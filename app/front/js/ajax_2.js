@@ -134,19 +134,15 @@ function clearChart() {
 }
 
 function showChart(content, relelement) {
-    //Close and clear any previous popup first
-
-
-
     var position = $(relelement).find('div').offset();
     $('#chart-header').find('div').html(content);
     //TODO: Make sure the following positioning does not affect mobile
     if ($('#chart-window').css('min-width') != '1px')
     {
+        //TODO: Add a small check if exceeding screen, then show towards left. Requires mouse coordinates first
         $('#chart-window').css({'left': position.left + ($(relelement).find('div').outerWidth()), 'top': position.top + $(relelement).find('div').outerHeight()});
     }
     $('#chart-window').addClass('is-visible');
-    //TODO: Add a small check if exceeding screen, then show towards left
 }
 
 
