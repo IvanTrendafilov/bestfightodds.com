@@ -1,0 +1,16 @@
+INSERT INTO `bets`.`bookies_parsers`
+(`id`,
+`bookie_id`,
+`parse_url`,
+`name`,
+`cn_inuse`,
+`mockfile`,
+`cn_urlsuffix`)
+VALUES
+(16,
+1,
+'test',
+'5Dimes_boxing',
+0,
+'5dimes.boxing.xml',''
+);

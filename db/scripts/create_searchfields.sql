@@ -1,0 +1,2 @@
+ALTER TABLE events ADD FULLTEXT(name);
+ALTER TABLE fighters ADD FULLTEXT(name);

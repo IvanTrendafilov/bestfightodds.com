@@ -1,0 +1,560 @@
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+	
+<table class="sportsPeriod">
+  <tbody>
+    <tr>
+	  <td class="sportsPeriodTdColSpecial">MMA Props</td>
+	</tr>
+  </tbody>
+</table>
+    
+<table class="league contest">
+  <thead>
+    <tr>
+	  <th class="col_league bdt"></th>
+	  <th class="col_rot bdl bdt">Rot.</th>
+	  <th class="col_team2 bdl bdt">Selection</th>
+	  <th class="col_odds bdl bdt" colspan="2">Odds</th>
+	  <th class="col_filler bdl bdt"></th>
+	</tr>
+  </thead>
+  <tbody class="date">
+    <tr>
+	  <td colspan="6" class="bdt">Saturday, Apr 27, 2013</td>
+	</tr>
+  </tbody>  
+
+  <tbody class="cntstNm">
+    <tr>
+      <td colspan="6" class="bdt">
+      <table class="contestName">
+        <tr>
+		  <td>UFC 159</td>
+		</tr>
+        <tr>
+          <td>
+			<div style="float: left; padding-right: 5px;">Jon Jones vs Chael Sonnen - Ending Time Frame</div>      
+		  </td>
+        </tr>        
+      </table>
+      </td>
+    </tr>
+  </tbody>
+
+  <tbody class="event">
+    <tr class="cntstSeq firstline" seq="21929422">
+      <td rowspan="13" class="col_time bdevtt">10:00 PM</td>
+      <td class="bdevtt col_rotno">22</td>
+      <td class="bdevtt">
+		0 - 2:30 in Round 1 
+	  </td>
+      <td class="checkboxes bdevtt3 "><input type="checkbox" class="oddsselection" cfg="{'type':'cntst','selId':'C|232743356|232743523|POSTUP|.|C','selObj':{'gt':'C','cntstNo':232743356,'cntstntNo':232743523,'mkt':'C','str':'POSTUP','prf':'.'},'lv1':'MMA Props','lv2':'UFC 159','lv3':'.','dlv1':'MMA Props','dlv2':'UFC 159','dlv3':'.','crid':'Mart-MMA Sa Chael Sonnen@Jon Jones','unit':'','gmdt':'04\/27\/2013 22:00:00','cntstnm':'Jon Jones vs Chael Sonnen - Ending Time Frame','dcntstnm':'Jon Jones vs Chael Sonnen - Ending Time Frame','nm':'0 - 2:30 in Round 1','dnm':'0 - 2:30 in Round 1','sts':'I','rno':22,'a':400,'d':5,'h':0,'dh':'','aorg':400,'dorg':5,'horg':0,'dhorg':''}" value="C|232743356|232743523|POSTUP|.|C" disabled='true' /> </td>
+	  <td class="odds bdevtt displayOdds " cfg="{'a':400,'d':5}">+400</td>
+	  <td class="addMktIcn bdevtt"></td>
+    </tr>
+    <tr class="cntstSeq otherline" seq="21929422">
+      <td class="bdevtt col_rotno">23</td>
+      <td class="bdevtt">
+		2:31 - 5 in Round 1 
+	  </td>
+      <td class="checkboxes bdevtt3 "><input type="checkbox" class="oddsselection" cfg="{'type':'cntst','selId':'C|232743356|232743524|POSTUP|.|C','selObj':{'gt':'C','cntstNo':232743356,'cntstntNo':232743524,'mkt':'C','str':'POSTUP','prf':'.'},'lv1':'MMA Props','lv2':'UFC 159','lv3':'.','dlv1':'MMA Props','dlv2':'UFC 159','dlv3':'.','crid':'Mart-MMA Sa Chael Sonnen@Jon Jones','unit':'','gmdt':'04\/27\/2013 22:00:00','cntstnm':'Jon Jones vs Chael Sonnen - Ending Time Frame','dcntstnm':'Jon Jones vs Chael Sonnen - Ending Time Frame','nm':'2:31 - 5 in Round 1','dnm':'2:31 - 5 in Round 1','sts':'I','rno':23,'a':350,'d':4.5,'h':0,'dh':'','aorg':350,'dorg':4.5,'horg':0,'dhorg':''}" value="C|232743356|232743524|POSTUP|.|C" disabled='true' /> </td>
+	  <td class="odds bdevtt displayOdds " cfg="{'a':350,'d':4.5}">+350</td>
+	  <td class="addMktIcn bdevtt"></td>
+    </tr>
+    <tr class="cntstSeq otherline" seq="21929422">
+      <td class="bdevtt col_rotno">24</td>
+      <td class="bdevtt">
+		0 - 2:30 in Round 2 
+	  </td>
+      <td class="checkboxes bdevtt3 "><input type="checkbox" class="oddsselection" cfg="{'type':'cntst','selId':'C|232743356|232743525|POSTUP|.|C','selObj':{'gt':'C','cntstNo':232743356,'cntstntNo':232743525,'mkt':'C','str':'POSTUP','prf':'.'},'lv1':'MMA Props','lv2':'UFC 159','lv3':'.','dlv1':'MMA Props','dlv2':'UFC 159','dlv3':'.','crid':'Mart-MMA Sa Chael Sonnen@Jon Jones','unit':'','gmdt':'04\/27\/2013 22:00:00','cntstnm':'Jon Jones vs Chael Sonnen - Ending Time Frame','dcntstnm':'Jon Jones vs Chael Sonnen - Ending Time Frame','nm':'0 - 2:30 in Round 2','dnm':'0 - 2:30 in Round 2','sts':'I','rno':24,'a':600,'d':7,'h':0,'dh':'','aorg':600,'dorg':7,'horg':0,'dhorg':''}" value="C|232743356|232743525|POSTUP|.|C" disabled='true' /> </td>
+	  <td class="odds bdevtt displayOdds " cfg="{'a':600,'d':7}">+600</td>
+	  <td class="addMktIcn bdevtt"></td>
+    </tr>
+    <tr class="cntstSeq otherline" seq="21929422">
+      <td class="bdevtt col_rotno">25</td>
+      <td class="bdevtt">
+		2:31 - 5 in Round 2 
+	  </td>
+      <td class="checkboxes bdevtt3 "><input type="checkbox" class="oddsselection" cfg="{'type':'cntst','selId':'C|232743356|232743526|POSTUP|.|C','selObj':{'gt':'C','cntstNo':232743356,'cntstntNo':232743526,'mkt':'C','str':'POSTUP','prf':'.'},'lv1':'MMA Props','lv2':'UFC 159','lv3':'.','dlv1':'MMA Props','dlv2':'UFC 159','dlv3':'.','crid':'Mart-MMA Sa Chael Sonnen@Jon Jones','unit':'','gmdt':'04\/27\/2013 22:00:00','cntstnm':'Jon Jones vs Chael Sonnen - Ending Time Frame','dcntstnm':'Jon Jones vs Chael Sonnen - Ending Time Frame','nm':'2:31 - 5 in Round 2','dnm':'2:31 - 5 in Round 2','sts':'I','rno':25,'a':300,'d':4,'h':0,'dh':'','aorg':300,'dorg':4,'horg':0,'dhorg':''}" value="C|232743356|232743526|POSTUP|.|C" disabled='true' /> </td>
+	  <td class="odds bdevtt displayOdds " cfg="{'a':300,'d':4}">+300</td>
+	  <td class="addMktIcn bdevtt"></td>
+    </tr>
+    <tr class="cntstSeq otherline" seq="21929422">
+      <td class="bdevtt col_rotno">26</td>
+      <td class="bdevtt">
+		0 - 2:30 in Round 3 
+	  </td>
+      <td class="checkboxes bdevtt3 "><input type="checkbox" class="oddsselection" cfg="{'type':'cntst','selId':'C|232743356|232743527|POSTUP|.|C','selObj':{'gt':'C','cntstNo':232743356,'cntstntNo':232743527,'mkt':'C','str':'POSTUP','prf':'.'},'lv1':'MMA Props','lv2':'UFC 159','lv3':'.','dlv1':'MMA Props','dlv2':'UFC 159','dlv3':'.','crid':'Mart-MMA Sa Chael Sonnen@Jon Jones','unit':'','gmdt':'04\/27\/2013 22:00:00','cntstnm':'Jon Jones vs Chael Sonnen - Ending Time Frame','dcntstnm':'Jon Jones vs Chael Sonnen - Ending Time Frame','nm':'0 - 2:30 in Round 3','dnm':'0 - 2:30 in Round 3','sts':'I','rno':26,'a':1500,'d':16,'h':0,'dh':'','aorg':1500,'dorg':16,'horg':0,'dhorg':''}" value="C|232743356|232743527|POSTUP|.|C" disabled='true' /> </td>
+	  <td class="odds bdevtt displayOdds " cfg="{'a':1500,'d':16}">+1500</td>
+	  <td class="addMktIcn bdevtt"></td>
+    </tr>
+    <tr class="cntstSeq otherline" seq="21929422">
+      <td class="bdevtt col_rotno">27</td>
+      <td class="bdevtt">
+		2:31 - 5 in Round 3 
+	  </td>
+      <td class="checkboxes bdevtt3 "><input type="checkbox" class="oddsselection" cfg="{'type':'cntst','selId':'C|232743356|232743528|POSTUP|.|C','selObj':{'gt':'C','cntstNo':232743356,'cntstntNo':232743528,'mkt':'C','str':'POSTUP','prf':'.'},'lv1':'MMA Props','lv2':'UFC 159','lv3':'.','dlv1':'MMA Props','dlv2':'UFC 159','dlv3':'.','crid':'Mart-MMA Sa Chael Sonnen@Jon Jones','unit':'','gmdt':'04\/27\/2013 22:00:00','cntstnm':'Jon Jones vs Chael Sonnen - Ending Time Frame','dcntstnm':'Jon Jones vs Chael Sonnen - Ending Time Frame','nm':'2:31 - 5 in Round 3','dnm':'2:31 - 5 in Round 3','sts':'I','rno':27,'a':1000,'d':11,'h':0,'dh':'','aorg':1000,'dorg':11,'horg':0,'dhorg':''}" value="C|232743356|232743528|POSTUP|.|C" disabled='true' /> </td>
+	  <td class="odds bdevtt displayOdds " cfg="{'a':1000,'d':11}">+1000</td>
+	  <td class="addMktIcn bdevtt"></td>
+    </tr>
+    <tr class="cntstSeq otherline" seq="21929422">
+      <td class="bdevtt col_rotno">28</td>
+      <td class="bdevtt">
+		0 - 2:30 in Round 4 
+	  </td>
+      <td class="checkboxes bdevtt3 "><input type="checkbox" class="oddsselection" cfg="{'type':'cntst','selId':'C|232743356|232743529|POSTUP|.|C','selObj':{'gt':'C','cntstNo':232743356,'cntstntNo':232743529,'mkt':'C','str':'POSTUP','prf':'.'},'lv1':'MMA Props','lv2':'UFC 159','lv3':'.','dlv1':'MMA Props','dlv2':'UFC 159','dlv3':'.','crid':'Mart-MMA Sa Chael Sonnen@Jon Jones','unit':'','gmdt':'04\/27\/2013 22:00:00','cntstnm':'Jon Jones vs Chael Sonnen - Ending Time Frame','dcntstnm':'Jon Jones vs Chael Sonnen - Ending Time Frame','nm':'0 - 2:30 in Round 4','dnm':'0 - 2:30 in Round 4','sts':'I','rno':28,'a':1000,'d':11,'h':0,'dh':'','aorg':1000,'dorg':11,'horg':0,'dhorg':''}" value="C|232743356|232743529|POSTUP|.|C" disabled='true' /> </td>
+	  <td class="odds bdevtt displayOdds " cfg="{'a':1000,'d':11}">+1000</td>
+	  <td class="addMktIcn bdevtt"></td>
+    </tr>
+    <tr class="cntstSeq otherline" seq="21929422">
+      <td class="bdevtt col_rotno">29</td>
+      <td class="bdevtt">
+		2:31 - 5 in Round 4 
+	  </td>
+      <td class="checkboxes bdevtt3 "><input type="checkbox" class="oddsselection" cfg="{'type':'cntst','selId':'C|232743356|232743531|POSTUP|.|C','selObj':{'gt':'C','cntstNo':232743356,'cntstntNo':232743531,'mkt':'C','str':'POSTUP','prf':'.'},'lv1':'MMA Props','lv2':'UFC 159','lv3':'.','dlv1':'MMA Props','dlv2':'UFC 159','dlv3':'.','crid':'Mart-MMA Sa Chael Sonnen@Jon Jones','unit':'','gmdt':'04\/27\/2013 22:00:00','cntstnm':'Jon Jones vs Chael Sonnen - Ending Time Frame','dcntstnm':'Jon Jones vs Chael Sonnen - Ending Time Frame','nm':'2:31 - 5 in Round 4','dnm':'2:31 - 5 in Round 4','sts':'I','rno':29,'a':1500,'d':16,'h':0,'dh':'','aorg':1500,'dorg':16,'horg':0,'dhorg':''}" value="C|232743356|232743531|POSTUP|.|C" disabled='true' /> </td>
+	  <td class="odds bdevtt displayOdds " cfg="{'a':1500,'d':16}">+1500</td>
+	  <td class="addMktIcn bdevtt"></td>
+    </tr>
+    <tr class="cntstSeq otherline" seq="21929422">
+      <td class="bdevtt col_rotno">30</td>
+      <td class="bdevtt">
+		0 - 2:30 in Round 5 
+	  </td>
+      <td class="checkboxes bdevtt3 "><input type="checkbox" class="oddsselection" cfg="{'type':'cntst','selId':'C|232743356|232743532|POSTUP|.|C','selObj':{'gt':'C','cntstNo':232743356,'cntstntNo':232743532,'mkt':'C','str':'POSTUP','prf':'.'},'lv1':'MMA Props','lv2':'UFC 159','lv3':'.','dlv1':'MMA Props','dlv2':'UFC 159','dlv3':'.','crid':'Mart-MMA Sa Chael Sonnen@Jon Jones','unit':'','gmdt':'04\/27\/2013 22:00:00','cntstnm':'Jon Jones vs Chael Sonnen - Ending Time Frame','dcntstnm':'Jon Jones vs Chael Sonnen - Ending Time Frame','nm':'0 - 2:30 in Round 5','dnm':'0 - 2:30 in Round 5','sts':'I','rno':30,'a':1500,'d':16,'h':0,'dh':'','aorg':1500,'dorg':16,'horg':0,'dhorg':''}" value="C|232743356|232743532|POSTUP|.|C" disabled='true' /> </td>
+	  <td class="odds bdevtt displayOdds " cfg="{'a':1500,'d':16}">+1500</td>
+	  <td class="addMktIcn bdevtt"></td>
+    </tr>
+    <tr class="cntstSeq otherline" seq="21929422">
+      <td class="bdevtt col_rotno">31</td>
+      <td class="bdevtt">
+		2:31 - 5 in Round 5 
+	  </td>
+      <td class="checkboxes bdevtt3 "><input type="checkbox" class="oddsselection" cfg="{'type':'cntst','selId':'C|232743356|232743533|POSTUP|.|C','selObj':{'gt':'C','cntstNo':232743356,'cntstntNo':232743533,'mkt':'C','str':'POSTUP','prf':'.'},'lv1':'MMA Props','lv2':'UFC 159','lv3':'.','dlv1':'MMA Props','dlv2':'UFC 159','dlv3':'.','crid':'Mart-MMA Sa Chael Sonnen@Jon Jones','unit':'','gmdt':'04\/27\/2013 22:00:00','cntstnm':'Jon Jones vs Chael Sonnen - Ending Time Frame','dcntstnm':'Jon Jones vs Chael Sonnen - Ending Time Frame','nm':'2:31 - 5 in Round 5','dnm':'2:31 - 5 in Round 5','sts':'I','rno':31,'a':1500,'d':16,'h':0,'dh':'','aorg':1500,'dorg':16,'horg':0,'dhorg':''}" value="C|232743356|232743533|POSTUP|.|C" disabled='true' /> </td>
+	  <td class="odds bdevtt displayOdds " cfg="{'a':1500,'d':16}">+1500</td>
+	  <td class="addMktIcn bdevtt"></td>
+    </tr>
+    <tr class="cntstSeq otherline" seq="21929422">
+      <td class="bdevtt col_rotno">32</td>
+      <td class="bdevtt">
+		Either wins by Decision 
+	  </td>
+      <td class="checkboxes bdevtt3 "><input type="checkbox" class="oddsselection" cfg="{'type':'cntst','selId':'C|232743356|232743536|POSTUP|.|C','selObj':{'gt':'C','cntstNo':232743356,'cntstntNo':232743536,'mkt':'C','str':'POSTUP','prf':'.'},'lv1':'MMA Props','lv2':'UFC 159','lv3':'.','dlv1':'MMA Props','dlv2':'UFC 159','dlv3':'.','crid':'Mart-MMA Sa Chael Sonnen@Jon Jones','unit':'','gmdt':'04\/27\/2013 22:00:00','cntstnm':'Jon Jones vs Chael Sonnen - Ending Time Frame','dcntstnm':'Jon Jones vs Chael Sonnen - Ending Time Frame','nm':'Either wins by Decision','dnm':'Either wins by Decision','sts':'I','rno':32,'a':275,'d':3.75,'h':0,'dh':'','aorg':275,'dorg':3.75,'horg':0,'dhorg':''}" value="C|232743356|232743536|POSTUP|.|C" disabled='true' /> </td>
+	  <td class="odds bdevtt displayOdds " cfg="{'a':275,'d':3.75}">+275</td>
+	  <td class="addMktIcn bdevtt"></td>
+    </tr>
+    <tr class="cntstSeq otherline" seq="21929422">
+      <td class="bdevtt col_rotno">33</td>
+      <td class="bdevtt">
+		Draw 
+	  </td>
+      <td class="checkboxes bdevtt3 "><input type="checkbox" class="oddsselection" cfg="{'type':'cntst','selId':'C|232743356|232743534|POSTUP|.|C','selObj':{'gt':'C','cntstNo':232743356,'cntstntNo':232743534,'mkt':'C','str':'POSTUP','prf':'.'},'lv1':'MMA Props','lv2':'UFC 159','lv3':'.','dlv1':'MMA Props','dlv2':'UFC 159','dlv3':'.','crid':'Mart-MMA Sa Chael Sonnen@Jon Jones','unit':'','gmdt':'04\/27\/2013 22:00:00','cntstnm':'Jon Jones vs Chael Sonnen - Ending Time Frame','dcntstnm':'Jon Jones vs Chael Sonnen - Ending Time Frame','nm':'Draw','dnm':'Draw','sts':'I','rno':33,'a':5000,'d':51,'h':0,'dh':'','aorg':5000,'dorg':51,'horg':0,'dhorg':''}" value="C|232743356|232743534|POSTUP|.|C" disabled='true' /> </td>
+	  <td class="odds bdevtt displayOdds " cfg="{'a':5000,'d':51}">+5000</td>
+	  <td class="addMktIcn bdevtt"></td>
+    </tr>
+    <tr class="cntstSeq otherline" seq="21929422">
+      <td class="bdevtt col_rotno">34</td>
+      <td class="bdevtt">
+		No Contest 
+	  </td>
+      <td class="checkboxes bdevtt3 "><input type="checkbox" class="oddsselection" cfg="{'type':'cntst','selId':'C|232743356|232743535|POSTUP|.|C','selObj':{'gt':'C','cntstNo':232743356,'cntstntNo':232743535,'mkt':'C','str':'POSTUP','prf':'.'},'lv1':'MMA Props','lv2':'UFC 159','lv3':'.','dlv1':'MMA Props','dlv2':'UFC 159','dlv3':'.','crid':'Mart-MMA Sa Chael Sonnen@Jon Jones','unit':'','gmdt':'04\/27\/2013 22:00:00','cntstnm':'Jon Jones vs Chael Sonnen - Ending Time Frame','dcntstnm':'Jon Jones vs Chael Sonnen - Ending Time Frame','nm':'No Contest','dnm':'No Contest','sts':'I','rno':34,'a':4000,'d':41,'h':0,'dh':'','aorg':4000,'dorg':41,'horg':0,'dhorg':''}" value="C|232743356|232743535|POSTUP|.|C" disabled='true' /> </td>
+	  <td class="odds bdevtt displayOdds " cfg="{'a':4000,'d':41}">+4000</td>
+	  <td class="addMktIcn bdevtt"></td>
+    </tr>
+  </tbody>
+
+  <tbody class="cntstNm">
+    <tr>
+      <td colspan="6" class="bdt">
+      <table class="contestName">
+        <tr>
+		  <td>UFC 159</td>
+		</tr>
+        <tr>
+          <td>
+			<div style="float: left; padding-right: 5px;">Jon Jones vs Chael Sonnen - How It Ends</div>      
+		  </td>
+        </tr>        
+      </table>
+      </td>
+    </tr>
+  </tbody>
+
+  <tbody class="event">
+    <tr class="cntstSeq firstline" seq="21929422">
+      <td rowspan="5" class="col_time bdevtt">10:00 PM</td>
+      <td class="bdevtt col_rotno">9</td>
+      <td class="bdevtt">
+		KO 
+	  </td>
+      <td class="checkboxes bdevtt3 "><input type="checkbox" class="oddsselection" cfg="{'type':'cntst','selId':'C|232743106|232743193|POSTUP|.|C','selObj':{'gt':'C','cntstNo':232743106,'cntstntNo':232743193,'mkt':'C','str':'POSTUP','prf':'.'},'lv1':'MMA Props','lv2':'UFC 159','lv3':'.','dlv1':'MMA Props','dlv2':'UFC 159','dlv3':'.','crid':'Mart-MMA Sa Chael Sonnen@Jon Jones','unit':'','gmdt':'04\/27\/2013 22:00:00','cntstnm':'Jon Jones vs Chael Sonnen - How It Ends','dcntstnm':'Jon Jones vs Chael Sonnen - How It Ends','nm':'KO','dnm':'KO','sts':'I','rno':9,'a':125,'d':2.25,'h':0,'dh':'','aorg':125,'dorg':2.25,'horg':0,'dhorg':''}" value="C|232743106|232743193|POSTUP|.|C" disabled='true' /> </td>
+	  <td class="odds bdevtt displayOdds " cfg="{'a':125,'d':2.25}">+125</td>
+	  <td class="addMktIcn bdevtt"></td>
+    </tr>
+    <tr class="cntstSeq otherline" seq="21929422">
+      <td class="bdevtt col_rotno">10</td>
+      <td class="bdevtt">
+		Submission 
+	  </td>
+      <td class="checkboxes bdevtt3 "><input type="checkbox" class="oddsselection" cfg="{'type':'cntst','selId':'C|232743106|232799235|POSTUP|.|C','selObj':{'gt':'C','cntstNo':232743106,'cntstntNo':232799235,'mkt':'C','str':'POSTUP','prf':'.'},'lv1':'MMA Props','lv2':'UFC 159','lv3':'.','dlv1':'MMA Props','dlv2':'UFC 159','dlv3':'.','crid':'Mart-MMA Sa Chael Sonnen@Jon Jones','unit':'','gmdt':'04\/27\/2013 22:00:00','cntstnm':'Jon Jones vs Chael Sonnen - How It Ends','dcntstnm':'Jon Jones vs Chael Sonnen - How It Ends','nm':'Submission','dnm':'Submission','sts':'I','rno':10,'a':140,'d':2.4,'h':0,'dh':'','aorg':140,'dorg':2.4,'horg':0,'dhorg':''}" value="C|232743106|232799235|POSTUP|.|C" disabled='true' /> </td>
+	  <td class="odds bdevtt displayOdds " cfg="{'a':140,'d':2.4}">+140</td>
+	  <td class="addMktIcn bdevtt"></td>
+    </tr>
+    <tr class="cntstSeq otherline" seq="21929422">
+      <td class="bdevtt col_rotno">11</td>
+      <td class="bdevtt">
+		Decision 
+	  </td>
+      <td class="checkboxes bdevtt3 "><input type="checkbox" class="oddsselection" cfg="{'type':'cntst','selId':'C|232743106|232743195|POSTUP|.|C','selObj':{'gt':'C','cntstNo':232743106,'cntstntNo':232743195,'mkt':'C','str':'POSTUP','prf':'.'},'lv1':'MMA Props','lv2':'UFC 159','lv3':'.','dlv1':'MMA Props','dlv2':'UFC 159','dlv3':'.','crid':'Mart-MMA Sa Chael Sonnen@Jon Jones','unit':'','gmdt':'04\/27\/2013 22:00:00','cntstnm':'Jon Jones vs Chael Sonnen - How It Ends','dcntstnm':'Jon Jones vs Chael Sonnen - How It Ends','nm':'Decision','dnm':'Decision','sts':'I','rno':11,'a':275,'d':3.75,'h':0,'dh':'','aorg':275,'dorg':3.75,'horg':0,'dhorg':''}" value="C|232743106|232743195|POSTUP|.|C" disabled='true' /> </td>
+	  <td class="odds bdevtt displayOdds " cfg="{'a':275,'d':3.75}">+275</td>
+	  <td class="addMktIcn bdevtt"></td>
+    </tr>
+    <tr class="cntstSeq otherline" seq="21929422">
+      <td class="bdevtt col_rotno">12</td>
+      <td class="bdevtt">
+		Draw 
+	  </td>
+      <td class="checkboxes bdevtt3 "><input type="checkbox" class="oddsselection" cfg="{'type':'cntst','selId':'C|232743106|232743196|POSTUP|.|C','selObj':{'gt':'C','cntstNo':232743106,'cntstntNo':232743196,'mkt':'C','str':'POSTUP','prf':'.'},'lv1':'MMA Props','lv2':'UFC 159','lv3':'.','dlv1':'MMA Props','dlv2':'UFC 159','dlv3':'.','crid':'Mart-MMA Sa Chael Sonnen@Jon Jones','unit':'','gmdt':'04\/27\/2013 22:00:00','cntstnm':'Jon Jones vs Chael Sonnen - How It Ends','dcntstnm':'Jon Jones vs Chael Sonnen - How It Ends','nm':'Draw','dnm':'Draw','sts':'I','rno':12,'a':5000,'d':51,'h':0,'dh':'','aorg':5000,'dorg':51,'horg':0,'dhorg':''}" value="C|232743106|232743196|POSTUP|.|C" disabled='true' /> </td>
+	  <td class="odds bdevtt displayOdds " cfg="{'a':5000,'d':51}">+5000</td>
+	  <td class="addMktIcn bdevtt"></td>
+    </tr>
+    <tr class="cntstSeq otherline" seq="21929422">
+      <td class="bdevtt col_rotno">13</td>
+      <td class="bdevtt">
+		No Contest 
+	  </td>
+      <td class="checkboxes bdevtt3 "><input type="checkbox" class="oddsselection" cfg="{'type':'cntst','selId':'C|232743106|232743197|POSTUP|.|C','selObj':{'gt':'C','cntstNo':232743106,'cntstntNo':232743197,'mkt':'C','str':'POSTUP','prf':'.'},'lv1':'MMA Props','lv2':'UFC 159','lv3':'.','dlv1':'MMA Props','dlv2':'UFC 159','dlv3':'.','crid':'Mart-MMA Sa Chael Sonnen@Jon Jones','unit':'','gmdt':'04\/27\/2013 22:00:00','cntstnm':'Jon Jones vs Chael Sonnen - How It Ends','dcntstnm':'Jon Jones vs Chael Sonnen - How It Ends','nm':'No Contest','dnm':'No Contest','sts':'I','rno':13,'a':4000,'d':41,'h':0,'dh':'','aorg':4000,'dorg':41,'horg':0,'dhorg':''}" value="C|232743106|232743197|POSTUP|.|C" disabled='true' /> </td>
+	  <td class="odds bdevtt displayOdds " cfg="{'a':4000,'d':41}">+4000</td>
+	  <td class="addMktIcn bdevtt"></td>
+    </tr>
+  </tbody>
+
+  <tbody class="cntstNm">
+    <tr>
+      <td colspan="6" class="bdt">
+      <table class="contestName">
+        <tr>
+		  <td>UFC 159</td>
+		</tr>
+        <tr>
+          <td>
+			<div style="float: left; padding-right: 5px;">Jon Jones vs Chael Sonnen - Outcome</div>      
+		  </td>
+        </tr>        
+      </table>
+      </td>
+    </tr>
+  </tbody>
+
+  <tbody class="event">
+    <tr class="cntstSeq firstline" seq="21929422">
+      <td rowspan="8" class="col_time bdevtt">10:00 PM</td>
+      <td class="bdevtt col_rotno">1</td>
+      <td class="bdevtt">
+		Jon Jones by KO, TKO or DQ 
+	  </td>
+      <td class="checkboxes bdevtt3 "><input type="checkbox" class="oddsselection" cfg="{'type':'cntst','selId':'C|232743013|232743098|POSTUP|.|C','selObj':{'gt':'C','cntstNo':232743013,'cntstntNo':232743098,'mkt':'C','str':'POSTUP','prf':'.'},'lv1':'MMA Props','lv2':'UFC 159','lv3':'.','dlv1':'MMA Props','dlv2':'UFC 159','dlv3':'.','crid':'Mart-MMA Sa Chael Sonnen@Jon Jones','unit':'','gmdt':'04\/27\/2013 22:00:00','cntstnm':'Jon Jones vs Chael Sonnen - Outcome','dcntstnm':'Jon Jones vs Chael Sonnen - Outcome','nm':'Jon Jones by KO, TKO or DQ','dnm':'Jon Jones by KO, TKO or DQ','sts':'I','rno':1,'a':120,'d':2.2,'h':0,'dh':'','aorg':120,'dorg':2.2,'horg':0,'dhorg':''}" value="C|232743013|232743098|POSTUP|.|C" disabled='true' /> </td>
+	  <td class="odds bdevtt displayOdds " cfg="{'a':120,'d':2.2}">+120</td>
+	  <td class="addMktIcn bdevtt"></td>
+    </tr>
+    <tr class="cntstSeq otherline" seq="21929422">
+      <td class="bdevtt col_rotno">2</td>
+      <td class="bdevtt">
+		Jon Jones by Submission 
+	  </td>
+      <td class="checkboxes bdevtt3 "><input type="checkbox" class="oddsselection" cfg="{'type':'cntst','selId':'C|232743013|232743099|POSTUP|.|C','selObj':{'gt':'C','cntstNo':232743013,'cntstntNo':232743099,'mkt':'C','str':'POSTUP','prf':'.'},'lv1':'MMA Props','lv2':'UFC 159','lv3':'.','dlv1':'MMA Props','dlv2':'UFC 159','dlv3':'.','crid':'Mart-MMA Sa Chael Sonnen@Jon Jones','unit':'','gmdt':'04\/27\/2013 22:00:00','cntstnm':'Jon Jones vs Chael Sonnen - Outcome','dcntstnm':'Jon Jones vs Chael Sonnen - Outcome','nm':'Jon Jones by Submission','dnm':'Jon Jones by Submission','sts':'I','rno':2,'a':150,'d':2.5,'h':0,'dh':'','aorg':150,'dorg':2.5,'horg':0,'dhorg':''}" value="C|232743013|232743099|POSTUP|.|C" disabled='true' /> </td>
+	  <td class="odds bdevtt displayOdds " cfg="{'a':150,'d':2.5}">+150</td>
+	  <td class="addMktIcn bdevtt"></td>
+    </tr>
+    <tr class="cntstSeq otherline" seq="21929422">
+      <td class="bdevtt col_rotno">3</td>
+      <td class="bdevtt">
+		Jon Jones by Decision 
+	  </td>
+      <td class="checkboxes bdevtt3 "><input type="checkbox" class="oddsselection" cfg="{'type':'cntst','selId':'C|232743013|232743100|POSTUP|.|C','selObj':{'gt':'C','cntstNo':232743013,'cntstntNo':232743100,'mkt':'C','str':'POSTUP','prf':'.'},'lv1':'MMA Props','lv2':'UFC 159','lv3':'.','dlv1':'MMA Props','dlv2':'UFC 159','dlv3':'.','crid':'Mart-MMA Sa Chael Sonnen@Jon Jones','unit':'','gmdt':'04\/27\/2013 22:00:00','cntstnm':'Jon Jones vs Chael Sonnen - Outcome','dcntstnm':'Jon Jones vs Chael Sonnen - Outcome','nm':'Jon Jones by Decision','dnm':'Jon Jones by Decision','sts':'I','rno':3,'a':400,'d':5,'h':0,'dh':'','aorg':400,'dorg':5,'horg':0,'dhorg':''}" value="C|232743013|232743100|POSTUP|.|C" disabled='true' /> </td>
+	  <td class="odds bdevtt displayOdds " cfg="{'a':400,'d':5}">+400</td>
+	  <td class="addMktIcn bdevtt"></td>
+    </tr>
+    <tr class="cntstSeq otherline" seq="21929422">
+      <td class="bdevtt col_rotno">4</td>
+      <td class="bdevtt">
+		Chael Sonnen by KO, TKO or DQ 
+	  </td>
+      <td class="checkboxes bdevtt3 "><input type="checkbox" class="oddsselection" cfg="{'type':'cntst','selId':'C|232743013|232743101|POSTUP|.|C','selObj':{'gt':'C','cntstNo':232743013,'cntstntNo':232743101,'mkt':'C','str':'POSTUP','prf':'.'},'lv1':'MMA Props','lv2':'UFC 159','lv3':'.','dlv1':'MMA Props','dlv2':'UFC 159','dlv3':'.','crid':'Mart-MMA Sa Chael Sonnen@Jon Jones','unit':'','gmdt':'04\/27\/2013 22:00:00','cntstnm':'Jon Jones vs Chael Sonnen - Outcome','dcntstnm':'Jon Jones vs Chael Sonnen - Outcome','nm':'Chael Sonnen by KO, TKO or DQ','dnm':'Chael Sonnen by KO, TKO or DQ','sts':'I','rno':4,'a':1700,'d':18,'h':0,'dh':'','aorg':1700,'dorg':18,'horg':0,'dhorg':''}" value="C|232743013|232743101|POSTUP|.|C" disabled='true' /> </td>
+	  <td class="odds bdevtt displayOdds " cfg="{'a':1700,'d':18}">+1700</td>
+	  <td class="addMktIcn bdevtt"></td>
+    </tr>
+    <tr class="cntstSeq otherline" seq="21929422">
+      <td class="bdevtt col_rotno">5</td>
+      <td class="bdevtt">
+		Chael Sonnen by Submission 
+	  </td>
+      <td class="checkboxes bdevtt3 "><input type="checkbox" class="oddsselection" cfg="{'type':'cntst','selId':'C|232743013|232743102|POSTUP|.|C','selObj':{'gt':'C','cntstNo':232743013,'cntstntNo':232743102,'mkt':'C','str':'POSTUP','prf':'.'},'lv1':'MMA Props','lv2':'UFC 159','lv3':'.','dlv1':'MMA Props','dlv2':'UFC 159','dlv3':'.','crid':'Mart-MMA Sa Chael Sonnen@Jon Jones','unit':'','gmdt':'04\/27\/2013 22:00:00','cntstnm':'Jon Jones vs Chael Sonnen - Outcome','dcntstnm':'Jon Jones vs Chael Sonnen - Outcome','nm':'Chael Sonnen by Submission','dnm':'Chael Sonnen by Submission','sts':'I','rno':5,'a':2200,'d':23,'h':0,'dh':'','aorg':2200,'dorg':23,'horg':0,'dhorg':''}" value="C|232743013|232743102|POSTUP|.|C" disabled='true' /> </td>
+	  <td class="odds bdevtt displayOdds " cfg="{'a':2200,'d':23}">+2200</td>
+	  <td class="addMktIcn bdevtt"></td>
+    </tr>
+    <tr class="cntstSeq otherline" seq="21929422">
+      <td class="bdevtt col_rotno">6</td>
+      <td class="bdevtt">
+		Chael Sonnen by Decision 
+	  </td>
+      <td class="checkboxes bdevtt3 "><input type="checkbox" class="oddsselection" cfg="{'type':'cntst','selId':'C|232743013|232743103|POSTUP|.|C','selObj':{'gt':'C','cntstNo':232743013,'cntstntNo':232743103,'mkt':'C','str':'POSTUP','prf':'.'},'lv1':'MMA Props','lv2':'UFC 159','lv3':'.','dlv1':'MMA Props','dlv2':'UFC 159','dlv3':'.','crid':'Mart-MMA Sa Chael Sonnen@Jon Jones','unit':'','gmdt':'04\/27\/2013 22:00:00','cntstnm':'Jon Jones vs Chael Sonnen - Outcome','dcntstnm':'Jon Jones vs Chael Sonnen - Outcome','nm':'Chael Sonnen by Decision','dnm':'Chael Sonnen by Decision','sts':'I','rno':6,'a':1000,'d':11,'h':0,'dh':'','aorg':1000,'dorg':11,'horg':0,'dhorg':''}" value="C|232743013|232743103|POSTUP|.|C" disabled='true' /> </td>
+	  <td class="odds bdevtt displayOdds " cfg="{'a':1000,'d':11}">+1000</td>
+	  <td class="addMktIcn bdevtt"></td>
+    </tr>
+    <tr class="cntstSeq otherline" seq="21929422">
+      <td class="bdevtt col_rotno">7</td>
+      <td class="bdevtt">
+		Draw 
+	  </td>
+      <td class="checkboxes bdevtt3 "><input type="checkbox" class="oddsselection" cfg="{'type':'cntst','selId':'C|232743013|232743104|POSTUP|.|C','selObj':{'gt':'C','cntstNo':232743013,'cntstntNo':232743104,'mkt':'C','str':'POSTUP','prf':'.'},'lv1':'MMA Props','lv2':'UFC 159','lv3':'.','dlv1':'MMA Props','dlv2':'UFC 159','dlv3':'.','crid':'Mart-MMA Sa Chael Sonnen@Jon Jones','unit':'','gmdt':'04\/27\/2013 22:00:00','cntstnm':'Jon Jones vs Chael Sonnen - Outcome','dcntstnm':'Jon Jones vs Chael Sonnen - Outcome','nm':'Draw','dnm':'Draw','sts':'I','rno':7,'a':5000,'d':51,'h':0,'dh':'','aorg':5000,'dorg':51,'horg':0,'dhorg':''}" value="C|232743013|232743104|POSTUP|.|C" disabled='true' /> </td>
+	  <td class="odds bdevtt displayOdds " cfg="{'a':5000,'d':51}">+5000</td>
+	  <td class="addMktIcn bdevtt"></td>
+    </tr>
+    <tr class="cntstSeq otherline" seq="21929422">
+      <td class="bdevtt col_rotno">8</td>
+      <td class="bdevtt">
+		No Contest 
+	  </td>
+      <td class="checkboxes bdevtt3 "><input type="checkbox" class="oddsselection" cfg="{'type':'cntst','selId':'C|232743013|232743105|POSTUP|.|C','selObj':{'gt':'C','cntstNo':232743013,'cntstntNo':232743105,'mkt':'C','str':'POSTUP','prf':'.'},'lv1':'MMA Props','lv2':'UFC 159','lv3':'.','dlv1':'MMA Props','dlv2':'UFC 159','dlv3':'.','crid':'Mart-MMA Sa Chael Sonnen@Jon Jones','unit':'','gmdt':'04\/27\/2013 22:00:00','cntstnm':'Jon Jones vs Chael Sonnen - Outcome','dcntstnm':'Jon Jones vs Chael Sonnen - Outcome','nm':'No Contest','dnm':'No Contest','sts':'I','rno':8,'a':4000,'d':41,'h':0,'dh':'','aorg':4000,'dorg':41,'horg':0,'dhorg':''}" value="C|232743013|232743105|POSTUP|.|C" disabled='true' /> </td>
+	  <td class="odds bdevtt displayOdds " cfg="{'a':4000,'d':41}">+4000</td>
+	  <td class="addMktIcn bdevtt"></td>
+    </tr>
+  </tbody>
+
+  <tbody class="cntstNm">
+    <tr>
+      <td colspan="6" class="bdt">
+      <table class="contestName">
+        <tr>
+		  <td>UFC 159</td>
+		</tr>
+        <tr>
+          <td>
+			<div style="float: left; padding-right: 5px;">Jon Jones vs Chael Sonnen - When It Ends</div>      
+		  </td>
+        </tr>        
+      </table>
+      </td>
+    </tr>
+  </tbody>
+
+  <tbody class="event">
+    <tr class="cntstSeq firstline" seq="21929422">
+      <td rowspan="8" class="col_time bdevtt">10:00 PM</td>
+      <td class="bdevtt col_rotno">14</td>
+      <td class="bdevtt">
+		Round 1 
+	  </td>
+      <td class="checkboxes bdevtt3 "><input type="checkbox" class="oddsselection" cfg="{'type':'cntst','selId':'C|232743198|232743334|POSTUP|.|C','selObj':{'gt':'C','cntstNo':232743198,'cntstntNo':232743334,'mkt':'C','str':'POSTUP','prf':'.'},'lv1':'MMA Props','lv2':'UFC 159','lv3':'.','dlv1':'MMA Props','dlv2':'UFC 159','dlv3':'.','crid':'Mart-MMA Sa Chael Sonnen@Jon Jones','unit':'','gmdt':'04\/27\/2013 22:00:00','cntstnm':'Jon Jones vs Chael Sonnen - When It Ends','dcntstnm':'Jon Jones vs Chael Sonnen - When It Ends','nm':'Round 1','dnm':'Round 1','sts':'I','rno':14,'a':250,'d':3.5,'h':0,'dh':'','aorg':250,'dorg':3.5,'horg':0,'dhorg':''}" value="C|232743198|232743334|POSTUP|.|C" disabled='true' /> </td>
+	  <td class="odds bdevtt displayOdds " cfg="{'a':250,'d':3.5}">+250</td>
+	  <td class="addMktIcn bdevtt"></td>
+    </tr>
+    <tr class="cntstSeq otherline" seq="21929422">
+      <td class="bdevtt col_rotno">15</td>
+      <td class="bdevtt">
+		Round 2 
+	  </td>
+      <td class="checkboxes bdevtt3 "><input type="checkbox" class="oddsselection" cfg="{'type':'cntst','selId':'C|232743198|232743335|POSTUP|.|C','selObj':{'gt':'C','cntstNo':232743198,'cntstntNo':232743335,'mkt':'C','str':'POSTUP','prf':'.'},'lv1':'MMA Props','lv2':'UFC 159','lv3':'.','dlv1':'MMA Props','dlv2':'UFC 159','dlv3':'.','crid':'Mart-MMA Sa Chael Sonnen@Jon Jones','unit':'','gmdt':'04\/27\/2013 22:00:00','cntstnm':'Jon Jones vs Chael Sonnen - When It Ends','dcntstnm':'Jon Jones vs Chael Sonnen - When It Ends','nm':'Round 2','dnm':'Round 2','sts':'I','rno':15,'a':350,'d':4.5,'h':0,'dh':'','aorg':350,'dorg':4.5,'horg':0,'dhorg':''}" value="C|232743198|232743335|POSTUP|.|C" disabled='true' /> </td>
+	  <td class="odds bdevtt displayOdds " cfg="{'a':350,'d':4.5}">+350</td>
+	  <td class="addMktIcn bdevtt"></td>
+    </tr>
+    <tr class="cntstSeq otherline" seq="21929422">
+      <td class="bdevtt col_rotno">16</td>
+      <td class="bdevtt">
+		Round 3 
+	  </td>
+      <td class="checkboxes bdevtt3 "><input type="checkbox" class="oddsselection" cfg="{'type':'cntst','selId':'C|232743198|232743336|POSTUP|.|C','selObj':{'gt':'C','cntstNo':232743198,'cntstntNo':232743336,'mkt':'C','str':'POSTUP','prf':'.'},'lv1':'MMA Props','lv2':'UFC 159','lv3':'.','dlv1':'MMA Props','dlv2':'UFC 159','dlv3':'.','crid':'Mart-MMA Sa Chael Sonnen@Jon Jones','unit':'','gmdt':'04\/27\/2013 22:00:00','cntstnm':'Jon Jones vs Chael Sonnen - When It Ends','dcntstnm':'Jon Jones vs Chael Sonnen - When It Ends','nm':'Round 3','dnm':'Round 3','sts':'I','rno':16,'a':500,'d':6,'h':0,'dh':'','aorg':500,'dorg':6,'horg':0,'dhorg':''}" value="C|232743198|232743336|POSTUP|.|C" disabled='true' /> </td>
+	  <td class="odds bdevtt displayOdds " cfg="{'a':500,'d':6}">+500</td>
+	  <td class="addMktIcn bdevtt"></td>
+    </tr>
+    <tr class="cntstSeq otherline" seq="21929422">
+      <td class="bdevtt col_rotno">17</td>
+      <td class="bdevtt">
+		Round 4 
+	  </td>
+      <td class="checkboxes bdevtt3 "><input type="checkbox" class="oddsselection" cfg="{'type':'cntst','selId':'C|232743198|232743337|POSTUP|.|C','selObj':{'gt':'C','cntstNo':232743198,'cntstntNo':232743337,'mkt':'C','str':'POSTUP','prf':'.'},'lv1':'MMA Props','lv2':'UFC 159','lv3':'.','dlv1':'MMA Props','dlv2':'UFC 159','dlv3':'.','crid':'Mart-MMA Sa Chael Sonnen@Jon Jones','unit':'','gmdt':'04\/27\/2013 22:00:00','cntstnm':'Jon Jones vs Chael Sonnen - When It Ends','dcntstnm':'Jon Jones vs Chael Sonnen - When It Ends','nm':'Round 4','dnm':'Round 4','sts':'I','rno':17,'a':600,'d':7,'h':0,'dh':'','aorg':600,'dorg':7,'horg':0,'dhorg':''}" value="C|232743198|232743337|POSTUP|.|C" disabled='true' /> </td>
+	  <td class="odds bdevtt displayOdds " cfg="{'a':600,'d':7}">+600</td>
+	  <td class="addMktIcn bdevtt"></td>
+    </tr>
+    <tr class="cntstSeq otherline" seq="21929422">
+      <td class="bdevtt col_rotno">18</td>
+      <td class="bdevtt">
+		Round 5 
+	  </td>
+      <td class="checkboxes bdevtt3 "><input type="checkbox" class="oddsselection" cfg="{'type':'cntst','selId':'C|232743198|232743338|POSTUP|.|C','selObj':{'gt':'C','cntstNo':232743198,'cntstntNo':232743338,'mkt':'C','str':'POSTUP','prf':'.'},'lv1':'MMA Props','lv2':'UFC 159','lv3':'.','dlv1':'MMA Props','dlv2':'UFC 159','dlv3':'.','crid':'Mart-MMA Sa Chael Sonnen@Jon Jones','unit':'','gmdt':'04\/27\/2013 22:00:00','cntstnm':'Jon Jones vs Chael Sonnen - When It Ends','dcntstnm':'Jon Jones vs Chael Sonnen - When It Ends','nm':'Round 5','dnm':'Round 5','sts':'I','rno':18,'a':700,'d':8,'h':0,'dh':'','aorg':700,'dorg':8,'horg':0,'dhorg':''}" value="C|232743198|232743338|POSTUP|.|C" disabled='true' /> </td>
+	  <td class="odds bdevtt displayOdds " cfg="{'a':700,'d':8}">+700</td>
+	  <td class="addMktIcn bdevtt"></td>
+    </tr>
+    <tr class="cntstSeq otherline" seq="21929422">
+      <td class="bdevtt col_rotno">19</td>
+      <td class="bdevtt">
+		Either by Decision 
+	  </td>
+      <td class="checkboxes bdevtt3 "><input type="checkbox" class="oddsselection" cfg="{'type':'cntst','selId':'C|232743198|232743339|POSTUP|.|C','selObj':{'gt':'C','cntstNo':232743198,'cntstntNo':232743339,'mkt':'C','str':'POSTUP','prf':'.'},'lv1':'MMA Props','lv2':'UFC 159','lv3':'.','dlv1':'MMA Props','dlv2':'UFC 159','dlv3':'.','crid':'Mart-MMA Sa Chael Sonnen@Jon Jones','unit':'','gmdt':'04\/27\/2013 22:00:00','cntstnm':'Jon Jones vs Chael Sonnen - When It Ends','dcntstnm':'Jon Jones vs Chael Sonnen - When It Ends','nm':'Either by Decision','dnm':'Either by Decision','sts':'I','rno':19,'a':275,'d':3.75,'h':0,'dh':'','aorg':275,'dorg':3.75,'horg':0,'dhorg':''}" value="C|232743198|232743339|POSTUP|.|C" disabled='true' /> </td>
+	  <td class="odds bdevtt displayOdds " cfg="{'a':275,'d':3.75}">+275</td>
+	  <td class="addMktIcn bdevtt"></td>
+    </tr>
+    <tr class="cntstSeq otherline" seq="21929422">
+      <td class="bdevtt col_rotno">20</td>
+      <td class="bdevtt">
+		Draw 
+	  </td>
+      <td class="checkboxes bdevtt3 "><input type="checkbox" class="oddsselection" cfg="{'type':'cntst','selId':'C|232743198|232743340|POSTUP|.|C','selObj':{'gt':'C','cntstNo':232743198,'cntstntNo':232743340,'mkt':'C','str':'POSTUP','prf':'.'},'lv1':'MMA Props','lv2':'UFC 159','lv3':'.','dlv1':'MMA Props','dlv2':'UFC 159','dlv3':'.','crid':'Mart-MMA Sa Chael Sonnen@Jon Jones','unit':'','gmdt':'04\/27\/2013 22:00:00','cntstnm':'Jon Jones vs Chael Sonnen - When It Ends','dcntstnm':'Jon Jones vs Chael Sonnen - When It Ends','nm':'Draw','dnm':'Draw','sts':'I','rno':20,'a':5000,'d':51,'h':0,'dh':'','aorg':5000,'dorg':51,'horg':0,'dhorg':''}" value="C|232743198|232743340|POSTUP|.|C" disabled='true' /> </td>
+	  <td class="odds bdevtt displayOdds " cfg="{'a':5000,'d':51}">+5000</td>
+	  <td class="addMktIcn bdevtt"></td>
+    </tr>
+    <tr class="cntstSeq otherline" seq="21929422">
+      <td class="bdevtt col_rotno">21</td>
+      <td class="bdevtt">
+		No Contest 
+	  </td>
+      <td class="checkboxes bdevtt3 "><input type="checkbox" class="oddsselection" cfg="{'type':'cntst','selId':'C|232743198|232743341|POSTUP|.|C','selObj':{'gt':'C','cntstNo':232743198,'cntstntNo':232743341,'mkt':'C','str':'POSTUP','prf':'.'},'lv1':'MMA Props','lv2':'UFC 159','lv3':'.','dlv1':'MMA Props','dlv2':'UFC 159','dlv3':'.','crid':'Mart-MMA Sa Chael Sonnen@Jon Jones','unit':'','gmdt':'04\/27\/2013 22:00:00','cntstnm':'Jon Jones vs Chael Sonnen - When It Ends','dcntstnm':'Jon Jones vs Chael Sonnen - When It Ends','nm':'No Contest','dnm':'No Contest','sts':'I','rno':21,'a':4000,'d':41,'h':0,'dh':'','aorg':4000,'dorg':41,'horg':0,'dhorg':''}" value="C|232743198|232743341|POSTUP|.|C" disabled='true' /> </td>
+	  <td class="odds bdevtt displayOdds " cfg="{'a':4000,'d':41}">+4000</td>
+	  <td class="addMktIcn bdevtt"></td>
+    </tr>
+  </tbody>
+
+  <tbody class="date">
+    <tr>
+	  <td colspan="6" class="bdt">Saturday, Jul 06, 2013</td>
+	</tr>
+  </tbody>  
+
+  <tbody class="cntstNm">
+    <tr>
+      <td colspan="6" class="bdt">
+      <table class="contestName">
+        <tr>
+		  <td>UFC 162</td>
+		</tr>
+        <tr>
+          <td>
+			<div style="float: left; padding-right: 5px;">Anderson Silva vs Chris Weidman - Outcome</div>      
+		  </td>
+        </tr>        
+      </table>
+      </td>
+    </tr>
+  </tbody>
+
+  <tbody class="event">
+    <tr class="cntstSeq firstline" seq="21929422">
+      <td rowspan="8" class="col_time bdevtt">11:30 PM</td>
+      <td class="bdevtt col_rotno">70613</td>
+      <td class="bdevtt">
+		Anderson Silva by KO, TKO or DQ 
+	  </td>
+      <td class="checkboxes bdevtt3 "><input type="checkbox" class="oddsselection" cfg="{'type':'cntst','selId':'C|230628421|230628506|POSTUP|.|C','selObj':{'gt':'C','cntstNo':230628421,'cntstntNo':230628506,'mkt':'C','str':'POSTUP','prf':'.'},'lv1':'MMA Props','lv2':'UFC 162','lv3':'.','dlv1':'MMA Props','dlv2':'UFC 162','dlv3':'.','crid':'Mart-MMA Sa Anderson Silv@Chris Weidman','unit':'','gmdt':'07\/06\/2013 23:30:00','cntstnm':'Anderson Silva vs Chris Weidman - Outcome','dcntstnm':'Anderson Silva vs Chris Weidman - Outcome','nm':'Anderson Silva by KO, TKO or DQ','dnm':'Anderson Silva by KO, TKO or DQ','sts':'I','rno':70613,'a':-120,'d':1.833,'h':0,'dh':'','aorg':-120,'dorg':1.833,'horg':0,'dhorg':''}" value="C|230628421|230628506|POSTUP|.|C" disabled='true' /> </td>
+	  <td class="odds bdevtt displayOdds " cfg="{'a':-120,'d':1.833}">-120</td>
+	  <td class="addMktIcn bdevtt"></td>
+    </tr>
+    <tr class="cntstSeq otherline" seq="21929422">
+      <td class="bdevtt col_rotno">70614</td>
+      <td class="bdevtt">
+		Anderson Silva by Submission 
+	  </td>
+      <td class="checkboxes bdevtt3 "><input type="checkbox" class="oddsselection" cfg="{'type':'cntst','selId':'C|230628421|230628507|POSTUP|.|C','selObj':{'gt':'C','cntstNo':230628421,'cntstntNo':230628507,'mkt':'C','str':'POSTUP','prf':'.'},'lv1':'MMA Props','lv2':'UFC 162','lv3':'.','dlv1':'MMA Props','dlv2':'UFC 162','dlv3':'.','crid':'Mart-MMA Sa Anderson Silv@Chris Weidman','unit':'','gmdt':'07\/06\/2013 23:30:00','cntstnm':'Anderson Silva vs Chris Weidman - Outcome','dcntstnm':'Anderson Silva vs Chris Weidman - Outcome','nm':'Anderson Silva by Submission','dnm':'Anderson Silva by Submission','sts':'I','rno':70614,'a':800,'d':9,'h':0,'dh':'','aorg':800,'dorg':9,'horg':0,'dhorg':''}" value="C|230628421|230628507|POSTUP|.|C" disabled='true' /> </td>
+	  <td class="odds bdevtt displayOdds " cfg="{'a':800,'d':9}">+800</td>
+	  <td class="addMktIcn bdevtt"></td>
+    </tr>
+    <tr class="cntstSeq otherline" seq="21929422">
+      <td class="bdevtt col_rotno">70615</td>
+      <td class="bdevtt">
+		Anderson Silva by Decision 
+	  </td>
+      <td class="checkboxes bdevtt3 "><input type="checkbox" class="oddsselection" cfg="{'type':'cntst','selId':'C|230628421|230628508|POSTUP|.|C','selObj':{'gt':'C','cntstNo':230628421,'cntstntNo':230628508,'mkt':'C','str':'POSTUP','prf':'.'},'lv1':'MMA Props','lv2':'UFC 162','lv3':'.','dlv1':'MMA Props','dlv2':'UFC 162','dlv3':'.','crid':'Mart-MMA Sa Anderson Silv@Chris Weidman','unit':'','gmdt':'07\/06\/2013 23:30:00','cntstnm':'Anderson Silva vs Chris Weidman - Outcome','dcntstnm':'Anderson Silva vs Chris Weidman - Outcome','nm':'Anderson Silva by Decision','dnm':'Anderson Silva by Decision','sts':'I','rno':70615,'a':375,'d':4.75,'h':0,'dh':'','aorg':375,'dorg':4.75,'horg':0,'dhorg':''}" value="C|230628421|230628508|POSTUP|.|C" disabled='true' /> </td>
+	  <td class="odds bdevtt displayOdds " cfg="{'a':375,'d':4.75}">+375</td>
+	  <td class="addMktIcn bdevtt"></td>
+    </tr>
+    <tr class="cntstSeq otherline" seq="21929422">
+      <td class="bdevtt col_rotno">70616</td>
+      <td class="bdevtt">
+		Chris Weidman by KO, TKO or DQ 
+	  </td>
+      <td class="checkboxes bdevtt3 "><input type="checkbox" class="oddsselection" cfg="{'type':'cntst','selId':'C|230628421|230628509|POSTUP|.|C','selObj':{'gt':'C','cntstNo':230628421,'cntstntNo':230628509,'mkt':'C','str':'POSTUP','prf':'.'},'lv1':'MMA Props','lv2':'UFC 162','lv3':'.','dlv1':'MMA Props','dlv2':'UFC 162','dlv3':'.','crid':'Mart-MMA Sa Anderson Silv@Chris Weidman','unit':'','gmdt':'07\/06\/2013 23:30:00','cntstnm':'Anderson Silva vs Chris Weidman - Outcome','dcntstnm':'Anderson Silva vs Chris Weidman - Outcome','nm':'Chris Weidman by KO, TKO or DQ','dnm':'Chris Weidman by KO, TKO or DQ','sts':'I','rno':70616,'a':385,'d':4.85,'h':0,'dh':'','aorg':385,'dorg':4.85,'horg':0,'dhorg':''}" value="C|230628421|230628509|POSTUP|.|C" disabled='true' /> </td>
+	  <td class="odds bdevtt displayOdds " cfg="{'a':385,'d':4.85}">+385</td>
+	  <td class="addMktIcn bdevtt"></td>
+    </tr>
+    <tr class="cntstSeq otherline" seq="21929422">
+      <td class="bdevtt col_rotno">70617</td>
+      <td class="bdevtt">
+		Chris Weidman by Submission 
+	  </td>
+      <td class="checkboxes bdevtt3 "><input type="checkbox" class="oddsselection" cfg="{'type':'cntst','selId':'C|230628421|230628510|POSTUP|.|C','selObj':{'gt':'C','cntstNo':230628421,'cntstntNo':230628510,'mkt':'C','str':'POSTUP','prf':'.'},'lv1':'MMA Props','lv2':'UFC 162','lv3':'.','dlv1':'MMA Props','dlv2':'UFC 162','dlv3':'.','crid':'Mart-MMA Sa Anderson Silv@Chris Weidman','unit':'','gmdt':'07\/06\/2013 23:30:00','cntstnm':'Anderson Silva vs Chris Weidman - Outcome','dcntstnm':'Anderson Silva vs Chris Weidman - Outcome','nm':'Chris Weidman by Submission','dnm':'Chris Weidman by Submission','sts':'I','rno':70617,'a':1600,'d':17,'h':0,'dh':'','aorg':1600,'dorg':17,'horg':0,'dhorg':''}" value="C|230628421|230628510|POSTUP|.|C" disabled='true' /> </td>
+	  <td class="odds bdevtt displayOdds " cfg="{'a':1600,'d':17}">+1600</td>
+	  <td class="addMktIcn bdevtt"></td>
+    </tr>
+    <tr class="cntstSeq otherline" seq="21929422">
+      <td class="bdevtt col_rotno">70618</td>
+      <td class="bdevtt">
+		Chris Weidman by Decision 
+	  </td>
+      <td class="checkboxes bdevtt3 "><input type="checkbox" class="oddsselection" cfg="{'type':'cntst','selId':'C|230628421|230628511|POSTUP|.|C','selObj':{'gt':'C','cntstNo':230628421,'cntstntNo':230628511,'mkt':'C','str':'POSTUP','prf':'.'},'lv1':'MMA Props','lv2':'UFC 162','lv3':'.','dlv1':'MMA Props','dlv2':'UFC 162','dlv3':'.','crid':'Mart-MMA Sa Anderson Silv@Chris Weidman','unit':'','gmdt':'07\/06\/2013 23:30:00','cntstnm':'Anderson Silva vs Chris Weidman - Outcome','dcntstnm':'Anderson Silva vs Chris Weidman - Outcome','nm':'Chris Weidman by Decision','dnm':'Chris Weidman by Decision','sts':'I','rno':70618,'a':1000,'d':11,'h':0,'dh':'','aorg':1000,'dorg':11,'horg':0,'dhorg':''}" value="C|230628421|230628511|POSTUP|.|C" disabled='true' /> </td>
+	  <td class="odds bdevtt displayOdds " cfg="{'a':1000,'d':11}">+1000</td>
+	  <td class="addMktIcn bdevtt"></td>
+    </tr>
+    <tr class="cntstSeq otherline" seq="21929422">
+      <td class="bdevtt col_rotno">70619</td>
+      <td class="bdevtt">
+		Draw 
+	  </td>
+      <td class="checkboxes bdevtt3 "><input type="checkbox" class="oddsselection" cfg="{'type':'cntst','selId':'C|230628421|230628512|POSTUP|.|C','selObj':{'gt':'C','cntstNo':230628421,'cntstntNo':230628512,'mkt':'C','str':'POSTUP','prf':'.'},'lv1':'MMA Props','lv2':'UFC 162','lv3':'.','dlv1':'MMA Props','dlv2':'UFC 162','dlv3':'.','crid':'Mart-MMA Sa Anderson Silv@Chris Weidman','unit':'','gmdt':'07\/06\/2013 23:30:00','cntstnm':'Anderson Silva vs Chris Weidman - Outcome','dcntstnm':'Anderson Silva vs Chris Weidman - Outcome','nm':'Draw','dnm':'Draw','sts':'I','rno':70619,'a':4000,'d':41,'h':0,'dh':'','aorg':4000,'dorg':41,'horg':0,'dhorg':''}" value="C|230628421|230628512|POSTUP|.|C" disabled='true' /> </td>
+	  <td class="odds bdevtt displayOdds " cfg="{'a':4000,'d':41}">+4000</td>
+	  <td class="addMktIcn bdevtt"></td>
+    </tr>
+    <tr class="cntstSeq otherline" seq="21929422">
+      <td class="bdevtt col_rotno">70620</td>
+      <td class="bdevtt">
+		No Contest 
+	  </td>
+      <td class="checkboxes bdevtt3 "><input type="checkbox" class="oddsselection" cfg="{'type':'cntst','selId':'C|230628421|230628513|POSTUP|.|C','selObj':{'gt':'C','cntstNo':230628421,'cntstntNo':230628513,'mkt':'C','str':'POSTUP','prf':'.'},'lv1':'MMA Props','lv2':'UFC 162','lv3':'.','dlv1':'MMA Props','dlv2':'UFC 162','dlv3':'.','crid':'Mart-MMA Sa Anderson Silv@Chris Weidman','unit':'','gmdt':'07\/06\/2013 23:30:00','cntstnm':'Anderson Silva vs Chris Weidman - Outcome','dcntstnm':'Anderson Silva vs Chris Weidman - Outcome','nm':'No Contest','dnm':'No Contest','sts':'I','rno':70620,'a':4500,'d':46,'h':0,'dh':'','aorg':4500,'dorg':46,'horg':0,'dhorg':''}" value="C|230628421|230628513|POSTUP|.|C" disabled='true' /> </td>
+	  <td class="odds bdevtt displayOdds " cfg="{'a':4500,'d':46}">+4500</td>
+	  <td class="addMktIcn bdevtt"></td>
+    </tr>
+  </tbody>
+
+  
+  <tbody class="event">
+    <tr class="eventseparator">
+      <td colspan="6"></td>
+    </tr>
+  </tbody>
+</table>
+
+
+<div id="scoreboard-dialog" class="scoreboard-dialog"></div>
+<script type="text/javascript">
+	P.LiveBetting.Init();
+</script>
+<table class="league">
+  <tbody class="event">
+    <tr class="eventseparator">
+      <td colspan="7"></td>
+    </tr>
+  </tbody>
+</table>
+
+
+
+	
+
+	<div id="maxSeq"></div>
+

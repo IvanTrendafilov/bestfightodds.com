@@ -1,0 +1,1 @@
+INSERT IGNORE INTO fight_twits (fight_id, twitdate) SELECT id, '2001-01-01 00:00:00' FROM fights;

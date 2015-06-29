@@ -1,0 +1,992 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<sports>
+  <sport>
+    <name>Boxing</name>
+    <leagues>
+            <league>
+        <name>Mixed Martial Arts</name>
+        <games>
+                    <game>
+            <period> Game </period>
+    	    <status> Open </status> 
+            <date>Sat, 22 Jan 2011 11:00 PM</date>
+            <title>UFC FIGHT NIGHT 23: FIGHT FOR THE TROOPS</title>
+            <description>@ Fort Hood - Killeen, Texas</description>
+            <lines>
+                                          <line>
+                <seqNumber>2951</seqNumber>
+                <teamName>Melvin Guillard</teamName>
+                <psPoints>NA</psPoints>
+                <psOdds> 0 </psOdds>
+                <totalPoints>NA</totalPoints>
+                <totalOdds> 0 </totalOdds>
+                <mlOdds>+190</mlOdds>
+
+                                                      <lineValue> </lineValue>
+                                                </line>
+                            <line>
+                <seqNumber>2952</seqNumber>
+                <teamName>Evan Dunham</teamName>
+                <psPoints>NA</psPoints>
+                <psOdds> 0 </psOdds>
+                <totalPoints>NA</totalPoints>
+                <totalOdds> 0 </totalOdds>
+                <mlOdds>-240</mlOdds>
+
+                                                      <lineValue>NA-40</lineValue>
+                                                </line>
+                          </lines>
+          </game>
+                    <game>
+            <period> Game </period>
+    	    <status> Open </status> 
+            <date>Sat, 22 Jan 2011 10:30 PM</date>
+            <title></title>
+            <description>UFC FIGHT NIGHT 23: FIGHT FOR THE TROOPS
+@ Fort Hood - Killeen, Texas</description>
+            <lines>
+                                          <line>
+                <seqNumber>2953</seqNumber>
+                <teamName>Tim Hague</teamName>
+                <psPoints>NA</psPoints>
+                <psOdds> 0 </psOdds>
+                <totalPoints>NA</totalPoints>
+                <totalOdds> 0 </totalOdds>
+                <mlOdds>+200</mlOdds>
+
+                                                      <lineValue> </lineValue>
+                                                </line>
+                            <line>
+                <seqNumber>2954</seqNumber>
+                <teamName>Matt Mitrione</teamName>
+                <psPoints>NA</psPoints>
+                <psOdds> 0 </psOdds>
+                <totalPoints>NA</totalPoints>
+                <totalOdds> 0 </totalOdds>
+                <mlOdds>-250</mlOdds>
+
+                                                      <lineValue>NA-40</lineValue>
+                                                </line>
+                          </lines>
+          </game>
+                    <game>
+            <period> Game </period>
+    	    <status> Open </status> 
+            <date>Sat, 22 Jan 2011 10:00 PM</date>
+            <title></title>
+            <description>UFC FIGHT NIGHT 23: FIGHT FOR THE TROOPS
+@ Fort Hood - Killeen, Texas</description>
+            <lines>
+                                          <line>
+                <seqNumber>2955</seqNumber>
+                <teamName>George Roop</teamName>
+                <psPoints>NA</psPoints>
+                <psOdds> 0 </psOdds>
+                <totalPoints>NA</totalPoints>
+                <totalOdds> 0 </totalOdds>
+                <mlOdds>+190</mlOdds>
+
+                                                      <lineValue> </lineValue>
+                                                </line>
+                            <line>
+                <seqNumber>2956</seqNumber>
+                <teamName>Mark Hominick</teamName>
+                <psPoints>NA</psPoints>
+                <psOdds> 0 </psOdds>
+                <totalPoints>NA</totalPoints>
+                <totalOdds> 0 </totalOdds>
+                <mlOdds>-240</mlOdds>
+
+                                                      <lineValue>NA-40</lineValue>
+                                                </line>
+                          </lines>
+          </game>
+                    <game>
+            <period> Game </period>
+    	    <status> Open </status> 
+            <date>Sat, 22 Jan 2011 09:30 PM</date>
+            <title></title>
+            <description>UFC FIGHT NIGHT 23: FIGHT FOR THE TROOPS
+@ Fort Hood - Killeen, Texas</description>
+            <lines>
+                                          <line>
+                <seqNumber>2957</seqNumber>
+                <teamName>Joey Beltran</teamName>
+                <psPoints>NA</psPoints>
+                <psOdds> 0 </psOdds>
+                <totalPoints>NA</totalPoints>
+                <totalOdds> 0 </totalOdds>
+                <mlOdds>+170</mlOdds>
+
+                                                      <lineValue> </lineValue>
+                                                </line>
+                            <line>
+                <seqNumber>2958</seqNumber>
+                <teamName>Pat Barry</teamName>
+                <psPoints>NA</psPoints>
+                <psOdds> 0 </psOdds>
+                <totalPoints>NA</totalPoints>
+                <totalOdds> 0 </totalOdds>
+                <mlOdds>-210</mlOdds>
+
+                                                      <lineValue>NA-40</lineValue>
+                                                </line>
+                          </lines>
+          </game>
+                    <game>
+            <period> Game </period>
+    	    <status> Open </status> 
+            <date>Sat, 22 Jan 2011 09:00 PM</date>
+            <title></title>
+            <description>UFC FIGHT NIGHT 23: FIGHT FOR THE TROOPS
+@ Fort Hood - Killeen, Texas</description>
+            <lines>
+                                          <line>
+                <seqNumber>2959</seqNumber>
+                <teamName>Matt Wiman</teamName>
+                <psPoints>NA</psPoints>
+                <psOdds> 0 </psOdds>
+                <totalPoints>NA</totalPoints>
+                <totalOdds> 0 </totalOdds>
+                <mlOdds>+125</mlOdds>
+
+                                                      <lineValue> </lineValue>
+                                                </line>
+                            <line>
+                <seqNumber>2960</seqNumber>
+                <teamName>Cole Miller</teamName>
+                <psPoints>NA</psPoints>
+                <psOdds> 0 </psOdds>
+                <totalPoints>NA</totalPoints>
+                <totalOdds> 0 </totalOdds>
+                <mlOdds>-155</mlOdds>
+
+                                                      <lineValue>NA-40</lineValue>
+                                                </line>
+                          </lines>
+          </game>
+                    <game>
+            <period> Game </period>
+    	    <status> Open </status> 
+            <date>Sat, 29 Jan 2011 11:59 PM</date>
+            <title>STRIKEFORCE DIAZ vs CYBORG</title>
+            <description>@ HP Pavilion - San Jose, California, United States</description>
+            <lines>
+                                          <line>
+                <seqNumber>2201</seqNumber>
+                <teamName>Evangelista Santos</teamName>
+                <psPoints>NA</psPoints>
+                <psOdds> 0 </psOdds>
+                <totalPoints>NA</totalPoints>
+                <totalOdds> 0 </totalOdds>
+                <mlOdds>+250</mlOdds>
+
+                                                      <lineValue> </lineValue>
+                                                </line>
+                            <line>
+                <seqNumber>2202</seqNumber>
+                <teamName>Nick Diaz</teamName>
+                <psPoints>NA</psPoints>
+                <psOdds> 0 </psOdds>
+                <totalPoints>NA</totalPoints>
+                <totalOdds> 0 </totalOdds>
+                <mlOdds>-350</mlOdds>
+
+                                                      <lineValue>NA-40</lineValue>
+                                                </line>
+                          </lines>
+          </game>
+                    <game>
+            <period> Game </period>
+    	    <status> Open </status> 
+            <date>Sat, 29 Jan 2011 11:00 PM</date>
+            <title></title>
+            <description>STRIKEFORCE DIAZ vs CYBORG
+@ HP Pavilion - San Jose, California, United States</description>
+            <lines>
+                                          <line>
+                <seqNumber>2203</seqNumber>
+                <teamName>Robbie Lawler</teamName>
+                <psPoints>NA</psPoints>
+                <psOdds> 0 </psOdds>
+                <totalPoints>NA</totalPoints>
+                <totalOdds> 0 </totalOdds>
+                <mlOdds>+190</mlOdds>
+
+                                                      <lineValue> </lineValue>
+                                                </line>
+                            <line>
+                <seqNumber>2204</seqNumber>
+                <teamName>Ronaldo Souza</teamName>
+                <psPoints>NA</psPoints>
+                <psOdds> 0 </psOdds>
+                <totalPoints>NA</totalPoints>
+                <totalOdds> 0 </totalOdds>
+                <mlOdds>-250</mlOdds>
+
+                                                      <lineValue>NA-40</lineValue>
+                                                </line>
+                          </lines>
+          </game>
+                    <game>
+            <period> Game </period>
+    	    <status> Open </status> 
+            <date>Sat, 05 Feb 2011 11:59 PM</date>
+            <title>UFC 126</title>
+            <description>@ Mandalay Bay Events Center - Las Vegas, Nevada, United States</description>
+            <lines>
+                                          <line>
+                <seqNumber>2001</seqNumber>
+                <teamName>Vitor Belfort</teamName>
+                <psPoints>NA</psPoints>
+                <psOdds> 0 </psOdds>
+                <totalPoints>NA</totalPoints>
+                <totalOdds> 0 </totalOdds>
+                <mlOdds>+210</mlOdds>
+
+                                                      <lineValue> </lineValue>
+                                                </line>
+                            <line>
+                <seqNumber>2002</seqNumber>
+                <teamName>Anderson Silva</teamName>
+                <psPoints>NA</psPoints>
+                <psOdds> 0 </psOdds>
+                <totalPoints>NA</totalPoints>
+                <totalOdds> 0 </totalOdds>
+                <mlOdds>-280</mlOdds>
+
+                                                      <lineValue>NA-40</lineValue>
+                                                </line>
+                          </lines>
+          </game>
+                    <game>
+            <period> Game </period>
+    	    <status> Open </status> 
+            <date>Sat, 05 Feb 2011 11:30 PM</date>
+            <title></title>
+            <description>UFC 126
+@ Mandalay Bay Events Center - Las Vegas, Nevada, United States</description>
+            <lines>
+                                          <line>
+                <seqNumber>2003</seqNumber>
+                <teamName>Forrest Griffin</teamName>
+                <psPoints>NA</psPoints>
+                <psOdds> 0 </psOdds>
+                <totalPoints>NA</totalPoints>
+                <totalOdds> 0 </totalOdds>
+                <mlOdds>+155</mlOdds>
+
+                                                      <lineValue> </lineValue>
+                                                </line>
+                            <line>
+                <seqNumber>2004</seqNumber>
+                <teamName>Rich Franklin</teamName>
+                <psPoints>NA</psPoints>
+                <psOdds> 0 </psOdds>
+                <totalPoints>NA</totalPoints>
+                <totalOdds> 0 </totalOdds>
+                <mlOdds>-185</mlOdds>
+
+                                                      <lineValue>NA-40</lineValue>
+                                                </line>
+                          </lines>
+          </game>
+                    <game>
+            <period> Game </period>
+    	    <status> Open </status> 
+            <date>Sat, 05 Feb 2011 10:30 PM</date>
+            <title></title>
+            <description>UFC 126
+@ Mandalay Bay Events Center - Las Vegas, Nevada, United States</description>
+            <lines>
+                                          <line>
+                <seqNumber>2005</seqNumber>
+                <teamName>Ryan Bader</teamName>
+                <psPoints>NA</psPoints>
+                <psOdds> 0 </psOdds>
+                <totalPoints>NA</totalPoints>
+                <totalOdds> 0 </totalOdds>
+                <mlOdds>+260</mlOdds>
+
+                                                      <lineValue> </lineValue>
+                                                </line>
+                            <line>
+                <seqNumber>2006</seqNumber>
+                <teamName>Jon Jones</teamName>
+                <psPoints>NA</psPoints>
+                <psOdds> 0 </psOdds>
+                <totalPoints>NA</totalPoints>
+                <totalOdds> 0 </totalOdds>
+                <mlOdds>-360</mlOdds>
+
+                                                      <lineValue>NA-40</lineValue>
+                                                </line>
+                          </lines>
+          </game>
+                    <game>
+            <period> Game </period>
+    	    <status> Open </status> 
+            <date>Sat, 05 Feb 2011 10:00 PM</date>
+            <title></title>
+            <description>UFC 126
+@ Mandalay Bay Events Center - Las Vegas, Nevada, United States</description>
+            <lines>
+                                          <line>
+                <seqNumber>2007</seqNumber>
+                <teamName>Antonio Banuelos</teamName>
+                <psPoints>NA</psPoints>
+                <psOdds> 0 </psOdds>
+                <totalPoints>NA</totalPoints>
+                <totalOdds> 0 </totalOdds>
+                <mlOdds>+290</mlOdds>
+
+                                                      <lineValue> </lineValue>
+                                                </line>
+                            <line>
+                <seqNumber>2008</seqNumber>
+                <teamName>Miguel Torres</teamName>
+                <psPoints>NA</psPoints>
+                <psOdds> 0 </psOdds>
+                <totalPoints>NA</totalPoints>
+                <totalOdds> 0 </totalOdds>
+                <mlOdds>-380</mlOdds>
+
+                                                      <lineValue>NA-40</lineValue>
+                                                </line>
+                          </lines>
+          </game>
+                    <game>
+            <period> Game </period>
+    	    <status> Open </status> 
+            <date>Sat, 05 Feb 2011 11:00 PM</date>
+            <title></title>
+            <description>UFC 126
+@ Mandalay Bay Events Center - Las Vegas, Nevada, United States</description>
+            <lines>
+                                          <line>
+                <seqNumber>2009</seqNumber>
+                <teamName>Carlos Eduardo Rocha</teamName>
+                <psPoints>NA</psPoints>
+                <psOdds> 0 </psOdds>
+                <totalPoints>NA</totalPoints>
+                <totalOdds> 0 </totalOdds>
+                <mlOdds>+260</mlOdds>
+
+                                                      <lineValue> </lineValue>
+                                                </line>
+                            <line>
+                <seqNumber>2010</seqNumber>
+                <teamName>Jake Ellenberger</teamName>
+                <psPoints>NA</psPoints>
+                <psOdds> 0 </psOdds>
+                <totalPoints>NA</totalPoints>
+                <totalOdds> 0 </totalOdds>
+                <mlOdds>-360</mlOdds>
+
+                                                      <lineValue>NA-40</lineValue>
+                                                </line>
+                          </lines>
+          </game>
+                    <game>
+            <period> Game </period>
+    	    <status> Open </status> 
+            <date>Sat, 05 Feb 2011 07:15 PM</date>
+            <title></title>
+            <description>UFC 126
+@ Mandalay Bay Events Center - Las Vegas, Nevada, United States</description>
+            <lines>
+                                          <line>
+                <seqNumber>2411</seqNumber>
+                <teamName>Demetrious Johnson</teamName>
+                <psPoints>NA</psPoints>
+                <psOdds> 0 </psOdds>
+                <totalPoints>NA</totalPoints>
+                <totalOdds> 0 </totalOdds>
+                <mlOdds>+120</mlOdds>
+
+                                                      <lineValue> </lineValue>
+                                                </line>
+                            <line>
+                <seqNumber>2412</seqNumber>
+                <teamName>Norifumi Yamamoto</teamName>
+                <psPoints>NA</psPoints>
+                <psOdds> 0 </psOdds>
+                <totalPoints>NA</totalPoints>
+                <totalOdds> 0 </totalOdds>
+                <mlOdds>-150</mlOdds>
+
+                                                      <lineValue>NA-40</lineValue>
+                                                </line>
+                          </lines>
+          </game>
+                    <game>
+            <period> Game </period>
+    	    <status> Open </status> 
+            <date>Sat, 12 Feb 2011 10:30 PM</date>
+            <title>STIRKEORCE/M1 GLOBAL</title>
+            <description>@ IZOD Center - East Rutherford, New Jersey, United States</description>
+            <lines>
+                                          <line>
+                <seqNumber>2701</seqNumber>
+                <teamName>Antonio Silva</teamName>
+                <psPoints>NA</psPoints>
+                <psOdds> 0 </psOdds>
+                <totalPoints>NA</totalPoints>
+                <totalOdds> 0 </totalOdds>
+                <mlOdds>+310</mlOdds>
+
+                                                      <lineValue> </lineValue>
+                                                </line>
+                            <line>
+                <seqNumber>2702</seqNumber>
+                <teamName>Fedor Emelianenko</teamName>
+                <psPoints>NA</psPoints>
+                <psOdds> 0 </psOdds>
+                <totalPoints>NA</totalPoints>
+                <totalOdds> 0 </totalOdds>
+                <mlOdds>-400</mlOdds>
+
+                                                      <lineValue>NA-40</lineValue>
+                                                </line>
+                          </lines>
+          </game>
+                    <game>
+            <period> Game </period>
+    	    <status> Open </status> 
+            <date>Sat, 12 Feb 2011 10:00 PM</date>
+            <title></title>
+            <description>STIRKEORCE/M1 GLOBAL
+@ IZOD Center - East Rutherford, New Jersey, United States</description>
+            <lines>
+                                          <line>
+                <seqNumber>2703</seqNumber>
+                <teamName>Sergei Kharitonov</teamName>
+                <psPoints>NA</psPoints>
+                <psOdds> 0 </psOdds>
+                <totalPoints>NA</totalPoints>
+                <totalOdds> 0 </totalOdds>
+                <mlOdds>-120</mlOdds>
+
+                                                      <lineValue>NA-40</lineValue>
+                                                </line>
+                            <line>
+                <seqNumber>2704</seqNumber>
+                <teamName>Andrei Arlovski</teamName>
+                <psPoints>NA</psPoints>
+                <psOdds> 0 </psOdds>
+                <totalPoints>NA</totalPoints>
+                <totalOdds> 0 </totalOdds>
+                <mlOdds>-110</mlOdds>
+
+                                                      <lineValue>NA-40</lineValue>
+                                                </line>
+                          </lines>
+          </game>
+                    <game>
+            <period> Game </period>
+    	    <status> Open </status> 
+            <date>Sat, 26 Feb 2011 03:00 PM</date>
+            <title>UFC 127</title>
+            <description>@ Acer Arena - Sydney, Australia</description>
+            <lines>
+                                          <line>
+                <seqNumber>2401</seqNumber>
+                <teamName>B.J. Penn</teamName>
+                <psPoints>NA</psPoints>
+                <psOdds> 0 </psOdds>
+                <totalPoints>NA</totalPoints>
+                <totalOdds> 0 </totalOdds>
+                <mlOdds>+145</mlOdds>
+
+                                                      <lineValue> </lineValue>
+                                                </line>
+                            <line>
+                <seqNumber>2402</seqNumber>
+                <teamName>Jon Fitch</teamName>
+                <psPoints>NA</psPoints>
+                <psOdds> 0 </psOdds>
+                <totalPoints>NA</totalPoints>
+                <totalOdds> 0 </totalOdds>
+                <mlOdds>-175</mlOdds>
+
+                                                      <lineValue>NA-40</lineValue>
+                                                </line>
+                          </lines>
+          </game>
+                    <game>
+            <period> Game </period>
+    	    <status> Open </status> 
+            <date>Sat, 26 Feb 2011 03:00 PM</date>
+            <title></title>
+            <description>UFC 127
+@ Acer Arena - Sydney, Australia</description>
+            <lines>
+                                          <line>
+                <seqNumber>2403</seqNumber>
+                <teamName>Jorge Rivera</teamName>
+                <psPoints>NA</psPoints>
+                <psOdds> 0 </psOdds>
+                <totalPoints>NA</totalPoints>
+                <totalOdds> 0 </totalOdds>
+                <mlOdds>+260</mlOdds>
+
+                                                      <lineValue> </lineValue>
+                                                </line>
+                            <line>
+                <seqNumber>2404</seqNumber>
+                <teamName>Michael Bisping</teamName>
+                <psPoints>NA</psPoints>
+                <psOdds> 0 </psOdds>
+                <totalPoints>NA</totalPoints>
+                <totalOdds> 0 </totalOdds>
+                <mlOdds>-360</mlOdds>
+
+                                                      <lineValue>NA-40</lineValue>
+                                                </line>
+                          </lines>
+          </game>
+                    <game>
+            <period> Game </period>
+    	    <status> Open </status> 
+            <date>Sat, 26 Feb 2011 03:00 PM</date>
+            <title></title>
+            <description>UFC 127
+@ Acer Arena - Sydney, Australia</description>
+            <lines>
+                                          <line>
+                <seqNumber>2405</seqNumber>
+                <teamName>Carlos Condit</teamName>
+                <psPoints>NA</psPoints>
+                <psOdds> 0 </psOdds>
+                <totalPoints>NA</totalPoints>
+                <totalOdds> 0 </totalOdds>
+                <mlOdds>-185</mlOdds>
+
+                                                      <lineValue>NA-40</lineValue>
+                                                </line>
+                            <line>
+                <seqNumber>2406</seqNumber>
+                <teamName>Chris Lytle</teamName>
+                <psPoints>NA</psPoints>
+                <psOdds> 0 </psOdds>
+                <totalPoints>NA</totalPoints>
+                <totalOdds> 0 </totalOdds>
+                <mlOdds>+155</mlOdds>
+
+                                                      <lineValue> </lineValue>
+                                                </line>
+                          </lines>
+          </game>
+                    <game>
+            <period> Game </period>
+    	    <status> Open </status> 
+            <date>Sat, 26 Feb 2011 12:00 PM</date>
+            <title></title>
+            <description>UFC 127
+@ Acer Arena - Sydney, Australia</description>
+            <lines>
+                                          <line>
+                <seqNumber>2911</seqNumber>
+                <teamName>Dennis Siver</teamName>
+                <psPoints>NA</psPoints>
+                <psOdds> 0 </psOdds>
+                <totalPoints>NA</totalPoints>
+                <totalOdds> 0 </totalOdds>
+                <mlOdds>+220</mlOdds>
+
+                                                      <lineValue> </lineValue>
+                                                </line>
+                            <line>
+                <seqNumber>2912</seqNumber>
+                <teamName>George Sotiropoulos</teamName>
+                <psPoints>NA</psPoints>
+                <psOdds> 0 </psOdds>
+                <totalPoints>NA</totalPoints>
+                <totalOdds> 0 </totalOdds>
+                <mlOdds>-300</mlOdds>
+
+                                                      <lineValue>NA-40</lineValue>
+                                                </line>
+                          </lines>
+          </game>
+                    <game>
+            <period> Game </period>
+    	    <status> Open </status> 
+            <date>Sat, 26 Feb 2011 12:00 PM</date>
+            <title></title>
+            <description>UFC 127
+@ Acer Arena - Sydney, Australia</description>
+            <lines>
+                                          <line>
+                <seqNumber>2913</seqNumber>
+                <teamName>Chris Camozzi</teamName>
+                <psPoints>NA</psPoints>
+                <psOdds> 0 </psOdds>
+                <totalPoints>NA</totalPoints>
+                <totalOdds> 0 </totalOdds>
+                <mlOdds>+145</mlOdds>
+
+                                                      <lineValue> </lineValue>
+                                                </line>
+                            <line>
+                <seqNumber>2914</seqNumber>
+                <teamName>Kyle Noke</teamName>
+                <psPoints>NA</psPoints>
+                <psOdds> 0 </psOdds>
+                <totalPoints>NA</totalPoints>
+                <totalOdds> 0 </totalOdds>
+                <mlOdds>-175</mlOdds>
+
+                                                      <lineValue>NA-40</lineValue>
+                                                </line>
+                          </lines>
+          </game>
+                    <game>
+            <period> Game </period>
+    	    <status> Open </status> 
+            <date>Thu, 03 Mar 2011 10:30 PM</date>
+            <title>UFC ON VERSUS 3</title>
+            <description>@ KFC Yum! Center - Louisville, Kentucky</description>
+            <lines>
+                                          <line>
+                <seqNumber>2441</seqNumber>
+                <teamName>Diego Sanchez</teamName>
+                <psPoints>NA</psPoints>
+                <psOdds> 0 </psOdds>
+                <totalPoints>NA</totalPoints>
+                <totalOdds> 0 </totalOdds>
+                <mlOdds>+125</mlOdds>
+
+                                                      <lineValue> </lineValue>
+                                                </line>
+                            <line>
+                <seqNumber>2442</seqNumber>
+                <teamName>Martin Kampmann</teamName>
+                <psPoints>NA</psPoints>
+                <psOdds> 0 </psOdds>
+                <totalPoints>NA</totalPoints>
+                <totalOdds> 0 </totalOdds>
+                <mlOdds>-155</mlOdds>
+
+                                                      <lineValue>NA-40</lineValue>
+                                                </line>
+                          </lines>
+          </game>
+                    <game>
+            <period> Game </period>
+    	    <status> Open </status> 
+            <date>Thu, 03 Mar 2011 09:30 PM</date>
+            <title></title>
+            <description>UFC ON VERSUS 3
+@ KFC Yum! Center - Louisville, Kentucky</description>
+            <lines>
+                                          <line>
+                <seqNumber>2443</seqNumber>
+                <teamName>CB Dollaway</teamName>
+                <psPoints>NA</psPoints>
+                <psOdds> 0 </psOdds>
+                <totalPoints>NA</totalPoints>
+                <totalOdds> 0 </totalOdds>
+                <mlOdds>+170</mlOdds>
+
+                                                      <lineValue> </lineValue>
+                                                </line>
+                            <line>
+                <seqNumber>2444</seqNumber>
+                <teamName>Mark Munoz</teamName>
+                <psPoints>NA</psPoints>
+                <psOdds> 0 </psOdds>
+                <totalPoints>NA</totalPoints>
+                <totalOdds> 0 </totalOdds>
+                <mlOdds>-210</mlOdds>
+
+                                                      <lineValue>NA-40</lineValue>
+                                                </line>
+                          </lines>
+          </game>
+                    <game>
+            <period> Game </period>
+    	    <status> Open </status> 
+            <date>Sat, 05 Mar 2011 11:30 PM</date>
+            <title>STRIKEFORCE: COLUMBUS</title>
+            <description>@ Nationwide Arena - Columbus, Ohio, United States</description>
+            <lines>
+                                          <line>
+                <seqNumber>2461</seqNumber>
+                <teamName>Fabricio Werdum</teamName>
+                <psPoints>NA</psPoints>
+                <psOdds> 0 </psOdds>
+                <totalPoints>NA</totalPoints>
+                <totalOdds> 0 </totalOdds>
+                <mlOdds>+215</mlOdds>
+
+                                                      <lineValue> </lineValue>
+                                                </line>
+                            <line>
+                <seqNumber>2462</seqNumber>
+                <teamName>Alistair Overeem</teamName>
+                <psPoints>NA</psPoints>
+                <psOdds> 0 </psOdds>
+                <totalPoints>NA</totalPoints>
+                <totalOdds> 0 </totalOdds>
+                <mlOdds>-275</mlOdds>
+
+                                                      <lineValue>NA-40</lineValue>
+                                                </line>
+                          </lines>
+          </game>
+                    <game>
+            <period> Game </period>
+    	    <status> Open </status> 
+            <date>Sat, 19 Mar 2011 11:00 PM</date>
+            <title>UFC 128</title>
+            <description>@ Prudential Center - Newark, New Jersey, United States</description>
+            <lines>
+                                          <line>
+                <seqNumber>2801</seqNumber>
+                <teamName>Rashad Evans</teamName>
+                <psPoints>NA</psPoints>
+                <psOdds> 0 </psOdds>
+                <totalPoints>NA</totalPoints>
+                <totalOdds> 0 </totalOdds>
+                <mlOdds>+145</mlOdds>
+
+                                                      <lineValue> </lineValue>
+                                                </line>
+                            <line>
+                <seqNumber>2802</seqNumber>
+                <teamName>Mauricio Rua</teamName>
+                <psPoints>NA</psPoints>
+                <psOdds> 0 </psOdds>
+                <totalPoints>NA</totalPoints>
+                <totalOdds> 0 </totalOdds>
+                <mlOdds>-175</mlOdds>
+
+                                                      <lineValue>NA-40</lineValue>
+                                                </line>
+                          </lines>
+          </game>
+                    <game>
+            <period> Game </period>
+    	    <status> Close </status> 
+            <date>Sat, 19 Mar 2011 10:30 PM</date>
+            <title></title>
+            <description>UFC 128
+@ Prudential Center - Newark, New Jersey, United States</description>
+            <lines>
+                                          <line>
+                <seqNumber>2803</seqNumber>
+                <teamName>Yoshihiro Akiyama</teamName>
+                <psPoints>NA</psPoints>
+                <psOdds> 0 </psOdds>
+                <totalPoints>NA</totalPoints>
+                <totalOdds> 0 </totalOdds>
+                <mlOdds>NA</mlOdds>
+
+                              </line>
+                            <line>
+                <seqNumber>2804</seqNumber>
+                <teamName>Nate Marquardt</teamName>
+                <psPoints>NA</psPoints>
+                <psOdds> 0 </psOdds>
+                <totalPoints>NA</totalPoints>
+                <totalOdds> 0 </totalOdds>
+                <mlOdds>NA</mlOdds>
+
+                              </line>
+                          </lines>
+          </game>
+                    <game>
+            <period> Game </period>
+    	    <status> Open </status> 
+            <date>Sat, 26 Mar 2011 10:30 PM</date>
+            <title>UFC FIGHT NIGHT 24</title>
+            <description>@ Key Arena - Seattle, Washington, United States</description>
+            <lines>
+                                          <line>
+                <seqNumber>2451</seqNumber>
+                <teamName>Tito Ortiz</teamName>
+                <psPoints>NA</psPoints>
+                <psOdds> 0 </psOdds>
+                <totalPoints>NA</totalPoints>
+                <totalOdds> 0 </totalOdds>
+                <mlOdds>+200</mlOdds>
+
+                                                      <lineValue> </lineValue>
+                                                </line>
+                            <line>
+                <seqNumber>2452</seqNumber>
+                <teamName>Antonio Rogerio Nogueira</teamName>
+                <psPoints>NA</psPoints>
+                <psOdds> 0 </psOdds>
+                <totalPoints>NA</totalPoints>
+                <totalOdds> 0 </totalOdds>
+                <mlOdds>-260</mlOdds>
+
+                                                      <lineValue>NA-40</lineValue>
+                                                </line>
+                          </lines>
+          </game>
+                    <game>
+            <period> Game </period>
+    	    <status> Open </status> 
+            <date>Sat, 26 Mar 2011 10:00 PM</date>
+            <title></title>
+            <description>UFC FIGHT NIGHT 24
+@ Key Arena - Seattle, Washington, United States</description>
+            <lines>
+                                          <line>
+                <seqNumber>2453</seqNumber>
+                <teamName>Leonard Garcia</teamName>
+                <psPoints>NA</psPoints>
+                <psOdds> 0 </psOdds>
+                <totalPoints>NA</totalPoints>
+                <totalOdds> 0 </totalOdds>
+                <mlOdds>+115</mlOdds>
+
+                                                      <lineValue> </lineValue>
+                                                </line>
+                            <line>
+                <seqNumber>2454</seqNumber>
+                <teamName>Nam Phan</teamName>
+                <psPoints>NA</psPoints>
+                <psOdds> 0 </psOdds>
+                <totalPoints>NA</totalPoints>
+                <totalOdds> 0 </totalOdds>
+                <mlOdds>-145</mlOdds>
+
+                                                      <lineValue>NA-40</lineValue>
+                                                </line>
+                          </lines>
+          </game>
+                    <game>
+            <period> Game </period>
+    	    <status> Open </status> 
+            <date>Sat, 30 Apr 2011 11:30 PM</date>
+            <title>UFC 129</title>
+            <description>@ Rogers Centre - Toronto, Ontario, Canada</description>
+            <lines>
+                                          <line>
+                <seqNumber>2881</seqNumber>
+                <teamName>Jake Shields</teamName>
+                <psPoints>NA</psPoints>
+                <psOdds> 0 </psOdds>
+                <totalPoints>NA</totalPoints>
+                <totalOdds> 0 </totalOdds>
+                <mlOdds>+400</mlOdds>
+
+                                                      <lineValue> </lineValue>
+                                                </line>
+                            <line>
+                <seqNumber>2882</seqNumber>
+                <teamName>Georges St-Pierre</teamName>
+                <psPoints>NA</psPoints>
+                <psOdds> 0 </psOdds>
+                <totalPoints>NA</totalPoints>
+                <totalOdds> 0 </totalOdds>
+                <mlOdds>-600</mlOdds>
+
+                                                      <lineValue>NA-40</lineValue>
+                                                </line>
+                          </lines>
+          </game>
+                    <game>
+            <period> Game </period>
+    	    <status> Open </status> 
+            <date>Sat, 30 Apr 2011 11:00 PM</date>
+            <title></title>
+            <description>UFC 129
+@ Rogers Centre - Toronto, Ontario, Canada</description>
+            <lines>
+                                          <line>
+                <seqNumber>2883</seqNumber>
+                <teamName>Randy Couture</teamName>
+                <psPoints>NA</psPoints>
+                <psOdds> 0 </psOdds>
+                <totalPoints>NA</totalPoints>
+                <totalOdds> 0 </totalOdds>
+                <mlOdds>+250</mlOdds>
+
+                                                      <lineValue> </lineValue>
+                                                </line>
+                            <line>
+                <seqNumber>2884</seqNumber>
+                <teamName>Lyoto Machida</teamName>
+                <psPoints>NA</psPoints>
+                <psOdds> 0 </psOdds>
+                <totalPoints>NA</totalPoints>
+                <totalOdds> 0 </totalOdds>
+                <mlOdds>-330</mlOdds>
+
+                                                      <lineValue>NA-40</lineValue>
+                                                </line>
+                          </lines>
+          </game>
+                    <game>
+            <period> Game </period>
+    	    <status> Open </status> 
+            <date>Sat, 30 Apr 2011 10:00 PM</date>
+            <title></title>
+            <description>UFC 129
+@ Rogers Centre - Toronto, Ontario, Canada</description>
+            <lines>
+                                          <line>
+                <seqNumber>2885</seqNumber>
+                <teamName>Mark Bocek</teamName>
+                <psPoints>NA</psPoints>
+                <psOdds> 0 </psOdds>
+                <totalPoints>NA</totalPoints>
+                <totalOdds> 0 </totalOdds>
+                <mlOdds>-105</mlOdds>
+
+                                                      <lineValue>NA-40</lineValue>
+                                                </line>
+                            <line>
+                <seqNumber>2886</seqNumber>
+                <teamName>Ben Henderson</teamName>
+                <psPoints>NA</psPoints>
+                <psOdds> 0 </psOdds>
+                <totalPoints>NA</totalPoints>
+                <totalOdds> 0 </totalOdds>
+                <mlOdds>-125</mlOdds>
+
+                                                      <lineValue>NA-40</lineValue>
+                                                </line>
+                          </lines>
+          </game>
+                    <game>
+            <period> Game </period>
+    	    <status> Open </status> 
+            <date>Sat, 11 Jun 2011 10:00 PM</date>
+            <title>UFC 131</title>
+            <description>@ Rogers Arena - British Columbia, Canada</description>
+            <lines>
+                                          <line>
+                <seqNumber>2721</seqNumber>
+                <teamName>Brock Lesnar</teamName>
+                <psPoints>NA</psPoints>
+                <psOdds> 0 </psOdds>
+                <totalPoints>NA</totalPoints>
+                <totalOdds> 0 </totalOdds>
+                <mlOdds>EV</mlOdds>
+
+                                                      <lineValue> </lineValue>
+                                                </line>
+                            <line>
+                <seqNumber>2722</seqNumber>
+                <teamName>Junior Dos Santos</teamName>
+                <psPoints>NA</psPoints>
+                <psOdds> 0 </psOdds>
+                <totalPoints>NA</totalPoints>
+                <totalOdds> 0 </totalOdds>
+                <mlOdds>-130</mlOdds>
+
+                                                      <lineValue>NA-40</lineValue>
+                                                </line>
+                          </lines>
+          </game>
+                  </games>
+      </league>
+          </leagues>
+  </sport>
+</sports>

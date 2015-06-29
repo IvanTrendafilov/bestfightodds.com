@@ -1,0 +1,216 @@
+.table-header {
+    background-color: #393B42;
+    /*Pre-switch: background-color: #2D2E34;*/
+    font-size: 12px;
+    height: 17px;
+    padding: 4px 0px 10px 11px;
+    color: #fff;
+
+      display: -webkit-box;  
+    display: -moz-box;         
+    display: -ms-flexbox;      
+    display: -webkit-flex;     
+    display: flex;     
+    z-index: 2;
+}
+.table-header a {
+    font-weight: 500;
+    
+    font-size: 15px;
+    text-transform: uppercase;
+}
+.table-header a:hover {
+    color: #d0d0d0;
+}
+.table-header-title {
+    max-width: 100%;
+    white-space: nowrap;
+}
+
+.table-header-date {
+    padding-left: 8px;
+    padding-top: 3px;
+}
+.odds-table {
+    width: 946px;
+    font-size: 11px;
+    border-collapse: collapse;
+    /*margin-top: -1px;*/
+}
+.odds-table thead tr {
+    /*Pre-switch: background-color: #393B42;*/
+    background-color: #cdcdcd;
+}
+.odds-table thead th {
+    text-align: center;
+    height: 16px;
+    border-left: 1px solid #c5c5c5
+
+}
+
+.odds-table thead th.table-prop-header {
+    text-align: right; 
+    padding-right: 5px;
+    color: #505050;
+    font-size: 10px;
+    font-weight: 500;
+}
+.odds-table thead th a {
+    color: #505050;
+    /*Pre-switch: color: #a5a5a5;*/
+    font-size: 10px;
+}
+.odds-table thead th a:hover {
+    color: #b9b9b9;
+}
+.odds-table tbody tr {
+    background-color: #e9eaed;
+    height: 20px;
+}
+.odds-table tbody tr.odd {
+    background-color: #fff;
+    border-bottom: 1px solid #C6C6C6;
+}
+.odds-table tbody tr.pr {
+    background-color: #d8d8d8;
+    display: none;
+    height: 20px;
+}
+.odds-table tbody tr.pr-odd {
+    background-color: #e8e8e8;
+    border-bottom: 1px solid #bdbdbd;
+    display: none;
+}
+.odds-table tbody th {
+    padding-left: 5px;
+    width: 110px;
+    color: #272727;
+    font-size: 10px;
+    font-weight: 500;
+    max-width: 110px;
+    word-break: break-word;
+}
+.odds-table tbody th a {
+    color: #272727;
+    font-weight: 500;
+    font-size: 10px;
+    width: 140px;
+    height: 20px;
+}
+.odds-table tbody th a:hover {
+    color: #666;
+}
+.odds-table tbody td {
+    font-family: Arial, sans-serif;
+    border-left: 1px dotted #ddd;
+    color: #272727;
+    width: 47px;
+    text-align: center;
+    height: 20px;
+}
+.odds-table tbody td div {
+    width: 100%;
+    height: 100%;
+    position: relative;
+}
+.odds-table tbody td a {
+    margin: 0;
+    padding: 0;
+    border: 0;
+}
+.odds-table tbody  tr.pr td, .odds-table tbody  tr.pr-odd td {
+    border-left: 1px dotted #bbb;
+}
+.odds-table tbody td.button-cell {
+    width: 16px;
+    padding-top: 1px;
+    height: 19px;
+}
+.odds-table tbody td.prop-cell {
+    width: 15px;
+    color: #272727;
+    padding-right: 11px;
+    vertical-align: middle;
+}
+.exp-img {
+    width: 9px;
+    height: 16px;
+    position: absolute;
+    padding-left: 4px;
+}
+.odds-table tbody td a {
+    color: #272727;
+}
+.odds-table tbody td a:hover {
+    color: #666;
+}
+.odds-table tbody td span.na {
+    color: #686868;
+}
+.odds-table tbody td .bestbet {
+    background-color: #B00101;
+    color: #fff;
+    padding: 0 1px;
+}
+
+.aru {
+    color: #4BCA02;
+    position: absolute;    /*right: 0;*/
+    margin-left: 1px;
+    font-size: 12px;
+}
+.ard {
+    color: #E93524;
+    position: absolute;    /*right: 0;*/
+    margin-left: 1px;
+    font-size: 12px;
+}
+.arage-1 {
+}
+.arage-2 {
+    opacity: .6;
+    -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=60)";
+    filter: alpha(opacity=70);
+}
+.arage-3 {
+    opacity: .30;
+    -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=30)";
+    filter: alpha(opacity=30);
+}
+.table-outer-wrapper {
+    padding: 0 15px;
+    font-size: 12px;
+}
+.table-div {
+    -webkit-box-shadow: 0px 1px 1px 1px rgb(180, 180, 180);
+    -moz-box-shadow: 0px 1px 1px 1px rgb(180, 180, 180);
+    box-shadow: 0px 1px 1px 1px rgb(180, 180, 180);
+    border-radius: 1px;
+    position: relative;
+}
+.table-last-changed {
+    color: #999;
+    height: 12px;
+    font-size: 10px;
+    text-align: right;
+    padding-top: 3px;
+    padding-right: 19px;
+    margin-bottom: 10px;
+}
+.small-button:hover {
+    opacity: .85;
+    -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=85)";
+    filter: alpha(opacity=85);
+}
+.odds-table-responsive-header {
+    width: 90px;
+    z-index: 2;
+    position: absolute;
+    display: none;
+}
+.odds-table-responsive-header tbody tr th {
+    width: 90px;
+    height: 20px;
+}
+.odds-table-responsive-header tbody tr.pr th {
+}

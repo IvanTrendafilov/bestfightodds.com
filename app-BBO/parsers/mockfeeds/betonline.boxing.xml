@@ -1,0 +1,159 @@
+<?xml version="1.0"?>
+<bestlinesports_line_feed>
+<event>
+<event_datetimeGMT>2013-10-05 15:00</event_datetimeGMT>
+<sporttype>Boxing</sporttype>
+<scheduletext>Heavyweight                                                 </scheduletext>
+<league>Matchups Boxing</league>
+<participant>
+<participant_name>Alexander Povetkin</participant_name>
+<rotnum>24601</rotnum>
+<visiting_home_draw>Visiting</visiting_home_draw>
+<odds>
+<moneyline>450</moneyline>
+</odds>
+<pitcher></pitcher>
+</participant>
+<participant>
+<participant_name>Wladimir Klitschko</participant_name>
+<rotnum>24602</rotnum>
+<visiting_home_draw>Home</visiting_home_draw>
+<odds>
+<moneyline>-625</moneyline>
+</odds>
+<pitcher></pitcher>
+</participant>
+<drawrotnum>0</drawrotnum><drawmoneyline>0</drawmoneyline><drawTitle></drawTitle><period>
+<period_description>Game</period_description>
+<periodcutoff_datetimeGMT>2013-10-05 15:00</periodcutoff_datetimeGMT>
+<period_status>I</period_status>
+<spread><spread_visiting></spread_visiting>
+<spread_adjust_visiting></spread_adjust_visiting>
+<spread_home></spread_home>
+<spread_adjust_home></spread_adjust_home>
+</spread>
+<total>
+<total_points>9.5</total_points>
+<over_adjust>-115</over_adjust>
+<under_adjust>-115</under_adjust>
+</total>
+</period>
+</event>
+<event>
+<event_datetimeGMT>2013-10-05 23:00</event_datetimeGMT>
+<sporttype>Boxing</sporttype>
+<scheduletext>Middleweight                                                </scheduletext>
+<league>Matchups Boxing</league>
+<participant>
+<participant_name>Delvin Rodriguez</participant_name>
+<rotnum>24605</rotnum>
+<visiting_home_draw>Visiting</visiting_home_draw>
+<odds>
+<moneyline>400</moneyline>
+</odds>
+<pitcher></pitcher>
+</participant>
+<participant>
+<participant_name>Miguel Cotto</participant_name>
+<rotnum>24606</rotnum>
+<visiting_home_draw>Home</visiting_home_draw>
+<odds>
+<moneyline>-550</moneyline>
+</odds>
+<pitcher></pitcher>
+</participant>
+<drawrotnum>0</drawrotnum><drawmoneyline>0</drawmoneyline><drawTitle></drawTitle><period>
+<period_description>Game</period_description>
+<periodcutoff_datetimeGMT>2013-10-05 23:00</periodcutoff_datetimeGMT>
+<period_status>I</period_status>
+<spread><spread_visiting></spread_visiting>
+<spread_adjust_visiting></spread_adjust_visiting>
+<spread_home></spread_home>
+<spread_adjust_home></spread_adjust_home>
+</spread>
+<total>
+<total_points></total_points>
+<over_adjust></over_adjust>
+<under_adjust></under_adjust>
+</total>
+</period>
+</event>
+<event>
+<event_datetimeGMT>2013-10-12 23:00</event_datetimeGMT>
+<sporttype>Boxing</sporttype>
+<scheduletext>Welterweight                                                </scheduletext>
+<league>Matchups Boxing</league>
+<participant>
+<participant_name>Timothy Bradley</participant_name>
+<rotnum>24789</rotnum>
+<visiting_home_draw>Visiting</visiting_home_draw>
+<odds>
+<moneyline>115</moneyline>
+</odds>
+<pitcher></pitcher>
+</participant>
+<participant>
+<participant_name>Juan Manuel Marquez</participant_name>
+<rotnum>24790</rotnum>
+<visiting_home_draw>Home</visiting_home_draw>
+<odds>
+<moneyline>-145</moneyline>
+</odds>
+<pitcher></pitcher>
+</participant>
+<drawrotnum>0</drawrotnum><drawmoneyline>0</drawmoneyline><drawTitle></drawTitle><period>
+<period_description>Game</period_description>
+<periodcutoff_datetimeGMT>2013-10-12 23:00</periodcutoff_datetimeGMT>
+<period_status>I</period_status>
+<spread><spread_visiting></spread_visiting>
+<spread_adjust_visiting></spread_adjust_visiting>
+<spread_home></spread_home>
+<spread_adjust_home></spread_adjust_home>
+</spread>
+<total>
+<total_points>9.5</total_points>
+<over_adjust>-325</over_adjust>
+<under_adjust>250</under_adjust>
+</total>
+</period>
+</event>
+<event>
+<event_datetimeGMT>2013-11-23 23:00</event_datetimeGMT>
+<sporttype>Boxing</sporttype>
+<scheduletext>Welterweight                                                </scheduletext>
+<league>Matchups Boxing</league>
+<participant>
+<participant_name>Brandon Rios</participant_name>
+<rotnum>24851</rotnum>
+<visiting_home_draw>Visiting</visiting_home_draw>
+<odds>
+<moneyline>325</moneyline>
+</odds>
+<pitcher></pitcher>
+</participant>
+<participant>
+<participant_name>Manny Pacquiao</participant_name>
+<rotnum>24852</rotnum>
+<visiting_home_draw>Home</visiting_home_draw>
+<odds>
+<moneyline>-425</moneyline>
+</odds>
+<pitcher></pitcher>
+</participant>
+<drawrotnum>0</drawrotnum><drawmoneyline>0</drawmoneyline><drawTitle></drawTitle><period>
+<period_description>Game</period_description>
+<periodcutoff_datetimeGMT>2013-11-23 23:00</periodcutoff_datetimeGMT>
+<period_status>I</period_status>
+<spread><spread_visiting></spread_visiting>
+<spread_adjust_visiting></spread_adjust_visiting>
+<spread_home></spread_home>
+<spread_adjust_home></spread_adjust_home>
+</spread>
+<total>
+<total_points>8.5</total_points>
+<over_adjust>-105</over_adjust>
+<under_adjust>-125</under_adjust>
+</total>
+</period>
+</event>
+</bestlinesports_line_feed>

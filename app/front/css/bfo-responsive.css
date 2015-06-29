@@ -1,0 +1,235 @@
+/* Mobile */
+@media only screen and (max-width:767px) {
+	body {
+		width: 100%;
+	}
+	#page {
+		width: 100%;
+	}
+	#header-search-box {
+		display: none;
+	}
+	#parlay-mode-container, #auto-refresh-container {
+		display: none;
+	}
+
+	#format-container {
+		margin-right: 17px;
+	}
+
+	#header-menu {
+		padding-left: 10px;
+	}
+	.odds-table-responsive-header {
+		display: block;
+	}
+	.table-scroller {
+		width: 100%;
+		overflow-x: scroll;
+		overflow-y: hidden;
+		-webkit-overflow-scrolling: touch;
+	}
+	#content {
+		width: 100%;
+	}
+	.odds-table {
+		font-size: 10px;
+	}
+	.table-outer-wrapper {
+		padding: 3px;
+	}
+	.odds-table tbody th {
+		width: 50px;
+	}
+	.odds-table tbody th, .odds-table tbody th a {
+		font-size: 9px;
+	}
+	.odds-table tbody td {
+		width: 30px;
+	}
+	.odds-table thead th a {
+		font-size: 9px;
+	}
+	.table-header {
+		font-size: 10px;
+		height: 13px;
+		padding: 5px 0px 7px 8px;
+        
+
+	}
+	.table-header a {
+		font-size: 11px;
+		-ms-text-overflow: ellipsis;
+	    -o-text-overflow: ellipsis;
+	    text-overflow: ellipsis;
+	    white-space: nowrap;
+	    overflow: hidden;
+
+	}
+
+	.table-header-title {
+		
+	}
+
+
+	.table-header-date {
+		padding-left: 5px;
+		padding-right: 6px;
+		padding-top: 2px;
+		font-size: 0.9em;
+		text-align: right;
+		white-space: nowrap;
+	}
+
+
+	#logo {
+		width: 200px;
+		height: 37px;
+	}
+	#header-top {
+		height: 50px;
+		width: 100%;
+	}
+	.header {
+		margin-bottom: 0;
+		min-width: 0;
+	}
+	#page-wrapper {
+		margin: 5px;
+	}
+	#header-menu {
+		width: 100%;
+	}
+	.header-menu-item {
+		height: 20px;
+
+		font-size: 11px;
+		padding: 6px 10px 0 10px;
+	}
+	.menu-divider {
+		display: none;
+	}
+	.item-non-mobile {
+		display: none;
+	}
+
+	#page-content {
+		width: 100%;
+	}
+	#page-header {
+		font-size: 12px;
+		height: 12px;
+	}
+
+	#page-inner-wrapper {
+		padding: 4px;
+	}
+
+	.table-inner-wrapper {
+		position: relative;
+	}
+	.table-inner-shadow-right {
+		position: absolute;
+		top: 0;
+		right: 0;
+		width: 6px;
+		height: 100%;
+		background-color: transparent;
+		z-index: 3;
+		background: -moz-linear-gradient(left, rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, 0.4) 100%); /* FF3.6+ */
+		background: -webkit-gradient(linear, left top, right top, color-stop(0%, rgba(0, 0, 0, 0)), color-stop(100%, rgba(0, 0, 0, 0.4))); /* Chrome,Safari4+ */
+		background: -webkit-linear-gradient(left, rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, 0.4) 100%); /* Chrome10+,Safari5.1+ */
+		background: -o-linear-gradient(left, rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, 0.4) 100%); /* Opera 11.10+ */
+		background: -ms-linear-gradient(left, rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, 0.4) 100%); /* IE10+ */
+		background: linear-gradient(to right, rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, 0.4) 100%); /* W3C */
+		filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#001e5799', endColorstr='#000000', GradientType=0.4); /* IE6-9 */
+	}
+	.table-inner-shadow-left {
+		position: absolute;
+		top: 0;
+		left: 89px;
+		width: 0;
+		height: 100%;
+		background-color: transparent;
+		z-index: 3;
+		background: -moz-linear-gradient(left, rgba(0, 0, 0, 0.2) 0%, rgba(0, 0, 0, 0) 100%); /* FF3.6+ */
+		background: -webkit-gradient(linear, left top, right top, color-stop(0%, rgba(0, 0, 0, 0.2)), color-stop(100%, rgba(0, 0, 0, 0))); /* Chrome,Safari4+ */
+		background: -webkit-linear-gradient(left, rgba(0, 0, 0, 0.2) 0%, rgba(0, 0, 0, 0) 100%); /* Chrome10+,Safari5.1+ */
+		background: -o-linear-gradient(left, rgba(0, 0, 0, 0.2) 0%, rgba(0, 0, 0, 0) 100%); /* Opera 11.10+ */
+		background: -ms-linear-gradient(left, rgba(0, 0, 0, 0.2) 0%, rgba(0, 0, 0, 0) 100%); /* IE10+ */
+		background: linear-gradient(to right, rgba(0, 0, 0, 0.2) 0%, rgba(0, 0, 0, 0) 100%); /* W3C */
+		filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#000000', endColorstr='#00ffffff', GradientType=0.2); /* IE6-9 */
+	}
+	.table-last-changed {
+		padding-top: 0;
+		font-size: 0.7em;
+		margin-bottom: 3px;
+		display: none;
+	}
+	#chart-window {
+		width: 94%;
+		left: 0 !important;
+		top: 0 !important;
+		margin-left: 3%;
+		margin-top: 28% ;
+		min-width: 1px;
+		display: block;
+	}
+	#chart-area {
+		
+	}
+	.odds-table:not(.odds-table-responsive-header) tbody tr th a {
+		color: transparent;
+	}
+
+	.odds-table:not(.odds-table-responsive-header) tbody tr th {
+		color: transparent;
+	}
+
+	.share-dropdown {
+	    margin-top: -5px;
+
+	}
+
+	/* Content pages */
+	.content-header {
+	    padding-left: 6px;
+	    font-size: 12px;
+	    margin-bottom: 3px;
+		-ms-text-overflow: ellipsis;
+	    -o-text-overflow: ellipsis;
+	    text-overflow: ellipsis;
+	    white-space: nowrap;
+	    overflow: hidden;
+	}
+
+	.content-list {
+	    font-size: 11px;
+	}
+
+	.content-list tr td {
+	    padding: 3px 10px;
+	}
+	.content-list-date {
+	    padding-right: 5px;
+	    width: 80px;
+	}
+
+	.content-team-left {
+	    width: auto;
+	}
+	.content-vs-cell {
+ 	   width: 10px;
+	}
+
+	.content-button-cell {
+	    padding-bottom: 2px !important;
+	    padding-top: 0 !important;
+	    padding-right: 10px !important;
+	    text-align: right;
+	}
+
+	.content-button-cell input {
+		font-size: 11px;
+	}
+}

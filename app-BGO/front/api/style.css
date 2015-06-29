@@ -1,0 +1,14 @@
+.asyncPostBackPanel {
+    position: absolute;
+    width: 20%;
+    left: 40%;
+    top: 40%;
+    background-color: #F1F4FA;
+    border: solid 1px #00008B;
+    text-align: left;
+    vertical-align: middle;
+    padding: 10px;
+    font: Verdana;
+    font-weight: bold;
+    font-size: 14pt;
+}  
