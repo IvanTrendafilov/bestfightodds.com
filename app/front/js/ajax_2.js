@@ -19,33 +19,10 @@ console.log($(obj));
     if (parlayMode) {
         return addToParlay(obj);
     } else {
-        /*var prevHTML = $(obj).html();
-        $(obj).html("<img src=\'/img/ajax-loader2.gif\' />");
-        
-        $.get("/ajax/ajax.Interface.php?function=getLineDetails", {
-            m: fight,
-            b: bookie,
-            p: fighter
-        }, function(data) {
-            json_data = eval('(' + data + ')');
-            
-            var openLine = json_data.open.odds;
-            if (oddsType == 2)
-            {
-                openLine = parseFloat(singleMLToDecimal(openLine)).toFixed(2);
-            }
-            $(obj).html(prevHTML);
-    */
-        //overlib('<div class=\'popup-container\'><div class=\'popup-header\'>Last change: <span style=\'font-weight: normal;\' id="popupTarget">' + json_data.current.changed + '</span><span style=\'float: right; font-weight: normal;\'>Opened at: ' + openLine + '</span></div><div class=\'graph-container\'><img src=\'/ajax/getGraph.php?bookieID=' + bookie + '&fighter=' + fighter + '&fightID=' + fight + '&oddsType=' + oddsType + '\' class="graph-image" /></div></div>', STICKY, MOUSEOFF, WRAP, CELLPAD, 5 , FULLHTML);
-        //overlib('<div class=\'popup-container\'><div class=\'popup-header\'>Last change: <span style=\'font-weight: normal;\' id="popupTarget">' + json_data.current.changed + '</span><span style=\'float: right; font-weight: normal;\'>Opened at: ' + openLine + '</span></div><div class=\'graph-container\'><img src=\'/ajax/getGraph.php?bookieID=' + bookie + '&fighter=' + fighter + '&fightID=' + fight + '&oddsType=' + oddsType + '\' class="graph-image" /></div></div>' + '<div class=\'chart-window\'><div class=\'chart-header\'></div><div id=\'chart-area\'></div></div><br />', STICKY, MOUSEOFF, WRAP, CELLPAD, 5 , FULLHTML);
         var title = $(obj).parent().parent().find("th").find("a").text() + " <span style=\"font-weight: normal;\"> &#150; " + $(obj).closest('table').find('th').eq($(obj).parent().index()).find("a").text() + "</span>";
-
-        //overlib('<div id=\'chart-window\'><div id=\'chart-header\'>' + title + '</div><div id=\'chart-area\'></div></div>', STICKY, MOUSEOFF, WRAP, CELLPAD, 5, FULLHTML);
         clearChart();
         showChart(title, obj);
         createMChart(bookie, fight, fighter);
-        return false;
-        /*  });*/
         return false;
     }
     return null;
@@ -56,39 +33,10 @@ function sHp(obj, bookie, posprop, matchup, proptype, teamnum) {
     if (parlayMode) {
         return addToParlay(obj);
     } else {
-        /*var prevHTML = $(obj).html();
-        $(obj).html("<img src=\'/img/ajax-loader2.gif\' />");
-        
-        $.get("/ajax/ajax.Interface.php?function=getPropLineDetails", {
-            m: matchup,
-            p: posprop,
-            pt: proptype,
-            tn: teamnum,
-            b: bookie
-            
-        }, function(data) {
-            
-            json_data = eval('(' + data + ')');
-            
-            var openLine = json_data.open.odds;
-            var currentLine = json_data.current.odds;
-            if (oddsType == 2)
-            {
-                openLine = parseFloat(singleMLToDecimal(openLine)).toFixed(2);
-                currentLine = parseFloat(singleMLToDecimal(currentLine)).toFixed(2);
-            }
-            $(obj).html(prevHTML);*/
-        //            return overlib('<div class=\'popup-container\'><div class=\'popup-header\'>Last change: <span style=\'font-weight: normal;\'>' + json_data.current.changed + '<span><span style=\'float: right; font-weight: normal;\'>Opened at: ' + openLine + '</span></div><div class=\'graph-container\'><img src=\'/ajax/getPropGraph.php?bookieID=' + bookie + '&posProp=' + posprop + '&matchupID=' + matchup + '&oddsType=' + oddsType + '&propTypeID=' + proptype + '&teamNum=' + teamnum + '\' class="graph-image" /></div></div>', STICKY, MOUSEOFF, WRAP, CELLPAD, 5 , FULLHTML);
-        //           overlib('<div class=\'popup-container\'><div class=\'popup-header\'>Last change: <span style=\'font-weight: normal;\'>' + json_data.current.changed + '<span><span style=\'float: right; font-weight: normal;\'>Opened at: ' + openLine + '</span></div><div class=\'graph-container\'><img src=\'/ajax/getPropGraph.php?bookieID=' + bookie + '&posProp=' + posprop + '&matchupID=' + matchup + '&oddsType=' + oddsType + '&propTypeID=' + proptype + '&teamNum=' + teamnum + '\' class="graph-image" /></div></div>' + '<div class=\'chart-window\'><div class=\'chart-header\'></div><div id=\'chart-area\'></div></div><br />', STICKY, MOUSEOFF, WRAP, CELLPAD, 5 , FULLHTML);
         var title = $(obj).parent().parent().find("th").text() + " <span style=\"font-weight: normal;\"> &#150; " + $(obj).closest('table').find('th').eq($(obj).parent().index()).find("a").text() + "</span>";
-
-        /*console.log($(obj).closest("tr").prevAll(":not(.pr,.pr-odd)"));*/
-        //overlib('<div id=\'chart-window\'><div id=\'chart-header\'>' + title + '</div><div id=\'chart-area\'></div></div>', STICKY, MOUSEOFF, WRAP, CELLPAD, 5, FULLHTML);
         clearChart();
         showChart(title, obj);
         createPChart(bookie, matchup, posprop, proptype, teamnum);
-        /*});*/
-
         return false;
     }
     return null;
@@ -99,32 +47,10 @@ function sI(target, fighter, fight) {
     if (parlayMode) {
         return false;
     } else {
-        /*var prevHTML = $(target).html();
-        $(target).html("<img src=\'/img/ajax-loader2.gif\' />");
-        
-        $.get("/ajax/ajax.Interface.php?function=getLineDetails", {
-            m: fight,
-            p: fighter
-        }, function(data) {
-            
-            json_data = eval('(' + data + ')');
-            
-            var openLine = json_data.open.odds;
-            var currentLine = json_data.current.odds;
-            if (oddsType == 2)
-            {
-                openLine = parseFloat(singleMLToDecimal(openLine)).toFixed(2);
-                currentLine = parseFloat(singleMLToDecimal(currentLine)).toFixed(2);
-            }
-            $(target).html(prevHTML);*/
-        /*overlib('<div class=\'popup-container\'><div class=\'popup-header\'>Current mean: ' + currentLine + '<span style=\'float: right; font-weight: normal;\'>Opened at: ' + openLine + '</span></div><div class=\'graph-container\'><img src=\'/ajax/getIndexGraph.php?fighter=' + fighter + '&fightID=' + fight + '&oddsType=' + oddsType + '\' class="graph-image" /></div></div>', STICKY, MOUSEOFF, WRAP, CELLPAD, 5 , FULLHTML);*/
-        /*overlib('<div class=\'popup-container\'><div class=\'popup-header\'>Current mean: ' + currentLine + '<span style=\'float: right; font-weight: normal;\'>Opened at: ' + openLine + '</span></div><div class=\'graph-container\'><img src=\'/ajax/getIndexGraph.php?fighter=' + fighter + '&fightID=' + fight + '&oddsType=' + oddsType + '\' class="graph-image" /></div></div>' + '<div class=\'chart-window\'><div class=\'chart-header\'></div><div id=\'chart-area\'></div></div><br />', STICKY, MOUSEOFF, WRAP, CELLPAD, 5 , FULLHTML);*/
         var title = $(target).parent().parent().find("th").text() + " <span style=\"font-weight: normal;\"> &#150; Mean odds";
-        //overlib('<div id=\'chart-window\'><div id=\'chart-header\'>' + title + '</div><div id=\'chart-area\'></div></div>', STICKY, MOUSEOFF, WRAP, CELLPAD, 5, FULLHTML);
         clearChart();
         showChart(title, target);
         createMIChart(fight, fighter);
-        /*        });*/
         return false;
     }
 
@@ -137,35 +63,10 @@ function sIp(target, posprop, matchup, proptype, teamnum) {
     if (parlayMode) {
         return false;
     } else {
-        /*   var prevHTML = $(target).html();
-        $(target).html("<img src=\'/img/ajax-loader2.gif\' />");
-        
-        $.get("/ajax/ajax.Interface.php?function=getPropLineDetails", {
-            m: matchup,
-            p: posprop,
-            pt: proptype,
-            tn: teamnum
-            
-        }, function(data) {
-            
-            json_data = eval('(' + data + ')');
-            
-            var openLine = json_data.open.odds;
-            var currentLine = json_data.current.odds;
-            if (oddsType == 2)
-            {
-                openLine = parseFloat(singleMLToDecimal(openLine)).toFixed(2);
-                currentLine = parseFloat(singleMLToDecimal(currentLine)).toFixed(2);
-            }
-            $(target).html(prevHTML);
-            /*overlib('<div class=\'popup-container\'><div class=\'popup-header\'>Current mean: ' + currentLine + '<span style=\'float: right; font-weight: normal;\'>Opened at: ' + openLine + '</span></div><div class=\'graph-container\'><img src=\'/ajax/getPropIndexGraph.php?posProp=' + posprop + '&matchupID=' + matchup + '&oddsType=' + oddsType + '&propTypeID=' + proptype + '&teamNum=' + teamnum + '\' class="graph-image" /></div></div>', STICKY, MOUSEOFF, WRAP, CELLPAD, 5 , FULLHTML);*/
-        /*overlib('<div class=\'popup-container\'><div class=\'popup-header\'>Current mean: ' + currentLine + '<span style=\'float: right; font-weight: normal;\'>Opened at: ' + openLine + '</span></div><div class=\'graph-container\'><img src=\'/ajax/getPropIndexGraph.php?posProp=' + posprop + '&matchupID=' + matchup + '&oddsType=' + oddsType + '&propTypeID=' + proptype + '&teamNum=' + teamnum + '\' class="graph-image" /></div></div>' + '<div class=\'chart-window\'><div class=\'chart-header\'></div><div id=\'chart-area\'></div></div><br />', STICKY, MOUSEOFF, WRAP, CELLPAD, 5 , FULLHTML);*/
         var title = $(target).parent().parent().find("th").text() + " <span style=\"font-weight: normal;\"> &#150; Mean";
-        //overlib('<div id=\'chart-window\'><div id=\'chart-header\'>' + title + '</div><div id=\'chart-area\'></div></div>', STICKY, MOUSEOFF, WRAP, CELLPAD, 5, FULLHTML);
         clearChart();
         showChart(title, target);
         createPIChart(matchup, posprop, proptype, teamnum);
-        /*        });*/
         return false;
     }
 }
