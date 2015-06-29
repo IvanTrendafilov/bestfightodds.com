@@ -5,7 +5,6 @@ header("Content-type: text/javascript");
 
 include_once('jquery-1.11.3.min.js');
 include_once('jquery.cookie.js');
-include_once('jquery.color.js');
 include_once('highcharts.js');
 include_once('highcharts-more.js');
 include_once('ajax_2.js');
