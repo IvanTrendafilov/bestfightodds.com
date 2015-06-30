@@ -3,7 +3,7 @@
     /*Pre-switch: background-color: #2D2E34;*/
     font-size: 12px;
     height: 17px;
-    padding: 4px 0px 10px 11px;
+    padding: 6px 0px 9px 11px;
     color: #fff;
 
       display: -webkit-box;  
@@ -69,7 +69,7 @@
 }
 .odds-table tbody tr.odd {
     background-color: #fff;
-    border-bottom: 1px solid #C6C6C6;
+    border-bottom: 1px solid #b6b6b6;
 }
 .odds-table tbody tr.pr {
     background-color: #d8d8d8;
