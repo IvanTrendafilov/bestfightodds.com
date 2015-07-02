@@ -5,8 +5,7 @@
     height: 17px;
     padding: 6px 0px 9px 11px;
     color: #fff;
-
-      display: -webkit-box;  
+    display: -webkit-box;  
     display: -moz-box;         
     display: -ms-flexbox;      
     display: -webkit-flex;     
