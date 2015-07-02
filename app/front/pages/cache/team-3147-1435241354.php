@@ -22,20 +22,6 @@
                         </thead>
                         <tbody>
                                                 
-                                                                    <tr>
-                                        <th scope="row"><a href="/events/ufc-189-aldo-vs-mcgregor-942" style="font-size: 12px;">UFC 189: Aldo vs. McGregor</a></th>
-                                        <td><a href="/fighters/Chad-Mendes-1049">Chad Mendes</a></td>
-                                        <td align="center" class="moneyline" colspan="3">n/a</td>
-                                        <td></td>
-                                    </tr>
-                                    <tr class="odd">
-                                        <th scope="row">Jul 11th 2015</th>
-                                        <td><a href="/fighters/Conor-McGregor-3147">Conor McGregor</a></td>
-                                        <td align="center" class="moneyline" colspan="3">n/a</td>
-                                        <td></td>
-                                    </tr>
-                                                                
-                                                    
                                                                             <tr>
                                                 <th scope="row"><a href="/events/ufc-189-aldo-vs-mcgregor-942" style="font-size: 12px;">UFC 189: Aldo vs. McGregor</a></th>
                                                 <td><a href="/fighters/Conor-McGregor-3147">Conor McGregor</a></td>
@@ -52,6 +38,20 @@
                                                 <td class="button-cell"><a href="#" onclick="return sI(this,2,9367, '');"><img src="/img/graph.gif" class="small-button" alt="Betting line movement" title="Betting line movement" /></a></td>                                            </tr>
 
                                                                     
+                                                    
+                                                                    <tr>
+                                        <th scope="row"><a href="/events/ufc-189-aldo-vs-mcgregor-942" style="font-size: 12px;">UFC 189: Aldo vs. McGregor</a></th>
+                                        <td><a href="/fighters/Chad-Mendes-1049">Chad Mendes</a></td>
+                                        <td align="center" class="moneyline" colspan="3">n/a</td>
+                                        <td></td>
+                                    </tr>
+                                    <tr class="odd">
+                                        <th scope="row">Jul 11th 2015</th>
+                                        <td><a href="/fighters/Conor-McGregor-3147">Conor McGregor</a></td>
+                                        <td align="center" class="moneyline" colspan="3">n/a</td>
+                                        <td></td>
+                                    </tr>
+                                                                
                                                     
                                                                             <tr>
                                                 <th scope="row"><a href="/events/ufc-fight-night-59-mcgregor-vs-siver-895" style="font-size: 12px;">UFC Fight Night 59: McGregor vs. Siver</a></th>

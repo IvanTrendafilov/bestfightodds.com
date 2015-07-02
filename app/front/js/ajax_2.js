@@ -12,36 +12,6 @@ var scrollCache = [];
 var scrollX = 0;
 var scrollCaptain = null;
 
-//showHistory
-function sH(obj, bookie, fighter, fight) {
-
-console.log($(obj));
-    if (parlayMode) {
-        return addToParlay(obj);
-    } else {
-        var title = $(obj).parent().parent().find("th").find("a").text() + " <span style=\"font-weight: normal;\"> &#150; " + $(obj).closest('table').find('th').eq($(obj).parent().index()).find("a").text() + "</span>";
-        clearChart();
-        showChart(title, obj);
-        createMChart(bookie, fight, fighter);
-        return false;
-    }
-    return null;
-}
-
-//showHistoryProp
-function sHp(obj, bookie, posprop, matchup, proptype, teamnum) {
-    if (parlayMode) {
-        return addToParlay(obj);
-    } else {
-        var title = $(obj).parent().parent().find("th").text() + " <span style=\"font-weight: normal;\"> &#150; " + $(obj).closest('table').find('th').eq($(obj).parent().index()).find("a").text() + "</span>";
-        clearChart();
-        showChart(title, obj);
-        createPChart(bookie, matchup, posprop, proptype, teamnum);
-        return false;
-    }
-    return null;
-}
-
 //showIndex
 function sI(target, fighter, fight) {
     if (parlayMode) {
@@ -71,76 +41,20 @@ function sIp(target, posprop, matchup, proptype, teamnum) {
     }
 }
 
-//showNoHistory
-function sNH(obj, bookie, fighter, fight) {
-    if (parlayMode) {
-        return addToParlay(obj);
-    } else {
-        var prevHTML = $(obj).html();
-        $(obj).html("<img src=\'/img/ajax-loader2.gif\' />");
-
-        $.get("/ajax/ajax.Interface.php?function=getLineDetails", {
-            m: fight,
-            b: bookie,
-            p: fighter
-        }, function(data) {
-            json_data = eval('(' + data + ')');
-
-            var openLine = json_data.open.odds;
-            if (oddsType == 2) {
-                openLine = parseFloat(singleMLToDecimal(openLine)).toFixed(2);
-            }
-            $(obj).html(prevHTML);
-            return overlib('<div class=\'popup-container\' style="height: 65px;"><div class=\'popup-header\'>Last change: <span style=\'font-weight: normal;\'>' + json_data.current.changed + '<span><span style=\'float: right; font-weight: normal;\'>Opened at: ' + openLine + '</span></div><br />No line movement since opening</div>', STICKY, MOUSEOFF, WRAP, CELLPAD, 5, FULLHTML);
-        });
-        return false;
-    }
-}
-
-//showNoHistoryProp
-function sNHp(obj, bookie, posprop, matchup, proptype, teamnum) {
-    if (parlayMode) {
-        return addToParlay(obj);
-    } else {
-        var prevHTML = $(obj).html();
-        $(obj).html("<img src=\'/img/ajax-loader2.gif\' />");
-
-        $.get("/ajax/ajax.Interface.php?function=getPropLineDetails", {
-            m: matchup,
-            p: posprop,
-            pt: proptype,
-            tn: teamnum,
-            b: bookie
-
-        }, function(data) {
-
-            json_data = eval('(' + data + ')');
-
-            var openLine = json_data.open.odds;
-            var currentLine = json_data.current.odds;
-            if (oddsType == 2) {
-                openLine = parseFloat(singleMLToDecimal(openLine)).toFixed(2);
-                currentLine = parseFloat(singleMLToDecimal(currentLine)).toFixed(2);
-            }
-            $(obj).html(prevHTML);
-            return overlib('<div class=\'popup-container\' style="height: 65px;"><div class=\'popup-header\'>Last change: <span style=\'font-weight: normal;\'>' + json_data.current.changed + '<span><span style=\'float: right; font-weight: normal;\'>Opened at: ' + openLine + '</span></div><br />No line movement since opening</div>', STICKY, MOUSEOFF, WRAP, CELLPAD, 5, FULLHTML);
-        });
-        return false;
-    }
-}
-
 function clearChart() {
     $('#chart-area').empty();
 }
 
-function showChart(content, relelement) {
-    var position = $(relelement).find('div').offset();
+function showChart(content, xcord, ycord) {
+    //var position = $(relelement).find('div').offset();
     $('#chart-header').find('div').html(content);
     //TODO: Make sure the following positioning does not affect mobile
-    if ($('#chart-window').css('min-width') != '1px')
-    {
+    if ($('#chart-window').css('min-width') != '1px') {
         //TODO: Add a small check if exceeding screen, then show towards left. Requires mouse coordinates first
-        $('#chart-window').css({'left': position.left + ($(relelement).find('div').outerWidth()), 'top': position.top + $(relelement).find('div').outerHeight()});
+        $('#chart-window').css({
+            'left': xcord + 8,
+            'top': ycord + 8
+        });
     }
     $('#chart-window').addClass('is-visible');
 }
@@ -584,6 +498,9 @@ function initPage() {
     //Add prop row togglers
     $('.prop-cell a').on('click', function() {
         matchup_id = $(this).attr('data-mu');
+        if (typeof $(this).data('toggled') == 'undefined') {
+            $(this).data('toggled', false);
+        }
         $(this).data('toggled', !$(this).data('toggled'));
         if ($(this).data('toggled')) {
             if (navigator.appName.indexOf("Microsoft") > -1 && navigator.appVersion.indexOf("MSIE 10.0") == -1) {
@@ -595,7 +512,7 @@ function initPage() {
                     $(this).css('display', 'table-row')
                 });
             }
-            $("[data-mu='" + matchup_id + "'] div img").attr("src","/img/dexp.gif");
+            $("[data-mu='" + matchup_id + "'] div img").attr("src", "/img/dexp.gif");
             refreshOpenProps[matchup_id] = true;
         } else {
             $('[id^="prop-' + matchup_id + '"]').each(function() {
@@ -608,52 +525,15 @@ function initPage() {
 
     });
 
-
-    //    $('.table-scroller').on('scroll', throttle(function (event) {
-    /*    $('.table-scroller').on('scroll', function() {
-        // do the Ajax request
-        var selfscroller = $(this);
-        $.each(scrollCache, function(key, value) {
-            if (value[0] != selfscroller) {
-                value[0].scrollLeft(selfscroller.scrollLeft());
-            }
-        });
-
-
-        if (selfscroller.scrollLeft() >= ($('table', selfscroller).width() - selfscroller.width()) - 6) {
-            $('.table-inner-shadow-right').each(function() {
-                //         $(this).css("width", 0 + (($('table', selfscroller).width() - selfscroller.width()) - selfscroller.scrollLeft()));
-            });
-        } else {
-            $('.table-inner-shadow-right').each(function() {
-                //           $(this).css("width", "6px");
-            });
-        }
-
-        if (selfscroller.scrollLeft() <= 6) {
-            $('.table-inner-shadow-left').each(function() {
-                //      $(this).css("width", 0 + selfscroller.scrollLeft());
-            });
-        } else {
-            $('.table-inner-shadow-left').each(function() {
-                //    $(this).css("width", "6px");
-            });
-        }
-        //}, 10))
-    });*/
-
-
-    //    $('.table-scroller').on('scroll', throttle(function (event) {
-
     //Sync scrollbars
-        $('.table-scroller').bind('mousedown touchstart', function() {
-                scrollCaptain = $(this);
-});
+    $('.table-scroller').bind('mousedown touchstart', function() {
+        scrollCaptain = $(this);
+    });
 
     $('.table-scroller').on('scroll', function() {
 
         var selfscroller = $(this);
-    //console.log(selfscroller.parent().parent().attr('id') + " / " + scrollCaptain.parent().parent().attr('id'));
+        //console.log(selfscroller.parent().parent().attr('id') + " / " + scrollCaptain.parent().parent().attr('id'));
         if (selfscroller.scrollLeft() == scrollX || !selfscroller.is(scrollCaptain)) return false;
         scrollX = selfscroller.scrollLeft();
         $.each(scrollCache, function(key, value) {
@@ -661,20 +541,20 @@ function initPage() {
                 value[0].scrollLeft(selfscroller.scrollLeft());
             }
 
-            if (value[0].scrollLeft() >= (value[1].width() - value[0].width()) - 6) {
+            if (value[0].scrollLeft() >= (value[1].width() - value[0].width()) - 10) {
                 value[3].css("width", 0 + ((value[1].width() - value[0].width()) - value[0].scrollLeft()));
                 value[3].data("scrollRightVis", false);
 
             } else if (value[3].data("scrollRightVis") == false) {
-                value[3].css("width", "6px");
+                value[3].css("width", "10px");
                 value[3].data("scrollRightVis", true);
             }
 
-            if (value[0].scrollLeft() <= 6) {
+            if (value[0].scrollLeft() <= 10) {
                 value[2].css("width", 0 + value[0].scrollLeft());
                 value[2].data("scrollLeftVis", false);
             } else if (value[2].data("scrollLeftVis") == false) {
-                value[2].css("width", "6px");
+                value[2].css("width", "10px");
                 value[2].data("scrollLeftVis", true);
             }
 
@@ -684,9 +564,8 @@ function initPage() {
         //}, 10))
     });
 
-
+    //Add dropdowns
     $(function() {
-
         //enable hover
         $("ul.dropdown li").hover(function() {
             $(this).addClass("hover");
@@ -714,20 +593,84 @@ function initPage() {
 
     //Add graph popup controls
     //close popup
-    $('#chart-window').on('click', function(event){
-        if( $(event.target).is('.cd-popup-close') || $(event.target).is('#chart-window') ) {
+    $('#chart-window').on('click', function(event) {
+        if ($(event.target).is('.cd-popup-close') || $(event.target).is('#chart-window')) {
             event.preventDefault();
             $(this).removeClass('is-visible');
             $('#chart-area').empty();
         }
     });
     //close popup when clicking the esc keyboard button
-    $(document).keyup(function(event){
-        if(event.which=='27'){
+    $(document).keyup(function(event) {
+        if (event.which == '27') {
             $('#chart-window').removeClass('is-visible');
             $('#chart-area').empty();
         }
     });
+    //close when clicking anywhere but the grahp (if open that is)
+    $(document).click(function(event) {
+        if (!$(event.target).closest('#chart-window').length) {
+            if ($('#chart-window').is(":visible")) {
+                $('#chart-window').removeClass('is-visible');
+                $('#chart-area').empty();
+            }
+        }
+    })
+
+
+
+    //Bind graph clicks on table
+    //Loop through all tr TDs and add event
+
+    //Add regular matchup listeners
+    $(".odds-table").find('tr.even,tr.odd').find('a').on('click', function(event) {
+if($(this).find(".ink").length === 0){
+        $(this).prepend("<span class='ink'></span>");
+    }
+         
+    ink = $(this).find(".ink");
+    ink.removeClass("animate");
+     
+    if(!ink.height() && !ink.width()){
+        d = Math.max($(this).outerWidth(), $(this).outerHeight());
+        ink.css({height: d, width: d});
+    }
+     
+    x = event.pageX - $(this).offset().left - ink.width()/2;
+    y = event.pageY - $(this).offset().top - ink.height()/2;
+     
+    ink.css({top: y+'px', left: x+'px'}).addClass("animate");
+
+        var opts = $.parseJSON($(this).attr('data-li'));
+        if (parlayMode) {
+            return addToParlay(this);
+        } else {
+            var title = $(this).parent().parent().find("th").find("a").text() + " <span style=\"font-weight: normal;\"> &#150; " + $(this).closest('table').find('th').eq($(this).parent().index()).find("a").text() + "</span>";
+            clearChart();
+            showChart(title, event.clientX, event.clientY);
+            createMChart(opts.b, opts.m, opts.tn);
+            return false;
+        }
+    });
+    //Add prop listeners
+    $(".odds-table").find('tr.pr,tr.pr-odd').find('a').on('click', function(event) {
+        var opts = $.parseJSON($(this).attr('data-li'));
+        if (parlayMode) {
+            return addToParlay(this);
+        } else {
+            var title = $(this).parent().parent().find("th").text() + " <span style=\"font-weight: normal;\"> &#150; " + $(this).closest('table').find('th').eq($(this).parent().index()).find("a").text() + "</span>";
+            clearChart();
+            showChart(title, event.clientX, event.clientY);
+            createPChart(opts.b, opts.m, opts.pp, opts.pt, opts.tn);
+            return false;
+        }
+    });
+
+    //Loop through all 
+
+
+
+
 
 }
 
@@ -822,3 +765,4 @@ function stTwitter(url) {
 
     window.open('http://twitter.com', 'twitterwindow', 'height=450, width=550, top=' + ($(window).height() / 2 - 225) + ', left=' + $(window).width() / 2 + ', toolbar=0, location=0, menubar=0, directories=0, scrollbars=0');
 }
+
