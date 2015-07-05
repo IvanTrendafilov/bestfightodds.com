@@ -8,7 +8,8 @@
             <h1>
         Matt Serra        </h1>
     </div>
-        <div style="display: inline-block; width: 30%; border: 1px solid red;">Graphs go here</div>
+        <div style="display: inline-block; border: 1px solid red;" id="teamChartArea"></div>
+        <script type="text/javascript">getTeamSpreadChart(86);</script>
                 <div class="fighter-history-container" style="display: inline-block">
 
                     <table class="odds-table" cellspacing="0" style="width: 100%; border-color: #b0b0b0; border-style: solid; border-width: 0 1px;" summary="Odds for Matt Serra">

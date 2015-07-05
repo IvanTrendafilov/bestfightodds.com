@@ -166,7 +166,7 @@
 		margin-bottom: 3px;
 		display: none;
 	}
-	#chart-window {
+	#chart-window,#alert-window {
 		width: 94%;
 		left: 0 !important;
 		top: 0 !important;

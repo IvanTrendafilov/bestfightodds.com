@@ -31,6 +31,23 @@
     <body>
         <script type="text/javascript" async src="/js/javascripts.php"></script>
         <div id="chart-window"><div id="chart-header"><div></div><a href="#" class="cd-popup-close">&#10006;</a></div><div id="chart-area"></div></div>
+        <div id="alert-window"><div id="alert-header"><div></div><a href="#" class="cd-popup-close">&#10006;</a></div><div id="alert-area">
+            <form id="alert-form">Alert me at e-mail <input type="text" name="alert-mail" id="alert-mail"><br />when the odds reaches <input type="text" name="alert-odds" id="alert-odds"> or better<br/>at <select name="alert-bookie">
+                <option value="-1">any bookie</option>
+                <option value="1">5Dimes</option>
+                <option value="13">BetDSI</option>
+                <option value="3">BookMaker</option>
+                <option value="5">Bovada</option>
+                <option value="2">SportBet</option>
+                <option value="4">Sportsbook</option>
+                <option value="7">BetUS</option>
+                <option value="9">Pinnacle</option>
+                <option value="8">SportsInteraction</option>
+                <option value="10">SBG</option>
+                <option value="11">TheGreek</option>
+                <option value="12">BetOnline</option>
+              </select><br /><div id="alert-button-container"><input type="hidden" name="tn"><input type="hidden" name="m"><input type="submit" value="Add alert" id="alert-submit"></div></form></div>
+        </div>
         <div class="header">
                 <div id="header-top">
                     <a href="/"><img src="/img/logo.png" id="logo" alt="BestFightOdds.com" /></a>

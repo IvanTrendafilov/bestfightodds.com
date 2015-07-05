@@ -12,53 +12,20 @@ var scrollCache = [];
 var scrollX = 0;
 var scrollCaptain = null;
 
-//showIndex
-function sI(target, fighter, fight) {
-    if (parlayMode) {
-        return false;
-    } else {
-        var title = $(target).parent().parent().find("th").text() + " <span style=\"font-weight: normal;\"> &#150; Mean odds";
-        clearChart();
-        showChart(title, target);
-        createMIChart(fight, fighter);
-        return false;
-    }
-
-    return null;
-}
-
-
-//showPropIndex
-function sIp(target, posprop, matchup, proptype, teamnum) {
-    if (parlayMode) {
-        return false;
-    } else {
-        var title = $(target).parent().parent().find("th").text() + " <span style=\"font-weight: normal;\"> &#150; Mean";
-        clearChart();
-        showChart(title, target);
-        createPIChart(matchup, posprop, proptype, teamnum);
-        return false;
-    }
-}
-
 function clearChart() {
     $('#chart-area').empty();
 }
 
 function showChart(content, xcord, ycord) {
-    //var position = $(relelement).find('div').offset();
     $('#chart-header').find('div').html(content);
-    //TODO: Make sure the following positioning does not affect mobile
     if ($('#chart-window').css('min-width') != '1px') {
         setxcord = xcord + 8;
         setycord = ycord + 8;
-        if (xcord + $('#chart-window').width() >= $(window).width())
-        {
+        if (xcord + $('#chart-window').width() >= $(window).width()) {
             //Set cords to show to the left
             setxcord = xcord - $('#chart-window').width();
         }
-        if (ycord + $('#chart-window').height() >= $(window).height())
-        {
+        if (ycord + $('#chart-window').height() >= $(window).height()) {
             //Set cords to show to the left
             setycord = ycord - $('#chart-window').height();
         }
@@ -69,6 +36,34 @@ function showChart(content, xcord, ycord) {
         });
     }
     $('#chart-window').addClass('is-visible');
+}
+
+function showAlertWindow(context, xcord, ycord)
+{
+    $('#alert-odds').val(context.bestodds);
+    $('#alert-form').find("[name=tn]").val(context.opts.tn);
+    $('#alert-form').find("[name=m]").val(context.opts.m);
+    $('#alert-header').find("div").html('Add alert<span style="font-weight: normal;"> - ' + context.teamtitle + '</span>');
+
+    if ($('#alert-window').css('min-width') != '1px') {
+        setxcord = xcord + 8;
+        setycord = ycord + 8;
+        if (xcord + $('#alert-window').width() >= $(window).width()) {
+            //Set cords to show to the left
+            setxcord = xcord - $('#alert-window').width();
+        }
+        if (ycord + $('#alert-window').height() >= $(window).height()) {
+            //Set cords to show to the left
+            setycord = ycord - $('#alert-window').height();
+        }
+
+        $('#alert-window').css({
+            'left': setxcord,
+            'top': setycord
+        });
+    }
+    $('#alert-window').addClass('is-visible');
+
 }
 
 
@@ -612,6 +607,13 @@ function initPage() {
             $('#chart-area').empty();
         }
     });
+    $('#alert-window').on('click', function(event) {
+        if ($(event.target).is('.cd-popup-close') || $(event.target).is('#alert-window')) {
+            event.preventDefault();
+            $(this).removeClass('is-visible');
+        }
+    });
+
     //close popup when clicking the esc keyboard button
     $(document).keyup(function(event) {
         if (event.which == '27') {
@@ -627,6 +629,11 @@ function initPage() {
                 $('#chart-area').empty();
             }
         }
+        if (!$(event.target).closest('#alert-window').length) {
+            if ($('#alert-window').is(":visible")) {
+                $('#alert-window').removeClass('is-visible');
+            }
+        }
     })
 
 
@@ -635,52 +642,100 @@ function initPage() {
     //Loop through all tr TDs and add event
 
     //Add regular matchup listeners
-    $(".odds-table").find('tr.even,tr.odd').find('a').on('click', function(event) {
-if($(this).find(".ink").length === 0){
-        $(this).prepend("<span class='ink'></span>");
-    }
-         
-    ink = $(this).find(".ink");
-    ink.removeClass("animate");
-     
-    if(!ink.height() && !ink.width()){
-        d = Math.max($(this).outerWidth(), $(this).outerHeight());
-        ink.css({height: d, width: d});
-    }
-     
-    x = event.pageX - $(this).offset().left - ink.width()/2;
-    y = event.pageY - $(this).offset().top - ink.height()/2;
-     
-    ink.css({top: y+'px', left: x+'px'}).addClass("animate");
-
+    $(".odds-table").find('.but-sg').on('click', function(event) {
         var opts = $.parseJSON($(this).attr('data-li'));
         if (parlayMode) {
             return addToParlay(this);
         } else {
             var title = $(this).parent().parent().find("th").find("a").text() + " <span style=\"font-weight: normal;\"> &#150; " + $(this).closest('table').find('th').eq($(this).parent().index()).find("a").text() + "</span>";
             clearChart();
-            showChart(title, event.clientX, event.clientY);
             createMChart(opts.b, opts.m, opts.tn);
+            showChart(title, event.clientX, event.clientY);
+
             return false;
         }
     });
     //Add prop listeners
-    $(".odds-table").find('tr.pr,tr.pr-odd').find('a').on('click', function(event) {
+    $(".odds-table").find('.but-sgp').on('click', function(event) {
         var opts = $.parseJSON($(this).attr('data-li'));
         if (parlayMode) {
             return addToParlay(this);
         } else {
             var title = $(this).parent().parent().find("th").text() + " <span style=\"font-weight: normal;\"> &#150; " + $(this).closest('table').find('th').eq($(this).parent().index()).find("a").text() + "</span>";
             clearChart();
-            showChart(title, event.clientX, event.clientY);
             createPChart(opts.b, opts.m, opts.pp, opts.pt, opts.tn);
+            showChart(title, event.clientX, event.clientY);
             return false;
         }
     });
 
-    //Loop through all 
+    //Add index graph button listeners
+    $(".odds-table").find('.but-si').on('click', function(event) {
+        var opts = $.parseJSON($(this).attr('data-li'));
+        if (parlayMode) {
+            return false;
+        } else {
+            var title = $(this).parent().parent().find("th").text() + " <span style=\"font-weight: normal;\"> &#150; Mean odds";
+            clearChart();
+            createMIChart(opts.m, opts.tn);
+            showChart(title, event.clientX, event.clientY);
 
+            return false;
+        }
 
+        return null;
+    });
+    //Add prop index graph button listeners
+    $(".odds-table").find('.but-sip').on('click', function(event) {
+        var opts = $.parseJSON($(this).attr('data-li'));
+        if (parlayMode) {
+            return false;
+        } else {
+            var title = $(this).parent().parent().find("th").text() + " <span style=\"font-weight: normal;\"> &#150; Mean";
+            clearChart();
+            createPIChart(opts.m, opts.pp, opts.pt, opts.tn);
+            showChart(title, event.clientX, event.clientY);
+            return false;
+        }
+    });
+
+    //Add alert button form show listeners
+    $(".odds-table").find('.but-al').on('click', function(event) {
+        var context = {};
+        context.opts = $.parseJSON($(this).attr('data-li'));
+        context.bestodds = $(this).closest("tr").find(".bestbet").text();
+        context.teamtitle = $(this).closest("tr").find("th").text();
+        if (parlayMode) {
+            return addToParlay(this);
+        } else {
+            showAlertWindow(context, event.clientX, event.clientY);
+            return false;
+        }
+    });
+
+    //Alert button add listener
+    $("#alert-form").submit(function(event) {
+        var $inputs = $('#alert-form :input,:select');
+        var values = {};
+        $inputs.each(function() {
+            values[this.name] = $(this).val();
+        });
+        console.log(values);
+
+        $.get("/ajax/ajax.Interface.php?function=addAlert", {
+            alertFight: values['m'],
+            alertFighter: values['tn'],
+            alertBookie: values['alert-bookies'],
+            alertMail: values['alert-mail'],
+            alertOdds: values['alert-odds'],
+            alertOddsType: oddsType
+        }, function(data) {
+            alertFormShowResult(data);
+        });
+
+        event.preventDefault();
+    return false;    
+    });
 
 
 
@@ -777,4 +832,3 @@ function stTwitter(url) {
 
     window.open('http://twitter.com', 'twitterwindow', 'height=450, width=550, top=' + ($(window).height() / 2 - 225) + ', left=' + $(window).width() / 2 + ', toolbar=0, location=0, menubar=0, directories=0, scrollbars=0');
 }
-
