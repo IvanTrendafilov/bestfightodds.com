@@ -50,10 +50,22 @@ function showChart(content, xcord, ycord) {
     $('#chart-header').find('div').html(content);
     //TODO: Make sure the following positioning does not affect mobile
     if ($('#chart-window').css('min-width') != '1px') {
-        //TODO: Add a small check if exceeding screen, then show towards left. Requires mouse coordinates first
+        setxcord = xcord + 8;
+        setycord = ycord + 8;
+        if (xcord + $('#chart-window').width() >= $(window).width())
+        {
+            //Set cords to show to the left
+            setxcord = xcord - $('#chart-window').width();
+        }
+        if (ycord + $('#chart-window').height() >= $(window).height())
+        {
+            //Set cords to show to the left
+            setycord = ycord - $('#chart-window').height();
+        }
+
         $('#chart-window').css({
-            'left': xcord + 8,
-            'top': ycord + 8
+            'left': setxcord,
+            'top': setycord
         });
     }
     $('#chart-window').addClass('is-visible');

@@ -36,7 +36,7 @@ function createChart(indata) {
                 fontFamily: "'Roboto', Arial, sans-serif"
             },
 
-            marginTop: 18,
+            marginTop: 18
         },
         credits: {
             enabled: false
@@ -62,7 +62,7 @@ function createChart(indata) {
             title: {
                 text: ''
             },
-            tickPixelInterval: 50,
+            tickPixelInterval: 50
 
         },
         yAxis: {
@@ -82,7 +82,7 @@ function createChart(indata) {
                     return '';
                 }
             },
-            tickPixelInterval: 50,
+            tickPixelInterval: 50
 
         },
         tooltip: {
@@ -125,7 +125,7 @@ function createChart(indata) {
 
             series: {
                 step: 'left',
-                animation: false,
+                animation: false
                 /*{duration: 500
                     }*/
             },
@@ -168,15 +168,15 @@ function createChart(indata) {
                         textShadow: 0,
                         fontSize: '11px',
                         color: '#fff',
-                        fontWeight: 'normal',
+                        fontWeight: 'normal'
 
                     },
                     y: -8,
 
                     overflow: 'none',
                     crop: false,
-                    useHTML: true,
-                },
+                    useHTML: true
+                }
             }
 
         },
