@@ -1,7 +1,6 @@
 // ========= MAIN ===========
 
 var storedOdds = [];
-var usedSearch = false;
 var oddsType = 1; //1. Moneyline 2. Decimal. 3. Custom
 var parlayMode = false;
 var parlay = [];
@@ -38,8 +37,7 @@ function showChart(content, xcord, ycord) {
     $('#chart-window').addClass('is-visible');
 }
 
-function showAlertWindow(context, xcord, ycord)
-{
+function showAlertWindow(context, xcord, ycord) {
     $('#alert-odds').val(context.bestodds);
     $('#alert-form').find("[name=tn]").val(context.opts.tn);
     $('#alert-form').find("[name=m]").val(context.opts.m);
@@ -66,19 +64,6 @@ function showAlertWindow(context, xcord, ycord)
 
 }
 
-
-function iSI() {
-
-}
-
-
-//closeOverLib
-function cO() {
-    if (!parlayMode) {
-        return nd();
-    }
-}
-
 //linkOut
 function lO(operator, event) {
     $.get("/ajax/ajax.LinkOut.php", {
@@ -88,31 +73,15 @@ function lO(operator, event) {
 }
 
 
-//showSpreadList
-function sSL(spreads) {
-    if (!parlayMode) {
-        return overlib('<div class=\'previous-odds\'>' + spreads + '</div>', WRAP, FGCOLOR, '#eeeeee', BGCOLOR, '#1f2a34', BORDER, 1)
-    }
-}
-
-
 function addToParlay(obj) {
     if (obj != null) {
         if (parlay.length >= 25) {
             return false;
         }
-
-        tmpArr = new Array();
-        tmpArr["ml"] = obj.getElementsByTagName('span')[0].innerHTML;
-        if (obj.parentNode.parentNode.getElementsByTagName('th')[0].getElementsByTagName('a').length > 0) {
-            //Regular row
-            tmpArr["name"] = obj.parentNode.parentNode.getElementsByTagName('th')[0].getElementsByTagName('a')[0].innerHTML;
-        } else {
-            //Prop row
-            tmpArr["name"] = obj.parentNode.parentNode.getElementsByTagName('th')[0].innerHTML;
-        }
-
-        tmpArr["ref"] = obj.getElementsByTagName('span')[0].id.substring(6);
+        tmpArr = [];
+        tmpArr["ml"] = $(obj).find('span').first().text()
+        tmpArr["name"] = $(obj).closest('tr').find('th').text();
+        tmpArr["ref"] = $(obj).find('span').first().attr('id').substring(6);
 
         found = false;
         for (var i = 0; i < parlay.length; i++) {
@@ -133,6 +102,7 @@ function addToParlay(obj) {
     tmpText = '';
     pvalue = 1;
     for (var i = 0; i < parlay.length; i++) {
+        console.log('ionce');
         dispLine = '';
         if (storedOdds[parlay[i]["ref"]] != null) {
             switch (oddsType) {
@@ -161,10 +131,9 @@ function addToParlay(obj) {
             }
             pvalue *= singleMLToDecimal(document.getElementById('oddsID' + parlay[i]["ref"]).innerHTML);
         }
-        tmpText += '<span>»</span> <b>' + parlay[i]["name"] + '</b> ' + dispLine + '<br />';
+        tmpText += '<span>»</span> <span style="font-weight: 500">' + parlay[i]["name"] + '</span> ' + dispLine + '<br />';
 
     }
-
     dispValue = '';
     switch (oddsType) {
         case 1:
@@ -184,7 +153,8 @@ function addToParlay(obj) {
             break;
     }
 
-    document.getElementById('parlay-mode-window').innerHTML = '<div class=\'popup-header\'>Parlay</div><p>' + tmpText + '<br /><span>Total:</span> ' + dispValue + '</p>';
+    $('#parlay-area').html(tmpText);
+    $('#parlay-header').html('Parlay: ' + dispValue);
     return false;
 
 }
@@ -332,35 +302,7 @@ function setOddsType(val) {
     }
 }
 
-function useSearchBox() {
-    if (usedSearch == false) {
-        $('#search-box1').css('color', '#fff');
-        $('#search-box1').val('');
-        usedSearch = true;
-        $('#search-box1').focus();
-    }
-}
 
-function toggleParlayMode() {
-    if (parlayMode == true) {
-        parlay = [];
-        parlayMode = false;
-        id = 0;
-        while ((obj = document.getElementById('tablenot' + id))) {
-            obj.innerHTML = 'Click on odds to view a history chart.';
-            id++;
-        }
-        return nd();
-    } else {
-        parlayMode = true;
-        id = 0;
-        while ((obj = document.getElementById('tablenot' + id))) {
-            obj.innerHTML = 'Click on odds to add it to your parlay.';
-            id++;
-        }
-        return overlib('<div class=\'popup-container\' id=\'parlay-mode-window\' style="width: auto; height: auto"><div class=\'popup-header\'>Parlay</div><p><span>-</span> Click on a betting line to add it<br />to your parlay<br /><br /><span>-</span> You can change the parlay format<br />at any time with the top right box</p></div>', MOUSEOFF, WRAP, CELLPAD, 5, FULLHTML);
-    }
-}
 
 function getElementsByClassName(strClassName, obj) {
     var ar = arguments[2] || new Array();
@@ -453,8 +395,38 @@ $(document).ready(function() {
         $('span', $('#afSelectorOff')).css('display', 'inline-block');
     });
 
+    $('#parlay-mode-box').click(function() {
+        parlay = [];
+        if (typeof $(this).data('toggled') == 'undefined') {
+            $(this).data('toggled', false);
+        }
+        $(this).data('toggled', !$(this).data('toggled'));
 
+        if ($(this).data('toggled')) {
+            parlayMode = true;
+            $('#parlay-window').addClass('is-visible');
+            $(document).on('mousemove', function(e) {
+                $('#parlay-window').css({
+                    left: e.clientX + 8,
+                    top: e.clientY + 8
+                });
+            });
+        } else {
+            parlayMode = false;
+            $(document).off('mousemove');
+            $('#parlay-window').removeClass('is-visible');
+            $('#parlay-area').html('Click on a line to add it to your parlay');
+            $('#parlay-header').html('Parlay');
+        }
+    });
 
+    //Set trigger for using of searchbox
+    $('#search-box1').on('mousedown', function(e) {
+        $(this).css('color', '#fff');
+        $(this).val('');
+        $(this).focus();
+        $(this).off('mousedown');
+    });
 
 });
 
@@ -734,7 +706,7 @@ function initPage() {
         });
 
         event.preventDefault();
-    return false;    
+        return false;
     });
 
 

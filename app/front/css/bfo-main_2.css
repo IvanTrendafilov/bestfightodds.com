@@ -642,29 +642,20 @@ ul.share-dropdown ul li a {
     background: url("/img/sharebuttons.png") -322px -8px;
     display: inline-block;
 }
-#chart-window {
+
+.popup-window {
     -webkit-box-shadow: 0px 2px 3px 1px rgba(0, 0, 0, 0.4);
     -moz-box-shadow: 0px 2px 3px 1px rgba(0, 0, 0, 0.4);
-    box-shadow: 0px 2px 3px 1px rgba(0, 0, 0, 0.4);
-    width: 400px;
+    box-shadow: 0px 2px 3px 1px rgba(0, 0, 0, 0.4);    
+
     background-color: #fff;
     opacity: 0;
     visibility: hidden;
     z-index: 999;
     position: fixed;
 }
-#chart-window.is-visible, #alert-window.is-visible {
-    opacity: 1;
-    visibility: visible;
-}
-.cd-popup-close {
-    position: absolute;
-    top: 4px;
-    right: 3px;
-    font-size: 13px;
-    padding: 0 8px;
-}
-#chart-header, #alert-header {
+
+.popup-header {
     background-color: #393B42;
     font-size: 12px;
     font-weight: 500;
@@ -678,21 +669,43 @@ ul.share-dropdown ul li a {
     white-space: nowrap;
     overflow: hidden;
 }
+
+#chart-window {
+    width: 400px;
+
+}
+.popup-window.is-visible {
+    opacity: 1;
+    visibility: visible;
+}
+.cd-popup-close {
+    position: absolute;
+    top: 4px;
+    right: 3px;
+    font-size: 13px;
+    padding: 0 8px;
+}
+
 #chart-area {
     width: 100%;
     height: 200px;
 }
+
+#parlay-window {
+    min-width: 250px;
+}
+
+#parlay-area {
+    width: 100%;
+    height: 100%;
+    color: #222;
+    text-align: left;
+    font-size: 11px;
+    padding: 9px;
+}
+
 #alert-window {
-    -webkit-box-shadow: 0px 2px 3px 1px rgba(0, 0, 0, 0.4);
-    -moz-box-shadow: 0px 2px 3px 1px rgba(0, 0, 0, 0.4);
-    box-shadow: 0px 2px 3px 1px rgba(0, 0, 0, 0.4);
-    background-color: #fff;
-    opacity: 0;
-    visibility: hidden;
-    z-index: 999;
-    position: fixed;
     width: 270px;
-    
 }
 
 #alert-area {

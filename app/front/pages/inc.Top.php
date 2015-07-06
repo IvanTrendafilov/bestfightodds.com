@@ -30,8 +30,9 @@
     <![endif]--> 
     <body>
         <script type="text/javascript" async src="/js/javascripts.php"></script>
-        <div id="chart-window"><div id="chart-header"><div></div><a href="#" class="cd-popup-close">&#10006;</a></div><div id="chart-area"></div></div>
-        <div id="alert-window"><div id="alert-header"><div></div><a href="#" class="cd-popup-close">&#10006;</a></div><div id="alert-area">
+        <div id="chart-window" class="popup-window"><div class="popup-header" id="chart-header"><div></div><a href="#" class="cd-popup-close">&#10006;</a></div><div id="chart-area"></div></div>
+        <div id="parlay-window" class="popup-window"><div class="popup-header" id="parlay-header">Parlay</div><div id="parlay-area">Click on a line to add it to your parlay</div></div>
+        <div id="alert-window" class="popup-window"><div class="popup-header" id="alert-header"><div></div><a href="#" class="cd-popup-close">&#10006;</a></div><div id="alert-area">
             <form id="alert-form">Alert me at e-mail <input type="text" name="alert-mail" id="alert-mail"><br />when the odds reaches <input type="text" name="alert-odds" id="alert-odds"> or better<br/>at <select name="alert-bookie">
                 <option value="-1">any bookie</option>
                 <option value="1">5Dimes</option>
@@ -76,7 +77,7 @@
                         <div class="menu-divider"></div>
                         <div id="auto-refresh-container"
                             <?php
-                             //Only display parlay-mode container if we are displaying an event or are on the front page
+                             //Only display autorefresh-mode container if we are displaying an event or are on the front page
                              if (CURRENT_PAGE != '')
                              {
                                  echo ' style="display: none" ';
@@ -102,7 +103,7 @@
                              }
                              ?>
                              >
-                            <input type="checkbox" onclick="toggleParlayMode()" id="parlay-mode-box" disabled="disabled" />Parlay
+                            <input type="checkbox" id="parlay-mode-box" disabled="disabled" />Parlay
                         </div>
 
                     </div>
