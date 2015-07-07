@@ -252,7 +252,7 @@ if (sizeof($aFights) > 0 && $oEvent->isDisplayed())
                     }
                     if (!$bFoundOldOdds)
                     {
-                        echo '<td><a href="#" class="but-sg" data-li="{&quot;b&quot;:' . $oFightOdds->getBookieID() . ',&quot;tn&quot;:' . $iX . ',&quot;m&quot;:' . $oFightOdds->getFightID() . '}"  ><span id="oddsID' . ('1' . $oFightOdds->getFightID() . $oFightOdds->getBookieID() . $iX) . '" ' . $sClassName . '>' . $oFightOdds->getFighterOddsAsString($iX) . '</span></a></td>';
+                        echo '<td><a href="#" class="but-sg" data-li="{&quot;b&quot;:' . $oFightOdds->getBookieID() . ',&quot;tn&quot;:' . $iX . ',&quot;m&quot;:' . $oFightOdds->getFightID() . '}"  ><div><span id="oddsID' . ('1' . $oFightOdds->getFightID() . $oFightOdds->getBookieID() . $iX) . '" ' . $sClassName . '>' . $oFightOdds->getFighterOddsAsString($iX) . '</span></div></a></td>';
                     }
 
                     $iProcessed++;

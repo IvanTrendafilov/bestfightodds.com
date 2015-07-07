@@ -107,6 +107,11 @@
     text-align: center;
     height: 20px;
 }
+
+.odds-table tbody td:hover:not(.button-cell):not(.prop-cell) {
+    background-color: #D8D8D8;
+}
+
 .odds-table tbody td div {
     width: 100%;
     height: 12px;
