@@ -102,7 +102,6 @@ function addToParlay(obj) {
     tmpText = '';
     pvalue = 1;
     for (var i = 0; i < parlay.length; i++) {
-        console.log('ionce');
         dispLine = '';
         if (storedOdds[parlay[i]["ref"]] != null) {
             switch (oddsType) {
@@ -512,7 +511,6 @@ function initPage() {
     $('.table-scroller').on('scroll', function() {
 
         var selfscroller = $(this);
-        //console.log(selfscroller.parent().parent().attr('id') + " / " + scrollCaptain.parent().parent().attr('id'));
         if (selfscroller.scrollLeft() == scrollX || !selfscroller.is(scrollCaptain)) return false;
         scrollX = selfscroller.scrollLeft();
         $.each(scrollCache, function(key, value) {
@@ -692,8 +690,6 @@ function initPage() {
         $inputs.each(function() {
             values[this.name] = $(this).val();
         });
-        console.log(values);
-
         $.get("/ajax/ajax.Interface.php?function=addAlert", {
             alertFight: values['m'],
             alertFighter: values['tn'],

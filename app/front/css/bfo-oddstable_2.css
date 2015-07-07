@@ -109,7 +109,7 @@
 }
 .odds-table tbody td div {
     width: 100%;
-    height: 100%;
+    height: 12px;
     position: relative;
 }
 .odds-table tbody td a {
@@ -153,12 +153,16 @@
 }
 
 .aru {
+        margin: 0;
+    padding: 0;
     color: #4BCA02;
     position: absolute;    /*right: 0;*/
     margin-left: 1px;
     font-size: 12px;
 }
 .ard {
+    margin: 0;
+    padding: 0;
     color: #E93524;
     position: absolute;    /*right: 0;*/
     margin-left: 1px;
