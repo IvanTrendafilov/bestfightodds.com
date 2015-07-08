@@ -450,7 +450,7 @@ if (sizeof($aFights) > 0 && $oEvent->isDisplayed())
                         //Fill empty cells
                         for ($iY = $iCurrentOperatorColumn; $iY < (sizeof($aBookieRefList) - 1); $iY++)
                         {
-                            echo '<td><div></div></td>';
+                            echo '<td></td>';
                         }
 
                         //Add alert cell - Functionality disabled however
