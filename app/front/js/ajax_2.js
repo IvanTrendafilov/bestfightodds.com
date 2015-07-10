@@ -39,9 +39,9 @@ function showChart(content, xcord, ycord) {
 
 function showAlertWindow(context, xcord, ycord) {
     $('#alert-odds').val(context.bestodds);
-    $('#alert-form').find("[name=tn]").val(context.opts.tn);
-    $('#alert-form').find("[name=m]").val(context.opts.m);
-    $('#alert-header').find("div").html('Add alert<span style="font-weight: normal;"> - ' + context.teamtitle + '</span>');
+    $('#alert-form').find("[name=tn]").val(context.opts[1]);
+    $('#alert-form').find("[name=m]").val(context.opts[0]);
+    $('#alert-header').find("div").html('Add alert:<span style="font-weight: normal;"> ' + context.teamtitle + '</span>');
 
     if ($('#alert-window').css('min-width') != '1px') {
         setxcord = xcord + 8;
@@ -81,7 +81,7 @@ function addToParlay(obj) {
         tmpArr = [];
         tmpArr["ml"] = $(obj).find('span').first().text()
         tmpArr["name"] = $(obj).closest('tr').find('th').text();
-        tmpArr["ref"] = $(obj).find('span').first().attr('id').substring(6);
+        tmpArr["ref"] = $(obj).find('span').first().attr('id').substring(3);
 
         found = false;
         for (var i = 0; i < parlay.length; i++) {
@@ -119,16 +119,16 @@ function addToParlay(obj) {
         } else {
             switch (oddsType) {
                 case 1:
-                    dispLine = document.getElementById('oddsID' + parlay[i]["ref"]).innerHTML;
+                    dispLine = document.getElementById('oID' + parlay[i]["ref"]).innerHTML;
                     break;
                 case 2:
-                    dispLine = parseFloat(singleMLToDecimal(document.getElementById('oddsID' + parlay[i]["ref"]).innerHTML)).toFixed(2);
+                    dispLine = parseFloat(singleMLToDecimal(document.getElementById('oID' + parlay[i]["ref"]).innerHTML)).toFixed(2);
                     break;
                 case 3:
-                    dispLine = singleDecimalToAmount(singleMLToDecimal(document.getElementById('oddsID' + parlay[i]["ref"]).innerHTML));
+                    dispLine = singleDecimalToAmount(singleMLToDecimal(document.getElementById('oID' + parlay[i]["ref"]).innerHTML));
                     break;
             }
-            pvalue *= singleMLToDecimal(document.getElementById('oddsID' + parlay[i]["ref"]).innerHTML);
+            pvalue *= singleMLToDecimal(document.getElementById('oID' + parlay[i]["ref"]).innerHTML);
         }
         tmpText += '<span>»</span> <span style="font-weight: 500">' + parlay[i]["name"] + '</span> ' + dispLine + '<br />';
 
@@ -164,8 +164,8 @@ function oddsToMoneyline() {
     }
 
     if (storedOdds.length > 0) {
-        $('[id^="oddsID"]').each(function() {
-            this.innerHTML = storedOdds[this.id.substring(6)];
+        $('[id^="oID"]').each(function() {
+            this.innerHTML = storedOdds[this.id.substring(3)];
         });
     }
 
@@ -183,13 +183,13 @@ function oddsToDecimal() {
 
     //If odds are not stored, store them
     if (oddsType == 1 && storedOdds.length == 0) {
-        $('[id^="oddsID"]').each(function() {
-            storedOdds[this.id.substring(6)] = this.innerHTML;
+        $('[id^="oID"]').each(function() {
+            storedOdds[this.id.substring(3)] = this.innerHTML;
         });
     }
 
 
-    $('[id^="oddsID"]').each(function() {
+    $('[id^="oID"]').each(function() {
         this.innerHTML = parseFloat(singleMLToDecimal(this.innerHTML)).toFixed(2);
     });
 
@@ -210,7 +210,7 @@ function oddsToAmount(amount) {
 
     oddsToDecimal();
 
-    $('[id^="oddsID"]').each(function() {
+    $('[id^="oID"]').each(function() {
         var odds = parseFloat(this.innerHTML);
         this.innerHTML = '$' + (Math.round(((value * odds) - value)));
     });
@@ -481,21 +481,16 @@ function initPage() {
         }
         $(this).data('toggled', !$(this).data('toggled'));
         if ($(this).data('toggled')) {
+
             if (navigator.appName.indexOf("Microsoft") > -1 && navigator.appVersion.indexOf("MSIE 10.0") == -1) {
-                $('[id^="prop-' + matchup_id + '"]').each(function() {
-                    $(this).css('display', 'block')
-                });
+                $(this).closest('tr').next('tr.odd').andSelf('tr.odd').nextUntil('tr.even').css('display', 'block');
             } else {
-                $('[id^="prop-' + matchup_id + '"]').each(function() {
-                    $(this).css('display', 'table-row')
-                });
+                $(this).closest('tr').next('tr.odd').andSelf('tr.odd').nextUntil('tr.even').css('display', 'table-row');
             }
             $("[data-mu='" + matchup_id + "'] div img").attr("src", "/img/dexp.gif");
             refreshOpenProps[matchup_id] = true;
         } else {
-            $('[id^="prop-' + matchup_id + '"]').each(function() {
-                $(this).css('display', 'none')
-            });
+            $(this).closest('tr').next('tr.odd').andSelf('tr.odd').nextUntil('tr.even').css('display', 'none');
             $("[data-mu='" + matchup_id + "'] div img").attr("src", "/img/exp.gif");
             refreshOpenProps[matchup_id] = false;
         }
@@ -614,12 +609,13 @@ function initPage() {
     //Add regular matchup listeners
     $(".odds-table").find('.but-sg').on('click', function(event) {
         var opts = $.parseJSON($(this).attr('data-li'));
+        console.log(opts);
         if (parlayMode) {
             return addToParlay(this);
         } else {
             var title = $(this).parent().parent().find("th").find("a").text() + " <span style=\"font-weight: normal;\"> &#150; " + $(this).closest('table').find('th').eq($(this).parent().index()).find("a").text() + "</span>";
             clearChart();
-            createMChart(opts.b, opts.m, opts.tn);
+            createMChart(opts[0], opts[1], opts[2]);
             showChart(title, event.clientX, event.clientY);
 
             return false;
@@ -633,7 +629,7 @@ function initPage() {
         } else {
             var title = $(this).parent().parent().find("th").text() + " <span style=\"font-weight: normal;\"> &#150; " + $(this).closest('table').find('th').eq($(this).parent().index()).find("a").text() + "</span>";
             clearChart();
-            createPChart(opts.b, opts.m, opts.pp, opts.pt, opts.tn);
+            createPChart(opts[0], opts[2], opts[1], opts[3], opts[4]);
             showChart(title, event.clientX, event.clientY);
             return false;
         }
@@ -647,7 +643,7 @@ function initPage() {
         } else {
             var title = $(this).parent().parent().find("th").text() + " <span style=\"font-weight: normal;\"> &#150; Mean odds";
             clearChart();
-            createMIChart(opts.m, opts.tn);
+            createMIChart(opts[1], opts[0]);
             showChart(title, event.clientX, event.clientY);
 
             return false;
@@ -663,7 +659,7 @@ function initPage() {
         } else {
             var title = $(this).parent().parent().find("th").text() + " <span style=\"font-weight: normal;\"> &#150; Mean";
             clearChart();
-            createPIChart(opts.m, opts.pp, opts.pt, opts.tn);
+            createPIChart(opts[1], opts[0], opts[2], opts[3]);
             showChart(title, event.clientX, event.clientY);
             return false;
         }
@@ -704,26 +700,17 @@ function initPage() {
         event.preventDefault();
         return false;
     });
-
-
-
 }
 
 function refreshPage() {
-    $.get("/ajax/ajax.Interface.php?function=refreshPage", {}, function(data) {
-        $("#content").html(data);
-
+    $("#content").load("/ajax/ajax.Interface.php?function=refreshPage", function() {
         initPage();
-
         $.each(refreshOpenProps, function(index, value) {
             if (value == true) {
-                $('a[data-mu="' + index + '"]').trigger("click");
+                $('a[data-mu="' + index + '"]').first().trigger("click");
             }
         });
-
-        return true;
     });
-    return false;
 }
 
 function updateLine(line, newval) {

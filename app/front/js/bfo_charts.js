@@ -1,4 +1,4 @@
-function createMChart(b, m, p) {
+function createMChart(b, p, m) {
     $.getJSON('/ajax/ajax.Interface.php?function=getGraphData&b=' + b + '&m=' + m + '&p=' + p, function(indata) {
         createChart(indata);
     });
