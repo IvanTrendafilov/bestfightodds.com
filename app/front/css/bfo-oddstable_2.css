@@ -83,14 +83,14 @@
 .odds-table tbody th {
     padding-left: 5px;
     width: 110px;
-    color: #272727;
+    color: #1a1a1a;
     font-size: 10px;
     font-weight: 500;
     max-width: 110px;
     word-break: break-word;
 }
 .odds-table tbody th a {
-    color: #272727;
+    color: #1a1a1a;
     font-weight: 500;
     font-size: 10px;
     width: 140px;
@@ -102,7 +102,7 @@
 .odds-table tbody td {
     font-family: Arial, sans-serif;
     border-left: 1px dotted #ddd;
-    color: #272727;
+    color: #1a1a1a;
     width: 47px;
     text-align: center;
     height: 20px;
@@ -154,7 +154,7 @@
 }
 .odds-table tbody td.prop-cell {
     width: 15px;
-    color: #272727;
+    color: #1a1a1a;
     padding-right: 11px;
     vertical-align: middle;
 }
@@ -165,7 +165,7 @@
     padding-left: 4px;
 }
 .odds-table tbody td a {
-    color: #272727;
+    color: #1a1a1a;
 }
 .odds-table tbody td a:hover {
     color: #666;
