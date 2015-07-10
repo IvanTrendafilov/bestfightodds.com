@@ -5,6 +5,7 @@ require_once('lib/bfocore/general/class.OddsHandler.php');
 require_once('lib/bfocore/general/class.FighterHandler.php');
 require_once('lib/bfocore/general/class.TeamHandler.php');
 require_once('lib/bfocore/general/caching/class.CacheControl.php');
+require_once('lib/bfocore/general/class.GraphHandler.php');
 
 $oFighter = FighterHandler::getFighterByID($_GET['fighterID']);
 if (!isset($_GET['fighterID']) || !is_numeric($_GET['fighterID']) || $_GET['fighterID'] < 0 || $_GET['fighterID'] > 999999 || $oFighter == null
@@ -46,11 +47,10 @@ else
         <?php echo $oFighter->getNameAsString(); ?>
         </h1>
     </div>
-        <div style="display: inline-block; border: 1px solid red;" id="teamChartArea"></div>
         <script type="text/javascript">getTeamSpreadChart(<?php echo $_GET['fighterID']; ?>);</script>
                 <div class="fighter-history-container" style="display: inline-block">
 
-                    <table class="odds-table" cellspacing="0" style="width: 100%; border-color: #b0b0b0; border-style: solid; border-width: 0 1px;" summary="Odds for <?php echo $oFighter->getNameAsString(); ?>">
+                    <table class="odds-table" cellspacing="0" summary="Odds for <?php echo $oFighter->getNameAsString(); ?>">
                         <thead>
                             <th>Event</th>
                             <th>Matchup</th>
@@ -67,6 +67,9 @@ else
                         $oFightOdds2 = EventHandler::getBestOddsForFightAndFighter($oFight->getID(), 2);
                         $oOpeningOdds = OddsHandler::getOpeningOddsForMatchup($oFight->getID());
 
+
+                        $aGraphData = GraphHandler::getMedianSparkLine($oFight->getID(), ($oFight->getFighterID(1) == $oFighter->getID() ? 1 : 2));
+                        var_dump($aGraphData);
                         $sEventDate = '';
                         //TODO: Hardcoded reference to "FUTURE EVENTS". Should be changed to set id
                         if (strtoupper($oEvent->getName()) != 'FUTURE EVENTS')
@@ -88,6 +91,7 @@ else
                                                 <td align="center" class="moneyline"><span id="oddsID<?php echo $iCellCounter++; ?>"><?php echo $oOpeningOdds->getFighterOddsAsString(1); ?></span></td>
                                                 <td align="center" class="moneyline"><span id="oddsID<?php echo $iCellCounter++; ?>" class="bestbet"><?php echo $oFightOdds1->getFighterOddsAsString(1); ?></span></td>
                                                 <td></td>
+                                                <td data-sparkline="68, 52, 80, 96 "/>
                                                 <?php
                                                 echo '<td class="button-cell"><a href="#" onclick="return sI(this,1,' . $oFight->getID() . ', \'\');"><img src="/img/graph.gif" class="small-button" alt="Betting line movement" title="Betting line movement" /></a></td>';
                                                 ?>
@@ -98,6 +102,7 @@ else
                                                 <td align="center" class="moneyline"><span id="oddsID<?php echo $iCellCounter++; ?>"><?php echo $oOpeningOdds->getFighterOddsAsString(2); ?></span></td>
                                                 <td align="center" class="moneyline"><span id="oddsID<?php echo $iCellCounter++; ?>" class="bestbet"><?php echo $oFightOdds1->getFighterOddsAsString(2); ?></span></td>
                                                 <td></td>
+                                                <td data-sparkline="68, 52, 80, 96 "/>
                                                 <?php
                                                 echo '<td class="button-cell"><a href="#" onclick="return sI(this,2,' . $oFight->getID() . ', \'\');"><img src="/img/graph.gif" class="small-button" alt="Betting line movement" title="Betting line movement" /></a></td>';
                                                 ?>
@@ -114,6 +119,7 @@ else
                                                 <td align="center" class="moneyline"><span id="oddsID<?php echo $iCellCounter++; ?>"><?php echo $oOpeningOdds->getFighterOddsAsString(1); ?></span></td>
                                                 <td align="center" class="moneyline"><span id="oddsID<?php echo $iCellCounter++; ?>" class="bestbet"><?php echo $oFightOdds1->getFighterOddsAsString(1); ?></span></td>
                                                 <td align="center" class="moneyline"><span id="oddsID<?php echo $iCellCounter++; ?>" class="normalbet"><?php echo $oFightOdds2->getFighterOddsAsString(1); ?></span></td>
+                                                <td data-sparkline="68, 52, 80, 96 "/>
                                                 <?php
                                                 echo '<td class="button-cell"><a href="#" onclick="return sI(this,1,' . $oFight->getID() . ', \'\');"><img src="/img/graph.gif" class="small-button" alt="Betting line movement" title="Betting line movement" /></a></td>';
                                                 ?>
@@ -124,6 +130,7 @@ else
                                                 <td align="center" class="moneyline"><span id="oddsID<?php echo $iCellCounter++; ?>"><?php echo $oOpeningOdds->getFighterOddsAsString(2); ?></span></td>
                                                 <td align="center" class="moneyline"><span id="oddsID<?php echo $iCellCounter++; ?>" class="normalbet"><?php echo $oFightOdds1->getFighterOddsAsString(2); ?></span></td>
                                                 <td align="center" class="moneyline"><span id="oddsID<?php echo $iCellCounter++; ?>" class="bestbet"><?php echo $oFightOdds2->getFighterOddsAsString(2); ?></span></td>
+                                                <td data-sparkline="68, 52, 80, 96 "/>
                                                 <?php
                                                 echo '<td class="button-cell"><a href="#" onclick="return sI(this,2,' . $oFight->getID() . ', \'\');"><img src="/img/graph.gif" class="small-button" alt="Betting line movement" title="Betting line movement" /></a></td>';
                                                 ?>

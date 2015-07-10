@@ -205,7 +205,7 @@ class GraphHandler
 	    return $aDateOdds;
 	}
 
-	public static function getTeamSpreadData($a_iTeamID)
+	/*public static function getTeamSpreadData($a_iTeamID)
 	{
 		$aRetArr = array();
 		$aMatchups = EventHandler::getAllFightsForFighter($a_iTeamID);
@@ -244,7 +244,39 @@ class GraphHandler
 
 		return null;
 
+	}*/
+
+	public static function getMedianSparkLine($a_iMatchupID, $a_iTeamNum)
+	{
+		$aData = GraphHandler::getMatchupIndexData($a_iMatchupID, $a_iTeamNum);
+
+
+
+        //Convert to JSON and return
+        $sBookieName = 'Mean';
+        $retArr = array('name' => $sBookieName, 'data' => array());
+        date_default_timezone_set('America/Los_Angeles');
+        foreach ($aData as $iIndex => $oOdds)
+        {
+                $retArr['data'][] = array('x' => 
+                                (new DateTime($oOdds->getDate(), new DateTimeZone('America/New_York')))->getTimestamp() * 1000,
+                                'y' => $oOdds->moneylineToDecimal($oOdds->getOdds($a_iTeamNum), true));
+
+                
+                if ($iIndex == 0)
+                {
+                    $retArr['data'][0]['dataLabels'] = array('x' => 9);
+                }
+
+                if ($iIndex == count($aData) - 1)
+                {
+                    $retArr['data'][$iIndex]['dataLabels'] = array('x' => -9);   
+                }
+        }
+
+	       return $retArr;
 	}
+
 
 
 }
