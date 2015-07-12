@@ -691,6 +691,10 @@ ul.share-dropdown ul li a {
     height: 200px;
 }
 
+.chart-spark {
+    cursor: pointer;
+}
+
 #parlay-window {
     min-width: 250px;
 }
@@ -780,4 +784,65 @@ ul.share-dropdown ul li a {
     text-align: right;
 }
 .content-button-cell input {
+}
+
+
+/*Team page*/
+table.team-stats-table {
+    width: 946px;
+    font-size: 11px;
+    border-collapse: collapse;
+    color: #222;
+    /*margin-top: -1px;*/
+}
+
+.team-stats-table tr {
+    background-color: #fff;
+
+}
+
+
+.team-stats-table tr:nth-child(odd) {
+    background-color: #e9eaed;
+    border-top: 1px dotted #989898;
+
+}  
+
+.team-stats-table tbody th {
+    padding-left: 5px;
+    width: 110px;
+    color: #1a1a1a;
+    font-size: 10px;
+    font-weight: 500;
+    max-width: 110px;
+    word-break: break-word;
+}
+.team-stats-table tbody th a {
+    color: #1a1a1a;
+    font-weight: 500;
+    font-size: 10px;
+    width: 140px;
+    height: 20px;
+}
+.team-stats-table tbody th a:hover {
+    color: #666;
+}
+.team-stats-table tbody td {
+    font-family: Arial, sans-serif;
+    border-left: 1px dotted #ddd;
+    color: #1a1a1a;
+    width: 47px;
+    text-align: center;
+    height: 20px;
+}
+
+.team-stats-table tbody td .bestbet {
+    background-color: #B00101;
+    color: #fff;
+    padding: 0 1px;
+}
+
+
+.team-stats-table  a {
+    color: #222;
 }

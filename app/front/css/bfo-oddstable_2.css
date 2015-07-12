@@ -108,7 +108,7 @@
     height: 20px;
 }
 
-.odds-table tbody td:hover:not(.button-cell):not(.prop-cell):not(:empty) {
+.odds-table tbody td:hover:not(.button-cell):not(.chart-cell):not(.prop-cell):not(:empty) {
     background-color: #d8d8d8;
     -webkit-transition-property: background-color;
     -moz-transition-property: background-color;
@@ -120,7 +120,7 @@
     transition-duration: 0.1s;
 }
 
-.odds-table tbody tr.pr td:hover:not(.button-cell):not(.prop-cell):not(:empty),.odds-table tbody tr.pr-odd td:hover:not(.button-cell):not(.prop-cell):not(:empty) {
+.odds-table tbody tr.pr td:hover:not(.button-cell):not(.chart-cell):not(.prop-cell):not(:empty),.odds-table tbody tr.pr-odd td:hover:not(.button-cell):not(.prop-cell):not(:empty) {
     background-color: #c8c8c8;
     -webkit-transition-property: background-color;
     -moz-transition-property: background-color;

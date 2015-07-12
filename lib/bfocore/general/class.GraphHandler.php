@@ -248,37 +248,52 @@ class GraphHandler
 
 	public static function getMedianSparkLine($a_iMatchupID, $a_iTeamNum)
 	{
-		$aData = GraphHandler::getMatchupIndexData($a_iMatchupID, $a_iTeamNum);
+		$iSparklineSteps = 10;
 
+		$aLines = EventHandler::getAllOddsForMatchup($a_iMatchupID);
+		if ($aLines == null || sizeof($aLines) < 1)
+		{
+			return null;
+		}
 
+		//Determine high/low/step
+		$iLow = (new DateTime($aLines[0]->getDate(), new DateTimeZone('America/New_York')))->getTimestamp() * 1000;
+		$iHigh = (new DateTime($aLines[sizeof($aLines)-1]->getDate(), new DateTimeZone('America/New_York')))->getTimestamp() * 1000;
+		$fStep = ($iHigh - $iLow) / ($iSparklineSteps - 1);
 
-        //Convert to JSON and return
-        $sBookieName = 'Mean';
-        $retArr = array('name' => $sBookieName, 'data' => array());
-        date_default_timezone_set('America/Los_Angeles');
-        foreach ($aData as $iIndex => $oOdds)
-        {
-                $retArr['data'][] = array('x' => 
-                                (new DateTime($oOdds->getDate(), new DateTimeZone('America/New_York')))->getTimestamp() * 1000,
-                                'y' => $oOdds->moneylineToDecimal($oOdds->getOdds($a_iTeamNum), true));
+		$aBookieLatestLine = array();
+		$iStepCounter = 0;
+		$sRetStr = '';
 
-                
-                if ($iIndex == 0)
-                {
-                    $retArr['data'][0]['dataLabels'] = array('x' => 9);
-                }
+		foreach ($aLines as $aLine)
+		{
 
-                if ($iIndex == count($aData) - 1)
-                {
-                    $retArr['data'][$iIndex]['dataLabels'] = array('x' => -9);   
-                }
-        }
+			$sLineDate = (new DateTime($aLine->getDate(), new DateTimeZone('America/New_York')))->getTimestamp() * 1000;
+			$aBookieLatestLine[$aLine->getBookieID()] = $aLine;
+			// Once we reach a line that passes the step date, flush the stored ones and create an index for that
+				if ($sLineDate >= $iLow + ($fStep * $iStepCounter))  {
+					$fTotal = 0;
+					foreach ($aBookieLatestLine as $oBookieLine)
+					{	
+						$fTotal += $oBookieLine->getFighterOddsAsDecimal($a_iTeamNum, true);
+					}
+					$fMean = $fTotal/sizeof($aBookieLatestLine);
+					//echo 'Step ' . $iStepCounter . ' mean is: ' . $fMean . ' when steps was ' . ($iLow + ($fStep * $iStepCounter)) . '<br>';
+					$sRetStr .= $fMean . ', ';
+					$iStepCounter++;
 
-	       return $retArr;
+				}
+
+		}
+		return rtrim($sRetStr, ', ');
 	}
-
-
-
 }
+
+function algorun($N,$A){
+        $aRet = array();
+        $step=(sizeof($A)-1)/($N-1);
+        for ($i=0;$i<$N;$i++)
+	        $aRet[] = $A[round($step*$i)];
+    }
 
 ?>

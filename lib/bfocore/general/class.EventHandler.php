@@ -45,6 +45,11 @@ class EventHandler
         return EventDAO::getAllOddsForFightAndBookie($a_iFightID, $a_iBookieID);
     }
 
+    public static function getAllOddsForMatchup($a_iMatchupID)
+    {
+        return EventDAO::getAllOddsForMatchup($a_iMatchupID);
+    }
+
     public static function getEvent($a_iEventID, $a_bFutureEventsOnly = false)
     {
         return EventDAO::getEvent($a_iEventID, $a_bFutureEventsOnly);

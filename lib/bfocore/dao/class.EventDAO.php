@@ -294,6 +294,28 @@ fo2.bookie_id, fo2.fight_id ASC;';
         return null;
     }
 
+    public static function getAllOddsForMatchup($a_iMatchupID)
+    {
+        $sQuery = 'SELECT fight_id, fighter1_odds, fighter2_odds, bookie_id, date
+                        FROM fightodds
+                        WHERE fight_id = ? 
+                        ORDER BY date ASC';
+
+        $rResult = DBTools::doParamQuery($sQuery, array($a_iMatchupID));
+
+        $aFightOddsCol = array();
+        while ($aFightOdds = mysql_fetch_array($rResult))
+        {
+            $aFightOddsCol[] = new FightOdds($aFightOdds['fight_id'], $aFightOdds['bookie_id'], $aFightOdds['fighter1_odds'], $aFightOdds['fighter2_odds'], $aFightOdds['date']);
+        }
+        if (sizeof($aFightOddsCol) > 0)
+        {
+            return $aFightOddsCol;
+        }
+        return null;
+    }
+
+
     /**
      * Retrieves a future fight
      * 

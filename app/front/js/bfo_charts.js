@@ -35,7 +35,6 @@ function createChart(indata) {
             style: {
                 fontFamily: "'Roboto', Arial, sans-serif"
             },
-
             marginTop: 18
         },
         credits: {
@@ -188,26 +187,33 @@ function createChart(indata) {
 
 
 
-$(function () {
-    /**
-     * Create a constructor for sparklines that takes some sensible defaults and merges in the individual
-     * chart options. This function is also available from the jQuery plugin as $(element).highcharts('SparkLine').
-     */
-    Highcharts.SparkLine = function (options, callback) {
+$(function() {
+    Highcharts.SparkLine = function(options, callback) {
         var defaultOptions = {
             chart: {
                 renderTo: (options.chart && options.chart.renderTo) || this,
-                backgroundColor: null,
+                backgroundColor: '#585B5E',
                 borderWidth: 0,
-                type: 'area',
-                margin: [2, 0, 2, 0],
-                width: 120,
-                height: 20,
+                type: 'line',
+                margin: [3, 2, 5, 2],
+                width: 60,
+                height: 30,
+                className: 'chart-spark',
+                events: {
+                    click: function() {
+                        var opts = $.parseJSON($('#' + this.container.id).closest('td').attr('data-li'));
+                        var title = $("#team-name").text() + " <span style=\"font-weight: normal;\"> &#150; Mean odds";
+                        clearChart();
+                        createMIChart(opts[0], opts[1]);
+                        showChart(title, event.clientX, event.clientY);
+                    }
+                },
                 style: {
                     overflow: 'visible'
                 },
                 skipClone: true
             },
+            colors: ['#fff'],
             title: {
                 text: ''
             },
@@ -223,7 +229,8 @@ $(function () {
                 },
                 startOnTick: false,
                 endOnTick: false,
-                tickPositions: []
+                tickPositions: [],
+                
             },
             yAxis: {
                 endOnTick: false,
@@ -234,46 +241,47 @@ $(function () {
                 title: {
                     text: null
                 },
-                tickPositions: [0]
+                tickPositions: [0],
+                tickPixelInterval: 50,
+
             },
             legend: {
                 enabled: false
             },
             tooltip: {
-                backgroundColor: null,
-                borderWidth: 0,
-                shadow: false,
-                useHTML: true,
-                hideDelay: 0,
-                shared: true,
-                padding: 0,
-                positioner: function (w, h, point) {
-                    return { x: point.plotX - w / 2, y: point.plotY - h};
-                }
+                enabled: false
+
             },
             plotOptions: {
+                            area: {
+                                fillColor: '#686B6E',
+
+            },
                 series: {
+                    threshold: null,
                     animation: false,
-                    lineWidth: 1,
-                    shadow: false,
+                    lineWidth: 1.5,
                     states: {
                         hover: {
-                            lineWidth: 1
+                            enabled: false,
                         }
                     },
+                    shadow: false,
+                    events: {
+                    click: function() {
+                        var opts = $.parseJSON($('#' + this.chart.container.id).closest('td').attr('data-li'));
+                        var title = $("#team-name").text() + " <span style=\"font-weight: normal;\"> &#150; Mean odds";
+                        clearChart();
+                        createMIChart(opts[0], opts[1]);
+                        showChart(title, event.clientX, event.clientY);
+                        }
+                    },
+
                     marker: {
-                        radius: 1,
-                        states: {
-                            hover: {
-                                radius: 2
-                            }
-                        }
+                        enabled: false,
                     },
-                    fillOpacity: 0.25
-                },
-                column: {
-                    negativeColor: '#910000',
-                    borderColor: 'silver'
+                    fillOpacity: 0.3
+
                 }
             }
         };
@@ -315,10 +323,6 @@ $(function () {
                     data: data,
                     pointStart: 1
                 }],
-                tooltip: {
-                    headerFormat: '<span style="font-size: 10px">' + $td.parent().find('th').html() + ', Q{point.x}:</span><br/>',
-                    pointFormat: '<b>{point.y}.000</b> USD'
-                },
                 chart: chart
             });
 
@@ -329,11 +333,6 @@ $(function () {
                 $tds.splice(0, i + 1);
                 setTimeout(doChunk, 0);
                 break;
-            }
-
-            // Print a feedback on the performance
-            if (n === fullLen) {
-                $('#result').html('Generated ' + fullLen + ' sparklines in ' + (new Date() - start) + ' ms');
             }
         }
     }
