@@ -16,20 +16,13 @@ if (sizeof($aBookies) == 0)
 }
 $aEvent = EventHandler::getAllUpcomingEvents();
 
-$iCellCounter = 0;
-$bAdAdded = false;
-
-$iEventCounter = 0;
-
 //List all events
 foreach ($aEvent as $oEvent)
 {
     $aFights = EventHandler::getAllFightsForEvent($oEvent->getID(), true);
 
-
-if (sizeof($aFights) > 0 && $oEvent->isDisplayed())
+    if (sizeof($aFights) > 0 && $oEvent->isDisplayed())
     {
-        $sLastChange = EventHandler::getLatestChangeDate($oEvent->getID());
         //Check if event is named FUTURE EVENTS, if so, do not display the date
         $sAddDate = '';
         if (strtoupper($oEvent->getName()) != 'FUTURE EVENTS')

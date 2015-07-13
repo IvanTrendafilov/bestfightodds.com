@@ -46,7 +46,7 @@ else
             <div id="page-content">            
 
     </div>
-                <div class="fighter-history-container" style="display: inline-block">
+                <div class="team-stats-container" style="display: inline-block">
 
                     <table class="team-stats-table" cellspacing="0" summary="Odds for <?php echo $oFighter->getNameAsString(); ?>">
                         <thead>

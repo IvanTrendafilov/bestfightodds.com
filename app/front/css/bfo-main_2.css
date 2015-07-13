@@ -460,30 +460,6 @@ h1 {
     background-color: #fff;
 }
 
-/* Archive */
-.fighter-profile-container {
-    margin-left: 8px;
-    width: 100px;
-    float: left;
-}
-.fighter-profile-container img {
-    border: 1px solid #B0B0B0;
-}
-.fighter-history-container {
-}
-.fighter-history-event-container {
-    margin-bottom: 10px;
-    padding-right: 15px;
-}
-
-/* Graphs */
-.graph-image {
-    padding: 5px;
-}
-.graph-container {
-    height: 100px;
-    background: url('/img/ajax-loader.gif') #fff no-repeat center;
-}
 
 /* Links */
 .links-table {
@@ -789,10 +765,10 @@ ul.share-dropdown ul li a {
 
 /*Team page*/
 table.team-stats-table {
-    width: 946px;
+    width: 100%;
     font-size: 11px;
     border-collapse: collapse;
-    color: #222;
+    color: #1a1a1a;
 }
 
 
@@ -813,9 +789,8 @@ table.team-stats-table {
 }
 
 .team-stats-table tbody tr:nth-child(odd) {
-    background-color: #f1f1f1;
+    background-color: #f6f6f6;
 }
-
 
 
 .team-stats-table tbody tr:hover {
@@ -824,21 +799,20 @@ table.team-stats-table {
 
 .team-stats-table tbody th {
     padding-left: 5px;
-    color: #1a1a1a;
     font-size: 11px;
-
     word-break: break-word;
 }
 .team-stats-table tbody th a {
-    color: #1a1a1a;
     font-size: 11px;
-    height: 20px;
 }
 
 .team-stats-table tbody td {
     border-left: 1px dotted #ddd;
-    color: #1a1a1a;
     height: 25px;
+}
+
+.team-stats-table tbody td, th {
+    padding: 0 3px;
 }
 
 .team-stats-table tbody td .bestbet {
@@ -850,13 +824,12 @@ table.team-stats-table {
 .team-stats-table tbody td.moneyline {
     text-align: center;
     font-family: Arial, sans-serif;
+    width: 50px;
 }
-
 
 .team-stats-table a {
     color: #222;
     font-weight: 500;
-
 }
 
 .team-stats-table a:hover {
@@ -866,4 +839,12 @@ table.team-stats-table {
 .team-stats-header {
     font-size: 15px;
     padding: 6px 0 8px 10px;
+}
+
+.team-stats-table .chart-cell {
+    width: 60px;
+}
+
+.team-stats-container { 
+    width: 100%;
 }
