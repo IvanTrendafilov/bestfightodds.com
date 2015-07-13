@@ -793,47 +793,52 @@ table.team-stats-table {
     font-size: 11px;
     border-collapse: collapse;
     color: #222;
-    /*margin-top: -1px;*/
 }
 
-.team-stats-table tr {
+
+
+.team-stats-table thead th {
+    padding: 3px 0 2px 5px;
+
+}
+
+.team-stats-table thead tr {
+    background-color: #d0d0d0;
+    border-bottom: 1px dotted #989898;
+}
+
+.team-stats-table tbody tr {
     background-color: #fff;
+    border-bottom: 1px dotted #989898;
+}
 
+.team-stats-table tbody tr:nth-child(odd) {
+    background-color: #f1f1f1;
 }
 
 
-.team-stats-table tr:nth-child(odd) {
-    background-color: #e9eaed;
-    border-top: 1px dotted #989898;
 
-}  
+.team-stats-table tbody tr:hover {
+    background-color: #e9eaed;
+}
 
 .team-stats-table tbody th {
     padding-left: 5px;
-    width: 110px;
     color: #1a1a1a;
-    font-size: 10px;
-    font-weight: 500;
-    max-width: 110px;
+    font-size: 11px;
+
     word-break: break-word;
 }
 .team-stats-table tbody th a {
     color: #1a1a1a;
-    font-weight: 500;
-    font-size: 10px;
-    width: 140px;
+    font-size: 11px;
     height: 20px;
 }
-.team-stats-table tbody th a:hover {
-    color: #666;
-}
+
 .team-stats-table tbody td {
-    font-family: Arial, sans-serif;
     border-left: 1px dotted #ddd;
     color: #1a1a1a;
-    width: 47px;
-    text-align: center;
-    height: 20px;
+    height: 25px;
 }
 
 .team-stats-table tbody td .bestbet {
@@ -842,7 +847,23 @@ table.team-stats-table {
     padding: 0 1px;
 }
 
+.team-stats-table tbody td.moneyline {
+    text-align: center;
+    font-family: Arial, sans-serif;
+}
 
-.team-stats-table  a {
+
+.team-stats-table a {
     color: #222;
+    font-weight: 500;
+
+}
+
+.team-stats-table a:hover {
+    color: #666;
+}
+
+.team-stats-header {
+    font-size: 15px;
+    padding: 6px 0 8px 10px;
 }

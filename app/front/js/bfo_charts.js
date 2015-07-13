@@ -192,12 +192,12 @@ $(function() {
         var defaultOptions = {
             chart: {
                 renderTo: (options.chart && options.chart.renderTo) || this,
-                backgroundColor: '#585B5E',
+                backgroundColor: null,
                 borderWidth: 0,
-                type: 'line',
+                type: 'area',
                 margin: [3, 2, 5, 2],
                 width: 60,
-                height: 30,
+                height: 26,
                 className: 'chart-spark',
                 events: {
                     click: function() {
@@ -213,7 +213,7 @@ $(function() {
                 },
                 skipClone: true
             },
-            colors: ['#fff'],
+            colors: ['#000'],
             title: {
                 text: ''
             },
@@ -242,7 +242,7 @@ $(function() {
                     text: null
                 },
                 tickPositions: [0],
-                tickPixelInterval: 50,
+
 
             },
             legend: {
@@ -253,14 +253,10 @@ $(function() {
 
             },
             plotOptions: {
-                            area: {
-                                fillColor: '#686B6E',
-
-            },
                 series: {
                     threshold: null,
                     animation: false,
-                    lineWidth: 1.5,
+                    lineWidth: 0.65,
                     states: {
                         hover: {
                             enabled: false,
@@ -280,7 +276,8 @@ $(function() {
                     marker: {
                         enabled: false,
                     },
-                    fillOpacity: 0.3
+                    fillColor: '#e6e6e6',
+            
 
                 }
             }

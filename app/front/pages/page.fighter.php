@@ -41,18 +41,22 @@ else
 
     
     <div id="page-container">
+    <div class="content-header team-stats-header" id="team-name">Chad Mendes</div>
         <div id="page-inner-wrapper">
-            <div id="page-content">
-            <h1 id="team-name"><?php echo $oFighter->getNameAsString(); ?></h1>
+            <div id="page-content">            
+
     </div>
                 <div class="fighter-history-container" style="display: inline-block">
 
                     <table class="team-stats-table" cellspacing="0" summary="Odds for <?php echo $oFighter->getNameAsString(); ?>">
                         <thead>
                             <th>Event</th>
-                            <th>Matchup</th>
+                            <th>Date</th>
                             <th>Open</th>
                             <th colspan="2">Close</th>
+                            <th>Opponent</th>
+                            <th>Opp. Open</th>
+                            <th colspan="2">Opp. Close</th>
                             <th></th>
                         </thead>
                         <tbody>
@@ -84,40 +88,34 @@ else
                                     {
                                         ?>
                                             <tr>
-                                                <th scope="row" rowspan="2"><a href="/events/<?php echo $oEvent->getEventAsLinkString(); ?>" style="font-size: 12px;"><?php echo $oEvent->getName(); ?></a><br><?php echo $sEventDate; ?></th>
-                                                <td><?php echo '<a href="/fighters/' . $oFight->getFighterAsLinkString($iTeamPos) . '">' . $oFight->getFighterAsString($iTeamPos) . '</a>'; ?></td>
-                                                <td align="center" class="moneyline"><span id="oID<?php echo $iCellCounter++; ?>"><?php echo $oOpeningOdds->getFighterOddsAsString($iTeamPos); ?></span></td>
-                                                <td align="center" class="moneyline"><span id="oID<?php echo $iCellCounter++; ?>" class="bestbet"><?php echo $oFightOdds1->getFighterOddsAsString($iTeamPos); ?></span></td>
+                                                <th scope="row"><a href="/events/<?php echo $oEvent->getEventAsLinkString(); ?>"><?php echo $oEvent->getName(); ?></a></th>
+                                                <td><?php echo $sEventDate; ?></td>
+                                                <td class="moneyline"><span id="oID<?php echo $iCellCounter++; ?>"><?php echo $oOpeningOdds->getFighterOddsAsString($iTeamPos); ?></span></td>
+                                                <td class="moneyline"><span id="oID<?php echo $iCellCounter++; ?>" class="bestbet"><?php echo $oFightOdds1->getFighterOddsAsString($iTeamPos); ?></span></td>
                                                 <td></td>
-                                                <td class="chart-cell" rowspan="2" data-sparkline="<?php echo $sGraphData; ?>" data-li="[<?php echo $oFight->getID(); ?>,<?php echo $iTeamPos; ?>]" />
-                                            </tr>
-                                            <tr class="odd">
                                                 <td><?php echo '<a href="/fighters/' . $oFight->getFighterAsLinkString($iOtherPos) . '">' . $oFight->getFighterAsString($iOtherPos) . '</a>'; ?></td>
-                                                <td align="center" class="moneyline"><span id="oID<?php echo $iCellCounter++; ?>"><?php echo $oOpeningOdds->getFighterOddsAsString($iOtherPos); ?></span></td>
-                                                <td align="center" class="moneyline"><span id="oID<?php echo $iCellCounter++; ?>" class="bestbet"><?php echo $oFightOdds1->getFighterOddsAsString($iOtherPos); ?></span></td>
+                                                <td class="moneyline"><span id="oID<?php echo $iCellCounter++; ?>"><?php echo $oOpeningOdds->getFighterOddsAsString($iOtherPos); ?></span></td>
+                                                <td class="moneyline"><span id="oID<?php echo $iCellCounter++; ?>" class="bestbet"><?php echo $oFightOdds1->getFighterOddsAsString($iOtherPos); ?></span></td>
                                                 <td></td>
+                                                <td class="chart-cell" data-sparkline="<?php echo $sGraphData; ?>" data-li="[<?php echo $oFight->getID(); ?>,<?php echo $iTeamPos; ?>]" />
                                             </tr>
-                                        
                                         <?php
                                     }
                                     else
                                     {
                                         ?>
                                             <tr>
-                                                <th scope="row" rowspan="2"><a href="/events/<?php echo $oEvent->getEventAsLinkString(); ?>" style="font-size: 12px;"><?php echo $oEvent->getName(); ?></a><br><?php echo $sEventDate; ?></th>
-                                                <td><?php echo '<a href="/fighters/' . $oFight->getFighterAsLinkString($iTeamPos) . '">' . $oFight->getFighterAsString($iTeamPos) . '</a>'; ?></td>
-                                                <td align="center" class="moneyline"><span id="oID<?php echo $iCellCounter++; ?>"><?php echo $oOpeningOdds->getFighterOddsAsString($iTeamPos); ?></span></td>
-                                                <td align="center" class="moneyline"><span id="oID<?php echo $iCellCounter++; ?>" class="bestbet"><?php echo $oFightOdds1->getFighterOddsAsString($iTeamPos); ?></span></td>
-                                                <td align="center" class="moneyline"><span id="oID<?php echo $iCellCounter++; ?>" class="normalbet"><?php echo $oFightOdds2->getFighterOddsAsString($iTeamPos); ?></span></td>
-                                                <td class="chart-cell" rowspan="2" data-sparkline="<?php echo $sGraphData; ?>" data-li="[<?php echo $oFight->getID(); ?>,<?php echo $iTeamPos; ?>]" />
-                                            </tr>
-                                            <tr class="odd">
+                                                <th scope="row"><a href="/events/<?php echo $oEvent->getEventAsLinkString(); ?>"><?php echo $oEvent->getName(); ?></a></th>
+                                                <td><?php echo $sEventDate; ?></td>
+                                                <td class="moneyline"><span id="oID<?php echo $iCellCounter++; ?>"><?php echo $oOpeningOdds->getFighterOddsAsString($iTeamPos); ?></span></td>
+                                                <td class="moneyline"><span id="oID<?php echo $iCellCounter++; ?>" class="bestbet"><?php echo $oFightOdds1->getFighterOddsAsString($iTeamPos); ?></span></td>
+                                                <td class="moneyline"><span id="oID<?php echo $iCellCounter++; ?>" class="normalbet"><?php echo $oFightOdds2->getFighterOddsAsString($iTeamPos); ?></span></td>
                                                 <td><?php echo '<a href="/fighters/' . $oFight->getFighterAsLinkString($iOtherPos) . '">' . $oFight->getFighterAsString($iOtherPos) . '</a>'; ?></td>
-                                                <td align="center" class="moneyline"><span id="oID<?php echo $iCellCounter++; ?>"><?php echo $oOpeningOdds->getFighterOddsAsString($iOtherPos); ?></span></td>
-                                                <td align="center" class="moneyline"><span id="oID<?php echo $iCellCounter++; ?>" class="normalbet"><?php echo $oFightOdds1->getFighterOddsAsString($iOtherPos); ?></span></td>
-                                                <td align="center" class="moneyline"><span id="oID<?php echo $iCellCounter++; ?>" class="bestbet"><?php echo $oFightOdds2->getFighterOddsAsString($iOtherPos); ?></span></td>
+                                                <td class="moneyline"><span id="oID<?php echo $iCellCounter++; ?>"><?php echo $oOpeningOdds->getFighterOddsAsString($iOtherPos); ?></span></td>
+                                                <td class="moneyline"><span id="oID<?php echo $iCellCounter++; ?>" class="normalbet"><?php echo $oFightOdds1->getFighterOddsAsString($iOtherPos); ?></span></td>
+                                                <td class="moneyline"><span id="oID<?php echo $iCellCounter++; ?>" class="bestbet"><?php echo $oFightOdds2->getFighterOddsAsString($iOtherPos); ?></span></td>
+                                                <td class="chart-cell" data-sparkline="<?php echo $sGraphData; ?>" data-li="[<?php echo $oFight->getID(); ?>,<?php echo $iTeamPos; ?>]" />
                                             </tr>
-
                                         <?php
                                     }
                                 }
@@ -125,14 +123,12 @@ else
                                 {
                                     ?>
                                     <tr>
-                                        <th scope="row" rowspan="2"><a href="/events/<?php echo $oEvent->getEventAsLinkString(); ?>" style="font-size: 12px;"><?php echo $oEvent->getName(); ?></a><br><?php echo $sEventDate; ?></th>
-                                        <td><?php echo '<a href="/fighters/' . $oFight->getFighterAsLinkString($iTeamPos) . '">' . $oFight->getFighterAsString($iTeamPos) . '</a>'; ?></td>
-                                        <td align="center" class="moneyline" colspan="3">n/a</td>
-                                        <td rowspan="2"></td>
-                                    </tr>
-                                    <tr class="odd">
+                                        <th scope="row"><a href="/events/<?php echo $oEvent->getEventAsLinkString(); ?>"><?php echo $oEvent->getName(); ?></a></th>
+                                        <td><?php echo $sEventDate; ?></td>
+                                        <td class="moneyline" colspan="3">n/a</td>
                                         <td><?php echo '<a href="/fighters/' . $oFight->getFighterAsLinkString($iOtherPos) . '">' . $oFight->getFighterAsString($iOtherPos) . '</a>'; ?></td>
-                                        <td align="center" class="moneyline" colspan="3">n/a</td>
+                                        <td class="moneyline" colspan="3">n/a</td>
+                                        <td></td>
                                     </tr>
                                     <?php
                                 }
