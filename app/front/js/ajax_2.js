@@ -689,7 +689,7 @@ function initPage() {
         $inputs.each(function() {
             values[this.name] = $(this).val();
         });
-        $.get("/ajax/ajax.Interface.php?function=addAlert", {
+        $.get("api?f=aa", {
             alertFight: values['m'],
             alertFighter: values['tn'],
             alertBookie: values['alert-bookies'],
@@ -706,7 +706,7 @@ function initPage() {
 }
 
 function refreshPage() {
-    $("#content").load("/ajax/ajax.Interface.php?function=refreshPage", function() {
+    $("#content").load("api?f=rp", function() {
         initPage();
         $.each(refreshOpenProps, function(index, value) {
             if (value == true) {

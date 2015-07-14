@@ -1,23 +1,23 @@
 function createMChart(b, p, m) {
-    $.getJSON('/ajax/ajax.Interface.php?function=getGraphData&b=' + b + '&m=' + m + '&p=' + p, function(indata) {
+    $.getJSON('/api?f=ggd&b=' + b + '&m=' + m + '&p=' + p, function(indata) {
         createChart(indata);
     });
 };
 
 function createMIChart(m, p) {
-    $.getJSON('/ajax/ajax.Interface.php?function=getGraphData&m=' + m + '&p=' + p, function(indata) {
+    $.getJSON('/api?f=ggd&m=' + m + '&p=' + p, function(indata) {
         createChart(indata);
     });
 };
 
 function createPChart(b, m, p, pt, tn) {
-    $.getJSON('/ajax/ajax.Interface.php?function=getGraphData&b=' + b + '&m=' + m + '&p=' + p + '&pt=' + pt + '&tn=' + tn, function(indata) {
+    $.getJSON('/api?f=ggd&b=' + b + '&m=' + m + '&p=' + p + '&pt=' + pt + '&tn=' + tn, function(indata) {
         createChart(indata);
     });
 };
 
 function createPIChart(m, p, pt, tn) {
-    $.getJSON('/ajax/ajax.Interface.php?function=getGraphData&m=' + m + '&p=' + p + '&pt=' + pt + '&tn=' + tn, function(indata) {
+    $.getJSON('/api?f=ggd&m=' + m + '&p=' + p + '&pt=' + pt + '&tn=' + tn, function(indata) {
         createChart(indata);
     });
 };

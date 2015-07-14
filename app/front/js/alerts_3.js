@@ -47,7 +47,7 @@ function alertFormAddAlert() {
     document.getElementById('alert-popup-form-container').style.display = 'none';
     document.getElementById('alert-popup-loading-container').style.display = 'block';
 
-    $.get("/ajax/ajax.Interface.php?function=addAlert", {
+    $.get("/api?f=aa", {
         alertFight: document.forms['alert-popup-form1'].elements['alertFight'].value,
         alertFighter: document.forms['alert-popup-form1'].elements['alertFighter'].value,
         alertBookie: document.forms['alert-popup-form1'].elements['alertBookie'].value,
@@ -117,7 +117,7 @@ function addAlertInline(matchup)
     res = document.getElementById('p-alerts-add-' + matchup);
     res.innerHTML = '<img src="/img/ajax-loader.gif"> <input type="submit" class="alerts-add-button" value="Add alert" onclick="return addAlertInline(' + matchup + ')" disabled="disabled">';
 
-    $.get("/ajax/ajax.Interface.php?function=addAlert", {
+    $.get("/api?f=aa", {
         alertFight: matchup,
         alertFighter: '1',
         alertBookie: document.forms['alert_form'].elements['alert_bookie'].value,

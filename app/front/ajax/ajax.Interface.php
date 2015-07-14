@@ -12,36 +12,36 @@ require_once('lib/bfocore/general/class.GraphHandler.php');
 require_once('app/front/pages/inc.FrontLogic.php');
 require_once('config/inc.generalConfig.php');
 
-checkRequiredParam('function');
+checkRequiredParam('f');
 
-switch ($_GET['function'])
+switch ($_GET['f'])
 {
-    case 'searchFighter':
+    case 'sf':
         AjaxInterface::searchFighter();
         break;
-    case 'addAlert':
+    case 'aa':
         AjaxInterface::addAlert();
         break;
-    case 'getLineDetails':
+    case 'gld':
         AjaxInterface::getLineDetails();
         break;
-    case 'getPropLineDetails':
+    case 'gpld':
         AjaxInterface::getPropLineDetails();
         break;
-    case 'getUpdates';
+    case 'gu';
         AjaxInterface::getUpdates();
         break;
-    case 'refreshPage':
+    case 'rp':
         AjaxInterface::refreshPage();
         break;
-    case 'getGraphData':
+    case 'ggd':
         AjaxInterface::getGraphData();
         break;
-    case 'getTeamSpreadData':
+    case 'gtsd':
         AjaxInterface::getTeamSpreadData();
         break;
     default:
-        echo 'Invalid function: ' . $_GET['function'];
+        echo 'Invalid function: ' . $_GET['f'];
 }
 
 class AjaxInterface
