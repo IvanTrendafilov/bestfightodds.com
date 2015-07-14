@@ -612,7 +612,6 @@ function initPage() {
     //Add regular matchup listeners
     $(".odds-table").find('.but-sg').on('click', function(event) {
         var opts = $.parseJSON($(this).attr('data-li'));
-        console.log(opts);
         if (parlayMode) {
             return addToParlay(this);
         } else {
@@ -651,8 +650,6 @@ function initPage() {
 
             return false;
         }
-
-        return null;
     });
     //Add prop index graph button listeners
     $(".odds-table").find('.but-sip').on('click', function(event) {
