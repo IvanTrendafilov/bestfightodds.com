@@ -400,7 +400,6 @@ $(document).ready(function() {
             $(this).data('toggled', false);
         }
         $(this).data('toggled', !$(this).data('toggled'));
-
         if ($(this).data('toggled')) {
             parlayMode = true;
             $('#parlay-window').addClass('is-visible');
@@ -480,6 +479,7 @@ function initPage() {
             $(this).data('toggled', false);
         }
         $(this).data('toggled', !$(this).data('toggled'));
+        $("[data-mu=" + matchup_id + "]").data('toggled', $(this).data('toggled'));
         if ($(this).data('toggled')) {
 
             if (navigator.appName.indexOf("Microsoft") > -1 && navigator.appVersion.indexOf("MSIE 10.0") == -1) {
