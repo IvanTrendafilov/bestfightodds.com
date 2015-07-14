@@ -1,23 +1,23 @@
 function createMChart(b, p, m) {
-    $.getJSON('/ajax/ajax.Interface.php?function=getGraphData&b=' + b + '&m=' + m + '&p=' + p, function(indata) {
+    $.getJSON('/api?f=ggd&b=' + b + '&m=' + m + '&p=' + p, function(indata) {
         createChart(indata);
     });
 };
 
 function createMIChart(m, p) {
-    $.getJSON('/ajax/ajax.Interface.php?function=getGraphData&m=' + m + '&p=' + p, function(indata) {
+    $.getJSON('/api?f=ggd&m=' + m + '&p=' + p, function(indata) {
         createChart(indata);
     });
 };
 
 function createPChart(b, m, p, pt, tn) {
-    $.getJSON('/ajax/ajax.Interface.php?function=getGraphData&b=' + b + '&m=' + m + '&p=' + p + '&pt=' + pt + '&tn=' + tn, function(indata) {
+    $.getJSON('/api?f=ggd&b=' + b + '&m=' + m + '&p=' + p + '&pt=' + pt + '&tn=' + tn, function(indata) {
         createChart(indata);
     });
 };
 
 function createPIChart(m, p, pt, tn) {
-    $.getJSON('/ajax/ajax.Interface.php?function=getGraphData&m=' + m + '&p=' + p + '&pt=' + pt + '&tn=' + tn, function(indata) {
+    $.getJSON('/api?f=ggd&m=' + m + '&p=' + p + '&pt=' + pt + '&tn=' + tn, function(indata) {
         createChart(indata);
     });
 };
@@ -150,7 +150,7 @@ function createChart(indata) {
                         if (this.point.index == 0 || this.series.chart.series[0].points.length - 1 == this.point.index) {
                             //return '<span style="font-size: 1.3em">singleDecimalToML(this.y) '</span>';
                             if (oddsType == 2) {
-                                return '<span style="margin-left: 4px; margin-right: 4px;">' + Highcharts.numberFormat(this.y, 2); + '</span>';
+                                return '<span style="margin-left: 4px; margin-right: 4px;">' + Highcharts.numberFormat(this.y, 2) + '</span>';
                             } else {
                                 return '<span style="margin-left: 4px; margin-right: 4px;">' + singleDecimalToML(this.y) + '</span>';
                             }
@@ -229,8 +229,7 @@ $(function() {
                 },
                 startOnTick: false,
                 endOnTick: false,
-                tickPositions: [],
-                
+                tickPositions: []                
             },
             yAxis: {
                 endOnTick: false,
@@ -241,9 +240,7 @@ $(function() {
                 title: {
                     text: null
                 },
-                tickPositions: [0],
-
-
+                tickPositions: [0]
             },
             legend: {
                 enabled: false
@@ -259,7 +256,7 @@ $(function() {
                     lineWidth: 0.65,
                     states: {
                         hover: {
-                            enabled: false,
+                            enabled: false
                         }
                     },
                     shadow: false,
@@ -274,9 +271,9 @@ $(function() {
                     },
 
                     marker: {
-                        enabled: false,
+                        enabled: false
                     },
-                    fillColor: '#e6e6e6',
+                    fillColor: '#e6e6e6'
             
 
                 }

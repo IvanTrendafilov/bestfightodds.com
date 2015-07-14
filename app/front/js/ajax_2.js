@@ -400,7 +400,6 @@ $(document).ready(function() {
             $(this).data('toggled', false);
         }
         $(this).data('toggled', !$(this).data('toggled'));
-
         if ($(this).data('toggled')) {
             parlayMode = true;
             $('#parlay-window').addClass('is-visible');
@@ -480,6 +479,7 @@ function initPage() {
             $(this).data('toggled', false);
         }
         $(this).data('toggled', !$(this).data('toggled'));
+        $("[data-mu=" + matchup_id + "]").data('toggled', $(this).data('toggled'));
         if ($(this).data('toggled')) {
 
             if (navigator.appName.indexOf("Microsoft") > -1 && navigator.appVersion.indexOf("MSIE 10.0") == -1) {
@@ -489,12 +489,12 @@ function initPage() {
                 $(this).closest('tr').next('tr.odd').andSelf('tr.odd').nextUntil('tr.even').css('display', 'table-row');
                 $('#mu-' + matchup_id).nextUntil('tr.even').css('display', 'table-row');
             }
-            $("[data-mu='" + matchup_id + "'] div img").attr("src", "/img/dexp.gif");
+            $("[data-mu='" + matchup_id + "']").find(".exp-txt").text("▼");
             refreshOpenProps[matchup_id] = true;
         } else {
             $(this).closest('tr').next('tr.odd').andSelf('tr.odd').nextUntil('tr.even').css('display', 'none');
             $('#mu-' + matchup_id).nextUntil('tr.even').css('display', 'none');
-            $("[data-mu='" + matchup_id + "'] div img").attr("src", "/img/exp.gif");
+            $("[data-mu='" + matchup_id + "']").find(".exp-txt").text("►");
             refreshOpenProps[matchup_id] = false;
         }
         return false;
@@ -612,7 +612,6 @@ function initPage() {
     //Add regular matchup listeners
     $(".odds-table").find('.but-sg').on('click', function(event) {
         var opts = $.parseJSON($(this).attr('data-li'));
-        console.log(opts);
         if (parlayMode) {
             return addToParlay(this);
         } else {
@@ -651,8 +650,6 @@ function initPage() {
 
             return false;
         }
-
-        return null;
     });
     //Add prop index graph button listeners
     $(".odds-table").find('.but-sip').on('click', function(event) {
@@ -689,7 +686,7 @@ function initPage() {
         $inputs.each(function() {
             values[this.name] = $(this).val();
         });
-        $.get("/ajax/ajax.Interface.php?function=addAlert", {
+        $.get("api?f=aa", {
             alertFight: values['m'],
             alertFighter: values['tn'],
             alertBookie: values['alert-bookies'],
@@ -706,7 +703,7 @@ function initPage() {
 }
 
 function refreshPage() {
-    $("#content").load("/ajax/ajax.Interface.php?function=refreshPage", function() {
+    $("#content").load("api?f=rp", function() {
         initPage();
         $.each(refreshOpenProps, function(index, value) {
             if (value == true) {
