@@ -1,7 +1,5 @@
 </div>
 <div class="legend-container">
-    <img src="/img/error.png" class="hidden-image" alt="Error indicator" />
-    <img src="/img/success.png" class="hidden-image" alt="Success indicator" />
     <img src="/img/ajax-loader.gif" class="hidden-image" alt="Loading indicator" />
 </div>
 
