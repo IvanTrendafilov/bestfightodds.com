@@ -43,11 +43,8 @@ else
     <div id="page-container">
     <div class="content-header team-stats-header" id="team-name">Chad Mendes</div>
         <div id="page-inner-wrapper">
-            <div id="page-content">            
-
-    </div>
+            <div id="page-content">           
                 <div class="team-stats-container" style="display: inline-block">
-
                     <table class="team-stats-table" cellspacing="0" summary="Odds for <?php echo $oFighter->getNameAsString(); ?>">
                         <thead>
                             <th>Event</th>

@@ -153,17 +153,20 @@
     height: 19px;
 }
 .odds-table tbody td.prop-cell {
-    width: 15px;
-    color: #1a1a1a;
-    padding-right: 11px;
+    width: 24px;
     vertical-align: middle;
 }
-.exp-img {
-    width: 9px;
-    height: 16px;
-    position: absolute;
-    padding-left: 4px;
+
+.odds-table tbody td.prop-cell a{
+    color: #585B5E;
 }
+
+.odds-table tbody td.prop-cell a:hover {
+    color: #787B7F;
+}
+
+
+
 .odds-table tbody td a {
     color: #1a1a1a;
 }
@@ -180,7 +183,7 @@
 }
 
 .aru {
-        margin: 0;
+    margin: 0;
     padding: 0;
     color: #4BCA02;
     position: absolute;    /*right: 0;*/
@@ -249,3 +252,4 @@
 }
 .odds-table-responsive-header tbody tr.pr th {
 }
+

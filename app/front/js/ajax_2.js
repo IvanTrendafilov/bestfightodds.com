@@ -489,12 +489,12 @@ function initPage() {
                 $(this).closest('tr').next('tr.odd').andSelf('tr.odd').nextUntil('tr.even').css('display', 'table-row');
                 $('#mu-' + matchup_id).nextUntil('tr.even').css('display', 'table-row');
             }
-            $("[data-mu='" + matchup_id + "'] div img").attr("src", "/img/dexp.gif");
+            $("[data-mu='" + matchup_id + "']").find(".exp-txt").text("▼");
             refreshOpenProps[matchup_id] = true;
         } else {
             $(this).closest('tr').next('tr.odd').andSelf('tr.odd').nextUntil('tr.even').css('display', 'none');
             $('#mu-' + matchup_id).nextUntil('tr.even').css('display', 'none');
-            $("[data-mu='" + matchup_id + "'] div img").attr("src", "/img/exp.gif");
+            $("[data-mu='" + matchup_id + "']").find(".exp-txt").text("►");
             refreshOpenProps[matchup_id] = false;
         }
         return false;

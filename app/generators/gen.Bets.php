@@ -274,7 +274,7 @@ foreach ($aEvent as $oEvent)
                 $iPropCount = OddsHandler::getPropCountForMatchup($oFight->getID());
                 if ($iPropCount > 0)
                 {
-                    echo $iPropCount . '<img src="/img/exp.gif" class="exp-img" alt="Prop bets" />';
+                    echo $iPropCount . '&nbsp;<span class="exp-txt">►</span>';
                 }
                 echo '</div></a></td>';
 
