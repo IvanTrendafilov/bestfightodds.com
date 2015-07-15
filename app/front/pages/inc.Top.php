@@ -63,49 +63,50 @@
                         <a href="/alerts"><div class="header-menu-item <?php echo CURRENT_PAGE == 'alerts' ? ' header-menu-selected ' : ''; ?>">Alerts</div></a>
                         <a href="/links"><div class="header-menu-item <?php echo CURRENT_PAGE == 'links' ? ' header-menu-selected ' : ''; ?> item-non-mobile">Widget/Feed</div></a>
                         <a href="http://twitter.com/bestfightodds" target="_blank"><div class="header-menu-item"><img src="/img/twitter.png" id="twitter-icon" alt="Twitter icon" /></div></a>
-                        <div id="format-container">
-                            <ul class="dropdown">
-                                <li><a href="#" id="format-toggle-text"><span class="item-non-mobile">Format: </span><span>Moneyline &#9660;</span></a>
-                                    <ul class="sub_menu">
-                                         <li><a href="#" id="formatSelector1" class="list-checked"><span style="display: inline-block">&#10004;</span>Moneyline</a></li>
-                                         <li><a href="#" id="formatSelector2"><span>&#10004;</span>Decimal</a></li>
-                                         <li><a href="#" id="formatSelector3" style="display: inline"><span>&#10004;</span>Return on </a>$<input type="text" name="amountBox" id="format-amount-box1" maxlength="4" value="100" style="display: inline"/></li>
-                                    </ul>
-                                </li>
-                            </ul>
-                        </div>
-                        <div class="menu-divider"></div>
-                        <div id="auto-refresh-container"
-                            <?php
-                             //Only display autorefresh-mode container if we are displaying an event or are on the front page
-                             if (CURRENT_PAGE != '')
-                             {
-                                 echo ' style="display: none" ';
-                             }
-                             ?>
-                            >
-                            <ul class="dropdown">
-                                <li><a href="#"  onclick="toggleRefresh()" style="padding-left: 20px;"><img src="/img/refresh.png" class="refresh-ind" id="autoRefresh" alt="Toggle auto-refresh"/>&#9660;</a>
+                        <div id="header-menu-right">
+                           <div id="parlay-mode-container" 
+                                 <?php
+                                 //Only display parlay-mode container if we are displaying an event or are on the front page
+                                 if (CURRENT_PAGE != '' && CURRENT_PAGE != 'event')
+                                 {
+                                     echo ' style="visibility: hidden" ';
+                                 }
+                                 ?>
+                                 >
+                                <input type="checkbox" id="parlay-mode-box" disabled="disabled" />Parlay
+                            </div>
+                            <div class="menu-divider"></div>                 
+                            <div id="auto-refresh-container"
+                                <?php
+                                 //Only display autorefresh-mode container if we are displaying an event or are on the front page
+                                 if (CURRENT_PAGE != '')
+                                 {
+                                     echo ' style="display: none" ';
+                                 }
+                                 ?>
+                                >
+                                <ul class="dropdown">
+                                    <li><a href="#"  onclick="toggleRefresh()" style="padding-left: 20px;"><img src="/img/refresh.png" class="refresh-ind" id="autoRefresh" alt="Toggle auto-refresh"/>&#9660;</a>
+                                            <ul class="sub_menu">
+                                                 <li><a href="#" id="afSelectorOn" class="list-checked"><span style="display: inline-block">&#10004;</span>Auto-refresh: On</a></li>
+                                                 <li><a href="#" id="afSelectorOff"><span>&#10004;</span>Auto-refresh: Off</a></li>
+                                            </ul>
+                                    </li>
+                                </ul>
+                            </div>
+                            <div class="menu-divider"></div>
+                            <div id="format-container">
+                                <ul class="dropdown">
+                                    <li><a href="#" id="format-toggle-text"><span class="item-non-mobile">Format: </span><span>Moneyline &#9660;</span></a>
                                         <ul class="sub_menu">
-                                             <li><a href="#" id="afSelectorOn" class="list-checked"><span style="display: inline-block">&#10004;</span>Auto-refresh: On</a></li>
-                                             <li><a href="#" id="afSelectorOff"><span>&#10004;</span>Auto-refresh: Off</a></li>
+                                             <li><a href="#" id="formatSelector1" class="list-checked"><span style="display: inline-block">&#10004;</span>Moneyline</a></li>
+                                             <li><a href="#" id="formatSelector2"><span>&#10004;</span>Decimal</a></li>
+                                             <li><a href="#" id="formatSelector3" style="display: inline"><span>&#10004;</span>Return on </a>$<input type="text" name="amountBox" id="format-amount-box1" maxlength="4" value="100" style="display: inline"/></li>
                                         </ul>
-                                </li>
-                            </ul>
+                                    </li>
+                                </ul>
+                            </div>
                         </div>
-                        <div class="menu-divider"></div>
-                        <div id="parlay-mode-container" 
-                             <?php
-                             //Only display parlay-mode container if we are displaying an event or are on the front page
-                             if (CURRENT_PAGE != '' && CURRENT_PAGE != 'event')
-                             {
-                                 echo ' style="visibility: hidden" ';
-                             }
-                             ?>
-                             >
-                            <input type="checkbox" id="parlay-mode-box" disabled="disabled" />Parlay
-                        </div>
-
                     </div>
                 </div>
         </div>

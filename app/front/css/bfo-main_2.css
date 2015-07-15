@@ -109,17 +109,20 @@ input[type="submit"] {
     -webkit-box-shadow: 0 2px 1px -1px rgba(155, 155, 155, 1);
     -moz-box-shadow: 0 2px 1px -1px rgba(155, 155, 155, 1);
     box-shadow: 0 2px 1px -1px rgba(155, 155, 155, 1);
+    text-align: left;
 }
 #header-menu {
     margin: 0 auto;
     width: 938px;
+    position: relative;
 }
 .header-menu-item {
     height: 20px;
     font-size: 11px;
-    float: left;
+    display: inline-block;
     padding: 6px 16px 0 16px;
     font-weight: 500;
+    margin-left: -3px;
 }
 .header-menu-item:hover {
     background-color: #212427;
@@ -179,21 +182,27 @@ input[type="submit"] {
     height: 26px;
     float: right;
 }
+
+#header-menu-right {
+    display: inline-block;
+    position: absolute;
+    right: 0;
+}
+
 #parlay-mode-container {
-    float: right;
-    margin-top: 6px;
+    display: inline-block;
     padding-right: 8px;
     font-weight: 500;
 }
 #parlay-mode-container input {
     color: #000;
-    float: left;
+    display: inline-block;
     margin-right: 4px;
     border: 0px;
     margin-top: 2px;
 }
 #format-container, #auto-refresh-container {
-    float: right;
+    display: inline-block;
     height: 100%;
 }
 #format-container ul li ul {
@@ -248,8 +257,7 @@ input[type="submit"] {
     background-color: #666;
     width: 1px;
     height: 16px;
-    margin-top: 4px;
-    float: right;
+    display: inline-block;
 }
 
 /* Pop-up */
@@ -795,8 +803,6 @@ table.team-stats-table {
     color: #222;
 }
 
-
-
 .team-stats-table thead th {
     padding: 3px 0 2px 5px;
 
@@ -815,8 +821,6 @@ table.team-stats-table {
 .team-stats-table tbody tr:nth-child(odd) {
     background-color: #f1f1f1;
 }
-
-
 
 .team-stats-table tbody tr:hover {
     background-color: #e9eaed;
