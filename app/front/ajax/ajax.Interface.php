@@ -22,15 +22,6 @@ switch ($_GET['f'])
     case 'aa':
         AjaxInterface::addAlert();
         break;
-    case 'gld':
-        AjaxInterface::getLineDetails();
-        break;
-    case 'gpld':
-        AjaxInterface::getPropLineDetails();
-        break;
-    case 'gu';
-        AjaxInterface::getUpdates();
-        break;
     case 'rp':
         AjaxInterface::refreshPage();
         break;
@@ -51,104 +42,6 @@ class AjaxInterface
         require_once('lib/bfocore/general/class.Alerter.php');
         $iResult = Alerter::addNewAlert($_GET['alertFight'], $_GET['alertFighter'], $_GET['alertMail'], $_GET['alertOdds'], $_GET['alertBookie'], $_GET['alertOddsType']);
         echo $iResult;
-    }
-
-    public static function searchFighter()
-    {
-        if (checkRequiredParam('q', false) == false || strlen($_GET['q']) < 3)
-        {
-            exit();
-        }
-
-        $aFighters = FighterHandler::searchFighter($_GET['q']);
-        if ($aFighters != null)
-        {
-            foreach ($aFighters as $oFighter)
-            {
-                echo $oFighter->getNameAsString() . "\n";
-            }
-        }
-    }
-
-
-    public static function getLineDetails()
-    {
-        checkRequiredParam('m', false);
-        checkRequiredParam('p', false);
-
-        $oOpeningOdds = null;
-        $oLatestOdds = null;
-        //If bookie is supplied, we will check for that one specifically
-        if (checkRequiredParam('b', false))
-        {
-            $oOpeningOdds = OddsHandler::getOpeningOddsForMatchupAndBookie($_GET['m'], $_GET['b']);
-            $oLatestOdds = EventHandler::getLatestOddsForFightAndBookie($_GET['m'], $_GET['b']);
-        }
-        else
-        {
-            $oOpeningOdds = OddsHandler::getOpeningOddsForMatchup($_GET['m']);
-            $oLatestOdds = EventHandler::getCurrentOddsIndex($_GET['m'], $_GET['p']);
-        }
-
-        if ($oOpeningOdds == null || $oLatestOdds == null || ($_GET['p'] != 1 && $_GET['p'] != 2))
-        {
-            echo 'n/a';
-        }
-        else
-        {
-
-            //Create JSON structure and return it
-            $toJson = array('open' => array('changed' => $oOpeningOdds->getDate(), 'odds' => $oOpeningOdds->getFighterOddsAsString($_GET['p'])),
-                'current' => array('changed' => getTimeDifference(strtotime($oLatestOdds->getDate()), strtotime(GENERAL_TIMEZONE . ' hours')), 'odds' => $oLatestOdds->getFighterOddsAsString($_GET['p'])));
-
-            echo json_encode($toJson);
-        }
-        return;
-    }
-
-    public static function getPropLineDetails()
-    {
-        checkRequiredParam('m', false);
-        checkRequiredParam('p', false);
-        checkRequiredParam('pt', false);
-        checkRequiredParam('tn', false);
-
-        $oOpeningOdds = null;
-        $oLatestOdds = null;
-        //If bookie is supplied, we will check for that one specifically
-        if (checkRequiredParam('b', false))
-        {
-            $oOpeningOdds = OddsHandler::getOpeningOddsForPropAndBookie($_GET['m'], $_GET['pt'], $_GET['b'], $_GET['tn']);
-            $oLatestOdds = OddsHandler::getLatestPropOdds($_GET['m'], $_GET['b'], $_GET['pt'], $_GET['tn']);
-        }
-        else
-        {
-            $oOpeningOdds = OddsHandler::getOpeningOddsForProp($_GET['m'], $_GET['pt'], $_GET['tn']);
-            $oLatestOdds = OddsHandler::getCurrentPropIndex($_GET['m'], $_GET['p'], $_GET['pt'], $_GET['tn']);
-        }
-
-        if ($oOpeningOdds == null || $oLatestOdds == null || ($_GET['p'] != 1 && $_GET['p'] != 2))
-        {
-            echo 'n/a';
-        }
-        else
-        {
-            //Create JSON structure and return it
-            $toJson = array('open' => array('changed' => $oOpeningOdds->getDate(), 'odds' => ($_GET['p'] == 1 ? $oOpeningOdds->getPropOddsAsString() : $oOpeningOdds->getNegPropOddsAsString())),
-                'current' => array('changed' => getTimeDifference(strtotime($oLatestOdds->getDate()), strtotime(GENERAL_TIMEZONE . ' hours')), 'odds' => ($_GET['p'] == 1 ? $oLatestOdds->getPropOddsAsString() : $oLatestOdds->getNegPropOddsAsString())));
-
-            echo json_encode($toJson);
-        }
-        return;
-    }
-
-
-    /**
-     * Retrieves latest changes to the main page, based on timestamp sent in
-     */
-    public static function getChanges()
-    {
-        checkRequiredParam('t', false);
     }
 
     public static function refreshPage()
@@ -231,10 +124,9 @@ class AjaxInterface
                 $curTime = (new DateTime('', new DateTimeZone('America/New_York')));
                 $retArr['data'][] = array('x' => $curTime->getTimestamp() * 1000, 'y' => $aOdds[count($aOdds) - 1]->moneylineToDecimal($aOdds[count($aOdds) - 1]->getOdds($_GET['p']), true), 'dataLabels' => array('x' => -9));    
             }
-            
 
-            echo '[' . json_encode($retArr) . ']';
-            //var_dump($retArr);
+            //"Encrypt" with ROT47 + base64 before returning
+            echo self::encryptResponse('[' . json_encode($retArr) . ']');
         }
         return 'error';
 
@@ -251,9 +143,15 @@ class AjaxInterface
             return 'error';
         }
 
-
         echo '' . json_encode($aRetArr) . '';
 
+    }
+
+    public static function encryptResponse($sResponse)
+    {
+        //ROT47
+        //BASE64
+        return base64_encode(strtr($sResponse, '!"#$%&\'()*+,-./0123456789:;<=>?@ABCDEFGHIJKLMNOPQRSTUVWXYZ[\]^_`abcdefghijklmnopqrstuvwxyz{|}~', 'PQRSTUVWXYZ[\]^_`abcdefghijklmnopqrstuvwxyz{|}~!"#$%&\'()*+,-./0123456789:;<=>?@ABCDEFGHIJKLMNO'));
     }
 
 }
@@ -278,5 +176,6 @@ function checkRequiredParam($sParamName, $bPrintOut = true)
 
     return true;
 }
+
 
 ?>

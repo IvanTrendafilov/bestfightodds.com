@@ -1,24 +1,24 @@
 function createMChart(b, p, m) {
-    $.getJSON('/api?f=ggd&b=' + b + '&m=' + m + '&p=' + p, function(indata) {
-        createChart(indata);
+    $.get('/api?f=ggd&b=' + b + '&m=' + m + '&p=' + p, function(indata) {
+        createChart($.parseJSON(notIn(indata)));
     });
 };
 
 function createMIChart(m, p) {
-    $.getJSON('/api?f=ggd&m=' + m + '&p=' + p, function(indata) {
-        createChart(indata);
+    $.get('/api?f=ggd&m=' + m + '&p=' + p, function(indata) {
+        createChart($.parseJSON(notIn(indata)));
     });
 };
 
 function createPChart(b, m, p, pt, tn) {
-    $.getJSON('/api?f=ggd&b=' + b + '&m=' + m + '&p=' + p + '&pt=' + pt + '&tn=' + tn, function(indata) {
-        createChart(indata);
+    $.get('/api?f=ggd&b=' + b + '&m=' + m + '&p=' + p + '&pt=' + pt + '&tn=' + tn, function(indata) {
+        createChart($.parseJSON(notIn(indata)));
     });
 };
 
 function createPIChart(m, p, pt, tn) {
-    $.getJSON('/api?f=ggd&m=' + m + '&p=' + p + '&pt=' + pt + '&tn=' + tn, function(indata) {
-        createChart(indata);
+    $.get('/api?f=ggd&m=' + m + '&p=' + p + '&pt=' + pt + '&tn=' + tn, function(indata) {
+        createChart($.parseJSON(notIn(indata)));
     });
 };
 
@@ -229,7 +229,7 @@ $(function() {
                 },
                 startOnTick: false,
                 endOnTick: false,
-                tickPositions: []                
+                tickPositions: []
             },
             yAxis: {
                 endOnTick: false,
@@ -261,12 +261,12 @@ $(function() {
                     },
                     shadow: false,
                     events: {
-                    click: function() {
-                        var opts = $.parseJSON($('#' + this.chart.container.id).closest('td').attr('data-li'));
-                        var title = $("#team-name").text() + " <span style=\"font-weight: normal;\"> &#150; Mean odds";
-                        clearChart();
-                        createMIChart(opts[0], opts[1]);
-                        showChart(title, event.clientX, event.clientY);
+                        click: function() {
+                            var opts = $.parseJSON($('#' + this.chart.container.id).closest('td').attr('data-li'));
+                            var title = $("#team-name").text() + " <span style=\"font-weight: normal;\"> &#150; Mean odds";
+                            clearChart();
+                            createMIChart(opts[0], opts[1]);
+                            showChart(title, event.clientX, event.clientY);
                         }
                     },
 
@@ -274,7 +274,7 @@ $(function() {
                         enabled: false
                     },
                     fillColor: '#e6e6e6'
-            
+
 
                 }
             }
@@ -333,3 +333,4 @@ $(function() {
     doChunk();
 
 });
+
