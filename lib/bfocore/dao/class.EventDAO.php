@@ -11,7 +11,7 @@ class EventDAO
     {
         $sQuery = 'SELECT id, date, name, display
                     FROM events
-                    WHERE LEFT(date, 10) >= LEFT((NOW() - INTERVAL 1 HOUR), 10)
+                    WHERE LEFT(date, 10) >= LEFT((NOW() - INTERVAL 2 HOUR), 10)
                     ORDER BY date ASC, LEFT(name,3) = "UFC" DESC, name ASC';
         $rResult = DBTools::doQuery($sQuery);
         $aEvents = array();
@@ -43,7 +43,7 @@ class EventDAO
         $sExtraWhere = '';
         if ($a_bFutureEventsOnly)
         {
-            $sExtraWhere = ' AND LEFT(date, 10) >= LEFT((NOW() - INTERVAL 1 HOUR), 10) ';
+            $sExtraWhere = ' AND LEFT(date, 10) >= LEFT((NOW() - INTERVAL 2 HOUR), 10) ';
         }
 
         $sQuery = 'SELECT id, date, name, display FROM events WHERE id = ' . $a_iEventID . ' ' . $sExtraWhere;
@@ -163,7 +163,7 @@ class EventDAO
                         WHERE f.fighter1_id = f1.id
                           AND f.fighter2_id = f2.id
                           AND f.event_id = e.id
-                          AND LEFT(e.date, 10) >= LEFT((NOW() - INTERVAL 1 HOUR), 10)
+                          AND LEFT(e.date, 10) >= LEFT((NOW() - INTERVAL 2 HOUR), 10)
                         HAVING latest_date IS NOT NULL
                         ORDER BY f.is_mainevent DESC, f.id ASC';
         }
@@ -174,7 +174,7 @@ class EventDAO
                         WHERE f.fighter1_id = f1.id
                             AND f.fighter2_id = f2.id
                             AND f.event_id = e.id
-                            AND LEFT(e.date, 10) >= LEFT((NOW() - INTERVAL 1 HOUR), 10)
+                            AND LEFT(e.date, 10) >= LEFT((NOW() - INTERVAL 2 HOUR), 10)
                             ORDER BY f.is_mainevent DESC, f.id ASC';
         }
 
@@ -335,19 +335,19 @@ fo2.bookie_id, fo2.fight_id ASC;';
         $sQuery = 'SELECT 1 AS original, t.id, a.name AS fighter1_name, b.name AS fighter2_name, t.event_id
                       FROM events e, fights t
                           JOIN fighters a ON a.id = t.fighter1_id
-                          JOIN fighters b ON b.id = t.fighter2_id WHERE e.id = event_id AND LEFT(e.date, 10) >= LEFT((NOW() - INTERVAL 1 HOUR), 10)  ' . $sExtraWhere . '
+                          JOIN fighters b ON b.id = t.fighter2_id WHERE e.id = event_id AND LEFT(e.date, 10) >= LEFT((NOW() - INTERVAL 2 HOUR), 10)  ' . $sExtraWhere . '
                     UNION SELECT 0 AS original, t.id, a.altname , b.altname, t.event_id
                       FROM events e, fights t
                           JOIN fighters_altnames a ON a.fighter_id = fighter1_id
-                          JOIN fighters_altnames b ON b.fighter_id = fighter2_id WHERE e.id = event_id AND LEFT(e.date, 10) >= LEFT((NOW() - INTERVAL 1 HOUR), 10)  ' . $sExtraWhere . '
+                          JOIN fighters_altnames b ON b.fighter_id = fighter2_id WHERE e.id = event_id AND LEFT(e.date, 10) >= LEFT((NOW() - INTERVAL 2 HOUR), 10)  ' . $sExtraWhere . '
                     UNION SELECT 0 AS original, t.id, a.name , b.altname, t.event_id
                       FROM events e, fights t
                           JOIN fighters a ON a.id = t.fighter1_id
-                          JOIN fighters_altnames b ON b.fighter_id = fighter2_id WHERE e.id = event_id AND LEFT(e.date, 10) >= LEFT((NOW() - INTERVAL 1 HOUR), 10)  ' . $sExtraWhere . '
+                          JOIN fighters_altnames b ON b.fighter_id = fighter2_id WHERE e.id = event_id AND LEFT(e.date, 10) >= LEFT((NOW() - INTERVAL 2 HOUR), 10)  ' . $sExtraWhere . '
                     UNION SELECT 0 AS original, t.id, a.altname , b.name, t.event_id
                       FROM events e, fights t
                           JOIN fighters b ON b.id = fighter2_id
-                          JOIN fighters_altnames a ON a.fighter_id = fighter1_id WHERE e.id = event_id AND LEFT(e.date, 10) >= LEFT((NOW() - INTERVAL 1 HOUR), 10)  ' . $sExtraWhere . ' ';
+                          JOIN fighters_altnames a ON a.fighter_id = fighter1_id WHERE e.id = event_id AND LEFT(e.date, 10) >= LEFT((NOW() - INTERVAL 2 HOUR), 10)  ' . $sExtraWhere . ' ';
 
         $rResult = DBTools::getCachedQuery($sQuery);
         if ($rResult == null)
@@ -810,7 +810,7 @@ fo2.bookie_id, fo2.fight_id ASC;';
     {
         $sQuery = 'SELECT id, date, name, display
                     FROM events
-                    WHERE LEFT(date, 10) < LEFT((NOW() - INTERVAL 1 HOUR), 10)
+                    WHERE LEFT(date, 10) < LEFT((NOW() - INTERVAL 2 HOUR), 10)
                     ORDER BY date DESC, name DESC LIMIT ' . $a_iOffset . ',' . $a_iLimit . '';
 
         $rResult = DBTools::doQuery($sQuery);
