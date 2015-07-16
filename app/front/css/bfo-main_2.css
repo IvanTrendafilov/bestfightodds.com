@@ -258,6 +258,8 @@ input[type="submit"] {
     width: 1px;
     height: 16px;
     display: inline-block;
+    position: absolute;
+    top: 5px;
 }
 
 /* Pop-up */

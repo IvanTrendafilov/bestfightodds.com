@@ -86,7 +86,7 @@ if ($oEvent != null)
         echo '<div class="table-outer-wrapper"><div class="table-div" id="event' . $oEvent->getID() . '"><div class="table-header"><a href="/events/' . $oEvent->getEventAsLinkString() . '">' . $oEvent->getName() . '</a>' . $sAddDate . '';
 
         $sShareURL = 'https://www.bestfightodds.com' . $oEvent->getEventAsLinkString();
-        $sShareDesc = '$oEvent->getName()';
+        $sShareDesc = $oEvent->getName() . ' betting lines';
 
         echo '<ul class="share-dropdown dropdown">
                                 <li><a href="#"><img src="/img/share_3.png" class="share-button" alt="Share this" /></a>
