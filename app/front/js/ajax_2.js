@@ -435,6 +435,11 @@ $(document).ready(function() {
         $('#formatSelector3').addClass("list-checked");
         $('span', $('#formatSelector3')).css('display', 'inline-block');
     });
+    $("#format-amount-box1").keyup(function(event){
+        if(event.keyCode == 13){
+            $("#format-amount-box1").change();
+        }
+    });
 
 
     $('#afSelectorOn').click(function() {

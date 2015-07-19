@@ -48,9 +48,11 @@ input, textarea, select {
 }
 input, textarea, select {
     *font-size: 100%;    /*-webkit-appearance:none;  */
+}
+input {
     -webkit-appearance: none;
-   -moz-appearance:    none;
-   appearance:         none;
+    -moz-appearance: none;
+    appearance: none;
 }
 legend {
     color: #000;
@@ -185,17 +187,14 @@ input[type="submit"] {
     height: 26px;
     float: right;
 }
-
 .search-box:focus {
     color: #fff;
 }
-
 #header-menu-right {
     display: inline-block;
     position: absolute;
     right: 0;
 }
-
 #parlay-mode-container {
     display: inline-block;
     padding-right: 8px;
@@ -269,83 +268,6 @@ input[type="submit"] {
     top: 5px;
 }
 
-/* Pop-up */
-/*.popup-container {
-    color: #000;
-    height: 135px;
-    width: 267px;
-    margin: 0;
-    background: #fff;
-    -webkit-box-shadow: 0px 1px 2px 1px rgba(0, 0, 0, 0.4);
-    -moz-box-shadow: 0px 1px 2px 1px rgba(0, 0, 0, 0.4);
-    box-shadow: 0px 1px 2px 1px rgba(0, 0, 0, 0.4);
-}
-.popup-container a {
-    color: #a30000;
-    text-decoration: none;
-}
-.popup-container select {
-    margin: 7px 0 10px 3px;
-}
-.popup-container p {
-    color: #202020;
-    text-align: left;
-    padding: 0 2px;
-    margin: 8px;
-}
-input.abutton {
-    height: 18px;
-    width: 80px;
-    color: #fff;
-    border: 1px solid #1d1d1d;
-    font-size: 11px;
-}
-.popup-container p span {
-    color: #a30000;
-}
-.popup-header {
-    color: #fff;
-    background-color: #2D2E34;
-    text-align: left;
-    padding: 4px;
-    font-weight: 700;
-}
-
-/* Alerts */
-/* Pending removal:
-#alert-popup-form1 {
-    text-align: left;
-    padding: 10px;
-    margin: 0;
-    color: #000;
-}
-#alert-popup-form-container {
-    text-align: left;
-}
-#alert-popup-form-container a, #alert-popup-loading-container a, #alert-popup-result-container a {
-    color: #B00101;
-    font-weight: bold;
-}
-#alert-popup-loading-container, #alert-popup-result-container {
-    display: none;
-    padding-top: 40px;
-    padding-left: 30px;
-    padding-right: 30px;
-    color: #000;
-}
-.popup-header .alert-popup-close-button {
-    position: absolute;
-    right: 10px;
-    top: 5px;
-    text-decoration: none;
-}
-.popup-header a.alert-popup-close-button {
-    color: #B00101;
-}
-#alert-popup-form1 p {
-    margin: 0;
-    line-height: 2.5;
-}*/
 #page-wrapper {
     -webkit-box-shadow: 0px 1px 1px 1px rgb(170, 170, 170);
     -moz-box-shadow: 0px 1px 1px 1px rgb(170, 170, 170);
@@ -362,7 +284,7 @@ h1 {
 #page-container {
     margin-left: auto;
     margin-right: auto;
-    background-color: #f6f7f8;
+    background-color: #fff;
     color: #202020;
     font-size: 12px;
 }
@@ -660,19 +582,16 @@ ul.share-dropdown ul li a {
     background: url("/img/sharebuttons.png") -322px -8px;
     display: inline-block;
 }
-
 .popup-window {
     -webkit-box-shadow: 0px 2px 3px 1px rgba(0, 0, 0, 0.4);
     -moz-box-shadow: 0px 2px 3px 1px rgba(0, 0, 0, 0.4);
-    box-shadow: 0px 2px 3px 1px rgba(0, 0, 0, 0.4);    
-
+    box-shadow: 0px 2px 3px 1px rgba(0, 0, 0, 0.4);
     background-color: #fff;
     opacity: 0;
     visibility: hidden;
     z-index: 999;
     position: fixed;
 }
-
 .popup-header {
     background-color: #393B42;
     font-size: 12px;
@@ -687,7 +606,6 @@ ul.share-dropdown ul li a {
     white-space: nowrap;
     overflow: hidden;
 }
-
 #chart-window {
     width: 400px;
 }
@@ -702,20 +620,16 @@ ul.share-dropdown ul li a {
     font-size: 13px;
     padding: 0 8px;
 }
-
 #chart-area {
     width: 100%;
     height: 200px;
 }
-
 .chart-spark {
     cursor: pointer;
 }
-
 #parlay-window {
     min-width: 250px;
 }
-
 #parlay-area {
     width: 100%;
     height: 100%;
@@ -724,11 +638,9 @@ ul.share-dropdown ul li a {
     font-size: 11px;
     padding: 9px;
 }
-
 #alert-window {
     width: 270px;
 }
-
 #alert-area {
     color: #222;
     text-align: left;
@@ -736,7 +648,6 @@ ul.share-dropdown ul li a {
     padding: 9px;
     line-height: 25px;
 }
-
 #alert-area #alert-odds {
     width: 45px;
 }
@@ -803,47 +714,40 @@ ul.share-dropdown ul li a {
 .content-button-cell input {
 }
 
-
 /*Team page*/
 #team-stats-container {
     width: 100%;
 }
-
 table.team-stats-table {
     width: 100%;
     font-size: 11px;
     border-collapse: collapse;
     color: #222;
 }
-
 .team-stats-table thead th {
     padding: 3px 0 2px 5px;
-
+    color: #8A8A8A;
 }
-
 .team-stats-table thead tr {
-    background-color: #d0d0d0;
     border-bottom: 1px dotted #989898;
 }
-
 .team-stats-table tbody tr {
-    background-color: #fff;
+
+    /*background-color: #fff;*/
     border-bottom: 1px dotted #989898;
 }
-
 .team-stats-table tbody tr:nth-child(odd) {
-    /*background-color: #f1f1f1;*/
+    /*background-color: #e9eaed;*/
+    border-bottom: 0;
 }
-
 .team-stats-table tbody tr:hover {
     background-color: #e9eaed;
 }
-
 .team-stats-table tbody th {
-    padding-left: 5px;
+    padding-left: 3px;
     color: #1a1a1a;
     font-size: 11px;
-
+    font-weight: 500;
     word-break: break-word;
 }
 .team-stats-table tbody th a {
@@ -851,48 +755,39 @@ table.team-stats-table {
     font-size: 11px;
     height: 20px;
 }
-
 .team-stats-table tbody td {
     border-left: 1px dotted #ddd;
     color: #1a1a1a;
     height: 25px;
+    padding-left: 3px;
 }
-
 .team-stats-table tbody td .bestbet {
     background-color: #B00101;
     color: #fff;
     padding: 0 1px;
 }
-
 .team-stats-table tbody td.moneyline {
     text-align: center;
     font-family: Arial, sans-serif;
+    width: 40px;
 }
-
 .team-stats-table tbody td.chart-cell {
     width: 60px;
 }
-
-
 .team-stats-table a {
     color: #222;
     font-weight: 500;
-
 }
-
 .team-stats-table a:hover {
     color: #666;
 }
-
 .team-stats-header {
     font-size: 15px;
     padding: 6px 0 8px 10px;
 }
-
 .item-mobile-only {
     display: none;
 }
-
 .item-mobile-only-row {
     display: none;
 }

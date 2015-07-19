@@ -203,7 +203,7 @@ $(function() {
                     click: function(event) {
                         var opts = $.parseJSON($('#' + this.container.id).closest('td').attr('data-li'));
                         var versus = $('#' + this.container.id).closest('tr').find("td.oppcell").text();
-                        var title = $("#team-name").text() + " <span style=\"font-weight: normal;\">(" + versus +  ") &#150; Mean odds";
+                        var title = $("#team-name").text() + " <span style=\"font-weight: normal;\">(vs. " + versus +  ") &#150; Mean odds";
                         clearChart();
                         createMIChart(opts[0], opts[1]);
                         showChart(title, event.clientX, event.clientY);
@@ -265,7 +265,7 @@ $(function() {
                         click: function(event) {
                             var opts = $.parseJSON($('#' + this.chart.container.id).closest('td').attr('data-li'));
                             var versus = $('#' + this.chart.container.id).closest('tr').find("td.oppcell").text();
-                            var title = $("#team-name").text() + " <span style=\"font-weight: normal;\">(" + versus +  ") &#150; Mean odds";
+                            var title = $("#team-name").text() + " <span style=\"font-weight: normal;\">(vs. " + versus +  ") &#150; Mean odds";
                             clearChart();
                             createMIChart(opts[0], opts[1]);
                             showChart(title, event.clientX, event.clientY);
