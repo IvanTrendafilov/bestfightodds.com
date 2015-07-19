@@ -200,9 +200,10 @@ $(function() {
                 height: 26,
                 className: 'chart-spark',
                 events: {
-                    click: function() {
+                    click: function(event) {
                         var opts = $.parseJSON($('#' + this.container.id).closest('td').attr('data-li'));
-                        var title = $("#team-name").text() + " <span style=\"font-weight: normal;\"> &#150; Mean odds";
+                        var versus = $('#' + this.container.id).closest('tr').find("td.oppcell").text();
+                        var title = $("#team-name").text() + " <span style=\"font-weight: normal;\">(" + versus +  ") &#150; Mean odds";
                         clearChart();
                         createMIChart(opts[0], opts[1]);
                         showChart(title, event.clientX, event.clientY);
@@ -261,9 +262,10 @@ $(function() {
                     },
                     shadow: false,
                     events: {
-                        click: function() {
+                        click: function(event) {
                             var opts = $.parseJSON($('#' + this.chart.container.id).closest('td').attr('data-li'));
-                            var title = $("#team-name").text() + " <span style=\"font-weight: normal;\"> &#150; Mean odds";
+                            var versus = $('#' + this.chart.container.id).closest('tr').find("td.oppcell").text();
+                            var title = $("#team-name").text() + " <span style=\"font-weight: normal;\">(" + versus +  ") &#150; Mean odds";
                             clearChart();
                             createMIChart(opts[0], opts[1]);
                             showChart(title, event.clientX, event.clientY);

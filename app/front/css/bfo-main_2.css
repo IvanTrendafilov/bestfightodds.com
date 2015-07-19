@@ -48,6 +48,9 @@ input, textarea, select {
 }
 input, textarea, select {
     *font-size: 100%;    /*-webkit-appearance:none;  */
+    -webkit-appearance: none;
+   -moz-appearance:    none;
+   appearance:         none;
 }
 legend {
     color: #000;
@@ -181,6 +184,10 @@ input[type="submit"] {
     font-size: 15px;
     height: 26px;
     float: right;
+}
+
+.search-box:focus {
+    color: #fff;
 }
 
 #header-menu-right {
@@ -798,8 +805,12 @@ ul.share-dropdown ul li a {
 
 
 /*Team page*/
+#team-stats-container {
+    width: 100%;
+}
+
 table.team-stats-table {
-    width: 946px;
+    width: 100%;
     font-size: 11px;
     border-collapse: collapse;
     color: #222;
@@ -821,7 +832,7 @@ table.team-stats-table {
 }
 
 .team-stats-table tbody tr:nth-child(odd) {
-    background-color: #f1f1f1;
+    /*background-color: #f1f1f1;*/
 }
 
 .team-stats-table tbody tr:hover {
@@ -858,6 +869,10 @@ table.team-stats-table {
     font-family: Arial, sans-serif;
 }
 
+.team-stats-table tbody td.chart-cell {
+    width: 60px;
+}
+
 
 .team-stats-table a {
     color: #222;
@@ -872,4 +887,12 @@ table.team-stats-table {
 .team-stats-header {
     font-size: 15px;
     padding: 6px 0 8px 10px;
+}
+
+.item-mobile-only {
+    display: none;
+}
+
+.item-mobile-only-row {
+    display: none;
 }

@@ -479,7 +479,6 @@ $(document).ready(function() {
     //Set trigger for using of searchbox
     $('#search-box1').on('mousedown', function(e) {
         $(this).css('color', '#fff');
-        $(this).val('');
         $(this).focus();
         $(this).off('mousedown');
     });
@@ -487,7 +486,6 @@ $(document).ready(function() {
 });
 
 function initPage() {
-
     oddsType = 1;
     storedOdds = [];
     if ($.cookie('bfo_odds_type') != null) {

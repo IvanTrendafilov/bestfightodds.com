@@ -27,8 +27,7 @@
         </div>
         <div class="content-sidebar">
             <p>
-                <img src="img/info.gif" class="img-info-box" /> All odds posted on the site is stored in the archive. The archive contains thousands of matchups dating back to 2007 when the site was first launched.<br /><br />
-                <img src="img/info-arrow.gif" class="img-note-box" /> Results are limited to 25 events/fighters. Refine your search criteria to narrow down specific results
+                <img src="img/info.gif" class="img-info-box" /> Results are limited to 25 events/fighters. Refine your search criteria to narrow down specific results
             </p>
         </div>
         <div class="clear"></div>

@@ -41,20 +41,22 @@ else
 
     
     <div id="page-container">
-    <div class="content-header team-stats-header" id="team-name">Chad Mendes</div>
+    <div class="content-header team-stats-header" id="team-name"><?php echo $oFighter->getNameAsString(); ?></div>
         <div id="page-inner-wrapper">
             <div id="page-content">           
-                <div class="team-stats-container" style="display: inline-block">
+                <div id="team-stats-container" style="display: inline-block">
                     <table class="team-stats-table" cellspacing="0" summary="Odds for <?php echo $oFighter->getNameAsString(); ?>">
                         <thead>
-                            <th>Event</th>
-                            <th>Date</th>
-                            <th>Open</th>
-                            <th colspan="2">Close</th>
-                            <th>Opponent</th>
-                            <th>Opp. Open</th>
-                            <th colspan="2">Opp. Close</th>
-                            <th></th>
+                            <tr class="item-non-mobile">
+                                <th>Event</th>
+                                <th>Date</th>
+                                <th>Open</th>
+                                <th colspan="2">Close</th>
+                                <th>Opponent</th>
+                                <th>Opp. Open</th>
+                                <th colspan="2">Opp. Close</th>
+                                <th></th>
+                            </tr>
                         </thead>
                         <tbody>
                     <?php
@@ -77,44 +79,46 @@ else
                             $sEventDate = date('M jS Y', strtotime($oEvent->getDate()));
                         }
                         ?>
-                            
+                                <tr class="item-mobile-only-row">
+                                    <td colspan="8" scope="row"><a href="/events/<?php echo $oEvent->getEventAsLinkString(); ?>"><?php echo $oEvent->getName(); ?></a> <?php echo $sEventDate; ?></td>
+                                </tr>                            
                                 <?php
                                 if ($oFightOdds1 != null && $oFightOdds2 != null && $oEvent != null)
                                 {
+                                    ?>
+
+                                    <tr>
+                                        <th class="item-non-mobile" scope="row"><a href="/events/<?php echo $oEvent->getEventAsLinkString(); ?>"><?php echo $oEvent->getName(); ?></a></th>
+                                        <td class="item-non-mobile"><?php echo $sEventDate; ?></td>
+                                        <td class="moneyline"><span id="oID<?php echo $iCellCounter++; ?>"><?php echo $oOpeningOdds->getFighterOddsAsString($iTeamPos); ?></span></td>
+                                        <td class="moneyline"><span id="oID<?php echo $iCellCounter++; ?>" class="bestbet"><?php echo $oFightOdds1->getFighterOddsAsString($iTeamPos); ?></span></td>
+                                    <?php
                                     if ($oFightOdds1->getBookieID() == $oFightOdds2->getBookieID())
                                     {
                                         ?>
-                                            <tr>
-                                                <th scope="row"><a href="/events/<?php echo $oEvent->getEventAsLinkString(); ?>"><?php echo $oEvent->getName(); ?></a></th>
-                                                <td><?php echo $sEventDate; ?></td>
-                                                <td class="moneyline"><span id="oID<?php echo $iCellCounter++; ?>"><?php echo $oOpeningOdds->getFighterOddsAsString($iTeamPos); ?></span></td>
-                                                <td class="moneyline"><span id="oID<?php echo $iCellCounter++; ?>" class="bestbet"><?php echo $oFightOdds1->getFighterOddsAsString($iTeamPos); ?></span></td>
                                                 <td></td>
-                                                <td><?php echo '<a href="/fighters/' . $oFight->getFighterAsLinkString($iOtherPos) . '">' . $oFight->getFighterAsString($iOtherPos) . '</a>'; ?></td>
+                                                <td class="oppcell"><span class="item-mobile-only">vs. <span><?php echo '<a href="/fighters/' . $oFight->getFighterAsLinkString($iOtherPos) . '">' . $oFight->getFighterAsString($iOtherPos) . '</a>'; ?></td>
                                                 <td class="moneyline"><span id="oID<?php echo $iCellCounter++; ?>"><?php echo $oOpeningOdds->getFighterOddsAsString($iOtherPos); ?></span></td>
                                                 <td class="moneyline"><span id="oID<?php echo $iCellCounter++; ?>" class="bestbet"><?php echo $oFightOdds1->getFighterOddsAsString($iOtherPos); ?></span></td>
                                                 <td></td>
-                                                <td class="chart-cell" data-sparkline="<?php echo $sGraphData; ?>" data-li="[<?php echo $oFight->getID(); ?>,<?php echo $iTeamPos; ?>]" />
-                                            </tr>
                                         <?php
                                     }
                                     else
                                     {
                                         ?>
-                                            <tr>
-                                                <th scope="row"><a href="/events/<?php echo $oEvent->getEventAsLinkString(); ?>"><?php echo $oEvent->getName(); ?></a></th>
-                                                <td><?php echo $sEventDate; ?></td>
-                                                <td class="moneyline"><span id="oID<?php echo $iCellCounter++; ?>"><?php echo $oOpeningOdds->getFighterOddsAsString($iTeamPos); ?></span></td>
-                                                <td class="moneyline"><span id="oID<?php echo $iCellCounter++; ?>" class="bestbet"><?php echo $oFightOdds1->getFighterOddsAsString($iTeamPos); ?></span></td>
                                                 <td class="moneyline"><span id="oID<?php echo $iCellCounter++; ?>" class="normalbet"><?php echo $oFightOdds2->getFighterOddsAsString($iTeamPos); ?></span></td>
-                                                <td><?php echo '<a href="/fighters/' . $oFight->getFighterAsLinkString($iOtherPos) . '">' . $oFight->getFighterAsString($iOtherPos) . '</a>'; ?></td>
+                                                <td class="oppcell"><span class="item-mobile-only">vs. <span><?php echo '<a href="/fighters/' . $oFight->getFighterAsLinkString($iOtherPos) . '">' . $oFight->getFighterAsString($iOtherPos) . '</a>'; ?></td>
                                                 <td class="moneyline"><span id="oID<?php echo $iCellCounter++; ?>"><?php echo $oOpeningOdds->getFighterOddsAsString($iOtherPos); ?></span></td>
                                                 <td class="moneyline"><span id="oID<?php echo $iCellCounter++; ?>" class="normalbet"><?php echo $oFightOdds1->getFighterOddsAsString($iOtherPos); ?></span></td>
                                                 <td class="moneyline"><span id="oID<?php echo $iCellCounter++; ?>" class="bestbet"><?php echo $oFightOdds2->getFighterOddsAsString($iOtherPos); ?></span></td>
-                                                <td class="chart-cell" data-sparkline="<?php echo $sGraphData; ?>" data-li="[<?php echo $oFight->getID(); ?>,<?php echo $iTeamPos; ?>]" />
-                                            </tr>
+
                                         <?php
                                     }
+                                    ?>
+
+                                        <td class="chart-cell" data-sparkline="<?php echo $sGraphData; ?>" data-li="[<?php echo $oFight->getID(); ?>,<?php echo $iTeamPos; ?>]" />
+                                    </tr>
+                                    <?php
                                 }
                                 else
                                 {
