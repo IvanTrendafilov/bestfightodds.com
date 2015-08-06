@@ -174,13 +174,11 @@
 		display: none;
 	}
 	#chart-window,#alert-window {
-		width: 94%;
-		left: 0 !important;
-		top: 18% !important;
-		margin-left: 3%;
-		margin-top: 3% ;
-		min-width: 1px;
-		display: block;
+			min-width: 1px;
+			display: block;
+		  width: 90%; /* Set your own width: percents, ems, whatever! */
+		  margin: auto; /* Center the item vertically & horizontally */
+		  top: 0; left: 0; bottom: 0; right: 0; /* Set the bounds in which to center it, relative to its parent/container */
 	}
 	#chart-header {
 		font-size: 11px;

@@ -43,8 +43,7 @@
 .odds-table thead th {
     text-align: center;
     height: 16px;
-    border-left: 1px solid #c5c5c5
-
+    border-left: 1px solid #c5c5c5;
 }
 
 .odds-table thead th.table-prop-header {
@@ -104,6 +103,7 @@
     border-left: 1px dotted #ddd;
     color: #1a1a1a;
     width: 47px;
+    max-width: 47px;
     text-align: center;
     height: 20px;
 }
