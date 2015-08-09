@@ -38,11 +38,15 @@ function showChart(content, xcord, ycord) {
 }
 
 function showAlertWindow(context, xcord, ycord) {
+    $('#alert-result').removeClass('success error');
+    $('#alert-form').find("input").removeClass('success error');
     $('#alert-odds').val(context.bestodds);
     $('#alert-form').find("[name=tn]").val(context.opts[1]);
     $('#alert-form').find("[name=m]").val(context.opts[0]);
     $('#alert-header').find("div").html('Add alert:<span style="font-weight: normal;"> ' + context.teamtitle + '</span>');
-
+    if ($.cookie('bfo_alertmail') != null) {
+        $('#alert-mail').val($.cookie('bfo_alertmail'));
+    }
     if ($('#alert-window').css('min-width') != '1px') {
         setxcord = xcord + 8;
         setycord = ycord + 8;
@@ -742,23 +746,64 @@ function initPage() {
 
     //Alert button add listener
     $("#alert-form").submit(function(event) {
-        var $inputs = $('#alert-form :input,:select');
+        event.preventDefault();
+        var $inputs = $('#alert-form :input,select');
         var values = {};
         $inputs.each(function() {
             values[this.name] = $(this).val();
         });
+        $('#alert-submit')[0].disabled = true; //.prop( "disabled", true );
+        $('#alert-result').removeClass('success error');
+        $(event.target).find("input").removeClass('success error');
+        $('#alert-loader').css('display', 'inline-block');
         $.get("api?f=aa", {
             alertFight: values['m'],
             alertFighter: values['tn'],
-            alertBookie: values['alert-bookies'],
+            alertBookie: values['alert-bookie'],
             alertMail: values['alert-mail'],
             alertOdds: values['alert-odds'],
             alertOddsType: oddsType
         }, function(data) {
-            alertFormShowResult(data);
+            $('#alert-loader').css('display', 'none');
+            var sMessage = '';
+            switch (data) {
+                case '1':
+                    sMessage = '✔ Alert added';
+                    $.cookie('bfo_alertmail', values['alert-mail'], {
+                        expires: 999,
+                        path: '/'
+                    });        
+                    break;
+                case '2':
+                    sMessage = '✔ Alert already exists';
+                    break;
+                case '-1':
+                case '-2':
+                case '-3':
+                    sMessage = '✘ Error: Missing values (' + data + ')';
+                    break;
+                case '-4':
+                    sMessage = '✘ Invalid e-mail';
+                    $('#alert-mail').addClass("error");
+                    break;
+                case '-5':
+                    sMessage = '✘ Invalid odds format';
+                    $('#alert-odds').addClass("error");
+                    break;
+                case '-6':
+                    sMessage = '✘ Alert limit reached (50)';
+                    break;
+                case '-7':
+                    sMessage = '✘ Odds already reached';
+                    $('#alert-odds').addClass("error");
+                    break;
+                default:
+                    sMessage = '✘ Unknown error';
+            }
+            $('#alert-result').addClass((data >= 1 ? 'success' : 'error'));
+            $('#alert-result').text(sMessage);
         });
-
-        event.preventDefault();
+        $(event.target).find('input[type="submit"]').prop("disabled", false);
         return false;
     });
 }

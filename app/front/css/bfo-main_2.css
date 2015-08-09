@@ -93,7 +93,7 @@ input[type="submit"] {
     text-align: center;
     vertical-align: middle;
 }
-.input[type="submit"][disabled] {
+input[type="submit"][disabled], input[type="submit"]:disabled {
     color: #888;
 }
 .header {
@@ -660,9 +660,42 @@ ul.share-dropdown ul li a {
 #alert-area #alert-button-container {
     text-align: right;
 }
+
+
+#alert-area input.error {
+    border-color: #ff0000;
+}
 #alert-button-container #alert-submit {
     margin-top: 8px;
+    display: inline-block;
 }
+
+#alert-loader {
+    background-image: url('/img/ajax-loader.gif');
+    width: 32px;
+    height: 16px;
+    display: none;
+}
+
+#alert-result {
+    display: none;
+    position: absolute;
+    left: 0;
+    margin-left: 8px;
+    margin-top: 8px;
+    font-weight: 500;
+}
+
+#alert-result.success {
+    display: inline-block;
+    color: green;
+}
+
+#alert-result.error {
+    display: inline-block;
+    color: red;
+}
+
 
 /* New content lists */
 .content-header {

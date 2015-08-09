@@ -47,7 +47,10 @@
                 <option value="10">SBG</option>
                 <option value="11">TheGreek</option>
                 <option value="12">BetOnline</option>
-              </select><br /><div id="alert-button-container"><input type="hidden" name="tn"><input type="hidden" name="m"><input type="submit" value="Add alert" id="alert-submit"></div></form></div>
+              </select><br /><div id="alert-button-container"><input type="hidden" name="tn"><input type="hidden" name="m">
+                <div id="alert-loader"></div>
+                <div id="alert-result">whatup</div>
+              <input type="submit" value="Add alert" id="alert-submit"></div></form></div>
         </div>
         <div class="header">
                 <div id="header-top">
@@ -73,7 +76,7 @@
                                  }
                                  ?>
                                  >
-                                <input type="checkbox" id="parlay-mode-box" disabled="disabled" />Parlay
+                                <input type="checkbox" id="parlay-mode-box" disabled="disabled" />☐ ☑ Parlay
                             </div>
                             <div class="menu-divider"></div>                 
                             <div id="auto-refresh-container"
