@@ -692,7 +692,7 @@ function initPage() {
         if (parlayMode) {
             return addToParlay(this);
         } else {
-            var title = $(this).parent().parent().find("th").find("a").text() + " <span style=\"font-weight: normal;\"> &#150; " + $(this).closest('table').find('th').eq($(this).parent().index()).find("a").text() + "</span>";
+            var title = $(this).parent().parent().find("th").find("a").text() + " <span style=\"font-weight: normal;\"> &#150; <a href=\"" + $(this).closest('table').find('th').eq($(this).parent().index()).find("a").attr("href") + "\" target=\"_blank\">" + $(this).closest('table').find('th').eq($(this).parent().index()).find("a").text() + "</a></span>";
             clearChart();
             createMChart(opts[0], opts[1], opts[2]);
             showChart(title, event.clientX, event.clientY);
