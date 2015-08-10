@@ -591,7 +591,21 @@ ul.share-dropdown ul li a {
     visibility: hidden;
     z-index: 999;
     position: fixed;
+    -webkit-transform: scale(0.7, 0.7);
+    -moz-transform: scale(0.7, 0.7);
+    -ms-transform: scale(0.7, 0.7);
+    transform: scale(0.7, 0.7);
+    -webkit-transition: all 0.1s ease-out;
+    -moz-transition: all 0.1s ease-out;
+    transition: all 0.1s ease-out;
+    transition-property: opacity, scale, transform;
+    transform-origin: top left;
 }
+
+.popup-window-animate {
+
+}
+
 .popup-header {
     background-color: #393B42;
     font-size: 12px;
@@ -613,6 +627,11 @@ ul.share-dropdown ul li a {
 .popup-window.is-visible {
     opacity: 1;
     visibility: visible;
+    -webkit-transform: scale(1,1);
+    -moz-transform: scale(1,1);
+    -ms-transform: scale(1,1);
+    transform: scale(1,1);
+    opacity: 1;
 }
 .cd-popup-close {
     position: absolute;
@@ -641,6 +660,7 @@ ul.share-dropdown ul li a {
 }
 #alert-window {
     width: 270px;
+    height: 155px;
 }
 #alert-area {
     color: #222;

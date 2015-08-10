@@ -16,34 +16,43 @@ function clearChart() {
 }
 
 function showChart(content, xcord, ycord) {
+    $('#chart-window').removeClass('is-visible');
     $('#chart-header').find('div').html(content);
+    yorigin = 'top';
+    xorigin = 'left';
     if ($('#chart-window').css('min-width') != '1px') {
         setxcord = xcord + 8;
         setycord = ycord + 8;
         if (xcord + $('#chart-window').width() >= $(window).width()) {
             //Set cords to show to the left
             setxcord = xcord - $('#chart-window').width();
+            xorigin = 'right';
         }
         if (ycord + $('#chart-window').height() >= $(window).height()) {
-            //Set cords to show to the left
+            //Set cords to show to top
             setycord = ycord - $('#chart-window').height();
+            yorigin = 'bottom';
         }
 
         $('#chart-window').css({
             'left': setxcord,
-            'top': setycord
+            'top': setycord,
+            'transform-origin': yorigin + ' ' + xorigin
         });
     }
     $('#chart-window').addClass('is-visible');
 }
 
 function showAlertWindow(context, xcord, ycord) {
+    $('#alert-window').removeClass('is-visible');
     $('#alert-result').removeClass('success error');
     $('#alert-form').find("input").removeClass('success error');
     $('#alert-odds').val(context.bestodds);
     $('#alert-form').find("[name=tn]").val(context.opts[1]);
     $('#alert-form').find("[name=m]").val(context.opts[0]);
     $('#alert-header').find("div").html('Add alert:<span style="font-weight: normal;"> ' + context.teamtitle + '</span>');
+    yorigin = 'top';
+    xorigin = 'left';
     if ($.cookie('bfo_alertmail') != null) {
         $('#alert-mail').val($.cookie('bfo_alertmail'));
     }
@@ -53,15 +62,18 @@ function showAlertWindow(context, xcord, ycord) {
         if (xcord + $('#alert-window').width() >= $(window).width()) {
             //Set cords to show to the left
             setxcord = xcord - $('#alert-window').width();
+            xorigin = 'right';
         }
         if (ycord + $('#alert-window').height() >= $(window).height()) {
-            //Set cords to show to the left
+            //Set cords to show to top
             setycord = ycord - $('#alert-window').height();
+            yorigin = 'bottom';
         }
 
         $('#alert-window').css({
             'left': setxcord,
-            'top': setycord
+            'top': setycord,
+            'transform-origin': yorigin + ' ' + xorigin
         });
     }
     $('#alert-window').addClass('is-visible');
@@ -734,7 +746,7 @@ function initPage() {
     $(".odds-table").find('.but-al').on('click', function(event) {
         var context = {};
         context.opts = $.parseJSON($(this).attr('data-li'));
-        context.bestodds = $(this).closest("tr").find(".bestbet").text();
+        context.bestodds = $(this).closest("tr").find(".bestbet").first().text();
         context.teamtitle = $(this).closest("tr").find("th").text();
         if (parlayMode) {
             return addToParlay(this);
@@ -802,9 +814,8 @@ function initPage() {
             }
             $('#alert-result').addClass((data >= 1 ? 'success' : 'error'));
             $('#alert-result').text(sMessage);
+            $(event.target).find('input[type="submit"]').prop("disabled", false);
         });
-        $(event.target).find('input[type="submit"]').prop("disabled", false);
-        return false;
     });
 }
 

@@ -173,7 +173,7 @@
 		margin-bottom: 3px;
 		display: none;
 	}
-	#chart-window,#alert-window {
+	#chart-window, #alert-window {
 			min-width: 1px;
 			display: block;
 		  width: 90%; /* Set your own width: percents, ems, whatever! */
