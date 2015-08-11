@@ -52,18 +52,18 @@ function showAlertWindow(context, xcord, ycord) {
     $('#alert-form').find("[name=m]").val(context.opts[0]);
     $('#alert-header').find("div").html('Add alert:<span style="font-weight: normal;"> ' + context.teamtitle + '</span>');
     yorigin = 'top';
-    xorigin = 'left';
+    xorigin = 'right';
     if ($.cookie('bfo_alertmail') != null) {
         $('#alert-mail').val($.cookie('bfo_alertmail'));
     }
     if ($('#alert-window').css('min-width') != '1px') {
         setxcord = xcord + 8;
         setycord = ycord + 8;
-        if (xcord + $('#alert-window').width() >= $(window).width()) {
+        //if (xcord + $('#alert-window').width() >= $(window).width()) {
             //Set cords to show to the left
             setxcord = xcord - $('#alert-window').width();
             xorigin = 'right';
-        }
+        //}
         if (ycord + $('#alert-window').height() >= $(window).height()) {
             //Set cords to show to top
             setycord = ycord - $('#alert-window').height();
@@ -392,9 +392,6 @@ function getElementsByClassName(strClassName, obj) {
 
 $(document).ready(function() {
 
-    $("#parlay-mode-box").prop("disabled", false);
-    $("#parlay-mode-box").prop("checked", false);
-
     initPage();
 
     if ($('#auto-refresh-container').css('display') != 'none') {
@@ -480,6 +477,7 @@ $(document).ready(function() {
         }
         $(this).data('toggled', !$(this).data('toggled'));
         if ($(this).data('toggled')) {
+            $('#parlay-mode-box').find('.bfo-check-box').addClass('checked');
             parlayMode = true;
             $('#parlay-window').addClass('is-visible');
             $(document).on('mousemove', function(e) {
@@ -489,6 +487,7 @@ $(document).ready(function() {
                 });
             });
         } else {
+            $('#parlay-mode-box').find('.bfo-check-box').removeClass('checked');
             parlayMode = false;
             $(document).off('mousemove');
             $('#parlay-window').removeClass('is-visible');

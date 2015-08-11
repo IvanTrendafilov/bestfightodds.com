@@ -5,7 +5,7 @@ require_once('lib/bfocore/general/class.EventHandler.php');
     <div id="page-container">
         <div id="page-inner-wrapper">
             <div id="page-content">
-                <form name="search_fighters" style="margin-top: 10px; margin-bottom: 22px;" method="get" action="/search">
+                <form name="search_fighters" style="margin-bottom: 14px;" method="get" action="/search">
                     <p>Search the archive for events/fighters:<input type="text" name="query" value="" style="width: 195px; margin-left: 5px;" /><input type="submit" value="&#128269;" class="archive_search_button" style="margin-left: -1px;"/></p>
                 </form>
                 <div class="content-header">Recently completed events</div>

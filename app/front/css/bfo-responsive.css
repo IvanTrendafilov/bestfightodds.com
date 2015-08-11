@@ -122,7 +122,13 @@
 
 	#page-content {
 		width: 100%;
+		padding-top: 6px;
 	}
+
+	#page-content p {
+	    padding: 0 10px;
+	}
+
 	#page-header {
 		font-size: 12px;
 		height: 12px;

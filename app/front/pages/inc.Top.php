@@ -76,7 +76,7 @@
                                  }
                                  ?>
                                  >
-                                <input type="checkbox" id="parlay-mode-box" disabled="disabled" />☐ ☑ Parlay
+                                <a href="#" id="parlay-mode-box"><div class="bfo-check-box">✔</div> Parlay</a>
                             </div>
                             <div class="menu-divider"></div>                 
                             <div id="auto-refresh-container"

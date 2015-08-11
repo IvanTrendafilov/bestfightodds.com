@@ -8,7 +8,7 @@ require_once('lib/bfocore/general/inc.GlobalTypes.php');
     <div id="page-container">
         <div id="page-inner-wrapper">
             <div id="page-content">
-                <form name="alert_form" style="margin-top: 10px;">
+                <form name="alert_form">
                     <p>Alert me at e-mail &nbsp;<input type="text" name="alert_mail" value="" style="width: 195px;" />
                         when <select name="alert_bookie">
                             <option value="-1" selected>any bookie</option>
@@ -32,7 +32,7 @@ require_once('lib/bfocore/general/inc.GlobalTypes.php');
                                 $aFights = EventHandler::getAllFightsForEventWithoutOdds($oEvent->getID());
                                 if (sizeof($aFights) > 0)
                                 {
-                                    echo '<div class="content-header" style="margin-top: 22px;"><a href="/events/' . $oEvent->getEventAsLinkString() . '">' . strtoupper($oEvent->getName()) . '</a>';
+                                    echo '<div class="content-header" style="margin-top: 16px;"><a href="/events/' . $oEvent->getEventAsLinkString() . '">' . strtoupper($oEvent->getName()) . '</a>';
                                     //If name is FUTURE EVENTS, do not add date
                                     //TODO: Hardcoded reference to "FUTURE EVENTS". Should be changed to set id
                                     if (strtoupper($oEvent->getName()) != 'FUTURE EVENTS')

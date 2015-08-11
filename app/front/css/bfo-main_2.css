@@ -82,6 +82,7 @@ input[type="text"], select {
     border: 1px solid #a9a9a9;
     vertical-align: middle;
     line-height: 22px;
+    padding-left: 4px;
 }
 input[type="submit"] {
     background-color: #E9EAED;
@@ -96,6 +97,7 @@ input[type="submit"] {
 input[type="submit"][disabled], input[type="submit"]:disabled {
     color: #888;
 }
+
 .header {
     width: 100%;
     background-color: #212427;    /*background-image: url('/img/header-top.png');*/
@@ -207,6 +209,26 @@ input[type="submit"][disabled], input[type="submit"]:disabled {
     border: 0px;
     margin-top: 2px;
 }
+
+.bfo-check-box {
+  width:11px;
+  height:6px;
+  background-color:#f0f0f0;
+  font-size: 9px;
+  display: inline-block;
+  text-align: center;
+  padding-bottom: 5px;
+  font-weight: 700;
+  color: #f0f0f0;
+  margin-right: 2px;
+  margin-top: 1px;
+}
+
+.bfo-check-box.checked {
+    color: #000;
+}
+
+
 #format-container, #auto-refresh-container {
     display: inline-block;
     height: 100%;
@@ -294,6 +316,11 @@ h1 {
 #page-content {
     font-size: 13px;
 }
+
+#page-content p {
+    line-height: 220%;
+}
+
 #page-bottom {
     height: 15px;
     margin-bottom: 12px;
@@ -595,9 +622,9 @@ ul.share-dropdown ul li a {
     -moz-transform: scale(0.7, 0.7);
     -ms-transform: scale(0.7, 0.7);
     transform: scale(0.7, 0.7);
-    -webkit-transition: all 0.1s ease-out;
-    -moz-transition: all 0.1s ease-out;
-    transition: all 0.1s ease-out;
+    -webkit-transition: all 0.07s ease-out;
+    -moz-transition: all 0.07s ease-out;
+    transition: all 0.07s ease-out;
     transition-property: opacity, scale, transform;
     transform-origin: top left;
 }
@@ -620,6 +647,11 @@ ul.share-dropdown ul li a {
     white-space: nowrap;
     overflow: hidden;
 }
+
+.popup-header a:hover {
+    color: #d9d9d9;
+}
+
 #chart-window {
     width: 400px;
     height: 228px;
