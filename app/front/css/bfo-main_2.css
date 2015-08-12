@@ -93,6 +93,7 @@ input[type="submit"] {
     height: 24px;
     text-align: center;
     vertical-align: middle;
+    cursor: pointer;
 }
 input[type="submit"][disabled], input[type="submit"]:disabled {
     color: #888;
@@ -627,12 +628,8 @@ ul.share-dropdown ul li a {
     transition: all 0.07s ease-out;
     transition-property: opacity, scale, transform;
     transform-origin: top left;
+    -webkit-transform-origin: top left;
 }
-
-.popup-window-animate {
-
-}
-
 .popup-header {
     background-color: #393B42;
     font-size: 12px;
@@ -663,7 +660,6 @@ ul.share-dropdown ul li a {
     -moz-transform: scale(1,1);
     -ms-transform: scale(1,1);
     transform: scale(1,1);
-    opacity: 1;
 }
 .cd-popup-close {
     position: absolute;
@@ -691,7 +687,7 @@ ul.share-dropdown ul li a {
     padding: 9px;
 }
 #alert-window {
-    width: 270px;
+    width: 300px;
     height: 155px;
 }
 #alert-area {

@@ -40,6 +40,7 @@ function showChart(content, xcord, ycord) {
             'transform-origin': yorigin + ' ' + xorigin
         });
     }
+
     $('#chart-window').addClass('is-visible');
 }
 
@@ -818,6 +819,10 @@ function initPage() {
     });
 }
 
+function addAlert(m, tn, b, mail, alert_odds, alert_oddstype) {
+
+}
+
 function refreshPage() {
     $("#content").load("api?f=rp", function() {
         initPage();
@@ -903,3 +908,7 @@ function stTwitter(url) {
 
     window.open('http://twitter.com', 'twitterwindow', 'height=450, width=550, top=' + ($(window).height() / 2 - 225) + ', left=' + $(window).width() / 2 + ', toolbar=0, location=0, menubar=0, directories=0, scrollbars=0');
 }
+
+$(function() {
+    FastClick.attach(document.body);
+});

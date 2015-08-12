@@ -222,6 +222,10 @@
 	    font-size: 11px;
 	}
 
+	.content-list tr:hover {
+	    background-color: #fff;
+	}
+
 	.content-list tr td {
 	    padding: 3px 10px;
 	}

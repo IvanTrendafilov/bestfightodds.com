@@ -55,7 +55,7 @@ require_once('lib/bfocore/general/inc.GlobalTypes.php');
                                     {
                                         echo '<tr>
                                                 <td class="content-team-left"><a href="/fighters/' . $oFight->getFighterAsLinkString(1) . '">' . $oFight->getFighterAsString(1) . '</a></td><td class="content-vs-cell"> vs </td><td class="team-cell" style="text-align: left;"><a href="/fighters/' . $oFight->getFighterAsLinkString(2) . '">' . $oFight->getFighterAsString(2) . '</a></td>
-                                                <td class="content-button-cell"><div class="p-alerts-add" id="p-alerts-add-' . $oFight->getID() . '"><input type="submit" value="Add alert" onclick="return addAlertInline(' . $oFight->getID() . ')"></div></td>
+                                                <td class="content-button-cell"><div class="p-alerts-add" id="p-alerts-add-' . $oFight->getID() . '"><input type="submit" value="Add alert" data-mu="' . $oFight->getID() . '"></div></td>
                                             </tr>';
                                         $bOddRow = !$bOddRow;
                                     }

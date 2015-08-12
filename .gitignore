@@ -1,0 +1,5 @@
+/app/front/pages/cache/event-*.php
+/app/front/pages/cache/fighter-*.php
+/app/front/pages/cache/team-*.php
+/app/front/pages/page.odds.php
+/app/front/pages/page.feed.xml
