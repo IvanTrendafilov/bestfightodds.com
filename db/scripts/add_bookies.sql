@@ -8,13 +8,13 @@ INSERT INTO bets.bookies(id, name, url, refurl, active, position, date_added) VA
 
 (3, 'BookMaker', 'http://www.bookmaker.eu', 'http://www.bookmaker.eu/?cmpid=13797_393', 1, 2),
 
-(4, 'Sportsbook', 'http://www.sportsbook.com', 'http://affiliates.commissionaccount.com/processing/clickthrgh.asp?btag=a_4684b_609', 1, 5),
+(4, 'Sportsbook', 'http://www.sportsbook.ag', 'http://affiliates.commissionaccount.com/processing/clickthrgh.asp?btag=a_4684b_388', 1, 5),
 
-(5, 'Bovada', 'http://www.bovada.lv', 'http://www.bestfightodds.com/redir.php?b=5', 1, 3), 
+(5, 'Bovada', 'http://www.bovada.lv', '/redir.php?b=5', 1, 3), 
 
 (7, 'BetUS', 'http://www.betus.com.pa', 'http://www.betus.com.pa', 1, 6),
 
-(8, 'SportsInteraction', 'http://www.sportsinteraction.com', 'http://affiliate.sportsinteraction.com/processing/clickthrgh.asp?btag=a_3145b_102', 1, 8),
+(8, 'SportsInteraction', 'http://www.sportsinteraction.com', 'http://affiliate.sportsinteraction.com/processing/clickthrgh.asp?btag=a_3145b_470&aid=mma', 1, 8),
 
 (9, 'Pinnacle', 'http://www.pinnaclesports.com', 'http://affiliates.pinnaclesports.com/processing/clickthrgh.asp?btag=a_1274b_818', 1, 7),
 
@@ -22,7 +22,7 @@ INSERT INTO bets.bookies(id, name, url, refurl, active, position, date_added) VA
 
 (11, 'TheGreek', 'http://www.thegreek.com', 'http://www.thegreek.com/dw/sportsbook.asp?ap=A165125', 1, 11),
 
-(12, 'BetOnline', 'http://www.betonline.com', 'http://partners.betonline.com/processing/clickthrgh.asp?btag=a_1811b_4', 1, 12),
+(12, 'BetOnline', 'http://www.betonline.com', 'http://partners.commission.bz/processing/clickthrgh.asp?btag=a_1811b_2', 1, 12),
 
 (13, 'BetDSI', 'http://www.betdsi.com', 'http://www.betdsi.eu/mma-betting?cmpid=18239_4778', 1, 2, '2012-08-19 00:00:00');
 

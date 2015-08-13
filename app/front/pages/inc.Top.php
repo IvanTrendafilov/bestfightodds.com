@@ -78,7 +78,15 @@
                                  >
                                 <a href="#" id="parlay-mode-box"><div class="bfo-check-box">✔</div> Parlay</a>
                             </div>
-                            <div class="menu-divider"></div>                 
+                            <div class="menu-divider"
+                                <?php
+                                 //Only display autorefresh-mode container if we are displaying an event or are on the front page
+                                 if (CURRENT_PAGE != '')
+                                 {
+                                     echo ' style="display: none" ';
+                                 }
+                                 ?>
+                            ></div>                 
                             <div id="auto-refresh-container"
                                 <?php
                                  //Only display autorefresh-mode container if we are displaying an event or are on the front page
@@ -97,7 +105,15 @@
                                     </li>
                                 </ul>
                             </div>
-                            <div class="menu-divider"></div>
+                            <div class="menu-divider"
+                                <?php
+                                 //Only display autorefresh-mode container if we are displaying an event or are on the front page
+                                 if (CURRENT_PAGE != '')
+                                 {
+                                     echo ' style="display: none" ';
+                                 }
+                                 ?>
+                            ></div>
                             <div id="format-container">
                                 <ul class="dropdown">
                                     <li><a href="#" id="format-toggle-text"><span class="item-non-mobile">Format: </span><span>Moneyline &#9660;</span></a>
