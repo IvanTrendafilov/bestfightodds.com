@@ -90,7 +90,6 @@ class FightLinkCreator
 
     public static function createFightLink($a_iFightID, $a_iLineType, $a_iFormat)
     {
-
         $oMatchup = EventHandler::getFightByID($a_iFightID);
         return self::createLink(array($oMatchup), $a_iLineType, $a_iFormat);
     }
@@ -112,7 +111,7 @@ class FightLinkCreator
         $rImage = imagecreatetruecolor(LINK_WIDTH, $iCalculatedHeight)
                 or die("Cannot Initialize new GD image stream");
 
-        $rFrameColor = imagecolorallocate($rImage, 38, 44, 50);
+        $rFrameColor = imagecolorallocate($rImage, 88, 94, 100);
         $rMiddleFrameColor = imagecolorallocate($rImage, 194, 194, 194);
         $rTopColor = imagecolorallocate($rImage, 232, 232, 232);
         $rBottomColor = imagecolorallocate($rImage, 255, 255, 255);

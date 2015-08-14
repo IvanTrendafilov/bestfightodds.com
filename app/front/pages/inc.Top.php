@@ -49,18 +49,18 @@
                 <option value="12">BetOnline</option>
               </select><br /><div id="alert-button-container"><input type="hidden" name="tn"><input type="hidden" name="m">
                 <div id="alert-loader"></div>
-                <div id="alert-result">whatup</div>
+                <div id="alert-result">&nbsp;</div>
               <input type="submit" value="Add alert" id="alert-submit"></div></form></div>
         </div>
         <div class="header">
-                <div id="header-top">
-                    <a href="/"><img src="/img/logo.png" id="logo" alt="BestFightOdds.com" /></a>
+                <div class="header-top">
+                    <a href="/"><img src="/img/logo.png" class="logo" alt="BestFightOdds.com" /></a>
                     <div id="header-search-box">
                         <form method="get" action="/search"><input type="text" id="search-box1" class="search-box" name="query" placeholder="MMA Event / Fighter"/> <input type="submit" class="search-button" id="search-button" value="&#128269;" /></form>
                     </div>
                 </div>
-                <div id="header-menu-wrapper">
-                        <div id="header-menu">
+                <div class="header-menu-wrapper">
+                        <div class="header-menu">
                         <a href="/"><div class="header-menu-item <?php echo CURRENT_PAGE == '' ? ' header-menu-selected ' : ''; ?>" style="margin-left: 10px">Latest odds</div></a>
                         <a href="/archive"><div class="header-menu-item <?php echo (CURRENT_PAGE == 'archive' || CURRENT_PAGE == 'fighter' || CURRENT_PAGE == 'event' || CURRENT_PAGE == 'search_results') ? ' header-menu-selected ' : ''; ?>">Archive</div></a>
                         <a href="/alerts"><div class="header-menu-item <?php echo CURRENT_PAGE == 'alerts' ? ' header-menu-selected ' : ''; ?>">Alerts</div></a>

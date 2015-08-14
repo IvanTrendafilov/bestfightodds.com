@@ -8,9 +8,9 @@ require_once('lib/bfocore/general/inc.GlobalTypes.php');
     <div id="page-container">
         <div id="page-inner-wrapper">
             <div id="page-content">
-                <form name="alert_form">
-                    <p>Alert me at e-mail &nbsp;<input type="text" name="alert_mail" value="" style="width: 195px;" />
-                        when <select name="alert_bookie">
+                <form name="alert-form-il">
+                    <p>Alert me at e-mail &nbsp;<input type="text" name="alert-mail-il" id="alert-mail-il" value="" style="width: 195px;" />
+                        when <select name="alert-bookie-il">
                             <option value="-1" selected>any bookie</option>
                             <?php
                             $aBookies = BookieHandler::getAllBookies();
@@ -55,7 +55,7 @@ require_once('lib/bfocore/general/inc.GlobalTypes.php');
                                     {
                                         echo '<tr>
                                                 <td class="content-team-left"><a href="/fighters/' . $oFight->getFighterAsLinkString(1) . '">' . $oFight->getFighterAsString(1) . '</a></td><td class="content-vs-cell"> vs </td><td class="team-cell" style="text-align: left;"><a href="/fighters/' . $oFight->getFighterAsLinkString(2) . '">' . $oFight->getFighterAsString(2) . '</a></td>
-                                                <td class="content-button-cell"><div class="p-alerts-add" id="p-alerts-add-' . $oFight->getID() . '"><input type="submit" value="Add alert" data-mu="' . $oFight->getID() . '"></div></td>
+                                                <td class="content-button-cell"><input type="submit" value="Add alert" data-mu="' . $oFight->getID() . '"></td>
                                             </tr>';
                                         $bOddRow = !$bOddRow;
                                     }
@@ -81,4 +81,11 @@ require_once('lib/bfocore/general/inc.GlobalTypes.php');
         <div class="clear"></div>
     </div>
 </div>
+<script type="text/javascript">
+window.onload = function () { 
+    if ($.cookie('bfo_alertmail') != null) {
+        $('#alert-mail-il').val($.cookie('bfo_alertmail'));
+    }
+}
+</script>
 <div id="page-bottom"></div>

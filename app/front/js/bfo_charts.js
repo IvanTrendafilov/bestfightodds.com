@@ -74,7 +74,7 @@ function createChart(indata) {
                         if (oddsType == 2) {
                             return Highcharts.numberFormat(this.value, 2);
                         } else {
-                            return singleDecimalToML(this.value);
+                            return oneDecToML(this.value);
                         }
 
                     }
@@ -102,7 +102,7 @@ function createChart(indata) {
                 if (oddsType == 2) {
                     ttVal = Highcharts.numberFormat(this.y, 2);
                 } else {
-                    ttVal = singleDecimalToML(this.y);
+                    ttVal = oneDecToML(this.y);
                 }
                 return '<span style="color: #666; font-weight: bold; font-size: 11px">' + Highcharts.dateFormat('%a %d. %b %H:%M', this.x) + '</span><br/>' +
 
@@ -148,11 +148,11 @@ function createChart(indata) {
                     formatter: function() {
                         //if ((this.y == this.series.chart.yAxis[0].getExtremes().dataMax || this.y == this.series.chart.yAxis[0].getExtremes().dataMin) && this.series.yData.indexOf(this.y) == this.point.index || this.series.chart.series[0].points.length -1 == this.point.index) {
                         if (this.point.index == 0 || this.series.chart.series[0].points.length - 1 == this.point.index) {
-                            //return '<span style="font-size: 1.3em">singleDecimalToML(this.y) '</span>';
+                            //return '<span style="font-size: 1.3em">oneDecToML(this.y) '</span>';
                             if (oddsType == 2) {
                                 return '<span style="margin-left: 4px; margin-right: 4px;">' + Highcharts.numberFormat(this.y, 2) + '</span>';
                             } else {
-                                return '<span style="margin-left: 4px; margin-right: 4px;">' + singleDecimalToML(this.y) + '</span>';
+                                return '<span style="margin-left: 4px; margin-right: 4px;">' + oneDecToML(this.y) + '</span>';
                             }
 
                         } else {
@@ -204,9 +204,9 @@ $(function() {
                         var opts = $.parseJSON($('#' + this.container.id).closest('td').attr('data-li'));
                         var versus = $('#' + this.container.id).closest('tr').find("td.oppcell").text();
                         var title = $("#team-name").text() + " <span style=\"font-weight: normal;\">(vs. " + versus +  ") &#150; Mean odds";
-                        clearChart();
+                        chartCC();
                         createMIChart(opts[0], opts[1]);
-                        showChart(title, event.clientX, event.clientY);
+                        chartSC(title, event.clientX, event.clientY);
                     }
                 },
                 style: {
@@ -266,9 +266,9 @@ $(function() {
                             var opts = $.parseJSON($('#' + this.chart.container.id).closest('td').attr('data-li'));
                             var versus = $('#' + this.chart.container.id).closest('tr').find("td.oppcell").text();
                             var title = $("#team-name").text() + " <span style=\"font-weight: normal;\">(vs. " + versus +  ") &#150; Mean odds";
-                            clearChart();
+                            chartCC();
                             createMIChart(opts[0], opts[1]);
-                            showChart(title, event.clientX, event.clientY);
+                            chartSC(title, event.clientX, event.clientY);
                         }
                     },
 

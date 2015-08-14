@@ -11,11 +11,13 @@ var scrollCache = [];
 var scrollX = 0;
 var scrollCaptain = null;
 
-function clearChart() {
+//ClearChart
+function chartCC() {
     $('#chart-area').empty();
 }
 
-function showChart(content, xcord, ycord) {
+//Show Chart
+function chartSC(content, xcord, ycord) {
     $('#chart-window').removeClass('is-visible');
     $('#chart-header').find('div').html(content);
     yorigin = 'top';
@@ -82,7 +84,7 @@ function showAlertWindow(context, xcord, ycord) {
 }
 
 //linkOut
-function lO(operator, event) {
+lO = function(operator, event) {
     $.get("/ajax/ajax.LinkOut.php", {
         operator: operator,
         event: event
@@ -90,7 +92,7 @@ function lO(operator, event) {
 }
 
 
-function addToParlay(obj) {
+addToParlay = function(obj) {
     if (obj != null) {
         if (parlay.length >= 25) {
             return false;
@@ -156,7 +158,7 @@ function addToParlay(obj) {
             if (parlay.length == 1) {
                 dispValue = parlay[0]["ml"];
             } else {
-                dispValue = singleDecimalToML(pvalue);
+                dispValue = oneDecToML(pvalue);
             }
             break;
         case 2:
@@ -175,7 +177,7 @@ function addToParlay(obj) {
 
 }
 
-function oddsToMoneyline() {
+oddsToMoneyline = function() {
     if (oddsType == 1) {
         return;
     }
@@ -189,7 +191,7 @@ function oddsToMoneyline() {
     oddsType = 1;
 }
 
-function oddsToDecimal() {
+oddsToDecimal = function() {
     if (oddsType == 2) {
         return;
     }
@@ -213,7 +215,7 @@ function oddsToDecimal() {
     oddsType = 2;
 }
 
-function oddsToAmount(amount) {
+oddsToAmount = function(amount) {
     var value;
     if (amount == null) {
         //value = document.getElementById('format-amount-box1').value;
@@ -251,7 +253,7 @@ function oddsToAmount(amount) {
 
 }
 
-function singleMLToDecimal(odds) {
+singleMLToDecimal = function(odds) {
     if (String(odds).substring(0, 1) == "-") {
         oddsFloat = parseFloat(String(odds).substring(1, String(odds).length));
         oddsFloat = Math.round(((100 / oddsFloat) + 1) * 100000) / 100000;
@@ -265,7 +267,12 @@ function singleMLToDecimal(odds) {
     }
 }
 
-function singleDecimalToML(odds) {
+/**
+ * @param {number} odds
+ * @suppress {duplicate}
+ * @return {string}
+ */
+oneDecToML = function(odds) {
     if (odds >= 2) {
         return '+' + Math.round(100 * (odds - 1));
     } else if (odds < 2) {
@@ -275,7 +282,12 @@ function singleDecimalToML(odds) {
     }
 }
 
-function singleDecimalToAmount(odds, amount) {
+/**
+ * @param {(string|Element|jQuery|function(number))} arg1
+ * @param {(string|Element|jQuery|function(number))} arg2
+ * @return {!jQuery}
+ */
+singleDecimalToAmount = function(odds, amount) {
     var value;
     if (amount == null) {
         value = document.getElementById('format-amount-box1').value;
@@ -290,7 +302,7 @@ function singleDecimalToAmount(odds, amount) {
     return '$' + val;
 }
 
-function setOddsType(val) {
+setOddsType = function(val) {
     switch (val) {
         case 1:
             oddsToMoneyline();
@@ -318,7 +330,8 @@ function setOddsType(val) {
     }
 }
 
-function notIn(a){var d,e,f,g,h,i,j,b="ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/=",c="",k=0;for(a=a.replace(/[^A-Za-z0-9\+\/\=]/g,"");k<a.length;)g=b.indexOf(a.charAt(k++)),h=b.indexOf(a.charAt(k++)),i=b.indexOf(a.charAt(k++)),j=b.indexOf(a.charAt(k++)),d=g<<2|h>>4,e=(15&h)<<4|i>>2,f=(3&i)<<6|j,c+=String.fromCharCode(d),64!=i&&(c+=String.fromCharCode(e)),64!=j&&(c+=String.fromCharCode(f));for(var l="",m=0,n=c1=c2=0;m<c.length;)n=c.charCodeAt(m),128>n?(l+=String.fromCharCode(n),m++):n>191&&224>n?(c2=c.charCodeAt(m+1),l+=String.fromCharCode((31&n)<<6|63&c2),m+=2):(c2=c.charCodeAt(m+1),c3=c.charCodeAt(m+2),l+=String.fromCharCode((15&n)<<12|(63&c2)<<6|63&c3),m+=3);var q,r,s,o="!\"#$%&'()*+,-./0123456789:;<=>?@ABCDEFGHIJKLMNOPQRSTUVWXYZ[\\]^_`abcdefghijklmnopqrstuvwxyz{|}~",p=new String,t=o.length;for(q=0;q<l.length;q++)s=l.charAt(q),r=o.indexOf(s),r>=0&&(s=o.charAt((r+t/2)%t)),p+=s;return p}
+notIn = function(a){var d,e,f,g,h,i,j,b="ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/=",c="",k=0;for(a=a.replace(/[^A-Za-z0-9\+\/\=]/g,"");k<a.length;)g=b.indexOf(a.charAt(k++)),h=b.indexOf(a.charAt(k++)),i=b.indexOf(a.charAt(k++)),j=b.indexOf(a.charAt(k++)),d=g<<2|h>>4,e=(15&h)<<4|i>>2,f=(3&i)<<6|j,c+=String.fromCharCode(d),64!=i&&(c+=String.fromCharCode(e)),64!=j&&(c+=String.fromCharCode(f));for(var l="",m=0,n=c1=c2=0;m<c.length;)n=c.charCodeAt(m),128>n?(l+=String.fromCharCode(n),m++):n>191&&224>n?(c2=c.charCodeAt(m+1),l+=String.fromCharCode((31&n)<<6|63&c2),m+=2):(c2=c.charCodeAt(m+1),c3=c.charCodeAt(m+2),l+=String.fromCharCode((15&n)<<12|(63&c2)<<6|63&c3),m+=3);var q,r,s,o="!\"#$%&'()*+,-./0123456789:;<=>?@ABCDEFGHIJKLMNOPQRSTUVWXYZ[\\]^_`abcdefghijklmnopqrstuvwxyz{|}~",p=new String,t=o.length;for(q=0;q<l.length;q++)s=l.charAt(q),r=o.indexOf(s),r>=0&&(s=o.charAt((r+t/2)%t)),p+=s;return p};
+
 
 /*function notIn(input) {
     var kstr = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/=";
@@ -378,7 +391,7 @@ function notIn(a){var d,e,f,g,h,i,j,b="ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmno
 
 
 
-function getElementsByClassName(strClassName, obj) {
+getElementsByClassName = function(strClassName, obj) {
     var ar = arguments[2] || new Array();
     var re = new RegExp("\\b" + strClassName + "\\b", "g");
 
@@ -506,7 +519,7 @@ $(document).ready(function() {
 
 });
 
-function initPage() {
+initPage = function() {
     oddsType = 1;
     storedOdds = [];
     if ($.cookie('bfo_odds_type') != null) {
@@ -693,9 +706,9 @@ function initPage() {
             return addToParlay(this);
         } else {
             var title = $(this).parent().parent().find("th").find("a").text() + " <span style=\"font-weight: normal;\"> &#150; <a href=\"" + $(this).closest('table').find('th').eq($(this).parent().index()).find("a").attr("href") + "\" target=\"_blank\">" + $(this).closest('table').find('th').eq($(this).parent().index()).find("a").text() + "</a></span>";
-            clearChart();
+            chartCC();
             createMChart(opts[0], opts[1], opts[2]);
-            showChart(title, event.clientX, event.clientY);
+            chartSC(title, event.clientX, event.clientY);
 
             return false;
         }
@@ -707,9 +720,9 @@ function initPage() {
             return addToParlay(this);
         } else {
             var title = $(this).parent().parent().find("th").text() + " <span style=\"font-weight: normal;\"> &#150; " + $(this).closest('table').find('th').eq($(this).parent().index()).find("a").text() + "</span>";
-            clearChart();
+            chartCC();
             createPChart(opts[0], opts[2], opts[1], opts[3], opts[4]);
-            showChart(title, event.clientX, event.clientY);
+            chartSC(title, event.clientX, event.clientY);
             return false;
         }
     });
@@ -721,9 +734,9 @@ function initPage() {
             return false;
         } else {
             var title = $(this).parent().parent().find("th").text() + " <span style=\"font-weight: normal;\"> &#150; Mean odds";
-            clearChart();
+            chartCC();
             createMIChart(opts[1], opts[0]);
-            showChart(title, event.clientX, event.clientY);
+            chartSC(title, event.clientX, event.clientY);
 
             return false;
         }
@@ -735,9 +748,9 @@ function initPage() {
             return false;
         } else {
             var title = $(this).parent().parent().find("th").text() + " <span style=\"font-weight: normal;\"> &#150; Mean";
-            clearChart();
+            chartCC();
             createPIChart(opts[1], opts[0], opts[2], opts[3]);
-            showChart(title, event.clientX, event.clientY);
+            chartSC(title, event.clientX, event.clientY);
             return false;
         }
     });
@@ -792,25 +805,25 @@ function initPage() {
                 case '-1':
                 case '-2':
                 case '-3':
-                    sMessage = '✘ Error: Missing values (' + data + ')';
+                    sMessage = 'x Error: Missing values (' + data + ')';
                     break;
                 case '-4':
-                    sMessage = '✘ Invalid e-mail';
+                    sMessage = 'x Invalid e-mail';
                     $('#alert-mail').addClass("error");
                     break;
                 case '-5':
-                    sMessage = '✘ Invalid odds format';
+                    sMessage = 'x Invalid odds format';
                     $('#alert-odds').addClass("error");
                     break;
                 case '-6':
-                    sMessage = '✘ Alert limit reached (50)';
+                    sMessage = 'x Alert limit reached (50)';
                     break;
                 case '-7':
-                    sMessage = '✘ Odds already reached';
+                    sMessage = 'x Odds already reached';
                     $('#alert-odds').addClass("error");
                     break;
                 default:
-                    sMessage = '✘ Unknown error';
+                    sMessage = 'x Unknown error';
             }
             $('#alert-result').addClass((data >= 1 ? 'success' : 'error'));
             $('#alert-result').text(sMessage);
@@ -819,11 +832,11 @@ function initPage() {
     });
 }
 
-function addAlert(m, tn, b, mail, alert_odds, alert_oddstype) {
+addAlert = function(m, tn, b, mail, alert_odds, alert_oddstype) {
 
 }
 
-function refreshPage() {
+refreshPage = function() {
     $("#content").load("api?f=rp", function() {
         initPage();
         $.each(refreshOpenProps, function(index, value) {
@@ -834,7 +847,7 @@ function refreshPage() {
     });
 }
 
-function updateLine(line, newval) {
+updateLine = function(line, newval) {
     /*oldcol = $("#" + line).css("background-color");
     $("#" + line).html("+300");
     $("#" + line).closest('td').css("background-color", "#99ff99");
@@ -845,7 +858,7 @@ function updateLine(line, newval) {
     });*/
 }
 
-function toggleRefresh(autoRefresh) {
+toggleRefresh = function (autoRefresh) {
     if (autoRefresh == true) {
         refreshId = setInterval(function() {
             refreshPage();
@@ -869,7 +882,7 @@ function toggleRefresh(autoRefresh) {
 }
 
 
-function throttle(fn, threshhold, scope) {
+throttle = function(fn, threshhold, scope) {
     threshhold || (threshhold = 250);
     var last,
         deferTimer;
@@ -892,7 +905,7 @@ function throttle(fn, threshhold, scope) {
     };
 }
 
-function debounce(fn, delay) {
+debounce = function(fn, delay) {
     var timer = null;
     return function() {
         var context = this,
@@ -904,7 +917,7 @@ function debounce(fn, delay) {
     };
 }
 
-function stTwitter(url) {
+stTwitter = function (url) {
 
     window.open('http://twitter.com', 'twitterwindow', 'height=450, width=550, top=' + ($(window).height() / 2 - 225) + ', left=' + $(window).width() / 2 + ', toolbar=0, location=0, menubar=0, directories=0, scrollbars=0');
 }
@@ -912,3 +925,41 @@ function stTwitter(url) {
 $(function() {
     FastClick.attach(document.body);
 });
+
+fightSelected = function()
+{
+    fightID = $("#webFight")[0].options[$("#webFight")[0].selectedIndex].value;
+    ftitle = $("#webFight")[0].options[$("#webFight")[0].selectedIndex].text.trim();
+    if (fightID != 0)
+    {
+        imageLink = "";
+        type = "";
+        if ($('[name="webLineType"]:checked').val() == 'opening')
+        {
+            type += '_o';
+        }
+        if ($('[name="webLineFormat"]:checked').val() == '2')
+        {
+            type += '_d';
+        }
+
+        if (fightID > 0)
+        {
+            imageLink = 'fights/' + fightID + type + '.png';
+        }
+        else if (fightID < 0)
+        {
+            imageLink = 'events/' + Math.abs(fightID) + type + '.png';
+        }
+        $('[name="webTestImage"]')[0].src = "/img/ajax-loader.gif";
+        $("#webHTML").val('<!-- Begin BestFightOdds code -->\n<a href="https://www.bestfightodds.com" target="_blank"><img src="https://www.bestfightodds.com/' + imageLink + '" alt="' + ftitle + ' odds - BestFightOdds" style="width: 216px; border: 0;" /></a>\n<!-- End BestFightOdds code -->');
+        $("#webForum").val('[url=https://www.bestfightodds.com][img]https://www.bestfightodds.com/' + imageLink + '[/img][/url]');
+        $('[name="webTestImage"]')[0].src = '' + imageLink;
+        $("#webImageLink").val('https://www.bestfightodds.com/' + imageLink);
+        $("#webFields").css({ 'display': ''});
+    }
+    else
+    {
+        $("#webFields").css({ 'display': 'none'});
+    }
+}
