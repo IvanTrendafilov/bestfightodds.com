@@ -83,7 +83,7 @@
     padding-left: 5px;
     width: 110px;
     color: #1a1a1a;
-    font-size: 11px;
+    font-size: 10px;
     font-weight: 500;
     max-width: 110px;
     word-break: break-word;
@@ -91,7 +91,7 @@
 .odds-table tbody th a {
     color: #1a1a1a;
     font-weight: 500;
-    font-size: 11px;
+    font-size: 10px;
     width: 140px;
     height: 20px;
 }
@@ -181,10 +181,10 @@
 }
 
 .odds-table tbody tr:nth-child(even) th {
-    padding-bottom: 0px;
+    padding-bottom: 1px;
 }
 .odds-table tbody tr:nth-child(odd) th {
-    padding-top: 0px;
+    padding-top: 1px;
 }
 
 .aru {
