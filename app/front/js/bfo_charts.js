@@ -196,8 +196,8 @@ $(function() {
                 borderWidth: 0,
                 type: 'area',
                 margin: [3, 2, 5, 2],
-                width: 60,
-                height: 26,
+                width: 76,
+                height: 36,
                 className: 'chart-spark',
                 events: {
                     click: function(event) {
@@ -275,7 +275,7 @@ $(function() {
                     marker: {
                         enabled: false
                     },
-                    fillColor: '#e6e6e6'
+                    fillColor: '#e9e9e9'
 
 
                 }

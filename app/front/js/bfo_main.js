@@ -12,12 +12,12 @@ var scrollX = 0;
 var scrollCaptain = null;
 
 //ClearChart
-function chartCC() {
+chartCC = function() {
     $('#chart-area').empty();
 }
 
 //Show Chart
-function chartSC(content, xcord, ycord) {
+chartSC = function(content, xcord, ycord) {
     $('#chart-window').removeClass('is-visible');
     $('#chart-header').find('div').html(content);
     yorigin = 'top';
@@ -46,7 +46,8 @@ function chartSC(content, xcord, ycord) {
     $('#chart-window').addClass('is-visible');
 }
 
-function showAlertWindow(context, xcord, ycord) {
+//Show Alert Window
+alertSW = function(context, xcord, ycord) {
     $('#alert-window').removeClass('is-visible');
     $('#alert-result').removeClass('success error');
     $('#alert-form').find("input").removeClass('success error');
@@ -86,8 +87,8 @@ function showAlertWindow(context, xcord, ycord) {
 //linkOut
 lO = function(operator, event) {
     $.get("/ajax/ajax.LinkOut.php", {
-        operator: operator,
-        event: event
+        'operator': operator,
+        'event': event
     });
 }
 
@@ -764,7 +765,7 @@ initPage = function() {
         if (parlayMode) {
             return addToParlay(this);
         } else {
-            showAlertWindow(context, event.clientX, event.clientY);
+            alertSW(context, event.clientX, event.clientY);
             return false;
         }
     });
@@ -782,12 +783,12 @@ initPage = function() {
         $(event.target).find("input").removeClass('success error');
         $('#alert-loader').css('display', 'inline-block');
         $.get("api?f=aa", {
-            alertFight: values['m'],
-            alertFighter: values['tn'],
-            alertBookie: values['alert-bookie'],
-            alertMail: values['alert-mail'],
-            alertOdds: values['alert-odds'],
-            alertOddsType: oddsType
+            'alertFight': values['m'],
+            'alertFighter': values['tn'],
+            'alertBookie': values['alert-bookie'],
+            'alertMail': values['alert-mail'],
+            'alertOdds': values['alert-odds'],
+            'alertOddsType': oddsType
         }, function(data) {
             $('#alert-loader').css('display', 'none');
             var sMessage = '';
