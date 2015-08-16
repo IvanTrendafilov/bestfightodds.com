@@ -38,7 +38,7 @@
 }
 .odds-table thead tr {
     /*Pre-switch: background-color: #393B42;*/
-    background-color: #cdcdcd;
+    background-color: #cccdce;
 }
 .odds-table thead th {
     text-align: center;
@@ -62,7 +62,7 @@
     color: #b9b9b9;
 }
 .odds-table tbody tr {
-    background-color: #e9e9e9;
+    background-color: #e9eaed;
     height: 20px;
 }
 .odds-table tbody tr.odd {

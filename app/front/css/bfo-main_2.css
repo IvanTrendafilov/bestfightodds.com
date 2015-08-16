@@ -326,7 +326,7 @@ h1 {
 .clear {
     clear: both;
 }
-.odds-history {
+.p-history {
     border: 1px solid #000;
     padding: 5px;
 }
@@ -547,10 +547,10 @@ ul.share-dropdown ul li a {
     visibility: hidden;
     z-index: 999;
     position: fixed;
-    -webkit-transform: scale(0.7, 0.7);
-    -moz-transform: scale(0.7, 0.7);
-    -ms-transform: scale(0.7, 0.7);
-    transform: scale(0.7, 0.7);
+    -webkit-transform: scale(0.1, 0.1);
+    -moz-transform: scale(0.1, 0.1);
+    -ms-transform: scale(0.1, 0.1);
+    transform: scale(0.1, 0.1);
     -webkit-transition: all 0.07s ease-out;
     -moz-transition: all 0.07s ease-out;
     transition: all 0.07s ease-out;
@@ -558,6 +558,16 @@ ul.share-dropdown ul li a {
     transform-origin: top left;
     -webkit-transform-origin: top left;
 }
+
+
+.no-transition {
+    -webkit-transition: none !important; 
+    -moz-transition: none !important; 
+    -o-transition: none !important; 
+    -ms-transition: none !important; 
+    transition: none !important; 
+}
+
 .popup-header {
     background-color: #393B42;
     font-size: 12px;
@@ -794,7 +804,8 @@ table.team-stats-table {
     padding-left: 3px;
 }
 .team-stats-table tbody td.oppcell {
-    min-width: 150px;
+    
+    max-width: 60px;
 }
 
 .team-stats-table tbody td .bestbet {

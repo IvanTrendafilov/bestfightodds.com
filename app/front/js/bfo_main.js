@@ -19,6 +19,12 @@ chartCC = function() {
 //Show Chart
 chartSC = function(content, xcord, ycord) {
     $('#chart-window').removeClass('is-visible');
+    $('#chart-window').addClass('no-transition');
+    
+    //Flush CSS cache. Not sure if this works..
+    getComputedStyle($('#chart-window')[0]).display;
+    $('#chart-window')[0].offsetHeight; 
+
     $('#chart-header').find('div').html(content);
     yorigin = 'top';
     xorigin = 'left';
@@ -42,13 +48,21 @@ chartSC = function(content, xcord, ycord) {
             'transform-origin': yorigin + ' ' + xorigin
         });
     }
-
+    //Flush CSS cache. Not sure if this works..
+    getComputedStyle($('#chart-window')[0]).display;
+    $('#chart-window')[0].offsetHeight; 
+    $('#chart-window').removeClass('no-transition');
     $('#chart-window').addClass('is-visible');
 }
 
 //Show Alert Window
 alertSW = function(context, xcord, ycord) {
     $('#alert-window').removeClass('is-visible');
+    $('#alert-window').addClass('no-transition');
+    //Flush CSS
+    getComputedStyle($('#alert-window')[0]).display;
+    $('#alert-window')[0].offsetHeight; 
+
     $('#alert-result').removeClass('success error');
     $('#alert-form').find("input").removeClass('success error');
     $('#alert-odds').val(context.bestodds);
@@ -80,6 +94,11 @@ alertSW = function(context, xcord, ycord) {
             'transform-origin': yorigin + ' ' + xorigin
         });
     }
+    //Flush CSS
+    getComputedStyle($('#alert-window')[0]).display;
+    $('#alert-window')[0].offsetHeight; 
+
+    $('#alert-window').removeClass('no-transition');
     $('#alert-window').addClass('is-visible');
 
 }
