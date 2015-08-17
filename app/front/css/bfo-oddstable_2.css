@@ -43,7 +43,7 @@
 .odds-table thead th {
     text-align: center;
     height: 16px;
-    border-left: 1px solid #c5c5c5;
+    /*border-left: 1px solid #c5c5c5;*/
 }
 
 .odds-table thead th.table-prop-header {
@@ -100,7 +100,7 @@
 }
 .odds-table tbody td {
     font-family: Arial, sans-serif;
-    border-left: 1px dotted #ddd;
+    /*border-left: 1px dotted #ddd;*/
     color: #1a1a1a;
     width: 47px;
     max-width: 47px;
@@ -145,7 +145,7 @@
     border: 0;
 }
 .odds-table tbody  tr.pr td, .odds-table tbody  tr.pr-odd td {
-    border-left: 1px dotted #bbb;
+    /*border-left: 1px dotted #bbb;*/
 }
 .odds-table tbody td.button-cell {
     width: 16px;
