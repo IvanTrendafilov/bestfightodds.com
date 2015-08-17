@@ -1,9 +1,7 @@
 .table-header {
     background-color: #393B42;
-    /*Pre-switch: background-color: #2D2E34;*/
     font-size: 12px;
-    height: 17px;
-    padding: 7px 0px 7px 11px;
+    padding: 6px 0px 6px 11px;
     color: #fff;
     display: -webkit-box;  
     display: -moz-box;         
@@ -37,7 +35,6 @@
     /*margin-top: -1px;*/
 }
 .odds-table thead tr {
-    /*Pre-switch: background-color: #393B42;*/
     background-color: #cccdce;
 }
 .odds-table thead th {
