@@ -609,6 +609,10 @@ ul.share-dropdown ul li a {
 #chart-area {
     width: 100%;
     height: 200px;
+    background-image: url('/img/loader.gif');
+    background-repeat: no-repeat;
+    background-position: center center;
+
 }
 .chart-spark {
     cursor: pointer;
