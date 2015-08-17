@@ -94,6 +94,18 @@ class XMLParserBovada
                 }
                 else if ((string) $cEvent['STATUS'] != 'Closed' && (string) $cEvent['STATUS'] != 'Cancelled' && count($cEvent->Competitor) > 2)
                 {
+                    //Temporary fix for Roan Carneiro vs Gegard Mousasi
+                    if ((string) $cEvent->Competitor[1]['NAME'] == 'Gegard Mousasi' && (string) $cEvent->Competitor[3]['NAME'] == 'Roan Carneiro')
+                    {
+                        $oParsedSport->addParsedMatchup(new ParsedMatchup(
+                                        (string) $cEvent->Competitor[1]['NAME'],
+                                        (string) $cEvent->Competitor[3]['NAME'],
+                                        (string) $cEvent->Competitor[1]->Line->Choice['VALUE'],
+                                        (string) $cEvent->Competitor[3]->Line->Choice['VALUE']
+                        ));
+                    }
+
+
                     //Probably a prop bet
                     foreach ($cEvent->Competitor as $cCompetitor)
                     {
