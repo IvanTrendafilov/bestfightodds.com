@@ -609,7 +609,7 @@ ul.share-dropdown ul li a {
 #chart-area {
     width: 100%;
     height: 200px;
-    background-image: url('/img/loader.gif');
+    background-image: url('/img/loading.gif');
     background-repeat: no-repeat;
     background-position: center center;
 
@@ -649,8 +649,8 @@ ul.share-dropdown ul li a {
 }
 #alert-area #alert-button-container {
     text-align: right;
+    margin-top: 8px;
 }
-
 
 #alert-area input.error {
     -webkit-transition: all 0.2s ease-out;
@@ -660,15 +660,17 @@ ul.share-dropdown ul li a {
     border-color: #ff0000;
 }
 #alert-button-container #alert-submit {
-    margin-top: 8px;
     display: inline-block;
 }
 
 #alert-loader {
-    background-image: url('/img/ajax-loader.gif');
+    background-image: url('/img/loading.gif');
     width: 32px;
-    height: 16px;
+    height: 25px;
     display: none;
+    background-repeat: no-repeat;
+    background-size: 25px 25px;
+    vertical-align: middle;
 }
 
 #alert-result {
@@ -676,7 +678,6 @@ ul.share-dropdown ul li a {
     position: absolute;
     left: 0;
     margin-left: 8px;
-    margin-top: 8px;
     font-weight: 500;
     visibility: hidden;
     opacity: 0;

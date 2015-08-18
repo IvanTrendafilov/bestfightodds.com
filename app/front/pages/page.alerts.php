@@ -8,7 +8,7 @@ require_once('lib/bfocore/general/inc.GlobalTypes.php');
     <div id="page-container">
         <div id="page-inner-wrapper">
             <div id="page-content">
-                <form name="alert-form-il">
+                <form name="alert-form-il" id="alert-form-il">
                     <p>Alert me at e-mail &nbsp;<input type="text" name="alert-mail-il" id="alert-mail-il" value="" style="width: 195px;" />
                         when <select name="alert-bookie-il">
                             <option value="-1" selected>any bookie</option>
