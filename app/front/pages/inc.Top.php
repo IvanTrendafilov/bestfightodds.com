@@ -48,8 +48,8 @@
                 <option value="11">TheGreek</option>
                 <option value="12">BetOnline</option>
               </select><br /><div id="alert-button-container"><input type="hidden" name="tn"><input type="hidden" name="m">
-                <div id="alert-loader"></div>
-                <div id="alert-result">&nbsp;</div>
+                <div class="alert-loader"></div>
+                <div class="alert-result">&nbsp;</div>
               <input type="submit" value="Add alert" id="alert-submit"></div></form></div>
         </div>
         <div class="header">

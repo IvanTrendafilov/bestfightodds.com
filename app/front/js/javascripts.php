@@ -12,7 +12,7 @@ include_once('fastclick-min.js');
 
 //BFO
 include_once('bfo_main.js');
-include_once('alerts_3.js');
+//include_once('alerts_3.js');
 include_once('bfo_charts.js');
 
 //TODO: To replace above once compiler is running as expected

@@ -539,26 +539,27 @@ $(document).ready(function() {
 
 
     //Alert button (inline) add listener
-    $("#alert-form-il").submit(function(event) {
+    //$("#alert-form-il").submit(function(event) {
+    $("#alert-form-il :submit").on('click', function(event) {
         event.preventDefault();
-        var $inputs = $('#alert-form :input,select');
+        var $inputs = $('#alert-form-il :input,select');
         var values = {};
         $inputs.each(function() {
             values[this.name] = $(this).val();
         });
-        $('#alert-submit')[0].disabled = true; //.prop( "disabled", true );
-        $('#alert-result').removeClass('success error');
+        $(this)[0].disabled = true; //.prop( "disabled", true );
+        $(this).closest('.alert-il-result').removeClass('success error');
         $(event.target).find("input").removeClass('success error');
-        $('#alert-loader').css('display', 'inline-block');
-        $.get("api?f=aa", {
-            'alertFight': values['m'],
-            'alertFighter': values['tn'],
-            'alertBookie': values['alert-bookie'],
-            'alertMail': values['alert-mail'],
-            'alertOdds': values['alert-odds'],
+        $(this).closest('.alert-loader').css('display', 'inline-block');
+        $.get("/api?f=aa", {
+            'alertFight': $(this).data("mu"),
+            'alertFighter': '1',
+            'alertBookie': values['alert-bookie-il'],
+            'alertMail': values['alert-mail-il'],
+            'alertOdds': '-9999',
             'alertOddsType': oddsType
-        }, function(data) {
-            $('#alert-loader').css('display', 'none');
+        },  function(data) {
+            //$('.alert-loader').css('display', 'none');
             var sMessage = '';
             switch (data) {
                 case '1':
@@ -596,7 +597,7 @@ $(document).ready(function() {
             }
             $('#alert-result').addClass((data >= 1 ? 'success' : 'error'));
             $('#alert-result').text(sMessage);
-            $(event.target).find('input[type="submit"]').prop("disabled", false);
+            $(this)[0].disabled = false; //.prop( "disabled", true );
         });
     });
 
@@ -802,7 +803,7 @@ initPage = function() {
         if (parlayMode) {
             return addToParlay(this);
         } else {
-            var title = $(this).parent().parent().find("th").text() + " <span style=\"font-weight: normal;\"> &#150; " + $(this).closest('table').find('th').eq($(this).parent().index()).find("a").text() + "</span>";
+            var title = $(this).parent().parent().find("th").text() + " <span style=\"font-weight: normal;\"> &#150; <a href=\"" + $(this).closest('table').find('th').eq($(this).parent().index()).find("a").attr("href") + "\" target=\"_blank\">" + $(this).closest('table').find('th').eq($(this).parent().index()).find("a").text() + "</a></span>";
             chartCC();
             createPChart(opts[0], opts[2], opts[1], opts[3], opts[4]);
             chartSC(title, event.clientX, event.clientY);
@@ -830,7 +831,7 @@ initPage = function() {
         if (parlayMode) {
             return false;
         } else {
-            var title = $(this).parent().parent().find("th").text() + " <span style=\"font-weight: normal;\"> &#150; Mean";
+            var title = $(this).parent().parent().find("th").text() + " <span style=\"font-weight: normal;\"> &#150; Mean odds";
             chartCC();
             createPIChart(opts[1], opts[0], opts[2], opts[3]);
             chartSC(title, event.clientX, event.clientY);
@@ -861,9 +862,9 @@ initPage = function() {
             values[this.name] = $(this).val();
         });
         $('#alert-submit')[0].disabled = true; //.prop( "disabled", true );
-        $('#alert-result').removeClass('success error');
+        $('.alert-result').removeClass('success error');
         $(event.target).find("input").removeClass('success error');
-        $('#alert-loader').css('display', 'inline-block');
+        $('.alert-loader').css('display', 'inline-block');
         $.get("api?f=aa", {
             'alertFight': values['m'],
             'alertFighter': values['tn'],
@@ -872,7 +873,7 @@ initPage = function() {
             'alertOdds': values['alert-odds'],
             'alertOddsType': oddsType
         }, function(data) {
-            $('#alert-loader').css('display', 'none');
+            $('.alert-loader').css('display', 'none');
             var sMessage = '';
             switch (data) {
                 case '1':
@@ -908,8 +909,8 @@ initPage = function() {
                 default:
                     sMessage = 'x Unknown error';
             }
-            $('#alert-result').addClass((data >= 1 ? 'success' : 'error'));
-            $('#alert-result').text(sMessage);
+            $('.alert-result').addClass((data >= 1 ? 'success' : 'error'));
+            $('.alert-result').text(sMessage);
             $(event.target).find('input[type="submit"]').prop("disabled", false);
         });
     });
@@ -1046,3 +1047,4 @@ fightSelected = function()
         $("#webFields").css({ 'display': 'none'});
     }
 }
+

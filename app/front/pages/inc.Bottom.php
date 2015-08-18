@@ -1,6 +1,6 @@
 </div>
 <div class="legend-container">
-    <img src="/img/ajax-loader.gif" class="hidden-image" alt="Loading indicator" />
+    <img src="/img/loading.gif" class="hidden-image" alt="Loading indicator" />
 </div>
 
 <div id="bottom-container">

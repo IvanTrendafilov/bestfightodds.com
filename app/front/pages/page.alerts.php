@@ -55,7 +55,7 @@ require_once('lib/bfocore/general/inc.GlobalTypes.php');
                                     {
                                         echo '<tr>
                                                 <td class="content-team-left"><a href="/fighters/' . $oFight->getFighterAsLinkString(1) . '">' . $oFight->getFighterAsString(1) . '</a></td><td class="content-vs-cell"> vs </td><td class="team-cell" style="text-align: left;"><a href="/fighters/' . $oFight->getFighterAsLinkString(2) . '">' . $oFight->getFighterAsString(2) . '</a></td>
-                                                <td class="content-button-cell"><input type="submit" value="Add alert" data-mu="' . $oFight->getID() . '"></td>
+                                                <td class="content-button-cell"><div class="alert-loader"></div><input type="submit" value="Add alert" data-mu="' . $oFight->getID() . '"></td>
                                             </tr>';
                                         $bOddRow = !$bOddRow;
                                     }
@@ -74,9 +74,6 @@ require_once('lib/bfocore/general/inc.GlobalTypes.php');
                 <img src="img/info-arrow.gif" class="img-note-box" /> Note that there is a limit of max 50 alerts per e-mail. When an alert is issued or expires you will be able to add a new one.<br /><br />
                 To ensure that alerts show up properly in your inbox, add<br /><b>no-reply@bestfightodds.com</b> to your list of trusted senders.
             </p>
-            <img src="/img/error.png" class="hidden-image" alt="Error" />
-            <img src="/img/success.png" class="hidden-image" alt="Success" />
-            <img src="/img/ajax-loader.gif" class="hidden-image" alt="Success" />
         </div>
         <div class="clear"></div>
     </div>

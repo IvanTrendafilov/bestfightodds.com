@@ -663,7 +663,7 @@ ul.share-dropdown ul li a {
     display: inline-block;
 }
 
-#alert-loader {
+.alert-loader {
     background-image: url('/img/loading.gif');
     width: 32px;
     height: 25px;
@@ -673,7 +673,7 @@ ul.share-dropdown ul li a {
     vertical-align: middle;
 }
 
-#alert-result {
+.alert-result {
     display:  inline-block;
     position: absolute;
     left: 0;
@@ -688,17 +688,38 @@ ul.share-dropdown ul li a {
 
 }
 
-#alert-result.success {
+.alert-result-il {
+    display:  inline-block;
+    position: absolute;
+    left: 0;
+    margin-left: 8px;
+    font-weight: 500;
+    visibility: hidden;
+    opacity: 0;
+    -webkit-transition: all 0.2s ease-out;
+    -moz-transition: all 0.2s ease-out;
+    transition: all 0.2s ease-out;
+    transition-property: opacity;
+
+}
+
+.alert-result.success, .alert-result-il.success {
     visibility: visible;
     color: green;
     opacity: 1;
 }
 
-#alert-result.error {
+.alert-result.error, .alert-result-il.error {
     visibility: visible;
     color: red;
     opacity: 1;
 }
+
+
+
+
+
+
 
 
 /* New content lists */
