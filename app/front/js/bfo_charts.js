@@ -196,13 +196,13 @@ $(function() {
                 borderWidth: 0,
                 type: 'area',
                 margin: [3, 2, 5, 2],
-                width: 76,
-                height: 36,
+                width: 50,
+                height: 25,
                 className: 'chart-spark',
                 events: {
                     click: function(event) {
                         var opts = $.parseJSON($('#' + this.container.id).closest('td').attr('data-li'));
-                        var versus = $('#' + this.container.id).closest('tr').find("td.oppcell").text();
+                        var versus = $('#' + this.container.id).closest('tr').next('tr').find("th.oppcell").text();
                         var title = $("#team-name").text() + " <span style=\"font-weight: normal;\">(vs. " + versus +  ") &#150; Mean odds";
                         chartCC();
                         createMIChart(opts[0], opts[1]);
@@ -264,7 +264,7 @@ $(function() {
                     events: {
                         click: function(event) {
                             var opts = $.parseJSON($('#' + this.chart.container.id).closest('td').attr('data-li'));
-                            var versus = $('#' + this.chart.container.id).closest('tr').find("td.oppcell").text();
+                            var versus = $('#' + this.chart.container.id).closest('tr').next('tr').find("th.oppcell").text();
                             var title = $("#team-name").text() + " <span style=\"font-weight: normal;\">(vs. " + versus +  ") &#150; Mean odds";
                             chartCC();
                             createMIChart(opts[0], opts[1]);
