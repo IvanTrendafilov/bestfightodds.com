@@ -159,6 +159,7 @@ input[type="submit"][disabled], input[type="submit"]:disabled {
     margin-top: 7px;
     margin-left: 16px;
     float: left;
+    display: none; /* Temporary disable */
 }
 #twitter-icon {
     height: 11px;
@@ -652,7 +653,7 @@ ul.share-dropdown ul li a {
     margin-top: 8px;
 }
 
-#alert-area input.error {
+#alert-area input.error, #alert-mail-il.error {
     -webkit-transition: all 0.2s ease-out;
     -moz-transition: all 0.2s ease-out;
     transition: all 0.2s ease-out;
@@ -666,10 +667,10 @@ ul.share-dropdown ul li a {
 .alert-loader {
     background-image: url('/img/loading.gif');
     width: 32px;
-    height: 25px;
+    height: 23px;
     display: none;
     background-repeat: no-repeat;
-    background-size: 25px 25px;
+    background-size: 23px 23px;
     vertical-align: middle;
 }
 
@@ -690,9 +691,7 @@ ul.share-dropdown ul li a {
 
 .alert-result-il {
     display:  inline-block;
-    position: absolute;
-    left: 0;
-    margin-left: 8px;
+    margin-right: 8px;
     font-weight: 500;
     visibility: hidden;
     opacity: 0;
@@ -700,7 +699,7 @@ ul.share-dropdown ul li a {
     -moz-transition: all 0.2s ease-out;
     transition: all 0.2s ease-out;
     transition-property: opacity;
-
+    vertical-align: middle;
 }
 
 .alert-result.success, .alert-result-il.success {
