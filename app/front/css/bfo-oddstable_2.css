@@ -59,7 +59,7 @@
     color: #b9b9b9;
 }
 .odds-table tbody tr {
-    background-color: #e9eaed;
+    background-color: #eaecee;
     height: 20px;
 }
 .odds-table tbody tr.odd {
@@ -67,12 +67,12 @@
     border-bottom: 1px solid #b6b6b6;
 }
 .odds-table tbody tr.pr {
-    background-color: #d8d8d8;
+    background-color: #d8dadc;
     display: none;
     height: 20px;
 }
 .odds-table tbody tr.pr-odd {
-    background-color: #e8e8e8;
+    background-color: #e8eaec;
     border-bottom: 1px solid #bdbdbd;
     display: none;
 }

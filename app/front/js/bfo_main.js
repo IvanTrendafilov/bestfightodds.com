@@ -617,6 +617,7 @@ $(document).ready(function() {
         curbut[0].disabled = true; //.prop( "disabled", true );
         curbut.prevAll('.alert-result').removeClass('success error');
         $('#alert-mail-il').removeClass('success error');
+        curbut.prevAll('.alert-result-il').text('');
         curbut.prevAll('.alert-loader').css('display', 'inline-block');
 
         console.log($(this).prevAll('.alert-result'));
