@@ -1043,7 +1043,7 @@ fightSelected = function()
         {
             imageLink = 'events/' + Math.abs(fightID) + type + '.png';
         }
-        $('[name="webTestImage"]')[0].src = "/img/ajax-loader.gif";
+        $('[name="webTestImage"]')[0].src = "/img/loading.gif";
         $("#webHTML").val('<!-- Begin BestFightOdds code -->\n<a href="https://www.bestfightodds.com" target="_blank"><img src="https://www.bestfightodds.com/' + imageLink + '" alt="' + ftitle + ' odds - BestFightOdds" style="width: 216px; border: 0;" /></a>\n<!-- End BestFightOdds code -->');
         $("#webForum").val('[url=https://www.bestfightodds.com][img]https://www.bestfightodds.com/' + imageLink + '[/img][/url]');
         $('[name="webTestImage"]')[0].src = '' + imageLink;

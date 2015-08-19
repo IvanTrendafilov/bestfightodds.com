@@ -113,11 +113,11 @@ class FightLinkCreator
 
         $rFrameColor = imagecolorallocate($rImage, 88, 94, 100);
         $rMiddleFrameColor = imagecolorallocate($rImage, 194, 194, 194);
-        $rTopColor = imagecolorallocate($rImage, 232, 232, 232);
+        $rTopColor = imagecolorallocate($rImage, 234, 236, 238);
         $rBottomColor = imagecolorallocate($rImage, 255, 255, 255);
         $rTextColor = imagecolorallocate($rImage, 20, 20, 20);
 
-        $rSeperatorColor = imagecolorallocate($rImage, 136, 136, 136);
+        $rSeperatorColor = imagecolorallocate($rImage, 182, 182, 182);
 
         //Fighter1 Squares
         imagefill($rImage, 0, 0, $rTopColor);
