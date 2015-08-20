@@ -619,8 +619,6 @@ $(document).ready(function() {
         $('#alert-mail-il').removeClass('success error');
         curbut.prevAll('.alert-result-il').text('');
         curbut.prevAll('.alert-loader').css('display', 'inline-block');
-
-        console.log($(this).prevAll('.alert-result'));
         $.get("/api?f=aa", {
             'alertFight': $(this).data("mu"),
             'alertFighter': '1',
@@ -673,7 +671,6 @@ $(document).ready(function() {
     //Team page: Mean graph text button listener
     $(".teamPercChange").on('click', function(event) {
             var opts = $.parseJSON($(this).attr('data-li'));
-            console.log(opts);
             var versus = $(this).closest('tr').next('tr').find("th.oppcell").text();
             var title = $("#team-name").text() + " <span style=\"font-weight: normal;\">(vs. " + versus +  ") &#150; Mean odds";
             chartCC();
