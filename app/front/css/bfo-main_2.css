@@ -801,15 +801,20 @@ table.team-stats-table {
 
 .team-stats-table tbody tr.event-header td {
     /*background-color: #fff;*/
-    border-top: 1px dotted #989898;
-    background-color: #393B42;
-    color: #fff;
+    border-top: 1px solid #989898;
+    border-bottom: 1px solid #989898;
+    background-color: #E6E8Ea;
+    color: #1a1a1a;
+    vertical-align: bottom;
 }
 
 .team-stats-table tbody tr.event-header td a {
-    color: #fff;
+    color: #1a1a1a;
 }
 
+.team-stats-table tbody tr.event-header td a:hover {
+    color: #666;
+}
 
 
 
@@ -867,7 +872,7 @@ table.team-stats-table {
 
 .team-stats-table tbody td.change-cell {
     text-align: left; 
-    width: 30px;
+    width: 50px;
     padding-left: 0;
     margin-left: 0;
 }
