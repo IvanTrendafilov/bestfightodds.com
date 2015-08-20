@@ -786,6 +786,12 @@ table.team-stats-table {
     padding: 3px 0 2px 3px;
     color: #8a8a8a;
 }
+
+
+.team-stats-table thead th.header-movement {
+     padding-left: 35px;
+}
+
 .team-stats-table thead tr {
     border-bottom: 1px dotted #989898;
 }
@@ -802,7 +808,7 @@ table.team-stats-table {
 .team-stats-table tbody tr.event-header td {
     /*background-color: #fff;*/
     border-top: 1px solid #989898;
-    border-bottom: 1px solid #989898;
+    border-bottom: 1px solid #E6E8Ea;
     background-color: #E6E8Ea;
     color: #1a1a1a;
     vertical-align: bottom;
@@ -862,12 +868,13 @@ table.team-stats-table {
     text-align: right;
     font-family: Arial, sans-serif;
     width: 40px;
+    padding-left: 10px;
 }
 .team-stats-table tbody td.chart-cell {
     width: 52px;
     padding-top: 0;
     padding-bottom: 0;
-    padding-left: 20px;
+    padding-left: 35px;
 }
 
 .team-stats-table tbody td.change-cell {
@@ -875,6 +882,7 @@ table.team-stats-table {
     width: 50px;
     padding-left: 0;
     margin-left: 0;
+    color: #666;
 }
 
 .team-stats-table tbody td.change-cell span.teamPercChange {

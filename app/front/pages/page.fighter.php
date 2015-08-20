@@ -52,9 +52,9 @@ else
                                 <th style="text-align: right;">Open</th>
                                 <th style="text-align: right;">Close</th>
                                 <th></th>
-                                <th style="padding-left: 20px">Movement</th>
+                                <th class="header-movement">Movement</th>
                                 <th></th>
-                                <th class="item-non-mobile" style="padding-left: 35px">Event</th>
+                                <th class="item-non-mobile" style="padding-left: 20px">Event</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -113,7 +113,7 @@ else
                                     ?>
                                                 <td class="chart-cell" data-sparkline="<?php echo $sGraphData; ?>" data-li="[<?php echo $oFight->getID(); ?>,<?php echo $iTeamPos; ?>]" rowspan="2"></td>
                                                 <td rowspan="2" class="change-cell"><span class="teamPercChange" data-li="[<?php echo $oFight->getID(); ?>,<?php echo $iTeamPos; ?>]"><?php echo $fPercChange > 0 ? '+' : ''; ?><?php echo $fPercChange; ?>%<span style="color: <?php echo $fPercChange > 0 ? '#4BCA02' : ($fPercChange < 0 ? '#E93524' : '') ?>;position:relative; margin-left: 0"><?php echo $fPercChange > 0 ? '▲' : ($fPercChange < 0 ? '▼' : '') ?></span></span></td>
-                                                <td class="item-non-mobile" scope="row" style="padding-left: 35px"><a href="/events/<?php echo $oEvent->getEventAsLinkString(); ?>" ><?php echo $oEvent->getName(); ?></a></th>
+                                                <td class="item-non-mobile" scope="row" style="padding-left: 20px"><a href="/events/<?php echo $oEvent->getEventAsLinkString(); ?>" ><?php echo $oEvent->getName(); ?></a></th>
                                             </tr>
                                             <tr>
                                                 <th class="oppcell"><?php echo '<a href="/fighters/' . $oFight->getFighterAsLinkString($iOtherPos) . '">' . $oFight->getFighterAsString($iOtherPos) . '</a>'; ?></td>
@@ -133,7 +133,7 @@ else
                                         <?php
                                     }
                                     ?>
-                                        <td class="item-non-mobile" style="padding-left: 35px"><?php echo $sEventDate; ?></td>
+                                        <td class="item-non-mobile" style="padding-left: 20px"><?php echo $sEventDate; ?></td>
                                     </tr>
                                     <?php
                                 }
@@ -147,7 +147,7 @@ else
                                         <td class="moneyline"></td>
                                         <td></td>
                                         <td></td>
-                                        <td class="item-non-mobile" scope="row" style="padding-left: 35px"><a href="/events/<?php echo $oEvent->getEventAsLinkString(); ?>" ><?php echo $oEvent->getName(); ?></a></th>
+                                        <td class="item-non-mobile" scope="row" style="padding-left: 20px"><a href="/events/<?php echo $oEvent->getEventAsLinkString(); ?>" ><?php echo $oEvent->getName(); ?></a></th>
                                     </tr>
                                     <tr>
                                         <th class="oppcell"><?php echo '<a href="/fighters/' . $oFight->getFighterAsLinkString($iOtherPos) . '">' . $oFight->getFighterAsString($iOtherPos) . '</a>'; ?></td>
@@ -156,7 +156,7 @@ else
                                         <td class="moneyline"></td>
                                         <td></td>
                                         <td></td>
-                                        <td class="item-non-mobile" style="padding-left: 35px"><?php echo $sEventDate; ?></td>
+                                        <td class="item-non-mobile" style="padding-left: 20px"><?php echo $sEventDate; ?></td>
                                     </tr>
                                     <?php
                                 }

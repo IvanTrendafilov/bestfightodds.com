@@ -197,7 +197,7 @@ $(function() {
                 type: 'area',
                 margin: [3, 0, 5, 2],
                 width: 50,
-                height: 30,
+                height: 32,
                 className: 'chart-spark',
                 events: {
                     click: function(event) {

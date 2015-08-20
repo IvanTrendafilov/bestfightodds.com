@@ -258,6 +258,27 @@
 	}
 
 
+	.team-stats-table thead th.header-movement {
+    	 padding-left: 0px;
+	}
+
+	.team-stats-table tbody th a {
+	    font-size: 10px;
+	    height: 20px;
+	}
+
+
+	.team-stats-table tbody td.moneyline {
+	    padding-left: 1px;
+	}
+	.team-stats-table tbody td.chart-cell {
+	    padding-left: 5px;
+	}
+
+	.team-stats-table tbody td.change-cell {
+	}
+
+
 }
 
 @media only screen and (max-height:300px) {
