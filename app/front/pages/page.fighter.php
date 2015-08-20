@@ -49,10 +49,11 @@ else
                         <thead>
                             <tr>
                                 <th>Matchup</th>
-                                <th style="text-align: center;">Open</th>
-                                <th style="text-align: center;">Close</th>
+                                <th style="text-align: right;">Open</th>
+                                <th style="text-align: right;">Close</th>
                                 <th></th>
-                                <th style="padding-left: 5px">Movement</th>
+                                <th style="padding-left: 20px">Movement</th>
+                                <th></th>
                                 <th class="item-non-mobile" style="padding-left: 35px">Event</th>
                             </tr>
                         </thead>
@@ -64,9 +65,16 @@ else
                         $oFightOdds1 = EventHandler::getBestOddsForFightAndFighter($oFight->getID(), 1);
                         $oFightOdds2 = EventHandler::getBestOddsForFightAndFighter($oFight->getID(), 2);
                         $oOpeningOdds = OddsHandler::getOpeningOddsForMatchup($oFight->getID());
-
+                        
                         $iTeamPos = ((int) $oFight->getFighterID(2) == $oFighter->getID()) + 1;
                         $iOtherPos = $iTeamPos == 1 ? 2 : 1;
+                        $oLatestIndex = EventHandler::getCurrentOddsIndex($oFight->getID(), $iTeamPos);
+
+                        //Calculate % change from opening to mean
+                        if ($oLatestIndex != null && $oOpeningOdds != null)
+                        {
+                            $fPercChange = round((($oLatestIndex->getFighterOddsAsDecimal($iTeamPos, true) - $oOpeningOdds->getFighterOddsAsDecimal($iTeamPos, true)) / $oLatestIndex->getFighterOddsAsDecimal($iTeamPos, true)) * 100, 1);
+                        }
 
                         $sGraphData = GraphHandler::getMedianSparkLine($oFight->getID(), ($oFight->getFighterID(1) == $oFighter->getID() ? 1 : 2));
 
@@ -77,8 +85,8 @@ else
                             $sEventDate = date('M jS Y', strtotime($oEvent->getDate()));
                         }
                         ?>
-                                <tr class="item-mobile-only-row">
-                                    <td colspan="6" scope="row"><a href="/events/<?php echo $oEvent->getEventAsLinkString(); ?>"><?php echo $oEvent->getName(); ?></a> <?php echo $sEventDate; ?></td>
+                                <tr class="event-header item-mobile-only-row">
+                                    <td colspan="7" scope="row"><a href="/events/<?php echo $oEvent->getEventAsLinkString(); ?>"><?php echo $oEvent->getName(); ?></a> <?php echo $sEventDate; ?></td>
                                 </tr>                            
                                 <?php
                                 if ($oFightOdds1 != null && $oFightOdds2 != null && $oEvent != null)
@@ -94,33 +102,38 @@ else
                                     {
                                         ?>
                                                 <td></td>
-                                                <td class="chart-cell" data-sparkline="<?php echo $sGraphData; ?>" data-li="[<?php echo $oFight->getID(); ?>,<?php echo $iTeamPos; ?>]" rowspan="2"></td>
-                                                <td class="item-non-mobile" scope="row" style="padding-left: 35px"><a href="/events/<?php echo $oEvent->getEventAsLinkString(); ?>" ><?php echo $oEvent->getName(); ?></a></th>
-                                            </tr>
-                                            <tr>
-                                                <th class="oppcell"><?php echo '<a href="/fighters/' . $oFight->getFighterAsLinkString($iOtherPos) . '">' . $oFight->getFighterAsString($iOtherPos) . '</a>'; ?></td>
-                                                <td class="moneyline"><span id="oID<?php echo $iCellCounter++; ?>"><?php echo $oOpeningOdds->getFighterOddsAsString($iOtherPos); ?></span></td>
-                                                <td class="moneyline"><span id="oID<?php echo $iCellCounter++; ?>" class="bestbet"><?php echo $oFightOdds1->getFighterOddsAsString($iOtherPos); ?></span></td>
-                                                <td></td>
                                         <?php
                                     }
                                     else
                                     {
                                         ?>
                                                 <td class="moneyline"><span id="oID<?php echo $iCellCounter++; ?>" class="normalbet"><?php echo $oFightOdds2->getFighterOddsAsString($iTeamPos); ?></span></td>
+                                        <?php
+                                    }
+                                    ?>
                                                 <td class="chart-cell" data-sparkline="<?php echo $sGraphData; ?>" data-li="[<?php echo $oFight->getID(); ?>,<?php echo $iTeamPos; ?>]" rowspan="2"></td>
-                                                <td class="item-non-mobile" scope="row" style="padding-left: 35px"><a href="/events/<?php echo $oEvent->getEventAsLinkString(); ?>"><?php echo $oEvent->getName(); ?></a></th>
+                                                <td rowspan="2" class="change-cell"><span class="teamPercChange" data-li="[<?php echo $oFight->getID(); ?>,<?php echo $iTeamPos; ?>]"><?php echo $fPercChange > 0 ? '+' : ''; ?><?php echo $fPercChange; ?>%<span style="color: <?php echo $fPercChange > 0 ? '#4BCA02' : ($fPercChange < 0 ? '#E93524' : '') ?>;position:relative; margin-left: 0"><?php echo $fPercChange > 0 ? '▲' : ($fPercChange < 0 ? '▼' : '') ?></span></span></td>
+                                                <td class="item-non-mobile" scope="row" style="padding-left: 35px"><a href="/events/<?php echo $oEvent->getEventAsLinkString(); ?>" ><?php echo $oEvent->getName(); ?></a></th>
                                             </tr>
                                             <tr>
                                                 <th class="oppcell"><?php echo '<a href="/fighters/' . $oFight->getFighterAsLinkString($iOtherPos) . '">' . $oFight->getFighterAsString($iOtherPos) . '</a>'; ?></td>
                                                 <td class="moneyline"><span id="oID<?php echo $iCellCounter++; ?>"><?php echo $oOpeningOdds->getFighterOddsAsString($iOtherPos); ?></span></td>
-                                                <td class="moneyline"><span id="oID<?php echo $iCellCounter++; ?>" class="normalbet"><?php echo $oFightOdds1->getFighterOddsAsString($iOtherPos); ?></span></td>
+                                                <td class="moneyline"><span id="oID<?php echo $iCellCounter++; ?>"><?php echo $oFightOdds1->getFighterOddsAsString($iOtherPos); ?></span></td>
+                                    <?php
+                                    if ($oFightOdds1->getBookieID() == $oFightOdds2->getBookieID())
+                                    {
+                                        ?>
+                                                <td></td>
+                                        <?php
+                                    }
+                                    else
+                                    {
+                                        ?>
                                                 <td class="moneyline"><span id="oID<?php echo $iCellCounter++; ?>" class="bestbet"><?php echo $oFightOdds2->getFighterOddsAsString($iOtherPos); ?></span></td>
                                         <?php
                                     }
                                     ?>
                                         <td class="item-non-mobile" style="padding-left: 35px"><?php echo $sEventDate; ?></td>
-                                        <td></td>
                                     </tr>
                                     <?php
                                 }
@@ -133,6 +146,7 @@ else
                                         <td class="moneyline">n/a</td>
                                         <td class="moneyline"></td>
                                         <td></td>
+                                        <td></td>
                                         <td class="item-non-mobile" scope="row" style="padding-left: 35px"><a href="/events/<?php echo $oEvent->getEventAsLinkString(); ?>" ><?php echo $oEvent->getName(); ?></a></th>
                                     </tr>
                                     <tr>
@@ -140,6 +154,7 @@ else
                                         <td class="moneyline"></td>
                                         <td class="moneyline">n/a</td>
                                         <td class="moneyline"></td>
+                                        <td></td>
                                         <td></td>
                                         <td class="item-non-mobile" style="padding-left: 35px"><?php echo $sEventDate; ?></td>
                                     </tr>

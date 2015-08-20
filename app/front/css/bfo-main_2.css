@@ -351,7 +351,7 @@ h1 {
     height: 100%;
     font-size: 11px;
     width: 60%;
-    color: #7d7d7d;
+    color: #666;
 }
 .content-sidebar a {
     color: #000;
@@ -780,9 +780,10 @@ table.team-stats-table {
     font-size: 11px;
     border-collapse: collapse;
     color: #222;
+    background-color: #fff;
 }
 .team-stats-table thead th {
-    padding: 3px 0 2px 5px;
+    padding: 3px 0 2px 3px;
     color: #8a8a8a;
 }
 .team-stats-table thead tr {
@@ -797,6 +798,21 @@ table.team-stats-table {
     /*background-color: #fff;*/
     border-top: 1px dotted #989898;
 }
+
+.team-stats-table tbody tr.event-header td {
+    /*background-color: #fff;*/
+    border-top: 1px dotted #989898;
+    background-color: #393B42;
+    color: #fff;
+}
+
+.team-stats-table tbody tr.event-header td a {
+    color: #fff;
+}
+
+
+
+
 
 .team-stats-table tbody tr.main-row td {
     padding-top: 2px;
@@ -838,7 +854,7 @@ table.team-stats-table {
     padding: 0 1px;
 }
 .team-stats-table tbody td.moneyline {
-    text-align: center;
+    text-align: right;
     font-family: Arial, sans-serif;
     width: 40px;
 }
@@ -846,7 +862,18 @@ table.team-stats-table {
     width: 52px;
     padding-top: 0;
     padding-bottom: 0;
-    padding-left: 5px;
+    padding-left: 20px;
+}
+
+.team-stats-table tbody td.change-cell {
+    text-align: left; 
+    width: 30px;
+    padding-left: 0;
+    margin-left: 0;
+}
+
+.team-stats-table tbody td.change-cell span.teamPercChange {
+        cursor: pointer;
 }
 
 .team-stats-table a {
@@ -866,3 +893,4 @@ table.team-stats-table {
 .item-mobile-only-row {
     display: none;
 }
+

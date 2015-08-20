@@ -11,8 +11,7 @@
     z-index: 2;
 }
 .table-header a {
-    font-weight: 500;
-    
+    font-weight: 500;    
     font-size: 15px;
     text-transform: uppercase;
 }
@@ -59,7 +58,7 @@
     color: #b9b9b9;
 }
 .odds-table tbody tr {
-    background-color: #eaecee;
+    background-color: #eceef0;
     height: 20px;
 }
 .odds-table tbody tr.odd {

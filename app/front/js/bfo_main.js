@@ -670,6 +670,18 @@ $(document).ready(function() {
         });
     });
 
+    //Team page: Mean graph text button listener
+    $(".teamPercChange").on('click', function(event) {
+            var opts = $.parseJSON($(this).attr('data-li'));
+            console.log(opts);
+            var versus = $(this).closest('tr').next('tr').find("th.oppcell").text();
+            var title = $("#team-name").text() + " <span style=\"font-weight: normal;\">(vs. " + versus +  ") &#150; Mean odds";
+            chartCC();
+            createMIChart(opts[0], opts[1]);
+            chartSC(title, event.clientX, event.clientY);
+            return false;
+    });
+
 });
 
 initPage = function() {

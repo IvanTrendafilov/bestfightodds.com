@@ -69,7 +69,6 @@ require_once('lib/bfocore/general/inc.GlobalTypes.php');
         </div>
         <div class="content-sidebar">
             <p>
-                <img src="img/info.gif" class="img-info-box" /> With the alerts feature, we will automatically send you an e-mail when odds are first posted for a matchup <b>or</b> if the betting line reaches a certain limit that you have specified.<br /><br />
                 To create an alert for scheduled/rumored matchups without odds, use the form to the left. To add an alert for a matchup with existing odds, click the  <img src="/img/alert.gif" class="small-button" alt="Alert symbol" /> symbol on the <a href="/">front page</a>.<br /><br /><br />
                 <img src="img/info-arrow.gif" class="img-note-box" /> Note that there is a limit of max 50 alerts per e-mail. When an alert is issued or expires you will be able to add a new one.<br /><br />
                 To ensure that alerts show up properly in your inbox, add<br /><b>no-reply@bestfightodds.com</b> to your list of trusted senders.

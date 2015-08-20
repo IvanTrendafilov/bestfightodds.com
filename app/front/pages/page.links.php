@@ -6,7 +6,7 @@ require_once('lib/bfocore/general/class.EventHandler.php');
         <div id="page-inner-wrapper">
             <div id="page-content">
                 <form name="webLink" method="get" action="" style="margin-top: 10px;">
-                    Select the fight or event you want to display:  <select id="webFight" style="width: 345px;" onchange="fightSelected();"><option value="0">(select an event or a fight)</option>
+                    Select the fight or event you want to display on your website, blog or anywhere else:  <select id="webFight" style="width: 345px;" onchange="fightSelected();"><option value="0">(select an event or a fight)</option>
                         <?php
                         $aEvents = EventHandler::getAllUpcomingEvents();
                         foreach ($aEvents as $oEvent)
@@ -35,11 +35,11 @@ require_once('lib/bfocore/general/class.EventHandler.php');
                     </div>
 
                 </form>
-                <img src="/img/ajax-loader.gif" class="hidden-image" alt="loading" />
+                <img src="/img/loading.gif" class="hidden-image" alt="loading" />
             </div>
         </div>
         <div class="content-sidebar">
-            <img src="img/info.gif" class="img-info-box" /> This feature lets you to display betting lines on your own website, blog or forum posts<br /><br />Simply select the fight or event that you want to display and then copy and paste the generated url/code into the desired location<br /><br /><br /><img src="img/info-arrow.gif" class="img-note-box" /> Note that the image for the current best line will be updated automatically as the betting line changes
+            <img src="img/info-arrow.gif" class="img-note-box" /> Note that the image for the current best odds will be updated automatically as the betting line changes
         </div>
         <div class="clear"></div>
     </div>
