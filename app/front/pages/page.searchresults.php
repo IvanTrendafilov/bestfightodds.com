@@ -6,7 +6,7 @@
  *
  */
 ?>
-<div id="page-wrapper"  style="max-width: 800px;">
+<div id="page-wrapper"  style="max-width: 700px;">
     <div id="page-container">
         <div id="page-inner-wrapper">
             <div id="page-content">

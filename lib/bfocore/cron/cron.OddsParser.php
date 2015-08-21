@@ -102,6 +102,9 @@ $bCacheDeleted = CacheControl::cleanGraphCache();
 $oLogger->log("Deleting image cache: " . $bCacheDeleted, ($bCacheDeleted ? 0 : -2));
 /*$bCacheDeleted = CacheControl::cleanPageCache();
 $oLogger->log("Deleting page cache: " . $bCacheDeleted, ($bCacheDeleted ? 0 : -2));*/
+CacheControl::cleanPageCacheWC('graphdata-*');
+$oLogger->log("Deleting graph cache", 0);
+
 
 //Cleanup old correlations
 $iSuccess = OddsHandler::cleanCorrelations();

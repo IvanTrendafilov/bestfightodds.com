@@ -773,7 +773,7 @@ initPage = function() {
                 value[3].data("scrollRightVis", false);
 
             } else if (value[3].data("scrollRightVis") == false) {
-                value[3].css("width", "10px");
+                value[3].css("width", "5px");
                 value[3].data("scrollRightVis", true);
             }
 
@@ -781,7 +781,7 @@ initPage = function() {
                 value[2].css("width", 0 + value[0].scrollLeft());
                 value[2].data("scrollLeftVis", false);
             } else if (value[2].data("scrollLeftVis") == false) {
-                value[2].css("width", "10px");
+                value[2].css("width", "5px");
                 value[2].data("scrollLeftVis", true);
             }
 

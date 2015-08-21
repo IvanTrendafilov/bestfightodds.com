@@ -111,8 +111,25 @@ else
                                         <?php
                                     }
                                     ?>
+
+                                    <?php
+                                        //Disable sparkline if only one row
+                                    if (strpos($sGraphData, ',') !== false) 
+                                    {
+                                    ?>
                                                 <td class="chart-cell" data-sparkline="<?php echo $sGraphData; ?>" data-li="[<?php echo $oFight->getID(); ?>,<?php echo $iTeamPos; ?>]" rowspan="2"></td>
                                                 <td rowspan="2" class="change-cell"><span class="teamPercChange" data-li="[<?php echo $oFight->getID(); ?>,<?php echo $iTeamPos; ?>]"><?php echo $fPercChange > 0 ? '+' : ''; ?><?php echo $fPercChange; ?>%<span style="color: <?php echo $fPercChange > 0 ? '#4BCA02' : ($fPercChange < 0 ? '#E93524' : '') ?>;position:relative; margin-left: 0"><?php echo $fPercChange > 0 ? '▲' : ($fPercChange < 0 ? '▼' : '') ?></span></span></td>
+                                    <?php
+                                    }
+                                    else
+                                    {
+                                    ?>
+                                                <td class="chart-cell" rowspan="2"></td>
+                                                <td rowspan="2" class="change-cell"></td>
+                                    <?php
+                                    }
+                                    ?>
+
                                                 <td class="item-non-mobile" scope="row" style="padding-left: 20px"><a href="/events/<?php echo $oEvent->getEventAsLinkString(); ?>" ><?php echo $oEvent->getName(); ?></a></th>
                                             </tr>
                                             <tr>

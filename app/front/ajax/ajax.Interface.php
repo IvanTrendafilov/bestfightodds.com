@@ -9,6 +9,7 @@ require_once('lib/bfocore/general/class.BookieHandler.php');
 require_once('lib/bfocore/general/class.OddsHandler.php');
 require_once('lib/bfocore/general/class.FighterHandler.php');
 require_once('lib/bfocore/general/class.GraphHandler.php');
+require_once('lib/bfocore/general/caching/class.CacheControl.php');
 require_once('app/front/pages/inc.FrontLogic.php');
 require_once('config/inc.generalConfig.php');
 
@@ -52,27 +53,23 @@ class AjaxInterface
 
     public static function getGraphData()
     {
-        checkRequiredParam('m', false); //Matchup
-        checkRequiredParam('p', false); //Position in line
+        //Check if cached
 
-        $aOdds = null;
-        $bIsProp = false;
-
+        //graphdata-m-b-p-pt-tn
+        $sCacheKey = 'graphdata-';
         if (checkRequiredParam('pt', false) && checkRequiredParam('tn', false))
         {
-            $bIsProp = true;
             //For prop
             if (checkRequiredParam('b', false))
             {
                 //For specific bookie
-                $aOdds = GraphHandler::getPropData($_GET['m'], $_GET['b'], $_GET['pt'], $_GET['tn']);
+                $sCacheKey .= $_GET['m'] . '-' . $_GET['b'] . '-' . $_GET['p'] . '-' . $_GET['pt'] . '-' . $_GET['tn'];
             }
             else
             {
                 //Mean
-                $aOdds = GraphHandler::getPropIndexData($_GET['m'], $_GET['p'], $_GET['pt'], $_GET['tn']);
+                $sCacheKey .= $_GET['m'] . '--' . $_GET['p'] . '-' . $_GET['pt'] . '-' . $_GET['tn'];
             }
-
         }
         else
         {
@@ -80,57 +77,104 @@ class AjaxInterface
             if (checkRequiredParam('b', false))
             {
                 //For specific bookie
-                $aOdds = GraphHandler::getMatchupData($_GET['m'], $_GET['b']);
+                $sCacheKey .= $_GET['m'] . '-' . $_GET['b'] . '-' . $_GET['p'] . '--';
             }
             else
             {
-                $aOdds = GraphHandler::getMatchupIndexData($_GET['m'], $_GET['p']);
+                $sCacheKey .= $_GET['m'] . '--' . $_GET['p'] . '--';
             }
         }
 
 
-        if ($aOdds != null)
+        if (CacheControl::isPageCached($sCacheKey))
         {
-            //Convert to JSON and return
-            $sBookieName = 'Mean';
-            if (isset($_GET['b']))
-            {
-                $sBookieName = BookieHandler::getBookieByID($_GET['b'])->getName();
-            }
-
-            $retArr = array('name' => $sBookieName, 'data' => array());
-            date_default_timezone_set('America/Los_Angeles');
-            $oEvent = EventHandler::getEvent(EventHandler::getFightByID($_GET['m'])->getEventID(), true);
-            foreach ($aOdds as $iIndex => $oOdds)
-            {
-                    $retArr['data'][] = array('x' => 
-                                    (new DateTime($oOdds->getDate(), new DateTimeZone('America/New_York')))->getTimestamp() * 1000,
-                                    'y' => $oOdds->moneylineToDecimal($oOdds->getOdds($_GET['p']), true));
-
-                    
-                    if ($iIndex == 0)
-                    {
-                        $retArr['data'][0]['dataLabels'] = array('x' => 9);
-                    }
-
-                    if ($iIndex == count($aOdds) - 1)
-                    {
-                        $retArr['data'][$iIndex]['dataLabels'] = array('x' => -9);   
-                    }
-            }
-            //Add last odds with current date if this is an upcoming event
-            if ($oEvent != null)
-            {
-                $curTime = (new DateTime('', new DateTimeZone('America/New_York')));
-                $retArr['data'][] = array('x' => $curTime->getTimestamp() * 1000, 'y' => $aOdds[count($aOdds) - 1]->moneylineToDecimal($aOdds[count($aOdds) - 1]->getOdds($_GET['p']), true), 'dataLabels' => array('x' => -9));    
-            }
-
-            //"Encrypt" with ROT47 + base64 before returning
-            echo self::encryptResponse('[' . json_encode($retArr) . ']');
+            echo CacheControl::getCachedPage($sCacheKey);
+            return true;
         }
-        return 'error';
+        else
+        {
+            //Not cached, process
+            checkRequiredParam('m', false); //Matchup
+            checkRequiredParam('p', false); //Position in line
+
+            $aOdds = null;
+            $bIsProp = false;
+
+            if (checkRequiredParam('pt', false) && checkRequiredParam('tn', false))
+            {
+                $bIsProp = true;
+                //For prop
+                if (checkRequiredParam('b', false))
+                {
+                    //For specific bookie
+                    $aOdds = GraphHandler::getPropData($_GET['m'], $_GET['b'], $_GET['pt'], $_GET['tn']);
+                }
+                else
+                {
+                    //Mean
+                    $aOdds = GraphHandler::getPropIndexData($_GET['m'], $_GET['p'], $_GET['pt'], $_GET['tn']);
+                }
+
+            }
+            else
+            {
+                //For normal matchup
+                if (checkRequiredParam('b', false))
+                {
+                    //For specific bookie
+                    $aOdds = GraphHandler::getMatchupData($_GET['m'], $_GET['b']);
+                }
+                else
+                {
+                    $aOdds = GraphHandler::getMatchupIndexData($_GET['m'], $_GET['p']);
+                }
+            }
 
 
+            if ($aOdds != null)
+            {
+                //Convert to JSON and return
+                $sBookieName = 'Mean';
+                if (isset($_GET['b']))
+                {
+                    $sBookieName = BookieHandler::getBookieByID($_GET['b'])->getName();
+                }
+
+                $retArr = array('name' => $sBookieName, 'data' => array());
+                date_default_timezone_set('America/Los_Angeles');
+                $oEvent = EventHandler::getEvent(EventHandler::getFightByID($_GET['m'])->getEventID(), true);
+                foreach ($aOdds as $iIndex => $oOdds)
+                {
+                        $retArr['data'][] = array('x' => 
+                                        (new DateTime($oOdds->getDate(), new DateTimeZone('America/New_York')))->getTimestamp() * 1000,
+                                        'y' => $oOdds->moneylineToDecimal($oOdds->getOdds($_GET['p']), true));
+
+                        
+                        if ($iIndex == 0)
+                        {
+                            $retArr['data'][0]['dataLabels'] = array('x' => 9);
+                        }
+
+                        if ($iIndex == count($aOdds) - 1)
+                        {
+                            $retArr['data'][$iIndex]['dataLabels'] = array('x' => -9);   
+                        }
+                }
+                //Add last odds with current date if this is an upcoming event
+                if ($oEvent != null)
+                {
+                    $curTime = (new DateTime('', new DateTimeZone('America/New_York')));
+                    $retArr['data'][] = array('x' => $curTime->getTimestamp() * 1000, 'y' => $aOdds[count($aOdds) - 1]->moneylineToDecimal($aOdds[count($aOdds) - 1]->getOdds($_GET['p']), true), 'dataLabels' => array('x' => -9));    
+                }
+
+                //"Encrypt" with ROT47 + base64 before returning
+                $sResp = self::encryptResponse('[' . json_encode($retArr) . ']');
+                echo $sResp;
+                CacheControl::cachePage($sResp, $sCacheKey . '.php');
+                return true;
+            }
+            return false;
+        }
     }
 
     public static function getTeamSpreadData()

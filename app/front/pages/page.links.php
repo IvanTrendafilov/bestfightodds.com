@@ -1,12 +1,12 @@
 <?php
 require_once('lib/bfocore/general/class.EventHandler.php');
 ?>
-<div id="page-wrapper">
+<div id="page-wrapper" style="max-width: 850px;">
     <div id="page-container">
         <div id="page-inner-wrapper">
             <div id="page-content">
                 <form name="webLink" method="get" action="" style="margin-top: 10px;">
-                    Select the fight or event you want to display on your website, blog or anywhere else:  <select id="webFight" style="width: 345px;" onchange="fightSelected();"><option value="0">(select an event or a fight)</option>
+                    Select the fight or event you want to display on your website, blog or anywhere else:  <select id="webFight" style="width: 305px;" onchange="fightSelected();"><option value="0">(select an event or a fight)</option>
                         <?php
                         $aEvents = EventHandler::getAllUpcomingEvents();
                         foreach ($aEvents as $oEvent)
