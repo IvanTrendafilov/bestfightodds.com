@@ -44,6 +44,19 @@ if (isset($_GET['risk']))
     }
 }
 
+if (isset($_GET['desktop']) && $_GET['desktop'] == 'on')
+{
+    setcookie("bfo_reqdesktop", "true");
+    header('Location: /');
+    exit;
+}
+else if (isset($_GET['desktop']) && $_GET['desktop'] == 'off')
+{
+    setcookie("bfo_reqdesktop", "", time()-3600);
+    header('Location: /');
+    exit;
+}
+
 
 //Disable caching
 header('Cache-Control: no-cache, no-store, max-age=0, must-revalidate');

@@ -190,6 +190,10 @@
     position: absolute;    /*right: 0;*/
     margin-left: 1px;
     font-size: 12px;
+    vertical-align: middle;
+    top: 0;
+    bottom: 0;
+    line-height: 20px;
 }
 .ard {
     margin: 0;
@@ -198,6 +202,10 @@
     position: absolute;    /*right: 0;*/
     margin-left: 1px;
     font-size: 12px;
+    vertical-align: middle;
+    top: 0;
+    bottom: 0;
+    line-height: 20px;
 }
 .arage-1 {
 }
@@ -242,7 +250,7 @@
     filter: alpha(opacity=85);
 }
 .odds-table-responsive-header {
-    width: 90px;
+    width: 95px;
     z-index: 2;
     position: absolute;
     display: none;

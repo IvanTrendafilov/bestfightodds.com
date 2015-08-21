@@ -806,17 +806,29 @@ initPage = function() {
         });
 
         //click for mobile
-        $("ul.dropdown li").click(function() {
-            $(this).addClass("hover");
-            $('ul:first', this).css('visibility', 'visible');
+        $("ul.dropdown li").click(function(e) {
+            console.log(e);
+            if (!$(e.toElement).is("#format-amount-box1"))
+            {
+                if ($(this).hasClass("hover"))
+                {
+                    console.log('open');
+                    $(this).removeClass("hover");
+                    $('ul:first', this).css('visibility', 'hidden');
+                }
+                else
+                {
+                    console.log('close');
+                    $(this).addClass("hover");
+                    $('ul:first', this).css('visibility', 'visible');    
+                }
+            }      
 
         });
 
         //close on click (doesnt really work)
         $("ul.dropdown li ul li").click(function() {
 
-            $(this).removeClass("hover");
-            $('ul:first', this).css('visibility', 'hidden');
         });
     });
 

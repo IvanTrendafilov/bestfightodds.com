@@ -4,8 +4,48 @@
 </div>
 
 <div id="bottom-container">
-    <a href="/">Home</a><span class="menu-seperator">|</span><a href="/terms">Terms of service</a><span class="menu-seperator">|</span><a href="mailto:info1@bestfightodds.com">Contact us</a><span class="menu-seperator">|</span><a href="mailto:info1@bestfightodds.com">&copy; 2015</a>
+    <a href="/">Home</a><span class="menu-seperator">|</span>
+         <?php   
+         //Display switch to mobile if on forced desktop
+            if ((isset($_COOKIE['bfo_reqdesktop']) && $_COOKIE['bfo_reqdesktop'] == 'true'))
+            {
+          ?>
+            <a href="/?desktop=off">Mobile</a><span class="menu-seperator">|</span>
+            <?php
+            }
+            else
+            {
+              ?>
+            <a href="/?desktop=on">Desktop site</a></span><span class="menu-seperator">|</span>
+              <?php
+            }
+          ?>
+    <a href="/terms">Terms of service</a><span class="menu-seperator">|</span><a href="mailto:info1@bestfightodds.com">Contact</a><span class="menu-seperator">|</span><a href="mailto:info1@bestfightodds.com">&copy; 2015</a>
 </div>
+
+<div id="chart-window" class="popup-window"><div class="popup-header" id="chart-header"><div></div><a href="#" class="cd-popup-close">&#10006;</a></div><div id="chart-area"></div></div>
+<div id="parlay-window" class="popup-window"><div class="popup-header" id="parlay-header">Parlay</div><div id="parlay-area">Click on a line to add it to your parlay</div></div>
+<div id="alert-window" class="popup-window"><div class="popup-header" id="alert-header"><div></div><a href="#" class="cd-popup-close">&#10006;</a></div><div id="alert-area">
+    <form id="alert-form">Alert me at e-mail <input type="text" name="alert-mail" id="alert-mail"><br />when the odds reaches <input type="text" name="alert-odds" id="alert-odds"> or better<br/>at <select name="alert-bookie">
+        <option value="-1">any bookie</option>
+        <option value="1">5Dimes</option>
+        <option value="13">BetDSI</option>
+        <option value="3">BookMaker</option>
+        <option value="5">Bovada</option>
+        <option value="2">SportBet</option>
+        <option value="4">Sportsbook</option>
+        <option value="7">BetUS</option>
+        <option value="9">Pinnacle</option>
+        <option value="8">SportsInteraction</option>
+        <option value="10">SBG</option>
+        <option value="11">TheGreek</option>
+        <option value="12">BetOnline</option>
+      </select><br /><div id="alert-button-container"><input type="hidden" name="tn"><input type="hidden" name="m">
+        <div class="alert-loader"></div>
+        <div class="alert-result">&nbsp;</div>
+      <input type="submit" value="Add alert" id="alert-submit"></div></form></div>
+</div>
+
 <script type="text/javascript" src="https://www.google.com/jsapi"></script>
 <?php
 //Disable if running locally
@@ -25,6 +65,7 @@ if ($_SERVER['SERVER_ADDR'] != '127.0.0.1')
     <?php
 }
 ?>
+
 
 </body>
 </html>

@@ -49,11 +49,14 @@ input, textarea, select {
 input, textarea, select {
     *font-size: 100%;
 }
-input[type!="radio"] {
+input[type="text"], input[type="submit"] {
     -webkit-appearance: none;
     -moz-appearance: none;
     appearance: none;
 }
+
+
+
 legend {
     color: #000;
 }
@@ -156,9 +159,13 @@ input[type="submit"][disabled], input[type="submit"]:disabled {
     height: 20px;
 }
 .logo {
-    margin-top: 7px;
-    margin-left: 16px;
+    margin-top: 6px;
+    margin-left: 12px;
     float: left;
+    width: 290px;
+    height: 54px;
+    background-image: url('/img/logo.png');
+    background-size: 290px 54px;
 }
 #twitter-icon {
     height: 11px;
@@ -334,11 +341,11 @@ h1 {
     width: 100%;
     text-align: center;
     padding-bottom: 15px;
-    color: #666;
+    color: #787878;
     margin-top: -15px;
 }
 #bottom-container a {
-    color: #999;
+    color: #9a9a9a;
     font-size: 11px;
     padding: 0 5px;
 }
@@ -424,7 +431,7 @@ ul.dropdown li:last-child a {
 }
 
 /* Doesn't work in IE */
-ul.dropdown li.hover, ul.dropdown li:hover {
+ul.dropdown li.hover {
     background: #212427;
     position: relative;
 }
@@ -475,6 +482,7 @@ ul.share-dropdown {
     margin-bottom: 5px;
     right: 0;
     position: absolute;
+    display: none;
 }
 ul.share-dropdown li {
     height: auto;
