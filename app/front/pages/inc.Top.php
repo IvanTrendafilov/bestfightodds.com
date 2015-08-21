@@ -40,7 +40,7 @@
         <script type="text/javascript" async src="/js/javascripts.php"></script>
         <div class="header">
                 <div class="header-top">
-                    <a href="/"><div class="logo" alt="BestFightOdds.com"></div>
+                    <a href="/"><div class="logo" alt="BestFightOdds.com"></div></a>
                     <div id="header-search-box">
                         <form method="get" action="/search"><input type="text" id="search-box1" class="search-box" name="query" placeholder="MMA Event / Fighter"/> <input type="submit" class="search-button" id="search-button" value="&#128269;" /></form>
                     </div>
