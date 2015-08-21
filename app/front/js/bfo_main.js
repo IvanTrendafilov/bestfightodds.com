@@ -611,9 +611,7 @@ $(document).ready(function() {
         $inputs.each(function() {
             values[this.name] = $(this).val();
         });
-
         curbut = $(this);
-
         curbut[0].disabled = true; //.prop( "disabled", true );
         curbut.prevAll('.alert-result').removeClass('success error');
         $('#alert-mail-il').removeClass('success error');
@@ -664,7 +662,11 @@ $(document).ready(function() {
 
             curbut.prevAll('.alert-result-il').addClass((data >= 1 ? 'success' : 'error'));
             curbut.prevAll('.alert-result-il').text(sMessage);
-            curbut[0].disabled = false; //.prop( "disabled", true );
+
+            if (data <= 0)
+            {
+                curbut[0].disabled = false; //.prop( "disabled", true );    
+            }
         });
     });
 

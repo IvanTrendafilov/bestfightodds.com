@@ -55,7 +55,7 @@
     font-size: 10px;
 }
 .odds-table thead th a:hover {
-    color: #b9b9b9;
+    color: #999;
 }
 .odds-table tbody tr {
     background-color: #eceef0;
