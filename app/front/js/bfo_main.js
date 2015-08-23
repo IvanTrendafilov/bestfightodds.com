@@ -120,9 +120,9 @@ addToParlay = function(obj) {
             return false;
         }
         tmpArr = [];
-        tmpArr["ml"] = $(obj).find('span').first().text()
+        tmpArr["ml"] = $(obj).find('span').find('span').first().text()
         tmpArr["name"] = $(obj).closest('tr').find('th').text();
-        tmpArr["ref"] = $(obj).find('span').first().attr('id').substring(3);
+        tmpArr["ref"] = $(obj).find('span').find('span').first().attr('id').substring(3);
 
         found = false;
         for (var i = 0; i < parlay.length; i++) {
