@@ -106,28 +106,30 @@
     height: 20px;
 }
 
-.odds-table tbody td:hover:not(.button-cell):not(.chart-cell):not(.prop-cell):not(:empty) {
-    background-color: #d8d8d8;
-    -webkit-transition-property: background-color;
-    -moz-transition-property: background-color;
-    -o-transition-property: background-color;
-    transition-property: background-color;
-    -webkit-transition-duration: 0.1s;
-    -moz-transition-duration: 0.1s;
-    -o-transition-duration: 0.1s;
-    transition-duration: 0.1s;
-}
+@media not screen and (max-width:767px) {
+    .odds-table tbody td:hover:not(.button-cell):not(.chart-cell):not(.prop-cell):not(:empty) {
+        background-color: #d8d8d8;
+        -webkit-transition-property: background-color;
+        -moz-transition-property: background-color;
+        -o-transition-property: background-color;
+        transition-property: background-color;
+        -webkit-transition-duration: 0.1s;
+        -moz-transition-duration: 0.1s;
+        -o-transition-duration: 0.1s;
+        transition-duration: 0.1s;
+    }
 
-.odds-table tbody tr.pr td:hover:not(.button-cell):not(.chart-cell):not(.prop-cell):not(:empty),.odds-table tbody tr.pr-odd td:hover:not(.button-cell):not(.prop-cell):not(:empty) {
-    background-color: #c8c8c8;
-    -webkit-transition-property: background-color;
-    -moz-transition-property: background-color;
-    -o-transition-property: background-color;
-    transition-property: background-color;
-    -webkit-transition-duration: 0.1s;
-    -moz-transition-duration: 0.1s;
-    -o-transition-duration: 0.1s;
-    transition-duration: 0.1s;
+    .odds-table tbody tr.pr td:hover:not(.button-cell):not(.chart-cell):not(.prop-cell):not(:empty),.odds-table tbody tr.pr-odd td:hover:not(.button-cell):not(.prop-cell):not(:empty) {
+        background-color: #c8c8c8;
+        -webkit-transition-property: background-color;
+        -moz-transition-property: background-color;
+        -o-transition-property: background-color;
+        transition-property: background-color;
+        -webkit-transition-duration: 0.1s;
+        -moz-transition-duration: 0.1s;
+        -o-transition-duration: 0.1s;
+        transition-duration: 0.1s;
+    }
 }
 
 .odds-table tbody td div {
