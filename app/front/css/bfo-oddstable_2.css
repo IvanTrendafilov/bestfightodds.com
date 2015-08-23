@@ -85,6 +85,7 @@
 .odds-table tbody th div {
     width: 100%;
     position: relative;
+    display: inline-block;
 }
 
 .odds-table tbody th a {
@@ -138,6 +139,7 @@
     position: relative;
     padding-top: 4px;
     padding-bottom: 4px;
+    display: inline-block;
 }
 .odds-table tbody td a {
     margin: 0;
@@ -198,6 +200,7 @@
     top: 0;
     bottom: 0;
     line-height: 20px;
+    display: inline-block;
 }
 .ard {
     margin: 0;
@@ -210,6 +213,7 @@
     top: 0;
     bottom: 0;
     line-height: 20px;
+    display: inline-block;
 }
 .arage-1 {
 }

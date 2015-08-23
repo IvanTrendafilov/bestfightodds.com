@@ -222,15 +222,17 @@ input[type="submit"][disabled], input[type="submit"]:disabled {
 
 .bfo-check-box {
   width:10px;
-  height:5px;
+  height:11px;
   background-color:#f0f0f0;
   font-size: 8px;
   display: inline-block;
   text-align: center;
-  padding-bottom: 5px;
+  overflow: hidden;
   font-weight: 700;
   color: #f0f0f0;
   margin-right: 2px;
+  vertical-align: middle;
+  margin-bottom: 1px;
 }
 
 .bfo-check-box.checked {

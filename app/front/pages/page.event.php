@@ -532,7 +532,9 @@ if ($oEvent != null)
         }
         echo '</tbody>'
         . '</table></div></div></div></div>
-        <div class="table-last-changed">Last change: <span title="' . ($sLastChange == null ? 'n/a' : (date('M jS Y H:i', strtotime($sLastChange)) . ' EST')) . '"><?php echo getTimeDifference("' . strtotime($sLastChange) . '", strtotime("' . GENERAL_TIMEZONE . ' hours")); ?></span></div>';
+        <div class="table-last-changed">Last change: <span title="' . (sizeof($aFights) == 0 ? 'n/a' : (date('M jS Y H:i', strtotime($sLastChange)) . ' EST')) . '">' . getTimeDifference(strtotime($sLastChange), strtotime(GENERAL_TIMEZONE . ' hours')) . '</span></div>'
+        . '
+          ';
     }
 }
 

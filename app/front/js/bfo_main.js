@@ -266,7 +266,7 @@ oddsToAmount = function(amount) {
         path: '/'
     });
 
-    $("#format-toggle-text").find('span').first().next().html("Return on $" + value + "  &#9660;");
+    $("#format-toggle-text").find('span').first().next().html("$" + value + "  &#9660;");
     $('#format-amount-box1').val(value);
 
     if (parlayMode) {
@@ -516,12 +516,25 @@ $(document).ready(function() {
             $('#parlay-mode-box').find('.bfo-check-box').addClass('checked');
             parlayMode = true;
             $('#parlay-window').addClass('is-visible');
-            $(document).on('mousemove', function(e) {
-                $('#parlay-window').css({
-                    left: e.clientX + 8,
-                    top: e.clientY + 8
+
+            var isTouch = (('ontouchstart' in window) || (navigator.msMaxTouchPoints > 0));
+            if (!isTouch)
+            {
+                $(document).on('mousemove', function(e) {
+                    $('#parlay-window').css({
+                        left: e.clientX + 8,
+                        top: e.clientY + 8
+                    });
                 });
-            });
+            }
+            else
+            {
+                //Position parlay mode somehow
+                $('#parlay-window').css({
+                   left: 5,
+                    top: 5
+                });
+            }
         } else {
             $('#parlay-mode-box').find('.bfo-check-box').removeClass('checked');
             parlayMode = false;
@@ -1078,3 +1091,12 @@ fightSelected = function()
     }
 }
 
+function hideArrows() {
+    $('.ard').css("display", "none");
+    $('.aru').css("display", "none");
+    window.setTimeout(function() {
+        $('.ard').css("display", "inline-block");
+        $('.aru').css("display", "inline-block");
+    },0);
+}
+document.oncopy = hideArrows;

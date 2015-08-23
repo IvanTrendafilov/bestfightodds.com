@@ -91,7 +91,7 @@
                                     </li>
                                 </ul>
                             </div>
-                            <div class="menu-divider"
+                            <div id="mob-divider" class="menu-divider"
                                 <?php
                                  //Only display autorefresh-mode container if we are displaying an event or are on the front page
                                  if (CURRENT_PAGE != '')

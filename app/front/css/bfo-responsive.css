@@ -9,7 +9,7 @@
 	#header-search-box {
 		display: none;
 	}
-	#parlay-mode-container, #auto-refresh-container {
+	 #auto-refresh-container {
 		display: none;
 	}
 	.odds-table-responsive-header {
@@ -103,7 +103,7 @@
 	}
 
 	#header-menu-right {
-		margin-right: 15px;
+		margin-right: 7px;
 	}
 	.menu-divider {
 		display: none;
@@ -305,6 +305,28 @@
 		margin-top: 5px;
 	}
 
+	#parlay-window {
+	    min-width: 150px;
+	}
+
+	#parlay-mode-container {
+	    padding-right: 2px;
+
+	}
+
+	#mob-divider {
+		display: inline-block;
+	}
+}
+
+@media only screen and (max-width:372px) {
+	#parlay-mode-container {
+			display: none;
+		}
+
+		#mob-divider {
+			display: none;
+		}
 }
 
 @media only screen and (max-height:300px) {
