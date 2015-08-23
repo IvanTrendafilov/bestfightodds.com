@@ -1,7 +1,7 @@
 <?php
 require_once('lib/bfocore/general/class.EventHandler.php');
 ?>
-<div id="page-wrapper" style="max-width: 700px;">
+<div id="page-wrapper" style="max-width: 750px;">
     <div id="page-container">
         <div id="page-inner-wrapper">
             <div id="page-content">

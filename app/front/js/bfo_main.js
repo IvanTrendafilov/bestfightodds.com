@@ -611,7 +611,7 @@ $(document).ready(function() {
         $inputs.each(function() {
             values[this.name] = $(this).val();
         });
-        curbut = $(this);
+        var curbut = $(this);
         curbut[0].disabled = true; //.prop( "disabled", true );
         curbut.prevAll('.alert-result').removeClass('success error');
         $('#alert-mail-il').removeClass('success error');
@@ -743,12 +743,12 @@ initPage = function() {
                 $(this).closest('tr').next('tr.odd').andSelf('tr.odd').nextUntil('tr.even').css('display', 'table-row');
                 $('#mu-' + matchup_id).nextUntil('tr.even').css('display', 'table-row');
             }
-            $("[data-mu='" + matchup_id + "']").find(".exp-txt").text("▼");
+            $("[data-mu='" + matchup_id + "']").find(".exp-ard").addClass("exp-aru").removeClass("exp-ard");
             refreshOpenProps[matchup_id] = true;
         } else {
             $(this).closest('tr').next('tr.odd').andSelf('tr.odd').nextUntil('tr.even').css('display', 'none');
             $('#mu-' + matchup_id).nextUntil('tr.even').css('display', 'none');
-            $("[data-mu='" + matchup_id + "']").find(".exp-txt").text("►");
+            $("[data-mu='" + matchup_id + "']").find(".exp-aru").addClass("exp-ard").removeClass("exp-aru");
             refreshOpenProps[matchup_id] = false;
         }
         return false;
@@ -770,7 +770,7 @@ initPage = function() {
                 value[0].scrollLeft(selfscroller.scrollLeft());
             }
 
-            if (value[0].scrollLeft() >= (value[1].width() - value[0].width()) - 10) {
+            if (value[0].scrollLeft() >= (value[1].width() - value[0].width()) - 5) {
                 value[3].css("width", 0 + ((value[1].width() - value[0].width()) - value[0].scrollLeft()));
                 value[3].data("scrollRightVis", false);
 
@@ -779,7 +779,7 @@ initPage = function() {
                 value[3].data("scrollRightVis", true);
             }
 
-            if (value[0].scrollLeft() <= 10) {
+            if (value[0].scrollLeft() <= 5) {
                 value[2].css("width", 0 + value[0].scrollLeft());
                 value[2].data("scrollLeftVis", false);
             } else if (value[2].data("scrollLeftVis") == false) {

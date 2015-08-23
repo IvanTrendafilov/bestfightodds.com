@@ -16,6 +16,12 @@ class XMLParserSportsInteraction
 
     public function parseXML($a_sXML)
     {
+      //Temporary store of XML:
+      //$rStoreFile = fopen('/var/www/vhosts/bestfightodds.com/httpdocs/storedfeeds/' . 'sportsint-' . date('Ymd-Hi') . '.xml', 'a');
+      //fwrite($rStoreFile, $a_sXML);
+      //fclose($rStoreFile);
+
+
         $a_sXML = ereg_replace("<SportsInteractionLines>", "<SportsInteractionLines>\n", $a_sXML);
         $a_sXML = ereg_replace("</SportsInteractionLines>", "\n</SportsInteractionLines>", $a_sXML);
 

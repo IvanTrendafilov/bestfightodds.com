@@ -1,6 +1,7 @@
 </div>
 <div class="legend-container">
     <img src="/img/loading.gif" class="hidden-image" alt="Loading indicator" />
+    <img src="/img/expu.png" class="hidden-image" alt="Loading indicator" />
 </div>
 
 <div id="bottom-container">

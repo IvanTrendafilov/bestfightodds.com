@@ -279,16 +279,27 @@
 	.team-stats-table tbody td.change-cell {
 	}
 
+	.team-stats-table tbody tr:hover {
+	    background-color: #fff;
+	}
+
+
 
 	/*Alerts page*/ 
 	.alert-result-il {
-		background-color: #f0f2f4;
-		border: 1px solid #c0c0c0;
+		background-color: #f4f6f8;
+		border: 1px solid #cecece;
 		right: 75px;
 		margin-top: 2px;
 		padding: 1px;
 		position: absolute;
 	}
+
+	.alert-loader-il {
+		position: absolute;
+		right: 75px;
+	}
+
 
 	#bottom-container {
 		margin-top: 5px;

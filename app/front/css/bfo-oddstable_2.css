@@ -31,7 +31,6 @@
     width: 946px;
     font-size: 11px;
     border-collapse: collapse;
-    /*margin-top: -1px;*/
 }
 .odds-table thead tr {
     background-color: #cccdce;
@@ -39,7 +38,6 @@
 .odds-table thead th {
     text-align: center;
     height: 16px;
-    /*border-left: 1px solid #c5c5c5;*/
 }
 
 .odds-table thead th.table-prop-header {
@@ -51,7 +49,6 @@
 }
 .odds-table thead th a {
     color: #505050;
-    /*Pre-switch: color: #a5a5a5;*/
     font-size: 10px;
 }
 .odds-table thead th a:hover {
@@ -84,6 +81,12 @@
     max-width: 110px;
     word-break: break-word;
 }
+
+.odds-table tbody th div {
+    width: 100%;
+    position: relative;
+}
+
 .odds-table tbody th a {
     color: #1a1a1a;
     font-weight: 500;
@@ -96,7 +99,6 @@
 }
 .odds-table tbody td {
     font-family: Arial, sans-serif;
-    /*border-left: 1px dotted #ddd;*/
     color: #1a1a1a;
     width: 47px;
     max-width: 47px;
@@ -187,7 +189,7 @@
     margin: 0;
     padding: 0;
     color: #4BCA02;
-    position: absolute;    /*right: 0;*/
+    position: absolute;
     margin-left: 1px;
     font-size: 12px;
     vertical-align: middle;
@@ -199,7 +201,7 @@
     margin: 0;
     padding: 0;
     color: #E93524;
-    position: absolute;    /*right: 0;*/
+    position: absolute;
     margin-left: 1px;
     font-size: 12px;
     vertical-align: middle;
@@ -240,12 +242,8 @@
     margin-bottom: 10px;
 }
 
-.button-cell img {
-    opacity: .9
-}
-
-.button-cell img:hover {
-    opacity: .7;
+.button-cell div:hover {
+    opacity: .8;
     -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=85)";
     filter: alpha(opacity=85);
 }
@@ -259,6 +257,45 @@
     width: 90px;
     height: 20px;
 }
-.odds-table-responsive-header tbody tr.pr th {
+
+.exp-ard {
+    width: 9px !important;
+    height: 6px !important;
+    background-image: url('/img/expd.png');
+    background-size: 9px 6px;
+    padding: 0 !important;
+    display: inline-block;
 }
 
+.exp-aru {
+    width: 9px !important;
+    height: 6px !important;
+    background-image: url('/img/expu.png');
+    background-size: 9px 6px;
+    padding: 0 !important;
+    display: inline-block;
+}
+
+.but-img {
+    width: 14px !important;
+    height: 15px !important;
+    background-size: 14px 15px;
+    padding: 0 !important;
+    display: inline-block;
+}
+
+.i-ng {
+    background-image: url('/img/icon-nograph.png');
+}
+
+.i-na {
+    background-image: url('/img/icon-noalert.png');
+}
+
+.i-g {
+    background-image: url('/img/icon-graph.png');
+}
+
+.i-a {
+    background-image: url('/img/icon-alert.png');
+}

@@ -1,4 +1,4 @@
-<?php
+B0;136;0c<?php
 
 require_once('lib/bfocore/general/class.EventHandler.php');
 require_once('lib/bfocore/utils/class.OddsTools.php');
@@ -51,6 +51,17 @@ class ParseTools
             curl_setopt($rCurl, CURLOPT_USERPWD, $sCred);
             curl_setopt($rCurl, CURLOPT_HTTPAUTH, CURLAUTH_BASIC);
         }
+
+	if ($a_sURL == 'http://lines.bookmaker.eu')
+	{
+	  curl_setopt($rCurl, CURLOPT_INTERFACE, '89.221.255.123');
+	}
+
+	if ($a_sURL == 'http://lines.betdsi.eu/')
+	  {
+	    curl_setopt($rCurl, CURLOPT_INTERFACE, '89.221.253.24');
+	  }
+
 
         // Set some options - we are passing in a useragent too here        
         curl_setopt_array($rCurl, array(
@@ -109,6 +120,18 @@ class ParseTools
                 curl_setopt($aChannels[$sURL], CURLOPT_HTTPAUTH, CURLAUTH_BASIC);
             }
             
+
+if ($sURL == 'http://lines.bookmaker.eu')
+    {
+      curl_setopt($aChannels[$sURL], CURLOPT_INTERFACE, '89.221.255.123');
+    }
+
+    if ($sURL == 'http://lines.betdsi.eu/')
+      {
+        curl_setopt($aChannels[$sURL], CURLOPT_INTERFACE, '89.221.253.24');
+      }
+
+
             curl_setopt_array($aChannels[$sURL], array(
                 CURLOPT_IPRESOLVE => CURL_IPRESOLVE_V4,
                 CURLOPT_RETURNTRANSFER => 1,

@@ -164,7 +164,7 @@ input[type="submit"][disabled], input[type="submit"]:disabled {
     float: left;
     width: 290px;
     height: 54px;
-    background-image: url('/img/logo.png');
+    background-image: url('/img/logo_3.png');
     background-size: 290px 54px;
 }
 #twitter-icon {
@@ -723,11 +723,6 @@ ul.share-dropdown ul li a {
 
 
 
-
-
-
-
-
 /* New content lists */
 .content-header {
     background-color: #393B42;
@@ -815,7 +810,7 @@ table.team-stats-table {
 
 .team-stats-table tbody tr.event-header td {
     /*background-color: #fff;*/
-    border-top: 1px solid #989898;
+    border-top: 1px solid #b0b2b4;
     border-bottom: 1px solid #E6E8Ea;
     background-color: #E6E8Ea;
     color: #1a1a1a;
@@ -863,8 +858,12 @@ table.team-stats-table {
     padding-left: 3px;
 }
 .team-stats-table tbody td.oppcell {
-    
     max-width: 70px;
+}
+
+.team-stats-table tbody td.oppcell div  {
+    width: 100%;
+    position: relative;
 }
 
 .team-stats-table tbody td .bestbet {

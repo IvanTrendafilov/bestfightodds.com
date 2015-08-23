@@ -50,6 +50,11 @@ class XMLParserSportBet
                 //Check if entry is a prop, if so add it as a parsed prop
                 if (trim((string) $cEvent->SportSubType) == 'Props')
                 {
+		  if (trim((string) $cEvent->CorrelationId) == 'Till1501')
+                    {
+                      $cEvent->CorrelationId = 'Oliveira1501';
+                    }
+
                     $oParsedProp = null;
 
                     if ((trim((string) $cEvent->HomeMoneyLine) != '')

@@ -50,6 +50,10 @@ class XMLParser5Dimes
                 //Check if entry is a prop, if so add it as a parsed prop
                 if (trim((string) $cEvent->SportSubType) == 'Props')
                 {
+		  if (trim((string) $cEvent->CorrelationID) == 'Till1501')
+		    {
+		      $cEvent->CorrelationID = 'Oliveira1501';
+		    }
                     $oParsedProp = null;
 
                     if ((trim((string) $cEvent->HomeMoneyLine) != '')
