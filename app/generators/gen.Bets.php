@@ -40,7 +40,7 @@ foreach ($aEvent as $oEvent)
                                         <ul class="sub_menu">
                                              <li><div class="share-window">
                                                 <a href="https://twitter.com/intent/tweet?text=' . urlencode($sShareDesc) . '&amp;url=' . urlencode($sShareURL) . '" class="share-window-twitter">&nbsp;</a>
-                                                <a href="https://www.facebook.com/sharer/sharer.php?u=http%3A%2F%2Fsbnation.com%2Fe%2F8538682%3Futm_campaign%3Dbloodyelbow%26utm_content%3Darticle%2525253Atop%26utm_medium%3Dsocial%26utm_source%3Dfacebook%252523%2523%23" class="share-window-facebook">&nbsp;</a>
+                                                <a href="https://www.facebook.com/sharer/sharer.php?u=http://www.bestfightodds.com%26utm_medium%3Dsocial%26utm_source%3Dfacebook%252523%2523%23" class="share-window-facebook">&nbsp;</a>
                                                 <a href="#" class="share-window-whatsapp">&nbsp;</a>
                                                 <a href="#" class="share-window-google">&nbsp;</a></div></li>
                                         </ul>

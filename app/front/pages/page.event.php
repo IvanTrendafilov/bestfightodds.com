@@ -93,7 +93,7 @@ if ($oEvent != null)
                                         <ul class="sub_menu">
                                              <li><div class="share-window">
                                                 <a href="https://twitter.com/intent/tweet?text=' . urlencode($sShareDesc) . '&amp;url=' . urlencode($sShareURL) . '" class="share-window-twitter">&nbsp;</a>
-                                                <a href="https://www.facebook.com/sharer/sharer.php?u=http%3A%2F%2Fsbnation.com%2Fe%2F8538682%3Futm_campaign%3Dbloodyelbow%26utm_content%3Darticle%2525253Atop%26utm_medium%3Dsocial%26utm_source%3Dfacebook%252523%2523%23" class="share-window-facebook">&nbsp;</a>
+                                                <a href="https://www.facebook.com/sharer/sharer.php?u=http://www.bestfightodds.com%26utm_medium%3Dsocial%26utm_source%3Dfacebook%252523%2523%23" class="share-window-facebook">&nbsp;</a>
                                                 <a href="#" class="share-window-whatsapp">&nbsp;</a>
                                                 <a href="#" class="share-window-google">&nbsp;</a></div></li>
                                         </ul>
@@ -109,7 +109,6 @@ if ($oEvent != null)
         . '<tbody>';
 
         $iFightCounter = 0;
-
         foreach ($aFights as $oFight)
         {
             //List all odds for the fight
@@ -203,10 +202,8 @@ if ($oEvent != null)
         }
         echo '</tbody>'
         . '</table>';
-    }
+    
 
-    if (sizeof($aFights) > 0 && $oEvent->isDisplayed())
-    {
         $sLastChange = EventHandler::getLatestChangeDate($oEvent->getID());
 
         echo '<div class="table-inner-wrapper"><div class="table-inner-shadow-left"></div><div class="table-inner-shadow-right"></div><div class="table-scroller"><table class="odds-table">'
@@ -223,6 +220,7 @@ if ($oEvent != null)
         echo '<th scope="col" colspan="3" class="table-prop-header">Props</th></tr></thead><tbody>';
 
         $iFightCounter = 0;
+        $bSomeOddsFound = false;
 
         foreach ($aFights as $oFight)
         {
@@ -243,6 +241,8 @@ if ($oEvent != null)
 
                 foreach ($aFightOdds as $oFightOdds)
                 {
+                    $bSomeOddsFound = true;
+
                     $iCurrentOperatorColumn = $iProcessed;
                     while (isset($aBookieRefList[$iCurrentOperatorColumn]) && $aBookieRefList[$iCurrentOperatorColumn] != $oFightOdds->getBookieID())
                     {
@@ -290,7 +290,7 @@ if ($oEvent != null)
                             {
                                 echo '<span class="ard arage-' . $iChangeID . '">▼</span>';
                             }
- 
+
                             echo '</span></a></td>';
                              $bFoundOldOdds = true;
                             $bEverFoundOldOdds = true;
@@ -530,12 +530,53 @@ if ($oEvent != null)
 
             $iFightCounter++;
         }
+
+       if (!$bSomeOddsFound)
+        {
+            echo '<tr><td colspan="' . (sizeof($aBookies) + 3) . '" style="padding: 20px 0; ">No betting lines available for this event';
+            //Check if event is in the future, if so, add a notifier about alerts, tweets, etc..
+            if (strtotime(GENERAL_TIMEZONE . ' hours') < strtotime(date('Y-m-d 23:59:59', strtotime($oEvent->getDate()))))
+            {
+                echo '<br /><br /><img src="/img/info.gif" class="img-info-box" /> Get notified when odds are posted either via our <a href="/alerts" style="text-decoration: underline">Alerts</a> functionality or by following us on <a href="http://twitter.com/bestfightodds" target="_blank" style="text-decoration: underline">Twitter</a>';
+            }
+            echo '</td></tr>';
+        }
+
         echo '</tbody>'
-        . '</table></div></div></div></div>
-        <div class="table-last-changed">Last change: <span title="' . (sizeof($aFights) == 0 ? 'n/a' : (date('M jS Y H:i', strtotime($sLastChange)) . ' EST')) . '">' . getTimeDifference(strtotime($sLastChange), strtotime(GENERAL_TIMEZONE . ' hours')) . '</span></div>'
-        . '
-          ';
+        . '</table></div></div></div></div>'; 
+
+
+        $sBuffer = ob_get_clean();
+
+        CacheControl::cleanPageCacheWC('event-' . $oEvent->getID() . '-*');
+        CacheControl::cachePage($sBuffer, 'event-' . $oEvent->getID() . '-' . strtotime($sLastChange) . '.php');
+        
+        echo '<!--C:MIS-->';
+
+
     }
+
+    //Perform dynamic modifications to the content (cached or not)
+    echo preg_replace_callback('/bfo-cdate=\"([^\"]*)\"/', function ($a_aMatches)
+    {
+        $iHoursDiff = intval(floor((time() - strtotime($a_aMatches[1])) / 3600));
+        if ($iHoursDiff >= 72)
+        {
+            return 'class="carr-age3"';
+        }
+        else if ($iHoursDiff >= 24)
+        {
+            return 'class="carr-age2"';
+        }
+        else
+        {
+            return 'class="carr-age1"';
+        }
+    }, $sBuffer);
+
+        echo '<div class="table-last-changed">Last change: <span title="' . ($sLastChange == null ? 'n/a' : (date('M jS Y H:i', strtotime($sLastChange)) . ' EST')) . '">' . getTimeDifference(strtotime($sLastChange), strtotime(GENERAL_TIMEZONE . ' hours')) . '</span></div>'
+    . '
+          ';
 }
 
 ?>

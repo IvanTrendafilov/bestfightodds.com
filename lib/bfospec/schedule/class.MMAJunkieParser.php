@@ -6,8 +6,8 @@ class MMAJunkieParser
 {
     public static function fetchSchedule()
     {
-        //$sURL = 'http://api.mmajunkie.com/rumors/rss';
-        $sURL = 'http://localhost:8080/rss.txt';
+        $sURL = 'http://api.mmajunkie.com/rumors/rss';
+        //$sURL = 'http://localhost:8080/rss.txt';
         $aCurlOpts = array(CURLOPT_USERAGENT => 'MWFeedParser');
         $sContents = ParseTools::retrievePageFromURL($sURL, $aCurlOpts);
 
