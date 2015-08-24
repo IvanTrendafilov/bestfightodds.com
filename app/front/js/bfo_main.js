@@ -125,19 +125,33 @@ addToParlay = function(obj) {
         tmpArr["ref"] = $(obj).find('span').find('span').first().attr('id').substring(3);
 
         found = false;
+        foundEl = null;
         for (var i = 0; i < parlay.length; i++) {
             if (parlay[i]["ref"] == tmpArr["ref"]) {
+                foundEl = i;
                 found = true;
             }
         }
         if (!found) {
             parlay.push(tmpArr);
         }
+        else
+        {  
+            //Remove it from parlay
+            parlay.splice(foundEl, 1);
+        }
 
     } else {
         if (parlay.length == 0) {
             return false;
         }
+    }
+
+    if (parlay.length == 0)
+    {
+        $('#parlay-area').html('Click on a line to add it to your parlay');
+        $('#parlay-header').html('Parlay');
+        return false;
     }
 
     tmpText = '';
