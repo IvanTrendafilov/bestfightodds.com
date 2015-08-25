@@ -68,8 +68,9 @@ class TwitterHandler
                 }
             }
 
+            //Disabled: Generic hashtags (replaced by dynamic later down)
             //If we haven't exceeded 140 chars we can add #-categories for certain events
-            if ((strlen($sTwitText) + 5) <= 140)
+            /*if ((strlen($sTwitText) + 5) <= 140)
             {
                 if (strtolower(substr($oEvent->getName(), 0, 3)) == 'ufc')
                 {
@@ -79,8 +80,19 @@ class TwitterHandler
             if ((strlen($sTwitText) + 5) <= 140)
             {
                 $sTwitText .= ' #MMA';
-            }
+            }*/
 
+            //Add dynamic hashtags if less than 140 chars and if event name format allows for it
+            $aMatches = null;
+            $sRegExp = preg_match("/^([a-zA-Z]{2,8}\s[0-9]{1,5}):/", $oEvent->getName(), $aMatches);
+            if ($aMatches != null && isset($aMatches[1]))
+            {
+                $sHashtag = ' #' . strtolower(str_replace(' ', '', $aMatches[1]));
+                if ($sTwitText + $sHashtag - 2 <= 140) //The -2 correction is for URL transformation to t.co address
+                {
+                    $sTwitText .= $sHashtag;
+                }
+            }
 
             if ($sTwitText != '' && $oTwitterer->updateStatus($sTwitText))
             {

@@ -17,7 +17,7 @@
             else
             {
               ?>
-            <a href="/?desktop=on">Desktop site</a></span><span class="menu-seperator">|</span>
+            <a href="/?desktop=on">Desktop site</a><span class="menu-seperator">|</span>
               <?php
             }
           ?>
