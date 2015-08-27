@@ -31,11 +31,13 @@ require_once('lib/bfocore/general/class.BookieHandler.php');
 //Step 3
 
 $aBookies = BookieHandler::getAllBookies();
-$aEvents = EventHandler::getAllUpcomingEvents();
+$aEvents = array_merge(EventHandler::getAllUpcomingEvents(), EventHandler::getRecentEvents(10));
 $iRemovedOdds = 1;
 $iRemovedPropOdds = 1;
 $iCounter = 0;
 
+echo 'Preparing to clean ' . count($aEvents) . ' events.. 
+';
 
 while (($iRemovedOdds > 0 || $iRemovedPropOdds > 0)  && $iCounter < 10) 
 {
