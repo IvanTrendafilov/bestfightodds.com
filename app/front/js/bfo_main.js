@@ -698,7 +698,7 @@ $(document).ready(function() {
     });
 
     //Team page: Mean graph text button listener
-    $(".teamPercChange").on('click', function(event) {
+    $("span.teamPercChange").on('click', function(event) {
             var opts = $.parseJSON($(this).attr('data-li'));
             var versus = $(this).closest('tr').next('tr').find("th.oppcell").text();
             var title = $("#team-name").text() + " <span style=\"font-weight: normal;\">(vs. " + versus +  ") &#150; Mean odds";
@@ -744,7 +744,7 @@ initPage = function() {
 
 
     //Cache tables for scrolling purpose
-    $('.table-scroller').each(function() {
+    $('div.table-scroller').each(function() {
         scrollCache.push([$(this), $('table', $(this)), $(this).prev().prev('.table-inner-shadow-left'), $(this).prev('.table-inner-shadow-right')]);
         $.each(scrollCache, function(key, value) {
             value[2].data("scrollLeftVis", false);
@@ -754,7 +754,7 @@ initPage = function() {
 
 
     //Add prop row togglers
-    $('.prop-cell a').on('click', function() {
+    $('td.prop-cell').find('a').on('click', function() {
         matchup_id = $(this).attr('data-mu');
         if (typeof $(this).data('toggled') == 'undefined') {
             $(this).data('toggled', false);
@@ -783,11 +783,11 @@ initPage = function() {
     });
 
     //Sync scrollbars
-    $('.table-scroller').bind('mousedown touchstart', function() {
+    $('div.table-scroller').bind('mousedown touchstart', function() {
         scrollCaptain = $(this);
     });
 
-    $('.table-scroller').on('scroll', function() {
+    $('div.table-scroller').on('scroll', function() {
 
         var selfscroller = $(this);
         if (selfscroller.scrollLeft() == scrollX || !selfscroller.is(scrollCaptain)) return false;
@@ -903,7 +903,7 @@ initPage = function() {
     //Loop through all tr TDs and add event
 
     //Add regular matchup listeners
-    $(".odds-table").find('.but-sg').on('click', function(event) {
+    $('a.but-sg').on('click', function(event) {
         var opts = $.parseJSON($(this).attr('data-li'));
         if (parlayMode) {
             return addToParlay(this);
@@ -917,7 +917,7 @@ initPage = function() {
         }
     });
     //Add prop listeners
-    $(".odds-table").find('.but-sgp').on('click', function(event) {
+    $('a.but-sgp').on('click', function(event) {
         var opts = $.parseJSON($(this).attr('data-li'));
         if (parlayMode) {
             return addToParlay(this);
@@ -931,7 +931,7 @@ initPage = function() {
     });
 
     //Add index graph button listeners
-    $(".odds-table").find('.but-si').on('click', function(event) {
+    $('a.but-si').on('click', function(event) {
         var opts = $.parseJSON($(this).attr('data-li'));
         if (parlayMode) {
             return false;
@@ -945,7 +945,7 @@ initPage = function() {
         }
     });
     //Add prop index graph button listeners
-    $(".odds-table").find('.but-sip').on('click', function(event) {
+    $('a.but-sip').on('click', function(event) {
         var opts = $.parseJSON($(this).attr('data-li'));
         if (parlayMode) {
             return false;
@@ -959,7 +959,7 @@ initPage = function() {
     });
 
     //Add alert button form show listeners
-    $(".odds-table").find('.but-al').on('click', function(event) {
+    $('a.but-al').on('click', function(event) {
         var context = {};
         context.opts = $.parseJSON($(this).attr('data-li'));
         context.bestodds = $(this).closest("tr").find(".bestbet").first().text();

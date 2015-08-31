@@ -263,32 +263,16 @@ if ($oEvent != null)
 
                     foreach ($aOldFightOdds as $oOldFightOdds)
                     {
-                        //Get difference in hours between latest and next to latest odds
-                        $iHoursDiff = intval(floor((time() - strtotime($oFightOdds->getDate())) / 3600));
-                        if ($iHoursDiff >= 72)
-                        {
-                            $iChangeID = '3';
-                        }
-                        else if ($iHoursDiff >= 24)
-                        {
-                            $iChangeID = '2';
-                        }
-                        else
-                        {
-                            $iChangeID = '1';
-                        }
-
-
                         if ($oOldFightOdds->getBookieID() == $iCurrentOperatorID)
                         {
                             echo '<td><a href="#" class="but-sg" data-li="[' . $oFightOdds->getBookieID() . ',' . $iX . ',' . $oFightOdds->getFightID() . ']" ><span class="tw"><span id="oID' . ('1' . $oFightOdds->getFightID() . $oFightOdds->getBookieID() . $iX) . '" ' . $sClassName . '>' . $oFightOdds->getFighterOddsAsString($iX) . '</span>';
                             if ($oFightOdds->getFighterOdds($iX) > $oOldFightOdds->getFighterOdds($iX))
                             {
-                                echo '<span class="aru arage-' . $iChangeID . '">▲</span>';
+                                echo '<span class="aru changedate-' . $oFightOdds->getDate() .'">▲</span>';
                             }
                             else if ($oFightOdds->getFighterOdds($iX) < $oOldFightOdds->getFighterOdds($iX))
                             {
-                                echo '<span class="ard arage-' . $iChangeID . '">▼</span>';
+                                echo '<span class="ard changedate-' . $oFightOdds->getDate() .'">▼</span>';
                             }
 
                             echo '</span></a></td>';
@@ -323,11 +307,11 @@ if ($oEvent != null)
                     echo '<td class="button-cell"><span class="but-img i-ng" alt="No index graph available"></span></td>';
                 }
 
-                echo '<td class="prop-cell"><a href="#" data-mu="' . $oFight->getID() . '"><span class="tw">';
+                echo '<td class="prop-cell"><a href="#" data-mu="' . $oFight->getID() . '"><span class="tw">&nbsp;';
                 $iPropCount = OddsHandler::getPropCountForMatchup($oFight->getID());
                 if ($iPropCount > 0)
                 {
-                    echo $iPropCount . '&nbsp;<span class="exp-ard"></span>';
+                    echo $iPropCount . '<span class="exp-ard"></span>';
                 }
                 echo '</span></a></td>';
 
@@ -417,21 +401,6 @@ if ($oEvent != null)
 
                             foreach ($aOldPropOdds as $oOldPropOdds)
                             {
-                                //Get difference in hours between latest and next to latest odds
-                                $iHoursDiff = intval(floor((time() - strtotime($oPropOdds->getDate())) / 3600));
-                                if ($iHoursDiff >= 72)
-                                {
-                                    $iChangeID = '3';
-                                }
-                                else if ($iHoursDiff >= 24)
-                                {
-                                    $iChangeID = '2';
-                                }
-                                else
-                                {
-                                    $iChangeID = '1';
-                                }
-
                                 //Determine if the prop or negative prop is the one to compare
                                 $iCompareOddsNew = 0;
                                 $iCompareOddsOld = 0;
@@ -454,11 +423,11 @@ if ($oEvent != null)
                                         echo '<a href="#" class="but-sgp" data-li="[' . $oPropOdds->getBookieID() . ',' . $iX . ',' . $oPropOdds->getMatchupID() . ',' . $oPropOdds->getPropTypeID() . ',' . $oPropOdds->getTeamNumber() . ']"><span class="tw"><span id="oID' . ('2' . $oPropOdds->getMatchupID() . $oPropOdds->getBookieID() . $iX . $oPropOdds->getPropTypeID() . $oPropOdds->getTeamNumber()) . '" ' . $sClassName . '>' . ($iX == 1 ? $oPropOdds->getPropOddsAsString() : $oPropOdds->getNegPropOddsAsString()) . '</span>';
                                         if ($iCompareOddsNew > $iCompareOddsOld)
                                         {
-                                            echo '<span class="aru arage-' . $iChangeID . '">▲</span>';
+                                            echo '<span class="aru changedate-' . $oPropOdds->getDate() .'">▲</span>';
                                         }
                                         else if ($iCompareOddsNew < $iCompareOddsOld)
                                         {
-                                            echo '<span class="ard arage-' . $iChangeID . '">▼</span>';
+                                            echo '<span class="ard changedate-' . $oPropOdds->getDate() .'">▼</span>';
                                         }
                                         else
                                         {
@@ -557,20 +526,20 @@ if ($oEvent != null)
     }
 
     //Perform dynamic modifications to the content (cached or not)
-    echo preg_replace_callback('/bfo-cdate=\"([^\"]*)\"/', function ($a_aMatches)
+    echo preg_replace_callback('/changedate-([^\"]*)/', function ($a_aMatches)
     {
         $iHoursDiff = intval(floor((time() - strtotime($a_aMatches[1])) / 3600));
         if ($iHoursDiff >= 72)
         {
-            return 'class="carr-age3"';
+            return 'arage-3';
         }
         else if ($iHoursDiff >= 24)
         {
-            return 'class="carr-age2"';
+            return 'arage-2"';
         }
         else
         {
-            return 'class="carr-age1"';
+            return 'arage-1"';
         }
     }, $sBuffer);
 
