@@ -19,7 +19,7 @@
         }
         ?>
         </script>
-        <link rel="stylesheet" type="text/css" href="/css/stylesheets_3.1.php" />
+        <link rel="stylesheet" type="text/css" href="/css/stylesheets_3.2.php" />
         <link rel="shortcut icon" href="https://www.bestfightodds.com/favicon.ico" />
         <link rel="apple-touch-icon" sizes="144x144" href="/apple-touch-icon-144x144.png" />
         <link rel="apple-touch-icon" sizes="114x114" href="/apple-touch-icon-114x114.png" />
@@ -37,7 +37,7 @@
     <link rel="stylesheet" type="text/css" href="/css/bfo-ie9.css" />
     <![endif]--> 
     <body>
-        <script type="text/javascript" async src="/js/javascripts_3.0.php"></script>
+        <script type="text/javascript" async src="/js/javascripts_3.1.php"></script>
         <div class="header">
                 <div class="header-top">
                     <a href="/"><div class="logo" alt="BestFightOdds.com"></div></a>

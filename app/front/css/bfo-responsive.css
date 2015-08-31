@@ -208,8 +208,39 @@
 	    padding-top: 0;
 	}
 
-	.share-dropdown {
+
+	.share-button {
+	    height: 25px;
 	    margin-top: -5px;
+	}
+
+	.share-window {
+	    margin-top: -5px;
+	    height: 25px;
+	}
+
+	.share-window.show {
+		width: 180px;
+	}
+
+	.share-twitter {
+	    background: url("/img/sharebuttons.png") -0px -3px
+	}
+	.share-facebook {
+	    background: url("/img/sharebuttons.png") -53px -3px;
+	}
+	.share-google {
+	    background: url("/img/sharebuttons.png") -104px -3px;
+	}
+	.share-whatsapp {
+	    background: url("/img/sharebuttons.png") -157px -3px;
+	}
+
+	.share-item {
+	    width: 45px;
+	    height: 25px;
+	    display: inline-block;
+	    background-size: 203px 31px;
 	}
 
 	/* Content pages */

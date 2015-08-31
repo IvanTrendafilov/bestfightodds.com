@@ -482,9 +482,15 @@ ul.share-dropdown ul li {
     height: 100%;
 }
 .share-button {
-    width: 13px;
-    height: 13px;
+    width: 30px;
+    height: 32px;
     opacity: 0.25;
+    background: url("/img/share_3.png") ;
+    background-size: 13px 13px;
+    background-repeat: no-repeat;
+    background-position: center;
+    margin-top: -6px;
+    cursor: pointer;
 }
 .share-button:hover {
     opacity: 0.75;
@@ -492,45 +498,66 @@ ul.share-dropdown ul li {
 ul.share-dropdown ul li a {
     padding: 0;
 }
+
+.share-area {
+    position: absolute;
+    right: 0;
+    display: inline-block;
+}
+
 .share-window {
-    display: -webkit-box;
-    display: -moz-box;
-    display: -ms-flexbox;
-    display: -webkit-flex;
-    display: flex;
-}
-.share-window-twitter {
-    min-width: 70px;
-    min-height: 50px;
-    width: 70px;
-    height: 18px;
-    background: url("/img/sharebuttons.png") -11px -8px;
     display: inline-block;
+    position: absolute;
+    z-index: 5;
+    right: 0;
+    -webkit-transition: all 0.1s ease-out;
+    -moz-transition: all 0.1s ease-out;
+    -o-transition: all 0.1s ease-out;
+    transition: all 0.1s ease-out;
+    width: 0;
+    margin-top: -6px;
+    overflow: hidden;
+    white-space: nowrap;
+    -webkit-transform: scale(0, 1.0);
+    -moz-transform: scale(0, 1.0);
+    -ms-transform: scale(0, 1.0);
+    transform: scale(0, 1.0);
+    -webkit-transform-origin: right center;
+    -moz-transform-origin: right center;
+    -o-transform-origin: right center;
+    transform-origin: right center;
+    height: 32px;
+    border-left: solid 2px #393B42;
 }
-.share-window-facebook {
-    min-width: 70px;
-    min-height: 50px;
-    width: 70px;
-    height: 18px;
-    background: url("/img/sharebuttons.png") -116px -8px;
+
+.share-window.show {
+    width: 135px;
+    -webkit-transform: scale(1.0, 1.0);
+    -moz-transform: scale(1.0, 1.0);
+    -ms-transform: scale(1.0, 1.0);
+    transform: scale(1.0, 1.0);
+}
+.share-twitter {
+    background: url("/img/sharebuttons.png") -0px 0px
+}
+.share-facebook {
+    background: url("/img/sharebuttons.png") -53px 0px;
+}
+.share-google {
+    background: url("/img/sharebuttons.png") -104px 0px;
+}
+.share-whatsapp {
+    background: url("/img/sharebuttons.png") -157px 0px;
+}
+
+.share-item {
+    width: 45px;
+    height: 32px;
     display: inline-block;
+    background-size: 203px 31px;
+    cursor: pointer;
 }
-.share-window-google {
-    min-width: 70px;
-    min-height: 50px;
-    width: 70px;
-    height: 18px;
-    background: url("/img/sharebuttons.png") -217px -8px;
-    display: inline-block;
-}
-.share-window-whatsapp {
-    min-width: 70px;
-    min-height: 50px;
-    width: 70px;
-    height: 18px;
-    background: url("/img/sharebuttons.png") -322px -8px;
-    display: inline-block;
-}
+
 .popup-window {
     -webkit-box-shadow: 0 2px 3px 1px rgba(0, 0, 0, 0.4);
     -moz-box-shadow: 0 2px 3px 1px rgba(0, 0, 0, 0.4);

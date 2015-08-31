@@ -32,22 +32,11 @@ foreach ($aEvent as $oEvent)
 
         echo '<div class="table-outer-wrapper"><div class="table-div" id="event' . $oEvent->getID() . '"><div class="table-header"><a href="/events/' . $oEvent->getEventAsLinkString() . '">' . $oEvent->getName() . '</a>' . $sAddDate . '';
 
-        $sShareURL = 'https://www.bestfightodds.com' . $oEvent->getEventAsLinkString();
+        $sShareURL = 'https://www.bestfightodds.com/events/' . $oEvent->getEventAsLinkString();
         $sShareDesc = $oEvent->getName() . ' betting lines';
 
-        echo '<ul class="share-dropdown dropdown">
-                                <li><a href="#"><img src="/img/share_3.png" class="share-button" alt="Share this" /></a>
-                                        <ul class="sub_menu">
-                                             <li><div class="share-window">
-                                                <a href="https://twitter.com/intent/tweet?text=' . urlencode($sShareDesc) . '&amp;url=' . urlencode($sShareURL) . '" class="share-window-twitter">&nbsp;</a>
-                                                <a href="https://www.facebook.com/sharer/sharer.php?u=http://www.bestfightodds.com%26utm_medium%3Dsocial%26utm_source%3Dfacebook%252523%2523%23" class="share-window-facebook">&nbsp;</a>
-                                                <a href="#" class="share-window-whatsapp">&nbsp;</a>
-                                                <a href="#" class="share-window-google">&nbsp;</a></div></li>
-                                        </ul>
-                                </li>
-                            </ul>';
-
-                            /*echo '<div class="share-area"><a href="#">Share me</a></div>';*/
+        echo '<div class="share-area"><div class="share-button" alt="Share this"></div></div>
+                                        <div class="share-window"><div data-href="https://twitter.com/intent/tweet?text=' . urlencode($sShareDesc) . '&amp;url=' . urlencode($sShareURL) . '" class="share-item share-twitter"></div><div data-href="https://www.facebook.com/sharer/sharer.php?u=' . urlencode($sShareURL) . '" class="share-item share-facebook"></div><div data-href="https://plus.google.com/share?url=' . urlencode($sShareURL) .'" class="share-item share-google"></div><div data-href="whatsapp://send?text=' . urlencode($sShareDesc) . ' ' . urlencode($sShareURL) . '" data-action="share/whatsapp/share" class="share-item share-whatsapp item-mobile-only"></div></div>';
 
         echo '</div>';
 

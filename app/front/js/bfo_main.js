@@ -10,6 +10,7 @@ var refreshOpenProps = {};
 var scrollCache = [];
 var scrollX = 0;
 var scrollCaptain = null;
+var shareVisible = false;
 
 //ClearChart
 chartCC = function() {
@@ -859,6 +860,24 @@ initPage = function() {
         });
     });
 
+    //Add share popup
+    $('.share-area').click(function(event) {
+        var shw = $(this).parent().find('.share-window')
+        $(shw).addClass('show');
+        //Add event handlers for each share window
+            $(shw).find('.share-item').on('click', function(event) {
+                if ($(this).data('href').substring(0,11) == 'whatsapp://')
+                {
+                    window.location.href=$(this).data('href');
+                }
+                else
+                {
+                    window.open('' + $(this).data('href'),'_blank');
+                }
+            });
+        shareVisible = true;
+    });
+
     //Add graph popup controls
     //close popup
     $('#chart-window').on('click', function(event) {
@@ -893,6 +912,17 @@ initPage = function() {
         if (!$(event.target).closest('#alert-window').length) {
             if ($('#alert-window').is(":visible")) {
                 $('#alert-window').removeClass('is-visible');
+            }
+        }
+
+        if (shareVisible == true)
+        {
+            if (!$(event.target).closest('.share-button').length) {
+                if (!$(event.target).closest('.share-item').length) {
+                    $('div.share-window.show').removeClass('show');
+                    shareVisible = false;
+                    $('.share-item').off("click");
+                }
             }
         }
     })
@@ -1059,9 +1089,6 @@ debounce = function(fn, delay) {
     };
 }
 
-stTwitter = function (url) {
-    window.open('http://twitter.com', 'twitterwindow', 'height=450, width=550, top=' + ($(window).height() / 2 - 225) + ', left=' + $(window).width() / 2 + ', toolbar=0, location=0, menubar=0, directories=0, scrollbars=0');
-}
 
 $(function() {
     FastClick.attach(document.body);
