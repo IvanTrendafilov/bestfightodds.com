@@ -482,18 +482,22 @@ ul.share-dropdown ul li {
     height: 100%;
 }
 .share-button {
-    width: 30px;
+    width: 35px;
     height: 32px;
-    opacity: 0.25;
+    opacity: 0.3;
     background: url("/img/share_3.png") ;
     background-size: 13px 13px;
     background-repeat: no-repeat;
     background-position: center;
     margin-top: -6px;
     cursor: pointer;
+    -webkit-transition: all 0.1s ease-out;
+    -moz-transition: all 0.1s ease-out;
+    -o-transition: all 0.1s ease-out;
+    transition: all 0.1s ease-out;
 }
 .share-button:hover {
-    opacity: 0.75;
+    opacity: 0.8;
 }
 ul.share-dropdown ul li a {
     padding: 0;
