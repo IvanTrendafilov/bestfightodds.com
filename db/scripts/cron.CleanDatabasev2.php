@@ -31,7 +31,7 @@ require_once('lib/bfocore/general/class.BookieHandler.php');
 //Step 3
 
 $aBookies = BookieHandler::getAllBookies();
-$aEvents = array_merge(EventHandler::getAllUpcomingEvents(), EventHandler::getRecentEvents(10));
+$aEvents = array_merge(EventHandler::getAllUpcomingEvents(), EventHandler::getRecentEvents(5));
 $iRemovedOdds = 1;
 $iRemovedPropOdds = 1;
 $iCounter = 0;
