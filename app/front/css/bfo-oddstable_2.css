@@ -9,6 +9,7 @@
     display: -webkit-flex;     
     display: flex;     
     z-index: 2;
+    height: 20px;
 }
 .table-header a {
     font-weight: 500;    
