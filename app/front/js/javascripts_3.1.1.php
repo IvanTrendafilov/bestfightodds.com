@@ -5,7 +5,7 @@ header("Cache-Control: max-age=900, must-revalidate");
 
 //Libs
 include_once('jquery-1.11.3.min.js');
-include_once('jquery.cookie.js');
+include_once('js.cookie.js');
 include_once('highcharts.js');
 include_once('highcharts-more.js');
 include_once('fastclick-min.js');

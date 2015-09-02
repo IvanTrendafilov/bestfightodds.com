@@ -37,7 +37,7 @@
     <link rel="stylesheet" type="text/css" href="/css/bfo-ie9.css" />
     <![endif]--> 
     <body>
-        <script type="text/javascript" async src="/js/javascripts_3.1.php"></script>
+        <script type="text/javascript" async src="/js/javascripts_3.1.1.php"></script>
         <div class="header">
                 <div class="header-top">
                     <a href="/"><div class="logo" alt="BestFightOdds.com"></div></a>

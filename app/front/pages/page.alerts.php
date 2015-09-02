@@ -79,8 +79,8 @@ require_once('lib/bfocore/general/inc.GlobalTypes.php');
 </div>
 <script type="text/javascript">
 window.onload = function () { 
-    if ($.cookie('bfo_alertmail') != null) {
-        $('#alert-mail-il').val($.cookie('bfo_alertmail'));
+    if (Cookies.get('bfo_alertmail') != null) {
+        $('#alert-mail-il').val(Cookies.get('bfo_alertmail'));
     }
 }
 </script>

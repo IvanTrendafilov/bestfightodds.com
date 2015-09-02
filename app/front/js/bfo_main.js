@@ -74,8 +74,8 @@ alertSW = function(context, xcord, ycord) {
     $('#alert-header').find("div").html('Add alert:<span style="font-weight: normal;"> ' + context.teamtitle + '</span>');
     yorigin = 'top';
     xorigin = 'right';
-    if ($.cookie('bfo_alertmail') != null) {
-        $('#alert-mail').val($.cookie('bfo_alertmail'));
+    if (Cookies.get('bfo_alertmail') != null) {
+        $('#alert-mail').val(Cookies.get('bfo_alertmail'));
     }
     if ($('#alert-window').css('min-width') != '1px') {
         setxcord = xcord + 8;
@@ -272,13 +272,11 @@ oddsToAmount = function(amount) {
     });
 
     oddsType = 3;
-    $.cookie('bfo_odds_type', 3, {
-        expires: 999,
-        path: '/'
+    Cookies.set('bfo_odds_type', 3, {
+        'expires': 999
     });
-    $.cookie('bfo_risk_amount', value, {
-        expires: 999,
-        path: '/'
+    Cookies.set('bfo_risk_amount', value, {
+        'expires': 999
     });
 
     $("#format-toggle-text").find('span').first().next().html("$" + value + "  &#9660;");
@@ -343,17 +341,15 @@ setOddsType = function(val) {
     switch (val) {
         case 1:
             oddsToMoneyline();
-            $.cookie('bfo_odds_type', 1, {
-                expires: 999,
-                path: '/'
+            Cookies.set('bfo_odds_type', 1, {
+                'expires': 999
             });
             $("#format-toggle-text").find('span').first().next().html("Moneyline &#9660;");
             break;
         case 2:
             oddsToDecimal();
-            $.cookie('bfo_odds_type', 2, {
-                expires: 999,
-                path: '/'
+            Cookies.set('bfo_odds_type', 2, {
+                'expires': 999
             });
             $("#format-toggle-text").find('span').first().next().html("Decimal &#9660;");
             break;
@@ -446,7 +442,7 @@ $(document).ready(function() {
     initPage();
 
     if ($('#auto-refresh-container').css('display') != 'none') {
-        if ($.cookie('bfo_autorefresh') != null && !isNaN($.cookie('bfo_autorefresh')) && $.cookie('bfo_autorefresh') == 0) {
+        if (Cookies.get('bfo_autorefresh') != null && !isNaN(Cookies.get('bfo_autorefresh')) && Cookies.get('bfo_autorefresh') == 0) {
             //Disable auto refresh
             $('#afSelectorOn').removeClass("list-checked");
             $('span', $('#afSelectorOn')).css('display', 'none');
@@ -593,9 +589,8 @@ $(document).ready(function() {
             switch (data) {
                 case '1':
                     sMessage = '✔ Alert added';
-                    $.cookie('bfo_alertmail', values['alert-mail'], {
-                        expires: 999,
-                        path: '/'
+                    Cookies.set('bfo_alertmail', values['alert-mail'], {
+                        'expires': 999
                     });        
                     break;
                 case '2':
@@ -658,9 +653,8 @@ $(document).ready(function() {
             switch (data) {
                 case '1':
                     sMessage = '✔ Alert added';
-                    $.cookie('bfo_alertmail', values['alert-mail-il'], {
-                        expires: 999,
-                        path: '/'
+                    Cookies.set('bfo_alertmail', values['alert-mail-il'], {
+                        'expires': 999
                     });        
                     break;
                 case '2':
@@ -714,9 +708,9 @@ $(document).ready(function() {
 initPage = function() {
     oddsType = 1;
     storedOdds = [];
-    if ($.cookie('bfo_odds_type') != null) {
-        if (!isNaN($.cookie('bfo_odds_type'))) {
-            cOddsType = parseInt($.cookie('bfo_odds_type'));
+    if (Cookies.get('bfo_odds_type') != null) {
+        if (!isNaN(Cookies.get('bfo_odds_type'))) {
+            cOddsType = parseInt(Cookies.get('bfo_odds_type'));
             switch (cOddsType) {
                 case 1:
                     $("#format-toggle-text").find('span').first().next().html("Moneyline &#9660;");
@@ -726,9 +720,9 @@ initPage = function() {
                     oddsToDecimal();
                     break;
                 case 3:
-                    $("#format-toggle-text").find('span').first().next().html(" $" + $.cookie('bfo_risk_amount') + " &#9660;");
-                    $("#format-amount-box1").find('span').first().next().html($.cookie('bfo_risk_amount'));
-                    oddsToAmount($.cookie('bfo_risk_amount'));
+                    $("#format-toggle-text").find('span').first().next().html(" $" + Cookies.get('bfo_risk_amount') + " &#9660;");
+                    $("#format-amount-box1").find('span').first().next().html(Cookies.get('bfo_risk_amount'));
+                    oddsToAmount(Cookies.get('bfo_risk_amount'));
                     break;
                 default:
             }
@@ -1036,16 +1030,14 @@ toggleRefresh = function (autoRefresh) {
             refreshPage();
         }, 60000);
         $("#autoRefresh").addClass("refresh-ind-spin");
-        $.cookie('bfo_autorefresh', 1, {
-            expires: 999,
-            path: '/'
+        Cookies.set('bfo_autorefresh', 1, {
+            'expires': 999
         });
 
     } else {
         $("#autoRefresh").removeClass("refresh-ind-spin");
-        $.cookie('bfo_autorefresh', 0, {
-            expires: 999,
-            path: '/'
+        Cookies.set('bfo_autorefresh', 0, {
+            'expires': 999
         });
         if (typeof refreshId !== 'undefined') {
             clearInterval(refreshId);
