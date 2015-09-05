@@ -2,25 +2,25 @@ function createMChart(b, p, m) {
     $.get('/api?f=ggd&b=' + b + '&m=' + m + '&p=' + p, function(indata) {
         createChart($.parseJSON(notIn(indata)));
     });
-};
+}
 
 function createMIChart(m, p) {
     $.get('/api?f=ggd&m=' + m + '&p=' + p, function(indata) {
         createChart($.parseJSON(notIn(indata)));
     });
-};
+}
 
 function createPChart(b, m, p, pt, tn) {
     $.get('/api?f=ggd&b=' + b + '&m=' + m + '&p=' + p + '&pt=' + pt + '&tn=' + tn, function(indata) {
         createChart($.parseJSON(notIn(indata)));
     });
-};
+}
 
 function createPIChart(m, p, pt, tn) {
     $.get('/api?f=ggd&m=' + m + '&p=' + p + '&pt=' + pt + '&tn=' + tn, function(indata) {
         createChart($.parseJSON(notIn(indata)));
     });
-};
+}
 
 function createChart(indata) {
     Highcharts.setOptions({
@@ -106,7 +106,7 @@ function createChart(indata) {
                 }
                 return '<span style="color: #666; font-weight: bold; font-size: 11px">' + Highcharts.dateFormat('%a %d. %b %H:%M', this.x) + '</span><br/>' +
 
-                    this.series.name + ': <b>' + ttVal + '</b>' + carr + '<br/>'
+                    this.series.name + ': <b>' + ttVal + '</b>' + carr + '<br/>';
 
             },
             style: {
@@ -147,7 +147,7 @@ function createChart(indata) {
                     enabled: true,
                     formatter: function() {
                         //if ((this.y == this.series.chart.yAxis[0].getExtremes().dataMax || this.y == this.series.chart.yAxis[0].getExtremes().dataMin) && this.series.yData.indexOf(this.y) == this.point.index || this.series.chart.series[0].points.length -1 == this.point.index) {
-                        if (this.point.index == 0 || this.series.chart.series[0].points.length - 1 == this.point.index) {
+                        if (this.point.index === 0 || this.series.chart.series[0].points.length - 1 == this.point.index) {
                             //return '<span style="font-size: 1.3em">oneDecToML(this.y) '</span>';
                             if (oddsType == 2) {
                                 return '<span style="margin-left: 4px; margin-right: 4px;">' + Highcharts.numberFormat(this.y, 2) + '</span>';

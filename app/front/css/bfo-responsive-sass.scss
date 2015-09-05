@@ -1,0 +1,342 @@
+/* Mobile */
+@media only screen and (max-width: 767px) {
+  body, #page {
+    width: 100%;
+  }
+  #header-search-box, #auto-refresh-container {
+    display: none;
+  }
+  .odds-table-responsive-header {
+    display: block;
+  }
+  .table-scroller {
+    width: 100%;
+    overflow-x: scroll;
+    overflow-y: hidden;
+    -webkit-overflow-scrolling: touch;
+  }
+  #content {
+    width: 100%;
+  }
+  .odds-table {
+    font-size: 10px;
+  }
+  .table-outer-wrapper {
+    padding: 3px;
+  }
+  .odds-table {
+    tbody {
+      th {
+        width: 50px;
+        font-size: 9px;
+        a {
+          font-size: 9px;
+        }
+      }
+      td {
+        width: 30px;
+        &.button-cell {
+          width: 14px;
+        }
+      }
+    }
+    thead th a {
+      font-size: 9px;
+    }
+  }
+  .table-header {
+    font-size: 10px;
+    height: 13px;
+    padding: 5px 0px 7px 8px;
+    a {
+      font-size: 11px;
+      -ms-text-overflow: ellipsis;
+      -o-text-overflow: ellipsis;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+      overflow: hidden;
+    }
+  }
+  .table-header-date {
+    padding-left: 5px;
+    padding-right: 6px;
+    padding-top: 2px;
+    font-size: 0.9em;
+    text-align: right;
+    white-space: nowrap;
+  }
+  .logo {
+    margin-top: 5px;
+    width: 240px;
+    height: 45px;
+    background-size: 240px 45px;
+  }
+  .header {
+    margin-bottom: 0;
+    min-width: 0;
+  }
+  .header-top {
+    width: 100%;
+    height: 54px;
+  }
+  #page-wrapper {
+    margin: 5px;
+  }
+  .header-menu {
+    width: 100%;
+  }
+  .header-menu-item {
+    height: 20px;
+    font-size: 11px;
+    padding: 6px 10px 0 10px;
+  }
+  #header-menu-right {
+    margin-right: 7px;
+  }
+  .menu-divider, .item-non-mobile {
+    display: none;
+  }
+  .item-mobile-only {
+    display: block;
+  }
+  .item-mobile-only-row {
+    display: table-row;
+  }
+  #page-content {
+    width: 100%;
+    padding-top: 6px;
+    p {
+      padding: 0 10px;
+    }
+  }
+  #page-header {
+    font-size: 12px;
+    height: 12px;
+  }
+  #page-inner-wrapper {
+    padding: 4px;
+  }
+  .table-inner-wrapper {
+    position: relative;
+  }
+  .table-inner-shadow-right {
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 5px;
+    height: 100%;
+    background-color: transparent;
+    z-index: 3;
+    background: -moz-linear-gradient(left, rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, 0.2) 100%);
+    /* FF3.6+ */
+    background: -webkit-gradient(linear, left top, right top, color-stop(0%, rgba(0, 0, 0, 0)), color-stop(100%, rgba(0, 0, 0, 0.2)));
+    /* Chrome,Safari4+ */
+    background: -webkit-linear-gradient(left, rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, 0.2) 100%);
+    /* Chrome10+,Safari5.1+ */
+    background: -o-linear-gradient(left, rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, 0.2) 100%);
+    /* Opera 11.10+ */
+    background: -ms-linear-gradient(left, rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, 0.2) 100%);
+    /* IE10+ */
+    background: linear-gradient(to right, rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, 0.2) 100%);
+    /* W3C */
+    filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#001e5799', endColorstr='#000000', GradientType=0.2);
+    /* IE6-9 */
+  }
+  .table-inner-shadow-left {
+    position: absolute;
+    top: 0;
+    left: 94px;
+    width: 0;
+    height: 100%;
+    background-color: transparent;
+    z-index: 3;
+    background: -moz-linear-gradient(left, rgba(0, 0, 0, 0.15) 0%, rgba(0, 0, 0, 0) 100%);
+    /* FF3.6+ */
+    background: -webkit-gradient(linear, left top, right top, color-stop(0%, rgba(0, 0, 0, 0.15)), color-stop(100%, rgba(0, 0, 0, 0)));
+    /* Chrome,Safari4+ */
+    background: -webkit-linear-gradient(left, rgba(0, 0, 0, 0.15) 0%, rgba(0, 0, 0, 0) 100%);
+    /* Chrome10+,Safari5.1+ */
+    background: -o-linear-gradient(left, rgba(0, 0, 0, 0.15) 0%, rgba(0, 0, 0, 0) 100%);
+    /* Opera 11.10+ */
+    background: -ms-linear-gradient(left, rgba(0, 0, 0, 0.15) 0%, rgba(0, 0, 0, 0) 100%);
+    /* IE10+ */
+    background: linear-gradient(to right, rgba(0, 0, 0, 0.15) 0%, rgba(0, 0, 0, 0) 100%);
+    /* W3C */
+    filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#000000', endColorstr='#00ffffff', GradientType=0.15);
+    /* IE6-9 */
+  }
+  .table-last-changed {
+    padding-top: 0;
+    font-size: 0.7em;
+    margin-bottom: 3px;
+    display: none;
+  }
+  #chart-window, #alert-window {
+    min-width: 1px;
+    display: block;
+    width: 90%;
+    /* Set your own width: percents, ems, whatever! */
+    margin: auto;
+    /* Center the item vertically & horizontally */
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+    /* Set the bounds in which to center it, relative to its parent/container */
+  }
+  #chart-header {
+    font-size: 11px;
+  }
+  #chart-area {}
+  .odds-table {
+    &:not(.odds-table-responsive-header) tbody tr th {
+      a {
+        color: transparent;
+      }
+      color: transparent;
+    }
+    tbody tr {
+      &:nth-child(even) th {
+        padding-bottom: 0;
+      }
+      &:nth-child(odd) th {
+        padding-top: 0;
+      }
+    }
+  }
+  .share-button {
+    width: 30px;
+    height: 25px;
+    margin-top: -5px;
+  }
+  .share-window {
+    margin-top: -5px;
+    height: 25px;
+    &.show {
+      width: 180px;
+    }
+  }
+  .share-twitter {
+    background: url("/img/sharebuttons.png") 0px -3px;
+  }
+  .share-facebook {
+    background: url("/img/sharebuttons.png") -53px -3px;
+  }
+  .share-google {
+    background: url("/img/sharebuttons.png") -104px -3px;
+  }
+  .share-whatsapp {
+    background: url("/img/sharebuttons.png") -157px -3px;
+  }
+  .share-item {
+    width: 45px;
+    height: 25px;
+    display: inline-block;
+    background-size: 203px 31px;
+  }
+  /* Content pages */
+  .content-header {
+    padding-left: 6px;
+    font-size: 12px;
+    margin-bottom: 3px;
+    -ms-text-overflow: ellipsis;
+    -o-text-overflow: ellipsis;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    overflow: hidden;
+  }
+  .content-list {
+    font-size: 11px;
+    tr {
+      &:hover {
+        background-color: #fff;
+      }
+      td {
+        padding: 3px 10px;
+      }
+    }
+  }
+  .content-list-date {
+    padding-right: 5px;
+    width: 80px;
+  }
+  .content-team-left {
+    width: auto;
+  }
+  .content-vs-cell {
+    width: 10px;
+  }
+  .content-button-cell {
+    padding-bottom: 2px !important;
+    padding-top: 0 !important;
+    padding-right: 10px !important;
+    text-align: right;
+    input {
+      font-size: 11px;
+    }
+  }
+  .team-stats-table {
+    thead th.header-movement {
+      padding-left: 0px;
+    }
+    tbody {
+      th a {
+        font-size: 10px;
+        height: 20px;
+      }
+      td {
+        &.moneyline {
+          padding-left: 1px;
+        }
+        &.chart-cell {
+          padding-left: 5px;
+        }
+        &.change-cell {}
+      }
+      tr:hover {
+        background-color: #fff;
+      }
+    }
+  }
+  /*Team-stats page*/
+  /*Alerts page*/
+  .alert-result-il {
+    background-color: #f4f6f8;
+    border: 1px solid #cecece;
+    right: 75px;
+    margin-top: 2px;
+    padding: 1px;
+    position: absolute;
+  }
+  .alert-loader-il {
+    position: absolute;
+    right: 75px;
+  }
+  #bottom-container {
+    margin-top: 5px;
+  }
+  #parlay-window {
+    min-width: 150px;
+  }
+  #parlay-mode-container {
+    padding-right: 2px;
+  }
+  #mob-divider {
+    display: inline-block;
+  }
+}
+
+@media only screen and (max-width: 372px) {
+  .header-menu-item {
+    padding: 6px 8px 0 8px;
+  }
+  .item-non-mob-mini {
+    display: none;
+  }
+}
+
+@media only screen and (max-height: 300px) {
+  #chart-window {
+    top: 0 !important;
+  }
+}

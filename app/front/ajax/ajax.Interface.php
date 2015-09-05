@@ -1,8 +1,20 @@
 <?php
-
 /**
  * This is an interface used for Ajax requests.
  */
+
+checkRequiredParam('f');
+
+require_once('app/front/pages/inc.FrontLogic.php');
+
+switch($_GET['f'])
+{
+    case 'rp':
+        AjaxInterface::refreshPage();
+        break;
+    default:
+}
+
 require_once('lib/bfocore/general/inc.GlobalTypes.php');
 require_once('lib/bfocore/general/class.EventHandler.php');
 require_once('lib/bfocore/general/class.BookieHandler.php');
@@ -10,10 +22,7 @@ require_once('lib/bfocore/general/class.OddsHandler.php');
 require_once('lib/bfocore/general/class.FighterHandler.php');
 require_once('lib/bfocore/general/class.GraphHandler.php');
 require_once('lib/bfocore/general/caching/class.CacheControl.php');
-require_once('app/front/pages/inc.FrontLogic.php');
 require_once('config/inc.generalConfig.php');
-
-checkRequiredParam('f');
 
 switch ($_GET['f'])
 {
@@ -22,9 +31,6 @@ switch ($_GET['f'])
         break;
     case 'aa':
         AjaxInterface::addAlert();
-        break;
-    case 'rp':
-        AjaxInterface::refreshPage();
         break;
     case 'ggd':
         AjaxInterface::getGraphData();
@@ -48,7 +54,7 @@ class AjaxInterface
     public static function refreshPage()
     {
         include_once('app/front/pages/page.odds.php');
-        return;
+        exit;
     }
 
     public static function getGraphData()

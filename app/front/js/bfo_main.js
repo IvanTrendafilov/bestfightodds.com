@@ -15,7 +15,7 @@ var shareVisible = false;
 //ClearChart
 chartCC = function() {
     $('#chart-area').empty();
-}
+};
 
 //Show Chart
 chartSC = function(content, xcord, ycord) {
@@ -54,7 +54,7 @@ chartSC = function(content, xcord, ycord) {
     $('#chart-window')[0].offsetHeight; 
     $('#chart-window').removeClass('no-transition');
     $('#chart-window').addClass('is-visible');
-}
+};
 
 //Show Alert Window
 alertSW = function(context, xcord, ycord) {
@@ -74,7 +74,7 @@ alertSW = function(context, xcord, ycord) {
     $('#alert-header').find("div").html('Add alert:<span style="font-weight: normal;"> ' + context.teamtitle + '</span>');
     yorigin = 'top';
     xorigin = 'right';
-    if (Cookies.get('bfo_alertmail') != null) {
+    if (Cookies.get('bfo_alertmail') !== null) {
         $('#alert-mail').val(Cookies.get('bfo_alertmail'));
     }
     if ($('#alert-window').css('min-width') != '1px') {
@@ -103,8 +103,7 @@ alertSW = function(context, xcord, ycord) {
 
     $('#alert-window').removeClass('no-transition');
     $('#alert-window').addClass('is-visible');
-
-}
+};
 
 //linkOut
 lO = function(operator, event) {
@@ -112,16 +111,16 @@ lO = function(operator, event) {
         'operator': operator,
         'event': event
     });
-}
+};
 
 
 addToParlay = function(obj) {
-    if (obj != null) {
+    if (obj !== null) {
         if (parlay.length >= 25) {
             return false;
         }
         tmpArr = [];
-        tmpArr["ml"] = $(obj).find('span').find('span').first().text()
+        tmpArr["ml"] = $(obj).find('span').find('span').first().text();
         tmpArr["name"] = $(obj).closest('tr').find('th').text();
         tmpArr["ref"] = $(obj).find('span').find('span').first().attr('id').substring(3);
 
@@ -143,12 +142,12 @@ addToParlay = function(obj) {
         }
 
     } else {
-        if (parlay.length == 0) {
+        if (parlay.length === 0) {
             return false;
         }
     }
 
-    if (parlay.length == 0)
+    if (parlay.length === 0)
     {
         $('#parlay-area').html('Click on a line to add it to your parlay');
         $('#parlay-header').html('Parlay');
@@ -159,7 +158,7 @@ addToParlay = function(obj) {
     pvalue = 1;
     for (var i = 0; i < parlay.length; i++) {
         dispLine = '';
-        if (storedOdds[parlay[i]["ref"]] != null) {
+        if (storedOdds[parlay[i]["ref"]] !== null) {
             switch (oddsType) {
                 case 1:
                     dispLine = storedOdds[parlay[i]["ref"]];
@@ -211,8 +210,7 @@ addToParlay = function(obj) {
     $('#parlay-area').html(tmpText);
     $('#parlay-header').html('Parlay: ' + dispValue);
     return false;
-
-}
+};
 
 oddsToMoneyline = function() {
     if (oddsType == 1) {
@@ -226,7 +224,7 @@ oddsToMoneyline = function() {
     }
 
     oddsType = 1;
-}
+};
 
 oddsToDecimal = function() {
     if (oddsType == 2) {
@@ -238,7 +236,7 @@ oddsToDecimal = function() {
     }
 
     //If odds are not stored, store them
-    if (oddsType == 1 && storedOdds.length == 0) {
+    if (oddsType == 1 && storedOdds.length === 0) {
         $('[id^="oID"]').each(function() {
             storedOdds[this.id.substring(3)] = this.innerHTML;
         });
@@ -250,11 +248,11 @@ oddsToDecimal = function() {
     });
 
     oddsType = 2;
-}
+};
 
 oddsToAmount = function(amount) {
     var value;
-    if (amount == null) {
+    if (amount === null) {
         //value = document.getElementById('format-amount-box1').value;
         value = $('#format-amount-box1').val();
     } else {
@@ -285,8 +283,7 @@ oddsToAmount = function(amount) {
     if (parlayMode) {
         addToParlay(null);
     }
-
-}
+};
 
 singleMLToDecimal = function(odds) {
     if (String(odds).substring(0, 1) == "-") {
@@ -300,7 +297,7 @@ singleMLToDecimal = function(odds) {
     } else {
         return 'error';
     }
-}
+};
 
 /**
  * @param {number} odds
@@ -315,7 +312,7 @@ oneDecToML = function(odds) {
     } else {
         return 'error';
     }
-}
+};
 
 /**
  * @param {(string|Element|jQuery|function(number))} arg1
@@ -324,7 +321,7 @@ oneDecToML = function(odds) {
  */
 singleDecimalToAmount = function(odds, amount) {
     var value;
-    if (amount == null) {
+    if (amount === null) {
         value = document.getElementById('format-amount-box1').value;
     } else {
         value = amount;
@@ -335,7 +332,7 @@ singleDecimalToAmount = function(odds, amount) {
     var val = new String((Math.round(((value * odds) - value) * 100)));
     val = val.slice(0, val.length - 2) + '.' + val.slice(-2);
     return '$' + val;
-}
+};
 
 setOddsType = function(val) {
     switch (val) {
@@ -361,7 +358,7 @@ setOddsType = function(val) {
     if (parlayMode) {
         addToParlay(null);
     }
-}
+};
 
 notIn = function(a){var d,e,f,g,h,i,j,b="ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/=",c="",k=0;for(a=a.replace(/[^A-Za-z0-9\+\/\=]/g,"");k<a.length;)g=b.indexOf(a.charAt(k++)),h=b.indexOf(a.charAt(k++)),i=b.indexOf(a.charAt(k++)),j=b.indexOf(a.charAt(k++)),d=g<<2|h>>4,e=(15&h)<<4|i>>2,f=(3&i)<<6|j,c+=String.fromCharCode(d),64!=i&&(c+=String.fromCharCode(e)),64!=j&&(c+=String.fromCharCode(f));for(var l="",m=0,n=c1=c2=0;m<c.length;)n=c.charCodeAt(m),128>n?(l+=String.fromCharCode(n),m++):n>191&&224>n?(c2=c.charCodeAt(m+1),l+=String.fromCharCode((31&n)<<6|63&c2),m+=2):(c2=c.charCodeAt(m+1),c3=c.charCodeAt(m+2),l+=String.fromCharCode((15&n)<<12|(63&c2)<<6|63&c3),m+=3);var q,r,s,o="!\"#$%&'()*+,-./0123456789:;<=>?@ABCDEFGHIJKLMNOPQRSTUVWXYZ[\\]^_`abcdefghijklmnopqrstuvwxyz{|}~",p=new String,t=o.length;for(q=0;q<l.length;q++)s=l.charAt(q),r=o.indexOf(s),r>=0&&(s=o.charAt((r+t/2)%t)),p+=s;return p};
 
@@ -435,14 +432,14 @@ getElementsByClassName = function(strClassName, obj) {
         getElementsByClassName(strClassName, obj.childNodes[i], ar);
 
     return ar;
-}
+};
 
 $(document).ready(function() {
 
     initPage();
 
     if ($('#auto-refresh-container').css('display') != 'none') {
-        if (Cookies.get('bfo_autorefresh') != null && !isNaN(Cookies.get('bfo_autorefresh')) && Cookies.get('bfo_autorefresh') == 0) {
+        if (Cookies.get('bfo_autorefresh') !== null && !isNaN(Cookies.get('bfo_autorefresh')) && Cookies.get('bfo_autorefresh') === 0) {
             //Disable auto refresh
             $('#afSelectorOn').removeClass("list-checked");
             $('span', $('#afSelectorOn')).css('display', 'none');
@@ -708,7 +705,7 @@ $(document).ready(function() {
 initPage = function() {
     oddsType = 1;
     storedOdds = [];
-    if (Cookies.get('bfo_odds_type') != null) {
+    if (Cookies.get('bfo_odds_type') !== null) {
         if (!isNaN(Cookies.get('bfo_odds_type'))) {
             cOddsType = parseInt(Cookies.get('bfo_odds_type'));
             switch (cOddsType) {
@@ -796,7 +793,7 @@ initPage = function() {
                 value[3].css("width", 0 + ((value[1].width() - value[0].width()) - value[0].scrollLeft()));
                 value[3].data("scrollRightVis", false);
 
-            } else if (value[3].data("scrollRightVis") == false) {
+            } else if (value[3].data("scrollRightVis") === false) { 
                 value[3].css("width", "5px");
                 value[3].data("scrollRightVis", true);
             }
@@ -804,7 +801,7 @@ initPage = function() {
             if (value[0].scrollLeft() <= 5) {
                 value[2].css("width", 0 + value[0].scrollLeft());
                 value[2].data("scrollLeftVis", false);
-            } else if (value[2].data("scrollLeftVis") == false) {
+            } else if (value[2].data("scrollLeftVis") === false) {
                 value[2].css("width", "5px");
                 value[2].data("scrollLeftVis", true);
             }
@@ -829,18 +826,15 @@ initPage = function() {
 
         //click for mobile
         $("ul.dropdown li").click(function(e) {
-            console.log(e);
             if (!$(e.toElement).is("#format-amount-box1"))
             {
                 if ($(this).hasClass("hover"))
                 {
-                    console.log('open');
                     $(this).removeClass("hover");
                     $('ul:first', this).css('visibility', 'hidden');
                 }
                 else
                 {
-                    console.log('close');
                     $(this).addClass("hover");
                     $('ul:first', this).css('visibility', 'visible');    
                 }
@@ -856,7 +850,7 @@ initPage = function() {
 
     //Add share popup
     $('.share-area').click(function(event) {
-        var shw = $(this).parent().find('.share-window')
+        var shw = $(this).parent().find('.share-window');
         $(shw).addClass('show');
         //Add event handlers for each share window
             $(shw).find('.share-item').on('click', function(event) {
@@ -909,7 +903,7 @@ initPage = function() {
             }
         }
 
-        if (shareVisible == true)
+        if (shareVisible === true)
         {
             if (!$(event.target).closest('.share-button').length) {
                 if (!$(event.target).closest('.share-item').length) {
@@ -919,7 +913,7 @@ initPage = function() {
                 }
             }
         }
-    })
+    });
 
 
 
@@ -995,23 +989,21 @@ initPage = function() {
             return false;
         }
     });
-
-}
+};
 
 addAlert = function(m, tn, b, mail, alert_odds, alert_oddstype) {
-
-}
+};
 
 refreshPage = function() {
     $("#content").load("api?f=rp", function() {
         initPage();
         $.each(refreshOpenProps, function(index, value) {
-            if (value == true) {
+            if (value === true) {
                 $('a[data-mu="' + index + '"]').first().trigger("click");
             }
         });
     });
-}
+};
 
 updateLine = function(line, newval) {
     /*oldcol = $("#" + line).css("background-color");
@@ -1022,10 +1014,10 @@ updateLine = function(line, newval) {
     }, 60000, function() { //TODO: Raise this to 60000
         //Finished
     });*/
-}
+};
 
 toggleRefresh = function (autoRefresh) {
-    if (autoRefresh == true) {
+    if (autoRefresh === true) {
         refreshId = setInterval(function() {
             refreshPage();
         }, 60000);
@@ -1043,7 +1035,7 @@ toggleRefresh = function (autoRefresh) {
             clearInterval(refreshId);
         }
     }
-}
+};
 
 
 throttle = function(fn, threshhold, scope) {
@@ -1067,7 +1059,7 @@ throttle = function(fn, threshhold, scope) {
             fn.apply(context, args);
         }
     };
-}
+};
 
 debounce = function(fn, delay) {
     var timer = null;
@@ -1079,7 +1071,7 @@ debounce = function(fn, delay) {
             fn.apply(context, args);
         }, delay);
     };
-}
+};
 
 
 $(function() {
@@ -1090,7 +1082,7 @@ fightSelected = function()
 {
     fightID = $("#webFight")[0].options[$("#webFight")[0].selectedIndex].value;
     ftitle = $("#webFight")[0].options[$("#webFight")[0].selectedIndex].text.trim();
-    if (fightID != 0)
+    if (fightID !== 0)
     {
         imageLink = "";
         type = "";
@@ -1122,7 +1114,7 @@ fightSelected = function()
     {
         $("#webFields").css({ 'display': 'none'});
     }
-}
+};
 
 function hideArrows() {
     $('.ard').css("display", "none");

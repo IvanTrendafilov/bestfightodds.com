@@ -2,3 +2,4 @@
 /app/front/pages/page.odds.php
 /app/front/pages/page.feed.xml
 /app/front/img/cache/*.png
+/node_modules/*

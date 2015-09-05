@@ -19,7 +19,7 @@
         }
         ?>
         </script>
-        <link rel="stylesheet" type="text/css" href="/css/stylesheets_3.2.php" />
+        <link rel="stylesheet" type="text/css" href="/css/bfo.min.css" />
         <link rel="shortcut icon" href="https://www.bestfightodds.com/favicon.ico" />
         <link rel="apple-touch-icon" sizes="144x144" href="/apple-touch-icon-144x144.png" />
         <link rel="apple-touch-icon" sizes="114x114" href="/apple-touch-icon-114x114.png" />
@@ -27,17 +27,8 @@
         <link rel="apple-touch-icon" href="/apple-touch-icon-iphone.png" />
         <title><?php echo (defined('PAGE_OVERRIDE_TITLE') ? PAGE_OVERRIDE_TITLE . ' | Best Fight Odds': 'UFC &amp; MMA Odds &amp; Betting Lines | Best Fight Odds'); ?></title>
     </head>
-    <!--[if lte IE 7]>
-    <link rel="stylesheet" type="text/css" href="/css/bfo-ie7.css" />
-    <![endif]--> 
-    <!--[if IE 8]>
-    <link rel="stylesheet" type="text/css" href="/css/bfo-ie8.css" />
-    <![endif]--> 
-    <!--[if IE 9]>
-    <link rel="stylesheet" type="text/css" href="/css/bfo-ie9.css" />
-    <![endif]--> 
     <body>
-        <script type="text/javascript" async src="/js/javascripts_3.1.1.php"></script>
+        <script type="text/javascript" async src="/js/bfo.min.js"></script>
         <div class="header">
                 <div class="header-top">
                     <a href="/"><div class="logo" alt="BestFightOdds.com"></div></a>
@@ -47,7 +38,7 @@
                 </div>
                 <div class="header-menu-wrapper">
                         <div class="header-menu">
-                        <a href="/"><div class="header-menu-item <?php echo CURRENT_PAGE == '' ? ' header-menu-selected ' : ''; ?>" style="margin-left: 10px">Latest odds</div></a>
+                        <a href="/"><div class="header-menu-item <?php echo CURRENT_PAGE == '' ? ' header-menu-selected ' : ''; ?>" style="margin-left: 10px">Latest<span class="item-non-mob-mini"> odds</span></div></a>
                         <a href="/archive"><div class="header-menu-item <?php echo (CURRENT_PAGE == 'archive' || CURRENT_PAGE == 'fighter' || CURRENT_PAGE == 'event' || CURRENT_PAGE == 'search_results') ? ' header-menu-selected ' : ''; ?>">Archive</div></a>
                         <a href="/alerts"><div class="header-menu-item <?php echo CURRENT_PAGE == 'alerts' ? ' header-menu-selected ' : ''; ?>">Alerts</div></a>
                         <a href="/links"><div class="header-menu-item <?php echo CURRENT_PAGE == 'links' ? ' header-menu-selected ' : ''; ?> item-non-mobile">Widget</div></a>
