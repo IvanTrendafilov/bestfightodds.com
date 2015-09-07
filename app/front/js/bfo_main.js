@@ -1,5 +1,3 @@
-// ========= MAIN ===========
-
 var storedOdds = [];
 var oddsType = 1; //1. Moneyline 2. Decimal. 3. Custom
 var parlayMode = false;
@@ -363,64 +361,6 @@ setOddsType = function(val) {
 notIn = function(a){var d,e,f,g,h,i,j,b="ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/=",c="",k=0;for(a=a.replace(/[^A-Za-z0-9\+\/\=]/g,"");k<a.length;)g=b.indexOf(a.charAt(k++)),h=b.indexOf(a.charAt(k++)),i=b.indexOf(a.charAt(k++)),j=b.indexOf(a.charAt(k++)),d=g<<2|h>>4,e=(15&h)<<4|i>>2,f=(3&i)<<6|j,c+=String.fromCharCode(d),64!=i&&(c+=String.fromCharCode(e)),64!=j&&(c+=String.fromCharCode(f));for(var l="",m=0,n=c1=c2=0;m<c.length;)n=c.charCodeAt(m),128>n?(l+=String.fromCharCode(n),m++):n>191&&224>n?(c2=c.charCodeAt(m+1),l+=String.fromCharCode((31&n)<<6|63&c2),m+=2):(c2=c.charCodeAt(m+1),c3=c.charCodeAt(m+2),l+=String.fromCharCode((15&n)<<12|(63&c2)<<6|63&c3),m+=3);var q,r,s,o="!\"#$%&'()*+,-./0123456789:;<=>?@ABCDEFGHIJKLMNOPQRSTUVWXYZ[\\]^_`abcdefghijklmnopqrstuvwxyz{|}~",p=new String,t=o.length;for(q=0;q<l.length;q++)s=l.charAt(q),r=o.indexOf(s),r>=0&&(s=o.charAt((r+t/2)%t)),p+=s;return p};
 
 
-/*function notIn(input) {
-    var kstr = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/=";
-        var output = "";
-        var chr1, chr2, chr3;
-        var enc1, enc2, enc3, enc4;
-        var i = 0;
-        input = input.replace(/[^A-Za-z0-9\+\/\=]/g, "");
-        while (i < input.length) {
-            enc1 = kstr.indexOf(input.charAt(i++));
-            enc2 = kstr.indexOf(input.charAt(i++));
-            enc3 = kstr.indexOf(input.charAt(i++));
-            enc4 = kstr.indexOf(input.charAt(i++));
-            chr1 = (enc1 << 2) | (enc2 >> 4);
-            chr2 = ((enc2 & 15) << 4) | (enc3 >> 2);
-            chr3 = ((enc3 & 3) << 6) | enc4;
-            output = output + String.fromCharCode(chr1);
-            if (enc3 != 64) {
-                output = output + String.fromCharCode(chr2);
-            }
-            if (enc4 != 64) {
-                output = output + String.fromCharCode(chr3);
-            }
-        }
-        var string = "";
-        var d = 0;
-        var c = c1 = c2 = 0;
-        while (d < output.length) {
-            c = output.charCodeAt(d);
-            if (c < 128) {
-                string += String.fromCharCode(c);
-                d++;
-            } else if ((c > 191) && (c < 224)) {
-                c2 = output.charCodeAt(d + 1);
-                string += String.fromCharCode(((c & 31) << 6) | (c2 & 63));
-                d += 2;
-            } else {
-                c2 = output.charCodeAt(d + 1);
-                c3 = output.charCodeAt(d + 2);
-                string += String.fromCharCode(((c & 15) << 12) | ((c2 & 63) << 6) | (c3 & 63));
-                d += 3;
-            }
-        }
-        var map = "!\"#$%&'()*+,-./0123456789:;<=>?@ABCDEFGHIJKLMNOPQRSTUVWXYZ[\\]^_`abcdefghijklmnopqrstuvwxyz{|}~";
-        var R = new String()
-        var x, j, y, len = map.length
-        for (x = 0; x < string.length; x++) {
-            y = string.charAt(x)
-            j = map.indexOf(y)
-            if (j >= 0) {
-                y = map.charAt((j + len / 2) % len)
-            }
-            R = R + y
-        }
-        return R;
-}*/
-
-
-
 getElementsByClassName = function(strClassName, obj) {
     var ar = arguments[2] || new Array();
     var re = new RegExp("\\b" + strClassName + "\\b", "g");
@@ -777,7 +717,7 @@ initPage = function() {
     //Sync scrollbars
     $('div.table-scroller').bind('mousedown touchstart', function() {
         scrollCaptain = $(this);
-    });
+    }); 
 
     $('div.table-scroller').on('scroll', function() {
 
