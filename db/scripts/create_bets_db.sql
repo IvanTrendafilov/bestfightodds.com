@@ -182,7 +182,7 @@ CREATE TABLE `bets`.`matchups_metadata` (
   `mattribute` VARCHAR(45) NOT NULL,
   `mvalue` VARCHAR(45) NOT NULL,
   `source_bookie_id` INT NOT NULL,
-  PRIMARY KEY (`matchup_id`, `attribute`)
+  PRIMARY KEY (`matchup_id`, `mattribute`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 CREATE TABLE `bets`.`events_redditposts` (

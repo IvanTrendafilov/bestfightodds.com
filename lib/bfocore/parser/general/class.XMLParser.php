@@ -1,6 +1,7 @@
 <?php
 
 require_once('lib/bfocore/parser/general/inc.ParserMain.php');
+require_once('config/inc.parseConfig.php');
 
 /**
  * Main XML parser - This is where the magic happens..
@@ -273,7 +274,7 @@ class XMLParser
                     //Create the matchup and also as a new event
                     //Get the generic event for the date of the matchup. If none can be found, create it
                     $oGenericEvent = EventHandler::getGenericEventForDate($oParsedMatchup->getDate());
-                    $iGenericEventID = $oGenericEvent != null ? $oGenericEvent->getID() : 197; //TODO :Removing hardcoding of 197 here (FUTURE EVENTS)
+                    $iGenericEventID = $oGenericEvent != null ? $oGenericEvent->getID() : PARSE_FUTURESEVENT_ID;
 
                     $oNewMatchup = new Fight(-1, $oParsedMatchup->getTeamName(1), $oParsedMatchup->getTeamName(2), $iGenericEventID);
                     //TODO: This currently creates duplicate matchups since getFight() caches current matchups in the initial search. The cache needs to be invalidated somehow I guess..
