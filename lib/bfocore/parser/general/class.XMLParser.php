@@ -273,7 +273,15 @@ class XMLParser
                 {
                     //Create the matchup and also as a new event
                     //Get the generic event for the date of the matchup. If none can be found, create it
-                    $oGenericEvent = EventHandler::getGenericEventForDate($oParsedMatchup->getDate());
+                    $aMeta = $oParsedMatchup->getAllMetaData();
+                    $oGenericEvent = null;
+
+                    if (isset($aMeta['gametime']))
+                    {
+                        $oGenericEvent = EventHandler::getGenericEventForDate(date('Y-m-d', $aMeta['gametime']));    
+                    }
+
+                    
                     $iGenericEventID = $oGenericEvent != null ? $oGenericEvent->getID() : PARSE_FUTURESEVENT_ID;
 
                     $oNewMatchup = new Fight(-1, $oParsedMatchup->getTeamName(1), $oParsedMatchup->getTeamName(2), $iGenericEventID);
