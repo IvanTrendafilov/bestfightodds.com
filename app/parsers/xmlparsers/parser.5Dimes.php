@@ -40,6 +40,7 @@ class XMLParser5Dimes
                     && (trim((string) $cEvent->SportSubType) != 'Live In-Play')
                     && (trim((string) $cEvent->SportSubType) != 'Olympic Boxing')
                     && (trim((string) $cEvent->SportSubType) != 'Kickboxing')
+                    && (trim((string) $cEvent->SportSubType) != 'Boxing Props')
                     && ((int) $cEvent->IsCancelled) != 1
                     && ((int) $cEvent->isGraded) != 1)
                     && !((trim((string) $cEvent->HomeMoneyLine) == '-99999') && (trim((string) $cEvent->VisitorMoneyLine) == '-99999'))
@@ -50,10 +51,6 @@ class XMLParser5Dimes
                 //Check if entry is a prop, if so add it as a parsed prop
                 if (trim((string) $cEvent->SportSubType) == 'Props' || trim((string) $cEvent->SportSubType) == 'MMA Props')
                 {
-		  if (trim((string) $cEvent->CorrelationID) == 'Till1501')
-		    {
-		      $cEvent->CorrelationID = 'Oliveira1501';
-		    }
                     $oParsedProp = null;
 
                     if ((trim((string) $cEvent->HomeMoneyLine) != '')
@@ -122,9 +119,7 @@ class XMLParser5Dimes
                 else
                 {
                     if ((trim((string) $cEvent->HomeMoneyLine) != '')
-                    && (trim((string) $cEvent->VisitorMoneyLine) != '')
-                    && (trim((string) $cEvent->CorrelationID) != 'McGregorAldoUSA')
-                    && (trim((string) $cEvent->CorrelationID) != 'McGregor1001Brazil'))
+                    && (trim((string) $cEvent->VisitorMoneyLine) != ''))
                     {
                         $oParsedMatchup = new ParsedMatchup(
                                         (string) $cEvent->HomeTeamID,
