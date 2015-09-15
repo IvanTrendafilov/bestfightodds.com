@@ -25,3 +25,7 @@ RewriteRule ^\[[0-9]\] / [R]
 <FilesMatch "\.(jpg|gif|png)$">
 	Header set Cache-Control "max-age=604800, must-revalidate"
 </FilesMatch>
+
+<FilesMatch "\.(js|css)$">
+	Header set Cache-Control: "max-age=900, must-revalidate"
+</FilesMatch>
