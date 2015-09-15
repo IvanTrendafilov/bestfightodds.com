@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en"> 
     <head>
         <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
-        <meta name="description" content="<?php echo (defined('PAGE_OVERRIDE_DESCRIPTION') ? PAGE_OVERRIDE_DESCRIPTION . ' ' : ''); ?>Mixed Martial Arts odds comparison service. Find and compare the latest MMA lines from the top online betting sites." />
+        <meta name="description" content="<?php echo (defined('PAGE_OVERRIDE_DESCRIPTION') ? PAGE_OVERRIDE_DESCRIPTION . ' ' : ''); ?>MMA odds comparison service. Compare the latest MMA fight odds and betting lines from the top online sportsbooks" />
         <meta name="keywords" content="<?php echo (defined('PAGE_OVERRIDE_KEYWORDS') ? PAGE_OVERRIDE_KEYWORDS . ', ' : ''); ?>mma odds, mma betting, mma lines, ufc odds, ufc, mma, odds, betting" />
         <meta property="og:image" content="https://www.bestfightodds.com/img/iconv2.jpg" />
         <link href='https://fonts.googleapis.com/css?family=Roboto:500,700,400' rel='stylesheet' type='text/css'>
