@@ -154,9 +154,9 @@ addToParlay = function(obj) {
 
     tmpText = '';
     pvalue = 1;
-    for (var i = 0; i < parlay.length; i++) {
-        dispLine = '';
-        if (storedOdds[parlay[i]["ref"]] !== null) {
+    for (var i = 0; i < parlay.length; i++) { 
+        var dispLine = '';
+        if (storedOdds[parlay[i]["ref"]] != null) {
             switch (oddsType) {
                 case 1:
                     dispLine = storedOdds[parlay[i]["ref"]];
