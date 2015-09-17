@@ -419,7 +419,7 @@ $(document).ready(function() {
             $(this).removeClass("list-checked");
             $('span', this).css('display', 'none');
         });
-        oddsToAmount();
+        oddsToAmount($('#format-amount-box1').val());
         $(this).addClass("list-checked");
         $('span', this).css('display', 'inline-block');
     });
@@ -428,7 +428,7 @@ $(document).ready(function() {
             $(this).removeClass("list-checked");
             $('span', this).css('display', 'none');
         });
-        oddsToAmount();
+        oddsToAmount($('#format-amount-box1').val());
         $('#formatSelector3').addClass("list-checked");
         $('span', $('#formatSelector3')).css('display', 'inline-block');
     });
