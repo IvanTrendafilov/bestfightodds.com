@@ -525,13 +525,13 @@ $(document).ready(function() {
             var sMessage = '';
             switch (data) {
                 case '1':
-                    sMessage = '✔ Alert added';
+                    sMessage = '✓ Alert added';
                     Cookies.set('bfo_alertmail', values['alert-mail'], {
                         'expires': 999
                     });        
                     break;
                 case '2':
-                    sMessage = '✔ Alert already exists';
+                    sMessage = '✓ Alert already exists';
                     break;
                 case '-1':
                 case '-2':
@@ -589,13 +589,13 @@ $(document).ready(function() {
             var sMessage = '';
             switch (data) {
                 case '1':
-                    sMessage = '✔ Alert added';
+                    sMessage = '✓ Alert added';
                     Cookies.set('bfo_alertmail', values['alert-mail-il'], {
                         'expires': 999
                     });        
                     break;
                 case '2':
-                    sMessage = '✔ Alert already exists';
+                    sMessage = '✓ Alert already exists';
                     break;
                 case '-1':
                 case '-2':

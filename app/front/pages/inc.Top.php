@@ -53,7 +53,7 @@
                                  }
                                  ?>
                                  >
-                                <a href="#" id="parlay-mode-box"><div class="bfo-check-box">✔</div> Parlay</a>
+                                <a href="#" id="parlay-mode-box"><div class="bfo-check-box">✓</div> Parlay</a>
                             </div>
                             <div class="menu-divider"
                                 <?php
@@ -95,9 +95,9 @@
                                 <ul class="dropdown">
                                     <li><a href="#" id="format-toggle-text"><span class="item-non-mobile">Format: </span><span>Moneyline &#9660;</span></a>
                                         <ul class="sub_menu">
-                                             <li><a href="#" id="formatSelector1" class="list-checked"><span style="display: inline-block">&#10004;</span>Moneyline</a></li>
-                                             <li><a href="#" id="formatSelector2"><span>&#10004;</span>Decimal</a></li>
-                                             <li><a href="#" id="formatSelector3" style="display: inline"><span>&#10004;</span>Return on </a>$<input type="text" name="amountBox" id="format-amount-box1" maxlength="4" value="100" style="display: inline"/></li>
+                                             <li><a href="#" id="formatSelector1" class="list-checked"><span style="display: inline-block">&#10003;</span>Moneyline</a></li>
+                                             <li><a href="#" id="formatSelector2"><span>&#10003;</span>Decimal</a></li>
+                                             <li><a href="#" id="formatSelector3" style="display: inline"><span>&#10003;</span>Return on </a>$<input type="text" name="amountBox" id="format-amount-box1" maxlength="4" value="100" style="display: inline"/></li>
                                         </ul>
                                     </li>
                                 </ul>
