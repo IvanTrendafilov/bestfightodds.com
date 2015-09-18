@@ -379,7 +379,7 @@ $(document).ready(function() {
     initPage();
 
     if ($('#auto-refresh-container').css('display') != 'none') {
-        if (Cookies.get('bfo_autorefresh') !== null && !isNaN(Cookies.get('bfo_autorefresh')) && Cookies.get('bfo_autorefresh') === 0) {
+        if (Cookies.get('bfo_autorefresh') !== null && !isNaN(Cookies.get('bfo_autorefresh')) && Cookies.get('bfo_autorefresh') == '0') {
             //Disable auto refresh
             $('#afSelectorOn').removeClass("list-checked");
             $('span', $('#afSelectorOn')).css('display', 'none');
@@ -965,7 +965,6 @@ toggleRefresh = function (autoRefresh) {
         Cookies.set('bfo_autorefresh', 1, {
             'expires': 999
         });
-
     } else {
         $("#autoRefresh").removeClass("refresh-ind-spin");
         Cookies.set('bfo_autorefresh', 0, {
