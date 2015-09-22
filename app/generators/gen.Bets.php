@@ -35,7 +35,7 @@ foreach ($aEvent as $oEvent)
         $sShareURL = 'https://www.bestfightodds.com/events/' . $oEvent->getEventAsLinkString();
         $sShareDesc = $oEvent->getName() . ' betting lines';
 
-        echo '<div class="share-area"><div class="share-button" alt="Share this"></div></div>
+        echo '<div class="share-area"><div class="share-button"></div></div>
                                         <div class="share-window"><div data-href="https://twitter.com/intent/tweet?text=' . urlencode($sShareDesc) . '&amp;url=' . urlencode($sShareURL) . '" class="share-item share-twitter"></div><div data-href="https://www.facebook.com/sharer/sharer.php?u=' . urlencode($sShareURL) . '" class="share-item share-facebook"></div><div data-href="https://plus.google.com/share?url=' . urlencode($sShareURL) .'" class="share-item share-google"></div><div data-href="whatsapp://send?text=' . urlencode($sShareDesc) . ' ' . urlencode($sShareURL) . '" data-action="share/whatsapp/share" class="share-item share-whatsapp item-mobile-only"></div></div>';
 
         echo '</div>';
@@ -247,16 +247,16 @@ foreach ($aEvent as $oEvent)
                 }
 
                 //Add alert cell
-                echo '<td class="button-cell"><a href="#" class="but-al" data-li="[' . $oFight->getID() . ',' . $iX . ']"><span class="but-img i-a" alt="Add alert" title="Add alert"></span></a></td>';
+                echo '<td class="button-cell"><a href="#" class="but-al" data-li="[' . $oFight->getID() . ',' . $iX . ']"><span class="but-img i-a" title="Add alert"></span></a></td>';
 
                 //Add index graph button
                 if ($bEverFoundOldOdds || count($aFightOdds) > 1)
                 {
-                    echo '<td class="button-cell"><a href="#" class="but-si" data-li="[' . $iX . ',' . $oFightOdds->getFightID() . ']"><span class="but-img i-g"  alt="Betting line movement" title="Betting line movement"></span></a></td>';
+                    echo '<td class="button-cell"><a href="#" class="but-si" data-li="[' . $iX . ',' . $oFightOdds->getFightID() . ']"><span class="but-img i-g"  title="Betting line movement"></span></a></td>';
                 }
                 else
                 {
-                    echo '<td class="button-cell"><span class="but-img i-ng" alt="No index graph available"></span></td>';
+                    echo '<td class="button-cell"><span class="but-img i-ng"></span></td>';
                 }
 
                 echo '<td class="prop-cell"><a href="#" data-mu="' . $oFight->getID() . '"><span class="tw">';
@@ -440,7 +440,7 @@ foreach ($aEvent as $oEvent)
                         }
 
                         //Add alert cell
-                        echo '<td class="button-cell"><span class="but-img i-na" alt="Alert not available"></span></td>';
+                        echo '<td class="button-cell"><span class="but-img i-na"></span></td>';
 
                         //Add index graph
                         if ($bEverFoundOldOdds || count($aPropsOdds) > 1)
@@ -450,11 +450,11 @@ foreach ($aEvent as $oEvent)
                             {
                                 $oCurrentPropOddsIndex = $oBestOdds;
                             }
-                            echo '<td class="button-cell"><a href="#" class="but-sip" data-li="[' . $iX . ',' . $oPropOdds->getMatchupID() . ',' . $oPropOdds->getPropTypeID() . ',' . $oPropOdds->getTeamNumber() . ']"><span class="but-img i-g" alt="Prop betting line movement" title="Prop betting line movement"></span></a></td>';
+                            echo '<td class="button-cell"><a href="#" class="but-sip" data-li="[' . $iX . ',' . $oPropOdds->getMatchupID() . ',' . $oPropOdds->getPropTypeID() . ',' . $oPropOdds->getTeamNumber() . ']"><span class="but-img i-g" title="Prop betting line movement"></span></a></td>';
                         }
                         else
                         {
-                            echo '<td class="button-cell"><span class="but-img i-ng" alt="No index graph available"></span></td>';
+                            echo '<td class="button-cell"><span class="but-img i-ng"></span></td>';
                         }
 
                         //Add empty cell normally used for props
