@@ -69,7 +69,7 @@ function getTimeDifference($a_sStart, $a_sEnd)
                 {
                     if ($minutes == 1)
                     {
-                        $sRetString .= '< ';
+                        $sRetString .= '&lt; ';
                     }
                     $sRetString .= $minutes . ' min';
                 }
