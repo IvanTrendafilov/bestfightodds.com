@@ -25,6 +25,10 @@ if (isset($_GET['b']) && $_GET['b'] == '5')
 	
 	header('Location: ' . $sURL);
 }
+else if (isset($_GET['b']) && $_GET['b'] == '1')
+{
+	header('Location: http://affiliates.5dimes.com/tracking/Affiliate.asp?AffID=5D1796725&mediaTypeID=220&AffUrlID=31');
+}
 else
 {
 	header('Location: https://www.bestfightodds.com');
