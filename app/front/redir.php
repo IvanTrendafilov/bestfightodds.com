@@ -27,7 +27,13 @@ if (isset($_GET['b']) && $_GET['b'] == '5')
 }
 else if (isset($_GET['b']) && $_GET['b'] == '1')
 {
+	//5Dimes
 	header('Location: http://affiliates.5dimes.com/tracking/Affiliate.asp?AffID=5D1796725&mediaTypeID=220&AffUrlID=31');
+}
+else if (isset($_GET['b']) && $_GET['b'] == '9')
+{
+	//Pinnacle
+	header('Location: http://affiliates.pinnaclesports.com/processing/clickthrgh.asp?btag=a_1274b_818');
 }
 else
 {
