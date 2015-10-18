@@ -165,7 +165,7 @@ addToParlay = function(obj) {
                     dispLine = parseFloat(singleMLToDecimal(storedOdds[parlay[i]["ref"]])).toFixed(2);
                     break;
                 case 3:
-                    dispLine = singleDecimalToAmount(singleMLToDecimal(storedOdds[parlay[i]["ref"]]));
+                    dispLine = singleDecimalToAmount(singleMLToDecimal(storedOdds[parlay[i]["ref"]]), $('#format-amount-box1').val());
                     break;
             }
             pvalue *= singleMLToDecimal(storedOdds[parlay[i]["ref"]]);
@@ -178,7 +178,7 @@ addToParlay = function(obj) {
                     dispLine = parseFloat(singleMLToDecimal(document.getElementById('oID' + parlay[i]["ref"]).innerHTML)).toFixed(2);
                     break;
                 case 3:
-                    dispLine = singleDecimalToAmount(singleMLToDecimal(document.getElementById('oID' + parlay[i]["ref"]).innerHTML));
+                    dispLine = singleDecimalToAmount(singleMLToDecimal(document.getElementById('oID' + parlay[i]["ref"]).innerHTML), $('#format-amount-box1').val());
                     break;
             }
             pvalue *= singleMLToDecimal(document.getElementById('oID' + parlay[i]["ref"]).innerHTML);
@@ -199,7 +199,7 @@ addToParlay = function(obj) {
             dispValue = Math.round(pvalue * 100) / 100;
             break;
         case 3:
-            dispValue = singleDecimalToAmount(pvalue);
+            dispValue = singleDecimalToAmount(pvalue, $('#format-amount-box1').val());
             break;
         default:
             break;
@@ -327,8 +327,9 @@ singleDecimalToAmount = function(odds, amount) {
     if (isNaN(value) || value < 0) {
         return '';
     }
-    var val = new String((Math.round(((value * odds) - value) * 100)));
-    val = val.slice(0, val.length - 2) + '.' + val.slice(-2);
+    var val = new String((Math.round((value * odds) - value)));
+    //var val = new String((Math.round(((value * odds) - value) * 100)));
+    //val = val.slice(0, val.length - 2) + '.' + val.slice(-2);
     return '$' + val;
 };
 
