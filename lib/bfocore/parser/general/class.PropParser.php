@@ -12,11 +12,13 @@ class PropParser
 
     private $oLogger;
     private $aMatchups;
+    private $aEvents;
 
     public function __construct()
     {
         $this->oLogger = Logger::getInstance();
         $this->aMatchups = EventHandler::getAllUpcomingMatchups(true);
+        $this->aEvents = EventHandler::getAllUpcomingEvents();
 
         //We will need to check the alt names as well so for each upcoming matchup fetched , fetch the associated altnames for each team and add a new matchup using this
         $aNewMatchupList = $this->aMatchups;
@@ -58,86 +60,151 @@ class PropParser
         $this->oLogger->log('--Template found for ' . $a_oProp->toString() . ': ' . $oTemplate->toString(), 1);
 
 
-        //Find a matching matchup for the prop
-        $aResult = $this->matchParsedPropToMatchup($a_oProp, $oTemplate);
-
-        //If the prop had a correlation ID but still no match was found, try again without correlation ID
-        if ($aResult['matchup'] == null && $a_oProp->getCorrelationID() != '')
+        if ($oTemplate->isEventProp() == true) //TODO: Check if prop_type is event only
         {
-            $this->oLogger->log('--Matchup has correlation ID from bookie but no match. Checking all matchups', 0);
-            $a_oProp->setCorrelationID('');
-            $aResult = $this->matchParsedPropToMatchup($a_oProp, $oTemplate);
-        }
+            //---EVENT PROP---
+            //Find a matching event for the prop
+            $aResult = $this->matchParsedPropToEvent($a_oProp, $oTemplate);
 
-        if ($aResult['matchup'] == null)
-        {
-            $this->oLogger->log('---No matchup found for prop values ' . $a_oProp->toString() . ' (Template ' . $oTemplate->getID() . ' expecting ft: ' . $oTemplate->getFieldsTypeAsExample() . ')' .
-                ' [<a href="?p=addManualPropCorrelation&inBookieID=' . $a_iBookieID . '&inCorrelation=' . ($a_oProp->getMainProp() == 1 ? $a_oProp->getTeamName(1) : $a_oProp->getTeamName(2)) . '">link manually</a>]', -1);
-            EventHandler::logUnmatched($a_oProp->toString(), $a_iBookieID, 1);
-            return false;
-        }
-        $this->oLogger->log('---We found a match for prop values! (' . $aResult['matchup'] . ')', 2);
-        $a_oProp->setMatchedMatchupID($aResult['matchup']);
-
-        //Check if the specific bookie has normal odds (non-prop) for the fight, if not, cancel the matching since no bookie generally has props but no normal odds
-        if (EventHandler::getLatestOddsForFightAndBookie($a_oProp->getMatchedMatchupID(), $a_iBookieID) == null)
-        {
-        	$this->oLogger->log('----Bookie does not have normal odds for matchup, bailing', -1);
-        	return false;
-        }
-
-
-        //If prop requires that team is specified, add this to the prop
-        if ($aResult['team'] != null)
-        {
-            $a_oProp->setMatchedTeamNumber($aResult['team']);
-        }
-
-        $oNewProp = null;
-
-        if ($oTemplate->isNegPrimary())
-        {
-            //Create a PropBet object for storage
-            $oNewProp = new PropBet($a_oProp->getMatchedMatchupID(),
-                            $a_iBookieID,
-                            '',
-                            $a_oProp->getMoneyline(($a_oProp->getMainProp() % 2) + 1),
-                            '',
-                            $a_oProp->getMoneyline($a_oProp->getMainProp()),
-                            $oTemplate->getPropTypeID(),
-                            '',
-                            $a_oProp->getMatchedTeamNumber());
-        }
-        else
-        {
-            //Create a PropBet object for storage
-            $oNewProp = new PropBet($a_oProp->getMatchedMatchupID(),
-                            $a_iBookieID,
-                            '',
-                            $a_oProp->getMoneyline($a_oProp->getMainProp()),
-                            '',
-                            $a_oProp->getMoneyline(($a_oProp->getMainProp() % 2) + 1),
-                            $oTemplate->getPropTypeID(),
-                            '',
-                            $a_oProp->getMatchedTeamNumber());
-        }
-
-        //Store prop bet if it has changed
-        if (OddsHandler::checkMatchingPropOdds($oNewProp))
-        {
-            $this->oLogger->log("------- nothing has changed since last prop odds", 2);
-            return true;
-        }
-        else
-        {
-            $this->oLogger->log("------- adding new prop odds!", 2);
-            if (OddsHandler::addPropBet($oNewProp))
+            if ($aResult['event'] == null)
             {
-                return true;
+                $this->oLogger->log('---No event found for prop values ' . $a_oProp->toString() . ' (Template ' . $oTemplate->getID() . ' expecting ft: ' . $oTemplate->getFieldsTypeAsExample() . ')' .
+                    '', -1);
+                EventHandler::logUnmatched($a_oProp->toString(), $a_iBookieID, 1);
+                return false;
+            }
+            $this->oLogger->log('---We found a event match for prop values! (' . $aResult['event'] . ')', 2);
+
+            $oNewProp = null;
+
+            if ($oTemplate->isNegPrimary())
+            {
+                //Create a EventPropBet object for storage
+                $oNewProp = new EventPropBet($aResult['event'],
+                                $a_iBookieID,
+                                '',
+                                $a_oProp->getMoneyline(($a_oProp->getMainProp() % 2) + 1),
+                                '',
+                                $a_oProp->getMoneyline($a_oProp->getMainProp()),
+                                $oTemplate->getPropTypeID(),
+                                '');
+            }
+            else
+            {
+                //Create a EventPropBet object for storage
+                $oNewProp = new EventPropBet($aResult['event'],
+                                $a_iBookieID,
+                                '',
+                                $a_oProp->getMoneyline($a_oProp->getMainProp()),
+                                '',
+                                $a_oProp->getMoneyline(($a_oProp->getMainProp() % 2) + 1),
+                                $oTemplate->getPropTypeID(),
+                                '');
             }
 
-            $this->oLogger->log('----Prop not stored properly: ' . var_export($oNewProp, true) . '', -2);
-            return false;
+            //Store prop bet if it has changed
+            if (OddsHandler::checkMatchingEventPropOdds($oNewProp))
+            {
+                $this->oLogger->log("------- nothing has changed since last event prop odds", 2);
+                return true;
+            }
+            else
+            {
+                $this->oLogger->log("------- adding new event prop odds!", 2);
+                if (OddsHandler::addEventPropBet($oNewProp))
+                {
+                    return true;
+                }
+
+                $this->oLogger->log('----Prop not stored properly: ' . var_export($oNewProp, true) . '', -2);
+                return false;
+            }
+        }
+        else
+        {
+            //---MATCHUP PROP---
+
+            //Find a matching matchup for the prop
+            $aResult = $this->matchParsedPropToMatchup($a_oProp, $oTemplate);
+
+            //If the prop had a correlation ID but still no match was found, try again without correlation ID
+            if ($aResult['matchup'] == null && $a_oProp->getCorrelationID() != '')
+            {
+                $this->oLogger->log('--Matchup has correlation ID from bookie but no match. Checking all matchups', 0);
+                $a_oProp->setCorrelationID('');
+                $aResult = $this->matchParsedPropToMatchup($a_oProp, $oTemplate);
+            }
+
+            if ($aResult['matchup'] == null)
+            {
+                $this->oLogger->log('---No matchup found for prop values ' . $a_oProp->toString() . ' (Template ' . $oTemplate->getID() . ' expecting ft: ' . $oTemplate->getFieldsTypeAsExample() . ')' .
+                    ' [<a href="?p=addManualPropCorrelation&inBookieID=' . $a_iBookieID . '&inCorrelation=' . ($a_oProp->getMainProp() == 1 ? $a_oProp->getTeamName(1) : $a_oProp->getTeamName(2)) . '">link manually</a>]', -1);
+                EventHandler::logUnmatched($a_oProp->toString(), $a_iBookieID, 1);
+                return false;
+            }
+            $this->oLogger->log('---We found a match for prop values! (' . $aResult['matchup'] . ')', 2);
+            $a_oProp->setMatchedMatchupID($aResult['matchup']);
+
+            //Check if the specific bookie has normal odds (non-prop) for the fight, if not, cancel the matching since no bookie generally has props but no normal odds
+            if (EventHandler::getLatestOddsForFightAndBookie($a_oProp->getMatchedMatchupID(), $a_iBookieID) == null)
+            {
+            	$this->oLogger->log('----Bookie does not have normal odds for matchup, bailing', -1);
+            	return false;
+            }
+
+
+            //If prop requires that team is specified, add this to the prop
+            if ($aResult['team'] != null)
+            {
+                $a_oProp->setMatchedTeamNumber($aResult['team']);
+            }
+
+            $oNewProp = null;
+
+            if ($oTemplate->isNegPrimary())
+            {
+                //Create a PropBet object for storage
+                $oNewProp = new PropBet($a_oProp->getMatchedMatchupID(),
+                                $a_iBookieID,
+                                '',
+                                $a_oProp->getMoneyline(($a_oProp->getMainProp() % 2) + 1),
+                                '',
+                                $a_oProp->getMoneyline($a_oProp->getMainProp()),
+                                $oTemplate->getPropTypeID(),
+                                '',
+                                $a_oProp->getMatchedTeamNumber());
+            }
+            else
+            {
+                //Create a PropBet object for storage
+                $oNewProp = new PropBet($a_oProp->getMatchedMatchupID(),
+                                $a_iBookieID,
+                                '',
+                                $a_oProp->getMoneyline($a_oProp->getMainProp()),
+                                '',
+                                $a_oProp->getMoneyline(($a_oProp->getMainProp() % 2) + 1),
+                                $oTemplate->getPropTypeID(),
+                                '',
+                                $a_oProp->getMatchedTeamNumber());
+            }
+
+            //Store prop bet if it has changed
+            if (OddsHandler::checkMatchingPropOdds($oNewProp))
+            {
+                $this->oLogger->log("------- nothing has changed since last prop odds", 2);
+                return true;
+            }
+            else
+            {
+                $this->oLogger->log("------- adding new prop odds!", 2);
+                if (OddsHandler::addPropBet($oNewProp))
+                {
+                    return true;
+                }
+
+                $this->oLogger->log('----Prop not stored properly: ' . var_export($oNewProp, true) . '', -2);
+                return false;
+            }
         }
     }
 
@@ -455,6 +522,95 @@ class PropParser
 
         return array('matchup' => $iFoundMatchupID, 'team' => $iFoundTeam);
     }
+
+    private function matchParsedPropToEvent($a_oProp, $a_oTemplate)
+    {
+        $aTemplateVariables = array();
+        if ($a_oTemplate->isNegPrimary())
+        {
+            $aTemplateVariables = $a_oTemplate->getNegPropVariables();
+        }
+        else
+        {
+            $aTemplateVariables = $a_oTemplate->getPropVariables();
+        }
+
+        //Check that prop and template have the same number of variables/values
+        $aPropValues = $a_oProp->getPropValues();
+
+        if (count($aPropValues) != count($aTemplateVariables))
+        {
+
+            $this->oLogger->log('---Template variable count (' . count($aTemplateVariables) . ') does not match prop values count (' . count($aPropValues) . '). Not good, check template.', -2);
+            return null;
+        }
+
+        $aParsedEvent = $a_oProp->getPropValues();
+        sort($aParsedEvent);
+
+        $oFoundEvent = null;
+        $iFoundEventID = null;
+        $fFoundSim = 0; //Used to compare fsims if two matchups are found for the same prop
+
+        $aEventsToCheck = $this->aEvents;
+
+        foreach ($aEventsToCheck as $oEvent)
+        {
+            //Compare the values fetched from the prop with the stored matchup
+            $bFound = false;
+            $fNewSim = 0;
+            similar_text(strtoupper($oEvent->getName()), $aParsedEvent[0], $fSim1);
+            similar_text(substr(strtoupper($oEvent->getName()), 0, strpos($oEvent->getName(), ':')), $aParsedEvent[0], $fSim2);
+            $fSim = ($fSim1 > $fSim2 ? $fSim1 : $fSim2);
+
+            //DEBUG:
+            /*$this->oLogger->log("checking: " . $oEvent->getName() . " _and " . substr(strtoupper($oEvent->getName()), 0, strpos($oEvent->getName(), ':')) . " vs " . $aParsedEvent[0] . " fsim:" . $fSim, -2);
+            echo "checking: " . $oEvent->getName() . " vs " . $aParsedEvent[0] . " 
+            fsim:" . $fSim;*/
+
+            if ($fSim > 87)
+            { 
+                $fNewSim = $fSim;
+                $bFound = true;
+            }
+            else
+            {
+                $bFound = false;
+            }
+
+            if ($bFound == true)
+            {
+                if ($oFoundEvent != null)
+                {
+                    $this->oLogger->log('---Found multiple matches for prop values. Comparing fsims, challenger: ' . $oEvent->getName() . ' ' . $oEvent->getID() . ' (' . $fNewSim . ') and current: ' . $oFoundEvent->getName() . ' ' . $oFoundEvent->getID() . ' (' . $fFoundSim . ')', 0);
+                    if ($fNewSim > $fFoundSim)
+                    {
+                        $oFoundEvent = $oEvent;
+                        $iFoundEventID = $oFoundEvent->getID();
+                        $fFoundSim = $fNewSim;
+                        $this->oLogger->log('----Challenger won, changing matched to new one: ' . $iFoundEventID);
+                    }
+                    else if ($fNewSim == $fFoundSim)
+                    {
+                        $this->oLogger->log('----Fsims are identical, cannot determine winner. Bailing..');
+                        return array('event' => null);
+                    }
+                    else
+                    {
+                        $this->oLogger->log('----Current won. Sticking with current');
+                    }
+                }
+                else
+                {
+                    $oFoundEvent = $oEvent;
+                    $iFoundEventID = $oFoundEvent->getID();
+                    $fFoundSim = $fNewSim;
+                }
+            }
+        }
+        return array('event' => $iFoundEventID);
+    }
+
 
     private function addAltNameMatchupsToMatchup($oMatchupToCheck)
     {

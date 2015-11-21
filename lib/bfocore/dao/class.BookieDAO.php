@@ -174,9 +174,10 @@ class BookieDAO
 
     public static function getPropTemplatesForBookie($a_iBookieID)
     {
-        $sQuery = 'SELECT bpt.id, bpt.bookie_id, bpt.template, bpt.template_neg, bpt.prop_type, bpt.fields_type
-                    FROM bookies_proptemplates bpt
-                    WHERE bpt.bookie_id = ?';
+        $sQuery = 'SELECT bpt.id, bpt.bookie_id, bpt.template, bpt.template_neg, bpt.prop_type, bpt.fields_type, pt.is_eventprop
+                    FROM bookies_proptemplates bpt, prop_types pt
+                    WHERE bpt.bookie_id = ?
+                        AND bpt.prop_type = pt.id';
         $aParams = array($a_iBookieID);
 
         $rResult = DBTools::doParamQuery($sQuery, $aParams);
@@ -184,7 +185,9 @@ class BookieDAO
         $aTemplates = array();
         while ($aTemplate = mysql_fetch_array($rResult))
         {
-            $aTemplates[] = new PropTemplate($aTemplate['id'], $aTemplate['bookie_id'], $aTemplate['template'], $aTemplate['template_neg'], $aTemplate['prop_type'], $aTemplate['fields_type']);
+            $oTempObj = new PropTemplate($aTemplate['id'], $aTemplate['bookie_id'], $aTemplate['template'], $aTemplate['template_neg'], $aTemplate['prop_type'], $aTemplate['fields_type']);
+            $oTempObj->setEventProp($aTemplate['is_eventprop']);
+            $aTemplates[] = $oTempObj;
         }
 
         return $aTemplates;

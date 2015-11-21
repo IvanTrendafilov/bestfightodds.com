@@ -70,20 +70,6 @@ class ParsedSport
                         {
                             $bChanged = false;
 
-                            //Add totals if new one has totals
-                            if ($oTempMatchup->hasTotals())
-                            {
-                                $bChanged = true;
-                                $oMatchup->addTotalOddsCol($oTempMatchup->getTotalOddsCol());
-                            }
-
-                            //Add spreads if new one has spreads
-                            if ($oTempMatchup->hasSpreads())
-                            {
-                                $bChanged = true;
-                                $oMatchup->addSpreadOddsCol($oTempMatchup->getSpreadOddsCol());
-                            }
-
                             //Check if a moneyline exists in both. In that case just skip
                             //TODO: Maybe handle this in some way.. Maybe just check best arbitrage and then store that one?
                             if ($oMatchup->hasMoneyline() && $oTempMatchup->hasMoneyline())

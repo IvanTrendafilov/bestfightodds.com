@@ -10,6 +10,7 @@ class PropTemplate
     private $aTemplatePropValues;
     private $aTemplateNegPropValues;
     private $iFieldsTypeID;
+    private $bIsEventProp = false;
 
     private $bNegIsPrimary = false;
 
@@ -118,6 +119,16 @@ class PropTemplate
             break;
             default:
         }
+    }
+
+    public function setEventProp($a_bState)
+    {
+        $this->bIsEventProp = $a_bState;
+    }
+
+    public function isEventProp()
+    {
+        return $this->bIsEventProp;
     }
 
 }

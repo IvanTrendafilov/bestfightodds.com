@@ -2,7 +2,6 @@
 
 class PropBet
 {
-
     private $iMatchupID; //Matchup the prop is linked to
     private $iTeamNumber; //Used if prop specifies a certain team in the matchup
     private $iBookieID;

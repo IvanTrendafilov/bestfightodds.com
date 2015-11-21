@@ -2,17 +2,12 @@
 
 require_once('lib/bfocore/parser/utils/class.ParseTools.php');
 require_once('lib/bfocore/parser/general/class.ParsedMoneyline.php');
-require_once('lib/bfocore/parser/general/class.ParsedTotal.php');
-require_once('lib/bfocore/parser/general/class.ParsedSpread.php');
 
 class ParsedMatchup
 {
-
     private $sTeam1Name;
     private $sTeam2Name;
     private $oMoneyline;
-    private $aTotalOdds = null;
-    private $aSpreadOdds = null;
     private $sDate;
     private $bSwitched = false; //Indicates if team order has been changed or not
     private $bSwitchedFromOutside = false;
@@ -37,8 +32,6 @@ class ParsedMatchup
         }
 
         $this->bSwitchedFromOutside = false;
-        $this->aSpreadOdds = array();
-        $this->aTotalOdds = array();
         $this->aMetaData = array();
         $this->sDate = ($a_sDate != '' ? $this->sDate = ParseTools::standardizeDate(trim($a_sDate)) : '');
     }
@@ -96,27 +89,11 @@ class ParsedMatchup
     public function switchOdds()
     {
         $this->bSwitchedFromOutside = true;
-
-        //Switch spreads
-        if ($this->aSpreadOdds != null)
-        {
-            foreach ($this->aSpreadOdds as $oSpreadOdds)
-            {
-                if (!$oSpreadOdds->isSwitched())
-                {
-                    $oSpreadOdds->switchOdds();
-                }
-            }
-        }
-
         //Switch moneyline
         if ($this->oMoneyline != null && !$this->oMoneyline->isSwitched())
         {
             $this->oMoneyline->switchOdds();
         }
-
-        //Not required to switch totals
-
         return true;
     }
 
@@ -139,98 +116,9 @@ class ParsedMatchup
         return $this->oMoneyline;
     }
 
-    public function addTotalOddsCol($a_oTotalOdds)
-    {
-        foreach ($a_oTotalOdds as $oTotalOdds)
-        {
-
-            //Check if a entry with the same total exists, if so check if the moneyline is better and if SO, replace the old one, otherwise skip
-            $bSkip = false;
-            for ($iX = 0; $iX < count($this->aTotalOdds); $iX++)
-            {
-                if ($this->aTotalOdds[$iX]->getTotalPoints(1) == $oTotalOdds->getTotalPoints(1))
-                {
-                    //Match was found, check which moneyline is better
-                    $fStoredArb = ParseTools::getArbitrage($this->aTotalOdds[$iX]->getOverML(), $this->aTotalOdds[$iX]->getUnderML());
-                    $fChallengerArb = ParseTools::getArbitrage($oTotalOdds->getOverML(), $oTotalOdds->getUnderML());
-                    if ($fStoredArb > $fChallengerArb)
-                    {
-                        //New moneyline is better, replace existing
-                        $this->aTotalOdds[$iX] = $oTotalOdds;
-                    }
-                    //Indicate that spread is not to be added as a new one
-                    $bSkip = true;
-                }
-            }
-
-            if ($bSkip == false)
-            {
-                $this->aTotalOdds[] = $oTotalOdds;
-            }
-        }
-    }
-
-    public function getTotalOddsCol()
-    {
-        return $this->aTotalOdds;
-    }
-
-    /**
-     * Note that this function will APPEND new spread odds and not replace
-     */
-    public function addSpreadOddsCol($a_aSpreadOdds)
-    {
-        foreach ($a_aSpreadOdds as $oSpreadOdds)
-        {
-            if ($this->bSwitched == true && !$oSpreadOdds->isSwitched())
-            {
-                $oSpreadOdds->switchOdds();
-            }
-            //Check if a entry with the same spread exists, if so check if the moneyline is better and if SO, replace the old one, otherwise skip
-            $bSkip = false;
-            for ($iX = 0; $iX < count($this->aSpreadOdds); $iX++)
-            {
-                if ($this->aSpreadOdds[$iX]->getSpread(1) == $oSpreadOdds->getSpread(1)
-                        && $this->aSpreadOdds[$iX]->getSpread(2) == $oSpreadOdds->getSpread(2))
-                {
-                    //Match was found, check which moneyline is better
-                    $fStoredArb = ParseTools::getArbitrage($this->aSpreadOdds[$iX]->getMoneyline(1), $this->aSpreadOdds[$iX]->getMoneyline(2));
-                    $fChallengerArb = ParseTools::getArbitrage($oSpreadOdds->getMoneyline(1), $oSpreadOdds->getMoneyline(2));
-                    if ($fStoredArb > $fChallengerArb)
-                    {
-                        //New moneyline is better, replace existing
-                        $this->aSpreadOdds[$iX] = $oSpreadOdds;
-                    }
-                    //Indicate that spread is not to be added as a new one
-                    $bSkip = true;
-                }
-            }
-
-            if ($bSkip == false)
-            {
-                $this->aSpreadOdds[] = $oSpreadOdds;
-            }
-        }
-    }
-
-    public function getSpreadOddsCol()
-    {
-        return $this->aSpreadOdds;
-    }
-
-    public function hasTotals()
-    {
-        return (sizeof($this->aTotalOdds) > 0 ? true : false);
-    }
-
     public function hasMoneyline()
     {
         return ($this->oMoneyline->getMoneyline(1) != '' && $this->oMoneyline->getMoneyline(1) != '');
-    }
-
-    public function hasSpreads()
-    {
-        return (sizeof($this->aSpreadOdds) > 0 ? true : false);
     }
 
     public function toString()

@@ -13,10 +13,6 @@ require_once('lib/bfocore/general/datatypes/class.FightOdds.php');
 require_once('lib/bfocore/general/datatypes/class.Bookie.php');
 
 //2.0
-require_once('lib/bfocore/general/datatypes/class.SpreadOdds.php');
-require_once('lib/bfocore/general/datatypes/class.SpreadOddsSet.php');
-require_once('lib/bfocore/general/datatypes/class.TotalOdds.php');
-require_once('lib/bfocore/general/datatypes/class.TotalOddsSet.php');
 require_once('lib/bfocore/general/datatypes/class.PropBet.php');
 require_once('lib/bfocore/general/datatypes/class.PropTemplate.php');
 require_once('lib/bfocore/general/datatypes/class.PropType.php');
@@ -24,5 +20,8 @@ require_once('lib/bfocore/general/datatypes/class.Linkout.php');
 
 //2.1
 require_once('lib/bfocore/general/datatypes/class.BookieParser.php');
+
+//2.2
+require_once('lib/bfocore/general/datatypes/class.EventPropBet.php');
 
 ?>

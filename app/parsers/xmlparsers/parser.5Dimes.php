@@ -63,16 +63,16 @@ class XMLParser5Dimes
                         {
                             //Prop starts with NOT, switch home and visitor fields
                             $oParsedProp = new ParsedProp(
-                                            (string) $cEvent->VisitorTeamID,
-                                            (string) $cEvent->HomeTeamID,
+                                            (string) ':: ' . $cEvent->Header . ' : ' . $cEvent->VisitorTeamID,
+                                            (string) ':: ' . $cEvent->Header . ' : ' .$cEvent->HomeTeamID,
                                             (string) $cEvent->VisitorMoneyLine,
                                             (string) $cEvent->HomeMoneyLine);
                         }
                         else
                         {
                             $oParsedProp = new ParsedProp(
-                                            (string) $cEvent->HomeTeamID,
-                                            (string) $cEvent->VisitorTeamID,
+                                            (string) ':: ' . $cEvent->Header . ' : ' . $cEvent->HomeTeamID,
+                                            (string) ':: ' . $cEvent->Header . ' : ' . $cEvent->VisitorTeamID,
                                             (string) $cEvent->HomeMoneyLine,
                                             (string) $cEvent->VisitorMoneyLine);
                         }

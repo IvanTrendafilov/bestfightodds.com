@@ -5,74 +5,6 @@ require_once('lib/bfocore/general/class.BookieHandler.php');
 
 class OddsHandler
 {
-
-    /**
-     * Store a spread. If no set ID is specified, a new set will be created
-     *
-     * @param SpreadOdds $a_oSpreadOdds The spread odds object to add
-     * @param int $a_iSetID Set ID to add the spread to
-     * @return boolean If successful or not
-     */
-    public static function addSingleSpread($a_oSpreadOdds, $a_iSetID = null)
-    {
-        return OddsDAO::addSingleSpread($a_oSpreadOdds, $a_iSetID);
-    }
-
-    public static function addMultipleSpreads($a_aSpreadOdds, $a_iSetID = null)
-    {
-        return OddsDAO::addMultipleSpreads($a_aSpreadOdds, $a_iSetID);
-    }
-
-    public static function addSingleTotals($a_oTotalOdds, $a_iSetID = null)
-    {
-        return OddsDAO::addSingleTotals($a_oTotalOdds, $a_iSetID);
-    }
-
-    public static function addMultipleTotals($a_aTotalOdds, $a_iSetID = null)
-    {
-        return OddsDAO::addMultipleTotals($a_aTotalOdds, $a_iSetID);
-    }
-
-    public static function getLatestSpreadsForMatchup($a_iMatchupID, $a_iOffset = 0)
-    {
-        return OddsDAO::getLatestSpreadsForMatchup($a_iMatchupID, $a_iOffset);
-    }
-
-    public static function getLatestTotalsForMatchup($a_iMatchupID, $a_iOffset = 0)
-    {
-        return OddsDAO::getLatestTotalsForMatchup($a_iMatchupID, $a_iOffset);
-    }
-
-    public static function getLatestSpreadsForMatchupAndBookie($a_iMatchupID, $a_iBookieID)
-    {
-        return OddsDAO::getLatestSpreadsForMatchupAndBookie($a_iMatchupID, $a_iBookieID);
-    }
-
-    public static function getLatestTotalsForMatchupAndBookie($a_iMatchupID, $a_iBookieID)
-    {
-        return OddsDAO::getLatestTotalsForMatchupAndBookie($a_iMatchupID, $a_iBookieID);
-    }
-
-    public static function isLatestTotalSet($a_oTotalSet)
-    {
-        $oExistingTotal = OddsHandler::getLatestTotalsForMatchupAndBookie($a_oTotalSet->getMatchupID(), $a_oTotalSet->getBookieID());
-        if ($oExistingTotal != null)
-        {
-            return $oExistingTotal->equals($a_oTotalSet);
-        }
-        return false;
-    }
-
-    public static function isLatestSpreadSet($a_oSpreadSet)
-    {
-        $oExistingSpreadSet = OddsHandler::getLatestSpreadsForMatchupAndBookie($a_oSpreadSet->getMatchupID(), $a_oSpreadSet->getBookieID());
-        if ($oExistingSpreadSet != null)
-        {
-            return $oExistingSpreadSet->equals($a_oSpreadSet);
-        }
-        return false;
-    }
-
     public static function addPropBet($a_oPropBet)
     {
         return OddsDAO::addPropBet($a_oPropBet);
@@ -279,6 +211,124 @@ class OddsHandler
     {
         return OddsDAO::cleanCorrelations();
     }
+
+    public static function addEventPropBet($a_oEventPropBet)
+    {
+        return OddsDAO::addEventPropBet($a_oEventPropBet);
+    }
+
+    public static function getPropBetsForEvent($a_iEventID)
+    {
+        return OddsDAO::getPropBetsForEvent($a_iEventID);
+    }
+
+    public static function getAllPropTypesForEvent($a_iEventID)
+    {
+        return OddsDAO::getAllPropTypesForEvent($a_iEventID);
+    }
+
+    public static function getLatestEventPropOdds($a_iEventID, $a_iBookieID, $a_iPropTypeID, $a_iOffset = 0)
+    {
+        return OddsDAO::getLatestEventPropOdds($a_iEventID, $a_iBookieID, $a_iPropTypeID, $a_iOffset = 0);
+    }
+
+    public static function getAllLatestEventPropOddsForEvent($a_iEventID, $a_iPropTypeID, $a_iOffset = 0)
+    {
+        $aRetOdds = array();
+
+        //Loop through each bookie and retrieve prop odds
+        $aBookies = BookieHandler::getAllBookies();
+        foreach ($aBookies as $oBookie)
+        {
+            $oOdds = OddsDAO::getLatestPropOdds($a_iEventID, $oBookie->getID(), $a_iPropTypeID, $a_iOffset);
+            if ($oOdds != null)
+            {
+                $aRetOdds[] = $oOdds;
+            }
+        }
+
+        return $aRetOdds;
+    }
+
+
+    public static function getBestPropOddsForEvent($a_iEventID, $a_iPropTypeID)
+    {
+        return OddsDAO::getBestPropOddsForEvent($a_iEventID, $a_iPropTypeID);
+    }
+
+    public static function getAllPropOddsForEventPropType($a_iEventID, $a_iBookieID, $a_iPropTypeID)
+    {
+        return OddsDAO::getAllPropOddsForEventPropType($a_iEventID, $a_iBookieID, $a_iPropTypeID);
+    }
+
+    public static function getPropCountForEvent($a_iEventID)
+    {
+        return count(OddsDAO::getAllPropTypesForEvent($a_iEventID));
+    }
+
+    public static function getCurrentEventPropIndex($a_iEventID, $a_iPosProp, $a_iPropTypeID)
+    {
+        $iSkippedProps = 0; //Keeps track of skipped prop bets that are not available, i.e. stored as -99999 in the database
+
+        $aOdds = OddsHandler::getAllLatestPropOddsForMatchup($a_iEventID, $a_iPropTypeID);
+
+        if ($aOdds == null || sizeof($aOdds) == 0)
+        {
+            return null;
+        }
+        if (sizeof($aOdds) == 1)
+        {
+            return new PropBet($a_iEventID, -1, '', ($a_iPosProp == 1 ? $aOdds[0]->getPropOdds() : 0), '', ($a_iPosProp == 2 ? $aOdds[0]->getNegPropOdds() : 0), $a_iPropTypeID, -1);
+        }
+        $iCurrentOddsTotal = 0;
+        foreach ($aOdds as $oPropBet)
+        {
+            //Check if prop bet should be skipped, i.e. stored as -99999 in database
+            if (( $a_iPosProp == 1 ? $oPropBet->getPropOdds() : $oPropBet->getNegPropOdds()) == -99999)
+            {
+                $iSkippedProps++;
+            }
+            else
+            {
+                $iCurrOdds = $a_iPosProp == 1 ? $oPropBet->getPropOdds() : $oPropBet->getNegPropOdds();
+                $iCurrentOddsTotal += $iCurrOdds < 0 ? ($iCurrOdds + 100) : ($iCurrOdds - 100);
+            }
+        }
+        if (sizeof($aOdds) - $iSkippedProps != 0)
+        {
+            $iCurrentOddsTotal = round($iCurrentOddsTotal / (sizeof($aOdds) - $iSkippedProps) + ($iCurrentOddsTotal < 0 ? -100 : 100));
+        }
+        return new EventPropBet($a_iEventID, -1, '', ($a_iPosProp == 1 ? $iCurrentOddsTotal : 0), '', ($a_iPosProp == 2 ? $iCurrentOddsTotal : 0), $a_iPropTypeID, -1);
+    }
+
+
+    public static function getOpeningOddsForEventProp($a_iEventID, $a_iPropTypeID)
+    {
+        return OddsDAO::getOpeningOddsForEventProp($a_iEventID, $a_iPropTypeID);
+    }
+
+    public static function getOpeningOddsForEventPropAndBookie($a_iEventID, $a_iPropTypeID, $a_iBookieID)
+    {
+        return OddsDAO::getOpeningOddsForEventPropAndBookie($a_iEventID, $a_iPropTypeID, $a_iBookieID);
+    }
+
+    public static function getCompletePropsForEvent($a_iEventID, $a_iOffset = 0)
+    {
+        return OddsDAO::getCompletePropsForEvent($a_iEventID, $a_iOffset = 0);
+    }
+
+    public static function checkMatchingEventPropOdds($a_oEventPropBet)
+    {
+
+        $oExistingPropOdds = OddsHandler::getLatestEventPropOdds($a_oEventPropBet->getEventID(), $a_oEventPropBet->getBookieID(), $a_oEventPropBet->getPropTypeID());
+        if ($oExistingPropOdds != null)
+        {
+            return $oExistingPropOdds->equals($a_oEventPropBet);
+        }
+        return false;
+    }
+
+
 
 }
 

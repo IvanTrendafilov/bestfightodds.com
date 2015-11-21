@@ -1,7 +1,7 @@
 <?php
 
 /**
- * Description of classParsedSpread
+ * Description of ParsedMoneyline
  *
  * @author Christian
  */

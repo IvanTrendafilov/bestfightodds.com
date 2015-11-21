@@ -79,39 +79,6 @@ CREATE TABLE  `bets`.`sports` (
   PRIMARY KEY  (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
-CREATE TABLE  `bets`.`lines_spread_set` (
-  `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
-  `matchup_id` int(10) unsigned NOT NULL,
-  `bookie_id` smallint(5) unsigned NOT NULL,
-  `date` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
-CREATE TABLE  `bets`.`lines_spread` (
-  `team1_line` smallint(6) NOT NULL,
-  `team2_line` smallint(6) NOT NULL,
-  `team1_spread` decimal(4,1) NOT NULL,
-  `team2_spread` decimal(4,1) NOT NULL,
-  `set_id` int(10) unsigned NOT NULL,
-  PRIMARY KEY (`team1_spread`,`team2_spread`,`set_id`) USING BTREE
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
-CREATE TABLE  `bets`.`lines_totals_set` (
-  `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
-  `matchup_id` int(10) unsigned NOT NULL,
-  `bookie_id` smallint(5) unsigned NOT NULL,
-  `date` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=33 DEFAULT CHARSET=latin1;
-
-CREATE TABLE  `bets`.`lines_totals` (
-  `totalpoints` decimal(4,1) NOT NULL,
-  `over_line` smallint(6) NOT NULL,
-  `under_line` smallint(6) NOT NULL,
-  `set_id` int(10) unsigned NOT NULL,
-  PRIMARY KEY (`set_id`,`totalpoints`) USING BTREE
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
 CREATE TABLE `bets`.`bookies_changenums` (
   `bookie_id` INTEGER UNSIGNED NOT NULL AUTO_INCREMENT,
   `changenum` VARCHAR(45) NOT NULL,
@@ -143,6 +110,7 @@ CREATE TABLE  `bets`.`prop_types` (
   `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
   `prop_desc` varchar(300) NOT NULL,
   `negprop_desc` varchar(45) NOT NULL,
+  `is_eventprop` TINYINT(1) DEFAULT 0 NOT NULL, 
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=latin1;
 
@@ -199,3 +167,12 @@ CREATE TABLE `schedule_manualactions` (
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=53 DEFAULT CHARSET=latin1;
 
+CREATE TABLE `lines_eventprops` (
+  `event_id` int(10) unsigned NOT NULL DEFAULT '0',
+  `bookie_id` int(10) unsigned NOT NULL DEFAULT '0',
+  `prop_odds` int(11) NOT NULL DEFAULT '0',
+  `negprop_odds` int(11) NOT NULL DEFAULT '0',
+  `proptype_id` int(10) unsigned NOT NULL DEFAULT '0',
+  `date` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  PRIMARY KEY (`event_id`,`bookie_id`,`date`,`proptype_id`)
+) ENGINE=MyISAM DEFAULT CHARSET=latin1;

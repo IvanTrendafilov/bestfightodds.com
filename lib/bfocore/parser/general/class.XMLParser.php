@@ -245,8 +245,6 @@ class XMLParser
             $iMatchupCount = 0;
             $iTotalCount = 0;
             $iMoneylineCount = 0;
-            $iSpreadCount = 0;
-            $iTotalsCount = 0;
 
             $oLogger->log('-sport: ' . $oParsedSport->getName(), 1);
 
@@ -319,20 +317,6 @@ class XMLParser
                             $iMoneylineCount++;
                         }
 
-                        // PROCESS SPREADS
-                        if ($oParsedMatchup->hasSpreads())
-                        {
-                            self::processParsedSpreads($oMatchedMatchup, $oParsedMatchup, $a_iBookieID);
-                            $iSpreadCount++;
-                        }
-
-                        //PROCESS TOTALS
-                        if ($oParsedMatchup->hasTotals())
-                        {
-                            self::processParsedTotals($oMatchedMatchup, $oParsedMatchup, $a_iBookieID);
-                            $iTotalsCount++;
-                        }
-
                         //If parsed matchup contains a correlation ID, we store this in the correlation table so that other functions can be
                         if ($oParsedMatchup->getCorrelationID() != '')
                         {
@@ -360,9 +344,6 @@ class XMLParser
                 }
             }
             $oLogger->log("Total matched matchups: " . $iMatchupCount . ' / ' . $iTotalCount, 0);
-            /*$oLogger->log("Total matched moneylines: " . $iMoneylineCount, 0);
-            $oLogger->log("Total matched spreads: " . $iSpreadCount, 0);
-            $oLogger->log("Total matched totals: " . $iTotalsCount, 0);*/
         }
     }
 
@@ -381,62 +362,6 @@ class XMLParser
         {
             $oLogger->log("------- adding new odds!", 2);
             EventHandler::addNewFightOdds($oTempMatchupOdds);
-        }
-    }
-
-    public static function processParsedSpreads($a_oMatchedMatchup, $a_oParsedMatchup, $a_iBookieID)
-    {
-        $oLogger = Logger::getInstance();
-
-        $oTempSpreadSet = new SpreadOddsSet(-1, $a_oMatchedMatchup->getID(), $a_iBookieID, ParseTools::standardizeDate(date('Y-m-d')));
-        $aParsedSpreads = $a_oParsedMatchup->getSpreadOddsCol();
-        foreach ($aParsedSpreads as $oParsedSpread)
-        {
-            $oTempSpreadSet->addSpreadOdds(new SpreadOdds($a_oMatchedMatchup->getID(),
-                            $a_iBookieID,
-                            $oParsedSpread->getSpread(1),
-                            $oParsedSpread->getSpread(2),
-                            $oParsedSpread->getMoneyline(1),
-                            $oParsedSpread->getMoneyline(2),
-                            $oTempSpreadSet->getDate()));
-        }
-
-        if (OddsHandler::isLatestSpreadSet($oTempSpreadSet))
-        {
-            $oLogger->log("------- nothing has changed since last odds", 2);
-        }
-        else
-        {
-            $oLogger->log("------- adding new spread odds set!", 2);
-            OddsHandler::addMultipleSpreads($oTempSpreadSet->getSpreadOddsCol());
-        }
-    }
-
-
-    public static function processParsedTotals($a_oMatchedMatchup, $a_oParsedMatchup, $a_iBookieID)
-    {
-        $oLogger = Logger::getInstance();
-
-        $oTempTotalsSet = new TotalOddsSet(-1, $a_oMatchedMatchup->getID(), $a_iBookieID, ParseTools::standardizeDate(date('Y-m-d')));
-        $aParsedTotals = $a_oParsedMatchup->getTotalOddsCol();
-        foreach ($aParsedTotals as $oParsedTotal)
-        {
-            $oTempTotalsSet->addTotalOdds(new TotalOdds($a_oMatchedMatchup->getID(),
-                            $a_iBookieID,
-                            $oParsedTotal->getTotalPoints(),
-                            $oParsedTotal->getOverML(),
-                            $oParsedTotal->getUnderML(),
-                            $oTempTotalsSet->getDate()));
-        }
-
-        if (OddsHandler::isLatestTotalSet($oTempTotalsSet))
-        {
-            $oLogger->log("------- nothing has changed since last odds", 2);
-        }
-        else
-        {
-            $oLogger->log("------- adding new totals odds set", 2);
-            OddsHandler::addMultipleTotals($oTempTotalsSet->getTotalOddsCol());
         }
     }
 

@@ -7,6 +7,7 @@ class PropType
     private $sPropNegDesc;
     private $bTeamSpecific = false;
     private $iTeamNum;
+    private $bIsEventProp = false;
 
     public function __construct($a_iID, $a_sPropDesc, $a_sPropNegDesc, $a_iTeamNum = 0)
     {
@@ -76,6 +77,17 @@ class PropType
         }
         return false;
     }
+
+    public function setEventProp($a_bState)
+    {
+        $this->bIsEventProp = $a_bState;
+    }
+
+    public function isEventProp()
+    {
+        return $this->bIsEventProp;
+    }
+
 
 }
 
