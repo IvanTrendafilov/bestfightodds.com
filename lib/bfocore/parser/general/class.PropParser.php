@@ -568,7 +568,7 @@ class PropParser
             echo "checking: " . $oEvent->getName() . " vs " . $aParsedEvent[0] . " 
             fsim:" . $fSim;*/
 
-            if ($fSim > 87)
+            if ($fSim > 95)
             { 
                 $fNewSim = $fSim;
                 $bFound = true;
