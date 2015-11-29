@@ -714,9 +714,10 @@ initPage = function() {
     });
 
     $('tr.eventprop th').find('a').on('click', function() {
-        alert('TODO: Trigger click on prop cell');
+        event_id = $(this).attr('data-mu');
+        $('.prop-cell').find("[data-mu=" + event_id + "]").trigger('click');
     }); 
-
+ 
 
     //Sync scrollbars
     $('div.table-scroller').bind('mousedown touchstart', function() {
