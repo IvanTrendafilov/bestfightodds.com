@@ -695,7 +695,6 @@ initPage = function() {
         $(this).data('toggled', !$(this).data('toggled'));
         $("[data-mu=" + matchup_id + "]").data('toggled', $(this).data('toggled'));
         if ($(this).data('toggled')) {
-
             if (navigator.appName.indexOf("Microsoft") > -1 && navigator.appVersion.indexOf("MSIE 10.0") == -1) {
                 $(this).closest('tr').next('tr.odd').andSelf('tr.odd').nextUntil('tr.even').css('display', 'block');
                 $('#mu-' + matchup_id).nextUntil('tr.even').css('display', 'block');
@@ -712,8 +711,12 @@ initPage = function() {
             refreshOpenProps[matchup_id] = false;
         }
         return false;
-
     });
+
+    $('tr.eventprop th').find('a').on('click', function() {
+        alert('TODO: Trigger click on prop cell');
+    }); 
+
 
     //Sync scrollbars
     $('div.table-scroller').bind('mousedown touchstart', function() {

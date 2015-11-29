@@ -240,7 +240,7 @@ class OddsHandler
         $aBookies = BookieHandler::getAllBookies();
         foreach ($aBookies as $oBookie)
         {
-            $oOdds = OddsDAO::getLatestPropOdds($a_iEventID, $oBookie->getID(), $a_iPropTypeID, $a_iOffset);
+            $oOdds = OddsDAO::getLatestEventPropOdds($a_iEventID, $oBookie->getID(), $a_iPropTypeID, $a_iOffset);
             if ($oOdds != null)
             {
                 $aRetOdds[] = $oOdds;
@@ -270,7 +270,7 @@ class OddsHandler
     {
         $iSkippedProps = 0; //Keeps track of skipped prop bets that are not available, i.e. stored as -99999 in the database
 
-        $aOdds = OddsHandler::getAllLatestPropOddsForMatchup($a_iEventID, $a_iPropTypeID);
+        $aOdds = OddsHandler::getAllLatestEventPropOddsForEvent($a_iEventID, $a_iPropTypeID);
 
         if ($aOdds == null || sizeof($aOdds) == 0)
         {

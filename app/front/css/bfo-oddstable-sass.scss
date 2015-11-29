@@ -65,6 +65,13 @@
         background-color: #fff;
         border-bottom: 1px solid #b6b6b6;
       }
+      &.eventprop {
+        background-color: #eceef0;
+        border-top: 1px solid #b6b6b6;
+        & th a {
+          font-weight: 400;
+        }
+      }
       &.pr {
         background-color: #d8dadc;
         display: none;
