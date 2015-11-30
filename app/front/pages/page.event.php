@@ -195,7 +195,7 @@ if ($oEvent != null)
         $aPropTypes = OddsHandler::getAllPropTypesForEvent($oEvent->getID());
         if (count($aPropTypes) > 0)
         {
-            echo '<tr class="odd even eventprop">';
+            echo '<tr class="odd even eventprop" id="mu-' . $oEvent->getID() . '">';
             echo '<th scope="row" style="font-weight: 400"><a href="#" data-mu="' . $oEvent->getID() . '">Event props</a></th>';
             echo '</tr>';
 
@@ -243,7 +243,7 @@ if ($oEvent != null)
                         
                         $iPropRowCounter++;
                         echo '<tr class="pr' . (($iX % 2) == 1 ? '' : '-odd') . '"' . (($iX == 2 && $iPropCounter == count($aPropTypes) - 1) ? ' style="border-bottom: 2px solid #f8f8f8;"' : (($iX == 1 && $iFightCounter == count($aFights) - 1 && $iPropCounter == 0) ? ' style="border-top: 1px solid #C6C6C6;"' : '')) . '>';
-                        echo '<th scope="row">' . ($iX == 1 ? $oPropType->getPropDesc() : $oPropType->getPropNegDesc()) . '</th>';
+                        echo '<th scope="row">' . ($iX == 1 ? $oPropType->getPropDesc() : $oPropType->getPropNegDesc()) . '&nbsp;</th>';
 
                         $iProcessedProps = 0;
                         $bEverFoundOldOdds = false;
@@ -566,7 +566,7 @@ if ($oEvent != null)
         $aPropTypes = OddsHandler::getAllPropTypesForEvent($oEvent->getID());
         if (count($aPropTypes) > 0)
         {
-            echo '<tr class="odd even eventprop">';
+            echo '<tr class="odd even eventprop" id="mu-' . $oEvent->getID() . '">';
             echo '<th scope="row" style="font-weight: 400"><a href="#" data-mu="' . $oEvent->getID() . '">Event props</a></th>';
 
             //Fill empty cells
@@ -627,7 +627,7 @@ if ($oEvent != null)
                         
                         $iPropRowCounter++;
                         echo '<tr class="pr' . (($iX % 2) == 1 ? '' : '-odd') . '"' . (($iX == 2 && $iPropCounter == count($aPropTypes) - 1) ? ' style="border-bottom: 2px solid #f8f8f8;"' : (($iX == 1 && $iFightCounter == count($aFights) - 1 && $iPropCounter == 0) ? ' style="border-top: 1px solid #C6C6C6;"' : '')) . '>';
-                        echo '<th scope="row">' . ($iX == 1 ? $oPropType->getPropDesc() : $oPropType->getPropNegDesc()) . '</th>';
+                        echo '<th scope="row">' . ($iX == 1 ? $oPropType->getPropDesc() : $oPropType->getPropNegDesc()) . '&nbsp;</th>';
 
                         $iProcessedProps = 0;
                         $bEverFoundOldOdds = false;

@@ -109,7 +109,7 @@ CREATE TABLE  `bets`.`bookies_parsers` (
 CREATE TABLE  `bets`.`prop_types` (
   `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
   `prop_desc` varchar(300) NOT NULL,
-  `negprop_desc` varchar(45) NOT NULL,
+  `negprop_desc` varchar(300) NOT NULL,
   `is_eventprop` TINYINT(1) DEFAULT 0 NOT NULL, 
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=latin1;
