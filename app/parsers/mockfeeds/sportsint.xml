@@ -1,1 +1,2593 @@
-<?xml version="1.0" encoding="utf-8" ?><sportsinteractionLines timestamp="2013-06-16T23:06:47"><EventType ID="20" NAME="Boxing"><Event ID="3846666"><Name><![CDATA[Adrien Broner v Paul Malignaggi]]></Name><Date>2013-06-23 04:00:00.0</Date><Location><![CDATA[Draw]]></Location><Live>1</Live><Bet TYPE=""><Runner ID="14140826"><![CDATA[Adrien Broner]]></Runner><Price>-2000</Price><Handicap>0</Handicap><Betlink><![CDATA[http://www.sportsinteraction.com/sportsbook/index.cfm?section=events&eventtypeID=20&gameID=468764]]></Betlink><NSSNumber></NSSNumber></Bet><Bet TYPE=""><Runner ID="14140827"><![CDATA[Draw]]></Runner><Price>+3500</Price><Handicap>0</Handicap><Betlink><![CDATA[http://www.sportsinteraction.com/sportsbook/index.cfm?section=events&eventtypeID=20&gameID=468764]]></Betlink><NSSNumber></NSSNumber></Bet><Bet TYPE=""><Runner ID="14140828"><![CDATA[Paul Malignaggi]]></Runner><Price>+800</Price><Handicap>0</Handicap><Betlink><![CDATA[http://www.sportsinteraction.com/sportsbook/index.cfm?section=events&eventtypeID=20&gameID=468764]]></Betlink><NSSNumber></NSSNumber></Bet></Event><Event ID="3928011"><Name><![CDATA[Adrien Broner v Paul Malignaggi]]></Name><Date>2013-06-23 04:00:00.0</Date><Location><![CDATA[Adrien Broner KO/TKO]]></Location><Live>1</Live><Bet TYPE="Method of Victory"><Runner ID="14412852"><![CDATA[Adrien Broner by Pts or Technical Decision]]></Runner><Price>+185</Price><Handicap>0</Handicap><Betlink><![CDATA[http://www.sportsinteraction.com/sportsbook/index.cfm?section=events&eventtypeID=20&gameID=468764]]></Betlink><NSSNumber></NSSNumber></Bet><Bet TYPE="Method of Victory"><Runner ID="14412853"><![CDATA[Adrien Broner KO/TKO/DQ]]></Runner><Price>-250</Price><Handicap>0</Handicap><Betlink><![CDATA[http://www.sportsinteraction.com/sportsbook/index.cfm?section=events&eventtypeID=20&gameID=468764]]></Betlink><NSSNumber></NSSNumber></Bet><Bet TYPE="Method of Victory"><Runner ID="14412854"><![CDATA[Draw]]></Runner><Price>+3500</Price><Handicap>0</Handicap><Betlink><![CDATA[http://www.sportsinteraction.com/sportsbook/index.cfm?section=events&eventtypeID=20&gameID=468764]]></Betlink><NSSNumber></NSSNumber></Bet><Bet TYPE="Method of Victory"><Runner ID="14412855"><![CDATA[Paul Malignaggi by Pts or Technical Decision]]></Runner><Price>+900</Price><Handicap>0</Handicap><Betlink><![CDATA[http://www.sportsinteraction.com/sportsbook/index.cfm?section=events&eventtypeID=20&gameID=468764]]></Betlink><NSSNumber></NSSNumber></Bet><Bet TYPE="Method of Victory"><Runner ID="14412856"><![CDATA[Paul Malignaggi KO/TKO/DQ]]></Runner><Price>+2500</Price><Handicap>0</Handicap><Betlink><![CDATA[http://www.sportsinteraction.com/sportsbook/index.cfm?section=events&eventtypeID=20&gameID=468764]]></Betlink><NSSNumber></NSSNumber></Bet></Event><Event ID="3846667"><Name><![CDATA[David Haye v Manuel Charr]]></Name><Date>2013-06-26 22:00:00.0</Date><Location><![CDATA[Draw]]></Location><Live>1</Live><Bet TYPE=""><Runner ID="14140829"><![CDATA[David Haye]]></Runner><Price>-1111</Price><Handicap>0</Handicap><Betlink><![CDATA[http://www.sportsinteraction.com/sportsbook/index.cfm?section=events&eventtypeID=20&gameID=468765]]></Betlink><NSSNumber></NSSNumber></Bet><Bet TYPE=""><Runner ID="14140830"><![CDATA[Draw]]></Runner><Price>+3300</Price><Handicap>0</Handicap><Betlink><![CDATA[http://www.sportsinteraction.com/sportsbook/index.cfm?section=events&eventtypeID=20&gameID=468765]]></Betlink><NSSNumber></NSSNumber></Bet><Bet TYPE=""><Runner ID="14140831"><![CDATA[Manuel Charr]]></Runner><Price>+525</Price><Handicap>0</Handicap><Betlink><![CDATA[http://www.sportsinteraction.com/sportsbook/index.cfm?section=events&eventtypeID=20&gameID=468765]]></Betlink><NSSNumber></NSSNumber></Bet></Event><Event ID="3936725"><Name><![CDATA[Gavin Rees v Anthony Crolla]]></Name><Date>2013-06-29 21:00:00.0</Date><Location><![CDATA[Draw]]></Location><Live>1</Live><Bet TYPE=""><Runner ID="14440139"><![CDATA[Gavin Rees]]></Runner><Price>-400</Price><Handicap>0</Handicap><Betlink><![CDATA[http://www.sportsinteraction.com/sportsbook/index.cfm?section=events&eventtypeID=20&gameID=474891]]></Betlink><NSSNumber></NSSNumber></Bet><Bet TYPE=""><Runner ID="14440140"><![CDATA[Draw]]></Runner><Price>+2500</Price><Handicap>0</Handicap><Betlink><![CDATA[http://www.sportsinteraction.com/sportsbook/index.cfm?section=events&eventtypeID=20&gameID=474891]]></Betlink><NSSNumber></NSSNumber></Bet><Bet TYPE=""><Runner ID="14440141"><![CDATA[Anthony Crolla]]></Runner><Price>+275</Price><Handicap>0</Handicap><Betlink><![CDATA[http://www.sportsinteraction.com/sportsbook/index.cfm?section=events&eventtypeID=20&gameID=474891]]></Betlink><NSSNumber></NSSNumber></Bet></Event><Event ID="3936726"><Name><![CDATA[Gennadity Golovkin v Matthew Macklin]]></Name><Date>2013-06-30 03:30:00.0</Date><Location><![CDATA[Draw]]></Location><Live>1</Live><Bet TYPE=""><Runner ID="14440142"><![CDATA[Gennadity Golovkin]]></Runner><Price>-833</Price><Handicap>0</Handicap><Betlink><![CDATA[http://www.sportsinteraction.com/sportsbook/index.cfm?section=events&eventtypeID=20&gameID=474892]]></Betlink><NSSNumber></NSSNumber></Bet><Bet TYPE=""><Runner ID="14440143"><![CDATA[Draw]]></Runner><Price>+2500</Price><Handicap>0</Handicap><Betlink><![CDATA[http://www.sportsinteraction.com/sportsbook/index.cfm?section=events&eventtypeID=20&gameID=474892]]></Betlink><NSSNumber></NSSNumber></Bet><Bet TYPE=""><Runner ID="14440144"><![CDATA[Matthew Macklin]]></Runner><Price>+500</Price><Handicap>0</Handicap><Betlink><![CDATA[http://www.sportsinteraction.com/sportsbook/index.cfm?section=events&eventtypeID=20&gameID=474892]]></Betlink><NSSNumber></NSSNumber></Bet></Event><Event ID="3846668"><Name><![CDATA[Roy Jones Jr v Steve Collins]]></Name><Date>2013-07-01 21:00:00.0</Date><Location><![CDATA[Draw]]></Location><Live>1</Live><Bet TYPE=""><Runner ID="14140832"><![CDATA[Roy Jones Jr]]></Runner><Price>-833</Price><Handicap>0</Handicap><Betlink><![CDATA[http://www.sportsinteraction.com/sportsbook/index.cfm?section=events&eventtypeID=20&gameID=468766]]></Betlink><NSSNumber></NSSNumber></Bet><Bet TYPE=""><Runner ID="14140833"><![CDATA[Draw]]></Runner><Price>+2200</Price><Handicap>0</Handicap><Betlink><![CDATA[http://www.sportsinteraction.com/sportsbook/index.cfm?section=events&eventtypeID=20&gameID=468766]]></Betlink><NSSNumber></NSSNumber></Bet><Bet TYPE=""><Runner ID="14140834"><![CDATA[Steve Collins]]></Runner><Price>+450</Price><Handicap>0</Handicap><Betlink><![CDATA[http://www.sportsinteraction.com/sportsbook/index.cfm?section=events&eventtypeID=20&gameID=468766]]></Betlink><NSSNumber></NSSNumber></Bet></Event><Event ID="3936729"><Name><![CDATA[Bernard Hopkins v Karo Murat]]></Name><Date>2013-07-14 02:30:00.0</Date><Location><![CDATA[Draw]]></Location><Live>1</Live><Bet TYPE=""><Runner ID="14440153"><![CDATA[Bernard Hopkins]]></Runner><Price>-833</Price><Handicap>0</Handicap><Betlink><![CDATA[http://www.sportsinteraction.com/sportsbook/index.cfm?section=events&eventtypeID=20&gameID=474893]]></Betlink><NSSNumber></NSSNumber></Bet><Bet TYPE=""><Runner ID="14440154"><![CDATA[Draw]]></Runner><Price>+2500</Price><Handicap>0</Handicap><Betlink><![CDATA[http://www.sportsinteraction.com/sportsbook/index.cfm?section=events&eventtypeID=20&gameID=474893]]></Betlink><NSSNumber></NSSNumber></Bet><Bet TYPE=""><Runner ID="14440155"><![CDATA[Karo Murat]]></Runner><Price>+500</Price><Handicap>0</Handicap><Betlink><![CDATA[http://www.sportsinteraction.com/sportsbook/index.cfm?section=events&eventtypeID=20&gameID=474893]]></Betlink><NSSNumber></NSSNumber></Bet></Event><Event ID="3936732"><Name><![CDATA[Daniel Geale v Darren Barker]]></Name><Date>2013-08-18 03:00:00.0</Date><Location><![CDATA[Draw]]></Location><Live>1</Live><Bet TYPE=""><Runner ID="14440164"><![CDATA[Daniel Geale]]></Runner><Price>-164</Price><Handicap>0</Handicap><Betlink><![CDATA[http://www.sportsinteraction.com/sportsbook/index.cfm?section=events&eventtypeID=20&gameID=474894]]></Betlink><NSSNumber></NSSNumber></Bet><Bet TYPE=""><Runner ID="14440165"><![CDATA[Draw]]></Runner><Price>+2000</Price><Handicap>0</Handicap><Betlink><![CDATA[http://www.sportsinteraction.com/sportsbook/index.cfm?section=events&eventtypeID=20&gameID=474894]]></Betlink><NSSNumber></NSSNumber></Bet><Bet TYPE=""><Runner ID="14440166"><![CDATA[Darren Barker]]></Runner><Price>+125</Price><Handicap>0</Handicap><Betlink><![CDATA[http://www.sportsinteraction.com/sportsbook/index.cfm?section=events&eventtypeID=20&gameID=474894]]></Betlink><NSSNumber></NSSNumber></Bet></Event><Event ID="3910548"><Name><![CDATA[Canelo Alvarez v Floyd Mayweather]]></Name><Date>2013-09-15 04:00:00.0</Date><Location><![CDATA[Draw]]></Location><Live>1</Live><Bet TYPE=""><Runner ID="14357121"><![CDATA[Canelo Alvarez]]></Runner><Price>+240</Price><Handicap>0</Handicap><Betlink><![CDATA[http://www.sportsinteraction.com/sportsbook/index.cfm?section=events&eventtypeID=20&gameID=473185]]></Betlink><NSSNumber></NSSNumber></Bet><Bet TYPE=""><Runner ID="14357122"><![CDATA[Draw]]></Runner><Price>+2500</Price><Handicap>0</Handicap><Betlink><![CDATA[http://www.sportsinteraction.com/sportsbook/index.cfm?section=events&eventtypeID=20&gameID=473185]]></Betlink><NSSNumber></NSSNumber></Bet><Bet TYPE=""><Runner ID="14357123"><![CDATA[Floyd Mayweather]]></Runner><Price>-303</Price><Handicap>0</Handicap><Betlink><![CDATA[http://www.sportsinteraction.com/sportsbook/index.cfm?section=events&eventtypeID=20&gameID=473185]]></Betlink><NSSNumber></NSSNumber></Bet></Event><Event ID="3936756"><Name><![CDATA[Wladimir Klitschko v Alexander Povetkin]]></Name><Date>2013-10-05 21:00:00.0</Date><Location><![CDATA[Draw]]></Location><Live>1</Live><Bet TYPE=""><Runner ID="14440221"><![CDATA[Wladimir Klitschko]]></Runner><Price>-1429</Price><Handicap>0</Handicap><Betlink><![CDATA[http://www.sportsinteraction.com/sportsbook/index.cfm?section=events&eventtypeID=20&gameID=474895]]></Betlink><NSSNumber></NSSNumber></Bet><Bet TYPE=""><Runner ID="14440222"><![CDATA[Draw]]></Runner><Price>+2500</Price><Handicap>0</Handicap><Betlink><![CDATA[http://www.sportsinteraction.com/sportsbook/index.cfm?section=events&eventtypeID=20&gameID=474895]]></Betlink><NSSNumber></NSSNumber></Bet><Bet TYPE=""><Runner ID="14440223"><![CDATA[Alexander Povetkin]]></Runner><Price>+650</Price><Handicap>0</Handicap><Betlink><![CDATA[http://www.sportsinteraction.com/sportsbook/index.cfm?section=events&eventtypeID=20&gameID=474895]]></Betlink><NSSNumber></NSSNumber></Bet></Event><Event ID="3936763"><Name><![CDATA[Juan Manuel Marquez v Timothy Bradley]]></Name><Date>2013-10-13 03:00:00.0</Date><Location><![CDATA[Draw]]></Location><Live>1</Live><Bet TYPE=""><Runner ID="14440254"><![CDATA[Juan Manuel Marquez]]></Runner><Price>-175</Price><Handicap>0</Handicap><Betlink><![CDATA[http://www.sportsinteraction.com/sportsbook/index.cfm?section=events&eventtypeID=20&gameID=474896]]></Betlink><NSSNumber></NSSNumber></Bet><Bet TYPE=""><Runner ID="14440255"><![CDATA[Draw]]></Runner><Price>+2000</Price><Handicap>0</Handicap><Betlink><![CDATA[http://www.sportsinteraction.com/sportsbook/index.cfm?section=events&eventtypeID=20&gameID=474896]]></Betlink><NSSNumber></NSSNumber></Bet><Bet TYPE=""><Runner ID="14440256"><![CDATA[Timothy Bradley]]></Runner><Price>+137</Price><Handicap>0</Handicap><Betlink><![CDATA[http://www.sportsinteraction.com/sportsbook/index.cfm?section=events&eventtypeID=20&gameID=474896]]></Betlink><NSSNumber></NSSNumber></Bet></Event><Event ID="3936765"><Name><![CDATA[Manny Pacquiao v Brandon Rios]]></Name><Date>2013-11-24 04:00:00.0</Date><Location><![CDATA[Draw]]></Location><Live>1</Live><Bet TYPE=""><Runner ID="14440262"><![CDATA[Manny Pacquiao]]></Runner><Price>-625</Price><Handicap>0</Handicap><Betlink><![CDATA[http://www.sportsinteraction.com/sportsbook/index.cfm?section=events&eventtypeID=20&gameID=474897]]></Betlink><NSSNumber></NSSNumber></Bet><Bet TYPE=""><Runner ID="14440263"><![CDATA[Draw]]></Runner><Price>+2500</Price><Handicap>0</Handicap><Betlink><![CDATA[http://www.sportsinteraction.com/sportsbook/index.cfm?section=events&eventtypeID=20&gameID=474897]]></Betlink><NSSNumber></NSSNumber></Bet><Bet TYPE=""><Runner ID="14440264"><![CDATA[Brandon Rios]]></Runner><Price>+400</Price><Handicap>0</Handicap><Betlink><![CDATA[http://www.sportsinteraction.com/sportsbook/index.cfm?section=events&eventtypeID=20&gameID=474897]]></Betlink><NSSNumber></NSSNumber></Bet></Event><Event ID="3936767"><Name><![CDATA[Jean Pascal v Lucian Bute]]></Name><Date>2013-12-07 04:00:00.0</Date><Location><![CDATA[Draw]]></Location><Live>1</Live><Bet TYPE=""><Runner ID="14440267"><![CDATA[Jean Pascal]]></Runner><Price>-152</Price><Handicap>0</Handicap><Betlink><![CDATA[http://www.sportsinteraction.com/sportsbook/index.cfm?section=events&eventtypeID=20&gameID=474899]]></Betlink><NSSNumber></NSSNumber></Bet><Bet TYPE=""><Runner ID="14440268"><![CDATA[Draw]]></Runner><Price>+2000</Price><Handicap>0</Handicap><Betlink><![CDATA[http://www.sportsinteraction.com/sportsbook/index.cfm?section=events&eventtypeID=20&gameID=474899]]></Betlink><NSSNumber></NSSNumber></Bet><Bet TYPE=""><Runner ID="14440269"><![CDATA[Lucian Bute]]></Runner><Price>+120</Price><Handicap>0</Handicap><Betlink><![CDATA[http://www.sportsinteraction.com/sportsbook/index.cfm?section=events&eventtypeID=20&gameID=474899]]></Betlink><NSSNumber></NSSNumber></Bet></Event></EventType><EventType ID="150" NAME="MMA"><Event ID="3846612"><Name><![CDATA[UFC 162 - Charles Oliveira v Frank Edgar]]></Name><Date>2013-07-07 01:00:00.0</Date><Location><![CDATA[Frank Edgar]]></Location><Live>1</Live><Bet TYPE=""><Runner ID="14140706"><![CDATA[Charles Oliveira]]></Runner><Price>+322</Price><Handicap>0</Handicap><Betlink><![CDATA[http://www.sportsinteraction.com/sportsbook/index.cfm?section=events&eventtypeID=150&gameID=468733]]></Betlink><NSSNumber></NSSNumber></Bet><Bet TYPE=""><Runner ID="14140707"><![CDATA[Frank Edgar]]></Runner><Price>-556</Price><Handicap>0</Handicap><Betlink><![CDATA[http://www.sportsinteraction.com/sportsbook/index.cfm?section=events&eventtypeID=150&gameID=468733]]></Betlink><NSSNumber></NSSNumber></Bet></Event><Event ID="3663408"><Name><![CDATA[UFC 162 - Chris Weidman v Anderson Silva]]></Name><Date>2013-07-07 01:00:00.0</Date><Location><![CDATA[Anderson Silva]]></Location><Live>1</Live><Bet TYPE=""><Runner ID="13537285"><![CDATA[Chris Weidman]]></Runner><Price>+200</Price><Handicap>0</Handicap><Betlink><![CDATA[http://www.sportsinteraction.com/sportsbook/index.cfm?section=events&eventtypeID=150&gameID=457911]]></Betlink><NSSNumber></NSSNumber></Bet><Bet TYPE=""><Runner ID="13537286"><![CDATA[Anderson Silva]]></Runner><Price>-294</Price><Handicap>0</Handicap><Betlink><![CDATA[http://www.sportsinteraction.com/sportsbook/index.cfm?section=events&eventtypeID=150&gameID=457911]]></Betlink><NSSNumber></NSSNumber></Bet></Event><Event ID="3846614"><Name><![CDATA[UFC 162 - Dennis Siver v Cub Swanson]]></Name><Date>2013-07-07 01:00:00.0</Date><Location><![CDATA[Dennis Siver]]></Location><Live>1</Live><Bet TYPE=""><Runner ID="14140710"><![CDATA[Dennis Siver]]></Runner><Price>+180</Price><Handicap>0</Handicap><Betlink><![CDATA[http://www.sportsinteraction.com/sportsbook/index.cfm?section=events&eventtypeID=150&gameID=468735]]></Betlink><NSSNumber></NSSNumber></Bet><Bet TYPE=""><Runner ID="14140711"><![CDATA[Cub Swanson]]></Runner><Price>-263</Price><Handicap>0</Handicap><Betlink><![CDATA[http://www.sportsinteraction.com/sportsbook/index.cfm?section=events&eventtypeID=150&gameID=468735]]></Betlink><NSSNumber></NSSNumber></Bet></Event><Event ID="3846622"><Name><![CDATA[UFC on FOX 8 - Jake Ellenberger v Rory MacDonald]]></Name><Date>2013-07-28 01:00:00.0</Date><Location><![CDATA[Jake Ellenberger]]></Location><Live>1</Live><Bet TYPE=""><Runner ID="14140726"><![CDATA[Jake Ellenberger]]></Runner><Price>+185</Price><Handicap>0</Handicap><Betlink><![CDATA[http://www.sportsinteraction.com/sportsbook/index.cfm?section=events&eventtypeID=150&gameID=468743]]></Betlink><NSSNumber></NSSNumber></Bet><Bet TYPE=""><Runner ID="14140727"><![CDATA[Rory MacDonald]]></Runner><Price>-270</Price><Handicap>0</Handicap><Betlink><![CDATA[http://www.sportsinteraction.com/sportsbook/index.cfm?section=events&eventtypeID=150&gameID=468743]]></Betlink><NSSNumber></NSSNumber></Bet></Event><Event ID="3846623"><Name><![CDATA[UFC on FOX 8 - Robbie Lawler v Tarec Saffiedine]]></Name><Date>2013-07-28 01:00:00.0</Date><Location><![CDATA[Tarec Saffiedine]]></Location><Live>1</Live><Bet TYPE=""><Runner ID="14140728"><![CDATA[Robbie Lawler]]></Runner><Price>+195</Price><Handicap>0</Handicap><Betlink><![CDATA[http://www.sportsinteraction.com/sportsbook/index.cfm?section=events&eventtypeID=150&gameID=468744]]></Betlink><NSSNumber></NSSNumber></Bet><Bet TYPE=""><Runner ID="14140729"><![CDATA[Tarec Saffiedine]]></Runner><Price>-286</Price><Handicap>0</Handicap><Betlink><![CDATA[http://www.sportsinteraction.com/sportsbook/index.cfm?section=events&eventtypeID=150&gameID=468744]]></Betlink><NSSNumber></NSSNumber></Bet></Event><Event ID="3846633"><Name><![CDATA[UFC 163 - Anthony Pettis v Jose Aldo]]></Name><Date>2013-08-04 01:00:00.0</Date><Location><![CDATA[Jose Aldo]]></Location><Live>1</Live><Bet TYPE=""><Runner ID="14140748"><![CDATA[Anthony Pettis]]></Runner><Price>+110</Price><Handicap>0</Handicap><Betlink><![CDATA[http://www.sportsinteraction.com/sportsbook/index.cfm?section=events&eventtypeID=150&gameID=468754]]></Betlink><NSSNumber></NSSNumber></Bet><Bet TYPE=""><Runner ID="14140749"><![CDATA[Jose Aldo]]></Runner><Price>-152</Price><Handicap>0</Handicap><Betlink><![CDATA[http://www.sportsinteraction.com/sportsbook/index.cfm?section=events&eventtypeID=150&gameID=468754]]></Betlink><NSSNumber></NSSNumber></Bet></Event></EventType></sportsinteractionLines>
+<?xml version="1.0" encoding="utf-8" ?>
+<sportsinteractionLines timestamp="2015-12-06T16:35:52">
+	<EventType ID="20" NAME="Boxing">
+		<Event ID="15119986">
+			<Name><![CDATA[Nonito Donaire v Cesar Juarez]]></Name>
+			<Date>2015-12-12 00:00:00.0</Date>
+			<Location><![CDATA[Draw]]></Location>
+			<Live>1</Live>
+			<Bet TYPE="">
+				<Runner ID="48071479"><![CDATA[Nonito Donaire]]></Runner>
+				<Price>-2000</Price>
+				<Handicap>0</Handicap>
+				<Betlink><![CDATA[http://www.sportsinteraction.com/sportsbook/index.cfm?section=events&eventtypeID=20&gameID=862299]]></Betlink>
+				<NSSNumber></NSSNumber>
+			</Bet>
+			<Bet TYPE="">
+				<Runner ID="48071480"><![CDATA[Draw]]></Runner>
+				<Price>+2500</Price>
+				<Handicap>0</Handicap>
+				<Betlink><![CDATA[http://www.sportsinteraction.com/sportsbook/index.cfm?section=events&eventtypeID=20&gameID=862299]]></Betlink>
+				<NSSNumber></NSSNumber>
+			</Bet>
+			<Bet TYPE="">
+				<Runner ID="48071481"><![CDATA[Cesar Juarez]]></Runner>
+				<Price>+700</Price>
+				<Handicap>0</Handicap>
+				<Betlink><![CDATA[http://www.sportsinteraction.com/sportsbook/index.cfm?section=events&eventtypeID=20&gameID=862299]]></Betlink>
+				<NSSNumber></NSSNumber>
+			</Bet>
+		</Event>
+		<Event ID="15048404">
+			<Name><![CDATA[Roy Jones jr v Enzo Maccarinelli]]></Name>
+			<Date>2015-12-12 18:00:00.0</Date>
+			<Location><![CDATA[Draw]]></Location>
+			<Live>1</Live>
+			<Bet TYPE="">
+				<Runner ID="47867590"><![CDATA[Roy Jones jr]]></Runner>
+				<Price>-139</Price>
+				<Handicap>0</Handicap>
+				<Betlink><![CDATA[http://www.sportsinteraction.com/sportsbook/index.cfm?section=events&eventtypeID=20&gameID=860390]]></Betlink>
+				<NSSNumber></NSSNumber>
+			</Bet>
+			<Bet TYPE="">
+				<Runner ID="47867591"><![CDATA[Draw]]></Runner>
+				<Price>+2000</Price>
+				<Handicap>0</Handicap>
+				<Betlink><![CDATA[http://www.sportsinteraction.com/sportsbook/index.cfm?section=events&eventtypeID=20&gameID=860390]]></Betlink>
+				<NSSNumber></NSSNumber>
+			</Bet>
+			<Bet TYPE="">
+				<Runner ID="47867592"><![CDATA[Enzo Maccarinelli]]></Runner>
+				<Price>+110</Price>
+				<Handicap>0</Handicap>
+				<Betlink><![CDATA[http://www.sportsinteraction.com/sportsbook/index.cfm?section=events&eventtypeID=20&gameID=860390]]></Betlink>
+				<NSSNumber></NSSNumber>
+			</Bet>
+		</Event>
+		<Event ID="15048422">
+			<Name><![CDATA[Chris Arreola v Travis Kauffman]]></Name>
+			<Date>2015-12-13 01:30:00.0</Date>
+			<Location><![CDATA[Draw]]></Location>
+			<Live>1</Live>
+			<Bet TYPE="">
+				<Runner ID="47867627"><![CDATA[Chris Arreola]]></Runner>
+				<Price>-250</Price>
+				<Handicap>0</Handicap>
+				<Betlink><![CDATA[http://www.sportsinteraction.com/sportsbook/index.cfm?section=events&eventtypeID=20&gameID=860391]]></Betlink>
+				<NSSNumber></NSSNumber>
+			</Bet>
+			<Bet TYPE="">
+				<Runner ID="47867628"><![CDATA[Draw]]></Runner>
+				<Price>+2000</Price>
+				<Handicap>0</Handicap>
+				<Betlink><![CDATA[http://www.sportsinteraction.com/sportsbook/index.cfm?section=events&eventtypeID=20&gameID=860391]]></Betlink>
+				<NSSNumber></NSSNumber>
+			</Bet>
+			<Bet TYPE="">
+				<Runner ID="47867629"><![CDATA[Travis Kauffman]]></Runner>
+				<Price>+200</Price>
+				<Handicap>0</Handicap>
+				<Betlink><![CDATA[http://www.sportsinteraction.com/sportsbook/index.cfm?section=events&eventtypeID=20&gameID=860391]]></Betlink>
+				<NSSNumber></NSSNumber>
+			</Bet>
+		</Event>
+		<Event ID="12681209">
+			<Name><![CDATA[Billy Joe Saunders v Andy Lee]]></Name>
+			<Date>2015-12-19 22:00:00.0</Date>
+			<Location><![CDATA[Draw]]></Location>
+			<Live>1</Live>
+			<Bet TYPE="">
+				<Runner ID="40716303"><![CDATA[Billy Joe Saunders]]></Runner>
+				<Price>-111</Price>
+				<Handicap>0</Handicap>
+				<Betlink><![CDATA[http://www.sportsinteraction.com/sportsbook/index.cfm?section=events&eventtypeID=20&gameID=796693]]></Betlink>
+				<NSSNumber></NSSNumber>
+			</Bet>
+			<Bet TYPE="">
+				<Runner ID="40716304"><![CDATA[Draw]]></Runner>
+				<Price>+2000</Price>
+				<Handicap>0</Handicap>
+				<Betlink><![CDATA[http://www.sportsinteraction.com/sportsbook/index.cfm?section=events&eventtypeID=20&gameID=796693]]></Betlink>
+				<NSSNumber></NSSNumber>
+			</Bet>
+			<Bet TYPE="">
+				<Runner ID="40716305"><![CDATA[Andy Lee]]></Runner>
+				<Price>-111</Price>
+				<Handicap>0</Handicap>
+				<Betlink><![CDATA[http://www.sportsinteraction.com/sportsbook/index.cfm?section=events&eventtypeID=20&gameID=796693]]></Betlink>
+				<NSSNumber></NSSNumber>
+			</Bet>
+		</Event>
+		<Event ID="13301234">
+			<Name><![CDATA[Billy Joe Saunders v Andy Lee]]></Name>
+			<Date>2015-12-19 22:00:00.0</Date>
+			<Location><![CDATA[Under]]></Location>
+			<Live>1</Live>
+			<Bet TYPE="Total Rounds">
+				<Runner ID="42604346"><![CDATA[Over]]></Runner>
+				<Price>-10000</Price>
+				<Handicap>9.5</Handicap>
+				<Betlink><![CDATA[http://www.sportsinteraction.com/sportsbook/index.cfm?section=events&eventtypeID=20&gameID=796693]]></Betlink>
+				<NSSNumber></NSSNumber>
+			</Bet>
+			<Bet TYPE="Total Rounds">
+				<Runner ID="42604347"><![CDATA[Under]]></Runner>
+				<Price>-10000</Price>
+				<Handicap>9.5</Handicap>
+				<Betlink><![CDATA[http://www.sportsinteraction.com/sportsbook/index.cfm?section=events&eventtypeID=20&gameID=796693]]></Betlink>
+				<NSSNumber></NSSNumber>
+			</Bet>
+		</Event>
+		<Event ID="14325420">
+			<Name><![CDATA[Scott Quigg v Carl Frampton]]></Name>
+			<Date>2015-12-31 12:00:00.0</Date>
+			<Location><![CDATA[Draw]]></Location>
+			<Live>1</Live>
+			<Bet TYPE="">
+				<Runner ID="45745198"><![CDATA[Scott Quigg]]></Runner>
+				<Price>+200</Price>
+				<Handicap>0</Handicap>
+				<Betlink><![CDATA[http://www.sportsinteraction.com/sportsbook/index.cfm?section=events&eventtypeID=20&gameID=841245]]></Betlink>
+				<NSSNumber></NSSNumber>
+			</Bet>
+			<Bet TYPE="">
+				<Runner ID="45745199"><![CDATA[Draw]]></Runner>
+				<Price>+2200</Price>
+				<Handicap>0</Handicap>
+				<Betlink><![CDATA[http://www.sportsinteraction.com/sportsbook/index.cfm?section=events&eventtypeID=20&gameID=841245]]></Betlink>
+				<NSSNumber></NSSNumber>
+			</Bet>
+			<Bet TYPE="">
+				<Runner ID="45745200"><![CDATA[Carl Frampton]]></Runner>
+				<Price>-278</Price>
+				<Handicap>0</Handicap>
+				<Betlink><![CDATA[http://www.sportsinteraction.com/sportsbook/index.cfm?section=events&eventtypeID=20&gameID=841245]]></Betlink>
+				<NSSNumber></NSSNumber>
+			</Bet>
+		</Event>
+	</EventType>
+	<EventType ID="150" NAME="MMA">
+		<Event ID="14323059">
+			<Name><![CDATA[Fight Night 80 - Cody Pfister v Sage Northcutt]]></Name>
+			<Date>2015-12-11 03:00:00.0</Date>
+			<Location><![CDATA[Sage Northcutt]]></Location>
+			<Live>1</Live>
+			<Bet TYPE="">
+				<Runner ID="45737744"><![CDATA[Cody Pfister]]></Runner>
+				<Price>+500</Price>
+				<Handicap>0</Handicap>
+				<Betlink><![CDATA[http://www.sportsinteraction.com/sportsbook/index.cfm?section=events&eventtypeID=150&gameID=841163]]></Betlink>
+				<NSSNumber></NSSNumber>
+			</Bet>
+			<Bet TYPE="">
+				<Runner ID="45737745"><![CDATA[Sage Northcutt]]></Runner>
+				<Price>-800</Price>
+				<Handicap>0</Handicap>
+				<Betlink><![CDATA[http://www.sportsinteraction.com/sportsbook/index.cfm?section=events&eventtypeID=150&gameID=841163]]></Betlink>
+				<NSSNumber></NSSNumber>
+			</Bet>
+		</Event>
+		<Event ID="14318373">
+			<Name><![CDATA[TUF 22 - Chad Mendes v Frankie Edgar]]></Name>
+			<Date>2015-12-12 01:00:00.0</Date>
+			<Location><![CDATA[Frankie Edgar]]></Location>
+			<Live>1</Live>
+			<Bet TYPE="">
+				<Runner ID="45722652"><![CDATA[Chad Mendes]]></Runner>
+				<Price>+140</Price>
+				<Handicap>0</Handicap>
+				<Betlink><![CDATA[http://www.sportsinteraction.com/sportsbook/index.cfm?section=events&eventtypeID=150&gameID=841122]]></Betlink>
+				<NSSNumber></NSSNumber>
+			</Bet>
+			<Bet TYPE="">
+				<Runner ID="45722653"><![CDATA[Frankie Edgar]]></Runner>
+				<Price>-180</Price>
+				<Handicap>0</Handicap>
+				<Betlink><![CDATA[http://www.sportsinteraction.com/sportsbook/index.cfm?section=events&eventtypeID=150&gameID=841122]]></Betlink>
+				<NSSNumber></NSSNumber>
+			</Bet>
+		</Event>
+		<Event ID="14988853">
+			<Name><![CDATA[TUF 22 - Chad Mendes v Frankie Edgar]]></Name>
+			<Date>2015-12-12 01:00:00.0</Date>
+			<Location><![CDATA[Chad Mendes by Pts or Technical Decision]]></Location>
+			<Live>1</Live>
+			<Bet TYPE="Method of Victory">
+				<Runner ID="47689723"><![CDATA[Chad Mendes by KO,TKO,DQ]]></Runner>
+				<Price>+400</Price>
+				<Handicap>0</Handicap>
+				<Betlink><![CDATA[http://www.sportsinteraction.com/sportsbook/index.cfm?section=events&eventtypeID=150&gameID=841122]]></Betlink>
+				<NSSNumber></NSSNumber>
+			</Bet>
+			<Bet TYPE="Method of Victory">
+				<Runner ID="47689724"><![CDATA[Chad Mendes by Pts or Technical Decision]]></Runner>
+				<Price>+300</Price>
+				<Handicap>0</Handicap>
+				<Betlink><![CDATA[http://www.sportsinteraction.com/sportsbook/index.cfm?section=events&eventtypeID=150&gameID=841122]]></Betlink>
+				<NSSNumber></NSSNumber>
+			</Bet>
+			<Bet TYPE="Method of Victory">
+				<Runner ID="47689725"><![CDATA[Chad Mendes by Submission]]></Runner>
+				<Price>+1000</Price>
+				<Handicap>0</Handicap>
+				<Betlink><![CDATA[http://www.sportsinteraction.com/sportsbook/index.cfm?section=events&eventtypeID=150&gameID=841122]]></Betlink>
+				<NSSNumber></NSSNumber>
+			</Bet>
+			<Bet TYPE="Method of Victory">
+				<Runner ID="47689726"><![CDATA[Draw]]></Runner>
+				<Price>+6600</Price>
+				<Handicap>0</Handicap>
+				<Betlink><![CDATA[http://www.sportsinteraction.com/sportsbook/index.cfm?section=events&eventtypeID=150&gameID=841122]]></Betlink>
+				<NSSNumber></NSSNumber>
+			</Bet>
+			<Bet TYPE="Method of Victory">
+				<Runner ID="47689727"><![CDATA[Frankie Edgar by KO,TKO,DQ]]></Runner>
+				<Price>+500</Price>
+				<Handicap>0</Handicap>
+				<Betlink><![CDATA[http://www.sportsinteraction.com/sportsbook/index.cfm?section=events&eventtypeID=150&gameID=841122]]></Betlink>
+				<NSSNumber></NSSNumber>
+			</Bet>
+			<Bet TYPE="Method of Victory">
+				<Runner ID="47689728"><![CDATA[Frankie Edgar by Pts or Technical Decision]]></Runner>
+				<Price>+120</Price>
+				<Handicap>0</Handicap>
+				<Betlink><![CDATA[http://www.sportsinteraction.com/sportsbook/index.cfm?section=events&eventtypeID=150&gameID=841122]]></Betlink>
+				<NSSNumber></NSSNumber>
+			</Bet>
+			<Bet TYPE="Method of Victory">
+				<Runner ID="47689729"><![CDATA[Frankie Edgar by Submission]]></Runner>
+				<Price>+600</Price>
+				<Handicap>0</Handicap>
+				<Betlink><![CDATA[http://www.sportsinteraction.com/sportsbook/index.cfm?section=events&eventtypeID=150&gameID=841122]]></Betlink>
+				<NSSNumber></NSSNumber>
+			</Bet>
+		</Event>
+		<Event ID="14988863">
+			<Name><![CDATA[TUF 22 - Chad Mendes v Frankie Edgar]]></Name>
+			<Date>2015-12-12 01:00:00.0</Date>
+			<Location><![CDATA[Chad Mendes To Win in Round 2]]></Location>
+			<Live>1</Live>
+			<Bet TYPE="Round">
+				<Runner ID="47689752"><![CDATA[Chad Mendes To Win in Round 1]]></Runner>
+				<Price>+1000</Price>
+				<Handicap>0</Handicap>
+				<Betlink><![CDATA[http://www.sportsinteraction.com/sportsbook/index.cfm?section=events&eventtypeID=150&gameID=841122]]></Betlink>
+				<NSSNumber></NSSNumber>
+			</Bet>
+			<Bet TYPE="Round">
+				<Runner ID="47689753"><![CDATA[Chad Mendes To Win in Round 2]]></Runner>
+				<Price>+1400</Price>
+				<Handicap>0</Handicap>
+				<Betlink><![CDATA[http://www.sportsinteraction.com/sportsbook/index.cfm?section=events&eventtypeID=150&gameID=841122]]></Betlink>
+				<NSSNumber></NSSNumber>
+			</Bet>
+			<Bet TYPE="Round">
+				<Runner ID="47689754"><![CDATA[Chad Mendes To Win in Round 3]]></Runner>
+				<Price>+2000</Price>
+				<Handicap>0</Handicap>
+				<Betlink><![CDATA[http://www.sportsinteraction.com/sportsbook/index.cfm?section=events&eventtypeID=150&gameID=841122]]></Betlink>
+				<NSSNumber></NSSNumber>
+			</Bet>
+			<Bet TYPE="Round">
+				<Runner ID="47689755"><![CDATA[Chad Mendes To Win in Round 4]]></Runner>
+				<Price>+2500</Price>
+				<Handicap>0</Handicap>
+				<Betlink><![CDATA[http://www.sportsinteraction.com/sportsbook/index.cfm?section=events&eventtypeID=150&gameID=841122]]></Betlink>
+				<NSSNumber></NSSNumber>
+			</Bet>
+			<Bet TYPE="Round">
+				<Runner ID="47689756"><![CDATA[Chad Mendes To Win in Round 5]]></Runner>
+				<Price>+2800</Price>
+				<Handicap>0</Handicap>
+				<Betlink><![CDATA[http://www.sportsinteraction.com/sportsbook/index.cfm?section=events&eventtypeID=150&gameID=841122]]></Betlink>
+				<NSSNumber></NSSNumber>
+			</Bet>
+			<Bet TYPE="Round">
+				<Runner ID="47689757"><![CDATA[Chad Mendes by Pts or Technical Decision]]></Runner>
+				<Price>+300</Price>
+				<Handicap>0</Handicap>
+				<Betlink><![CDATA[http://www.sportsinteraction.com/sportsbook/index.cfm?section=events&eventtypeID=150&gameID=841122]]></Betlink>
+				<NSSNumber></NSSNumber>
+			</Bet>
+			<Bet TYPE="Round">
+				<Runner ID="47689758"><![CDATA[Draw]]></Runner>
+				<Price>+6600</Price>
+				<Handicap>0</Handicap>
+				<Betlink><![CDATA[http://www.sportsinteraction.com/sportsbook/index.cfm?section=events&eventtypeID=150&gameID=841122]]></Betlink>
+				<NSSNumber></NSSNumber>
+			</Bet>
+			<Bet TYPE="Round">
+				<Runner ID="47689759"><![CDATA[Frankie Edgar To Win in Round 1]]></Runner>
+				<Price>+600</Price>
+				<Handicap>0</Handicap>
+				<Betlink><![CDATA[http://www.sportsinteraction.com/sportsbook/index.cfm?section=events&eventtypeID=150&gameID=841122]]></Betlink>
+				<NSSNumber></NSSNumber>
+			</Bet>
+			<Bet TYPE="Round">
+				<Runner ID="47689760"><![CDATA[Frankie Edgar To Win in Round 2]]></Runner>
+				<Price>+1000</Price>
+				<Handicap>0</Handicap>
+				<Betlink><![CDATA[http://www.sportsinteraction.com/sportsbook/index.cfm?section=events&eventtypeID=150&gameID=841122]]></Betlink>
+				<NSSNumber></NSSNumber>
+			</Bet>
+			<Bet TYPE="Round">
+				<Runner ID="47689761"><![CDATA[Frankie Edgar To Win in Round 3]]></Runner>
+				<Price>+1600</Price>
+				<Handicap>0</Handicap>
+				<Betlink><![CDATA[http://www.sportsinteraction.com/sportsbook/index.cfm?section=events&eventtypeID=150&gameID=841122]]></Betlink>
+				<NSSNumber></NSSNumber>
+			</Bet>
+			<Bet TYPE="Round">
+				<Runner ID="47689762"><![CDATA[Frankie Edgar To Win in Round 4]]></Runner>
+				<Price>+2000</Price>
+				<Handicap>0</Handicap>
+				<Betlink><![CDATA[http://www.sportsinteraction.com/sportsbook/index.cfm?section=events&eventtypeID=150&gameID=841122]]></Betlink>
+				<NSSNumber></NSSNumber>
+			</Bet>
+			<Bet TYPE="Round">
+				<Runner ID="47689763"><![CDATA[Frankie Edgar To Win in Round 5]]></Runner>
+				<Price>+2500</Price>
+				<Handicap>0</Handicap>
+				<Betlink><![CDATA[http://www.sportsinteraction.com/sportsbook/index.cfm?section=events&eventtypeID=150&gameID=841122]]></Betlink>
+				<NSSNumber></NSSNumber>
+			</Bet>
+			<Bet TYPE="Round">
+				<Runner ID="47689764"><![CDATA[Frankie Edgar by Pts or Technical Decision]]></Runner>
+				<Price>+120</Price>
+				<Handicap>0</Handicap>
+				<Betlink><![CDATA[http://www.sportsinteraction.com/sportsbook/index.cfm?section=events&eventtypeID=150&gameID=841122]]></Betlink>
+				<NSSNumber></NSSNumber>
+			</Bet>
+		</Event>
+		<Event ID="14636564">
+			<Name><![CDATA[TUF 22 - Edson Barboza v Tony Ferguson]]></Name>
+			<Date>2015-12-12 03:00:00.0</Date>
+			<Location><![CDATA[Tony Ferguson]]></Location>
+			<Live>1</Live>
+			<Bet TYPE="">
+				<Runner ID="46672629"><![CDATA[Edson Barboza]]></Runner>
+				<Price>+120</Price>
+				<Handicap>0</Handicap>
+				<Betlink><![CDATA[http://www.sportsinteraction.com/sportsbook/index.cfm?section=events&eventtypeID=150&gameID=849900]]></Betlink>
+				<NSSNumber></NSSNumber>
+			</Bet>
+			<Bet TYPE="">
+				<Runner ID="46672630"><![CDATA[Tony Ferguson]]></Runner>
+				<Price>-150</Price>
+				<Handicap>0</Handicap>
+				<Betlink><![CDATA[http://www.sportsinteraction.com/sportsbook/index.cfm?section=events&eventtypeID=150&gameID=849900]]></Betlink>
+				<NSSNumber></NSSNumber>
+			</Bet>
+		</Event>
+		<Event ID="14323540">
+			<Name><![CDATA[UFC 194 - Joe Proctor v Magomed Mustafaev]]></Name>
+			<Date>2015-12-13 00:00:00.0</Date>
+			<Location><![CDATA[Magomed Mustafaev]]></Location>
+			<Live>1</Live>
+			<Bet TYPE="">
+				<Runner ID="45739242"><![CDATA[Joe Proctor]]></Runner>
+				<Price>+260</Price>
+				<Handicap>0</Handicap>
+				<Betlink><![CDATA[http://www.sportsinteraction.com/sportsbook/index.cfm?section=events&eventtypeID=150&gameID=841177]]></Betlink>
+				<NSSNumber></NSSNumber>
+			</Bet>
+			<Bet TYPE="">
+				<Runner ID="45739243"><![CDATA[Magomed Mustafaev]]></Runner>
+				<Price>-370</Price>
+				<Handicap>0</Handicap>
+				<Betlink><![CDATA[http://www.sportsinteraction.com/sportsbook/index.cfm?section=events&eventtypeID=150&gameID=841177]]></Betlink>
+				<NSSNumber></NSSNumber>
+			</Bet>
+		</Event>
+		<Event ID="14989138">
+			<Name><![CDATA[UFC 194 - Joe Proctor v Magomed Mustafaev]]></Name>
+			<Date>2015-12-13 00:00:00.0</Date>
+			<Location><![CDATA[Joe Proctor Pts or Technical Decision]]></Location>
+			<Live>1</Live>
+			<Bet TYPE="Method of Victory">
+				<Runner ID="47690630"><![CDATA[Joe Proctor by KO,TKO,DQ]]></Runner>
+				<Price>+800</Price>
+				<Handicap>0</Handicap>
+				<Betlink><![CDATA[http://www.sportsinteraction.com/sportsbook/index.cfm?section=events&eventtypeID=150&gameID=841177]]></Betlink>
+				<NSSNumber></NSSNumber>
+			</Bet>
+			<Bet TYPE="Method of Victory">
+				<Runner ID="47690631"><![CDATA[Joe Proctor Pts or Technical Decision]]></Runner>
+				<Price>+450</Price>
+				<Handicap>0</Handicap>
+				<Betlink><![CDATA[http://www.sportsinteraction.com/sportsbook/index.cfm?section=events&eventtypeID=150&gameID=841177]]></Betlink>
+				<NSSNumber></NSSNumber>
+			</Bet>
+			<Bet TYPE="Method of Victory">
+				<Runner ID="47690632"><![CDATA[Joe Proctor by Submission]]></Runner>
+				<Price>+800</Price>
+				<Handicap>0</Handicap>
+				<Betlink><![CDATA[http://www.sportsinteraction.com/sportsbook/index.cfm?section=events&eventtypeID=150&gameID=841177]]></Betlink>
+				<NSSNumber></NSSNumber>
+			</Bet>
+			<Bet TYPE="Method of Victory">
+				<Runner ID="47690633"><![CDATA[Draw]]></Runner>
+				<Price>+5000</Price>
+				<Handicap>0</Handicap>
+				<Betlink><![CDATA[http://www.sportsinteraction.com/sportsbook/index.cfm?section=events&eventtypeID=150&gameID=841177]]></Betlink>
+				<NSSNumber></NSSNumber>
+			</Bet>
+			<Bet TYPE="Method of Victory">
+				<Runner ID="47690634"><![CDATA[Magomed Mustafaev by KO,TKO,DQ]]></Runner>
+				<Price>+185</Price>
+				<Handicap>0</Handicap>
+				<Betlink><![CDATA[http://www.sportsinteraction.com/sportsbook/index.cfm?section=events&eventtypeID=150&gameID=841177]]></Betlink>
+				<NSSNumber></NSSNumber>
+			</Bet>
+			<Bet TYPE="Method of Victory">
+				<Runner ID="47690635"><![CDATA[Magomed Mustafaev Pts or Technical Decision]]></Runner>
+				<Price>+160</Price>
+				<Handicap>0</Handicap>
+				<Betlink><![CDATA[http://www.sportsinteraction.com/sportsbook/index.cfm?section=events&eventtypeID=150&gameID=841177]]></Betlink>
+				<NSSNumber></NSSNumber>
+			</Bet>
+			<Bet TYPE="Method of Victory">
+				<Runner ID="47690636"><![CDATA[Magomed Mustafaev by Submission]]></Runner>
+				<Price>+500</Price>
+				<Handicap>0</Handicap>
+				<Betlink><![CDATA[http://www.sportsinteraction.com/sportsbook/index.cfm?section=events&eventtypeID=150&gameID=841177]]></Betlink>
+				<NSSNumber></NSSNumber>
+			</Bet>
+		</Event>
+		<Event ID="14989148">
+			<Name><![CDATA[UFC 194 - Joe Proctor v Magomed Mustafaev]]></Name>
+			<Date>2015-12-13 00:00:00.0</Date>
+			<Location><![CDATA[Joe Proctor To Win in Round 2]]></Location>
+			<Live>1</Live>
+			<Bet TYPE="Round">
+				<Runner ID="47690659"><![CDATA[Joe Proctor To Win in Round 1]]></Runner>
+				<Price>+800</Price>
+				<Handicap>0</Handicap>
+				<Betlink><![CDATA[http://www.sportsinteraction.com/sportsbook/index.cfm?section=events&eventtypeID=150&gameID=841177]]></Betlink>
+				<NSSNumber></NSSNumber>
+			</Bet>
+			<Bet TYPE="Round">
+				<Runner ID="47690660"><![CDATA[Joe Proctor To Win in Round 2]]></Runner>
+				<Price>+1200</Price>
+				<Handicap>0</Handicap>
+				<Betlink><![CDATA[http://www.sportsinteraction.com/sportsbook/index.cfm?section=events&eventtypeID=150&gameID=841177]]></Betlink>
+				<NSSNumber></NSSNumber>
+			</Bet>
+			<Bet TYPE="Round">
+				<Runner ID="47690661"><![CDATA[Joe Proctor To Win in Round 3]]></Runner>
+				<Price>+1600</Price>
+				<Handicap>0</Handicap>
+				<Betlink><![CDATA[http://www.sportsinteraction.com/sportsbook/index.cfm?section=events&eventtypeID=150&gameID=841177]]></Betlink>
+				<NSSNumber></NSSNumber>
+			</Bet>
+			<Bet TYPE="Round">
+				<Runner ID="47690662"><![CDATA[Joe Proctor Pts or Technical Decision]]></Runner>
+				<Price>+450</Price>
+				<Handicap>0</Handicap>
+				<Betlink><![CDATA[http://www.sportsinteraction.com/sportsbook/index.cfm?section=events&eventtypeID=150&gameID=841177]]></Betlink>
+				<NSSNumber></NSSNumber>
+			</Bet>
+			<Bet TYPE="Round">
+				<Runner ID="47690663"><![CDATA[Draw]]></Runner>
+				<Price>+5000</Price>
+				<Handicap>0</Handicap>
+				<Betlink><![CDATA[http://www.sportsinteraction.com/sportsbook/index.cfm?section=events&eventtypeID=150&gameID=841177]]></Betlink>
+				<NSSNumber></NSSNumber>
+			</Bet>
+			<Bet TYPE="Round">
+				<Runner ID="47690664"><![CDATA[Magomed Mustafaev To Win in Round 1]]></Runner>
+				<Price>+250</Price>
+				<Handicap>0</Handicap>
+				<Betlink><![CDATA[http://www.sportsinteraction.com/sportsbook/index.cfm?section=events&eventtypeID=150&gameID=841177]]></Betlink>
+				<NSSNumber></NSSNumber>
+			</Bet>
+			<Bet TYPE="Round">
+				<Runner ID="47690665"><![CDATA[Magomed Mustafaev To Win in Round 2]]></Runner>
+				<Price>+500</Price>
+				<Handicap>0</Handicap>
+				<Betlink><![CDATA[http://www.sportsinteraction.com/sportsbook/index.cfm?section=events&eventtypeID=150&gameID=841177]]></Betlink>
+				<NSSNumber></NSSNumber>
+			</Bet>
+			<Bet TYPE="Round">
+				<Runner ID="47690666"><![CDATA[Magomed Mustafaev To Win in Round 3]]></Runner>
+				<Price>+1000</Price>
+				<Handicap>0</Handicap>
+				<Betlink><![CDATA[http://www.sportsinteraction.com/sportsbook/index.cfm?section=events&eventtypeID=150&gameID=841177]]></Betlink>
+				<NSSNumber></NSSNumber>
+			</Bet>
+			<Bet TYPE="Round">
+				<Runner ID="47690667"><![CDATA[Magomed Mustafaev Pts or Technical Decision]]></Runner>
+				<Price>+160</Price>
+				<Handicap>0</Handicap>
+				<Betlink><![CDATA[http://www.sportsinteraction.com/sportsbook/index.cfm?section=events&eventtypeID=150&gameID=841177]]></Betlink>
+				<NSSNumber></NSSNumber>
+			</Bet>
+		</Event>
+		<Event ID="14323518">
+			<Name><![CDATA[UFC 194 - Marcio Alexandre v Court Mcgee]]></Name>
+			<Date>2015-12-13 00:00:00.0</Date>
+			<Location><![CDATA[Court Mcgee]]></Location>
+			<Live>1</Live>
+			<Bet TYPE="">
+				<Runner ID="45739188"><![CDATA[Marcio Alexandre]]></Runner>
+				<Price>+155</Price>
+				<Handicap>0</Handicap>
+				<Betlink><![CDATA[http://www.sportsinteraction.com/sportsbook/index.cfm?section=events&eventtypeID=150&gameID=841176]]></Betlink>
+				<NSSNumber></NSSNumber>
+			</Bet>
+			<Bet TYPE="">
+				<Runner ID="45739189"><![CDATA[Court Mcgee]]></Runner>
+				<Price>-195</Price>
+				<Handicap>0</Handicap>
+				<Betlink><![CDATA[http://www.sportsinteraction.com/sportsbook/index.cfm?section=events&eventtypeID=150&gameID=841176]]></Betlink>
+				<NSSNumber></NSSNumber>
+			</Bet>
+		</Event>
+		<Event ID="14989175">
+			<Name><![CDATA[UFC 194 - Marcio Alexandre v Court Mcgee]]></Name>
+			<Date>2015-12-13 00:00:00.0</Date>
+			<Location><![CDATA[Marcio Alexandre by Pts or Technical Decision]]></Location>
+			<Live>1</Live>
+			<Bet TYPE="Method of Victory">
+				<Runner ID="47690752"><![CDATA[Marcio Alexandre by KO,TKO,DQ]]></Runner>
+				<Price>+350</Price>
+				<Handicap>0</Handicap>
+				<Betlink><![CDATA[http://www.sportsinteraction.com/sportsbook/index.cfm?section=events&eventtypeID=150&gameID=841176]]></Betlink>
+				<NSSNumber></NSSNumber>
+			</Bet>
+			<Bet TYPE="Method of Victory">
+				<Runner ID="47690753"><![CDATA[Marcio Alexandre by Pts or Technical Decision]]></Runner>
+				<Price>+500</Price>
+				<Handicap>0</Handicap>
+				<Betlink><![CDATA[http://www.sportsinteraction.com/sportsbook/index.cfm?section=events&eventtypeID=150&gameID=841176]]></Betlink>
+				<NSSNumber></NSSNumber>
+			</Bet>
+			<Bet TYPE="Method of Victory">
+				<Runner ID="47690754"><![CDATA[Marcio Alexandre by Submission]]></Runner>
+				<Price>+800</Price>
+				<Handicap>0</Handicap>
+				<Betlink><![CDATA[http://www.sportsinteraction.com/sportsbook/index.cfm?section=events&eventtypeID=150&gameID=841176]]></Betlink>
+				<NSSNumber></NSSNumber>
+			</Bet>
+			<Bet TYPE="Method of Victory">
+				<Runner ID="47690755"><![CDATA[Draw]]></Runner>
+				<Price>+5000</Price>
+				<Handicap>0</Handicap>
+				<Betlink><![CDATA[http://www.sportsinteraction.com/sportsbook/index.cfm?section=events&eventtypeID=150&gameID=841176]]></Betlink>
+				<NSSNumber></NSSNumber>
+			</Bet>
+			<Bet TYPE="Method of Victory">
+				<Runner ID="47690756"><![CDATA[Court Mcgee by KO,TKO,DQ]]></Runner>
+				<Price>+650</Price>
+				<Handicap>0</Handicap>
+				<Betlink><![CDATA[http://www.sportsinteraction.com/sportsbook/index.cfm?section=events&eventtypeID=150&gameID=841176]]></Betlink>
+				<NSSNumber></NSSNumber>
+			</Bet>
+			<Bet TYPE="Method of Victory">
+				<Runner ID="47690757"><![CDATA[Court Mcgee by Pts or Technical Decision]]></Runner>
+				<Price>+120</Price>
+				<Handicap>0</Handicap>
+				<Betlink><![CDATA[http://www.sportsinteraction.com/sportsbook/index.cfm?section=events&eventtypeID=150&gameID=841176]]></Betlink>
+				<NSSNumber></NSSNumber>
+			</Bet>
+			<Bet TYPE="Method of Victory">
+				<Runner ID="47690758"><![CDATA[Court Mcgee by Submission]]></Runner>
+				<Price>+400</Price>
+				<Handicap>0</Handicap>
+				<Betlink><![CDATA[http://www.sportsinteraction.com/sportsbook/index.cfm?section=events&eventtypeID=150&gameID=841176]]></Betlink>
+				<NSSNumber></NSSNumber>
+			</Bet>
+		</Event>
+		<Event ID="14989176">
+			<Name><![CDATA[UFC 194 - Marcio Alexandre v Court Mcgee]]></Name>
+			<Date>2015-12-13 00:00:00.0</Date>
+			<Location><![CDATA[Marcio Alexandre To Win in Round 2]]></Location>
+			<Live>1</Live>
+			<Bet TYPE="Round">
+				<Runner ID="47690759"><![CDATA[Marcio Alexandre To Win in Round 1]]></Runner>
+				<Price>+350</Price>
+				<Handicap>0</Handicap>
+				<Betlink><![CDATA[http://www.sportsinteraction.com/sportsbook/index.cfm?section=events&eventtypeID=150&gameID=841176]]></Betlink>
+				<NSSNumber></NSSNumber>
+			</Bet>
+			<Bet TYPE="Round">
+				<Runner ID="47690760"><![CDATA[Marcio Alexandre To Win in Round 2]]></Runner>
+				<Price>+800</Price>
+				<Handicap>0</Handicap>
+				<Betlink><![CDATA[http://www.sportsinteraction.com/sportsbook/index.cfm?section=events&eventtypeID=150&gameID=841176]]></Betlink>
+				<NSSNumber></NSSNumber>
+			</Bet>
+			<Bet TYPE="Round">
+				<Runner ID="47690761"><![CDATA[Marcio Alexandre To Win in Round 3]]></Runner>
+				<Price>+1400</Price>
+				<Handicap>0</Handicap>
+				<Betlink><![CDATA[http://www.sportsinteraction.com/sportsbook/index.cfm?section=events&eventtypeID=150&gameID=841176]]></Betlink>
+				<NSSNumber></NSSNumber>
+			</Bet>
+			<Bet TYPE="Round">
+				<Runner ID="47690762"><![CDATA[Marcio Alexandre by Pts or Technical Decision]]></Runner>
+				<Price>+500</Price>
+				<Handicap>0</Handicap>
+				<Betlink><![CDATA[http://www.sportsinteraction.com/sportsbook/index.cfm?section=events&eventtypeID=150&gameID=841176]]></Betlink>
+				<NSSNumber></NSSNumber>
+			</Bet>
+			<Bet TYPE="Round">
+				<Runner ID="47690763"><![CDATA[Draw]]></Runner>
+				<Price>+5000</Price>
+				<Handicap>0</Handicap>
+				<Betlink><![CDATA[http://www.sportsinteraction.com/sportsbook/index.cfm?section=events&eventtypeID=150&gameID=841176]]></Betlink>
+				<NSSNumber></NSSNumber>
+			</Bet>
+			<Bet TYPE="Round">
+				<Runner ID="47690764"><![CDATA[Court Mcgee To Win in Round 1]]></Runner>
+				<Price>+500</Price>
+				<Handicap>0</Handicap>
+				<Betlink><![CDATA[http://www.sportsinteraction.com/sportsbook/index.cfm?section=events&eventtypeID=150&gameID=841176]]></Betlink>
+				<NSSNumber></NSSNumber>
+			</Bet>
+			<Bet TYPE="Round">
+				<Runner ID="47690765"><![CDATA[Court Mcgee To Win in Round 2]]></Runner>
+				<Price>+800</Price>
+				<Handicap>0</Handicap>
+				<Betlink><![CDATA[http://www.sportsinteraction.com/sportsbook/index.cfm?section=events&eventtypeID=150&gameID=841176]]></Betlink>
+				<NSSNumber></NSSNumber>
+			</Bet>
+			<Bet TYPE="Round">
+				<Runner ID="47690766"><![CDATA[Court Mcgee To Win in Round 3]]></Runner>
+				<Price>+1400</Price>
+				<Handicap>0</Handicap>
+				<Betlink><![CDATA[http://www.sportsinteraction.com/sportsbook/index.cfm?section=events&eventtypeID=150&gameID=841176]]></Betlink>
+				<NSSNumber></NSSNumber>
+			</Bet>
+			<Bet TYPE="Round">
+				<Runner ID="47690767"><![CDATA[Court Mcgee by Pts or Technical Decision]]></Runner>
+				<Price>+120</Price>
+				<Handicap>0</Handicap>
+				<Betlink><![CDATA[http://www.sportsinteraction.com/sportsbook/index.cfm?section=events&eventtypeID=150&gameID=841176]]></Betlink>
+				<NSSNumber></NSSNumber>
+			</Bet>
+		</Event>
+		<Event ID="14318467">
+			<Name><![CDATA[UFC 194 - Yancy Medeiros v John Makdessi]]></Name>
+			<Date>2015-12-13 00:00:00.0</Date>
+			<Location><![CDATA[John Makdessi]]></Location>
+			<Live>1</Live>
+			<Bet TYPE="">
+				<Runner ID="45722887"><![CDATA[Yancy Medeiros]]></Runner>
+				<Price>+145</Price>
+				<Handicap>0</Handicap>
+				<Betlink><![CDATA[http://www.sportsinteraction.com/sportsbook/index.cfm?section=events&eventtypeID=150&gameID=841129]]></Betlink>
+				<NSSNumber></NSSNumber>
+			</Bet>
+			<Bet TYPE="">
+				<Runner ID="45722888"><![CDATA[John Makdessi]]></Runner>
+				<Price>-185</Price>
+				<Handicap>0</Handicap>
+				<Betlink><![CDATA[http://www.sportsinteraction.com/sportsbook/index.cfm?section=events&eventtypeID=150&gameID=841129]]></Betlink>
+				<NSSNumber></NSSNumber>
+			</Bet>
+		</Event>
+		<Event ID="14989150">
+			<Name><![CDATA[UFC 194 - Yancy Medeiros v John Makdessi]]></Name>
+			<Date>2015-12-13 00:00:00.0</Date>
+			<Location><![CDATA[Yancy Medeiros by Pts or Technical Decision]]></Location>
+			<Live>1</Live>
+			<Bet TYPE="Method of Victory">
+				<Runner ID="47690670"><![CDATA[Yancy Medeiros by KO,TKO,DQ]]></Runner>
+				<Price>+600</Price>
+				<Handicap>0</Handicap>
+				<Betlink><![CDATA[http://www.sportsinteraction.com/sportsbook/index.cfm?section=events&eventtypeID=150&gameID=841129]]></Betlink>
+				<NSSNumber></NSSNumber>
+			</Bet>
+			<Bet TYPE="Method of Victory">
+				<Runner ID="47690671"><![CDATA[Yancy Medeiros by Pts or Technical Decision]]></Runner>
+				<Price>+500</Price>
+				<Handicap>0</Handicap>
+				<Betlink><![CDATA[http://www.sportsinteraction.com/sportsbook/index.cfm?section=events&eventtypeID=150&gameID=841129]]></Betlink>
+				<NSSNumber></NSSNumber>
+			</Bet>
+			<Bet TYPE="Method of Victory">
+				<Runner ID="47690672"><![CDATA[Yancy Medeiros by Submission]]></Runner>
+				<Price>+300</Price>
+				<Handicap>0</Handicap>
+				<Betlink><![CDATA[http://www.sportsinteraction.com/sportsbook/index.cfm?section=events&eventtypeID=150&gameID=841129]]></Betlink>
+				<NSSNumber></NSSNumber>
+			</Bet>
+			<Bet TYPE="Method of Victory">
+				<Runner ID="47690673"><![CDATA[Draw]]></Runner>
+				<Price>+5000</Price>
+				<Handicap>0</Handicap>
+				<Betlink><![CDATA[http://www.sportsinteraction.com/sportsbook/index.cfm?section=events&eventtypeID=150&gameID=841129]]></Betlink>
+				<NSSNumber></NSSNumber>
+			</Bet>
+			<Bet TYPE="Method of Victory">
+				<Runner ID="47690674"><![CDATA[John Makdessi by KO,TKO,DQ]]></Runner>
+				<Price>+150</Price>
+				<Handicap>0</Handicap>
+				<Betlink><![CDATA[http://www.sportsinteraction.com/sportsbook/index.cfm?section=events&eventtypeID=150&gameID=841129]]></Betlink>
+				<NSSNumber></NSSNumber>
+			</Bet>
+			<Bet TYPE="Method of Victory">
+				<Runner ID="47690675"><![CDATA[John Makdessi by Pts or Technical Decision]]></Runner>
+				<Price>+275</Price>
+				<Handicap>0</Handicap>
+				<Betlink><![CDATA[http://www.sportsinteraction.com/sportsbook/index.cfm?section=events&eventtypeID=150&gameID=841129]]></Betlink>
+				<NSSNumber></NSSNumber>
+			</Bet>
+			<Bet TYPE="Method of Victory">
+				<Runner ID="47690676"><![CDATA[John Makdessi by Submission]]></Runner>
+				<Price>+1400</Price>
+				<Handicap>0</Handicap>
+				<Betlink><![CDATA[http://www.sportsinteraction.com/sportsbook/index.cfm?section=events&eventtypeID=150&gameID=841129]]></Betlink>
+				<NSSNumber></NSSNumber>
+			</Bet>
+		</Event>
+		<Event ID="14989169">
+			<Name><![CDATA[UFC 194 - Yancy Medeiros v John Makdessi]]></Name>
+			<Date>2015-12-13 00:00:00.0</Date>
+			<Location><![CDATA[Yancy Medeiros To Win in Round 2]]></Location>
+			<Live>1</Live>
+			<Bet TYPE="Round">
+				<Runner ID="47690733"><![CDATA[Yancy Medeiros To Win in Round 1]]></Runner>
+				<Price>+600</Price>
+				<Handicap>0</Handicap>
+				<Betlink><![CDATA[http://www.sportsinteraction.com/sportsbook/index.cfm?section=events&eventtypeID=150&gameID=841129]]></Betlink>
+				<NSSNumber></NSSNumber>
+			</Bet>
+			<Bet TYPE="Round">
+				<Runner ID="47690734"><![CDATA[Yancy Medeiros To Win in Round 2]]></Runner>
+				<Price>+800</Price>
+				<Handicap>0</Handicap>
+				<Betlink><![CDATA[http://www.sportsinteraction.com/sportsbook/index.cfm?section=events&eventtypeID=150&gameID=841129]]></Betlink>
+				<NSSNumber></NSSNumber>
+			</Bet>
+			<Bet TYPE="Round">
+				<Runner ID="47690735"><![CDATA[Yancy Medeiros To Win in Round 3]]></Runner>
+				<Price>+1200</Price>
+				<Handicap>0</Handicap>
+				<Betlink><![CDATA[http://www.sportsinteraction.com/sportsbook/index.cfm?section=events&eventtypeID=150&gameID=841129]]></Betlink>
+				<NSSNumber></NSSNumber>
+			</Bet>
+			<Bet TYPE="Round">
+				<Runner ID="47690736"><![CDATA[Yancy Medeiros by Pts or Technical Decision]]></Runner>
+				<Price>+500</Price>
+				<Handicap>0</Handicap>
+				<Betlink><![CDATA[http://www.sportsinteraction.com/sportsbook/index.cfm?section=events&eventtypeID=150&gameID=841129]]></Betlink>
+				<NSSNumber></NSSNumber>
+			</Bet>
+			<Bet TYPE="Round">
+				<Runner ID="47690737"><![CDATA[Draw]]></Runner>
+				<Price>+5000</Price>
+				<Handicap>0</Handicap>
+				<Betlink><![CDATA[http://www.sportsinteraction.com/sportsbook/index.cfm?section=events&eventtypeID=150&gameID=841129]]></Betlink>
+				<NSSNumber></NSSNumber>
+			</Bet>
+			<Bet TYPE="Round">
+				<Runner ID="47690738"><![CDATA[John Makdessi To Win in Round 1]]></Runner>
+				<Price>+200</Price>
+				<Handicap>0</Handicap>
+				<Betlink><![CDATA[http://www.sportsinteraction.com/sportsbook/index.cfm?section=events&eventtypeID=150&gameID=841129]]></Betlink>
+				<NSSNumber></NSSNumber>
+			</Bet>
+			<Bet TYPE="Round">
+				<Runner ID="47690739"><![CDATA[John Makdessi To Win in Round 2]]></Runner>
+				<Price>+500</Price>
+				<Handicap>0</Handicap>
+				<Betlink><![CDATA[http://www.sportsinteraction.com/sportsbook/index.cfm?section=events&eventtypeID=150&gameID=841129]]></Betlink>
+				<NSSNumber></NSSNumber>
+			</Bet>
+			<Bet TYPE="Round">
+				<Runner ID="47690740"><![CDATA[John Makdessi To Win in Round 3]]></Runner>
+				<Price>+1000</Price>
+				<Handicap>0</Handicap>
+				<Betlink><![CDATA[http://www.sportsinteraction.com/sportsbook/index.cfm?section=events&eventtypeID=150&gameID=841129]]></Betlink>
+				<NSSNumber></NSSNumber>
+			</Bet>
+			<Bet TYPE="Round">
+				<Runner ID="47690741"><![CDATA[John Makdessi by Pts or Technical Decision]]></Runner>
+				<Price>+275</Price>
+				<Handicap>0</Handicap>
+				<Betlink><![CDATA[http://www.sportsinteraction.com/sportsbook/index.cfm?section=events&eventtypeID=150&gameID=841129]]></Betlink>
+				<NSSNumber></NSSNumber>
+			</Bet>
+		</Event>
+		<Event ID="14318472">
+			<Name><![CDATA[UFC 194 - Frankie Saenz v Urijah Faber]]></Name>
+			<Date>2015-12-13 01:00:00.0</Date>
+			<Location><![CDATA[Urijah Faber]]></Location>
+			<Live>1</Live>
+			<Bet TYPE="">
+				<Runner ID="45722897"><![CDATA[Frankie Saenz]]></Runner>
+				<Price>+460</Price>
+				<Handicap>0</Handicap>
+				<Betlink><![CDATA[http://www.sportsinteraction.com/sportsbook/index.cfm?section=events&eventtypeID=150&gameID=841131]]></Betlink>
+				<NSSNumber></NSSNumber>
+			</Bet>
+			<Bet TYPE="">
+				<Runner ID="45722898"><![CDATA[Urijah Faber]]></Runner>
+				<Price>-720</Price>
+				<Handicap>0</Handicap>
+				<Betlink><![CDATA[http://www.sportsinteraction.com/sportsbook/index.cfm?section=events&eventtypeID=150&gameID=841131]]></Betlink>
+				<NSSNumber></NSSNumber>
+			</Bet>
+		</Event>
+		<Event ID="14989072">
+			<Name><![CDATA[UFC 194 - Frankie Saenz v Urijah Faber]]></Name>
+			<Date>2015-12-13 01:00:00.0</Date>
+			<Location><![CDATA[Frankie Saenz by Pts or Technical Decision]]></Location>
+			<Live>1</Live>
+			<Bet TYPE="Method of Victory">
+				<Runner ID="47690412"><![CDATA[Frankie Saenz by KO,TKO,DQ]]></Runner>
+				<Price>+1000</Price>
+				<Handicap>0</Handicap>
+				<Betlink><![CDATA[http://www.sportsinteraction.com/sportsbook/index.cfm?section=events&eventtypeID=150&gameID=841131]]></Betlink>
+				<NSSNumber></NSSNumber>
+			</Bet>
+			<Bet TYPE="Method of Victory">
+				<Runner ID="47690413"><![CDATA[Frankie Saenz by Pts or Technical Decision]]></Runner>
+				<Price>+800</Price>
+				<Handicap>0</Handicap>
+				<Betlink><![CDATA[http://www.sportsinteraction.com/sportsbook/index.cfm?section=events&eventtypeID=150&gameID=841131]]></Betlink>
+				<NSSNumber></NSSNumber>
+			</Bet>
+			<Bet TYPE="Method of Victory">
+				<Runner ID="47690414"><![CDATA[Frankie Saenz by Submission]]></Runner>
+				<Price>+1400</Price>
+				<Handicap>0</Handicap>
+				<Betlink><![CDATA[http://www.sportsinteraction.com/sportsbook/index.cfm?section=events&eventtypeID=150&gameID=841131]]></Betlink>
+				<NSSNumber></NSSNumber>
+			</Bet>
+			<Bet TYPE="Method of Victory">
+				<Runner ID="47690415"><![CDATA[Draw]]></Runner>
+				<Price>+5000</Price>
+				<Handicap>0</Handicap>
+				<Betlink><![CDATA[http://www.sportsinteraction.com/sportsbook/index.cfm?section=events&eventtypeID=150&gameID=841131]]></Betlink>
+				<NSSNumber></NSSNumber>
+			</Bet>
+			<Bet TYPE="Method of Victory">
+				<Runner ID="47690416"><![CDATA[Urijah Faber by KO,TKO,DQ]]></Runner>
+				<Price>+600</Price>
+				<Handicap>0</Handicap>
+				<Betlink><![CDATA[http://www.sportsinteraction.com/sportsbook/index.cfm?section=events&eventtypeID=150&gameID=841131]]></Betlink>
+				<NSSNumber></NSSNumber>
+			</Bet>
+			<Bet TYPE="Method of Victory">
+				<Runner ID="47690417"><![CDATA[Urijah Faber by Pts or Technical Decision]]></Runner>
+				<Price>+100</Price>
+				<Handicap>0</Handicap>
+				<Betlink><![CDATA[http://www.sportsinteraction.com/sportsbook/index.cfm?section=events&eventtypeID=150&gameID=841131]]></Betlink>
+				<NSSNumber></NSSNumber>
+			</Bet>
+			<Bet TYPE="Method of Victory">
+				<Runner ID="47690418"><![CDATA[Urijah Faber by Submission]]></Runner>
+				<Price>+160</Price>
+				<Handicap>0</Handicap>
+				<Betlink><![CDATA[http://www.sportsinteraction.com/sportsbook/index.cfm?section=events&eventtypeID=150&gameID=841131]]></Betlink>
+				<NSSNumber></NSSNumber>
+			</Bet>
+		</Event>
+		<Event ID="14989090">
+			<Name><![CDATA[UFC 194 - Frankie Saenz v Urijah Faber]]></Name>
+			<Date>2015-12-13 01:00:00.0</Date>
+			<Location><![CDATA[Frankie Saenz To Win in Round 2]]></Location>
+			<Live>1</Live>
+			<Bet TYPE="Round">
+				<Runner ID="47690470"><![CDATA[Frankie Saenz To Win in Round 1]]></Runner>
+				<Price>+1000</Price>
+				<Handicap>0</Handicap>
+				<Betlink><![CDATA[http://www.sportsinteraction.com/sportsbook/index.cfm?section=events&eventtypeID=150&gameID=841131]]></Betlink>
+				<NSSNumber></NSSNumber>
+			</Bet>
+			<Bet TYPE="Round">
+				<Runner ID="47690471"><![CDATA[Frankie Saenz To Win in Round 2]]></Runner>
+				<Price>+1400</Price>
+				<Handicap>0</Handicap>
+				<Betlink><![CDATA[http://www.sportsinteraction.com/sportsbook/index.cfm?section=events&eventtypeID=150&gameID=841131]]></Betlink>
+				<NSSNumber></NSSNumber>
+			</Bet>
+			<Bet TYPE="Round">
+				<Runner ID="47690472"><![CDATA[Frankie Saenz To Win in Round 3]]></Runner>
+				<Price>+2000</Price>
+				<Handicap>0</Handicap>
+				<Betlink><![CDATA[http://www.sportsinteraction.com/sportsbook/index.cfm?section=events&eventtypeID=150&gameID=841131]]></Betlink>
+				<NSSNumber></NSSNumber>
+			</Bet>
+			<Bet TYPE="Round">
+				<Runner ID="47690473"><![CDATA[Frankie Saenz by Pts or Technical Decision]]></Runner>
+				<Price>+800</Price>
+				<Handicap>0</Handicap>
+				<Betlink><![CDATA[http://www.sportsinteraction.com/sportsbook/index.cfm?section=events&eventtypeID=150&gameID=841131]]></Betlink>
+				<NSSNumber></NSSNumber>
+			</Bet>
+			<Bet TYPE="Round">
+				<Runner ID="47690474"><![CDATA[Draw]]></Runner>
+				<Price>+5000</Price>
+				<Handicap>0</Handicap>
+				<Betlink><![CDATA[http://www.sportsinteraction.com/sportsbook/index.cfm?section=events&eventtypeID=150&gameID=841131]]></Betlink>
+				<NSSNumber></NSSNumber>
+			</Bet>
+			<Bet TYPE="Round">
+				<Runner ID="47690475"><![CDATA[Urijah Faber To Win in Round 1]]></Runner>
+				<Price>+250</Price>
+				<Handicap>0</Handicap>
+				<Betlink><![CDATA[http://www.sportsinteraction.com/sportsbook/index.cfm?section=events&eventtypeID=150&gameID=841131]]></Betlink>
+				<NSSNumber></NSSNumber>
+			</Bet>
+			<Bet TYPE="Round">
+				<Runner ID="47690476"><![CDATA[Urijah Faber To Win in Round 2]]></Runner>
+				<Price>+500</Price>
+				<Handicap>0</Handicap>
+				<Betlink><![CDATA[http://www.sportsinteraction.com/sportsbook/index.cfm?section=events&eventtypeID=150&gameID=841131]]></Betlink>
+				<NSSNumber></NSSNumber>
+			</Bet>
+			<Bet TYPE="Round">
+				<Runner ID="47690477"><![CDATA[Urijah Faber To Win in Round 3]]></Runner>
+				<Price>+1000</Price>
+				<Handicap>0</Handicap>
+				<Betlink><![CDATA[http://www.sportsinteraction.com/sportsbook/index.cfm?section=events&eventtypeID=150&gameID=841131]]></Betlink>
+				<NSSNumber></NSSNumber>
+			</Bet>
+			<Bet TYPE="Round">
+				<Runner ID="47690478"><![CDATA[Urijah Faber by Pts or Technical Decision]]></Runner>
+				<Price>+100</Price>
+				<Handicap>0</Handicap>
+				<Betlink><![CDATA[http://www.sportsinteraction.com/sportsbook/index.cfm?section=events&eventtypeID=150&gameID=841131]]></Betlink>
+				<NSSNumber></NSSNumber>
+			</Bet>
+		</Event>
+		<Event ID="14323567">
+			<Name><![CDATA[UFC 194 - Leonardo Santos v Kevin Lee]]></Name>
+			<Date>2015-12-13 01:00:00.0</Date>
+			<Location><![CDATA[Kevin Lee]]></Location>
+			<Live>1</Live>
+			<Bet TYPE="">
+				<Runner ID="45739327"><![CDATA[Leonardo Santos]]></Runner>
+				<Price>+400</Price>
+				<Handicap>0</Handicap>
+				<Betlink><![CDATA[http://www.sportsinteraction.com/sportsbook/index.cfm?section=events&eventtypeID=150&gameID=841178]]></Betlink>
+				<NSSNumber></NSSNumber>
+			</Bet>
+			<Bet TYPE="">
+				<Runner ID="45739328"><![CDATA[Kevin Lee]]></Runner>
+				<Price>-625</Price>
+				<Handicap>0</Handicap>
+				<Betlink><![CDATA[http://www.sportsinteraction.com/sportsbook/index.cfm?section=events&eventtypeID=150&gameID=841178]]></Betlink>
+				<NSSNumber></NSSNumber>
+			</Bet>
+		</Event>
+		<Event ID="14989125">
+			<Name><![CDATA[UFC 194 - Leonardo Santos v Kevin Lee]]></Name>
+			<Date>2015-12-13 01:00:00.0</Date>
+			<Location><![CDATA[Leonardo Santos by Pts or Technical Decision]]></Location>
+			<Live>1</Live>
+			<Bet TYPE="Method of Victory">
+				<Runner ID="47690581"><![CDATA[Leonardo Santos by KO,TKO,DQ]]></Runner>
+				<Price>+1400</Price>
+				<Handicap>0</Handicap>
+				<Betlink><![CDATA[http://www.sportsinteraction.com/sportsbook/index.cfm?section=events&eventtypeID=150&gameID=841178]]></Betlink>
+				<NSSNumber></NSSNumber>
+			</Bet>
+			<Bet TYPE="Method of Victory">
+				<Runner ID="47690582"><![CDATA[Leonardo Santos by Pts or Technical Decision]]></Runner>
+				<Price>+650</Price>
+				<Handicap>0</Handicap>
+				<Betlink><![CDATA[http://www.sportsinteraction.com/sportsbook/index.cfm?section=events&eventtypeID=150&gameID=841178]]></Betlink>
+				<NSSNumber></NSSNumber>
+			</Bet>
+			<Bet TYPE="Method of Victory">
+				<Runner ID="47690583"><![CDATA[Leonardo Santos by Submission]]></Runner>
+				<Price>+1000</Price>
+				<Handicap>0</Handicap>
+				<Betlink><![CDATA[http://www.sportsinteraction.com/sportsbook/index.cfm?section=events&eventtypeID=150&gameID=841178]]></Betlink>
+				<NSSNumber></NSSNumber>
+			</Bet>
+			<Bet TYPE="Method of Victory">
+				<Runner ID="47690584"><![CDATA[Draw]]></Runner>
+				<Price>+5000</Price>
+				<Handicap>0</Handicap>
+				<Betlink><![CDATA[http://www.sportsinteraction.com/sportsbook/index.cfm?section=events&eventtypeID=150&gameID=841178]]></Betlink>
+				<NSSNumber></NSSNumber>
+			</Bet>
+			<Bet TYPE="Method of Victory">
+				<Runner ID="47690585"><![CDATA[Kevin Lee by KO,TKO,DQ]]></Runner>
+				<Price>+450</Price>
+				<Handicap>0</Handicap>
+				<Betlink><![CDATA[http://www.sportsinteraction.com/sportsbook/index.cfm?section=events&eventtypeID=150&gameID=841178]]></Betlink>
+				<NSSNumber></NSSNumber>
+			</Bet>
+			<Bet TYPE="Method of Victory">
+				<Runner ID="47690586"><![CDATA[Kevin Lee by Pts or Technical Decision]]></Runner>
+				<Price>-110</Price>
+				<Handicap>0</Handicap>
+				<Betlink><![CDATA[http://www.sportsinteraction.com/sportsbook/index.cfm?section=events&eventtypeID=150&gameID=841178]]></Betlink>
+				<NSSNumber></NSSNumber>
+			</Bet>
+			<Bet TYPE="Method of Victory">
+				<Runner ID="47690587"><![CDATA[Kevin Lee by Submission]]></Runner>
+				<Price>+250</Price>
+				<Handicap>0</Handicap>
+				<Betlink><![CDATA[http://www.sportsinteraction.com/sportsbook/index.cfm?section=events&eventtypeID=150&gameID=841178]]></Betlink>
+				<NSSNumber></NSSNumber>
+			</Bet>
+		</Event>
+		<Event ID="14989130">
+			<Name><![CDATA[UFC 194 - Leonardo Santos v Kevin Lee]]></Name>
+			<Date>2015-12-13 01:00:00.0</Date>
+			<Location><![CDATA[Leonardo Santos To Win in Round 2]]></Location>
+			<Live>1</Live>
+			<Bet TYPE="Round">
+				<Runner ID="47690600"><![CDATA[Leonardo Santos To Win in Round 1]]></Runner>
+				<Price>+1000</Price>
+				<Handicap>0</Handicap>
+				<Betlink><![CDATA[http://www.sportsinteraction.com/sportsbook/index.cfm?section=events&eventtypeID=150&gameID=841178]]></Betlink>
+				<NSSNumber></NSSNumber>
+			</Bet>
+			<Bet TYPE="Round">
+				<Runner ID="47690601"><![CDATA[Leonardo Santos To Win in Round 2]]></Runner>
+				<Price>+1200</Price>
+				<Handicap>0</Handicap>
+				<Betlink><![CDATA[http://www.sportsinteraction.com/sportsbook/index.cfm?section=events&eventtypeID=150&gameID=841178]]></Betlink>
+				<NSSNumber></NSSNumber>
+			</Bet>
+			<Bet TYPE="Round">
+				<Runner ID="47690602"><![CDATA[Leonardo Santos To Win in Round 3]]></Runner>
+				<Price>+1600</Price>
+				<Handicap>0</Handicap>
+				<Betlink><![CDATA[http://www.sportsinteraction.com/sportsbook/index.cfm?section=events&eventtypeID=150&gameID=841178]]></Betlink>
+				<NSSNumber></NSSNumber>
+			</Bet>
+			<Bet TYPE="Round">
+				<Runner ID="47690603"><![CDATA[Leonardo Santos by Pts or Technical Decision]]></Runner>
+				<Price>+650</Price>
+				<Handicap>0</Handicap>
+				<Betlink><![CDATA[http://www.sportsinteraction.com/sportsbook/index.cfm?section=events&eventtypeID=150&gameID=841178]]></Betlink>
+				<NSSNumber></NSSNumber>
+			</Bet>
+			<Bet TYPE="Round">
+				<Runner ID="47690604"><![CDATA[Draw]]></Runner>
+				<Price>+5000</Price>
+				<Handicap>0</Handicap>
+				<Betlink><![CDATA[http://www.sportsinteraction.com/sportsbook/index.cfm?section=events&eventtypeID=150&gameID=841178]]></Betlink>
+				<NSSNumber></NSSNumber>
+			</Bet>
+			<Bet TYPE="Round">
+				<Runner ID="47690605"><![CDATA[Kevin Lee To Win in Round 1]]></Runner>
+				<Price>+350</Price>
+				<Handicap>0</Handicap>
+				<Betlink><![CDATA[http://www.sportsinteraction.com/sportsbook/index.cfm?section=events&eventtypeID=150&gameID=841178]]></Betlink>
+				<NSSNumber></NSSNumber>
+			</Bet>
+			<Bet TYPE="Round">
+				<Runner ID="47690606"><![CDATA[Kevin Lee To Win in Round 2]]></Runner>
+				<Price>+550</Price>
+				<Handicap>0</Handicap>
+				<Betlink><![CDATA[http://www.sportsinteraction.com/sportsbook/index.cfm?section=events&eventtypeID=150&gameID=841178]]></Betlink>
+				<NSSNumber></NSSNumber>
+			</Bet>
+			<Bet TYPE="Round">
+				<Runner ID="47690607"><![CDATA[Kevin Lee To Win in Round 3]]></Runner>
+				<Price>+1000</Price>
+				<Handicap>0</Handicap>
+				<Betlink><![CDATA[http://www.sportsinteraction.com/sportsbook/index.cfm?section=events&eventtypeID=150&gameID=841178]]></Betlink>
+				<NSSNumber></NSSNumber>
+			</Bet>
+			<Bet TYPE="Round">
+				<Runner ID="47690608"><![CDATA[Kevin Lee by Pts or Technical Decision]]></Runner>
+				<Price>-110</Price>
+				<Handicap>0</Handicap>
+				<Betlink><![CDATA[http://www.sportsinteraction.com/sportsbook/index.cfm?section=events&eventtypeID=150&gameID=841178]]></Betlink>
+				<NSSNumber></NSSNumber>
+			</Bet>
+		</Event>
+		<Event ID="14323368">
+			<Name><![CDATA[UFC 194 - Warlley Alves v Colby Covington]]></Name>
+			<Date>2015-12-13 01:00:00.0</Date>
+			<Location><![CDATA[Colby Covington]]></Location>
+			<Live>1</Live>
+			<Bet TYPE="">
+				<Runner ID="45738767"><![CDATA[Warlley Alves]]></Runner>
+				<Price>-105</Price>
+				<Handicap>0</Handicap>
+				<Betlink><![CDATA[http://www.sportsinteraction.com/sportsbook/index.cfm?section=events&eventtypeID=150&gameID=841173]]></Betlink>
+				<NSSNumber></NSSNumber>
+			</Bet>
+			<Bet TYPE="">
+				<Runner ID="45738768"><![CDATA[Colby Covington]]></Runner>
+				<Price>-125</Price>
+				<Handicap>0</Handicap>
+				<Betlink><![CDATA[http://www.sportsinteraction.com/sportsbook/index.cfm?section=events&eventtypeID=150&gameID=841173]]></Betlink>
+				<NSSNumber></NSSNumber>
+			</Bet>
+		</Event>
+		<Event ID="14989103">
+			<Name><![CDATA[UFC 194 - Warlley Alves v Colby Covington]]></Name>
+			<Date>2015-12-13 01:00:00.0</Date>
+			<Location><![CDATA[Warlley Alves by Pts or Technical Decision]]></Location>
+			<Live>1</Live>
+			<Bet TYPE="Method of Victory">
+				<Runner ID="47690511"><![CDATA[Warlley Alves by KO,TKO,DQ]]></Runner>
+				<Price>+550</Price>
+				<Handicap>0</Handicap>
+				<Betlink><![CDATA[http://www.sportsinteraction.com/sportsbook/index.cfm?section=events&eventtypeID=150&gameID=841173]]></Betlink>
+				<NSSNumber></NSSNumber>
+			</Bet>
+			<Bet TYPE="Method of Victory">
+				<Runner ID="47690512"><![CDATA[Warlley Alves by Pts or Technical Decision]]></Runner>
+				<Price>+250</Price>
+				<Handicap>0</Handicap>
+				<Betlink><![CDATA[http://www.sportsinteraction.com/sportsbook/index.cfm?section=events&eventtypeID=150&gameID=841173]]></Betlink>
+				<NSSNumber></NSSNumber>
+			</Bet>
+			<Bet TYPE="Method of Victory">
+				<Runner ID="47690513"><![CDATA[Warlley Alves by Submission]]></Runner>
+				<Price>+350</Price>
+				<Handicap>0</Handicap>
+				<Betlink><![CDATA[http://www.sportsinteraction.com/sportsbook/index.cfm?section=events&eventtypeID=150&gameID=841173]]></Betlink>
+				<NSSNumber></NSSNumber>
+			</Bet>
+			<Bet TYPE="Method of Victory">
+				<Runner ID="47690514"><![CDATA[Draw]]></Runner>
+				<Price>+5000</Price>
+				<Handicap>0</Handicap>
+				<Betlink><![CDATA[http://www.sportsinteraction.com/sportsbook/index.cfm?section=events&eventtypeID=150&gameID=841173]]></Betlink>
+				<NSSNumber></NSSNumber>
+			</Bet>
+			<Bet TYPE="Method of Victory">
+				<Runner ID="47690515"><![CDATA[Colby Covington by KO,TKO,DQ]]></Runner>
+				<Price>+650</Price>
+				<Handicap>0</Handicap>
+				<Betlink><![CDATA[http://www.sportsinteraction.com/sportsbook/index.cfm?section=events&eventtypeID=150&gameID=841173]]></Betlink>
+				<NSSNumber></NSSNumber>
+			</Bet>
+			<Bet TYPE="Method of Victory">
+				<Runner ID="47690516"><![CDATA[Colby Covington by Pts or Technical Decision]]></Runner>
+				<Price>+225</Price>
+				<Handicap>0</Handicap>
+				<Betlink><![CDATA[http://www.sportsinteraction.com/sportsbook/index.cfm?section=events&eventtypeID=150&gameID=841173]]></Betlink>
+				<NSSNumber></NSSNumber>
+			</Bet>
+			<Bet TYPE="Method of Victory">
+				<Runner ID="47690517"><![CDATA[Colby Covington by Submission]]></Runner>
+				<Price>+400</Price>
+				<Handicap>0</Handicap>
+				<Betlink><![CDATA[http://www.sportsinteraction.com/sportsbook/index.cfm?section=events&eventtypeID=150&gameID=841173]]></Betlink>
+				<NSSNumber></NSSNumber>
+			</Bet>
+		</Event>
+		<Event ID="14989115">
+			<Name><![CDATA[UFC 194 - Warlley Alves v Colby Covington]]></Name>
+			<Date>2015-12-13 01:00:00.0</Date>
+			<Location><![CDATA[Warlley Alves To Win in Round 2]]></Location>
+			<Live>1</Live>
+			<Bet TYPE="Round">
+				<Runner ID="47690547"><![CDATA[Warlley Alves To Win in Round 1]]></Runner>
+				<Price>+400</Price>
+				<Handicap>0</Handicap>
+				<Betlink><![CDATA[http://www.sportsinteraction.com/sportsbook/index.cfm?section=events&eventtypeID=150&gameID=841173]]></Betlink>
+				<NSSNumber></NSSNumber>
+			</Bet>
+			<Bet TYPE="Round">
+				<Runner ID="47690548"><![CDATA[Warlley Alves To Win in Round 2]]></Runner>
+				<Price>+600</Price>
+				<Handicap>0</Handicap>
+				<Betlink><![CDATA[http://www.sportsinteraction.com/sportsbook/index.cfm?section=events&eventtypeID=150&gameID=841173]]></Betlink>
+				<NSSNumber></NSSNumber>
+			</Bet>
+			<Bet TYPE="Round">
+				<Runner ID="47690549"><![CDATA[Warlley Alves To Win in Round 3]]></Runner>
+				<Price>+1200</Price>
+				<Handicap>0</Handicap>
+				<Betlink><![CDATA[http://www.sportsinteraction.com/sportsbook/index.cfm?section=events&eventtypeID=150&gameID=841173]]></Betlink>
+				<NSSNumber></NSSNumber>
+			</Bet>
+			<Bet TYPE="Round">
+				<Runner ID="47690550"><![CDATA[Warlley Alves by Pts or Technical Decision]]></Runner>
+				<Price>+250</Price>
+				<Handicap>0</Handicap>
+				<Betlink><![CDATA[http://www.sportsinteraction.com/sportsbook/index.cfm?section=events&eventtypeID=150&gameID=841173]]></Betlink>
+				<NSSNumber></NSSNumber>
+			</Bet>
+			<Bet TYPE="Round">
+				<Runner ID="47690551"><![CDATA[Draw]]></Runner>
+				<Price>+5000</Price>
+				<Handicap>0</Handicap>
+				<Betlink><![CDATA[http://www.sportsinteraction.com/sportsbook/index.cfm?section=events&eventtypeID=150&gameID=841173]]></Betlink>
+				<NSSNumber></NSSNumber>
+			</Bet>
+			<Bet TYPE="Round">
+				<Runner ID="47690552"><![CDATA[Colby Covington To Win in Round 1]]></Runner>
+				<Price>+500</Price>
+				<Handicap>0</Handicap>
+				<Betlink><![CDATA[http://www.sportsinteraction.com/sportsbook/index.cfm?section=events&eventtypeID=150&gameID=841173]]></Betlink>
+				<NSSNumber></NSSNumber>
+			</Bet>
+			<Bet TYPE="Round">
+				<Runner ID="47690553"><![CDATA[Colby Covington To Win in Round 2]]></Runner>
+				<Price>+800</Price>
+				<Handicap>0</Handicap>
+				<Betlink><![CDATA[http://www.sportsinteraction.com/sportsbook/index.cfm?section=events&eventtypeID=150&gameID=841173]]></Betlink>
+				<NSSNumber></NSSNumber>
+			</Bet>
+			<Bet TYPE="Round">
+				<Runner ID="47690554"><![CDATA[Colby Covington To Win in Round 3]]></Runner>
+				<Price>+1400</Price>
+				<Handicap>0</Handicap>
+				<Betlink><![CDATA[http://www.sportsinteraction.com/sportsbook/index.cfm?section=events&eventtypeID=150&gameID=841173]]></Betlink>
+				<NSSNumber></NSSNumber>
+			</Bet>
+			<Bet TYPE="Round">
+				<Runner ID="47690555"><![CDATA[Colby Covington by Pts or Technical Decision]]></Runner>
+				<Price>+225</Price>
+				<Handicap>0</Handicap>
+				<Betlink><![CDATA[http://www.sportsinteraction.com/sportsbook/index.cfm?section=events&eventtypeID=150&gameID=841173]]></Betlink>
+				<NSSNumber></NSSNumber>
+			</Bet>
+		</Event>
+		<Event ID="14318475">
+			<Name><![CDATA[UFC 194 - Gunnar Nelson v Demian Maia]]></Name>
+			<Date>2015-12-13 03:00:00.0</Date>
+			<Location><![CDATA[Demian Maia]]></Location>
+			<Live>1</Live>
+			<Bet TYPE="">
+				<Runner ID="45722903"><![CDATA[Gunnar Nelson]]></Runner>
+				<Price>+120</Price>
+				<Handicap>0</Handicap>
+				<Betlink><![CDATA[http://www.sportsinteraction.com/sportsbook/index.cfm?section=events&eventtypeID=150&gameID=841132]]></Betlink>
+				<NSSNumber></NSSNumber>
+			</Bet>
+			<Bet TYPE="">
+				<Runner ID="45722904"><![CDATA[Demian Maia]]></Runner>
+				<Price>-150</Price>
+				<Handicap>0</Handicap>
+				<Betlink><![CDATA[http://www.sportsinteraction.com/sportsbook/index.cfm?section=events&eventtypeID=150&gameID=841132]]></Betlink>
+				<NSSNumber></NSSNumber>
+			</Bet>
+		</Event>
+		<Event ID="14989006">
+			<Name><![CDATA[UFC 194 - Gunnar Nelson v Demian Maia]]></Name>
+			<Date>2015-12-13 03:00:00.0</Date>
+			<Location><![CDATA[Gunnar Nelson by Pts or Technical Decision]]></Location>
+			<Live>1</Live>
+			<Bet TYPE="Method of Victory">
+				<Runner ID="47690236"><![CDATA[Gunnar Nelson by KO,TKO,DQ]]></Runner>
+				<Price>+500</Price>
+				<Handicap>0</Handicap>
+				<Betlink><![CDATA[http://www.sportsinteraction.com/sportsbook/index.cfm?section=events&eventtypeID=150&gameID=841132]]></Betlink>
+				<NSSNumber></NSSNumber>
+			</Bet>
+			<Bet TYPE="Method of Victory">
+				<Runner ID="47690237"><![CDATA[Gunnar Nelson by Pts or Technical Decision]]></Runner>
+				<Price>+250</Price>
+				<Handicap>0</Handicap>
+				<Betlink><![CDATA[http://www.sportsinteraction.com/sportsbook/index.cfm?section=events&eventtypeID=150&gameID=841132]]></Betlink>
+				<NSSNumber></NSSNumber>
+			</Bet>
+			<Bet TYPE="Method of Victory">
+				<Runner ID="47690238"><![CDATA[Gunnar Nelson by Submission]]></Runner>
+				<Price>+600</Price>
+				<Handicap>0</Handicap>
+				<Betlink><![CDATA[http://www.sportsinteraction.com/sportsbook/index.cfm?section=events&eventtypeID=150&gameID=841132]]></Betlink>
+				<NSSNumber></NSSNumber>
+			</Bet>
+			<Bet TYPE="Method of Victory">
+				<Runner ID="47690239"><![CDATA[Draw]]></Runner>
+				<Price>+5000</Price>
+				<Handicap>0</Handicap>
+				<Betlink><![CDATA[http://www.sportsinteraction.com/sportsbook/index.cfm?section=events&eventtypeID=150&gameID=841132]]></Betlink>
+				<NSSNumber></NSSNumber>
+			</Bet>
+			<Bet TYPE="Method of Victory">
+				<Runner ID="47690240"><![CDATA[Demian Maia by KO,TKO,DQ]]></Runner>
+				<Price>+800</Price>
+				<Handicap>0</Handicap>
+				<Betlink><![CDATA[http://www.sportsinteraction.com/sportsbook/index.cfm?section=events&eventtypeID=150&gameID=841132]]></Betlink>
+				<NSSNumber></NSSNumber>
+			</Bet>
+			<Bet TYPE="Method of Victory">
+				<Runner ID="47690241"><![CDATA[Demian Maia by Pts or Technical Decision]]></Runner>
+				<Price>+150</Price>
+				<Handicap>0</Handicap>
+				<Betlink><![CDATA[http://www.sportsinteraction.com/sportsbook/index.cfm?section=events&eventtypeID=150&gameID=841132]]></Betlink>
+				<NSSNumber></NSSNumber>
+			</Bet>
+			<Bet TYPE="Method of Victory">
+				<Runner ID="47690242"><![CDATA[Demian Maia by Submission]]></Runner>
+				<Price>+400</Price>
+				<Handicap>0</Handicap>
+				<Betlink><![CDATA[http://www.sportsinteraction.com/sportsbook/index.cfm?section=events&eventtypeID=150&gameID=841132]]></Betlink>
+				<NSSNumber></NSSNumber>
+			</Bet>
+		</Event>
+		<Event ID="14989013">
+			<Name><![CDATA[UFC 194 - Gunnar Nelson v Demian Maia]]></Name>
+			<Date>2015-12-13 03:00:00.0</Date>
+			<Location><![CDATA[Gunnar Nelson To Win in Round 2]]></Location>
+			<Live>1</Live>
+			<Bet TYPE="Round">
+				<Runner ID="47690255"><![CDATA[Gunnar Nelson To Win in Round 1]]></Runner>
+				<Price>+500</Price>
+				<Handicap>0</Handicap>
+				<Betlink><![CDATA[http://www.sportsinteraction.com/sportsbook/index.cfm?section=events&eventtypeID=150&gameID=841132]]></Betlink>
+				<NSSNumber></NSSNumber>
+			</Bet>
+			<Bet TYPE="Round">
+				<Runner ID="47690256"><![CDATA[Gunnar Nelson To Win in Round 2]]></Runner>
+				<Price>+800</Price>
+				<Handicap>0</Handicap>
+				<Betlink><![CDATA[http://www.sportsinteraction.com/sportsbook/index.cfm?section=events&eventtypeID=150&gameID=841132]]></Betlink>
+				<NSSNumber></NSSNumber>
+			</Bet>
+			<Bet TYPE="Round">
+				<Runner ID="47690257"><![CDATA[Gunnar Nelson To Win in Round 3]]></Runner>
+				<Price>+1400</Price>
+				<Handicap>0</Handicap>
+				<Betlink><![CDATA[http://www.sportsinteraction.com/sportsbook/index.cfm?section=events&eventtypeID=150&gameID=841132]]></Betlink>
+				<NSSNumber></NSSNumber>
+			</Bet>
+			<Bet TYPE="Round">
+				<Runner ID="47690258"><![CDATA[Gunnar Nelson by Pts or Technical Decision]]></Runner>
+				<Price>+250</Price>
+				<Handicap>0</Handicap>
+				<Betlink><![CDATA[http://www.sportsinteraction.com/sportsbook/index.cfm?section=events&eventtypeID=150&gameID=841132]]></Betlink>
+				<NSSNumber></NSSNumber>
+			</Bet>
+			<Bet TYPE="Round">
+				<Runner ID="47690259"><![CDATA[Draw]]></Runner>
+				<Price>+5000</Price>
+				<Handicap>0</Handicap>
+				<Betlink><![CDATA[http://www.sportsinteraction.com/sportsbook/index.cfm?section=events&eventtypeID=150&gameID=841132]]></Betlink>
+				<NSSNumber></NSSNumber>
+			</Bet>
+			<Bet TYPE="Round">
+				<Runner ID="47690260"><![CDATA[Demian Maia To Win in Round 1]]></Runner>
+				<Price>+500</Price>
+				<Handicap>0</Handicap>
+				<Betlink><![CDATA[http://www.sportsinteraction.com/sportsbook/index.cfm?section=events&eventtypeID=150&gameID=841132]]></Betlink>
+				<NSSNumber></NSSNumber>
+			</Bet>
+			<Bet TYPE="Round">
+				<Runner ID="47690261"><![CDATA[Demian Maia To Win in Round 2]]></Runner>
+				<Price>+800</Price>
+				<Handicap>0</Handicap>
+				<Betlink><![CDATA[http://www.sportsinteraction.com/sportsbook/index.cfm?section=events&eventtypeID=150&gameID=841132]]></Betlink>
+				<NSSNumber></NSSNumber>
+			</Bet>
+			<Bet TYPE="Round">
+				<Runner ID="47690262"><![CDATA[Demian Maia To Win in Round 3]]></Runner>
+				<Price>+1400</Price>
+				<Handicap>0</Handicap>
+				<Betlink><![CDATA[http://www.sportsinteraction.com/sportsbook/index.cfm?section=events&eventtypeID=150&gameID=841132]]></Betlink>
+				<NSSNumber></NSSNumber>
+			</Bet>
+			<Bet TYPE="Round">
+				<Runner ID="47690263"><![CDATA[Demian Maia by Pts or Technical Decision]]></Runner>
+				<Price>+150</Price>
+				<Handicap>0</Handicap>
+				<Betlink><![CDATA[http://www.sportsinteraction.com/sportsbook/index.cfm?section=events&eventtypeID=150&gameID=841132]]></Betlink>
+				<NSSNumber></NSSNumber>
+			</Bet>
+		</Event>
+		<Event ID="14318471">
+			<Name><![CDATA[UFC 194 - Jeremy Stephens v Max Holloway]]></Name>
+			<Date>2015-12-13 03:00:00.0</Date>
+			<Location><![CDATA[Max Holloway]]></Location>
+			<Live>1</Live>
+			<Bet TYPE="">
+				<Runner ID="45722895"><![CDATA[Jeremy Stephens]]></Runner>
+				<Price>+400</Price>
+				<Handicap>0</Handicap>
+				<Betlink><![CDATA[http://www.sportsinteraction.com/sportsbook/index.cfm?section=events&eventtypeID=150&gameID=841130]]></Betlink>
+				<NSSNumber></NSSNumber>
+			</Bet>
+			<Bet TYPE="">
+				<Runner ID="45722896"><![CDATA[Max Holloway]]></Runner>
+				<Price>-625</Price>
+				<Handicap>0</Handicap>
+				<Betlink><![CDATA[http://www.sportsinteraction.com/sportsbook/index.cfm?section=events&eventtypeID=150&gameID=841130]]></Betlink>
+				<NSSNumber></NSSNumber>
+			</Bet>
+		</Event>
+		<Event ID="14989031">
+			<Name><![CDATA[UFC 194 - Jeremy Stephens v Max Holloway]]></Name>
+			<Date>2015-12-13 03:00:00.0</Date>
+			<Location><![CDATA[Jeremy Stephens by Pts or Technical Decision]]></Location>
+			<Live>1</Live>
+			<Bet TYPE="Method of Victory">
+				<Runner ID="47690308"><![CDATA[Jeremy Stephens by KO,TKO,DQ]]></Runner>
+				<Price>+600</Price>
+				<Handicap>0</Handicap>
+				<Betlink><![CDATA[http://www.sportsinteraction.com/sportsbook/index.cfm?section=events&eventtypeID=150&gameID=841130]]></Betlink>
+				<NSSNumber></NSSNumber>
+			</Bet>
+			<Bet TYPE="Method of Victory">
+				<Runner ID="47690309"><![CDATA[Jeremy Stephens by Pts or Technical Decision]]></Runner>
+				<Price>+700</Price>
+				<Handicap>0</Handicap>
+				<Betlink><![CDATA[http://www.sportsinteraction.com/sportsbook/index.cfm?section=events&eventtypeID=150&gameID=841130]]></Betlink>
+				<NSSNumber></NSSNumber>
+			</Bet>
+			<Bet TYPE="Method of Victory">
+				<Runner ID="47690310"><![CDATA[Jeremy Stephens by Submission]]></Runner>
+				<Price>+1400</Price>
+				<Handicap>0</Handicap>
+				<Betlink><![CDATA[http://www.sportsinteraction.com/sportsbook/index.cfm?section=events&eventtypeID=150&gameID=841130]]></Betlink>
+				<NSSNumber></NSSNumber>
+			</Bet>
+			<Bet TYPE="Method of Victory">
+				<Runner ID="47690311"><![CDATA[Draw]]></Runner>
+				<Price>+5000</Price>
+				<Handicap>0</Handicap>
+				<Betlink><![CDATA[http://www.sportsinteraction.com/sportsbook/index.cfm?section=events&eventtypeID=150&gameID=841130]]></Betlink>
+				<NSSNumber></NSSNumber>
+			</Bet>
+			<Bet TYPE="Method of Victory">
+				<Runner ID="47690312"><![CDATA[Max Holloway by KO,TKO,DQ]]></Runner>
+				<Price>+250</Price>
+				<Handicap>0</Handicap>
+				<Betlink><![CDATA[http://www.sportsinteraction.com/sportsbook/index.cfm?section=events&eventtypeID=150&gameID=841130]]></Betlink>
+				<NSSNumber></NSSNumber>
+			</Bet>
+			<Bet TYPE="Method of Victory">
+				<Runner ID="47690313"><![CDATA[Max Holloway by Pts or Technical Decision]]></Runner>
+				<Price>-110</Price>
+				<Handicap>0</Handicap>
+				<Betlink><![CDATA[http://www.sportsinteraction.com/sportsbook/index.cfm?section=events&eventtypeID=150&gameID=841130]]></Betlink>
+				<NSSNumber></NSSNumber>
+			</Bet>
+			<Bet TYPE="Method of Victory">
+				<Runner ID="47690314"><![CDATA[Max Holloway by Submission]]></Runner>
+				<Price>+550</Price>
+				<Handicap>0</Handicap>
+				<Betlink><![CDATA[http://www.sportsinteraction.com/sportsbook/index.cfm?section=events&eventtypeID=150&gameID=841130]]></Betlink>
+				<NSSNumber></NSSNumber>
+			</Bet>
+		</Event>
+		<Event ID="14989032">
+			<Name><![CDATA[UFC 194 - Jeremy Stephens v Max Holloway]]></Name>
+			<Date>2015-12-13 03:00:00.0</Date>
+			<Location><![CDATA[Jeremy Stephens To Win in Round 2]]></Location>
+			<Live>1</Live>
+			<Bet TYPE="Round">
+				<Runner ID="47690315"><![CDATA[Jeremy Stephens To Win in Round 1]]></Runner>
+				<Price>+800</Price>
+				<Handicap>0</Handicap>
+				<Betlink><![CDATA[http://www.sportsinteraction.com/sportsbook/index.cfm?section=events&eventtypeID=150&gameID=841130]]></Betlink>
+				<NSSNumber></NSSNumber>
+			</Bet>
+			<Bet TYPE="Round">
+				<Runner ID="47690316"><![CDATA[Jeremy Stephens To Win in Round 2]]></Runner>
+				<Price>+1000</Price>
+				<Handicap>0</Handicap>
+				<Betlink><![CDATA[http://www.sportsinteraction.com/sportsbook/index.cfm?section=events&eventtypeID=150&gameID=841130]]></Betlink>
+				<NSSNumber></NSSNumber>
+			</Bet>
+			<Bet TYPE="Round">
+				<Runner ID="47690317"><![CDATA[Jeremy Stephens To Win in Round 3]]></Runner>
+				<Price>+1400</Price>
+				<Handicap>0</Handicap>
+				<Betlink><![CDATA[http://www.sportsinteraction.com/sportsbook/index.cfm?section=events&eventtypeID=150&gameID=841130]]></Betlink>
+				<NSSNumber></NSSNumber>
+			</Bet>
+			<Bet TYPE="Round">
+				<Runner ID="47690318"><![CDATA[Jeremy Stephens by Pts or Technical Decision]]></Runner>
+				<Price>+700</Price>
+				<Handicap>0</Handicap>
+				<Betlink><![CDATA[http://www.sportsinteraction.com/sportsbook/index.cfm?section=events&eventtypeID=150&gameID=841130]]></Betlink>
+				<NSSNumber></NSSNumber>
+			</Bet>
+			<Bet TYPE="Round">
+				<Runner ID="47690319"><![CDATA[Draw]]></Runner>
+				<Price>+5000</Price>
+				<Handicap>0</Handicap>
+				<Betlink><![CDATA[http://www.sportsinteraction.com/sportsbook/index.cfm?section=events&eventtypeID=150&gameID=841130]]></Betlink>
+				<NSSNumber></NSSNumber>
+			</Bet>
+			<Bet TYPE="Round">
+				<Runner ID="47690320"><![CDATA[Max Holloway To Win in Round 1]]></Runner>
+				<Price>+350</Price>
+				<Handicap>0</Handicap>
+				<Betlink><![CDATA[http://www.sportsinteraction.com/sportsbook/index.cfm?section=events&eventtypeID=150&gameID=841130]]></Betlink>
+				<NSSNumber></NSSNumber>
+			</Bet>
+			<Bet TYPE="Round">
+				<Runner ID="47690321"><![CDATA[Max Holloway To Win in Round 2]]></Runner>
+				<Price>+600</Price>
+				<Handicap>0</Handicap>
+				<Betlink><![CDATA[http://www.sportsinteraction.com/sportsbook/index.cfm?section=events&eventtypeID=150&gameID=841130]]></Betlink>
+				<NSSNumber></NSSNumber>
+			</Bet>
+			<Bet TYPE="Round">
+				<Runner ID="47690322"><![CDATA[Max Holloway To Win in Round 3]]></Runner>
+				<Price>+1200</Price>
+				<Handicap>0</Handicap>
+				<Betlink><![CDATA[http://www.sportsinteraction.com/sportsbook/index.cfm?section=events&eventtypeID=150&gameID=841130]]></Betlink>
+				<NSSNumber></NSSNumber>
+			</Bet>
+			<Bet TYPE="Round">
+				<Runner ID="47690323"><![CDATA[Max Holloway by Pts or Technical Decision]]></Runner>
+				<Price>-110</Price>
+				<Handicap>0</Handicap>
+				<Betlink><![CDATA[http://www.sportsinteraction.com/sportsbook/index.cfm?section=events&eventtypeID=150&gameID=841130]]></Betlink>
+				<NSSNumber></NSSNumber>
+			</Bet>
+		</Event>
+		<Event ID="14318463">
+			<Name><![CDATA[UFC 194 - Yoel Romero v Ronaldo Souza]]></Name>
+			<Date>2015-12-13 03:00:00.0</Date>
+			<Location><![CDATA[Ronaldo Souza]]></Location>
+			<Live>1</Live>
+			<Bet TYPE="">
+				<Runner ID="45722879"><![CDATA[Yoel Romero]]></Runner>
+				<Price>+130</Price>
+				<Handicap>0</Handicap>
+				<Betlink><![CDATA[http://www.sportsinteraction.com/sportsbook/index.cfm?section=events&eventtypeID=150&gameID=841128]]></Betlink>
+				<NSSNumber></NSSNumber>
+			</Bet>
+			<Bet TYPE="">
+				<Runner ID="45722880"><![CDATA[Ronaldo Souza]]></Runner>
+				<Price>-165</Price>
+				<Handicap>0</Handicap>
+				<Betlink><![CDATA[http://www.sportsinteraction.com/sportsbook/index.cfm?section=events&eventtypeID=150&gameID=841128]]></Betlink>
+				<NSSNumber></NSSNumber>
+			</Bet>
+		</Event>
+		<Event ID="14988999">
+			<Name><![CDATA[UFC 194 - Yoel Romero v Ronaldo Souza]]></Name>
+			<Date>2015-12-13 03:00:00.0</Date>
+			<Location><![CDATA[Yoel Romero by Pts or Technical Decision]]></Location>
+			<Live>1</Live>
+			<Bet TYPE="Method of Victory">
+				<Runner ID="47690210"><![CDATA[Yoel Romero by KO,TKO,DQ]]></Runner>
+				<Price>+275</Price>
+				<Handicap>0</Handicap>
+				<Betlink><![CDATA[http://www.sportsinteraction.com/sportsbook/index.cfm?section=events&eventtypeID=150&gameID=841128]]></Betlink>
+				<NSSNumber></NSSNumber>
+			</Bet>
+			<Bet TYPE="Method of Victory">
+				<Runner ID="47690211"><![CDATA[Yoel Romero by Pts or Technical Decision]]></Runner>
+				<Price>+500</Price>
+				<Handicap>0</Handicap>
+				<Betlink><![CDATA[http://www.sportsinteraction.com/sportsbook/index.cfm?section=events&eventtypeID=150&gameID=841128]]></Betlink>
+				<NSSNumber></NSSNumber>
+			</Bet>
+			<Bet TYPE="Method of Victory">
+				<Runner ID="47690212"><![CDATA[Yoel Romero by Submission]]></Runner>
+				<Price>+2000</Price>
+				<Handicap>0</Handicap>
+				<Betlink><![CDATA[http://www.sportsinteraction.com/sportsbook/index.cfm?section=events&eventtypeID=150&gameID=841128]]></Betlink>
+				<NSSNumber></NSSNumber>
+			</Bet>
+			<Bet TYPE="Method of Victory">
+				<Runner ID="47690213"><![CDATA[Draw]]></Runner>
+				<Price>+6600</Price>
+				<Handicap>0</Handicap>
+				<Betlink><![CDATA[http://www.sportsinteraction.com/sportsbook/index.cfm?section=events&eventtypeID=150&gameID=841128]]></Betlink>
+				<NSSNumber></NSSNumber>
+			</Bet>
+			<Bet TYPE="Method of Victory">
+				<Runner ID="47690214"><![CDATA[Ronaldo Souza by KO,TKO,DQ]]></Runner>
+				<Price>+600</Price>
+				<Handicap>0</Handicap>
+				<Betlink><![CDATA[http://www.sportsinteraction.com/sportsbook/index.cfm?section=events&eventtypeID=150&gameID=841128]]></Betlink>
+				<NSSNumber></NSSNumber>
+			</Bet>
+			<Bet TYPE="Method of Victory">
+				<Runner ID="47690215"><![CDATA[Ronaldo Souza by Pts or Technical Decision]]></Runner>
+				<Price>+250</Price>
+				<Handicap>0</Handicap>
+				<Betlink><![CDATA[http://www.sportsinteraction.com/sportsbook/index.cfm?section=events&eventtypeID=150&gameID=841128]]></Betlink>
+				<NSSNumber></NSSNumber>
+			</Bet>
+			<Bet TYPE="Method of Victory">
+				<Runner ID="47690216"><![CDATA[Ronaldo Souza by Submission]]></Runner>
+				<Price>+160</Price>
+				<Handicap>0</Handicap>
+				<Betlink><![CDATA[http://www.sportsinteraction.com/sportsbook/index.cfm?section=events&eventtypeID=150&gameID=841128]]></Betlink>
+				<NSSNumber></NSSNumber>
+			</Bet>
+		</Event>
+		<Event ID="14989000">
+			<Name><![CDATA[UFC 194 - Yoel Romero v Ronaldo Souza]]></Name>
+			<Date>2015-12-13 03:00:00.0</Date>
+			<Location><![CDATA[Yoel Romero To Win in Round 2]]></Location>
+			<Live>1</Live>
+			<Bet TYPE="Round">
+				<Runner ID="47690217"><![CDATA[Yoel Romero To Win in Round 1]]></Runner>
+				<Price>+400</Price>
+				<Handicap>0</Handicap>
+				<Betlink><![CDATA[http://www.sportsinteraction.com/sportsbook/index.cfm?section=events&eventtypeID=150&gameID=841128]]></Betlink>
+				<NSSNumber></NSSNumber>
+			</Bet>
+			<Bet TYPE="Round">
+				<Runner ID="47690218"><![CDATA[Yoel Romero To Win in Round 2]]></Runner>
+				<Price>+750</Price>
+				<Handicap>0</Handicap>
+				<Betlink><![CDATA[http://www.sportsinteraction.com/sportsbook/index.cfm?section=events&eventtypeID=150&gameID=841128]]></Betlink>
+				<NSSNumber></NSSNumber>
+			</Bet>
+			<Bet TYPE="Round">
+				<Runner ID="47690219"><![CDATA[Yoel Romero To Win in Round 3]]></Runner>
+				<Price>+1200</Price>
+				<Handicap>0</Handicap>
+				<Betlink><![CDATA[http://www.sportsinteraction.com/sportsbook/index.cfm?section=events&eventtypeID=150&gameID=841128]]></Betlink>
+				<NSSNumber></NSSNumber>
+			</Bet>
+			<Bet TYPE="Round">
+				<Runner ID="47690220"><![CDATA[Yoel Romero by Pts or Technical Decision]]></Runner>
+				<Price>+500</Price>
+				<Handicap>0</Handicap>
+				<Betlink><![CDATA[http://www.sportsinteraction.com/sportsbook/index.cfm?section=events&eventtypeID=150&gameID=841128]]></Betlink>
+				<NSSNumber></NSSNumber>
+			</Bet>
+			<Bet TYPE="Round">
+				<Runner ID="47690221"><![CDATA[Draw]]></Runner>
+				<Price>+6600</Price>
+				<Handicap>0</Handicap>
+				<Betlink><![CDATA[http://www.sportsinteraction.com/sportsbook/index.cfm?section=events&eventtypeID=150&gameID=841128]]></Betlink>
+				<NSSNumber></NSSNumber>
+			</Bet>
+			<Bet TYPE="Round">
+				<Runner ID="47690222"><![CDATA[Ronaldo Souza To Win in Round 1]]></Runner>
+				<Price>+300</Price>
+				<Handicap>0</Handicap>
+				<Betlink><![CDATA[http://www.sportsinteraction.com/sportsbook/index.cfm?section=events&eventtypeID=150&gameID=841128]]></Betlink>
+				<NSSNumber></NSSNumber>
+			</Bet>
+			<Bet TYPE="Round">
+				<Runner ID="47690223"><![CDATA[Ronaldo Souza To Win in Round 2]]></Runner>
+				<Price>+500</Price>
+				<Handicap>0</Handicap>
+				<Betlink><![CDATA[http://www.sportsinteraction.com/sportsbook/index.cfm?section=events&eventtypeID=150&gameID=841128]]></Betlink>
+				<NSSNumber></NSSNumber>
+			</Bet>
+			<Bet TYPE="Round">
+				<Runner ID="47690224"><![CDATA[Ronaldo Souza To Win in Round 3]]></Runner>
+				<Price>+1000</Price>
+				<Handicap>0</Handicap>
+				<Betlink><![CDATA[http://www.sportsinteraction.com/sportsbook/index.cfm?section=events&eventtypeID=150&gameID=841128]]></Betlink>
+				<NSSNumber></NSSNumber>
+			</Bet>
+			<Bet TYPE="Round">
+				<Runner ID="47690225"><![CDATA[Ronaldo Souza by Pts or Technical Decision]]></Runner>
+				<Price>+250</Price>
+				<Handicap>0</Handicap>
+				<Betlink><![CDATA[http://www.sportsinteraction.com/sportsbook/index.cfm?section=events&eventtypeID=150&gameID=841128]]></Betlink>
+				<NSSNumber></NSSNumber>
+			</Bet>
+		</Event>
+		<Event ID="14318462">
+			<Name><![CDATA[UFC 194 - Luke Rockhold v Chris Weidman]]></Name>
+			<Date>2015-12-13 04:00:00.0</Date>
+			<Location><![CDATA[Chris Weidman]]></Location>
+			<Live>1</Live>
+			<Bet TYPE="">
+				<Runner ID="45722877"><![CDATA[Luke Rockhold]]></Runner>
+				<Price>+140</Price>
+				<Handicap>0</Handicap>
+				<Betlink><![CDATA[http://www.sportsinteraction.com/sportsbook/index.cfm?section=events&eventtypeID=150&gameID=841127]]></Betlink>
+				<NSSNumber></NSSNumber>
+			</Bet>
+			<Bet TYPE="">
+				<Runner ID="45722878"><![CDATA[Chris Weidman]]></Runner>
+				<Price>-180</Price>
+				<Handicap>0</Handicap>
+				<Betlink><![CDATA[http://www.sportsinteraction.com/sportsbook/index.cfm?section=events&eventtypeID=150&gameID=841127]]></Betlink>
+				<NSSNumber></NSSNumber>
+			</Bet>
+		</Event>
+		<Event ID="14988940">
+			<Name><![CDATA[UFC 194 - Luke Rockhold v Chris Weidman]]></Name>
+			<Date>2015-12-13 04:00:00.0</Date>
+			<Location><![CDATA[Luke Rockhold by Pts or Technical Decision]]></Location>
+			<Live>1</Live>
+			<Bet TYPE="Method of Victory">
+				<Runner ID="47690034"><![CDATA[Luke Rockhold by KO,TKO,DQ]]></Runner>
+				<Price>+500</Price>
+				<Handicap>0</Handicap>
+				<Betlink><![CDATA[http://www.sportsinteraction.com/sportsbook/index.cfm?section=events&eventtypeID=150&gameID=841127]]></Betlink>
+				<NSSNumber></NSSNumber>
+			</Bet>
+			<Bet TYPE="Method of Victory">
+				<Runner ID="47690035"><![CDATA[Luke Rockhold by Pts or Technical Decision]]></Runner>
+				<Price>+450</Price>
+				<Handicap>0</Handicap>
+				<Betlink><![CDATA[http://www.sportsinteraction.com/sportsbook/index.cfm?section=events&eventtypeID=150&gameID=841127]]></Betlink>
+				<NSSNumber></NSSNumber>
+			</Bet>
+			<Bet TYPE="Method of Victory">
+				<Runner ID="47690036"><![CDATA[Luke Rockhold by Submission]]></Runner>
+				<Price>+500</Price>
+				<Handicap>0</Handicap>
+				<Betlink><![CDATA[http://www.sportsinteraction.com/sportsbook/index.cfm?section=events&eventtypeID=150&gameID=841127]]></Betlink>
+				<NSSNumber></NSSNumber>
+			</Bet>
+			<Bet TYPE="Method of Victory">
+				<Runner ID="47690037"><![CDATA[Draw]]></Runner>
+				<Price>+6600</Price>
+				<Handicap>0</Handicap>
+				<Betlink><![CDATA[http://www.sportsinteraction.com/sportsbook/index.cfm?section=events&eventtypeID=150&gameID=841127]]></Betlink>
+				<NSSNumber></NSSNumber>
+			</Bet>
+			<Bet TYPE="Method of Victory">
+				<Runner ID="47690038"><![CDATA[Chris Weidman by KO,TKO,DQ]]></Runner>
+				<Price>+250</Price>
+				<Handicap>0</Handicap>
+				<Betlink><![CDATA[http://www.sportsinteraction.com/sportsbook/index.cfm?section=events&eventtypeID=150&gameID=841127]]></Betlink>
+				<NSSNumber></NSSNumber>
+			</Bet>
+			<Bet TYPE="Method of Victory">
+				<Runner ID="47690039"><![CDATA[Chris Weidman by Pts or Technical Decision]]></Runner>
+				<Price>+250</Price>
+				<Handicap>0</Handicap>
+				<Betlink><![CDATA[http://www.sportsinteraction.com/sportsbook/index.cfm?section=events&eventtypeID=150&gameID=841127]]></Betlink>
+				<NSSNumber></NSSNumber>
+			</Bet>
+			<Bet TYPE="Method of Victory">
+				<Runner ID="47690040"><![CDATA[Chris Weidman by Submission]]></Runner>
+				<Price>+600</Price>
+				<Handicap>0</Handicap>
+				<Betlink><![CDATA[http://www.sportsinteraction.com/sportsbook/index.cfm?section=events&eventtypeID=150&gameID=841127]]></Betlink>
+				<NSSNumber></NSSNumber>
+			</Bet>
+		</Event>
+		<Event ID="14988947">
+			<Name><![CDATA[UFC 194 - Luke Rockhold v Chris Weidman]]></Name>
+			<Date>2015-12-13 04:00:00.0</Date>
+			<Location><![CDATA[Luke Rockhold To Win in Round 2]]></Location>
+			<Live>1</Live>
+			<Bet TYPE="Round">
+				<Runner ID="47690055"><![CDATA[Luke Rockhold To Win in Round 1]]></Runner>
+				<Price>+600</Price>
+				<Handicap>0</Handicap>
+				<Betlink><![CDATA[http://www.sportsinteraction.com/sportsbook/index.cfm?section=events&eventtypeID=150&gameID=841127]]></Betlink>
+				<NSSNumber></NSSNumber>
+			</Bet>
+			<Bet TYPE="Round">
+				<Runner ID="47690056"><![CDATA[Luke Rockhold To Win in Round 2]]></Runner>
+				<Price>+1000</Price>
+				<Handicap>0</Handicap>
+				<Betlink><![CDATA[http://www.sportsinteraction.com/sportsbook/index.cfm?section=events&eventtypeID=150&gameID=841127]]></Betlink>
+				<NSSNumber></NSSNumber>
+			</Bet>
+			<Bet TYPE="Round">
+				<Runner ID="47690057"><![CDATA[Luke Rockhold To Win in Round 3]]></Runner>
+				<Price>+1400</Price>
+				<Handicap>0</Handicap>
+				<Betlink><![CDATA[http://www.sportsinteraction.com/sportsbook/index.cfm?section=events&eventtypeID=150&gameID=841127]]></Betlink>
+				<NSSNumber></NSSNumber>
+			</Bet>
+			<Bet TYPE="Round">
+				<Runner ID="47690058"><![CDATA[Luke Rockhold To Win in Round 4]]></Runner>
+				<Price>+2000</Price>
+				<Handicap>0</Handicap>
+				<Betlink><![CDATA[http://www.sportsinteraction.com/sportsbook/index.cfm?section=events&eventtypeID=150&gameID=841127]]></Betlink>
+				<NSSNumber></NSSNumber>
+			</Bet>
+			<Bet TYPE="Round">
+				<Runner ID="47690059"><![CDATA[Luke Rockhold To Win in Round 5]]></Runner>
+				<Price>+2500</Price>
+				<Handicap>0</Handicap>
+				<Betlink><![CDATA[http://www.sportsinteraction.com/sportsbook/index.cfm?section=events&eventtypeID=150&gameID=841127]]></Betlink>
+				<NSSNumber></NSSNumber>
+			</Bet>
+			<Bet TYPE="Round">
+				<Runner ID="47690060"><![CDATA[Luke Rockhold by Pts or Technical Decision]]></Runner>
+				<Price>+450</Price>
+				<Handicap>0</Handicap>
+				<Betlink><![CDATA[http://www.sportsinteraction.com/sportsbook/index.cfm?section=events&eventtypeID=150&gameID=841127]]></Betlink>
+				<NSSNumber></NSSNumber>
+			</Bet>
+			<Bet TYPE="Round">
+				<Runner ID="47690061"><![CDATA[Draw]]></Runner>
+				<Price>+6600</Price>
+				<Handicap>0</Handicap>
+				<Betlink><![CDATA[http://www.sportsinteraction.com/sportsbook/index.cfm?section=events&eventtypeID=150&gameID=841127]]></Betlink>
+				<NSSNumber></NSSNumber>
+			</Bet>
+			<Bet TYPE="Round">
+				<Runner ID="47690062"><![CDATA[Chris Weidman To Win in Round 1]]></Runner>
+				<Price>+500</Price>
+				<Handicap>0</Handicap>
+				<Betlink><![CDATA[http://www.sportsinteraction.com/sportsbook/index.cfm?section=events&eventtypeID=150&gameID=841127]]></Betlink>
+				<NSSNumber></NSSNumber>
+			</Bet>
+			<Bet TYPE="Round">
+				<Runner ID="47690063"><![CDATA[Chris Weidman To Win in Round 2]]></Runner>
+				<Price>+650</Price>
+				<Handicap>0</Handicap>
+				<Betlink><![CDATA[http://www.sportsinteraction.com/sportsbook/index.cfm?section=events&eventtypeID=150&gameID=841127]]></Betlink>
+				<NSSNumber></NSSNumber>
+			</Bet>
+			<Bet TYPE="Round">
+				<Runner ID="47690064"><![CDATA[Chris Weidman To Win in Round 3]]></Runner>
+				<Price>+1000</Price>
+				<Handicap>0</Handicap>
+				<Betlink><![CDATA[http://www.sportsinteraction.com/sportsbook/index.cfm?section=events&eventtypeID=150&gameID=841127]]></Betlink>
+				<NSSNumber></NSSNumber>
+			</Bet>
+			<Bet TYPE="Round">
+				<Runner ID="47690065"><![CDATA[Chris Weidman To Win in Round 4]]></Runner>
+				<Price>+1600</Price>
+				<Handicap>0</Handicap>
+				<Betlink><![CDATA[http://www.sportsinteraction.com/sportsbook/index.cfm?section=events&eventtypeID=150&gameID=841127]]></Betlink>
+				<NSSNumber></NSSNumber>
+			</Bet>
+			<Bet TYPE="Round">
+				<Runner ID="47690066"><![CDATA[Chris Weidman To Win in Round 5]]></Runner>
+				<Price>+2200</Price>
+				<Handicap>0</Handicap>
+				<Betlink><![CDATA[http://www.sportsinteraction.com/sportsbook/index.cfm?section=events&eventtypeID=150&gameID=841127]]></Betlink>
+				<NSSNumber></NSSNumber>
+			</Bet>
+			<Bet TYPE="Round">
+				<Runner ID="47690067"><![CDATA[Chris Weidman by Pts or Technical Decision]]></Runner>
+				<Price>+250</Price>
+				<Handicap>0</Handicap>
+				<Betlink><![CDATA[http://www.sportsinteraction.com/sportsbook/index.cfm?section=events&eventtypeID=150&gameID=841127]]></Betlink>
+				<NSSNumber></NSSNumber>
+			</Bet>
+		</Event>
+		<Event ID="15130605">
+			<Name><![CDATA[McGregor v Aldo - How Long Will 1st Round Last?]]></Name>
+			<Date>2015-12-13 05:00:00.0</Date>
+			<Location><![CDATA[]]></Location>
+			<Live>1</Live>
+			<Bet TYPE="Pinata Pick">
+				<Runner ID="48101880"><![CDATA[McGregor v Aldo - How Long Will Round 1 Last?]]></Runner>
+				<Price>+25000</Price>
+				<Handicap>0</Handicap>
+				<Betlink><![CDATA[http://www.sportsinteraction.com/sportsbook/index.cfm?section=events&eventtypeID=150&gameID=862613]]></Betlink>
+				<NSSNumber></NSSNumber>
+			</Bet>
+		</Event>
+		<Event ID="12745727">
+			<Name><![CDATA[UFC 194 - Conor McGregor v Jose Aldo]]></Name>
+			<Date>2015-12-13 05:00:00.0</Date>
+			<Location><![CDATA[Jose Aldo]]></Location>
+			<Live>1</Live>
+			<Bet TYPE="">
+				<Runner ID="40914549"><![CDATA[Conor McGregor]]></Runner>
+				<Price>-140</Price>
+				<Handicap>0</Handicap>
+				<Betlink><![CDATA[http://www.sportsinteraction.com/sportsbook/index.cfm?section=events&eventtypeID=150&gameID=798454]]></Betlink>
+				<NSSNumber></NSSNumber>
+			</Bet>
+			<Bet TYPE="">
+				<Runner ID="40914550"><![CDATA[Jose Aldo]]></Runner>
+				<Price>+110</Price>
+				<Handicap>0</Handicap>
+				<Betlink><![CDATA[http://www.sportsinteraction.com/sportsbook/index.cfm?section=events&eventtypeID=150&gameID=798454]]></Betlink>
+				<NSSNumber></NSSNumber>
+			</Bet>
+		</Event>
+		<Event ID="12745728">
+			<Name><![CDATA[UFC 194 - Conor McGregor v Jose Aldo]]></Name>
+			<Date>2015-12-13 05:00:00.0</Date>
+			<Location><![CDATA[Conor McGregor _TO_WIN_IN_ROUND_ 1]]></Location>
+			<Live>1</Live>
+			<Bet TYPE="Round">
+				<Runner ID="40914551"><![CDATA[Conor McGregor _TO_WIN_IN_ROUND_ 1]]></Runner>
+				<Price>+300</Price>
+				<Handicap>0</Handicap>
+				<Betlink><![CDATA[http://www.sportsinteraction.com/sportsbook/index.cfm?section=events&eventtypeID=150&gameID=798454]]></Betlink>
+				<NSSNumber></NSSNumber>
+			</Bet>
+			<Bet TYPE="Round">
+				<Runner ID="40914552"><![CDATA[Conor McGregor _TO_WIN_IN_ROUND_ 2]]></Runner>
+				<Price>+500</Price>
+				<Handicap>0</Handicap>
+				<Betlink><![CDATA[http://www.sportsinteraction.com/sportsbook/index.cfm?section=events&eventtypeID=150&gameID=798454]]></Betlink>
+				<NSSNumber></NSSNumber>
+			</Bet>
+			<Bet TYPE="Round">
+				<Runner ID="40914553"><![CDATA[Conor McGregor _TO_WIN_IN_ROUND_ 3]]></Runner>
+				<Price>+750</Price>
+				<Handicap>0</Handicap>
+				<Betlink><![CDATA[http://www.sportsinteraction.com/sportsbook/index.cfm?section=events&eventtypeID=150&gameID=798454]]></Betlink>
+				<NSSNumber></NSSNumber>
+			</Bet>
+			<Bet TYPE="Round">
+				<Runner ID="40914554"><![CDATA[Conor McGregor _TO_WIN_IN_ROUND_ 4]]></Runner>
+				<Price>+1000</Price>
+				<Handicap>0</Handicap>
+				<Betlink><![CDATA[http://www.sportsinteraction.com/sportsbook/index.cfm?section=events&eventtypeID=150&gameID=798454]]></Betlink>
+				<NSSNumber></NSSNumber>
+			</Bet>
+			<Bet TYPE="Round">
+				<Runner ID="40914555"><![CDATA[Conor McGregor _TO_WIN_IN_ROUND_ 5]]></Runner>
+				<Price>+1600</Price>
+				<Handicap>0</Handicap>
+				<Betlink><![CDATA[http://www.sportsinteraction.com/sportsbook/index.cfm?section=events&eventtypeID=150&gameID=798454]]></Betlink>
+				<NSSNumber></NSSNumber>
+			</Bet>
+			<Bet TYPE="Round">
+				<Runner ID="40914556"><![CDATA[Conor McGregor _BY_PTS_OR_TECH_]]></Runner>
+				<Price>+650</Price>
+				<Handicap>0</Handicap>
+				<Betlink><![CDATA[http://www.sportsinteraction.com/sportsbook/index.cfm?section=events&eventtypeID=150&gameID=798454]]></Betlink>
+				<NSSNumber></NSSNumber>
+			</Bet>
+			<Bet TYPE="Round">
+				<Runner ID="40914557"><![CDATA[_DRWTXT_]]></Runner>
+				<Price>+6600</Price>
+				<Handicap>0</Handicap>
+				<Betlink><![CDATA[http://www.sportsinteraction.com/sportsbook/index.cfm?section=events&eventtypeID=150&gameID=798454]]></Betlink>
+				<NSSNumber></NSSNumber>
+			</Bet>
+			<Bet TYPE="Round">
+				<Runner ID="40914558"><![CDATA[Jose Aldo _TO_WIN_IN_ROUND_ 1]]></Runner>
+				<Price>+800</Price>
+				<Handicap>0</Handicap>
+				<Betlink><![CDATA[http://www.sportsinteraction.com/sportsbook/index.cfm?section=events&eventtypeID=150&gameID=798454]]></Betlink>
+				<NSSNumber></NSSNumber>
+			</Bet>
+			<Bet TYPE="Round">
+				<Runner ID="40914559"><![CDATA[Jose Aldo _TO_WIN_IN_ROUND_ 2]]></Runner>
+				<Price>+1000</Price>
+				<Handicap>0</Handicap>
+				<Betlink><![CDATA[http://www.sportsinteraction.com/sportsbook/index.cfm?section=events&eventtypeID=150&gameID=798454]]></Betlink>
+				<NSSNumber></NSSNumber>
+			</Bet>
+			<Bet TYPE="Round">
+				<Runner ID="40914560"><![CDATA[Jose Aldo _TO_WIN_IN_ROUND_ 3]]></Runner>
+				<Price>+1600</Price>
+				<Handicap>0</Handicap>
+				<Betlink><![CDATA[http://www.sportsinteraction.com/sportsbook/index.cfm?section=events&eventtypeID=150&gameID=798454]]></Betlink>
+				<NSSNumber></NSSNumber>
+			</Bet>
+			<Bet TYPE="Round">
+				<Runner ID="40914561"><![CDATA[Jose Aldo _TO_WIN_IN_ROUND_ 4]]></Runner>
+				<Price>+2000</Price>
+				<Handicap>0</Handicap>
+				<Betlink><![CDATA[http://www.sportsinteraction.com/sportsbook/index.cfm?section=events&eventtypeID=150&gameID=798454]]></Betlink>
+				<NSSNumber></NSSNumber>
+			</Bet>
+			<Bet TYPE="Round">
+				<Runner ID="40914562"><![CDATA[Jose Aldo _TO_WIN_IN_ROUND_ 5]]></Runner>
+				<Price>+2800</Price>
+				<Handicap>0</Handicap>
+				<Betlink><![CDATA[http://www.sportsinteraction.com/sportsbook/index.cfm?section=events&eventtypeID=150&gameID=798454]]></Betlink>
+				<NSSNumber></NSSNumber>
+			</Bet>
+			<Bet TYPE="Round">
+				<Runner ID="40914563"><![CDATA[Jose Aldo _BY_PTS_OR_TECH_]]></Runner>
+				<Price>+400</Price>
+				<Handicap>0</Handicap>
+				<Betlink><![CDATA[http://www.sportsinteraction.com/sportsbook/index.cfm?section=events&eventtypeID=150&gameID=798454]]></Betlink>
+				<NSSNumber></NSSNumber>
+			</Bet>
+		</Event>
+		<Event ID="12745729">
+			<Name><![CDATA[UFC 194 - Conor McGregor v Jose Aldo]]></Name>
+			<Date>2015-12-13 05:00:00.0</Date>
+			<Location><![CDATA[Over]]></Location>
+			<Live>1</Live>
+			<Bet TYPE="Total Rounds">
+				<Runner ID="40914564"><![CDATA[Over]]></Runner>
+				<Price>-120</Price>
+				<Handicap>2.5</Handicap>
+				<Betlink><![CDATA[http://www.sportsinteraction.com/sportsbook/index.cfm?section=events&eventtypeID=150&gameID=798454]]></Betlink>
+				<NSSNumber></NSSNumber>
+			</Bet>
+			<Bet TYPE="Total Rounds">
+				<Runner ID="40914565"><![CDATA[Under]]></Runner>
+				<Price>-110</Price>
+				<Handicap>2.5</Handicap>
+				<Betlink><![CDATA[http://www.sportsinteraction.com/sportsbook/index.cfm?section=events&eventtypeID=150&gameID=798454]]></Betlink>
+				<NSSNumber></NSSNumber>
+			</Bet>
+		</Event>
+		<Event ID="12745730">
+			<Name><![CDATA[UFC 194 - Conor McGregor v Jose Aldo]]></Name>
+			<Date>2015-12-13 05:00:00.0</Date>
+			<Location><![CDATA[Conor McGregor _TO_WIN_KO_DQ_SUB_]]></Location>
+			<Live>1</Live>
+			<Bet TYPE="Method of Victory">
+				<Runner ID="40914566"><![CDATA[Conor McGregor _TO_WIN_KO_DQ_SUB_]]></Runner>
+				<Price>-110</Price>
+				<Handicap>0</Handicap>
+				<Betlink><![CDATA[http://www.sportsinteraction.com/sportsbook/index.cfm?section=events&eventtypeID=150&gameID=798454]]></Betlink>
+				<NSSNumber></NSSNumber>
+			</Bet>
+			<Bet TYPE="Method of Victory">
+				<Runner ID="40914567"><![CDATA[Conor McGregor _BY_PTS_OR_TECH_]]></Runner>
+				<Price>+650</Price>
+				<Handicap>0</Handicap>
+				<Betlink><![CDATA[http://www.sportsinteraction.com/sportsbook/index.cfm?section=events&eventtypeID=150&gameID=798454]]></Betlink>
+				<NSSNumber></NSSNumber>
+			</Bet>
+			<Bet TYPE="Method of Victory">
+				<Runner ID="40914568"><![CDATA[Conor McGregor _BY_SUBMISSION_]]></Runner>
+				<Price>+2000</Price>
+				<Handicap>0</Handicap>
+				<Betlink><![CDATA[http://www.sportsinteraction.com/sportsbook/index.cfm?section=events&eventtypeID=150&gameID=798454]]></Betlink>
+				<NSSNumber></NSSNumber>
+			</Bet>
+			<Bet TYPE="Method of Victory">
+				<Runner ID="40914569"><![CDATA[_DRWTXT_]]></Runner>
+				<Price>+6600</Price>
+				<Handicap>0</Handicap>
+				<Betlink><![CDATA[http://www.sportsinteraction.com/sportsbook/index.cfm?section=events&eventtypeID=150&gameID=798454]]></Betlink>
+				<NSSNumber></NSSNumber>
+			</Bet>
+			<Bet TYPE="Method of Victory">
+				<Runner ID="40914570"><![CDATA[Jose Aldo _TO_WIN_KO_DQ_SUB_]]></Runner>
+				<Price>+500</Price>
+				<Handicap>0</Handicap>
+				<Betlink><![CDATA[http://www.sportsinteraction.com/sportsbook/index.cfm?section=events&eventtypeID=150&gameID=798454]]></Betlink>
+				<NSSNumber></NSSNumber>
+			</Bet>
+			<Bet TYPE="Method of Victory">
+				<Runner ID="40914571"><![CDATA[Jose Aldo _BY_PTS_OR_TECH_]]></Runner>
+				<Price>+400</Price>
+				<Handicap>0</Handicap>
+				<Betlink><![CDATA[http://www.sportsinteraction.com/sportsbook/index.cfm?section=events&eventtypeID=150&gameID=798454]]></Betlink>
+				<NSSNumber></NSSNumber>
+			</Bet>
+			<Bet TYPE="Method of Victory">
+				<Runner ID="40914572"><![CDATA[Jose Aldo _BY_SUBMISSION_]]></Runner>
+				<Price>+500</Price>
+				<Handicap>0</Handicap>
+				<Betlink><![CDATA[http://www.sportsinteraction.com/sportsbook/index.cfm?section=events&eventtypeID=150&gameID=798454]]></Betlink>
+				<NSSNumber></NSSNumber>
+			</Bet>
+		</Event>
+		<Event ID="15152629">
+			<Name><![CDATA[UFC 194 - Conor McGregor v Jose Aldo]]></Name>
+			<Date>2015-12-13 05:00:00.0</Date>
+			<Location><![CDATA[Jose Aldo]]></Location>
+			<Live>1</Live>
+			<Bet TYPE="Specials">
+				<Runner ID="48165269"><![CDATA[Conor McGregor]]></Runner>
+				<Price>-125</Price>
+				<Handicap>0</Handicap>
+				<Betlink><![CDATA[http://www.sportsinteraction.com/sportsbook/index.cfm?section=events&eventtypeID=150&gameID=798454]]></Betlink>
+				<NSSNumber></NSSNumber>
+			</Bet>
+			<Bet TYPE="Specials">
+				<Runner ID="48165270"><![CDATA[Jose Aldo]]></Runner>
+				<Price>+125</Price>
+				<Handicap>0</Handicap>
+				<Betlink><![CDATA[http://www.sportsinteraction.com/sportsbook/index.cfm?section=events&eventtypeID=150&gameID=798454]]></Betlink>
+				<NSSNumber></NSSNumber>
+			</Bet>
+		</Event>
+		<Event ID="15152721">
+			<Name><![CDATA[UFC 194 - Conor McGregor v Jose Aldo]]></Name>
+			<Date>2015-12-13 05:00:00.0</Date>
+			<Location><![CDATA[No]]></Location>
+			<Live>1</Live>
+			<Bet TYPE="Specials">
+				<Runner ID="48165517"><![CDATA[Aldo to announce retirement]]></Runner>
+				<Price>+250</Price>
+				<Handicap>0</Handicap>
+				<Betlink><![CDATA[http://www.sportsinteraction.com/sportsbook/index.cfm?section=events&eventtypeID=150&gameID=798454]]></Betlink>
+				<NSSNumber></NSSNumber>
+			</Bet>
+		</Event>
+		<Event ID="15152727">
+			<Name><![CDATA[UFC 194 - Conor McGregor v Jose Aldo]]></Name>
+			<Date>2015-12-13 05:00:00.0</Date>
+			<Location><![CDATA[No]]></Location>
+			<Live>1</Live>
+			<Bet TYPE="Specials">
+				<Runner ID="48165529"><![CDATA[Aldo pulls out of fight]]></Runner>
+				<Price>+600</Price>
+				<Handicap>0</Handicap>
+				<Betlink><![CDATA[http://www.sportsinteraction.com/sportsbook/index.cfm?section=events&eventtypeID=150&gameID=798454]]></Betlink>
+				<NSSNumber></NSSNumber>
+			</Bet>
+		</Event>
+		<Event ID="14318486">
+			<Name><![CDATA[UFC on FOX 17 - Alistair Overeem v Junior Dos Santos]]></Name>
+			<Date>2015-12-20 01:00:00.0</Date>
+			<Location><![CDATA[Alistair Overeem]]></Location>
+			<Live>1</Live>
+			<Bet TYPE="">
+				<Runner ID="45722928"><![CDATA[Alistair Overeem]]></Runner>
+				<Price>+250</Price>
+				<Handicap>0</Handicap>
+				<Betlink><![CDATA[http://www.sportsinteraction.com/sportsbook/index.cfm?section=events&eventtypeID=150&gameID=841134]]></Betlink>
+				<NSSNumber></NSSNumber>
+			</Bet>
+			<Bet TYPE="">
+				<Runner ID="45722929"><![CDATA[Junior Dos Santos]]></Runner>
+				<Price>-360</Price>
+				<Handicap>0</Handicap>
+				<Betlink><![CDATA[http://www.sportsinteraction.com/sportsbook/index.cfm?section=events&eventtypeID=150&gameID=841134]]></Betlink>
+				<NSSNumber></NSSNumber>
+			</Bet>
+		</Event>
+		<Event ID="14989215">
+			<Name><![CDATA[UFC on FOX 17 - Alistair Overeem v Junior Dos Santos]]></Name>
+			<Date>2015-12-20 01:00:00.0</Date>
+			<Location><![CDATA[Alistair Overeem Pts or Technical Decision]]></Location>
+			<Live>1</Live>
+			<Bet TYPE="Method of Victory">
+				<Runner ID="47690868"><![CDATA[Alistair Overeem by KO,TKO,DQ]]></Runner>
+				<Price>+500</Price>
+				<Handicap>0</Handicap>
+				<Betlink><![CDATA[http://www.sportsinteraction.com/sportsbook/index.cfm?section=events&eventtypeID=150&gameID=841134]]></Betlink>
+				<NSSNumber></NSSNumber>
+			</Bet>
+			<Bet TYPE="Method of Victory">
+				<Runner ID="47690869"><![CDATA[Alistair Overeem Pts or Technical Decision]]></Runner>
+				<Price>+800</Price>
+				<Handicap>0</Handicap>
+				<Betlink><![CDATA[http://www.sportsinteraction.com/sportsbook/index.cfm?section=events&eventtypeID=150&gameID=841134]]></Betlink>
+				<NSSNumber></NSSNumber>
+			</Bet>
+			<Bet TYPE="Method of Victory">
+				<Runner ID="47690870"><![CDATA[Alistair Overeem by Submission]]></Runner>
+				<Price>+1000</Price>
+				<Handicap>0</Handicap>
+				<Betlink><![CDATA[http://www.sportsinteraction.com/sportsbook/index.cfm?section=events&eventtypeID=150&gameID=841134]]></Betlink>
+				<NSSNumber></NSSNumber>
+			</Bet>
+			<Bet TYPE="Method of Victory">
+				<Runner ID="47690871"><![CDATA[Draw]]></Runner>
+				<Price>+6600</Price>
+				<Handicap>0</Handicap>
+				<Betlink><![CDATA[http://www.sportsinteraction.com/sportsbook/index.cfm?section=events&eventtypeID=150&gameID=841134]]></Betlink>
+				<NSSNumber></NSSNumber>
+			</Bet>
+			<Bet TYPE="Method of Victory">
+				<Runner ID="47690872"><![CDATA[Junior Dos Santos by KO,TKO,DQ]]></Runner>
+				<Price>-230</Price>
+				<Handicap>0</Handicap>
+				<Betlink><![CDATA[http://www.sportsinteraction.com/sportsbook/index.cfm?section=events&eventtypeID=150&gameID=841134]]></Betlink>
+				<NSSNumber></NSSNumber>
+			</Bet>
+			<Bet TYPE="Method of Victory">
+				<Runner ID="47690873"><![CDATA[Junior Dos Santos Pts or Technical Decision]]></Runner>
+				<Price>+550</Price>
+				<Handicap>0</Handicap>
+				<Betlink><![CDATA[http://www.sportsinteraction.com/sportsbook/index.cfm?section=events&eventtypeID=150&gameID=841134]]></Betlink>
+				<NSSNumber></NSSNumber>
+			</Bet>
+			<Bet TYPE="Method of Victory">
+				<Runner ID="47690874"><![CDATA[Junior Dos Santos by Submission]]></Runner>
+				<Price>+1200</Price>
+				<Handicap>0</Handicap>
+				<Betlink><![CDATA[http://www.sportsinteraction.com/sportsbook/index.cfm?section=events&eventtypeID=150&gameID=841134]]></Betlink>
+				<NSSNumber></NSSNumber>
+			</Bet>
+		</Event>
+		<Event ID="14989227">
+			<Name><![CDATA[UFC on FOX 17 - Alistair Overeem v Junior Dos Santos]]></Name>
+			<Date>2015-12-20 01:00:00.0</Date>
+			<Location><![CDATA[Alistair Overeem To Win in Round 2]]></Location>
+			<Live>1</Live>
+			<Bet TYPE="Round">
+				<Runner ID="47690914"><![CDATA[Alistair Overeem To Win in Round 1]]></Runner>
+				<Price>+600</Price>
+				<Handicap>0</Handicap>
+				<Betlink><![CDATA[http://www.sportsinteraction.com/sportsbook/index.cfm?section=events&eventtypeID=150&gameID=841134]]></Betlink>
+				<NSSNumber></NSSNumber>
+			</Bet>
+			<Bet TYPE="Round">
+				<Runner ID="47690915"><![CDATA[Alistair Overeem To Win in Round 2]]></Runner>
+				<Price>+1000</Price>
+				<Handicap>0</Handicap>
+				<Betlink><![CDATA[http://www.sportsinteraction.com/sportsbook/index.cfm?section=events&eventtypeID=150&gameID=841134]]></Betlink>
+				<NSSNumber></NSSNumber>
+			</Bet>
+			<Bet TYPE="Round">
+				<Runner ID="47690916"><![CDATA[Alistair Overeem To Win in Round 3]]></Runner>
+				<Price>+1400</Price>
+				<Handicap>0</Handicap>
+				<Betlink><![CDATA[http://www.sportsinteraction.com/sportsbook/index.cfm?section=events&eventtypeID=150&gameID=841134]]></Betlink>
+				<NSSNumber></NSSNumber>
+			</Bet>
+			<Bet TYPE="Round">
+				<Runner ID="47690917"><![CDATA[Alistair Overeem Pts or Technical Decision]]></Runner>
+				<Price>+800</Price>
+				<Handicap>0</Handicap>
+				<Betlink><![CDATA[http://www.sportsinteraction.com/sportsbook/index.cfm?section=events&eventtypeID=150&gameID=841134]]></Betlink>
+				<NSSNumber></NSSNumber>
+			</Bet>
+			<Bet TYPE="Round">
+				<Runner ID="47690918"><![CDATA[Draw]]></Runner>
+				<Price>+6600</Price>
+				<Handicap>0</Handicap>
+				<Betlink><![CDATA[http://www.sportsinteraction.com/sportsbook/index.cfm?section=events&eventtypeID=150&gameID=841134]]></Betlink>
+				<NSSNumber></NSSNumber>
+			</Bet>
+			<Bet TYPE="Round">
+				<Runner ID="47690919"><![CDATA[Junior Dos Santos To Win in Round 1]]></Runner>
+				<Price>-110</Price>
+				<Handicap>0</Handicap>
+				<Betlink><![CDATA[http://www.sportsinteraction.com/sportsbook/index.cfm?section=events&eventtypeID=150&gameID=841134]]></Betlink>
+				<NSSNumber></NSSNumber>
+			</Bet>
+			<Bet TYPE="Round">
+				<Runner ID="47690920"><![CDATA[Junior Dos Santos To Win in Round 2]]></Runner>
+				<Price>+400</Price>
+				<Handicap>0</Handicap>
+				<Betlink><![CDATA[http://www.sportsinteraction.com/sportsbook/index.cfm?section=events&eventtypeID=150&gameID=841134]]></Betlink>
+				<NSSNumber></NSSNumber>
+			</Bet>
+			<Bet TYPE="Round">
+				<Runner ID="47690921"><![CDATA[Junior Dos Santos To Win in Round 3]]></Runner>
+				<Price>+1000</Price>
+				<Handicap>0</Handicap>
+				<Betlink><![CDATA[http://www.sportsinteraction.com/sportsbook/index.cfm?section=events&eventtypeID=150&gameID=841134]]></Betlink>
+				<NSSNumber></NSSNumber>
+			</Bet>
+			<Bet TYPE="Round">
+				<Runner ID="47690922"><![CDATA[Junior Dos Santos Pts or Technical Decision]]></Runner>
+				<Price>+550</Price>
+				<Handicap>0</Handicap>
+				<Betlink><![CDATA[http://www.sportsinteraction.com/sportsbook/index.cfm?section=events&eventtypeID=150&gameID=841134]]></Betlink>
+				<NSSNumber></NSSNumber>
+			</Bet>
+		</Event>
+		<Event ID="14318482">
+			<Name><![CDATA[UFC on FOX 17 - Donald Cerrone v Rafael Dos Anjos]]></Name>
+			<Date>2015-12-20 01:00:00.0</Date>
+			<Location><![CDATA[Rafael Dos Anjos]]></Location>
+			<Live>1</Live>
+			<Bet TYPE="">
+				<Runner ID="45722917"><![CDATA[Donald Cerrone]]></Runner>
+				<Price>+200</Price>
+				<Handicap>0</Handicap>
+				<Betlink><![CDATA[http://www.sportsinteraction.com/sportsbook/index.cfm?section=events&eventtypeID=150&gameID=841133]]></Betlink>
+				<NSSNumber></NSSNumber>
+			</Bet>
+			<Bet TYPE="">
+				<Runner ID="45722918"><![CDATA[Rafael Dos Anjos]]></Runner>
+				<Price>-275</Price>
+				<Handicap>0</Handicap>
+				<Betlink><![CDATA[http://www.sportsinteraction.com/sportsbook/index.cfm?section=events&eventtypeID=150&gameID=841133]]></Betlink>
+				<NSSNumber></NSSNumber>
+			</Bet>
+		</Event>
+		<Event ID="14989184">
+			<Name><![CDATA[UFC on FOX 17 - Donald Cerrone v Rafael Dos Anjos]]></Name>
+			<Date>2015-12-20 01:00:00.0</Date>
+			<Location><![CDATA[Donald Cerrone by Pts or Technical Decision]]></Location>
+			<Live>1</Live>
+			<Bet TYPE="Method of Victory">
+				<Runner ID="47690782"><![CDATA[Donald Cerrone by KO,TKO,DQ]]></Runner>
+				<Price>+500</Price>
+				<Handicap>0</Handicap>
+				<Betlink><![CDATA[http://www.sportsinteraction.com/sportsbook/index.cfm?section=events&eventtypeID=150&gameID=841133]]></Betlink>
+				<NSSNumber></NSSNumber>
+			</Bet>
+			<Bet TYPE="Method of Victory">
+				<Runner ID="47690783"><![CDATA[Donald Cerrone by Pts or Technical Decision]]></Runner>
+				<Price>+600</Price>
+				<Handicap>0</Handicap>
+				<Betlink><![CDATA[http://www.sportsinteraction.com/sportsbook/index.cfm?section=events&eventtypeID=150&gameID=841133]]></Betlink>
+				<NSSNumber></NSSNumber>
+			</Bet>
+			<Bet TYPE="Method of Victory">
+				<Runner ID="47690784"><![CDATA[Donald Cerrone by Submission]]></Runner>
+				<Price>+600</Price>
+				<Handicap>0</Handicap>
+				<Betlink><![CDATA[http://www.sportsinteraction.com/sportsbook/index.cfm?section=events&eventtypeID=150&gameID=841133]]></Betlink>
+				<NSSNumber></NSSNumber>
+			</Bet>
+			<Bet TYPE="Method of Victory">
+				<Runner ID="47690785"><![CDATA[Draw]]></Runner>
+				<Price>+6600</Price>
+				<Handicap>0</Handicap>
+				<Betlink><![CDATA[http://www.sportsinteraction.com/sportsbook/index.cfm?section=events&eventtypeID=150&gameID=841133]]></Betlink>
+				<NSSNumber></NSSNumber>
+			</Bet>
+			<Bet TYPE="Method of Victory">
+				<Runner ID="47690786"><![CDATA[Rafael Dos Anjos by KO,TKO,DQ]]></Runner>
+				<Price>+350</Price>
+				<Handicap>0</Handicap>
+				<Betlink><![CDATA[http://www.sportsinteraction.com/sportsbook/index.cfm?section=events&eventtypeID=150&gameID=841133]]></Betlink>
+				<NSSNumber></NSSNumber>
+			</Bet>
+			<Bet TYPE="Method of Victory">
+				<Runner ID="47690787"><![CDATA[Rafael Dos Anjos by Pts or Technical Decision]]></Runner>
+				<Price>+110</Price>
+				<Handicap>0</Handicap>
+				<Betlink><![CDATA[http://www.sportsinteraction.com/sportsbook/index.cfm?section=events&eventtypeID=150&gameID=841133]]></Betlink>
+				<NSSNumber></NSSNumber>
+			</Bet>
+			<Bet TYPE="Method of Victory">
+				<Runner ID="47690788"><![CDATA[Rafael Dos Anjos by Submission]]></Runner>
+				<Price>+600</Price>
+				<Handicap>0</Handicap>
+				<Betlink><![CDATA[http://www.sportsinteraction.com/sportsbook/index.cfm?section=events&eventtypeID=150&gameID=841133]]></Betlink>
+				<NSSNumber></NSSNumber>
+			</Bet>
+		</Event>
+		<Event ID="14989210">
+			<Name><![CDATA[UFC on FOX 17 - Donald Cerrone v Rafael Dos Anjos]]></Name>
+			<Date>2015-12-20 01:00:00.0</Date>
+			<Location><![CDATA[Donald Cerrone To Win in Round 2]]></Location>
+			<Live>1</Live>
+			<Bet TYPE="Round">
+				<Runner ID="47690847"><![CDATA[Donald Cerrone To Win in Round 1]]></Runner>
+				<Price>+800</Price>
+				<Handicap>0</Handicap>
+				<Betlink><![CDATA[http://www.sportsinteraction.com/sportsbook/index.cfm?section=events&eventtypeID=150&gameID=841133]]></Betlink>
+				<NSSNumber></NSSNumber>
+			</Bet>
+			<Bet TYPE="Round">
+				<Runner ID="47690848"><![CDATA[Donald Cerrone To Win in Round 2]]></Runner>
+				<Price>+1200</Price>
+				<Handicap>0</Handicap>
+				<Betlink><![CDATA[http://www.sportsinteraction.com/sportsbook/index.cfm?section=events&eventtypeID=150&gameID=841133]]></Betlink>
+				<NSSNumber></NSSNumber>
+			</Bet>
+			<Bet TYPE="Round">
+				<Runner ID="47690849"><![CDATA[Donald Cerrone To Win in Round 3]]></Runner>
+				<Price>+2000</Price>
+				<Handicap>0</Handicap>
+				<Betlink><![CDATA[http://www.sportsinteraction.com/sportsbook/index.cfm?section=events&eventtypeID=150&gameID=841133]]></Betlink>
+				<NSSNumber></NSSNumber>
+			</Bet>
+			<Bet TYPE="Round">
+				<Runner ID="47690850"><![CDATA[Donald Cerrone To Win in Round 4]]></Runner>
+				<Price>+2500</Price>
+				<Handicap>0</Handicap>
+				<Betlink><![CDATA[http://www.sportsinteraction.com/sportsbook/index.cfm?section=events&eventtypeID=150&gameID=841133]]></Betlink>
+				<NSSNumber></NSSNumber>
+			</Bet>
+			<Bet TYPE="Round">
+				<Runner ID="47690851"><![CDATA[Donald Cerrone To Win in Round 5]]></Runner>
+				<Price>+3300</Price>
+				<Handicap>0</Handicap>
+				<Betlink><![CDATA[http://www.sportsinteraction.com/sportsbook/index.cfm?section=events&eventtypeID=150&gameID=841133]]></Betlink>
+				<NSSNumber></NSSNumber>
+			</Bet>
+			<Bet TYPE="Round">
+				<Runner ID="47690852"><![CDATA[Donald Cerrone by Pts or Technical Decision]]></Runner>
+				<Price>+600</Price>
+				<Handicap>0</Handicap>
+				<Betlink><![CDATA[http://www.sportsinteraction.com/sportsbook/index.cfm?section=events&eventtypeID=150&gameID=841133]]></Betlink>
+				<NSSNumber></NSSNumber>
+			</Bet>
+			<Bet TYPE="Round">
+				<Runner ID="47690853"><![CDATA[Draw]]></Runner>
+				<Price>+6600</Price>
+				<Handicap>0</Handicap>
+				<Betlink><![CDATA[http://www.sportsinteraction.com/sportsbook/index.cfm?section=events&eventtypeID=150&gameID=841133]]></Betlink>
+				<NSSNumber></NSSNumber>
+			</Bet>
+			<Bet TYPE="Round">
+				<Runner ID="47690854"><![CDATA[Rafael Dos Anjos To Win in Round 1]]></Runner>
+				<Price>+600</Price>
+				<Handicap>0</Handicap>
+				<Betlink><![CDATA[http://www.sportsinteraction.com/sportsbook/index.cfm?section=events&eventtypeID=150&gameID=841133]]></Betlink>
+				<NSSNumber></NSSNumber>
+			</Bet>
+			<Bet TYPE="Round">
+				<Runner ID="47690855"><![CDATA[Rafael Dos Anjos To Win in Round 2]]></Runner>
+				<Price>+800</Price>
+				<Handicap>0</Handicap>
+				<Betlink><![CDATA[http://www.sportsinteraction.com/sportsbook/index.cfm?section=events&eventtypeID=150&gameID=841133]]></Betlink>
+				<NSSNumber></NSSNumber>
+			</Bet>
+			<Bet TYPE="Round">
+				<Runner ID="47690856"><![CDATA[Rafael Dos Anjos To Win in Round 3]]></Runner>
+				<Price>+1200</Price>
+				<Handicap>0</Handicap>
+				<Betlink><![CDATA[http://www.sportsinteraction.com/sportsbook/index.cfm?section=events&eventtypeID=150&gameID=841133]]></Betlink>
+				<NSSNumber></NSSNumber>
+			</Bet>
+			<Bet TYPE="Round">
+				<Runner ID="47690857"><![CDATA[Rafael Dos Anjos To Win in Round 4]]></Runner>
+				<Price>+1800</Price>
+				<Handicap>0</Handicap>
+				<Betlink><![CDATA[http://www.sportsinteraction.com/sportsbook/index.cfm?section=events&eventtypeID=150&gameID=841133]]></Betlink>
+				<NSSNumber></NSSNumber>
+			</Bet>
+			<Bet TYPE="Round">
+				<Runner ID="47690858"><![CDATA[Rafael Dos Anjos To Win in Round 5]]></Runner>
+				<Price>+2500</Price>
+				<Handicap>0</Handicap>
+				<Betlink><![CDATA[http://www.sportsinteraction.com/sportsbook/index.cfm?section=events&eventtypeID=150&gameID=841133]]></Betlink>
+				<NSSNumber></NSSNumber>
+			</Bet>
+			<Bet TYPE="Round">
+				<Runner ID="47690859"><![CDATA[Rafael Dos Anjos by Pts or Technical Decision]]></Runner>
+				<Price>+110</Price>
+				<Handicap>0</Handicap>
+				<Betlink><![CDATA[http://www.sportsinteraction.com/sportsbook/index.cfm?section=events&eventtypeID=150&gameID=841133]]></Betlink>
+				<NSSNumber></NSSNumber>
+			</Bet>
+		</Event>
+		<Event ID="14318498">
+			<Name><![CDATA[UFC on FOX 17 - Nate Diaz v Michael Johnson]]></Name>
+			<Date>2015-12-20 01:00:00.0</Date>
+			<Location><![CDATA[Nate Diaz]]></Location>
+			<Live>1</Live>
+			<Bet TYPE="">
+				<Runner ID="45722956"><![CDATA[Nate Diaz]]></Runner>
+				<Price>+280</Price>
+				<Handicap>0</Handicap>
+				<Betlink><![CDATA[http://www.sportsinteraction.com/sportsbook/index.cfm?section=events&eventtypeID=150&gameID=841135]]></Betlink>
+				<NSSNumber></NSSNumber>
+			</Bet>
+			<Bet TYPE="">
+				<Runner ID="45722957"><![CDATA[Michael Johnson]]></Runner>
+				<Price>-400</Price>
+				<Handicap>0</Handicap>
+				<Betlink><![CDATA[http://www.sportsinteraction.com/sportsbook/index.cfm?section=events&eventtypeID=150&gameID=841135]]></Betlink>
+				<NSSNumber></NSSNumber>
+			</Bet>
+		</Event>
+		<Event ID="14989282">
+			<Name><![CDATA[UFC on FOX 17 - Nate Diaz v Michael Johnson]]></Name>
+			<Date>2015-12-20 01:00:00.0</Date>
+			<Location><![CDATA[Nate Diaz by Pts or Technical Decision]]></Location>
+			<Live>1</Live>
+			<Bet TYPE="Method of Victory">
+				<Runner ID="47691031"><![CDATA[Nate Diaz by KO,TKO,DQ]]></Runner>
+				<Price>+750</Price>
+				<Handicap>0</Handicap>
+				<Betlink><![CDATA[http://www.sportsinteraction.com/sportsbook/index.cfm?section=events&eventtypeID=150&gameID=841135]]></Betlink>
+				<NSSNumber></NSSNumber>
+			</Bet>
+			<Bet TYPE="Method of Victory">
+				<Runner ID="47691032"><![CDATA[Nate Diaz by Pts or Technical Decision]]></Runner>
+				<Price>+750</Price>
+				<Handicap>0</Handicap>
+				<Betlink><![CDATA[http://www.sportsinteraction.com/sportsbook/index.cfm?section=events&eventtypeID=150&gameID=841135]]></Betlink>
+				<NSSNumber></NSSNumber>
+			</Bet>
+			<Bet TYPE="Method of Victory">
+				<Runner ID="47691033"><![CDATA[Nate Diaz by Submission]]></Runner>
+				<Price>+500</Price>
+				<Handicap>0</Handicap>
+				<Betlink><![CDATA[http://www.sportsinteraction.com/sportsbook/index.cfm?section=events&eventtypeID=150&gameID=841135]]></Betlink>
+				<NSSNumber></NSSNumber>
+			</Bet>
+			<Bet TYPE="Method of Victory">
+				<Runner ID="47691034"><![CDATA[Draw]]></Runner>
+				<Price>+5000</Price>
+				<Handicap>0</Handicap>
+				<Betlink><![CDATA[http://www.sportsinteraction.com/sportsbook/index.cfm?section=events&eventtypeID=150&gameID=841135]]></Betlink>
+				<NSSNumber></NSSNumber>
+			</Bet>
+			<Bet TYPE="Method of Victory">
+				<Runner ID="47691035"><![CDATA[Michael Johnson by KO,TKO,DQ]]></Runner>
+				<Price>+200</Price>
+				<Handicap>0</Handicap>
+				<Betlink><![CDATA[http://www.sportsinteraction.com/sportsbook/index.cfm?section=events&eventtypeID=150&gameID=841135]]></Betlink>
+				<NSSNumber></NSSNumber>
+			</Bet>
+			<Bet TYPE="Method of Victory">
+				<Runner ID="47691036"><![CDATA[Michael Johnson by Pts or Technical Decision]]></Runner>
+				<Price>+110</Price>
+				<Handicap>0</Handicap>
+				<Betlink><![CDATA[http://www.sportsinteraction.com/sportsbook/index.cfm?section=events&eventtypeID=150&gameID=841135]]></Betlink>
+				<NSSNumber></NSSNumber>
+			</Bet>
+			<Bet TYPE="Method of Victory">
+				<Runner ID="47691037"><![CDATA[Michael Johnson by Submission]]></Runner>
+				<Price>+1200</Price>
+				<Handicap>0</Handicap>
+				<Betlink><![CDATA[http://www.sportsinteraction.com/sportsbook/index.cfm?section=events&eventtypeID=150&gameID=841135]]></Betlink>
+				<NSSNumber></NSSNumber>
+			</Bet>
+		</Event>
+		<Event ID="14989285">
+			<Name><![CDATA[UFC on FOX 17 - Nate Diaz v Michael Johnson]]></Name>
+			<Date>2015-12-20 01:00:00.0</Date>
+			<Location><![CDATA[Nate Diaz To Win in Round 2]]></Location>
+			<Live>1</Live>
+			<Bet TYPE="Round">
+				<Runner ID="47691042"><![CDATA[Nate Diaz To Win in Round 1]]></Runner>
+				<Price>+600</Price>
+				<Handicap>0</Handicap>
+				<Betlink><![CDATA[http://www.sportsinteraction.com/sportsbook/index.cfm?section=events&eventtypeID=150&gameID=841135]]></Betlink>
+				<NSSNumber></NSSNumber>
+			</Bet>
+			<Bet TYPE="Round">
+				<Runner ID="47691043"><![CDATA[Nate Diaz To Win in Round 2]]></Runner>
+				<Price>+1000</Price>
+				<Handicap>0</Handicap>
+				<Betlink><![CDATA[http://www.sportsinteraction.com/sportsbook/index.cfm?section=events&eventtypeID=150&gameID=841135]]></Betlink>
+				<NSSNumber></NSSNumber>
+			</Bet>
+			<Bet TYPE="Round">
+				<Runner ID="47691044"><![CDATA[Nate Diaz To Win in Round 3]]></Runner>
+				<Price>+1400</Price>
+				<Handicap>0</Handicap>
+				<Betlink><![CDATA[http://www.sportsinteraction.com/sportsbook/index.cfm?section=events&eventtypeID=150&gameID=841135]]></Betlink>
+				<NSSNumber></NSSNumber>
+			</Bet>
+			<Bet TYPE="Round">
+				<Runner ID="47691045"><![CDATA[Nate Diaz by Pts or Technical Decision]]></Runner>
+				<Price>+750</Price>
+				<Handicap>0</Handicap>
+				<Betlink><![CDATA[http://www.sportsinteraction.com/sportsbook/index.cfm?section=events&eventtypeID=150&gameID=841135]]></Betlink>
+				<NSSNumber></NSSNumber>
+			</Bet>
+			<Bet TYPE="Round">
+				<Runner ID="47691046"><![CDATA[Draw]]></Runner>
+				<Price>+5000</Price>
+				<Handicap>0</Handicap>
+				<Betlink><![CDATA[http://www.sportsinteraction.com/sportsbook/index.cfm?section=events&eventtypeID=150&gameID=841135]]></Betlink>
+				<NSSNumber></NSSNumber>
+			</Bet>
+			<Bet TYPE="Round">
+				<Runner ID="47691047"><![CDATA[Michael Johnson To Win in Round 1]]></Runner>
+				<Price>+350</Price>
+				<Handicap>0</Handicap>
+				<Betlink><![CDATA[http://www.sportsinteraction.com/sportsbook/index.cfm?section=events&eventtypeID=150&gameID=841135]]></Betlink>
+				<NSSNumber></NSSNumber>
+			</Bet>
+			<Bet TYPE="Round">
+				<Runner ID="47691048"><![CDATA[Michael Johnson To Win in Round 2]]></Runner>
+				<Price>+550</Price>
+				<Handicap>0</Handicap>
+				<Betlink><![CDATA[http://www.sportsinteraction.com/sportsbook/index.cfm?section=events&eventtypeID=150&gameID=841135]]></Betlink>
+				<NSSNumber></NSSNumber>
+			</Bet>
+			<Bet TYPE="Round">
+				<Runner ID="47691049"><![CDATA[Michael Johnson To Win in Round 3]]></Runner>
+				<Price>+1000</Price>
+				<Handicap>0</Handicap>
+				<Betlink><![CDATA[http://www.sportsinteraction.com/sportsbook/index.cfm?section=events&eventtypeID=150&gameID=841135]]></Betlink>
+				<NSSNumber></NSSNumber>
+			</Bet>
+			<Bet TYPE="Round">
+				<Runner ID="47691050"><![CDATA[Michael Johnson by Pts or Technical Decision]]></Runner>
+				<Price>+110</Price>
+				<Handicap>0</Handicap>
+				<Betlink><![CDATA[http://www.sportsinteraction.com/sportsbook/index.cfm?section=events&eventtypeID=150&gameID=841135]]></Betlink>
+				<NSSNumber></NSSNumber>
+			</Bet>
+		</Event>
+		<Event ID="14318510">
+			<Name><![CDATA[UFC 195 - Andrei Arlovski v Stipe Miocic]]></Name>
+			<Date>2016-01-03 01:00:00.0</Date>
+			<Location><![CDATA[Andrei Arlovski]]></Location>
+			<Live>1</Live>
+			<Bet TYPE="">
+				<Runner ID="45722982"><![CDATA[Andrei Arlovski]]></Runner>
+				<Price>+180</Price>
+				<Handicap>0</Handicap>
+				<Betlink><![CDATA[http://www.sportsinteraction.com/sportsbook/index.cfm?section=events&eventtypeID=150&gameID=841139]]></Betlink>
+				<NSSNumber></NSSNumber>
+			</Bet>
+			<Bet TYPE="">
+				<Runner ID="45722983"><![CDATA[Stipe Miocic]]></Runner>
+				<Price>-240</Price>
+				<Handicap>0</Handicap>
+				<Betlink><![CDATA[http://www.sportsinteraction.com/sportsbook/index.cfm?section=events&eventtypeID=150&gameID=841139]]></Betlink>
+				<NSSNumber></NSSNumber>
+			</Bet>
+		</Event>
+		<Event ID="13200319">
+			<Name><![CDATA[Fabricio Werdum v Cain Velasquez]]></Name>
+			<Date>2016-02-02 17:00:00.0</Date>
+			<Location><![CDATA[Cain Velasquez]]></Location>
+			<Live>1</Live>
+			<Bet TYPE="">
+				<Runner ID="42311363"><![CDATA[Fabricio Werdum]]></Runner>
+				<Price>+115</Price>
+				<Handicap>0</Handicap>
+				<Betlink><![CDATA[http://www.sportsinteraction.com/sportsbook/index.cfm?section=events&eventtypeID=150&gameID=811208]]></Betlink>
+				<NSSNumber></NSSNumber>
+			</Bet>
+			<Bet TYPE="">
+				<Runner ID="42311364"><![CDATA[Cain Velasquez]]></Runner>
+				<Price>-145</Price>
+				<Handicap>0</Handicap>
+				<Betlink><![CDATA[http://www.sportsinteraction.com/sportsbook/index.cfm?section=events&eventtypeID=150&gameID=811208]]></Betlink>
+				<NSSNumber></NSSNumber>
+			</Bet>
+		</Event>
+	</EventType>
+</sportsinteractionLines>

@@ -680,13 +680,13 @@ foreach ($aEvent as $oEvent)
                         }
 
                         //Fill empty cells
-                        for ($iY = $iCurrentOperatorColumn; $iY < (sizeof($aBookieRefList)); $iY++)
+                        for ($iY = $iCurrentOperatorColumn; $iY < (sizeof($aBookieRefList) - 1); $iY++)
                         {
                             echo '<td></td>';
                         }
 
-                        //Add alert cell - Functionality should be disabled however
-                        //echo '<td class="button-cell"><div class="but-img i-na"></div></td>';
+                        //Add alert cell
+                        echo '<td class="button-cell"><span class="but-img i-na"></span></td>';
 
                         //Add index graph
                         if ($bEverFoundOldOdds || count($aPropsOdds) > 1)
