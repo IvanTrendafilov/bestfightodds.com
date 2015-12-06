@@ -205,6 +205,21 @@ class GraphHandler
 	    return $aDateOdds;
 	}
 
+
+	public static function getEventPropData($a_iMatchupID, $a_iBookieID, $a_iPropTypeID, $a_iEventID)
+	{
+		//TODO
+	}    
+	//getEventPropData($_GET['m'], $_GET['b'], $_GET['pt'], $_GET['e']);    
+
+	public static function getEventPropIndexData($a_iMatchupID, $a_iPosProp, $a_iPropTypeID, $a_iEventID)
+	{
+		//TODO
+	}
+	//getEventPropIndexData($_GET['m'], $_GET['p'], $_GET['pt'], $_GET['e']);
+
+
+
 	/*public static function getTeamSpreadData($a_iTeamID)
 	{
 		$aRetArr = array();

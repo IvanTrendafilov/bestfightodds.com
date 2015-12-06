@@ -61,7 +61,8 @@ class AjaxInterface
     {
         //Check if cached
 
-        //graphdata-m-b-p-pt-tn
+        //graphdata-m-b-p-pt-tn-e
+        //Matchup-Bookie-Posprop-Proptype-TeamNum-Event
         $sCacheKey = 'graphdata-';
         if (checkRequiredParam('pt', false) && checkRequiredParam('tn', false))
         {
@@ -69,12 +70,29 @@ class AjaxInterface
             if (checkRequiredParam('b', false))
             {
                 //For specific bookie
-                $sCacheKey .= $_GET['m'] . '-' . $_GET['b'] . '-' . $_GET['p'] . '-' . $_GET['pt'] . '-' . $_GET['tn'];
+                if (checkRequiredParam('e', false))
+                {
+                    //Event prop
+                    $sCacheKey .= $_GET['m'] . '-' . $_GET['b'] . '-' . $_GET['p'] . '-' . $_GET['pt'] . '-' . $_GET['tn'] . '-' . $_GET['e'];
+                }
+                else
+                {
+                    //Regular prop
+                    $sCacheKey .= $_GET['m'] . '-' . $_GET['b'] . '-' . $_GET['p'] . '-' . $_GET['pt'] . '-' . $_GET['tn'];
+                }
             }
             else
             {
                 //Mean
-                $sCacheKey .= $_GET['m'] . '--' . $_GET['p'] . '-' . $_GET['pt'] . '-' . $_GET['tn'];
+                if (checkRequiredParam('e', false))
+                {
+                    $sCacheKey .= $_GET['m'] . '--' . $_GET['p'] . '-' . $_GET['pt'] . '-' . $_GET['tn'] . '-' . $_GET['e'];
+                }                
+                else
+                {
+                    $sCacheKey .= $_GET['m'] . '--' . $_GET['p'] . '-' . $_GET['pt'] . '-' . $_GET['tn'];    
+                }
+                
             }
         }
         else
@@ -113,12 +131,30 @@ class AjaxInterface
                 if (checkRequiredParam('b', false))
                 {
                     //For specific bookie
-                    $aOdds = GraphHandler::getPropData($_GET['m'], $_GET['b'], $_GET['pt'], $_GET['tn']);
+                    if (checkRequiredParam('e', false))
+                    {
+                        //Event prop
+                        $aOdds = GraphHandler::getEventPropData($_GET['m'], $_GET['b'], $_GET['pt'], $_GET['e']);    
+                    }
+                    else
+                    {
+                        //Regular prop
+                        $aOdds = GraphHandler::getPropData($_GET['m'], $_GET['b'], $_GET['pt'], $_GET['tn']);    
+                    }
                 }
                 else
                 {
                     //Mean
-                    $aOdds = GraphHandler::getPropIndexData($_GET['m'], $_GET['p'], $_GET['pt'], $_GET['tn']);
+                    if (checkRequiredParam('e', false))
+                    {
+                        //Event prop
+                        $aOdds = GraphHandler::getEventPropIndexData($_GET['m'], $_GET['p'], $_GET['pt'], $_GET['e']);
+                    }
+                    else
+                    {
+                        //Regular prop
+                        $aOdds = GraphHandler::getPropIndexData($_GET['m'], $_GET['p'], $_GET['pt'], $_GET['tn']);
+                    }
                 }
 
             }

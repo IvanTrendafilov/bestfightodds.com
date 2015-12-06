@@ -539,11 +539,11 @@ foreach ($aEvent as $oEvent)
             echo '<th scope="row" style="font-weight: 400"><a href="#" data-mu="' . $oEvent->getID() . '">Event props</a></th>';
 
             //Fill empty cells
-            for ($iY = 0; $iY < (sizeof($aBookieRefList) + 1); $iY++)
+            for ($iY = 0; $iY < (sizeof($aBookieRefList)); $iY++)
             {
                 echo '<td></td>';
             }
-            echo '<td class="button-cell"></td>';
+            echo '<td class="button-cell"></td><td class="button-cell"></td>';
 
             echo '<td class="prop-cell"><a href="#" data-mu="' . $oEvent->getID() . '"><span class="tw">';
             echo count($aPropTypes) . '&nbsp;<span class="exp-ard"></span>';
