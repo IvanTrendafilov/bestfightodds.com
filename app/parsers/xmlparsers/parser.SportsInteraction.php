@@ -22,8 +22,8 @@ class XMLParserSportsInteraction
       //fclose($rStoreFile);
 
 
-        $a_sXML = ereg_replace("<SportsInteractionLines>", "<SportsInteractionLines>\n", $a_sXML);
-        $a_sXML = ereg_replace("</SportsInteractionLines>", "\n</SportsInteractionLines>", $a_sXML);
+        $a_sXML = preg_replace("<SportsInteractionLines>", "<SportsInteractionLines>\n", $a_sXML);
+        $a_sXML = preg_replace("</SportsInteractionLines>", "\n</SportsInteractionLines>", $a_sXML);
 
         $oXML = simplexml_load_string($a_sXML);
 
@@ -60,7 +60,7 @@ class XMLParserSportsInteraction
                                         && ParseTools::checkCorrectOdds((string) $cEvent->Bet[2]->Price)
                                         && !isset($cEvent->Bet[3]) //Temporary fix to remove props such as FOTN
                                         && !isset($cEvent->Bet[4]) //Temporary fix to remove props such as FOTN
-				    && !((string) $cEvent->Bet[0]->Price == '-10000' && (string) $cEvent->Bet[2]->Price == '-10000'))
+				                        && !((string) $cEvent->Bet[0]->Price == '-10000' && (string) $cEvent->Bet[2]->Price == '-10000'))
                                 {
                                     $oParsedMatchup = new ParsedMatchup(
                                                     (string) $cEvent->Bet[0]->Runner,
@@ -75,7 +75,7 @@ class XMLParserSportsInteraction
                                         && ParseTools::checkCorrectOdds((string) $cEvent->Bet[1]->Price)
                                         && !isset($cEvent->Bet[3]) //Temporary fix to remove props such as FOTN
                                         && !isset($cEvent->Bet[4]) //Temporary fix to remove props such as FOTN
-				    && !((string) $cEvent->Bet[0]->Price == '-10000' && (string) $cEvent->Bet[1]->Price == '-10000'))
+				                        && !((string) $cEvent->Bet[0]->Price == '-10000' && (string) $cEvent->Bet[1]->Price == '-10000'))
                                 {
                                     $oParsedMatchup = new ParsedMatchup(
                                                     (string) $cEvent->Bet[0]->Runner,
@@ -114,8 +114,11 @@ class XMLParserSportsInteraction
                             {
                                 if (ParseTools::checkCorrectOdds((string) $cBet->Price))
                                 {
-                                    $cBet->Runner = str_replace('ST. PIERRE', 'ST.PIERRE', strtoupper($cBet->Runner)); //Temporary GSP fix
-
+                                    //Draw does not automatically indicate the matchup so we must add it manually
+                                    if (strtoupper((string) $cBet->Runner) == 'DRAW' || strtoupper((string) $cBet->Runner) == '_DRWTXT_')
+                                    {
+                                        $cBet->Runner = (string) $cEvent->Name . ' - ' . $cBet->Runner;
+                                    }
                                     $oParsedSport->addFetchedProp(new ParsedProp(
                                                     (string) $cBet->Runner,
                                                     '',
