@@ -241,21 +241,49 @@ class PropParser
             $sTemplate = str_replace('<?>', '.*?', $sTemplate);
             $sTemplate = str_replace('/', '\/', $sTemplate);
 
+            
             //Check the template against the prop
             $aPVMatches = array();
-
-            if (preg_match('/^' . $sTemplate . '$/', $a_oProp->getTeamName(1), $aPVMatches) > 0)
+            $bFound1 = (preg_match('/^' . $sTemplate . '$/', $a_oProp->getTeamName(1), $aPVMatches1) > 0);
+            $bFound2 = (preg_match('/^' . $sTemplate . '$/', $a_oProp->getTeamName(2), $aPVMatches2) > 0);
+            if ($bFound1 && $bFound2)
+            {
+                $this->oLogger->log('--Both team fields match template. Picking shortest one as it is probably not the negative one: ' .  $a_oProp->getTeamName(1) . ' compared to ' .  $a_oProp->getTeamName(2), 0);
+                //TEMPORARY HACK FOR PROPTYPE 65. REMOVE WHEN NO ODDS ARE LIVE FOR THIS TYPE
+                if ($oTemplate->getPropTypeID() == 65)
+                {
+                    $this->oLogger->log('---Proptype 65, picking main prop 1 anyway. TODO: Remove this when no odds are live!', -1);
+                    $a_oProp->setMainProp(1);
+                    $aPVMatches = $aPVMatches1;
+                }
+                else if (strlen($a_oProp->getTeamName(1)) <= strlen($a_oProp->getTeamName(2)))
+                {
+                    $this->oLogger->log('---Field 1 wins', 0);
+                    $a_oProp->setMainProp(1);
+                    $aPVMatches = $aPVMatches1;
+                }
+                else
+                {
+                    $this->oLogger->log('---Field 2 wins', 0);
+                    $a_oProp->setMainProp(2);
+                    $aPVMatches = $aPVMatches2;
+                }
+            }
+            else if ($bFound1)
             {
                 //Found in team 1
                 $a_oProp->setMainProp(1);
-                $bFound = true;
+                $aPVMatches = $aPVMatches1;
             }
-            else if (preg_match('/^' . $sTemplate . '$/', $a_oProp->getTeamName(2), $aPVMatches) > 0)
+            else if ($bFound2)
             {
                 //Found in team 2
                 $a_oProp->setMainProp(2);
-                $bFound = true;
+                $aPVMatches = $aPVMatches2;
             }
+            $bFound = ($bFound1 || $bFound2);
+
+
 
             if ($bFound == true)
             {
