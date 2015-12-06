@@ -713,7 +713,8 @@ initPage = function() {
         return false;
     });
 
-    $('tr.eventprop th').find('a').on('click', function() {
+    $('tr.eventprop th').find('a').on('click', function(event) {
+        event.preventDefault();
         event_id = $(this).attr('data-mu');
         $('.prop-cell').find("[data-mu=" + event_id + "]").trigger('click');
     }); 

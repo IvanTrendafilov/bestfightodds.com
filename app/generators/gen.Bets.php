@@ -137,6 +137,66 @@ foreach ($aEvent as $oEvent)
 
             $iFightCounter++;
         }
+
+
+        //Add event prop rows
+        $aPropTypes = OddsHandler::getAllPropTypesForEvent($oEvent->getID());
+        if (count($aPropTypes) > 0)
+        {
+            echo '<tr class="odd even eventprop" id="mu-' . $oEvent->getID() . '">';
+            echo '<th scope="row" style="font-weight: 400"><a href="#" data-mu="' . $oEvent->getID() . '">Event props</a></th>';
+            echo '</tr>';
+
+            $aAllPropOdds = OddsHandler::getCompletePropsForEvent($oEvent->getID());
+            $aAllOldPropOdds = OddsHandler::getCompletePropsForEvent($oEvent->getID(), 1);
+
+            $iPropCounter = 0;
+            $iPropRowCounter = 0;
+            foreach ($aPropTypes as $oPropType)
+            {
+                //From previously fetech props, grab all for that specific proptype
+                    $aPropsOdds = array();
+                    foreach ($aAllPropOdds as $oTempPropOdds)
+                    {
+                        if ($oTempPropOdds->getPropTypeID() == $oPropType->getID())
+                        {
+                            $aPropsOdds[] = $oTempPropOdds;
+                        }
+                    }
+
+                    $aOldPropOdds = array();
+                    if ($aAllOldPropOdds != null)
+                    {
+                        foreach ($aAllOldPropOdds as $oTempPropOdds)
+                        {
+                            if ($oTempPropOdds->getPropTypeID() == $oPropType->getID())
+                            {
+                                $aOldPropOdds[] = $oTempPropOdds;
+                            }
+                        }
+                    }
+
+                    $oBestOdds = OddsHandler::getBestPropOddsForEvent($oEvent->getID(), $oPropType->getID());
+
+                    $iProcessedProps = 0;
+                    $iCurrentOperatorColumn = 0;
+
+                    for ($iX = 1; $iX <= 2; $iX++)
+                    {
+                        $iPropRowCounter++;
+                        echo '<tr class="pr' . (($iX % 2) == 1 ? '' : '-odd') . '"' . (($iX == 2 && $iPropCounter == count($aPropTypes) - 1) ? ' style="border-bottom: 2px solid #f8f8f8;"' : (($iX == 1 && $iPropCounter == 0) ? ' style="border-top: 1px solid #C6C6C6;"' : '')) . '>';
+                        echo '<th scope="row">' . ($iX == 1 ? $oPropType->getPropDesc() : $oPropType->getPropNegDesc()) . '&nbsp;</th>';
+
+                        $iProcessedProps = 0;
+                        $bEverFoundOldOdds = false;
+
+                        echo '</tr>';
+                    }
+
+                    $iPropCounter++;
+            }
+        }
+
         echo '</tbody>'
         . '</table>';
     }
@@ -470,6 +530,188 @@ foreach ($aEvent as $oEvent)
 
             $iFightCounter++;
         }
+
+        //Add event prop rows
+        $aPropTypes = OddsHandler::getAllPropTypesForEvent($oEvent->getID());
+        if (count($aPropTypes) > 0)
+        {
+            echo '<tr class="odd even eventprop" id="mu-' . $oEvent->getID() . '">';
+            echo '<th scope="row" style="font-weight: 400"><a href="#" data-mu="' . $oEvent->getID() . '">Event props</a></th>';
+
+            //Fill empty cells
+            for ($iY = 0; $iY < (sizeof($aBookieRefList) + 1); $iY++)
+            {
+                echo '<td></td>';
+            }
+            echo '<td class="button-cell"></td>';
+
+            echo '<td class="prop-cell"><a href="#" data-mu="' . $oEvent->getID() . '"><span class="tw">';
+            echo count($aPropTypes) . '&nbsp;<span class="exp-ard"></span>';
+            echo '</span></a></td>';
+
+
+            echo '</tr>';
+
+            $aAllPropOdds = OddsHandler::getCompletePropsForEvent($oEvent->getID());
+            $aAllOldPropOdds = OddsHandler::getCompletePropsForEvent($oEvent->getID(), 1);
+
+            $iPropCounter = 0;
+            $iPropRowCounter = 0;
+            foreach ($aPropTypes as $oPropType)
+            {
+                //From previously fetech props, grab all for that specific proptype
+                    $aPropsOdds = array();
+                    foreach ($aAllPropOdds as $oTempPropOdds)
+                    {
+                        if ($oTempPropOdds->getPropTypeID() == $oPropType->getID())
+                        {
+                            $aPropsOdds[] = $oTempPropOdds;
+                        }
+                    }
+
+                    $aOldPropOdds = array();
+                    if ($aAllOldPropOdds != null)
+                    {
+                        foreach ($aAllOldPropOdds as $oTempPropOdds)
+                        {
+                            if ($oTempPropOdds->getPropTypeID() == $oPropType->getID())
+                            {
+                                $aOldPropOdds[] = $oTempPropOdds;
+                            }
+                        }
+                    }
+
+                    $oBestOdds = OddsHandler::getBestPropOddsForEvent($oEvent->getID(), $oPropType->getID());
+
+                    $iProcessedProps = 0;
+                    $iCurrentOperatorColumn = 0;
+
+                    for ($iX = 1; $iX <= 2; $iX++)
+                    {
+                        $iPropRowCounter++;
+                        echo '<tr class="pr' . (($iX % 2) == 1 ? '' : '-odd') . '"' . (($iX == 2 && $iPropCounter == count($aPropTypes) - 1) ? ' style="border-bottom: 2px solid #f8f8f8;"' : (($iX == 1 && $iPropCounter == 0) ? ' style="border-top: 1px solid #C6C6C6;"' : '')) . '>';
+                        echo '<th scope="row">' . ($iX == 1 ? $oPropType->getPropDesc() : $oPropType->getPropNegDesc()) . '&nbsp;</th>';
+
+                        $iProcessedProps = 0;
+                        $bEverFoundOldOdds = false;
+
+                        foreach ($aPropsOdds as $oPropOdds)
+                        {
+                            $iCurrentOperatorColumn = $iProcessedProps;
+                            while (isset($aBookieRefList[$iCurrentOperatorColumn]) && $aBookieRefList[$iCurrentOperatorColumn] != $oPropOdds->getBookieID())
+                            {
+                                echo '<td></td>';
+                                $iCurrentOperatorColumn++;
+                                $iProcessedProps++;
+                            }
+
+                            $sClassName = '';
+                            if (($iX == 1 && $oPropOdds->getPropOdds() == $oBestOdds->getPropOdds()) ||
+                                    ($iX == 2 && $oPropOdds->getNegPropOdds() == $oBestOdds->getNegPropOdds()))
+                            {
+                                $sClassName = 'class="bestbet"';
+                            }
+
+                            //Loop through the previous odds and check if odds is higher or lower or non-existant (kinda ugly, needs a fix)
+                            $iCurrentOperatorID = $oPropOdds->getBookieID();
+                            $bFoundOldOdds = false;
+
+                            foreach ($aOldPropOdds as $oOldPropOdds)
+                            {
+                                //Determine if the prop or negative prop is the one to compare
+                                $iCompareOddsNew = 0;
+                                $iCompareOddsOld = 0;
+                                if ($iX == 1)
+                                {
+                                    $iCompareOddsNew = $oPropOdds->getPropOdds();
+                                    $iCompareOddsOld = $oOldPropOdds->getPropOdds();
+                                }
+                                else
+                                {
+                                    $iCompareOddsNew = $oPropOdds->getNegPropOdds();
+                                    $iCompareOddsOld = $oOldPropOdds->getNegPropOdds();
+                                }
+
+                                if ($oOldPropOdds->getBookieID() == $iCurrentOperatorID)
+                                {
+                                    echo '<td>';
+                                    if (($iX == 1 ? $oPropOdds->getPropOddsAsString() : $oPropOdds->getNegPropOddsAsString()) != '-99999')
+                                    {
+                                        echo '<a href="#" class="but-sgp" data-li="[' . $oPropOdds->getBookieID() . ',' . $iX . ',' . $oPropOdds->getMatchupID() . ',' . $oPropOdds->getPropTypeID() . ',' . $oPropOdds->getTeamNumber() . ']"><span class="tw"><span id="oID' . ('2' . $oPropOdds->getMatchupID() . $oPropOdds->getBookieID() . $iX . $oPropOdds->getPropTypeID() . $oPropOdds->getTeamNumber()) . '" ' . $sClassName . '>' . ($iX == 1 ? $oPropOdds->getPropOddsAsString() : $oPropOdds->getNegPropOddsAsString()) . '</span>';
+                                        if ($iCompareOddsNew > $iCompareOddsOld)
+                                        {
+                                            echo '<span class="aru changedate-' . $oPropOdds->getDate() .'">▲</span>';
+                                        }
+                                        else if ($iCompareOddsNew < $iCompareOddsOld)
+                                        {
+                                            echo '<span class="ard changedate-' . $oPropOdds->getDate() .'">▼</span>';
+                                        }
+                                        else
+                                        {
+                                            echo '';
+                                        }
+                                        echo '</span></a>';
+                                    }
+                                    else
+                                    {
+                                        echo '<span class="tw"><span class="na">n/a</span></span>';
+                                    }
+                                    $bFoundOldOdds = true;
+                                    $bEverFoundOldOdds = true;
+
+                                    echo '</td>';
+                                }
+                            }
+                            if (!$bFoundOldOdds)
+                            {
+                                echo '<td>';
+                                if (($iX == 1 ? $oPropOdds->getPropOddsAsString() : $oPropOdds->getNegPropOddsAsString()) != '-99999')
+                                {
+                                    echo '<a href="#" class="but-sgp" data-li="[' . $oPropOdds->getBookieID() . ',' . $iX . ',' . $oPropOdds->getMatchupID() . ',' . $oPropOdds->getPropTypeID() . ',' . $oPropOdds->getTeamNumber() . ']" ><span class="tw"><span id="oID' . ('2' . $oPropOdds->getMatchupID() . $oPropOdds->getBookieID() . $iX . $oPropOdds->getPropTypeID() . $oPropOdds->getTeamNumber()) . '" ' . $sClassName . '>' . ($iX == 1 ? $oPropOdds->getPropOddsAsString() : $oPropOdds->getNegPropOddsAsString()) . '</span></span></a>';
+                                }
+                                else
+                                {
+                                    echo '<span class="na">n/a</span>';
+                                }
+                                echo '</td>';
+                            }
+
+                            $iProcessedProps++;
+                        }
+
+                        //Fill empty cells
+                        for ($iY = $iCurrentOperatorColumn; $iY < (sizeof($aBookieRefList)); $iY++)
+                        {
+                            echo '<td></td>';
+                        }
+
+                        //Add alert cell - Functionality should be disabled however
+                        //echo '<td class="button-cell"><div class="but-img i-na"></div></td>';
+
+                        //Add index graph
+                        if ($bEverFoundOldOdds || count($aPropsOdds) > 1)
+                        {
+                            $oCurrentPropOddsIndex = OddsHandler::getCurrentEventPropIndex($oPropOdds->getEventID(), $iX, $oPropOdds->getPropTypeID());
+                            if (($iX == 1 ? $oCurrentPropOddsIndex->getPropOdds() : $oCurrentPropOddsIndex->getNegPropOdds()) > ($iX == 1 ? $oBestOdds->getPropOdds() : $oBestOdds->getNegPropOdds()))
+                            {
+                                $oCurrentPropOddsIndex = $oBestOdds;
+                            }
+                            echo '<td class="button-cell"><a href="#" class="but-sip" data-li="[' . $iX . ',' . $oPropOdds->getMatchupID() . ',' . $oPropOdds->getPropTypeID() . ',' . $oPropOdds->getTeamNumber() . ']"><span class="but-img i-g" title="Prop betting line movement"></span></a></td>';
+                        }
+                        else
+                        {
+                            echo '<td class="button-cell"><span class="but-img i-ng"></span></td>';
+                        }
+
+                        //Add empty cell normally used for props
+                        echo '<td class="prop-cell"></td>';
+                        echo '</tr>';
+                    }
+
+                    $iPropCounter++;
+            }
+        }
+
         echo '</tbody>'
         . '</table></div></div></div></div>
         <div class="table-last-changed">Last change: <span title="' . ($sLastChange == null ? 'n/a' : (date('M jS Y H:i', strtotime($sLastChange)) . ' EST')) . '"><?php echo getTimeDifference("' . strtotime($sLastChange) . '", strtotime("' . GENERAL_TIMEZONE . ' hours")); ?></span></div>';

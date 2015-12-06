@@ -197,6 +197,9 @@
       color: transparent;
     }
     tbody tr {
+      & th {
+        line-height: 10px;
+      }
       &:nth-child(even) th {
         padding-bottom: 0;
       }
