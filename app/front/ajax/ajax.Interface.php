@@ -122,11 +122,8 @@ class AjaxInterface
             checkRequiredParam('p', false); //Position in line
 
             $aOdds = null;
-            $bIsProp = false;
-
             if (checkRequiredParam('pt', false) && checkRequiredParam('tn', false))
             {
-                $bIsProp = true;
                 //For prop
                 if (checkRequiredParam('b', false))
                 {
@@ -134,7 +131,7 @@ class AjaxInterface
                     if (checkRequiredParam('e', false))
                     {
                         //Event prop
-                        $aOdds = GraphHandler::getEventPropData($_GET['m'], $_GET['b'], $_GET['pt'], $_GET['e']);    
+                        $aOdds = GraphHandler::getEventPropData($_GET['e'], $_GET['b'], $_GET['pt']);    
                     }
                     else
                     {
@@ -148,7 +145,7 @@ class AjaxInterface
                     if (checkRequiredParam('e', false))
                     {
                         //Event prop
-                        $aOdds = GraphHandler::getEventPropIndexData($_GET['m'], $_GET['p'], $_GET['pt'], $_GET['e']);
+                        $aOdds = GraphHandler::getEventPropIndexData($_GET['e'], $_GET['p'], $_GET['pt']);
                     }
                     else
                     {
