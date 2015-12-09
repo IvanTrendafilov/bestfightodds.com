@@ -64,7 +64,7 @@ class AjaxInterface
         //graphdata-m-b-p-pt-tn-e
         //Matchup-Bookie-Posprop-Proptype-TeamNum-Event
         $sCacheKey = 'graphdata-';
-        if (checkRequiredParam('pt', false) && checkRequiredParam('tn', false))
+        if (checkRequiredParam('pt', false))
         {
             //For prop
             if (checkRequiredParam('b', false))
@@ -73,7 +73,7 @@ class AjaxInterface
                 if (checkRequiredParam('e', false))
                 {
                     //Event prop
-                    $sCacheKey .= $_GET['m'] . '-' . $_GET['b'] . '-' . $_GET['p'] . '-' . $_GET['pt'] . '-' . $_GET['tn'] . '-' . $_GET['e'];
+                    $sCacheKey .= 'x-' . $_GET['b'] . '-' . $_GET['p'] . '-' . $_GET['pt'] . '-x-' . $_GET['e'];
                 }
                 else
                 {
@@ -86,11 +86,11 @@ class AjaxInterface
                 //Mean
                 if (checkRequiredParam('e', false))
                 {
-                    $sCacheKey .= $_GET['m'] . '--' . $_GET['p'] . '-' . $_GET['pt'] . '-' . $_GET['tn'] . '-' . $_GET['e'];
+                    $sCacheKey .= 'x-x-' . $_GET['p'] . '-' . $_GET['pt'] . '-x-' . $_GET['e'];
                 }                
                 else
                 {
-                    $sCacheKey .= $_GET['m'] . '--' . $_GET['p'] . '-' . $_GET['pt'] . '-' . $_GET['tn'];    
+                    $sCacheKey .= $_GET['m'] . '-x-' . $_GET['p'] . '-' . $_GET['pt'] . '-' . $_GET['tn'];    
                 }
                 
             }
@@ -101,11 +101,11 @@ class AjaxInterface
             if (checkRequiredParam('b', false))
             {
                 //For specific bookie
-                $sCacheKey .= $_GET['m'] . '-' . $_GET['b'] . '-' . $_GET['p'] . '--';
+                $sCacheKey .= $_GET['m'] . '-' . $_GET['b'] . '-' . $_GET['p'] . '-x-';
             }
             else
             {
-                $sCacheKey .= $_GET['m'] . '--' . $_GET['p'] . '--';
+                $sCacheKey .= $_GET['m'] . '-x-' . $_GET['p'] . '-x-';
             }
         }
 
@@ -122,7 +122,7 @@ class AjaxInterface
             checkRequiredParam('p', false); //Position in line
 
             $aOdds = null;
-            if (checkRequiredParam('pt', false) && checkRequiredParam('tn', false))
+            if (checkRequiredParam('pt', false))
             {
                 //For prop
                 if (checkRequiredParam('b', false))
@@ -181,7 +181,16 @@ class AjaxInterface
 
                 $retArr = array('name' => $sBookieName, 'data' => array());
                 date_default_timezone_set('America/Los_Angeles');
-                $oEvent = EventHandler::getEvent(EventHandler::getFightByID($_GET['m'])->getEventID(), true);
+
+                if (isset($_GET['e']))
+                {
+                    $oEvent = EventHandler::getEvent($_GET['e'], true);
+                }
+                else
+                {
+                    $oEvent = EventHandler::getEvent(EventHandler::getFightByID($_GET['m'])->getEventID(), true);    
+                }
+                
                 foreach ($aOdds as $iIndex => $oOdds)
                 {
                         $retArr['data'][] = array('x' => 

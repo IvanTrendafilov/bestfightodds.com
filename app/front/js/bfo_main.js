@@ -893,6 +893,20 @@ initPage = function() {
             return false;
         }
     });
+    //Add event prop listeners
+    $('a.but-sgep').on('click', function(event) {
+        var opts = $.parseJSON($(this).attr('data-li'));
+        if (parlayMode) {
+            return addToParlay(this);
+        } else {
+            var title = $(this).parent().parent().find("th").text() + " <span style=\"font-weight: normal;\"> &#150; <a href=\"" + $(this).closest('table').find('th').eq($(this).parent().index()).find("a").attr("href") + "\" target=\"_blank\">" + $(this).closest('table').find('th').eq($(this).parent().index()).find("a").text() + "</a></span>";
+            chartCC();
+            createEPChart(opts[0], opts[1], opts[2], opts[3]);
+            chartSC(title, event.clientX, event.clientY);
+            return false;
+        }
+    });
+
 
     //Add index graph button listeners
     $('a.but-si').on('click', function(event) {
@@ -917,6 +931,20 @@ initPage = function() {
             var title = $(this).parent().parent().find("th").text() + " <span style=\"font-weight: normal;\"> &#150; Mean odds";
             chartCC();
             createPIChart(opts[1], opts[0], opts[2], opts[3]);
+            chartSC(title, event.clientX, event.clientY);
+            return false;
+        }
+    });
+
+    //Add event prop index graph button listeners
+    $('a.but-siep').on('click', function(event) {
+        var opts = $.parseJSON($(this).attr('data-li'));
+        if (parlayMode) {
+            return false;
+        } else {
+            var title = $(this).parent().parent().find("th").text() + " <span style=\"font-weight: normal;\"> &#150; Mean odds";
+            chartCC();
+            createEPIChart(opts[0], opts[1], opts[2]);
             chartSC(title, event.clientX, event.clientY);
             return false;
         }
@@ -966,7 +994,7 @@ toggleRefresh = function (autoRefresh) {
     if (autoRefresh === true) {
         refreshId = setInterval(function() {
             refreshPage();
-        }, 60000);
+        }, 120000);
         $("#autoRefresh").addClass("refresh-ind-spin");
         Cookies.set('bfo_autorefresh', 1, {
             'expires': 999

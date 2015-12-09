@@ -295,7 +295,7 @@ class GraphHandler
 	            }
 	        }
 
-	        $aDateOdds[] = new PropBet($a_iMatchupID, -1, '', ($a_iPosProp == 1 ? PropBet::decimalToMoneyline($iCurrentOddsMean / $iCurrentOwners) : 0), '', ($a_iPosProp == 2 ? PropBet::decimalToMoneyline($iCurrentOddsMean / $iCurrentOwners) : 0), $a_iPropTypeID, $sDate, $a_iTeamNum);
+	        $aDateOdds[] = new PropBet($a_iEventID, -1, '', ($a_iPosProp == 1 ? PropBet::decimalToMoneyline($iCurrentOddsMean / $iCurrentOwners) : 0), '', ($a_iPosProp == 2 ? PropBet::decimalToMoneyline($iCurrentOddsMean / $iCurrentOwners) : 0), $a_iPropTypeID, $sDate);
 	    }
 
 	    return $aDateOdds;

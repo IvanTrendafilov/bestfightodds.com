@@ -43,6 +43,7 @@ while (($iRemovedOdds > 0 || $iRemovedPropOdds > 0)  && $iCounter < 10)
 {
     $iRemovedOdds = 0;
     $iRemovedPropOdds = 0;
+    $iRemovedEventPropOdds = 0;
 
     foreach ($aEvents as $oEvent)
     {
@@ -75,10 +76,30 @@ while (($iRemovedOdds > 0 || $iRemovedPropOdds > 0)  && $iCounter < 10)
                 }
             }
         }
+
+        $aPropTypes = OddsHandler::getAllPropTypesForEvent($oEvent->getID());
+        foreach ($aPropTypes as $oPropType)
+        {
+            for ($i = 0; $i <= 2; $i++)
+            {
+                foreach ($aBookies as $oBookie)
+                {
+                    $aPropOddsToRemove = getAllPropDuplicates(OddsHandler::getAllPropOddsForEventPropType($oEvent->getID(), $oBookie->getID(), $oPropType->getID())); 
+                    if (count($aPropOddsToRemove) > 0)
+                    {
+                        $iRemovedEventPropOdds += count($aPropOddsToRemove);
+                        echo ' EP:' . $oEvent->getID() . '/' . $oBookie->getID() . '/' . $oPropType->getID() .  '/' . $i;
+                    }
+                    removeEventPropOdds($aPropOddsToRemove);
+                }
+            }
+        }
+
     }
 
     echo "\r\nFollowing dupes removed: " . $iRemovedOdds . "\r\n";
     echo "\r\nFollowing dupes props removed: " . $iRemovedPropOdds . "\r\n";
+    echo "\r\nFollowing dupes event props removed: " . $iRemovedEventPropOdds . "\r\n";
 
     $iCounter++;
 }
@@ -181,7 +202,6 @@ $fOav = (pow($oLastMatch->getFighterOddsAsDecimal(1, true), -1)
  */
 function getAllPropDuplicates($a_aProps)
 {
-
     if ($a_aProps == null || count($a_aProps) <= 0)
     {
         return null;
@@ -325,6 +345,38 @@ function removePropOdds($a_aPropOddsCol)
                         AND proptype_id = ?';
 
         $aParams = array($oPropOdds->getMatchupID(), $oPropOdds->getBookieID(), $oPropOdds->getPropOdds(), $oPropOdds->getNegPropOdds(), $oPropOdds->getDate(), $oPropOdds->getTeamNumber(), $oPropOdds->getPropTypeID());
+
+        DBTools::doParamQuery($sQuery, $aParams);
+
+        if (DBTools::getAffectedRows() != 1)
+        {
+            echo "-";
+        }
+        else
+        {
+            echo "*";
+        }
+    }
+    return true;
+}
+
+function removeEventPropOdds($a_aPropOddsCol)
+{
+    if ($a_aPropOddsCol == null || count($a_aPropOddsCol) <= 0)
+    {
+        return false;
+    }
+    foreach ($a_aPropOddsCol as $oPropOdds)
+    {
+        $sQuery = 'DELETE FROM lines_eventprops
+                    WHERE event_id = ?
+                        AND bookie_id = ?
+                        AND prop_odds = ?
+                        AND negprop_odds = ?
+                        AND date = ?
+                        AND proptype_id = ?';
+
+        $aParams = array($oPropOdds->getEventID(), $oPropOdds->getBookieID(), $oPropOdds->getPropOdds(), $oPropOdds->getNegPropOdds(), $oPropOdds->getDate(), $oPropOdds->getPropTypeID());
 
         DBTools::doParamQuery($sQuery, $aParams);
 

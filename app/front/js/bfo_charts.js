@@ -22,6 +22,19 @@ function createPIChart(m, p, pt, tn) {
     });
 }
 
+function createEPChart(e, b, p, pt) {
+    $.get('/api?f=ggd&b=' + b + '&e=' + e + '&p=' + p + '&pt=' + pt, function(indata) {
+        createChart($.parseJSON(notIn(indata)));
+    });
+}
+
+function createEPIChart(e, p, pt) {
+    $.get('/api?f=ggd&e=' + e + '&p=' + p + '&pt=' + pt, function(indata) {
+        createChart($.parseJSON(notIn(indata)));
+    });
+}
+
+
 function createChart(indata) {
     Highcharts.setOptions({
         global: {

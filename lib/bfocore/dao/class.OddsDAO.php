@@ -847,8 +847,8 @@ class OddsDAO
         if ($a_iOffset == 1)
         {
 
-            $sExtraQuery = ' AND lp4.date != (SELECT
-                MAX(lp5.date)  FROM lines_eventprops lep5
+            $sExtraQuery = ' AND lep4.date != (SELECT
+                MAX(lep5.date)  FROM lines_eventprops lep5
             WHERE
                 lep5.event_id = ? AND lep5.bookie_id =
                 lep4.bookie_id AND lep5.proptype_id = lep4.proptype_id) ';

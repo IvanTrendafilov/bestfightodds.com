@@ -897,17 +897,8 @@ fo2.bookie_id, fo2.fight_id ASC;';
         return DBTools::doParamQuery($sQuery, $aParams);
     }
 
-    /**
-     * TODO: Must be fixed to include changes to prop odds
-     */
     public static function getLatestChangeDate($a_iEventID)
     {
-        /*$sQuery = 'SELECT fo.date 
-                    FROM fightodds fo 
-                        LEFT JOIN fights f ON fo.fight_id = f.id 
-                    WHERE f.event_id = ? 
-                    ORDER BY fo.date DESC LIMIT 0,1;';*/
-
         $sQuery = 'SELECT thedate FROM (SELECT fo.date as thedate 
                     FROM fightodds fo 
                         LEFT JOIN fights f ON fo.fight_id = f.id 
@@ -917,9 +908,14 @@ fo2.bookie_id, fo2.fight_id ASC;';
                     FROM lines_props lp
                         LEFT JOIN fights f ON lp.matchup_id = f.id 
                     WHERE f.event_id = ?
-                    ORDER BY lp.date DESC LIMIT 0,1) AS lpt ORDER BY thedate DESC LIMIT 0,1;';
+                    ORDER BY lp.date DESC LIMIT 0,1) AS lpt 
+                    UNION SELECT * FROM (SELECT lep.date as thedate 
+                        FROM lines_eventprops lep
+                        WHERE lep.event_id = ?
+                        ORDER BY lep.date DESC LIMIT 0,1) AS lept
+                    ORDER BY thedate DESC LIMIT 0,1;';
 
-        $aParams = array($a_iEventID, $a_iEventID);
+        $aParams = array($a_iEventID, $a_iEventID, $a_iEventID);
 
         $rResult = DBTools::doParamQuery($sQuery, $aParams);
         return DBTools::getSingleValue($rResult);

@@ -577,6 +577,7 @@ if ($oEvent != null)
 
             echo '</tr>';
 
+
             $aAllPropOdds = OddsHandler::getCompletePropsForEvent($oEvent->getID());
             $aAllOldPropOdds = OddsHandler::getCompletePropsForEvent($oEvent->getID(), 1);
 
@@ -662,7 +663,8 @@ if ($oEvent != null)
                                     echo '<td>';
                                     if (($iX == 1 ? $oPropOdds->getPropOddsAsString() : $oPropOdds->getNegPropOddsAsString()) != '-99999')
                                     {
-                                        echo '<a href="#" class="but-sgp" data-li="[' . $oPropOdds->getBookieID() . ',' . $iX . ',' . $oPropOdds->getMatchupID() . ',' . $oPropOdds->getPropTypeID() . ',' . $oPropOdds->getTeamNumber() . ']"><span class="tw"><span id="oID' . ('2' . $oPropOdds->getMatchupID() . $oPropOdds->getBookieID() . $iX . $oPropOdds->getPropTypeID() . $oPropOdds->getTeamNumber()) . '" ' . $sClassName . '>' . ($iX == 1 ? $oPropOdds->getPropOddsAsString() : $oPropOdds->getNegPropOddsAsString()) . '</span>';
+                                        echo '<a href="#" class="but-sgep" data-li="[' . $oPropOdds->getEventID() . ',' . $oPropOdds->getBookieID() . ',' . $iX . ',' . $oPropOdds->getPropTypeID() . ',' . $oPropOdds->getTeamNumber() . ']"><span class="tw"><span id="oID' . ('2' . $oPropOdds->getMatchupID() . $oPropOdds->getBookieID() . $iX . $oPropOdds->getPropTypeID() . $oPropOdds->getTeamNumber()) . '" ' . $sClassName . '>' . ($iX == 1 ? $oPropOdds->getPropOddsAsString() : $oPropOdds->getNegPropOddsAsString()) . '</span>';
+
                                         if ($iCompareOddsNew > $iCompareOddsOld)
                                         {
                                             echo '<span class="aru changedate-' . $oPropOdds->getDate() .'">▲</span>';
@@ -692,7 +694,7 @@ if ($oEvent != null)
                                 echo '<td>';
                                 if (($iX == 1 ? $oPropOdds->getPropOddsAsString() : $oPropOdds->getNegPropOddsAsString()) != '-99999')
                                 {
-                                    echo '<a href="#" class="but-sgp" data-li="[' . $oPropOdds->getBookieID() . ',' . $iX . ',' . $oPropOdds->getMatchupID() . ',' . $oPropOdds->getPropTypeID() . ',' . $oPropOdds->getTeamNumber() . ']" ><span class="tw"><span id="oID' . ('2' . $oPropOdds->getMatchupID() . $oPropOdds->getBookieID() . $iX . $oPropOdds->getPropTypeID() . $oPropOdds->getTeamNumber()) . '" ' . $sClassName . '>' . ($iX == 1 ? $oPropOdds->getPropOddsAsString() : $oPropOdds->getNegPropOddsAsString()) . '</span></span></a>';
+                                    echo '<a href="#" class="but-sgep" data-li="[' . $oPropOdds->getEventID() . ',' . $oPropOdds->getBookieID() . ',' . $iX . ',' . $oPropOdds->getPropTypeID() . ',' . $oPropOdds->getTeamNumber() . ']" ><span class="tw"><span id="oID' . ('2' . $oPropOdds->getMatchupID() . $oPropOdds->getBookieID() . $iX . $oPropOdds->getPropTypeID() . $oPropOdds->getTeamNumber()) . '" ' . $sClassName . '>' . ($iX == 1 ? $oPropOdds->getPropOddsAsString() : $oPropOdds->getNegPropOddsAsString()) . '</span></span></a>';
                                 }
                                 else
                                 {
@@ -721,7 +723,7 @@ if ($oEvent != null)
                             {
                                 $oCurrentPropOddsIndex = $oBestOdds;
                             }
-                            echo '<td class="button-cell"><a href="#" class="but-sip" data-li="[' . $iX . ',' . $oPropOdds->getMatchupID() . ',' . $oPropOdds->getPropTypeID() . ',' . $oPropOdds->getTeamNumber() . ']"><span class="but-img i-g" title="Prop betting line movement"></span></a></td>';
+                            echo '<td class="button-cell"><a href="#" class="but-siep" data-li="[' . $oPropOdds->getEventID() . ',' . $iX . ',' . $oPropOdds->getPropTypeID() . ',' . $oPropOdds->getTeamNumber() . ']"><span class="but-img i-g" title="Prop betting line movement"></span></a></td>';
                         }
                         else
                         {

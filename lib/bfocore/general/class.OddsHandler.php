@@ -229,7 +229,7 @@ class OddsHandler
 
     public static function getLatestEventPropOdds($a_iEventID, $a_iBookieID, $a_iPropTypeID, $a_iOffset = 0)
     {
-        return OddsDAO::getLatestEventPropOdds($a_iEventID, $a_iBookieID, $a_iPropTypeID, $a_iOffset = 0);
+        return OddsDAO::getLatestEventPropOdds($a_iEventID, $a_iBookieID, $a_iPropTypeID, $a_iOffset);
     }
 
     public static function getAllLatestEventPropOddsForEvent($a_iEventID, $a_iPropTypeID, $a_iOffset = 0)
@@ -314,7 +314,7 @@ class OddsHandler
 
     public static function getCompletePropsForEvent($a_iEventID, $a_iOffset = 0)
     {
-        return OddsDAO::getCompletePropsForEvent($a_iEventID, $a_iOffset = 0);
+        return OddsDAO::getCompletePropsForEvent($a_iEventID, $a_iOffset);
     }
 
     public static function checkMatchingEventPropOdds($a_oEventPropBet)
