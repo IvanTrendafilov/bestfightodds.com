@@ -118,8 +118,11 @@ class XMLParser5Dimes
                 //Entry is a regular matchup, add as one
                 else
                 {
+                    //TODO: Temporary fix below to exclude mcgregor/dos anjos local fights
                     if ((trim((string) $cEvent->HomeMoneyLine) != '')
-                    && (trim((string) $cEvent->VisitorMoneyLine) != ''))
+                    && (trim((string) $cEvent->VisitorMoneyLine) != '')
+                    && (trim((string) $cEvent->GameNumber) != '349182325')
+                    && (trim((string) $cEvent->GameNumber) != '349182820'))
                     {
                         $oParsedMatchup = new ParsedMatchup(
                                         (string) $cEvent->HomeTeamID,
