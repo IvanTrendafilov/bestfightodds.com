@@ -327,9 +327,6 @@ class OddsHandler
         }
         return false;
     }
-
-
-
 }
 
 ?>

@@ -5,6 +5,7 @@
  * - Differencing lines posted at the same minute for a fight and bookie
  * - Lines that for some reason have been added after eachother in time but
  *   represent the exact same line
+ * - Prop inconsistencies (+3.5 points, multiple over/unders for a single book/fight)
  *
  * Prefereably this should be scheduled as a cron job running at least once a day
  *
@@ -105,6 +106,9 @@ while (($iRemovedOdds > 0 || $iRemovedPropOdds > 0)  && $iCounter < 10)
 }
 
 
+
+echo "\r\nCleaned over/under inconsistensies: " . clearOverUnderIncons();
+echo "\r\nCleaned handicap (e.g. +3 points) inconsistensies: " . clearPointsHandicapIncons();
 
 /**
  * Returns all fight odds that are considered duplicates. A duplicate is one
@@ -391,5 +395,59 @@ function removeEventPropOdds($a_aPropOddsCol)
     }
     return true;
 }
+
+
+function clearOverUnderIncons()
+{
+    $sQuery = 'DELETE
+                FROM lp2 USING lines_props lp1,
+                               lines_props lp2
+                WHERE lp1.proptype_id IN (32,
+                                          33,
+                                          34,
+                                          35)
+                  AND lp2.proptype_id IN (32,
+                                          33,
+                                          34,
+                                          35)
+                  AND lp1.proptype_id != lp2.proptype_id
+                  AND lp1.matchup_id = lp2.matchup_id
+                  AND lp1.bookie_id = lp2.bookie_id
+                  AND lp1.date > lp2.date;';
+        
+        DBTools::doQuery($sQuery);
+
+        return DBTools::getAffectedRows();
+}
+
+function clearPointsHandicapIncons()
+{
+    $sQuery = 'DELETE
+                FROM lp2 USING lines_props lp1,
+                               lines_props lp2
+                WHERE lp1.proptype_id IN (38,
+                                          39,
+                                          40,
+                                          41,
+                                          42,
+                                          43,
+                                          47,
+                                          48,
+                                          49,
+                                          50,
+                                          64)
+                  AND lp1.matchup_id = lp2.matchup_id
+                  AND lp1.bookie_id = lp2.bookie_id
+                  AND lp1.proptype_id = lp2.proptype_id
+                  AND lp1.team_num <> lp2.team_num
+                  AND lp1.team_num <> 0
+                  AND lp2.team_num <> 0
+                  AND lp1.date > lp2.date;';
+        
+        DBTools::doQuery($sQuery);
+
+        return DBTools::getAffectedRows();
+}
+
 
 ?>
