@@ -48,5 +48,6 @@ INSERT INTO bets.bookies_parsers(bookie_id, parse_url, name, cn_inuse, mockfile,
 (10, 'http://feeds.sbgsportsbook.com/linefeed/SbgXmlFeedId?league=112_511', 'SBG', false, 'sbg.xml', ''),
 (2, 'http://lines.sportbet.com/linesfeed/getlinefeeds.aspx?UID=bestfightodds5841', 'SportBet', true, 'sportbet.xml', '&changenum='),
 (4, 'https://www.gamingsystem.ag/sbk/sportsbook4/www.sportsbook.ag/getodds.xgi?categoryId=92', 'Sportsbook', false, 'sportsbook.xml', ''),
+(4, 'https://www.gamingsystem.ag/sbk/sportsbook4/www.sportsbook.ag/getodds.xgi?categoryId=122', 'SportsbookMMA', false, 'sportsbookmma.xml', ''),
 (8, 'http://www.sportsinteraction.com/info/data/feeds/consume/?consumerName=bfodds&pwd=bfodds3145&feedID=5&formatID=4', 'SportsInteraction', false, 'sportsint.xml', ''),
 (11, 'http://www.thegreek.com/sports/Boxing/boxselections.asp', 'TheGreek', false, 'thegreek.asp', '');
