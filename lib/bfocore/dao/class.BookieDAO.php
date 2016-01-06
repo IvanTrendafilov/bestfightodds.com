@@ -159,7 +159,7 @@ class BookieDAO
             $sExtraWhere = ' WHERE bookie_id = ?';
         }
 
-        $sQuery = 'SELECT id, bookie_id, name, parse_url, cn_inuse, mockfile, cn_urlsuffix FROM bets.bookies_parsers b ' . $sExtraWhere;
+        $sQuery = 'SELECT id, bookie_id, name, parse_url, cn_inuse, mockfile, cn_urlsuffix FROM bookies_parsers b ' . $sExtraWhere;
 
         $rResult = DBTools::doParamQuery($sQuery, $aParams);
 
