@@ -1,6 +1,5 @@
 <?php
 
-require_once('lib/bfospec/schedule/class.MMAJunkieParser.php');
 require_once('lib/bfocore/general/class.EventHandler.php');
 require_once('lib/bfocore/general/class.ScheduleHandler.php');
 require_once('config/inc.parseConfig.php');
@@ -10,13 +9,29 @@ class ScheduleParser
 	private $aMatchedExistingMatchups;
 	private $aMatchedExistingEvents;
 
+	/*
+	 * @depcreated Use parseSchedPreFetched instead of parseSched to make it site independent
+	 */
 	public function parseSched()
 	{
+		require_once('lib/bfospec/schedule/class.MMAJunkieParser.php');
 		$this->aMatchedExistingMatchups = array();
 		$this->aMatchedExistingEvents = array();
 		ScheduleHandler::clearAllManualActions();
 		$aSchedule = MMAJunkieParser::fetchSchedule();
 		$this->parseEvents($aSchedule);
+		$this->checkRemovedContent();
+	}
+
+	/*
+	 * Use this instead of parseSched to make it site independent
+	 */
+	public function parseSchedPreFetched($a_aSchedule)
+	{
+		$this->aMatchedExistingMatchups = array();
+		$this->aMatchedExistingEvents = array();
+		ScheduleHandler::clearAllManualActions();
+		$this->parseEvents($a_aSchedule);
 		$this->checkRemovedContent();
 	}
 

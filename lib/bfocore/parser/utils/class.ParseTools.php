@@ -278,10 +278,10 @@ class ParseTools
         $sNewName = str_replace('&quot;', '"', $a_sName);
 
         //Replaces all words surrounded by [, ( or " (e.g. nicknames):
-        $sNewName = preg_replace('/[\\[("\'“Â][a-zA-Z0-9\\/\\?\'\\.\\s-]*[\\])"\'”Â]/', ' ', $sNewName);
+        $sNewName = preg_replace('/[\\[("\'“Â][a-zA-Z0-9\\/\\?\'\\.\\,\\s-]*[\\])"\'”Â]/', ' ', $sNewName);
 
         //Trims multiple spaces to single space:
-        $sNewName = preg_replace('/\s{2,}/', ' ', $sNewName);
+        $sNewName = preg_replace('/\h{2,}/', ' ', $sNewName);
 
         //Fixes various foreign characters:
         $sNewName = self::stripForeignChars($sNewName);
