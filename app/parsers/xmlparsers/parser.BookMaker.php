@@ -19,17 +19,18 @@ class XMLParserBookMaker
 
     public function parseXML($a_sXML)
     {
+        //Store as latest feed available for ProBoxingOdds.com
+        $rStoreFile = fopen('/var/www/vhosts/bestfightodds.com/httpdocs/app/front/externalfeeds/bookmaker-latest.xml', 'w');
+        fwrite($rStoreFile, $a_sXML);
+        fclose($rStoreFile);
 
         $oXML = simplexml_load_string($a_sXML);
-
         if ($oXML == false)
         {
             Logger::getInstance()->log("Warning: XML broke!!", -1);
         }
 
-
         $aSports = array();
-
         $oParsedSport = new ParsedSport('MMA');
 
         foreach ($oXML->Leagues->league as $cLeague)
