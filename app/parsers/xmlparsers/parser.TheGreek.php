@@ -86,7 +86,7 @@ class XMLParserTheGreek
 
             Logger::getInstance()->log("Fetching page: http://www.thegreek.com" . $sURL, 0);
 
-            $sLineMatch = '/<span class=\"name\" id=\"dt\">([^<]*)<\/span>[^<]*<span class=\"odd\" id=\"m1\">([^<]*)<\/span>/';
+            $sLineMatch = '/<span class=\"name\" id=\"dt\">([^<]*)<\/span>[^<]*<span class=\"odd\" id=\"m1\">([+-][^<]+)<\/span>/';
             $aLineMatches = ParseTools::matchBlock($sPage, $sLineMatch);
 
             if (count($aLineMatches) == 0)
