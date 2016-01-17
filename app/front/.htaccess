@@ -1,6 +1,10 @@
 Options +FollowSymlinks
 RewriteEngine on
 
+RewriteCond %{HTTPS} !=on
+RewriteCond %{HTTP_HOST} ^(www\.)?bestfightodds\.com [NC]
+RewriteRule ^(.*)$ https://%{HTTP_HOST}/$1 [R,QSA]
+
 RewriteRule ^fights/([0-9]+)_o.png fightlink.php?fight=$1&type=opening [nc]
 RewriteRule ^fights/([0-9]+).png fightlink.php?fight=$1 [nc]
 RewriteRule ^events/([0-9]+)_o.png fightlink.php?event=$1&type=opening [nc]
