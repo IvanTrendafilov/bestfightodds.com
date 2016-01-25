@@ -23,5 +23,8 @@ require_once('lib/bfocore/parser/general/class.ParsedProp.php');
 //2.1
 require_once('lib/bfocore/parser/general/class.CreativeMatcher.php');
 
+//2.2
+require_once('lib/bfocore/parser/general/class.ScheduleChangeTracker.php');
+
 
 ?>

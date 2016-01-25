@@ -10,6 +10,8 @@ require_once('config/inc.parseConfig.php');
  */
 class XMLParser
 {
+    private $aMatchupDates;
+
     /**
      * Retrieves the feed from the bookie and launches the bookie specific XML parser. The
      * result is then passed to the parseEvents function to store the new odds.
@@ -258,7 +260,6 @@ class XMLParser
                 $oTempMatchup = new Fight(0, $oParsedMatchup->getTeamName(1), $oParsedMatchup->getTeamName(2), -1);
                 $oMatchedMatchup = EventHandler::getMatchingFight($oTempMatchup);
 
-
                 //If enabled, perform creative matching
                 if ($oMatchedMatchup == null && PARSE_CREATIVEMATCHING == true)
                 {
@@ -279,7 +280,6 @@ class XMLParser
                         $oGenericEvent = EventHandler::getGenericEventForDate(date('Y-m-d', $aMeta['gametime']));    
                     }
 
-                    
                     $iGenericEventID = $oGenericEvent != null ? $oGenericEvent->getID() : PARSE_FUTURESEVENT_ID;
 
                     $oNewMatchup = new Fight(-1, $oParsedMatchup->getTeamName(1), $oParsedMatchup->getTeamName(2), $iGenericEventID);
@@ -291,8 +291,14 @@ class XMLParser
                     {
                         $oLogger->log('New matchup was stored but no matchup was found afterwards', -2);
                     }
+                    if (isset($aMeta['gametime']))
+                    {
+                        $oGenericEvent = EventHandler::getGenericEventForDate(date('Y-m-d', $aMeta['gametime']));    
+                    }
+                    ScheduleChangeTracker::getInstance()->addMatchup(['matchup_id' => $oMatchedMatchup->getID(),
+                                                                    'bookie_id' => $a_iBookieID,
+                                                                    'date' => $aMeta['gametime']]);
                 }
-
 
                 if ($oMatchedMatchup != null)
                 {
