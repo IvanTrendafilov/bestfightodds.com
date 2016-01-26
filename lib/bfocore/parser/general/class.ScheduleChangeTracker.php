@@ -7,7 +7,14 @@ class ScheduleChangeTracker
 
     public function addMatchup($a_aMatchup)
     {
-        $aMatchupDates[] = $a_aMatchup;
+        if (isset($a_aMatchup['bookie_id']) && 
+            isset($a_aMatchup['matchup_id']) &&
+            isset($a_aMatchup['date']))
+        {
+            $aMatchupDates[] = $a_aMatchup;
+            return true;
+        }
+        return false;
     }
 
     /**
@@ -30,6 +37,7 @@ class ScheduleChangeTracker
      */
     protected function __construct()
     {
+        $this->aMatchupDates = [];
     }
 
     /**
