@@ -1,9 +1,11 @@
 <?php
 
+require_once('lib/bfocore/general/class.EventHandler.php');
+
 class ScheduleChangeTracker
 {
     private static $instance;
-    private $aMatchupDates;
+    private $aMatchups;
 
     public function addMatchup($a_aMatchup)
     {
@@ -11,7 +13,7 @@ class ScheduleChangeTracker
             isset($a_aMatchup['matchup_id']) &&
             isset($a_aMatchup['date']))
         {
-            $aMatchupDates[] = $a_aMatchup;
+            $this->aMatchups[] = $a_aMatchup;
             return true;
         }
         return false;
@@ -37,7 +39,7 @@ class ScheduleChangeTracker
      */
     protected function __construct()
     {
-        $this->aMatchupDates = [];
+        $this->aMatchups = [];
     }
 
     /**
@@ -58,6 +60,50 @@ class ScheduleChangeTracker
      */
     private function __wakeup()
     {
+    }
+
+    public function dumpResult()
+    {
+        var_dump($this->aMatchupDates);
+    }
+
+    public function checkForChanges()
+    {
+        $aUpcomingMatchups = EventHandler::getAllUpcomingMatchups(true);
+        foreach ($aUpcomingMatchups as $oUpMatch)
+        {
+            $oEvent = EventHandler::getEvent($oUpMatch->getEventID());
+            foreach ($this->aMatchups as $aMatchup)
+            {
+                if ($aMatchup['matchup_id'] == $oUpMatch->getID())
+                {
+                    $firstDateTimeObj = new DateTime();
+                    $firstDateTimeObj->setTimestamp($aMatchup['date']);
+                    //Subtract 6 hours to adjust for timezones (but not for future events)
+                    $firstDateTimeObj->sub(new DateInterval('PT6H'));
+
+                    $secondDateTimeObj = new DateTime($oEvent->getDate());
+                    $firstDate = $firstDateTimeObj->format('Y-m-d');
+                    $secondDate = $secondDateTimeObj->format('Y-m-d');//Check if date matches
+
+
+                    echo $aMatchup['matchup_id'] . " " . $firstDate .  " " . $secondDate . " 
+                    ";
+                    if ($firstDate != $secondDate)
+                    {
+                        echo 'yes ';
+                    }
+                    else
+                    {
+                        echo 'no';
+                    }
+
+                }
+            }
+
+        }
+
+
     }
 }
 

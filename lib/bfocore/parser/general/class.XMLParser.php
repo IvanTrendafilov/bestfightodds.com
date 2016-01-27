@@ -257,6 +257,7 @@ class XMLParser
             {
                 $iTotalCount++;
 
+                $aMeta = $oParsedMatchup->getAllMetaData();
                 $oTempMatchup = new Fight(0, $oParsedMatchup->getTeamName(1), $oParsedMatchup->getTeamName(2), -1);
                 $oMatchedMatchup = EventHandler::getMatchingFight($oTempMatchup);
 
@@ -267,12 +268,12 @@ class XMLParser
                     $oMatchedMatchup = CreativeMatcher::checkMatching($oParsedMatchup);
                     
                 }
+
                 //If enabled, create matchup if missing
                 if ($oMatchedMatchup == null && PARSE_CREATEMATCHUPS == true)
                 {
                     //Create the matchup and also as a new event
                     //Get the generic event for the date of the matchup. If none can be found, create it
-                    $aMeta = $oParsedMatchup->getAllMetaData();
                     $oGenericEvent = null;
 
                     if (isset($aMeta['gametime']))
@@ -290,14 +291,7 @@ class XMLParser
                     if ($oMatchedMatchup == null)
                     {
                         $oLogger->log('New matchup was stored but no matchup was found afterwards', -2);
-                    }
-                    if (isset($aMeta['gametime']))
-                    {
-                        $oGenericEvent = EventHandler::getGenericEventForDate(date('Y-m-d', $aMeta['gametime']));    
-                    }
-                    ScheduleChangeTracker::getInstance()->addMatchup(['matchup_id' => $oMatchedMatchup->getID(),
-                                                                    'bookie_id' => $a_iBookieID,
-                                                                    'date' => $aMeta['gametime']]);
+                    }                    
                 }
 
                 if ($oMatchedMatchup != null)
@@ -347,6 +341,14 @@ class XMLParser
                 {
                     EventHandler::logUnmatched($oTempMatchup->getFighter(1) . ' vs ' . $oTempMatchup->getFighter(2), $a_iBookieID, 0);
                     $oLogger->log('--- unmatched matchup: ' . $oTempMatchup->getFighter(1) . ' vs ' . $oTempMatchup->getFighter(2) . ' [<a href="?p=addNewFightForm&inFighter1=' . $oTempMatchup->getFighter(1) . '&inFighter2=' . $oTempMatchup->getFighter(2) . '">add</a>] [<a href="http://www.google.se/search?q=' . $oTempMatchup->getFighterAsString(1) . ' vs ' . $oTempMatchup->getFighterAsString(2) . '">google</a>]', -1);
+                }
+
+                //If bookie provides gametime, add it to the schedule change tracker to potentially propose a date change
+                if (PARSE_CREATEMATCHUPS == true && isset($aMeta['gametime']))
+                {
+                    ScheduleChangeTracker::getInstance()->addMatchup(['matchup_id' => $oMatchedMatchup->getID(),
+                                                                'bookie_id' => $a_iBookieID,
+                                                                'date' => $aMeta['gametime']]);
                 }
             }
             $oLogger->log("Total matched matchups: " . $iMatchupCount . ' / ' . $iTotalCount, 0);
