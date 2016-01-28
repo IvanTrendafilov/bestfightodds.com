@@ -1,6 +1,7 @@
 <?php
 
 require_once('lib/bfocore/general/class.EventHandler.php');
+require_once('config/inc.parseConfig.php');
 
 class ScheduleChangeTracker
 {
@@ -69,41 +70,52 @@ class ScheduleChangeTracker
 
     public function checkForChanges()
     {
+        //Fetch future event date, we need to use it later to exclude it   
+        $sFutureEventDate = (new DateTime(EventHandler::getEvent(PARSE_FUTURESEVENT_ID)->getDate()))->format('Y-m-d');
+
         $aUpcomingMatchups = EventHandler::getAllUpcomingMatchups(true);
         foreach ($aUpcomingMatchups as $oUpMatch)
         {
+            $sFoundNewDate = '';
+            $sFoundOwner = '';
             $oEvent = EventHandler::getEvent($oUpMatch->getEventID());
+            $oCurDate = new DateTime($oEvent->getDate());
             foreach ($this->aMatchups as $aMatchup)
             {
                 if ($aMatchup['matchup_id'] == $oUpMatch->getID())
                 {
-                    $firstDateTimeObj = new DateTime();
-                    $firstDateTimeObj->setTimestamp($aMatchup['date']);
+                    $oNewDate = new DateTime();
+                    $oNewDate->setTimestamp($aMatchup['date']);
                     //Subtract 6 hours to adjust for timezones (but not for future events)
-                    $firstDateTimeObj->sub(new DateInterval('PT6H'));
-
-                    $secondDateTimeObj = new DateTime($oEvent->getDate());
-                    $firstDate = $firstDateTimeObj->format('Y-m-d');
-                    $secondDate = $secondDateTimeObj->format('Y-m-d');//Check if date matches
-
-
-                    echo $aMatchup['matchup_id'] . " " . $firstDate .  " " . $secondDate . " 
-                    ";
-                    if ($firstDate != $secondDate)
+                    if ($oNewDate->format('Y-m-d') != $sFutureEventDate)
                     {
-                        echo 'yes ';
+                        $oNewDate->sub(new DateInterval('PT6H'));
                     }
-                    else
+                    if ($oNewDate->format('Y-m-d') != $oCurDate->format('Y-m-d'))
                     {
-                        echo 'no';
+                        //We'll favour the earliest date since it is most likely to not be a preliminary date
+                        if ($sFoundNewDate == '' || $oNewDate->format('Y-m-d') < $sFoundNewDate)
+                        {
+                            $sFoundNewDate = $oNewDate->format('Y-m-d');
+                            $sFoundOwner = $aMatchup['bookie_id'];
+                        }
                     }
-
                 }
             }
 
+            if ($sFoundNewDate != '')
+            {
+                $iEventID = EventHandler::getGenericEventForDate($sFoundNewDate)->getID();
+                if (EventHandler::changeFight($oUpMatch->getID(), $iEventID))
+                {
+                    Logger::getInstance()->log('Moved matchup ' . $oUpMatch->getID() . ' to ' . $sFoundNewDate . ' as suggested by ' . $sFoundOwner, 0);
+                }
+                else
+                {
+                    Logger::getInstance()->log('Tried to move matchup ' . $oUpMatch->getID() . ' to ' . $sFoundNewDate . ' as suggested by ' . $sFoundOwner . ' but failed', -2);
+                }
+            }
         }
-
-
     }
 }
 

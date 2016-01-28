@@ -90,11 +90,8 @@ $oLogger->seperate();
 //Evaluate changes to matchup dates as proposed by xml feeds
 if (PARSE_CREATEMATCHUPS == true)
 {
-    //var_dump(ScheduleChangeTracker::getInstance());
     ScheduleChangeTracker::getInstance()->checkForChanges();
 }
-
-
 
 //Clean and check alerts
 if (ALERTER_ENABLED == true)
