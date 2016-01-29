@@ -283,6 +283,30 @@ oddsToAmount = function(amount) {
     }
 };
 
+oddsToFraction = function() {
+    if (oddsType == 4)
+    {
+        return;
+    }
+
+    if (oddsType != 1) {
+        oddsToMoneyline();
+    }
+
+    //If odds are not stored, store them
+    if (oddsType == 1 && storedOdds.length === 0) {
+        $('[id^="oID"]').each(function() {
+            storedOdds[this.id.substring(3)] = this.innerHTML;
+        });
+    }
+
+    $('[id^="oID"]').each(function() {
+        this.innerHTML = singleMLToFractional(this.innerHTML);
+    });
+
+    oddsType = 4;
+};
+
 singleMLToDecimal = function(odds) {
     if (String(odds).substring(0, 1) == "-") {
         oddsFloat = parseFloat(String(odds).substring(1, String(odds).length));
@@ -295,6 +319,60 @@ singleMLToDecimal = function(odds) {
     } else {
         return 'error';
     }
+};
+
+singleMLToFractional = function(odds) {
+    //Rounds down to closest 5 factor
+    odds = 5 * Math.round(odds/5);
+    function getCalcDig(num1,num2)
+    {
+        var a; var b;
+        if      (num1 < num2) {a = num2; b = num1;}
+        else if (num1 > num2) {a = num1; b = num2;}
+        else if (num1 == num2) {return num1;}
+         while(1)
+         {
+            if (b == 0)
+            { return a;}
+            else
+            {
+                var temp = b;
+                b = a % b;
+                a = temp;
+            }
+         }
+    }
+
+    function reduceNum(a,b)
+    {   
+        var n  = new Array(2);
+        var f = getCalcDig(a,b);   
+        n[0] = a/f;
+        n[1] = b/f;
+        return n;
+    }
+
+    var mn = parseFloat(odds);
+    var dec;
+    var num;
+    var dom;
+    
+    if (mn < 0)
+    {
+        dom = (-1)*(mn);
+        num = 100;
+    }
+    else if (mn > 0)
+    {
+        dom = 100;
+        num = mn;
+    }
+    var a = reduceNum (num,dom)
+    num = a[0];
+    dom = a[1];
+    
+    dec = (num/dom) + 1;
+    return "" + num + "/" + dom;
 };
 
 /**
@@ -352,6 +430,13 @@ setOddsType = function(val) {
         case 3:
             $("#format-toggle-text").find('span').first().next().html("Amount &#9660;" + $("#format-amount-box1").html());
             break;
+        case 4:
+            oddsToFraction();
+            Cookies.set('bfo_odds_type', 4, {
+                'expires': 999
+            });
+            $("#format-toggle-text").find('span').first().next().html("Fractional &#9660;");
+        break;
         default:
     }
     if (parlayMode) {
@@ -421,6 +506,15 @@ $(document).ready(function() {
             $('span', this).css('display', 'none');
         });
         oddsToAmount($('#format-amount-box1').val());
+        $(this).addClass("list-checked");
+        $('span', this).css('display', 'inline-block');
+    });
+    $('#formatSelector4').click(function() {
+        $('[id^="formatSelector"]').each(function() {
+            $(this).removeClass("list-checked");
+            $('span', this).css('display', 'none');
+        });
+        setOddsType(4);
         $(this).addClass("list-checked");
         $('span', this).css('display', 'inline-block');
     });
@@ -661,7 +755,11 @@ initPage = function() {
                     $("#format-toggle-text").find('span').first().next().html(" $" + Cookies.get('bfo_risk_amount') + " &#9660;");
                     $("#format-amount-box1").find('span').first().next().html(Cookies.get('bfo_risk_amount'));
                     oddsToAmount(Cookies.get('bfo_risk_amount'));
-                    break;
+                break;
+                case 4:
+                    $("#format-toggle-text").find('span').first().next().html("Fractional &#9660;");
+                    oddsToFraction();
+                break;
                 default:
             }
             $('[id^="formatSelector"]').each(function() {

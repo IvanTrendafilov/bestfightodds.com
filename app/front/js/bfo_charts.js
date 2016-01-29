@@ -34,7 +34,6 @@ function createEPIChart(e, p, pt) {
     });
 }
 
-
 function createChart(indata) {
     Highcharts.setOptions({
         global: {
@@ -86,6 +85,8 @@ function createChart(indata) {
                     if (this.value > 1) {
                         if (oddsType == 2) {
                             return Highcharts.numberFormat(this.value, 2);
+                        } else if (oddsType == 4) {
+                            return singleMLToDecimal(oneDecToML(this.value));
                         } else {
                             return oneDecToML(this.value);
                         }
@@ -112,8 +113,10 @@ function createChart(indata) {
                 }
 
                 var ttVal;
-                if (oddsType == 2) {
+                if (oddsType == 2) { 
                     ttVal = Highcharts.numberFormat(this.y, 2);
+                } else if (oddsType == 4) {
+                    ttVal = singleMLToDecimal(oneDecToML(this.y));
                 } else {
                     ttVal = oneDecToML(this.y);
                 }
@@ -134,7 +137,6 @@ function createChart(indata) {
 
 
         plotOptions: {
-
             series: {
                 step: 'left',
                 animation: false
@@ -155,7 +157,6 @@ function createChart(indata) {
                 },
                 dataLabels: {
                     shape: 'callout',
-
                     defer: false,
                     enabled: true,
                     formatter: function() {
@@ -164,10 +165,11 @@ function createChart(indata) {
                             //return '<span style="font-size: 1.3em">oneDecToML(this.y) '</span>';
                             if (oddsType == 2) {
                                 return '<span style="margin-left: 4px; margin-right: 4px;">' + Highcharts.numberFormat(this.y, 2) + '</span>';
+                            } else if (oddsType == 4) {
+                                return '<span style="margin-left: 4px; margin-right: 4px;">' + oneDecToFrac(this.y) + '</span>';
                             } else {
                                 return '<span style="margin-left: 4px; margin-right: 4px;">' + oneDecToML(this.y) + '</span>';
                             }
-
                         } else {
                             return null;
                         }
