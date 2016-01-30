@@ -21,7 +21,7 @@
               <?php
             }
           ?>
-    <a href="/terms">Terms of service</a><span class="menu-seperator">|</span><a href="mailto:info1@bestfightodds.com">Contact</a><span class="menu-seperator">|</span><a href="mailto:info1@bestfightodds.com">&copy; 2015</a>
+    <a href="https://www.proboxingodds.com">Boxing Odds</a><span class="menu-seperator">|</span><a href="/terms">Terms of service</a><span class="menu-seperator">|</span><a href="mailto:info1@bestfightodds.com">Contact</a><span class="menu-seperator">|</span><a href="mailto:info1@bestfightodds.com">&copy; 2015</a>
 </div>
 
 <div id="chart-window" class="popup-window"><div class="popup-header" id="chart-header"><div></div><a href="#" class="cd-popup-close">&#10005;</a></div><div id="chart-area"></div></div>
