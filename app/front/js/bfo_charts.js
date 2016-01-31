@@ -86,7 +86,9 @@ function createChart(indata) {
                         if (oddsType == 2) {
                             return Highcharts.numberFormat(this.value, 2);
                         } else if (oddsType == 4) {
-                            return singleMLToDecimal(oneDecToML(this.value));
+                            //Rounds down to closest 5 factor
+                            odds = 5 * Math.round(oneDecToML(this.value)/5);
+                            return singleMLToFractional(odds);
                         } else {
                             return oneDecToML(this.value);
                         }
@@ -116,7 +118,9 @@ function createChart(indata) {
                 if (oddsType == 2) { 
                     ttVal = Highcharts.numberFormat(this.y, 2);
                 } else if (oddsType == 4) {
-                    ttVal = singleMLToDecimal(oneDecToML(this.y));
+                    //Rounds down to closest 5 factor
+                    odds = 5 * Math.round(oneDecToML(this.y)/5);
+                    ttVal = singleMLToFractional(odds);
                 } else {
                     ttVal = oneDecToML(this.y);
                 }
@@ -129,19 +133,11 @@ function createChart(indata) {
                 fontSize: '12px'
             }
         },
-        /*tooltip: {
-                headerFormat: '<b>{series.name}</b><br>',
-                pointFormat: '{point.x:%e. %b}: {point.y:.2f} m'
-            },*/
-
-
 
         plotOptions: {
             series: {
                 step: 'left',
                 animation: false
-                /*{duration: 500
-                    }*/
             },
             line: {
                 lineWidth: 1.75,
@@ -166,7 +162,9 @@ function createChart(indata) {
                             if (oddsType == 2) {
                                 return '<span style="margin-left: 4px; margin-right: 4px;">' + Highcharts.numberFormat(this.y, 2) + '</span>';
                             } else if (oddsType == 4) {
-                                return '<span style="margin-left: 4px; margin-right: 4px;">' + oneDecToFrac(this.y) + '</span>';
+                                //Rounds down to closest 5 factor
+                                odds = 5 * Math.round(oneDecToML(this.y)/5);
+                                return '<span style="margin-left: 4px; margin-right: 4px;">' + singleMLToFractional(odds) + '</span>';
                             } else {
                                 return '<span style="margin-left: 4px; margin-right: 4px;">' + oneDecToML(this.y) + '</span>';
                             }
