@@ -1,6 +1,7 @@
 <?php
 
 require_once('lib/bfocore/dao/class.EventDAO.php');
+require_once('config/inc.parseConfig.php');
 
 class EventHandler
 {
@@ -323,6 +324,11 @@ class EventHandler
 
     public static function getGenericEventForDate($a_sDate)
     {
+        //Check first if future events date, if so, fetch that one
+        if ($a_sDate == '2019-12-31') 
+        {
+            return self::getEvent(PARSE_FUTURESEVENT_ID);
+        }
         $oEvent = EventDAO::getGenericEventForDate($a_sDate);
         if ($oEvent == null)
         {
