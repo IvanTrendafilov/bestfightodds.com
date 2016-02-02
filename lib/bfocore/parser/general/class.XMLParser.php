@@ -270,7 +270,7 @@ class XMLParser
                 }
 
                 //If enabled, create matchup if missing
-                if ($oMatchedMatchup == null && PARSE_CREATEMATCHUPS == true)
+                if ($oMatchedMatchup == null && PARSE_CREATEMATCHUPS == true && isset($aMeta['gametime']))
                 {
                     //Create the matchup and also as a new event
                     //Get the generic event for the date of the matchup. If none can be found, create it
