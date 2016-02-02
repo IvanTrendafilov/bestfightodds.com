@@ -20,17 +20,14 @@ class TwitterHandler
     public static function twitterNewFights()
     {
         $iTwits = 0;
-
         $aFights = TwitDAO::getUntwitteredFights();
-
-
 
         // Fights are mainly grouped based on event, however main events are always seperated into their own group
         $aGroups = array();
 
         foreach ($aFights as $oFight)
         {
-            if ($oFight->isMainEvent())
+            if (!TWITTER_GROUP_MATCHUPS || $oFight->isMainEvent())
             {
                 $aGroups[$oFight->getEventID() . $oFight->getID()]['matchups'][] = $oFight;
                 $aGroups[$oFight->getEventID() . $oFight->getID()]['event_id'] = $oFight->getEventID();
@@ -54,7 +51,11 @@ class TwitterHandler
             if (count($aGroup['matchups']) > 1)
             {
                 //Multiple fights for the same event needs to be twittered
-                $sTwitText = 'New lines for ' . $oEvent->getName() . ' posted https://bestfightodds.com';
+                $sTwitText = str_replace(array('<E>','<T1>','<T2>','<T1O>','<T2O>'),
+                                            array($oEvent->getName(), $aGroup['matchups'][0]->getFighterAsString(1), $aGroup['matchups'][0]->getFighterAsString(2), $oFightOdds->getFighterOddsAsString(1), $oFightOdds->getFighterOddsAsString(2)),
+                                            TWITTER_TEMPLATE_MULTI);
+
+                //$sTwitText = 'New lines for ' . $oEvent->getName() . ' posted https://bestfightodds.com';
             }
             else if (count($aGroup['matchups']) == 1)
             {
@@ -63,24 +64,14 @@ class TwitterHandler
 
                 if ($oFightOdds != null)
                 {
-                    $sTwitText = $oEvent->getName() . ': ' . $aGroup['matchups'][0]->getFighterAsString(1) . ' (' . $oFightOdds->getFighterOddsAsString(1) . ') vs. '
-                            . $aGroup['matchups'][0]->getFighterAsString(2) . ' (' . $oFightOdds->getFighterOddsAsString(2) . ') https://bestfightodds.com';
-                }
-            }
+                    $sTwitText = str_replace(array('<E>','<T1>','<T2>','<T1O>','<T2O>'),
+                                            array($oEvent->getName(), $aGroup['matchups'][0]->getFighterAsString(1), $aGroup['matchups'][0]->getFighterAsString(2), $oFightOdds->getFighterOddsAsString(1), $oFightOdds->getFighterOddsAsString(2)),
+                                            TWITTER_TEMPLATE_SINGLE);
 
-            //Disabled: Generic hashtags (replaced by dynamic later down)
-            //If we haven't exceeded 140 chars we can add #-categories for certain events
-            /*if ((strlen($sTwitText) + 5) <= 140)
-            {
-                if (strtolower(substr($oEvent->getName(), 0, 3)) == 'ufc')
-                {
-                    $sTwitText .= ' #UFC';
+                    //$sTwitText = $oEvent->getName() . ': ' . $aGroup['matchups'][0]->getFighterAsString(1) . ' (' . $oFightOdds->getFighterOddsAsString(1) . ') vs. '
+                    //        . $aGroup['matchups'][0]->getFighterAsString(2) . ' (' . $oFightOdds->getFighterOddsAsString(2) . ') https://bestfightodds.com';
                 }
             }
-            if ((strlen($sTwitText) + 5) <= 140)
-            {
-                $sTwitText .= ' #MMA';
-            }*/
 
             //Add dynamic hashtags if less than 140 chars and if event name format allows for it
             $aMatches = null;

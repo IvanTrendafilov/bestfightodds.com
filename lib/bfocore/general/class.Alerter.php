@@ -137,23 +137,23 @@ class Alerter
         //If odds is set to -9999 then we just want to announce that the fight has got odds
         if ($a_oAlert->getLimit() == -9999)
         {
-            $sText = "Odds for " . $oFight->getFighterAsString(1) . " (" . $sTeamOdds[1] . ") vs " . $oFight->getFighterAsString(2) . " (" . $sTeamOdds[2] . ") has just been posted at BestFightOdds\n
-Check out https://www.bestfightodds.com to view the latest listings.\n
+            $sText = "Odds for " . $oFight->getFighterAsString(1) . " (" . $sTeamOdds[1] . ") vs " . $oFight->getFighterAsString(2) . " (" . $sTeamOdds[2] . ") has just been posted at " . ALERTER_SITE_NAME . "\n
+Check out " . ALERTER_SITE_LINK . " to view the latest listings.\n
 You are receiving this e-mail because you have signed up to be notified when odds were added for a certain matchup. If you did not sign up for this you don't have to do anything as your e-mail will not be stored for future use.\n
 Good luck!\n
-BestFightOdds";
+" . ALERTER_SITE_NAME;
             $sSubject = 'Odds for ' . $oFight->getFighterAsString(1) . ' vs ' . $oFight->getFighterAsString(2) . ' available';
         } else
         {
             $sText = "The odds for " . $oFight->getFighterAsString($a_oAlert->getFighter()) . " has reached " . $sTeamOdds[$a_oAlert->getFighter()] . " in his/her upcoming fight against " . $oFight->getFighterAsString(($a_oAlert->getFighter() == 1 ? 2 : 1)) . "\n
-Check out https://www.bestfightodds.com to view the latest listings.\n
+Check out " . ALERTER_SITE_LINK . " to view the latest listings.\n
 You are receiving this e-mail because you have signed up to be notified when the odds changed for a certain matchup. If you did not sign up for this you don't have to do anything as your e-mail will not be stored for future use.\n
 Good luck!\n
-BestFightOdds";
+" . ALERTER_SITE_NAME;
             $sSubject = 'Odds for ' . $oFight->getFighterAsString($a_oAlert->getFighter()) . ' has reached your limit';
         }
         $sTo = $a_oAlert->getEmail();
-        $sHeaders = 'From: BestFightOdds <no-reply@bestfightodds.com>';
+        $sHeaders = 'From: ' . ALERTER_MAIL_FROM;
 
 
         $bSuccess = false;
@@ -223,14 +223,14 @@ BestFightOdds";
             }
 
             $sText = "A win/win situation has been discovered in the following fights:\n" . $sFights . "\n
-	Check out https://www.bestfightodds.com to view the latest listings.\n
+	Check out " . ALERTER_SITE_LINK . " to view the latest listings.\n
 	You are receiving this e-mail because you have signed up to be reminded when a win/win bet was posted at our site. If you did not sign up for this you don't have to do anything as your e-mail will not be stored for future use.\n
 	Good luck!\n
-	BestFightOdds";
+	" . ALERTER_SITE_NAME;
             $sSubject = 'One or more win/win bets have been discovered';
 
             $sTo = ALERTER_ADMIN_ALERT;
-            $sHeaders = 'From: BestFightOdds <no-reply@bestfightodds.com>';
+            $sHeaders = 'From: ' . ALERTER_MAIL_FROM;
 
             $bSuccess = mail($sTo, $sSubject, $sText, $sHeaders);
         }

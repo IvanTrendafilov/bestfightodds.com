@@ -44,7 +44,8 @@ class Twitterer
     {
         if ($this->m_bDebug == true)
         {
-            echo "Posting (" . strlen($a_sMessage) . "): " . $a_sMessage . "\n\r<br />";
+            echo "Posting (" . strlen($a_sMessage) . "): " . $a_sMessage . "\n\r
+";
             return true;
         }
 
