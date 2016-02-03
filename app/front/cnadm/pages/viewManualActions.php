@@ -1,5 +1,5 @@
-
-Manual actions:
+Manual actions: <a href="#" onclick="$('input[onclick^=\'maAdd\']').click();" >Accept all <b>Create</b> actions below</a>
+<br /><br />
 
 <?php
 
