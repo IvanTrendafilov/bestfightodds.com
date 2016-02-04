@@ -1,4 +1,4 @@
-B0;136;0c<?php
+<?php
 
 require_once('lib/bfocore/general/class.EventHandler.php');
 require_once('lib/bfocore/utils/class.OddsTools.php');

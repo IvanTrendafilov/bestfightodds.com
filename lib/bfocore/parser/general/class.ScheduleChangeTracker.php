@@ -7,6 +7,7 @@ class ScheduleChangeTracker
 {
     private static $instance;
     private $aMatchups;
+    private $aAuthoritiveRunBookies;
 
     public function addMatchup($a_aMatchup)
     {
@@ -18,6 +19,12 @@ class ScheduleChangeTracker
             return true;
         }
         return false;
+    }
+
+    //This function is called to declare that the bookie had an Authoritive run. This means that it was able to report all odds exactly as they are right now with any removals included. Use with care
+    public function reportAuthoritiveRun($a_iBookieID)
+    {
+        $this->aAuthoritiveRunBookies[$a_iBookieID] = true;
     }
 
     /**
@@ -41,6 +48,7 @@ class ScheduleChangeTracker
     protected function __construct()
     {
         $this->aMatchups = [];
+        $this->aAuthoritiveRunBookies = [];
     }
 
     /**
@@ -74,6 +82,8 @@ class ScheduleChangeTracker
         $sFutureEventDate = (new DateTime(EventHandler::getEvent(PARSE_FUTURESEVENT_ID)->getDate()))->format('Y-m-d');
 
         $aUpcomingMatchups = EventHandler::getAllUpcomingMatchups(true);
+        $aProcessedBookieMatchups = [];
+
         foreach ($aUpcomingMatchups as $oUpMatch)
         {
             $sFoundNewDate = '';
@@ -84,6 +94,7 @@ class ScheduleChangeTracker
             {
                 if ($aMatchup['matchup_id'] == $oUpMatch->getID())
                 {
+                    $aProcessedBookieMatchups[$aMatchup['bookie_id']][$aMatchup['matchup_id']] = true;
                     $oNewDate = new DateTime();
                     $oNewDate->setTimestamp($aMatchup['date']);
                     //Subtract 6 hours to adjust for timezones (but not for future events)
@@ -115,6 +126,29 @@ class ScheduleChangeTracker
                     Logger::getInstance()->log('Tried to move matchup ' . $oUpMatch->getID() . ' to ' . $sFoundNewDate . ' as suggested by ' . $sFoundOwner . ' but failed', -2);
                 }
             }
+        }
+
+        //Check if bookie has odds for the matchup, ran a Authoritive run but did not report it back to the change tracker. If so, remove any odds associated with it
+        foreach ($this->aAuthoritiveRunBookies as $sKey => $sVal)
+        {
+            Logger::getInstance()->log('Bookie ' . $sKey  . ' reported an authoritive run. Performing cleanups', 0);
+            if (!array_key_exists($oUpMatch->getID(), $aProcessedBookieMatchups[$sKey]))
+            {
+                //Only remove matchups that are > 24 hours away to avoid removing one the day matchups by accident
+                $datetime = new DateTime($oEvent->getDate());
+                $nowdatetime = new Datetime();
+                $nowdatetime->modify('+1 day');
+                if ($datetime > $nowdatetime) 
+                {
+                    Logger::getInstance()->log('-Matchup: ' . $oUpMatch->getID() . ' was not found in feed and will be removed', 0);
+                    //TODO: Perform actual removal
+                }   
+                else
+                {
+                    Logger::getInstance()->log('-Matchup: ' . $oUpMatch->getID() . ' was not found in feed but is too close in time to remove. Maybe manually remove?', 0);
+                }             
+            }
+            EventHandler::getAllOddsForFightAndBookie($oUpMatch->getID(), $sKey);
         }
     }
 }
