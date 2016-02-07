@@ -1,15 +1,17 @@
 #!/bin/bash
 
 backupdir="/var/www/vhosts/bestfightodds.com/httpdocs/db/scripts/backup/"
+gdrivedir="/var/www/vhosts/bestfightodds.com/gdrive/BFO_Backups/"
+gdrivepath="/var/www/vhosts/bestfightodds.com/gopath/bin/"
 backupfilename="bfo2_backup_$(date '+%Y%m%d%H%M%S')"
-hostname="213.89.180.107"
-username="admin"
-password="Bilbo123"
-remotedir="/myshare/bfo/"
 
+echo 'Starting backup'
 cd $backupdir/
 rm $backupdir/bfo2_backup_*.sql
+echo 'Cleared old backups'
 mysqldump -ubestfightodds -pmUCe5haj bets > $backupdir/$backupfilename.sql
-zip -9 -D $backupdir/$backupfilename.zip $backupfilename.sql
- 
-mv $backupdir/$backupfilename.zip ~/Dropbox
+echo 'Dump complete'
+zip -j -9 -D $gdrivedir/$backupfilename.zip $backupdir/$backupfilename.sql
+echo 'Compression complete'
+cd $gdrivedir/
+$gdrivepath/drive push -no-prompt $backupfilename.zip
