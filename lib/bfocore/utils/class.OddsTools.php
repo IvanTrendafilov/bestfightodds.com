@@ -20,6 +20,10 @@ class OddsTools
     public static function convertDecimalToMoneyline($a_fOdds)
     {
         $a_fOdds = (float) $a_fOdds - 1.0;
+        if ($a_fOdds == 0)
+        {
+            return '-25000';
+        }
         if ($a_fOdds < 1)
         {
             return '-' . round((1 / $a_fOdds) * 100);
