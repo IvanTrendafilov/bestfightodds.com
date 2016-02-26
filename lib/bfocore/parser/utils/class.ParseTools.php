@@ -52,23 +52,6 @@ class ParseTools
             curl_setopt($rCurl, CURLOPT_HTTPAUTH, CURLAUTH_BASIC);
         }
 
-	if ($a_sURL == 'http://lines.bookmaker.eu')
-	{
-	  curl_setopt($rCurl, CURLOPT_INTERFACE, '89.221.255.123');
-	}
-
-	if ($a_sURL == 'http://lines.betdsi.eu/')
-	  {
-	    curl_setopt($rCurl, CURLOPT_INTERFACE, '89.221.253.24');
-	  }
-
-      if ($a_sURL == 'http://www.sportsinteraction.com/info/data/feeds/consume/?consumerName=bfodds&pwd=bfodds3145&feedID=5&formatID=4')
-          {
-            curl_setopt($rCurl, CURLOPT_SSL_CIPHER_LIST, 'ecdhe_ecdsa_aes_128_sha');
-          }
-
-
-
         // Set some options - we are passing in a useragent too here        
         curl_setopt_array($rCurl, array(
             CURLOPT_IPRESOLVE => CURL_IPRESOLVE_V4,
@@ -80,6 +63,24 @@ class ParseTools
             CURLOPT_SSL_VERIFYPEER => 0,
             CURLOPT_FOLLOWLOCATION => true
         ));
+
+        //TODO: Hardcoded stuff. Ugly and should be moved out
+        if ($a_sURL == 'http://lines.bookmaker.eu')
+        {
+            curl_setopt($rCurl, CURLOPT_INTERFACE, '89.221.255.123');
+        }
+        else if ($a_sURL == 'http://lines.betdsi.eu/')
+        {
+            curl_setopt($rCurl, CURLOPT_INTERFACE, '89.221.253.24');
+        }
+        else if ($a_sURL == 'http://www.sportsinteraction.com/info/data/feeds/consume/?consumerName=bfodds&pwd=bfodds3145&feedID=5&formatID=4')
+        {
+            curl_setopt($rCurl, CURLOPT_SSL_CIPHER_LIST, 'ecdhe_ecdsa_aes_128_sha');
+        }
+        else if (substr($a_sURL, 0, strlen('http://www.thegreek.com')) === 'http://www.thegreek.com')
+        {
+            curl_setopt($rCurl, CURLOPT_USERAGENT, 'Mozilla/5.0 (iPhone; CPU iPhone OS 6_0 like Mac OS X) AppleWebKit/536.26 (KHTML, like Gecko) Version/6.0 Mobile/10A5376e Safari/8536.25');
+        }
 
         //Set custom curl options if specified
         if (!empty($a_sCurlOpts))
@@ -125,22 +126,7 @@ class ParseTools
                 curl_setopt($aChannels[$sURL], CURLOPT_USERPWD, $sCred);
                 curl_setopt($aChannels[$sURL], CURLOPT_HTTPAUTH, CURLAUTH_BASIC);
             }
-            
 
-            if ($sURL == 'http://lines.bookmaker.eu')
-            {
-              curl_setopt($aChannels[$sURL], CURLOPT_INTERFACE, '89.221.255.123');
-            }
-
-            if ($sURL == 'http://lines.betdsi.eu/')
-            {
-              curl_setopt($aChannels[$sURL], CURLOPT_INTERFACE, '89.221.253.24');
-            }
-
-            if ($sURL == 'http://www.sportsinteraction.com/info/data/feeds/consume/?consumerName=bfodds&pwd=bfodds3145&feedID=5&formatID=4')
-            {
-              curl_setopt($aChannels[$sURL], CURLOPT_SSL_CIPHER_LIST, 'ecdhe_ecdsa_aes_128_sha');
-            }
             curl_setopt_array($aChannels[$sURL], array(
                 CURLOPT_IPRESOLVE => CURL_IPRESOLVE_V4,
                 CURLOPT_RETURNTRANSFER => 1,
@@ -150,7 +136,26 @@ class ParseTools
                 CURLOPT_TIMEOUT => 120,
                 CURLOPT_SSL_VERIFYPEER => 0,
                 CURLOPT_FOLLOWLOCATION => true
-            ));
+            ));            
+
+            if ($sURL == 'http://lines.bookmaker.eu')
+            {
+              curl_setopt($aChannels[$sURL], CURLOPT_INTERFACE, '89.221.255.123');
+            }
+            else if ($sURL == 'http://lines.betdsi.eu/')
+            {
+              curl_setopt($aChannels[$sURL], CURLOPT_INTERFACE, '89.221.253.24');
+            }
+            else if ($sURL == 'http://www.sportsinteraction.com/info/data/feeds/consume/?consumerName=bfodds&pwd=bfodds3145&feedID=5&formatID=4')
+            {
+              curl_setopt($aChannels[$sURL], CURLOPT_SSL_CIPHER_LIST, 'ecdhe_ecdsa_aes_128_sha');
+            }
+            else if (substr($sURL, 0, strlen('http://www.thegreek.com')) === 'http://www.thegreek.com')
+            {
+                curl_setopt($aChannels[$sURL], CURLOPT_USERAGENT, 'Mozilla/5.0 (iPhone; CPU iPhone OS 6_0 like Mac OS X) AppleWebKit/536.26 (KHTML, like Gecko) Version/6.0 Mobile/10A5376e Safari/8536.25');
+            }
+
+
             curl_multi_add_handle($mh, $aChannels[$sURL]);
         }
 
