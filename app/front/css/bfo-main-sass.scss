@@ -888,7 +888,7 @@ table.team-stats-table {
       padding: 3px 0 2px 3px;
       color: #8a8a8a;
       &.header-movement {
-        padding-left: 35px;
+        padding-left: 25px;
       }
     }
     tr {
@@ -966,7 +966,12 @@ table.team-stats-table {
         width: 52px;
         padding-top: 0;
         padding-bottom: 0;
-        padding-left: 35px;
+        padding-left: 25px;
+      }
+      &.dash-cell {
+        width: 12px;
+        padding: 0;
+        text-align: center;
       }
       &.change-cell {
         text-align: left;
