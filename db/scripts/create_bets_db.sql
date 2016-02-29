@@ -103,6 +103,7 @@ CREATE TABLE  `bets`.`bookies_parsers` (
   `cn_inuse` tinyint(1) NOT NULL,
   `mockfile` varchar(45) NOT NULL,
   `cn_urlsuffix` varchar(45) NOT NULL,
+  `cn_initial` VARCHAR(45) NOT NULL DEFAULT '-1',
   PRIMARY KEY (`id`)
 ) ENGINE=MyISAM DEFAULT CHARSET=latin1;
 

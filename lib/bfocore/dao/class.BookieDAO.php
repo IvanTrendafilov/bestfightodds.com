@@ -139,7 +139,9 @@ class BookieDAO
 
     public static function resetAllChangeNums()
     {
-        $sQuery = 'UPDATE bookies_changenums SET changenum = -1';
+        $sQuery = 'UPDATE bookies_changenums bcn
+                    INNER JOIN bookies_parsers bp ON bcn.bookie_id = bp.id
+                    SET bcn.changenum = bp.cn_initial';
         $bResult = DBTools::doQuery($sQuery);
         if ($bResult == false)
         {

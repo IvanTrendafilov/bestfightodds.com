@@ -83,7 +83,13 @@ class XMLParser
             {
                 $oSport->mergeMatchups();
             }
-            
+
+            //Check with parser if authorative run was declared. If so, inform schedule change tracker
+            if (PARSE_CREATEMATCHUPS == true && method_exists($oBookieParser, 'checkAuthoritiveRun') && $oBookieParser->checkAuthoritiveRun() == true)
+            {
+                ScheduleChangeTracker::getInstance()->reportAuthoritiveRun($a_oParser->getBookieID());
+            }
+
             //Clear correlation table so that it is not shared between parsers
             ParseTools::clearCorrelations();
 
