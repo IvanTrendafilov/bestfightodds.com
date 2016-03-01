@@ -134,7 +134,7 @@ class ScheduleChangeTracker
         foreach ($this->aAuthoritiveRunBookies as $sKey => $sVal)
         {
             Logger::getInstance()->log('Bookie ' . $sKey  . ' reported an authoritive run. Performing cleanups', 0);
-            if (!array_key_exists($oUpMatch->getID(), $aProcessedBookieMatchups[$sKey]))
+            if (!array_key_exists($oUpMatch->getID(), $aProcessedBookieMatchups[$sKey]) && EventHandler::getLatestOddsForFightAndBookie($oUpMatch->getID(), $sKey) != null)
             {
                 //Only remove matchups that are > 24 hours away to avoid removing one the day matchups by accident
                 $datetime = new DateTime($oEvent->getDate());
@@ -150,7 +150,6 @@ class ScheduleChangeTracker
                     Logger::getInstance()->log('-Matchup: ' . $oUpMatch->getID() . ' was not found in feed but is too close in time to remove. Maybe manually remove?', 0);
                 }             
             }
-            EventHandler::getAllOddsForFightAndBookie($oUpMatch->getID(), $sKey);
         }
     }
 }
