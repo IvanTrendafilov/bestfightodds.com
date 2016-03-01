@@ -15,3 +15,4 @@ zip -j -9 -D $gdrivedir/$backupfilename.zip $backupdir/$backupfilename.sql
 echo 'Compression complete'
 cd $gdrivedir/
 $gdrivepath/drive push -no-prompt $backupfilename.zip
+rm $backupfilename.zip
