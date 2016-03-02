@@ -1,17 +1,17 @@
 function maAddEventWithMatchups(ma_id, inputdata)
 {
-	inputJSON = $.parseJSON(inputdata);
-	$.post("logic/api.php", {
+    inputJSON = $.parseJSON(inputdata);
+    $.post("logic/api.php", {
         apiFunction: 'addEvent',
         eventName: inputJSON.eventTitle,
         eventDate: inputJSON.eventDate
     }, function(data) {
-    	console.log('added event');
+        console.log('added event');
         result = $.parseJSON(data);
 
         $.when(maRecursiveAddMatchup(result, inputJSON, 0)          
         ).done(function() {
-        	console.log('all done');
+            console.log('all done');
             clearManulAction(ma_id);
         })
     });
@@ -60,7 +60,7 @@ function maAddMatchup(ma_id, inputdata)
         team1Name: inputJSON.matchups[0].team1,
         team2Name: inputJSON.matchups[0].team2
     }, function(data) {
-        console.log('renamed event');
+        console.log('added matchup');
         result = $.parseJSON(data);
         clearManulAction(ma_id);
     });
@@ -138,6 +138,20 @@ function clearManulAction(ma_id)
         $("#ma" + ma_id).find('td').css("text-decoration", "line-through");
         $("#ma" + ma_id).find('input[type=submit]').attr("disabled", "disabled");
     });
+    //TODO: Add check that things actually went good
+}
+
+function removeOddsForMatchupAndBookie(matchup_id, bookie_id)
+{
+    $.post("logic/api.php", {
+        apiFunction: 'removeOddsForMatchupAndBookie',
+        matchupID: matchup_id,
+        bookieID: bookie_id
+    }, function(data) {
+        result = $.parseJSON(data);
+        console.log('removed odds');
+    });
+    return;
     //TODO: Add check that things actually went good
 }
 

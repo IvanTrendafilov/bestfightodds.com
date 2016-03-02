@@ -327,6 +327,18 @@ class OddsHandler
         }
         return false;
     }
+
+    public static function removeOddsForMatchupAndBookie($a_iMatchupID, $a_iBookieID)
+    {
+        //First we remove all prop odds so that we don't leave any orphans
+        OddsHandler::removePropOddsForMatchupAndBookie($a_iMatchupID, $a_iBookieID);
+        return OddsDAO::removeOddsForMatchupAndBookie($a_iMatchupID, $a_iBookieID);
+    }
+
+    public static function removePropOddsForMatchupAndBookie($a_iMatchupID, $a_iBookieID)
+    {
+        return OddsDAO::removePropOddsForMatchupAndBookie($a_iMatchupID, $a_iBookieID);
+    }
 }
 
 ?>

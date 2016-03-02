@@ -3,3 +3,4 @@
 /app/front/pages/page.feed.xml
 /app/front/img/cache/*.png
 /node_modules/*
+/vendor/*

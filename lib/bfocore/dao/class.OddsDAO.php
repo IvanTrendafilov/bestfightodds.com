@@ -902,6 +902,30 @@ class OddsDAO
         return null;
     }
     
+    public static function removeOddsForMatchupAndBookie($a_iMatchupID, $a_iBookieID)
+    {
+        $sQuery = 'DELETE fo.*
+                    FROM fightodds fo
+                    WHERE
+                        fo.fight_id = ?
+                        AND fo.bookie_id = ?';
+        $aParams = [$a_iMatchupID, $a_iBookieID];
+        DBTools::doParamQuery($sQuery, $aParams);
+        return DBTools::getAffectedRows();
+    }
+
+    public static function removePropOddsForMatchupAndBookie($a_iMatchupID, $a_iBookieID)
+    {
+        $sQuery = 'DELETE lp.*
+                    FROM lines_props lp
+                    WHERE
+                        lp.matchup_id = ?
+                        AND lp.bookie_id = ?';
+        $aParams = [$a_iMatchupID, $a_iBookieID];
+        DBTools::doParamQuery($sQuery, $aParams);
+        return DBTools::getAffectedRows();
+    }
+
 }
 
 ?>

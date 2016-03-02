@@ -134,21 +134,24 @@ class ScheduleChangeTracker
         foreach ($this->aAuthoritiveRunBookies as $sKey => $sVal)
         {
             Logger::getInstance()->log('Bookie ' . $sKey  . ' reported an authoritive run. Performing cleanups', 0);
-            if (!array_key_exists($oUpMatch->getID(), $aProcessedBookieMatchups[$sKey]) && EventHandler::getLatestOddsForFightAndBookie($oUpMatch->getID(), $sKey) != null)
+            foreach ($aUpcomingMatchups as $oUpMatch)
             {
-                //Only remove matchups that are > 24 hours away to avoid removing one the day matchups by accident
-                $datetime = new DateTime($oEvent->getDate());
-                $nowdatetime = new Datetime();
-                $nowdatetime->modify('+1 day');
-                if ($datetime > $nowdatetime) 
+                if (!array_key_exists($oUpMatch->getID(), $aProcessedBookieMatchups[$sKey]) && EventHandler::getLatestOddsForFightAndBookie($oUpMatch->getID(), $sKey) != null)
                 {
-                    Logger::getInstance()->log('-Matchup: ' . $oUpMatch->getID() . ' was not found in feed and will be removed', 0);
-                    //TODO: Perform actual removal
-                }   
-                else
-                {
-                    Logger::getInstance()->log('-Matchup: ' . $oUpMatch->getID() . ' was not found in feed but is too close in time to remove. Maybe manually remove?', 0);
-                }             
+                    //Only remove matchups that are > 24 hours away to avoid removing one the day matchups by accident
+                    $datetime = new DateTime($oEvent->getDate());
+                    $nowdatetime = new Datetime();
+                    $nowdatetime->modify('+1 day');
+                    if ($datetime > $nowdatetime) 
+                    {
+                        Logger::getInstance()->log('-Matchup: ' . $oUpMatch->getID() . ' was not found in feed and will be removed <a href="#/" onclick="removeOddsForMatchupAndBookie(\'' . $oUpMatch->getID() . '\',\'' . $sKey . '\')">remove</a>', 0);
+                        //TODO: Perform actual removal
+                    }   
+                    else
+                    {
+                        Logger::getInstance()->log('-Matchup: ' . $oUpMatch->getID() . ' was not found in feed but is too close in time to remove. Maybe manually remove?', 0);
+                    }             
+                }
             }
         }
     }

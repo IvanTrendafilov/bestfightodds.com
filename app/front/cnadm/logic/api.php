@@ -1,15 +1,13 @@
 <?php
 
-//BFO Admin API
-
+//Admin API
 
 require_once('lib/bfocore/general/class.EventHandler.php');
+require_once('lib/bfocore/general/class.OddsHandler.php');
 require_once('lib/bfocore/general/class.ScheduleHandler.php');
-
 
 $oInstance = AdminAPI::getInstance();
 $oInstance->processCall();
-
 
 class AdminAPI
 {
@@ -175,6 +173,25 @@ class AdminAPI
     			}
 				$this->returnError('0004', 'Error when redating event');
 				break;
+
+
+		    case 'removeOddsForMatchupAndBookie':
+		    	if (!$this->isPOST())
+				{
+					$this->returnError('0005', 'Must be called as POST');
+					break;	
+				}
+				if (!$this->getParam('matchupID') || !$this->getParam('bookieID'))
+				{
+					$this->returnError('0003', 'Missing parameters');
+					break;
+				}
+				if (OddsHandler::removeOddsForMatchupAndBookie($this->getParam('matchupID'), $this->getParam('bookieID')))
+				{
+					$this->returnSuccess('Odds removed', array('matchupID' => $this->getParam('matchupID'), 'bookieID' => $this->getParam('bookieID')));
+				}
+		        $this->returnError('0004', 'Error when removing odds for matchup/bookie');
+		        break;
 
 			default:
 				$this->returnError('0002', 'Invalid function');
