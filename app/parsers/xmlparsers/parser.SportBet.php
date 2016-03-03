@@ -106,6 +106,17 @@ class XMLParserSportBet
                         }
                         $oParsedSport->addFetchedProp($oParsedProp);
                     }
+                    else if (!empty($cEvent->TotalPoints) && !empty($cEvent->TotalPointsOverPrice) && !empty($cEvent->TotalPointsUnderPrice))
+                    {
+                        //Custom totals prop bet
+                        $oParsedProp = new ParsedProp(
+                                      (string) $cEvent->HomeTeamID . ' - OVER ' . (string) $cEvent->TotalPoints,
+                                      (string) $cEvent->VisitorTeamID . ' - UNDER ' . (string) $cEvent->TotalPoints,
+                                      (string) $cEvent->TotalPointsOverPrice,
+                                      (string) $cEvent->TotalPointsUnderPrice);
+                        $oParsedProp->setCorrelationID((string) $cEvent->CorrelationId);
+                        $oParsedSport->addFetchedProp($oParsedProp);
+                    }
                     else
                     {
                         //Unhandled prop
@@ -119,9 +130,7 @@ class XMLParserSportBet
                 {
                     //TODO: Temporary fix below to exclude mcgregor/dos anjos local fights
                    if ((trim((string) $cEvent->HomeMoneyLine) != '')
-                    && (trim((string) $cEvent->VisitorMoneyLine) != '')
-                    && (trim((string) $cEvent->GameNumber) != '349182325')
-                    && (trim((string) $cEvent->GameNumber) != '349182820'))
+                    && (trim((string) $cEvent->VisitorMoneyLine) != ''))
                         {
                         $oParsedMatchup = new ParsedMatchup(
                                         (string) $cEvent->HomeTeamID,
