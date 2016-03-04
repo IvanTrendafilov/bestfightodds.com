@@ -42,6 +42,7 @@
                         <a href="/archive"><div class="header-menu-item <?php echo (CURRENT_PAGE == 'archive' || CURRENT_PAGE == 'fighter' || CURRENT_PAGE == 'event' || CURRENT_PAGE == 'search_results') ? ' header-menu-selected ' : ''; ?>">Archive</div></a>
                         <a href="/alerts"><div class="header-menu-item <?php echo CURRENT_PAGE == 'alerts' ? ' header-menu-selected ' : ''; ?>">Alerts</div></a>
                         <a href="/links"><div class="header-menu-item <?php echo CURRENT_PAGE == 'links' ? ' header-menu-selected ' : ''; ?> item-non-mobile">Widget</div></a>
+                        <a href="https://www.proboxingodds.com" target="_blank"><div class="header-menu-item <?php echo CURRENT_PAGE == 'links' ? ' header-menu-selected ' : ''; ?> " style="padding-right: 3px;">Boxing<span style="font-size: 9px; color: #ff0000; padding-left: 3px; vertical-align: top;">New</span> </div></a>
                         <a href="http://twitter.com/bestfightodds" target="_blank"><div class="header-menu-item"><img src="/img/twitter.png" id="twitter-icon" alt="Twitter icon" /></div></a>
                         <div id="header-menu-right">
                            <div id="parlay-mode-container" 
