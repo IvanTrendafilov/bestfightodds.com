@@ -16,12 +16,14 @@ class XMLParser
      * Retrieves the feed from the bookie and launches the bookie specific XML parser. The
      * result is then passed to the parseEvents function to store the new odds.
      *
-     * @param string $a_sBookie Bookie name
+     * @param string $a_oParser BookieParser object
      * @return boolean If dispatch was successful or not
      *
      */
     public static function dispatch($a_oParser)
     {
+        $aAuthorativeMetadata = [];
+
         $oLogger = Logger::getInstance();
         $oLogger->log("============== " . $a_oParser->getName() . " ===============");
 
@@ -44,6 +46,7 @@ class XMLParser
                 {
                     $sURL .= $a_oParser->getChangenumSuffix() . $iChangeNum;    
                 }
+                $aAuthorativeMetadata['changenum'] = $iChangeNum;
             }
 
             //Check if page already has been fetched using multifetch
@@ -84,8 +87,9 @@ class XMLParser
                 $oSport->mergeMatchups();
             }
 
+            
             //Check with parser if authorative run was declared. If so, inform schedule change tracker
-            if (PARSE_CREATEMATCHUPS == true && method_exists($oBookieParser, 'checkAuthoritiveRun') && $oBookieParser->checkAuthoritiveRun() == true)
+            if (PARSE_CREATEMATCHUPS == true && method_exists($oBookieParser, 'checkAuthoritiveRun') && $oBookieParser->checkAuthoritiveRun($aAuthorativeMetadata) == true)
             {
                 ScheduleChangeTracker::getInstance()->reportAuthoritiveRun($a_oParser->getBookieID());
             }
@@ -350,11 +354,11 @@ class XMLParser
                 }
 
                 //If bookie provides gametime, add it to the schedule change tracker to potentially propose a date change
-                if (PARSE_CREATEMATCHUPS == true && isset($aMeta['gametime']))
+                if (PARSE_CREATEMATCHUPS == true && $oMatchedMatchup != null && isset($aMeta['gametime']))
                 {
                     ScheduleChangeTracker::getInstance()->addMatchup(['matchup_id' => $oMatchedMatchup->getID(),
                                                                 'bookie_id' => $a_iBookieID,
-                                                                'date' => $aMeta['gametime']]);
+                                                                'date' => (isset($aMeta['gametime']) ? $aMeta['gametime'] : '')]);
                 }
             }
             $oLogger->log("Total matched matchups: " . $iMatchupCount . ' / ' . $iTotalCount, 0);

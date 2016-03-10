@@ -12,8 +12,7 @@ class ScheduleChangeTracker
     public function addMatchup($a_aMatchup)
     {
         if (isset($a_aMatchup['bookie_id']) && 
-            isset($a_aMatchup['matchup_id']) &&
-            isset($a_aMatchup['date']))
+            isset($a_aMatchup['matchup_id']))
         {
             $this->aMatchups[] = $a_aMatchup;
             return true;
@@ -84,6 +83,7 @@ class ScheduleChangeTracker
         $aUpcomingMatchups = EventHandler::getAllUpcomingMatchups(true);
         $aProcessedBookieMatchups = [];
 
+        //Routine to move matchup if parser has suggested it
         foreach ($aUpcomingMatchups as $oUpMatch)
         {
             $sFoundNewDate = '';
@@ -92,7 +92,7 @@ class ScheduleChangeTracker
             $oCurDate = new DateTime($oEvent->getDate());
             foreach ($this->aMatchups as $aMatchup)
             {
-                if ($aMatchup['matchup_id'] == $oUpMatch->getID())
+                if ($aMatchup['matchup_id'] == $oUpMatch->getID() && isset($aMatchup['date']) && $aMatchup['date'] != '')
                 {
                     $aProcessedBookieMatchups[$aMatchup['bookie_id']][$aMatchup['matchup_id']] = true;
                     $oNewDate = new DateTime();
@@ -149,7 +149,7 @@ class ScheduleChangeTracker
                     }   
                     else
                     {
-                        Logger::getInstance()->log('-Matchup: ' . $oUpMatch->getID() . ' was not found in feed but is too close in time to remove. Maybe manually remove?', 0);
+                        Logger::getInstance()->log('-Matchup: ' . $oUpMatch->getID() . ' was not found in feed but is too close in time to remove. Maybe manually remove? <a href="#/" onclick="removeOddsForMatchupAndBookie(\'' . $oUpMatch->getID() . '\',\'' . $sKey . '\')">remove</a>', 0);
                     }             
                 }
             }
