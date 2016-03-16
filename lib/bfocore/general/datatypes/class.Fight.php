@@ -13,6 +13,7 @@ class Fight
     private $iFighter2ID;
     private $bOrderChanged;
     private $bIsMainEvent;
+    private $aMetadata;
 
     /**
      * Constructor
@@ -48,6 +49,7 @@ class Fight
             $this->iEventID = $a_iEventID;
         }
         $this->sComment = $a_sComment;
+        $this->aMetadata = [];
     }
 
     /**
@@ -284,7 +286,15 @@ class Fight
         }
     }
 
+    public function setMetadata($a_sAttribute, $a_sValue)
+    {
+        $this->aMetadata[(string) $a_sAttribute] = (string) $a_sValue;
+    }
 
+    public function getMetadata($a_sAttribute)
+    {
+        return isset($this->aMetadata[(string) $a_sAttribute]) ? $this->aMetadata[(string) $a_sAttribute] : false;
+    }
 }
 
 ?>

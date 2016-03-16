@@ -31,6 +31,19 @@ class XMLParser
 
         //Fetch XML file. But first check if mock feeds mode is on, if so fetch feeds from static files instead of real URL feeds
         $sXML = null;
+        $sURL = $a_oParser->getParseURL();
+
+        //Add changenums if in use
+        if ($a_oParser->hasChangenumInUse())
+        {
+            $iChangeNum = BookieHandler::getChangeNum($a_oParser->getBookieID());
+            if ($iChangeNum != -1)
+            {
+                $sURL .= $a_oParser->getChangenumSuffix() . $iChangeNum;    
+            }
+            $aAuthorativeMetadata['changenum'] = $iChangeNum;
+        }
+
         if (PARSE_MOCKFEEDS_ON == true)
         {
             $oLogger->log("Note: Using mock file at " . PARSE_MOCKFEEDS_DIR . $a_oParser->getMockFile() . "", 0);
@@ -38,17 +51,6 @@ class XMLParser
         }
         else
         {
-            $sURL = $a_oParser->getParseURL();
-            if ($a_oParser->hasChangenumInUse())
-            {
-                $iChangeNum = BookieHandler::getChangeNum($a_oParser->getBookieID());
-                if ($iChangeNum != -1)
-                {
-                    $sURL .= $a_oParser->getChangenumSuffix() . $iChangeNum;    
-                }
-                $aAuthorativeMetadata['changenum'] = $iChangeNum;
-            }
-
             //Check if page already has been fetched using multifetch
             $sXML = ParseTools::getStoredContentForURL($sURL);
             if ($sXML == null)
@@ -87,7 +89,6 @@ class XMLParser
                 $oSport->mergeMatchups();
             }
 
-            
             //Check with parser if authorative run was declared. If so, inform schedule change tracker
             if (PARSE_CREATEMATCHUPS == true && method_exists($oBookieParser, 'checkAuthoritiveRun') && $oBookieParser->checkAuthoritiveRun($aAuthorativeMetadata) == true)
             {
@@ -353,8 +354,8 @@ class XMLParser
                     $oLogger->log('--- unmatched matchup: ' . $oTempMatchup->getFighter(1) . ' vs ' . $oTempMatchup->getFighter(2) . ' [<a href="?p=addNewFightForm&inFighter1=' . $oTempMatchup->getFighter(1) . '&inFighter2=' . $oTempMatchup->getFighter(2) . '">add</a>] [<a href="http://www.google.se/search?q=' . $oTempMatchup->getFighterAsString(1) . ' vs ' . $oTempMatchup->getFighterAsString(2) . '">google</a>]', -1);
                 }
 
-                //If bookie provides gametime, add it to the schedule change tracker to potentially propose a date change
-                if (PARSE_CREATEMATCHUPS == true && $oMatchedMatchup != null && isset($aMeta['gametime']))
+                //Add it to the schedule change tracker to potentially propose a date change or removal
+                if (PARSE_CREATEMATCHUPS == true && $oMatchedMatchup != null)
                 {
                     ScheduleChangeTracker::getInstance()->addMatchup(['matchup_id' => $oMatchedMatchup->getID(),
                                                                 'bookie_id' => $a_iBookieID,

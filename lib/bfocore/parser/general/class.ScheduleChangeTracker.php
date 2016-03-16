@@ -92,25 +92,28 @@ class ScheduleChangeTracker
             $oCurDate = new DateTime($oEvent->getDate());
             foreach ($this->aMatchups as $aMatchup)
             {
-                if ($aMatchup['matchup_id'] == $oUpMatch->getID() && isset($aMatchup['date']) && $aMatchup['date'] != '')
+                if ($aMatchup['matchup_id'] == $oUpMatch->getID())
                 {
                     $aProcessedBookieMatchups[$aMatchup['bookie_id']][$aMatchup['matchup_id']] = true;
-                    $oNewDate = new DateTime();
-                    $oNewDate->setTimestamp($aMatchup['date']);
-                    //Subtract 6 hours to adjust for timezones (but not for future events)
-                    if ($oNewDate->format('Y-m-d') != $sFutureEventDate)
+                    if (isset($aMatchup['date']) && $aMatchup['date'] != '')
                     {
-                        $oNewDate->sub(new DateInterval('PT6H'));
-                    }
-                    //Check that new date is other than current and also that it is not in the past 
-                    if ($oNewDate->format('Y-m-d') != $oCurDate->format('Y-m-d') &&
-                        new DateTime() < $oNewDate)
-                    {
-                        //We'll favour the earliest date since it is most likely to not be a preliminary date
-                        if ($sFoundNewDate == '' || $oNewDate->format('Y-m-d') < $sFoundNewDate)
+                        $oNewDate = new DateTime();
+                        $oNewDate->setTimestamp($aMatchup['date']);
+                        //Subtract 6 hours to adjust for timezones (but not for future events)
+                        if ($oNewDate->format('Y-m-d') != $sFutureEventDate)
                         {
-                            $sFoundNewDate = $oNewDate->format('Y-m-d');
-                            $sFoundOwner = $aMatchup['bookie_id'];
+                            $oNewDate->sub(new DateInterval('PT6H'));
+                        }
+                        //Check that new date is other than current and also that it is not in the past 
+                        if ($oNewDate->format('Y-m-d') != $oCurDate->format('Y-m-d') &&
+                            new DateTime() < $oNewDate)
+                        {
+                            //We'll favour the earliest date since it is most likely to not be a preliminary date
+                            if ($sFoundNewDate == '' || $oNewDate->format('Y-m-d') < $sFoundNewDate)
+                            {
+                                $sFoundNewDate = $oNewDate->format('Y-m-d');
+                                $sFoundOwner = $aMatchup['bookie_id'];
+                            }
                         }
                     }
                 }

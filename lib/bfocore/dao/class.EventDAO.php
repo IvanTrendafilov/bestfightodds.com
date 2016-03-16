@@ -115,6 +115,7 @@ class EventDAO
             $oTempFight->setFighterID(1, $aFight['fighter1_id']);
             $oTempFight->setFighterID(2, $aFight['fighter2_id']);
             $oTempFight->setMainEvent($aFight['is_mainevent']);
+            $oTempFight->setMetadata('gametime', $aFight['gametime']);
             $aFights[] = $oTempFight;
         }
 
