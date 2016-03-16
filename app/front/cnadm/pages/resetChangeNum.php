@@ -24,7 +24,7 @@ if (isset($_GET['bookie_id']))
 	}
 	else
 	{
-		BookieHandler::saveChangeNum($_GET['bookie_id'], '-1');
+		BookieHandler::resetChangeNum($_GET['bookie_id']);
 		$oBookie = BookieHandler::getBookieByID($_GET['bookie_id']);
 		echo 'Changenum cleared for ' . $oBookie->getName() . '. New value: ' . BookieHandler::getChangeNum($_GET['bookie_id']);
 	}
