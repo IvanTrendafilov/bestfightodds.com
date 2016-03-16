@@ -113,9 +113,11 @@ class BookieDAO
 
     public static function saveChangeNum($a_iBookieID, $a_sChangeNum)
     {
-        $sQuery = 'UPDATE bookies_changenums SET changenum = ? WHERE bookie_id = ?';
+        $sQuery = 'UPDATE bookies_changenums bcn
+                    INNER JOIN bookies_parsers bp ON bcn.bookie_id = bp.bookie_id
+                    SET bcn.changenum = bp.cn_initial WHERE bcn.bookie_id = ?';
 
-        $aParams = array($a_sChangeNum, $a_iBookieID);
+        $aParams = array($a_iBookieID);
 
         $bResult = DBTools::doParamQuery($sQuery, $aParams);
 
@@ -140,7 +142,7 @@ class BookieDAO
     public static function resetAllChangeNums()
     {
         $sQuery = 'UPDATE bookies_changenums bcn
-                    INNER JOIN bookies_parsers bp ON bcn.bookie_id = bp.id
+                    INNER JOIN bookies_parsers bp ON bcn.bookie_id = bp.bookie_id
                     SET bcn.changenum = bp.cn_initial';
         $bResult = DBTools::doQuery($sQuery);
         if ($bResult == false)
