@@ -110,7 +110,6 @@ class ParseTools
 
     public static function retrieveMultiplePagesFromURLs($a_aURLs)
     {
-        self::$aFeedStorage = array();
         $aChannels = array();
         $mh = curl_multi_init();
 

@@ -8,7 +8,7 @@ header('Cache-Control: no-cache, no-store, max-age=0, must-revalidate');
 header('Expires: Mon, 12 Jul 1996 04:11:00 GMT'); //Any date passed.
 header('Pragma: no-cache');
 
-$keys = array('fightmagazine2518'); //FIGHT! Magazine
+$keys = array('bfotest', 'paulm201603'); //Paul Melluzzo paul.d.melluzzo@gmail.com
 
 if (!isset($_GET['key']) || !in_array($_GET['key'], $keys))
 {
