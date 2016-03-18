@@ -66,10 +66,28 @@ class EventHandler
      *
      * @param Fight $a_oFight
      * @return Fight Matching fight
+     * @deprecated Use getMatchinFightV2() instead
      */
     public static function getMatchingFight($a_oFight)
     {
         return EventDAO::getFight($a_oFight->getFighter(1), $a_oFight->getFighter(2), $a_oFight->getEventID());
+    }
+
+    //New version of getFight above. Improvements are the possibility of finding old matchups
+    //Params:
+    //team1_name = Required
+    //team2_name = Required
+    //future_only = Optional
+    //event_id = Optional
+    /**
+     * Get matching fight (V2)
+     *
+     * @param Fight $a_oFight
+     * @return Fight Matching fight
+     */
+    public static function getMatchingFightV2($a_aParams)
+    {
+        return EventDAO::getMatchingFightV2($a_aParams);
     }
 
     public static function getFightByID($a_iID)
@@ -354,6 +372,23 @@ class EventHandler
     {
         return EventDAO::getLatestChangeDate($a_iEventID);
     }
+
+
+    public static function getAllEventsWithMatchupsWithoutResults()
+    {
+        return EventDAO::getAllEventsWithMatchupsWithoutResults();
+    }
+
+    public static function addMatchupResults($a_aParams)
+    {
+        return EventDAO::addMatchupResults($a_aParams);
+    }
+
+    public static function getResultsForMatchup($a_iMatchup_ID)
+    {
+        return EventDAO::getResultsForMatchup($a_iMatchup_ID);
+    }
+
 }
 
 ?>

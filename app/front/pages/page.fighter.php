@@ -64,6 +64,7 @@ else
                         $oFightOdds1 = EventHandler::getBestOddsForFightAndFighter($oFight->getID(), 1);
                         $oFightOdds2 = EventHandler::getBestOddsForFightAndFighter($oFight->getID(), 2);
                         $aOddsForFight = EventHandler::getAllLatestOddsForFight($oFight->getID());
+                        $aResults = EventHandler::getResultsForMatchup($oFight->getID());
 
                         $oFighter1Low = null;
                         $oFighter2Low = null;
@@ -100,7 +101,7 @@ else
                         }
                         ?>
                                 <tr class="event-header item-mobile-only-row">
-                                    <td colspan="8 scope="row"><a href="/events/<?php echo $oEvent->getEventAsLinkString(); ?>"><?php echo $oEvent->getName(); ?></a> <?php echo $sEventDate; ?></td>
+                                    <td colspan="8" scope="row"><a href="/events/<?php echo $oEvent->getEventAsLinkString(); ?>"><?php echo $oEvent->getName(); ?></a> <?php echo $sEventDate; ?></td>
                                 </tr>                            
                                 <?php
                                 if ($oFightOdds1 != null && $oFightOdds2 != null && $oEvent != null)
@@ -108,6 +109,7 @@ else
                                     ?>
 
                                     <tr class="main-row">
+                                        <td class="resultcell <?php echo $aResults['winner'] != '' ? $aResults['winner'] == $oFighter->getID() ? 'wincell' : 'losecell' : ''; ?>"></td>
                                         <th class="oppcell"><?php echo '<a href="/fighters/' . $oFight->getFighterAsLinkString($iTeamPos) . '"><div>' . $oFight->getFighterAsString($iTeamPos) . '</div></a>'; ?></td>
                                         <td class="moneyline" style="padding-right: 4px;"><span id="oID<?php echo $iCellCounter++; ?>"><?php echo $oOpeningOdds->getFighterOddsAsString($iTeamPos); ?></span></td>
                                         <td class="moneyline"><span id="oID<?php echo $iCellCounter++; ?>"><?php echo $oFighter1Low->getFighterOddsAsString(1); ?></span></td>
@@ -136,6 +138,7 @@ else
                                                 <td class="item-non-mobile" scope="row" style="padding-left: 20px"><a href="/events/<?php echo $oEvent->getEventAsLinkString(); ?>" ><?php echo $oEvent->getName(); ?></a></th>
                                             </tr>
                                             <tr>
+                                                <td class="resultcell <?php echo $aResults['winner'] != '' ? $aResults['winner'] == $oFighter->getID() ? 'wincell' : 'losecell' : ''; ?>"></td>
                                                 <th class="oppcell"><?php echo '<a href="/fighters/' . $oFight->getFighterAsLinkString($iOtherPos) . '"><div>' . $oFight->getFighterAsString($iOtherPos) . '</div></a>'; ?></td>
                                                 <td class="moneyline" style="padding-right: 4px;"><span id="oID<?php echo $iCellCounter++; ?>"><?php echo $oOpeningOdds->getFighterOddsAsString($iOtherPos); ?></span></td>
                                                 <td class="moneyline"><span id="oID<?php echo $iCellCounter++; ?>"><?php echo $oFighter2Low->getFighterOddsAsString(2); ?></span></td>
@@ -150,6 +153,7 @@ else
                                 {
                                     ?>
                                     <tr class="main-row">
+                                        <td class="resultcell <?php echo $aResults['winner'] != '' ? $aResults['winner'] == $oFighter->getID() ? 'wincell' : 'losecell' : ''; ?>"></td>
                                         <th class="oppcell"><?php echo '<a href="/fighters/' . $oFight->getFighterAsLinkString($iTeamPos) . '">' . $oFight->getFighterAsString($iTeamPos) . '</a>'; ?></td>
                                         <td class="moneyline"></td>
                                         <td class="moneyline">n/a</td>
@@ -160,6 +164,7 @@ else
                                         <td class="item-non-mobile" scope="row" style="padding-left: 20px"><a href="/events/<?php echo $oEvent->getEventAsLinkString(); ?>" ><?php echo $oEvent->getName(); ?></a></th>
                                     </tr>
                                     <tr>
+                                             <td class="resultcell <?php echo $aResults['winner'] != '' ? $aResults['winner'] == $oFighter->getID() ? 'wincell' : 'losecell' : ''; ?>"></td>
                                         <th class="oppcell"><?php echo '<a href="/fighters/' . $oFight->getFighterAsLinkString($iOtherPos) . '">' . $oFight->getFighterAsString($iOtherPos) . '</a>'; ?></td>
                                         <td class="moneyline"></td>
                                         <td class="moneyline">n/a</td>

@@ -330,6 +330,7 @@ fo2.bookie_id, fo2.fight_id ASC;';
     public static function getFight($a_sFighter1, $a_sFighter2, $a_iEventID = -1)
     {
 
+
         $sExtraWhere = '';
         if ($a_iEventID != -1)
         {
@@ -401,7 +402,96 @@ fo2.bookie_id, fo2.fight_id ASC;';
                 }
             }
         }
+        //No matching fight found
+        return null;
+    }
 
+    //New version of getFight above. Improvements are the possibility of finding old matchups
+    //Params:
+    //team1_name = Required
+    //team2_name = Required
+    //future_only = Optional
+    //event_id = Optional
+    public static function getMatchingFightV2($a_aParams)
+    {
+        $sExtraWhere = '';
+        $aQueryParams = [];
+        if (isset($a_aParams['future_only']) && $a_aParams['future_only'] == true)
+        {
+            $sExtraWhere .= ' AND LEFT(e.date, 10) >= LEFT((NOW() - INTERVAL 2 HOUR), 10)';
+        }
+        if (isset($a_aParams['event_id']) && is_numeric($a_aParams['event_id']) && $a_aParams['event_id'] != -1)
+        {
+            $sExtraWhere = ' AND event_id = ' . DBTools::makeParamSafe($a_aParams['event_id']) . '';
+            $aQueryParams[] = $a_aParams['event_id'];
+        }
+        $sQuery = 'SELECT 1 AS original, t.id, a.name AS fighter1_name, a.id as fighter1_id, b.name AS fighter2_name, b.id as fighter2_id, t.event_id
+                      FROM events e, fights t
+                          JOIN fighters a ON a.id = t.fighter1_id
+                          JOIN fighters b ON b.id = t.fighter2_id WHERE e.id = event_id ' . $sExtraWhere . '
+                    UNION SELECT 0 AS original, t.id, a.altname, a.fighter_id, b.altname, b.fighter_id, t.event_id
+                      FROM events e, fights t
+                          JOIN fighters_altnames a ON a.fighter_id = fighter1_id
+                          JOIN fighters_altnames b ON b.fighter_id = fighter2_id WHERE e.id = event_id ' . $sExtraWhere . '
+                    UNION SELECT 0 AS original, t.id, a.name, a.id, b.altname, b.fighter_id, t.event_id
+                      FROM events e, fights t
+                          JOIN fighters a ON a.id = t.fighter1_id
+                          JOIN fighters_altnames b ON b.fighter_id = fighter2_id WHERE e.id = event_id ' . $sExtraWhere . '
+                    UNION SELECT 0 AS original, t.id, a.altname, a.fighter_id, b.name, b.id, t.event_id
+                      FROM events e, fights t
+                          JOIN fighters b ON b.id = fighter2_id
+                          JOIN fighters_altnames a ON a.fighter_id = fighter1_id WHERE e.id = event_id ' . $sExtraWhere . ' ';
+
+        $rResult = DBTools::getCachedQuery($sQuery);
+        if ($rResult == null)
+        {
+            $rResult = DBTools::doQuery($sQuery);
+            DBTools::cacheQueryResults($sQuery, $rResult);
+        }
+
+        while ($aFight = mysql_fetch_array($rResult))
+        {
+            $oTempFight = new Fight($aFight['id'], $aFight['fighter1_name'], $aFight['fighter2_name'], $aFight['event_id']);
+            if ($aFight['fighter1_name'] > $aFight['fighter2_name'])
+            {
+                $oTempFight->setComment('switched');
+            }
+
+            if (OddsTools::compareNames($oTempFight->getFighter(1), $a_aParams['team1_name']) > 82)
+            {
+                if (OddsTools::compareNames($oTempFight->getFighter(2), $a_aParams['team2_name']) > 82)
+                {
+                    $aFoundFight = null;
+                    if ($aFight['original'] == '0')
+                    {
+                        $aFoundFight = EventDAO::getFightByID($aFight['id']);
+
+                        $bCheckFight = EventDAO::isFightOrderedInDatabase($aFight['id']);
+                        if ($bCheckFight == true)
+                        {
+                            if ($oTempFight->getComment() == 'switched')
+                            {
+                                $aFoundFight->setComment('switched');
+                            }
+                        }
+                        else
+                        {
+                            if ($oTempFight->getComment() != 'switched')
+                            {
+                                $aFoundFight->setComment('switched');
+                            }
+                        }
+                    }
+                    else
+                    {
+                        $aFoundFight = new Fight($aFight['id'], $aFight['fighter1_name'], $aFight['fighter2_name'], $aFight['event_id']);
+                        $aFoundFight->setFighterID(1, $aFight['fighter1_id']);
+                        $aFoundFight->setFighterID(2, $aFight['fighter2_id']);
+                    }
+                    return $aFoundFight;
+                }
+            }
+        }
         //No matching fight found
         return null;
     }
@@ -923,6 +1013,54 @@ fo2.bookie_id, fo2.fight_id ASC;';
 
         $rResult = DBTools::doParamQuery($sQuery, $aParams);
         return DBTools::getSingleValue($rResult);
+    }
+
+    public static function getAllEventsWithMatchupsWithoutResults()
+    {
+        $sQuery = 'SELECT DISTINCT e.* FROM fights f INNER JOIN events e ON f.event_id = e.id WHERE f.id NOT IN (SELECT mr.matchup_id FROM matchups_results mr);';
+        $rResult = DBTools::doQuery($sQuery);
+        $aEvents = array();
+        while ($aEvent = mysql_fetch_array($rResult))
+        {
+            $aEvents[] = new Event($aEvent['id'], $aEvent['date'], $aEvent['name'], $aEvent['display']);
+        }
+        return $aEvents;
+    }
+
+    public static function addMatchupResults($a_aParams)
+    {
+        if (!isset($a_aParams['matchup_id'], $a_aParams['winner']))
+        {
+            return false;
+        }
+        $aQueryParams[] = $a_aParams['matchup_id']; 
+        $aQueryParams[] = $a_aParams['winner'];
+        $aQueryParams[] = isset($a_aParams['method']) ? $a_aParams['method'] : '';
+        $aQueryParams[] = isset($a_aParams['endround']) ? $a_aParams['endround'] : -1;
+        $aQueryParams[] = isset($a_aParams['endtime']) ? $a_aParams['endtime'] : '';
+
+        $sQuery = 'REPLACE INTO matchups_results(matchup_id, winner, method, endround, endtime) 
+                    VALUES (?,?,?,?,?)';
+
+        $bResult = DBTools::doParamQuery($sQuery, $aQueryParams);
+        if ($bResult == false)
+        {
+            return false;
+        }
+        return true;
+
+    }
+
+    public static function getResultsForMatchup($a_iMatchup_ID)
+    {
+        $sQuery = 'SELECT matchup_id, winner, method, endround, endtime FROM matchups_results WHERE matchup_id = ?';
+        $rResult = DBTools::doParamQuery($sQuery, [$a_iMatchup_ID]);
+
+        if ($aResult = mysql_fetch_array($rResult))
+        {
+            return $aResult; 
+        }
+        return null;
     }
 }
 

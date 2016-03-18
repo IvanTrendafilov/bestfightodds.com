@@ -177,3 +177,12 @@ CREATE TABLE `lines_eventprops` (
   `date` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   PRIMARY KEY (`event_id`,`bookie_id`,`date`,`proptype_id`)
 ) ENGINE=MyISAM DEFAULT CHARSET=latin1;
+
+CREATE TABLE `matchups_results` (
+  `matchup_id` INT(11) NOT NULL,
+  `winner` INT(11) NULL DEFAULT '-1',
+  `method` VARCHAR(200) NULL DEFAULT NULL,
+  `endround` TINYINT(2) NULL DEFAULT NULL,
+  `endtime` VARCHAR(20) NULL DEFAULT NULL,
+  PRIMARY KEY (`matchup_id`)
+) ENGINE=MyISAM DEFAULT CHARSET=latin1;

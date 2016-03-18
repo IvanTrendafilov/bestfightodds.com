@@ -1,5 +1,6 @@
 {
     "require": {
-        "respect/validation": "^1.0"
+        "respect/validation": "^1.0",
+        "katzgrau/klogger": "dev-master"
     }
 }

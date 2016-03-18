@@ -983,6 +983,15 @@ table.team-stats-table {
           cursor: pointer;
         }
       }
+      &.resultcell {
+        background-color: #c0c0c0;
+      }
+      &.wincell {
+        background-color: #00ff00;
+      }
+      &.losecell {
+        background-color: #ff0000;
+      }
     }
   }
   a {
