@@ -4,3 +4,5 @@
 /app/front/img/cache/*.png
 /node_modules/*
 /vendor/*
+/log/*
+/logs/*
