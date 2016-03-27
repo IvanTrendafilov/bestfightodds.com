@@ -60,6 +60,19 @@ class TeamDAO
         return DBTools::getSingleValue($rResult);
     }
 
+
+    public static function getAllTeamsWithMissingResults()
+    {
+        $sQuery = 'SELECT DISTINCT f.* FROM fighters f INNER JOIN fights fi ON (fi.fighter1_id = f.id OR fi.fighter2_id = f.id) WHERE fi.id NOT IN (SELECT mr.matchup_id FROM matchups_results mr);';
+        $rResult = DBTools::doQuery($sQuery);
+        $aFighters = [];
+        while ($aFighter = mysql_fetch_array($rResult))
+        {
+            $aFighters[] = new Fighter($aFighter['name'], $aFighter['id']);
+        }
+        return $aFighters;
+    }
+
 }
 
 ?>

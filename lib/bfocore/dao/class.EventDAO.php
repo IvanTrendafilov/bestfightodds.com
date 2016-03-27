@@ -411,6 +411,9 @@ fo2.bookie_id, fo2.fight_id ASC;';
     //team1_name = Required
     //team2_name = Required
     //future_only = Optional
+    //past_only = Optional
+    //known_fighter_id = Optional
+    //event_date = Optional (format: yyyy-mm-dd)
     //event_id = Optional
     public static function getMatchingFightV2($a_aParams)
     {
@@ -420,11 +423,23 @@ fo2.bookie_id, fo2.fight_id ASC;';
         {
             $sExtraWhere .= ' AND LEFT(e.date, 10) >= LEFT((NOW() - INTERVAL 2 HOUR), 10)';
         }
+        if (isset($a_aParams['past_only']) && $a_aParams['past_only'] == true)
+        {
+            $sExtraWhere .= ' AND LEFT(e.date, 10) < LEFT((NOW() - INTERVAL 2 HOUR), 10)';
+        }
         if (isset($a_aParams['event_id']) && is_numeric($a_aParams['event_id']) && $a_aParams['event_id'] != -1)
         {
             $sExtraWhere = ' AND event_id = ' . DBTools::makeParamSafe($a_aParams['event_id']) . '';
-            $aQueryParams[] = $a_aParams['event_id'];
         }
+        if (isset($a_aParams['known_fighter_id']) && is_numeric($a_aParams['known_fighter_id']))
+        {
+            $sExtraWhere = ' AND (fighter1_id = ' . DBTools::makeParamSafe($a_aParams['known_fighter_id']) . ' OR fighter2_id = ' . DBTools::makeParamSafe($a_aParams['known_fighter_id']) . ')';
+        }
+        if (isset($a_aParams['event_date']))
+        {
+            $sExtraWhere = ' AND LEFT(e.date, 10) = \'' . DBTools::makeParamSafe($a_aParams['event_date']) . '\'';
+        }
+
         $sQuery = 'SELECT 1 AS original, t.id, a.name AS fighter1_name, a.id as fighter1_id, b.name AS fighter2_name, b.id as fighter2_id, t.event_id
                       FROM events e, fights t
                           JOIN fighters a ON a.id = t.fighter1_id

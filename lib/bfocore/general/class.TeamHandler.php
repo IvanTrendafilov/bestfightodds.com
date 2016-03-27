@@ -24,6 +24,11 @@ class TeamHandler
      	return TeamDAO::getLastChangeDate($a_iFighterID);
     }
 
+    public static function getAllTeamsWithMissingResults()
+    {
+        return TeamDAO::getAllTeamsWithMissingResults();
+    }
+
 }
 
 ?>
