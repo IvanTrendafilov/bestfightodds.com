@@ -63,6 +63,7 @@ class TeamDAO
 
     public static function getAllTeamsWithMissingResults()
     {
+        //TODO: Modify to only fetch old events
         $sQuery = 'SELECT DISTINCT f.* FROM fighters f INNER JOIN fights fi ON (fi.fighter1_id = f.id OR fi.fighter2_id = f.id) WHERE fi.id NOT IN (SELECT mr.matchup_id FROM matchups_results mr);';
         $rResult = DBTools::doQuery($sQuery);
         $aFighters = [];
