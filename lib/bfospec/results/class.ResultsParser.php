@@ -24,7 +24,9 @@ class ResultsParser
 		$this->logger->info('ResultParser start');
 		$ounte = 0;
 		//Retrieve all events that have not been fully parsed. Query should fetch all matchups that do not have results and then grab the events that they are connected to, it is the events that we will look for
+		
 		$teams = TeamHandler::getAllTeamsWithMissingResults();
+		//$teams = array(new Fighter('CONOR MCGREGOR', 3147));
 
 		foreach ($teams as $team)
 		{
@@ -35,24 +37,6 @@ class ResultsParser
 
 		$this->logger->info('ResultParser end');
 	}
-
-	public function parseResults()
-	{
-		$this->logger->info('ResultParser start');
-		$ounte = 0;
-		//Retrieve all events that have not been fully parsed. Query should fetch all matchups that do not have results and then grab the events that they are connected to, it is the events that we will look for
-		$events = EventHandler::getAllEventsWithMatchupsWithoutResults();
-
-		foreach ($events as $event)
-		{
-			$ounte++;
-			$this->logger->info('Checking: ' . $event->getName());
-			$this->checkEvent($event);
-		}
-
-		$this->logger->info('ResultParser end');
-	}
-
 
 	private function checkFighterPage($fighter)
 	{
@@ -70,6 +54,10 @@ class ResultsParser
 			$this->logger->warning('Missing MMA record start. Probably not a fighter page. Aborting');	
 			return false;
 		}
+		//Strip everything prior to mma record to avoid parsing 
+		$matches = null;
+		preg_match("/{{MMA record start}}(.+){{end}}/s", $page_content, $matches);
+		$page_content = $matches[0];
 
 		//Pick out all the fights ont he page using regexp magic
 		$blocks = ParseTools::matchBlock($page_content, '/\|\-.+?(?=\|\-|{{end}})/');
@@ -78,8 +66,6 @@ class ResultsParser
 			$result = $this->checkFighterMatchup($block[0], $fighter);
 		}
 	}
-
-
 
 	private function getPageFromWikipedia($title)
 	{
@@ -116,30 +102,21 @@ class ResultsParser
 
 		//Parse dts date format
 		$matches = null;
-		preg_match('/{{dts\|([^}]+)}}/', $matchup, $matches);
-		$date_pieces = explode('|', $matches[1]);
-		//TODO: Add check to validate that we got the pieces we need
+		preg_match("/{{dts\|[^}]*(\d{4})\|([a-zA-Z]+)\|(\d{1,2})[^}]*}}/", $matchup, $matches);
 		$check_date = null;
 		try 
 		{
-			$check_date = new DateTime ($date_pieces[count($date_pieces) - 1] . ' ' . $date_pieces[count($date_pieces) - 2]  . ' ' . $date_pieces[count($date_pieces) - 3]); //TODO: Validation
+			$check_date = new DateTime ($matches[3] . ' ' . $matches[2]  . ' ' . $matches[1]); //TODO: Validation
 		}
 		catch (Exception $e)
 		{
-			$this->logger->warning('Invalid date format: ' . $date_pieces[count($date_pieces) - 1] . ' ' . $date_pieces[count($date_pieces) - 2]  . ' ' . $date_pieces[count($date_pieces) - 3]);	
+			$this->logger->warning('Invalid date format: ' . $matches[3] . ' ' . $matches[2]  . ' ' . $matches[1]);	
 			return false;
 		}
-		$matchup = preg_replace('/{{([^}]+)}}/', '', $matchup);
-
-
+		//Clear all strings containing {{ }} around them
+		$matchup = preg_replace('/{{[^}]*}}/', '', $matchup);
 		
 		$fields = explode('|', $matchup);
-		if (count($fields) != 15)
-		{
-			$this->logger->info('Warning, unexpected number of table columns. Bailing..');	
-			return false;
-		}
-
 		$temp_fight = new Fight(-1, $fighter->getNameAsString(), ParseTools::formatName($fields[5]), -1);
 		$result_text = trim(strtolower($fields[2])); //win, loss, nc
 
@@ -166,6 +143,7 @@ class ResultsParser
 					$winner_id = $matching_fight->getFighterID(1) == $fighter->getID() ? $matching_fight->getFighterID(2) : $matching_fight->getFighterID(1);
 				break;
 				case 'nc':
+				case 'draw':
 					$winner_id = -1;
 				break;
 				default:
@@ -197,6 +175,29 @@ class ResultsParser
 		{
 			$this->logger->warning('No match found for ' . $temp_fight->getTeam(1) . ' ' . $result_text . ' ' . $temp_fight->getTeam(2));
 		}
+	}
+
+
+
+ 	/*===========EVENT MATCHING BELOW=====*/
+
+
+
+	public function parseResults()
+	{
+		$this->logger->info('ResultParser start');
+		$ounte = 0;
+		//Retrieve all events that have not been fully parsed. Query should fetch all matchups that do not have results and then grab the events that they are connected to, it is the events that we will look for
+		$events = EventHandler::getAllEventsWithMatchupsWithoutResults();
+
+		foreach ($events as $event)
+		{
+			$ounte++;
+			$this->logger->info('Checking: ' . $event->getName());
+			$this->checkEvent($event);
+		}
+
+		$this->logger->info('ResultParser end');
 	}
 
 

@@ -413,7 +413,7 @@ fo2.bookie_id, fo2.fight_id ASC;';
     //future_only = Optional
     //past_only = Optional
     //known_fighter_id = Optional
-    //event_date = Optional (format: yyyy-mm-dd)
+    //event_date = Optional (format: yyyy-mm-dd) Note: day before and after is also included
     //event_id = Optional
     public static function getMatchingFightV2($a_aParams)
     {
@@ -429,15 +429,15 @@ fo2.bookie_id, fo2.fight_id ASC;';
         }
         if (isset($a_aParams['event_id']) && is_numeric($a_aParams['event_id']) && $a_aParams['event_id'] != -1)
         {
-            $sExtraWhere = ' AND event_id = ' . DBTools::makeParamSafe($a_aParams['event_id']) . '';
+            $sExtraWhere .= ' AND event_id = ' . DBTools::makeParamSafe($a_aParams['event_id']) . '';
         }
         if (isset($a_aParams['known_fighter_id']) && is_numeric($a_aParams['known_fighter_id']))
         {
-            $sExtraWhere = ' AND (fighter1_id = ' . DBTools::makeParamSafe($a_aParams['known_fighter_id']) . ' OR fighter2_id = ' . DBTools::makeParamSafe($a_aParams['known_fighter_id']) . ')';
+            $sExtraWhere .= ' AND (fighter1_id = ' . DBTools::makeParamSafe($a_aParams['known_fighter_id']) . ' OR fighter2_id = ' . DBTools::makeParamSafe($a_aParams['known_fighter_id']) . ')';
         }
         if (isset($a_aParams['event_date']))
         {
-            $sExtraWhere = ' AND LEFT(e.date, 10) = \'' . DBTools::makeParamSafe($a_aParams['event_date']) . '\'';
+            $sExtraWhere .= ' AND LEFT(e.date, 10) <= DATE_ADD(\'' . DBTools::makeParamSafe($a_aParams['event_date']) . '\', INTERVAL +1 DAY) AND LEFT(e.date, 10) >= DATE_ADD(\'' . DBTools::makeParamSafe($a_aParams['event_date']) . '\', INTERVAL -1 DAY)';
         }
 
         $sQuery = 'SELECT 1 AS original, t.id, a.name AS fighter1_name, a.id as fighter1_id, b.name AS fighter2_name, b.id as fighter2_id, t.event_id
@@ -472,9 +472,9 @@ fo2.bookie_id, fo2.fight_id ASC;';
                 $oTempFight->setComment('switched');
             }
 
-            if (OddsTools::compareNames($oTempFight->getFighter(1), $a_aParams['team1_name']) > 82)
+            if (OddsTools::compareNames($oTempFight->getFighter(($a_aParams['team1_name'] >= $a_aParams['team2_name'] ? 2 : 1)), $a_aParams['team1_name']) > 82)
             {
-                if (OddsTools::compareNames($oTempFight->getFighter(2), $a_aParams['team2_name']) > 82)
+                if (OddsTools::compareNames($oTempFight->getFighter(($a_aParams['team1_name'] >= $a_aParams['team2_name'] ? 1 : 2)), $a_aParams['team2_name']) > 82)
                 {
                     $aFoundFight = null;
                     if ($aFight['original'] == '0')
