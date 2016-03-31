@@ -23,37 +23,55 @@ class ResultsParser
 	{
 		$this->logger->info('ResultParser start');
 		$ounte = 0;
-		//Retrieve all events that have not been fully parsed. Query should fetch all matchups that do not have results and then grab the events that they are connected to, it is the events that we will look for
-		
-		$teams = TeamHandler::getAllTeamsWithMissingResults();
-		//$teams = array(new Fighter('CONOR MCGREGOR', 3147));
 
+		//Retrieve all teams that have missing reults
+		$teams = TeamHandler::getAllTeamsWithMissingResults();
+		$this->logger->info('Parsing teams start');
 		foreach ($teams as $team)
 		{
 			$ounte++;
 			$this->logger->info('Checking: ' . $team->getName());
 			$this->checkFighterPage($team);
 		}
+		$this->logger->info('Parsing teams end');
+
+		//Retrieve all events that have missing reults
+		/*$events = EventHandler::getAllEventsWithMatchupsWithoutResults();
+		$this->logger->info('Parsing events start');
+		foreach ($events as $event)
+		{
+			$ounte++;
+			$this->logger->info('Checking: ' . $event->getName());
+			$this->checkEvent($event);
+		}
+		$this->logger->info('Parsing events end');*/
 
 		$this->logger->info('ResultParser end');
 	}
 
 	private function checkFighterPage($fighter)
 	{
-		//$page_content = $this->getPageFromWikipedia('Cain Velasquez' . ' (fighter)');
-		$page_content = $this->getPageFromWikipedia($fighter->getNameAsString() . ' (fighter)');
+		$found_unmatched = false;
+		$found_matched = false;
+		$page_content = $this->getPageFromWikipedia($fighter->getNameAsString() . ' hastemplate:"Infobox martial artist" hastemplate:"MMArecordbox"');
+		
 		//Remove \n
 		$page_content=str_replace("\n","",$page_content);
 
-
-		//First check if this appears to be a correct page
-
-		//CHECK FOR:  strstr
 		if (strstr($page_content, '{{MMA record start}}') === false)
 		{
 			$this->logger->warning('Missing MMA record start. Probably not a fighter page. Aborting');	
 			return false;
 		}
+
+		//Fetch all matchups to keep track which ones we have matched and not
+		$existing_db_matchups = EventHandler::getAllFightsForFighter($fighter->getID());
+		$existing_matchups = [];
+		foreach ($existing_db_matchups as $existing_db_matchup)
+		{
+			$existing_matchups[$existing_db_matchup->getID()] = false;
+		}
+
 		//Strip everything prior to mma record to avoid parsing 
 		$matches = null;
 		preg_match("/{{MMA record start}}(.+){{end}}/s", $page_content, $matches);
@@ -64,6 +82,25 @@ class ResultsParser
 		foreach ($blocks as $block)
 		{
 			$result = $this->checkFighterMatchup($block[0], $fighter);
+			if ($result != false)
+			{
+				$existing_matchups[$result] = true;
+				$found_matched = true;
+			}
+			else
+			{
+				$found_unmatched = true;
+			}
+		}
+
+		//Check which matchups thare weren't found for some reason. If no checks above returned false then these should probably be cleaned as Cancalled bouts
+		foreach ($existing_matchups as $key => $val)
+		{
+			if ($found_matched == true && $found_unmatched == false && $val == false)
+			{
+				$matchup = EventHandler::getFightByID($key);
+				$this->logger->info('Matchup ' . $key . '(' . $matchup->getTeamAsString(1) . ' vs. ' . $matchup->getTeamAsString(2) . ') was not found on wiki page. Should probably be cleared as Cancelled');
+			}
 		}
 	}
 
@@ -71,11 +108,26 @@ class ResultsParser
 	{
 			//TODO: Error handling
 			//Search for it first
+
+			//If main part of name is in the prefix, just search directly for it
+			$potential_newtitle = explode(':', $title)[0];
+			if (is_numeric(substr($potential_newtitle, -1)))
+			{
+				$title = $potential_newtitle;
+			}
+
+
 			$curl_opts = array(CURLOPT_USERAGENT => 'BestFightOdds/1.0 (https://bestfightodds.com/; info1@bestfightodds.com) BestFightOdds/1.0');
-			$wiki_search_url = "https://en.wikipedia.org/w/api.php?action=query&list=search&utf8=&format=json&srsearch=intitle:" . urlencode($title);
+			$wiki_search_url = "https://en.wikipedia.org/w/api.php?action=query&list=search&utf8=&format=json&srsearch=" . urlencode($title);
 			$this->logger->info('Search URL: ' . $wiki_search_url);
 			$wiki_search_result = ParseTools::retrievePageFromURL($wiki_search_url, $curl_opts);
 			$wiki_search_json = json_decode($wiki_search_result);
+
+			if (!isset($wiki_search_json->query->search[0]->title))
+			{
+				$this->logger->warning('No search results found');	
+				return false;
+			}
 
 			//If the first results are lists of some sort (starts with "List ") then skip them
 			$i = 0;
@@ -160,7 +212,8 @@ class ResultsParser
 											 'winner' => $winner_id,
 											 'method' => $method,
 											 'endround' => $endround,
-											 'endtime' => $endtime]);
+											 'endtime' => $endtime,
+											 'source' => 'teams']);
 
 			if ($result == false)
 			{
@@ -168,12 +221,13 @@ class ResultsParser
 				return false;
 			}
 			$this->logger->info('Result stored');
-			return true;
+			return $matching_fight->getID();
 				
 		}
 		else
 		{
 			$this->logger->warning('No match found for ' . $temp_fight->getTeam(1) . ' ' . $result_text . ' ' . $temp_fight->getTeam(2));
+			return false;
 		}
 	}
 
@@ -203,13 +257,73 @@ class ResultsParser
 
 	private function checkEvent($event)
 	{
-		$page_content = $this->getPageFromWikipedia($event->getName());
+		$found_unmatched = false;
+		$found_matched = false;
+		$page_content = $this->getPageFromWikipedia('intitle:' . $event->getName() . ' hastemplate:"Infobox MMA event"');
+
+		if (strstr($page_content, '{{MMAevent}}') === false)
+		{
+			$this->logger->warning('Missing MMAevent start. Probably not an event page. Aborting');	
+			return false;
+		}
+
+		//Validate that date matches from the infobox on the page
+		$matches = null;
+		preg_match("/{{Infobox MMA event(.+)}}/s", $page_content, $matches);
+		$datematches = null;
+		preg_match("/date\s{0,1}=\s{0,1}([a-zA-Z\d]+ [a-zA-Z\d,]+ \d{4})\\n/", $matches[0], $datematches);
+		if (empty($datematches))
+		{
+			preg_match("/\|(\d{4}\|\d{2}\|\d{2})}}/", $matches[0], $datematches);
+			if (empty($datematches))
+			{
+				$this->logger->warning('Date not parsed. Aborting');
+				return false;
+			}
+			$datematches[1] = str_replace('|','-', $datematches[1]);
+		}
+		$check_date = new DateTime($datematches[1]);
+		$event_date = new DateTime($event->getDate());
+		if ($event_date != $check_date && $event_date->add(new DateInterval('P1D')) != $check_date && $event_date->sub(new DateInterval('P2D')) != $check_date)
+		{
+			$this->logger->warning('Date does not match. Aborting');
+			return false;
+		}
+
+		//Fetch all matchups to keep track which ones we have matched and not
+		$existing_db_matchups = EventHandler::getAllFightsForEvent($event->getID());
+		$existing_matchups = [];
+		foreach ($existing_db_matchups as $existing_db_matchup)
+		{
+			$existing_matchups[$existing_db_matchup->getID()] = false;
+		}
+
 		//Pick out all the fights ont he page using regexp magic
 		$blocks = ParseTools::matchBlock($page_content, '{{MMAevent bout[^\}]+}}');
 		foreach ($blocks as $block)
 		{
 			$result = $this->checkEventMatchup($block[0], $event);
+			if ($result != false)
+			{
+				$existing_matchups[$result] = true;
+				$found_matched = true;
+			}
+			else
+			{
+				$found_unmatched = true;
+			}
 		}
+
+		//Check which matchups thare weren't found for some reason. If no checks above returned false then these should probably be cleaned as Cancalled bouts
+		foreach ($existing_matchups as $key => $val)
+		{
+			if ($found_matched == true && $found_unmatched == false && $val == false)
+			{
+				$matchup = EventHandler::getFightByID($key);
+				$this->logger->info('Matchup ' . $key . '(' . $matchup->getTeamAsString(1) . ' vs. ' . $matchup->getTeamAsString(2) . ') was not found on wiki page. Should probably be cleared as Cancelled');
+			}
+		}
+
 	}
 
 	private function checkEventMatchup($matchup, $event)
@@ -220,6 +334,7 @@ class ResultsParser
 		$matchup = preg_replace('/\[\[([^\]\|]+)(\|[^\]]+)*|\]\]/', '$1', $matchup);
 
 		$fields = explode('|', $matchup);
+
 		$temp_fight = new Fight(-1, ParseTools::formatName($fields[2]), ParseTools::formatName($fields[4]), $event->getID());
 
 		$this->logger->info('Found that:  ' . $temp_fight->getTeam($temp_fight->hasOrderChanged() ? 2 : 1) . ' ' . $fields[3] . ' ' . $temp_fight->getTeam($temp_fight->hasOrderChanged() ? 1 : 2));
@@ -230,7 +345,7 @@ class ResultsParser
 		if ($matching_fight != null)
 		{
 			$this->logger->info('Found match: ' . $matching_fight->getTeam($temp_fight->hasOrderChanged() ? 2 : 1) . ' vs ' . $matching_fight->getTeam($temp_fight->hasOrderChanged() ? 1 : 2));
-			
+
 			//If the order has changed for the temp_fight, this means the winner is in the second field (team2). However, if the matched fight is swithed in the database due to nicknames and stuff these two cancel eachother out
 			$winner_id = null;
 			if ($matching_fight->getComment() == 'switched')
@@ -252,7 +367,8 @@ class ResultsParser
 											 'winner' => $winner_id,
 											 'method' => $method,
 											 'endround' => $endround,
-											 'endtime' => $endtime]);
+											 'endtime' => $endtime,
+											 'source' => 'events']);
 
 			if ($result == false)
 			{
@@ -260,7 +376,7 @@ class ResultsParser
 				return false;
 			}
 			$this->logger->info('Result stored');
-			return true;
+			return $matching_fight->getID();
 				
 		}
 		else

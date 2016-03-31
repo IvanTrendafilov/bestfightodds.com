@@ -1032,7 +1032,9 @@ fo2.bookie_id, fo2.fight_id ASC;';
 
     public static function getAllEventsWithMatchupsWithoutResults()
     {
-        $sQuery = 'SELECT DISTINCT e.* FROM fights f INNER JOIN events e ON f.event_id = e.id WHERE f.id NOT IN (SELECT mr.matchup_id FROM matchups_results mr);';
+        $sQuery = 'SELECT DISTINCT e.* FROM fights f INNER JOIN events e ON f.event_id = e.id 
+                    WHERE f.id NOT IN (SELECT mr.matchup_id FROM matchups_results mr)
+                    AND LEFT(e.date, 10) < LEFT((NOW() - INTERVAL 2 HOUR), 10);';
         $rResult = DBTools::doQuery($sQuery);
         $aEvents = array();
         while ($aEvent = mysql_fetch_array($rResult))
@@ -1044,7 +1046,7 @@ fo2.bookie_id, fo2.fight_id ASC;';
 
     public static function addMatchupResults($a_aParams)
     {
-        if (!isset($a_aParams['matchup_id'], $a_aParams['winner']))
+        if (!isset($a_aParams['matchup_id'], $a_aParams['winner'], $a_aParams['source']))
         {
             return false;
         }
@@ -1053,9 +1055,10 @@ fo2.bookie_id, fo2.fight_id ASC;';
         $aQueryParams[] = isset($a_aParams['method']) ? $a_aParams['method'] : '';
         $aQueryParams[] = isset($a_aParams['endround']) ? $a_aParams['endround'] : -1;
         $aQueryParams[] = isset($a_aParams['endtime']) ? $a_aParams['endtime'] : '';
+        $aQueryParams[] = $a_aParams['source'];
 
-        $sQuery = 'REPLACE INTO matchups_results(matchup_id, winner, method, endround, endtime) 
-                    VALUES (?,?,?,?,?)';
+        $sQuery = 'REPLACE INTO matchups_results(matchup_id, winner, method, endround, endtime, source) 
+                    VALUES (?,?,?,?,?, ?)';
 
         $bResult = DBTools::doParamQuery($sQuery, $aQueryParams);
         if ($bResult == false)

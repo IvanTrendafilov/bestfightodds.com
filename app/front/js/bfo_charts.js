@@ -140,6 +140,7 @@ function createChart(indata) {
                 animation: false
             },
             line: {
+                turboThreshold: 1500,
                 lineWidth: 1.75,
                 marker: {
                     enabled: false,
