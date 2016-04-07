@@ -112,7 +112,7 @@ else
                                     <tr class="main-row">
                                         <td rowspan="2" class="resultcell <?php echo $aResults['winner'] != '' ? $aResults['winner'] == $oFighter->getID() ? 'wincell' : ($aResults['winner'] != '-1' ? 'losecell' : '') : ''; ?>">
                                             <div><?php echo $aResults['winner'] != '' ? $aResults['winner'] == $oFighter->getID() ? 'Win' : ($aResults['winner'] != '-1' ? 'Loss' : 'Draw') : 'n/a'; ?><br />
-                                             <span class="method"><?php echo $aResults['winner'] != '-1' ? '(' . $aResults['method'] . ')' : ''; ?></span></div>
+                                             <span class="method"><?php echo $aResults['winner'] != '-1' ? '' . $aResults['method'] . '' : ''; ?></span></div>
                                         </td>
                                         <th class="oppcell"><?php echo '<a href="/fighters/' . $oFight->getFighterAsLinkString($iTeamPos) . '"><div>' . $oFight->getFighterAsString($iTeamPos) . '</div></a>'; ?></td>
                                         <td class="moneyline" style="padding-right: 4px;"><span id="oID<?php echo $iCellCounter++; ?>"><?php echo $oOpeningOdds->getFighterOddsAsString($iTeamPos); ?></span></td>

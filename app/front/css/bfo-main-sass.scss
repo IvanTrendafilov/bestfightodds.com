@@ -985,23 +985,31 @@ table.team-stats-table {
       }
       &.resultcell {
         font-weight: 500;
-        text-align: center;
+        text-align: center; 
         span.method {
           font-weight: 400;
           font-size: 9px;
         }
+        div {
+          color: #fff;
+          padding-top: 2px;
+          padding-bottom: 2px;
+          width: 60px;
+          background-color: #9B9EA0;
+          height: 24px;
+          border: 1px solid #989898;
+        }
+        padding-right: 10px;
       }
       &.wincell {
         div {
-          background-color: #4BCA02;
-          color: #fff;
+          background-color: rgba(75,202,2,0.9);
         }
         
       }
       &.losecell {
         div {
-          background-color: #E93524;
-          color: #fff;
+          background-color: rgba(233, 53, 36, 0.9);
         }
         
       }
