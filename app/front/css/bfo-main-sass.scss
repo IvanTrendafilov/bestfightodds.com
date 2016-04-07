@@ -897,14 +897,11 @@ table.team-stats-table {
   }
   tbody {
     tr {
-      /*background-color: #e9eaed;*/
       border-bottom: 0;
       &.main-row {
-        /*background-color: #fff;*/
         border-top: 1px dotted #989898;
       }
       &.event-header td {
-        /*background-color: #fff;*/
         border-top: 1px solid #b0b2b4;
         border-bottom: 1px solid #E6E8Ea;
         background-color: #E6E8Ea;
@@ -940,7 +937,6 @@ table.team-stats-table {
       }
     }
     td {
-      /*border-left: 1px dotted #ddd;*/
       color: #1a1a1a;
       height: 18px;
       padding-left: 3px;
@@ -997,9 +993,8 @@ table.team-stats-table {
           width: 60px;
           background-color: #9B9EA0;
           height: 24px;
-          border: 1px solid #989898;
         }
-        padding-right: 10px;
+        padding-right: 15px;
       }
       &.wincell {
         div {
