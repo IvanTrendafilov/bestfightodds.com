@@ -846,21 +846,24 @@ fo2.bookie_id, fo2.fight_id ASC;';
         return true;
     }
 
+    //Returns all fights for a fighter. Use future_only and past_only to narrow it down
     public static function getAllFightsForFighter($a_iFighterID)
     {
-        $sQuery = 'SELECT e.date AS thedate, f.id, f1.name AS fighter1_name, f2.name AS fighter2_name, f.event_id, f1.id AS fighter1_id, f2.id AS fighter2_id
+        $sQuery = 'SELECT e.date AS thedate, f.id, f1.name AS fighter1_name, f2.name AS fighter2_name, f.event_id, f1.id AS fighter1_id, f2.id AS fighter2_id,
+                        LEFT(e.date, 10) >= LEFT((NOW() - INTERVAL 2 HOUR), 10) AS is_future 
                     FROM fights f, fighters f1, fighters f2, events e
                     WHERE f.fighter1_id = f1.id
                     AND f.fighter2_id = f2.id
                     AND f2.id = ?
-                    AND f.event_id = e.id
+                    AND f.event_id = e.id 
                 UNION
-                    SELECT e.date AS thedate, f.id, f1.name AS fighter1_name, f2.name AS fighter2_name, f.event_id, f1.id AS fighter1_id, f2.id AS fighter2_id
+                    SELECT e.date AS thedate, f.id, f1.name AS fighter1_name, f2.name AS fighter2_name, f.event_id, f1.id AS fighter1_id, f2.id AS fighter2_id,
+                        LEFT(e.date, 10) >= LEFT((NOW() - INTERVAL 2 HOUR), 10) AS is_future 
                     FROM fights f, fighters f1, fighters f2, events e
                     WHERE f.fighter1_id = f1.id
                     AND f.fighter2_id = f2.id
                     AND f1.id = ?
-                    AND f.event_id = e.id
+                    AND f.event_id = e.id 
                     ORDER BY thedate DESC';
 
         $aParams = array($a_iFighterID, $a_iFighterID);
@@ -872,6 +875,7 @@ fo2.bookie_id, fo2.fight_id ASC;';
             $oTempFight = new Fight($aFight['id'], $aFight['fighter1_name'], $aFight['fighter2_name'], $aFight['event_id']);
             $oTempFight->setFighterID(1, $aFight['fighter1_id']);
             $oTempFight->setFighterID(2, $aFight['fighter2_id']);
+            $oTempFight->setIsFuture($aFight['is_future']);
             $aFights[] = $oTempFight;
         }
 

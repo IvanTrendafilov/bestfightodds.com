@@ -13,6 +13,7 @@ class Fight
     private $iFighter2ID;
     private $bOrderChanged;
     private $bIsMainEvent;
+    private $bIsFuture;
     private $aMetadata;
 
     /**
@@ -262,6 +263,28 @@ class Fight
         if (isset($this->bIsMainEvent))
         {
             return $this->bIsMainEvent;
+        }
+        return false;
+    }
+
+    public function setIsFuture($a_bIsFuture)
+    {
+        switch ($a_bIsFuture)
+        {
+            case 1: $a_bIsFuture = true;
+                break;
+            case 0: $a_bIsFuture = false;
+                break;
+        }
+
+        $this->bIsFuture = $a_bIsFuture;
+    }
+
+    public function isFuture()
+    {
+        if (isset($this->bIsFuture))
+        {
+            return $this->bIsFuture;
         }
         return false;
     }
