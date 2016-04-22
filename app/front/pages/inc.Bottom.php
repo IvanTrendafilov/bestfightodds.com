@@ -35,12 +35,13 @@
         <option value="5">Bovada</option>
         <option value="2">SportBet</option>
         <option value="4">Sportsbook</option>
-        <option value="7">BetUS</option>
+        <option value="17">William Hill</option>
         <option value="9">Pinnacle</option>
         <option value="8">SportsInteraction</option>
         <option value="10">SBG</option>
         <option value="11">TheGreek</option>
         <option value="12">BetOnline</option>
+        <option value="7">BetUS</option>
       </select><br /><div id="alert-button-container"><input type="hidden" name="tn"><input type="hidden" name="m">
         <div class="alert-loader"></div>
         <div class="alert-result">&nbsp;</div>

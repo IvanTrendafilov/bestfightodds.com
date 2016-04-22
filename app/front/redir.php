@@ -1,5 +1,7 @@
 <?php
 
+require_once('lib/bfocore/general/class.BookieHandler.php');
+
 //This script is used to redirect to different urls depending on different variables such as locale
 
 //Bodog/Bovada
@@ -25,19 +27,31 @@ if (isset($_GET['b']) && $_GET['b'] == '5')
 	
 	header('Location: ' . $sURL);
 }
-else if (isset($_GET['b']) && $_GET['b'] == '1')
-{
-	//5Dimes
-	header('Location: http://affiliates.5dimes.com/tracking/Affiliate.asp?AffID=5D1796725&mediaTypeID=220&AffUrlID=31');
-}
-else if (isset($_GET['b']) && $_GET['b'] == '9')
-{
-	//Pinnacle
-	header('Location: http://affiliates.pinnaclesports.com/processing/clickthrgh.asp?btag=a_1274b_818');
-}
 else
 {
-	header('Location: https://www.bestfightodds.com');
+	if (is_numeric($_GET['b']))
+	{
+		$oBookie = BookieHandler::getBookieByID($_GET['b']);
+		if ($oBookie != null)
+		{
+			if ($oBookie->getRefURL() != '')
+			{
+				header('Location: ' . $oBookie->getRefURL());
+			}
+			else
+			{
+				header('Location: https://www.bestfightodds.com');
+			}
+		}
+		else
+		{
+			header('Location: https://www.bestfightodds.com');
+		}
+	}
+	else
+	{
+		header('Location: https://www.bestfightodds.com');
+	}	
 }
 
 ?>

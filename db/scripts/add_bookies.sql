@@ -24,7 +24,10 @@ INSERT INTO bets.bookies(id, name, url, refurl, active, position, date_added) VA
 
 (12, 'BetOnline', 'http://www.betonline.com', 'http://partners.commission.bz/processing/clickthrgh.asp?btag=a_1811b_2', 1, 12),
 
-(13, 'BetDSI', 'http://www.betdsi.com', 'http://www.betdsi.eu/mma-betting?cmpid=18239_4778', 1, 2, '2012-08-19 00:00:00');
+(13, 'BetDSI', 'http://www.betdsi.com', 'http://www.betdsi.eu/mma-betting?cmpid=18239_4778', 1, 2, '2012-08-19 00:00:00'),
+
+(17, 'William Hill', 'http://www.williamhill.eu', 'http://ads2.williamhill.com/redirect.aspx?pid=189883705&bid=1487413667&lpid=1487413047', 1, 3);
+
 
 
 INSERT INTO bets.bookies_changenums(bookie_id, changenum) VALUES
@@ -50,4 +53,5 @@ INSERT INTO bets.bookies_parsers(bookie_id, parse_url, name, cn_inuse, mockfile,
 (4, 'https://www.gamingsystem.ag/sbk/sportsbook4/www.sportsbook.ag/getodds.xgi?categoryId=92', 'Sportsbook', false, 'sportsbook.xml', ''),
 (4, 'https://www.gamingsystem.ag/sbk/sportsbook4/www.sportsbook.ag/getodds.xgi?categoryId=122', 'SportsbookMMA', false, 'sportsbookmma.xml', ''),
 (8, 'http://www.sportsinteraction.com/info/data/feeds/consume/?consumerName=bfodds&pwd=bfodds3145&feedID=5&formatID=4', 'SportsInteraction', false, 'sportsint.xml', ''),
-(11, 'http://www.thegreek.com/sports/Boxing/boxselections.asp', 'TheGreek', false, 'thegreek.asp', '');
+(11, 'http://www.thegreek.com/sports/Boxing/boxselections.asp', 'TheGreek', false, 'thegreek.asp', ''),
+(17, 'http://whdn.williamhill.com/pricefeed/openbet_cdn?action=template&template=getHierarchyByMarketType&classId=402&filterBIR=N', 'William Hill', false, 'williamhill.xml', '');
