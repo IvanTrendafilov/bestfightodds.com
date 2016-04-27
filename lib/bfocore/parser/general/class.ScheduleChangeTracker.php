@@ -141,13 +141,14 @@ class ScheduleChangeTracker
             {
                 if (!array_key_exists($oUpMatch->getID(), $aProcessedBookieMatchups[$sKey]) && EventHandler::getLatestOddsForFightAndBookie($oUpMatch->getID(), $sKey) != null)
                 {
-                    //Only remove matchups that are > 24 hours away to avoid removing one the day matchups by accident
+                    //Only remove matchups that are > 24 hours away to avoid removing on-the-day matchups by accident
+                    $oEvent = EventHandler::getEvent($oUpMatch->getEventID());
                     $datetime = new DateTime($oEvent->getDate());
                     $nowdatetime = new Datetime();
                     $nowdatetime->modify('+1 day');
                     if ($datetime > $nowdatetime) 
                     {
-                        Logger::getInstance()->log('-Matchup: ' . $oUpMatch->getID() . ' was not found in feed and will be removed <a href="#/" onclick="removeOddsForMatchupAndBookie(\'' . $oUpMatch->getID() . '\',\'' . $sKey . '\')">remove</a>', 0);
+                        Logger::getInstance()->log('-Matchup: ' . $oUpMatch->getID() . ' was not found in feed and will be removed (event date:' . $datetime->format('Y-m-d') . ' / now date: ' . $nowdatetime->format('Y-m-d') .  ') <a href="#/" onclick="removeOddsForMatchupAndBookie(\'' . $oUpMatch->getID() . '\',\'' . $sKey . '\')">remove</a>', 0);
                         //TODO: Perform actual removal
                     }   
                     else
