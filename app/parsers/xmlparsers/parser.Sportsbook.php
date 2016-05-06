@@ -76,7 +76,7 @@ class XMLParserSportsbook
         $sPage = ParseTools::stripForeignChars($sPage);
 	
         //Match fights in single page
-        $sFightRegexp = '/([a-zA-Z]+[a-zA-Z0-9\\s\\-.,]+?) ([+-]{0,1}[0-9]+|EV|even) OFF OFF [0-9]{2}:[0-9]{2} [A-Za-z]{2} ([a-zA-Z]+[a-zA-Z0-9\\s\\-.,]+?) ([+-]{0,1}[0-9]+|EV|even) OFF OFF/';
+        $sFightRegexp = '/(\\d{2}\\/\\d{2}\\/\\d{2}) \\d{2,5} ([a-zA-Z]+[a-zA-Z0-9\\s\\-.,]+?) ([+-]{0,1}[0-9]+|EV|even) OFF OFF ([0-9]{2}:[0-9]{2}) [A-Za-z]{2} ([a-zA-Z]+[a-zA-Z0-9\\s\\-.,]+?) ([+-]{0,1}[0-9]+|EV|even) OFF OFF/';
 
         $aFightMatches = ParseTools::matchBlock($sPage, $sFightRegexp);
 
@@ -85,11 +85,16 @@ class XMLParserSportsbook
             Logger::getInstance()->log("Warning: No matchups found in alternative parser", -1);
         }
 
+        $sTimezone = (new DateTime())->setTimezone(new DateTimeZone('America/New_York'))->format('T');
+
         foreach ($aFightMatches as $aFight)
         {
-            $sRetXML .= '<fight><f1>' . $aFight[1] . '</f1><f2>' .
-                    $aFight[3] . '</f2><f1_line>' . $aFight[2] . '</f1_line><f2_line>' .
-                    $aFight[4] . '</f2_line></fight>';
+            //Add time of matchup
+            $oGameDate = new DateTime($aFight[1] . ' ' . $aFight[4] . ' ' . $sTimezone);
+
+            $sRetXML .= '<fight><timestamp>' . ((string) $oGameDate->getTimestamp()) . '</timestamp><f1>' . $aFight[2] . '</f1><f2>' .
+                    $aFight[5] . '</f2><f1_line>' . $aFight[3] . '</f1_line><f2_line>' .
+                    $aFight[6] . '</f2_line></fight>';
         }
         $sRetXML .= '</fights>';
 
@@ -114,6 +119,7 @@ class XMLParserSportsbook
                                 (string) $cFight->f1_line,
                                 (string) $cFight->f2_line
                 );
+                $oParsedMatchup->setMetaData('gametime', (string) $cFight->timestamp);
 
                 $oParsedSport->addParsedMatchup($oParsedMatchup);
             }
