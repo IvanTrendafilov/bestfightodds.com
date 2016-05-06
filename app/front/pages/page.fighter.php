@@ -108,7 +108,7 @@ else
                         else if (!empty($aResults['winner']) && $aResults['winner'] != $oFighter->getID())
                         {
                             $sResultClass = 'losecell';
-                            $sResult = 'Lose';
+                            $sResult = 'Loss';
                         }
                         
                         $oFighter1Low = null;
