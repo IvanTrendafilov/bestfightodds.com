@@ -1,29 +1,40 @@
 <?php 
 
+require_once('config/inc.generalConfig.php');
 require_once('lib/bfocore/alerter/class.AlertsModel.php');
+
 
 class AlerterV2
 {
+	private $logger;
+
+	public function __construct()
+	{
+		$this->logger = new Katzgrau\KLogger\Logger(GENERAL_KLOGDIR, Psr\Log\LogLevel::DEBUG, ['prefix' => 'alerter_']);
+	}
+
 	public function addAlert($email, $oddstype, $criterias)
 	{
 		//Before adding alert, check if criterias are already met. If so we return an exception
 		if ($this->evaluateCriterias($criterias) == false)
 		{
-			throw new Exception("Criteria already met", 10);
+			//throw new Exception("Criteria already met", 10);
+			//TODO: Pass back code to front end somehow so it knows how to respond
+			return false;
 		}
-
 
 		$am = new AlertsModel();
 		try 
 		{
-			return $am->addAlert($email, $oddstype, $criterias);
+			$id = $am->addAlert($email, $oddstype, $criterias);
+			$this->logger->info('Added alert ' . $id . ' for ' . $email . ', oddstype ' . $oddstype . ': ' . $criterias);
 		}
 		catch (Exception $e)
 		{
-			//TODO: Add Klogger entry
-			echo 'Error: ' . $e->getCode();
+			//TODO: Pass back code to front end somehow so it knows how to respond
 			return false;
 		}
+		return true;
 	}
 
 	public function deleteAlert($alert_id)
@@ -31,14 +42,15 @@ class AlerterV2
 		$am = new AlertsModel();
 		try
 		{
-			return $am->deleteAlert($alert_id);
+			$am->deleteAlert($alert_id);
+			$this->logger->info('Cleared alert ' . $alert_id);
 		}
 		catch (Exception $e)
 		{
-			//TODO: Add Klogger entry
-			echo 'Error: ' . $e->getCode() . ' for ID:' . $alert_id;
+			$this->logger->error('Unable to clear alert ' . $alert_id);
 			return false;
 		}
+		return true;
 	}
 
 	public function checkAlerts()
@@ -59,40 +71,75 @@ class AlerterV2
 		foreach ($ids_dispatched as $alert_id)
 		{
 			$this->deleteAlert($alert_id);
-			//TODO: Klogger
 		}
 	}
 
+
+
 	private function evaluateCriterias($criterias)
+	{
+		$is_reached = (new AlertsModel())->isAlertReached($criterias);	
+		return $is_reached; 
+
+		// switch ($this->getCriteriasCategory($criterias))
+		// {
+		// 	case 1: //Matchup
+
+		// 	break;
+		// 	case 2: //Matchup prop
+		// 	break;
+		// 	case 3: //Matchup proptype
+		// 	break;
+		// 	case 4: //Event 
+		// 	break;
+		// 	case 5: //Event prop
+		// 	break;
+		// 	case 6: //Event proptype
+		// 	break;
+		// 	default:	
+		// }
+
+	}
+
+	private function getCriteriasCategory($criterias)
 	{
 		if (isset($criterias['matchup_id']))
 		{
-			//Matchup based alert
-
 			if (isset($criterias['proptype_id']))
 			{
 				//Proptype for matchup
+				return 2;
 			}
 			else if (isset($criterias['proptype_category']))
 			{
 				//Proptype category for matchup
+				return 3;
 			}
-
+			else
+			{
+				//Matchup based alert
+				return 1;
+			}
 		}
 		else if (isset($criterias['event_id']))
 		{
-			//Event based alert
 			if (isset($criterias['proptype_id']))
 			{
+				return 5;
 				//Prop type
 			}
 			else if (isset($criterias['proptype_category']))
 			{
+				return 6;
 				//Prop type category
 			}
+			else
+			{
+				return 4;
+				//Event based alert
+			}
 		}
-
-		return true;
+		return null;
 	}
 
 
@@ -118,16 +165,14 @@ class AlerterV2
 		{
 			foreach ($alerts as $alert)
 			{
-				//Put these alerts together in this loop
-				echo 'Adding an alert
-				';	
 				$ids_dispatched[] = $alert->getID();
 			}
-			//...and send them off
-			echo '..and lift off for ' . $rcpt . ' 
-			';
-			
+			//TODO: Perform actual dispatch of alerts
+			$this->logger->info('Dispatched ' . implode($ids_dispatched, ' ,') . ' for ' . $rcpt);
 		}
+
+		
+
 		return $ids_dispatched;
 	}
 
@@ -135,12 +180,6 @@ class AlerterV2
 	{
 		//TODO: Format each alert determined by their criteras.. Do we do this earlier in the chain while we evaluate the criteras?
 	}
-
-	private function sendAlertsByTwitter()
-	{
-		//TODO: Currently halted due to the direct message limit (250 a day) on Twitter. Not sure if we can work through it
-	}
-
 
 }
 

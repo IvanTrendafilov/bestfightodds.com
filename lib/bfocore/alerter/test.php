@@ -1,5 +1,7 @@
 <?php
 
+require 'vendor/autoload.php';
+
 require_once('lib/bfocore/alerter/class.AlerterV2.php');
 
 
@@ -62,6 +64,6 @@ catch (Exception $e)
 }
 
 
-//$alerter->checkAlerts();
+$alerter->checkAlerts();
 
 ?>

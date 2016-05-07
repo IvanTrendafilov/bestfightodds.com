@@ -4,8 +4,7 @@ require_once('config/inc.dbConfig.php');
 
 class PDOTools
 {
-
-    private static $aCachedResults = array();
+    private static $cached_queries = [];
     private static $db;
 
     /**
@@ -13,118 +12,68 @@ class PDOTools
      *
      * @return Resource Database connection
      */
-    private static function getInstance()
+    private static function getConnection()
     {
         if (!isset(self::$db))
         {
             try 
             {
-                $db = new PDO("mysql:host=" . DB_HOST . ";dbname=" . DB_SCHEME, DB_USER, DB_PASSWORD, [\PDO::MYSQL_ATTR_INIT_COMMAND =>"SET NAMES utf8;SET time_zone = 'America/New York'")];
-                $db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_WARNING);
-                $db->setAttribute(PDO::MYSQL_ATTR_INIT_COMMAND,'SET NAMES UTF8');
-
+                self::$db = new PDO("mysql:host=" . DB_HOST . ";dbname=" . DB_SCHEME . ';charset=utf8', DB_USER, DB_PASSWORD, [\PDO::MYSQL_ATTR_INIT_COMMAND =>"SET time_zone = '-6:00';", PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION]);
+               
             } 
             catch (PDOException $e) 
             {
-                throw new PDOException("Error  : " .$e->getMessage());
+                throw new PDOException("Error  : " . $e->getMessage());
             }
         }
-
         return self::$db;
     }
 
-    public static function doQuery($)
+    public static function insert($query, array $data)
+    {        
+        self::getConnection()->prepare($query)->execute($data);     
+        return self::getConnection()->lastInsertId();
+    }
+
+    public static function update($query, array $data) 
     {
-        //Adjust time according to set timezone.. THIS NEEDS A FIX TO USE PROPER TIMEZONE HANDLING INSTEAD
-        if (is_numeric(DB_TIMEZONE))
+        $stmt = self::executeQuery($query,$data);
+        return $stmt->rowCount();       
+    }
+
+    public static function delete($query, array $data) 
+    {
+        $stmt = self::executeQuery($query,$data);
+        return $stmt->rowCount();       
+    }
+
+    public static function findOne($query, array $data = null)
+    {        
+        $stmt = self::executeQuery($query,$data);          
+        return $stmt->fetchObject();
+    }
+
+    public static function findMany($query, array $data = null)
+    {
+        $stmt = self::executeQuery($query,$data);
+        return($stmt->fetchAll());
+    }
+
+    public static function executeQuery($query, $data = null)
+    {
+        try 
         {
-            $a_sQuery = str_replace('NOW()', '(NOW() + INTERVAL ' . DB_TIMEZONE . ' HOUR)', $a_sQuery);
+            $stmt = self::getConnection()->prepare($query);
+            $stmt->execute($data);
+            return $stmt;
+        }
+        catch (PDOException $e)
+        {
+            //TODO: Catch all generic SQL errors but pass on others
+            throw $e;
         }
     }
 
-
-
-    /**
-     * Executes a query without any parameters
-     *
-     * @param string $a_sQuery Query to execute
-     * @return Resource Query results
-     */
-    public static function doQuery($a_sQuery)
-    {
-
-
-        //$sStart = microtime(); 
-        $rResult = mysql_query($a_sQuery, self::getConnection()) or die('MySQL error: ' . mysql_error());
-
-/*if (microtime() - $sStart > 0.05)
-{
-         echo "
-
-          ";
-          echo 'query: ' . (microtime() - $sStart) . ' ' . $a_sQuery . '<br /><br />';
-          echo "
-
-          "; 
-}*/
-        return $rResult;
-    }
-
-    /**
-     * Executes a query with parameters
-     *
-     * In the query string, parameters are indicated with a ?. The parameters to be included
-     * in these places are passed as an array.
-     *
-     * @param string $a_sQuery Query to execute
-     * @param array $aParams Parameters to include
-     * @return Resource Query results
-     */
-    public static function doParamQuery($a_sQuery, $a_aParams)
-    {
-        $iParamCount = 0;
-        while ($iPos = strpos($a_sQuery, '?'))
-        {
-            if (sizeof($a_aParams) < ($iParamCount + 1))
-            {
-                return false;
-            }
-            $a_sQuery = substr_replace($a_sQuery, "'" . DBTools::makeParamSafe($a_aParams[$iParamCount]) . "'", $iPos, 1);
-            $iParamCount++;
-        }
-
-        if (($iParamCount + 1) < sizeof($a_aParams))
-        {
-            return false;
-        }
-
-        return DBTools::doQuery($a_sQuery);
-    }
-
-    /**
-     * Makes a parameter safe from SQL injections
-     *
-     * Wrapper for mysql_real_escape_string
-     *
-     * @param string $a_sParam Parameter to make safe
-     * @return string Safe parameter
-     */
-    public static function makeParamSafe($a_sParam)
-    {
-        return mysql_real_escape_string($a_sParam, self::getConnection());
-    }
-
-    /**
-     * Gets the number of affected rows in the previously executed query
-     *
-     * Wrapper for mysql_affected_rows
-     *
-     * @return int The number of affected rows
-     */
-    public static function getAffectedRows()
-    {
-        return mysql_affected_rows(self::getConnection());
-    }
 
     /**
      * Caches query results for later retrieval using getCachedQuery
@@ -134,11 +83,11 @@ class PDOTools
      * @return boolean True if result was cached and false if it was not
      *
      */
-    public static function cacheQueryResults($a_sQuery, $a_rResults)
+    public static function cacheQueryResults($query, $results)
     {
-        if ($a_sQuery != '' && $a_rResults != null)
+        if (!empty($query) && !empty($results))
         {
-            DBTools::$aCachedResults[$a_sQuery] = $a_rResults;
+            self::$cached_queries[$query] = $results;
             return true;
         }
         return false;
@@ -150,14 +99,13 @@ class PDOTools
      * @param string $a_sQuery Query to find cached
      * @return Resource The cached query or false if it could not be found
      */
-    public static function getCachedQuery($a_sQuery)
+    public static function getCachedQuery($query)
     {
-        if (array_key_exists($a_sQuery, DBTools::$aCachedResults))
+        if (array_key_exists($query, self::$cached_queries))
         {
-            if (mysql_num_rows(DBTools::$aCachedResults[$a_sQuery]) > 0)
+            if (self::$cached_queries[$query]->fetchColumn() > 0)
             {
-                mysql_data_seek(DBTools::$aCachedResults[$a_sQuery], 0);
-                return DBTools::$aCachedResults[$a_sQuery];
+                return self::$cached_queries[$query];
             }
         }
         return false;
@@ -170,45 +118,9 @@ class PDOTools
      */
     public static function invalidateCache()
     {
-        self::$aCachedResults = array();
+        self::$cached_queries = [];
         return true;
     }
-
-
-    /**
-     * Gets the latest ID updated in the database
-     *
-     * Wrapper for mysql_insert_id
-     *
-     * @return int Latest ID updated by auto-increment
-     */
-    public static function getLatestID()
-    {
-        return mysql_insert_id();
-    }
-
-    /**
-     * Get single value from a query
-     *
-     * If a query only returns one single value this function
-     * can be used to fetch that value.
-     *
-     * @param resource $a_rResults MySQL resource
-     * @return string Single value
-     */
-    public static function getSingleValue($a_rResults)
-    {
-        if ($a_rResults != null)
-        {
-            $aRow = mysql_fetch_row($a_rResults);
-            if ($aRow != null && isset($aRow[0]))
-            {
-                return $aRow[0];
-            }
-        }
-        return null;
-    }
-
 }
 
 ?>
