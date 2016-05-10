@@ -25,6 +25,7 @@ RewriteRule ^feed feed.php?key=$1 [nc,QSA]
 RewriteRule ^, / [R]
 RewriteRule ^fights/([a-zA-Z]+)(.*)$ / [R=301,NC,L]
 RewriteRule ^\[[0-9]\] / [R]
+RewriteRule ^out/([0-9]+) redir.php?b=$1 [nc]
 
 <FilesMatch "\.(jpg|gif|png)$">
 	Header set Cache-Control "max-age=604800, must-revalidate"

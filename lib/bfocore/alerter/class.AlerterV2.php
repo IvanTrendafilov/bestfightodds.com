@@ -13,14 +13,24 @@ class AlerterV2
 		$this->logger = new Katzgrau\KLogger\Logger(GENERAL_KLOGDIR, Psr\Log\LogLevel::DEBUG, ['prefix' => 'alerter_']);
 	}
 
+	//Possible error codes:
+	//-100 Criteria already met
+	//-2xx (passed from Model)
+	//  -210 Duplicate entry
+	//	-220 Invalid criterias
+	//	-230 Invalid e-mail
+	//  -240 Invalid odds type
+	//  -250 Invalid criterias combination
+	//
+	// 1 = Alert added OK!
+
 	public function addAlert($email, $oddstype, $criterias)
 	{
 		//Before adding alert, check if criterias are already met. If so we return an exception
-		if ($this->evaluateCriterias($criterias) == false)
+		if ($this->evaluateCriterias($criterias) == true)
 		{
-			//throw new Exception("Criteria already met", 10);
-			//TODO: Pass back code to front end somehow so it knows how to respond
-			return false;
+			//Criteria already met
+			return -101;
 		}
 
 		$am = new AlertsModel();
@@ -28,13 +38,13 @@ class AlerterV2
 		{
 			$id = $am->addAlert($email, $oddstype, $criterias);
 			$this->logger->info('Added alert ' . $id . ' for ' . $email . ', oddstype ' . $oddstype . ': ' . $criterias);
+			return 1;
 		}
 		catch (Exception $e)
 		{
 			//TODO: Pass back code to front end somehow so it knows how to respond
-			return false;
+			return (int) ('-2' . $e->getCode());
 		}
-		return true;
 	}
 
 	public function deleteAlert($alert_id)

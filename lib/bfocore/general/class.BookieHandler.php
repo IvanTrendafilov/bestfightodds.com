@@ -46,6 +46,11 @@ class BookieHandler
         return BookieDAO::resetAllChangeNums();
     }
 
+    public static function resetChangenum($a_iBookieID)
+    {
+        return BookieDAO::resetChangenum($a_iBookieID);
+    }
+
     public static function getParsers($a_iBookieID = -1)
     {
         return BookieDAO::getParsers($a_iBookieID);

@@ -1,5 +1,7 @@
 <?php
 
+require_once('lib/bfocore/parser/utils/class.ParseTools.php');
+
 /**
  * XML Parser
  *
@@ -11,83 +13,120 @@
  */
 class XMLParserPinnacle
 {
+    private $bAuthorativeRun = false;
+    private $oParsedSport;
 
-    public function parseXML($a_sXML)
+    public function parseXML($sInput)
     {
-        $oXML = simplexml_load_string($a_sXML);
+        $this->oParsedSport = new ParsedSport('MMA');
+        //Actually JSON
+        //We already have the fixtures ($sInput) so let's grab the actual odds here:
+        $sCN = BookieHandler::getChangeNum(9); //TODO: bookie_id is hardcoded here..
+        $sOddsJSON = ParseTools::retrievePageFromURL('https://api.pinnaclesports.com/v1/odds?sportId=22&since=' . $sCN . '&isLive=0&oddsFormat=AMERICAN');
 
-        if ($oXML == false)
+        $aFetchedFixtures = json_decode($sInput, true);
+        $aFetchedOdds = json_decode($sOddsJSON, true);
+        
+        //Loop through fixtures
+        foreach ($aFetchedFixtures['league'] as $aLeague)
         {
-            Logger::getInstance()->log("Warning: XML broke!!", -1);
-        }
-        if (isset($oXML->err))
-        {
-            Logger::getInstance()->log("Error: " . $oXML->err, -2);
-        }
-
-        $aSports = array();
-
-        $oParsedSport = new ParsedSport('MMA');
-
-        //Loop through leagues
-        foreach ($oXML->fd->sports->sport->leagues->league as $cLeague)
-        {
-            foreach ($cLeague->events->event as $cEvent)
+            foreach ($aLeague['events'] as $aEvent)
             {
-                if ($cEvent->IsLive == 'No' && //Avoid parsing live odds
-                        ParseTools::checkCorrectOdds($cEvent->periods->period->moneyLine->awayPrice) && //Check odds format
-                        ParseTools::checkCorrectOdds($cEvent->periods->period->moneyLine->homePrice)) //Check odds format
+                $aOdds = $this->findMatchingOdds((int) $aEvent['id'], $aFetchedOdds);
+                if ($aOdds != null)
                 {
-                    $oParsedMatchup = new ParsedMatchup(
-                                    (string) $cEvent->homeTeam->name,
-                                    (string) $cEvent->awayTeam->name,
-                                    (string) $cEvent->periods->period->moneyLine->homePrice,
-                                    (string) $cEvent->periods->period->moneyLine->awayPrice
-                    );
-
-                    $oParsedSport->addParsedMatchup($oParsedMatchup);
-
-                    //Add total if one exists
-                    if (isset($cEvent->periods->period->totals) && trim((string) $cEvent->periods->period->totals->total->points) != '')
-                    {
-                        //Total exists, add it
-                        $oParsedProp = new ParsedProp(
-                                          (string) $cEvent->homeTeam->name . ' vs ' . (string) $cEvent->awayTeam->name . ' - OVER ' . (string) $cEvent->periods->period->totals->total->points,
-                                          (string) $cEvent->homeTeam->name . ' vs ' . (string) $cEvent->awayTeam->name . ' - UNDER ' . (string) $cEvent->periods->period->totals->total->points,
-                                          (string) $cEvent->periods->period->totals->total->overPrice,
-                                          (string) $cEvent->periods->period->totals->total->underPrice);
-                        $oParsedSport->addFetchedProp($oParsedProp);
-                    }
+                    $this->parseEntry($aEvent, $aOdds);
+                }
+                else
+                {
+                    Logger::getInstance()->log("Notice: Did not find matching odds for fixture: " . $aEvent['id'], 0);
                 }
             }
+        } 
+
+        //Declare authorative run if we fill the criteria
+        if (count($this->oParsedSport->getParsedMatchups()) >= 5 && $sCN == '-1')
+        {
+            $this->bAuthorativeRun = true;
+            Logger::getInstance()->log("Declared authoritive run (changenum was omitted)", 0);
         }
 
-
-        $aSports[] = $oParsedSport;
-
         //Before finishing up, save the changenum to be able to fetch future feeds
-        $sCN = trim((string) $oXML->fd->fdTime);
+        $sCN = trim((string) $aFetchedOdds['last']);
         if ($sCN != '-1' && $sCN != null && $sCN != '')
         {
             //Store the changenum - WARNING, bookie_id is hardcoded here, should be fixed..
-            $sCN = ((float) $sCN) - 5000;
+            $sCN = ((float) $sCN);
             if (BookieHandler::saveChangeNum(9, $sCN))
             {
-                Logger::getInstance()->log("ChangeNum stored OK: " . $sCN, 0);
+                Logger::getInstance()->log("ChangeNum (for odds call) stored OK: " . $sCN, 0);
             }
             else
             {
-                Logger::getInstance()->log("Error: ChangeNum was not stored", -2);
+                Logger::getInstance()->log("Error: ChangeNum (for odds call) was not stored", -2);
             }
         }
         else
         {
-            Logger::getInstance()->log("Error: Bad ChangeNum in feed. Message: " . $oXML->err, -2);
+            Logger::getInstance()->log("Error: Bad ChangeNum in feed", -2);
         }
 
-        return $aSports;
+        return [$this->oParsedSport];
     }
 
+    private function findMatchingOdds($iEventID, $aFetchedOdds)
+    {
+        foreach ($aFetchedOdds['leagues'] as $aLeague)
+        {
+            foreach ($aLeague['events'] as $aEvent)
+            {
+                if ($aEvent['id'] == $iEventID)
+                {
+                    return $aEvent;
+                }
+            }
+        }
+        return null;
+    }
+
+    private function parseEntry($aEvent, $aOdds)
+    {
+        if (!isset($aOdds['periods'][0]['moneyline']))
+        {
+            Logger::getInstance()->log("Notice: Odds not set for: " . $aEvent['home'] . ' vs ' . $aEvent['away'], 0);
+            return false;
+        }
+        $oParsedMatchup = new ParsedMatchup(
+                        $aEvent['home'],
+                        $aEvent['away'],
+                        $aOdds['periods'][0]['moneyline']['home'],
+                        $aOdds['periods'][0]['moneyline']['away']
+        );
+        $oGameDate = new DateTime($aEvent['starts']);
+        $oParsedMatchup->setMetaData('gametime', $oGameDate->getTimestamp());
+        //Add ID as correlation ID
+        $oParsedMatchup->setCorrelationID($aEvent['id']);
+        $this->oParsedSport->addParsedMatchup($oParsedMatchup);
+
+        if (isset($aOdds['periods'][0]['totals']))
+        {
+            //Totals exist, add it
+            $oParsedProp = new ParsedProp(
+                              $aEvent['home'] . ' vs ' . $aEvent['away'] . ' - OVER ' . $aOdds['periods'][0]['totals'][0]['points'],
+                              $aEvent['home'] . ' vs ' . $aEvent['away'] . ' - UNDER ' . $aOdds['periods'][0]['totals'][0]['points'],
+                              $aOdds['periods'][0]['totals'][0]['over'],
+                              $aOdds['periods'][0]['totals'][0]['under']);
+            $oParsedProp->setCorrelationID($aEvent['id']);
+            $this->oParsedSport->addFetchedProp($oParsedProp);
+        }
+        return true;
+
+    }
+
+    public function checkAuthoritiveRun($a_aMetadata)
+    {
+        return $this->bAuthorativeRun;
+    }
 }
 ?>
 

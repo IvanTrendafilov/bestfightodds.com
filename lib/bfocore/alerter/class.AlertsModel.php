@@ -29,6 +29,8 @@ class AlertsModel
 			throw new Exception("Invalid field combinations", 50);
 		}
 
+		//Validate event/matchup/proptype_id (maybe)
+
 		$query = "INSERT INTO alerts_entries(email, oddstype, criterias) VALUES (?,?,?)";
 		$params = [$email, $oddstype, $criterias];
 		try 
@@ -38,7 +40,7 @@ class AlertsModel
 		catch(PDOException $e)
 		{
 		    if($e->getCode() == 23000){
-				throw new Exception("Duplicate entry", 50);	
+				throw new Exception("Duplicate entry", 10);	
 		    }
 		}
 		return $id;
@@ -70,18 +72,25 @@ class AlertsModel
 
 	public function isAlertReached($criterias)
 	{
-		if (isset($criterias['proptype_id']))
-		{
-			return $this->isPropAlertReached($criterias);
-		}
-		else if (isset($criterias['matchup_id']))
+		if (isset($criterias['matchup_id']))
 		{
 			return $this->isMatchupAlertReached($criterias);
+		}
+		else if (isset($criterias['proptype_id']))
+		{
+			if (isset($criterias['event_id']))
+			{
+				return $this->isEventPropAlertReached($criterias);
+			}
+			else 
+			{
+				return $this->isPropAlertReached($criterias);
+			}
 		}
 		return false;
 	}
 
-	private function isMatchupAlertReached($criterias)
+	private function isMatchupAlertReached($criterias) //WORKS!
 	{
 		$query_checks = '';
 		$query_params = [];
@@ -89,23 +98,60 @@ class AlertsModel
 		{
 			switch ($criteria)
 			{
-				case 'matchup_id':
-					$query_checks .= ' AND f.id = :matchup_id';
+				case 'matchup_id': //Required
 					$query_params[':matchup_id'] = $val;
 					break;
-				case 'line_limit':
-					$query_checks .= ' AND fo.' . ($criterias['team_num'] == 1 ? 'fighter1_odds' : 'fighter2_odds') . ' = :line_limit';
+				case 'line_limit': //Optional
+					$query_checks .= ' AND fo.' . ($criterias['team_num'] == 1 ? 'fighter1_odds' : 'fighter2_odds') . ' >= :line_limit';
 					$query_params['line_limit'] = $val;
 					break;
-				case 'bookie_id':
-					$query_checks .= ' AND fo.bookie_id = :bookied_id';
+				case 'bookie_id': //Optional
+					$query_checks .= ' AND tmp_fo.bookie_id = :bookied_id';
 					$query_params['bookie_id'] = $val;
 					break;
 			}
 		}
 
-		$query = "SELECT * FROM fightodds fo 
+		$query = "SELECT * FROM (SELECT bookie_id, fight_id, MAX(date) as maxdate FROM fightodds fo WHERE fo.fight_id = :matchup_id GROUP BY fo.bookie_id) tmp_fo 
+						INNER JOIN fightodds fo ON fo.fight_id = tmp_fo.fight_id AND tmp_fo.maxdate = fo.date AND tmp_fo.bookie_id = fo.bookie_id
 						INNER JOIN fights f ON fo.fight_id = f.id 
+						INNER JOIN events e ON f.event_id = e.id 
+						WHERE LEFT(e.date, 10) >= LEFT((NOW() - INTERVAL 2 HOUR), 10)
+						 " . $query_checks;
+
+		return (count(PDOTools::findMany($query, $query_params)) > 0);
+	}
+
+	private function isPropAlertReached($criterias) //NEEDS FIX similar to top one
+	{
+		$query_checks = '';
+		$query_params = [];
+		foreach ($criterias as $criteria => $val)
+		{
+			switch ($criteria)
+			{
+				case 'matchup_id': //Required
+					$query_params[':matchup_id'] = $val;
+					break;
+				case 'proptype_id': //Required
+					$query_params['proptype_id'] = $val;
+					break;
+				case 'team_num': //Required (but can be set to 0)
+					$query_params['team_num'] = $val;
+					break;
+				case 'line_limit': //Optional
+					$query_checks .= ' AND lp.' . ($criterias['line_side'] == 1 ? 'prop_odds' : 'negprop_odds') . ' >= :line_limit';
+					$query_params['line_limit'] = $val;
+				case 'bookie_id': //Optional
+					$query_checks .= ' AND lp.bookie_id = :bookied_id';
+					$query_params['bookie_id'] = $val;
+					break;
+			}
+		}
+
+		$query = "SELECT * FROM (SELECT bookie_id, matchup_id, MAX(date) as maxdate FROM lines_props lp WHERE lp.matchup_id = :matchup_id AND lp.team_num = :team_num AND lp.proptype_id = :proptype_id GROUP BY lp.bookie_id) tmp_lp
+						INNER JOIN lines_props lp ON lp.matchup_id = tmp_lp.matchup_id AND tmp_lp.maxdate = lp.date AND tmp_lp.bookie_id = lp.bookie_id
+						INNER JOIN fights f ON lp.matchup_id = f.id 
 						INNER JOIN events e ON f.event_id = e.id 
 						WHERE LEFT(e.date, 10) >= LEFT((NOW() - INTERVAL 2 HOUR), 10)
 						 " . $query_checks;
@@ -113,7 +159,7 @@ class AlertsModel
 		return (PDOTools::findMany($query, $query_params)->fetchColumn() > 0);
 	}
 
-	private function isPropAlertReached($criterias)
+	private function isEventPropAlertReached($criterias) //NEEDS FIX similar to top one
 	{
 		$query_checks = '';
 		$query_params = [];
@@ -121,34 +167,26 @@ class AlertsModel
 		{
 			switch ($criteria)
 			{
-				case 'event_id':
+				case 'event_id': //Required (or matchup)
 					$query_checks .= ' AND e.id = :event_id';
 					$query_params[':event_id'] = $val;
 					break;
-				case 'matchup_id':
-					$query_checks .= ' AND f.id = :matchup_id';
-					$query_params[':matchup_id'] = $val;
-					break;
-				case 'proptype_id':
+				case 'proptype_id': //Required
 					$query_checks .= ' AND pt.id = :proptype_id';
 					$query_params['proptype_id'] = $val;
 					break;
-				case 'team_num':
-					$query_checks .= ' AND lp.team_num = :team_num';
-					$query_params['team_num'] = $val;
-					break;
-				case 'line_limit':
-					$query_checks .= ' AND lp.' . ($criterias['line_side'] == 1 ? 'prop_odds' : 'negprop_odds') . ' = :line_limit';
+				case 'line_limit': //Optional
+					$query_checks .= ' AND lp.' . ($criterias['line_side'] == 1 ? 'prop_odds' : 'negprop_odds') . ' >= :line_limit';
 					$query_params['line_limit'] = $val;
-				case 'bookie_id':
+				case 'bookie_id': //Optional
 					$query_checks .= ' AND lp.bookie_id = :bookied_id';
 					$query_params['bookie_id'] = $val;
 					break;
 			}
 		}
 
-		$query = "SELECT * FROM lines_props lp 
-						INNER JOIN fights f ON lp.matchup_id = f.id 
+		$query = "SELECT * FROM (SELECT bookie_id, event_id, MAX(date) as maxdate FROM lines_eventprops lep WHERE lep.event_id = :event_id AND lep.proptype_id = :proptype_id GROUP BY lep.bookie_id) tmp_lep
+						INNER JOIN lines_eventprops lep ON lep.event_id = tmp_lep.event_id AND tmp_lep.maxdate = lep.date AND tmp_lep.bookie_id = lep.bookie_id
 						INNER JOIN events e ON f.event_id = e.id 
 						WHERE LEFT(e.date, 10) >= LEFT((NOW() - INTERVAL 2 HOUR), 10)
 						 " . $query_checks;

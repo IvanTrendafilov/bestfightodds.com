@@ -7,60 +7,46 @@ require_once('lib/bfocore/alerter/class.AlerterV2.php');
 
 $alerter = new AlerterV2();
 
-try
-{
-	 $alerter->addAlert('cnordvaller@gmail.com', 2, '{"matchup_id": 123}');	
-}
-catch (Exception $e)
-{
-	echo 'Exception: ' . $e;
-}
-
-try
-{
-	 $alerter->addAlert('cnordvaller@gmail.com', 2, '{"matchup_id": 123}');	
-}
-catch (Exception $e)
-{
-	echo 'Exception: ' . $e;
-}
+translateResult($alerter->addAlert('cnordvaller@gmail.com', 2, '{"matchup_id": 11816}'));	 //Ok (Matchup 11816 Show)
+translateResult($alerter->addAlert('cnordvaller@gmail.com', 2, '{"matchup_id": 11816}'));	//Fail: Should be treated as dupe
+translateResult($alerter->addAlert('cnordvalleil.com', 2, '{"matchup_id": 11816}'));	//Fail: Invalid e-mail
+translateResult($alerter->addAlert('cndsvaller@gmail.com', 2, '{"matchup_id": 11816, "line_limit":150, "team_num": 1}')); //Ok (Limit not met yet)
+translateResult($alerter->addAlert('cndsvaller@gmail.com', 2, '{"matchup_id": 11816, "line_limit":-200, "team_num": 1}')); //Ok (Limit met)
 
 
-
-try
+function translateResult($result)
 {
-	 $alerter->addAlert('cnordvalleil.com', 2, '{"matchup_id": 123}');	
-}
-catch (Exception $e)
-{
-	echo 'Exception: ' . $e;
-}
-
-try
-{
-	 $alerter->addAlert('cndsvaller@gmail.com', 2, '{"matchup_id": 123}');	
-}
-catch (Exception $e)
-{
-	echo 'Exception: ' . $e;
-}
-
-try
-{
-	 $alerter->addAlert('cnordvaller@gmail.com', 15, '{"matchup_id": 123}');	
-}
-catch (Exception $e)
-{
-	echo 'Exception: ' . $e;
-}
-
-try
-{
-	 $alerter->addAlert('cnordvfffler@gmail.com', 0, '{"matchup_id": 123}');	
-}
-catch (Exception $e)
-{
-	echo 'Exception: ' . $e;
+	switch ($result)
+	{
+		case 1:
+			echo "OK!
+			";
+		break;
+		case -100:
+			echo "Criteria already met
+			";
+		break;
+		case -210: 
+			echo "Duplicate entry
+			";
+		break;
+		case -220: 
+			echo "Invalid criterias
+			";
+		break;
+		case -230: 
+			echo "Invalid e-mail
+			";
+		break;
+		case -240: 
+			echo "Invalid odds type
+			";
+		break;
+		case -250: 
+			echo "Invalid criterias combination
+			";
+		break;
+	}
 }
 
 
