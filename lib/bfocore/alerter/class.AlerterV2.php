@@ -1,6 +1,7 @@
 <?php 
 
 require_once('config/inc.generalConfig.php');
+require_once('config/inc.alertConfig.php');
 require_once('lib/bfocore/alerter/class.AlertsModel.php');
 
 
@@ -26,14 +27,13 @@ class AlerterV2
 
 	public function addAlert($email, $oddstype, $criterias)
 	{
+		$am = new AlertsModel();
 		//Before adding alert, check if criterias are already met. If so we return an exception
-		if ($this->evaluateCriterias($criterias) == true)
+		if ($am->isAlertReached($criterias) == true)
 		{
 			//Criteria already met
 			return -101;
 		}
-
-		$am = new AlertsModel();
 		try 
 		{
 			$id = $am->addAlert($email, $oddstype, $criterias);
@@ -42,7 +42,6 @@ class AlerterV2
 		}
 		catch (Exception $e)
 		{
-			//TODO: Pass back code to front end somehow so it knows how to respond
 			return (int) ('-2' . $e->getCode());
 		}
 	}
@@ -71,7 +70,7 @@ class AlerterV2
 		foreach ($alerts as $alert)
 		{
 			//Evaluate if stored alert fills the criterias to be triggered
-			if ($this->evaluateCriterias($alert->getCriterias()))
+			if ($am->isAlertReached($alert->getCriterias()))
 			{
 				//Fills criteria, add it to list of alerts to dispatch
 				$alerts_to_send[] = $alert;
@@ -84,72 +83,21 @@ class AlerterV2
 		}
 	}
 
-
-
-	private function evaluateCriterias($criterias)
-	{
-		$is_reached = (new AlertsModel())->isAlertReached($criterias);	
-		return $is_reached; 
-
-		// switch ($this->getCriteriasCategory($criterias))
-		// {
-		// 	case 1: //Matchup
-
-		// 	break;
-		// 	case 2: //Matchup prop
-		// 	break;
-		// 	case 3: //Matchup proptype
-		// 	break;
-		// 	case 4: //Event 
-		// 	break;
-		// 	case 5: //Event prop
-		// 	break;
-		// 	case 6: //Event proptype
-		// 	break;
-		// 	default:	
-		// }
-
-	}
-
-	private function getCriteriasCategory($criterias)
+	private function getAlertCategory($criterias)
 	{
 		if (isset($criterias['matchup_id']))
 		{
-			if (isset($criterias['proptype_id']))
-			{
-				//Proptype for matchup
-				return 2;
-			}
-			else if (isset($criterias['proptype_category']))
-			{
-				//Proptype category for matchup
-				return 3;
-			}
-			else
-			{
-				//Matchup based alert
-				return 1;
-			}
+			return $this->isMatchupAlertReached($criterias);
 		}
-		else if (isset($criterias['event_id']))
+		else if (isset($criterias['proptype_id']))
 		{
-			if (isset($criterias['proptype_id']))
-			{
-				return 5;
-				//Prop type
-			}
-			else if (isset($criterias['proptype_category']))
-			{
-				return 6;
-				//Prop type category
-			}
-			else
-			{
-				return 4;
-				//Event based alert
-			}
+			return $this->isPropAlertReached($criterias);
 		}
-		return null;
+		else if (isset($criterias['is_eventprop']))
+		{
+			return $this->isEventPropAlertReached($criterias);
+		}
+		return false;
 	}
 
 
@@ -169,26 +117,73 @@ class AlerterV2
 	{
 		//Group alerts before dispatching them
 		$grouped_alerts = $this->groupAlerts($alerts);
-		$ids_dispatched = [];
+		$all_ids_dispatched = [];
 
 		foreach ($grouped_alerts as $rcpt => $alerts)
 		{
+			$ids_dispatched = [];
 			foreach ($alerts as $alert)
 			{
 				$ids_dispatched[] = $alert->getID();
 			}
 			//TODO: Perform actual dispatch of alerts
+
+			$text = $this->formatAlertMail($alerts);
+			$this->sendAlertsByMail($text);
+
 			$this->logger->info('Dispatched ' . implode($ids_dispatched, ' ,') . ' for ' . $rcpt);
+			$all_ids_dispatched = array_merge($all_ids_dispatched, $ids_dispatched);
 		}
-
-		
-
-		return $ids_dispatched;
+		return $all_ids_dispatched;
 	}
 
-	private function sendAlertsByMail()
+	private function formatAlertMail($alerts)
 	{
+		$text = "Alert mail:\n\n";
+		foreach ($alerts as $alert)
+		{
+			$criterias = $alert->getCriterias(); 
+			//Add alert row
+			if (isset($criterias['proptype_id']))
+			{
+				//Prop row
+				$text .= "Prop available";
+			}
+			else
+			{
+				//Matchup
+				$text .= "Regular matchup";
+				if (!isset($alert->getCriterias()['line_limit']))
+				{
+					//No limit set, this is for show only
+					
+				}
+				else
+				{
+					//Limit set, include it
+				}
+			}
+
+			$text .= "\n";
+		}
+		$text .= "End of alert mail\n\n";
+		return $text;
+	}
+
+	private function sendAlertsByMail($mail_text)
+	{
+		if (ALERTER_DEV_MODE == true)
+		{
+			//Do not actually send the alert, just echo it
+			echo $mail_text;
+
+		}
 		//TODO: Format each alert determined by their criteras.. Do we do this earlier in the chain while we evaluate the criteras?
+	}
+
+	public function getAllAlerts()
+	{
+		return (new AlertsModel())->getAllAlerts();
 	}
 
 }
