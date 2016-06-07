@@ -655,10 +655,12 @@ fo2.bookie_id, fo2.fight_id ASC;';
                                 VALUES(
                                     (SELECT f1.id
                                         FROM fighters f1
-                                        WHERE f1.name = ?),
+                                        WHERE f1.name = ?
+                                        ORDER BY f1.id ASC LIMIT 1),
                                     (SELECT f2.id
                                         FROM fighters f2
-                                        WHERE f2.name = ?),
+                                        WHERE f2.name = ?
+                                        ORDER BY f2.id ASC LIMIT 1),
                                         ?)';
 
                 $aParams = array($a_oFight->getFighter(1), $a_oFight->getFighter(2), $a_oFight->getEventID());

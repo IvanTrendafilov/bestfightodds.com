@@ -1,6 +1,7 @@
 <?php
 
 require_once('lib/bfocore/general/class.EventHandler.php');
+require_once('lib/bfocore/general/class.OddsHandler.php');
 require_once('config/inc.parseConfig.php');
 
 class ScheduleChangeTracker
@@ -149,7 +150,14 @@ class ScheduleChangeTracker
                     if ($datetime > $nowdatetime) 
                     {
                         Logger::getInstance()->log('-Matchup: ' . $oUpMatch->getID() . ' was not found in feed and will be removed (event date:' . $datetime->format('Y-m-d') . ' / now date: ' . $nowdatetime->format('Y-m-d') .  ') <a href="#/" onclick="removeOddsForMatchupAndBookie(\'' . $oUpMatch->getID() . '\',\'' . $sKey . '\')">remove</a>', 0);
-                        //TODO: Perform actual removal
+                        if (OddsHandler::removeOddsForMatchupAndBookie($oUpMatch->getID(), $sKey))
+                        {
+                            Logger::getInstance()->log('--Removed', 0);
+                        }
+                        else
+                        {
+                            Logger::getInstance()->log('--Not removed', -2);
+                        }
                     }   
                     else
                     {

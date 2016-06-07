@@ -186,3 +186,48 @@ CREATE TABLE `matchups_results` (
   `endtime` VARCHAR(20) NULL DEFAULT NULL,
   PRIMARY KEY (`matchup_id`)
 ) ENGINE=MyISAM DEFAULT CHARSET=latin1;
+
+
+CREATE TABLE `alerts_entries` (
+  `id` INT(11) NOT NULL AUTO_INCREMENT,
+  `email` VARCHAR(255) NOT NULL,
+  `oddstype` INT(1) NOT NULL,
+  `criterias` VARCHAR(500) NOT NULL,
+  PRIMARY KEY (`id`, `email`, `criterias`),
+  UNIQUE INDEX `ix_entry` (`email`, `criterias`)
+)
+ENGINE=MyISAM DEFAULT 
+CHARSET=latin1;
+AUTO_INCREMENT=301
+;
+
+CREATE TABLE `prop_types_categories` (
+  `id` INT(11) NOT NULL AUTO_INCREMENT,
+  `name` INT(11) NULL DEFAULT NULL,
+  PRIMARY KEY (`id`)
+)
+ENGINE=MyISAM DEFAULT 
+CHARSET=latin1;
+;
+
+
+USE `bets`;
+DROP function IF EXISTS `MoneylineToDecimal`;
+
+DELIMITER $$
+USE `bets`$$
+CREATE DEFINER=`root`@`localhost` FUNCTION `MoneylineToDecimal`(moneyline INT) RETURNS float
+BEGIN
+  DECLARE decimalval FLOAT;
+  IF moneyline = 100 THEN
+    SET decimalval = 2.0;
+  ELSEIF moneyline > 0 THEN
+    SET decimalval = ROUND((moneyline / 100) + 1, 5) ;
+  ELSEIF moneyline < 0 THEN
+    SET decimalval = ROUND((100 / ABS(moneyline)) + 1, 5);
+  END IF;
+RETURN decimalval;
+END$$
+
+DELIMITER ;
+
