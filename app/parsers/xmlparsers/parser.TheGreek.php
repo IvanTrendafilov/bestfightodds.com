@@ -58,6 +58,15 @@ class XMLParserTheGreek
         {
             foreach ($sportlinesnode->find('div.collaps') as $collapsenode)
             {
+
+                /*foreach ($collapsenode->find('span.yellow-text') as $ytn)
+                {
+                    echo 'once ';
+                    $sib = $ytn->next_sibling();
+                    echo 'next: ' . $sib->tag . '  ';
+                    
+                }*/
+
                 //One entry
                 $headernodes = $collapsenode->find('span.yellow-text');
                 $teamnodes = $collapsenode->find('td.content a.predictions-lines');
