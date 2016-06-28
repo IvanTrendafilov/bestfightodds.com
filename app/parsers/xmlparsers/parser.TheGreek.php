@@ -59,60 +59,49 @@ class XMLParserTheGreek
             foreach ($sportlinesnode->find('div.collaps') as $collapsenode)
             {
 
-                /*foreach ($collapsenode->find('span.yellow-text') as $ytn)
+                foreach ($collapsenode->find('span.yellow-text') as $headernode)
                 {
-                    echo 'once ';
-                    $sib = $ytn->next_sibling();
-                    echo 'next: ' . $sib->tag . '  ';
-                    
-                }*/
-
-                //One entry
-                $headernodes = $collapsenode->find('span.yellow-text');
-                $teamnodes = $collapsenode->find('td.content a.predictions-lines');
-                $oddsnodes = $collapsenode->find('td.odds a.predictions-lines');
-
-                //If only one header node and more than two teams and odds, most likely a prop
-                if (count($headernodes) == 1 && count($teamnodes) > 2 && count($oddsnodes) > 2)
-                {
-                    //Single line prop
-                    $iX = 0;
-                    foreach ($teamnodes as $teamnode)
+                    //One header node
+                    $sib = $headernode->next_sibling();
+                    $teams = [];
+                    $odds = [];
+                    //Loop through and find all 'table' occurences. These contain the matchup and odds
+                    while (trim(strtolower($sib->tag)) == 'table')
                     {
-                        $sTeam1 = trim(str_replace("&nbsp;", " ", $teamnodes[$iX]->plaintext));
-
-                        $oParsedProp = new ParsedProp(
-                                        $headernodes[0]->plaintext . ' : ' . $sTeam1,
-                                        '',
-                                        $oddsnodes[$iX]->plaintext,
-                                        '-99999'
-                        );
-
-                        $this->oParsedSport->addFetchedProp($oParsedProp);
-                        $iX++;
+                        $teams[] = trim(str_replace(["&nbsp;", " Champ "], " ", $sib->find('td.content a.predictions-lines')[0]->plaintext));
+                        $odds[] = trim(str_replace(["&nbsp;", " Champ "], " ", $sib->find('td.odds a.predictions-lines')[0]->plaintext));
+                        $sib = $sib->next_sibling();
                     }
-                }
-                else if (count($headernodes) >= 1)
-                {
-                    //Regular matchup (with potential additional prop)
-                    $iX = 0;
-                    foreach ($headernodes as $headernode)
+                    
+                    if (count($teams) > 2 && count($odds) > 2) //If more than two teams and odds, most likely a prop
                     {
-                        if (ParseTools::checkCorrectOdds(trim((string) $oddsnodes[$iX]->plaintext))
-                                && ParseTools::checkCorrectOdds(trim((string) $oddsnodes[$iX + 1]->plaintext))
-                        )
+                        for ($x = 0; $x <= count($teams); $x++)
                         {
-                            $sTeam1 = trim(str_replace(" Champ ", " ", str_replace("&nbsp;", " ", $teamnodes[$iX]->plaintext)));
-                            $sTeam2 = trim(str_replace(" Champ ", " ", str_replace("&nbsp;", " ", $teamnodes[$iX + 1]->plaintext)));
-
-                            if (substr($sTeam1, 0, strlen('Over')) === 'Over' && substr($sTeam2, 0, strlen('Under')) === 'Under')
+                            if (ParseTools::checkCorrectOdds($odds[$x]))
+                            {
+                                //One entry
+                                $oParsedProp = new ParsedProp(
+                                    $headernode[0]->plaintext . ' : ' . $teams[$x],
+                                    '',
+                                    $odds[$x],
+                                    '-99999'
+                                );
+                                $this->oParsedSport->addFetchedProp($oParsedProp);
+                            }
+                        } 
+                    }
+                    else //Regular matchup (with potential additional prop)
+                    {
+                        if (ParseTools::checkCorrectOdds($odds[0]) && ParseTools::checkCorrectOdds($odds[1]))
+                        {
+                            if (substr($teams[0], 0, strlen('Over')) === 'Over' && substr($teams[1], 0, strlen('Under')) === 'Under')
                             {
                                 //Over/under
                                 $oParsedProp = new ParsedProp(
-                                                $headernodes[0]->plaintext . ' : ' . $sTeam1,
-                                                $headernodes[0]->plaintext . ' : ' . $sTeam2,
-                                                $oddsnodes[$iX]->plaintext,
-                                                $oddsnodes[$iX + 1]->plaintext
+                                                $headernode[0]->plaintext . ' : ' . $teams[0],
+                                                $headernode[0]->plaintext . ' : ' . $teams[1],
+                                                $odds[0],
+                                                $odds[1]
                                 );
 
                                 $this->oParsedSport->addFetchedProp($oParsedProp);
@@ -121,16 +110,15 @@ class XMLParserTheGreek
                             {
                                 //Regular matchup
                                 $oParsedMatchup = new ParsedMatchup(
-                                                $sTeam1,
-                                                $sTeam2,
-                                                $oddsnodes[$iX]->plaintext,
-                                                $oddsnodes[$iX + 1]->plaintext
+                                                $teams[0],
+                                                $teams[1],
+                                                $odds[0],
+                                                $odds[1]
                                 );
 
                                 $this->oParsedSport->addParsedMatchup($oParsedMatchup);
                             }
                         }
-                        $iX += 2;
                     }
                 }
             } 
