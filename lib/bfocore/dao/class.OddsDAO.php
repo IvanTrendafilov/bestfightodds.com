@@ -112,6 +112,29 @@ class OddsDAO
         return $aPropTypes;
     }
 
+    public static function getPropTypeByID($a_iID)
+    {
+        $sQuery = 'SELECT pt.id, pt.prop_desc, pt.negprop_desc
+                    FROM prop_types pt
+                    WHERE pt.id = ?';
+
+        $rResult = DBTools::doParamQuery($sQuery, [$a_iID]);
+
+        $aPropTypes = array();
+        while ($aRow = mysql_fetch_array($rResult))
+        {
+            $aPropTypes[] = new PropType($aRow['id'],
+                            $aRow['prop_desc'],
+                            $aRow['negprop_desc']);
+        }
+
+        if (sizeof($aPropTypes) > 0)
+        {
+            return $aPropTypes[0];
+        }
+        return null;
+    }
+
     /**
      * Retrieves the prop types that a certain matchup has props and odds for
      *

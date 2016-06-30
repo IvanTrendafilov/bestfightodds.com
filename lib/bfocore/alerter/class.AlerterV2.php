@@ -147,7 +147,9 @@ class AlerterV2
 			if (isset($criterias['proptype_id']))
 			{
 				//Prop row
-				$text .= "Prop available";
+				$text .= "Prop available: ";
+				$proptype = OddsHandler::getPropTypeByID($criterias['proptype_id']);
+				$text .= '' . $proptype->getPropDesc() . ' / ' . $proptype->getNegPropDesc() 
 			}
 			else
 			{

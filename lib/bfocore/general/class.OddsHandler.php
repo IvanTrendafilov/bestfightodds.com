@@ -25,6 +25,11 @@ class OddsHandler
         return OddsDAO::getAllPropTypes();
     }
 
+    public static function getPropTypeByID($a_iID)
+    {
+        return OddsDAO::getPropTypeByID($a_iID);
+    }
+
     public static function checkMatchingPropOdds($a_oPropBet)
     {
 
