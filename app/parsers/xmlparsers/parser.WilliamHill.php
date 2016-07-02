@@ -85,8 +85,8 @@ class XMLParserWilliamHill
                     {
                         //Two option bet
                         $oParsedProp = new ParsedProp(
-                                      $cMarket['name'] . ' : ' .  $cMarket->participant[0]['name'] . ' ' . $cMarket->participant[0]['handicap'],
-                                      $cMarket['name'] . ' : ' .  $cMarket->participant[1]['name'] . ' ' . $cMarket->participant[1]['handicap'],
+                                      $this->getCorrelationID($cMarket) . ' - ' . $sType . ' : ' .  $cMarket->participant[0]['name'] . ' ' . $cMarket->participant[0]['handicap'],
+                                      $this->getCorrelationID($cMarket) . ' - ' . $sType . ' : ' .  $cMarket->participant[1]['name'] . ' ' . $cMarket->participant[1]['handicap'],
                                       OddsTools::convertDecimalToMoneyline($cMarket->participant[0]['oddsDecimal']),
                                       OddsTools::convertDecimalToMoneyline($cMarket->participant[1]['oddsDecimal']));
                      
@@ -99,7 +99,7 @@ class XMLParserWilliamHill
                         foreach ($cMarket->participant as $cParticipant)
                         {
                             $oParsedProp = new ParsedProp(
-                                      $cMarket['name'] . ' : ' .  $cParticipant['name'] . ' ' . $cParticipant['handicap'],
+                                      $this->getCorrelationID($cMarket) . ' - ' . $sType . ' : ' .  $cParticipant['name'] . ' ' . $cParticipant['handicap'],
                                       '',
                                       OddsTools::convertDecimalToMoneyline($cParticipant['oddsDecimal']),
                                       '-99999');
@@ -129,12 +129,24 @@ class XMLParserWilliamHill
         if ($iPos = strpos($a_cMarket['name'], "-"))
         {
             $sCorrelation = substr($a_cMarket['name'], 0, $iPos - 1);
+            $sCorrelation = $this->correctMarket($sCorrelation);
         }
         else
         {
             Logger::getInstance()->log("Warning: Unable to set correlation ID: " . $a_cMarket['name'], -1);
         }
         return $sCorrelation;
+    }
+
+    private function correctMarket($a_sMarket)
+    {
+        //The following piece of code ensures that the matchup correlation is always in lexigraphical order
+        $aPieces = explode(' v ', $a_sMarket);
+        if (count($aPieces) == 2)
+        {
+            return $aPieces[0] <= $aPieces[1] ? $aPieces[0] . ' v ' . $aPieces[1] : $aPieces[1] . ' v ' . $aPieces[0]; 
+        }
+        return $a_sMarket;
     }
 
     public function checkAuthoritiveRun($a_aMetadata)
