@@ -8,11 +8,14 @@ require_once('lib/bfocore/parser/utils/class.ParseTools.php');
  * Bookie: SportsInteraction
  * Sport: MMA
  *
+ * Authorative run declared: Yes 
+ *
  * Comment: Prod version
  *
  */
 class XMLParserSportsInteraction
 {
+    private $bAuthorativeRun = false;
 
     public function parseXML($a_sXML)
     {
@@ -52,7 +55,6 @@ class XMLParserSportsInteraction
                 {
                     foreach ($cEventType->Event as $cEvent)
                     {
-
                         if ($cEvent->Bet[0]['TYPE'] == "")
                         {
                             //Regular matchup
@@ -90,6 +92,7 @@ class XMLParserSportsInteraction
                             }
                             if ($oParsedMatchup != null)
                             {
+                                $oParsedMatchup->setCorrelationID(trim($cEvent->Name));
                                 $oParsedSport->addParsedMatchup($oParsedMatchup);
                             }
                         }
@@ -99,11 +102,15 @@ class XMLParserSportsInteraction
                             if (ParseTools::checkCorrectOdds((string) $cEvent->Bet[0]->Price)
                                     && ParseTools::checkCorrectOdds((string) $cEvent->Bet[1]->Price))
                             {
-                                $oParsedSport->addFetchedProp(new ParsedProp(
+
+                                $oTempProp = new ParsedProp(
                                                 (string) $cEvent->Name . ' Total Rounds over ' . $cEvent->Bet[0]->Handicap,
                                                 'Total Rounds under ' . $cEvent->Bet[1]->Handicap,
                                                 (string) $cEvent->Bet[0]->Price,
-                                                (string) $cEvent->Bet[1]->Price));
+                                                (string) $cEvent->Bet[1]->Price);
+
+                                $oTempProp->setCorrelationID(trim($cEvent->Name));
+                                $oParsedSport->addFetchedProp($oTempProp);
                             }
                         }
                         else if ($cEvent->Bet[0]['TYPE'] == "How will the Fight Finish")
@@ -123,11 +130,14 @@ class XMLParserSportsInteraction
                                     {
                                         $cBet->Runner = (string) $cEvent->Name . ' - ' . $cBet->Runner;
                                     }
-                                    $oParsedSport->addFetchedProp(new ParsedProp(
+
+                                    $oTempProp = new ParsedProp(
                                                     (string) $cBet->Runner,
                                                     '',
                                                     (string) $cBet->Price,
-                                                    '-99999'));
+                                                    '-99999');
+                                    $oTempProp->setCorrelationID(trim($cEvent->Name));
+                                    $oParsedSport->addFetchedProp($oTempProp);
                                 }
                             }
                         }
@@ -136,11 +146,26 @@ class XMLParserSportsInteraction
             }
         }
 
-        $aSports[] = $oParsedSport;
+        //Declare authorative run if we fill the criteria
+        if (count($oParsedSport->getParsedMatchups()) >= 5 && $oXML->getName() != 'feed-unchanged')
+        {
+            $this->bAuthorativeRun = true;
+            Logger::getInstance()->log("Declared authoritive run", 0);
+        }
 
+        $aSports[] = $oParsedSport;
         return $aSports;
     }
 
+    public function checkAuthoritiveRun($a_aMetadata)
+    {
+        //Only report as an authoritive run if changenum has been reset. This in combination with the number of parsed matchups declares
+        if (isset($a_aMetadata['changenum']) && $a_aMetadata['changenum'] == -1)
+        {
+            return $this->bAuthorativeRun;
+        }
+        return false;
+    }
 }
 
 ?>

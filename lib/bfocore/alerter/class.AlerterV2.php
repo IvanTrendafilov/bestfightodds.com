@@ -149,20 +149,20 @@ class AlerterV2
 				//Prop row
 				$text .= "Prop available: ";
 				$proptype = OddsHandler::getPropTypeByID($criterias['proptype_id']);
-				$text .= '' . $proptype->getPropDesc() . ' / ' . $proptype->getNegPropDesc() 
+				$text .= '' . $proptype->getPropDesc() . ' / ' . $proptype->getNegPropDesc();
 			}
 			else
 			{
 				//Matchup
-				$text .= "Regular matchup";
-				if (!isset($alert->getCriterias()['line_limit']))
+				$text .= "Regular matchup: ";
+				
+				if (isset($alert->getCriterias()['line_limit']))
 				{
-					//No limit set, this is for show only
-					
+					//Limit set, include it	
 				}
 				else
 				{
-					//Limit set, include it
+					//No limit set, this is for show only
 				}
 			}
 
