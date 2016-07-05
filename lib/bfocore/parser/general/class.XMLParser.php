@@ -105,10 +105,8 @@ class XMLParser
                 ParseTools::saveCorrelation($aCorr['correlation'], $aCorr['matchup_id']);
             }
             
-            //Remove dupes - DISABLED, function must be fixed
-            //$aParseResults = XMLParser::removeMoneylineDupes($aParseResults);
-            
-            //Pass events/matchups to storage parser
+            //Remove dupes, then pass to parser
+            $aParseResults = XMLParser::removeMoneylineDupes($aParseResults);            
             self::processAll($aParseResults, $a_oParser->getBookieID());
             $aParseResults = self::removePropDupes($aParseResults);
             self::processProps($aParseResults, $a_oParser->getBookieID());
@@ -137,8 +135,6 @@ class XMLParser
 
     /**
      *  Cleans dupes. If a dupe is found (two odds for the same fighters), the one with the best arbitrage is picked
-     *
-     * TODO Warning: This one currently removes any dupes based on only the moneyline odds and NOT spreads and totals. Should be fixed
      */
     public static function removeMoneylineDupes($a_aSports)
     {
