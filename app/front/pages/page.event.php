@@ -195,7 +195,7 @@ if ($oEvent != null)
         $aPropTypes = OddsHandler::getAllPropTypesForEvent($oEvent->getID());
         if (count($aPropTypes) > 0)
         {
-            echo '<tr class="odd even eventprop" id="mu-' . $oEvent->getID() . '">';
+            echo '<tr class="odd even eventprop" id="mu-e' . $oEvent->getID() . '">';
             echo '<th scope="row" style="font-weight: 400"><a href="#" data-mu="' . $oEvent->getID() . '">Event props</a></th>';
             echo '</tr>';
 
@@ -561,7 +561,7 @@ if ($oEvent != null)
         if (count($aPropTypes) > 0)
         {
             echo '<tr class="odd even eventprop" id="mu-' . $oEvent->getID() . '">';
-            echo '<th scope="row" style="font-weight: 400"><a href="#" data-mu="' . $oEvent->getID() . '">Event props</a></th>';
+            echo '<th scope="row" style="font-weight: 400"><a href="#" data-mu="e' . $oEvent->getID() . '">Event props</a></th>';
 
             //Fill empty cells
             for ($iY = 0; $iY < (sizeof($aBookieRefList)); $iY++)
@@ -570,7 +570,7 @@ if ($oEvent != null)
             }
             echo '<td class="button-cell"></td>';
 
-            echo '<td class="prop-cell"><a href="#" data-mu="' . $oEvent->getID() . '"><span class="tw">';
+            echo '<td class="prop-cell"><a href="#" data-mu="e' . $oEvent->getID() . '"><span class="tw">';
             echo count($aPropTypes) . '&nbsp;<span class="exp-ard"></span>';
             echo '</span></a></td>';
 
