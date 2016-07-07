@@ -1,71 +1,266 @@
-<?xml version="1.0"?>
+<?xml version="1.0" encoding="ISO-8859-1"?>
 <bestlinesports_line_feed>
 <event>
-<event_datetimeGMT>2013-03-16 22:00</event_datetimeGMT>
+<event_datetimeGMT>2016-07-07 23:25</event_datetimeGMT>
 <sporttype>Martial Arts</sporttype>
-<scheduletext>UFC 158                                                     </scheduletext>
+<scheduletext>UFC Fight Night 90                                          </scheduletext>
 <league>MMA Martial Arts</league>
 <participant>
-<participant_name>Nick Diaz</participant_name>
+<participant_name>Eddie Alvarez</participant_name>
 <rotnum>24101</rotnum>
 <visiting_home_draw>Visiting</visiting_home_draw>
 <odds>
-<moneyline>375</moneyline>
+<moneyline>285</moneyline>
 </odds>
 <pitcher></pitcher>
 </participant>
 <participant>
-<participant_name>Georges St-Pierre</participant_name>
+<participant_name>Rafael Dos Anjos</participant_name>
 <rotnum>24102</rotnum>
 <visiting_home_draw>Home</visiting_home_draw>
 <odds>
-<moneyline>-500</moneyline>
+<moneyline>-350</moneyline>
 </odds>
 <pitcher></pitcher>
 </participant>
 <drawrotnum>0</drawrotnum><drawmoneyline>0</drawmoneyline><drawTitle></drawTitle><period>
 <period_description>Game</period_description>
-<periodcutoff_datetimeGMT>2013-03-16 22:00</periodcutoff_datetimeGMT>
-<period_status>I</period_status>
+<periodcutoff_datetimeGMT>2016-07-07 23:30</periodcutoff_datetimeGMT>
+<period_status>O</period_status>
 <spread><spread_visiting></spread_visiting>
 <spread_adjust_visiting></spread_adjust_visiting>
 <spread_home></spread_home>
 <spread_adjust_home></spread_adjust_home>
 </spread>
 <total>
-<total_points>4.5</total_points>
-<over_adjust>-280</over_adjust>
-<under_adjust>220</under_adjust>
+<total_points>3.5</total_points>
+<over_adjust>110</over_adjust>
+<under_adjust>-140</under_adjust>
 </total>
 </period>
 </event>
 <event>
-<event_datetimeGMT>2013-03-16 22:30</event_datetimeGMT>
+<event_datetimeGMT>2016-07-07 22:55</event_datetimeGMT>
 <sporttype>Martial Arts</sporttype>
-<scheduletext>UFC 158                                                     </scheduletext>
+<scheduletext>UFC Fight Night 90                                          </scheduletext>
 <league>MMA Martial Arts</league>
 <participant>
-<participant_name>Carlos Condit</participant_name>
+<participant_name>Derrick Lewis</participant_name>
 <rotnum>24105</rotnum>
 <visiting_home_draw>Visiting</visiting_home_draw>
 <odds>
-<moneyline>120</moneyline>
+<moneyline>110</moneyline>
 </odds>
 <pitcher></pitcher>
 </participant>
 <participant>
-<participant_name>Johny Hendricks</participant_name>
+<participant_name>Roy Nelson</participant_name>
 <rotnum>24106</rotnum>
 <visiting_home_draw>Home</visiting_home_draw>
 <odds>
-<moneyline>-140</moneyline>
+<moneyline>-130</moneyline>
 </odds>
 <pitcher></pitcher>
 </participant>
 <drawrotnum>0</drawrotnum><drawmoneyline>0</drawmoneyline><drawTitle></drawTitle><period>
 <period_description>Game</period_description>
-<periodcutoff_datetimeGMT>2013-03-16 22:30</periodcutoff_datetimeGMT>
-<period_status>I</period_status>
+<periodcutoff_datetimeGMT>2016-07-07 23:00</periodcutoff_datetimeGMT>
+<period_status>O</period_status>
+<spread><spread_visiting></spread_visiting>
+<spread_adjust_visiting></spread_adjust_visiting>
+<spread_home></spread_home>
+<spread_adjust_home></spread_adjust_home>
+</spread>
+<total>
+<total_points>1.5</total_points>
+<over_adjust>155</over_adjust>
+<under_adjust>-185</under_adjust>
+</total>
+</period>
+</event>
+<event>
+<event_datetimeGMT>2016-07-07 22:30</event_datetimeGMT>
+<sporttype>Martial Arts</sporttype>
+<scheduletext>UFC Fight Night 90                                          </scheduletext>
+<league>MMA Martial Arts</league>
+<participant>
+<participant_name>Belal Muhammad</participant_name>
+<rotnum>24109</rotnum>
+<visiting_home_draw>Visiting</visiting_home_draw>
+<odds>
+<moneyline>-105</moneyline>
+</odds>
+<pitcher></pitcher>
+</participant>
+<participant>
+<participant_name>Alan Jouban</participant_name>
+<rotnum>24110</rotnum>
+<visiting_home_draw>Home</visiting_home_draw>
+<odds>
+<moneyline>-115</moneyline>
+</odds>
+<pitcher></pitcher>
+</participant>
+<drawrotnum>0</drawrotnum><drawmoneyline>0</drawmoneyline><drawTitle></drawTitle><period>
+<period_description>Game</period_description>
+<periodcutoff_datetimeGMT>2016-07-07 22:35</periodcutoff_datetimeGMT>
+<period_status>O</period_status>
+<spread><spread_visiting></spread_visiting>
+<spread_adjust_visiting></spread_adjust_visiting>
+<spread_home></spread_home>
+<spread_adjust_home></spread_adjust_home>
+</spread>
+<total>
+<total_points>2.5</total_points>
+<over_adjust>-165</over_adjust>
+<under_adjust>135</under_adjust>
+</total>
+</period>
+</event>
+<event>
+<event_datetimeGMT>2016-07-07 22:05</event_datetimeGMT>
+<sporttype>Martial Arts</sporttype>
+<scheduletext>UFC Fight Night 90                                          </scheduletext>
+<league>MMA Martial Arts</league>
+<participant>
+<participant_name>Mitch Clarke</participant_name>
+<rotnum>24113</rotnum>
+<visiting_home_draw>Visiting</visiting_home_draw>
+<odds>
+<moneyline>305</moneyline>
+</odds>
+<pitcher></pitcher>
+</participant>
+<participant>
+<participant_name>Joseph Duffy</participant_name>
+<rotnum>24114</rotnum>
+<visiting_home_draw>Home</visiting_home_draw>
+<odds>
+<moneyline>-370</moneyline>
+</odds>
+<pitcher></pitcher>
+</participant>
+<drawrotnum>0</drawrotnum><drawmoneyline>0</drawmoneyline><drawTitle></drawTitle><period>
+<period_description>Game</period_description>
+<periodcutoff_datetimeGMT>2016-07-07 22:10</periodcutoff_datetimeGMT>
+<period_status>O</period_status>
+<spread><spread_visiting></spread_visiting>
+<spread_adjust_visiting></spread_adjust_visiting>
+<spread_home></spread_home>
+<spread_adjust_home></spread_adjust_home>
+</spread>
+<total>
+<total_points>2.5</total_points>
+<over_adjust>-105</over_adjust>
+<under_adjust>-125</under_adjust>
+</total>
+</period>
+</event>
+<event>
+<event_datetimeGMT>2016-07-07 21:35</event_datetimeGMT>
+<sporttype>Martial Arts</sporttype>
+<scheduletext>UFC Fight Night 90                                          </scheduletext>
+<league>MMA Martial Arts</league>
+<participant>
+<participant_name>Alberto Mina</participant_name>
+<rotnum>24117</rotnum>
+<visiting_home_draw>Visiting</visiting_home_draw>
+<odds>
+<moneyline>100</moneyline>
+</odds>
+<pitcher></pitcher>
+</participant>
+<participant>
+<participant_name>Mike Pyle</participant_name>
+<rotnum>24118</rotnum>
+<visiting_home_draw>Home</visiting_home_draw>
+<odds>
+<moneyline>-120</moneyline>
+</odds>
+<pitcher></pitcher>
+</participant>
+<drawrotnum>0</drawrotnum><drawmoneyline>0</drawmoneyline><drawTitle></drawTitle><period>
+<period_description>Game</period_description>
+<periodcutoff_datetimeGMT>2016-07-07 21:40</periodcutoff_datetimeGMT>
+<period_status>O</period_status>
+<spread><spread_visiting></spread_visiting>
+<spread_adjust_visiting></spread_adjust_visiting>
+<spread_home></spread_home>
+<spread_adjust_home></spread_adjust_home>
+</spread>
+<total>
+<total_points>1.5</total_points>
+<over_adjust>-180</over_adjust>
+<under_adjust>150</under_adjust>
+</total>
+</period>
+</event>
+<event>
+<event_datetimeGMT>2016-07-07 21:10</event_datetimeGMT>
+<sporttype>Martial Arts</sporttype>
+<scheduletext>UFC Fight Night 90                                          </scheduletext>
+<league>MMA Martial Arts</league>
+<participant>
+<participant_name>Mehdi Baghdad</participant_name>
+<rotnum>24121</rotnum>
+<visiting_home_draw>Visiting</visiting_home_draw>
+<odds>
+<moneyline>110</moneyline>
+</odds>
+<pitcher></pitcher>
+</participant>
+<participant>
+<participant_name>John Makdessi</participant_name>
+<rotnum>24122</rotnum>
+<visiting_home_draw>Home</visiting_home_draw>
+<odds>
+<moneyline>-130</moneyline>
+</odds>
+<pitcher></pitcher>
+</participant>
+<drawrotnum>0</drawrotnum><drawmoneyline>0</drawmoneyline><drawTitle></drawTitle><period>
+<period_description>Game</period_description>
+<periodcutoff_datetimeGMT>2016-07-07 21:15</periodcutoff_datetimeGMT>
+<period_status>O</period_status>
+<spread><spread_visiting></spread_visiting>
+<spread_adjust_visiting></spread_adjust_visiting>
+<spread_home></spread_home>
+<spread_adjust_home></spread_adjust_home>
+</spread>
+<total>
+<total_points>2.5</total_points>
+<over_adjust>-205</over_adjust>
+<under_adjust>165</under_adjust>
+</total>
+</period>
+</event>
+<event>
+<event_datetimeGMT>2016-07-07 20:45</event_datetimeGMT>
+<sporttype>Martial Arts</sporttype>
+<scheduletext>UFC Fight Night 90                                          </scheduletext>
+<league>MMA Martial Arts</league>
+<participant>
+<participant_name>Dileno Lopes</participant_name>
+<rotnum>24125</rotnum>
+<visiting_home_draw>Visiting</visiting_home_draw>
+<odds>
+<moneyline>205</moneyline>
+</odds>
+<pitcher></pitcher>
+</participant>
+<participant>
+<participant_name>Anthony Birchak</participant_name>
+<rotnum>24126</rotnum>
+<visiting_home_draw>Home</visiting_home_draw>
+<odds>
+<moneyline>-240</moneyline>
+</odds>
+<pitcher></pitcher>
+</participant>
+<drawrotnum>0</drawrotnum><drawmoneyline>0</drawmoneyline><drawTitle></drawTitle><period>
+<period_description>Game</period_description>
+<periodcutoff_datetimeGMT>2016-07-07 20:50</periodcutoff_datetimeGMT>
+<period_status>O</period_status>
 <spread><spread_visiting></spread_visiting>
 <spread_adjust_visiting></spread_adjust_visiting>
 <spread_home></spread_home>
@@ -79,32 +274,968 @@
 </period>
 </event>
 <event>
-<event_datetimeGMT>2013-03-16 22:00</event_datetimeGMT>
+<event_datetimeGMT>2016-07-07 20:20</event_datetimeGMT>
 <sporttype>Martial Arts</sporttype>
-<scheduletext>UFC 158                                                     </scheduletext>
+<scheduletext>UFC Fight Night 90                                          </scheduletext>
 <league>MMA Martial Arts</league>
 <participant>
-<participant_name>Nate Marquardt</participant_name>
-<rotnum>24109</rotnum>
+<participant_name>Russell Doane</participant_name>
+<rotnum>24129</rotnum>
 <visiting_home_draw>Visiting</visiting_home_draw>
 <odds>
-<moneyline>145</moneyline>
+<moneyline>190</moneyline>
 </odds>
 <pitcher></pitcher>
 </participant>
 <participant>
-<participant_name>Jake Ellenberger</participant_name>
-<rotnum>24110</rotnum>
+<participant_name>Pedro Munhoz</participant_name>
+<rotnum>24130</rotnum>
 <visiting_home_draw>Home</visiting_home_draw>
 <odds>
-<moneyline>-165</moneyline>
+<moneyline>-225</moneyline>
 </odds>
 <pitcher></pitcher>
 </participant>
 <drawrotnum>0</drawrotnum><drawmoneyline>0</drawmoneyline><drawTitle></drawTitle><period>
 <period_description>Game</period_description>
-<periodcutoff_datetimeGMT>2013-03-16 22:00</periodcutoff_datetimeGMT>
+<periodcutoff_datetimeGMT>2016-07-07 20:25</periodcutoff_datetimeGMT>
+<period_status>O</period_status>
+<spread><spread_visiting></spread_visiting>
+<spread_adjust_visiting></spread_adjust_visiting>
+<spread_home></spread_home>
+<spread_adjust_home></spread_adjust_home>
+</spread>
+<total>
+<total_points>2.5</total_points>
+<over_adjust>-170</over_adjust>
+<under_adjust>140</under_adjust>
+</total>
+</period>
+</event>
+<event>
+<event_datetimeGMT>2016-07-07 19:55</event_datetimeGMT>
+<sporttype>Martial Arts</sporttype>
+<scheduletext>UFC Fight Night 90                                          </scheduletext>
+<league>MMA Martial Arts</league>
+<participant>
+<participant_name>Jerrod Sanders</participant_name>
+<rotnum>24133</rotnum>
+<visiting_home_draw>Visiting</visiting_home_draw>
+<odds>
+<moneyline>135</moneyline>
+</odds>
+<pitcher></pitcher>
+</participant>
+<participant>
+<participant_name>Felipe Arantes</participant_name>
+<rotnum>24134</rotnum>
+<visiting_home_draw>Home</visiting_home_draw>
+<odds>
+<moneyline>-155</moneyline>
+</odds>
+<pitcher></pitcher>
+</participant>
+<drawrotnum>0</drawrotnum><drawmoneyline>0</drawmoneyline><drawTitle></drawTitle><period>
+<period_description>Game</period_description>
+<periodcutoff_datetimeGMT>2016-07-07 20:00</periodcutoff_datetimeGMT>
+<period_status>O</period_status>
+<spread><spread_visiting></spread_visiting>
+<spread_adjust_visiting></spread_adjust_visiting>
+<spread_home></spread_home>
+<spread_adjust_home></spread_adjust_home>
+</spread>
+<total>
+<total_points>2.5</total_points>
+<over_adjust>-155</over_adjust>
+<under_adjust>125</under_adjust>
+</total>
+</period>
+</event>
+<event>
+<event_datetimeGMT>2016-07-07 19:30</event_datetimeGMT>
+<sporttype>Martial Arts</sporttype>
+<scheduletext>UFC Fight Night 90                                          </scheduletext>
+<league>MMA Martial Arts</league>
+<participant>
+<participant_name>Lukasz Sajewski</participant_name>
+<rotnum>24137</rotnum>
+<visiting_home_draw>Visiting</visiting_home_draw>
+<odds>
+<moneyline>200</moneyline>
+</odds>
+<pitcher></pitcher>
+</participant>
+<participant>
+<participant_name>Gilbert Burns</participant_name>
+<rotnum>24138</rotnum>
+<visiting_home_draw>Home</visiting_home_draw>
+<odds>
+<moneyline>-235</moneyline>
+</odds>
+<pitcher></pitcher>
+</participant>
+<drawrotnum>0</drawrotnum><drawmoneyline>0</drawmoneyline><drawTitle></drawTitle><period>
+<period_description>Game</period_description>
+<periodcutoff_datetimeGMT>2016-07-07 19:35</periodcutoff_datetimeGMT>
+<period_status>O</period_status>
+<spread><spread_visiting></spread_visiting>
+<spread_adjust_visiting></spread_adjust_visiting>
+<spread_home></spread_home>
+<spread_adjust_home></spread_adjust_home>
+</spread>
+<total>
+<total_points>2.5</total_points>
+<over_adjust>-175</over_adjust>
+<under_adjust>145</under_adjust>
+</total>
+</period>
+</event>
+<event>
+<event_datetimeGMT>2016-07-07 19:00</event_datetimeGMT>
+<sporttype>Martial Arts</sporttype>
+<scheduletext>UFC Fight Night 90                                          </scheduletext>
+<league>MMA Martial Arts</league>
+<participant>
+<participant_name>Marco Antonio Beltran</participant_name>
+<rotnum>24141</rotnum>
+<visiting_home_draw>Visiting</visiting_home_draw>
+<odds>
+<moneyline>120</moneyline>
+</odds>
+<pitcher></pitcher>
+</participant>
+<participant>
+<participant_name>Reginaldo Vieira</participant_name>
+<rotnum>24142</rotnum>
+<visiting_home_draw>Home</visiting_home_draw>
+<odds>
+<moneyline>-140</moneyline>
+</odds>
+<pitcher></pitcher>
+</participant>
+<drawrotnum>0</drawrotnum><drawmoneyline>0</drawmoneyline><drawTitle></drawTitle><period>
+<period_description>Game</period_description>
+<periodcutoff_datetimeGMT>2016-07-07 19:05</periodcutoff_datetimeGMT>
+<period_status>O</period_status>
+<spread><spread_visiting></spread_visiting>
+<spread_adjust_visiting></spread_adjust_visiting>
+<spread_home></spread_home>
+<spread_adjust_home></spread_adjust_home>
+</spread>
+<total>
+<total_points>2.5</total_points>
+<over_adjust>-200</over_adjust>
+<under_adjust>160</under_adjust>
+</total>
+</period>
+</event>
+<event>
+<event_datetimeGMT>2016-07-07 18:35</event_datetimeGMT>
+<sporttype>Martial Arts</sporttype>
+<scheduletext>UFC Fight Night 90                                          </scheduletext>
+<league>MMA Martial Arts</league>
+<participant>
+<participant_name>Alvaro Herrera</participant_name>
+<rotnum>24145</rotnum>
+<visiting_home_draw>Visiting</visiting_home_draw>
+<odds>
+<moneyline>355</moneyline>
+</odds>
+<pitcher></pitcher>
+</participant>
+<participant>
+<participant_name>Vicente Luque</participant_name>
+<rotnum>24146</rotnum>
+<visiting_home_draw>Home</visiting_home_draw>
+<odds>
+<moneyline>-425</moneyline>
+</odds>
+<pitcher></pitcher>
+</participant>
+<drawrotnum>0</drawrotnum><drawmoneyline>0</drawmoneyline><drawTitle></drawTitle><period>
+<period_description>Game</period_description>
+<periodcutoff_datetimeGMT>2016-07-07 18:40</periodcutoff_datetimeGMT>
+<period_status>O</period_status>
+<spread><spread_visiting></spread_visiting>
+<spread_adjust_visiting></spread_adjust_visiting>
+<spread_home></spread_home>
+<spread_adjust_home></spread_adjust_home>
+</spread>
+<total>
+<total_points>1.5</total_points>
+<over_adjust>-125</over_adjust>
+<under_adjust>-105</under_adjust>
+</total>
+</period>
+</event>
+<event>
+<event_datetimeGMT>2016-07-08 23:05</event_datetimeGMT>
+<sporttype>Martial Arts</sporttype>
+<scheduletext>UFC The Ultimate Fighter 23                                 </scheduletext>
+<league>MMA Martial Arts</league>
+<participant>
+<participant_name>Claudia Gadelha</participant_name>
+<rotnum>24201</rotnum>
+<visiting_home_draw>Visiting</visiting_home_draw>
+<odds>
+<moneyline>110</moneyline>
+</odds>
+<pitcher></pitcher>
+</participant>
+<participant>
+<participant_name>Joanna Jedrzejczyk</participant_name>
+<rotnum>24202</rotnum>
+<visiting_home_draw>Home</visiting_home_draw>
+<odds>
+<moneyline>-130</moneyline>
+</odds>
+<pitcher></pitcher>
+</participant>
+<drawrotnum>0</drawrotnum><drawmoneyline>0</drawmoneyline><drawTitle></drawTitle><period>
+<period_description>Game</period_description>
+<periodcutoff_datetimeGMT>2016-07-08 23:10</periodcutoff_datetimeGMT>
+<period_status>O</period_status>
+<spread><spread_visiting></spread_visiting>
+<spread_adjust_visiting></spread_adjust_visiting>
+<spread_home></spread_home>
+<spread_adjust_home></spread_adjust_home>
+</spread>
+<total>
+<total_points>4.5</total_points>
+<over_adjust>-265</over_adjust>
+<under_adjust>205</under_adjust>
+</total>
+</period>
+</event>
+<event>
+<event_datetimeGMT>2016-07-08 21:35</event_datetimeGMT>
+<sporttype>Martial Arts</sporttype>
+<scheduletext>UFC The Ultimate Fighter 23                                 </scheduletext>
+<league>MMA Martial Arts</league>
+<participant>
+<participant_name>Ross Pearson</participant_name>
+<rotnum>24205</rotnum>
+<visiting_home_draw>Visiting</visiting_home_draw>
+<odds>
+<moneyline>295</moneyline>
+</odds>
+<pitcher></pitcher>
+</participant>
+<participant>
+<participant_name>Will Brooks</participant_name>
+<rotnum>24206</rotnum>
+<visiting_home_draw>Home</visiting_home_draw>
+<odds>
+<moneyline>-360</moneyline>
+</odds>
+<pitcher></pitcher>
+</participant>
+<drawrotnum>0</drawrotnum><drawmoneyline>0</drawmoneyline><drawTitle></drawTitle><period>
+<period_description>Game</period_description>
+<periodcutoff_datetimeGMT>2016-07-08 21:40</periodcutoff_datetimeGMT>
+<period_status>O</period_status>
+<spread><spread_visiting></spread_visiting>
+<spread_adjust_visiting></spread_adjust_visiting>
+<spread_home></spread_home>
+<spread_adjust_home></spread_adjust_home>
+</spread>
+<total>
+<total_points>2.5</total_points>
+<over_adjust>-200</over_adjust>
+<under_adjust>160</under_adjust>
+</total>
+</period>
+</event>
+<event>
+<event_datetimeGMT>2016-07-08 21:05</event_datetimeGMT>
+<sporttype>Martial Arts</sporttype>
+<scheduletext>UFC The Ultimate Fighter 23                                 </scheduletext>
+<league>MMA Martial Arts</league>
+<participant>
+<participant_name>Thiago Tavares</participant_name>
+<rotnum>24209</rotnum>
+<visiting_home_draw>Visiting</visiting_home_draw>
+<odds>
+<moneyline>190</moneyline>
+</odds>
+<pitcher></pitcher>
+</participant>
+<participant>
+<participant_name>Doo Ho Choi</participant_name>
+<rotnum>24210</rotnum>
+<visiting_home_draw>Home</visiting_home_draw>
+<odds>
+<moneyline>-225</moneyline>
+</odds>
+<pitcher></pitcher>
+</participant>
+<drawrotnum>0</drawrotnum><drawmoneyline>0</drawmoneyline><drawTitle></drawTitle><period>
+<period_description>Game</period_description>
+<periodcutoff_datetimeGMT>2016-07-08 21:10</periodcutoff_datetimeGMT>
+<period_status>O</period_status>
+<spread><spread_visiting></spread_visiting>
+<spread_adjust_visiting></spread_adjust_visiting>
+<spread_home></spread_home>
+<spread_adjust_home></spread_adjust_home>
+</spread>
+<total>
+<total_points>1.5</total_points>
+<over_adjust>110</over_adjust>
+<under_adjust>-140</under_adjust>
+</total>
+</period>
+</event>
+<event>
+<event_datetimeGMT>2016-07-08 20:35</event_datetimeGMT>
+<sporttype>Martial Arts</sporttype>
+<scheduletext>UFC The Ultimate Fighter 23                                 </scheduletext>
+<league>MMA Martial Arts</league>
+<participant>
+<participant_name>Joaquim Silva</participant_name>
+<rotnum>24213</rotnum>
+<visiting_home_draw>Visiting</visiting_home_draw>
+<odds>
+<moneyline>-130</moneyline>
+</odds>
+<pitcher></pitcher>
+</participant>
+<participant>
+<participant_name>Andrew Holbrook</participant_name>
+<rotnum>24214</rotnum>
+<visiting_home_draw>Home</visiting_home_draw>
+<odds>
+<moneyline>110</moneyline>
+</odds>
+<pitcher></pitcher>
+</participant>
+<drawrotnum>0</drawrotnum><drawmoneyline>0</drawmoneyline><drawTitle></drawTitle><period>
+<period_description>Game</period_description>
+<periodcutoff_datetimeGMT>2016-07-08 20:40</periodcutoff_datetimeGMT>
+<period_status>O</period_status>
+<spread><spread_visiting></spread_visiting>
+<spread_adjust_visiting></spread_adjust_visiting>
+<spread_home></spread_home>
+<spread_adjust_home></spread_adjust_home>
+</spread>
+<total>
+<total_points>2.5</total_points>
+<over_adjust>-135</over_adjust>
+<under_adjust>105</under_adjust>
+</total>
+</period>
+</event>
+<event>
+<event_datetimeGMT>2016-07-08 20:05</event_datetimeGMT>
+<sporttype>Martial Arts</sporttype>
+<scheduletext>UFC The Ultimate Fighter 23                                 </scheduletext>
+<league>MMA Martial Arts</league>
+<participant>
+<participant_name>Fernando Bruno</participant_name>
+<rotnum>24217</rotnum>
+<visiting_home_draw>Visiting</visiting_home_draw>
+<odds>
+<moneyline>140</moneyline>
+</odds>
+<pitcher></pitcher>
+</participant>
+<participant>
+<participant_name>Gray Maynard</participant_name>
+<rotnum>24218</rotnum>
+<visiting_home_draw>Home</visiting_home_draw>
+<odds>
+<moneyline>-160</moneyline>
+</odds>
+<pitcher></pitcher>
+</participant>
+<drawrotnum>0</drawrotnum><drawmoneyline>0</drawmoneyline><drawTitle></drawTitle><period>
+<period_description>Game</period_description>
+<periodcutoff_datetimeGMT>2016-07-08 20:10</periodcutoff_datetimeGMT>
+<period_status>O</period_status>
+<spread><spread_visiting></spread_visiting>
+<spread_adjust_visiting></spread_adjust_visiting>
+<spread_home></spread_home>
+<spread_adjust_home></spread_adjust_home>
+</spread>
+<total>
+<total_points>2.5</total_points>
+<over_adjust>-160</over_adjust>
+<under_adjust>130</under_adjust>
+</total>
+</period>
+</event>
+<event>
+<event_datetimeGMT>2016-07-08 19:05</event_datetimeGMT>
+<sporttype>Martial Arts</sporttype>
+<scheduletext>UFC The Ultimate Fighter 23                                 </scheduletext>
+<league>MMA Martial Arts</league>
+<participant>
+<participant_name>Cezar Ferreira</participant_name>
+<rotnum>24221</rotnum>
+<visiting_home_draw>Visiting</visiting_home_draw>
+<odds>
+<moneyline>125</moneyline>
+</odds>
+<pitcher></pitcher>
+</participant>
+<participant>
+<participant_name>Anthony Smith</participant_name>
+<rotnum>24222</rotnum>
+<visiting_home_draw>Home</visiting_home_draw>
+<odds>
+<moneyline>-145</moneyline>
+</odds>
+<pitcher></pitcher>
+</participant>
+<drawrotnum>0</drawrotnum><drawmoneyline>0</drawmoneyline><drawTitle></drawTitle><period>
+<period_description>Game</period_description>
+<periodcutoff_datetimeGMT>2016-07-08 19:10</periodcutoff_datetimeGMT>
+<period_status>O</period_status>
+<spread><spread_visiting></spread_visiting>
+<spread_adjust_visiting></spread_adjust_visiting>
+<spread_home></spread_home>
+<spread_adjust_home></spread_adjust_home>
+</spread>
+<total>
+<total_points>1.5</total_points>
+<over_adjust>-105</over_adjust>
+<under_adjust>-125</under_adjust>
+</total>
+</period>
+</event>
+<event>
+<event_datetimeGMT>2016-07-08 18:05</event_datetimeGMT>
+<sporttype>Martial Arts</sporttype>
+<scheduletext>UFC The Ultimate Fighter 23                                 </scheduletext>
+<league>MMA Martial Arts</league>
+<participant>
+<participant_name>Anton Zafir</participant_name>
+<rotnum>24225</rotnum>
+<visiting_home_draw>Visiting</visiting_home_draw>
+<odds>
+<moneyline>265</moneyline>
+</odds>
+<pitcher></pitcher>
+</participant>
+<participant>
+<participant_name>Li Jingliang</participant_name>
+<rotnum>24226</rotnum>
+<visiting_home_draw>Home</visiting_home_draw>
+<odds>
+<moneyline>-315</moneyline>
+</odds>
+<pitcher></pitcher>
+</participant>
+<drawrotnum>0</drawrotnum><drawmoneyline>0</drawmoneyline><drawTitle></drawTitle><period>
+<period_description>Game</period_description>
+<periodcutoff_datetimeGMT>2016-07-08 18:10</periodcutoff_datetimeGMT>
+<period_status>O</period_status>
+<spread><spread_visiting></spread_visiting>
+<spread_adjust_visiting></spread_adjust_visiting>
+<spread_home></spread_home>
+<spread_adjust_home></spread_adjust_home>
+</spread>
+<total>
+<total_points>1.5</total_points>
+<over_adjust>-165</over_adjust>
+<under_adjust>135</under_adjust>
+</total>
+</period>
+</event>
+<event>
+<event_datetimeGMT>2016-07-08 19:35</event_datetimeGMT>
+<sporttype>Martial Arts</sporttype>
+<scheduletext>UFC The Ultimate Fighter 23                                 </scheduletext>
+<league>MMA Martial Arts</league>
+<participant>
+<participant_name>Matheus Nicolau</participant_name>
+<rotnum>24229</rotnum>
+<visiting_home_draw>Visiting</visiting_home_draw>
+<odds>
+<moneyline>150</moneyline>
+</odds>
+<pitcher></pitcher>
+</participant>
+<participant>
+<participant_name>John Moraga</participant_name>
+<rotnum>24230</rotnum>
+<visiting_home_draw>Home</visiting_home_draw>
+<odds>
+<moneyline>-175</moneyline>
+</odds>
+<pitcher></pitcher>
+</participant>
+<drawrotnum>0</drawrotnum><drawmoneyline>0</drawmoneyline><drawTitle></drawTitle><period>
+<period_description>Game</period_description>
+<periodcutoff_datetimeGMT>2016-07-08 19:40</periodcutoff_datetimeGMT>
+<period_status>O</period_status>
+<spread><spread_visiting></spread_visiting>
+<spread_adjust_visiting></spread_adjust_visiting>
+<spread_home></spread_home>
+<spread_adjust_home></spread_adjust_home>
+</spread>
+<total>
+<total_points>2.5</total_points>
+<over_adjust>-200</over_adjust>
+<under_adjust>160</under_adjust>
+</total>
+</period>
+</event>
+<event>
+<event_datetimeGMT>2016-07-08 18:30</event_datetimeGMT>
+<sporttype>Martial Arts</sporttype>
+<scheduletext>UFC The Ultimate Fighter 23                                 </scheduletext>
+<league>MMA Martial Arts</league>
+<participant>
+<participant_name>Kevin Lee</participant_name>
+<rotnum>24233</rotnum>
+<visiting_home_draw>Visiting</visiting_home_draw>
+<odds>
+<moneyline>115</moneyline>
+</odds>
+<pitcher></pitcher>
+</participant>
+<participant>
+<participant_name>Jake Matthews</participant_name>
+<rotnum>24234</rotnum>
+<visiting_home_draw>Home</visiting_home_draw>
+<odds>
+<moneyline>-135</moneyline>
+</odds>
+<pitcher></pitcher>
+</participant>
+<drawrotnum>0</drawrotnum><drawmoneyline>0</drawmoneyline><drawTitle></drawTitle><period>
+<period_description>Game</period_description>
+<periodcutoff_datetimeGMT>2016-07-08 18:35</periodcutoff_datetimeGMT>
+<period_status>O</period_status>
+<spread><spread_visiting></spread_visiting>
+<spread_adjust_visiting></spread_adjust_visiting>
+<spread_home></spread_home>
+<spread_adjust_home></spread_adjust_home>
+</spread>
+<total>
+<total_points>2.5</total_points>
+<over_adjust>-175</over_adjust>
+<under_adjust>145</under_adjust>
+</total>
+</period>
+</event>
+<event>
+<event_datetimeGMT>2016-09-10 00:00</event_datetimeGMT>
+<sporttype>Martial Arts</sporttype>
+<scheduletext>UFC 203                                                     </scheduletext>
+<league>MMA Martial Arts</league>
+<participant>
+<participant_name>Alistair Overeem</participant_name>
+<rotnum>24253</rotnum>
+<visiting_home_draw>Visiting</visiting_home_draw>
+<odds>
+<moneyline>115</moneyline>
+</odds>
+<pitcher></pitcher>
+</participant>
+<participant>
+<participant_name>Stipe Miocic</participant_name>
+<rotnum>24254</rotnum>
+<visiting_home_draw>Home</visiting_home_draw>
+<odds>
+<moneyline>-135</moneyline>
+</odds>
+<pitcher></pitcher>
+</participant>
+<drawrotnum>0</drawrotnum><drawmoneyline>0</drawmoneyline><drawTitle></drawTitle><period>
+<period_description>Game</period_description>
+<periodcutoff_datetimeGMT>2016-09-10 00:00</periodcutoff_datetimeGMT>
 <period_status>I</period_status>
+<spread><spread_visiting></spread_visiting>
+<spread_adjust_visiting></spread_adjust_visiting>
+<spread_home></spread_home>
+<spread_adjust_home></spread_adjust_home>
+</spread>
+<total>
+<total_points>1.5</total_points>
+<over_adjust>-115</over_adjust>
+<under_adjust>-115</under_adjust>
+</total>
+</period>
+</event>
+<event>
+<event_datetimeGMT>2016-07-13 21:00</event_datetimeGMT>
+<sporttype>Martial Arts</sporttype>
+<scheduletext>UFC Fight Night 91                                          </scheduletext>
+<league>MMA Martial Arts</league>
+<participant>
+<participant_name>Michael McDonald</participant_name>
+<rotnum>24301</rotnum>
+<visiting_home_draw>Visiting</visiting_home_draw>
+<odds>
+<moneyline>155</moneyline>
+</odds>
+<pitcher></pitcher>
+</participant>
+<participant>
+<participant_name>John Lineker</participant_name>
+<rotnum>24302</rotnum>
+<visiting_home_draw>Home</visiting_home_draw>
+<odds>
+<moneyline>-180</moneyline>
+</odds>
+<pitcher></pitcher>
+</participant>
+<drawrotnum>0</drawrotnum><drawmoneyline>0</drawmoneyline><drawTitle></drawTitle><period>
+<period_description>Game</period_description>
+<periodcutoff_datetimeGMT>2016-07-13 21:00</periodcutoff_datetimeGMT>
+<period_status>I</period_status>
+<spread><spread_visiting></spread_visiting>
+<spread_adjust_visiting></spread_adjust_visiting>
+<spread_home></spread_home>
+<spread_adjust_home></spread_adjust_home>
+</spread>
+<total>
+<total_points>1.5</total_points>
+<over_adjust>-165</over_adjust>
+<under_adjust>135</under_adjust>
+</total>
+</period>
+</event>
+<event>
+<event_datetimeGMT>2016-07-23 20:00</event_datetimeGMT>
+<sporttype>Martial Arts</sporttype>
+<scheduletext>UFC Fight Night 92                                          </scheduletext>
+<league>MMA Martial Arts</league>
+<participant>
+<participant_name>Valentina Shevchenko</participant_name>
+<rotnum>24353</rotnum>
+<visiting_home_draw>Visiting</visiting_home_draw>
+<odds>
+<moneyline>330</moneyline>
+</odds>
+<pitcher></pitcher>
+</participant>
+<participant>
+<participant_name>Holly Holm</participant_name>
+<rotnum>24354</rotnum>
+<visiting_home_draw>Home</visiting_home_draw>
+<odds>
+<moneyline>-400</moneyline>
+</odds>
+<pitcher></pitcher>
+</participant>
+<drawrotnum>0</drawrotnum><drawmoneyline>0</drawmoneyline><drawTitle></drawTitle><period>
+<period_description>Game</period_description>
+<periodcutoff_datetimeGMT>2016-07-23 20:00</periodcutoff_datetimeGMT>
+<period_status>I</period_status>
+<spread><spread_visiting></spread_visiting>
+<spread_adjust_visiting></spread_adjust_visiting>
+<spread_home></spread_home>
+<spread_adjust_home></spread_adjust_home>
+</spread>
+<total>
+<total_points>4.5</total_points>
+<over_adjust>-160</over_adjust>
+<under_adjust>130</under_adjust>
+</total>
+</period>
+</event>
+<event>
+<event_datetimeGMT>2016-07-10 00:30</event_datetimeGMT>
+<sporttype>Martial Arts</sporttype>
+<scheduletext>UFC 200                                                     </scheduletext>
+<league>MMA Martial Arts</league>
+<participant>
+<participant_name>Jon Jones</participant_name>
+<rotnum>24401</rotnum>
+<visiting_home_draw>Visiting</visiting_home_draw>
+<odds>
+<moneyline>-270</moneyline>
+</odds>
+<pitcher></pitcher>
+</participant>
+<participant>
+<participant_name>Daniel Cormier</participant_name>
+<rotnum>24402</rotnum>
+<visiting_home_draw>Home</visiting_home_draw>
+<odds>
+<moneyline>230</moneyline>
+</odds>
+<pitcher></pitcher>
+</participant>
+<drawrotnum>0</drawrotnum><drawmoneyline>0</drawmoneyline><drawTitle></drawTitle><period>
+<period_description>Game</period_description>
+<periodcutoff_datetimeGMT>2016-07-10 00:35</periodcutoff_datetimeGMT>
+<period_status>O</period_status>
+<spread><spread_visiting></spread_visiting>
+<spread_adjust_visiting></spread_adjust_visiting>
+<spread_home></spread_home>
+<spread_adjust_home></spread_adjust_home>
+</spread>
+<total>
+<total_points>4.5</total_points>
+<over_adjust>-145</over_adjust>
+<under_adjust>115</under_adjust>
+</total>
+</period>
+</event>
+<event>
+<event_datetimeGMT>2016-07-09 23:20</event_datetimeGMT>
+<sporttype>Martial Arts</sporttype>
+<scheduletext>UFC 200                                                     </scheduletext>
+<league>MMA Martial Arts</league>
+<participant>
+<participant_name>Amanda Nunes</participant_name>
+<rotnum>24405</rotnum>
+<visiting_home_draw>Visiting</visiting_home_draw>
+<odds>
+<moneyline>205</moneyline>
+</odds>
+<pitcher></pitcher>
+</participant>
+<participant>
+<participant_name>Miesha Tate</participant_name>
+<rotnum>24406</rotnum>
+<visiting_home_draw>Home</visiting_home_draw>
+<odds>
+<moneyline>-240</moneyline>
+</odds>
+<pitcher></pitcher>
+</participant>
+<drawrotnum>0</drawrotnum><drawmoneyline>0</drawmoneyline><drawTitle></drawTitle><period>
+<period_description>Game</period_description>
+<periodcutoff_datetimeGMT>2016-07-09 23:25</periodcutoff_datetimeGMT>
+<period_status>O</period_status>
+<spread><spread_visiting></spread_visiting>
+<spread_adjust_visiting></spread_adjust_visiting>
+<spread_home></spread_home>
+<spread_adjust_home></spread_adjust_home>
+</spread>
+<total>
+<total_points>1.5</total_points>
+<over_adjust>-225</over_adjust>
+<under_adjust>185</under_adjust>
+</total>
+</period>
+</event>
+<event>
+<event_datetimeGMT>2016-07-09 22:40</event_datetimeGMT>
+<sporttype>Martial Arts</sporttype>
+<scheduletext>UFC 200                                                     </scheduletext>
+<league>MMA Martial Arts</league>
+<participant>
+<participant_name>Frankie Edgar</participant_name>
+<rotnum>24409</rotnum>
+<visiting_home_draw>Visiting</visiting_home_draw>
+<odds>
+<moneyline>-118</moneyline>
+</odds>
+<pitcher></pitcher>
+</participant>
+<participant>
+<participant_name>Jose Aldo</participant_name>
+<rotnum>24410</rotnum>
+<visiting_home_draw>Home</visiting_home_draw>
+<odds>
+<moneyline>-102</moneyline>
+</odds>
+<pitcher></pitcher>
+</participant>
+<drawrotnum>0</drawrotnum><drawmoneyline>0</drawmoneyline><drawTitle></drawTitle><period>
+<period_description>Game</period_description>
+<periodcutoff_datetimeGMT>2016-07-09 22:45</periodcutoff_datetimeGMT>
+<period_status>O</period_status>
+<spread><spread_visiting></spread_visiting>
+<spread_adjust_visiting></spread_adjust_visiting>
+<spread_home></spread_home>
+<spread_adjust_home></spread_adjust_home>
+</spread>
+<total>
+<total_points>4.5</total_points>
+<over_adjust>-125</over_adjust>
+<under_adjust>-105</under_adjust>
+</total>
+</period>
+</event>
+<event>
+<event_datetimeGMT>2016-07-09 23:55</event_datetimeGMT>
+<sporttype>Martial Arts</sporttype>
+<scheduletext>UFC 200                                                     </scheduletext>
+<league>MMA Martial Arts</league>
+<participant>
+<participant_name>Brock Lesnar</participant_name>
+<rotnum>24413</rotnum>
+<visiting_home_draw>Visiting</visiting_home_draw>
+<odds>
+<moneyline>140</moneyline>
+</odds>
+<pitcher></pitcher>
+</participant>
+<participant>
+<participant_name>Mark Hunt</participant_name>
+<rotnum>24414</rotnum>
+<visiting_home_draw>Home</visiting_home_draw>
+<odds>
+<moneyline>-160</moneyline>
+</odds>
+<pitcher></pitcher>
+</participant>
+<drawrotnum>0</drawrotnum><drawmoneyline>0</drawmoneyline><drawTitle></drawTitle><period>
+<period_description>Game</period_description>
+<periodcutoff_datetimeGMT>2016-07-09 00:00</periodcutoff_datetimeGMT>
+<period_status>O</period_status>
+<spread><spread_visiting></spread_visiting>
+<spread_adjust_visiting></spread_adjust_visiting>
+<spread_home></spread_home>
+<spread_adjust_home></spread_adjust_home>
+</spread>
+<total>
+<total_points>1.5</total_points>
+<over_adjust>195</over_adjust>
+<under_adjust>-245</under_adjust>
+</total>
+</period>
+</event>
+<event>
+<event_datetimeGMT>2016-07-09 22:15</event_datetimeGMT>
+<sporttype>Martial Arts</sporttype>
+<scheduletext>UFC 200                                                     </scheduletext>
+<league>MMA Martial Arts</league>
+<participant>
+<participant_name>Travis Browne</participant_name>
+<rotnum>24417</rotnum>
+<visiting_home_draw>Visiting</visiting_home_draw>
+<odds>
+<moneyline>250</moneyline>
+</odds>
+<pitcher></pitcher>
+</participant>
+<participant>
+<participant_name>Cain Velasquez</participant_name>
+<rotnum>24418</rotnum>
+<visiting_home_draw>Home</visiting_home_draw>
+<odds>
+<moneyline>-300</moneyline>
+</odds>
+<pitcher></pitcher>
+</participant>
+<drawrotnum>0</drawrotnum><drawmoneyline>0</drawmoneyline><drawTitle></drawTitle><period>
+<period_description>Game</period_description>
+<periodcutoff_datetimeGMT>2016-07-09 22:20</periodcutoff_datetimeGMT>
+<period_status>O</period_status>
+<spread><spread_visiting></spread_visiting>
+<spread_adjust_visiting></spread_adjust_visiting>
+<spread_home></spread_home>
+<spread_adjust_home></spread_adjust_home>
+</spread>
+<total>
+<total_points>1.5</total_points>
+<over_adjust>-115</over_adjust>
+<under_adjust>-115</under_adjust>
+</total>
+</period>
+</event>
+<event>
+<event_datetimeGMT>2016-07-09 21:35</event_datetimeGMT>
+<sporttype>Martial Arts</sporttype>
+<scheduletext>UFC 200                                                     </scheduletext>
+<league>MMA Martial Arts</league>
+<participant>
+<participant_name>Julianna Pena</participant_name>
+<rotnum>24421</rotnum>
+<visiting_home_draw>Visiting</visiting_home_draw>
+<odds>
+<moneyline>150</moneyline>
+</odds>
+<pitcher></pitcher>
+</participant>
+<participant>
+<participant_name>Cat Zingano</participant_name>
+<rotnum>24422</rotnum>
+<visiting_home_draw>Home</visiting_home_draw>
+<odds>
+<moneyline>-175</moneyline>
+</odds>
+<pitcher></pitcher>
+</participant>
+<drawrotnum>0</drawrotnum><drawmoneyline>0</drawmoneyline><drawTitle></drawTitle><period>
+<period_description>Game</period_description>
+<periodcutoff_datetimeGMT>2016-07-09 21:40</periodcutoff_datetimeGMT>
+<period_status>O</period_status>
+<spread><spread_visiting></spread_visiting>
+<spread_adjust_visiting></spread_adjust_visiting>
+<spread_home></spread_home>
+<spread_adjust_home></spread_adjust_home>
+</spread>
+<total>
+<total_points>2.5</total_points>
+<over_adjust>-155</over_adjust>
+<under_adjust>125</under_adjust>
+</total>
+</period>
+</event>
+<event>
+<event_datetimeGMT>2016-07-09 21:05</event_datetimeGMT>
+<sporttype>Martial Arts</sporttype>
+<scheduletext>UFC 200                                                     </scheduletext>
+<league>MMA Martial Arts</league>
+<participant>
+<participant_name>Kelvin Gastelum</participant_name>
+<rotnum>24425</rotnum>
+<visiting_home_draw>Visiting</visiting_home_draw>
+<odds>
+<moneyline>-105</moneyline>
+</odds>
+<pitcher></pitcher>
+</participant>
+<participant>
+<participant_name>Johny Hendricks</participant_name>
+<rotnum>24426</rotnum>
+<visiting_home_draw>Home</visiting_home_draw>
+<odds>
+<moneyline>-115</moneyline>
+</odds>
+<pitcher></pitcher>
+</participant>
+<drawrotnum>0</drawrotnum><drawmoneyline>0</drawmoneyline><drawTitle></drawTitle><period>
+<period_description>Game</period_description>
+<periodcutoff_datetimeGMT>2016-07-09 21:10</periodcutoff_datetimeGMT>
+<period_status>O</period_status>
+<spread><spread_visiting></spread_visiting>
+<spread_adjust_visiting></spread_adjust_visiting>
+<spread_home></spread_home>
+<spread_adjust_home></spread_adjust_home>
+</spread>
+<total>
+<total_points>2.5</total_points>
+<over_adjust>-205</over_adjust>
+<under_adjust>165</under_adjust>
+</total>
+</period>
+</event>
+<event>
+<event_datetimeGMT>2016-07-09 20:35</event_datetimeGMT>
+<sporttype>Martial Arts</sporttype>
+<scheduletext>UFC 200                                                     </scheduletext>
+<league>MMA Martial Arts</league>
+<participant>
+<participant_name>Raphael Assuncao</participant_name>
+<rotnum>24429</rotnum>
+<visiting_home_draw>Visiting</visiting_home_draw>
+<odds>
+<moneyline>320</moneyline>
+</odds>
+<pitcher></pitcher>
+</participant>
+<participant>
+<participant_name>T.J. Dillashaw</participant_name>
+<rotnum>24430</rotnum>
+<visiting_home_draw>Home</visiting_home_draw>
+<odds>
+<moneyline>-385</moneyline>
+</odds>
+<pitcher></pitcher>
+</participant>
+<drawrotnum>0</drawrotnum><drawmoneyline>0</drawmoneyline><drawTitle></drawTitle><period>
+<period_description>Game</period_description>
+<periodcutoff_datetimeGMT>2016-07-09 20:40</periodcutoff_datetimeGMT>
+<period_status>O</period_status>
 <spread><spread_visiting></spread_visiting>
 <spread_adjust_visiting></spread_adjust_visiting>
 <spread_home></spread_home>
@@ -118,31 +1249,187 @@
 </period>
 </event>
 <event>
-<event_datetimeGMT>2013-03-16 21:15</event_datetimeGMT>
+<event_datetimeGMT>2016-07-09 20:05</event_datetimeGMT>
 <sporttype>Martial Arts</sporttype>
-<scheduletext>UFC 158                                                     </scheduletext>
+<scheduletext>UFC 200                                                     </scheduletext>
 <league>MMA Martial Arts</league>
 <participant>
-<participant_name>Chris Camozzi</participant_name>
-<rotnum>24113</rotnum>
+<participant_name>Enrique Marin</participant_name>
+<rotnum>24433</rotnum>
 <visiting_home_draw>Visiting</visiting_home_draw>
 <odds>
-<moneyline>-105</moneyline>
+<moneyline>265</moneyline>
 </odds>
 <pitcher></pitcher>
 </participant>
 <participant>
-<participant_name>Nick Ring</participant_name>
-<rotnum>24114</rotnum>
+<participant_name>Sage Northcutt</participant_name>
+<rotnum>24434</rotnum>
 <visiting_home_draw>Home</visiting_home_draw>
 <odds>
-<moneyline>-115</moneyline>
+<moneyline>-315</moneyline>
 </odds>
 <pitcher></pitcher>
 </participant>
 <drawrotnum>0</drawrotnum><drawmoneyline>0</drawmoneyline><drawTitle></drawTitle><period>
 <period_description>Game</period_description>
-<periodcutoff_datetimeGMT>2013-03-16 21:15</periodcutoff_datetimeGMT>
+<periodcutoff_datetimeGMT>2016-07-09 20:10</periodcutoff_datetimeGMT>
+<period_status>O</period_status>
+<spread><spread_visiting></spread_visiting>
+<spread_adjust_visiting></spread_adjust_visiting>
+<spread_home></spread_home>
+<spread_adjust_home></spread_adjust_home>
+</spread>
+<total>
+<total_points>1.5</total_points>
+<over_adjust>-130</over_adjust>
+<under_adjust>100</under_adjust>
+</total>
+</period>
+</event>
+<event>
+<event_datetimeGMT>2016-07-09 19:00</event_datetimeGMT>
+<sporttype>Martial Arts</sporttype>
+<scheduletext>UFC 200                                                     </scheduletext>
+<league>MMA Martial Arts</league>
+<participant>
+<participant_name>Thiago Santos</participant_name>
+<rotnum>24437</rotnum>
+<visiting_home_draw>Visiting</visiting_home_draw>
+<odds>
+<moneyline>225</moneyline>
+</odds>
+<pitcher></pitcher>
+</participant>
+<participant>
+<participant_name>Gerard Mousasi</participant_name>
+<rotnum>24438</rotnum>
+<visiting_home_draw>Home</visiting_home_draw>
+<odds>
+<moneyline>-265</moneyline>
+</odds>
+<pitcher></pitcher>
+</participant>
+<drawrotnum>0</drawrotnum><drawmoneyline>0</drawmoneyline><drawTitle></drawTitle><period>
+<period_description>Game</period_description>
+<periodcutoff_datetimeGMT>2016-07-09 19:05</periodcutoff_datetimeGMT>
+<period_status>O</period_status>
+<spread><spread_visiting></spread_visiting>
+<spread_adjust_visiting></spread_adjust_visiting>
+<spread_home></spread_home>
+<spread_adjust_home></spread_adjust_home>
+</spread>
+<total>
+<total_points>2.5</total_points>
+<over_adjust>-125</over_adjust>
+<under_adjust>-105</under_adjust>
+</total>
+</period>
+</event>
+<event>
+<event_datetimeGMT>2016-07-09 19:30</event_datetimeGMT>
+<sporttype>Martial Arts</sporttype>
+<scheduletext>UFC 200                                                     </scheduletext>
+<league>MMA Martial Arts</league>
+<participant>
+<participant_name>Joe Lauzon</participant_name>
+<rotnum>24441</rotnum>
+<visiting_home_draw>Visiting</visiting_home_draw>
+<odds>
+<moneyline>-113</moneyline>
+</odds>
+<pitcher></pitcher>
+</participant>
+<participant>
+<participant_name>Diego Sanchez</participant_name>
+<rotnum>24442</rotnum>
+<visiting_home_draw>Home</visiting_home_draw>
+<odds>
+<moneyline>-107</moneyline>
+</odds>
+<pitcher></pitcher>
+</participant>
+<drawrotnum>0</drawrotnum><drawmoneyline>0</drawmoneyline><drawTitle></drawTitle><period>
+<period_description>Game</period_description>
+<periodcutoff_datetimeGMT>2016-07-09 19:35</periodcutoff_datetimeGMT>
+<period_status>O</period_status>
+<spread><spread_visiting></spread_visiting>
+<spread_adjust_visiting></spread_adjust_visiting>
+<spread_home></spread_home>
+<spread_adjust_home></spread_adjust_home>
+</spread>
+<total>
+<total_points>2.5</total_points>
+<over_adjust>-245</over_adjust>
+<under_adjust>195</under_adjust>
+</total>
+</period>
+</event>
+<event>
+<event_datetimeGMT>2016-07-09 18:35</event_datetimeGMT>
+<sporttype>Martial Arts</sporttype>
+<scheduletext>UFC 200                                                     </scheduletext>
+<league>MMA Martial Arts</league>
+<participant>
+<participant_name>Takanori Gomi</participant_name>
+<rotnum>24445</rotnum>
+<visiting_home_draw>Visiting</visiting_home_draw>
+<odds>
+<moneyline>190</moneyline>
+</odds>
+<pitcher></pitcher>
+</participant>
+<participant>
+<participant_name>Jim Miller</participant_name>
+<rotnum>24446</rotnum>
+<visiting_home_draw>Home</visiting_home_draw>
+<odds>
+<moneyline>-225</moneyline>
+</odds>
+<pitcher></pitcher>
+</participant>
+<drawrotnum>0</drawrotnum><drawmoneyline>0</drawmoneyline><drawTitle></drawTitle><period>
+<period_description>Game</period_description>
+<periodcutoff_datetimeGMT>2016-07-09 18:40</periodcutoff_datetimeGMT>
+<period_status>O</period_status>
+<spread><spread_visiting></spread_visiting>
+<spread_adjust_visiting></spread_adjust_visiting>
+<spread_home></spread_home>
+<spread_adjust_home></spread_adjust_home>
+</spread>
+<total>
+<total_points>1.5</total_points>
+<over_adjust>-150</over_adjust>
+<under_adjust>120</under_adjust>
+</total>
+</period>
+</event>
+<event>
+<event_datetimeGMT>2016-07-30 12:30</event_datetimeGMT>
+<sporttype>Martial Arts</sporttype>
+<scheduletext>UFC 201                                                     </scheduletext>
+<league>MMA Martial Arts</league>
+<participant>
+<participant_name>Tyron Woodley</participant_name>
+<rotnum>24451</rotnum>
+<visiting_home_draw>Visiting</visiting_home_draw>
+<odds>
+<moneyline>185</moneyline>
+</odds>
+<pitcher></pitcher>
+</participant>
+<participant>
+<participant_name>Robbie Lawler</participant_name>
+<rotnum>24452</rotnum>
+<visiting_home_draw>Home</visiting_home_draw>
+<odds>
+<moneyline>-215</moneyline>
+</odds>
+<pitcher></pitcher>
+</participant>
+<drawrotnum>0</drawrotnum><drawmoneyline>0</drawmoneyline><drawTitle></drawTitle><period>
+<period_description>Game</period_description>
+<periodcutoff_datetimeGMT>2016-07-30 12:30</periodcutoff_datetimeGMT>
 <period_status>I</period_status>
 <spread><spread_visiting></spread_visiting>
 <spread_adjust_visiting></spread_adjust_visiting>
@@ -151,37 +1438,37 @@
 </spread>
 <total>
 <total_points>2.5</total_points>
-<over_adjust>-285</over_adjust>
-<under_adjust>225</under_adjust>
+<over_adjust>-150</over_adjust>
+<under_adjust>120</under_adjust>
 </total>
 </period>
 </event>
 <event>
-<event_datetimeGMT>2013-03-16 21:15</event_datetimeGMT>
+<event_datetimeGMT>2016-08-20 23:00</event_datetimeGMT>
 <sporttype>Martial Arts</sporttype>
-<scheduletext>UFC 158                                                     </scheduletext>
+<scheduletext>UFC 202                                                     </scheduletext>
 <league>MMA Martial Arts</league>
 <participant>
-<participant_name>Colin Fletcher</participant_name>
-<rotnum>24117</rotnum>
+<participant_name>Nate Diaz</participant_name>
+<rotnum>24501</rotnum>
 <visiting_home_draw>Visiting</visiting_home_draw>
 <odds>
-<moneyline>240</moneyline>
+<moneyline>110</moneyline>
 </odds>
 <pitcher></pitcher>
 </participant>
 <participant>
-<participant_name>Mike Ricci</participant_name>
-<rotnum>24118</rotnum>
+<participant_name>Conor McGregor</participant_name>
+<rotnum>24502</rotnum>
 <visiting_home_draw>Home</visiting_home_draw>
 <odds>
-<moneyline>-285</moneyline>
+<moneyline>-130</moneyline>
 </odds>
 <pitcher></pitcher>
 </participant>
 <drawrotnum>0</drawrotnum><drawmoneyline>0</drawmoneyline><drawTitle></drawTitle><period>
 <period_description>Game</period_description>
-<periodcutoff_datetimeGMT>2013-03-16 21:15</periodcutoff_datetimeGMT>
+<periodcutoff_datetimeGMT>2016-08-20 23:00</periodcutoff_datetimeGMT>
 <period_status>I</period_status>
 <spread><spread_visiting></spread_visiting>
 <spread_adjust_visiting></spread_adjust_visiting>
@@ -190,37 +1477,37 @@
 </spread>
 <total>
 <total_points>2.5</total_points>
-<over_adjust>-190</over_adjust>
-<under_adjust>160</under_adjust>
+<over_adjust>105</over_adjust>
+<under_adjust>-135</under_adjust>
 </total>
 </period>
 </event>
 <event>
-<event_datetimeGMT>2013-03-16 19:00</event_datetimeGMT>
+<event_datetimeGMT>2016-09-10 23:00</event_datetimeGMT>
 <sporttype>Martial Arts</sporttype>
-<scheduletext>UFC 158                                                     </scheduletext>
+<scheduletext>UFC 203                                                     </scheduletext>
 <league>MMA Martial Arts</league>
 <participant>
-<participant_name>Bobby Voelker</participant_name>
-<rotnum>24121</rotnum>
+<participant_name>Ben Rothwell</participant_name>
+<rotnum>99303</rotnum>
 <visiting_home_draw>Visiting</visiting_home_draw>
 <odds>
-<moneyline>155</moneyline>
+<moneyline>165</moneyline>
 </odds>
 <pitcher></pitcher>
 </participant>
 <participant>
-<participant_name>Patrick Cote</participant_name>
-<rotnum>24122</rotnum>
+<participant_name>Fabricio Werdum</participant_name>
+<rotnum>99304</rotnum>
 <visiting_home_draw>Home</visiting_home_draw>
 <odds>
-<moneyline>-175</moneyline>
+<moneyline>-190</moneyline>
 </odds>
 <pitcher></pitcher>
 </participant>
 <drawrotnum>0</drawrotnum><drawmoneyline>0</drawmoneyline><drawTitle></drawTitle><period>
 <period_description>Game</period_description>
-<periodcutoff_datetimeGMT>2013-03-16 19:00</periodcutoff_datetimeGMT>
+<periodcutoff_datetimeGMT>2016-09-10 23:00</periodcutoff_datetimeGMT>
 <period_status>I</period_status>
 <spread><spread_visiting></spread_visiting>
 <spread_adjust_visiting></spread_adjust_visiting>
@@ -228,20 +1515,59 @@
 <spread_adjust_home></spread_adjust_home>
 </spread>
 <total>
-<total_points>2.5</total_points>
-<over_adjust>125</over_adjust>
-<under_adjust>-155</under_adjust>
+<total_points></total_points>
+<over_adjust></over_adjust>
+<under_adjust></under_adjust>
 </total>
 </period>
 </event>
 <event>
-<event_datetimeGMT>2013-03-16 19:00</event_datetimeGMT>
+<event_datetimeGMT>2016-09-03 15:00</event_datetimeGMT>
 <sporttype>Martial Arts</sporttype>
-<scheduletext>UFC 158                                                     </scheduletext>
+<scheduletext>UFC Fight Night 93                                          </scheduletext>
 <league>MMA Martial Arts</league>
 <participant>
-<participant_name>Antonio Carvalho</participant_name>
-<rotnum>24125</rotnum>
+<participant_name>Andrei Arlovski</participant_name>
+<rotnum>99501</rotnum>
+<visiting_home_draw>Visiting</visiting_home_draw>
+<odds>
+<moneyline>145</moneyline>
+</odds>
+<pitcher></pitcher>
+</participant>
+<participant>
+<participant_name>Josh Barnett</participant_name>
+<rotnum>99502</rotnum>
+<visiting_home_draw>Home</visiting_home_draw>
+<odds>
+<moneyline>-165</moneyline>
+</odds>
+<pitcher></pitcher>
+</participant>
+<drawrotnum>0</drawrotnum><drawmoneyline>0</drawmoneyline><drawTitle></drawTitle><period>
+<period_description>Game</period_description>
+<periodcutoff_datetimeGMT>2016-09-03 15:00</periodcutoff_datetimeGMT>
+<period_status>I</period_status>
+<spread><spread_visiting></spread_visiting>
+<spread_adjust_visiting></spread_adjust_visiting>
+<spread_home></spread_home>
+<spread_adjust_home></spread_adjust_home>
+</spread>
+<total>
+<total_points></total_points>
+<over_adjust></over_adjust>
+<under_adjust></under_adjust>
+</total>
+</period>
+</event>
+<event>
+<event_datetimeGMT>2016-09-03 15:00</event_datetimeGMT>
+<sporttype>Martial Arts</sporttype>
+<scheduletext>UFC Fight Night 93                                          </scheduletext>
+<league>MMA Martial Arts</league>
+<participant>
+<participant_name>Ilir Latifi</participant_name>
+<rotnum>99503</rotnum>
 <visiting_home_draw>Visiting</visiting_home_draw>
 <odds>
 <moneyline>175</moneyline>
@@ -249,8 +1575,8 @@
 <pitcher></pitcher>
 </participant>
 <participant>
-<participant_name>Darren Elkins</participant_name>
-<rotnum>24126</rotnum>
+<participant_name>Ryan Bader</participant_name>
+<rotnum>99504</rotnum>
 <visiting_home_draw>Home</visiting_home_draw>
 <odds>
 <moneyline>-205</moneyline>
@@ -259,7 +1585,7 @@
 </participant>
 <drawrotnum>0</drawrotnum><drawmoneyline>0</drawmoneyline><drawTitle></drawTitle><period>
 <period_description>Game</period_description>
-<periodcutoff_datetimeGMT>2013-03-16 19:00</periodcutoff_datetimeGMT>
+<periodcutoff_datetimeGMT>2016-09-03 15:00</periodcutoff_datetimeGMT>
 <period_status>I</period_status>
 <spread><spread_visiting></spread_visiting>
 <spread_adjust_visiting></spread_adjust_visiting>
@@ -267,20 +1593,98 @@
 <spread_adjust_home></spread_adjust_home>
 </spread>
 <total>
-<total_points>2.5</total_points>
-<over_adjust>-300</over_adjust>
-<under_adjust>240</under_adjust>
+<total_points></total_points>
+<over_adjust></over_adjust>
+<under_adjust></under_adjust>
 </total>
 </period>
 </event>
 <event>
-<event_datetimeGMT>2013-03-16 19:00</event_datetimeGMT>
+<event_datetimeGMT>2016-07-23 23:00</event_datetimeGMT>
 <sporttype>Martial Arts</sporttype>
-<scheduletext>UFC 158                                                     </scheduletext>
+<scheduletext>UFC on FOX 20                                               </scheduletext>
 <league>MMA Martial Arts</league>
 <participant>
-<participant_name>Dan Miller</participant_name>
-<rotnum>24129</rotnum>
+<participant_name>Valentina Shevchenko</participant_name>
+<rotnum>99651</rotnum>
+<visiting_home_draw>Visiting</visiting_home_draw>
+<odds>
+<moneyline>360</moneyline>
+</odds>
+<pitcher></pitcher>
+</participant>
+<participant>
+<participant_name>Holly Holm</participant_name>
+<rotnum>99652</rotnum>
+<visiting_home_draw>Home</visiting_home_draw>
+<odds>
+<moneyline>-430</moneyline>
+</odds>
+<pitcher></pitcher>
+</participant>
+<drawrotnum>0</drawrotnum><drawmoneyline>0</drawmoneyline><drawTitle></drawTitle><period>
+<period_description>Game</period_description>
+<periodcutoff_datetimeGMT>2016-07-23 23:00</periodcutoff_datetimeGMT>
+<period_status>I</period_status>
+<spread><spread_visiting></spread_visiting>
+<spread_adjust_visiting></spread_adjust_visiting>
+<spread_home></spread_home>
+<spread_adjust_home></spread_adjust_home>
+</spread>
+<total>
+<total_points></total_points>
+<over_adjust></over_adjust>
+<under_adjust></under_adjust>
+</total>
+</period>
+</event>
+<event>
+<event_datetimeGMT>2016-07-30 23:00</event_datetimeGMT>
+<sporttype>Martial Arts</sporttype>
+<scheduletext>UFC 201                                                     </scheduletext>
+<league>MMA Martial Arts</league>
+<participant>
+<participant_name>Wilson Reis</participant_name>
+<rotnum>99703</rotnum>
+<visiting_home_draw>Visiting</visiting_home_draw>
+<odds>
+<moneyline>850</moneyline>
+</odds>
+<pitcher></pitcher>
+</participant>
+<participant>
+<participant_name>Demetrious Johnson</participant_name>
+<rotnum>99704</rotnum>
+<visiting_home_draw>Home</visiting_home_draw>
+<odds>
+<moneyline>-1400</moneyline>
+</odds>
+<pitcher></pitcher>
+</participant>
+<drawrotnum>0</drawrotnum><drawmoneyline>0</drawmoneyline><drawTitle></drawTitle><period>
+<period_description>Game</period_description>
+<periodcutoff_datetimeGMT>2016-07-30 23:00</periodcutoff_datetimeGMT>
+<period_status>I</period_status>
+<spread><spread_visiting></spread_visiting>
+<spread_adjust_visiting></spread_adjust_visiting>
+<spread_home></spread_home>
+<spread_adjust_home></spread_adjust_home>
+</spread>
+<total>
+<total_points></total_points>
+<over_adjust></over_adjust>
+<under_adjust></under_adjust>
+</total>
+</period>
+</event>
+<event>
+<event_datetimeGMT>2016-07-13 23:00</event_datetimeGMT>
+<sporttype>Martial Arts</sporttype>
+<scheduletext>UFC Fight Night 91                                          </scheduletext>
+<league>MMA Martial Arts</league>
+<participant>
+<participant_name>Michael Chiesa</participant_name>
+<rotnum>99803</rotnum>
 <visiting_home_draw>Visiting</visiting_home_draw>
 <odds>
 <moneyline>250</moneyline>
@@ -288,8 +1692,8 @@
 <pitcher></pitcher>
 </participant>
 <participant>
-<participant_name>Jordan Mein</participant_name>
-<rotnum>24130</rotnum>
+<participant_name>Tony Ferguson</participant_name>
+<rotnum>99804</rotnum>
 <visiting_home_draw>Home</visiting_home_draw>
 <odds>
 <moneyline>-300</moneyline>
@@ -298,7 +1702,7 @@
 </participant>
 <drawrotnum>0</drawrotnum><drawmoneyline>0</drawmoneyline><drawTitle></drawTitle><period>
 <period_description>Game</period_description>
-<periodcutoff_datetimeGMT>2013-03-16 19:00</periodcutoff_datetimeGMT>
+<periodcutoff_datetimeGMT>2016-07-13 23:00</periodcutoff_datetimeGMT>
 <period_status>I</period_status>
 <spread><spread_visiting></spread_visiting>
 <spread_adjust_visiting></spread_adjust_visiting>
@@ -306,59 +1710,20 @@
 <spread_adjust_home></spread_adjust_home>
 </spread>
 <total>
-<total_points>2.5</total_points>
-<over_adjust>-220</over_adjust>
-<under_adjust>180</under_adjust>
+<total_points></total_points>
+<over_adjust></over_adjust>
+<under_adjust></under_adjust>
 </total>
 </period>
 </event>
 <event>
-<event_datetimeGMT>2013-03-16 19:00</event_datetimeGMT>
+<event_datetimeGMT>2016-12-31 23:00</event_datetimeGMT>
 <sporttype>Martial Arts</sporttype>
-<scheduletext>UFC 158                                                     </scheduletext>
+<scheduletext>null</scheduletext>
 <league>MMA Martial Arts</league>
 <participant>
-<participant_name>John Makdessi</participant_name>
-<rotnum>24133</rotnum>
-<visiting_home_draw>Visiting</visiting_home_draw>
-<odds>
-<moneyline>100</moneyline>
-</odds>
-<pitcher></pitcher>
-</participant>
-<participant>
-<participant_name>Daron Cruickshank</participant_name>
-<rotnum>24134</rotnum>
-<visiting_home_draw>Home</visiting_home_draw>
-<odds>
-<moneyline>-120</moneyline>
-</odds>
-<pitcher></pitcher>
-</participant>
-<drawrotnum>0</drawrotnum><drawmoneyline>0</drawmoneyline><drawTitle></drawTitle><period>
-<period_description>Game</period_description>
-<periodcutoff_datetimeGMT>2013-03-16 19:00</periodcutoff_datetimeGMT>
-<period_status>I</period_status>
-<spread><spread_visiting></spread_visiting>
-<spread_adjust_visiting></spread_adjust_visiting>
-<spread_home></spread_home>
-<spread_adjust_home></spread_adjust_home>
-</spread>
-<total>
-<total_points>2.5</total_points>
-<over_adjust>-190</over_adjust>
-<under_adjust>160</under_adjust>
-</total>
-</period>
-</event>
-<event>
-<event_datetimeGMT>2013-03-16 19:00</event_datetimeGMT>
-<sporttype>Martial Arts</sporttype>
-<scheduletext>UFC 158                                                     </scheduletext>
-<league>MMA Martial Arts</league>
-<participant>
-<participant_name>Quinn Mulhern</participant_name>
-<rotnum>24137</rotnum>
+<participant_name>Miesha Tate</participant_name>
+<rotnum>99815</rotnum>
 <visiting_home_draw>Visiting</visiting_home_draw>
 <odds>
 <moneyline>330</moneyline>
@@ -366,368 +1731,17 @@
 <pitcher></pitcher>
 </participant>
 <participant>
-<participant_name>Rick Story</participant_name>
-<rotnum>24138</rotnum>
+<participant_name>Ronda Rousey</participant_name>
+<rotnum>99816</rotnum>
 <visiting_home_draw>Home</visiting_home_draw>
 <odds>
-<moneyline>-390</moneyline>
+<moneyline>-400</moneyline>
 </odds>
 <pitcher></pitcher>
 </participant>
 <drawrotnum>0</drawrotnum><drawmoneyline>0</drawmoneyline><drawTitle></drawTitle><period>
 <period_description>Game</period_description>
-<periodcutoff_datetimeGMT>2013-03-16 19:00</periodcutoff_datetimeGMT>
-<period_status>I</period_status>
-<spread><spread_visiting></spread_visiting>
-<spread_adjust_visiting></spread_adjust_visiting>
-<spread_home></spread_home>
-<spread_adjust_home></spread_adjust_home>
-</spread>
-<total>
-<total_points>2.5</total_points>
-<over_adjust>-240</over_adjust>
-<under_adjust>190</under_adjust>
-</total>
-</period>
-</event>
-<event>
-<event_datetimeGMT>2013-03-16 17:00</event_datetimeGMT>
-<sporttype>Martial Arts</sporttype>
-<scheduletext>UFC 158                                                     </scheduletext>
-<league>MMA Martial Arts</league>
-<participant>
-<participant_name>Issei Tamura</participant_name>
-<rotnum>24141</rotnum>
-<visiting_home_draw>Visiting</visiting_home_draw>
-<odds>
-<moneyline>455</moneyline>
-</odds>
-<pitcher></pitcher>
-</participant>
-<participant>
-<participant_name>T.J. Dillashaw</participant_name>
-<rotnum>24142</rotnum>
-<visiting_home_draw>Home</visiting_home_draw>
-<odds>
-<moneyline>-605</moneyline>
-</odds>
-<pitcher></pitcher>
-</participant>
-<drawrotnum>0</drawrotnum><drawmoneyline>0</drawmoneyline><drawTitle></drawTitle><period>
-<period_description>Game</period_description>
-<periodcutoff_datetimeGMT>2013-03-16 17:00</periodcutoff_datetimeGMT>
-<period_status>I</period_status>
-<spread><spread_visiting></spread_visiting>
-<spread_adjust_visiting></spread_adjust_visiting>
-<spread_home></spread_home>
-<spread_adjust_home></spread_adjust_home>
-</spread>
-<total>
-<total_points>2.5</total_points>
-<over_adjust>-190</over_adjust>
-<under_adjust>160</under_adjust>
-</total>
-</period>
-</event>
-<event>
-<event_datetimeGMT>2013-03-16 17:00</event_datetimeGMT>
-<sporttype>Martial Arts</sporttype>
-<scheduletext>UFC 158                                                     </scheduletext>
-<league>MMA Martial Arts</league>
-<participant>
-<participant_name>George Roop</participant_name>
-<rotnum>24149</rotnum>
-<visiting_home_draw>Visiting</visiting_home_draw>
-<odds>
-<moneyline>115</moneyline>
-</odds>
-<pitcher></pitcher>
-</participant>
-<participant>
-<participant_name>Reuben Duran</participant_name>
-<rotnum>24150</rotnum>
-<visiting_home_draw>Home</visiting_home_draw>
-<odds>
-<moneyline>-135</moneyline>
-</odds>
-<pitcher></pitcher>
-</participant>
-<drawrotnum>0</drawrotnum><drawmoneyline>0</drawmoneyline><drawTitle></drawTitle><period>
-<period_description>Game</period_description>
-<periodcutoff_datetimeGMT>2013-03-16 17:00</periodcutoff_datetimeGMT>
-<period_status>I</period_status>
-<spread><spread_visiting></spread_visiting>
-<spread_adjust_visiting></spread_adjust_visiting>
-<spread_home></spread_home>
-<spread_adjust_home></spread_adjust_home>
-</spread>
-<total>
-<total_points>2.5</total_points>
-<over_adjust>-110</over_adjust>
-<under_adjust>-120</under_adjust>
-</total>
-</period>
-</event>
-<event>
-<event_datetimeGMT>2013-04-20 23:00</event_datetimeGMT>
-<sporttype>Martial Arts</sporttype>
-<scheduletext>UFC on Fox 7                                                </scheduletext>
-<league>MMA Martial Arts</league>
-<participant>
-<participant_name>Benson Henderson</participant_name>
-<rotnum>50034</rotnum>
-<visiting_home_draw>Visiting</visiting_home_draw>
-<odds>
-<moneyline>-250</moneyline>
-</odds>
-<pitcher></pitcher>
-</participant>
-<participant>
-<participant_name>Gilbert Melendez</participant_name>
-<rotnum>50035</rotnum>
-<visiting_home_draw>Home</visiting_home_draw>
-<odds>
-<moneyline>210</moneyline>
-</odds>
-<pitcher></pitcher>
-</participant>
-<drawrotnum>0</drawrotnum><drawmoneyline>0</drawmoneyline><drawTitle></drawTitle><period>
-<period_description>Game</period_description>
-<periodcutoff_datetimeGMT>2013-04-20 23:00</periodcutoff_datetimeGMT>
-<period_status>I</period_status>
-<spread><spread_visiting></spread_visiting>
-<spread_adjust_visiting></spread_adjust_visiting>
-<spread_home></spread_home>
-<spread_adjust_home></spread_adjust_home>
-</spread>
-<total>
-<total_points></total_points>
-<over_adjust></over_adjust>
-<under_adjust></under_adjust>
-</total>
-</period>
-</event>
-<event>
-<event_datetimeGMT>2013-04-20 22:30</event_datetimeGMT>
-<sporttype>Martial Arts</sporttype>
-<scheduletext>UFC on Fox 7                                                </scheduletext>
-<league>MMA Martial Arts</league>
-<participant>
-<participant_name>Daniel Cormier</participant_name>
-<rotnum>50036</rotnum>
-<visiting_home_draw>Visiting</visiting_home_draw>
-<odds>
-<moneyline>-390</moneyline>
-</odds>
-<pitcher></pitcher>
-</participant>
-<participant>
-<participant_name>Frank Mir</participant_name>
-<rotnum>50037</rotnum>
-<visiting_home_draw>Home</visiting_home_draw>
-<odds>
-<moneyline>330</moneyline>
-</odds>
-<pitcher></pitcher>
-</participant>
-<drawrotnum>0</drawrotnum><drawmoneyline>0</drawmoneyline><drawTitle></drawTitle><period>
-<period_description>Game</period_description>
-<periodcutoff_datetimeGMT>2013-04-20 22:30</periodcutoff_datetimeGMT>
-<period_status>I</period_status>
-<spread><spread_visiting></spread_visiting>
-<spread_adjust_visiting></spread_adjust_visiting>
-<spread_home></spread_home>
-<spread_adjust_home></spread_adjust_home>
-</spread>
-<total>
-<total_points></total_points>
-<over_adjust></over_adjust>
-<under_adjust></under_adjust>
-</total>
-</period>
-</event>
-<event>
-<event_datetimeGMT>2013-04-27 23:00</event_datetimeGMT>
-<sporttype>Martial Arts</sporttype>
-<scheduletext>UFC 159                                                     </scheduletext>
-<league>MMA Martial Arts</league>
-<participant>
-<participant_name>Chael Sonnen</participant_name>
-<rotnum>50080</rotnum>
-<visiting_home_draw>Visiting</visiting_home_draw>
-<odds>
-<moneyline>650</moneyline>
-</odds>
-<pitcher></pitcher>
-</participant>
-<participant>
-<participant_name>Jon Jones</participant_name>
-<rotnum>50081</rotnum>
-<visiting_home_draw>Home</visiting_home_draw>
-<odds>
-<moneyline>-900</moneyline>
-</odds>
-<pitcher></pitcher>
-</participant>
-<drawrotnum>0</drawrotnum><drawmoneyline>0</drawmoneyline><drawTitle></drawTitle><period>
-<period_description>Game</period_description>
-<periodcutoff_datetimeGMT>2013-04-27 23:00</periodcutoff_datetimeGMT>
-<period_status>I</period_status>
-<spread><spread_visiting></spread_visiting>
-<spread_adjust_visiting></spread_adjust_visiting>
-<spread_home></spread_home>
-<spread_adjust_home></spread_adjust_home>
-</spread>
-<total>
-<total_points></total_points>
-<over_adjust></over_adjust>
-<under_adjust></under_adjust>
-</total>
-</period>
-</event>
-<event>
-<event_datetimeGMT>2013-04-06 18:00</event_datetimeGMT>
-<sporttype>Martial Arts</sporttype>
-<scheduletext>UFC on Fuel TV 9                                            </scheduletext>
-<league>MMA Martial Arts</league>
-<participant>
-<participant_name>Gegard Mousasi</participant_name>
-<rotnum>52257</rotnum>
-<visiting_home_draw>Visiting</visiting_home_draw>
-<odds>
-<moneyline>215</moneyline>
-</odds>
-<pitcher></pitcher>
-</participant>
-<participant>
-<participant_name>Alexander Gustafsson</participant_name>
-<rotnum>52258</rotnum>
-<visiting_home_draw>Home</visiting_home_draw>
-<odds>
-<moneyline>-255</moneyline>
-</odds>
-<pitcher></pitcher>
-</participant>
-<drawrotnum>0</drawrotnum><drawmoneyline>0</drawmoneyline><drawTitle></drawTitle><period>
-<period_description>Game</period_description>
-<periodcutoff_datetimeGMT>2013-04-06 18:00</periodcutoff_datetimeGMT>
-<period_status>I</period_status>
-<spread><spread_visiting></spread_visiting>
-<spread_adjust_visiting></spread_adjust_visiting>
-<spread_home></spread_home>
-<spread_adjust_home></spread_adjust_home>
-</spread>
-<total>
-<total_points></total_points>
-<over_adjust></over_adjust>
-<under_adjust></under_adjust>
-</total>
-</period>
-</event>
-<event>
-<event_datetimeGMT>2013-05-25 23:30</event_datetimeGMT>
-<sporttype>Martial Arts</sporttype>
-<scheduletext>UFC 160                                                     </scheduletext>
-<league>MMA Martial Arts</league>
-<participant>
-<participant_name>Antonio Silva</participant_name>
-<rotnum>52275</rotnum>
-<visiting_home_draw>Visiting</visiting_home_draw>
-<odds>
-<moneyline>420</moneyline>
-</odds>
-<pitcher></pitcher>
-</participant>
-<participant>
-<participant_name>Cain Velasquez</participant_name>
-<rotnum>52276</rotnum>
-<visiting_home_draw>Home</visiting_home_draw>
-<odds>
-<moneyline>-570</moneyline>
-</odds>
-<pitcher></pitcher>
-</participant>
-<drawrotnum>0</drawrotnum><drawmoneyline>0</drawmoneyline><drawTitle></drawTitle><period>
-<period_description>Game</period_description>
-<periodcutoff_datetimeGMT>2013-05-25 23:30</periodcutoff_datetimeGMT>
-<period_status>I</period_status>
-<spread><spread_visiting></spread_visiting>
-<spread_adjust_visiting></spread_adjust_visiting>
-<spread_home></spread_home>
-<spread_adjust_home></spread_adjust_home>
-</spread>
-<total>
-<total_points></total_points>
-<over_adjust></over_adjust>
-<under_adjust></under_adjust>
-</total>
-</period>
-</event>
-<event>
-<event_datetimeGMT>2013-05-18 23:00</event_datetimeGMT>
-<sporttype>Martial Arts</sporttype>
-<scheduletext>UFC on Fox 8                                                </scheduletext>
-<league>MMA Martial Arts</league>
-<participant>
-<participant_name>Luke Rockhold</participant_name>
-<rotnum>52279</rotnum>
-<visiting_home_draw>Visiting</visiting_home_draw>
-<odds>
-<moneyline>-110</moneyline>
-</odds>
-<pitcher></pitcher>
-</participant>
-<participant>
-<participant_name>Vitor Belfort</participant_name>
-<rotnum>52280</rotnum>
-<visiting_home_draw>Home</visiting_home_draw>
-<odds>
-<moneyline>-110</moneyline>
-</odds>
-<pitcher></pitcher>
-</participant>
-<drawrotnum>0</drawrotnum><drawmoneyline>0</drawmoneyline><drawTitle></drawTitle><period>
-<period_description>Game</period_description>
-<periodcutoff_datetimeGMT>2013-05-18 23:00</periodcutoff_datetimeGMT>
-<period_status>I</period_status>
-<spread><spread_visiting></spread_visiting>
-<spread_adjust_visiting></spread_adjust_visiting>
-<spread_home></spread_home>
-<spread_adjust_home></spread_adjust_home>
-</spread>
-<total>
-<total_points></total_points>
-<over_adjust></over_adjust>
-<under_adjust></under_adjust>
-</total>
-</period>
-</event>
-<event>
-<event_datetimeGMT>2013-04-20 22:00</event_datetimeGMT>
-<sporttype>Martial Arts</sporttype>
-<scheduletext>UFC on Fox 7                                                </scheduletext>
-<league>MMA Martial Arts</league>
-<participant>
-<participant_name>Josh Thomson</participant_name>
-<rotnum>52361</rotnum>
-<visiting_home_draw>Visiting</visiting_home_draw>
-<odds>
-<moneyline>135</moneyline>
-</odds>
-<pitcher></pitcher>
-</participant>
-<participant>
-<participant_name>Nate Diaz</participant_name>
-<rotnum>52362</rotnum>
-<visiting_home_draw>Home</visiting_home_draw>
-<odds>
-<moneyline>-155</moneyline>
-</odds>
-<pitcher></pitcher>
-</participant>
-<drawrotnum>0</drawrotnum><drawmoneyline>0</drawmoneyline><drawTitle></drawTitle><period>
-<period_description>Game</period_description>
-<periodcutoff_datetimeGMT>2013-04-20 22:00</periodcutoff_datetimeGMT>
+<periodcutoff_datetimeGMT>2016-12-31 23:00</periodcutoff_datetimeGMT>
 <period_status>I</period_status>
 <spread><spread_visiting></spread_visiting>
 <spread_adjust_visiting></spread_adjust_visiting>

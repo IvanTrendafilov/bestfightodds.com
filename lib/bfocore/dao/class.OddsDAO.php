@@ -267,7 +267,7 @@ class OddsDAO
         $aProps = array();
         while ($aRow = mysql_fetch_array($rResult))
         {
-            $aProps[] = new PropBet($a_iEventID,
+            $aProps[] = new EventPropBet($a_iEventID,
                             $aRow['bookie_id'],
                             $aRow['prop_desc'],
                             $aRow['prop_odds'],
