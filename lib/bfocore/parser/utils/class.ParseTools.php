@@ -73,9 +73,9 @@ class ParseTools
         {
             curl_setopt($rCurl, CURLOPT_INTERFACE, '89.221.253.24');
         }
-        else if ($a_sURL == 'http://www.sportsinteraction.com/info/data/feeds/consume/?consumerName=bfodds&pwd=bfodds3145&feedID=5&formatID=4')
+        else if (strpos($a_sURL, 'sportsinteraction.') !== false) 
         {
-            curl_setopt($rCurl, CURLOPT_SSL_CIPHER_LIST, 'ecdhe_ecdsa_aes_128_sha');
+            curl_setopt($rCurl, CURLOPT_SSL_CIPHER_LIST, 'ecdhe_ecdsa_aes_128_sha,ecdhe_rsa_aes_128_sha');
         }
         else if (substr($a_sURL, 0, strlen('http://www.thegreek.com')) === 'http://www.thegreek.com')
         {
@@ -149,9 +149,9 @@ class ParseTools
             {
               curl_setopt($aChannels[$sURL], CURLOPT_INTERFACE, '89.221.253.24');
             }
-            else if ($sURL == 'http://www.sportsinteraction.com/info/data/feeds/consume/?consumerName=bfodds&pwd=bfodds3145&feedID=5&formatID=4')
+            else if (strpos($a_sURL, 'sportsinteraction.') !== false) 
             {
-              curl_setopt($aChannels[$sURL], CURLOPT_SSL_CIPHER_LIST, 'ecdhe_ecdsa_aes_128_sha');
+              curl_setopt($aChannels[$sURL], CURLOPT_SSL_CIPHER_LIST, 'ecdhe_ecdsa_aes_128_sha,ecdhe_rsa_aes_128_sha');
             }
             else if (substr($sURL, 0, strlen('http://www.thegreek.com')) === 'http://www.thegreek.com')
             {
