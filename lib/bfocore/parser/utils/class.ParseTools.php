@@ -149,7 +149,7 @@ class ParseTools
             {
               curl_setopt($aChannels[$sURL], CURLOPT_INTERFACE, '89.221.253.24');
             }
-            else if (strpos($a_sURL, 'sportsinteraction.') !== false) 
+            else if (strpos($sURL, 'sportsinteraction.') !== false) 
             {
               curl_setopt($aChannels[$sURL], CURLOPT_SSL_CIPHER_LIST, 'ecdhe_ecdsa_aes_128_sha,ecdhe_rsa_aes_128_sha');
             }
