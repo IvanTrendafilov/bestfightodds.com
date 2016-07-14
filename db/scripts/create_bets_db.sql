@@ -210,6 +210,23 @@ ENGINE=MyISAM DEFAULT
 CHARSET=latin1;
 ;
 
+CREATE TABLE `logs_parseruns` (
+  `date` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  `parser_id` INT(3) NOT NULL,
+  `bookie_id` INT(3) NOT NULL,
+  `parsed_matchups` INT(4) NULL DEFAULT NULL,
+  `matched_matchups` INT(4) NULL DEFAULT NULL,
+  `parsed_props` INT(4) NULL DEFAULT NULL,
+  `matched_props` INT(4) NULL DEFAULT NULL,
+  `status` INT(2) NOT NULL,
+  `url` VARCHAR(500) NULL DEFAULT NULL,
+  `authoritative_run` TINYINT(1) NULL DEFAULT NULL,
+  `mockfeed_used` TINYINT(1) NULL DEFAULT NULL,
+  `mockfeed_file` VARCHAR(100) NULL DEFAULT NULL,
+  PRIMARY KEY (`date`, `parser_id`, `bookie_id`)
+)
+ENGINE=MyISAM DEFAULT CHARSET=latin1;
+
 
 USE `bets`;
 DROP function IF EXISTS `MoneylineToDecimal`;

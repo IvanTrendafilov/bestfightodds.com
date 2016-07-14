@@ -23,6 +23,7 @@ class XMLParser
     public static function dispatch($a_oParser)
     {
         $aAuthorativeMetadata = [];
+        $oParseRunLogger = new ParseRunLogger();
 
         $oLogger = Logger::getInstance();
         $oLogger->log("============== " . $a_oParser->getName() . " ===============");
@@ -70,6 +71,13 @@ class XMLParser
             $oLogger->log("Error: Failed to open URL (" . $a_oParser->getParseURL() . ")", -2);
             $oLogger->log("===== " . $a_oParser->getName() . " finished in " . round(microtime(true) - $fStartTime, 3) . " =====", 0);
             $oLogger->seperate();
+
+            //Store run in database
+            $oParseRunLogger->logRun($a_oParser->getID(), ['bookie_id' => $a_oParser->getBookieID(),
+                                                            'status' => -1,
+                                                            'url' => $a_oParser->getParseURL(),
+                                                            'mockfeed_used' => PARSE_MOCKFEEDS_ON,
+                                                            'mockfeed_file' => (PARSE_MOCKFEEDS_ON ? $a_oParser->getMockFile() : '')]);
             return false;
         }
         else if ($sXML != null && $sXML != '')
@@ -107,9 +115,9 @@ class XMLParser
             
             //Remove dupes, then pass to parser
             $aParseResults = XMLParser::removeMoneylineDupes($aParseResults);            
-            self::processAll($aParseResults, $a_oParser->getBookieID());
+            $aParsedMatchupResult = self::processAll($aParseResults, $a_oParser->getBookieID());
             $aParseResults = self::removePropDupes($aParseResults);
-            self::processProps($aParseResults, $a_oParser->getBookieID());
+            $aParsedPropResult = self::processProps($aParseResults, $a_oParser->getBookieID());
            
             //Store correlations that may have been added in processMoneylines
             $aCorrStoreCol = array();
@@ -122,6 +130,17 @@ class XMLParser
             
             $oLogger->log("===== " . $a_oParser->getName() . " finished in " . round(microtime(true) - $fStartTime, 3) . " =====", 0);
             $oLogger->seperate();
+
+            //Store run in database
+            $oParseRunLogger->logRun($a_oParser->getID(), ['bookie_id' => $a_oParser->getBookieID(),
+                                                'parsed_matchups' => $aParsedMatchupResult['parsed_matchups'],
+                                                'parsed_props' => $aParsedPropResult['parsed_props'],
+                                                'matched_matchups' => $aParsedMatchupResult['matched_matchups'],
+                                                'matched_props' => $aParsedPropResult['matched_props'],
+                                                'status' => 1,
+                                                'url' => $a_oParser->getParseURL(),
+                                                'mockfeed_used' => PARSE_MOCKFEEDS_ON,
+                                                'mockfeed_file' => (PARSE_MOCKFEEDS_ON ? $a_oParser->getMockFile() : '')]);
             return true;
         }
         else
@@ -129,6 +148,13 @@ class XMLParser
             $oLogger->log("Warning: No data retrieved from site", -2);
             $oLogger->log("===== " . $a_oParser->getName() . " finished in " . round(microtime(true) - $fStartTime, 3) . " =====", 0);
             $oLogger->seperate();
+
+            //Store run in database
+            $oParseRunLogger->logRun($a_oParser->getID(), ['bookie_id' => $a_oParser->getBookieID(),
+                                                'status' => -2,
+                                                'url' => $a_oParser->getParseURL(),
+                                                'mockfeed_used' => PARSE_MOCKFEEDS_ON,
+                                                'mockfeed_file' => (PARSE_MOCKFEEDS_ON ? $a_oParser->getMockFile() : '')]);
             return false;
         }
     }
@@ -249,12 +275,12 @@ class XMLParser
     {
         $oLogger = Logger::getInstance();
 
+        $iMatchupCount = 0;
+        $iTotalCount = 0;
+        $iMoneylineCount = 0;
+
         foreach ($a_aParsedSports as $oParsedSport)
         {
-            $iMatchupCount = 0;
-            $iTotalCount = 0;
-            $iMoneylineCount = 0;
-
             $oLogger->log('-sport: ' . $oParsedSport->getName(), 1);
 
             //Get all matchups
@@ -360,6 +386,8 @@ class XMLParser
             }
             $oLogger->log("Total matched matchups: " . $iMatchupCount . ' / ' . $iTotalCount, 0);
         }
+
+        return ['matched_matchups' => $iMatchupCount, 'parsed_matchups' => $iTotalCount];
     }
 
 
@@ -385,6 +413,8 @@ class XMLParser
         $oLogger = Logger::getInstance();
         $oLogger->log('-props:', 0);
 
+        $iMatchedPropCount = 0;
+
         foreach ($a_aParsedSports as $oParsedSport)
         {
             $oPropParser = new PropParser();
@@ -392,6 +422,8 @@ class XMLParser
 
             $oLogger->log("Total matched props: " . $iMatchedPropCount . ' / ' . $oParsedSport->getPropCount(), 0);
         }
+
+        return ['matched_props' => $iMatchedPropCount, 'parsed_props' => $oParsedSport->getPropCount()];
     }
 
 }
