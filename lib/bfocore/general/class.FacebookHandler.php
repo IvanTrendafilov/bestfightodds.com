@@ -53,14 +53,14 @@ class FacebookHandler
 		return true;
 	}
 
-	public function saveMatchupAsPosted($matchup_id)
+	public function saveMatchupAsPosted($matchup_id, $skipped = false)
 	{
-		return FacebookDAO::saveMatchupAsPosted($matchup_id);
+		return FacebookDAO::saveMatchupAsPosted($matchup_id, $skipped);
 	}
 
-	public function saveEventAsPosted($event_id)
+	public function saveEventAsPosted($event_id, $skipped = false)
 	{
-		return FacebookDAO::saveEventAsPosted($event_id);
+		return FacebookDAO::saveEventAsPosted($event_id, $skipped);
 	}
 
 	public function getUnpostedMatchups()

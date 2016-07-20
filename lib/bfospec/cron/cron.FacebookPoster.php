@@ -4,18 +4,17 @@ require_once('lib/bfocore/general/class.FacebookHandler.php');
 require_once('lib/bfocore/general/class.EventHandler.php');
 require_once('lib/bfocore/general/class.OddsHandler.php');
 require_once('config/inc.facebookConfig.php');
+require_once('config/inc.parseConfig.php');
 
 if (FACEBOOK_ENABLED == false)
 {
-	echo 'Facebook disabled';
+	echo 'Facebook posting disabled';
 	exit;
 }
 
-
 $fh = new FacebookHandler();
 
-
-
+//Post any new opening odds for matchups that have not yet been posted
 $matchups = $fh->getUnpostedMatchups();
 foreach ($matchups as $matchup)
 {
@@ -23,59 +22,105 @@ foreach ($matchups as $matchup)
 	{
 		$event = EventHandler::getEvent($matchup->getEventID());
 		$odds = OddsHandler::getOpeningOddsForMatchup($matchup->getID());
-
-		//Determine who is the favourite
-
-		//TODO: handle future events wording
-
-		$message = $matchup->getTeamAsString(1) . ' opens as a ' . $odds->getFighterOddsAsString(1) . ' betting favorite over ' . $matchup->getTeamAsString(2) . ' (' . $odds->getFighterOddsAsString(2) . ') at ' . $event->getName() . ', set to take place on ' . date('F jS', strtotime($event->getDate()));
+		$message = '';
 		$link = 'https://www.bestfightodds.com/events/' . $event->getEventAsLinkString(); 
+
+		//Determine who (fighter position, 1 or 2) is the favourite
+		$favourite_num = 1;
+		if ($odds->getFighterOddsAsDecimal(2) < $odds->getFighterOddsAsDecimal(1))
+		{
+			$favourite_num = 2;
+		}
+		else if ($odds->getFighterOddsAsDecimal(1) == $odds->getFighterOddsAsDecimal(2))
+		{
+			$favourite_num = 0; //Even odds
+		}
+
+		
+		//If matchup date is not decided (future event) adjust wording accordingly
+		$event_message = '';
+		if ($event->getID() == PARSE_FUTURESEVENT_ID)
+		{
+			//Matchup is assigned to future events (unknown date)
+			$event_message = 'in their upcoming/rumoured matchup';
+		}
+		else 
+		{
+			//Matchup is assigned to future events (unknown date)
+			$event_message = 'at ' . $event->getName() . ', set to take place on ' . date('F jS', strtotime($event->getDate()));
+		}
+
+		if ($favourite_num == 0)
+		{
+			//Odds are even
+			$message = $matchup->getTeamAsString(1) . ' (' . $odds->getFighterOddsAsString(1) . ') vs. ' . $matchup->getTeamAsString(2) . ' (' . $odds->getFighterOddsAsString(2) . ') opens at even betting odds ' . $event_message;
+		}
+		else
+		{
+			$message = $matchup->getTeamAsString($favourite_num) . ' opens as a ' . $odds->getFighterOddsAsString($favourite_num) . ' betting favorite over ' . $matchup->getTeamAsString(($favourite_num % 2) + 1) . ' (' . $odds->getFighterOddsAsString(($favourite_num % 2) + 1) . ') ' . $event_message;
+		}
 
 		if ($fh->postToFeed($message, $link))
 		{
-			//Success, TODO: mark as posted
+			$fh->saveMatchupAsPosted($matchup->getID());
+		}
+		else
+		{
+			echo 'Failed to post matchup ' . $matchup->getID();
 		}
 	}
 	else
 	{
 		//Not a main event so lets not post it. Mark as posted however
-		//TODO: Mark as posted
+		$fh->saveMatchupAsPosted($matchup->getID(), true);
 	}
 }
 
+//Post a full event headsup 24 hours prior to the event (only for UFC and Bellator right now)
+$events = $fh->getUnpostedEvents();
+foreach ($events as $event)
+{
 
+    if (strtolower(substr($event->getName(), 0, 3)) == 'ufc' || 
+    	strtolower(substr($event->getName(), 0, 8)) == 'bellator')
+    {
+    	//Compile list of matchups with best odds available
+    	$fightodds = '';
+    	$matchups = EventHandler::getAllFightsForEvent($event->getID(), true);
+    	if (sizeof($matchups) > 0)
+    	{
+	    	foreach ($matchups as $matchup)
+	    	{
+	    		$odds = EventHandler::getBestOddsForFight($matchup->getID());
+	    		if ($odds != null)
+	    		{
+	    			$fightodds .= $matchup->getTeamAsString(1) . " (" . $odds->getFighterOddsAsString(1) . ") vs. " . $matchup->getTeamAsString(2) . " (" . $odds->getFighterOddsAsString(2) . ")\r\n";
+	    		}
+	    	}
 
+	    	$message = $event->getName() . " is only one day away! Here are the best odds currently available for each fighter and matchup:\r\n\r\n" . $fightodds;
+	    	$link = "https://www.bestfightodds.com/events/" . $event->getEventAsLinkString(); 
 
-
-
-
-
-
-//$fh->getUnpostedEvents();
-
-
-
-
-
-
-
-//Loop through upcoming events and find unfacebooked matchups
-
-
-
-//Filter out only the main events for now
-
-
-
-//Check if we have done a full event 24 hour prior to event posting of the odds (UFC and Bellator only)
-
-
-
-
-//$message = 'Peter Werdum opens as a -400 betting favourite over Ben Rothwell (+200) at UFC 197: Werdum vs. Rothwell, set for October 5th';
-//$link = 'https://www.bestfightodds.com/events/ufc-on-fox-20-holm-vs-shevchenko-1114';
-
-
-
+			if ($fh->postToFeed($message, $link))
+			{
+    			$fh->saveEventAsPosted($event->getID());
+			}
+			else
+			{
+				echo 'Failed to post matchup ' . $matchup->getID();
+			}
+    	}
+    	else
+    	{
+    		//No odds available, mark as posted
+    		$fh->saveEventAsPosted($event->getID(), true);
+    	}
+    }
+    else
+    {
+    	//Not UFC or Bellator, mark as posted
+    	$fh->saveEventAsPosted($event->getID(), true);
+    }
+}
 
 ?>

@@ -30,8 +30,9 @@ class PDOTools
     }
 
     public static function insert($query, array $data)
-    {        
-        self::getConnection()->prepare($query)->execute($data);     
+    {
+        $query = self::adjustDate($query);        
+        self::getConnection()->prepare($query)->execute($data);
         return self::getConnection()->lastInsertId();
     }
 
@@ -61,6 +62,7 @@ class PDOTools
 
     public static function executeQuery($query, $data = null)
     {
+        $query = self::adjustDate($query);
         try 
         {
             $stmt = self::getConnection()->prepare($query);
@@ -120,6 +122,16 @@ class PDOTools
     {
         self::$cached_queries = [];
         return true;
+    }
+
+    private static function adjustDate($query)
+    {
+        //Adjust time according to set timezone
+        if (is_numeric(DB_TIMEZONE))
+        {
+            $query = str_replace('NOW()', '(NOW() + INTERVAL ' . DB_TIMEZONE . ' HOUR)', $query);
+        }
+        return $query;
     }
 }
 

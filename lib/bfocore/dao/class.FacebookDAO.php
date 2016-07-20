@@ -12,19 +12,19 @@ require_once('lib/bfocore/utils/db/class.PDOTools.php');
  */
 class FacebookDAO
 {
-    public static function saveMatchupAsPosted($matchup_id)
+    public static function saveMatchupAsPosted($matchup_id, $skipped)
     {
-        $query = 'INSERT INTO matchups_fbposts(matchup_id, postdate)
-                        VALUES (?, NOW())';
-        $params = array($matchup_id);
+        $query = 'INSERT INTO matchups_fbposts(matchup_id, post_date, skipped)
+                        VALUES (?, NOW(), ?)';
+        $params = [$matchup_id, (int) $skipped];
         return PDOTools::insert($query, $params);
     }
 
-    public static function saveEventAsPosted($event_id)
+    public static function saveEventAsPosted($event_id, $skipped)
     {
-        $query = 'INSERT INTO matchups_fbposts(event_id, postdate)
-                        VALUES (?, NOW())';
-        $params = array($event_id);
+        $query = 'INSERT INTO matchups_fbposts(event_id, post_date, skipped)
+                        VALUES (?, NOW(), ?)';
+        $params = [$event_id, (int) $skipped];
         return PDOTools::insert($query, $params);
     }
 
@@ -62,20 +62,16 @@ class FacebookDAO
     public static function getUnpostedEvents()
     {
         $query = 'SELECT * FROM events e LEFT JOIN matchups_fbposts ff ON e.id = ff.event_id WHERE ff.event_id IS NULL
-        			AND LEFT(NOW() + INTERVAL 1 DAY, 10) = LEFT(e.date, 10)
+        			AND LEFT(NOW() + INTERVAL 12 HOUR, 10) = LEFT(e.date, 10)
         			AND e.display = 1';
 
         $results = PDOTools::findMany($query);
-        $matchups = [];
+        $events = [];
         foreach ($results as $row)
         {
-            $tmp_matchup = new Fight($row['id'], $row['fighter1_name'], $row['fighter2_name'], $row['event_id']);
-            $tmp_matchup->setFighterID(1, $row['fighter1_id']);
-            $tmp_matchup->setFighterID(2, $row['fighter2_id']);
-            $tmp_matchup->setMainEvent(($row['is_mainevent'] == 1 ? true : false));
-            $matchups[] = $tmp_matchup;
+            $events[] = new Event($row['id'], $row['date'], $row['name'], $row['display']);
         }
-        return $matchups;
+        return $events;
     }
 }
 ?>

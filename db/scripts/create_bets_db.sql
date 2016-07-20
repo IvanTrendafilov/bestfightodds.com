@@ -232,6 +232,7 @@ CREATE TABLE `matchups_fbposts` (
   `matchup_id` INT(7) NOT NULL DEFAULT '-1',
   `event_id` INT(7) NOT NULL DEFAULT '-1',
   `post_date` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  `skipped` TINYINT(1) NOT NULL,
   PRIMARY KEY (`matchup_id`, `event_id`, `post_date`)
 )
 ENGINE=MyISAM DEFAULT CHARSET=latin1;
