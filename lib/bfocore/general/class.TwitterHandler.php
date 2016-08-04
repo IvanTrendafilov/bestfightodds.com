@@ -51,8 +51,8 @@ class TwitterHandler
             if (count($aGroup['matchups']) > 1)
             {
                 //Multiple fights for the same event needs to be twittered
-                $sTwitText = str_replace(array('<E>','<T1>','<T2>'),
-                                            array($oEvent->getName(), $aGroup['matchups'][0]->getFighterAsString(1), $aGroup['matchups'][0]->getFighterAsString(2)),
+                $sTwitText = str_replace(array('<E>','<T1>','<T2>','<EVENT_URL>'),
+                                            array($oEvent->getName(), $aGroup['matchups'][0]->getFighterAsString(1), $aGroup['matchups'][0]->getFighterAsString(2), $oEvent->getEventAsLinkString()),
                                             TWITTER_TEMPLATE_MULTI);
 
                 //$sTwitText = 'New lines for ' . $oEvent->getName() . ' posted https://bestfightodds.com';
@@ -64,8 +64,8 @@ class TwitterHandler
 
                 if ($oFightOdds != null)
                 {
-                    $sTwitText = str_replace(array('<E>','<T1>','<T2>','<T1O>','<T2O>'),
-                                            array($oEvent->getName(), $aGroup['matchups'][0]->getFighterAsString(1), $aGroup['matchups'][0]->getFighterAsString(2), $oFightOdds->getFighterOddsAsString(1), $oFightOdds->getFighterOddsAsString(2)),
+                    $sTwitText = str_replace(array('<E>','<T1>','<T2>','<T1O>','<T2O>','<EVENT_URL>'),
+                                            array($oEvent->getName(), $aGroup['matchups'][0]->getFighterAsString(1), $aGroup['matchups'][0]->getFighterAsString(2), $oFightOdds->getFighterOddsAsString(1), $oFightOdds->getFighterOddsAsString(2), $oEvent->getEventAsLinkString()),
                                             TWITTER_TEMPLATE_SINGLE);
 
                     //$sTwitText = $oEvent->getName() . ': ' . $aGroup['matchups'][0]->getFighterAsString(1) . ' (' . $oFightOdds->getFighterOddsAsString(1) . ') vs. '

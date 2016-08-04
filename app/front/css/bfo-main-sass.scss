@@ -703,6 +703,12 @@ ul.share-dropdown ul li a {
   background-position: center center;
 }
 
+#chart-link {
+  text-align: left;
+  margin-left: 10px;
+  margin-bottom: 10px;
+}
+
 .chart-spark {
   cursor: pointer;
 }
@@ -1040,4 +1046,18 @@ table.team-stats-table {
 
 .item-mobile-only, .item-mobile-only-row {
   display: none;
+}
+
+.button {
+  border-radius: 2px;
+  padding: 4px 10px;
+  background-color: #e8ebf3;
+  color: #151515;
+  cursor: pointer;
+  font-size: 12px;
+  display: inline-block;
+  border: 1px solid #c7ccd6;
+  &:hover {
+   background-color: #d7dae2;
+  }
 }

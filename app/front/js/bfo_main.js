@@ -13,10 +13,22 @@ var shareVisible = false;
 //ClearChart
 chartCC = function() {
     $('#chart-area').empty();
+    $('#chart-link').hide();
+    $('#chart-window').height("228");
 };
 
 //Show Chart
 chartSC = function(content, xcord, ycord) {
+
+    //Pick out bookie name and link from content
+    if ((url = content.match('href="([^"]*)"')) != null && (bookie = content.match('>([^<]*)</a>')) != null)
+    {
+        $('#chart-link').html('Bet this line at ' + bookie[1]);
+        $('#chart-link').show();
+        $('#chart-link').parent().attr('href', 'https://www.bestfightodds.com' + url[1]);
+        $('#chart-window').height("260");
+    }
+
     $('#chart-window').removeClass('is-visible');
     $('#chart-window').addClass('no-transition');
     
@@ -47,7 +59,7 @@ chartSC = function(content, xcord, ycord) {
             'transform-origin': yorigin + ' ' + xorigin
         });
     }
-    //Flush CSS cache. Not sure if this works..
+    //Flush CSS cache. Not sure if this actually has any effect..
     getComputedStyle($('#chart-window')[0]).display;
     $('#chart-window')[0].offsetHeight; 
     $('#chart-window').removeClass('no-transition');
@@ -659,7 +671,7 @@ $(document).ready(function() {
 
     //Alert button (inline) add listener
     //$("#alert-form-il").submit(function(event) {
-    $("#alert-form-il :submit").on('click', function(event) {
+    $("#alert-form-il .button").on('click', function(event) {
         event.preventDefault();
         var $inputs = $('#alert-form-il :input,select');
         var values = {};

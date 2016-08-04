@@ -62,8 +62,9 @@ class FacebookDAO
     public static function getUnpostedEvents()
     {
         $query = 'SELECT * FROM events e LEFT JOIN matchups_fbposts ff ON e.id = ff.event_id WHERE ff.event_id IS NULL
-        			AND LEFT(NOW() + INTERVAL 12 HOUR, 10) = LEFT(e.date, 10)
+        			AND LEFT(NOW(), 10) = LEFT(e.date, 10)
         			AND e.display = 1';
+                    //AND LEFT(NOW() + INTERVAL 36 HOUR, 10) = LEFT(e.date, 10)
 
         $results = PDOTools::findMany($query);
         $events = [];
