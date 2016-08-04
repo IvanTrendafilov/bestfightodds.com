@@ -73,6 +73,10 @@ class ParseTools
         {
             curl_setopt($rCurl, CURLOPT_INTERFACE, '89.221.253.24');
         }
+        else if (strpos($sURL, 'gamingsystem.') !== false) 
+        {
+            curl_setopt($rCurl, CURLOPT_SSLVERSION, 6); //TLS 1.2
+        }
         else if (strpos($a_sURL, 'sportsinteraction.') !== false) 
         {
             curl_setopt($rCurl, CURLOPT_SSL_CIPHER_LIST, 'ecdhe_ecdsa_aes_128_sha,ecdhe_rsa_aes_128_sha');
@@ -148,6 +152,10 @@ class ParseTools
             else if ($sURL == 'http://lines.betdsi.eu/')
             {
               curl_setopt($aChannels[$sURL], CURLOPT_INTERFACE, '89.221.253.24');
+            }
+            else if (strpos($sURL, 'gamingsystem.') !== false) 
+            {
+              curl_setopt($aChannels[$sURL], CURLOPT_SSLVERSION, 6); //TLS 1.2
             }
             else if (strpos($sURL, 'sportsinteraction.') !== false) 
             {
