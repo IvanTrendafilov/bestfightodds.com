@@ -51,26 +51,34 @@ class TwitterHandler
             if (count($aGroup['matchups']) > 1)
             {
                 //Multiple fights for the same event needs to be twittered
-                $sTwitText = str_replace(array('<E>','<T1>','<T2>','<EVENT_URL>'),
-                                            array($oEvent->getName(), $aGroup['matchups'][0]->getFighterAsString(1), $aGroup['matchups'][0]->getFighterAsString(2), $oEvent->getEventAsLinkString()),
+                $sTwitText = str_replace(array('<T1>','<T2>'),
+                                            array($aGroup['matchups'][0]->getFighterAsString(1), $aGroup['matchups'][0]->getFighterAsString(2)),
                                             TWITTER_TEMPLATE_MULTI);
-
-                //$sTwitText = 'New lines for ' . $oEvent->getName() . ' posted https://bestfightodds.com';
             }
             else if (count($aGroup['matchups']) == 1)
             {
                 //Only one fight for the event needs to be twittered
                 $oFightOdds = OddsHandler::getOpeningOddsForMatchup($aGroup['matchups'][0]->getID());
-
                 if ($oFightOdds != null)
                 {
-                    $sTwitText = str_replace(array('<E>','<T1>','<T2>','<T1O>','<T2O>','<EVENT_URL>'),
-                                            array($oEvent->getName(), $aGroup['matchups'][0]->getFighterAsString(1), $aGroup['matchups'][0]->getFighterAsString(2), $oFightOdds->getFighterOddsAsString(1), $oFightOdds->getFighterOddsAsString(2), $oEvent->getEventAsLinkString()),
+                    $sTwitText = str_replace(array('<T1>','<T2>','<T1O>','<T2O>'),
+                                            array($aGroup['matchups'][0]->getFighterAsString(1), $aGroup['matchups'][0]->getFighterAsString(2), $oFightOdds->getFighterOddsAsString(1), $oFightOdds->getFighterOddsAsString(2)),
                                             TWITTER_TEMPLATE_SINGLE);
-
-                    //$sTwitText = $oEvent->getName() . ': ' . $aGroup['matchups'][0]->getFighterAsString(1) . ' (' . $oFightOdds->getFighterOddsAsString(1) . ') vs. '
-                    //        . $aGroup['matchups'][0]->getFighterAsString(2) . ' (' . $oFightOdds->getFighterOddsAsString(2) . ') https://bestfightodds.com';
                 }
+            }
+
+            $iTweetLength = strlen($sTwitText) + 13; //12 is to reach the URL character limit (23) with <EVENT_URL> already counted for
+            //Substitute event URL (doing this here because we need to count characters without URL prior to this)
+            $sTwitText = str_replace('<EVENT_URL>', $oEvent->getEventAsLinkString(), $sTwitText);
+
+            //Depending on how many characters we have left, add either full event name or the shortened version
+            if (strlen($sTwitText) + strlen($oEvent->getName()) <= 140)
+            {
+                $sTwitText = str_replace('<E>', $oEvent->getName(), $sTwitText);
+            }
+            else
+            {
+                $sTwitText = str_replace('<E>', $oEvent->getShortName(), $sTwitText);
             }
 
             //Add dynamic hashtags if less than 140 chars and if event name format allows for it
@@ -79,7 +87,7 @@ class TwitterHandler
             if ($aMatches != null && isset($aMatches[1]))
             {
                 $sHashtag = ' #' . strtolower(str_replace(' ', '', $aMatches[1]));
-                if ($sTwitText + $sHashtag - 2 <= 140) //The -2 correction is for URL transformation to t.co address
+                if (strlen($sHashtag) + $iTweetLength <= 140)
                 {
                     $sTwitText .= $sHashtag;
                 }

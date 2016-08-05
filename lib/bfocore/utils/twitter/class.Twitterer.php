@@ -49,12 +49,6 @@ class Twitterer
             return true;
         }
 
-        if (strlen($a_sMessage) > 140)
-        {
-            //Message too long
-            return false;
-        }
-
         $rConnection = new TwitterOAuth($this->m_sConsumerKey,
                         $this->m_sConsumerSecret,
                         $this->m_sOAuthToken,

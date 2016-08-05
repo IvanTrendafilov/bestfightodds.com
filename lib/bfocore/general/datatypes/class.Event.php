@@ -38,6 +38,17 @@ class Event
         return $this->sName;
     }
 
+    //Short name converts a longer name to a shorter one by omitting everything after the first : .E.g. UFC 201: Lawler vs. Woodley => UFC 201 
+    public function getShortName()
+    {
+        $iMarkPos = strpos($this->getName(), ':');
+        if ($iMarkPos != null)
+        {
+            return substr($this->getName(), 0, $iMarkPos);
+        }
+        return $this->getName();
+    }
+
     public function setName($a_sName)
     {
         $this->sName = $a_sName;
