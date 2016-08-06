@@ -71,7 +71,7 @@ if ($aManualActions != null && sizeof($aManualActions) > 0)
 			//Delete matchup
 				$oMatchup = EventHandler::getFightByID($oAction->matchupID);
 				$oEvent = EventHandler::getEvent($oMatchup->getEventID());
-				echo 'Delete ' . $oMatchup->getTeamAsString(1) . ' vs. ' . $oMatchup->getTeamAsString(2) . ' from ' . $oEvent->getName() . ' (' . $oEvent->getDate() .')';
+				echo 'Delete <a href="http://www.google.com/search?q=' . urlencode($oMatchup->getTeamAsString(1) . ' vs. ' . $oMatchup->getTeamAsString(2)) . '">' . $oMatchup->getTeamAsString(1) . ' vs. ' . $oMatchup->getTeamAsString(2) . '</a> from ' . $oEvent->getName() . ' (' . $oEvent->getDate() .')';
 				echo '<input type="submit" value="Accept" style="float: right" onclick="maDeleteMatchup(' . $aManualAction['id'] . ', \'' . htmlspecialchars($aManualAction['description']). '\')" />
 				';
 			break;

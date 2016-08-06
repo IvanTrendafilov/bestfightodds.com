@@ -18,7 +18,8 @@ class PDOTools
         {
             try 
             {
-                self::$db = new PDO("mysql:host=" . DB_HOST . ";dbname=" . DB_SCHEME . ';charset=utf8', DB_USER, DB_PASSWORD, [\PDO::MYSQL_ATTR_INIT_COMMAND =>"SET time_zone = '-6:00';", PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION]);
+                self::$db = new PDO("mysql:host=" . DB_HOST . ";dbname=" . DB_SCHEME . ';charset=utf8', DB_USER, DB_PASSWORD, [PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION]);
+                //self::$db = new PDO("mysql:host=" . DB_HOST . ";dbname=" . DB_SCHEME . ';charset=utf8', DB_USER, DB_PASSWORD, [\PDO::MYSQL_ATTR_INIT_COMMAND =>"SET time_zone = '-6:00';", PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION]);
                
             } 
             catch (PDOException $e) 
