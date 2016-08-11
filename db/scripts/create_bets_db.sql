@@ -184,6 +184,7 @@ CREATE TABLE `matchups_results` (
   `method` VARCHAR(200) NULL DEFAULT NULL,
   `endround` TINYINT(2) NULL DEFAULT NULL,
   `endtime` VARCHAR(20) NULL DEFAULT NULL,
+  `source` VARCHAR(30) NULL DEFAULT NULL,
   PRIMARY KEY (`matchup_id`)
 ) ENGINE=MyISAM DEFAULT CHARSET=latin1;
 

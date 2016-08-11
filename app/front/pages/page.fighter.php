@@ -83,6 +83,7 @@ else
                                 break; 
                             case 'tko/ko':
                             case 'nc':
+                            case 'dq':
                                 $sMethod = strtoupper($aResults['method']);
                                 break;
                             case 'submission':

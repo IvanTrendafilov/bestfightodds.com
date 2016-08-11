@@ -133,23 +133,60 @@ class OddsTools
      */
     public static function compareNames($a_sName1, $a_sName2)
     {
-        //Shorten name to N Diaz instead of Nick Diaz. Not for fighters with 1 name like Babalu
-        if (strpos(trim($a_sName1), ' '))
-            $a_sName1 = OddsTools::shortenName($a_sName1);
-        if (strpos(trim($a_sName2), ' '))
-            $a_sName2 = OddsTools::shortenName($a_sName2);
+        //Find the name with least number of parts, this will be deciding the number of parts for comparison
+        $aNameParts1 = explode(' ', $a_sName1);
+        $aNameParts2 = explode(' ', $a_sName2);
+        $iPartCount = min(count($aNameParts1), count($aNameParts2));
 
-        $fSim = 0;
-        similar_text($a_sName1, $a_sName2, $fSim);
-        return $fSim;
+        $aNames1 = self::getNameCombinations($aNameParts1, $iPartCount);
+        $aNames2 = self::getNameCombinations($aNameParts2, $iPartCount);
+
+        $fTopSim = 0;
+        foreach ($aNames1 as $aName1)
+        {
+            foreach ($aNames2 as $aName2)
+            {
+                $fSim = 0;
+                similar_text($aName1, $aName2, $fSim);
+                $fTopSim = $fSim > $fTopSim ? $fSim : $fTopSim;       
+            }
+        }
+        return $fTopSim;
     }
 
+    private static function getNameCombinations($a_sNameParts, $a_iParts)
+    {
+        $aRetNames = [];
+        //Add the original name, untouched
+        $aRetNames[] = implode(' ', $a_sNameParts);
+        
+        //Get all combinations by putting together the different parts, limited to the parts argument
+
+        self::depth_picker($a_sNameParts, "", $aRetNames, $a_iParts);
+        //Add a shortened version of the name using a letter for the first name (e.g. N Diaz for Nathan Diaz)
+        if (count($a_sNameParts) > 1) 
+        {
+            $aRetNames[] = OddsTools::shortenName(implode(' ', $a_sNameParts));
+        }
+        return $aRetNames;
+    }
+
+    private static function depth_picker($arr, $temp_string, &$collect, $part_count) {
+        if ($temp_string != "")
+            if (substr_count(trim($temp_string), " ") == $part_count - 1)
+                $collect []= trim($temp_string);
+        for ($i=0; $i<sizeof($arr);$i++) {
+            $arrcopy = $arr;
+            $elem = array_splice($arrcopy, $i, 1); // removes and returns the i'th element
+            if (sizeof($arrcopy) > 0) {
+                self::depth_picker($arrcopy, $temp_string ." " . $elem[0], $collect, $part_count);
+            } else {
+                if (substr_count(trim($temp_string. " " . $elem[0]), " ") == $part_count - 1)
+                    $collect[] = trim($temp_string. " " . $elem[0]);
+            }   
+        }   
+    }
 }
-
-
-
-
-
 
 
 ?>

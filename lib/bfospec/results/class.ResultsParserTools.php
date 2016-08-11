@@ -87,7 +87,7 @@ class ResultParserTools
 			}
 		}
 		else if (strpos($method, 'dq') !== false || strpos($method, 'disq') !== false) {
-		    return 'nc';
+		    return 'dq';
 		}		
 		else if (strpos($method, 'tko') !== false || strpos($method, 'ko') !== false) {
 		    return 'tko/ko';
