@@ -12,13 +12,14 @@ CREATE TABLE  `bets`.`alerts` (
 ) ENGINE=MyISAM AUTO_INCREMENT=12920 DEFAULT CHARSET=latin1;
 
 CREATE TABLE  `bets`.`bookies` (
-  `id` int(10) unsigned NOT NULL auto_increment,
-  `name` varchar(255) NOT NULL default '',
+  `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
+  `name` varchar(255) NOT NULL DEFAULT '',
   `url` text,
   `refurl` text,
-  `active` tinyint(1) NOT NULL default '1',
-  `position` int(10) unsigned NOT NULL default '2',
-  PRIMARY KEY  (`id`)
+  `active` tinyint(1) NOT NULL DEFAULT '1',
+  `position` int(10) unsigned NOT NULL DEFAULT '2',
+  `date_added` datetime NOT NULL DEFAULT '2000-01-01 00:00:00',
+  PRIMARY KEY (`id`)
 ) ENGINE=MyISAM DEFAULT CHARSET=latin1;
 
 CREATE TABLE  `bets`.`events` (
@@ -161,14 +162,14 @@ CREATE TABLE `bets`.`events_redditposts` (
   PRIMARY KEY (`event_id`)
 ) ENGINE=MyISAM DEFAULT CHARSET=latin1;
 
-CREATE TABLE `schedule_manualactions` (
+CREATE TABLE `bets`.`schedule_manualactions` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `description` varchar(2000) DEFAULT NULL,
   `type` int(2) DEFAULT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=MyISAM AUTO_INCREMENT=53 DEFAULT CHARSET=latin1;
 
-CREATE TABLE `lines_eventprops` (
+CREATE TABLE `bets`.`lines_eventprops` (
   `event_id` int(10) unsigned NOT NULL DEFAULT '0',
   `bookie_id` int(10) unsigned NOT NULL DEFAULT '0',
   `prop_odds` int(11) NOT NULL DEFAULT '0',
@@ -178,7 +179,7 @@ CREATE TABLE `lines_eventprops` (
   PRIMARY KEY (`event_id`,`bookie_id`,`date`,`proptype_id`)
 ) ENGINE=MyISAM DEFAULT CHARSET=latin1;
 
-CREATE TABLE `matchups_results` (
+CREATE TABLE `bets`.`matchups_results` (
   `matchup_id` INT(11) NOT NULL,
   `winner` INT(11) NULL DEFAULT '-1',
   `method` VARCHAR(200) NULL DEFAULT NULL,
@@ -189,7 +190,7 @@ CREATE TABLE `matchups_results` (
 ) ENGINE=MyISAM DEFAULT CHARSET=latin1;
 
 
-CREATE TABLE `alerts_entries` (
+CREATE TABLE `bets`.`alerts_entries` (
   `id` INT(11) NOT NULL AUTO_INCREMENT,
   `email` VARCHAR(255) NOT NULL,
   `oddstype` INT(1) NOT NULL,
@@ -202,7 +203,7 @@ CHARSET=latin1;
 AUTO_INCREMENT=301
 ;
 
-CREATE TABLE `prop_types_categories` (
+CREATE TABLE `bets`.`prop_types_categories` (
   `id` INT(11) NOT NULL AUTO_INCREMENT,
   `name` INT(11) NULL DEFAULT NULL,
   PRIMARY KEY (`id`)
@@ -211,7 +212,7 @@ ENGINE=MyISAM DEFAULT
 CHARSET=latin1;
 ;
 
-CREATE TABLE `logs_parseruns` (
+CREATE TABLE `bets`.`logs_parseruns` (
   `date` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   `parser_id` INT(3) NOT NULL,
   `bookie_id` INT(3) NOT NULL,
