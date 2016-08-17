@@ -24,14 +24,16 @@ if (!isset($_GET['fighterID']) || !is_numeric($_GET['fighterID']) || $_GET['figh
 
 $sBuffer = '';
 $sLastChange = TeamHandler::getLastChangeDate($oFighter->getID());
+$bCached = false;
 //Check if page is cached or not. If so, fetch from cache and include
 if (CacheControl::isPageCached('team-' . $oFighter->getID() . '-' . strtotime($sLastChange)))
 {
     //Retrieve cached page
     $sBuffer = CacheControl::getCachedPage('team-' . $oFighter->getID() . '-' . strtotime($sLastChange));
+    $bCached = true;
     echo '<!--C:HIT-->';
 }
-else
+if ($bCached == false || empty($sBuffer))
 {
     $aFights = EventHandler::getAllFightsForFighter((int) $_GET['fighterID']);
     $iCellCounter = 0;

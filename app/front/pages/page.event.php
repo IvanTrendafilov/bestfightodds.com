@@ -47,13 +47,6 @@ if ($oEvent == null ||
 
 $sOverlibStyle = ', FGCOLOR, \'#eeeeee\', BGCOLOR, \'#1f2a34\', BORDER, 1';
 
-$aBookies = BookieHandler::getAllBookies();
-if (sizeof($aBookies) == 0)
-{
-    echo 'No bookies found';
-    exit();
-}
-
 $iCellCounter = 0;
 
 //List event
@@ -61,16 +54,26 @@ if ($oEvent != null)
 {
     $sBuffer = '';
     $sLastChange = EventHandler::getLatestChangeDate($oEvent->getID());
+    $bCached = false;
 
     //Check if page is cached or not. If so, fetch from cache and include
     if (CacheControl::isPageCached('event-' . $oEvent->getID() . '-' . strtotime($sLastChange)))
     {
         //Retrieve cached page
         $sBuffer = CacheControl::getCachedPage('event-' . $oEvent->getID() . '-' . strtotime($sLastChange));
+        $bCached = true;
         echo '<!--C:HIT-->';
     }
-    else
+
+    if ($bCached == false || empty($sBuffer))
     {
+        $aBookies = BookieHandler::getAllBookies();
+        if (sizeof($aBookies) == 0)
+        {
+            echo 'No bookies found';
+            exit();
+        }
+        
         //Generate new page and display to user
         ob_start();
         $aFights = EventHandler::getAllFightsForEvent($oEvent->getID(), true);
