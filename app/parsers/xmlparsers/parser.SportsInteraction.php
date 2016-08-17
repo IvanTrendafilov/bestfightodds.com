@@ -130,6 +130,11 @@ class XMLParserSportsInteraction
                                     {
                                         $cBet->Runner = (string) $cEvent->Name . ' - ' . $cBet->Runner;
                                     }
+                                    //Check for Specials bet and modify runner based on this
+                                    if ($cBet['TYPE'] == 'Specials')
+                                    {
+                                        $cBet->Runner = (string) $cEvent->Name . ' ' . $cBet->BetTypeExtraInfo . ' - ' . $cBet->Runner;
+                                    }
 
                                     $oTempProp = new ParsedProp(
                                                     (string) $cBet->Runner,
