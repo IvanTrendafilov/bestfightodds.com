@@ -20,9 +20,9 @@ class XMLParserSportsInteraction
     public function parseXML($a_sXML)
     {
         //Temporary store of XML:
-        //$rStoreFile = fopen('/var/www/vhosts/bestfightodds.com/httpdocs/storedfeeds/' . 'sportsint-' . date('Ymd-Hi') . '.xml', 'a');
-        //fwrite($rStoreFile, $a_sXML);
-        //fclose($rStoreFile);
+        $rStoreFile = fopen('/var/www/vhosts/bestfightodds.com/httpdocs/storedfeeds/' . 'sportsint-' . date('Ymd-Hi') . '.xml', 'a');
+        fwrite($rStoreFile, $a_sXML);
+        fclose($rStoreFile);
 
         //Store as latest feed available for ProBoxingOdds.com
         $rStoreFile = fopen('/var/www/vhosts/bestfightodds.com/httpdocs/app/front/externalfeeds/sportsint-latest.xml', 'w');
@@ -55,11 +55,27 @@ class XMLParserSportsInteraction
                 {
                     foreach ($cEventType->Event as $cEvent)
                     {
-                        if ($cEvent->Bet[0]['TYPE'] == "")
+                        if (strpos(strtoupper($cEvent->Name), 'FIGHT OF THE NIGHT') !== false)
+                        {
+                            //Fight of the night prop
+                            foreach ($this->parseFOTN($cEvent) as $oParsedProp)
+                            {
+                                $oParsedSport->addFetchedProp($oParsedProp);
+                            }
+                        }
+                        else if ($cEvent->Bet[0]['TYPE'] == "Specials" && strpos(strtoupper($cEvent->Bet[0]->BetTypeExtraInfo), 'MOST ') !== false)
+                        {
+                            //Two side prop bet
+                            $oParsedProp = $this->parseTwoSideProp($cEvent);
+                            if ($oParsedProp != null)
+                            {
+                                $oParsedSport->addFetchedProp($oParsedProp);
+                            }
+                        }
+                        else if ($cEvent->Bet[0]['TYPE'] == "")
                         {
                             //Regular matchup
                             $oParsedMatchup = null;
-
                             if (isset($cEvent->Bet[2]))
                             {
                                 if (ParseTools::checkCorrectOdds((string) $cEvent->Bet[0]->Price)
@@ -160,6 +176,50 @@ class XMLParserSportsInteraction
 
         $aSports[] = $oParsedSport;
         return $aSports;
+    }
+
+
+    private function parseFOTN($a_cEvent)
+    {
+        $aRet = [];
+        foreach ($a_cEvent->Bet as $cBet)
+        {
+            $oTempProp = new ParsedProp(
+                (string) $a_cEvent->Name . ' - ' . $cBet->Runner,
+                '',
+                (string) $cBet->Price,
+                '-99999');
+
+            $oTempProp->setCorrelationID(trim($a_cEvent->Name));
+            $aRet[] = $oTempProp;
+        }
+        return $aRet;
+    }
+
+    private function parseTwoSideProp($a_cEvent)
+    {
+        //Find tie or draw and exclude it
+        $aBets = [];
+        foreach ($a_cEvent->Bet as $key => $cBet)
+        {
+            if ($cBet->Runner != 'Tie' && $cBet->Runner != 'Draw')
+            {
+                $aBets[] = $cBet;
+            }
+        }
+
+        if (count($aBets) == 2)
+        {
+            $oTempProp = new ParsedProp(
+                            (string) $a_cEvent->Name . ' ' . $aBets[0]->BetTypeExtraInfo . ' - ' . $aBets[0]->Runner,
+                            (string) $a_cEvent->Name . ' ' . $aBets[1]->BetTypeExtraInfo . ' - ' . $aBets[1]->Runner,
+                            (string) $aBets[0]->Price,
+                            (string) $aBets[1]->Price);
+            $oTempProp->setCorrelationID(trim($a_cEvent->Name));
+            return $oTempProp;
+        }
+        Logger::getInstance()->log("Invalid special two side prop: " . $a_cEvent->Name . ' ' . $a_cEvent->Bet[0]->BetTypeExtraInfo, -2);
+        return null;
     }
 
     public function checkAuthoritiveRun($a_aMetadata)
