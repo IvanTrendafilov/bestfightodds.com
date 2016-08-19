@@ -24,6 +24,7 @@ require_once('lib/bfocore/general/caching/class.CacheControl.php');
 require_once('lib/bfocore/general/class.TwitterHandler.php');
 require_once('lib/bfocore/general/class.OddsHandler.php');
 require_once('lib/bfocore/general/class.BookieHandler.php');
+require_once('lib/bfocore/parser/utils/class.ParseRunLogger.php');
 
 
 echo "Dispatching parser..";
@@ -125,7 +126,7 @@ $bSuccess = PageGenerator::generatePage(PARSE_GENERATORDIR . 'gen.XMLFeed.php', 
 $oLogger->log("XML feed generated: " . $bSuccess, ($bSuccess ? 0 : -2));
 
 
-//Twitter new fight odds
+//Tweet new fight odds
 if (TWITTER_ENABLED == true)
 {
     $aTwitResults = TwitterHandler::twitterNewFights();
@@ -133,11 +134,16 @@ if (TWITTER_ENABLED == true)
             ($aTwitResults['pre_untwittered_events'] == $aTwitResults['post_twittered'] ? 0 : -2));
 }
 
+//Clear old logged runs in database
+$iClearedRuns = (new ParseRunLogger())->clearOldRuns();
+$oLogger->log("Cleared old logged runs: " . $iClearedRuns, 0);
+
 $oLogger->seperate();
 $oLogger->log("Parsing/alerting/generating/twittering done!");
 
 //End logging
 $oLogger->end(PARSE_LOGDIR . date('Ymd-Hi') . '.log');
+
 
 echo 'Done!';
 ?>

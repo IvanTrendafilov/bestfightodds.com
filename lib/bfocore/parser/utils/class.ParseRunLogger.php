@@ -46,10 +46,10 @@ class ParseRunLogger
 		return $id;
 	}
 
-	//Clears old runs from the database, defaults to 30 days
-	public function clearOldRuns($age = 30)
+	//Clears old runs from the database, defaults to 14 days
+	public function clearOldRuns($age = 14)
 	{
-		$query = 'DELETE FROM logs_parseruns WHERE date < NOW() - INTERVAL ? DAYS';
+		$query = 'DELETE FROM logs_parseruns WHERE date < NOW() - INTERVAL ? DAY';
 		$rows = 0;
 		try 
 		{
@@ -57,7 +57,7 @@ class ParseRunLogger
 		}
 		catch(PDOException $e)
 		{
-			//TODO: Handle exception somehow
+			throw new Exception("Unable to delete old entries", 10);
 		}
 		return $rows;
 	}
