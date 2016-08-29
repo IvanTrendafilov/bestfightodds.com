@@ -61,8 +61,8 @@ class XMLParserWilliamHill
                             OddsTools::convertDecimalToMoneyline($aParticipants[1]['oddsDecimal'])
                         );
 
-                        //Add time of matchup as metadata
-                        $oGameDate = null;
+                        //Add time of matchup as metadata - Disabled: 5Dimes is date master
+                        /*$oGameDate = null;
                         if ($cType['name'] == 'Potential Fights')
                         {
                             $oGameDate = new DateTime('2019-12-31 00:00:00');
@@ -71,7 +71,7 @@ class XMLParserWilliamHill
                         {
                             $oGameDate = new DateTime($cMarket['date'] . ' ' . $cMarket['time']);    
                         }
-                        $oTempMatchup->setMetaData('gametime', $oGameDate->getTimestamp());
+                        $oTempMatchup->setMetaData('gametime', $oGameDate->getTimestamp());*/
 
                         $oTempMatchup->setCorrelationID($this->getCorrelationID($cMarket));
                         
