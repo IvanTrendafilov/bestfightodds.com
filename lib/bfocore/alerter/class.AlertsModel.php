@@ -103,7 +103,7 @@ class AlertsModel
 					$query_params[':line_limit'] = $val;
 					break;
 				case 'bookie_id': //Optional
-					$query_checks .= ' AND tmp_fo.bookie_id = :bookied_id';
+					$query_checks .= ' AND tmp_fo.bookie_id = :bookie_id';
 					$query_params[':bookie_id'] = $val;
 					break;
 			}
@@ -130,6 +130,7 @@ class AlertsModel
 			{
 				case 'matchup_id': //Required (or event_id)
 					$query_match_type = 'lp.matchup_id = :matchup_id';
+					$join_addition = 'lp.matchup_id = tmp_lp.matchup_id AND';
 					$query_params[':matchup_id'] = $val;
 					break;
 				case 'event_id': //Required (or matchup_id)
@@ -138,6 +139,7 @@ class AlertsModel
 					break;
 				case 'proptype_id': //Required
 					$query_params[':proptype_id'] = $val;
+					$join_addition = 'lp.proptype_id = tmp_lp.proptype_id AND';
 					break;
 				case 'team_num': //Required (but can be set to 0)
 					$query_params[':team_num'] = $val;
@@ -152,8 +154,8 @@ class AlertsModel
 			}
 		}
 
-		$query = "SELECT * FROM (SELECT bookie_id, matchup_id, MAX(date) as maxdate FROM lines_props lp WHERE " . $query_match_type . " AND lp.team_num = :team_num AND lp.proptype_id = :proptype_id GROUP BY lp.bookie_id) tmp_lp
-						INNER JOIN lines_props lp ON lp.matchup_id = tmp_lp.matchup_id AND tmp_lp.maxdate = lp.date AND tmp_lp.bookie_id = lp.bookie_id
+		$query = "SELECT * FROM (SELECT bookie_id, matchup_id, MAX(date) as maxdate, proptype_id FROM lines_props lp WHERE " . $query_match_type . " AND lp.team_num = :team_num AND lp.proptype_id = :proptype_id GROUP BY lp.bookie_id) tmp_lp
+						INNER JOIN lines_props lp ON " . $join_addition . " tmp_lp.maxdate = lp.date AND tmp_lp.bookie_id = lp.bookie_id
 						INNER JOIN fights f ON lp.matchup_id = f.id 
 						INNER JOIN events e ON f.event_id = e.id 
 						WHERE LEFT(e.date, 10) >= LEFT((NOW() - INTERVAL 2 HOUR), 10)

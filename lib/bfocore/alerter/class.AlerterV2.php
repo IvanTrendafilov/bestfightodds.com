@@ -3,6 +3,9 @@
 require_once('config/inc.generalConfig.php');
 require_once('config/inc.alertConfig.php');
 require_once('lib/bfocore/alerter/class.AlertsModel.php');
+require_once('lib/bfocore/general/class.EventHandler.php');
+require_once('lib/bfocore/general/class.OddsHandler.php');
+require_once('lib/bfocore/general/class.BookieHandler.php');
 
 
 class AlerterV2
@@ -126,7 +129,6 @@ class AlerterV2
 			{
 				$ids_dispatched[] = $alert->getID();
 			}
-			//TODO: Perform actual dispatch of alerts
 
 			$text = $this->formatAlertMail($alerts);
 			$this->sendAlertsByMail($text);
@@ -142,33 +144,64 @@ class AlerterV2
 		$text = "Alert mail:\n\n";
 		foreach ($alerts as $alert)
 		{
-			$criterias = $alert->getCriterias(); 
-			//Add alert row
-			if (isset($criterias['proptype_id']))
+			$text .= $this->formatSingleAlert($alert);
+			
+		}
+		$text .= "End of alert mail\n\n";
+		return $text;
+	}
+
+	private function formatSingleAlert($alert)
+	{
+		$text = '';
+		$criterias = $alert->getCriterias(); 
+		//Add alert row
+		if (isset($criterias['proptype_id']))
+		{
+			//Prop row
+			$text .= "Prop available: ";
+			$proptype = OddsHandler::getPropTypeByID($criterias['proptype_id']);
+			$text .= '' . $proptype->getPropDesc() . ' / ' . $proptype->getPropNegDesc();
+		}
+		else
+		{
+			//Matchup
+			$matchup = EventHandler::getFightByID($criterias['matchup_id']);
+			$text .= "Regular matchup: ";
+			$latest_price = null;
+			$add_bookie = '';
+
+			if (isset($criterias['bookie_id']))
 			{
-				//Prop row
-				$text .= "Prop available: ";
-				$proptype = OddsHandler::getPropTypeByID($criterias['proptype_id']);
-				$text .= '' . $proptype->getPropDesc() . ' / ' . $proptype->getNegPropDesc();
+				//Grab bookie specific line
+				$latest_price = EventHandler::getLatestOddsForFightAndBookie($criterias['matchup_id'], $criterias['bookie_id']);
+				$bookie = BookieHandler::getBookieByID($criterias['bookie_id']);
+				$add_bookie = ' at ' . $bookie->getName();
 			}
 			else
 			{
-				//Matchup
-				$text .= "Regular matchup: ";
-				
-				if (isset($alert->getCriterias()['line_limit']))
-				{
-					//Limit set, include it	
-				}
-				else
-				{
-					//No limit set, this is for show only
-				}
+				$latest_price = EventHandler::getBestOddsForFight($criterias['matchup_id']);
+				//Grab generic best line
 			}
 
-			$text .= "\n";
+			if (isset($criterias['line_limit']))
+			{
+				$text .= "Reached your limit (" . $criterias['line_limit'] . "): ";
+				//Limit set, include it	
+				$text .= " " . $matchup->getTeamAsString($criterias['team_num']) . ' ' . $latest_price->getFighterOddsAsString($criterias['team_num']) . ' (vs. ' . $matchup->getTeamAsString((($criterias['team_num'] - 1) ^ 1) + 1) . ' ' . $latest_price->getFighterOddsAsString((($criterias['team_num'] - 1) ^ 1) + 1) . ')' . $add_bookie;
+			}
+			else
+			{
+				//No limit set, this is for show only
+							$text .= " " . $matchup->getTeamAsString(1) . ' (' . $latest_price->getFighterOddsAsString(1) . ') vs. ' . $matchup->getTeamAsString(2) . ' (' . $latest_price->getFighterOddsAsString(2) . ')' . $add_bookie;
+			}
+
+
+
+
 		}
-		$text .= "End of alert mail\n\n";
+
+		$text .= "\n";
 		return $text;
 	}
 
