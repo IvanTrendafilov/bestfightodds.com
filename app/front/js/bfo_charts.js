@@ -198,7 +198,101 @@ function createChart(indata) {
     });
 }
 
+function createSwingChart(in_data) {
+    $('#event-swing-container').highcharts({
+        title:{
+            text:''
+        },
+        legend: {
+            enabled: false
+        },
+        chart: { 
+           animation: {
+                duration: 200,
 
+            },
+            type: 'bar'
+        },
+        xAxis: {
+            type: 'category',
+            labels: {
+                overflow: 'justify'
+            }
+        },
+        yAxis: {
+            title: {
+                text: 'Line change (%)',
+                align: 'high'
+            },
+        },
+        tooltip: {
+            valuePrefix: '-',
+            valueSuffix: ' %'
+        },
+        plotOptions: {
+            column: {
+                dataLabels: {
+                    enabled: true,
+                    crop: false,
+                    overflow: 'none',
+                    allowOverlap: true
+                }
+            },
+            bar: {
+                dataLabels: {
+
+                                        format: '{point.y}%',
+                    enabled: true,
+                    crop: false,
+                    overflow: 'none',
+                    allowOverlap: true
+                }
+            },
+            series: {
+               animation: {
+                    duration: 500,
+                },
+
+            }
+        },
+        credits: {
+            enabled: false
+        },
+        series: in_data,
+    }); 
+
+
+
+}
+
+$(function () {
+    $('.event-swing-picker').click(function () {
+        var opts = $(this).attr('data-li');
+        var chart = $('#event-swing-container').highcharts();
+        var series = chart.series;
+        var i = series.length;
+        var otherSeries;
+        while (i--) {
+            otherSeries = series[i];
+            if (i != opts) {
+                otherSeries.hide();
+            }
+            else
+            {
+
+            }
+        }
+
+        series[opts].show();
+        var xdata = chart.series[opts].data; 
+        var cats = [];
+        for (var j = 0; j < xdata.length; j++) {
+            cats.push(xdata[j].name);
+        }
+        chart.xAxis[0].setCategories(cats);
+
+    });
+});
 
 
 $(function() {

@@ -18,6 +18,8 @@ require_once('lib/bfocore/general/inc.GlobalTypes.php');
 require_once('config/inc.generalConfig.php');
 require_once('lib/bfocore/general/caching/class.CacheControl.php');
 require_once('lib/bfocore/utils/class.LinkTools.php');
+require_once('lib/bfocore/utils/class.OddsTools.php');
+require_once('lib/bfocore/general/class.StatsHandler.php');
 
 require_once('app/front/pages/inc.FrontLogic.php');
 
@@ -759,6 +761,60 @@ if ($oEvent != null)
 
         echo '</tbody>'
         . '</table></div></div></div></div>'; 
+
+
+
+        //BEING ADDITIONS
+
+       echo '<div class="table-outer-wrapper" style="margin-top: 10px;"><div class="table-div" style="background-color: #fff; color: #ff0000"><a href="#" class="event-swing-picker" data-li="0" style="color: #666">All</a> | <a href="#" class="event-swing-picker" data-li="1" style="color: #666">Last 24 hours</a> | <a href="#" class="event-swing-picker" data-li="2" style="color: #666">Last hour</a>';
+        echo '<div id="event-swing-container" style="width: 50%;  height: 250px; "></div>';
+
+?>
+
+
+<?php
+
+        $aData = [];
+
+        $aSwings = StatsHandler::getAllDiffsForEvent($oEvent->getID());
+        $aRowData = [];
+        foreach ($aSwings as $aSwing)
+        {
+            if ($aSwing[2]['swing'] > 0)
+            {
+                    $aRowData[]  = [$aSwing[0]->getTeamAsString($aSwing[1]), round($aSwing[2]['swing'] * 100)];
+            }
+        }
+        $aData[]  = ["name" => "Change since opening", "data" => $aRowData, "visible" => true];
+        $aSwings = StatsHandler::getAllDiffsForEvent($oEvent->getID(), 1);
+        $aRowData = [];
+        foreach ($aSwings as $aSwing)
+        {
+            if ($aSwing[2]['swing'] > 0)
+            {
+                    $aRowData[]  = [$aSwing[0]->getTeamAsString($aSwing[1]), round($aSwing[2]['swing'] * 100)];
+            }
+        }
+        $aData[]  = ["name" => "Change last 24 hours", "data" => $aRowData, "visible" => false];
+        $aSwings = StatsHandler::getAllDiffsForEvent($oEvent->getID(), 2);
+        $aRowData = [];
+        foreach ($aSwings as $aSwing)
+        {
+            if ($aSwing[2]['swing'] > 0)
+            {
+                    $aRowData[]  = [$aSwing[0]->getTeamAsString($aSwing[1]), round($aSwing[2]['swing'] * 100)];
+            }
+        }
+        $aData[]  = ["name" => "Change last hour", "data" => $aRowData, "visible" => false];
+
+        echo '<script>';
+        echo 'createSwingChart(' . json_encode($aData) .  ');';
+        echo '</script>';
+        echo '</div></div>';
+
+        //END ADDITIONS
+
+
 
 
         $sBuffer = ob_get_clean();

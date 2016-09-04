@@ -32,34 +32,36 @@ class StatsHandler
 		return StatsDAO::getSwingForMatchup($a_iMatchupID);
 	}
 
-	public static function getAllDiffsForEvent($a_iEventID)
+	public static function getAllDiffsForEvent($a_iEventID, $a_iFrom = -1) //-1 Opening, 1 = 1 day ago, 2 = 1 hour ago
 	{
 		$aMatchups = EventHandler::getAllFightsForEvent($a_iEventID, true);
 		$aSwings = array();
 		foreach ($aMatchups as $oMatchup)
 		{
-			$aStats = StatsHandler::getDiffForMatchup($oMatchup->getID());
+			$aStats = StatsHandler::getDiffForMatchup($oMatchup->getID(), $a_iFrom);
 
 			$aSwings[] = array($oMatchup, 1, $aStats['f1']);
 			$aSwings[] = array($oMatchup, 2, $aStats['f2']);
 		}
 
-		function cmpdiff($a, $b)
-		{
-		    return $a[2]['swing'] < $b[2]['swing'];
+		if(!function_exists('cmpdiff')) {
+			function cmpdiff($a, $b)
+			{
+			    return $a[2]['swing'] < $b[2]['swing'];
+			}
 		}
 		usort($aSwings, "cmpdiff");
 
 		return $aSwings;
 	}
 
-	public static function getDiffForMatchup($a_iMatchupID)
+	public static function getDiffForMatchup($a_iMatchupID, $a_iFrom = -1)
 	{
 		if (!is_numeric($a_iMatchupID))
 		{
 			return null;
 		}
-		return StatsDAO::getDiffForMatchup($a_iMatchupID);
+		return StatsDAO::getDiffForMatchup($a_iMatchupID, $a_iFrom);
 	}
 }
 

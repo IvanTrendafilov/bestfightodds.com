@@ -53,6 +53,9 @@ class StatsDAO
             return false;
         }
 
+        //TODO: This currently picks out the latest line and not the line mean. Needs another subquery to just pick out the latest mean. The uncommented appears to be the right one to use though..
+
+
         //This query gets diff no matter if favourite or underdog:
         /*$sQuery = 'select 
                         opening.fighter1_odds as opf1,
@@ -87,6 +90,16 @@ class StatsDAO
                         ORDER BY DATE DESC
                         LIMIT 0 , 1) latest)';*/
 
+        $sExtraWhere = '';
+        if ($a_iFrom == 1)
+        {
+            $sExtraWhere = ' AND date > NOW() - INTERVAL 1 DAY ';
+        }
+        else if ($a_iFrom == 2)
+        {
+           $sExtraWhere = ' AND date > NOW() - INTERVAL 1 HOUR '; 
+        }
+
         $sQuery = 'select 
                         opening.fighter1_odds as opf1,
                         opening.fighter2_odds as opf2,
@@ -104,7 +117,7 @@ class StatsDAO
                         FROM
                             fightodds
                         WHERE
-                            fight_id = ?
+                            fight_id = ? ' . $sExtraWhere . '
                         ORDER BY DATE ASC
                         LIMIT 0 , 1) opening
                         join (SELECT 
@@ -112,7 +125,7 @@ class StatsDAO
                         FROM
                             fightodds
                         WHERE
-                            fight_id = ?
+                            fight_id = ? ' . $sExtraWhere . '
                         ORDER BY DATE DESC
                         LIMIT 0 , 1) latest)';
 
