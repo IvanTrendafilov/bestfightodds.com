@@ -25,6 +25,7 @@ translateResult($alerter->addAlert('cnordvaller@gmail.com', 2, '{"event_id": 113
 translateResult($alerter->addAlert('cnordvaller@gmail.com', 2, '{"event_id": 1139, "proptype_id": 35, "team_num": 0}')); //Fail: Should be dupe
 translateResult($alerter->addAlert('cnordvaller@gmail.com', 2, '{"event_id": 1139, "proptype_id": 34, "team_num": 0}')); //Ok (Prop matchup in event 1139, proptype Over/Under 3½) - Should not trigger
 translateResult($alerter->addAlert('cnordvaller@gmail.com', 2, '{"event_id": 1139, "proptype_id": 2, "team_num": 0}')); //Ok (Prop matchup in event 1139, proptype Over/Under 3½) - Should trigger
+translateResult($alerter->addAlert('cnordvaller@gmail.com', 2, '{"matchup_id": 12156, "proptype_id": 8, "team_num": 1}')); //Ok (Prop matchup in matchup 12156, proptype <T> wins by TKO) - Should trigger
 
 
 function translateResult($result)

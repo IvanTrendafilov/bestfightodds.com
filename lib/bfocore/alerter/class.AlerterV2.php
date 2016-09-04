@@ -161,7 +161,19 @@ class AlerterV2
 			//Prop row
 			$text .= "Prop available: ";
 			$proptype = OddsHandler::getPropTypeByID($criterias['proptype_id']);
+			
+			if (isset($criterias['matchup_id']))
+			{
+				//Proptype is linked to a specific matchup
+				$matchup = EventHandler::getFightByID($criterias['matchup_id']);
+				$proptype->setPropDesc(str_replace('<T>', $matchup->getTeamLastNameAsString($criterias['team_num']), $proptype->getPropDesc()));
+	            $proptype->setPropNegDesc(str_replace('<T>', $matchup->getTeamLastNameAsString($criterias['team_num']), $proptype->getPropNegDesc()));
+	            $proptype->getPropDesc(str_replace('<T2>', $matchup->getTeamLastNameAsString(($criterias['team_num'] % 2) + 1), $proptype->getPropDesc()));
+	            $proptype->setPropNegDesc(str_replace('<T2>', $matchup->getTeamLastNameAsString(($criterias['team_num'] % 2) + 1), $proptype->getPropNegDesc()));
+			}
+
 			$text .= '' . $proptype->getPropDesc() . ' / ' . $proptype->getPropNegDesc();
+
 		}
 		else
 		{
