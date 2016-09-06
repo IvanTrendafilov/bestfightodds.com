@@ -198,72 +198,98 @@ function createChart(indata) {
     });
 }
 
-function createSwingChart(in_data) {
-    $('#event-swing-container').highcharts({
-        title:{
-            text:''
-        },
-        legend: {
-            enabled: false
-        },
-        chart: { 
-           animation: {
-                duration: 200,
+$(function() {
+    function createSwingChart(in_data) {
 
-            },
-            type: 'bar'
-        },
-        xAxis: {
-            type: 'category',
-            labels: {
-                overflow: 'justify'
-            }
-        },
-        yAxis: {
-            title: {
-                text: 'Line change (%)',
-                align: 'high'
-            },
-        },
-        tooltip: {
-            valuePrefix: '-',
-            valueSuffix: ' %'
-        },
-        plotOptions: {
-            column: {
-                dataLabels: {
-                    enabled: true,
-                    crop: false,
-                    overflow: 'none',
-                    allowOverlap: true
-                }
-            },
-            bar: {
-                dataLabels: {
+        var xdata = in_data[0]['data'];
+        var cats = [];
+        for (var j = 0; j < xdata.length; j++) {
+            cats.push(xdata[j][0]);
+        }
 
-                                        format: '{point.y}%',
-                    enabled: true,
-                    crop: false,
-                    overflow: 'none',
-                    allowOverlap: true
-                }
+        $('#event-swing-container').highcharts({
+            title:{
+                text:''
             },
-            series: {
-               animation: {
-                    duration: 500,
+
+            legend: {
+                enabled: false
+            },
+            chart: { 
+               animation: false,
+                type: 'bar',
+                style: {
+                    fontFamily: "'Roboto', Arial, sans-serif",
+                    color: '#272727',
+                    fontSize: '10px',
+                    fontWeight: '500'
+                },
+            },
+            
+            xAxis: {
+                categories: cats,
+                labels: {
+                    overflow: 'justify',
+                    style: {
+                        fontSize: '10px',
+                        fontWeight: '500',
+                        align: 'left'
+                    }
+                }, 
+            },
+            yAxis: {
+                title: {
+                    text: 'Line change (%)',
+                    align: 'high'
+                }, 
+            },
+            tooltip: {
+                valueSuffix: ' %'
+            },
+            plotOptions: {
+
+                bar: {
+                    dataLabels: {
+                        formatter: function() {
+                            if (this.y > 0)
+                            {
+                                return '+' + this.y + '%';
+                            }
+                            else
+                            {
+                                return this.y + '%';
+                            }
+                            
+                        },
+                        style: {
+                            fontFamily: "'Roboto', Arial, sans-serif",
+                            color: '#272727',
+                            fontSize: '11px',
+                            fontWeight: '500'
+                        },
+                        enabled: true,
+                        crop: false,
+                        overflow: 'none',
+                        allowOverlap: true
+                    },
+                },
+                series: {
+                   animation: {
+                    duration: 200,
+
                 },
 
-            }
-        },
-        credits: {
-            enabled: false
-        },
-        series: in_data,
-    }); 
-
-
-
-}
+                }
+            },
+            credits: {
+                enabled: false
+            },
+            series: in_data,
+        }); 
+    }
+    var move_data = $.parseJSON($('#event-swing-container').attr('data-moves'));
+    createSwingChart(move_data);
+});
 
 $(function () {
     $('.event-swing-picker').click(function () {
@@ -290,6 +316,9 @@ $(function () {
             cats.push(xdata[j].name);
         }
         chart.xAxis[0].setCategories(cats);
+        $('#event-swing-container').css("height", 60 + xdata.length * 18);
+        chart.setSize(null, 60 + xdata.length * 18);
+        chart.redraw();
 
     });
 });

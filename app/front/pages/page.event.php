@@ -78,7 +78,7 @@ if ($oEvent != null)
         
         //Generate new page and display to user
         ob_start();
-        $aFights = EventHandler::getAllFightsForEvent($oEvent->getID(), true);
+        $aFights = null; //EventHandler::getAllFightsForEvent($oEvent->getID(), true);
 
         //Check if event is named FUTURE EVENTS, if so, do not display the date
         //TODO: Hardcoded reference to "FUTURE EVENTS". Should be changed to set id
@@ -767,7 +767,6 @@ if ($oEvent != null)
         //BEING ADDITIONS
 
        echo '<div class="table-outer-wrapper" style="margin-top: 10px;"><div class="table-div" style="background-color: #fff; color: #ff0000"><a href="#" class="event-swing-picker" data-li="0" style="color: #666">All</a> | <a href="#" class="event-swing-picker" data-li="1" style="color: #666">Last 24 hours</a> | <a href="#" class="event-swing-picker" data-li="2" style="color: #666">Last hour</a>';
-        echo '<div id="event-swing-container" style="width: 50%;  height: 250px; "></div>';
 
 ?>
 
@@ -775,41 +774,30 @@ if ($oEvent != null)
 <?php
 
         $aData = [];
+        $aSeriesNames = ['Changes since opening', 'Changes in the last 24 hours', 'Changes in the last hour'];
+        for ($x = 0; $x <= 2; $x++)
+        {
+            $aSwings = StatsHandler::getAllDiffsForEvent($oEvent->getID(), $x);
+            $aRowData = [];
+            $iCount = 0;
+            foreach ($aSwings as $aSwing)
+            {
+                if ($aSwing[2]['swing'] != 0)
+                {
+                    $iCount++;
+                    $aRowData[]  = [$aSwing[0]->getTeamAsString($aSwing[1]), -round($aSwing[2]['swing'] * 100)];
+                }
+            }
+            if (count($aRowData) == 0)
+            {
+                $aRowData[] = ['No ' . strtolower($aSeriesNames[$x]), null];
+            }
+            $aData[]  = ["name" => $aSeriesNames[$x], "data" => $aRowData, "visible" => ($x == 0 ? true : false)];
 
-        $aSwings = StatsHandler::getAllDiffsForEvent($oEvent->getID());
-        $aRowData = [];
-        foreach ($aSwings as $aSwing)
-        {
-            if ($aSwing[2]['swing'] > 0)
-            {
-                    $aRowData[]  = [$aSwing[0]->getTeamAsString($aSwing[1]), round($aSwing[2]['swing'] * 100)];
-            }
         }
-        $aData[]  = ["name" => "Change since opening", "data" => $aRowData, "visible" => true];
-        $aSwings = StatsHandler::getAllDiffsForEvent($oEvent->getID(), 1);
-        $aRowData = [];
-        foreach ($aSwings as $aSwing)
-        {
-            if ($aSwing[2]['swing'] > 0)
-            {
-                    $aRowData[]  = [$aSwing[0]->getTeamAsString($aSwing[1]), round($aSwing[2]['swing'] * 100)];
-            }
-        }
-        $aData[]  = ["name" => "Change last 24 hours", "data" => $aRowData, "visible" => false];
-        $aSwings = StatsHandler::getAllDiffsForEvent($oEvent->getID(), 2);
-        $aRowData = [];
-        foreach ($aSwings as $aSwing)
-        {
-            if ($aSwing[2]['swing'] > 0)
-            {
-                    $aRowData[]  = [$aSwing[0]->getTeamAsString($aSwing[1]), round($aSwing[2]['swing'] * 100)];
-            }
-        }
-        $aData[]  = ["name" => "Change last hour", "data" => $aRowData, "visible" => false];
 
-        echo '<script>';
-        echo 'createSwingChart(' . json_encode($aData) .  ');';
-        echo '</script>';
+        echo '<div id="event-swing-container" data-moves="' . htmlentities(json_encode($aData), ENT_QUOTES, 'UTF-8') . '" style="width: 50%; height:' . (60 + count($aData[0]['data']) * 18) . 'px;"></div>';
+
         echo '</div></div>';
 
         //END ADDITIONS

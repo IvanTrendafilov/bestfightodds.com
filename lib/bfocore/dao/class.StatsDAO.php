@@ -46,7 +46,7 @@ class StatsDAO
         return DBTools::getSingleValue(DBTools::doParamQuery($sQuery, $aParams));
     }
 
-    public static function getDiffForMatchup($a_iMatchup, $a_iFrom = -1) //-1 Opening, 1 = 1 day ago, 2 = 1 hour ago
+    public static function getDiffForMatchup($a_iMatchup, $a_iFrom = 0) //0 Opening, 1 = 1 day ago, 2 = 1 hour ago
     {
         if ($a_iMatchup == null)
         {
@@ -90,44 +90,52 @@ class StatsDAO
                         ORDER BY DATE DESC
                         LIMIT 0 , 1) latest)';*/
 
+
+
+
+                        /*
+Query to get all averages:
+
+SELECT AVG(f1.dec_f1odds), AVG(f1.dec_f2odds) FROM (SELECT MoneylineToDecimal(m1.fighter1_odds) AS dec_f1odds, MoneylineToDecimal(m1.fighter2_odds) AS dec_f2odds, m1.*
+FROM fightodds m1 LEFT JOIN fightodds m2
+ ON (m1.fight_id = m2.fight_id AND m1.bookie_id = m2.bookie_id AND m1.date < m2.date)
+WHERE m2.date IS NULL AND m1.fight_id = 11930) f1;
+                        */
+
         $sExtraWhere = '';
         if ($a_iFrom == 1)
         {
-            $sExtraWhere = ' AND date > NOW() - INTERVAL 1 DAY ';
+            $sExtraWhere = ' AND m1.date > NOW() - INTERVAL 1 DAY ';
         }
         else if ($a_iFrom == 2)
         {
-           $sExtraWhere = ' AND date > NOW() - INTERVAL 1 HOUR '; 
+           $sExtraWhere = ' AND m1.date > NOW() - INTERVAL 1 HOUR '; 
         }
 
-        $sQuery = 'select 
+        $sQuery = 'SELECT 
                         opening.fighter1_odds as opf1,
                         opening.fighter2_odds as opf2,
-                        latest.fighter1_odds as laf1,
-                        latest.fighter2_odds as laf2,
+                        latest.avg_f1odds as laf1,
+                        latest.avg_f2odds as laf2,
                         @ml11:=MoneylineToDecimal(opening.fighter1_odds),
                         @ml12:=MoneylineToDecimal(opening.fighter2_odds),
-                        @ml21:=MoneylineToDecimal(latest.fighter1_odds),
-                        @ml22:=MoneylineToDecimal(latest.fighter2_odds),
-                        @ml11 - @ml21 as f1swing,
-                        @ml12 - @ml22 as f2swing
+                        (@ml11 - latest.avg_f1odds)/(@ml11 - 1) as f1swing,
+                        (@ml12 - latest.avg_f2odds)/(@ml12 - 1)as f2swing
                     from
                         ((SELECT 
-                            fighter1_odds, fighter2_odds
+                            m1.fighter1_odds, m1.fighter2_odds
                         FROM
-                            fightodds
+                            fightodds m1
                         WHERE
-                            fight_id = ? ' . $sExtraWhere . '
-                        ORDER BY DATE ASC
-                        LIMIT 0 , 1) opening
-                        join (SELECT 
-                            fighter1_odds, fighter2_odds
-                        FROM
-                            fightodds
-                        WHERE
-                            fight_id = ? ' . $sExtraWhere . '
-                        ORDER BY DATE DESC
-                        LIMIT 0 , 1) latest)';
+                            m1.fight_id = ? ' . $sExtraWhere . '
+                        ORDER BY m1.date ASC
+                        LIMIT 0, 1) opening
+                        JOIN 
+                            (SELECT AVG(f1.dec_f1odds) AS avg_f1odds, AVG(f1.dec_f2odds) AS avg_f2odds 
+                                FROM (SELECT MoneylineToDecimal(m1.fighter1_odds) AS dec_f1odds, MoneylineToDecimal(m1.fighter2_odds) AS dec_f2odds, m1.*
+                                    FROM fightodds m1 LEFT JOIN fightodds m2
+                                        ON (m1.fight_id = m2.fight_id AND m1.bookie_id = m2.bookie_id AND m1.date < m2.date)
+                                        WHERE m2.date IS NULL AND m1.fight_id = ? ' . $sExtraWhere . ') f1) latest)';
 
         $aParams = array($a_iMatchup, $a_iMatchup);
         $rResult = DBTools::doParamQuery($sQuery, $aParams);
