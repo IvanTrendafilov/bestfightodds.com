@@ -32,7 +32,7 @@ class StatsHandler
 		return StatsDAO::getSwingForMatchup($a_iMatchupID);
 	}
 
-	public static function getAllDiffsForEvent($a_iEventID, $a_iFrom = -1) //-1 Opening, 1 = 1 day ago, 2 = 1 hour ago
+	public static function getAllDiffsForEvent($a_iEventID, $a_iFrom = 0) //0 Opening, 1 = 1 day ago, 2 = 1 hour ago
 	{
 		$aMatchups = EventHandler::getAllFightsForEvent($a_iEventID, true);
 		$aSwings = array();
@@ -55,7 +55,7 @@ class StatsHandler
 		return $aSwings;
 	}
 
-	public static function getDiffForMatchup($a_iMatchupID, $a_iFrom = -1)
+	public static function getDiffForMatchup($a_iMatchupID, $a_iFrom = 0)
 	{
 		if (!is_numeric($a_iMatchupID))
 		{

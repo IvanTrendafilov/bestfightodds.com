@@ -199,96 +199,200 @@ function createChart(indata) {
 }
 
 $(function() {
-    function createSwingChart(in_data) {
+    if (document.getElementById("event-swing-container"))
+    {
+        function createSwingChart(in_data) {
 
-        var xdata = in_data[0]['data'];
-        var cats = [];
-        for (var j = 0; j < xdata.length; j++) {
-            cats.push(xdata[j][0]);
-        }
+            var xdata = in_data[0]['data'];
+            var cats = [];
+            for (var j = 0; j < xdata.length; j++) {
+                cats.push(xdata[j][0]);
+            }
 
-        $('#event-swing-container').highcharts({
-            title:{
-                text:''
-            },
-
-            legend: {
-                enabled: false
-            },
-            chart: { 
-               animation: false,
-                type: 'bar',
-                style: {
-                    fontFamily: "'Roboto', Arial, sans-serif",
-                    color: '#272727',
-                    fontSize: '10px',
-                    fontWeight: '500'
+            $('#event-swing-container').highcharts({
+                title:{
+                    text:''
                 },
-            },
-            
-            xAxis: {
-                categories: cats,
-                labels: {
-                    overflow: 'justify',
-                    style: {
-                        fontSize: '10px',
-                        fontWeight: '500',
-                        align: 'left'
-                    }
-                }, 
-            },
-            yAxis: {
-                title: {
-                    text: 'Line change (%)',
-                    align: 'high'
-                }, 
-            },
-            tooltip: {
-                valueSuffix: ' %'
-            },
-            plotOptions: {
 
-                bar: {
-                    dataLabels: {
-                        formatter: function() {
-                            if (this.y > 0)
-                            {
-                                return '+' + this.y + '%';
-                            }
-                            else
-                            {
-                                return this.y + '%';
-                            }
-                            
-                        },
-                        style: {
-                            fontFamily: "'Roboto', Arial, sans-serif",
-                            color: '#272727',
-                            fontSize: '11px',
-                            fontWeight: '500'
-                        },
-                        enabled: true,
-                        crop: false,
-                        overflow: 'none',
-                        allowOverlap: true
+                legend: {
+                    enabled: false
+                },
+                chart: { 
+                   animation: false,
+                    type: 'bar',
+                    style: {
+                        fontFamily: "'Roboto', Arial, sans-serif",
+                        color: '#1a1a1a',
+                        fontSize: '10px',
+                        fontWeight: '500'
                     },
                 },
-                series: {
-                   animation: {
-                    duration: 200,
-
+                xAxis: {
+                    categories: cats,
+                    labels: {
+                        overflow: 'justify',
+                        style: {
+                            fontSize: '10px',
+                            fontWeight: '500',
+                            align: 'left'
+                        }
+                    }, 
                 },
+                yAxis: {
+                    title: {
+                        text: 'Line change (%)',
+                        align: 'high'
+                    }, 
+                },
+                tooltip: {
+                    valueSuffix: ' %'
+                },
+                plotOptions: {
+                    bar: {
+                        dataLabels: {
+                            formatter: function() {
+                                if (this.y > 0)
+                                {
+                                    return '+' + this.y + '%';
+                                }
+                                else
+                                {
+                                    return this.y + '%';
+                                }
+                                
+                            },
+                            style: {
+                                fontFamily: "'Roboto', Arial, sans-serif",
+                                color: '#4d4d4d',
+                                fontSize: '11px',
+                                fontWeight: '500'
+                            },
+                            enabled: true,
+                            crop: false,
+                            overflow: 'none',
+                            allowOverlap: true
+                        },
+                    },
+                    series: {
+                       animation: {
+                        duration: 200,
 
-                }
-            },
-            credits: {
-                enabled: false
-            },
-            series: in_data,
-        }); 
+                    },
+
+                    }
+                },
+                credits: {
+                    enabled: false
+                },
+                series: in_data,
+            }); 
+        }
+        var move_data = $.parseJSON($('#event-swing-container').attr('data-moves'));
+        createSwingChart(move_data);
     }
-    var move_data = $.parseJSON($('#event-swing-container').attr('data-moves'));
-    createSwingChart(move_data);
+});
+
+$(function() {
+    if (document.getElementById("event-outcome-container"))
+    {
+        function createOutcomeChart() {
+            // http://jsfiddle.net/nLxL4Ljy/2/
+
+            //var xdata = in_data[0]['data'];
+            //var cats = [];
+            //for (var j = 0; j < xdata.length; j++) {
+            //    cats.push(xdata[j][0]);
+            //}
+
+            $('#event-outcome-container').highcharts({
+                            chart: {
+                        type: 'bar',
+                    },
+
+                    title: {
+                        text: ''
+                    },
+                    xAxis: [{
+                            categories: ['Jon Jones', 'Anderson Silva', 'Matt Hammill', 'Pete Sell', 'Matt Serra'],
+                            reversed: false,
+                            labels: {
+                                step: 1
+                            }
+                        }, { // mirror axis on right side
+                            opposite: true,
+                            reversed: false,
+                            categories: ['Royce Gracie', 'Mike Van Arsdale', 'CM Punk', 'Brock Lesnar', 'Demetrious Johson'],
+                            linkedTo: 0,
+                            labels: {
+                                step: 1
+                            }
+                        }],
+                    
+                    yAxis: {
+                        min: 0,
+                        title: {
+                            text: ''
+                        }
+                    },
+                    tooltip: {
+                        pointFormat: '<span style="color:{series.color}">{series.name}</span>: <b>{point.y}</b> ({point.percentage:.0f}%)<br/>',
+                        shared: true
+                    },
+                    plotOptions: {
+                        bar: {
+                            stacking: 'percent',
+                                            dataLabels: {
+                                            formatter: function() {
+                                        
+                                                return this.series.name;
+                                            },
+                                enabled: true,
+                                color: (Highcharts.theme && Highcharts.theme.dataLabelsColor) || 'white',
+                                style: {
+                                    fontSize: '10px',
+                                    textShadow: '0 0 2px black'
+                                }
+                            },
+                                        animation: false
+                        }
+                    },
+                    series: [{
+                        name: 'Decision',
+                        data: [7, 3, 4, 7, 9],
+                        color: '#404040'
+                    }, {
+                        name: 'TKO',
+                        data: [4, 2, 3, 4, 1],
+                        color: '#909090'
+                    }, {
+                        name: 'Submission',
+                        data: [6, 4, 4, 6, 5],
+                        color: '#c0c0c0'
+                    },
+                            {
+                        name: 'Draw',
+                        data: [1, 1, 1, 1, 1],
+                        color: '#a10000'
+                    },
+                    {
+                        name: 'Submission',
+                        data: [5, 3, 4, 7, 2],
+                        color: '#c0c0c0'
+                    }, {
+                        name: 'TKO',
+                        data: [2, 2, 3, 2, 1],
+                        color: '#909090'
+                    }, {
+                        name: 'Decision',
+                        data: [3, 4, 4, 2, 5],
+                         color: '#404040'
+                    }]
+
+            });
+        }
+        //var move_data = $.parseJSON($('#event-swing-container').attr('data-moves'));
+        createOutcomeChart();
+    }
 });
 
 $(function () {
@@ -317,10 +421,11 @@ $(function () {
         }
         chart.xAxis[0].setCategories(cats);
         $('#event-swing-container').css("height", 60 + xdata.length * 18);
-        chart.setSize(null, 60 + xdata.length * 18);
+        chart.setSize(chart.chartWidth, 60 + xdata.length * 18);
         chart.redraw();
-
+        return false;
     });
+
 });
 
 

@@ -53,8 +53,6 @@ class StatsDAO
             return false;
         }
 
-        //TODO: This currently picks out the latest line and not the line mean. Needs another subquery to just pick out the latest mean. The uncommented appears to be the right one to use though..
-
 
         //This query gets diff no matter if favourite or underdog:
         /*$sQuery = 'select 
@@ -102,6 +100,8 @@ FROM fightodds m1 LEFT JOIN fightodds m2
 WHERE m2.date IS NULL AND m1.fight_id = 11930) f1;
                         */
 
+        //TODO: Opening line in 24 hours/1 hours is not correct, should be the latest mean with that date as max
+
         $sExtraWhere = '';
         if ($a_iFrom == 1)
         {
@@ -136,6 +136,8 @@ WHERE m2.date IS NULL AND m1.fight_id = 11930) f1;
                                     FROM fightodds m1 LEFT JOIN fightodds m2
                                         ON (m1.fight_id = m2.fight_id AND m1.bookie_id = m2.bookie_id AND m1.date < m2.date)
                                         WHERE m2.date IS NULL AND m1.fight_id = ? ' . $sExtraWhere . ') f1) latest)';
+
+
 
         $aParams = array($a_iMatchup, $a_iMatchup);
         $rResult = DBTools::doParamQuery($sQuery, $aParams);

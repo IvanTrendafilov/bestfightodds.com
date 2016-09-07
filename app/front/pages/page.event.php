@@ -78,7 +78,7 @@ if ($oEvent != null)
         
         //Generate new page and display to user
         ob_start();
-        $aFights = null; //EventHandler::getAllFightsForEvent($oEvent->getID(), true);
+        $aFights = EventHandler::getAllFightsForEvent($oEvent->getID(), true);
 
         //Check if event is named FUTURE EVENTS, if so, do not display the date
         //TODO: Hardcoded reference to "FUTURE EVENTS". Should be changed to set id
@@ -766,7 +766,7 @@ if ($oEvent != null)
 
         //BEING ADDITIONS
 
-       echo '<div class="table-outer-wrapper" style="margin-top: 10px;"><div class="table-div" style="background-color: #fff; color: #ff0000"><a href="#" class="event-swing-picker" data-li="0" style="color: #666">All</a> | <a href="#" class="event-swing-picker" data-li="1" style="color: #666">Last 24 hours</a> | <a href="#" class="event-swing-picker" data-li="2" style="color: #666">Last hour</a>';
+       echo '<div class="table-outer-wrapper" style="margin-top: 20px;"><div class="table-div" style="padding: 0 10px; margin-top: 10px; background-color: #fff; color: #ff0000"><a href="#" class="event-swing-picker" data-li="0" style="color: #666">Since opening</a> | <a href="#" class="event-swing-picker" data-li="1" style="color: #666">Last 24 hours</a> | <a href="#" class="event-swing-picker" data-li="2" style="color: #666">Last hour</a>';
 
 ?>
 
@@ -796,8 +796,9 @@ if ($oEvent != null)
 
         }
 
-        echo '<div id="event-swing-container" data-moves="' . htmlentities(json_encode($aData), ENT_QUOTES, 'UTF-8') . '" style="width: 50%; height:' . (60 + count($aData[0]['data']) * 18) . 'px;"></div>';
+        echo '<div id="event-swing-container" data-moves="' . htmlentities(json_encode($aData), ENT_QUOTES, 'UTF-8') . '" style="width: 100%; height:' . (60 + count($aData[0]['data']) * 18) . 'px;"></div>';
 
+                //echo '<div id="event-outcome-container" style="width: 50%; height: 400px; display: inline-block;"></div>';
         echo '</div></div>';
 
         //END ADDITIONS
