@@ -209,6 +209,14 @@ $(function() {
                 cats.push(xdata[j][0]);
             }
 
+            //Set max to 9 (or less depending on dynamic data)
+            var maxten = 10
+            if (xdata.length < 10)
+            {
+                maxten = xdata.length;
+            }
+
+
             $('#event-swing-container').highcharts({
                 title:{
                     text:''
@@ -236,7 +244,8 @@ $(function() {
                             fontWeight: '500',
                             align: 'left'
                         }
-                    }, 
+                    },
+                    max: maxten - 1
                 },
                 yAxis: {
                     title: {
@@ -287,6 +296,8 @@ $(function() {
                 series: in_data,
             }); 
         }
+        $('#event-swing-container').data('expanded', false);
+        $('#event-swing-container').data('series', 0);
         var move_data = $.parseJSON($('#event-swing-container').attr('data-moves'));
         createSwingChart(move_data);
     }
@@ -398,7 +409,26 @@ $(function() {
 $(function () {
     $('.event-swing-picker').click(function () {
         var opts = $(this).attr('data-li');
-        var chart = $('#event-swing-container').highcharts();
+        var container = $('#event-swing-container');
+        var chart = container.highcharts();
+
+        //Ignore if switching to same category
+        if (opts == container.data('series'))
+        {
+            return false;
+        }
+
+        container.data('series', opts);
+        //If max value is < 10 then set the toggled option automatically. Otherwise we always dexpand it
+        if (chart.series[opts].data.length < 10)
+        {
+            container.data('expanded', !container.data('expanded'));
+        }
+        else
+        {
+            container.data('expanded', false);
+        }
+
         var series = chart.series;
         var i = series.length;
         var otherSeries;
@@ -407,25 +437,66 @@ $(function () {
             if (i != opts) {
                 otherSeries.hide();
             }
-            else
-            {
-
-            }
         }
-
         series[opts].show();
-        var xdata = chart.series[opts].data; 
-        var cats = [];
-        for (var j = 0; j < xdata.length; j++) {
-            cats.push(xdata[j].name);
-        }
+        cats = getCategoriesFromSeries(chart.series[opts].data);
         chart.xAxis[0].setCategories(cats);
-        $('#event-swing-container').css("height", 60 + xdata.length * 18);
-        chart.setSize(chart.chartWidth, 60 + xdata.length * 18);
-        chart.redraw();
+        setSwingMaxValue(container);
+
+        resizeSwingChart(chart.series[opts].data);
         return false;
     });
 
+    $('.event-swing-expand').click(function () {
+        
+        var container = $('#event-swing-container');
+        var chart = container.highcharts();
+      
+        container.data('expanded', !container.data('expanded'));
+
+        cats = getCategoriesFromSeries(chart.series[container.data('series')].data); 
+        chart.xAxis[0].setCategories(cats);
+        setSwingMaxValue($('#event-swing-container'));
+        resizeSwingChart(chart.series[container.data('series')].data);
+
+        return false;
+    });
+
+
+    function getCategoriesFromSeries(data)
+    { 
+        var cats = [];
+        for (var j = 0; j < data.length; j++) {
+            cats.push(data[j].name);
+        }
+        return cats;
+    }
+
+    function setSwingMaxValue(container)
+    {
+        var chart = container.highcharts();
+        if (container.data('expanded') == false)
+        {       
+            var maxten = 10;
+            if (chart.series[container.data('series')].data.length < 10)
+            {
+                maxten = chart.series[container.data('series')].data.length;
+            }
+            chart.xAxis[0].setExtremes(null, maxten - 1);
+        }
+        else
+        {
+            chart.xAxis[0].setExtremes(null, chart.series[container.data('series')].data.length - 1);
+        }        
+    }
+
+    function resizeSwingChart(data)
+    {
+        var chart = $('#event-swing-container').highcharts();
+        $('#event-swing-container').css("height", 60 + (chart.xAxis[0].getExtremes().max + 1) * 18);
+        chart.setSize(chart.chartWidth, 60 + (chart.xAxis[0].getExtremes().max + 1) * 18);
+        chart.redraw();
+    }
 });
 
 

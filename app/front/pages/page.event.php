@@ -78,7 +78,7 @@ if ($oEvent != null)
         
         //Generate new page and display to user
         ob_start();
-        $aFights = EventHandler::getAllFightsForEvent($oEvent->getID(), true);
+        $aFights = null; //EventHandler::getAllFightsForEvent($oEvent->getID(), true);
 
         //Check if event is named FUTURE EVENTS, if so, do not display the date
         //TODO: Hardcoded reference to "FUTURE EVENTS". Should be changed to set id
@@ -796,10 +796,16 @@ if ($oEvent != null)
 
         }
 
-        echo '<div id="event-swing-container" data-moves="' . htmlentities(json_encode($aData), ENT_QUOTES, 'UTF-8') . '" style="width: 100%; height:' . (60 + count($aData[0]['data']) * 18) . 'px;"></div>';
+        //Size of chart should be maximum 10 rows initially but if less we need to check that 
+        $iMaxTen = 10;
+        if (count($aData[0]['data']) < 10)
+        {
+            $iMaxTen = count($aData[0]['data']);
+        }
+        echo '<div id="event-swing-container" data-moves="' . htmlentities(json_encode($aData), ENT_QUOTES, 'UTF-8') . '" style="width: 100%; height:' . (60 + $iMaxTen * 18) . 'px;"></div>';
 
                 //echo '<div id="event-outcome-container" style="width: 50%; height: 400px; display: inline-block;"></div>';
-        echo '</div></div>';
+        echo '<a href="#" class="event-swing-expand" style="color: #666">Expand/Dexpand</a></div></div>';
 
         //END ADDITIONS
 
