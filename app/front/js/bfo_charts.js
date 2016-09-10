@@ -251,7 +251,9 @@ $(function() {
                     title: {
                         text: 'Line change (%)',
                         align: 'high'
-                    }, 
+                    },
+                    //minTickInterval: 10,
+
                 },
                 tooltip: {
                     valueSuffix: ' %'

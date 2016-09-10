@@ -1,6 +1,7 @@
 <?php
 
 require_once('lib/bfocore/utils/db/class.DBTools.php');
+require_once('config/inc.dbConfig.php');
 require_once('lib/bfocore/general/inc.GlobalTypes.php');
 require_once('lib/bfocore/parser/utils/class.ParseTools.php'); //TODO: Try to avoid having dependecies to the parsing component. Move this functionality to another class in the general library
 
@@ -53,94 +54,115 @@ class StatsDAO
             return false;
         }
 
+        //Gets the last update date (or matchup date) for past events:
+        //select FROM_UNIXTIME (mvalue) - INTERVAL 6 HOUR AS lasttime from matchups_metadata where matchup_id = 12155 UNION SELECT max(date) as lasttime from fightodds where fight_id = 12155 order by lasttime desc;
+        //TODO: figure out how to determine that event is old
 
-        //This query gets diff no matter if favourite or underdog:
-        /*$sQuery = 'select 
-                        opening.fighter1_odds as opf1,
-                        opening.fighter2_odds as opf2,
-                        latest.fighter1_odds as laf1,
-                        latest.fighter2_odds as laf2,
-                        @ml11:=MoneylineToDecimal(opening.fighter1_odds),
-                        @ml12:=MoneylineToDecimal(opening.fighter2_odds),
-                        @ml21:=MoneylineToDecimal(latest.fighter1_odds),
-                        @ml22:=MoneylineToDecimal(latest.fighter2_odds),
-                                                IF(@ml11 > @ml12,
-                            @ml11 - @ml12,
-                            IF(@ml11 < @ml12, @ml12 - @ml11, 0)) as f1swing,
-                        IF(@ml21 > @ml22,
-                            @ml21 - @ml22,
-                            IF(@ml21 < @ml22, @ml22 - @ml21, 0)) as f2swing
-                    from
-                        ((SELECT 
-                            fighter1_odds, fighter2_odds
-                        FROM
-                            fightodds
-                        WHERE
-                            fight_id = ?
-                        ORDER BY DATE ASC
-                        LIMIT 0 , 1) opening
-                        join (SELECT 
-                            fighter1_odds, fighter2_odds
-                        FROM
-                            fightodds
-                        WHERE
-                            fight_id = ?
-                        ORDER BY DATE DESC
-                        LIMIT 0 , 1) latest)';*/
+        $aParams = [];
+        //This logic checks if we are requesting odds from the last hour or last 24 hours. If so, we check if the event is in the past or not. If in the past we want to use either the last odds date or the fight time (from metadata) as the equivalent of now()
+
+        /*
+Gets matchup time and last updated odds time
+select FROM_UNIXTIME (mvalue) - INTERVAL 6 HOUR AS lasttime from matchups_metadata where matchup_id = 12155 UNION SELECT max(date) as lasttime from fightodds where fight_id = 12155 order by lasttime desc;
+
+
+Checks if event is future
+SELECT EXISTS (select 1 from fights f inner join events e on f.event_id = e.id where f.id = 12057 AND LEFT(date, 10) >= LEFT((NOW() - INTERVAL 2 HOUR), 10)) exi;
+
+Can we combine now(), matchup time and last update odds and get the truth somehow? In combination with the check event is future ofc
+SELECT * FROM (
+SELECT FROM_UNIXTIME (mvalue) - INTERVAL 6 HOUR AS lasttime
+    FROM matchups_metadata
+    WHERE matchup_id = 12155 UNION
+SELECT MAX(DATE) AS lasttime
+    FROM fightodds
+    WHERE fight_id = 12155
+    ORDER BY storedtime DESC) f1 UNION
+SELECT NOW() AS lasttime, 'NULL' as storedtime
+ORDER BY storedtime, lasttime DESC;
 
 
 
 
-                        /*
-Query to get all averages:
-
-SELECT AVG(f1.dec_f1odds), AVG(f1.dec_f2odds) FROM (SELECT MoneylineToDecimal(m1.fighter1_odds) AS dec_f1odds, MoneylineToDecimal(m1.fighter2_odds) AS dec_f2odds, m1.*
-FROM fightodds m1 LEFT JOIN fightodds m2
- ON (m1.fight_id = m2.fight_id AND m1.bookie_id = m2.bookie_id AND m1.date < m2.date)
-WHERE m2.date IS NULL AND m1.fight_id = 11930) f1;
-                        */
-
-        //TODO: Opening line in 24 hours/1 hours is not correct, should be the latest mean with that date as max
+        */
 
         $sExtraWhere = '';
-        if ($a_iFrom == 1)
+        $sDateCompare = '>';
+        if ($a_iFrom != 0)
         {
-            $sExtraWhere = ' AND m1.date > NOW() - INTERVAL 1 DAY ';
-        }
-        else if ($a_iFrom == 2)
-        {
-           $sExtraWhere = ' AND m1.date > NOW() - INTERVAL 1 HOUR '; 
+            //This query is used when a time slice is used, for example last 24 hours or last hour. We need to check if the event is in the past so that past events dont utilize NOW() - 1 HOUR as last hour. The check is as follows: 
+            //NOW() < METADATA = NOW()
+            //NOW() > METADATA = METADATA UNLESS LAST ODDS > METADATA
+            //!METADATA, IS_PAST( YES = LAST ODDS, NO = NOW() )
+
+            $sExtraWhere = " AND fo1.date <= (IF ((SELECT 1 FROM matchups_metadata mm WHERE matchup_id = ? AND mm.mattribute = 'gametime' ), 
+                                                    /*Metadata exists*/
+                                                    IF ((SELECT FROM_UNIXTIME(mm.mvalue) + INTERVAL " . DB_TIMEZONE . " HOUR FROM matchups_metadata mm WHERE mm.matchup_id = ? AND mm.mattribute = 'gametime' ) > NOW(), 
+                                                        /*Metadata > NOW()*/
+                                                        NOW(), 
+                                                        /*Metadata < NOW()*/
+                                                        (SELECT FROM_UNIXTIME(mm.mvalue) + INTERVAL " . DB_TIMEZONE . " HOUR FROM matchups_metadata mm WHERE mm.matchup_id = ? AND mm.mattribute = 'gametime')),
+                                                    /*Metadata does not exist*/
+                                                    IF ((SELECT 1 FROM fights f INNER JOIN events e ON f.event_id = e.id WHERE f.id = ? AND LEFT(e.date, 10) < LEFT((NOW() - INTERVAL 2 HOUR), 10)), 
+                                                        /*Event is in past*/
+                                                        (SELECT MAX(fo.date) FROM fightodds fo WHERE fo.fight_id = ?), 
+                                                        /*Event is upcoming*/
+                                                        NOW())
+                                                ))";
+            $aParams[] = $a_iMatchup;
+            $aParams[] = $a_iMatchup;
+            $aParams[] = $a_iMatchup;
+            $aParams[] = $a_iMatchup;
+            $aParams[] = $a_iMatchup;
+            $aParams[] = $a_iMatchup;
+            $aParams[] = $a_iMatchup;
+            $aParams[] = $a_iMatchup;
+                        $aParams[] = $a_iMatchup;
+            $aParams[] = $a_iMatchup;
+            $sDateCompare = '<';
+
+            if ($a_iFrom == 1) //24 hour
+            {
+                $sExtraWhere .= " - INTERVAL 1 DAY ";
+            }
+            else if ($a_iFrom == 2) //1 Hour
+            {
+                $sExtraWhere .= " - INTERVAL 1 HOUR ";
+            }
+
         }
 
         $sQuery = 'SELECT 
-                        opening.fighter1_odds as opf1,
-                        opening.fighter2_odds as opf2,
+                        opening.avg_f1odds as opf1,
+                        opening.avg_f2odds as opf2,
                         latest.avg_f1odds as laf1,
                         latest.avg_f2odds as laf2,
-                        @ml11:=MoneylineToDecimal(opening.fighter1_odds),
-                        @ml12:=MoneylineToDecimal(opening.fighter2_odds),
-                        (@ml11 - latest.avg_f1odds)/(@ml11 - 1) as f1swing,
-                        (@ml12 - latest.avg_f2odds)/(@ml12 - 1)as f2swing
+                        (opening.avg_f1odds - latest.avg_f1odds)/(opening.avg_f1odds - 1) as f1swing,           
+                        (opening.avg_f2odds - latest.avg_f2odds)/(opening.avg_f2odds - 1) as f2swing
                     from
-                        ((SELECT 
-                            m1.fighter1_odds, m1.fighter2_odds
-                        FROM
-                            fightodds m1
-                        WHERE
-                            m1.fight_id = ? ' . $sExtraWhere . '
-                        ORDER BY m1.date ASC
-                        LIMIT 0, 1) opening
+                        ((SELECT AVG(f1.dec_f1odds) AS avg_f1odds, AVG(f1.dec_f2odds) AS avg_f2odds 
+                                FROM (SELECT MoneylineToDecimal(m1.fighter1_odds) AS dec_f1odds, MoneylineToDecimal(m1.fighter2_odds) AS dec_f2odds, m1.*
+                                    FROM (SELECT fo1.* FROM fightodds fo1 WHERE fight_id = ? ' . $sExtraWhere . ') m1 LEFT JOIN (SELECT fo1.* FROM fightodds fo1 WHERE fight_id = ? ' . $sExtraWhere . ') m2
+                                        ON (m1.fight_id = m2.fight_id AND m1.bookie_id = m2.bookie_id AND m1.date ' . $sDateCompare . ' m2.date)
+                                        WHERE m2.date IS NULL AND m1.fight_id = ?) f1) opening
                         JOIN 
                             (SELECT AVG(f1.dec_f1odds) AS avg_f1odds, AVG(f1.dec_f2odds) AS avg_f2odds 
                                 FROM (SELECT MoneylineToDecimal(m1.fighter1_odds) AS dec_f1odds, MoneylineToDecimal(m1.fighter2_odds) AS dec_f2odds, m1.*
                                     FROM fightodds m1 LEFT JOIN fightodds m2
                                         ON (m1.fight_id = m2.fight_id AND m1.bookie_id = m2.bookie_id AND m1.date < m2.date)
-                                        WHERE m2.date IS NULL AND m1.fight_id = ? ' . $sExtraWhere . ') f1) latest)';
+                                        WHERE m2.date IS NULL AND m1.fight_id = ?) f1) latest)';
 
 
 
-        $aParams = array($a_iMatchup, $a_iMatchup);
+
+        $aParams[] = $a_iMatchup;
+        $aParams[] = $a_iMatchup;
+        $aParams[] = $a_iMatchup;
+        $aParams[] = $a_iMatchup;
         $rResult = DBTools::doParamQuery($sQuery, $aParams);
+
+
+
         if ($aRow = mysql_fetch_array($rResult))
         {
             return array('f1' => array(

@@ -78,7 +78,7 @@ if ($oEvent != null)
         
         //Generate new page and display to user
         ob_start();
-        $aFights = null; //EventHandler::getAllFightsForEvent($oEvent->getID(), true);
+        $aFights = EventHandler::getAllFightsForEvent($oEvent->getID(), true);
 
         //Check if event is named FUTURE EVENTS, if so, do not display the date
         //TODO: Hardcoded reference to "FUTURE EVENTS". Should be changed to set id
