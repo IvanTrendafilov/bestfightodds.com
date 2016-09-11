@@ -234,6 +234,7 @@ $(function() {
                         fontSize: '10px',
                         fontWeight: '500'
                     },
+                            spacingBottom: 3,
                 },
                 xAxis: {
                     categories: cats,
@@ -252,7 +253,11 @@ $(function() {
                         text: 'Line change (%)',
                         align: 'high'
                     },
-                    //minTickInterval: 10,
+                    labels: {
+                        style: {
+                                color: '#aaacae', 
+                       }
+                    },
 
                 },
                 tooltip: {
@@ -283,13 +288,14 @@ $(function() {
                             overflow: 'none',
                             allowOverlap: true
                         },
-                    },
+
+                    }, 
+
                     series: {
                        animation: {
                         duration: 200,
-
-                    },
-
+                            },
+                        color: '#66696d' 
                     }
                 },
                 credits: {
@@ -446,6 +452,9 @@ $(function () {
         setSwingMaxValue(container);
 
         resizeSwingChart(chart.series[opts].data);
+
+        $('.event-swing-picker').css("font-weight", "400");
+        $(this).css("font-weight", "500");
         return false;
     });
 
@@ -494,8 +503,22 @@ $(function () {
 
     function resizeSwingChart(data)
     {
-        var chart = $('#event-swing-container').highcharts();
-        $('#event-swing-container').css("height", 60 + (chart.xAxis[0].getExtremes().max + 1) * 18);
+        var container = $('#event-swing-container');
+        var chart = container.highcharts();
+        container.css("height", 60 + (chart.xAxis[0].getExtremes().max + 1) * 18);
+
+
+        //Set expander button
+        if (container.data('expanded') == true)
+        {
+            $('.event-swing-expand').find("div").css("background-image", "url(/img/expu.png)");
+        }
+        else
+        {
+            $('.event-swing-expand').find("div").css("background-image", "url(/img/expd.png)");
+        }
+        //TODO: Need a way to change the text $(this).textContent("Show less");
+
         chart.setSize(chart.chartWidth, 60 + (chart.xAxis[0].getExtremes().max + 1) * 18);
         chart.redraw();
     }
