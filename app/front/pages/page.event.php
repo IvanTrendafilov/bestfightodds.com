@@ -78,7 +78,7 @@ if ($oEvent != null)
         
         //Generate new page and display to user
         ob_start();
-        $aFights = null; //EventHandler::getAllFightsForEvent($oEvent->getID(), true);
+        $aFights = EventHandler::getAllFightsForEvent($oEvent->getID(), true);
 
         //Check if event is named FUTURE EVENTS, if so, do not display the date
         //TODO: Hardcoded reference to "FUTURE EVENTS". Should be changed to set id
@@ -766,10 +766,9 @@ if ($oEvent != null)
 
         //BEING ADDITIONS
 
-       echo '<div id="page-wrapper" style="margin: 0 15px"><div id="page-container" style="text-align: center; padding: 0px 10px 5px 10px; margin-top: 10px; background-color: #fff;""><p style="text-align: left; padding: 8px 0px 0px 2px">Line movement <a href="#" class="event-swing-picker" data-li="0" style="color: #666; font-weight: 500">Since opening</a> | <a href="#" class="event-swing-picker" data-li="1" style="color: #666">Last 24 hours</a> | <a href="#" class="event-swing-picker" data-li="2" style="color: #666">Last hour</a></p>';
+       echo '<div id="page-wrapper" style="margin: 0 15px"><div id="page-container" style="padding: 10px 10px 5px 10px; margin-top: 10px; background-color: #fff;"><div style="width: 50%"><div class="content-header">Line movement <a href="#" class="event-swing-picker" data-li="0" style="font-weight: 500">Since opening</a> | <a href="#" class="event-swing-picker" data-li="1">Last 24 hours</a> | <a href="#" class="event-swing-picker" data-li="2">Last hour</a></div>';
 
 ?>
-
 
 <?php
 
@@ -802,10 +801,10 @@ if ($oEvent != null)
         {
             $iMaxTen = count($aData[0]['data']);
         }
-        echo '<div id="event-swing-container" data-moves="' . htmlentities(json_encode($aData), ENT_QUOTES, 'UTF-8') . '" style="width: 100%; height:' . (60 + $iMaxTen * 18) . 'px;"></div>';
+        echo '<div id="event-swing-container" data-moves="' . htmlentities(json_encode($aData), ENT_QUOTES, 'UTF-8') . '" style="height:' . (60 + $iMaxTen * 18) . 'px;"></div>';
 
                 //echo '<div id="event-outcome-container" style="width: 50%; height: 400px; display: inline-block;"></div>';
-        echo '<a href="#" class="event-swing-expand" style="color: #666">Show more<div style="background-image: url(/img/expd.png); margin-left: auto; margin-right: auto; background-size: 9px 6px; width: 9px; height: 6px;"></div></a></div></div>';
+        echo '<div class="event-swing-expandarea"><a href="#" class="event-swing-expand"><span>Show more</span><div style="background-image: url(/img/expd.png); margin-left: auto; margin-right: auto; background-size: 9px 6px; width: 9px; height: 6px;"></div></a></div></div></div></div>';
 
         //END ADDITIONS
 

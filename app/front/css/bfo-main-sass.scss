@@ -829,6 +829,11 @@ ul.share-dropdown ul li a {
   height: 16px;
   color: #fff;
   margin-bottom: 4px;
+  a {
+    color: #eaeaea;
+    font-weight: 400;
+    font-size: 12px;
+  }
 }
 
 .content-list {
@@ -1060,4 +1065,31 @@ table.team-stats-table {
   &:hover {
    background-color: #d7dae2;
   }
+}
+
+
+#event-swing-container {
+  width: 100%;
+  -moz-transition: height 0.05s ease-out;
+  -webkit-transition: height 0.05s ease-out;
+  -o-transition: height 0.05s ease-out;
+  transition: height 0.05s ease-out;
+}
+
+#event-swing-container .highcharts-container {
+  -moz-transition: height 0.05s ease-out;
+  -webkit-transition: height 0.05s ease-out;
+  -o-transition: height 0.05s ease-out;
+  transition: height 0.05s ease-out;
+}
+
+.event-swing-expandarea {
+  text-align: center;
+ margin-left: auto;
+ margin-right: auto;
+ width: 150px;
+}
+
+.event-swing-expand {
+  color: #666;
 }

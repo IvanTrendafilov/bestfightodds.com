@@ -234,7 +234,7 @@ $(function() {
                         fontSize: '10px',
                         fontWeight: '500'
                     },
-                            spacingBottom: 3,
+                    spacingBottom: 3,
                 },
                 xAxis: {
                     categories: cats,
@@ -258,7 +258,6 @@ $(function() {
                                 color: '#aaacae', 
                        }
                     },
-
                 },
                 tooltip: {
                     valueSuffix: ' %'
@@ -507,18 +506,17 @@ $(function () {
         var chart = container.highcharts();
         container.css("height", 60 + (chart.xAxis[0].getExtremes().max + 1) * 18);
 
-
         //Set expander button
         if (container.data('expanded') == true)
         {
             $('.event-swing-expand').find("div").css("background-image", "url(/img/expu.png)");
+            $('.event-swing-expand').find("span").text("Show less");
         }
         else
         {
             $('.event-swing-expand').find("div").css("background-image", "url(/img/expd.png)");
+            $('.event-swing-expand').find("span").text("Show more");
         }
-        //TODO: Need a way to change the text $(this).textContent("Show less");
-
         chart.setSize(chart.chartWidth, 60 + (chart.xAxis[0].getExtremes().max + 1) * 18);
         chart.redraw();
     }
