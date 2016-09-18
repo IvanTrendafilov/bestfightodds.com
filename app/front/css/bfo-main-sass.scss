@@ -829,11 +829,6 @@ ul.share-dropdown ul li a {
   height: 16px;
   color: #fff;
   margin-bottom: 4px;
-  a {
-    color: #eaeaea;
-    font-weight: 400;
-    font-size: 12px;
-  }
 }
 
 .content-list {
@@ -1081,6 +1076,12 @@ table.team-stats-table {
   -webkit-transition: height 0.05s ease-out;
   -o-transition: height 0.05s ease-out;
   transition: height 0.05s ease-out;
+}
+
+.event-swing-picker {
+    color: #eaeaea;
+    font-weight: 400;
+    font-size: 12px;
 }
 
 .event-swing-expandarea {

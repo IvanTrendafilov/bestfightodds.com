@@ -78,7 +78,7 @@ if ($oEvent != null)
         
         //Generate new page and display to user
         ob_start();
-        $aFights = EventHandler::getAllFightsForEvent($oEvent->getID(), true);
+        $aFights = null; //EventHandler::getAllFightsForEvent($oEvent->getID(), true);
 
         //Check if event is named FUTURE EVENTS, if so, do not display the date
         //TODO: Hardcoded reference to "FUTURE EVENTS". Should be changed to set id
@@ -766,7 +766,7 @@ if ($oEvent != null)
 
         //BEING ADDITIONS
 
-       echo '<div id="page-wrapper" style="margin: 0 15px"><div id="page-container" style="padding: 10px 10px 5px 10px; margin-top: 10px; background-color: #fff;"><div style="width: 50%"><div class="content-header">Line movement <a href="#" class="event-swing-picker" data-li="0" style="font-weight: 500">Since opening</a> | <a href="#" class="event-swing-picker" data-li="1">Last 24 hours</a> | <a href="#" class="event-swing-picker" data-li="2">Last hour</a></div>';
+       echo '<div id="page-wrapper" style="margin: 25px 15px; width:50%"><div id="page-container" style="background-color: #fff;"><div><div class="content-header">Line movement: <a href="#" class="event-swing-picker" data-li="0" style="font-weight: 500">Since opening</a> | <a href="#" class="event-swing-picker" data-li="1">Last 24 hours</a> | <a href="#" class="event-swing-picker" data-li="2">Last hour</a></div>';
 
 ?>
 
@@ -778,12 +778,12 @@ if ($oEvent != null)
         {
             $aSwings = StatsHandler::getAllDiffsForEvent($oEvent->getID(), $x);
             $aRowData = [];
-            $iCount = 0;
+            
             foreach ($aSwings as $aSwing)
             {
                 if ($aSwing[2]['swing'] != 0)
                 {
-                    $iCount++;
+                    
                     $aRowData[]  = [$aSwing[0]->getTeamAsString($aSwing[1]), -round($aSwing[2]['swing'] * 100)];
                 }
             }
@@ -808,7 +808,42 @@ if ($oEvent != null)
 
         //END ADDITIONS
 
+        //BEING ADDITIONS
 
+       echo '<div id="page-wrapper" style="margin: 25px 15px; width: 50%"><div id="page-container" style="background-color: #fff;"><div><div class="content-header">Expected outcome</div>';
+
+?>
+
+<?php
+
+
+        $aOutcomes = StatsHandler::getExpectedOutcomesForEvent($oEvent->getID());
+        $aRowData = [];
+        foreach ($aOutcomes as $aOutcome)
+        {
+            $aLabels = [$aOutcome[0]->getTeamAsString(1), $aOutcome[0]->getTeamAsString(2)];
+            $aPoints = [$aOutcome[1]['team1_dec'],
+                        $aOutcome[1]['team1_itd'],
+                        $aOutcome[1]['draw'],
+                        $aOutcome[1]['team2_itd'],
+                        $aOutcome[1]['team2_dec']];
+            $aRowData[] = [$aLabels, $aPoints];
+
+        }
+        if (count($aRowData) == 0)
+        {
+            $aRowData[] = ['No ' . strtolower($aSeriesNames[$x]), null];
+        }
+        $aData  = ["name" => 'Outcomes', "data" => $aRowData];
+
+        //Size of chart should be maximum 10 rows initially but if less we need to check that 
+
+        echo '<div id="event-outcome-container" data-outcomes="' . htmlentities(json_encode($aData), ENT_QUOTES, 'UTF-8') . '" style="height:' . (60 + count($aRowData) * 22) . 'px;"></div>';
+
+                //echo '<div id="event-outcome-container" style="width: 50%; height: 400px; display: inline-block;"></div>';
+        echo '</div></div></div>';
+
+        //END ADDITIONS
 
 
         $sBuffer = ob_get_clean();
@@ -817,7 +852,6 @@ if ($oEvent != null)
         CacheControl::cachePage($sBuffer, 'event-' . $oEvent->getID() . '-' . strtotime($sLastChange) . '.php');
         
         echo '<!--C:MIS-->';
-
 
     }
 

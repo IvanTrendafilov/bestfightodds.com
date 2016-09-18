@@ -15,7 +15,7 @@ class StatsDAO
     /**
      * Top Swings (most movement in terms of line value)
     */
-    public static function getSwingForMatchup($a_iMatchupID)
+    /*public static function getSwingForMatchup($a_iMatchupID)
     {
         $sQuery = 'select 
                         sum(allswings)
@@ -45,7 +45,7 @@ class StatsDAO
 
         $aParams = array($a_iMatchupID, $a_iMatchupID, $a_iMatchupID);
         return DBTools::getSingleValue(DBTools::doParamQuery($sQuery, $aParams));
-    }
+    }*/
 
     public static function getDiffForMatchup($a_iMatchup, $a_iFrom = 0) //0 Opening, 1 = 1 day ago, 2 = 1 hour ago
     {
@@ -56,7 +56,7 @@ class StatsDAO
 
         //Gets the last update date (or matchup date) for past events:
         //select FROM_UNIXTIME (mvalue) - INTERVAL 6 HOUR AS lasttime from matchups_metadata where matchup_id = 12155 UNION SELECT max(date) as lasttime from fightodds where fight_id = 12155 order by lasttime desc;
-        //TODO: figure out how to determine that event is old
+
 
         $aParams = [];
         //This logic checks if we are requesting odds from the last hour or last 24 hours. If so, we check if the event is in the past or not. If in the past we want to use either the last odds date or the fight time (from metadata) as the equivalent of now()

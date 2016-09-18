@@ -313,103 +313,132 @@ $(function() {
 $(function() {
     if (document.getElementById("event-outcome-container"))
     {
-        function createOutcomeChart() {
-            // http://jsfiddle.net/nLxL4Ljy/2/
+        function createOutcomeChart(in_data) {
+            // http://jsfiddle.net/f3vv6o3h/
 
-            //var xdata = in_data[0]['data'];
-            //var cats = [];
-            //for (var j = 0; j < xdata.length; j++) {
-            //    cats.push(xdata[j][0]);
-            //}
+            var xdata = in_data['data'];
+            var cats_left = [];
+            var cats_right = [];
+            var team1_dec = [];
+            var team1_itd = [];
+            var draw = [];
+            var team2_itd = [];
+            var team2_dec = [];
+            for (var j = 0; j < xdata.length; j++) {
+                cats_left.push(xdata[j][0][0]);
+                cats_right.push(xdata[j][0][1]);
+                team1_dec.push(xdata[j][1][0]);
+                team1_itd.push(xdata[j][1][1]);
+                draw.push(xdata[j][1][2]);
+                team2_itd.push(xdata[j][1][3]);
+                team2_dec.push(xdata[j][1][4]);
+            }
 
             $('#event-outcome-container').highcharts({
-                            chart: {
-                        type: 'bar',
-                    },
+                   chart: {
+                  type: 'bar',
+                  style: {
+                    fontFamily: "'Roboto', Arial, sans-serif",
+                    color: '#1a1a1a',
+                    fontSize: '10px',
+                    fontWeight: '500'
+                  },
+                },
 
-                    title: {
-                        text: ''
+                title: {
+                  text: ''
+                },
+                xAxis: [{
+                  categories: cats_left,
+                  reversed: true,
+                  labels: {
+                    overflow: 'justify',
+                    style: {
+                      fontSize: '10px',
+                      fontWeight: '500',
+                      align: 'left'
+                    }
+                  },
+                }, { // mirror axis on right side
+                  opposite: true,
+                  reversed: true,
+                  categories: cats_right,
+                  linkedTo: 0,
+                  labels: {
+                    overflow: 'justify',
+                    style: {
+                      fontSize: '10px',
+                      fontWeight: '500',
+                      align: 'left'
+                    }
+                  },
+                  style: {
+                    fontFamily: "'Roboto', Arial, sans-serif",
+                    color: '#1a1a1a',
+                    fontSize: '10px',
+                    fontWeight: '500'
+                  },
+                }],
+
+                yAxis: {
+                  min: 0,
+                  title: {
+                    text: ''
+                  }
+                },
+                tooltip: {
+                  pointFormat: '<span style="color:{series.color}">{series.name}</span>: <b>{point.y}</b> ({point.percentage:.0f}%)<br/>',
+                  shared: true
+                },
+                plotOptions: {
+                  bar: {
+                    stacking: 'percent',
+                    borderWidth: 0,
+                    dataLabels: {
+                      formatter: function() {
+                        return this.series.name;
+                      },
+                      enabled: true,
+                      color: (Highcharts.theme && Highcharts.theme.dataLabelsColor) || 'white',
+                      style: {
+                        fontSize: '9px',
+                        textShadow: '0 0 1px black'
+                      }
                     },
-                    xAxis: [{
-                            categories: ['Jon Jones', 'Anderson Silva', 'Matt Hammill', 'Pete Sell', 'Matt Serra'],
-                            reversed: false,
-                            labels: {
-                                step: 1
-                            }
-                        }, { // mirror axis on right side
-                            opposite: true,
-                            reversed: false,
-                            categories: ['Royce Gracie', 'Mike Van Arsdale', 'CM Punk', 'Brock Lesnar', 'Demetrious Johson'],
-                            linkedTo: 0,
-                            labels: {
-                                step: 1
-                            }
-                        }],
-                    
-                    yAxis: {
-                        min: 0,
-                        title: {
-                            text: ''
-                        }
-                    },
-                    tooltip: {
-                        pointFormat: '<span style="color:{series.color}">{series.name}</span>: <b>{point.y}</b> ({point.percentage:.0f}%)<br/>',
-                        shared: true
-                    },
-                    plotOptions: {
-                        bar: {
-                            stacking: 'percent',
-                                            dataLabels: {
-                                            formatter: function() {
-                                        
-                                                return this.series.name;
-                                            },
-                                enabled: true,
-                                color: (Highcharts.theme && Highcharts.theme.dataLabelsColor) || 'white',
-                                style: {
-                                    fontSize: '10px',
-                                    textShadow: '0 0 2px black'
-                                }
-                            },
-                                        animation: false
-                        }
-                    },
-                    series: [{
-                        name: 'Decision',
-                        data: [7, 3, 4, 7, 9],
-                        color: '#404040'
-                    }, {
-                        name: 'TKO',
-                        data: [4, 2, 3, 4, 1],
-                        color: '#909090'
-                    }, {
-                        name: 'Submission',
-                        data: [6, 4, 4, 6, 5],
-                        color: '#c0c0c0'
-                    },
-                            {
-                        name: 'Draw',
-                        data: [1, 1, 1, 1, 1],
-                        color: '#a10000'
-                    },
-                    {
-                        name: 'Submission',
-                        data: [5, 3, 4, 7, 2],
-                        color: '#c0c0c0'
-                    }, {
-                        name: 'TKO',
-                        data: [2, 2, 3, 2, 1],
-                        color: '#909090'
-                    }, {
-                        name: 'Decision',
-                        data: [3, 4, 4, 2, 5],
-                         color: '#404040'
-                    }]
+                    animation: false
+                  }
+                },
+                credits: {
+                    enabled: false
+                },
+                series: [{
+                  name: 'Decision',
+                  data: team2_dec,
+                  color: '#404040'
+                }, {
+                  name: 'Finish',
+                  data: team2_itd,
+                  color: '#909090'
+                }, {
+                  name: 'Draw',
+                  data: draw,
+                  color: '#a10000'
+                }, {
+                  name: 'Finish',
+                  data: team1_itd,
+                  color: '#c0c0c0'
+                }, {
+                  name: 'Decision',
+                  data: team1_dec,
+                  color: '#404040'
+                }]
 
             });
         }
         //var move_data = $.parseJSON($('#event-swing-container').attr('data-moves'));
-        createOutcomeChart();
+        var outcome_data = $.parseJSON($('#event-outcome-container').attr('data-outcomes'));
+
+        createOutcomeChart(outcome_data);
     }
 });
 
