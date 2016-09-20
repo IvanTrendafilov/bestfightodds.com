@@ -210,10 +210,10 @@ $(function() {
             }
 
             //Set max to 9 (or less depending on dynamic data)
-            var maxten = 10
-            if (xdata.length < 10)
+            var maxval = 12;
+            if (xdata.length < 12)
             {
-                maxten = xdata.length;
+                maxval = xdata.length;
             }
 
 
@@ -244,9 +244,12 @@ $(function() {
                             fontSize: '10px',
                             fontWeight: '500',
                             align: 'left'
-                        }
+                        } 
                     },
-                    max: maxten - 1
+                    max: maxval - 1,
+                    crosshair: {
+                        color: '#eaeaea'
+                    }
                 },
                 yAxis: {
                     title: {
@@ -260,7 +263,7 @@ $(function() {
                     },
                 },
                 tooltip: {
-                    valueSuffix: ' %'
+                    valueSuffix: ' %',
                 },
                 plotOptions: {
                     bar: {
@@ -294,7 +297,9 @@ $(function() {
                        animation: {
                         duration: 200,
                             },
-                        color: '#66696d' 
+                        color: '#66696d',
+                        pointPadding: 0,
+                        groupPadding: 0.2,
                     }
                 },
                 credits: {
@@ -327,8 +332,8 @@ $(function() {
             for (var j = 0; j < xdata.length; j++) {
                 cats_left.push(xdata[j][0][0]);
                 cats_right.push(xdata[j][0][1]);
-                team1_dec.push(xdata[j][1][0]);
-                team1_itd.push(xdata[j][1][1]);
+                team1_dec.push(-xdata[j][1][0]);
+                team1_itd.push(-xdata[j][1][1]);
                 draw.push(xdata[j][1][2]);
                 team2_itd.push(xdata[j][1][3]);
                 team2_dec.push(xdata[j][1][4]);
@@ -381,14 +386,13 @@ $(function() {
                 }],
 
                 yAxis: {
-                  min: 0,
+
                   title: {
                     text: ''
                   }
                 },
                 tooltip: {
-                  pointFormat: '<span style="color:{series.color}">{series.name}</span>: <b>{point.y}</b> ({point.percentage:.0f}%)<br/>',
-                  shared: true
+                  pointFormat: '<span style="color:{series.color}">{series.name}</span>:  {point.percentage:.0f}%<br/>',
                 },
                 plotOptions: {
                   bar: {
@@ -396,7 +400,7 @@ $(function() {
                     borderWidth: 0,
                     dataLabels: {
                       formatter: function() {
-                        return this.series.name;
+                        return "";//this.series.name;
                       },
                       enabled: true,
                       color: (Highcharts.theme && Highcharts.theme.dataLabelsColor) || 'white',
@@ -406,32 +410,44 @@ $(function() {
                       }
                     },
                     animation: false
+                  },
+                  series: {
+                    pointPadding: 0,
+                    groupPadding: 0.2,
                   }
                 },
                 credits: {
                     enabled: false
                 },
+                legend: {
+                 style: {
+                    fontFamily: "'Roboto', Arial, sans-serif",
+                    color: '#1a1a1a',
+                    fontSize: '10px',
+                    fontWeight: '500'
+                  },
+                },
                 series: [{
                   name: 'Decision',
                   data: team2_dec,
-                  color: '#404040'
+                  color: '#303030'
                 }, {
                   name: 'Finish',
                   data: team2_itd,
-                  color: '#909090'
-                }, {
+                  color: '#606060'
+                },{
                   name: 'Draw',
                   data: draw,
-                  color: '#a10000'
-                }, {
-                  name: 'Finish',
-                  data: team1_itd,
-                  color: '#c0c0c0'
+                  color: '#a30000'
                 }, {
                   name: 'Decision',
                   data: team1_dec,
-                  color: '#404040'
-                }]
+                  color: '#c0c0c0'
+                }, {
+                  name: 'Finish',
+                  data: team1_itd,
+                  color: '#a0a0a0'
+                }],
 
             });
         }

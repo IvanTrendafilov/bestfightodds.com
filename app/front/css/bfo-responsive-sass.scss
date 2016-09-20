@@ -328,6 +328,24 @@
   #mob-divider {
     display: inline-block;
   }
+
+  //Event page graphs
+  #event-swing-area {
+    width: 100%;
+    vertical-align: top;
+    margin: 5px;
+  }
+
+  #event-outcome-area {
+    width: 100%;
+    vertical-align: top;
+    margin: 5px;
+  }
+
+  #event-charts-area {
+    padding-top: 0;
+  }
+
 }
 
 @media only screen and (max-width: 372px) {

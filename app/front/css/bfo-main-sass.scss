@@ -1063,6 +1063,30 @@ table.team-stats-table {
 }
 
 
+#event-charts-area {
+  padding-top: 22px;
+}
+
+#event-swing-area {
+  -webkit-box-shadow: 0 1px 1px 1px rgb(170, 170, 170);
+  -moz-box-shadow: 0 1px 1px 1px rgb(170, 170, 170);
+  box-shadow: 0 1px 1px 1px rgb(170, 170, 170);
+  width: 424px;
+  vertical-align: top;
+  display: inline-block;
+  margin-right: 22px;
+}
+
+#event-outcome-area {
+  -webkit-box-shadow: 0 1px 1px 1px rgb(170, 170, 170);
+  -moz-box-shadow: 0 1px 1px 1px rgb(170, 170, 170);
+  box-shadow: 0 1px 1px 1px rgb(170, 170, 170);
+  width: 500px;
+  vertical-align: top;
+  display: inline-block;
+}
+
+
 #event-swing-container {
   width: 100%;
   -moz-transition: height 0.05s ease-out;
@@ -1078,11 +1102,17 @@ table.team-stats-table {
   transition: height 0.05s ease-out;
 }
 
+#event-swing-picker-menu {
+  float: right;
+}
+
 .event-swing-picker {
     color: #eaeaea;
     font-weight: 400;
     font-size: 12px;
 }
+
+
 
 .event-swing-expandarea {
   text-align: center;

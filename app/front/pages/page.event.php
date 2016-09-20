@@ -766,14 +766,14 @@ if ($oEvent != null)
 
         //BEING ADDITIONS
 
-       echo '<div id="page-wrapper" style="margin: 25px 15px; width:50%"><div id="page-container" style="background-color: #fff;"><div><div class="content-header">Line movement: <a href="#" class="event-swing-picker" data-li="0" style="font-weight: 500">Since opening</a> | <a href="#" class="event-swing-picker" data-li="1">Last 24 hours</a> | <a href="#" class="event-swing-picker" data-li="2">Last hour</a></div>';
+       echo '<div class="table-outer-wrapper" id="event-charts-area"><div id="event-swing-area"><div id="page-container"><div class="content-header">Line movement: <div id="event-swing-picker-menu"><a href="#" class="event-swing-picker" data-li="0" style="font-weight: 500">Since opening</a> | <a href="#" class="event-swing-picker" data-li="1">Last 24 hours</a> | <a href="#" class="event-swing-picker" data-li="2">Last hour</a></div></div>';
 
 ?>
 
 <?php
 
         $aData = [];
-        $aSeriesNames = ['Changes since opening', 'Changes in the last 24 hours', 'Changes in the last hour'];
+        $aSeriesNames = ['Change since opening', 'Change in the last 24 hours', 'Change in the last hour'];
         for ($x = 0; $x <= 2; $x++)
         {
             $aSwings = StatsHandler::getAllDiffsForEvent($oEvent->getID(), $x);
@@ -781,7 +781,7 @@ if ($oEvent != null)
             
             foreach ($aSwings as $aSwing)
             {
-                if ($aSwing[2]['swing'] != 0)
+                if (round($aSwing[2]['swing'] * 100) != 0)
                 {
                     
                     $aRowData[]  = [$aSwing[0]->getTeamAsString($aSwing[1]), -round($aSwing[2]['swing'] * 100)];
@@ -795,22 +795,21 @@ if ($oEvent != null)
 
         }
 
-        //Size of chart should be maximum 10 rows initially but if less we need to check that 
-        $iMaxTen = 10;
-        if (count($aData[0]['data']) < 10)
+        //Size of chart should be maximum 12 rows initially but if less we need to check that 
+        $iMaxRows = 12;
+        if (count($aData[0]['data']) < 12)
         {
-            $iMaxTen = count($aData[0]['data']);
+            $iMaxRows = count($aData[0]['data']);
         }
-        echo '<div id="event-swing-container" data-moves="' . htmlentities(json_encode($aData), ENT_QUOTES, 'UTF-8') . '" style="height:' . (60 + $iMaxTen * 18) . 'px;"></div>';
+        echo '<div id="event-swing-container" data-moves="' . htmlentities(json_encode($aData), ENT_QUOTES, 'UTF-8') . '" style="height:' . (60 + $iMaxRows * 16) . 'px;"></div>';
 
-                //echo '<div id="event-outcome-container" style="width: 50%; height: 400px; display: inline-block;"></div>';
-        echo '<div class="event-swing-expandarea"><a href="#" class="event-swing-expand"><span>Show more</span><div style="background-image: url(/img/expd.png); margin-left: auto; margin-right: auto; background-size: 9px 6px; width: 9px; height: 6px;"></div></a></div></div></div></div>';
+        echo '<div class="event-swing-expandarea"><a href="#" class="event-swing-expand"><span>Show more</span><div style="background-image: url(/img/expd.png); margin-left: auto; margin-right: auto; background-size: 9px 6px; width: 9px; height: 6px;"></div></a></div></div></div>';
 
         //END ADDITIONS
 
         //BEING ADDITIONS
 
-       echo '<div id="page-wrapper" style="margin: 25px 15px; width: 50%"><div id="page-container" style="background-color: #fff;"><div><div class="content-header">Expected outcome</div>';
+       echo '<div id="event-outcome-area" style=""><div id="page-container"><div class="content-header">Expected outcome</div>';
 
 ?>
 
@@ -822,6 +821,8 @@ if ($oEvent != null)
         foreach ($aOutcomes as $aOutcome)
         {
             $aLabels = [$aOutcome[0]->getTeamAsString(1), $aOutcome[0]->getTeamAsString(2)];
+            $iOffset = $aOutcome[1]['team1_dec'] + $aOutcome[1]['team1_itd'] + ($aOutcome[1]['draw'] / 2);
+
             $aPoints = [$aOutcome[1]['team1_dec'],
                         $aOutcome[1]['team1_itd'],
                         $aOutcome[1]['draw'],
@@ -835,10 +836,7 @@ if ($oEvent != null)
             $aRowData[] = ['No ' . strtolower($aSeriesNames[$x]), null];
         }
         $aData  = ["name" => 'Outcomes', "data" => $aRowData];
-
-        //Size of chart should be maximum 10 rows initially but if less we need to check that 
-
-        echo '<div id="event-outcome-container" data-outcomes="' . htmlentities(json_encode($aData), ENT_QUOTES, 'UTF-8') . '" style="height:' . (60 + count($aRowData) * 22) . 'px;"></div>';
+        echo '<div id="event-outcome-container" data-outcomes="' . htmlentities(json_encode($aData), ENT_QUOTES, 'UTF-8') . '" style="height:' . (60 + count($aRowData) * 19) . 'px;"></div>';
 
                 //echo '<div id="event-outcome-container" style="width: 50%; height: 400px; display: inline-block;"></div>';
         echo '</div></div></div>';

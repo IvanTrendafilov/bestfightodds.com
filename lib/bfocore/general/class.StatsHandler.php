@@ -83,12 +83,11 @@ class StatsHandler
 
 	public static function getExpectedOutcomesForMatchup($oMatchup)
 	{
-		//TODO: Hardcoded prop_types here, need to look into this..
-
-		$oTeam1ITD = OddsHandler::getCurrentPropIndex($oMatchup->getID(), 1, 10, 1); //Proptype 10: wins inside distance
-		$oTeam1DEC = OddsHandler::getCurrentPropIndex($oMatchup->getID(), 1, 11, 1); //Proptype 11: wins by decision
-		$oTeam2ITD = OddsHandler::getCurrentPropIndex($oMatchup->getID(), 1, 10, 2); //Proptype 10: wins inside distance
-		$oTeam2DEC = OddsHandler::getCurrentPropIndex($oMatchup->getID(), 1, 11, 2); //Proptype 11: wins by decision
+		//Hardcoded proptype IDs here.. might wanna fix this
+		$oTeam1ITD = OddsHandler::getCurrentPropIndex($oMatchup->getID(), 1, 10, ($oMatchup->hasOrderChanged() ? 2 : 1)); //Proptype 10: wins inside distance
+		$oTeam1DEC = OddsHandler::getCurrentPropIndex($oMatchup->getID(), 1, 11, ($oMatchup->hasOrderChanged() ? 2 : 1)); //Proptype 11: wins by decision
+		$oTeam2ITD = OddsHandler::getCurrentPropIndex($oMatchup->getID(), 1, 10, ($oMatchup->hasOrderChanged() ? 1 : 2)); //Proptype 10: wins inside distance
+		$oTeam2DEC = OddsHandler::getCurrentPropIndex($oMatchup->getID(), 1, 11, ($oMatchup->hasOrderChanged() ? 1 : 2)); //Proptype 11: wins by decision
 		$oDraw = OddsHandler::getCurrentPropIndex($oMatchup->getID(), 1, 6, 0); //Proptype 6: fight is a draw
 
 		//All is required to be able to draw some conclusion
@@ -108,6 +107,7 @@ class StatsHandler
 				'team2_itd' => round($sum / (OddsTools::convertMoneylineToDecimal($oTeam2ITD->getPropOdds(1)) - 1)),
 				'team2_dec' => round($sum / (OddsTools::convertMoneylineToDecimal($oTeam2DEC->getPropOdds(1)) - 1)),
 				'draw' => round($sum / (OddsTools::convertMoneylineToDecimal($oDraw->getPropOdds(1)) - 1))];
+
 
 		return $ret;
 	}
