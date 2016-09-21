@@ -375,7 +375,6 @@ h1 {
   text-align: center;
   padding-bottom: 15px;
   color: #787878;
-  margin-top: -15px;
   a {
     color: #9a9a9a;
     font-size: 11px;
@@ -1062,11 +1061,6 @@ table.team-stats-table {
   }
 }
 
-
-#event-charts-area {
-  padding-top: 22px;
-}
-
 #event-swing-area {
   -webkit-box-shadow: 0 1px 1px 1px rgb(170, 170, 170);
   -moz-box-shadow: 0 1px 1px 1px rgb(170, 170, 170);
@@ -1104,21 +1098,39 @@ table.team-stats-table {
 
 #event-swing-picker-menu {
   float: right;
+  color: #666; 
 }
 
 .event-swing-picker {
     color: #eaeaea;
     font-weight: 400;
-    font-size: 12px;
+    font-size: 11px;
+    &.picked {
+      font-weight: 700;
+    }
 }
-
-
 
 .event-swing-expandarea {
   text-align: center;
- margin-left: auto;
- margin-right: auto;
- width: 150px;
+   margin-left: auto;
+   margin-right: auto;
+   width: 150px;
+   font-size: 11px;
+   font-weight: 500;
+   padding-top: 6px;
+   padding-bottom: 8px;  
+   &.hidden {
+    visibility: hidden;
+   }
+}
+.event-swing-expandarrow
+{
+  background-image: url(/img/expd.png);
+   margin-left: auto;
+   margin-right: auto;
+   background-size: 9px 6px;
+   width: 9px;
+   height: 6px;
 }
 
 .event-swing-expand {

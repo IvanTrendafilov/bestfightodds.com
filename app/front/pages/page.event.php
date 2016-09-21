@@ -78,7 +78,7 @@ if ($oEvent != null)
         
         //Generate new page and display to user
         ob_start();
-        $aFights = null; //EventHandler::getAllFightsForEvent($oEvent->getID(), true);
+        $aFights = EventHandler::getAllFightsForEvent($oEvent->getID(), true);
 
         //Check if event is named FUTURE EVENTS, if so, do not display the date
         //TODO: Hardcoded reference to "FUTURE EVENTS". Should be changed to set id
@@ -762,11 +762,11 @@ if ($oEvent != null)
         echo '</tbody>'
         . '</table></div></div></div></div>'; 
 
-
+        echo '%table-lastchanged%';
 
         //BEING ADDITIONS
 
-       echo '<div class="table-outer-wrapper" id="event-charts-area"><div id="event-swing-area"><div id="page-container"><div class="content-header">Line movement: <div id="event-swing-picker-menu"><a href="#" class="event-swing-picker" data-li="0" style="font-weight: 500">Since opening</a> | <a href="#" class="event-swing-picker" data-li="1">Last 24 hours</a> | <a href="#" class="event-swing-picker" data-li="2">Last hour</a></div></div>';
+       echo '<div class="table-outer-wrapper"><div id="event-swing-area"><div id="page-container"><div class="content-header">Line movement <div id="event-swing-picker-menu"><a href="#" class="event-swing-picker picked" data-li="0">Since opening</a> | <a href="#" class="event-swing-picker" data-li="1">Last 24 hours</a> | <a href="#" class="event-swing-picker" data-li="2">Last hour</a></div></div>';
 
 ?>
 
@@ -795,15 +795,15 @@ if ($oEvent != null)
 
         }
 
-        //Size of chart should be maximum 12 rows initially but if less we need to check that 
-        $iMaxRows = 12;
-        if (count($aData[0]['data']) < 12)
+        //Size of chart should be maximum 10 rows initially but if less we need to check that 
+        $iMaxRows = 10;
+        if (count($aData[0]['data']) < 10)
         {
             $iMaxRows = count($aData[0]['data']);
         }
-        echo '<div id="event-swing-container" data-moves="' . htmlentities(json_encode($aData), ENT_QUOTES, 'UTF-8') . '" style="height:' . (60 + $iMaxRows * 16) . 'px;"></div>';
+        echo '<div id="event-swing-container" data-moves="' . htmlentities(json_encode($aData), ENT_QUOTES, 'UTF-8') . '" style="height:' . (50 + $iMaxRows * 18) . 'px;"></div>';
 
-        echo '<div class="event-swing-expandarea"><a href="#" class="event-swing-expand"><span>Show more</span><div style="background-image: url(/img/expd.png); margin-left: auto; margin-right: auto; background-size: 9px 6px; width: 9px; height: 6px;"></div></a></div></div></div>';
+        echo '<div class="event-swing-expandarea ' . (count($aData[0]['data']) < 10 ? ' hidden' : '') . '"><a href="#" class="event-swing-expand"><span>Show all</span><div class="event-swing-expandarrow"></div></a></div></div></div>';
 
         //END ADDITIONS
 
@@ -836,7 +836,7 @@ if ($oEvent != null)
             $aRowData[] = ['No ' . strtolower($aSeriesNames[$x]), null];
         }
         $aData  = ["name" => 'Outcomes', "data" => $aRowData];
-        echo '<div id="event-outcome-container" data-outcomes="' . htmlentities(json_encode($aData), ENT_QUOTES, 'UTF-8') . '" style="height:' . (60 + count($aRowData) * 19) . 'px;"></div>';
+        echo '<div id="event-outcome-container" data-outcomes="' . htmlentities(json_encode($aData), ENT_QUOTES, 'UTF-8') . '" style="height:' . (66 + count($aRowData) * 20) . 'px;"></div>';
 
                 //echo '<div id="event-outcome-container" style="width: 50%; height: 400px; display: inline-block;"></div>';
         echo '</div></div></div>';
@@ -852,6 +852,10 @@ if ($oEvent != null)
         echo '<!--C:MIS-->';
 
     }
+
+    //Dynamically replace last change placeholder
+    $sBufferLastChange = '<div class="table-last-changed">Last change: <span title="' . ($sLastChange == null ? 'n/a' : (date('M jS Y H:i', strtotime($sLastChange)) . ' EST')) . '">' . getTimeDifference(strtotime($sLastChange), strtotime(GENERAL_TIMEZONE . ' hours')) . '</span></div> ';
+    $sBuffer = str_replace('%table-lastchanged%', $sBufferLastChange, $sBuffer);
 
     //Perform dynamic modifications to the content (cached or not)
     echo preg_replace_callback('/changedate-([^\"]*)/', function ($a_aMatches)
@@ -871,9 +875,9 @@ if ($oEvent != null)
         }
     }, $sBuffer);
 
-        echo '<div class="table-last-changed">Last change: <span title="' . ($sLastChange == null ? 'n/a' : (date('M jS Y H:i', strtotime($sLastChange)) . ' EST')) . '">' . getTimeDifference(strtotime($sLastChange), strtotime(GENERAL_TIMEZONE . ' hours')) . '</span></div>'
-    . '
-          ';
+    //Replace last changed placeholder
+
+
 }
 
 ?>

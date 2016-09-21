@@ -210,8 +210,8 @@ $(function() {
             }
 
             //Set max to 9 (or less depending on dynamic data)
-            var maxval = 12;
-            if (xdata.length < 12)
+            var maxval = 10;
+            if (xdata.length < 10)
             {
                 maxval = xdata.length;
             }
@@ -252,10 +252,7 @@ $(function() {
                     }
                 },
                 yAxis: {
-                    title: {
-                        text: 'Line change (%)',
-                        align: 'high'
-                    },
+                    title: "",
                     labels: {
                         style: {
                                 color: '#aaacae', 
@@ -297,7 +294,7 @@ $(function() {
                        animation: {
                         duration: 200,
                             },
-                        color: '#66696d',
+                        color: '#606060',
                         pointPadding: 0,
                         groupPadding: 0.2,
                     }
@@ -319,8 +316,6 @@ $(function() {
     if (document.getElementById("event-outcome-container"))
     {
         function createOutcomeChart(in_data) {
-            // http://jsfiddle.net/f3vv6o3h/
-
             var xdata = in_data['data'];
             var cats_left = [];
             var cats_right = [];
@@ -349,7 +344,6 @@ $(function() {
                     fontWeight: '500'
                   },
                 },
-
                 title: {
                   text: ''
                 },
@@ -361,7 +355,7 @@ $(function() {
                     style: {
                       fontSize: '10px',
                       fontWeight: '500',
-                      align: 'left'
+                      align: 'left',
                     }
                   },
                 }, { // mirror axis on right side
@@ -386,13 +380,51 @@ $(function() {
                 }],
 
                 yAxis: {
-
                   title: {
                     text: ''
+                  }, 
+                  labels: {
+                    style: {
+                      color: '#aaacae', 
+                    },
+                    formatter: function () {
+                        return Math.abs(this.value);
+                    }
                   }
                 },
                 tooltip: {
-                  pointFormat: '<span style="color:{series.color}">{series.name}</span>:  {point.percentage:.0f}%<br/>',
+                    formatter: function () {
+                        var retstr = "";
+                        
+                        //Check if empty row. If so, return no tooltip
+                        if (this.points[0].y == 0 && this.points[1].y == 0 && this.points[2].y == 0 && this.points[3].y == 0 && this.points[4].y == 0)
+                        {
+                            return false;
+                        }
+                        
+                        for (var i = 0; i < this.points.length; i++)
+                        {
+                            if (this.points[i].series.name == "Draw")
+                            {
+                                retstr += "<span style=\"font-weight: 400; color: " + this.points[i].series.color + "\">Draw: <b>" + Math.round(Math.abs(this.points[i].percentage)) + '%</b><br />';
+                            }
+                            else
+                            {
+                                if (this.points[i].percentage < 0)
+                                {
+                                    //Left hand team 
+                                    retstr += "<span style=\"font-weight: 400; color: " + this.points[0].series.color + "\">" + this.points[i].series.chart.xAxis[0].categories[this.points[i].point.x] + " by " + this.points[i].series.name.charAt(0).toLowerCase() + this.points[i].series.name.slice(1) + ": <b>" + Math.round(Math.abs(this.points[i].percentage)) + '%</b><br />';
+                                }
+                                else
+                                {
+                                    //Right hand team
+                                    retstr += "<span style=\"font-weight: 400; color: " + this.points[0].series.color + "\">" + this.points[i].series.chart.xAxis[1].categories[this.points[i].point.x] + " by " + this.points[i].series.name.charAt(0).toLowerCase() + this.points[i].series.name.slice(1) + ": <b>" + Math.round(Math.abs(this.points[i].percentage)) + '%</b><br />';
+                                }
+                            }
+                        }
+                        return retstr;
+                    },
+                    shared: true
                 },
                 plotOptions: {
                   bar: {
@@ -403,7 +435,6 @@ $(function() {
                         return "";//this.series.name;
                       },
                       enabled: true,
-                      color: (Highcharts.theme && Highcharts.theme.dataLabelsColor) || 'white',
                       style: {
                         fontSize: '9px',
                         textShadow: '0 0 1px black'
@@ -420,33 +451,38 @@ $(function() {
                     enabled: false
                 },
                 legend: {
-                 style: {
-                    fontFamily: "'Roboto', Arial, sans-serif",
-                    color: '#1a1a1a',
-                    fontSize: '10px',
-                    fontWeight: '500'
-                  },
+                   itemStyle: {
+                        fontFamily: "'Roboto', Arial, sans-serif",
+                        color: '#2a2a2a',
+                        fontSize: '11px',
+                        fontWeight: '500',
+                    }
                 },
                 series: [{
                   name: 'Decision',
                   data: team2_dec,
-                  color: '#303030'
+                  color: '#303030',
+                  legendIndex:5
                 }, {
                   name: 'Finish',
                   data: team2_itd,
-                  color: '#606060'
+                  color: '#606060',
+                  legendIndex:4
                 },{
                   name: 'Draw',
                   data: draw,
-                  color: '#a30000'
+                  color: '#a30000',
+                  legendIndex:3
                 }, {
                   name: 'Decision',
                   data: team1_dec,
-                  color: '#c0c0c0'
+                  color: '#c0c0c0',
+                  legendIndex:1
                 }, {
                   name: 'Finish',
                   data: team1_itd,
-                  color: '#a0a0a0'
+                  color: '#a0a0a0',
+                  legendIndex:2
                 }],
 
             });
@@ -476,10 +512,6 @@ $(function () {
         {
             container.data('expanded', !container.data('expanded'));
         }
-        else
-        {
-            container.data('expanded', false);
-        }
 
         var series = chart.series;
         var i = series.length;
@@ -497,8 +529,8 @@ $(function () {
 
         resizeSwingChart(chart.series[opts].data);
 
-        $('.event-swing-picker').css("font-weight", "400");
-        $(this).css("font-weight", "500");
+        $('.event-swing-picker').removeClass("picked");
+        $(this).addClass("picked");
         return false;
     });
 
@@ -549,7 +581,7 @@ $(function () {
     {
         var container = $('#event-swing-container');
         var chart = container.highcharts();
-        container.css("height", 60 + (chart.xAxis[0].getExtremes().max + 1) * 18);
+        container.css("height", 50 + (chart.xAxis[0].getExtremes().max + 1) * 18);
 
         //Set expander button
         if (container.data('expanded') == true)
@@ -560,9 +592,9 @@ $(function () {
         else
         {
             $('.event-swing-expand').find("div").css("background-image", "url(/img/expd.png)");
-            $('.event-swing-expand').find("span").text("Show more");
+            $('.event-swing-expand').find("span").text("Show all");
         }
-        chart.setSize(chart.chartWidth, 60 + (chart.xAxis[0].getExtremes().max + 1) * 18);
+        chart.setSize(chart.chartWidth, 50 + (chart.xAxis[0].getExtremes().max + 1) * 18);
         chart.redraw();
     }
 });

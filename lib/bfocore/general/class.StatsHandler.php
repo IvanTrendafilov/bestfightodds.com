@@ -93,7 +93,11 @@ class StatsHandler
 		//All is required to be able to draw some conclusion
 		if ($oTeam1ITD == null && $oTeam1DEC == null && $oTeam2ITD == null && $oTeam2DEC == null && $oDraw == null)
 		{
-			return null;
+		return ['team1_itd' => 0,
+				'team1_dec' => 0,
+				'team2_itd' => 0,
+				'team2_dec' => 0,
+				'draw' => 0];
 		}
 
 		$sum = OddsTools::convertMoneylineToDecimal($oTeam1ITD->getPropOdds(1)) - 1
