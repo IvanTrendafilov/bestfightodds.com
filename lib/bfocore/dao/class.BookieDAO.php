@@ -12,7 +12,13 @@ class BookieDAO
 					FROM bookies 
 					WHERE active = true 
 					ORDER BY position, id  ASC';
-        $rResult = DBTools::doQuery($sQuery);
+
+        $rResult = DBTools::getCachedQuery($sQuery);
+        if ($rResult == null)
+        {
+            $rResult = DBTools::doQuery($sQuery);
+            DBTools::cacheQueryResults($sQuery, $rResult);
+        }
 
         $aBookies = array();
 
