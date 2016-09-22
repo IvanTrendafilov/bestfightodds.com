@@ -91,7 +91,7 @@ class StatsHandler
 		$oDraw = OddsHandler::getCurrentPropIndex($oMatchup->getID(), 1, 6, 0); //Proptype 6: fight is a draw
 
 		//All is required to be able to draw some conclusion
-		if ($oTeam1ITD == null && $oTeam1DEC == null && $oTeam2ITD == null && $oTeam2DEC == null && $oDraw == null)
+		if ($oTeam1ITD == null || $oTeam1DEC == null || $oTeam2ITD == null || $oTeam2DEC == null || $oDraw == null)
 		{
 		return ['team1_itd' => 0,
 				'team1_dec' => 0,

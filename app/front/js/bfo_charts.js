@@ -291,9 +291,7 @@ $(function() {
                     }, 
 
                     series: {
-                       animation: {
-                        duration: 200,
-                            },
+                       animation: false,
                         color: '#606060',
                         pointPadding: 0,
                         groupPadding: 0.2,
@@ -401,7 +399,7 @@ $(function() {
                         {
                             return false;
                         }
-                        
+
                         for (var i = 0; i < this.points.length; i++)
                         {
                             if (this.points[i].series.name == "Draw")

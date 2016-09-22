@@ -152,9 +152,6 @@ ORDER BY storedtime, lasttime DESC;
                                         ON (m1.fight_id = m2.fight_id AND m1.bookie_id = m2.bookie_id AND m1.date < m2.date)
                                         WHERE m2.date IS NULL AND m1.fight_id = ?) f1) latest)';
 
-
-
-
         $aParams[] = $a_iMatchup;
         $aParams[] = $a_iMatchup;
         $aParams[] = $a_iMatchup;
