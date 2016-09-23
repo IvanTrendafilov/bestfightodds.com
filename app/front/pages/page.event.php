@@ -781,6 +781,10 @@ if ($oEvent != null)
             
             foreach ($aSwings as $aSwing)
             {
+                if ($aSwing[2]['swing'] < 0.01 && $aSwing[2]['swing'] > 0.00)
+                {
+                    $aSwing[2]['swing'] = 0.01;
+                }
                 if (round($aSwing[2]['swing'] * 100) != 0)
                 {
                     

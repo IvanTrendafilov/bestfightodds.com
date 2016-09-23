@@ -13,7 +13,7 @@ header('Pragma: no-cache');
 <head>
 <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
 <title>Admin</title>
-<script src="../js/jquery-1.11.3.min.js" language="JavaScript" type="text/javascript"></script>
+<script src="js/jquery-1.12.4.min.js" language="JavaScript" type="text/javascript"></script>
 <script src="js/jquery.autocomplete.min.js" language="JavaScript" type="text/javascript"></script>
 <script src="js/admin-main.js" language="JavaScript" type="text/javascript"></script>
 <link rel="stylesheet" type="text/css" href="css/stylesheets.php" />
