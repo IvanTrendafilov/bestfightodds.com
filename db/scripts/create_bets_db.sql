@@ -261,3 +261,5 @@ END$$
 
 DELIMITER ;
 
+
+ALTER TABLE lines_props ADD KEY ix1(matchup_id, proptype_id, bookie_id, team_num, date);

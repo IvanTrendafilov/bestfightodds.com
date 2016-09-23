@@ -105,20 +105,11 @@ if ($oEvent != null)
         $iFightCounter = 0;
         foreach ($aFights as $oFight)
         {
-            //List all odds for the fight
-            $aFightOdds = EventHandler::getAllLatestOddsForFight($oFight->getID());
-            $aOldFightOdds = EventHandler::getAllLatestOddsForFight($oFight->getID(), 1);
-            $oBestOdds = EventHandler::getBestOddsForFight($oFight->getID());
-
-            $iProcessed = 0;
             $iCurrentOperatorColumn = 0;
             for ($iX = 1; $iX <= 2; $iX++)
             {
                 echo '<tr ' . (($iX % 2) == 1 ? 'class="even"' : 'class="odd" id="mu-' . $oFight->getID() . '"') . ' ' . (($iX == 2 && $iFightCounter == count($aFights) - 1) ? ' style="border-bottom: 0;" ' : '') . '>'; //If this is the last matchup, add style for it
                 echo '<th scope="row"><a href="/fighters/' . $oFight->getFighterAsLinkString($iX) . '"><span class="tw">' . $oFight->getFighterAsString($iX) . '</span></a></th>';
-
-                $iProcessed = 0;
-                $bEverFoundOldOdds = false;
 
                 echo '</tr>';
             }
@@ -128,40 +119,11 @@ if ($oEvent != null)
 
             if (count($aPropTypes) > 0)
             {
-                $aAllPropOdds = OddsHandler::getCompletePropsForMatchup($oFight->getID());
-                $aAllOldPropOdds = OddsHandler::getCompletePropsForMatchup($oFight->getID(), 1);
-
                 $iPropCounter = 0;
                 $iPropRowCounter = 0;
                 foreach ($aPropTypes as $oPropType)
                 {
-                    //From previously fetech props, grab all for that specific proptype
-                    $aPropsOdds = array();
-                    foreach ($aAllPropOdds as $oTempPropOdds)
-                    {
-                        if ($oTempPropOdds->getPropTypeID() == $oPropType->getID() && $oTempPropOdds->getTeamNumber() == $oPropType->getTeamNum())
-                        {
-                            $aPropsOdds[] = $oTempPropOdds;
-                        }
-                    }
-
-                    $aOldPropOdds = array();
-                    if ($aAllOldPropOdds != null)
-                    {
-                        foreach ($aAllOldPropOdds as $oTempPropOdds)
-                        {
-                            if ($oTempPropOdds->getPropTypeID() == $oPropType->getID() && $oTempPropOdds->getTeamNumber() == $oPropType->getTeamNum())
-                            {
-                                $aOldPropOdds[] = $oTempPropOdds;
-                            }
-                        }
-                    }
-
-                    $oBestOdds = OddsHandler::getBestPropOddsForMatchup($oFight->getID(), $oPropType->getID(), $oPropType->getTeamNum());
-
-                    $iProcessedProps = 0;
                     $iCurrentOperatorColumn = 0;
-
                     for ($iX = 1; $iX <= 2; $iX++)
                     {
                         //If order has changed in the database we need to switch the odds
@@ -179,10 +141,6 @@ if ($oEvent != null)
 
                         echo '<tr class="pr' . (($iX % 2) == 1 ? '' : '-odd') . '"' . (($iX == 2 && $iPropCounter == count($aPropTypes) - 1) ? ' style="border-bottom: 2px solid #f8f8f8;"' : (($iX == 1 && $iFightCounter == count($aFights) - 1 && $iPropCounter == 0) ? ' style="border-top: 1px solid #C6C6C6;"' : '')) . '>';
                         echo '<th scope="row">' . ($iX == 1 ? $oPropType->getPropDesc() : $oPropType->getPropNegDesc()) . '</th>';
-
-                        $iProcessedProps = 0;
-                        $bEverFoundOldOdds = false;
-
                         echo '</tr>';
                     }
 
@@ -195,7 +153,6 @@ if ($oEvent != null)
             $iFightCounter++;
         }
 
-
         //Add event prop rows
         $aPropTypes = OddsHandler::getAllPropTypesForEvent($oEvent->getID());
         if (count($aPropTypes) > 0)
@@ -204,52 +161,19 @@ if ($oEvent != null)
             echo '<th scope="row" style="font-weight: 400"><a href="#" data-mu="' . $oEvent->getID() . '">Event props</a></th>';
             echo '</tr>';
 
-            $aAllPropOdds = OddsHandler::getCompletePropsForEvent($oEvent->getID());
-            $aAllOldPropOdds = OddsHandler::getCompletePropsForEvent($oEvent->getID(), 1);
-
             $iPropCounter = 0;
             $iPropRowCounter = 0;
             foreach ($aPropTypes as $oPropType)
             {
-                //From previously fetech props, grab all for that specific proptype
-                    $aPropsOdds = array();
-                    foreach ($aAllPropOdds as $oTempPropOdds)
-                    {
-                        if ($oTempPropOdds->getPropTypeID() == $oPropType->getID())
-                        {
-                            $aPropsOdds[] = $oTempPropOdds;
-                        }
-                    }
-
-                    $aOldPropOdds = array();
-                    if ($aAllOldPropOdds != null)
-                    {
-                        foreach ($aAllOldPropOdds as $oTempPropOdds)
-                        {
-                            if ($oTempPropOdds->getPropTypeID() == $oPropType->getID())
-                            {
-                                $aOldPropOdds[] = $oTempPropOdds;
-                            }
-                        }
-                    }
-
-                    $oBestOdds = OddsHandler::getBestPropOddsForEvent($oEvent->getID(), $oPropType->getID());
-
-                    $iProcessedProps = 0;
                     $iCurrentOperatorColumn = 0;
-
                     for ($iX = 1; $iX <= 2; $iX++)
                     {
                         $iPropRowCounter++;
                         echo '<tr class="pr' . (($iX % 2) == 1 ? '' : '-odd') . '"' . (($iX == 2 && $iPropCounter == count($aPropTypes) - 1) ? ' style="border-bottom: 2px solid #f8f8f8;"' : (($iX == 1 && $iPropCounter == 0) ? ' style="border-top: 1px solid #C6C6C6;"' : '')) . '>';
                         echo '<th scope="row">' . ($iX == 1 ? $oPropType->getPropDesc() : $oPropType->getPropNegDesc()) . '&nbsp;</th>';
 
-                        $iProcessedProps = 0;
-                        $bEverFoundOldOdds = false;
-
                         echo '</tr>';
                     }
-
                     $iPropCounter++;
             }
         }
