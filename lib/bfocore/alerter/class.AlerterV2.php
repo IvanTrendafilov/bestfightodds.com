@@ -8,6 +8,22 @@ require_once('lib/bfocore/general/class.OddsHandler.php');
 require_once('lib/bfocore/general/class.BookieHandler.php');
 
 
+
+/*
+
+LEFT TO DO:
+
+- Proper formatting of e-mails. Right now we can list the props but we need the following:
+	= What matchup is the props related to
+	= Sorting of props
+	= Sorting of said matchup (if props appear in random order)
+- Actual sending of mails
+- Front-end for adding props
+
+Ambition right now is to not get specific prop categories in place but wait with that until this is done
+
+*/
+
 class AlerterV2
 {
 	private $logger;
@@ -144,7 +160,7 @@ class AlerterV2
 		$text = "Alert mail:\n\n";
 		foreach ($alerts as $alert)
 		{
-			$text .= $this->formatSingleAlert($alert);
+			$text .= $this->formatSingleAlert($alert)['text'] . "\n";
 			
 		}
 		$text .= "End of alert mail\n\n";
@@ -154,12 +170,13 @@ class AlerterV2
 	private function formatSingleAlert($alert)
 	{
 		$text = '';
+		$type = '';
 		$criterias = $alert->getCriterias(); 
 		//Add alert row
 		if (isset($criterias['proptype_id']))
 		{
-			//Prop row
-			$text .= "Prop available: ";
+			//Prop
+			$type = 'prop';
 			$proptype = OddsHandler::getPropTypeByID($criterias['proptype_id']);
 			
 			if (isset($criterias['matchup_id']))
@@ -178,8 +195,8 @@ class AlerterV2
 		else
 		{
 			//Matchup
+			$type = 'matchup';
 			$matchup = EventHandler::getFightByID($criterias['matchup_id']);
-			$text .= "Regular matchup: ";
 			$latest_price = null;
 			$add_bookie = '';
 
@@ -198,23 +215,17 @@ class AlerterV2
 
 			if (isset($criterias['line_limit']))
 			{
-				$text .= "Reached your limit (" . $criterias['line_limit'] . "): ";
+				$text = "Reached your limit (" . $criterias['line_limit'] . "): ";
 				//Limit set, include it	
 				$text .= " " . $matchup->getTeamAsString($criterias['team_num']) . ' ' . $latest_price->getFighterOddsAsString($criterias['team_num']) . ' (vs. ' . $matchup->getTeamAsString((($criterias['team_num'] - 1) ^ 1) + 1) . ' ' . $latest_price->getFighterOddsAsString((($criterias['team_num'] - 1) ^ 1) + 1) . ')' . $add_bookie;
 			}
 			else
 			{
 				//No limit set, this is for show only
-							$text .= " " . $matchup->getTeamAsString(1) . ' (' . $latest_price->getFighterOddsAsString(1) . ') vs. ' . $matchup->getTeamAsString(2) . ' (' . $latest_price->getFighterOddsAsString(2) . ')' . $add_bookie;
+							$text = " " . $matchup->getTeamAsString(1) . ' (' . $latest_price->getFighterOddsAsString(1) . ') vs. ' . $matchup->getTeamAsString(2) . ' (' . $latest_price->getFighterOddsAsString(2) . ')' . $add_bookie;
 			}
-
-
-
-
-		}
-
-		$text .= "\n";
-		return $text;
+		}		
+		return ['type' => $type, 'text' => $text];
 	}
 
 	private function sendAlertsByMail($mail_text)

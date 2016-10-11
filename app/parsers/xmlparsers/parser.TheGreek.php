@@ -15,6 +15,7 @@ require_once('lib/simple_html_dom/simple_html_dom.php');
 class XMLParserTheGreek
 {
     private $oParsedSport;
+    private $bAuthorativeRun = false;
 
     public function __construct()
     {
@@ -24,6 +25,14 @@ class XMLParserTheGreek
     public function parseXML($a_sXML)
     {
         XMLParserTheGreek::collectMMAEvents($a_sXML);
+
+        //Declare authorative run if we fill the criteria
+        if (count($this->oParsedSport->getParsedMatchups()) >= 25)
+        {
+            $this->bAuthorativeRun = true;
+            Logger::getInstance()->log("Declared authoritive run", 0);
+        }
+
         return [$this->oParsedSport];
     }
 
@@ -123,6 +132,11 @@ class XMLParserTheGreek
                 }
             } 
         }
+    }
+
+    public function checkAuthoritiveRun($a_aMetadata)
+    {
+        return $this->bAuthorativeRun;
     }
 }
 ?>

@@ -10,12 +10,14 @@
  * Spreads: No
  * Totals: No
  * Props: Yes (confirmed)
+ * Authoritiative run: Yes
  *
  * Comment: Prod version
  *
  */
 class XMLParserBookMaker
 {
+    private $bAuthorativeRun = false;
 
     public function parseXML($a_sXML)
     {
@@ -121,9 +123,14 @@ class XMLParserBookMaker
             }
         }
 
-        $aSports[] = $oParsedSport;
+        //Declare authorative run if we fill the criteria
+        if (count($oParsedSport->getParsedMatchups()) >= 5 && $oParsedSport->getPropCount() >= 2)
+        {
+            $this->bAuthorativeRun = true;
+            Logger::getInstance()->log("Declared authoritive run", 0);
+        }
 
-        return $aSports;
+        return [$oParsedSport];
     }
 
     /**
@@ -135,6 +142,11 @@ class XMLParserBookMaker
     private function getMatchupFromString($a_sString)
     {
         return $sMatchup;
+    }
+
+    public function checkAuthoritiveRun($a_aMetadata)
+    {
+        return $this->bAuthorativeRun;
     }
 
 }

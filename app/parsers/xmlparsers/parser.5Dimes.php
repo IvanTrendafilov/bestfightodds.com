@@ -10,6 +10,7 @@
  * Spreads: No
  * Totals: No
  * Props: Yes
+ * Authoritative run: Yes
  *
  * Comment: Prod version
  *
@@ -18,6 +19,7 @@ require_once('lib/bfocore/general/class.BookieHandler.php');
 
 class XMLParser5Dimes
 {
+    private $bAuthorativeRun = false;
 
     public function parseXML($a_sXML)
     {
@@ -170,6 +172,13 @@ class XMLParser5Dimes
             }
         }
 
+        //Declare authorative run if we fill the criteria
+        if (count($oParsedSport->getParsedMatchups()) > 10 && $oParsedSport->getPropCount() > 10)
+        {
+            $this->bAuthorativeRun = true;
+            Logger::getInstance()->log("Declared authoritive run (but only valid if changenum is reset)", 0);
+        }
+
         $aSports[] = $oParsedSport;
 
         //Before finishing up, save the changenum to be able to fetch future feeds
@@ -194,6 +203,16 @@ class XMLParser5Dimes
 
         return $aSports;
 
+    }
+
+    public function checkAuthoritiveRun($a_aMetadata)
+    {
+        //Only report as an authoritive run if changenum has been reset. This in combination with the number of parsed matchups declares
+        if (isset($a_aMetadata['changenum']) && $a_aMetadata['changenum'] == -1)
+        {
+            return $this->bAuthorativeRun;
+        }
+        return false;
     }
 
 }

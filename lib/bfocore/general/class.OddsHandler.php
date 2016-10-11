@@ -222,10 +222,10 @@ class OddsHandler
         return OddsDAO::addEventPropBet($a_oEventPropBet);
     }
 
-    public static function getPropBetsForEvent($a_iEventID)
+    /*public static function getPropBetsForEvent($a_iEventID)
     {
         return OddsDAO::getPropBetsForEvent($a_iEventID);
-    }
+    }*/
 
     public static function getAllPropTypesForEvent($a_iEventID)
     {

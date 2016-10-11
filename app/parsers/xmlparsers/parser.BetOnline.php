@@ -10,12 +10,14 @@
  * Spreads: No
  * Totals: No
  * Props: No* (*except for totals, BetOnline have been contacted regarding other props)
+ * Authoritative run: Yes
  *
  * Comment: Prod version
  *
  */
 class XMLParserBetOnline
 {
+    private $bAuthorativeRun = false;
 
     public function parseXML($a_sXML)
     {
@@ -61,9 +63,19 @@ class XMLParserBetOnline
             }
         }
 
-        $aSports[] = $oParsedSport;
+        //Declare authorative run if we fill the criteria
+        if ($oXML != false && count($oParsedSport->getParsedMatchups()) >= 5)
+        {
+            $this->bAuthorativeRun = true;
+            Logger::getInstance()->log("Declared authoritive run", 0);
+        }
 
-        return $aSports;
+        return [$oParsedSport];
+    }
+
+    public function checkAuthoritiveRun($a_aMetadata)
+    {
+        return $this->bAuthorativeRun;
     }
 
 }

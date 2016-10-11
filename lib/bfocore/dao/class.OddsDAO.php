@@ -66,7 +66,7 @@ class OddsDAO
         return $aProps;
     }
 
-    public static function getPropBetsForEvent($a_iEventID)
+    /*public static function getPropBetsForEvent($a_iEventID)
     {
         $sQuery = 'SELECT lep.bookie_id, lep.prop_odds, lep.negprop_odds, lep.proptype_id, lep.date, pt.prop_desc, pt.negprop_desc, lep.date
                     FROM lines_eventprops lep, prop_types pt
@@ -90,16 +90,25 @@ class OddsDAO
         }
 
         return $aProps;
-    }
+    }*/
 
-
-    public static function getAllPropTypes()
+    public static function getAllMatchupPropsForEvent($a_iEventID)
     {
-        $sQuery = 'SELECT pt.id, pt.prop_desc, pt.negprop_desc
-                    FROM prop_types pt
-                    ORDER BY LEFT(pt.prop_desc,4) = "Over" DESC, id ASC';
+        //Under development
+        $sQuery = 'SELECT lp.*
+            FROM fights f INNER JOIN lines_props lp ON f.id = lp.matchup_id 
+            INNER JOIN
+                (SELECT matchup_id, proptype_id, bookie_id, team_num, date AS MaxDateTime
+                FROM lines_props
+                GROUP BY matchup_id, proptype_id, bookie_id, team_num) groupedtt 
+            ON (lp.matchup_id = groupedtt.matchup_id 
+            AND lp.proptype_id = groupedtt.proptype_id 
+            AND lp.bookie_id = groupedtt.bookie_id 
+            AND lp.team_num = groupedtt.team_num 
+            AND lp.date = groupedtt.MaxDateTime)
+            WHERE f.event_id = ?;';
 
-        $rResult = DBTools::doQuery($sQuery);
+        $rResult = DBTools::doParamQuery($sQuery, [$a_iEventID]);
 
         $aPropTypes = array();
         while ($aRow = mysql_fetch_array($rResult))
@@ -112,9 +121,31 @@ class OddsDAO
         return $aPropTypes;
     }
 
+
+    public static function getAllPropTypes()
+    {
+        $sQuery = 'SELECT pt.id, pt.prop_desc, pt.negprop_desc, pt.is_eventprop
+                    FROM prop_types pt
+                    ORDER BY LEFT(pt.prop_desc,4) = "Over" DESC, id ASC';
+
+        $rResult = DBTools::doQuery($sQuery);
+
+        $aPropTypes = array();
+        while ($aRow = mysql_fetch_array($rResult))
+        {
+            $oTempPT = new PropType($aRow['id'],
+                            $aRow['prop_desc'],
+                            $aRow['negprop_desc']);
+            $oTempPT->setEventProp($aRow['is_eventprop']);
+            $aPropTypes[] = $oTempPT;
+        }
+
+        return $aPropTypes;
+    }
+
     public static function getPropTypeByID($a_iID)
     {
-        $sQuery = 'SELECT pt.id, pt.prop_desc, pt.negprop_desc
+        $sQuery = 'SELECT pt.id, pt.prop_desc, pt.negprop_desc, pt.is_eventprop
                     FROM prop_types pt
                     WHERE pt.id = ?';
 
@@ -123,9 +154,11 @@ class OddsDAO
         $aPropTypes = array();
         while ($aRow = mysql_fetch_array($rResult))
         {
-            $aPropTypes[] = new PropType($aRow['id'],
+            $oTempPT = new PropType($aRow['id'],
                             $aRow['prop_desc'],
                             $aRow['negprop_desc']);
+            $oTempPT->setEventProp($aRow['is_eventprop']);
+            $aPropTypes[] = $oTempPT;
         }
 
         if (sizeof($aPropTypes) > 0)

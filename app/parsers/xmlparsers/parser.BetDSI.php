@@ -10,12 +10,15 @@
  * Spreads: No
  * Totals: No
  * Props: Yes (confirmed)
+ * Authoritative run: Yes
  *
  * Comment: Prod version
  *
  */
 class XMLParserBetDSI
 {
+    private $bAuthorativeRun = false;
+
     public function parseXML($a_sXML)
     {
         //Store as latest feed available for ProBoxingOdds.com
@@ -117,9 +120,14 @@ class XMLParserBetDSI
             }
         }
 
-        $aSports[] = $oParsedSport;
+        //Declare authorative run if we fill the criteria
+        if (count($oParsedSport->getParsedMatchups()) >= 5 && $oParsedSport->getPropCount() >= 2)
+        {
+            $this->bAuthorativeRun = true;
+            Logger::getInstance()->log("Declared authoritive run", 0);
+        }
 
-        return $aSports;
+        return [$oParsedSport];
     }
 
     /**
@@ -131,6 +139,11 @@ class XMLParserBetDSI
     private function getMatchupFromString($a_sString)
     {
         return $sMatchup;
+    }
+
+    public function checkAuthoritiveRun($a_aMetadata)
+    {
+        return $this->bAuthorativeRun;
     }
 
 }

@@ -72,7 +72,7 @@ class AlertsModel
 
 	public function isAlertReached($criterias)
 	{
-		if (isset($criterias['matchup_id']))
+		if (isset($criterias['matchup_id']) && !isset($criterias['proptype_id']))
 		{
 			return $this->isMatchupAlertReached($criterias);
 		}
@@ -87,7 +87,7 @@ class AlertsModel
 		return false;
 	}
 
-	private function isMatchupAlertReached($criterias) //WORKS!
+	private function isMatchupAlertReached($criterias)
 	{
 		$query_checks = '';
 		$query_params = [];
