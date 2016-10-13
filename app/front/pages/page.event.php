@@ -765,7 +765,7 @@ if ($oEvent != null)
             $aRowData[] = [['N/A','N/A'], $aPoints];
         }
         $aData  = ["name" => 'Outcomes', "data" => $aRowData];
-        echo '<div id="event-outcome-container" data-outcomes="' . htmlentities(json_encode($aData), ENT_QUOTES, 'UTF-8') . '" style="height:' . (66 + count($aRowData) * 20) . 'px;"></div>';
+        echo '<div id="event-outcome-container" data-outcomes="' . htmlentities(json_encode($aData), ENT_QUOTES, 'UTF-8') . '" style="height:' . (67 + count($aRowData) * 20) . 'px;"></div>';
 
                 //echo '<div id="event-outcome-container" style="width: 50%; height: 400px; display: inline-block;"></div>';
         echo '</div></div></div>';
