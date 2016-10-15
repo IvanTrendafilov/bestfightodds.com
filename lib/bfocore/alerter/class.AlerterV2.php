@@ -15,8 +15,6 @@ LEFT TO DO:
 
 - Proper formatting of e-mails. Right now we can list the props but we need the following:
 	= What matchup is the props related to
-	= Sorting of props
-	= Sorting of said matchup (if props appear in random order)
 - Actual sending of mails
 - Front-end for adding props
 
@@ -157,13 +155,54 @@ class AlerterV2
 
 	private function formatAlertMail($alerts)
 	{
-		$text = "Alert mail:\n\n";
+		if(!function_exists('sortAlerts')) {
+			function sortAlerts($a, $b)
+			{
+				//Determine if prop is matchup or event, use that ID as value to compare
+				$sortval_a = 0;
+				if (isset($a->getCriterias()['matchup_id']))
+				{
+					$sortval = $a->getCriterias()['matchup_id'];
+				}
+				else if (isset($a->getCriterias()['event_id']))
+				{
+					$sortval = $a->getCriterias()['event_id'];
+				}
+
+				$sortval_b = 0;
+				if (isset($b->getCriterias()['matchup_id']))
+				{
+					$sortval = $b->getCriterias()['matchup_id'];
+				}
+				else if (isset($b->getCriterias()['event_id']))
+				{
+					$sortval = $b->getCriterias()['event_id'];
+				}	
+
+			    return $sortval_a < $sortval_b;
+			}
+		}
+		usort($alerts, 'sortAlerts');
+
+		$text = "===========Alert mail:==========\n\n";
+		$current_linked_id = 0;
+		$latest_linked_id = 0;
 		foreach ($alerts as $alert)
 		{
-			$text .= $this->formatSingleAlert($alert)['text'] . "\n";
+			$formatted = $this->formatSingleAlert($alert);
+
+			//Current linked id represents the id of the matchup or event that this alert is linked to. We print it once
+			$latest_linked_id = isset($formatted['matchup']) ? $formatted['matchup']->getID() : $formatted['event']->getID();
+			if ($current_linked_id != $latest_linked_id)
+			{
+				$current_linked_id = $latest_linked_id;
+				$text .=  "** " . $formatted['header'] . " **\n";
+			}
+
+			$text .= $formatted['text'] . "\n";
 			
 		}
-		$text .= "End of alert mail\n\n";
+		$text .= "==============End of alert mail==============\n\n";
 		return $text;
 	}
 
@@ -171,6 +210,9 @@ class AlerterV2
 	{
 		$text = '';
 		$type = '';
+		$header = '';
+		$matchup = null;
+		$event = null;
 		$criterias = $alert->getCriterias(); 
 		//Add alert row
 		if (isset($criterias['proptype_id']))
@@ -187,16 +229,22 @@ class AlerterV2
 	            $proptype->setPropNegDesc(str_replace('<T>', $matchup->getTeamLastNameAsString($criterias['team_num']), $proptype->getPropNegDesc()));
 	            $proptype->getPropDesc(str_replace('<T2>', $matchup->getTeamLastNameAsString(($criterias['team_num'] % 2) + 1), $proptype->getPropDesc()));
 	            $proptype->setPropNegDesc(str_replace('<T2>', $matchup->getTeamLastNameAsString(($criterias['team_num'] % 2) + 1), $proptype->getPropNegDesc()));
+	            $header = $matchup->getTeamAsString(1) . " vs. " . $matchup->getTeamAsString(2);
+			}
+			else if (isset($criterias['event_id']))
+			{
+				$event = EventHandler::getEvent($criterias['event_id']);
+				$header = $event->getName();
 			}
 
 			$text .= '' . $proptype->getPropDesc() . ' / ' . $proptype->getPropNegDesc();
-
 		}
 		else
 		{
 			//Matchup
 			$type = 'matchup';
 			$matchup = EventHandler::getFightByID($criterias['matchup_id']);
+			$header = $matchup->getTeamAsString(1) . " vs. " . $matchup->getTeamAsString(2);
 			$latest_price = null;
 			$add_bookie = '';
 
@@ -225,7 +273,7 @@ class AlerterV2
 							$text = " " . $matchup->getTeamAsString(1) . ' (' . $latest_price->getFighterOddsAsString(1) . ') vs. ' . $matchup->getTeamAsString(2) . ' (' . $latest_price->getFighterOddsAsString(2) . ')' . $add_bookie;
 			}
 		}		
-		return ['type' => $type, 'text' => $text];
+		return ['type' => $type, 'text' => $text, 'matchup' => $matchup, 'event' => $event, 'header' => $header];
 	}
 
 	private function sendAlertsByMail($mail_text)
