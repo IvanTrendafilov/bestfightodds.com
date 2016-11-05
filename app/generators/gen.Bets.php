@@ -70,28 +70,6 @@ foreach ($aEvent as $oEvent)
                 $iPropRowCounter = 0;
                 foreach ($aPropTypes as $oPropType)
                 {
-                    //From previously fetech props, grab all for that specific proptype
-                    $aPropsOdds = array();
-                    foreach ($aAllPropOdds as $oTempPropOdds)
-                    {
-                        if ($oTempPropOdds->getPropTypeID() == $oPropType->getID() && $oTempPropOdds->getTeamNumber() == $oPropType->getTeamNum())
-                        {
-                            $aPropsOdds[] = $oTempPropOdds;
-                        }
-                    }
-
-                    $aOldPropOdds = array();
-                    if ($aAllOldPropOdds != null)
-                    {
-                        foreach ($aAllOldPropOdds as $oTempPropOdds)
-                        {
-                            if ($oTempPropOdds->getPropTypeID() == $oPropType->getID() && $oTempPropOdds->getTeamNumber() == $oPropType->getTeamNum())
-                            {
-                                $aOldPropOdds[] = $oTempPropOdds;
-                            }
-                        }
-                    }
-
                     $iProcessedProps = 0;
                     $iCurrentOperatorColumn = 0;
 
