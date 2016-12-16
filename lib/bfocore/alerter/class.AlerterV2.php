@@ -13,8 +13,7 @@ require_once('lib/bfocore/general/class.BookieHandler.php');
 
 LEFT TO DO:
 
-- Proper formatting of e-mails. Right now we can list the props but we need the following:
-	= What matchup is the props related to
+- Templating of email structure to highlight parts of it. Like bold for linked matchup
 - Actual sending of mails
 - Front-end for adding props
 

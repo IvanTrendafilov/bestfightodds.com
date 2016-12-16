@@ -636,6 +636,13 @@ class PropParser
                 }
             }
         }
+
+        //Temporary fix for UFN FN 101
+        if ($iFoundEventID == null && trim($aParsedEvent[0]) == 'UFC FN 101')
+        {
+            $iFoundEventID = 1191;
+        }
+
         return array('event' => $iFoundEventID);
     }
 
