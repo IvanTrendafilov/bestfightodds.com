@@ -296,6 +296,7 @@ class ParseTools
     public static function formatName($a_sName)
     {
         $sNewName = str_replace('&quot;', '"', $a_sName);
+        $sNewName = str_replace('?', '', $a_sName);
 
         //Replaces all words surrounded by [, ( or " (e.g. nicknames):
         $sNewName = preg_replace('/[\\[("\'“Â][a-zA-Z0-9\\/\\?\'\\.\\,\\s-]*[\\])"\'”Â]/', ' ', $sNewName);

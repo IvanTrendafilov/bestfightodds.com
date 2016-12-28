@@ -39,6 +39,8 @@ echo '<option value="3">single lastname (koscheck)</option>';
 echo '<option value="4">full name (josh koscheck)</option>';
 echo '<option value="5">first letter.lastname (e.g. j.koscheck)</option>';
 echo '<option value="6">first letter.lastname vs first letter.lastname (e.g. j.koscheck vs d.miller)</option>';
+echo '<option value="7">first letter lastname vs first letter lastname (e.g. j koscheck vs d miller)</option>';
+echo '<option value="8">first letter lastname (e.g. j koscheck)</option>';
 echo '</select><br /><br />
 
 Template:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <input type="text" id="templateField" name="template" size="70" value="' . (isset($_GET['inTemplate']) ? $_GET['inTemplate'] : '') . '" /> <a href="#" onclick="switchFields(\'templateField\',\'templateNegField\')">Switch</a><br />

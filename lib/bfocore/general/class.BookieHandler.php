@@ -67,7 +67,7 @@ class BookieHandler
         //TODO: Add check to see if we are trying to add a duplicate
 
         //Check if fields type ID is within the span 1-6
-        if ($a_oPropTemplate->getFieldsTypeID() < 1 || $a_oPropTemplate->getFieldsTypeID() > 6)
+        if ($a_oPropTemplate->getFieldsTypeID() < 1 || $a_oPropTemplate->getFieldsTypeID() > 8)
         {
             return false;
         }
