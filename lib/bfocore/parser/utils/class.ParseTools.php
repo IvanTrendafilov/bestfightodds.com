@@ -301,6 +301,11 @@ class ParseTools
         //Replaces all words surrounded by [, ( or " (e.g. nicknames):
         $sNewName = preg_replace('/[\\[("\'“Â][a-zA-Z0-9\\/\\?\'\\.\\,\\s-]*[\\])"\'”Â]/', ' ', $sNewName);
 
+        //TODO: Minor Bookmaker/BetDSI custom fix - to be removed or revamped
+        $sNewName = str_ireplace('(3 RD', '', $sNewName);
+        $sNewName = str_ireplace('(3RND', '', $sNewName);
+        $sNewName = str_ireplace('S)', '', $sNewName);
+
         //Trims multiple spaces to single space:
         $sNewName = preg_replace('/\h{2,}/', ' ', $sNewName);
 

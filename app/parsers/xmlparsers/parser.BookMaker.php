@@ -104,21 +104,38 @@ class XMLParserBookMaker
             {
                 foreach ($cLeague->game as $cGame)
                 {
-                    //Grab matchup from header, will be part of prop
-
-
-                    foreach ($cGame->line as $cLine)
+                    //Check if prop is a Yes/No prop, if so we add both sides as options
+                    if (count($cGame->line == 2) && strcasecmp($cGame->line[0]['tmname'], 'Yes') == 0 && strcasecmp($cGame->line[1]['tmname'], 'No') == 0)
                     {
-                        if (ParseTools::checkCorrectOdds((string) $cLine['odds']))
+                        //Multi line prop (Yes/No)
+                        if (ParseTools::checkCorrectOdds((string) $cGame->line[0]['odds']) && ParseTools::checkCorrectOdds((string) $cGame->line[1]['odds']))
                         {
                             $oParsedSport->addFetchedProp(new ParsedProp(
-                                            str_replace(' VS.', ' VS. ', (string) (string) trim($cGame['htm'], " -") . ' ' . $cLine['tmname']),
-                                            '',
-                                            (string) $cLine['odds'],
-                                            '-99999'
+                                            str_replace(' VS.', ' VS. ', (string) (string) trim($cGame['htm'], " -") . ' ' . $cGame->line[0]['tmname']),
+                                            str_replace(' VS.', ' VS. ', (string) (string) trim($cGame['htm'], " -") . ' ' . $cGame->line[1]['tmname']),
+                                            (string) $cGame->line[0]['odds'],
+                                            (string) $cGame->line[1]['odds']
                             ));
                         }
                     }
+                    else
+                    {
+                        //Single line props
+                        foreach ($cGame->line as $cLine)
+                        {
+                            if (ParseTools::checkCorrectOdds((string) $cLine['odds']))
+                            {
+                                $oParsedSport->addFetchedProp(new ParsedProp(
+                                                str_replace(' VS.', ' VS. ', (string) (string) trim($cGame['htm'], " -") . ' ' . $cLine['tmname']),
+                                                '',
+                                                (string) $cLine['odds'],
+                                                '-99999'
+                                ));
+                            }
+                        }
+
+                    }
+
                 }
             }
         }
