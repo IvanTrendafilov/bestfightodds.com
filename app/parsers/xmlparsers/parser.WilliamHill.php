@@ -81,7 +81,7 @@ class XMLParserWilliamHill
                 else 
                 {
                     //Prop bet
-                    if ($sType == 'Fight to go the Distance' || $sType == 'Total Rounds')
+                    if ($sType == 'Fight to go the Distance' || $sType == 'Total Rounds' || (strpos($sType, 'Total Rounds') !== false))
                     {
                         //Two option bet
                         $oParsedProp = new ParsedProp(
