@@ -22,7 +22,7 @@ class XMLParserPinnacle
         //Actually JSON
         //We already have the fixtures ($sInput) so let's grab the actual odds here:
         $sCN = BookieHandler::getChangeNum(9); //TODO: bookie_id is hardcoded here..
-        $sOddsJSON = ParseTools::retrievePageFromURL('https://api.pinnaclesports.com/v1/odds?sportId=22&since=' . $sCN . '&isLive=0&oddsFormat=AMERICAN');
+        $sOddsJSON = ParseTools::retrievePageFromURL('https://api.pinnacle.com/v1/odds?sportId=22&since=' . $sCN . '&isLive=0&oddsFormat=AMERICAN');
 
         $aFetchedFixtures = json_decode($sInput, true);
         $aFetchedOdds = json_decode($sOddsJSON, true);
