@@ -132,7 +132,7 @@ class EventPageParser
 			$title = $potential_newtitle;
 		}
 
-		$searchtitle = $this->searchWikipediaForTitle('intitle:' . $title . ' hastemplate:"Infobox MMA event"');
+		$searchtitle = $rpt->searchWikipediaForTitle('intitle:' . $title . ' hastemplate:"Infobox MMA event"');
 		$page_content = $rpt->getHTMLPageFromWikipedia($searchtitle);
 
 		if ($page_content == false)

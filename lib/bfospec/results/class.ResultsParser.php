@@ -33,10 +33,10 @@ class ResultsParser
 
 		$event_parser = new EventPageParser($this->logger);
 		$event_parser->checkEventLists();
-		//$event_parser->startParseEventResults();
+		$event_parser->startParseEventResults();
 
 		$team_parser = new TeamPageParser($this->logger);
-		$team_parser->startParseTeamResults();
+		//$team_parser->startParseTeamResults();
 
 
 

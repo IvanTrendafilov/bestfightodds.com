@@ -61,6 +61,7 @@ class ParseTools
             CURLOPT_CONNECTTIMEOUT => 30,
             CURLOPT_TIMEOUT => 120,
             CURLOPT_SSL_VERIFYPEER => 0,
+            CURLOPT_SSL_VERIFYHOST => 0,
             CURLOPT_FOLLOWLOCATION => true
         ));
 
@@ -79,7 +80,7 @@ class ParseTools
         }
         else if (strpos($a_sURL, 'sportsinteraction.') !== false) 
         {
-            curl_setopt($rCurl, CURLOPT_SSL_CIPHER_LIST, 'ecdhe_ecdsa_aes_128_sha,ecdhe_rsa_aes_128_sha');
+            //curl_setopt($rCurl, CURLOPT_SSL_CIPHER_LIST, 'ecdhe_ecdsa_aes_128_sha,ecdhe_rsa_aes_128_sha');
         }
         else if (substr($a_sURL, 0, strlen('http://www.thegreek.com')) === 'http://www.thegreek.com')
         {
@@ -142,6 +143,7 @@ class ParseTools
                 CURLOPT_CONNECTTIMEOUT => 30,
                 CURLOPT_TIMEOUT => 120,
                 CURLOPT_SSL_VERIFYPEER => 0,
+                CURLOPT_SSL_VERIFYHOST => 0,
                 CURLOPT_FOLLOWLOCATION => true
             ));            
 
@@ -159,7 +161,7 @@ class ParseTools
             }
             else if (strpos($sURL, 'sportsinteraction.') !== false) 
             {
-              curl_setopt($aChannels[$sURL], CURLOPT_SSL_CIPHER_LIST, 'ecdhe_ecdsa_aes_128_sha,ecdhe_rsa_aes_128_sha');
+              //curl_setopt($aChannels[$sURL], CURLOPT_SSL_CIPHER_LIST, 'ecdhe_ecdsa_aes_128_sha,ecdhe_rsa_aes_128_sha');
             }
             else if (substr($sURL, 0, strlen('http://www.thegreek.com')) === 'http://www.thegreek.com')
             {
