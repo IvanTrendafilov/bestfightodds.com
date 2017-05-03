@@ -1,21 +1,5 @@
 <?php
 
-define('FACEBOOK_ENABLED', true);
-define('FACEBOOK_DEV_MODE', true); //In dev mode, no actual posts are created. Instead they are just echo'ed to the prompt
-define('FACEBOOK_KLOGDIR', 'C:\\dev2\\bfo\\log\\');
-
-//Test
-define('FACEBOOK_APP_ID', '1743170102619630');
-define('FACEBOOK_APP_SECRET', 'af19c28c37ecbeb4c3db529e293cdb8e');
-define('FACEBOOK_ACCESS_TOKEN', 'EAAYxZA2qZC7e4BAOUww5RhqvWr9inuQZCW1koLMhTgVFAA6AYC6DtFHKYZAZCzHJWFYoozarzj3ZC0GZBv8oclgjvkFxBakjZC3X7og7XZCiIMsxohZC1Nr2Agyw37VjJoTpt4heQGcfQJ1oqxDi63nmKC5UCjQKUZB2oANkV319U5ceQZDZD');
-define('FACEBOOK_PAGEID', '1759833807635369');
-
-
-//PROD:
-/*define('FACEBOOK_APP_ID', '1743169762619664');
-define('FACEBOOK_APP_SECRET', '326235e4fb0a247d8eabc780c7db42c5');
-define('FACEBOOK_ACCESS_TOKEN', 'EAAYxZA1ZA78RABABsQdGDjZBYml5xRCSRqwWpjGld0ZAZA1UNZASINMpoP0czVx6cIMmhT2NjxpHwUCwPN64lUuXyQ4oC36sbMCOaU02Fdgga6iiKf2Ts1SlZBSaZBiJbZAMO2GF9g8nEwzvqBlx3ZA3yZCtia3oNALDxoZD');
-
-define('FACEBOOK_PAGEID', '272430589549678');*/
+require_once('config/inc.config.php');
 
 ?>
