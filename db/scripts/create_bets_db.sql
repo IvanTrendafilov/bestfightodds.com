@@ -52,13 +52,16 @@ CREATE TABLE  `bets`.`fightodds` (
   PRIMARY KEY  USING BTREE (`fight_id`,`bookie_id`,`date`,`fighter1_odds`,`fighter2_odds`)
 ) ENGINE=MyISAM DEFAULT CHARSET=latin1;
 
-CREATE TABLE  `bets`.`fights` (
-  `id` int(10) unsigned NOT NULL auto_increment,
-  `fighter1_id` int(10) unsigned NOT NULL default '0',
-  `fighter2_id` int(10) unsigned NOT NULL default '0',
-  `event_id` int(10) unsigned NOT NULL default '0',
-  `is_mainevent` tinyint(1) NOT NULL default '0',
-  PRIMARY KEY  (`id`)
+CREATE TABLE `bets`.`fights` (
+  `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
+  `fighter1_id` int(10) unsigned NOT NULL DEFAULT '0',
+  `fighter2_id` int(10) unsigned NOT NULL DEFAULT '0',
+  `event_id` int(10) unsigned NOT NULL DEFAULT '0',
+  `is_mainevent` tinyint(1) NOT NULL DEFAULT '0',
+  PRIMARY KEY (`id`),
+  KEY `event_index` (`event_id`) USING BTREE,
+  KEY `fighter_id_index` (`fighter1_id`),
+  KEY `fighter_id2_index` (`fighter2_id`)
 ) ENGINE=MyISAM DEFAULT CHARSET=latin1;
 
 CREATE TABLE  `bets`.`linkouts_ext` (
