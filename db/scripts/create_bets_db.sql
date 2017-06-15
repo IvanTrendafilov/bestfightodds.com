@@ -158,13 +158,6 @@ CREATE TABLE `bets`.`matchups_metadata` (
   PRIMARY KEY (`matchup_id`, `mattribute`)
 ) ENGINE=MyISAM DEFAULT CHARSET=latin1;
 
-CREATE TABLE `bets`.`events_redditposts` (
-  `event_id` INT NOT NULL,
-  `reddit_id` VARCHAR(45) NOT NULL,
-  `last_change` VARCHAR(45) NOT NULL,
-  PRIMARY KEY (`event_id`)
-) ENGINE=MyISAM DEFAULT CHARSET=latin1;
-
 CREATE TABLE `bets`.`schedule_manualactions` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `description` varchar(2000) DEFAULT NULL,
