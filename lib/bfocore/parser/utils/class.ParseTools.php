@@ -399,14 +399,20 @@ class ParseTools
      *
      * Current criterias:
      * - Consists of 4 or more words
+     * - Is either Yes or No
      *
      * @param String $a_sName Betting string to test
      * @return boolean If string is a prop or not
      */
     public static function isProp($a_sName)
     {
-//Check if either parameter is 4 or more words, then its probably a prop bet
+        //Check if either parameter is 4 or more words, then its probably a prop bet
         if (count(explode(" ", ParseTools::formatName($a_sName))) >= 4)
+        {
+            return true;
+        }
+        //Check if prop is either YES or NO, if that is the case then it is probably a prop
+        if ($a_sName == 'YES' || $a_sName == 'NO')
         {
             return true;
         }
