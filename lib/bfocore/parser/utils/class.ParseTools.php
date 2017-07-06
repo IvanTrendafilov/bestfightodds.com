@@ -412,7 +412,7 @@ class ParseTools
             return true;
         }
         //Check if prop is either YES or NO, if that is the case then it is probably a prop
-        if ($a_sName == 'YES' || $a_sName == 'NO')
+        if (strcasecmp($a_sName, 'yes') == 0 || strcasecmp($a_sName, 'no') == 0)
         {
             return true;
         }
