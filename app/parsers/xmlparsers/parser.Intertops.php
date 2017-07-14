@@ -36,7 +36,7 @@ class XMLParserIntertops
         {
             if ($cCategory['n'] != 'Boxing' 
             && substr($cCategory['n'], 0, strlen('Boxing')) !== 'Boxing'
-            && substr($cCategory['n'], 0, strlen('Kickboxing')) !== 'Kickboxing')
+            && substr($cCategory['n'], 0, strlen('Kickboxing')) !== 'Kickboxing'
             && substr($cCategory['n'], 0, strlen('Conor McGregor v Floyd Mayweather Jr')) !== 'Conor McGregor v Floyd Mayweather Jr')
             {
                 foreach ($cCategory->m as $cMatchup)
