@@ -637,10 +637,10 @@ class PropParser
             }
         }
 
-        //Temporary fix for UFN FN 101
-        if ($iFoundEventID == null && trim($aParsedEvent[0]) == 'UFC FN 101')
+        //Temporary fix for TUF 25
+        if ($iFoundEventID == null && trim($aParsedEvent[0]) == 'TUF 25')
         {
-            $iFoundEventID = 1191;
+            $iFoundEventID = 1289;
         }
 
         return array('event' => $iFoundEventID);
