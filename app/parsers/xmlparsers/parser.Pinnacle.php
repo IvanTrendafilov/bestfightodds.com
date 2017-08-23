@@ -32,14 +32,17 @@ class XMLParserPinnacle
         {
             foreach ($aLeague['events'] as $aEvent)
             {
-                $aOdds = $this->findMatchingOdds((int) $aEvent['id'], $aFetchedOdds);
-                if ($aOdds != null)
+                if ($aEvent['status'] != 'H') //Status H = temporary unavailable
                 {
-                    $this->parseEntry($aEvent, $aOdds);
-                }
-                else
-                {
-                    Logger::getInstance()->log("Notice: Did not find matching odds for fixture: " . $aEvent['id'], 0);
+                    $aOdds = $this->findMatchingOdds((int) $aEvent['id'], $aFetchedOdds);
+                    if ($aOdds != null)
+                    {
+                        $this->parseEntry($aEvent, $aOdds);
+                    }
+                    else
+                    {
+                        Logger::getInstance()->log("Notice: Did not find matching odds for fixture: " . $aEvent['id'], 0);
+                    }
                 }
             }
         } 
