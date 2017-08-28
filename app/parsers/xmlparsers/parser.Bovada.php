@@ -19,6 +19,8 @@
  */
 class XMLParserBovada
 {
+    private $auth_run = false;
+
     //Actually JSON
     public function parseXML($json)
     {
@@ -81,10 +83,21 @@ class XMLParserBovada
 
         }
 
+        //Declare authorative run if we fill the criteria
+        if (count($parsed_sport->getParsedMatchups()) > 10)
+        {
+            $this->auth_run = true;
+            Logger::getInstance()->log("Declared authoritive run", 0);
+        }
+
         $parsed_sports[] = $parsed_sport;
         return $parsed_sports;
     }
 
+    public function checkAuthoritiveRun($metadata)
+    {
+        return $this->auth_run;
+    }
 }
 
 ?>
