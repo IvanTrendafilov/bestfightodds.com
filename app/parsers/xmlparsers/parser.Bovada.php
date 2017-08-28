@@ -14,119 +14,75 @@
  * Comment: Prod version
  *
  * Change log:
- * 2011-03-02: Fixed so that additional props may be parsed
+ * 2017-08-28 - New JSON version based on latest updates from Bovada
  *
  */
 class XMLParserBovada
 {
-
-    public function parseXML($a_sXML)
+    //Actually JSON
+    public function parseXML($json)
     {
-        $oXML = simplexml_load_string($a_sXML);
+        $feed = json_decode($json, true);
+        $parsed_sports = array();
+        $parsed_sport = new ParsedSport('MMA');
 
-        if ($oXML == false)
+        foreach ($feed['events'] as $event)
         {
-            Logger::getInstance()->log("Warning: XML broke!!", -1);
-        }
+            //Store metadata and correlation ID
+            $correlation_id = $event['id'];
+            $date = $event['startTime'];
 
-        $aSports = array();
-
-        $oParsedSport = new ParsedSport('MMA');
-
-        foreach ($oXML->EventType->Date as $cDate)
-        {
-
-            foreach ($cDate->Event as $cEvent)
+            foreach ($event['markets'] as $market)
             {
-                if ((string) $cEvent['STATUS'] != 'Closed' && (string) $cEvent['STATUS'] != 'Cancelled' && count($cEvent->Competitor) == 2)
+                if ($market['status'] == 'OPEN')
                 {
-                    $cCompetitor1 = $cEvent->Competitor[0];
-                    $cCompetitor2 = $cEvent->Competitor[1];
-
-                    $cCompetitor1Choice = "";
-                    $cCompetitor2Choice = "";
-
-                    if ($cCompetitor1 != null && $cCompetitor2 != null)
+                    if ($market['description'] == 'Fight Winner')
                     {
-                        foreach ($cCompetitor1->Line as $cLine1)
-                        {
-                            if ((string) $cLine1['TYPE'] == "Moneyline")
-                            {
-                                $cCompetitor1Choice = $cLine1->Choice[0]->Odds;
-                            }
-                        }
-
-                        foreach ($cCompetitor2->Line as $cLine2)
-                        {
-                            if ((string) $cLine2['TYPE'] == "Moneyline")
-                            {
-                                $cCompetitor2Choice = $cLine2->Choice[0]->Odds;
-                            }
-                        }
-
-
-                        if ((string) $cCompetitor1Choice['Line'] != "" && (string) $cCompetitor2Choice['Line'] != "")
-                        {
-
-                            //Check if bet is a prop or not
-                            if (ParseTools::isProp((string) $cCompetitor1['NAME']) && ParseTools::isProp((string) $cCompetitor2['NAME']))
-                            {
-                                //Prop, add as such
-                                $oParsedSport->addFetchedProp(new ParsedProp(
-                                                (string) $cCompetitor1['NAME'],
-                                                (string) $cCompetitor2['NAME'],
-                                                (string) $cCompetitor1Choice['Line'],
-                                                (string) $cCompetitor2Choice['Line']
-                                ));
-                            }
-                            else
-                            {
-                                //Not a prop, add as matchup
-                                $oParsedSport->addParsedMatchup(new ParsedMatchup(
-                                                (string) $cCompetitor1['NAME'],
-                                                (string) $cCompetitor2['NAME'],
-                                                (string) $cCompetitor1Choice['Line'],
-                                                (string) $cCompetitor2Choice['Line']
-                                ));
-                            }
-                        }
+                        //Regular matchup
+                        $parsed_matchup = new ParsedMatchup(
+                                        $market['outcomes'][0]['description'],
+                                        $market['outcomes'][1]['description'],
+                                        $market['outcomes'][0]['price']['american'],
+                                        $market['outcomes'][1]['price']['american']);
+                        $parsed_matchup->setCorrelationID($correlation_id);
+                        $parsed_sport->addParsedMatchup($parsed_matchup);
                     }
-                }
-                else if ((string) $cEvent['STATUS'] != 'Closed' && (string) $cEvent['STATUS'] != 'Cancelled' && count($cEvent->Competitor) > 2)
-                {
-                    //Temporary fix for Roan Carneiro vs Gegard Mousasi
-                    if ((string) $cEvent->Competitor[1]['NAME'] == 'Gegard Mousasi' && (string) $cEvent->Competitor[3]['NAME'] == 'Roan Carneiro')
+                    else
                     {
-                        $oParsedSport->addParsedMatchup(new ParsedMatchup(
-                                        (string) $cEvent->Competitor[1]['NAME'],
-                                        (string) $cEvent->Competitor[3]['NAME'],
-                                        (string) $cEvent->Competitor[1]->Line->Choice['VALUE'],
-                                        (string) $cEvent->Competitor[3]->Line->Choice['VALUE']
-                        ));
-                    }
-
-
-                    //Probably a prop bet
-                    foreach ($cEvent->Competitor as $cCompetitor)
-                    {
-                        $sProp = (string) $cEvent['NAME'] . ' : ' . (string) $cCompetitor['NAME'];
-                        if (ParseTools::isProp($sProp) && isset($cCompetitor->Line->Choice->Odds['Line']) && (string) $cCompetitor->Line->Choice->Odds['Line'] != "")
+                        //Prop bet
+                        if (count($market['outcomes']) > 2)
                         {
-                                //Prop, add as such
-                                $oParsedSport->addFetchedProp(new ParsedProp(
-                                                $sProp,
-                                                '',
-                                                (string) $cCompetitor->Line->Choice->Odds['Line'],
-                                                '-99999'
-                                ));
+                            //Single line prop
+                            foreach ($market['outcomes'] as $outcome)
+                            {
+                                $parsed_prop = new ParsedProp(
+                                    $market['description'] . ' :: ' . $outcome['description'],
+                                    '',
+                                    $outcome['price']['american'],
+                                    '-99999');
+                                $parsed_prop->setCorrelationID($correlation_id);
+                                $parsed_sport->addFetchedProp($parsed_prop);
+                            }
+                        }
+                        else
+                        {
+                            //Two sided prop
+                            $parsed_prop = new ParsedProp(
+                                $market['description'] . ' :: ' . $market['outcomes'][0]['description'],
+                                $market['description'] . ' :: ' . $market['outcomes'][1]['description'],
+                                $market['outcomes'][0]['price']['american'],
+                                $market['outcomes'][1]['price']['american']);
+                            $parsed_prop->setCorrelationID($correlation_id);
+                            $parsed_sport->addFetchedProp($parsed_prop);
                         }
                     }
                 }
             }
-        }
-        $aSports[] = $oParsedSport;
 
-        return $aSports;
+        }
+
+        $parsed_sports[] = $parsed_sport;
+        return $parsed_sports;
     }
 
 }
