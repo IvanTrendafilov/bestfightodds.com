@@ -41,7 +41,7 @@
         <option value="10">SBG</option>
         <option value="11">TheGreek</option>
         <option value="12">BetOnline</option>
-        <option value="7">BetUS</option>
+        <option value="18">Intertops</option>
       </select><br /><div id="alert-button-container"><input type="hidden" name="tn"><input type="hidden" name="m">
         <div class="alert-loader"></div>
         <div class="alert-result">&nbsp;</div>

@@ -13,7 +13,6 @@ $rows = PDOTools::findMany($query);
 	foreach ($rows as $row)
 	{
 		$bookie = BookieHandler::getBookieByID($row['bookie_id']);
-
 		echo '' . $bookie->getName() . ': <div style="font-weight: bold; display: inline; color: ' . ($row['average_matched'] <= 0 ? 'red;' : 'green;') . '">' . $row['average_matched'] . '</div> | ';
 		if (++$count == 4)
 		{

@@ -10,6 +10,7 @@ All <a href="index.php?p=resetChangeNum&bookie_id=-1">Reset</a><br /><br />
 5Dimes <a href="index.php?p=resetChangeNum&bookie_id=1">Reset</a><br />
 SportBet <a href="index.php?p=resetChangeNum&bookie_id=2">Reset</a><br />
 Pinnacle <a href="index.php?p=resetChangeNum&bookie_id=9">Reset</a><br /><br />
+Intertops <a href="index.php?p=resetChangeNum&bookie_id=18">Reset</a><br /><br />
 
 
 <?php

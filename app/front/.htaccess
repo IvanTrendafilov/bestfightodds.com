@@ -33,5 +33,9 @@ RewriteCond %{HTTP_USER_AGENT} ^$
 RewriteRule ^.* - [F,L]
 
 <FilesMatch "\.(jpg|gif|png)$">
-	Header set Cache-Control "max-age=604800, must-revalidate"
+        Header set Cache-Control "max-age=604800, must-revalidate"
+</FilesMatch>
+
+<FilesMatch "\.(js|css)$">
+        Header set Cache-Control: "max-age=604800, must-revalidate"
 </FilesMatch>

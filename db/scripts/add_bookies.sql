@@ -11,14 +11,16 @@ INSERT INTO bets.bookies (`id`, `name`, `url`, `refurl`, `active`, `position`, `
 	(11, 'TheGreek', 'http://www.thegreek.com', 'http://www.thegreek.com/dw/sportsbook.asp?ap=A165125', 1, 11, '2000-01-01 00:00:00'),
 	(12, 'BetOnline', 'http://www.betonline.com', 'http://partners.commission.bz/processing/clickthrgh.asp?btag=a_1811b_2', 1, 12, '2000-01-01 00:00:00'),
 	(13, 'BetDSI', 'http://www.betdsi.com', 'http://www.betdsi.eu/mma-betting?cmpid=18239_4778', 1, 2, '2012-08-19 00:00:00'),
-	(17, 'William Hill', 'http://www.williamhill.eu', 'http://ads2.williamhill.com/redirect.aspx?pid=191293277&bid=1487413667&lpid=1487413047', 1, 7, '2016-04-22 00:00:00');
+	(17, 'William Hill', 'http://www.williamhill.eu', 'http://ads2.williamhill.com/redirect.aspx?pid=191293277&bid=1487413667&lpid=1487413047', 1, 7, '2016-04-22 00:00:00'),
+	(18, 'Intertops', 'http://www.intertops.eu', 'http://affiliate.intertops.com/processing/clickthrgh.asp?btag=a_10831b_1099', 1, 13, '2017-07-14 00:00:00');
 
 INSERT INTO bets.bookies_changenums(bookie_id, changenum) VALUES
 (1, '-1'),
 (2, '-1'),
-(9, '-1');
+(9, '-1'),
+(18, '9999999');
 
-INSERT INTO bets.bookies_parsers (`id`, `bookie_id`, `parse_url`, `name`, `cn_inuse`, `mockfile`, `cn_urlsuffix`, `cn_initial`) VALUES
+INSERT INTO bets.bookies_parsers (`id`, `bookie_id`, `parse_url`, `name`, `cn_inuse`, `mockfile`, `cn_urlsuffix`, `cn_initial`) VALUES 
 	(1, 1, 'http://lines.5dimes.com/linesfeed/getlinefeeds.aspx?uid=bestfightodds5841&Type=ReducedReplace', '5Dimes', 1, '5dimes.xml', '&changenum=', '-1'),
 	(2, 13, 'http://lines.betdsi.eu/', 'BetDSI', 0, 'betdsi.xml', '', '-1'),
 	(3, 12, 'http://livelines.betonline.com/sys/LineXML/LiveLineObjXml.asp?sport=Martial%20Arts', 'BetOnline', 0, 'betonline.xml', '', '-1'),
@@ -35,4 +37,8 @@ INSERT INTO bets.bookies_parsers (`id`, `bookie_id`, `parse_url`, `name`, `cn_in
 	(14, 8, 'https://www.sportsinteraction.com/info/data/feeds/consume/?consumerName=bfodds&pwd=bfodds3145&feedID=30&formatID=4', 'SportsInteraction', 0, 'sportsint.xml', '', '-1'),
 	(15, 11, 'http://www.thegreek.com/sportsbook/sport/martial%20arts', 'TheGreek', 0, 'thegreek.asp', '', '-1'),
 	(16, 4, 'https://www.gamingsystem.ag/sbk/sportsbook4/www.sportsbook.ag/getodds.xgi?categoryId=122', 'SportsbookMMA', 0, 'sportsbook.xml', '', '-1'),
-	(17, 17, 'http://whdn.williamhill.com/pricefeed/openbet_cdn?action=template&template=getHierarchyByMarketType&classId=402&filterBIR=N', 'WilliamHill', 0, 'williamhill.xml', '', '-1');
+	(17, 17, 'http://whdn.williamhill.com/pricefeed/openbet_cdn?action=template&template=getHierarchyByMarketType&classId=402&filterBIR=N', 'WilliamHill', 0, 'williamhill.xml', '', '-1'),
+	(18, 18, 'http://xmlfeed.intertops.com/xmloddsfeed/v2/xml/?apikey=860879d0-f4b6-e511-a090-003048dd52d5&sportId=6&includeCent=true', 'Intertops', 1, 'intertops.xml', '&delta=', '525600');
+
+
+	

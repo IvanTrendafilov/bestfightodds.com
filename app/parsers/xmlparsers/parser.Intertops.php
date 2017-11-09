@@ -34,7 +34,10 @@ class XMLParserIntertops
 
         foreach ($oXML->data->s->cat as $cCategory)
         {
-            if ($cCategory['n'] != 'Boxing')
+            if ($cCategory['n'] != 'Boxing' 
+            && substr($cCategory['n'], 0, strlen('Boxing')) !== 'Boxing'
+            && substr($cCategory['n'], 0, strlen('Kickboxing')) !== 'Kickboxing'
+            && substr($cCategory['n'], 0, strlen('Conor McGregor v Floyd Mayweather Jr')) !== 'Conor McGregor v Floyd Mayweather Jr')
             {
                 foreach ($cCategory->m as $cMatchup)
                 {
@@ -116,7 +119,8 @@ class XMLParserIntertops
         }
 
         //Before finishing up, save the changenum 30 to limit not fetching the entire feed
-        if (BookieHandler::saveChangeNum(16, '30'))
+        //TODO: Bookie ID is hardcoded here, should be fixed
+        if (BookieHandler::saveChangeNum(18, '30'))
         {
             Logger::getInstance()->log("ChangeNum stored OK: 30", 0);
         }
