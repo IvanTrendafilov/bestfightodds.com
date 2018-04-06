@@ -5,6 +5,10 @@ RewriteCond %{HTTPS} !=on
 RewriteCond %{HTTP_HOST} ^(www\.)?bestfightodds\.com [NC]
 RewriteRule ^(.*)$ https://%{HTTP_HOST}/$1 [R,QSA]
 
+RewriteRule ^events/ufc-223-ferguson-vs-khabib-1444 /events/ufc-223-khabib-vs-holloway-1444 [R=301]
+RewriteRule ^events/ufc-223-1444 /events/ufc-223-khabib-vs-holloway-1444 [R=301]
+RewriteRule ^events/ufc-223-holloway-vs-khabib-1444 /events/ufc-223-khabib-vs-holloway-1444 [R=301]
+
 RewriteRule ^fights/([0-9]+)_o.png fightlink.php?fight=$1&type=opening [nc]
 RewriteRule ^fights/([0-9]+).png fightlink.php?fight=$1 [nc]
 RewriteRule ^events/([0-9]+)_o.png fightlink.php?event=$1&type=opening [nc]
