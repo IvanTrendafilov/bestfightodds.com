@@ -117,7 +117,7 @@ alertSW = function(context, xcord, ycord) {
 
 //linkOut
 lO = function(operator, event) {
-    ga('send', 'event', 'outbound', 'click', 'bookie', operator);
+    ga('send', 'event', 'outbound', 'click', 'bookie ' + operator);
     $.get("/ajax/ajax.LinkOut.php", {
         'operator': operator,
         'event': event
