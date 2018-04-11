@@ -64,13 +64,6 @@ CREATE TABLE `bets`.`fights` (
   KEY `fighter_id2_index` (`fighter2_id`)
 ) ENGINE=MyISAM DEFAULT CHARSET=latin1;
 
-CREATE TABLE  `bets`.`linkouts_ext` (
-  `bookie_id` int(3) unsigned NOT NULL default '0',
-  `click_date` timestamp NOT NULL default CURRENT_TIMESTAMP on update CURRENT_TIMESTAMP,
-  `event_id` int(8) unsigned NOT NULL default '0',
-  `visitor_ip` varchar(15) NOT NULL default ''
-) ENGINE=MyISAM DEFAULT CHARSET=latin1;
-
 CREATE TABLE  `bets`.`fight_twits` (
   `fight_id` int(10) unsigned NOT NULL,
   `twitdate` timestamp NOT NULL default CURRENT_TIMESTAMP on update CURRENT_TIMESTAMP,
