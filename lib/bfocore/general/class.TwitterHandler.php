@@ -72,7 +72,7 @@ class TwitterHandler
             $sTwitText = str_replace('<EVENT_URL>', $oEvent->getEventAsLinkString(), $sTwitText);
 
             //Depending on how many characters we have left, add either full event name or the shortened version
-            if (strlen($sTwitText) + strlen($oEvent->getName()) <= 140)
+            if (strlen($sTwitText) + strlen($oEvent->getName()) <= 280)
             {
                 $sTwitText = str_replace('<E>', $oEvent->getName(), $sTwitText);
             }
@@ -81,17 +81,33 @@ class TwitterHandler
                 $sTwitText = str_replace('<E>', $oEvent->getShortName(), $sTwitText);
             }
 
-            //Add dynamic hashtags if less than 140 chars and if event name format allows for it
+            //Add dynamic hashtags if less than 280 chars and if event name format allows for it
             $aMatches = null;
             $sRegExp = preg_match("/^([a-zA-Z]{2,8}\s[0-9]{1,5}):/", $oEvent->getName(), $aMatches);
             if ($aMatches != null && isset($aMatches[1]))
             {
                 $sHashtag = ' #' . strtolower(str_replace(' ', '', $aMatches[1]));
-                if (strlen($sHashtag) + $iTweetLength <= 140)
+                if (strlen($sHashtag) + $iTweetLength <= 280)
                 {
                     $sTwitText .= $sHashtag;
                 }
             }
+
+            //Add fighter twitter handles if we are only tweeting one matchup (and if they exist)
+            if (count($aGroup['matchups']) == 1)
+            {
+                for($x = 1; $x <= 2; $x++)
+                {
+                    $handle = self::getTwitterHandle($aGroup['matchups'][0]->getFighterID($x));
+                    if ($handle && $handle != '')
+                    {
+                        $sTwitText .= ' @' . $handle;
+                    }
+                }
+            }
+
+            //Trim to 280 if we made any mistakes along the way
+            $sTwitText = substr($sTwitText, 0, 280);
 
             if ($sTwitText != '' && $oTwitterer->updateStatus($sTwitText))
             {
@@ -104,6 +120,17 @@ class TwitterHandler
         }
 
         return array('pre_untwittered_fights' => count($aFights), 'pre_untwittered_events' => count($aGroups), 'post_twittered' => $iTwits);
+    }
+
+    public static function addTwitterHandle($team_id, $handle)
+    {
+        return TwitDAO::addTwitterHandle($team_id, $handle);
+    }
+
+    public static function getTwitterHandle($team_id)
+    {
+        $result = TwitDAO::getTwitterHandle($team_id);
+        return isset($result->handle) ? $result->handle : false;
     }
 
 }

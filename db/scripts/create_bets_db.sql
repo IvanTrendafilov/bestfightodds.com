@@ -229,6 +229,14 @@ CREATE TABLE `matchups_fbposts` (
 ENGINE=MyISAM DEFAULT CHARSET=latin1;
 
 
+CREATE TABLE `teams_twitterhandles` (
+  `team_id` int(10) unsigned NOT NULL,
+  `name` varchar(85) NOT NULL,
+  PRIMARY KEY (`team_id`)
+)
+ENGINE=MyISAM DEFAULT CHARSET=latin1;
+
+
 
 USE `bets`;
 DROP function IF EXISTS `MoneylineToDecimal`;

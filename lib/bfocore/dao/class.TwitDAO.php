@@ -2,6 +2,7 @@
 
 require_once('lib/bfocore/general/inc.GlobalTypes.php');
 require_once('lib/bfocore/utils/db/class.DBTools.php');
+require_once('lib/bfocore/utils/db/class.PDOTools.php');
 
 /**
  * Twitter DAO
@@ -59,6 +60,21 @@ class TwitDAO
         }
 
         return $aFights;
+    }
+
+    public static function addTwitterHandle($team_id, $handle)
+    {
+        $query = 'INSERT INTO teams_twitterhandles(team_id, handle)
+                        VALUES (?, ?)';
+        $params = [$team_id, $handle];
+        return PDOTools::insert($query, $params);
+    }
+
+    public static function getTwitterHandle($team_id)
+    {
+        $query = 'SELECT * FROM teams_twitterhandles WHERE team_id = ?';
+        $params = [$team_id];
+        return PDOTools::findOne($query, $params);
     }
 }
 ?>
