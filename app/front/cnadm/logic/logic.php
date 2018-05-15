@@ -131,10 +131,19 @@ switch ($_GET['action'])
 
     case 'clearUnmatched':
         require_once('lib/bfocore/general/class.EventHandler.php');
+        define('RETURN_PAGE', 'main');
         EventHandler::clearUnmatched();
         finishCall();
-        define('RETURN_PAGE', 'main');
         break;
+    case 'addTeamTwitterHandle':
+        require_once('lib/bfocore/general/class.TwitterHandler.php');
+        checkPOSTParam('teamID');
+        checkPOSTParam('twitterHandle');
+        define('RETURN_PAGE', 'eventsOverview');
+        TwitterHandler::addTwitterHandle($_POST['teamID'], $_POST['twitterHandle']);
+        finishCall();
+        break;
+
 }
 
 /**
