@@ -76,7 +76,7 @@ class XMLParserSportsbook
         $sPage = ParseTools::stripForeignChars($sPage);
 	
         //Match fights in single page
-        $sFightRegexp = '/(\\d{2}\\/\\d{2}\\/\\d{2}) \\d{1,5} ([a-zA-Z]+[a-zA-Z0-9\\s\\-.,\']+?) ([+-]{0,1}[0-9]+|EV|even) OFF OFF ([0-9]{2}:[0-9]{2}) [A-Za-z]{2} ([a-zA-Z]+[a-zA-Z0-9\\s\\-.,\']+?) ([+-]{0,1}[0-9]+|EV|even) OFF OFF/';
+        $sFightRegexp = '/(\\d{2}\\/\\d{2}\\/\\d{2}) \\d{1,7} ([a-zA-Z]+[a-zA-Z0-9\\s\\-.,\']+?) ([+-]{0,1}[0-9]+|EV|even) OFF OFF ([0-9]{2}:[0-9]{2}) [A-Za-z]{2} ([a-zA-Z]+[a-zA-Z0-9\\s\\-.,\']+?) ([+-]{0,1}[0-9]+|EV|even) OFF OFF/';
 
         $aFightMatches = ParseTools::matchBlock($sPage, $sFightRegexp);
 

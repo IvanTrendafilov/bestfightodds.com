@@ -17,6 +17,7 @@ echo '
 				if (isset($_GET['fighterName']) && $oFighter->getName() == $_GET['fighterName'])
 				{
 					$iFighterID = $oFighter->getID();
+					$sFighterName = $oFighter->getNameAsString();
 					echo '<option value="' . $oFighter->getID() . '" selected>' . $oFighter->getNameAsString() . '</option>';
 				}
 				else
@@ -37,7 +38,9 @@ echo '
 <br />
 <form method="post" action="logic/logic.php?action=addTeamTwitterHandle">
 
-		<input type="hidden" name="teamID" value="' .  $iFighterID . '">Twitter handle &nbsp;
+		<input type="hidden" name="teamID" value="' .  $iFighterID . '">Twitter handle 
+		[<a href="http://www.google.se/search?q=site:twitter.com ' . $sFighterName . '">google</a>]
+		 &nbsp;
 	<input type="text" name="twitterHandle" style="width: 200px;"/>
 	<input type="submit" value="Add">
 </form>';
