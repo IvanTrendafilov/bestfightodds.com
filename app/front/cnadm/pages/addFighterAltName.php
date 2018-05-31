@@ -2,6 +2,7 @@
 
 require_once('lib/bfocore/general/class.EventHandler.php');
 require_once('lib/bfocore/general/class.FighterHandler.php');
+require_once('lib/bfocore/general/class.TwitterHandler.php');
 
 //Add fighter altname:
 echo '
@@ -31,7 +32,7 @@ echo '</select>&nbsp; aka &nbsp;
 	<input type="submit" value="Add">
 </form>';
 
-
+$sTwitterHandle = TwitterHandler::getTwitterHandle($iFighterID);
 
 //Add twitter handle:
 echo '
@@ -41,7 +42,7 @@ echo '
 		<input type="hidden" name="teamID" value="' .  $iFighterID . '">Twitter handle 
 		[<a href="http://www.google.se/search?q=site:twitter.com ' . $sFighterName . '">google</a>]
 		 &nbsp;
-	<input type="text" name="twitterHandle" style="width: 200px;"/>
+	<input type="text" name="twitterHandle" style="width: 200px;" value="' . $sTwitterHandle . '"/>
 	<input type="submit" value="Add">
 </form>';
 
