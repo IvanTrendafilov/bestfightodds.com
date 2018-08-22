@@ -56,6 +56,15 @@ class XMLParserBetDSI
                         else
                         {
                             //Not a prop, add as matchup
+
+                            //TODO: Temporary fix for Gaethje v Vick
+                            if ($cDSI->HomeTeamName == 'J VICK' && $cDSI->AwayTeamName == 'J GAETHJE')
+                            {
+                                $cDSI->HomeTeamName = 'JAMES VICK';
+                                $cDSI->AwayTeamName = 'JUSTIN GAETHJE';
+                            }
+
+
                             $oParsedSport->addParsedMatchup(new ParsedMatchup(
                                             (string) $cDSI->HomeTeamName,
                                             (string) $cDSI->AwayTeamName,
