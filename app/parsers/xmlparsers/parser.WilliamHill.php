@@ -81,9 +81,10 @@ class XMLParserWilliamHill
                 else 
                 {
                     //Prop bet
-                    if ($sType == 'Fight to go the Distance' || $sType == 'Total Rounds' || (strpos($sType, 'Total Rounds') !== false))
+                    if ($sType == 'Fight to go the Distance' || $sType == 'Total Rounds' || $sType == 'Fight Treble' || $sType == 'Most Successful Takedowns' || (strpos($sType, 'Total Rounds') !== false) ||
+                        (count($cMarket->participant) == 2 && in_array($cMarket->participant[0]['name'], array('Yes','No')) && in_array($cMarket->participant[1]['name'], array('Yes','No'))))
                     {
-                        //Two option bet
+                        //Two option bet OR Yes/No prop bet (second line check in if)
                         $oParsedProp = new ParsedProp(
                                       $this->getCorrelationID($cMarket) . ' - ' . $sType . ' : ' .  $cMarket->participant[0]['name'] . ' ' . $cMarket->participant[0]['handicap'],
                                       $this->getCorrelationID($cMarket) . ' - ' . $sType . ' : ' .  $cMarket->participant[1]['name'] . ' ' . $cMarket->participant[1]['handicap'],
