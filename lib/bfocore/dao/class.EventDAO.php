@@ -1006,8 +1006,8 @@ fo2.bookie_id, fo2.fight_id ASC;';
     public static function setMetaDataForMatchup($a_iMatchup_ID, $a_sAttribute, $a_sValue, $a_iBookieID)
     {
         $sQuery = 'INSERT INTO matchups_metadata(matchup_id, mattribute, mvalue, source_bookie_id) VALUES (?,?,?,?)
-                        ON DUPLICATE KEY UPDATE mvalue = ?';
-        $aParams = array($a_iMatchup_ID, $a_sAttribute, $a_sValue, $a_iBookieID, $a_sValue);
+                        ON DUPLICATE KEY UPDATE mvalue = ?, source_bookie_id = ?';
+        $aParams = array($a_iMatchup_ID, $a_sAttribute, $a_sValue, $a_iBookieID, $a_sValue, $a_iBookieID);
 
         return DBTools::doParamQuery($sQuery, $aParams);
     }

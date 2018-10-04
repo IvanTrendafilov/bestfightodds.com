@@ -119,7 +119,9 @@ class XMLParserSportsbook
                                 (string) $cFight->f1_line,
                                 (string) $cFight->f2_line
                 );
-                $oParsedMatchup->setMetaData('gametime', (string) $cFight->timestamp);
+
+                //Disabled metadata - 5Dimes is the master
+                //$oParsedMatchup->setMetaData('gametime', (string) $cFight->timestamp);
 
                 $oParsedSport->addParsedMatchup($oParsedMatchup);
             }
