@@ -23,10 +23,18 @@ chartSC = function(content, xcord, ycord) {
     //Pick out bookie name and link from content
     if ((url = content.match('href="([^"]*)"')) != null && (bookie = content.match('>([^<]*)</a>')) != null)
     {
+        $('#chart-disc').css('display', 'none');
         $('#chart-link').html('Bet this line at ' + bookie[1]);
         $('#chart-link').show();
         $('#chart-link').parent().attr('href', 'https://www.bestfightodds.com' + url[1]);
         $('#chart-window').height("260");
+
+        //Fix for Bet365 to discourage US players:
+        if (bookie[1] == 'Bet365')
+        {
+            $('#chart-window').height("300");
+            $('#chart-disc').css('display', 'block');
+        }
     }
 
     $('#chart-window').removeClass('is-visible');

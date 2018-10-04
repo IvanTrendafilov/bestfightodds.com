@@ -24,7 +24,7 @@
     <a href="https://www.proboxingodds.com">Boxing Odds</a><span class="menu-seperator">|</span><a href="/terms">Terms of service</a><span class="menu-seperator">|</span><a href="mailto:info1@bestfightodds.com">Contact</a><span class="menu-seperator">|</span><a href="mailto:info1@bestfightodds.com">&copy; 2017</a>
 </div>
 
-<div id="chart-window" class="popup-window"><div class="popup-header" id="chart-header"><div></div><a href="#" class="cd-popup-close">&#10005;</a></div><div id="chart-area"></div><a target="_blank"><div id="chart-link" class="button">Bet this line at bookie</div></a></div>
+<div id="chart-window" class="popup-window"><div class="popup-header" id="chart-header"><div></div><a href="#" class="cd-popup-close">&#10005;</a></div><div id="chart-area"></div><a target="_blank"><div id="chart-link" class="button">Bet this line at bookie</div></a><div id="chart-disc" style="display: none; color: #333">*Currently this Sportsbook does not accept players that reside in the US.<br />18+ Gamble Responsibly</div></div>
 <div id="parlay-window" class="popup-window"><div class="popup-header" id="parlay-header">Parlay</div><div id="parlay-area">Click on a line to add it to your parlay</div></div>
 <div id="alert-window" class="popup-window"><div class="popup-header" id="alert-header"><div></div><a href="#" class="cd-popup-close">&#10005;</a></div><div id="alert-area">
     <form id="alert-form">Alert me at e-mail <input type="text" name="alert-mail" id="alert-mail"><br />when the odds reaches <input type="text" name="alert-odds" id="alert-odds"> or better<br/>at <select name="alert-bookie">
@@ -33,12 +33,12 @@
         <option value="13">BetDSI</option>
         <option value="3">BookMaker</option>
         <option value="5">Bovada</option>
+        <option value="10">Bet365</option>
         <option value="2">SportBet</option>
         <option value="4">Sportsbook</option>
         <option value="17">William Hill</option>
         <option value="9">Pinnacle</option>
         <option value="8">SportsInteraction</option>
-        <option value="10">SBG</option>
         <option value="11">TheGreek</option>
         <option value="12">BetOnline</option>
         <option value="18">Intertops</option>
