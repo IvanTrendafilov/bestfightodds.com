@@ -1,13 +1,13 @@
 var gulp = require('gulp'),
     rename = require('gulp-rename'),
     minifycss = require('gulp-minify-css'),
-    jshint = require('gulp-jshint'),
+
     merge = require('gulp-merge'),
     uglify = require('gulp-uglify');
 
 
 //CSS
-//var sass = require('gulp-sass');
+var sass = require('gulp-sass');
 var concat = require('gulp-concat');
 
 gulp.task('styles', function() {
@@ -86,13 +86,6 @@ gulp.task('scripts', function() {
 });
 */
 
-
-// JS hint task
-gulp.task('jshint', function() {
-    gulp.src('./app/front/js/bfo_*.js')
-        .pipe(jshint())
-        .pipe(jshint.reporter('default'));
-});
 
 
 
