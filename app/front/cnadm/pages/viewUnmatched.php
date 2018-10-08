@@ -6,7 +6,7 @@ require_once('lib/bfocore/general/class.BookieHandler.php');
 
 
 
-$aUnmatchedCol = EventHandler::getUnmatched(500);
+$aUnmatchedCol = EventHandler::getUnmatched(1500);
 
 $sMatchups = '';
 $sPropsMatchup = '';
