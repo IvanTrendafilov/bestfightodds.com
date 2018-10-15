@@ -12,11 +12,11 @@
  * Props: Yes
 * Authorative run declared: Yes (but not fully evaluated)
  *
- * Comment: Prod version
+ * Comment: Prod version. Identical to Bet365
  *
  */
 
-class XMLParserBet365
+class XMLParserBet365Other
 {
     private $bAuthorativeRun = false;
 
