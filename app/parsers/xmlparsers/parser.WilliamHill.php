@@ -120,6 +120,17 @@ class XMLParserWilliamHill
             Logger::getInstance()->log("Declared authoritive run", 0);
         }
 
+        //Store the changenum - WARNING, bookie_id is hardcoded here, should be fixed..
+        $sCN = time();
+        if (BookieHandler::saveChangeNum(17, $sCN))
+        {
+            Logger::getInstance()->log("ChangeNum stored OK: " . $sCN, 0);
+        }
+        else
+        {
+            Logger::getInstance()->log("Error: ChangeNum was not stored", -2);
+        }
+
         $aSports[] = $oParsedSport;
         return $aSports;
     }

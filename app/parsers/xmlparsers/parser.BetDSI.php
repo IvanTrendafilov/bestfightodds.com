@@ -35,7 +35,7 @@ class XMLParserBetDSI
         $aSports = array();
         $oParsedSport = new ParsedSport('MMA');
         
-        foreach ($oXML->DSI as $cDSI)
+        foreach ($oXML->PPH as $cDSI)
         {
             //Matchups (also contains some props):
             if ($cDSI->IDLeague == 'Fighting')
