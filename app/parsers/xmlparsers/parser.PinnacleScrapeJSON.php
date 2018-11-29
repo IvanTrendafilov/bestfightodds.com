@@ -9,7 +9,7 @@ require_once('lib/simple_html_dom/simple_html_dom.php');
  * Bookie: Pinnacle Site JSON parser
  * Sport: MMA
  *
- * Comment: Used when API us unavailable. Currently limited to Bellator lines since UFC line page redirects
+ * Comment: Used when API us unavailable
  *
  */
 class XMLParserPinnacleScrapeJSON
