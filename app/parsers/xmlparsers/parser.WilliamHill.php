@@ -95,18 +95,20 @@ class XMLParserWilliamHill
                         $oParsedSport->addFetchedProp($oParsedProp);
                     }
                     else
-                    {
-                        //One line prop bet
-                        foreach ($cMarket->participant as $cParticipant)
-                        {
-                            $oParsedProp = new ParsedProp(
-                                      $this->getCorrelationID($cMarket) . ' - ' . $sType . ' : ' .  $cParticipant['name'] . ' ' . $cParticipant['handicap'],
-                                      '',
-                                      OddsTools::convertDecimalToMoneyline($cParticipant['oddsDecimal']),
-                                      '-99999');
-                     
-                            $oParsedProp->setCorrelationID($this->getCorrelationID($cMarket));
-                            $oParsedSport->addFetchedProp($oParsedProp);
+{                        //Exclude SSBT (self service betting terminal)
+                        if (strpos($sType, 'SSBT') === false) {
+                            //One line prop bet
+                            foreach ($cMarket->participant as $cParticipant)
+                            {
+                                $oParsedProp = new ParsedProp(
+                                        $this->getCorrelationID($cMarket) . ' - ' . $sType . ' : ' .  $cParticipant['name'] . ' ' . $cParticipant['handicap'],
+                                        '',
+                                        OddsTools::convertDecimalToMoneyline($cParticipant['oddsDecimal']),
+                                        '-99999');
+                        
+                                $oParsedProp->setCorrelationID($this->getCorrelationID($cMarket));
+                                $oParsedSport->addFetchedProp($oParsedProp);
+                            }
                         }
                     }
                 }
