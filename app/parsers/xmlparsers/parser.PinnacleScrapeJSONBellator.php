@@ -12,7 +12,7 @@ require_once('lib/simple_html_dom/simple_html_dom.php');
  * Comment: Used when API us unavailable. Identical to its twin but this is for Bellator
  *
  */
-class XMLParserPinnacleScrapeJSON
+class XMLParserPinnacleScrapeJSONBellator
 {
     private $oParsedSport;
     private $bAuthorativeRun = false;
