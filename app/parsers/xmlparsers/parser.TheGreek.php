@@ -45,7 +45,7 @@ class XMLParserTheGreek
 
         foreach ($html->find("a.toggle-rot90") as $sportlinesnode) 
         {
-            $sTempURL = "http://www.thegreek.com" . str_replace('>', '%3E', str_replace(' ', '%20', $sportlinesnode->href));
+            $sTempURL = "https://208.138.19.4" . str_replace('>', '%3E', str_replace(' ', '%20', $sportlinesnode->href));
             $aURLs[] = $sTempURL;
             Logger::getInstance()->log("Preparing fetch of " . $sTempURL, 0);
         }
