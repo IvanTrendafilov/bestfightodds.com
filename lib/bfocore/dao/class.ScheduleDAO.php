@@ -18,7 +18,7 @@ class ScheduleDAO
 		$rResult = DBTools::doQuery($sQuery);
 
 		$aReturn = array();
-        while ($aRow = mysql_fetch_array($rResult))
+        while ($aRow = mysqli_fetch_array($rResult))
         {
         	$aReturn[] = $aRow;
         }

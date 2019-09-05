@@ -28,7 +28,7 @@ class FighterDAO
 
         $aFighters = array();
 
-        while ($aFighter = mysql_fetch_array($rResult))
+        while ($aFighter = mysqli_fetch_array($rResult))
         {
             $aFighters[] = new Fighter($aFighter['name'], $aFighter['id']);
         }
@@ -50,7 +50,7 @@ class FighterDAO
 
         $aFighters = array();
 
-        while ($aFighter = mysql_fetch_array($rResult))
+        while ($aFighter = mysqli_fetch_array($rResult))
         {
             $aFighters[] = new Fighter($aFighter['name'], $aFighter['id']);
         }
@@ -64,7 +64,7 @@ class FighterDAO
         $aParams = array($a_iID);
         $rResult = DBTools::doParamQuery($sQuery, $aParams);
 
-        if ($aFighter = mysql_fetch_array($rResult))
+        if ($aFighter = mysqli_fetch_array($rResult))
         {
             return new Fighter($aFighter['name'], $aFighter['id']);
         }

@@ -17,8 +17,7 @@ class DBTools
     {
         if (!isset(self::$rDBConnection))
         {
-            self::$rDBConnection = mysql_connect(DB_HOST, DB_USER, DB_PASSWORD);
-            mysql_select_db(DB_SCHEME, self::$rDBConnection);
+            self::$rDBConnection = mysqli_connect(DB_HOST, DB_USER, DB_PASSWORD, DB_SCHEME);
         }
 
         return self::$rDBConnection;
@@ -39,7 +38,7 @@ class DBTools
         }
 
         //$sStart = microtime(); 
-        $rResult = mysql_query($a_sQuery, self::getConnection()) or die('MySQL error: ' . mysql_error());
+        $rResult = mysqli_query(self::getConnection(), $a_sQuery) or die('MySQL error: ' . mysqli_error(self::getConnection()));
 
 /*if (microtime() - $sStart > 0.05)
 {
@@ -88,26 +87,26 @@ class DBTools
     /**
      * Makes a parameter safe from SQL injections
      *
-     * Wrapper for mysql_real_escape_string
+     * Wrapper for mysqli_real_escape_string
      *
      * @param string $a_sParam Parameter to make safe
      * @return string Safe parameter
      */
     public static function makeParamSafe($a_sParam)
     {
-        return mysql_real_escape_string($a_sParam, self::getConnection());
+        return mysqli_real_escape_string(self::getConnection(), $a_sParam);
     }
 
     /**
      * Gets the number of affected rows in the previously executed query
      *
-     * Wrapper for mysql_affected_rows
+     * Wrapper for mysqli_affected_rows
      *
      * @return int The number of affected rows
      */
     public static function getAffectedRows()
     {
-        return mysql_affected_rows(self::getConnection());
+        return mysqli_affected_rows(self::getConnection());
     }
 
     /**
@@ -138,9 +137,9 @@ class DBTools
     {
         if (array_key_exists($a_sQuery, DBTools::$aCachedResults))
         {
-            if (mysql_num_rows(DBTools::$aCachedResults[$a_sQuery]) > 0)
+            if (mysqli_num_rows(DBTools::$aCachedResults[$a_sQuery]) > 0)
             {
-                mysql_data_seek(DBTools::$aCachedResults[$a_sQuery], 0);
+                mysqli_data_seek(DBTools::$aCachedResults[$a_sQuery], 0);
                 return DBTools::$aCachedResults[$a_sQuery];
             }
         }
@@ -162,13 +161,13 @@ class DBTools
     /**
      * Gets the latest ID updated in the database
      *
-     * Wrapper for mysql_insert_id
+     * Wrapper for mysqli_insert_id
      *
      * @return int Latest ID updated by auto-increment
      */
     public static function getLatestID()
     {
-        return mysql_insert_id();
+        return mysqli_insert_id(self::getConnection());
     }
 
     /**
@@ -184,7 +183,7 @@ class DBTools
     {
         if ($a_rResults != null)
         {
-            $aRow = mysql_fetch_row($a_rResults);
+            $aRow = mysqli_fetch_row($a_rResults);
             if ($aRow != null && isset($aRow[0]))
             {
                 return $aRow[0];

@@ -50,7 +50,7 @@ class TwitDAO
         $rResult = DBTools::doQuery($sQuery);
 
         $aFights = array();
-        while ($aFight = mysql_fetch_array($rResult))
+        while ($aFight = mysqli_fetch_array($rResult))
         {
             $oTempFight = new Fight($aFight['id'], $aFight['fighter1_name'], $aFight['fighter2_name'], $aFight['event_id']);
             $oTempFight->setFighterID(1, $aFight['fighter1_id']);

@@ -160,7 +160,7 @@ ORDER BY storedtime, lasttime DESC;
 
 
 
-        if ($aRow = mysql_fetch_array($rResult))
+        if ($aRow = mysqli_fetch_array($rResult))
         {
             return array('f1' => array(
                             'opening' => $aRow['opf1'],

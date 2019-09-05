@@ -120,7 +120,7 @@ class AlertDAO
         $aParams = array($a_oAlert->getEmail(), $a_oAlert->getFightID(), $a_oAlert->getFighter(), $a_oAlert->getBookieID(), $a_oAlert->getLimit());
 
         $rResult = DBTools::doParamQuery($sQuery, $aParams);
-        if ($aData = mysql_fetch_array($rResult))
+        if ($aData = mysqli_fetch_array($rResult))
         {
             return true;
         }
@@ -136,7 +136,7 @@ class AlertDAO
         $aParams = array($a_sEmail);
 
         $rResult = DBTools::doParamQuery($sQuery, $aParams);
-        if ($aData = mysql_fetch_array($rResult))
+        if ($aData = mysqli_fetch_array($rResult))
         {
             if ($aData['limitcount'] >= 50)
             {
@@ -202,7 +202,7 @@ class AlertDAO
 
         $rResult = DBTools::doQuery($sQuery);
         $aAlerts = array();
-        while ($aAlert = mysql_fetch_array($rResult))
+        while ($aAlert = mysqli_fetch_array($rResult))
         {
             $aAlerts[] = new Alert($aAlert['email'], $aAlert['fight_id'], $aAlert['fighter'], $aAlert['bookie_id'], $aAlert['odds'], $aAlert['id'], $aAlert['odds_type']);
         }
@@ -217,7 +217,7 @@ class AlertDAO
         $rResult = DBTools::doQuery($sQuery);
         $aAlerts = array();
 
-        while ($aAlert = mysql_fetch_array($rResult))
+        while ($aAlert = mysqli_fetch_array($rResult))
         {
             $aAlerts[] = new Alert($aAlert['email'], $aAlert['fight_id'], $aAlert['fighter'], $aAlert['bookie_id'], $aAlert['odds'], $aAlert['id'], $aAlert['odds_type']);
         }
@@ -231,7 +231,7 @@ class AlertDAO
 
         $rResult = DBTools::doQuery($sQuery);
 
-        if ($aResult = mysql_fetch_array($rResult))
+        if ($aResult = mysqli_fetch_array($rResult))
         {
             return $aResult['alertcount'];
         }

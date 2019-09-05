@@ -10,3 +10,6 @@
 
 3. Deployment
 * Important: **Do not deploy the /config directory**
+
+4. Additionals to notice:
+* MySQL stored procedures will not be included in the dump that is imported. Create these manually using the scripts in /db
