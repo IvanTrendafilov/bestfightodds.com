@@ -49,25 +49,44 @@ class XMLParserBetDSI
                         $odds = [];
                         foreach ($match_node->Bet as $bet_node)
                         {
-                            if ($bet_node['Name'] == 'Bout Odds')
+                            if ($bet_node['Name'] == 'Bout Odds' || $bet_node['Name'] == 'Match Winner')
                             {
+                                //Regular matchup odds
                                 foreach($bet_node->Odd as $odd_node)
                                 {
                                     $odds[((int) $odd_node['Name']) - 1] = OddsTools::convertDecimalToMoneyline($odd_node['Value']);
                                 }
                                 if (ParseTools::checkCorrectOdds((string) $odds[0]) && ParseTools::checkCorrectOdds((string) $odds[1]))
                                 {
-                                    $oParsedSport->addParsedMatchup(new ParsedMatchup(
+                                    $oParsedMatchup = new ParsedMatchup(
                                         (string) $competitors[0],
                                         (string) $competitors[1],
                                         (string) $odds[0],
                                         (string) $odds[1]
-                                     ));
+                                    );
+                                    $oParsedMatchup->setCorrelationID((string) $match_node['Name']);
+                                    $oParsedSport->addParsedMatchup($oParsedMatchup);    
                                 }
                             }
                             else
                             {
-                                Logger::getInstance()->log("New type of bet type: " . $bet_node['Name'] , -1);
+                                //Prop bet
+                                if (count($bet_node->Odd) == 2)
+                                {
+                                    //Probably two way bet (e.g. Yes/No, Over/Under)
+                                    $oParsedProp = new ParsedProp(
+                                        (string) $competitors[0] . ' vs ' . $competitors[1] . ' :: ' . $bet_node->Odd[0]['Name'] . (isset($bet_node->Odd[0]['SpecialBetValue']) ? ' ' . $bet_node->Odd[0]['SpecialBetValue'] : ''),
+                                        (string) $competitors[0] . ' vs ' . $competitors[1] . ' :: ' . $bet_node->Odd[1]['Name'] . (isset($bet_node->Odd[1]['SpecialBetValue']) ? ' ' . $bet_node->Odd[1]['SpecialBetValue'] : ''),
+                                        OddsTools::convertDecimalToMoneyline($bet_node->Odd[0]['Value']),
+                                        OddsTools::convertDecimalToMoneyline($bet_node->Odd[1]['Value'])
+                                    );
+                                    $oParsedProp->setCorrelationID((string) $match_node['Name']);
+                                    $oParsedSport->addFetchedProp($oParsedProp);
+                                }
+                                else
+                                {
+                                    Logger::getInstance()->log("New type of bet type: " . $bet_node['Name'] , -1);
+                                }
                             }
                         }
                     }
