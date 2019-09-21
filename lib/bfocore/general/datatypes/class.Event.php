@@ -74,12 +74,6 @@ class Event
     public function getEventAsLinkString()
     {
         $sName = LinkTools::slugString($this->sName);
-        /*$sName = str_replace(".", "", $sName);
-        $sName = str_replace(":", "", $sName);
-        $sName = str_replace(" ", "-", $sName);
-        $sName = str_replace("!", "", $sName);
-        $sName = str_replace("&", "and", $sName);
-        $sName = str_replace("+", "and", $sName);*/
         return strtolower($sName . '-' . $this->iID);
     }
 

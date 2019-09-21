@@ -237,6 +237,24 @@ CREATE TABLE `teams_twitterhandles` (
 ENGINE=MyISAM DEFAULT CHARSET=latin1;
 
 
+CREATE TABLE `prop_categories` (
+	`id` INT(11) NOT NULL AUTO_INCREMENT,
+	`category_name` VARCHAR(50) NOT NULL COMMENT 'Technical name',
+	`category_description` VARCHAR(200) NOT NULL COMMENT 'Describes the category in text',
+	PRIMARY KEY (`id`)
+)
+ENGINE=MyISAM DEFAULT CHARSET=latin1;
+;
+
+CREATE TABLE `prop_type_category` (
+	`proptype_id` INT(11) NOT NULL,
+	`category_id` INT(11) NOT NULL,
+	PRIMARY KEY (`proptype_id`, `category_id`)
+)
+ENGINE=MyISAM DEFAULT CHARSET=latin1;
+;
+
+
 
 USE `bets`;
 DROP function IF EXISTS `MoneylineToDecimal`;
