@@ -743,7 +743,7 @@ if ($oEvent != null)
 
 <?php
 
-
+        //TODO: This should be refactored to use the generic getExpectedOutcomes instead
         $aOutcomes = StatsHandler::getExpectedOutcomesForEvent($oEvent->getID());
         $aRowData = [];
         foreach ($aOutcomes as $aOutcome)
