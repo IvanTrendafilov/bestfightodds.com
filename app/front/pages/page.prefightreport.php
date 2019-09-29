@@ -49,9 +49,11 @@ if (CacheControl::isPageCached('prefightreport-' . $cache_key . '-' . strtotime(
 if ($bCached == false || empty($sBuffer))
 {
     $matchups = EventHandler::getAllFightsForEvent($event->getID(), true); //Limit to only matchups that have odds
-    $toplist_text = getTopExpectedOutcomes($event, $matchups);
+    $toplist_text = getTopExpectedTeamOutcomes($event, $matchups);
     $pickems_text = getPickems($event, $matchups);
     $fotn_text = getFOTN($event);
+
+    $distance_text = getTopExpectedMatchupOutcomes($event, $matchups);
 
     ob_start();
 
@@ -63,6 +65,7 @@ if ($bCached == false || empty($sBuffer))
         <div id="page-inner-wrapper">
             <div id="page-content">           
                Most expected outcome: <?php echo $toplist_text; ?><br /><br />
+               Fights that go the distance: <?php echo $distance_text; ?><br /><br />
                Pickems: <?php echo $pickems_text; ?><br /><br />
                FOTN: <?php echo $fotn_text ?><br /><br />
             </div>
@@ -83,7 +86,31 @@ if ($bCached == false || empty($sBuffer))
 
 echo $sBuffer;
 
-function getTopExpectedOutcomes($event, $matchups) {
+//Number of fights that go to decision
+function getTopExpectedMatchupOutcomes($event, $matchups)
+{
+    $count_distance = 0;
+    $count_inside = 0;
+    foreach ($matchups as $matchup)
+    {
+        //Get Goes to decision prop
+        //TODO: Hardcoded proptype id (1)
+        $propodds = OddsHandler::getBestPropOddsForMatchup($matchup->getID(), 1, 0);
+    
+        $odds = PropBet::moneylineToDecimal($propodds->getOdds(1));
+        if ($odds >= 1.83) //Inside distance expected
+        {
+            $count_inside++;
+        }
+        else
+        {
+            $count_distance++;
+        }
+    }
+    return '' . $count_distance . ' out of ' . ($count_distance + $count_inside) . ' fights are expected to go the distance ';
+}
+
+function getTopExpectedTeamOutcomes($event, $matchups) {
     //TODO: Temporary hard coded category id
     $category_id = 1;
 

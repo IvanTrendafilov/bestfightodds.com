@@ -120,10 +120,10 @@ if ($bCached == false || empty($sBuffer))
                         $oFighter2High = null;
                         foreach ($aOddsForFight as $oOdds)
                         {
-                            $oFighter1Low =  $oFighter1Low == null || $oOdds->getFighterOddsAsDecimal(1) < $oFighter1Low->getFighterOddsAsDecimal(1) ? $oOdds : $oFighter1Low;
-                            $oFighter2Low =  $oFighter2Low == null || $oOdds->getFighterOddsAsDecimal(2) < $oFighter2Low->getFighterOddsAsDecimal(2) ? $oOdds : $oFighter2Low;
-                            $oFighter1High = $oFighter1High == null || $oOdds->getFighterOddsAsDecimal(1) > $oFighter1High->getFighterOddsAsDecimal(1) ? $oOdds : $oFighter1High;
-                            $oFighter2High = $oFighter2High == null || $oOdds->getFighterOddsAsDecimal(2) > $oFighter2High->getFighterOddsAsDecimal(2) ? $oOdds : $oFighter2High;
+                            $oFighter1Low =  $oFighter1Low == null || $oOdds->getFighterOddsAsDecimal(1, true) < $oFighter1Low->getFighterOddsAsDecimal(1, true) ? $oOdds : $oFighter1Low;
+                            $oFighter2Low =  $oFighter2Low == null || $oOdds->getFighterOddsAsDecimal(2, true) < $oFighter2Low->getFighterOddsAsDecimal(2, true) ? $oOdds : $oFighter2Low;
+                            $oFighter1High = $oFighter1High == null || $oOdds->getFighterOddsAsDecimal(1, true) > $oFighter1High->getFighterOddsAsDecimal(1, true) ? $oOdds : $oFighter1High;
+                            $oFighter2High = $oFighter2High == null || $oOdds->getFighterOddsAsDecimal(2, true) > $oFighter2High->getFighterOddsAsDecimal(2, true) ? $oOdds : $oFighter2High;
                         }
 
 
