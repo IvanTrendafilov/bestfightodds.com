@@ -53,7 +53,6 @@ if (isset($_GET['eventID']) && $oEvent = EventHandler::getEvent($_GET['eventID']
 			</tr>';
   echo '</form>';
   echo '</table><br />';
-  echo '<div style=""><form method="post" action="logic/parseMJList.php"><input type="hidden" name="eventID" value="' . $_GET['eventID'] . '" /><textarea name="input" style="width: 450px; height: 200px;"></textarea><input type="submit" value="Parse" /></form></div>';
 }
 else if (isset($_GET['inFighter1']) && isset($_GET['inFighter2']))
 {
