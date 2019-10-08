@@ -895,12 +895,18 @@ fo2.bookie_id, fo2.fight_id ASC;';
         return DBTools::doParamQuery($sQuery, $aParams);
     }
 
-    public static function searchEvent($a_sEvent)
+    public static function searchEvent($a_sEvent, $a_bFutureEventsOnly = false)
     {
+        $sExtraWhere = '';
+        if ($a_bFutureEventsOnly == true)
+        {
+            $sExtraWhere = ' AND LEFT(date, 10) >= LEFT((NOW() - INTERVAL 2 HOUR), 10) ';
+        }
+
         $sQuery = 'SELECT e.id, e.date, e.name, e.display, MATCH(e.name) AGAINST (?) AS score  
                     FROM events e
                     WHERE e.name LIKE ? 
-                        OR MATCH(e.name) AGAINST (?) 
+                        OR MATCH(e.name) AGAINST (?) ' . $sExtraWhere . ' 
                     ORDER BY score DESC, e.name ASC';
 
         $aParams = array($a_sEvent, '%' . $a_sEvent . '%', $a_sEvent);
@@ -941,10 +947,10 @@ fo2.bookie_id, fo2.fight_id ASC;';
     /**
      * Writes an entry to the log for unmatched entries from parsing
      */
-    public static function logUnmatched($a_sMatchup, $a_iBookieID, $a_iType = 0)
+    public static function logUnmatched($a_sMatchup, $a_iBookieID, $a_iType, $a_sMetadata = '')
     {
-        $sQuery = 'INSERT INTO matchups_unmatched(matchup, bookie_id, type, log_date) VALUES (?,?,?, NOW()) ON DUPLICATE KEY UPDATE log_date = NOW()';
-        $aParams = array($a_sMatchup, $a_iBookieID, $a_iType);
+        $sQuery = 'INSERT INTO matchups_unmatched(matchup, bookie_id, type, metadata, log_date) VALUES (?,?,?,?, NOW()) ON DUPLICATE KEY UPDATE log_date = NOW()';
+        $aParams = array($a_sMatchup, $a_iBookieID, $a_iType, $a_sMetadata);
         DBTools::doParamQuery($sQuery, $aParams);
         return DBTools::getAffectedRows();
     }
@@ -954,7 +960,7 @@ fo2.bookie_id, fo2.fight_id ASC;';
      */
     public static function getUnmatched($a_iLimit = 10)
     {
-        $sQuery = 'SELECT matchup, bookie_id, log_date, type
+        $sQuery = 'SELECT matchup, bookie_id, log_date, type, metadata
                     FROM matchups_unmatched 
                     ORDER BY bookie_id ASC, log_date DESC
                     LIMIT 0, ' . $a_iLimit;

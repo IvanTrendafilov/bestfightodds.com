@@ -140,13 +140,14 @@ CREATE TABLE  `bets`.`matchups_unmatched` (
   `bookie_id` int(10) unsigned NOT NULL DEFAULT '0',
   `log_date` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `type` int(2) unsigned NOT NULL DEFAULT '0',
+  `metadata` VARCHAR(1000) NULL DEFAULT NULL,
   PRIMARY KEY (`matchup`,`bookie_id`) USING BTREE
 ) ENGINE=MyISAM DEFAULT CHARSET=latin1;
 
 CREATE TABLE `bets`.`matchups_metadata` (
   `matchup_id` INT NOT NULL,
   `mattribute` VARCHAR(45) NOT NULL,
-  `mvalue` VARCHAR(45) NOT NULL,
+  `mvalue` VARCHAR(500) NOT NULL,
   `source_bookie_id` INT NOT NULL,
   PRIMARY KEY (`matchup_id`, `mattribute`)
 ) ENGINE=MyISAM DEFAULT CHARSET=latin1;

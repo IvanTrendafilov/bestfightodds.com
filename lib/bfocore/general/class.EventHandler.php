@@ -289,9 +289,9 @@ class EventHandler
         return EventDAO::setFightAsMainEvent($a_iFightID, $a_bIsMainEvent);
     }
 
-    public static function searchEvent($a_sEventName)
+    public static function searchEvent($a_sEventName, $a_bFutureEventsOnly = false)
     {
-        return EventDAO::searchEvent($a_sEventName);
+        return EventDAO::searchEvent($a_sEventName, $a_bFutureEventsOnly);
     }
 
     /**
@@ -320,9 +320,10 @@ class EventHandler
      *
      * Type: 0 = matchup, 1 = prop without matchup, 2 = prop without template
      */
-    public static function logUnmatched($a_sMatchup, $a_iBookieID, $a_iType = 0)
+    public static function logUnmatched($a_sMatchup, $a_iBookieID, $a_iType, $a_aMetaData = null)
     {
-        return EventDAO::logUnmatched($a_sMatchup, $a_iBookieID, $a_iType);
+        $metadata = serialize($a_aMetaData);
+        return EventDAO::logUnmatched($a_sMatchup, $a_iBookieID, $a_iType, $metadata);
     }
 
     /**
@@ -332,7 +333,17 @@ class EventHandler
      */
     public static function getUnmatched($a_iLimit = 10)
     {
-        return EventDAO::getUnmatched($a_iLimit);
+        $unmatches = EventDAO::getUnmatched($a_iLimit);
+
+        //Before returning, unserialize the metadata field
+        foreach ($unmatches as $key => $val)
+        {
+            if ($val['metadata'] != '')
+            {
+                $unmatches[$key]['metadata'] = unserialize($unmatches[$key]['metadata']);
+            } 
+        }
+        return $unmatches;
     }
 
     /**
