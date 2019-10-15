@@ -50,7 +50,7 @@ class OddsDAO
         $rResult = DBTools::doParamQuery($sQuery, $aParams);
 
         $aProps = array();
-        while ($aRow = mysql_fetch_array($rResult))
+        while ($aRow = mysqli_fetch_array($rResult))
         {
             $aProps[] = new PropBet($a_iMatchupID,
                             $aRow['bookie_id'],
@@ -77,7 +77,7 @@ class OddsDAO
         $rResult = DBTools::doParamQuery($sQuery, $aParams);
 
         $aProps = array();
-        while ($aRow = mysql_fetch_array($rResult))
+        while ($aRow = mysqli_fetch_array($rResult))
         {
             $aProps[] = new EventPropBet($a_iEventID,
                             $aRow['bookie_id'],
@@ -111,7 +111,7 @@ class OddsDAO
         $rResult = DBTools::doParamQuery($sQuery, [$a_iEventID]);
 
         $aPropTypes = array();
-        while ($aRow = mysql_fetch_array($rResult))
+        while ($aRow = mysqli_fetch_array($rResult))
         {
             $aPropTypes[] = new PropType($aRow['id'],
                             $aRow['prop_desc'],
@@ -131,7 +131,7 @@ class OddsDAO
         $rResult = DBTools::doQuery($sQuery);
 
         $aPropTypes = array();
-        while ($aRow = mysql_fetch_array($rResult))
+        while ($aRow = mysqli_fetch_array($rResult))
         {
             $oTempPT = new PropType($aRow['id'],
                             $aRow['prop_desc'],
@@ -152,7 +152,7 @@ class OddsDAO
         $rResult = DBTools::doParamQuery($sQuery, [$a_iID]);
 
         $aPropTypes = array();
-        while ($aRow = mysql_fetch_array($rResult))
+        while ($aRow = mysqli_fetch_array($rResult))
         {
             $oTempPT = new PropType($aRow['id'],
                             $aRow['prop_desc'],
@@ -191,7 +191,7 @@ class OddsDAO
         $rResult = DBTools::doParamQuery($sQuery, $aParams);
 
         $aPropTypes = array();
-        while ($aRow = mysql_fetch_array($rResult))
+        while ($aRow = mysqli_fetch_array($rResult))
         {
             $aPropTypes[] = new PropType($aRow['id'],
                             $aRow['prop_desc'],
@@ -222,7 +222,7 @@ class OddsDAO
         $rResult = DBTools::doParamQuery($sQuery, $aParams);
 
         $aPropTypes = array();
-        while ($aRow = mysql_fetch_array($rResult))
+        while ($aRow = mysqli_fetch_array($rResult))
         {
             $aPropTypes[] = new PropType($aRow['id'],
                             $aRow['prop_desc'],
@@ -256,7 +256,7 @@ class OddsDAO
         $rResult = DBTools::doParamQuery($sQuery, $aParams);
 
         $aProps = array();
-        while ($aRow = mysql_fetch_array($rResult))
+        while ($aRow = mysqli_fetch_array($rResult))
         {
             $aProps[] = new PropBet($a_iMatchupID,
                             $aRow['bookie_id'],
@@ -298,7 +298,7 @@ class OddsDAO
         $rResult = DBTools::doParamQuery($sQuery, $aParams);
 
         $aProps = array();
-        while ($aRow = mysql_fetch_array($rResult))
+        while ($aRow = mysqli_fetch_array($rResult))
         {
             $aProps[] = new EventPropBet($a_iEventID,
                             $aRow['bookie_id'],
@@ -343,7 +343,7 @@ class OddsDAO
 
         //$aFightOddsCol = array();
 
-        if ($aRow = mysql_fetch_array($rResult))
+        if ($aRow = mysqli_fetch_array($rResult))
         {
             return new PropBet($a_iMatchupID,
                             $aRow['bookie_id'],
@@ -379,7 +379,7 @@ class OddsDAO
 
         //$aFightOddsCol = array();
 
-        if ($aRow = mysql_fetch_array($rResult))
+        if ($aRow = mysqli_fetch_array($rResult))
         {
             return new EventPropBet($a_iEventID,
                             $aRow['bookie_id'],
@@ -421,7 +421,7 @@ class OddsDAO
         $rResult = DBTools::doParamQuery($sQuery, $aParams);
 
         $aProps = array();
-        while ($aRow = mysql_fetch_array($rResult))
+        while ($aRow = mysqli_fetch_array($rResult))
         {
             $aProps[] = new PropBet($a_iMatchupID,
                             $aRow['bookie_id'],
@@ -462,7 +462,7 @@ class OddsDAO
         $rResult = DBTools::doParamQuery($sQuery, $aParams);
 
         $aProps = array();
-        while ($aRow = mysql_fetch_array($rResult))
+        while ($aRow = mysqli_fetch_array($rResult))
         {
             $aProps[] = new EventPropBet($a_iEventID,
                             $aRow['bookie_id'],
@@ -491,7 +491,7 @@ class OddsDAO
         $rResult = DBTools::doParamQuery($sQuery, $aParams);
 
         $aFightOddsCol = array();
-        while ($aFightOdds = mysql_fetch_array($rResult))
+        while ($aFightOdds = mysqli_fetch_array($rResult))
         {
             $aFightOddsCol[] = new FightOdds($aFightOdds['fight_id'], $aFightOdds['bookie_id'], $aFightOdds['fighter1_odds'], $aFightOdds['fighter2_odds'], $aFightOdds['date']);
         }
@@ -525,7 +525,7 @@ class OddsDAO
         $rResult = DBTools::doParamQuery($sQuery, $aParams);
 
         $aFightOddsCol = array();
-        while ($aFightOdds = mysql_fetch_array($rResult))
+        while ($aFightOdds = mysqli_fetch_array($rResult))
         {
             $aFightOddsCol[] = new FightOdds($aFightOdds['fight_id'], $aFightOdds['bookie_id'], $aFightOdds['fighter1_odds'], $aFightOdds['fighter2_odds'], $aFightOdds['date']);
         }
@@ -560,7 +560,7 @@ class OddsDAO
         $rResult = DBTools::doParamQuery($sQuery, $aParams);
 
         $aProps = array();
-        while ($aRow = mysql_fetch_array($rResult))
+        while ($aRow = mysqli_fetch_array($rResult))
         {
             $aProps[] = new PropBet($a_iMatchupID,
                             $aRow['bookie_id'],
@@ -603,7 +603,7 @@ class OddsDAO
         $rResult = DBTools::doParamQuery($sQuery, $aParams);
 
         $aProps = array();
-        while ($aRow = mysql_fetch_array($rResult))
+        while ($aRow = mysqli_fetch_array($rResult))
         {
             $aProps[] = new EventPropBet($a_iEventID,
                             $aRow['bookie_id'],
@@ -647,7 +647,7 @@ class OddsDAO
         $rResult = DBTools::doParamQuery($sQuery, $aParams);
 
         $aProps = array();
-        while ($aRow = mysql_fetch_array($rResult))
+        while ($aRow = mysqli_fetch_array($rResult))
         {
             $aProps[] = new PropBet($a_iMatchupID,
                             $aRow['bookie_id'],
@@ -691,7 +691,7 @@ class OddsDAO
         $rResult = DBTools::doParamQuery($sQuery, $aParams);
 
         $aProps = array();
-        while ($aRow = mysql_fetch_array($rResult))
+        while ($aRow = mysqli_fetch_array($rResult))
         {
             $aProps[] = new EventPropBet($a_iEventID,
                             $aRow['bookie_id'],
@@ -728,7 +728,7 @@ class OddsDAO
         $rResult = DBTools::doParamQuery($sQuery, $aParams);
 
         $aReturn = array();
-        while ($aRow = mysql_fetch_array($rResult))
+        while ($aRow = mysqli_fetch_array($rResult))
         {
             $aReturn[] = array('correlation' => $aRow['correlation'],
                 'matchup_id' => $aRow['matchup_id']);
@@ -871,7 +871,7 @@ class OddsDAO
         $rResult = DBTools::doParamQuery($sQuery, $aParams);
 
         $aProps = array();
-        while ($aRow = mysql_fetch_array($rResult))
+        while ($aRow = mysqli_fetch_array($rResult))
         {
             $aProps[] = new PropBet($a_iMatchup,
                             $aRow['bookie_id'],
@@ -939,7 +939,7 @@ class OddsDAO
         $rResult = DBTools::doParamQuery($sQuery, $aParams);
 
         $aProps = array();
-        while ($aRow = mysql_fetch_array($rResult))
+        while ($aRow = mysqli_fetch_array($rResult))
         {
             $aProps[] = new EventPropBet($a_iEventID,
                             $aRow['bookie_id'],

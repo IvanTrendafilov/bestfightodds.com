@@ -19,7 +19,7 @@ class TeamDAO
 
         $rResult = DBTools::doParamQuery($sQuery, $aParams);
 
-        while ($aTeamName = mysql_fetch_array($rResult))
+        while ($aTeamName = mysqli_fetch_array($rResult))
         {
             $aNames[] = $aTeamName['altname'];
         }
@@ -70,7 +70,7 @@ class TeamDAO
                         AND LEFT(e.date, 10) < LEFT((NOW() - INTERVAL 2 HOUR), 10)';
         $rResult = DBTools::doQuery($sQuery);
         $aFighters = [];
-        while ($aFighter = mysql_fetch_array($rResult))
+        while ($aFighter = mysqli_fetch_array($rResult))
         {
             $aFighters[] = new Fighter($aFighter['name'], $aFighter['id']);
         }

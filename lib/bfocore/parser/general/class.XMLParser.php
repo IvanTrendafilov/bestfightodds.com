@@ -372,7 +372,7 @@ class XMLParser
                 }
                 else
                 {
-                    EventHandler::logUnmatched($oTempMatchup->getFighter(1) . ' vs ' . $oTempMatchup->getFighter(2), $a_iBookieID, 0);
+                    EventHandler::logUnmatched($oTempMatchup->getFighter(1) . ' vs ' . $oTempMatchup->getFighter(2), $a_iBookieID, 0, $aMeta);
                     $oLogger->log('--- unmatched matchup: ' . $oTempMatchup->getFighter(1) . ' vs ' . $oTempMatchup->getFighter(2) . ' [<a href="?p=addNewFightForm&inFighter1=' . $oTempMatchup->getFighter(1) . '&inFighter2=' . $oTempMatchup->getFighter(2) . '">add</a>] [<a href="http://www.google.se/search?q=' . $oTempMatchup->getFighterAsString(1) . ' vs ' . $oTempMatchup->getFighterAsString(2) . '">google</a>]', -1);
                 }
 

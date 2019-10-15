@@ -15,7 +15,7 @@ class EventDAO
                     ORDER BY date ASC, LEFT(name,3) = "UFC" DESC, name ASC';
         $rResult = DBTools::doQuery($sQuery);
         $aEvents = array();
-        while ($aEvent = mysql_fetch_array($rResult))
+        while ($aEvent = mysqli_fetch_array($rResult))
         {
             $aEvents[] = new Event($aEvent['id'], $aEvent['date'], $aEvent['name'], $aEvent['display']);
         }
@@ -30,7 +30,7 @@ class EventDAO
                     ORDER BY date ASC, LEFT(name,3) = "UFC" DESC, name ASC';
         $rResult = DBTools::doQuery($sQuery);
         $aEvents = array();
-        while ($aEvent = mysql_fetch_array($rResult))
+        while ($aEvent = mysqli_fetch_array($rResult))
         {
             $aEvents[] = new Event($aEvent['id'], $aEvent['date'], $aEvent['name'], $aEvent['display']);
         }
@@ -49,7 +49,7 @@ class EventDAO
         $sQuery = 'SELECT id, date, name, display FROM events WHERE id = ' . $a_iEventID . ' ' . $sExtraWhere;
         $rResult = DBTools::doQuery($sQuery);
         $aEvents = array();
-        while ($aEvent = mysql_fetch_array($rResult))
+        while ($aEvent = mysqli_fetch_array($rResult))
         {
             $aEvents[] = new Event($aEvent['id'], $aEvent['date'], $aEvent['name'], $aEvent['display']);
         }
@@ -67,7 +67,7 @@ class EventDAO
         $sQuery = 'SELECT id, date, name, display FROM events WHERE name = ?';
         $rResult = DBTools::doParamQuery($sQuery, array($a_sName));
         $aEvents = array();
-        while ($aEvent = mysql_fetch_array($rResult))
+        while ($aEvent = mysqli_fetch_array($rResult))
         {
             $aEvents[] = new Event($aEvent['id'], $aEvent['date'], $aEvent['name'], $aEvent['display']);
         }
@@ -109,7 +109,7 @@ class EventDAO
 
         $aFights = array();
 
-        while ($aFight = mysql_fetch_array($rResult))
+        while ($aFight = mysqli_fetch_array($rResult))
         {
             $oTempFight = new Fight($aFight['id'], $aFight['fighter1_name'], $aFight['fighter2_name'], $aFight['event_id']);
             $oTempFight->setFighterID(1, $aFight['fighter1_id']);
@@ -141,7 +141,7 @@ class EventDAO
 
         $aFights = array();
 
-        while ($aFight = mysql_fetch_array($rResult))
+        while ($aFight = mysqli_fetch_array($rResult))
         {
             $oTempMatchup = new Fight($aFight['id'], $aFight['fighter1_name'], $aFight['fighter2_name'], $aFight['event_id']);
             $oTempMatchup->setFighterID(1, $aFight['fighter1_id']);
@@ -186,7 +186,7 @@ class EventDAO
 
         $aFights = array();
 
-        while ($aFight = mysql_fetch_array($rResult))
+        while ($aFight = mysqli_fetch_array($rResult))
         {
             $oTempFight = new Fight($aFight['id'], $aFight['fighter1_name'], $aFight['fighter2_name'], $aFight['event_id']);
             $oTempFight->setFighterID(1, $aFight['fighter1_id']);
@@ -243,7 +243,7 @@ fo2.bookie_id, fo2.fight_id ASC;';
 
         $aFightOddsCol = array();
 
-        while ($aFightOdds = mysql_fetch_array($rResult))
+        while ($aFightOdds = mysqli_fetch_array($rResult))
         {
             $aFightOddsCol[] = new FightOdds($aFightOdds['fight_id'], $aFightOdds['bookie_id'], $aFightOdds['fighter1_odds'], $aFightOdds['fighter2_odds'], $aFightOdds['date']);
         }
@@ -265,7 +265,7 @@ fo2.bookie_id, fo2.fight_id ASC;';
         $rResult = DBTools::doParamQuery($sQuery, $aParams);
 
         $aFightOddsCol = array();
-        while ($aFightOdds = mysql_fetch_array($rResult))
+        while ($aFightOdds = mysqli_fetch_array($rResult))
         {
             $aFightOddsCol[] = new FightOdds($aFightOdds['fight_id'], $aFightOdds['bookie_id'], $aFightOdds['fighter1_odds'], $aFightOdds['fighter2_odds'], $aFightOdds['date']);
         }
@@ -287,7 +287,7 @@ fo2.bookie_id, fo2.fight_id ASC;';
         $rResult = DBTools::doParamQuery($sQuery, array($a_iFightID, $a_iBookieID));
 
         $aFightOddsCol = array();
-        while ($aFightOdds = mysql_fetch_array($rResult))
+        while ($aFightOdds = mysqli_fetch_array($rResult))
         {
             $aFightOddsCol[] = new FightOdds($aFightOdds['fight_id'], $aFightOdds['bookie_id'], $aFightOdds['fighter1_odds'], $aFightOdds['fighter2_odds'], $aFightOdds['date']);
         }
@@ -308,7 +308,7 @@ fo2.bookie_id, fo2.fight_id ASC;';
         $rResult = DBTools::doParamQuery($sQuery, array($a_iMatchupID));
 
         $aFightOddsCol = array();
-        while ($aFightOdds = mysql_fetch_array($rResult))
+        while ($aFightOdds = mysqli_fetch_array($rResult))
         {
             $aFightOddsCol[] = new FightOdds($aFightOdds['fight_id'], $aFightOdds['bookie_id'], $aFightOdds['fighter1_odds'], $aFightOdds['fighter2_odds'], $aFightOdds['date']);
         }
@@ -361,7 +361,7 @@ fo2.bookie_id, fo2.fight_id ASC;';
             DBTools::cacheQueryResults($sQuery, $rResult);
         }
 
-        while ($aFight = mysql_fetch_array($rResult))
+        while ($aFight = mysqli_fetch_array($rResult))
         {
             $oTempFight = new Fight($aFight['id'], $aFight['fighter1_name'], $aFight['fighter2_name'], $aFight['event_id']);
             if ($aFight['fighter1_name'] > $aFight['fighter2_name'])
@@ -464,7 +464,7 @@ fo2.bookie_id, fo2.fight_id ASC;';
             DBTools::cacheQueryResults($sQuery, $rResult);
         }
 
-        while ($aFight = mysql_fetch_array($rResult))
+        while ($aFight = mysqli_fetch_array($rResult))
         {
             $oTempFight = new Fight($aFight['id'], $aFight['fighter1_name'], $aFight['fighter2_name'], $aFight['event_id']);
             if ($aFight['fighter1_name'] > $aFight['fighter2_name'])
@@ -524,7 +524,7 @@ fo2.bookie_id, fo2.fight_id ASC;';
 
         $rResult = DBTools::doParamQuery($sQuery, $aParams);
 
-        $aFight = mysql_fetch_array($rResult);
+        $aFight = mysqli_fetch_array($rResult);
         if ($aFight != false && sizeof($aFight) > 0)
         {
             $oTempFight = new Fight($aFight['id'], $aFight['fighter1_name'], $aFight['fighter2_name'], $aFight['event_id']);
@@ -550,7 +550,7 @@ fo2.bookie_id, fo2.fight_id ASC;';
 
         $rResult = DBTools::doQuery($sQuery);
 
-        $aFight = mysql_fetch_array($rResult);
+        $aFight = mysqli_fetch_array($rResult);
         if (sizeof($aFight) > 0)
         {
             if ($aFight['fighter1_name'] > $aFight['fighter2_name'])
@@ -581,13 +581,13 @@ fo2.bookie_id, fo2.fight_id ASC;';
     public static function addNewFighter($a_sFighterName)
     {
         $a_sFighterName = strtoupper($a_sFighterName);
-        $a_sFighterName = mysql_real_escape_string($a_sFighterName);
+        $params = [$a_sFighterName];
         if (EventDAO::getFighterIDByName($a_sFighterName) == null)
         {
             $sQuery = 'INSERT INTO fighters(name, url)
-                            VALUES(\'' . $a_sFighterName . '\', \'\')';
+                            VALUES(?, \'\')';
 
-            DBTools::doQuery($sQuery);
+            DBTools::doParamQuery($sQuery, $params);
             return true;
         }
         return false;
@@ -622,7 +622,7 @@ fo2.bookie_id, fo2.fight_id ASC;';
         $rResult = DBTools::doParamQuery($sQuery, $aParams);
 
         $aFighters = array();
-        while ($aFighter = mysql_fetch_array($rResult))
+        while ($aFighter = mysqli_fetch_array($rResult))
         {
             $aFighters[] = $aFighter['id'];
         }
@@ -730,7 +730,7 @@ fo2.bookie_id, fo2.fight_id ASC;';
 
         $aFightOddsCol = array();
 
-        while ($aFightOdds = mysql_fetch_array($rResult))
+        while ($aFightOdds = mysqli_fetch_array($rResult))
         {
             $aFightOddsCol[] = new FightOdds($a_iFightID, -1, $aFightOdds['fighter1_odds'], $aFightOdds['fighter2_odds'], '');
         }
@@ -776,7 +776,7 @@ fo2.bookie_id, fo2.fight_id ASC;';
 
         $aFightOddsCol = array();
 
-        while ($aFightOdds = mysql_fetch_array($rResult))
+        while ($aFightOdds = mysqli_fetch_array($rResult))
         {
             $aFightOddsCol[] = new FightOdds($a_iFightID, $aFightOdds['bookie_id'], $aFightOdds['fighter1_odds'], $aFightOdds['fighter2_odds'], '');
         }
@@ -872,7 +872,7 @@ fo2.bookie_id, fo2.fight_id ASC;';
         $rResult = DBTools::doParamQuery($sQuery, $aParams);
 
         $aFights = array();
-        while ($aFight = mysql_fetch_array($rResult))
+        while ($aFight = mysqli_fetch_array($rResult))
         {
             $oTempFight = new Fight($aFight['id'], $aFight['fighter1_name'], $aFight['fighter2_name'], $aFight['event_id']);
             $oTempFight->setFighterID(1, $aFight['fighter1_id']);
@@ -895,18 +895,24 @@ fo2.bookie_id, fo2.fight_id ASC;';
         return DBTools::doParamQuery($sQuery, $aParams);
     }
 
-    public static function searchEvent($a_sEvent)
+    public static function searchEvent($a_sEvent, $a_bFutureEventsOnly = false)
     {
+        $sExtraWhere = '';
+        if ($a_bFutureEventsOnly == true)
+        {
+            $sExtraWhere = ' AND LEFT(date, 10) >= LEFT((NOW() - INTERVAL 2 HOUR), 10) ';
+        }
+
         $sQuery = 'SELECT e.id, e.date, e.name, e.display, MATCH(e.name) AGAINST (?) AS score  
                     FROM events e
                     WHERE e.name LIKE ? 
-                        OR MATCH(e.name) AGAINST (?) 
+                        OR MATCH(e.name) AGAINST (?) ' . $sExtraWhere . ' 
                     ORDER BY score DESC, e.name ASC';
 
         $aParams = array($a_sEvent, '%' . $a_sEvent . '%', $a_sEvent);
         $rResult = DBTools::doParamQuery($sQuery, $aParams);
         $aEvents = array();
-        while ($aEvent = mysql_fetch_array($rResult))
+        while ($aEvent = mysqli_fetch_array($rResult))
         {
             $aEvents[] = new Event($aEvent['id'], $aEvent['date'], $aEvent['name'], $aEvent['display']);
         }
@@ -930,7 +936,7 @@ fo2.bookie_id, fo2.fight_id ASC;';
 
         $rResult = DBTools::doQuery($sQuery);
         $aEvents = array();
-        while ($aEvent = mysql_fetch_array($rResult))
+        while ($aEvent = mysqli_fetch_array($rResult))
         {
             $aEvents[] = new Event($aEvent['id'], $aEvent['date'], $aEvent['name'], $aEvent['display']);
         }
@@ -941,10 +947,10 @@ fo2.bookie_id, fo2.fight_id ASC;';
     /**
      * Writes an entry to the log for unmatched entries from parsing
      */
-    public static function logUnmatched($a_sMatchup, $a_iBookieID, $a_iType = 0)
+    public static function logUnmatched($a_sMatchup, $a_iBookieID, $a_iType, $a_sMetadata = '')
     {
-        $sQuery = 'INSERT INTO matchups_unmatched(matchup, bookie_id, type, log_date) VALUES (?,?,?, NOW()) ON DUPLICATE KEY UPDATE log_date = NOW()';
-        $aParams = array($a_sMatchup, $a_iBookieID, $a_iType);
+        $sQuery = 'INSERT INTO matchups_unmatched(matchup, bookie_id, type, metadata, log_date) VALUES (?,?,?,?, NOW()) ON DUPLICATE KEY UPDATE log_date = NOW()';
+        $aParams = array($a_sMatchup, $a_iBookieID, $a_iType, $a_sMetadata);
         DBTools::doParamQuery($sQuery, $aParams);
         return DBTools::getAffectedRows();
     }
@@ -954,14 +960,14 @@ fo2.bookie_id, fo2.fight_id ASC;';
      */
     public static function getUnmatched($a_iLimit = 10)
     {
-        $sQuery = 'SELECT matchup, bookie_id, log_date, type
+        $sQuery = 'SELECT matchup, bookie_id, log_date, type, metadata
                     FROM matchups_unmatched 
                     ORDER BY bookie_id ASC, log_date DESC
                     LIMIT 0, ' . $a_iLimit;
 
         $rResult = DBTools::doQuery($sQuery);
         $aUnmatched = array();
-        while ($aRow = mysql_fetch_array($rResult))
+        while ($aRow = mysqli_fetch_array($rResult))
         {
             $aUnmatched[] = $aRow;
         }        
@@ -992,7 +998,7 @@ fo2.bookie_id, fo2.fight_id ASC;';
         $rResult = DBTools::doParamQuery($sQuery, $aParams);
 
         $aEvents = array();
-        while ($aEvent = mysql_fetch_array($rResult))
+        while ($aEvent = mysqli_fetch_array($rResult))
         {
             $aEvents[] = new Event($aEvent['id'], $aEvent['date'], $aEvent['name'], $aEvent['display']);
         }
@@ -1043,7 +1049,7 @@ fo2.bookie_id, fo2.fight_id ASC;';
                     AND LEFT(e.date, 10) < LEFT((NOW() - INTERVAL 2 HOUR), 10);';
         $rResult = DBTools::doQuery($sQuery);
         $aEvents = array();
-        while ($aEvent = mysql_fetch_array($rResult))
+        while ($aEvent = mysqli_fetch_array($rResult))
         {
             $aEvents[] = new Event($aEvent['id'], $aEvent['date'], $aEvent['name'], $aEvent['display']);
         }
@@ -1080,7 +1086,7 @@ fo2.bookie_id, fo2.fight_id ASC;';
         $sQuery = 'SELECT matchup_id, winner, method, endround, endtime FROM matchups_results WHERE matchup_id = ?';
         $rResult = DBTools::doParamQuery($sQuery, [$a_iMatchup_ID]);
 
-        if ($aResult = mysql_fetch_array($rResult))
+        if ($aResult = mysqli_fetch_array($rResult))
         {
             return $aResult; 
         }

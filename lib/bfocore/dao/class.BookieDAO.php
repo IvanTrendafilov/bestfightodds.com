@@ -22,7 +22,7 @@ class BookieDAO
 
         $aBookies = array();
 
-        while ($aBookie = mysql_fetch_array($rResult))
+        while ($aBookie = mysqli_fetch_array($rResult))
         {
             $aBookies[] = new Bookie($aBookie['id'], $aBookie['name'], $aBookie['url'], $aBookie['refurl']);
         }
@@ -41,7 +41,7 @@ class BookieDAO
 
         $aBookies = array();
 
-        while ($aBookie = mysql_fetch_array($rResult))
+        while ($aBookie = mysqli_fetch_array($rResult))
         {
             $aBookies[] = new Bookie($aBookie['id'], $aBookie['name'], $aBookie['url'], $aBookie['refurl']);
         }
@@ -63,7 +63,7 @@ class BookieDAO
 
         $aBookies = array();
 
-        while ($aBookie = mysql_fetch_array($rResult))
+        while ($aBookie = mysqli_fetch_array($rResult))
         {
             $aBookies[] = new Bookie($aBookie['id'], $aBookie['name'], $aBookie['url'], $aBookie['refurl']);
         }
@@ -145,7 +145,7 @@ class BookieDAO
         $rResult = DBTools::doParamQuery($sQuery, $aParams);
 
         $aParsers = array();
-        while ($aParser = mysql_fetch_array($rResult))
+        while ($aParser = mysqli_fetch_array($rResult))
         {
             $aParsers[] = new BookieParser($aParser['id'], $aParser['bookie_id'], $aParser['name'], $aParser['parse_url'], $aParser['mockfile'], $aParser['cn_inuse'], $aParser['cn_urlsuffix']);
         }
@@ -164,7 +164,7 @@ class BookieDAO
         $rResult = DBTools::doParamQuery($sQuery, $aParams);
 
         $aTemplates = array();
-        while ($aTemplate = mysql_fetch_array($rResult))
+        while ($aTemplate = mysqli_fetch_array($rResult))
         {
             $oTempObj = new PropTemplate($aTemplate['id'], $aTemplate['bookie_id'], $aTemplate['template'], $aTemplate['template_neg'], $aTemplate['prop_type'], $aTemplate['fields_type']);
             $oTempObj->setEventProp($aTemplate['is_eventprop']);

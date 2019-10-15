@@ -150,6 +150,12 @@ class XMLParser5Dimes
                             $oGameDate = new DateTime($cEvent->GameDateTime);
                             $oParsedMatchup->setMetaData('gametime', $oGameDate->getTimestamp());
                         }
+
+                        //Add header of matchup as metadata
+                        if (isset($cEvent->Header))
+                        {
+                            $oParsedMatchup->setMetaData('event_name', (string) $cEvent->Header);
+                        }
                         
                         $oParsedSport->addParsedMatchup($oParsedMatchup);
 

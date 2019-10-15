@@ -13,12 +13,49 @@ $sPropsMatchup = '';
 $sPropsTemplate = '';
 foreach($aUnmatchedCol as $aUnmatched)
 {
+	$aSplit = explode(' vs ', $aUnmatched['matchup']);
+	$event_text = '';
+	//If metadata is set, parse it and check for interesting information like date, event that we can later match on
+	if (isset($aUnmatched['metadata']))
+	{
+		if (isset($aUnmatched['metadata']['event_name']))
+		{
+			$event_name = substr($aUnmatched['metadata']['event_name'], 0, strpos($aUnmatched['metadata']['event_name'], " -"));
+
+			$link_add = '';
+			$event_date = '';
+			if (isset($aUnmatched['metadata']['gametime']))
+			{
+				$event_date = (new DateTime('@' . $aUnmatched['metadata']['gametime']))->format('Y-m-d');
+				$link_add = '&eventDate=' . $event_date; 
+			}
+
+			$event_search = EventHandler::searchEvent($event_name, true);
+			$event_maybe = '';
+			if ($event_search != null)
+			{
+				$event_maybe = '  Match: ' . $event_search[0]->getName() . ' (' . $event_search[0]->getDate() . ') <a href="/cnadm/?p=addNewFightForm&inEventID=' . $event_search[0]->getID() . '&inFighter1=' . $aSplit[0] . '&inFighter2=' . $aSplit[1] . '">add?</a>';
+			}
+			else
+			{
+
+				$event_maybe = '  No match.. <a href="/cnadm/?p=addNewEventForm&eventName=' . $event_name . '&eventDate=' . $link_add . '">create?</a>';
+			}
+
+
+			
+			$event_text = $event_name . ' (' . $event_date . ') ' . $event_maybe;
+
+		}
+	}
+
+
 	$sBookie = BookieHandler::getBookieByID($aUnmatched['bookie_id'])->getName();
   	$sModifiedDate = date("Y-m-d H:i:s", strtotime("+6 hours", strtotime($aUnmatched['log_date']))); //Add 6 hours to date for admin timezone
-  	$aSplit = explode(' vs ', $aUnmatched['matchup']);
+
   	if ($aUnmatched['type'] == 0)
   	{
-  		$sMatchups .= '<tr><td>' . $sModifiedDate . '</td><td><b>' . $sBookie . '</b></td><td>' . $aUnmatched['matchup'] . '</td><td>[<a href="?p=addNewFightForm&inFighter1=' . $aSplit[0] .  '&inFighter2=' . $aSplit[1] . '">add</a>] [<a href="http://www.google.se/search?q=' . $aUnmatched['matchup'] . '">google</a>]</td></tr>';	
+  		$sMatchups .= '<tr><td>' . $sModifiedDate . '</td><td><b>' . $sBookie . '</b></td><td>' . $aUnmatched['matchup'] . '</td><td>[<a href="?p=addNewFightForm&inFighter1=' . $aSplit[0] .  '&inFighter2=' . $aSplit[1] . '">add</a>] [<a href="http://www.google.se/search?q=' . $aUnmatched['matchup'] . '">google</a>] ' . $event_text . '</td></tr>';	
   	}
   	else if ($aUnmatched['type'] == 1)
   	{

@@ -122,7 +122,7 @@ if (isset($_GET['p']) && (
         $_GET['p'] == 'stopscrape' || 
         $_GET['p'] == 'odds' ||
         $_GET['p'] == 'matchup' ||
-        $_GET['p'] == 'stats'
+        $_GET['p'] == 'prefightreport'
         ))
 {
     require_once('app/front/pages/inc.FrontLogic.php');

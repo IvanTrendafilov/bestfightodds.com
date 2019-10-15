@@ -140,13 +140,14 @@ CREATE TABLE  `bets`.`matchups_unmatched` (
   `bookie_id` int(10) unsigned NOT NULL DEFAULT '0',
   `log_date` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `type` int(2) unsigned NOT NULL DEFAULT '0',
+  `metadata` VARCHAR(1000) NULL DEFAULT NULL,
   PRIMARY KEY (`matchup`,`bookie_id`) USING BTREE
 ) ENGINE=MyISAM DEFAULT CHARSET=latin1;
 
 CREATE TABLE `bets`.`matchups_metadata` (
   `matchup_id` INT NOT NULL,
   `mattribute` VARCHAR(45) NOT NULL,
-  `mvalue` VARCHAR(45) NOT NULL,
+  `mvalue` VARCHAR(500) NOT NULL,
   `source_bookie_id` INT NOT NULL,
   PRIMARY KEY (`matchup_id`, `mattribute`)
 ) ENGINE=MyISAM DEFAULT CHARSET=latin1;
@@ -235,6 +236,24 @@ CREATE TABLE `teams_twitterhandles` (
   PRIMARY KEY (`team_id`)
 )
 ENGINE=MyISAM DEFAULT CHARSET=latin1;
+
+
+CREATE TABLE `prop_categories` (
+	`id` INT(11) NOT NULL AUTO_INCREMENT,
+	`category_name` VARCHAR(50) NOT NULL COMMENT 'Technical name',
+	`category_description` VARCHAR(200) NOT NULL COMMENT 'Describes the category in text',
+	PRIMARY KEY (`id`)
+)
+ENGINE=MyISAM DEFAULT CHARSET=latin1;
+;
+
+CREATE TABLE `prop_type_category` (
+	`proptype_id` INT(11) NOT NULL,
+	`category_id` INT(11) NOT NULL,
+	PRIMARY KEY (`proptype_id`, `category_id`)
+)
+ENGINE=MyISAM DEFAULT CHARSET=latin1;
+;
 
 
 

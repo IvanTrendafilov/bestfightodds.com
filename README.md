@@ -10,3 +10,12 @@
 
 3. Deployment
 * Important: **Do not deploy the /config directory**
+
+4. Additionals to notice:
+* MySQL stored procedures will not be included in the dump that is imported. Create these manually using the scripts in /db
+
+
+
+Changes in 2019-09-21 Build
+- Added prop categories. Installation of new code base will require the new prop categories schema to be run and that props are properly assigned to categories (separate admin interface to be defined)
+- New pre-fight report page. Ensure that .htaccess is modified accordingly so that pages can be accessed 

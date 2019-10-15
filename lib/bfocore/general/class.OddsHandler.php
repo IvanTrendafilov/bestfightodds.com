@@ -79,6 +79,7 @@ class OddsHandler
         return count(OddsDAO::getAllPropTypesForMatchup($a_iMatchupID));
     }
 
+    /* Gets the average value across multiple bookies for specific prop type */
     public static function getCurrentPropIndex($a_iMatchupID, $a_iPosProp, $a_iPropTypeID, $a_iTeam)
     {
         $iSkippedProps = 0; //Keeps track of skipped prop bets that are not available, i.e. stored as -99999 in the database
