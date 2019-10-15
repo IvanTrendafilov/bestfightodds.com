@@ -161,6 +161,10 @@ class ParseTools
             {
               curl_setopt($aChannels[$sURL], CURLOPT_INTERFACE, '89.221.253.24');
             }
+            else if ($a_sURL == 'https://api.mmajunkie.com/rumors/rss')
+            {
+                curl_setopt($rCurl, CURLOPT_INTERFACE, '89.221.253.24');
+            }
             else if (strpos($sURL, 'gamingsystem.') !== false) 
             {
               curl_setopt($aChannels[$sURL], CURLOPT_SSLVERSION, 6); //TLS 1.2
