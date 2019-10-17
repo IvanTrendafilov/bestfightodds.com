@@ -65,6 +65,13 @@ class XMLParserBetDSI
                                         (string) $odds[1]
                                     );
                                     $oParsedMatchup->setCorrelationID((string) $match_node['Name']);
+
+                                    //Add header of matchup as metadata
+                                    if (isset($event_node['Name']))
+                                    {
+                                        $oParsedMatchup->setMetaData('event_name', (string) $event_node['Name']);
+                                    }
+
                                     $oParsedSport->addParsedMatchup($oParsedMatchup);    
                                 }
                             }
