@@ -5,6 +5,15 @@
  * Remember to end all dirs with / (unix) or \\ (windows)
  */
 
+/* General */
+define('GENERAL_BASEDIR', 'C:/dev2/bfo'); //Used to specify base directory (where repository is located. Used in other paths below)
+define('GENERAL_HOSTNAME', 'www.bestfightodds.com'); //Used to specify the hostname where this site is hosted. Used mainly to generate URLs in various contexts
+define('GENERAL_PRODUCTION_MODE', false); //Used to specify production mode. In production mode, some features are disabled for security purposes. E.g. some tests cannot be run
+define('GENERAL_TIMEZONE', -6);	//Timezone for website (if different from system)
+define('GENERAL_IMAGE_DIRECTORY', GENERAL_BASEDIR . '/app/front/img/'); //Used to specify image directory (required for some functions)
+define('GENERAL_KLOGDIR', GENERAL_BASEDIR . '/log/'); //Directory where Klogger logs should be stored
+
+
 /* Alerts */
 define('ALERTER_ENABLED', false);
 define('ALERTER_ADMIN_ALERT','cnordvaller@gmail.com');  //E-mail to alert in case of internal alerts (arbitrage etc.)
@@ -14,9 +23,9 @@ define('ALERTER_SITE_LINK', 'https://www.bestfightodds.com');
 define('ALERTER_SITE_NAME', 'Best Fight Odds');
 
 /* Cache */
-define('IMAGE_CACHE_DIR', 'C:\\dev2\\bfo\\app\\front\\img\\cache\\');  //Image Cache Directory
+define('IMAGE_CACHE_DIR', GENERAL_BASEDIR . '/app/front/img/cache/');  //Image Cache Directory
 define('CACHE_IMAGE_CACHE_ENABLED', false); //Enables/disables cache for graphs. Should only be disabled during development
-define('CACHE_PAGE_DIR', 'C:\\dev2\\bfo\\app\\front\\pages\\cache\\');  //Page Cache Directory
+define('CACHE_PAGE_DIR', GENERAL_BASEDIR . '/app/front/pages/cache/');  //Page Cache Directory
 define('CACHE_PAGE_CACHE_ENABLED', false); //Enables/disables cache for pages. Should only be disabled during development
 
 /* Database configuration */
@@ -29,31 +38,24 @@ define('DB_TIMEZONE', -6);	//Timezone for all data in database. Currently set to
 /* Facebook  */
 define('FACEBOOK_ENABLED', true);
 define('FACEBOOK_DEV_MODE', true); //In dev mode, no actual posts are created. Instead they are just echo'ed to the prompt
-define('FACEBOOK_KLOGDIR', 'C:\\dev2\\bfo\\log\\');
+define('FACEBOOK_KLOGDIR', GENERAL_BASEDIR . '/log/');
 define('FACEBOOK_APP_ID', '1743170102619630');
 define('FACEBOOK_APP_SECRET', 'af19c28c37ecbeb4c3db529e293cdb8e');
 define('FACEBOOK_ACCESS_TOKEN', 'EAAYxZA2qZC7e4BAOUww5RhqvWr9inuQZCW1koLMhTgVFAA6AYC6DtFHKYZAZCzHJWFYoozarzj3ZC0GZBv8oclgjvkFxBakjZC3X7og7XZCiIMsxohZC1Nr2Agyw37VjJoTpt4heQGcfQJ1oqxDi63nmKC5UCjQKUZB2oANkV319U5ceQZDZD');
 define('FACEBOOK_PAGEID', '1759833807635369');
 
-/* General */
-define('GENERAL_HOSTNAME', 'www.bestfightodds.com'); //Used to specify the hostname where this site is hosted. Used mainly to generate URLs in various contexts
-define('GENERAL_PRODUCTION_MODE', false); //Used to specify production mode. In production mode, some features are disabled for security purposes. E.g. some tests cannot be run
-define('GENERAL_TIMEZONE', -6);	//Timezone for website (if different from system)
-define('GENERAL_IMAGE_DIRECTORY', 'G:\\Dev\\www\\bfo\\app\\front\\img\\'); //Used to specify image directory (required for some functions)
-define('GENERAL_KLOGDIR', 'C:\\dev2\\bfo\\log\\'); //Directory where Klogger logs should be stored
-
 /* Parser */
-define('PARSE_LOGDIR', 'C:\\dev2\\bfo\\logs\\'); //Directory where logs should be stored
-define('PARSE_GENERATORDIR', 'C:\\dev2\\bfo\\app\\generators\\');  //Directory where page generators are stored
-define('PARSE_PAGEDIR', 'C:\\dev2\\bfo\\app\\front\\pages\\');  //Directory where generated pages should be stored
+define('PARSE_LOGDIR', GENERAL_BASEDIR . '/logs/'); //Directory where logs should be stored
+define('PARSE_GENERATORDIR', GENERAL_BASEDIR . '/app/generators/');  //Directory where page generators are stored
+define('PARSE_PAGEDIR', GENERAL_BASEDIR . '/app/front/pages/');  //Directory where generated pages should be stored
 define('PARSE_LOG_LEVEL', 2); //Level of detail in the logs, from -2 to 2 . At the lowest level, only errors are shown
 define('PARSE_PARSERS', 'WilliamHill');
 define('PARSE_MOCKFEEDS_ON', false); //Enable/disable mock feed mode parsing from static files instead of real feeds
-define('PARSE_MOCKFEEDS_DIR', 'C:\\dev2\\bfo\\app\\parsers\\mockfeeds\\');  //Directory where mock feeds are stored
+define('PARSE_MOCKFEEDS_DIR', GENERAL_BASEDIR . '/app/parsers/mockfeeds/');  //Directory where mock feeds are stored
 define('PARSE_CREATIVEMATCHING', false); //Used to specify if parser should try creative ways to match matchups (use with caution);
 define('PARSE_CREATEMATCHUPS', false); //Used to specify if parser should create matchups that was not found (use with caution);
 define('PARSE_FUTURESEVENT_ID', 197); //Used to identify the event that holds all future (that cant be linked to a specific event) matchups
-define('PARSE_KLOGDIR', 'C:\\dev2\\bfo\\log\\'); //Directory where Klogger logs should be stored
+define('PARSE_KLOGDIR', GENERAL_BASEDIR . '/log/'); //Directory where Klogger logs should be stored
 
 /* Twitter  */
 define('TWITTER_ENABLED', true);
