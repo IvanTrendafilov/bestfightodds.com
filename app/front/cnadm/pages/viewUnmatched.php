@@ -34,12 +34,12 @@ foreach($aUnmatchedCol as $aUnmatched)
 			$event_maybe = '';
 			if ($event_search != null)
 			{
-				$event_maybe = '  Match: ' . $event_search[0]->getName() . ' (' . $event_search[0]->getDate() . ') <a href="/cnadm/?p=addNewFightForm&inEventID=' . $event_search[0]->getID() . '&inFighter1=' . $aSplit[0] . '&inFighter2=' . $aSplit[1] . '">add?</a>';
+				$event_maybe = '  Match: ' . $event_search[0]->getName() . ' (' . $event_search[0]->getDate() . ') [<a href="/cnadm/?p=addNewFightForm&inEventID=' . $event_search[0]->getID() . '&inFighter1=' . $aSplit[0] . '&inFighter2=' . $aSplit[1] . '">add</a>]';
 			}
 			else
 			{
 
-				$event_maybe = '  No match.. <a href="/cnadm/?p=addNewEventForm&eventName=' . $event_name . '&eventDate=' . $link_add . '">create?</a>';
+				$event_maybe = '  No match.. [<a href="/cnadm/?p=addNewEventForm&eventName=' . $event_name . '&eventDate=' . $link_add . '">create</a>] [<a href="http://www.google.se/search?q=' . $event_name . '">google</a>]';
 			}
 
 

@@ -900,16 +900,24 @@ fo2.bookie_id, fo2.fight_id ASC;';
         $sExtraWhere = '';
         if ($a_bFutureEventsOnly == true)
         {
-            $sExtraWhere = ' AND LEFT(date, 10) >= LEFT((NOW() - INTERVAL 2 HOUR), 10) ';
+            $sExtraWhere = ' AND LEFT(e.date, 10) >= LEFT((NOW() - INTERVAL 2 HOUR), 10) ';
         }
 
-        $sQuery = 'SELECT e.id, e.date, e.name, e.display, MATCH(e.name) AGAINST (?) AS score  
-                    FROM events e
-                    WHERE e.name LIKE ? 
-                        OR MATCH(e.name) AGAINST (?) ' . $sExtraWhere . ' 
-                    ORDER BY score DESC, e.name ASC';
+        $sQuery = ' SELECT DISTINCT a3.* FROM
+                        ((SELECT e.id, e.date, e.name, e.display, 100 AS score
+                        FROM events e
+                        WHERE e.name LIKE ?
+                                 ' . $sExtraWhere . '
+                        ORDER BY e.date ASC) 
+                    UNION
+                        (SELECT e.id, e.date, e.name, e.display, MATCH(e.name) AGAINST (?) AS score  
+                        FROM events e
+                        WHERE MATCH(e.name) AGAINST (?) 
+                                ' . $sExtraWhere . '
+                        ORDER BY score DESC, e.date ASC)) a3 
+                    GROUP BY a3.id, a3.date, a3.name ORDER BY a3.score DESC';
 
-        $aParams = array($a_sEvent, '%' . $a_sEvent . '%', $a_sEvent);
+        $aParams = array('%' . $a_sEvent . '%', $a_sEvent, $a_sEvent);
         $rResult = DBTools::doParamQuery($sQuery, $aParams);
         $aEvents = array();
         while ($aEvent = mysqli_fetch_array($rResult))

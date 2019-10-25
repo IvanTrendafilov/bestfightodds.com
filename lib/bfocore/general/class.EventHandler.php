@@ -357,7 +357,7 @@ class EventHandler
     public static function getGenericEventForDate($a_sDate)
     {
         //Check first if future events date, if so, fetch that one
-        if ($a_sDate == '2019-12-31') 
+        if ($a_sDate == '2030-12-31') 
         {
             return self::getEvent(PARSE_FUTURESEVENT_ID);
         }
