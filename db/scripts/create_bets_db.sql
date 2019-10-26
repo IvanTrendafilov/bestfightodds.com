@@ -262,7 +262,7 @@ DROP function IF EXISTS `MoneylineToDecimal`;
 
 DELIMITER $$
 USE `bets`$$
-CREATE DEFINER=`root`@`localhost` FUNCTION `MoneylineToDecimal`(moneyline INT) RETURNS float
+CREATE FUNCTION `MoneylineToDecimal`(moneyline INT) RETURNS float
 BEGIN
   DECLARE decimalval FLOAT;
   IF moneyline = 100 THEN
