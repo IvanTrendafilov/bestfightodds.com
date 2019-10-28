@@ -42,12 +42,22 @@ class XMLParserBetOnline
                 if (ParseTools::checkCorrectOdds((string) $cEvent->participant[0]->odds->moneyline)
                         && ParseTools::checkCorrectOdds((string) $cEvent->participant[1]->odds->moneyline))
                 {
-                    $oParsedSport->addParsedMatchup(new ParsedMatchup(
+
+                    
+                    $oParsedMatchup = new ParsedMatchup(
                                     (string) $cEvent->participant[0]->participant_name,
                                     (string) $cEvent->participant[1]->participant_name,
                                     (string) $cEvent->participant[0]->odds->moneyline,
                                     (string) $cEvent->participant[1]->odds->moneyline
-                    ));
+                    );
+
+                    //Add header of matchup as metadata
+                    if (isset($cEvent->scheduletext))
+                    {
+                        $oParsedMatchup->setMetaData('event_name', (string) $cEvent->scheduletext);
+                    }
+
+                    $oParsedSport->addParsedMatchup($oParsedMatchup);
                 }
 
                 //Add total as prop
