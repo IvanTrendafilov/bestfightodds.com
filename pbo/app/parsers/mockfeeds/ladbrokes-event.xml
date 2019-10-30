@@ -1,0 +1,129 @@
+{
+  "event":{
+    "eventKey":221435406,
+    "typeKey":210002520,
+    "subTypeKey":12640,
+    "eventName":"Terry Flanagan v Derry Mathews",
+    "eventNameTranslated":"Terry Flanagan v Derry Mathews",
+    "eventStatus":"Active",
+    "displayStatus":"Displayed",
+    "displayOrder":0,
+    "eventSort":"MTCH",
+    "eventDateTime":"2016-03-12T22:00:00.001Z",
+    "classSortCode":"--",
+    "typeFlagCode":"RN,OA",
+    "isOpenEvent":true,
+    "markets":{
+      "num":1,
+      "market":{
+        "marketKey":267944666,
+        "eventKey":221435406,
+        "marketName":"Fight result",
+        "marketNameTranslated":"Fight result",
+        "marketStatus":"Active",
+        "marketStatusDerived":"Active",
+        "displayStatus":"Displayed",
+        "displayOrder":-100,
+        "isIndexMarket":false,
+        "isStandardFixedOddsMarket":true,
+        "isHandicapMarket":false,
+        "isOverUnderMarket":false,
+        "isForecastMarket":false,
+        "isTricastMarket":false,
+        "selectionPriceType":"LP",
+        "ncastTypeCode":"LP",
+        "marketMeaningMajorCode":"-",
+        "marketMeaningMinorCode":"MR",
+        "selections":{
+          "num":3,
+          "selection":[
+            {
+              "selectionKey":430606859,
+              "marketKey":267944666,
+              "selectionName":"Terry Flanagan",
+              "selectionNameTranslated":"Terry Flanagan",
+              "selectionStatus":"Active",
+              "displayStatus":"Displayed",
+              "displayOrder":0,
+              "outcomeMeaningMajorCode":"MR",
+              "outcomeMeaningMinorCode":"H",
+              "currentPrice":{
+                "decimalPrice":1.17,
+                "numPrice":1,
+                "denPrice":6,
+                "selectionPriceType":"LP"
+              }
+            },
+            {
+              "selectionKey":430606860,
+              "marketKey":267944666,
+              "selectionName":"Derry Mathews",
+              "selectionNameTranslated":"Derry Mathews",
+              "selectionStatus":"Active",
+              "displayStatus":"Displayed",
+              "displayOrder":0,
+              "outcomeMeaningMajorCode":"MR",
+              "outcomeMeaningMinorCode":"A",
+              "currentPrice":{
+                "decimalPrice":5,
+                "numPrice":4,
+                "denPrice":1,
+                "selectionPriceType":"LP"
+              }
+            },
+            {
+              "selectionKey":430606861,
+              "marketKey":267944666,
+              "selectionName":"Draw or Technical Draw",
+              "selectionNameTranslated":"Draw or Technical Draw",
+              "selectionStatus":"Active",
+              "displayStatus":"Displayed",
+              "displayOrder":0,
+              "outcomeMeaningMajorCode":"MR",
+              "outcomeMeaningMinorCode":"D",
+              "currentPrice":{
+                "decimalPrice":26,
+                "numPrice":25,
+                "denPrice":1,
+                "selectionPriceType":"LP"
+              }
+            }
+          ]
+        }
+      }
+    },
+    "links":{
+      "num":4,
+      "link":[
+        {
+          "title":"Terry Flanagan v Derry Mathews",
+          "rel":"self",
+          "href":"https://api.ladbrokes.com/v2/sportsbook-api/classes/null/types/null/subtypes/null/events/221435406?locale=en-GB&api-key=LADe7bbeb07982e4438b00f6479fcdc241c&expand=selection",
+          "responseType":"event",
+          "method":"GET"
+        },
+        {
+          "title":"Collection",
+          "rel":"collection",
+          "href":"https://api.ladbrokes.com/v2/sportsbook-api/classes/null/types/210002520/subtypes/12640/events?locale=en-GB&api-key=LADe7bbeb07982e4438b00f6479fcdc241c",
+          "responseType":"events",
+          "method":"GET"
+        },
+        {
+          "title":"Markets",
+          "rel":"markets",
+          "href":"https://api.ladbrokes.com/v2/sportsbook-api/classes/null/types/210002520/subtypes/12640/events/221435406/markets?locale=en-GB&api-key=LADe7bbeb07982e4438b00f6479fcdc241c",
+          "responseType":"markets",
+          "method":"GET"
+        },
+        {
+          "title":"Fight result",
+          "rel":"market",
+          "href":"https://api.ladbrokes.com/v2/sportsbook-api/classes/null/types/210002520/subtypes/12640/events/221435406/markets/267944666?locale=en-GB&api-key=LADe7bbeb07982e4438b00f6479fcdc241c",
+          "responseType":"market",
+          "method":"GET"
+        }
+      ]
+    }
+  }
+}

@@ -1,0 +1,25 @@
+{
+  "name": "bbo",
+  "version": "1.0.0",
+  "description": "BBO",
+  "main": " ",
+  "scripts": {
+    "gulp": "gulp watch"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://cnordvaller@bitbucket.org/capappsab/bbo.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "gulp": "^4.0.0",
+    "gulp-closure-compiler": "^0.4.0",
+    "gulp-concat": "^2.6.0",
+    "gulp-merge": "^0.1.1",
+    "gulp-minify-css": "^1.2.1",
+    "gulp-rename": "^1.2.2",
+    "gulp-sass": "^4.0.1",
+    "gulp-uglify": "^3.0.1"
+  }
+}

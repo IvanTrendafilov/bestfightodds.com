@@ -1,0 +1,428 @@
+<?xml version="1.0"?>
+<rsp status="ok">
+  <fd>
+    <fdTime>1458122591419</fdTime>
+    <sports>
+      <sport>
+        <id>6</id>
+        <leagues>
+          <league>
+            <id>11713</id>
+            <events>
+              <event>
+                <startDateTime>2016-03-26T22:00:00Z</startDateTime>
+                <id>560641033</id>
+                <IsLive>No</IsLive>
+                <lStatus>0</lStatus>
+                <status>I</status>
+                <homeTeam type="Team1">
+                  <name>Kevin Bizier</name>
+                  <rotNum>1541</rotNum>
+                </homeTeam>
+                <awayTeam type="Team2">
+                  <name>Kell Brook</name>
+                  <rotNum>1542</rotNum>
+                </awayTeam>
+                <periods>
+                  <period lineId="276008806">
+                    <number>0</number>
+                    <description>Fight</description>
+                    <cutoffDateTime>2016-03-26T22:00:00Z</cutoffDateTime>
+                    <spreads />
+                    <moneyLine>
+                      <awayPrice>-6000</awayPrice>
+                      <homePrice>2504</homePrice>
+                    </moneyLine>
+                    <maxBetAmount>
+                      <moneyLine>1000</moneyLine>
+                    </maxBetAmount>
+                  </period>
+                </periods>
+              </event>
+              <event>
+                <startDateTime>2016-04-10T04:00:00Z</startDateTime>
+                <id>537651282</id>
+                <IsLive>No</IsLive>
+                <lStatus>0</lStatus>
+                <status>I</status>
+                <homeTeam type="Team1">
+                  <name>Timothy Bradley Jr.</name>
+                  <rotNum>1801</rotNum>
+                </homeTeam>
+                <awayTeam type="Team2">
+                  <name>Manny Pacquiao</name>
+                  <rotNum>1802</rotNum>
+                </awayTeam>
+                <periods>
+                  <period lineId="276009286">
+                    <number>0</number>
+                    <description>Fight</description>
+                    <cutoffDateTime>2016-04-10T04:00:00Z</cutoffDateTime>
+                    <spreads />
+                    <totals>
+                      <total>
+                        <points>10.5</points>
+                        <overPrice>-366</overPrice>
+                        <underPrice>295</underPrice>
+                      </total>
+                    </totals>
+                    <moneyLine>
+                      <awayPrice>-241</awayPrice>
+                      <homePrice>210</homePrice>
+                    </moneyLine>
+                    <maxBetAmount>
+                      <totalPoints>1000</totalPoints>
+                      <moneyLine>3000</moneyLine>
+                    </maxBetAmount>
+                  </period>
+                </periods>
+              </event>
+            </events>
+          </league>
+          <league>
+            <id>11716</id>
+            <events>
+              <event>
+                <startDateTime>2016-04-02T02:00:00Z</startDateTime>
+                <id>565644485</id>
+                <IsLive>No</IsLive>
+                <lStatus>0</lStatus>
+                <status>I</status>
+                <homeTeam type="Team1">
+                  <name>Ashley Theophane</name>
+                  <rotNum>1601</rotNum>
+                </homeTeam>
+                <awayTeam type="Team2">
+                  <name>Adrien Broner</name>
+                  <rotNum>1602</rotNum>
+                </awayTeam>
+                <periods>
+                  <period lineId="276009145">
+                    <number>0</number>
+                    <description>Fight</description>
+                    <cutoffDateTime>2016-04-02T02:00:00Z</cutoffDateTime>
+                    <spreads />
+                    <moneyLine>
+                      <awayPrice>-4000</awayPrice>
+                      <homePrice>2055</homePrice>
+                    </moneyLine>
+                    <maxBetAmount>
+                      <moneyLine>1000</moneyLine>
+                    </maxBetAmount>
+                  </period>
+                </periods>
+              </event>
+            </events>
+          </league>
+          <league>
+            <id>16283</id>
+            <events>
+              <event>
+                <startDateTime>2016-04-09T21:30:00Z</startDateTime>
+                <id>563934630</id>
+                <IsLive>No</IsLive>
+                <lStatus>0</lStatus>
+                <status>I</status>
+                <homeTeam type="Team1">
+                  <name>Charles Martin</name>
+                  <rotNum>1851</rotNum>
+                </homeTeam>
+                <awayTeam type="Team2">
+                  <name>Anthony Joshua</name>
+                  <rotNum>1852</rotNum>
+                </awayTeam>
+                <periods>
+                  <period lineId="276009405">
+                    <number>0</number>
+                    <description>Fight</description>
+                    <cutoffDateTime>2016-04-09T21:30:00Z</cutoffDateTime>
+                    <spreads />
+                    <moneyLine>
+                      <awayPrice>-555</awayPrice>
+                      <homePrice>450</homePrice>
+                    </moneyLine>
+                    <maxBetAmount>
+                      <moneyLine>1000</moneyLine>
+                    </maxBetAmount>
+                  </period>
+                </periods>
+              </event>
+              <event>
+                <startDateTime>2016-05-07T22:00:00Z</startDateTime>
+                <id>545174399</id>
+                <IsLive>No</IsLive>
+                <lStatus>0</lStatus>
+                <status>I</status>
+                <homeTeam type="Team1">
+                  <name>Tyson Fury</name>
+                  <rotNum>1991</rotNum>
+                </homeTeam>
+                <awayTeam type="Team2">
+                  <name>Wladimir Klitschko</name>
+                  <rotNum>1992</rotNum>
+                </awayTeam>
+                <periods>
+                  <period lineId="276009584">
+                    <number>0</number>
+                    <description>Fight</description>
+                    <cutoffDateTime>2016-05-07T22:00:00Z</cutoffDateTime>
+                    <spreads />
+                    <moneyLine>
+                      <awayPrice>-106</awayPrice>
+                      <homePrice>-106</homePrice>
+                    </moneyLine>
+                    <maxBetAmount>
+                      <moneyLine>3000</moneyLine>
+                    </maxBetAmount>
+                  </period>
+                </periods>
+              </event>
+            </events>
+          </league>
+          <league>
+            <id>16286</id>
+            <events>
+              <event>
+                <startDateTime>2016-04-10T03:00:00Z</startDateTime>
+                <id>548382415</id>
+                <IsLive>No</IsLive>
+                <lStatus>0</lStatus>
+                <status>I</status>
+                <homeTeam type="Team1">
+                  <name>Arthur Abraham</name>
+                  <rotNum>1803</rotNum>
+                </homeTeam>
+                <awayTeam type="Team2">
+                  <name>Gilberto Ramirez</name>
+                  <rotNum>1804</rotNum>
+                </awayTeam>
+                <periods>
+                  <period lineId="276151787">
+                    <number>0</number>
+                    <description>Fight</description>
+                    <cutoffDateTime>2016-04-10T03:00:00Z</cutoffDateTime>
+                    <spreads />
+                    <moneyLine>
+                      <awayPrice>-212</awayPrice>
+                      <homePrice>186</homePrice>
+                    </moneyLine>
+                    <maxBetAmount>
+                      <moneyLine>1000</moneyLine>
+                    </maxBetAmount>
+                  </period>
+                </periods>
+              </event>
+            </events>
+          </league>
+          <league>
+            <id>16287</id>
+            <events>
+              <event>
+                <startDateTime>2016-05-08T04:00:00Z</startDateTime>
+                <id>550075242</id>
+                <IsLive>No</IsLive>
+                <lStatus>0</lStatus>
+                <status>I</status>
+                <homeTeam type="Team1">
+                  <name>Amir Khan</name>
+                  <rotNum>1981</rotNum>
+                </homeTeam>
+                <awayTeam type="Team2">
+                  <name>Saul Alvarez</name>
+                  <rotNum>1982</rotNum>
+                </awayTeam>
+                <periods>
+                  <period lineId="276009529">
+                    <number>0</number>
+                    <description>Fight</description>
+                    <cutoffDateTime>2016-05-08T04:00:00Z</cutoffDateTime>
+                    <spreads />
+                    <totals>
+                      <total>
+                        <points>9.5</points>
+                        <overPrice>110</overPrice>
+                        <underPrice>-129</underPrice>
+                      </total>
+                    </totals>
+                    <moneyLine>
+                      <awayPrice>-479</awayPrice>
+                      <homePrice>395</homePrice>
+                    </moneyLine>
+                    <maxBetAmount>
+                      <totalPoints>1000</totalPoints>
+                      <moneyLine>3000</moneyLine>
+                    </maxBetAmount>
+                  </period>
+                </periods>
+              </event>
+              <event>
+                <startDateTime>2016-03-26T20:00:00Z</startDateTime>
+                <id>549367766</id>
+                <IsLive>No</IsLive>
+                <lStatus>0</lStatus>
+                <status>I</status>
+                <homeTeam type="Team1">
+                  <name>Nick Blackwell</name>
+                  <rotNum>1551</rotNum>
+                </homeTeam>
+                <awayTeam type="Team2">
+                  <name>Chris Eubank Jr</name>
+                  <rotNum>1552</rotNum>
+                </awayTeam>
+                <periods>
+                  <period lineId="276008905">
+                    <number>0</number>
+                    <description>Fight</description>
+                    <cutoffDateTime>2016-03-26T20:00:00Z</cutoffDateTime>
+                    <spreads />
+                    <moneyLine>
+                      <awayPrice>-943</awayPrice>
+                      <homePrice>700</homePrice>
+                    </moneyLine>
+                    <maxBetAmount>
+                      <moneyLine>1000</moneyLine>
+                    </maxBetAmount>
+                  </period>
+                </periods>
+              </event>
+            </events>
+          </league>
+          <league>
+            <id>16289</id>
+            <events>
+              <event>
+                <startDateTime>2016-04-09T19:30:00Z</startDateTime>
+                <id>567430778</id>
+                <IsLive>No</IsLive>
+                <lStatus>0</lStatus>
+                <status>I</status>
+                <homeTeam type="Team1">
+                  <name>Matthew Macklin</name>
+                  <rotNum>1855</rotNum>
+                </homeTeam>
+                <awayTeam type="Team2">
+                  <name>Brian Rose</name>
+                  <rotNum>1856</rotNum>
+                </awayTeam>
+                <periods>
+                  <period lineId="276009426">
+                    <number>0</number>
+                    <description>Fight</description>
+                    <cutoffDateTime>2016-04-09T19:30:00Z</cutoffDateTime>
+                    <spreads />
+                    <moneyLine>
+                      <awayPrice>-124</awayPrice>
+                      <homePrice>110</homePrice>
+                    </moneyLine>
+                    <maxBetAmount>
+                      <moneyLine>1000</moneyLine>
+                    </maxBetAmount>
+                  </period>
+                </periods>
+              </event>
+            </events>
+          </league>
+          <league>
+            <id>16292</id>
+            <events>
+              <event>
+                <startDateTime>2016-04-02T01:00:00Z</startDateTime>
+                <id>565644646</id>
+                <IsLive>No</IsLive>
+                <lStatus>0</lStatus>
+                <status>I</status>
+                <homeTeam type="Team1">
+                  <name>Algenis Mendez</name>
+                  <rotNum>1603</rotNum>
+                </homeTeam>
+                <awayTeam type="Team2">
+                  <name>Robert Easter</name>
+                  <rotNum>1604</rotNum>
+                </awayTeam>
+                <periods>
+                  <period lineId="276089515">
+                    <number>0</number>
+                    <description>Fight</description>
+                    <cutoffDateTime>2016-04-02T01:00:00Z</cutoffDateTime>
+                    <spreads />
+                    <moneyLine>
+                      <awayPrice>-333</awayPrice>
+                      <homePrice>285</homePrice>
+                    </moneyLine>
+                    <maxBetAmount>
+                      <moneyLine>1000</moneyLine>
+                    </maxBetAmount>
+                  </period>
+                </periods>
+              </event>
+            </events>
+          </league>
+          <league>
+            <id>16294</id>
+            <events>
+              <event>
+                <startDateTime>2016-04-09T20:30:00Z</startDateTime>
+                <id>567448005</id>
+                <IsLive>No</IsLive>
+                <lStatus>0</lStatus>
+                <status>I</status>
+                <homeTeam type="Team1">
+                  <name>Eric Hunter</name>
+                  <rotNum>1853</rotNum>
+                </homeTeam>
+                <awayTeam type="Team2">
+                  <name>Lee Selby</name>
+                  <rotNum>1854</rotNum>
+                </awayTeam>
+                <periods>
+                  <period lineId="276009418">
+                    <number>0</number>
+                    <description>Fight</description>
+                    <cutoffDateTime>2016-04-09T20:30:00Z</cutoffDateTime>
+                    <spreads />
+                    <maxBetAmount />
+                  </period>
+                </periods>
+              </event>
+            </events>
+          </league>
+          <league>
+            <id>16295</id>
+            <events>
+              <event>
+                <startDateTime>2016-04-10T02:00:00Z</startDateTime>
+                <id>548382623</id>
+                <IsLive>No</IsLive>
+                <lStatus>0</lStatus>
+                <status>I</status>
+                <homeTeam type="Team1">
+                  <name>Evgeny Gradovich</name>
+                  <rotNum>1805</rotNum>
+                </homeTeam>
+                <awayTeam type="Team2">
+                  <name>Oscar Valdez</name>
+                  <rotNum>1806</rotNum>
+                </awayTeam>
+                <periods>
+                  <period lineId="276151437">
+                    <number>0</number>
+                    <description>Fight</description>
+                    <cutoffDateTime>2016-04-10T02:00:00Z</cutoffDateTime>
+                    <spreads />
+                    <moneyLine>
+                      <awayPrice>-798</awayPrice>
+                      <homePrice>567</homePrice>
+                    </moneyLine>
+                    <maxBetAmount>
+                      <moneyLine>1000</moneyLine>
+                    </maxBetAmount>
+                  </period>
+                </periods>
+              </event>
+            </events>
+          </league>
+        </leagues>
+      </sport>
+    </sports>
+  </fd>
+</rsp>

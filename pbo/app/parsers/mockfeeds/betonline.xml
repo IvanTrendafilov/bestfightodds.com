@@ -1,0 +1,120 @@
+<?xml version="1.0"?>
+<bestlinesports_line_feed>
+<event>
+<event_datetimeGMT>2016-04-09 23:00</event_datetimeGMT>
+<sporttype>Boxing</sporttype>
+<scheduletext>Welterweight                                                </scheduletext>
+<league>Matchups Boxing</league>
+<participant>
+<participant_name>Timothy Bradley</participant_name>
+<rotnum>24701</rotnum>
+<visiting_home_draw>Visiting</visiting_home_draw>
+<odds>
+<moneyline>225</moneyline>
+</odds>
+<pitcher></pitcher>
+</participant>
+<participant>
+<participant_name>Manny Pacquiao</participant_name>
+<rotnum>24702</rotnum>
+<visiting_home_draw>Home</visiting_home_draw>
+<odds>
+<moneyline>-265</moneyline>
+</odds>
+<pitcher></pitcher>
+</participant>
+<drawrotnum>0</drawrotnum><drawmoneyline>0</drawmoneyline><drawTitle></drawTitle><period>
+<period_description>Game</period_description>
+<periodcutoff_datetimeGMT>2016-04-09 23:00</periodcutoff_datetimeGMT>
+<period_status>I</period_status>
+<spread><spread_visiting></spread_visiting>
+<spread_adjust_visiting></spread_adjust_visiting>
+<spread_home></spread_home>
+<spread_adjust_home></spread_adjust_home>
+</spread>
+<total>
+<total_points>10.5</total_points>
+<over_adjust>-325</over_adjust>
+<under_adjust>250</under_adjust>
+</total>
+</period>
+</event>
+<event>
+<event_datetimeGMT>2016-05-07 17:00</event_datetimeGMT>
+<sporttype>Boxing</sporttype>
+<scheduletext>Heavyweight                                                 </scheduletext>
+<league>Matchups Boxing</league>
+<participant>
+<participant_name>Tyson Fury</participant_name>
+<rotnum>24751</rotnum>
+<visiting_home_draw>Visiting</visiting_home_draw>
+<odds>
+<moneyline>-110</moneyline>
+</odds>
+<pitcher></pitcher>
+</participant>
+<participant>
+<participant_name>Wladimir Klitschko</participant_name>
+<rotnum>24752</rotnum>
+<visiting_home_draw>Home</visiting_home_draw>
+<odds>
+<moneyline>-110</moneyline>
+</odds>
+<pitcher></pitcher>
+</participant>
+<drawrotnum>0</drawrotnum><drawmoneyline>0</drawmoneyline><drawTitle></drawTitle><period>
+<period_description>Game</period_description>
+<periodcutoff_datetimeGMT>2016-05-07 17:10</periodcutoff_datetimeGMT>
+<period_status>I</period_status>
+<spread><spread_visiting></spread_visiting>
+<spread_adjust_visiting></spread_adjust_visiting>
+<spread_home></spread_home>
+<spread_adjust_home></spread_adjust_home>
+</spread>
+<total>
+<total_points></total_points>
+<over_adjust></over_adjust>
+<under_adjust></under_adjust>
+</total>
+</period>
+</event>
+<event>
+<event_datetimeGMT>2016-01-30 22:00</event_datetimeGMT>
+<sporttype>Boxing</sporttype>
+<scheduletext>Light Heavyweight                                           </scheduletext>
+<league>Matchups Boxing</league>
+<participant>
+<participant_name>Jean Pascal</participant_name>
+<rotnum>24841</rotnum>
+<visiting_home_draw>Visiting</visiting_home_draw>
+<odds>
+<moneyline>1600</moneyline>
+</odds>
+<pitcher></pitcher>
+</participant>
+<participant>
+<participant_name>Sergey Kovalev</participant_name>
+<rotnum>24842</rotnum>
+<visiting_home_draw>Home</visiting_home_draw>
+<odds>
+<moneyline>-2900</moneyline>
+</odds>
+<pitcher></pitcher>
+</participant>
+<drawrotnum>0</drawrotnum><drawmoneyline>0</drawmoneyline><drawTitle></drawTitle><period>
+<period_description>Game</period_description>
+<periodcutoff_datetimeGMT>2016-01-30 22:00</periodcutoff_datetimeGMT>
+<period_status>I</period_status>
+<spread><spread_visiting></spread_visiting>
+<spread_adjust_visiting></spread_adjust_visiting>
+<spread_home></spread_home>
+<spread_adjust_home></spread_adjust_home>
+</spread>
+<total>
+<total_points>9.5</total_points>
+<over_adjust>210</over_adjust>
+<under_adjust>-270</under_adjust>
+</total>
+</period>
+</event>
+</bestlinesports_line_feed>

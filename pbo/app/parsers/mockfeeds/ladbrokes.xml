@@ -1,0 +1,212 @@
+{"classes": {"class": {
+    "displayOrder": -207,
+    "className": "Boxing",
+    "classKey": 110000018,
+    "types": {
+        "num": 2,
+        "type": [
+            {
+                "subtypes": {
+                    "num": 1,
+                    "subtype": {
+                        "subTypeName": "Upcoming Fights",
+                        "events": {
+                            "num": 13,
+                            "event": [
+                                {
+                                    "typeFlagCode": "RN,OA,",
+                                    "eventKey": 221610678,
+                                    "eventDateTime": "2016-03-05T20:00:00Z",
+                                    "eventSort": "MTCH",
+                                    "displayOrder": 0,
+                                    "classSortCode": "--",
+                                    "eventNameTranslated": "Ruslan Chagaev v Lucas Browne",
+                                    "eventName": "Ruslan Chagaev v Lucas Browne",
+                                    "subTypeKey": 12640,
+                                    "eventStatus": "Active"
+                                },
+                                {
+                                    "typeFlagCode": "RN,OA,",
+                                    "eventKey": 221610683,
+                                    "eventDateTime": "2016-03-05T22:30:00Z",
+                                    "eventSort": "MTCH",
+                                    "displayOrder": 0,
+                                    "classSortCode": "--",
+                                    "eventNameTranslated": "Sam Eggington v Bradley Skeete",
+                                    "eventName": "Sam Eggington v Bradley Skeete",
+                                    "subTypeKey": 12640,
+                                    "eventStatus": "Active"
+                                },
+                                {
+                                    "typeFlagCode": "RN,OA,",
+                                    "eventKey": 221596614,
+                                    "eventDateTime": "2016-05-08T04:00:00Z",
+                                    "eventSort": "MTCH",
+                                    "displayOrder": 0,
+                                    "classSortCode": "--",
+                                    "eventNameTranslated": "Saul Alvarez v Amir Khan",
+                                    "eventName": "Saul Alvarez v Amir Khan",
+                                    "subTypeKey": 12640,
+                                    "eventStatus": "Active"
+                                },
+                                {
+                                    "typeFlagCode": "RN,OA,",
+                                    "eventKey": 221569133,
+                                    "eventDateTime": "2016-03-13T04:00:00Z",
+                                    "eventSort": "MTCH",
+                                    "displayOrder": 0,
+                                    "classSortCode": "--",
+                                    "eventNameTranslated": "Keith Thurman v Shawn Porter",
+                                    "eventName": "Keith Thurman v Shawn Porter",
+                                    "subTypeKey": 12640,
+                                    "eventStatus": "Active"
+                                },
+                                {
+                                    "typeFlagCode": "RN,OA,",
+                                    "eventKey": 221569135,
+                                    "eventDateTime": "2016-04-10T03:00:00Z",
+                                    "eventSort": "MTCH",
+                                    "displayOrder": 0,
+                                    "classSortCode": "--",
+                                    "eventNameTranslated": "Manny Pacquiao v Timothy Bradley Jr",
+                                    "eventName": "Manny Pacquiao v Timothy Bradley Jr",
+                                    "subTypeKey": 12640,
+                                    "eventStatus": "Active"
+                                },
+                                {
+                                    "typeFlagCode": "RN,OA,",
+                                    "eventKey": 221569136,
+                                    "eventDateTime": "2016-03-05T22:00:00Z",
+                                    "eventSort": "MTCH",
+                                    "displayOrder": 0,
+                                    "classSortCode": "--",
+                                    "eventNameTranslated": "Chris Eubank Jr v Nick Blackwell",
+                                    "eventName": "Chris Eubank Jr v Nick Blackwell",
+                                    "subTypeKey": 12640,
+                                    "eventStatus": "Active"
+                                },
+                                {
+                                    "typeFlagCode": "RN,OA,",
+                                    "eventKey": 221569137,
+                                    "eventDateTime": "2016-04-02T21:00:00Z",
+                                    "eventSort": "MTCH",
+                                    "displayOrder": 0,
+                                    "classSortCode": "--",
+                                    "eventNameTranslated": "Liam Williams v Navid Mansouri",
+                                    "eventName": "Liam Williams v Navid Mansouri",
+                                    "subTypeKey": 12640,
+                                    "eventStatus": "Active"
+                                },
+                                {
+                                    "typeFlagCode": "RN,OA,",
+                                    "eventKey": 221673797,
+                                    "eventDateTime": "2016-03-12T21:00:00Z",
+                                    "eventSort": "MTCH",
+                                    "displayOrder": 0,
+                                    "classSortCode": "--",
+                                    "eventNameTranslated": "Guillermo Rigondeaux v James Dickens",
+                                    "eventName": "Guillermo Rigondeaux v James Dickens",
+                                    "subTypeKey": 12640,
+                                    "eventStatus": "Active"
+                                },
+                                {
+                                    "typeFlagCode": "RN,OA,",
+                                    "eventKey": 221651182,
+                                    "eventDateTime": "2016-04-09T21:00:00Z",
+                                    "eventSort": "MTCH",
+                                    "displayOrder": 0,
+                                    "classSortCode": "--",
+                                    "eventNameTranslated": "Anthony Joshua v Charles Martin",
+                                    "eventName": "Anthony Joshua v Charles Martin",
+                                    "subTypeKey": 12640,
+                                    "eventStatus": "Active"
+                                },
+                                {
+                                    "typeFlagCode": "RN,OA,",
+                                    "eventKey": 221435406,
+                                    "eventDateTime": "2016-03-12T22:00:00Z",
+                                    "eventSort": "MTCH",
+                                    "displayOrder": 0,
+                                    "classSortCode": "--",
+                                    "eventNameTranslated": "Terry Flanagan v Derry Mathews",
+                                    "eventName": "Terry Flanagan v Derry Mathews",
+                                    "subTypeKey": 12640,
+                                    "eventStatus": "Active"
+                                },
+                                {
+                                    "typeFlagCode": "RN,OA,",
+                                    "eventKey": 221327660,
+                                    "eventDateTime": "2016-07-31T21:00:00Z",
+                                    "eventSort": "MTCH",
+                                    "displayOrder": 0,
+                                    "classSortCode": "--",
+                                    "eventNameTranslated": "Tyson Fury v Wladimir Klitschko",
+                                    "eventName": "Tyson Fury v Wladimir Klitschko",
+                                    "subTypeKey": 12640,
+                                    "eventStatus": "Active"
+                                },
+                                {
+                                    "typeFlagCode": "RN,OA,",
+                                    "eventKey": 221373346,
+                                    "eventDateTime": "2016-12-31T23:59:00Z",
+                                    "eventSort": "MTCH",
+                                    "displayOrder": 0,
+                                    "classSortCode": "--",
+                                    "eventNameTranslated": "Anthony Joshua v David Haye",
+                                    "eventName": "Anthony Joshua v David Haye",
+                                    "subTypeKey": 12640,
+                                    "eventStatus": "Active"
+                                },
+                                {
+                                    "typeFlagCode": "RN,OA,",
+                                    "eventKey": 221710834,
+                                    "eventDateTime": "2016-12-31T00:00:00Z",
+                                    "eventSort": "MTCH",
+                                    "displayOrder": 0,
+                                    "classSortCode": "--",
+                                    "eventNameTranslated": "Carl Frampton v Scott Quigg",
+                                    "eventName": "Carl Frampton v Scott Quigg",
+                                    "subTypeKey": 12640,
+                                    "eventStatus": "Active"
+                                }
+                            ]
+                        },
+                        "displayOrder": 1,
+                        "subTypeKey": 12640
+                    }
+                },
+                "typeName": "Upcoming Fights",
+                "displayOrder": -103,
+                "typeKey": 210002520
+            },
+            {
+                "subtypes": {
+                    "num": 1,
+                    "subtype": {
+                        "subTypeName": "Boxing Specials",
+                        "events": {
+                            "num": 1,
+                            "event": {
+                                "typeFlagCode": "RN,OA,",
+                                "eventKey": 221710835,
+                                "eventDateTime": "2016-02-29T23:59:00Z",
+                                "eventSort": "MTCH",
+                                "displayOrder": 0,
+                                "classSortCode": "--",
+                                "eventNameTranslated": "Carl Frampton's Next Opponent",
+                                "eventName": "Carl Frampton's Next Opponent",
+                                "subTypeKey": 11474,
+                                "eventStatus": "Active"
+                            }
+                        },
+                        "displayOrder": 5,
+                        "subTypeKey": 11474
+                    }
+                },
+                "typeName": "Specials",
+                "displayOrder": -102,
+                "typeKey": 210002447
+            }
+        ]
+    }
+}}}

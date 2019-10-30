@@ -1,0 +1,237 @@
+<?xml version="1.0"?>
+<bestlinesports_line_feed>
+<event>
+<event_datetimeGMT>2015-11-07 22:30</event_datetimeGMT>
+<sporttype>Boxing</sporttype>
+<scheduletext>Welterweight                                                </scheduletext>
+<league>Matchups Boxing</league>
+<participant>
+<participant_name>Brando Rios</participant_name>
+<rotnum>24801</rotnum>
+<visiting_home_draw>Visiting</visiting_home_draw>
+<odds>
+<moneyline>400</moneyline>
+</odds>
+<pitcher></pitcher>
+</participant>
+<participant>
+<participant_name>Timothy Bradley Jr</participant_name>
+<rotnum>24802</rotnum>
+<visiting_home_draw>Home</visiting_home_draw>
+<odds>
+<moneyline>-515</moneyline>
+</odds>
+<pitcher></pitcher>
+</participant>
+<drawrotnum>0</drawrotnum><drawmoneyline>0</drawmoneyline><drawTitle></drawTitle><period>
+<period_description>Game</period_description>
+<periodcutoff_datetimeGMT>2015-11-07 22:30</periodcutoff_datetimeGMT>
+<period_status>I</period_status>
+<spread><spread_visiting></spread_visiting>
+<spread_adjust_visiting></spread_adjust_visiting>
+<spread_home></spread_home>
+<spread_adjust_home></spread_adjust_home>
+</spread>
+<total>
+<total_points></total_points>
+<over_adjust></over_adjust>
+<under_adjust></under_adjust>
+</total>
+</period>
+</event>
+<event>
+<event_datetimeGMT>2015-11-21 23:00</event_datetimeGMT>
+<sporttype>Boxing</sporttype>
+<scheduletext>Middleweight                                                </scheduletext>
+<league>Matchups Boxing</league>
+<participant>
+<participant_name>Miguel Cotto</participant_name>
+<rotnum>24901</rotnum>
+<visiting_home_draw>Visiting</visiting_home_draw>
+<odds>
+<moneyline>260</moneyline>
+</odds>
+<pitcher></pitcher>
+</participant>
+<participant>
+<participant_name>Saul Alvarez</participant_name>
+<rotnum>24902</rotnum>
+<visiting_home_draw>Home</visiting_home_draw>
+<odds>
+<moneyline>-310</moneyline>
+</odds>
+<pitcher></pitcher>
+</participant>
+<drawrotnum>0</drawrotnum><drawmoneyline>0</drawmoneyline><drawTitle></drawTitle><period>
+<period_description>Game</period_description>
+<periodcutoff_datetimeGMT>2015-11-21 23:00</periodcutoff_datetimeGMT>
+<period_status>I</period_status>
+<spread><spread_visiting></spread_visiting>
+<spread_adjust_visiting></spread_adjust_visiting>
+<spread_home></spread_home>
+<spread_adjust_home></spread_adjust_home>
+</spread>
+<total>
+<total_points>11.5</total_points>
+<over_adjust>-165</over_adjust>
+<under_adjust>135</under_adjust>
+</total>
+</period>
+</event>
+<event>
+<event_datetimeGMT>2015-11-21 17:00</event_datetimeGMT>
+<sporttype>Boxing</sporttype>
+<scheduletext>Lightweight                                                 </scheduletext>
+<league>Matchups Boxing</league>
+<participant>
+<participant_name>Darley Perez</participant_name>
+<rotnum>81463</rotnum>
+<visiting_home_draw>Visiting</visiting_home_draw>
+<odds>
+<moneyline>115</moneyline>
+</odds>
+<pitcher></pitcher>
+</participant>
+<participant>
+<participant_name>Anthony Crolla</participant_name>
+<rotnum>81464</rotnum>
+<visiting_home_draw>Home</visiting_home_draw>
+<odds>
+<moneyline>-135</moneyline>
+</odds>
+<pitcher></pitcher>
+</participant>
+<drawrotnum>0</drawrotnum><drawmoneyline>0</drawmoneyline><drawTitle></drawTitle><period>
+<period_description>Game</period_description>
+<periodcutoff_datetimeGMT>2015-11-21 17:00</periodcutoff_datetimeGMT>
+<period_status>I</period_status>
+<spread><spread_visiting></spread_visiting>
+<spread_adjust_visiting></spread_adjust_visiting>
+<spread_home></spread_home>
+<spread_adjust_home></spread_adjust_home>
+</spread>
+<total>
+<total_points></total_points>
+<over_adjust></over_adjust>
+<under_adjust></under_adjust>
+</total>
+</period>
+</event>
+<event>
+<event_datetimeGMT>2015-11-07 17:00</event_datetimeGMT>
+<sporttype>Boxing</sporttype>
+<scheduletext>Super Middleweight                                          </scheduletext>
+<league>Matchups Boxing</league>
+<participant>
+<participant_name>Rocky Fielding</participant_name>
+<rotnum>81651</rotnum>
+<visiting_home_draw>Visiting</visiting_home_draw>
+<odds>
+<moneyline>325</moneyline>
+</odds>
+<pitcher></pitcher>
+</participant>
+<participant>
+<participant_name>Callum Smith</participant_name>
+<rotnum>81652</rotnum>
+<visiting_home_draw>Home</visiting_home_draw>
+<odds>
+<moneyline>-390</moneyline>
+</odds>
+<pitcher></pitcher>
+</participant>
+<drawrotnum>0</drawrotnum><drawmoneyline>0</drawmoneyline><drawTitle></drawTitle><period>
+<period_description>Game</period_description>
+<periodcutoff_datetimeGMT>2015-11-07 17:00</periodcutoff_datetimeGMT>
+<period_status>I</period_status>
+<spread><spread_visiting></spread_visiting>
+<spread_adjust_visiting></spread_adjust_visiting>
+<spread_home></spread_home>
+<spread_adjust_home></spread_adjust_home>
+</spread>
+<total>
+<total_points></total_points>
+<over_adjust></over_adjust>
+<under_adjust></under_adjust>
+</total>
+</period>
+</event>
+<event>
+<event_datetimeGMT>2015-11-21 17:00</event_datetimeGMT>
+<sporttype>Boxing</sporttype>
+<scheduletext>Super Middleweight                                          </scheduletext>
+<league>Matchups Boxing</league>
+<participant>
+<participant_name>Martin Murray</participant_name>
+<rotnum>81841</rotnum>
+<visiting_home_draw>Visiting</visiting_home_draw>
+<odds>
+<moneyline>-105</moneyline>
+</odds>
+<pitcher></pitcher>
+</participant>
+<participant>
+<participant_name>Arthur Abraham</participant_name>
+<rotnum>81842</rotnum>
+<visiting_home_draw>Home</visiting_home_draw>
+<odds>
+<moneyline>-115</moneyline>
+</odds>
+<pitcher></pitcher>
+</participant>
+<drawrotnum>0</drawrotnum><drawmoneyline>0</drawmoneyline><drawTitle></drawTitle><period>
+<period_description>Game</period_description>
+<periodcutoff_datetimeGMT>2015-11-21 17:00</periodcutoff_datetimeGMT>
+<period_status>I</period_status>
+<spread><spread_visiting></spread_visiting>
+<spread_adjust_visiting></spread_adjust_visiting>
+<spread_home></spread_home>
+<spread_adjust_home></spread_adjust_home>
+</spread>
+<total>
+<total_points></total_points>
+<over_adjust></over_adjust>
+<under_adjust></under_adjust>
+</total>
+</period>
+</event>
+<event>
+<event_datetimeGMT>2015-11-28 17:00</event_datetimeGMT>
+<sporttype>Boxing</sporttype>
+<scheduletext>Heavyweight                                                 </scheduletext>
+<league>Matchups Boxing</league>
+<participant>
+<participant_name>Tyson Fury</participant_name>
+<rotnum>81951</rotnum>
+<visiting_home_draw>Visiting</visiting_home_draw>
+<odds>
+<moneyline>395</moneyline>
+</odds>
+<pitcher></pitcher>
+</participant>
+<participant>
+<participant_name>Wladimir Klitschko</participant_name>
+<rotnum>81952</rotnum>
+<visiting_home_draw>Home</visiting_home_draw>
+<odds>
+<moneyline>-510</moneyline>
+</odds>
+<pitcher></pitcher>
+</participant>
+<drawrotnum>0</drawrotnum><drawmoneyline>0</drawmoneyline><drawTitle></drawTitle><period>
+<period_description>Game</period_description>
+<periodcutoff_datetimeGMT>2015-11-28 17:00</periodcutoff_datetimeGMT>
+<period_status>I</period_status>
+<spread><spread_visiting></spread_visiting>
+<spread_adjust_visiting></spread_adjust_visiting>
+<spread_home></spread_home>
+<spread_adjust_home></spread_adjust_home>
+</spread>
+<total>
+<total_points>9.5</total_points>
+<over_adjust>-140</over_adjust>
+<under_adjust>110</under_adjust>
+</total>
+</period>
+</event>
+</bestlinesports_line_feed>
