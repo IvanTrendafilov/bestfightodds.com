@@ -52,7 +52,7 @@ class XMLParserBetOnline
                     );
 
                     //Add header of matchup as metadata
-                    if (isset($cEvent->scheduletext))
+                    if (isset($cEvent->scheduletext) && trim($cEvent->scheduletext) != 'null')
                     {
                         $oParsedMatchup->setMetaData('event_name', (string) $cEvent->scheduletext);
                     }
