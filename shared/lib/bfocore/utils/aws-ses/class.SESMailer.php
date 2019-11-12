@@ -22,7 +22,7 @@ class SESMailer
         $this->mailer->SMTPSecure = 'tls';
         //$this->mailer->addCustomHeader('X-SES-CONFIGURATION-SET', $configurationSet);
 
-        $this->logger = new Katzgrau\KLogger\Logger(MAIL, Psr\Log\LogLevel::DEBUG, ['filename' => 'mail.txt']);
+        $this->logger = new Katzgrau\KLogger\Logger(MAIL_KLOGDIR, Psr\Log\LogLevel::DEBUG, ['filename' => 'mail.txt']);
     }
 
     public function sendMail($sender_mail, $sender_name, $recipient_mail, $subject, $body_html, $body_text)
