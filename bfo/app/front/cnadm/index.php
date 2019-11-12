@@ -33,6 +33,7 @@ header('Pragma: no-cache');
 <a href="index.php?p=addNewPropTemplate">New prop template</a>&nbsp;&nbsp;&nbsp;
 <a href="index.php?p=viewPropTemplates">View prop templates</a>&nbsp;&nbsp;&nbsp;
 <a href="index.php?p=resetChangeNum">Reset changenum</a>&nbsp;&nbsp;&nbsp;
+<a href="index.php?p=testMail">Test mail</a>&nbsp;&nbsp;&nbsp;
 <a href="index.php?p=viewLatestLog&log=latest">View latest log</a> <a href="index.php?p=viewLatestLog">(all)</a><br /><br />
 </div>
 <div class="contentWindow">
