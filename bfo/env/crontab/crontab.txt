@@ -1,9 +1,9 @@
 SHELL=/bin/bash
 MAILTO=""
-*/3     *       *       *       *       /usr/bin/php -d include_path=.:/var/www/vhosts/bestfightodds.com/httpdocs -d safe_mode=Off -d date.timezone=Europe/Stockholm -d max_execution_time=300 /var/www/vhosts/bestfightodds.com/httpdocs/lib/bfocore/cron/cron.OddsParser.php
-10      0       *       *       *       mv /var/www/vhosts/bestfightodds.com/httpdocs/logs/*.log /var/www/vhosts/bestfightodds.com/httpdocs/logs/archived/ && rm -rf /var/www/vhosts/bestfightodds.com/httpdocs/logs/*.log
-5       *       *       *       *       bash /var/www/vhosts/bestfightodds.com/httpdocs/db/scripts/backup/dobackup.sh
-6       6       *       *       *       sleep $[($RANDOM \%1740) + 11] && /usr/bin/php -d include_path=.:/var/www/vhosts/bestfightodds.com/httpdocs -d safe_mode=Off -d max_execution_time=300 /var/www/vhosts/bestfightodds.com/httpdocs/lib/bfocore/cron/cron.ScheduleParser.php
-30      12      *       *       *       /usr/bin/php -d include_path=.:/var/www/vhosts/bestfightodds.com/httpdocs -d safe_mode=Off -d date.timezone=Europe/Stockholm -d max_execution_time=300 /var/www/vhosts/bestfightodds.com/httpdocs/db/scripts/cron.CleanDatabasev2.php
-30      0       *       *       *       /usr/bin/php -d include_path=.:/var/www/vhosts/bestfightodds.com/httpdocs -d safe_mode=Off -d date.timezone=Europe/Stockholm -d max_execution_time=300 /var/www/vhosts/bestfightodds.com/httpdocs/db/scripts/cron.CleanDatabasev2.php
-*/5     *       *       *       *       /usr/bin/php -d include_path=.:/var/www/vhosts/bestfightodds.com/httpdocs -d safe_mode=Off -d date.timezone=Europe/Stockholm -d max_execution_time=300 /var/www/vhosts/bestfightodds.com/httpdocs/lib/bfospec/cron/cron.FacebookPoster.php
+*/3     *       *       *       *       /usr/bin/php -d include_path=/var/www/bfo/shared:/var/www/bfo/bfo -d safe_mode=Off -d date.timezone=American/New_York -d max_execution_time=300 /var/www/bfo/lib/bfocore/cron/cron.OddsParser.php
+10      0       *       *       *       mv /var/www/bfo/bfo/logs/*.log /var/www/bfo/bfo/logs/archived/ && rm -rf /var/www/bfo/bfo/logs/*.log
+5       *       *       *       *       bash /var/www/bfo/bfo/db/scripts/backup/dobackup.sh
+6       6       *       *       *       sleep $[($RANDOM \%1740) + 11] && /usr/bin/php -d include_path=/var/www/bfo/shared:/var/www/bfo/bfo -d safe_mode=Off -d max_execution_time=300 /var/www/bfo/lib/bfocore/cron/cron.ScheduleParser.php
+30      12      *       *       *       /usr/bin/php -d include_path=/var/www/bfo/shared:/var/www/bfo/bfo -d safe_mode=Off -d date.timezone=American/New_York -d max_execution_time=300 /var/www/bfo/bfo/db/scripts/cron.CleanDatabasev2.php
+30      0       *       *       *       /usr/bin/php -d include_path=/var/www/bfo/shared:/var/www/bfo/bfo -d safe_mode=Off -d date.timezone=American/New_York -d max_execution_time=300 /var/www/bfo/bfo/db/scripts/cron.CleanDatabasev2.php
+*/5     *       *       *       *       /usr/bin/php -d include_path=/var/www/bfo/shared:/var/www/bfo/bfo -d safe_mode=Off -d date.timezone=American/New_York -d max_execution_time=300 /var/www/bfo/lib/bfospec/cron/cron.FacebookPoster.php
