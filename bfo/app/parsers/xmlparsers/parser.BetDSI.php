@@ -66,6 +66,13 @@ class XMLParserBetDSI
                                     );
                                     $oParsedMatchup->setCorrelationID((string) $match_node['Name']);
 
+                                    //Add time of matchup as metadata
+                                    if (isset($match_node['StartDate']))
+                                    {
+                                        $oGameDate = new DateTime($match_node['StartDate']);
+                                        $oParsedMatchup->setMetaData('gametime', $oGameDate->getTimestamp());
+                                    }
+
                                     //Add header of matchup as metadata
                                     if (isset($event_node['Name']))
                                     {

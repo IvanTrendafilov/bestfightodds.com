@@ -20,7 +20,12 @@ foreach($aUnmatchedCol as $aUnmatched)
 	{
 		if (isset($aUnmatched['metadata']['event_name']))
 		{
-			$event_name = substr($aUnmatched['metadata']['event_name'], 0, strpos($aUnmatched['metadata']['event_name'], " -"));
+			$cut_pos = strpos($aUnmatched['metadata']['event_name'], " -");
+			if (!isset($cut_pos) || $cut_pos == null || $cut_pos == 0)
+			{
+				$cut_pos = strlen($aUnmatched['metadata']['event_name']);
+			}
+			$event_name = substr($aUnmatched['metadata']['event_name'], 0, $cut_pos);
 
 			$link_add = '';
 			$event_date = '';
