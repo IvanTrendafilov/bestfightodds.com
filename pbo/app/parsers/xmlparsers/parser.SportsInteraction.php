@@ -25,8 +25,8 @@ class XMLParserSportsInteraction
       //fclose($rStoreFile);
 
 
-        $a_sXML = ereg_replace("<SportsInteractionLines>", "<SportsInteractionLines>\n", $a_sXML);
-        $a_sXML = ereg_replace("</SportsInteractionLines>", "\n</SportsInteractionLines>", $a_sXML);
+        $a_sXML = preg_replace("<SportsInteractionLines>", "<SportsInteractionLines>\n", $a_sXML);
+        $a_sXML = preg_replace("</SportsInteractionLines>", "\n</SportsInteractionLines>", $a_sXML);
 
         $oXML = simplexml_load_string($a_sXML);
 
