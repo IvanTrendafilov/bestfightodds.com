@@ -5,6 +5,7 @@ require_once('lib/bfocore/dao/class.AlertDAO.php');
 require_once('lib/bfocore/general/class.EventHandler.php');
 require_once('config/inc.alertConfig.php');
 require_once('lib/bfocore/utils/class.OddsTools.php');
+require_once('lib/bfocore/utils/aws-ses/class.SESMailer.php');
 
 /**
  * Class Alerter - The alerter is a feature that warns (e-mails) a user whenever odds for a certain fight drops below a certain number
@@ -167,7 +168,10 @@ Good luck!\n
         } else
         {
             //Send e-mail alert
-            $bSuccess = mail($sTo, $sSubject, $sText, $sHeaders);
+            $mailer = new SESMailer(MAIL_SMTP_HOST, MAIL_SMTP_PORT, MAIL_SMTP_USERNAME, MAIL_SMTP_PASSWORD);
+            $bSuccess = $mailer->sendMail(ALERTER_MAIL_SENDER_MAIL, ALERTER_MAIL_FROM, 'cnordvaller@gmail.com', $sSubject, $sText);       
+            //$bSuccess = mail($sTo, $sSubject, $sText, $sHeaders);
+
         }
 
         return $bSuccess;
@@ -201,63 +205,6 @@ Good luck!\n
     public static function getAlertCount()
     {
         return AlertDAO::getAlertCount();
-    }
-
-    /**
-     * Checks if a Win/Win situation has occured (where betting both sides results in profit)
-     *
-     * In the case of a Win/Win, the admin of the system is alerted. E-mail used is specified in alertConfig
-     *
-     * @return int The number of match-ups with win/win found
-     */
-    public static function checkForWinWin()
-    {
-        $aFights = AlertDAO::checkForWinWin();
-
-        if (count($aFights) > 0)
-        {
-            $sFights = '';
-            foreach ($aFights as $oFight)
-            {
-                $sFights .= $oFight->getFighterAsString(1) . ' vs ' . $oFight->getFighterAsString(2) . ', ';
-            }
-
-            $sText = "A win/win situation has been discovered in the following fights:\n" . $sFights . "\n
-	Check out " . ALERTER_SITE_LINK . " to view the latest listings.\n
-	You are receiving this e-mail because you have signed up to be reminded when a win/win bet was posted at our site. If you did not sign up for this you don't have to do anything as your e-mail will not be stored for future use.\n
-	Good luck!\n
-	" . ALERTER_SITE_NAME;
-            $sSubject = 'One or more win/win bets have been discovered';
-
-            $sTo = ALERTER_ADMIN_ALERT;
-            $sHeaders = 'From: ' . ALERTER_MAIL_FROM;
-
-            $bSuccess = mail($sTo, $sSubject, $sText, $sHeaders);
-        }
-
-        return count($aFights);
-    }
-
-    /**
-     * Checks for arbitrage to determine win/win situations.
-     *
-     * If value returned is < 1 then it's a win/win situation. If it's >= 1 it's not
-     *
-     * @param int $a_iFightID Fight ID to check
-     * @return float Arbitrage value
-     */
-    public static function getArbitrageValue($a_iFightID)
-    {
-        $oFightOdds = EventHandler::getBestOddsForFight($a_iFightID);
-        if ($oFightOdds == null)
-        {
-            return null;
-        }
-
-        $fArbitValue = (pow($oFightOdds->getFighterOddsAsDecimal(1, true), -1)
-                + pow($oFightOdds->getFighterOddsAsDecimal(2, true), -1));
-
-        return $fArbitValue;
     }
 
     /**
