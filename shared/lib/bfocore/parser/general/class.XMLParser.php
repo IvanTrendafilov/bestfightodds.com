@@ -82,6 +82,20 @@ class XMLParser
         }
         else if ($sXML != null && $sXML != '')
         {
+            //TODO: Temporary store of pages for BFO migration
+            if (GENERAL_HOSTNAME == 'www.bestfightodds.com')
+            {
+                $rStoreFile = fopen('/var/www/vhosts/bestfightodds.com/httpdocs/app/front/externalfeeds/mig/' . strtolower($a_oParser->getName()) . '.xml', 'w');
+                fwrite($rStoreFile, $sXML);
+                fclose($rStoreFile); 
+            }
+            else if (GENERAL_HOSTNAME == 'www.proboxingodds.com')
+            {
+                $rStoreFile = fopen('/var/www/vhosts/proboxingodds.com/httpdocs/app/front/externalfeeds/mig/' . strtolower($a_oParser->getName()) . '.xml', 'w');
+                fwrite($rStoreFile, $sXML);
+                fclose($rStoreFile); 
+            }
+
             $oLogger->log("URL (" . $a_oParser->getParseURL() . ") fetched OK in " . round(microtime(true) - $fStartTime, 3), 0);
 
             require_once('app/parsers/xmlparsers/parser.' . $a_oParser->getName() . '.php');

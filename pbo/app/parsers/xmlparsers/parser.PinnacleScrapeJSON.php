@@ -47,7 +47,7 @@ class XMLParserPinnacleScrapeJSON
         }
 
         //Declare authorative run if we fill the criteria
-        if (count($this->oParsedSport->getParsedMatchups()) >= 5 && $sCN == '-1')
+        if (count($this->oParsedSport->getParsedMatchups()) >= 5)
         {
             $this->bAuthorativeRun = true;
             Logger::getInstance()->log("Declared authoritive run (changenum was omitted)", 0);

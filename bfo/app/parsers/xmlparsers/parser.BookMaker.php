@@ -22,7 +22,7 @@ class XMLParserBookMaker
     public function parseXML($a_sXML)
     {
         //Store as latest feed available for ProBoxingOdds.com
-        $rStoreFile = fopen('/var/www/vhosts/bestfightodds.com/httpdocs/app/front/externalfeeds/bookmaker-latest.xml', 'w');
+        $rStoreFile = fopen(GENERAL_BASEDIR . '/app/front/externalfeeds/bookmaker-latest.xml', 'w');
         fwrite($rStoreFile, $a_sXML);
         fclose($rStoreFile);
 

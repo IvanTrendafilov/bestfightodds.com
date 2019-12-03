@@ -240,50 +240,6 @@ class AlertDAO
     }
 
     /**
-     * This function checks if there are any fights that have two sites having different underdogs meaning its possible to place a win/win bet
-     */
-    public static function checkForWinWin()
-    {
-        $aFoundFights = array();
-
-        $aEvents = EventHandler::getAllUpcomingEvents();
-        foreach ($aEvents as $oEvent)
-        {
-            $aFights = EventHandler::getAllFightsForEvent($oEvent->getID(), true);
-            foreach ($aFights as $oFight)
-            {
-                $iFighter1Fav = 0;
-                $iFighter2Fav = 0;
-
-                $aFightOdds = EventHandler::getAllLatestOddsForFight($oFight->getID());
-                foreach ($aFightOdds as $oFightOdds)
-                {
-                    if ($oFightOdds->getFighterOdds(1) > 0 || $oFightOdds->getFighterOdds(2) > 0)
-                    {
-                        if ($oFightOdds->getFighterOdds(1) > $oFightOdds->getFighterOdds(2))
-                        {
-                            $iFighter1Fav++;
-                        }
-                        else
-                        {
-                            $iFighter2Fav++;
-                        }
-                    }
-                }
-
-                if ($iFighter1Fav > 0 && $iFighter2Fav > 0)
-                {
-                    //Found a win/win bet
-                    $aFoundFights[] = $oFight;
-                }
-            }
-        }
-
-        return $aFoundFights;
-    }
-
-
-    /**
      * Checks if an e-mail is exempted from the alert limit (max 50 alerts). These e-mail addresses are stored in a special table
      *
      * Tables: alerts_exemptions
