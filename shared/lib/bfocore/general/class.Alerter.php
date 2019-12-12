@@ -81,14 +81,11 @@ class Alerter
         $aAlerts = AlertDAO::getReachedAlerts();
         foreach ($aAlerts as $oAlert)
         {
-            $bClearSuccess = AlertDAO::clearAlert($oAlert->getID());
-            if ($bClearSuccess == true)
+            $bSuccess = Alerter::dispatchAlert($oAlert);
+            if ($bSuccess)
             {
-                $bSuccess = Alerter::dispatchAlert($oAlert);
-                if ($bSuccess)
-                {
-                    $iAlertCount++;
-                }
+                $iAlertCount++;
+                $bClearSuccess = AlertDAO::clearAlert($oAlert->getID());
             }
         }
         return $iAlertCount;
