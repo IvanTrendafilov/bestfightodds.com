@@ -54,7 +54,7 @@ while (($iRemovedOdds > 0 || $iRemovedPropOdds > 0)  && $iCounter < 10)
             foreach ($aBookies as $oBookie)
             {
                 $aOddsToRemove = getAllDuplicates(EventHandler::getAllOddsForFightAndBookie($oFight->getID(), $oBookie->getID()));
-                if (count($aOddsToRemove) > 0)
+                if (isset($aOddsToRemove) && count($aOddsToRemove) > 0)
                 {
                     $iRemovedOdds += count($aOddsToRemove);
                     echo ' M:' . $oFight->getID() . '/' . $oBookie->getID();
@@ -67,7 +67,7 @@ while (($iRemovedOdds > 0 || $iRemovedPropOdds > 0)  && $iCounter < 10)
                     for ($i = 0; $i <= 2; $i++)
                     {
                         $aPropOddsToRemove = getAllPropDuplicates(OddsHandler::getAllPropOddsForMatchupPropType($oFight->getID(), $oBookie->getID(), $oPropType->getID(), $i)); 
-                        if (count($aPropOddsToRemove) > 0)
+                        if (isset($aPropOddsToRemove) && count($aPropOddsToRemove) > 0)
                         {
                             $iRemovedPropOdds += count($aPropOddsToRemove);
                             echo ' P:' . $oFight->getID() . '/' . $oBookie->getID() . '/' . $oPropType->getID() .  '/' . $i;
@@ -86,7 +86,7 @@ while (($iRemovedOdds > 0 || $iRemovedPropOdds > 0)  && $iCounter < 10)
                 foreach ($aBookies as $oBookie)
                 {
                     $aPropOddsToRemove = getAllPropDuplicates(OddsHandler::getAllPropOddsForEventPropType($oEvent->getID(), $oBookie->getID(), $oPropType->getID())); 
-                    if (count($aPropOddsToRemove) > 0)
+                    if (isset($aPropOddsToRemove) && count($aPropOddsToRemove) > 0)
                     {
                         $iRemovedEventPropOdds += count($aPropOddsToRemove);
                         echo ' EP:' . $oEvent->getID() . '/' . $oBookie->getID() . '/' . $oPropType->getID() .  '/' . $i;
