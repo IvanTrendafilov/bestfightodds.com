@@ -8,6 +8,9 @@
   updated. Therefor it would need to work with the parsing-engine. */
 
 
+require_once('lib/bfocore/general/inc.GlobalTypes.php');
+require_once('lib/bfocore/general/class.EventHandler.php');
+require_once('lib/bfocore/general/class.OddsHandler.php');
 require_once('lib/bfocore/general/caching/class.CacheControl.php');
 
 define('LINK_HEIGHT', 65);  //Only used for single fights - Events use dynamic height
@@ -31,10 +34,6 @@ if (isset($_GET['fight']) && is_numeric($_GET['fight']) && $_GET['fight'] > 0 &&
     }
     else
     {
-        require_once('lib/bfocore/general/inc.GlobalTypes.php');
-        require_once('lib/bfocore/general/class.EventHandler.php');
-        require_once('lib/bfocore/general/class.OddsHandler.php');
-
         $rShowImage = FightLinkCreator::createFightLink($_GET['fight'], $sLineType, $iFormatType);
         if ($rShowImage != false)
         {
@@ -60,10 +59,6 @@ else if (isset($_GET['event']) && is_numeric($_GET['event']) && $_GET['event'] >
     }
     else
     {
-        require_once('lib/bfocore/general/inc.GlobalTypes.php');
-        require_once('lib/bfocore/general/class.EventHandler.php');
-        require_once('lib/bfocore/general/class.OddsHandler.php');
-
         $rShowImage = FightLinkCreator::createEventLink($_GET['event'], $sLineType, $iFormatType);
         if ($rShowImage != false)
         {
@@ -118,7 +113,7 @@ class FightLinkCreator
 
         $rFrameColor = imagecolorallocate($rImage, 96, 98, 100);
         $rMiddleFrameColor = imagecolorallocate($rImage, 194, 194, 194);
-        $rTopColor = imagecolorallocate($rImage, 234, 236, 238);
+        $rTopColor = imagecolorallocate($rImage, 245, 247, 249);
         $rBottomColor = imagecolorallocate($rImage, 255, 255, 255);
         $rTextColor = imagecolorallocate($rImage, 26, 26, 26);
 
