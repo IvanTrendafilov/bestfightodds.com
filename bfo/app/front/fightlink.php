@@ -217,19 +217,17 @@ class FightLinkCreator
             }
 
             $iWritePos += $aLastBox[2] + $a_iSpacing;
-		if ($a_sText[$iX] == 'A')
-		{
-		$iWritePos -= 2;
-		}
-
+            
             //Custom fixes for chars that add some spaces
-            switch ($a_sText[$iX])
+/*            switch ($a_sText[$iX])
             {
-                case 'A':
-                    $iWritePos += 2;
+                case 'l':
+                case 'n':
+                    $iWritePos--;
+                    $iWritePos--;
                 break;
                 default:
-            }
+            }*/
         }
     }
 
