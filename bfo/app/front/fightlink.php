@@ -226,7 +226,7 @@ class FightLinkCreator
             switch ($a_sText[$iX])
             {
                 case 'A':
-                    $iWritePos++;
+                    $iWritePos += 2;
                 break;
                 default:
             }
