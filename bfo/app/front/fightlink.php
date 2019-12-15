@@ -14,8 +14,8 @@ define('LINK_HEIGHT', 65);  //Only used for single fights - Events use dynamic h
 define('LINK_WIDTH', 216);
 define('LINK_BFO_HEIGHT', 18); //Indicates header size
 define('FONT_SIZE', 8);
-define('FONT_SIZE_BIG', 9);
-define('FONT_TYPE', dirname(__FILE__) . "/roboto.ttf");
+define('FONT_SIZE_BIG', 8);
+define('FONT_TYPE', dirname(__FILE__) . "/micross.ttf");
 
 
 $sLineType = isset($_GET['type']) ? $_GET['type'] : 'current';
