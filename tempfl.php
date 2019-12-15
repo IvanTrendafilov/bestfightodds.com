@@ -15,8 +15,7 @@ define('LINK_WIDTH', 216);
 define('LINK_BFO_HEIGHT', 18); //Indicates header size
 define('FONT_SIZE', 8);
 define('FONT_SIZE_BIG', 9);
-define('FONT_TYPE', dirname(__FILE__) . "/micross.ttf");
-
+define('FONT_TYPE', 'micross.ttf');
 
 $sLineType = isset($_GET['type']) ? $_GET['type'] : 'current';
 $iFormatType = isset($_GET['format']) ? $_GET['format'] : 1;
@@ -199,7 +198,7 @@ class FightLinkCreator
 
         //Frame
         imagerectangle($rImage, 0, 0, LINK_WIDTH - 1, $iCalculatedHeight - 1, $rFrameColor);
-       
+
         return $rImage;
     }
 
