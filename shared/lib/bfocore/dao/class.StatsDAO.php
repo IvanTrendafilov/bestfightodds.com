@@ -67,7 +67,7 @@ select FROM_UNIXTIME (mvalue) - INTERVAL 6 HOUR AS lasttime from matchups_metada
 
 
 Checks if event is future
-SELECT EXISTS (select 1 from fights f inner join events e on f.event_id = e.id where f.id = 12057 AND LEFT(date, 10) >= LEFT((NOW() - INTERVAL 2 HOUR), 10)) exi;
+SELECT EXISTS (select 1 from fights f inner join events e on f.event_id = e.id where f.id = 12057 AND LEFT(date, 10) >= LEFT((NOW() - INTERVAL ' . GENERAL_GRACEPERIOD_SHOW . ' HOUR), 10)) exi;
 
 Can we combine now(), matchup time and last update odds and get the truth somehow? In combination with the check event is future ofc
 SELECT * FROM (
@@ -103,7 +103,7 @@ ORDER BY storedtime, lasttime DESC;
                                                         /*Metadata < NOW()*/
                                                         (SELECT FROM_UNIXTIME(mm.mvalue) FROM matchups_metadata mm WHERE mm.matchup_id = ? AND mm.mattribute = 'gametime')),
                                                     /*Metadata does not exist*/
-                                                    IF ((SELECT 1 FROM fights f INNER JOIN events e ON f.event_id = e.id WHERE f.id = ? AND LEFT(e.date, 10) < LEFT((NOW() - INTERVAL 2 HOUR), 10)), 
+                                                    IF ((SELECT 1 FROM fights f INNER JOIN events e ON f.event_id = e.id WHERE f.id = ? AND LEFT(e.date, 10) < LEFT((NOW() - INTERVAL ' . GENERAL_GRACEPERIOD_SHOW . ' HOUR), 10)), 
                                                         /*Event is in past*/
                                                         (SELECT MAX(fo.date) FROM fightodds fo WHERE fo.fight_id = ?), 
                                                         /*Event is upcoming*/

@@ -1,5 +1,6 @@
 <?php
 //This class handles the model for Alerts. To be called from AlerterV2 only
+require_once('config/inc.config.php');
 require_once('lib/bfocore/alerter/class.AlertV2.php');
 require_once('lib/bfocore/utils/db/class.PDOTools.php');
 
@@ -113,7 +114,7 @@ class AlertsModel
 						INNER JOIN fightodds fo ON fo.fight_id = tmp_fo.fight_id AND tmp_fo.maxdate = fo.date AND tmp_fo.bookie_id = fo.bookie_id
 						INNER JOIN fights f ON fo.fight_id = f.id 
 						INNER JOIN events e ON f.event_id = e.id 
-						WHERE LEFT(e.date, 10) >= LEFT((NOW() - INTERVAL 2 HOUR), 10)
+						WHERE LEFT(e.date, 10) >= LEFT((NOW() - INTERVAL " . GENERAL_GRACEPERIOD_SHOW . " HOUR), 10)
 						 " . $query_checks;
 
 		return (count(PDOTools::findMany($query, $query_params)) > 0);
@@ -158,7 +159,7 @@ class AlertsModel
 						INNER JOIN lines_props lp ON " . $join_addition . " tmp_lp.maxdate = lp.date AND tmp_lp.bookie_id = lp.bookie_id
 						INNER JOIN fights f ON lp.matchup_id = f.id 
 						INNER JOIN events e ON f.event_id = e.id 
-						WHERE LEFT(e.date, 10) >= LEFT((NOW() - INTERVAL 2 HOUR), 10)
+						WHERE LEFT(e.date, 10) >= LEFT((NOW() - INTERVAL " . GENERAL_GRACEPERIOD_SHOW . " HOUR), 10)
 						 " . $query_checks;
 
 		return (count(PDOTools::findMany($query, $query_params)) > 0);
@@ -191,7 +192,7 @@ class AlertsModel
 		$query = "SELECT * FROM (SELECT bookie_id, event_id, MAX(date) as maxdate FROM lines_eventprops lep WHERE lep.event_id = :event_id AND lep.proptype_id = :proptype_id GROUP BY lep.bookie_id) tmp_lep
 						INNER JOIN lines_eventprops lep ON lep.event_id = tmp_lep.event_id AND tmp_lep.maxdate = lep.date AND tmp_lep.bookie_id = lep.bookie_id
 						INNER JOIN events e ON lep.event_id = e.id 
-						WHERE LEFT(e.date, 10) >= LEFT((NOW() - INTERVAL 2 HOUR), 10)
+						WHERE LEFT(e.date, 10) >= LEFT((NOW() - INTERVAL " . GENERAL_GRACEPERIOD_SHOW . " HOUR), 10)
 						 " . $query_checks;
 
 		return (count(PDOTools::findMany($query, $query_params)) > 0);

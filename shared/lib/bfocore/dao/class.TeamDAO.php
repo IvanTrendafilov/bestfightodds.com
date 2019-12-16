@@ -67,7 +67,7 @@ class TeamDAO
                         INNER JOIN fights fi ON (fi.fighter1_id = f.id OR fi.fighter2_id = f.id) 
                         INNER JOIN events e ON fi.event_id = e.id 
                     WHERE fi.id NOT IN (SELECT mr.matchup_id FROM matchups_results mr)
-                        AND LEFT(e.date, 10) < LEFT((NOW() - INTERVAL 2 HOUR), 10)';
+                        AND LEFT(e.date, 10) < LEFT((NOW() - INTERVAL ' . GENERAL_GRACEPERIOD_SHOW . ' HOUR), 10)';
         $rResult = DBTools::doQuery($sQuery);
         $aFighters = [];
         while ($aFighter = mysqli_fetch_array($rResult))

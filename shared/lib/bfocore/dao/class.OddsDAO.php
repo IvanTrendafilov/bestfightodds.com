@@ -802,7 +802,7 @@ class OddsDAO
                     FROM lines_correlations lc 
                         LEFT JOIN fights f ON lc.matchup_id = f.id 
                         LEFT JOIN events e ON f.event_id = e.id 
-                    WHERE LEFT(e.date, 10) < LEFT((NOW() - INTERVAL 2 HOUR), 10)';
+                    WHERE LEFT(e.date, 10) < LEFT((NOW() - INTERVAL ' . GENERAL_GRACEPERIOD_SHOW . ' HOUR), 10)';
         
         DBTools::doQuery($sQuery);
         $iCount = DBTools::getAffectedRows();
