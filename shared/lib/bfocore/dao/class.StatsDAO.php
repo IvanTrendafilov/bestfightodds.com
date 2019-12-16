@@ -1,7 +1,7 @@
 <?php
 
 require_once('lib/bfocore/utils/db/class.DBTools.php');
-require_once('config/inc.dbConfig.php');
+require_once('config/inc.config.php');
 require_once('lib/bfocore/general/inc.GlobalTypes.php');
 require_once('lib/bfocore/parser/utils/class.ParseTools.php'); //TODO: Try to avoid having dependecies to the parsing component. Move this functionality to another class in the general library
 
@@ -67,7 +67,7 @@ select FROM_UNIXTIME (mvalue) - INTERVAL 6 HOUR AS lasttime from matchups_metada
 
 
 Checks if event is future
-SELECT EXISTS (select 1 from fights f inner join events e on f.event_id = e.id where f.id = 12057 AND LEFT(date, 10) >= LEFT((NOW() - INTERVAL 2 HOUR), 10)) exi;
+SELECT EXISTS (select 1 from fights f inner join events e on f.event_id = e.id where f.id = 12057 AND LEFT(date, 10) >= LEFT((NOW() - INTERVAL ' . GENERAL_GRACEPERIOD_SHOW . ' HOUR), 10)) exi;
 
 Can we combine now(), matchup time and last update odds and get the truth somehow? In combination with the check event is future ofc
 SELECT * FROM (
@@ -97,13 +97,13 @@ ORDER BY storedtime, lasttime DESC;
 
             $sExtraWhere = " AND fo1.date <= (IF ((SELECT 1 FROM matchups_metadata mm WHERE matchup_id = ? AND mm.mattribute = 'gametime' ), 
                                                     /*Metadata exists*/
-                                                    IF ((SELECT FROM_UNIXTIME(mm.mvalue) + INTERVAL " . DB_TIMEZONE . " HOUR FROM matchups_metadata mm WHERE mm.matchup_id = ? AND mm.mattribute = 'gametime' ) > NOW(), 
+                                                    IF ((SELECT FROM_UNIXTIME(mm.mvalue) FROM matchups_metadata mm WHERE mm.matchup_id = ? AND mm.mattribute = 'gametime' ) > NOW(), 
                                                         /*Metadata > NOW()*/
                                                         NOW(), 
                                                         /*Metadata < NOW()*/
-                                                        (SELECT FROM_UNIXTIME(mm.mvalue) + INTERVAL " . DB_TIMEZONE . " HOUR FROM matchups_metadata mm WHERE mm.matchup_id = ? AND mm.mattribute = 'gametime')),
+                                                        (SELECT FROM_UNIXTIME(mm.mvalue) FROM matchups_metadata mm WHERE mm.matchup_id = ? AND mm.mattribute = 'gametime')),
                                                     /*Metadata does not exist*/
-                                                    IF ((SELECT 1 FROM fights f INNER JOIN events e ON f.event_id = e.id WHERE f.id = ? AND LEFT(e.date, 10) < LEFT((NOW() - INTERVAL 2 HOUR), 10)), 
+                                                    IF ((SELECT 1 FROM fights f INNER JOIN events e ON f.event_id = e.id WHERE f.id = ? AND LEFT(e.date, 10) < LEFT((NOW() - INTERVAL ' . GENERAL_GRACEPERIOD_SHOW . ' HOUR), 10)), 
                                                         /*Event is in past*/
                                                         (SELECT MAX(fo.date) FROM fightodds fo WHERE fo.fight_id = ?), 
                                                         /*Event is upcoming*/

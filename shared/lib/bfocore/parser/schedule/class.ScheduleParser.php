@@ -2,7 +2,7 @@
 
 require_once('lib/bfocore/general/class.EventHandler.php');
 require_once('lib/bfocore/general/class.ScheduleHandler.php');
-require_once('config/inc.parseConfig.php');
+require_once('config/inc.config.php');
 
 class ScheduleParser
 {

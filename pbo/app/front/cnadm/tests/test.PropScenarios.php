@@ -1,5 +1,5 @@
 <?php
-require_once('config/inc.generalConfig.php');
+require_once('config/inc.config.php');
 require_once('lib/bfocore/general/class.FighterHandler.php');
 require_once('lib/bfocore/general/class.EventHandler.php');
 require_once('lib/bfocore/general/inc.GlobalTypes.php');

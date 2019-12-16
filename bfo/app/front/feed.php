@@ -1,7 +1,7 @@
 <?php
 
 
-require_once('config/inc.parseConfig.php');
+require_once('config/inc.config.php');
 
 header('Content-type: text/xml');
 header('Cache-Control: no-cache, no-store, max-age=0, must-revalidate');

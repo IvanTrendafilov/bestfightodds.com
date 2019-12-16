@@ -1,7 +1,7 @@
 <?php
 
 require_once('lib/bfocore/dao/class.EventDAO.php');
-require_once('config/inc.parseConfig.php');
+require_once('config/inc.config.php');
 
 class EventHandler
 {

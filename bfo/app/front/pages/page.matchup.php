@@ -1,7 +1,7 @@
 <?php
 require_once('lib/bfocore/general/class.EventHandler.php');
 require_once('lib/bfocore/general/class.OddsHandler.php');
-require_once('config/inc.generalConfig.php');
+require_once('config/inc.config.php');
 
 $oMatchup = null;
 if (!isset($_GET['matchupID']) || !is_numeric($_GET['matchupID']) || $_GET['matchupID'] < 0 || $_GET['matchupID'] > 999999 || ($oMatchup = EventHandler::getFightByID($_GET['matchupID'])) == null)

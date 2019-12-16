@@ -9,7 +9,7 @@ echo 'Starting backup'
 cd $backupdir/
 rm $backupdir/pbo_backup_*.sql
 echo 'Cleared old backups'
-mysqldump -uproboxingodds -pIdkfa123 bets_boxing > $backupdir/$backupfilename.sql
+mysqldump -uproboxingodds -pIdkfa123 --skip-tz-utc bets_boxing > $backupdir/$backupfilename.sql
 echo 'Dump complete'
 zip -j -9 -D $gdrivedir/$backupfilename.zip $backupdir/$backupfilename.sql
 echo 'Compression complete'

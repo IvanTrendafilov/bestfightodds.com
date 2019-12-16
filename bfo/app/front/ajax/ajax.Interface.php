@@ -22,7 +22,7 @@ require_once('lib/bfocore/general/class.OddsHandler.php');
 require_once('lib/bfocore/general/class.FighterHandler.php');
 require_once('lib/bfocore/general/class.GraphHandler.php');
 require_once('lib/bfocore/general/caching/class.CacheControl.php');
-require_once('config/inc.generalConfig.php');
+require_once('config/inc.config.php');
 
 switch ($_GET['f'])
 {

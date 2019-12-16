@@ -1094,17 +1094,6 @@ refreshPage = function() {
     });
 };
 
-updateLine = function(line, newval) {
-    /*oldcol = $("#" + line).css("background-color");
-    $("#" + line).html("+300");
-    $("#" + line).closest('td').css("background-color", "#99ff99");
-    $("#" + line).closest('td').animate({
-        backgroundColor: oldcol
-    }, 60000, function() { //TODO: Raise this to 60000
-        //Finished
-    });*/
-};
-
 toggleRefresh = function (autoRefresh) {
     if (autoRefresh === true) {
         refreshId = setInterval(function() {

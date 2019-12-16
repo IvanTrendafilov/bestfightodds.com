@@ -1,7 +1,7 @@
 <?php
 
 require_once('lib/bfocore/general/inc.GlobalTypes.php');
-require_once('config/inc.twitterConfig.php');
+require_once('config/inc.config.php');
 require_once('lib/bfocore/utils/twitter/class.Twitterer.php');
 require_once('lib/bfocore/general/class.EventHandler.php');
 

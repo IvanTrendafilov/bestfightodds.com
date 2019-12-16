@@ -2,7 +2,7 @@
 
 require_once('lib/bfocore/general/class.EventHandler.php');
 require_once('lib/bfocore/general/class.OddsHandler.php');
-require_once('config/inc.parseConfig.php');
+require_once('config/inc.config.php');
 
 class ScheduleChangeTracker
 {
@@ -100,11 +100,11 @@ class ScheduleChangeTracker
                     {
                         $oNewDate = new DateTime();
                         $oNewDate->setTimestamp($aMatchup['date']);
-                        //Subtract 6 hours to adjust for timezones (but not for future events)
-                        if ($oNewDate->format('Y-m-d') != $sFutureEventDate)
-                        {
-                            $oNewDate->sub(new DateInterval('PT6H'));
-                        }
+                        //Subtract 6 hours to adjust for timezones (but not for future events) - Disabled: We are now using UTC TODO: Remove later
+                        //if ($oNewDate->format('Y-m-d') != $sFutureEventDate)
+                        //{
+                        //    $oNewDate->sub(new DateInterval('PT6H'));
+                        //}
                         //Check that new date is not in the past 
                         if (new DateTime() < $oNewDate)
                         {

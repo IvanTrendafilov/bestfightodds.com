@@ -2,7 +2,7 @@
 
 //Generates a sitemap based on all events
 
-require_once('config/inc.generalConfig.php');
+require_once('config/inc.config.php');
 require_once('lib/bfocore/general/class.EventHandler.php');
 
 $events = EventHandler::getAllEvents();

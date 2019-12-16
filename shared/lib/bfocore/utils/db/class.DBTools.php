@@ -1,6 +1,6 @@
 <?php
 
-require_once('config/inc.dbConfig.php');
+require_once('config/inc.config.php');
 
 class DBTools
 {
@@ -31,12 +31,6 @@ class DBTools
      */
     public static function doQuery($a_sQuery)
     {
-        //Adjust time according to set timezone
-        if (is_numeric(DB_TIMEZONE))
-        {
-            $a_sQuery = str_replace('NOW()', '(NOW() + INTERVAL ' . DB_TIMEZONE . ' HOUR)', $a_sQuery);
-        }
-
         //$sStart = microtime(); 
         $rResult = mysqli_query(self::getConnection(), $a_sQuery) or die('MySQL error: ' . mysqli_error(self::getConnection()));
 

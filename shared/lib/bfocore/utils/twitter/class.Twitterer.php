@@ -1,22 +1,21 @@
 <?php
 
+require 'vendor/autoload.php';
 require_once('JSON.php');
 require_once('twitteroauth.php');
 
 /**
- * Class used to integrate with Twitter
- * TODO: Fix logging
- *
- * @author Christian Nordvaller
+ * Class used to integrate with Twitter API
  */
 class Twitterer
 {
-
     private $m_bDebug = false;
     private $m_sConsumerKey;
     private $m_sConsumerSecret;
     private $m_sOAuthToken;
     private $m_sOAuthTokenSecret;
+
+    private $logger;
 
     /**
      * Constructor
@@ -28,6 +27,8 @@ class Twitterer
      */
     public function __construct($a_sConsumerKey, $a_sConsumerSecret, $a_sOAuthToken, $a_sOAuthTokenSecret)
     {
+        $this->logger = new Katzgrau\KLogger\Logger(GENERAL_KLOGDIR, Psr\Log\LogLevel::DEBUG, ['filename' => 'twitter.log']);
+
         $this->m_sConsumerKey = $a_sConsumerKey;
         $this->m_sConsumerSecret = $a_sConsumerSecret;
         $this->m_sOAuthToken = $a_sOAuthToken;
@@ -44,8 +45,7 @@ class Twitterer
     {
         if ($this->m_bDebug == true)
         {
-            echo "Posting (" . strlen($a_sMessage) . "): " . $a_sMessage . "\n\r
-";
+            $this->logger->debug("Simulating posting (" . strlen($a_sMessage) . "): " . $a_sMessage);
             return true;
         }
 
@@ -57,15 +57,16 @@ class Twitterer
 
         if (isset($rResult->error))
         {
-            //If error returned is "Status is a duplicate." we treat this as a success
-            if ($rResult->error == 'Status is a duplicate.')
+            if ($rResult->error == 'Status is a duplicate.') //Treated as success
             {
+                $this->logger->info("Duplicate post (OK): (" . strlen($a_sMessage) . "): " . $a_sMessage);
                 return true;
             }
-            echo "Error: " . $rResult->error . "\n\r<br />";
+            $this->logger->info("Error for tweet " . $a_sMessage . " (" . strlen($a_sMessage) . "): " . $rResult->error);
             return false;
         }
 
+        $this->logger->info("Posted (" . strlen($a_sMessage) . "): " . $a_sMessage);
         return true;
     }
 
@@ -73,7 +74,6 @@ class Twitterer
     {
         $this->m_bDebug = $a_bDebug;
     }
-
 }
 
 ?>

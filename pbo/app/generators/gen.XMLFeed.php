@@ -2,7 +2,7 @@
 
 require_once('lib/bfocore/general/class.EventHandler.php');
 require_once('lib/bfocore/general/inc.GlobalTypes.php');
-require_once('config/inc.generalConfig.php');
+require_once('config/inc.config.php');
 
 $oXML = new SimpleXMLElement('<?xml version="1.0" encoding="utf-8"?><bfo_feed></bfo_feed>');
 $aEvent = EventHandler::getAllUpcomingEvents();
