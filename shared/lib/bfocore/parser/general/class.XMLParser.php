@@ -1,10 +1,10 @@
 <?php
 
 require_once('lib/bfocore/parser/general/inc.ParserMain.php');
-require_once('config/inc.parseConfig.php');
+require_once('config/inc.config.php');
 
 /**
- * Main XML parser - This is where the magic happens..
+ * Main XML parser
  *
  * @author Christian Nordvaller
  */

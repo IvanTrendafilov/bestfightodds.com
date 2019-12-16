@@ -3,8 +3,7 @@
 require_once('lib/bfocore/general/class.FacebookHandler.php');
 require_once('lib/bfocore/general/class.EventHandler.php');
 require_once('lib/bfocore/general/class.OddsHandler.php');
-require_once('config/inc.facebookConfig.php');
-require_once('config/inc.parseConfig.php');
+require_once('config/inc.config.php');
 
 if (FACEBOOK_ENABLED == false)
 {

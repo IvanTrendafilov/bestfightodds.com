@@ -18,7 +18,6 @@ define('MAIL_SMTP_HOST', 'email-smtp.us-east-1.amazonaws.com'); //SMTP Hostname 
 define('MAIL_SMTP_PORT', '587'); //SMTP Port for external e-mail service
 define('MAIL_SMTP_USERNAME', ''); //Username for external e-mail service
 define('MAIL_SMTP_PASSWORD', ''); //Password for external e-mail service
-define('MAIL_KLOGDIR', GENERAL_KLOGDIR);
 
 /* Alerts */
 define('ALERTER_ENABLED', false);
@@ -40,12 +39,10 @@ define('DB_HOST', 'localhost'); //Database host
 define('DB_USER', 'root');  //Database username
 define('DB_PASSWORD', 'root');  //Database password
 define('DB_SCHEME', 'bets');  //Database scheme
-define('DB_TIMEZONE', -6);	//Timezone for all data in database. Currently set to adjust from the GMT+1 that server is to EST
 
 /* Facebook  */
 define('FACEBOOK_ENABLED', true);
 define('FACEBOOK_DEV_MODE', true); //In dev mode, no actual posts are created. Instead they are just echo'ed to the prompt
-define('FACEBOOK_KLOGDIR', GENERAL_BASEDIR . '/log/');
 define('FACEBOOK_APP_ID', '1743170102619630');
 define('FACEBOOK_APP_SECRET', 'af19c28c37ecbeb4c3db529e293cdb8e');
 define('FACEBOOK_ACCESS_TOKEN', 'EAAYxZA2qZC7e4BAOUww5RhqvWr9inuQZCW1koLMhTgVFAA6AYC6DtFHKYZAZCzHJWFYoozarzj3ZC0GZBv8oclgjvkFxBakjZC3X7og7XZCiIMsxohZC1Nr2Agyw37VjJoTpt4heQGcfQJ1oqxDi63nmKC5UCjQKUZB2oANkV319U5ceQZDZD');
@@ -62,7 +59,6 @@ define('PARSE_MOCKFEEDS_DIR', GENERAL_BASEDIR . '/app/parsers/mockfeeds/');  //D
 define('PARSE_CREATIVEMATCHING', false); //Used to specify if parser should try creative ways to match matchups (use with caution);
 define('PARSE_CREATEMATCHUPS', false); //Used to specify if parser should create matchups that was not found (use with caution);
 define('PARSE_FUTURESEVENT_ID', 197); //Used to identify the event that holds all future (that cant be linked to a specific event) matchups
-define('PARSE_KLOGDIR', GENERAL_BASEDIR . '/log/'); //Directory where Klogger logs should be stored
 
 /* Twitter  */
 define('TWITTER_ENABLED', true);

@@ -2,7 +2,7 @@
 
 //Generates a sitemap based on all teams (fighters)
 
-require_once('config/inc.generalConfig.php');
+require_once('config/inc.config.php');
 require_once('lib/bfocore/general/class.FighterHandler.php');
 
 $teams = FighterHandler::getAllFighters();

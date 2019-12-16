@@ -4,7 +4,7 @@ require_once('lib/bfocore/general/class.EventHandler.php');
 require_once('lib/bfocore/general/class.BookieHandler.php');
 require_once('lib/bfocore/general/class.OddsHandler.php');
 require_once('lib/bfocore/general/inc.GlobalTypes.php');
-require_once('config/inc.generalConfig.php');
+require_once('config/inc.config.php');
 
 $sOverlibStyle = ', FGCOLOR, \'#eeeeee\', BGCOLOR, \'#1f2a34\', BORDER, 1';
 

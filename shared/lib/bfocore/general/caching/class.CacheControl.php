@@ -1,6 +1,6 @@
 <?php
 
-require_once('config/inc.cacheConfig.php');
+require_once('config/inc.config.php');
 
 class CacheControl
 {

@@ -4,7 +4,7 @@
  * Purpose of this script/page is to scramble the data for scraping applications
  */
 
-require_once('config/inc.parseConfig.php');
+require_once('config/inc.config.php');
 
 $rFile = fopen(PARSE_PAGEDIR . 'page.odds.php', 'r');
 $sText = fread($rFile, filesize(PARSE_PAGEDIR . 'page.odds.php'));

@@ -12,9 +12,7 @@
  *
  * @author Christian Nordvaller
  */
-require_once('config/inc.parseConfig.php');
-require_once('config/inc.alertConfig.php');
-require_once('config/inc.twitterConfig.php');
+require_once('config/inc.config.php');
 
 require_once('lib/bfocore/parser/general/class.XMLParser.php');
 require_once('lib/bfocore/utils/pagegen/class.PageGenerator.php');

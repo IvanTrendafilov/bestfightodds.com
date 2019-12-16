@@ -1,6 +1,6 @@
 <?php
 
-require_once('config/inc.parseConfig.php');
+require_once('config/inc.config.php');
 
 if (!isset($_GET['log']))
 {

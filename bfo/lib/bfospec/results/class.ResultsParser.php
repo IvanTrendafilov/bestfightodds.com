@@ -8,7 +8,7 @@ require_once('lib/bfocore/general/class.EventHandler.php');
 require_once('lib/bfocore/general/class.TeamHandler.php');
 require_once('lib/bfocore/general/class.FighterHandler.php');
 require_once('lib/bfocore/parser/utils/class.ParseTools.php');
-require_once('config/inc.parseConfig.php');
+require_once('config/inc.config.php');
 require_once('lib/simple_html_dom/simple_html_dom.php');
 
 require_once('lib/bfospec/results/class.EventPageParser.php');
@@ -24,7 +24,7 @@ class ResultsParser
 
 	public function __construct() 
 	{
-		$this->logger = new Katzgrau\KLogger\Logger(PARSE_KLOGDIR, Psr\Log\LogLevel::DEBUG, ['prefix' => 'resultsparser_']);
+		$this->logger = new Katzgrau\KLogger\Logger(GENERAL_KLOGDIR, Psr\Log\LogLevel::DEBUG, ['prefix' => 'resultsparser_']);
 	}
 
 	public function startParser()

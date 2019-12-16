@@ -15,7 +15,7 @@ require_once('lib/bfocore/general/class.EventHandler.php');
 require_once('lib/bfocore/general/class.BookieHandler.php');
 require_once('lib/bfocore/general/class.OddsHandler.php');
 require_once('lib/bfocore/general/inc.GlobalTypes.php');
-require_once('config/inc.generalConfig.php');
+require_once('config/inc.config.php');
 require_once('lib/bfocore/general/caching/class.CacheControl.php');
 require_once('lib/bfocore/utils/class.LinkTools.php');
 

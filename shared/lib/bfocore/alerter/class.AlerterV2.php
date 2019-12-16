@@ -1,7 +1,6 @@
 <?php 
 
-require_once('config/inc.generalConfig.php');
-require_once('config/inc.alertConfig.php');
+require_once('config/inc.config.php');
 require_once('lib/bfocore/alerter/class.AlertsModel.php');
 require_once('lib/bfocore/general/class.EventHandler.php');
 require_once('lib/bfocore/general/class.OddsHandler.php');

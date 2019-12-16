@@ -57,7 +57,7 @@ foreach($aUnmatchedCol as $aUnmatched)
 
 	$sBookie = BookieHandler::getBookieByID($aUnmatched['bookie_id'])->getName();
   	$sModifiedDate = date("Y-m-d H:i:s", strtotime("+6 hours", strtotime($aUnmatched['log_date']))); //Add 6 hours to date for admin timezone
-
+	
   	if ($aUnmatched['type'] == 0)
   	{
   		$sMatchups .= '<tr><td>' . $sModifiedDate . '</td><td><b>' . $sBookie . '</b></td><td>' . $aUnmatched['matchup'] . '</td><td>[<a href="?p=addNewFightForm&inFighter1=' . $aSplit[0] .  '&inFighter2=' . $aSplit[1] . '">add</a>] [<a href="http://www.google.se/search?q=' . $aUnmatched['matchup'] . '">google</a>] ' . $event_text . '</td></tr>';	
