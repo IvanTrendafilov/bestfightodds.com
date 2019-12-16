@@ -8,6 +8,9 @@
   updated. Therefor it would need to work with the parsing-engine. */
 
 
+require_once('lib/bfocore/general/inc.GlobalTypes.php');
+require_once('lib/bfocore/general/class.EventHandler.php');
+require_once('lib/bfocore/general/class.OddsHandler.php');
 require_once('lib/bfocore/general/caching/class.CacheControl.php');
 
 define('LINK_HEIGHT', 65);  //Only used for single fights - Events use dynamic height
@@ -15,8 +18,7 @@ define('LINK_WIDTH', 216);
 define('LINK_BFO_HEIGHT', 18); //Indicates header size
 define('FONT_SIZE', 8);
 define('FONT_SIZE_BIG', 9);
-define('FONT_TYPE', dirname(__FILE__) . "/micross.ttf");
-
+define('FONT_TYPE', 'micross.ttf');
 
 $sLineType = isset($_GET['type']) ? $_GET['type'] : 'current';
 $iFormatType = isset($_GET['format']) ? $_GET['format'] : 1;
@@ -32,10 +34,6 @@ if (isset($_GET['fight']) && is_numeric($_GET['fight']) && $_GET['fight'] > 0 &&
     }
     else
     {
-        require_once('lib/bfocore/general/inc.GlobalTypes.php');
-        require_once('lib/bfocore/general/class.EventHandler.php');
-        require_once('lib/bfocore/general/class.OddsHandler.php');
-
         $rShowImage = FightLinkCreator::createFightLink($_GET['fight'], $sLineType, $iFormatType);
         if ($rShowImage != false)
         {
@@ -61,10 +59,6 @@ else if (isset($_GET['event']) && is_numeric($_GET['event']) && $_GET['event'] >
     }
     else
     {
-        require_once('lib/bfocore/general/inc.GlobalTypes.php');
-        require_once('lib/bfocore/general/class.EventHandler.php');
-        require_once('lib/bfocore/general/class.OddsHandler.php');
-
         $rShowImage = FightLinkCreator::createEventLink($_GET['event'], $sLineType, $iFormatType);
         if ($rShowImage != false)
         {
@@ -119,7 +113,7 @@ class FightLinkCreator
 
         $rFrameColor = imagecolorallocate($rImage, 96, 98, 100);
         $rMiddleFrameColor = imagecolorallocate($rImage, 194, 194, 194);
-        $rTopColor = imagecolorallocate($rImage, 234, 236, 238);
+        $rTopColor = imagecolorallocate($rImage, 245, 247, 249);
         $rBottomColor = imagecolorallocate($rImage, 255, 255, 255);
         $rTextColor = imagecolorallocate($rImage, 26, 26, 26);
 
@@ -171,7 +165,7 @@ class FightLinkCreator
 
             //Fighter 1 Name
             //imagettftext($rImage, FONT_SIZE, 0, 6, 0 + LINK_BFO_HEIGHT + $iFighterCellHeight + ($iFighterCellHeight * ($iFightX * 2)) + $iFightX - 5, $rTextColor, FONT_TYPE, $oFight->getFighterAsString(1));
-            self::textCustomSpacing($rImage, FONT_SIZE, 0, 6, 0 + LINK_BFO_HEIGHT + $iFighterCellHeight + ($iFighterCellHeight * ($iFightX * 2)) + $iFightX - 5, $rTextColor, FONT_TYPE, $oFight->getFighterAsString(1), -1);
+            self::textCustomSpacing($rImage, FONT_SIZE, 0, 6, 0 + LINK_BFO_HEIGHT + $iFighterCellHeight + ($iFighterCellHeight * ($iFightX * 2)) + $iFightX - 5, $rTextColor, FONT_TYPE, $oFight->getFighterAsString(1), 1);
 
             //Fighter 1 Odds
             $aOddsSize = imagettfbbox(FONT_SIZE, 0, FONT_TYPE, $sFighter1Odds);
@@ -180,7 +174,7 @@ class FightLinkCreator
 
 
             //Fighter 2 Name
-            self::textCustomSpacing($rImage, FONT_SIZE, 0, 6, 0 + LINK_BFO_HEIGHT + ($iFighterCellHeight * 2) + ($iFighterCellHeight * ($iFightX * 2)) + $iFightX - 6, $rTextColor, FONT_TYPE, $oFight->getFighterAsString(2), -1);
+            self::textCustomSpacing($rImage, FONT_SIZE, 0, 6, 0 + LINK_BFO_HEIGHT + ($iFighterCellHeight * 2) + ($iFighterCellHeight * ($iFightX * 2)) + $iFightX - 6, $rTextColor, FONT_TYPE, $oFight->getFighterAsString(2), 1);
 
             //Fighter 2 Odds
             $aOddsSize = imagettfbbox(FONT_SIZE, 0, FONT_TYPE, $sFighter2Odds);
@@ -199,7 +193,7 @@ class FightLinkCreator
 
         //Frame
         imagerectangle($rImage, 0, 0, LINK_WIDTH - 1, $iCalculatedHeight - 1, $rFrameColor);
-       
+
         return $rImage;
     }
 
@@ -217,7 +211,11 @@ class FightLinkCreator
             }
 
             $iWritePos += $aLastBox[2] + $a_iSpacing;
-            
+		if ($a_sText[$iX] == 'A')
+		{
+		$iWritePos -= 2;
+		}
+
             //Custom fixes for chars that add some spaces
 /*            switch ($a_sText[$iX])
             {

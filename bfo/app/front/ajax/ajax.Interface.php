@@ -180,7 +180,6 @@ class AjaxInterface
                 }
 
                 $retArr = array('name' => $sBookieName, 'data' => array());
-                date_default_timezone_set('America/Los_Angeles');
 
                 if (isset($_GET['e']))
                 {
@@ -194,10 +193,9 @@ class AjaxInterface
                 foreach ($aOdds as $iIndex => $oOdds)
                 {
                         $retArr['data'][] = array('x' => 
-                                        (new DateTime($oOdds->getDate(), new DateTimeZone('America/New_York')))->getTimestamp() * 1000,
+                                        (new DateTime($oOdds->getDate()))->getTimestamp() * 1000,
                                         'y' => $oOdds->moneylineToDecimal($oOdds->getOdds($_GET['p']), true));
 
-                        
                         if ($iIndex == 0)
                         {
                             $retArr['data'][0]['dataLabels'] = array('x' => 9);
@@ -211,7 +209,7 @@ class AjaxInterface
                 //Add last odds with current date if this is an upcoming event
                 if ($oEvent != null)
                 {
-                    $curTime = (new DateTime('', new DateTimeZone('America/New_York')));
+                    $curTime = (new DateTime(''));
                     $retArr['data'][] = array('x' => $curTime->getTimestamp() * 1000, 'y' => $aOdds[count($aOdds) - 1]->moneylineToDecimal($aOdds[count($aOdds) - 1]->getOdds($_GET['p']), true), 'dataLabels' => array('x' => -9));    
                 }
 

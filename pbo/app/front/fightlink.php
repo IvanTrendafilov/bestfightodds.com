@@ -18,7 +18,7 @@ define('LINK_WIDTH', 216);
 define('LINK_BFO_HEIGHT', 18); //Indicates header size
 define('FONT_SIZE', 8);
 define('FONT_SIZE_BIG', 9);
-define('FONT_TYPE', 'micross.ttf');
+define('FONT_TYPE', dirname(__FILE__) . "/micross.ttf");
 
 $sLineType = isset($_GET['type']) ? $_GET['type'] : 'current';
 $iFormatType = isset($_GET['format']) ? $_GET['format'] : 1;
@@ -165,7 +165,7 @@ class FightLinkCreator
 
             //Fighter 1 Name
             //imagettftext($rImage, FONT_SIZE, 0, 6, 0 + LINK_BFO_HEIGHT + $iFighterCellHeight + ($iFighterCellHeight * ($iFightX * 2)) + $iFightX - 5, $rTextColor, FONT_TYPE, $oFight->getFighterAsString(1));
-            self::textCustomSpacing($rImage, FONT_SIZE, 0, 6, 0 + LINK_BFO_HEIGHT + $iFighterCellHeight + ($iFighterCellHeight * ($iFightX * 2)) + $iFightX - 5, $rTextColor, FONT_TYPE, $oFight->getFighterAsString(1), 1);
+            self::textCustomSpacing($rImage, FONT_SIZE, 0, 6, 0 + LINK_BFO_HEIGHT + $iFighterCellHeight + ($iFighterCellHeight * ($iFightX * 2)) + $iFightX - 5, $rTextColor, FONT_TYPE, $oFight->getFighterAsString(1), -1);
 
             //Fighter 1 Odds
             $aOddsSize = imagettfbbox(FONT_SIZE, 0, FONT_TYPE, $sFighter1Odds);
@@ -174,7 +174,7 @@ class FightLinkCreator
 
 
             //Fighter 2 Name
-            self::textCustomSpacing($rImage, FONT_SIZE, 0, 6, 0 + LINK_BFO_HEIGHT + ($iFighterCellHeight * 2) + ($iFighterCellHeight * ($iFightX * 2)) + $iFightX - 6, $rTextColor, FONT_TYPE, $oFight->getFighterAsString(2), 1);
+            self::textCustomSpacing($rImage, FONT_SIZE, 0, 6, 0 + LINK_BFO_HEIGHT + ($iFighterCellHeight * 2) + ($iFighterCellHeight * ($iFightX * 2)) + $iFightX - 6, $rTextColor, FONT_TYPE, $oFight->getFighterAsString(2), -1);
 
             //Fighter 2 Odds
             $aOddsSize = imagettfbbox(FONT_SIZE, 0, FONT_TYPE, $sFighter2Odds);
@@ -211,11 +211,7 @@ class FightLinkCreator
             }
 
             $iWritePos += $aLastBox[2] + $a_iSpacing;
-		if ($a_sText[$iX] == 'A')
-		{
-		$iWritePos -= 2;
-		}
-
+		
             //Custom fixes for chars that add some spaces
 /*            switch ($a_sText[$iX])
             {
