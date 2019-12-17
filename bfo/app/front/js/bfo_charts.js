@@ -127,7 +127,7 @@ function createChart(indata) {
 
                 //Format and adjust date according to user timezone
                 var now = new Date();
-                var da = new Date(this.x - (now.getTimezoneOffset() * 60000));
+                var da = new Date(this.x + (now.getTimezoneOffset() * 60000));
 
                 var days = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
                 var monthNames = [
