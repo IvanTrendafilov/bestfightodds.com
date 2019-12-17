@@ -37,7 +37,7 @@ function createEPIChart(e, p, pt) {
 function createChart(indata) {
     Highcharts.setOptions({
         global: {
-            useUTC: false
+            useUTC: true
         }
     });
 
