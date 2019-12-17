@@ -127,7 +127,7 @@ function createChart(indata) {
 
                 //Format and adjust date according to user timezone
                 var now = new Date();
-                var da = new Date(this.x );
+                var da = new Date(this.x);
 
                 var days = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
                 var monthNames = [
@@ -136,7 +136,7 @@ function createChart(indata) {
                     "Aug", "Sep", "Oct",
                     "Nov", "Dec"
                   ];
-                var formatted_date = days[da.getDay()] + ', ' + monthNames[da.getMonth()] + ' ' + da.getDate() + ', ' + (da.getHours() < 10? '0' : '') + da.getHours() + ':' + (da.getMinutes() < 10? '0' : '') + da.getMinutes();
+                var formatted_date = da.toUTCString() + ' -- ' + days[da.getDay()] + ', ' + monthNames[da.getMonth()] + ' ' + da.getDate() + ', ' + (da.getHours() < 10? '0' : '') + da.getHours() + ':' + (da.getMinutes() < 10? '0' : '') + da.getMinutes();
                 //Old method: Highcharts.dateFormat('%a %d. %b %H:%M', this.x)
 
                 return '<span style="color: #666; font-weight: bold; font-size: 11px">' +  formatted_date + '</span><br/>' + this.series.name + ': <b>' + ttVal + '</b>' + carr + '<br/>';
