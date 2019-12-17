@@ -124,9 +124,22 @@ function createChart(indata) {
                 } else {
                     ttVal = oneDecToML(this.y);
                 }
-                return '<span style="color: #666; font-weight: bold; font-size: 11px">' + Highcharts.dateFormat('%a %d. %b %H:%M', this.x) + '</span><br/>' +
 
-                    this.series.name + ': <b>' + ttVal + '</b>' + carr + '<br/>';
+                //Format and adjust date according to user timezone
+                var now = new Date();
+                var da = new Date(this.x - (now.getTimezoneOffset() * 60000));
+
+                var days = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
+                var monthNames = [
+                    "Jan", "Feb", "Mar",
+                    "Apr", "May", "Jun", "Jul",
+                    "Aug", "Sep", "Oct",
+                    "Nov", "Dec"
+                  ];
+                var formatted_date = days[da.getDay()] + ', ' + monthNames[da.getMonth()] + ' ' + da.getDate() + ', ' + (da.getHours() < 10? '0' : '') + da.getHours() + ':' + (da.getMinutes() < 10? '0' : '') + da.getMinutes();
+                //Old method: Highcharts.dateFormat('%a %d. %b %H:%M', this.x)
+
+                return '<span style="color: #666; font-weight: bold; font-size: 11px">' +  formatted_date + '</span><br/>' + this.series.name + ': <b>' + ttVal + '</b>' + carr + '<br/>';
 
             },
             style: {
