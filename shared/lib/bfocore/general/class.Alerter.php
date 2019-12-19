@@ -5,7 +5,7 @@ require_once('lib/bfocore/dao/class.AlertDAO.php');
 require_once('lib/bfocore/general/class.EventHandler.php');
 require_once('config/inc.config.php');
 require_once('lib/bfocore/utils/class.OddsTools.php');
-require_once('lib/bfocore/utils/sendgrid/class.SendgridMailer.php');
+require_once('lib/bfocore/utils/aws-ses/class.SESMailer.php');
 
 /**
  * Class Alerter - The alerter is a feature that warns (e-mails) a user whenever odds for a certain fight drops below a certain number
@@ -165,7 +165,7 @@ Good luck!\n
         } else
         {
             //Send e-mail alert
-            $mailer = new SendgridMailer(MAIL_SENDGRID_KEY);
+            $mailer = new SESMailer(MAIL_SMTP_HOST, MAIL_SMTP_PORT, MAIL_SMTP_USERNAME, MAIL_SMTP_PASSWORD);
             $bSuccess = $mailer->sendMail(ALERTER_MAIL_SENDER_MAIL, ALERTER_MAIL_FROM, 'cnordvaller@gmail.com', $sSubject, $sText, $sText);       
             //$bSuccess = mail($sTo, $sSubject, $sText, $sHeaders);
 

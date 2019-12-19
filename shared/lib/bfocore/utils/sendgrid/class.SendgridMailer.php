@@ -10,7 +10,7 @@ class SendgridMailer
     public function __construct($key)
     {
         $this->sendgrid = new \SendGrid($key);
-        $this->logger = new Katzgrau\KLogger\Logger(GENERAL_KLOGDIR, Psr\Log\LogLevel::DEBUG, ['filename' => 'mail.txt']);
+        $this->logger = new Katzgrau\KLogger\Logger(GENERAL_KLOGDIR, Psr\Log\LogLevel::DEBUG, ['filename' => 'sendgrid.log']);
     }
 
     public function sendMail($sender_mail, $sender_name, $recipient_mail, $subject, $body_html, $body_text)

@@ -19,6 +19,7 @@ define('MAIL_SMTP_HOST', 'email-smtp.us-east-1.amazonaws.com'); //SMTP Hostname 
 define('MAIL_SMTP_PORT', '587'); //SMTP Port for external e-mail service
 define('MAIL_SMTP_USERNAME', ''); //Username for external e-mail service
 define('MAIL_SMTP_PASSWORD', ''); //Password for external e-mail service
+define('MAIL_SENDGRID_KEY', ''); //Sendgrid API key
 
 /* Alerts */
 define('ALERTER_ENABLED', false);
