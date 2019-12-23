@@ -5,7 +5,7 @@ require_once('lib/bfocore/parser/utils/class.ParseTools.php');
 /**
  * XML Parser
  *
- * Bookie: TheGreek
+ * Bookie: BetOnline
  * Sport: MMA
  *
  * Comment: In production

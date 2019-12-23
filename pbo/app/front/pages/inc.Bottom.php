@@ -40,7 +40,6 @@
         <option value="2">SportBet</option>
         <option value="9">Pinnacle</option>
         <option value="8">SportsInteraction</option>
-        <option value="11">TheGreek</option>
         <option value="12">BetOnline</option>
       </select><br /><div id="alert-button-container"><input type="hidden" name="tn"><input type="hidden" name="m">
         <div class="alert-loader"></div>

@@ -17,7 +17,6 @@ echo 'Schedule parser start
 ';
 
 //Set timezone to match that of parsed schedule
-date_default_timezone_set('America/New_York');
 
 $rSP = new ScheduleParser();
 $rSP->parseSchedPreFetched(fetchRingTVSchedule());

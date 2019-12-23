@@ -39,7 +39,6 @@
         <option value="17">William Hill</option>
         <option value="9">Pinnacle</option>
         <option value="8">SportsInteraction</option>
-        <option value="11">TheGreek</option>
         <option value="12">BetOnline</option>
         <option value="18">Intertops</option>
       </select><br /><div id="alert-button-container"><input type="hidden" name="tn"><input type="hidden" name="m">
