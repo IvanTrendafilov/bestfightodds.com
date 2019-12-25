@@ -23,6 +23,7 @@ class XMLParserWilliamHill
 
     public function parseXML($a_sXML)
     {
+        libxml_use_internal_errors(true); //Supress XML errors
         $oXML = simplexml_load_string($a_sXML);
 
         if ($oXML == false)
