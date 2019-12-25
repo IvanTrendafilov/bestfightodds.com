@@ -59,7 +59,7 @@ class XMLParserBetOnlineAlt
             //Check if participant name contains a comma, if so restructure the name
             for ($y = 0; $y <= 1; $y++)
             {
-                if( strpos($aMatches[$x + $y][1], ',') !== false ) {
+                if(isset($aMatches[$x + $y][1]) && strpos($aMatches[$x + $y][1], ',') !== false ) {
                     //Name contains a comma, split and restructure
                     $sploded = explode(',', $aMatches[$x + $y][1]);
                     $aMatches[$x + $y][1] = $sploded[1] . ' ' . $sploded[0];

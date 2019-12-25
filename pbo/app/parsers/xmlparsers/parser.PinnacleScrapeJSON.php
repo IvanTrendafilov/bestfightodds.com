@@ -19,7 +19,7 @@ class XMLParserPinnacleScrapeJSON
 
     public function __construct()
     {
-        $this->oParsedSport = new ParsedSport('MMA');
+        $this->oParsedSport = new ParsedSport('Boxing');
     }
 
     public function parseXML($a_sXML)

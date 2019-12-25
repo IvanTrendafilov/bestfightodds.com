@@ -38,9 +38,23 @@ class XMLParserBetOnline
                 && count($cEvent->participant) == 2 
                 && trim((string) $cEvent->scheduletext) != 'Kickboxing')
             {
+                if(isset($cEvent->participant[0]->participant_name) && strpos($cEvent->participant[0]->participant_name, ',') !== false ) {
+                    //Name contains a comma, split and restructure
+                    $sploded = explode(',', $cEvent->participant[0]->participant_name);
+                    $cEvent->participant[0]->participant_name = $sploded[1] . ' ' . $sploded[0];
+                }
+
+                if(isset($cEvent->participant[1]->participant_name) && strpos($cEvent->participant[1]->participant_name, ',') !== false ) {
+                    //Name contains a comma, split and restructure
+                    $sploded = explode(',', $cEvent->participant[1]->participant_name);
+                    $cEvent->participant[1]->participant_name = $sploded[1] . ' ' . $sploded[0];
+                }
+
+
                 if (ParseTools::checkCorrectOdds((string) $cEvent->participant[0]->odds->moneyline)
                         && ParseTools::checkCorrectOdds((string) $cEvent->participant[1]->odds->moneyline))
                 {
+
                     $oParsedMatchup = new ParsedMatchup(
                                     (string) $cEvent->participant[0]->participant_name,
                                     (string) $cEvent->participant[1]->participant_name,
