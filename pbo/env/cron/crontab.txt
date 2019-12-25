@@ -1,7 +1,5 @@
-#SHELL=/bin/bash
-#MAILTO=""
-#1-59/3  *       *       *       *       /usr/bin/php -d include_path=/var/www/bfo/shared:/var/www/bfo/pbo -d max_execution_time=300 /var/www/bfo/shared/lib/bfocore/cron/cron.OddsParser.php
-#6       6       *       *       *       /usr/bin/php -d include_path=/var/www/bfo/shared:/var/www/bfo/pbo -d max_execution_time=300 /var/www/bfo/shared/lib/pbospec/cron/cron.RingTVParser.php
+#1-59/3  *       *       *       *       /usr/bin/php -d include_path=/var/www/bfo/shared:/var/www/bfo/pbo -d max_execution_time=300 /var/www/bfo/shared/lib/bfocore/cron/cron.OddsParser.php >> /var/www/bfo/pbo/log/parser.log 2>&1
+#6       6       *       *       *       /usr/bin/php -d include_path=/var/www/bfo/shared:/var/www/bfo/pbo -d max_execution_time=300 /var/www/bfo/shared/lib/pbospec/cron/cron.RingTVParser.php >> /var/www/bfo/pbo/log/scheduleparser.log 2>&1
 #10      0       *       *       *       mv /var/www/bfo/pbo/logs/*.log /var/www/bfo/pbo/logs/archived/ && rm -rf /var/www/bfo/pbo/logs/*.log
 #5       *       *       *       *       bash /var/www/bfo/pbo/db/scripts/backup/dobackup.sh
 #30      0,12    *       *       *       /usr/bin/php -d include_path=/var/www/bfo/shared:/var/www/bfo/pbo -d max_execution_time=300 /var/www/bfo/pbo/db/scripts/cron.CleanDatabasev2.php
