@@ -65,9 +65,9 @@ class XMLParserWilliamHill
 
                         //Add time of matchup as metadata
                         $oGameDate = null;
-                        if ($cType['name'] == 'Potential Fights')
+                        if (substr($cType['name'], 0, strlen('Potential Fights')) == 'Potential Fights')
                         {
-                            $oGameDate = new DateTime('2019-12-31 00:00:00');
+                            $oGameDate = new DateTime('2030-12-31 00:00:00'); //Hardcoded date of FUTURE EVENTS event
                         }
                         else
                         {

@@ -272,7 +272,7 @@ END$$
 DELIMITER ;
 
 
-INSERT INTO bets_boxing.events VALUES (197, '2019-12-31 00:00:00', 'Future Events',1);
+INSERT INTO bets_boxing.events VALUES (197, '2030-12-31 00:00:00', 'Future Events',1);
 
 
 ALTER TABLE lines_props ADD KEY ix1(matchup_id, proptype_id, bookie_id, team_num, date);
