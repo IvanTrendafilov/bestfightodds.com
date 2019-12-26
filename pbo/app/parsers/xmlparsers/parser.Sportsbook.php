@@ -80,12 +80,13 @@ class XMLParserSportsbook
 
         $aFightMatches = ParseTools::matchBlock($sPage, $sFightRegexp);
 
-        $sTimezone = (new DateTime())->setTimezone(new DateTimeZone('America/New_York'))->format('T');
+        //$sTimezone = (new DateTime())->setTimezone(new DateTimeZone('America/New_York'))->format('T');
 
         foreach ($aFightMatches as $aFight)
         {
             //Add time of matchup
-            $oGameDate = new DateTime($aFight[1] . ' ' . $aFight[4] . ' ' . $sTimezone);
+            $oGameDate = new DateTime($aFight[1] . ' ' . $aFight[4]); // . ' ' . $sTimezone); <-- We don't adjust with timezone since this would put event at next day server time (UTC)
+            
 
             $sRetXML .= '<fight><timestamp>' . ((string) $oGameDate->getTimestamp()) . '</timestamp><f1>' . $aFight[2] . '</f1><f2>' .
                     $aFight[5] . '</f2><f1_line>' . $aFight[3] . '</f1_line><f2_line>' .
