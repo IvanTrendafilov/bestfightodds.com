@@ -25,7 +25,7 @@ class XMLParser
      */
     public static function dispatch($a_oParser)
     {
-        if ($klogger == null)
+        if (self::$klogger == null)
         {
             self::$klogger = new Katzgrau\KLogger\Logger(GENERAL_KLOGDIR, Psr\Log\LogLevel::DEBUG, ['filename' => 'xmlparser.log']);
         }
