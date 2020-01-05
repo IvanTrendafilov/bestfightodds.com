@@ -1,7 +1,9 @@
 <?php
 
+require 'vendor/autoload.php';
 require_once('lib/bfocore/parser/general/inc.ParserMain.php');
 require_once('config/inc.config.php');
+
 
 /**
  * Main XML parser
@@ -11,6 +13,7 @@ require_once('config/inc.config.php');
 class XMLParser
 {
     private $aMatchupDates;
+    private $klogger = null;
 
     /**
      * Retrieves the feed from the bookie and launches the bookie specific XML parser. The
@@ -22,6 +25,11 @@ class XMLParser
      */
     public static function dispatch($a_oParser)
     {
+        if ($klogger == null)
+        {
+            self::$klogger = new Katzgrau\KLogger\Logger(GENERAL_KLOGDIR, Psr\Log\LogLevel::DEBUG, ['filename' => 'xmlparser.log']);
+        }
+
         $aAuthorativeMetadata = [];
         $oParseRunLogger = new ParseRunLogger();
 
@@ -333,10 +341,12 @@ class XMLParser
                     $oNewMatchup = new Fight(-1, $oParsedMatchup->getTeamName(1), $oParsedMatchup->getTeamName(2), $iGenericEventID);
                     //TODO: This currently creates duplicate matchups since getFight() caches current matchups in the initial search. The cache needs to be invalidated somehow I guess..
 
+                    self::$klogger->info("Creating new matchup for " . $oParsedMatchup->getTeamName(1) . ' vs ' . $oParsedMatchup->getTeamName(2) . ' in event ID ' . $iGenericEventID . ' gametime reported is ' . $aMeta['gametime']);
                     $oLogger->log('---Had to add a new matchup: ' . $oParsedMatchup->getTeamName(1) . ' vs. ' . $oParsedMatchup->getTeamName(2), 0);
                     $oMatchedMatchup = EventHandler::getFightByID(EventHandler::addNewFight($oNewMatchup));
                     if ($oMatchedMatchup == null)
                     {
+                        self::$klogger->error("New matchup for " . $oParsedMatchup->getTeamName(1) . ' vs ' . $oParsedMatchup->getTeamName(2) . '  was attempted to be created but no matchup was found afterwards. In event ID ' . $iGenericEventID . ' gametime reported is ' . $aMeta['gametime']);
                         $oLogger->log('New matchup was stored but no matchup was found afterwards', -2);
                     }                    
                 }

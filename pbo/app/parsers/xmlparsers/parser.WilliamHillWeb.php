@@ -65,7 +65,7 @@ class XMLParserWilliamHillWeb
                     $oGameDate = null;
                     if ($event->groupId == '2000091527')
                     {
-                        $oGameDate = new DateTime('2019-12-31 00:00:00');
+                        $oGameDate = new DateTime('2030-12-31 00:00:00');
                     }
                     else
                     {
