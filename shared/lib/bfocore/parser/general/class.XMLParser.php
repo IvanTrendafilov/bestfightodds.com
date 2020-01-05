@@ -13,7 +13,7 @@ require_once('config/inc.config.php');
 class XMLParser
 {
     private $aMatchupDates;
-    private $klogger = null;
+    private static $klogger = null;
 
     /**
      * Retrieves the feed from the bookie and launches the bookie specific XML parser. The
