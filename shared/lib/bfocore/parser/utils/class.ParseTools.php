@@ -68,19 +68,17 @@ class ParseTools
         //TODO: Hardcoded stuff. Ugly and should be moved out
         if ($a_sURL == 'http://lines.bookmaker.eu')
         {
+            //TODO: Remove once on lightsail
             curl_setopt($rCurl, CURLOPT_INTERFACE, '89.221.255.123');
         }
         else if ($a_sURL == 'http://lines.betdsi.eu/')
         {
+            //TODO: Remove once on lightsail
             curl_setopt($rCurl, CURLOPT_INTERFACE, '89.221.253.24');
         }
         else if (strpos($a_sURL, 'gamingsystem.') !== false) 
         {
             curl_setopt($rCurl, CURLOPT_SSLVERSION, 6); //TLS 1.2
-        }
-        else if (strpos($a_sURL, 'sportsinteraction.') !== false) 
-        {
-            //curl_setopt($rCurl, CURLOPT_SSL_CIPHER_LIST, 'ecdhe_ecdsa_aes_128_sha,ecdhe_rsa_aes_128_sha');
         }
         else if (substr($a_sURL, 0, strlen('https://api.pinnacle.com')) === 'https://api.pinnacle.com')
         {
@@ -149,10 +147,12 @@ class ParseTools
 
             if ($sURL == 'http://lines.bookmaker.eu')
             {
+                //TODO: Remove once on lightsail
               curl_setopt($aChannels[$sURL], CURLOPT_INTERFACE, '89.221.255.123');
             }
             else if ($sURL == 'http://lines.betdsi.eu/')
             {
+                //TODO: Remove once on lightsail
               curl_setopt($aChannels[$sURL], CURLOPT_INTERFACE, '89.221.253.24');
             }
             else if ($sURL == 'https://api.mmajunkie.com/rumors/rss')
@@ -162,10 +162,6 @@ class ParseTools
             else if (strpos($sURL, 'gamingsystem.') !== false) 
             {
               curl_setopt($aChannels[$sURL], CURLOPT_SSLVERSION, 6); //TLS 1.2
-            }
-            else if (strpos($sURL, 'sportsinteraction.') !== false) 
-            {
-              //curl_setopt($aChannels[$sURL], CURLOPT_SSL_CIPHER_LIST, 'ecdhe_ecdsa_aes_128_sha,ecdhe_rsa_aes_128_sha');
             }
             else if (substr($sURL, 0, strlen('https://api.pinnacle.com')) === 'https://api.pinnacle.com')
             {
