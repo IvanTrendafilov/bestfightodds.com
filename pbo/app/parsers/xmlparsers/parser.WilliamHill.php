@@ -14,8 +14,8 @@
  *
  * Comment: Prod version
  *
- * http://whdn.williamhill.com/pricefeed/openbet_cdn?action=template&template=getHierarchyByMarketType&classId=10&filterBIR=N
- *
+ * http://whdn.williamhill.com/williamhill/oxipubserver?action=template&template=getHierarchyByMarketType&classId=10&filterBIR=N&cn=1579008672
+
  */
 class XMLParserWilliamHill
 {
@@ -40,7 +40,7 @@ class XMLParserWilliamHill
             foreach ($cType->market as $cMarket)
             {
                 $sType = substr(strrchr($cMarket['name'], "-"), 2);
-                if ($sType == 'Bout Betting')
+                if ($sType == 'Bout Betting' && count($cMarket->participant) == 3) //Number of participants needs to be 3 to ensure this is a boxing bout (fighter 1, fighter2, draw)
                 {
                     //Normal matchup
                     //Find draw and ignore it
@@ -53,8 +53,7 @@ class XMLParserWilliamHill
                         }
                     }
 
-                    if (ParseTools::checkCorrectOdds(OddsTools::convertDecimalToMoneyline($aParticipants[0]['oddsDecimal'])) && ParseTools::checkCorrectOdds(OddsTools::convertDecimalToMoneyline($aParticipants[1]['oddsDecimal']))
-                         && $cMarket['id'] != "477146153")
+                    if (ParseTools::checkCorrectOdds(OddsTools::convertDecimalToMoneyline($aParticipants[0]['oddsDecimal'])) && ParseTools::checkCorrectOdds(OddsTools::convertDecimalToMoneyline($aParticipants[1]['oddsDecimal'])))
                     {
                         $oTempMatchup = new ParsedMatchup(
                             $aParticipants[0]['name'],
