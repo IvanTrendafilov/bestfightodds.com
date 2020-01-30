@@ -10,6 +10,8 @@
   display: flex;
   z-index: 2;
   height: 20px;
+  border-top-left-radius: inherit;
+  border-top-right-radius: inherit;
   a {
     font-weight: 500;
     font-size: 15px;
@@ -255,10 +257,8 @@
 }
 
 .table-div {
-  -webkit-box-shadow: 0px 1px 1px 1px rgb(170, 170, 170);
-  -moz-box-shadow: 0px 1px 1px 1px rgb(170, 170, 170);
-  box-shadow: 0px 1px 1px 1px rgb(170, 170, 170);
-  border-radius: 1px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
   position: relative;
 }
 

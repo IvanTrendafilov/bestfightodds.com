@@ -82,14 +82,14 @@ html {
   margin: 0;
   padding: 0;
   text-align: center;
-  background-color: #e9eaed;
+  background-color: #edeff1;
 }
 
 body {
   margin: 0;
   padding: 0;
   text-align: center;
-  background-color: #e9eaed;
+  background-color: #edeff1;
   font-family: 'Roboto', Arial, sans-serif;
   font-size: 11px;
   color: #fff;
@@ -102,11 +102,15 @@ a {
 
 /* BFO Start */
 
+$primarybasecolor: #212427;
+$secondarybasecolor: #393B42;
+$selectedcolor: #212427;
+
 input[type="text"], select {
   background-color: #fff;
   height: 22px;
   font-size: 13px;
-  color: #212427;
+  color: $primarybasecolor;
   border: 1px solid #a9a9a9;
   vertical-align: middle;
   line-height: 22px;
@@ -115,7 +119,7 @@ input[type="text"], select {
 
 input[type="submit"] {
   background-color: #E9EAED;
-  color: #212427;
+  color: $primarybasecolor;
   border: 1px solid #a9a9a9;
   font-size: 13px;
   padding: 3px 6px;
@@ -130,8 +134,7 @@ input[type="submit"] {
 
 .header {
   width: 100%;
-  background-color: #212427;
-  /*background-image: url('/img/header-top.png');*/
+  background-color: $primarybasecolor;
   margin-bottom: 22px;
   min-width: 976px;
 }
@@ -143,12 +146,8 @@ input[type="submit"] {
 }
 
 .header-menu-wrapper {
-  background-color: #393B42;
+  background-color: $secondarybasecolor;
   height: 26px;
-  border-bottom: 2px solid #212427;
-  -webkit-box-shadow: 0 2px 1px -1px rgba(155, 155, 155, 1);
-  -moz-box-shadow: 0 2px 1px -1px rgba(155, 155, 155, 1);
-  box-shadow: 0 2px 1px -1px rgba(155, 155, 155, 1);
   text-align: left;
 }
 
@@ -166,12 +165,12 @@ input[type="submit"] {
   font-weight: 500;
   margin-left: -3px;
   &:hover {
-    background-color: #212427;
+    background-color: $selectedcolor;
   }
 }
 
 .header-menu-selected {
-  background-color: #212427;
+  background-color: $selectedcolor;
 }
 
 #content {
@@ -213,7 +212,7 @@ input[type="submit"] {
   padding-right: 20px;
   margin-top: 22px;
   input {
-    background-color: #393B42;
+    background-color: $secondarybasecolor;
     height: 24px;
     width: 200px;
     font-size: 11px;
@@ -270,9 +269,6 @@ input[type="submit"] {
   margin-right: 2px;
   vertical-align: middle;
   margin-bottom: 1px;
-  -moz-box-shadow: inset 0 0 1px #666;
-  -webkit-box-shadow: inset 0 0 1px #666;
-  box-shadow: inset 0 0 1px #666;
   &.checked {
     color: #000;
   }
@@ -323,9 +319,6 @@ input[type="submit"] {
 }
 
 #page-wrapper {
-  -webkit-box-shadow: 0 1px 1px 1px rgb(170, 170, 170);
-  -moz-box-shadow: 0 1px 1px 1px rgb(170, 170, 170);
-  box-shadow: 0 1px 1px 1px rgb(170, 170, 170);
   margin-left: auto;
   margin-right: auto;
 }
@@ -343,6 +336,8 @@ h1 {
   background-color: #fff;
   color: #202020;
   font-size: 12px;
+  border-radius: 4px;
+  border: 1px solid #ccc;
 }
 
 #page-inner-wrapper {
@@ -470,27 +465,23 @@ ul {
         border-right: none;
       }
       &.hover {
-        background: #212427;
+        background: $selectedcolor;
         position: relative;
-        a {}
       }
     }
     ul {
       visibility: hidden;
       position: absolute;
       right: 0;
-      -webkit-box-shadow: 0 1px 2px 1px rgba(0, 0, 0, 0.4);
-      -moz-box-shadow: 0 1px 2px 1px rgba(0, 0, 0, 0.4);
-      box-shadow: 0 1px 2px 1px rgba(0, 0, 0, 0.4);
       li {
         font-weight: 400;
-        background: #212427;
+        background: $selectedcolor;
         float: none;
         padding-top: 3px;
         padding-bottom: 3px;
         height: 22px;
         &:hover {
-          background-color: #393B42;
+          background-color: $secondarybasecolor;
         }
         a {
           border-right: none;
@@ -591,7 +582,7 @@ ul.share-dropdown ul li a {
   -o-transform-origin: right center;
   transform-origin: right center;
   height: 32px;
-  border-left: solid 2px #393B42;
+  border-left: solid 2px $secondarybasecolor;
   &.show {
     width: 135px;
     -webkit-transform: scale(1, 1);
@@ -626,9 +617,9 @@ ul.share-dropdown ul li a {
 }
 
 .popup-window {
-  -webkit-box-shadow: 0 2px 3px 1px rgba(0, 0, 0, 0.4);
-  -moz-box-shadow: 0 2px 3px 1px rgba(0, 0, 0, 0.4);
-  box-shadow: 0 2px 3px 1px rgba(0, 0, 0, 0.4);
+  -webkit-box-shadow: 0 2px 4px 0px rgba(0, 0, 0, 0.4);
+  -moz-box-shadow: 0 2px 4px 0px rgba(0, 0, 0, 0.4);
+  box-shadow: 0 2px 4px 0px rgba(0, 0, 0, 0.4);
   background-color: #fff;
   opacity: 0;
   visibility: hidden;
@@ -644,6 +635,7 @@ ul.share-dropdown ul li a {
   transition-property: opacity, scale, transform;
   transform-origin: top left;
   -webkit-transform-origin: top left;
+  border-radius: 4px;
 }
 
 .no-transition {
@@ -655,7 +647,7 @@ ul.share-dropdown ul li a {
 }
 
 .popup-header {
-  background-color: #393B42;
+  background-color: $secondarybasecolor;
   font-size: 12px;
   font-weight: 500;
   padding-left: 10px;
@@ -667,6 +659,8 @@ ul.share-dropdown ul li a {
   text-overflow: ellipsis;
   white-space: nowrap;
   overflow: hidden;
+  border-top-left-radius: inherit;
+  border-top-right-radius: inherit;
   a:hover {
     color: #d9d9d9;
   }
@@ -742,7 +736,7 @@ ul.share-dropdown ul li a {
   #alert-mail {
     width: 150px;
   }
-  #alert-bookies {}
+
   #alert-button-container {
     text-align: right;
     margin-top: 8px;
@@ -820,7 +814,7 @@ ul.share-dropdown ul li a {
 /* New content lists */
 
 .content-header {
-  background-color: #393B42;
+  background-color: $secondarybasecolor;
   padding: 6px;
   padding-left: 10px;
   font-weight: 500;
@@ -870,7 +864,6 @@ ul.share-dropdown ul li a {
   padding-top: 0 !important;
   padding-right: 10px !important;
   text-align: right;
-  input {}
 }
 
 /*Team page*/
@@ -1063,19 +1056,17 @@ table.team-stats-table {
 }
 
 #event-swing-area {
-  -webkit-box-shadow: 0 1px 1px 1px rgb(170, 170, 170);
-  -moz-box-shadow: 0 1px 1px 1px rgb(170, 170, 170);
-  box-shadow: 0 1px 1px 1px rgb(170, 170, 170);
+  border-radius: 4px;
+  border: 1px solid #ccc;
   width: 424px;
   vertical-align: top;
   display: inline-block;
-  margin-right: 22px;
+  margin-right: 20px;
 }
 
 #event-outcome-area {
-  -webkit-box-shadow: 0 1px 1px 1px rgb(170, 170, 170);
-  -moz-box-shadow: 0 1px 1px 1px rgb(170, 170, 170);
-  box-shadow: 0 1px 1px 1px rgb(170, 170, 170);
+  border-radius: 4px;
+  border: 1px solid #ccc;
   width: 500px;
   vertical-align: top;
   display: inline-block;
