@@ -338,6 +338,7 @@ h1 {
   font-size: 12px;
   border-radius: 4px;
   border: 1px solid #ccc;
+  overflow: hidden;
 }
 
 #page-inner-wrapper {
@@ -636,6 +637,7 @@ ul.share-dropdown ul li a {
   transform-origin: top left;
   -webkit-transform-origin: top left;
   border-radius: 4px;
+  overflow: hidden;
 }
 
 .no-transition {
@@ -659,8 +661,6 @@ ul.share-dropdown ul li a {
   text-overflow: ellipsis;
   white-space: nowrap;
   overflow: hidden;
-  border-top-left-radius: inherit;
-  border-top-right-radius: inherit;
   a:hover {
     color: #d9d9d9;
   }
@@ -1056,12 +1056,10 @@ table.team-stats-table {
 }
 
 #event-swing-area {
-  border-radius: 4px;
-  border: 1px solid #ccc;
   width: 424px;
   vertical-align: top;
   display: inline-block;
-  margin-right: 20px;
+  margin-right: 18px;
 }
 
 #event-outcome-area {
@@ -1070,6 +1068,7 @@ table.team-stats-table {
   width: 500px;
   vertical-align: top;
   display: inline-block;
+  overflow: hidden;
 }
 
 

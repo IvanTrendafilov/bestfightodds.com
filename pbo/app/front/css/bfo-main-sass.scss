@@ -343,6 +343,7 @@ h1 {
   font-size: 12px;
   border-radius: 4px;
   border: 1px solid #ccc;
+  overflow: hidden;
 }
 
 #page-inner-wrapper {
@@ -642,6 +643,7 @@ ul.share-dropdown ul li a {
   transform-origin: top left;
   -webkit-transform-origin: top left;
   border-radius: 4px;
+  overflow: hidden;
 }
 
 .no-transition {
@@ -665,8 +667,6 @@ ul.share-dropdown ul li a {
   text-overflow: ellipsis;
   white-space: nowrap;
   overflow: hidden;
-  border-top-left-radius: inherit;
-  border-top-right-radius: inherit;
   color: #fff;
   a {
     color: #fff;
