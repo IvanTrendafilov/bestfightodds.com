@@ -152,7 +152,17 @@ Good luck!\n
         }
         $sTo = $a_oAlert->getEmail();
         $sHeaders = 'From: ' . ALERTER_MAIL_FROM;
+        $sTextHTML = $sText; //Fallback to plaintext if file cannot be read below
 
+        //Read in mail template from ALERTER_TEMPLATES_DIR/alertmail.html
+        $rFile = fopen(ALERTER_TEMPLATES_DIR . '/alertmail.html', 'r');
+        $sTextHTML = fread($rFile, filesize(ALERTER_TEMPLATES_DIR . '/alertmail.html'));
+        fclose($rFile);
+
+        $sTextHTML = str_replace('{{MESSAGE}}', str_replace('\n','<br>', $sText), $sTextHTML);
+        $sTextHTML = str_replace('{{SITENAME}}', ALERTER_SITE_NAME, $sTextHTML);
+        $sTextHTML = str_replace('{{SUBJECT}}', $sSubject, $sTextHTML);
+        $sTextHTML = str_replace('{{SITEURL}}', ALERTER_SITE_LINK, $sTextHTML);
 
         $bSuccess = false;
         if (ALERTER_DEV_MODE == true)
@@ -166,7 +176,7 @@ Good luck!\n
         {
             //Send e-mail alert
             $mailer = new SESMailer(MAIL_SMTP_HOST, MAIL_SMTP_PORT, MAIL_SMTP_USERNAME, MAIL_SMTP_PASSWORD);
-            $bSuccess = $mailer->sendMail(ALERTER_MAIL_SENDER_MAIL, ALERTER_MAIL_FROM, 'cnordvaller@gmail.com', $sSubject, $sText, $sText);       
+            $bSuccess = $mailer->sendMail(ALERTER_MAIL_SENDER_MAIL, ALERTER_MAIL_FROM, 'cnordvaller@gmail.com', $sSubject, $sTextHTML, $sText);       
             //$bSuccess = mail($sTo, $sSubject, $sText, $sHeaders);
 
         }

@@ -29,6 +29,7 @@ define('ALERTER_MAIL_FROM', 'Best Fight Odds <no-reply@bestfightodds.com>');
 define('ALERTER_MAIL_SENDER_MAIL', 'no-reply@bestfightodds.com');
 define('ALERTER_SITE_LINK', 'https://www.bestfightodds.com');
 define('ALERTER_SITE_NAME', 'Best Fight Odds');
+define('ALERTER_TEMPLATE_DIR', GENERAL_BASEDIR . '/../shared/templates/');
 
 /* Cache */
 define('IMAGE_CACHE_DIR', GENERAL_BASEDIR . '/app/front/img/cache/');  //Image Cache Directory
