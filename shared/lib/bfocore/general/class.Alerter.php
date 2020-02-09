@@ -154,9 +154,9 @@ Good luck!\n
         $sHeaders = 'From: ' . ALERTER_MAIL_FROM;
         $sTextHTML = $sText; //Fallback to plaintext if file cannot be read below
 
-        //Read in mail template from ALERTER_TEMPLATES_DIR/alertmail.html
-        $rFile = fopen(ALERTER_TEMPLATES_DIR . '/alertmail.html', 'r');
-        $sTextHTML = fread($rFile, filesize(ALERTER_TEMPLATES_DIR . '/alertmail.html'));
+        //Read in mail template from ALERTER_TEMPLATE_DIR/alertmail.html
+        $rFile = fopen(ALERTER_TEMPLATE_DIR . '/alertmail.html', 'r');
+        $sTextHTML = fread($rFile, filesize(ALERTER_TEMPLATE_DIR . '/alertmail.html'));
         fclose($rFile);
 
         $sTextHTML = str_replace('{{MESSAGE}}', str_replace('\n','<br>', $sText), $sTextHTML);
