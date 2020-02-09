@@ -141,7 +141,7 @@ You are receiving this e-mail because you have signed up to be notified when odd
 Good luck!\n
 " . ALERTER_SITE_NAME;
 
-            $sMessageHTML = "Odds for " . $oFight->getFighterAsString(1) . " (" . $sTeamOdds[1] . ") vs " . $oFight->getFighterAsString(2) . " (" . $sTeamOdds[2] . ") has just been posted at " . ALERTER_SITE_NAME . "<br>";
+            $sMessageHTML = "<b>Alert - New odds added:</b><br><br>" . $oFight->getFighterAsString(1) . " <b>" . $sTeamOdds[1] . "</b><br>" . $oFight->getFighterAsString(2) . " <b>" . $sTeamOdds[2] . "</b><br>";
             $sSubject = 'Odds for ' . $oFight->getFighterAsString(1) . ' vs ' . $oFight->getFighterAsString(2) . ' available';
         } else
         {
