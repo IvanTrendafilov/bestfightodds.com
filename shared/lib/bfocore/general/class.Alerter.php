@@ -140,6 +140,8 @@ Check out " . ALERTER_SITE_LINK . " to view the latest listings.\n
 You are receiving this e-mail because you have signed up to be notified when odds were added for a certain matchup. If you did not sign up for this you don't have to do anything as your e-mail will not be stored for future use.\n
 Good luck!\n
 " . ALERTER_SITE_NAME;
+
+            $sMessageHTML = "<b>Alert - New odds added:</b><br><br>" . $oFight->getFighterAsString(1) . " <b>" . $sTeamOdds[1] . "</b><br>" . $oFight->getFighterAsString(2) . " <b>" . $sTeamOdds[2] . "</b><br>";
             $sSubject = 'Odds for ' . $oFight->getFighterAsString(1) . ' vs ' . $oFight->getFighterAsString(2) . ' available';
         } else
         {
@@ -148,11 +150,24 @@ Check out " . ALERTER_SITE_LINK . " to view the latest listings.\n
 You are receiving this e-mail because you have signed up to be notified when the odds changed for a certain matchup. If you did not sign up for this you don't have to do anything as your e-mail will not be stored for future use.\n
 Good luck!\n
 " . ALERTER_SITE_NAME;
+
+
+            $sMessageHTML = "The odds for " . $oFight->getFighterAsString($a_oAlert->getFighter()) . " has reached " . $sTeamOdds[$a_oAlert->getFighter()] . " in his/her upcoming fight against " . $oFight->getFighterAsString(($a_oAlert->getFighter() == 1 ? 2 : 1)) . "<br>";
             $sSubject = 'Odds for ' . $oFight->getFighterAsString($a_oAlert->getFighter()) . ' has reached your limit';
         }
         $sTo = $a_oAlert->getEmail();
         $sHeaders = 'From: ' . ALERTER_MAIL_FROM;
+        $sTextHTML = $sText; //Fallback to plaintext if file cannot be read below
 
+        //Read in mail template from ALERTER_TEMPLATE_DIR/alertmail.html
+        $rFile = fopen(ALERTER_TEMPLATE_DIR . '/alertmail.html', 'r');
+        $sTextHTML = fread($rFile, filesize(ALERTER_TEMPLATE_DIR . '/alertmail.html'));
+        fclose($rFile);
+
+        $sTextHTML = str_replace('{{MESSAGE}}', $sMessageHTML, $sTextHTML);
+        $sTextHTML = str_replace('{{SITENAME}}', ALERTER_SITE_NAME, $sTextHTML);
+        $sTextHTML = str_replace('{{SUBJECT}}', $sSubject, $sTextHTML);
+        $sTextHTML = str_replace('{{SITEURL}}', ALERTER_SITE_LINK, $sTextHTML);
 
         $bSuccess = false;
         if (ALERTER_DEV_MODE == true)
@@ -166,7 +181,7 @@ Good luck!\n
         {
             //Send e-mail alert
             $mailer = new SESMailer(MAIL_SMTP_HOST, MAIL_SMTP_PORT, MAIL_SMTP_USERNAME, MAIL_SMTP_PASSWORD);
-            $bSuccess = $mailer->sendMail(ALERTER_MAIL_SENDER_MAIL, ALERTER_MAIL_FROM, 'cnordvaller@gmail.com', $sSubject, $sText, $sText);       
+            $bSuccess = $mailer->sendMail(ALERTER_MAIL_SENDER_MAIL, ALERTER_MAIL_FROM, 'cnordvaller@gmail.com', $sSubject, $sTextHTML, $sText);       
             //$bSuccess = mail($sTo, $sSubject, $sText, $sHeaders);
 
         }
