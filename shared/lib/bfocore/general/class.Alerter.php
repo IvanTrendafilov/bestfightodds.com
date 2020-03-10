@@ -141,7 +141,7 @@ You are receiving this e-mail because you have signed up to be notified when odd
 Good luck!\n
 " . ALERTER_SITE_NAME;
 
-            $sMessageHTML = "<b>Alert - New odds added:</b><br><br>" . $oFight->getFighterAsString(1) . " <b>" . $sTeamOdds[1] . "</b><br>" . $oFight->getFighterAsString(2) . " <b>" . $sTeamOdds[2] . "</b><br>";
+            $sMessageHTML = "<b>Alert: New odds added</b><br><br>" . $oFight->getFighterAsString(1) . " <b>" . $sTeamOdds[1] . "</b><br>" . $oFight->getFighterAsString(2) . " <b>" . $sTeamOdds[2] . "</b><br>";
             $sSubject = 'Odds for ' . $oFight->getFighterAsString(1) . ' vs ' . $oFight->getFighterAsString(2) . ' available';
         } else
         {
@@ -152,7 +152,7 @@ Good luck!\n
 " . ALERTER_SITE_NAME;
 
 
-            $sMessageHTML = "The odds for " . $oFight->getFighterAsString($a_oAlert->getFighter()) . " has reached " . $sTeamOdds[$a_oAlert->getFighter()] . " in his/her upcoming fight against " . $oFight->getFighterAsString(($a_oAlert->getFighter() == 1 ? 2 : 1)) . "<br>";
+            $sMessageHTML = "<b>Alert: Odds changed</b><br><br>The odds for " . $oFight->getFighterAsString($a_oAlert->getFighter()) . " has reached " . $sTeamOdds[$a_oAlert->getFighter()] . " in his/her upcoming fight against " . $oFight->getFighterAsString(($a_oAlert->getFighter() == 1 ? 2 : 1)) . "<br>";
             $sSubject = 'Odds for ' . $oFight->getFighterAsString($a_oAlert->getFighter()) . ' has reached your limit';
         }
         $sTo = $a_oAlert->getEmail();

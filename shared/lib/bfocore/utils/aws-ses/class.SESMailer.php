@@ -34,10 +34,10 @@ class SESMailer
             $this->mailer->addAddress($recipient_mail);
 
             // Specify the content of the message.
-            $this->mailer->isHTML(true);
+            $this->mailer->isHTML(false); //TODO: HTML disable for now
             $this->mailer->Subject    = $subject;
-            $this->mailer->Body       = $body_html;
-            $this->mailer->AltBody    = $body_text;
+            $this->mailer->Body       = $body_text; //TODO: HTML disable for now
+            //$this->mailer->AltBody    = $body_text;
             $this->mailer->Send();
             $this->logger->info('Mail sent to ' . $recipient_mail . ': ' . $subject);
             return true;
