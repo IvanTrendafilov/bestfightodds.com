@@ -82,14 +82,14 @@ html {
   margin: 0;
   padding: 0;
   text-align: center;
-  background-color: #edeff1;
+  background-color: #e9eaed;
 }
 
 body {
   margin: 0;
   padding: 0;
   text-align: center;
-  background-color: #edeff1;
+  background-color: #e9eaed;
   font-family: 'Roboto', Arial, sans-serif;
   font-size: 11px;
   color: #fff;
@@ -148,6 +148,10 @@ input[type="submit"] {
 .header-menu-wrapper {
   background-color: $secondarybasecolor;
   height: 26px;
+  border-bottom: 2px solid #212427;
+  -webkit-box-shadow: 0 2px 1px -1px rgba(155, 155, 155, 1);
+  -moz-box-shadow: 0 2px 1px -1px rgba(155, 155, 155, 1);
+  box-shadow: 0 2px 1px -1px rgba(155, 155, 155, 1);
   text-align: left;
 }
 
@@ -269,6 +273,9 @@ input[type="submit"] {
   margin-right: 2px;
   vertical-align: middle;
   margin-bottom: 1px;
+  -moz-box-shadow: inset 0 0 1px #666;
+  -webkit-box-shadow: inset 0 0 1px #666;
+  box-shadow: inset 0 0 1px #666;
   &.checked {
     color: #000;
   }
@@ -319,6 +326,9 @@ input[type="submit"] {
 }
 
 #page-wrapper {
+  -webkit-box-shadow: 0 1px 1px 1px rgb(170, 170, 170);
+  -moz-box-shadow: 0 1px 1px 1px rgb(170, 170, 170);
+  box-shadow: 0 1px 1px 1px rgb(170, 170, 170);
   margin-left: auto;
   margin-right: auto;
 }
@@ -336,17 +346,6 @@ h1 {
   background-color: #fff;
   color: #202020;
   font-size: 12px;
-}
-
-#page-container::before {
-  content: '';
-  border: 1px solid #ccc;
-  border-radius: 4px;
-  position: absolute;
-  bottom: -1px;
-  top: -1px;
-  left: -1px;
-  right: -1px;
 }
 
 #page-inner-wrapper {
@@ -482,6 +481,9 @@ ul {
       visibility: hidden;
       position: absolute;
       right: 0;
+      -webkit-box-shadow: 0 1px 2px 1px rgba(0, 0, 0, 0.4);
+      -moz-box-shadow: 0 1px 2px 1px rgba(0, 0, 0, 0.4);
+      box-shadow: 0 1px 2px 1px rgba(0, 0, 0, 0.4);
       li {
         font-weight: 400;
         background: $selectedcolor;
@@ -626,9 +628,9 @@ ul.share-dropdown ul li a {
 }
 
 .popup-window {
-  -webkit-box-shadow: 0 2px 4px 0px rgba(0, 0, 0, 0.4);
-  -moz-box-shadow: 0 2px 4px 0px rgba(0, 0, 0, 0.4);
-  box-shadow: 0 2px 4px 0px rgba(0, 0, 0, 0.4);
+  -webkit-box-shadow: 0 2px 3px 1px rgba(0, 0, 0, 0.4);
+  -moz-box-shadow: 0 2px 3px 1px rgba(0, 0, 0, 0.4);
+  box-shadow: 0 2px 3px 1px rgba(0, 0, 0, 0.4);
   background-color: #fff;
   opacity: 0;
   visibility: hidden;
@@ -644,8 +646,6 @@ ul.share-dropdown ul li a {
   transition-property: opacity, scale, transform;
   transform-origin: top left;
   -webkit-transform-origin: top left;
-  border-radius: 4px;
-  overflow: hidden;
 }
 
 .no-transition {
@@ -1064,13 +1064,19 @@ table.team-stats-table {
 }
 
 #event-swing-area {
+  -webkit-box-shadow: 0 1px 1px 1px rgb(170, 170, 170);
+  -moz-box-shadow: 0 1px 1px 1px rgb(170, 170, 170);
+  box-shadow: 0 1px 1px 1px rgb(170, 170, 170);
   width: 424px;
   vertical-align: top;
   display: inline-block;
-  margin-right: 18px;
+  margin-right: 22px;
 }
 
 #event-outcome-area {
+  -webkit-box-shadow: 0 1px 1px 1px rgb(170, 170, 170);
+  -moz-box-shadow: 0 1px 1px 1px rgb(170, 170, 170);
+  box-shadow: 0 1px 1px 1px rgb(170, 170, 170);
   width: 500px;
   vertical-align: top;
   display: inline-block;
