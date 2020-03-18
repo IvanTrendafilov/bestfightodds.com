@@ -36,7 +36,7 @@
   border-collapse: collapse;
   thead {
     tr {
-      background-color: #dadcde;
+      background-color: #eaecee;
     }
     th {
       text-align: center;
@@ -44,13 +44,14 @@
       &.table-prop-header {
         text-align: right;
         padding-right: 5px;
-        color: #505050;
+        color: #707070;
         font-size: 10px;
         font-weight: 500;
       }
       a {
-        color: #505050;
+        color: #707070;
         font-size: 10px;
+        font-weight: 500;
         &:hover {
           color: #999;
         }
