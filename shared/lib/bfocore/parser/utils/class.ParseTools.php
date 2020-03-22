@@ -66,17 +66,7 @@ class ParseTools
         ));
 
         //TODO: Hardcoded stuff. Ugly and should be moved out
-        if ($a_sURL == 'http://lines.bookmaker.eu')
-        {
-            //TODO: Remove once on lightsail
-            curl_setopt($rCurl, CURLOPT_INTERFACE, '89.221.255.123');
-        }
-        else if ($a_sURL == 'http://lines.betdsi.eu/')
-        {
-            //TODO: Remove once on lightsail
-            curl_setopt($rCurl, CURLOPT_INTERFACE, '89.221.253.24');
-        }
-        else if (strpos($a_sURL, 'gamingsystem.') !== false) 
+        if (strpos($a_sURL, 'gamingsystem.') !== false) 
         {
             curl_setopt($rCurl, CURLOPT_SSLVERSION, 6); //TLS 1.2
         }
@@ -145,19 +135,9 @@ class ParseTools
                 CURLOPT_FOLLOWLOCATION => true
             ));            
 
-            if ($sURL == 'http://lines.bookmaker.eu')
+            if ($sURL == 'https://api.mmajunkie.com/rumors/rss')
             {
-                //TODO: Remove once on lightsail
-              curl_setopt($aChannels[$sURL], CURLOPT_INTERFACE, '89.221.255.123');
-            }
-            else if ($sURL == 'http://lines.betdsi.eu/')
-            {
-                //TODO: Remove once on lightsail
-              curl_setopt($aChannels[$sURL], CURLOPT_INTERFACE, '89.221.253.24');
-            }
-            else if ($sURL == 'https://api.mmajunkie.com/rumors/rss')
-            {
-                curl_setopt($rCurl, CURLOPT_INTERFACE, '89.221.253.24');
+                //curl_setopt($rCurl, CURLOPT_INTERFACE, '89.221.253.24'); If IP blocked
             }
             else if (strpos($sURL, 'gamingsystem.') !== false) 
             {
