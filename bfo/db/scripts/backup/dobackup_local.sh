@@ -1,6 +1,6 @@
 #!/bin/bash
 
-backupdir="/var/www/vhosts/bestfightodds.com/httpdocs/db/scripts/backup/"
+backupdir="/var/www/bfo/bfo/db/scripts/backup/"
 backupfilename="bfo2_backup_$(date '+%Y%m%d%H%M%S')"
 
 echo 'Starting backup'
