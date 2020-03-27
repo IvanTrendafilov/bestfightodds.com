@@ -60,7 +60,7 @@ foreach ($aEvents as $oEvent)
 				<td class="arbitrage">' . $sArbInfo . '</td>
 				<td class="imageLink"><a href="https://www.bestfightodds.com/fights/' . $oFight->getID() . '.png">o</a></td>
 				<td><a href="logic/logic.php?action=removeFight&fightID=' . $oFight->getID() . '&returnPage=eventsOverview" onclick="javascript:return confirm(\'Really remove ' . $oFight->getFighterAsString(1) . ' vs ' . $oFight->getFighterAsString(2) . '?\')" /><b>x</b></a></td>
-				<td class="mainEvent"><a href="logic/logic.php?action=setFightAsMainEvent&fightID=' . $oFight->getID() . '&isMain=' . ($oFight->isMainEvent() ? '0' : '1') . '&returnPage=eventsOverview" onclick="javascript:return confirm(\'Really ' . ($oFight->isMainEvent() ? 'unset' : 'set') . ' ' . $oFight->getFighterAsString(1) . ' vs ' . $oFight->getFighterAsString(2) . ' as main event?\')" />' . ($oFight->isMainEvent() ? 'v' : '^') . '</a></td>
+				<td class="mainEvent"><a href="logic/logic.php?action=setFightAsMainEvent&fightID=' . $oFight->getID() . '&isMain=' . ($oFight->isMainEvent() ? '0' : '1') . '&returnPage=eventsOverview" />' . ($oFight->isMainEvent() ? 'v' : '^') . '</a></td>
 			</tr>';
 	}
 }

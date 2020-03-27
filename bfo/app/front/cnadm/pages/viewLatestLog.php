@@ -42,12 +42,21 @@ else
             }
         }
         sort($aFiles);
-        include_once(PARSE_LOGDIR . '/' . $aFiles[sizeof($aFiles) - 1]);
-        
+        //include_once(PARSE_LOGDIR . '/' . $aFiles[sizeof($aFiles) - 1]);
+        $rFile = fopen(PARSE_LOGDIR . '/' . $aFiles[sizeof($aFiles) - 1], 'r');
+        $sText = fread($rFile, filesize(PARSE_LOGDIR . '/' . $aFiles[sizeof($aFiles) - 1]));
+        fclose($rFile);
+        $sText = preg_replace('/((www|http:\/\/)[^ ]+)/', '<a href="\1">\1</a>', $sText);
+        echo $sText;
     }
     else
     {
-        include_once(PARSE_LOGDIR . '/' . $_GET['log']);
+        //include_once(PARSE_LOGDIR . '/' . $_GET['log']);
+        $rFile = fopen(PARSE_LOGDIR . '/' . $_GET['log'], 'r');
+        $sText = fread($rFile, filesize(PARSE_LOGDIR . '/' . $_GET['log']));
+        fclose($rFile);
+        $sText = preg_replace('/((www|http:\/\/)[^ ]+)/', '<a href="\1">\1</a>', $sText);
+        echo $sText;
     }
 		
 	echo '</div></pre>';
