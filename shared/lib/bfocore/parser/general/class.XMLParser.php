@@ -76,7 +76,7 @@ class XMLParser
 
         if ($sXML == 'FAILED')
         {
-            $oLogger->log("Error: Failed to open URL (" . $a_oParser->getParseURL() . ")", -2);
+            $oLogger->log("Error: Failed to open URL (<a href=\"" . $a_oParser->getParseURL() . "\">" . $a_oParser->getParseURL() . "</a>)", -2);
             $oLogger->log("===== " . $a_oParser->getName() . " finished in " . round(microtime(true) - $fStartTime, 3) . " =====", 0);
             $oLogger->seperate();
 
@@ -104,7 +104,7 @@ class XMLParser
                 fclose($rStoreFile); 
             }
 
-            $oLogger->log("URL (" . $a_oParser->getParseURL() . ") fetched OK in " . round(microtime(true) - $fStartTime, 3), 0);
+            $oLogger->log("URL (<a href\"" . $a_oParser->getParseURL() . "\">" . $a_oParser->getParseURL() . "</a>) fetched OK in " . round(microtime(true) - $fStartTime, 3), 0);
 
             require_once('app/parsers/xmlparsers/parser.' . $a_oParser->getName() . '.php');
             $sClassName = 'XMLParser' . $a_oParser->getName();

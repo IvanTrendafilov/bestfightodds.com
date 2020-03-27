@@ -60,7 +60,7 @@ if (PARSE_MOCKFEEDS_ON == false)
             }
             $aURLs[] = $sURL;
             
-            $oLogger->log("Preparing prefetch of " . end($aURLs), 0);        
+            $oLogger->log("Preparing prefetch of <a href=\"" . end($aURLs) . "\" target=\"_blank\">" . end($aURLs) . "</a>", 0);        
         }
     }
     ParseTools::retrieveMultiplePagesFromURLs($aURLs);
