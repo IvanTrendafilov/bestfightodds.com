@@ -40,6 +40,8 @@ class XMLParserPinnacleScrapeJSON
                     $event['Participants'][1]['Name'] = str_replace('(AnyLocation=Action)', '', $event['Participants'][1]['Name']);
                     $event['Participants'][0]['Name'] = str_replace('(Any Location=Action)', '', $event['Participants'][0]['Name']);
                     $event['Participants'][1]['Name'] = str_replace('(Any Location=Action)', '', $event['Participants'][1]['Name']);
+                    $event['Participants'][0]['Name'] = str_replace('(AnyLocation=Action', '', $event['Participants'][0]['Name']);
+                    $event['Participants'][1]['Name'] = str_replace('(AnyLocation=Action', '', $event['Participants'][1]['Name']);
 
 
                     $oParsedMatchup = new ParsedMatchup(
