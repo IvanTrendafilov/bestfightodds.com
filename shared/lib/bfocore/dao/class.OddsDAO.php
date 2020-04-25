@@ -184,7 +184,7 @@ class OddsDAO
                     WHERE lp.proptype_id = pt.id
                         AND  lp.matchup_id = ?
                         GROUP BY lp.matchup_id, lp.team_num, pt.id
-                    ORDER BY LEFT(pt.prop_desc,4) = "Over" DESC, id ASC';
+                    ORDER BY LEFT(pt.prop_desc,4) = "Over" DESC, id ASC, team_num ASC';
 
         $aParams = array($a_iMatchupID);
 
