@@ -181,7 +181,7 @@ Good luck!\n
         {
             //Send e-mail alert
             $mailer = new SESMailer(MAIL_SMTP_HOST, MAIL_SMTP_PORT, MAIL_SMTP_USERNAME, MAIL_SMTP_PASSWORD);
-            $bSuccess = $mailer->sendMail(ALERTER_MAIL_SENDER_MAIL, ALERTER_MAIL_FROM, 'cnordvaller@gmail.com', $sSubject, $sTextHTML, $sText);       
+            $bSuccess = $mailer->sendMail(ALERTER_MAIL_SENDER_MAIL, ALERTER_MAIL_FROM, $sTo, $sSubject, $sTextHTML, $sText);       
             //$bSuccess = mail($sTo, $sSubject, $sText, $sHeaders);
 
         }

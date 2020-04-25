@@ -82,7 +82,7 @@ html {
   margin: 0;
   padding: 0;
   text-align: center;
-  background-color: #e9eaed;
+  background-color: #F1F3F7;
 }
 
 body {
@@ -118,7 +118,7 @@ input[type="text"], select {
 }
 
 input[type="submit"] {
-  background-color: #E9EAED;
+  background-color: #F1F3F7;
   color: $primarybasecolor;
   border: 1px solid #a9a9a9;
   font-size: 13px;
@@ -840,7 +840,7 @@ ul.share-dropdown ul li a {
   tr {
     border-bottom: 1px dotted #989898;
     &:hover {
-      background-color: #e9eaed;
+      background-color: #F1F3F7;
     }
     td {
       padding: 3px 10px;
@@ -927,7 +927,7 @@ table.team-stats-table {
         padding-bottom: 2px;
       }
       &:hover {
-        background-color: #e9eaed;
+        background-color: #F1F3F7;
       }
     }
     th {
