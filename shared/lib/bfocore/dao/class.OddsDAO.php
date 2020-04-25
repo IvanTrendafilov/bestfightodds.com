@@ -45,7 +45,7 @@ class OddsDAO
                     FROM lines_props lp, prop_types pt
                     WHERE lp.matchup_id = ?
                         AND lp.proptype_id = pt.id
-                        ORDER BY pt.prop_desc ASC';
+                        ORDER BY pt.prop_desc ASC, lp.team_num ASC';
         $aParams = array($a_iMatchupID);
         $rResult = DBTools::doParamQuery($sQuery, $aParams);
 
@@ -184,7 +184,7 @@ class OddsDAO
                     WHERE lp.proptype_id = pt.id
                         AND  lp.matchup_id = ?
                         GROUP BY lp.matchup_id, lp.team_num, pt.id
-                    ORDER BY LEFT(pt.prop_desc,4) = "Over" DESC, id ASC, team_num ASC';
+                    ORDER BY LEFT(pt.prop_desc,4) = "Over" DESC, id ASC, lp.team_num ASC';
 
         $aParams = array($a_iMatchupID);
 
