@@ -43,8 +43,8 @@ echo '<option value="7">first letter lastname vs first letter lastname (e.g. j k
 echo '<option value="8">first letter lastname (e.g. j koscheck)</option>';
 echo '</select><br /><br />
 
-Template:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <input type="text" id="templateField" name="template" size="70" value="' . (isset($_GET['inTemplate']) ? $_GET['inTemplate'] : '') . '" /> <a href="#" onclick="switchFields(\'templateField\',\'templateNegField\')">Switch</a><br />
-Neg Template: <input type="text" id="templateNegField" name="negTemplate"  size="70" value="' . (isset($_GET['inNegTemplate']) ? $_GET['inNegTemplate'] : '') . '"/><br /><br />';
+Template:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <input type="text" id="templateField" name="template" size="140" value="' . (isset($_GET['inTemplate']) ? $_GET['inTemplate'] : '') . '" /> <a href="#" onclick="switchFields(\'templateField\',\'templateNegField\')">Switch</a><br />
+Neg Template: <input type="text" id="templateNegField" name="negTemplate"  size="140" value="' . (isset($_GET['inNegTemplate']) ? $_GET['inNegTemplate'] : '') . '"/><br /><br />';
 
 echo '<input type="submit" value="Add template" onclick="javascript:return confirm(\'Are you sure?\')"/>';
 echo '</form><br />';
