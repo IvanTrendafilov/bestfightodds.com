@@ -21,7 +21,7 @@ sudo apt install -y apache2-utils
 sudo apt install -y php7.2
 
 # Install PHP extensions (Mysqli, GD, Mysql, Curl, XML, mbstring)
-sudo apt install -y php7.2-mysqli php-gd php7.2-mysql php-curl php7.2-xml php-mbstring
+sudo apt install -y php7.2-fpm php7.2-mysqli php-gd php7.2-mysql php-curl php7.2-xml php-mbstring
 
 # Install Composer PHP
 curl -sS https://getcomposer.org/installer -o ~/composer-setup.php
