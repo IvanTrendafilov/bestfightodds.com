@@ -8,7 +8,6 @@ echo '
 
 <form method="post" action="logic/logic.php?action=clearOddsForMatchupAndBookie">';
 
-<?php 
 $aEvents = EventHandler::getAllUpcomingEvents();
 echo 'Matchup: <select name="matchupID">';
 foreach($aEvents as $oEvent)
