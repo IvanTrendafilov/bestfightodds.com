@@ -8,7 +8,7 @@ $query = 'SELECT bookie_id, MAX(date), AVG(matched_matchups) as average_matched 
 
 $rows = PDOTools::findMany($query);
 
-	echo '<b>Average matched in the last 24 hours:</b>: <br /><div style="font-size: 12px; display: inline"><tr>';
+	echo '<table><b>Average matched in the last 24 hours:</b>: <br /><div style="font-size: 12px; display: inline"><tr>';
 	$count = 0;
 	foreach ($rows as $row)
 	{
@@ -20,7 +20,7 @@ $rows = PDOTools::findMany($query);
 			$count = 0;
 		}
 	}
-	echo '</tr></div>';
+	echo '</tr></div></table>';
 
 
 ?>
