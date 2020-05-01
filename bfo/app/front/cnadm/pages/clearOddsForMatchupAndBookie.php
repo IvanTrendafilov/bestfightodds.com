@@ -25,8 +25,8 @@ foreach($bookies as $bookie)
 {
 	echo '<option value="' . $bookie->getID() . '">' . $bookie->getName() . '</option>';
 }
-echo '</select><br /><br />';
-<input type="submit" value="Add">
+echo '</select><br /><br />
+<input type="submit" value="Remove">
 </form>';
 
 ?>
