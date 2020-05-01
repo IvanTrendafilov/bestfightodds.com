@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/bin/sh
 
 # This file will install all components required by the BFO platform. Note that this only needs to be done once per server (not once per site like bestfightodds.com or proboxingodds.com)
 # It is safe to run this multiple times
