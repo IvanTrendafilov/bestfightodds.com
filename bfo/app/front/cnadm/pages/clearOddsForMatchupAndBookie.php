@@ -19,7 +19,7 @@ foreach($aEvents as $oEvent)
 		echo '<option value="' . $oFight->getID() . '">&nbsp;&nbsp;' . $oFight->getFighterAsString(1) . ' VS ' . $oFight->getFighterAsString(2) . '</option>';
 	}
 }
-echo '</select>';
+echo '</select>&nbsp;';
 
 echo 'Bookie: <select name="bookieID">';
 $bookies = BookieHandler::getAllBookies();
