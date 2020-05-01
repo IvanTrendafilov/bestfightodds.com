@@ -1,8 +1,7 @@
 <?php
 
 require_once('lib/bfocore/general/class.EventHandler.php');
-require_once('lib/bfocore/general/class.FighterHandler.php');
-require_once('lib/bfocore/general/class.TwitterHandler.php');
+require_once('lib/bfocore/general/class.BookieHandler.php');
 
 //Add fighter altname:
 echo '
