@@ -1,0 +1,4 @@
+#!/bin/bash
+mysqldump -h ls-9bf1268dd5beed1d539ee8d4c86139bf072394e4.cc2cczpln4tj.us-east-2.rds.amazonaws.com -ubfo_tst -pueyROcZ643eYTjcglHnu --set-gtid-purged=OFF bets > ~/bets_temp.sql
+mysql -h ls-9bf1268dd5beed1d539ee8d4c86139bf072394e4.cc2cczpln4tj.us-east-2.rds.amazonaws.com -ubfo_tst -pueyROcZ643eYTjcglHnu bets_tst < ~/bets_temp.sql
+rm ~/bets_temp.sql

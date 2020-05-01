@@ -143,6 +143,14 @@ switch ($_GET['action'])
         TwitterHandler::addTwitterHandle($_POST['teamID'], $_POST['twitterHandle']);
         finishCall();
         break;
+    case 'clearOddsForMatchupAndBookie':
+        require_once('lib/bfocore/general/class.OddsHandler.php');
+        checkPOSTParam('matchupID');
+        checkPOSTParam('bookieID');
+        define('RETURN_PAGE', 'clearOddsForMatchupAndBookie');
+        OddsHandler::removeOddsForMatchupAndBookie($_POST['matchupID'], $_POST['bookieID']);
+        finishCall('Odds removed for matchup ' . $_POST['matchupID'] . ' and bookie ' . $_POST['bookieID']);
+        break;
 
 }
 
