@@ -33,3 +33,6 @@ sudo pip install awscli
 
 # Install Mysql client for accessing mysql from ssh
 sudo apt install -y mysql-client-core-5.7
+
+# Enable PHP modules
+sudo phpenmod mysqli pdo_mysql curl gd
