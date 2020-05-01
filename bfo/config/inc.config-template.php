@@ -6,10 +6,10 @@
  */
 
 /* General */
-define('GENERAL_BASEDIR', 'C:/dev2/bfo'); //Used to specify base directory (where repository is located. Used in other paths below)
+define('GENERAL_BASEDIR', '/var/www/bfo/bfo'); //Used to specify base directory (where repository is located. Used in other paths below)
 define('GENERAL_HOSTNAME', 'www.bestfightodds.com'); //Used to specify the hostname where this site is hosted. Used mainly to generate URLs in various contexts
 define('GENERAL_PRODUCTION_MODE', false); //Used to specify production mode. In production mode, some features are disabled for security purposes. E.g. some tests cannot be run
-define('GENERAL_TIMEZONE', -6);	//Timezone for website (if different from system)
+define('GENERAL_TIMEZONE', 0);	//Timezone for website (if different from system)
 define('GENERAL_IMAGE_DIRECTORY', GENERAL_BASEDIR . '/app/front/img/'); //Used to specify image directory (required for some functions)
 define('GENERAL_KLOGDIR', GENERAL_BASEDIR . '/log/'); //Directory where Klogger logs should be stored
 define('GENERAL_GRACEPERIOD_SHOW', 8); //Defines how many hours an event should be considered active even if it has passed its event date. Used for example to continue showing the event past its start

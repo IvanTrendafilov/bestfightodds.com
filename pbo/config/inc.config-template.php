@@ -6,10 +6,10 @@
  */
 
 /* General */
-define('GENERAL_BASEDIR', 'C:/dev2/bfo'); //Used to specify base directory (where repository is located. Used in other paths below)
-define('GENERAL_HOSTNAME', 'www.bestfightodds.com'); //Used to specify the hostname where this site is hosted. Used mainly to generate URLs in various contexts
+define('GENERAL_BASEDIR', '/var/www/bfo/pbo'); //Used to specify base directory (where repository is located. Used in other paths below)
+define('GENERAL_HOSTNAME', 'www.proboxingodds.com'); //Used to specify the hostname where this site is hosted. Used mainly to generate URLs in various contexts
 define('GENERAL_PRODUCTION_MODE', false); //Used to specify production mode. In production mode, some features are disabled for security purposes. E.g. some tests cannot be run
-define('GENERAL_TIMEZONE', -6);	//Timezone for website (if different from system)
+define('GENERAL_TIMEZONE', 0);	//Timezone for website (if different from system)
 define('GENERAL_IMAGE_DIRECTORY', GENERAL_BASEDIR . '/app/front/img/'); //Used to specify image directory (required for some functions)
 define('GENERAL_KLOGDIR', GENERAL_BASEDIR . '/log/'); //Directory where Klogger logs should be stored
 define('GENERAL_GRACEPERIOD_SHOW', 8); //Defines how many hours an event should be considered active even if it has passed its event date. Used for example to continue showing the event past its start
@@ -25,10 +25,10 @@ define('MAIL_SENDGRID_KEY', ''); //Sendgrid API key
 define('ALERTER_ENABLED', false);
 define('ALERTER_ADMIN_ALERT','cnordvaller@gmail.com');  //E-mail to alert in case of internal alerts (arbitrage etc.)
 define('ALERTER_DEV_MODE', true); //Dev mode on or off, if true no e-mails will be sent
-define('ALERTER_MAIL_FROM', 'Best Fight Odds <no-reply@bestfightodds.com>');
-define('ALERTER_MAIL_SENDER_MAIL', 'no-reply@bestfightodds.com');
-define('ALERTER_SITE_LINK', 'https://www.bestfightodds.com');
-define('ALERTER_SITE_NAME', 'Best Fight Odds');
+define('ALERTER_MAIL_FROM', 'Pro Boxing Odds <no-reply@proboxingodds.com>');
+define('ALERTER_MAIL_SENDER_MAIL', 'no-reply@proboxingodds.com');
+define('ALERTER_SITE_LINK', 'https://www.proboxingodds.com');
+define('ALERTER_SITE_NAME', 'Pro Boxing Odds');
 define('ALERTER_TEMPLATE_DIR', GENERAL_BASEDIR . '/../shared/templates/');
 
 /* Cache */
@@ -71,8 +71,8 @@ define('TWITTER_CONSUMER_SECRET', 'yheM1NCNx4BOdZyh3aeh1UPIQHfn4yRZBL7r3BjiU');
 define('TWITTER_OAUTH_TOKEN', '47427385-7rgoivFKNU7Bv1ABDgqeY3H7ij9nx2i47TPdlD1U2');
 define('TWITTER_OATUH_TOKEN_SECRET', 'S3N7HNMXHAXdFQoIhKrleT1rr3yOoRLzsH8vzmSzg');
 define('TWITTER_GROUP_MATCHUPS', true); //Used to indicate if we group multiple matchups on the same event into one tweet (does not include main events)
-define('TWITTER_TEMPLATE_SINGLE', '<E>: <T1> (<T1O>) vs. <T2> (<T2O>) https://bestfightodds.com/events/<EVENT_URL>'); //Template used to tweet one matchup in one tweet. <E> = Event name, <T1> = Team one, <T2> = team two, <T1O> = team one odds, <T2O> = team two odds
-define('TWITTER_TEMPLATE_MULTI', 'New lines for <E> posted https://bestfightodds.com/events/<EVENT_URL>'); //Template used to tweet multiple matchups in one tweet (only available if TWITTER_GROUP_MATCHUPS is enabled)
+define('TWITTER_TEMPLATE_SINGLE', '<E>: <T1> (<T1O>) vs. <T2> (<T2O>) https://proboxingodds.com/events/<EVENT_URL>'); //Template used to tweet one matchup in one tweet. <E> = Event name, <T1> = Team one, <T2> = team two, <T1O> = team one odds, <T2O> = team two odds
+define('TWITTER_TEMPLATE_MULTI', 'New lines for <E> posted https://proboxingodds.com/events/<EVENT_URL>'); //Template used to tweet multiple matchups in one tweet (only available if TWITTER_GROUP_MATCHUPS is enabled)
 
 
 ?>
