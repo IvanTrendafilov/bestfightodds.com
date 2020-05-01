@@ -18,22 +18,15 @@ echo '
 				echo '<option value="' . $matchup->getID() . '" selected>' . $matchup->getTeamAsString(1) . ' vs ' . $matchup->getTeamAsString(2) . '</option>';
 			}
 
-echo '</select>&nbsp; aka &nbsp;';
+echo '</select>&nbsp;';
 
 echo 'Bookie: <select name="bookieID">';
-echo '<option value="0" selected>- pick one -</option>';
-$aBookies = BookieHandler::getAllBookies();
-foreach ($aBookies as $oBookie)
+$bookies = BookieHandler::getAllBookies();
+foreach($bookies as $bookie)
 {
-    if (isset($_GET['inBookieID']) && $_GET['inBookieID'] == $oBookie->getID())
-    {
-        echo '<option value="' . $oBookie->getID() . '" selected>' . $oBookie->getName() . '</option>';
-    } else
-    {
-        echo '<option value="' . $oBookie->getID() . '">' . $oBookie->getName() . '</option>';
-    }
+	echo '<option value="' . $bookie->getID() . '">' . $bookie->getName() . '</option>';
 }
-echo '</select><br /><br />
+echo '</select><br /><br />';
 <input type="submit" value="Add">
 </form>';
 

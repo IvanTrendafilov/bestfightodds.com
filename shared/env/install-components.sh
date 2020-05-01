@@ -36,3 +36,6 @@ sudo apt install -y mysql-client
 
 # Enable PHP modules
 sudo phpenmod mysqli pdo_mysql curl gd
+
+# Install zip and unzip
+sudo apt install -y zip unzip
