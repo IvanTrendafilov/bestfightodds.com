@@ -6,18 +6,21 @@ require_once('lib/bfocore/general/class.BookieHandler.php');
 //Add fighter altname:
 echo '
 
-<form method="post" action="logic/logic.php?action=clearOddsForMatchupAndBookie">
+<form method="post" action="logic/logic.php?action=clearOddsForMatchupAndBookie">';
 
-		Matchup: <select name="matchup_id">
-			<option value="-1">(none)</option>';
-
-			$matchups = EventHandler::getAllUpcomingMatchups(true);
-			foreach ($matchups as $matchup)
-			{
-				echo '<option value="' . $matchup->getID() . '" selected>' . $matchup->getTeamAsString(1) . ' vs ' . $matchup->getTeamAsString(2) . '</option>';
-			}
-
-echo '</select>&nbsp;';
+<?php 
+$aEvents = EventHandler::getAllUpcomingEvents();
+echo 'Matchup: <select name="matchupID">';
+foreach($aEvents as $oEvent)
+{
+	echo '<option value="-1">' . $oEvent->getName() . '</option>';
+	$aFights = EventHandler::getAllFightsForEvent($oEvent->getID());
+	foreach ($aFights as $oFight)
+	{
+		echo '<option value="' . $oFight->getID() . '">&nbsp;&nbsp;' . $oFight->getFighterAsString(1) . ' VS ' . $oFight->getFighterAsString(2) . '</option>';
+	}
+}
+echo '</select>';
 
 echo 'Bookie: <select name="bookieID">';
 $bookies = BookieHandler::getAllBookies();
