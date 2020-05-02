@@ -99,7 +99,17 @@ class XMLParserBetDSI
                                 }
                                 else
                                 {
-                                    Logger::getInstance()->log("New type of bet type: " . $bet_node['Name'] , -1);
+                                    foreach ($bet_node->Odd as $odd_node)
+                                    {
+                                        $oParsedProp = new ParsedProp(
+                                            (string) $competitors[0] . ' vs ' . $competitors[1] . ' :: ' . $odd_node['Name'],
+                                            '',
+                                            OddsTools::convertDecimalToMoneyline($odd_node['Value']),
+                                            '-99999');
+                                        );
+                                        $oParsedProp->setCorrelationID((string) $match_node['Name']);
+                                        $oParsedSport->addFetchedProp($oParsedProp);
+                                    }
                                 }
                             }
                         }
