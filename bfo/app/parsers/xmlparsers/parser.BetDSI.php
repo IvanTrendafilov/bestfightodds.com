@@ -106,7 +106,6 @@ class XMLParserBetDSI
                                             '',
                                             OddsTools::convertDecimalToMoneyline($odd_node['Value']),
                                             '-99999');
-                                        );
                                         $oParsedProp->setCorrelationID((string) $match_node['Name']);
                                         $oParsedSport->addFetchedProp($oParsedProp);
                                     }
