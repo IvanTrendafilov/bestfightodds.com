@@ -99,7 +99,7 @@ class XMLParserSportsInteraction
                             }
                         }
                         else if ($cEvent->Bet[0]['TYPE'] != "" && (count(array_intersect(['yes','no','over','under'], 
-                                                                   [strtolower($cEvent->Bet[0]->Runner), strtolower($cEvent->Bet[1]->Runner)])) > 0)
+                                                                   [strtolower($cEvent->Bet[0]->Runner), strtolower($cEvent->Bet[1]->Runner)])) > 0))
                         {
                             //Two side prop bet since bet 1 or 2 contains the words yes,no,over or under
                             $oParsedProp = $this->parseTwoSideProp($cEvent);
