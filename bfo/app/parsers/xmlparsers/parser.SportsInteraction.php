@@ -58,7 +58,7 @@ class XMLParserSportsInteraction
                                 $oParsedSport->addFetchedProp($oParsedProp);
                             }
                         }
-                        else if ($cEvent->Bet[0]['TYPE'] == "")
+                        else if ($cEvent->Bet[0]['TYPE'] == "" && !(strpos($cEvent->Name, 'Total Event') !== false))
                         {
                             //Regular matchup
                             $oParsedMatchup = null;
