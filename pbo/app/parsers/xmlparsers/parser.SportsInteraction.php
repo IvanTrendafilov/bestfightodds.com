@@ -120,11 +120,6 @@ class XMLParserSportsInteraction
                                 $oParsedSport->addFetchedProp($oTempProp);
                             }
                         }
-                        else if ($cEvent->Bet[0]['TYPE'] == "How will the Fight Finish")
-                        {
-                            //Prop - Fight finish
-                            //TODO: There is currently no way to handle props that say if the fight ends in e.g. KO/TKO no matter what fighter gets the finish
-                        }
                         else
                         {
                             //Prop - All other
@@ -133,7 +128,7 @@ class XMLParserSportsInteraction
                                 if (ParseTools::checkCorrectOdds((string) $cBet->Price))
                                 {
                                     $oTempProp = new ParsedProp(
-                                                    (string) $cBet->Runner,
+                                                    (string) $cEvent->Name . ' ::: ' . $cBet->Type . ' :: ' . $cBet->BetTypeExtraInfo . ' : ' . $cBet->Runner,
                                                     '',
                                                     (string) $cBet->Price,
                                                     '-99999');

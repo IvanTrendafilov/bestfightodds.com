@@ -58,15 +58,6 @@ class XMLParserSportsInteraction
                                 $oParsedSport->addFetchedProp($oParsedProp);
                             }
                         }
-                        else if ($cEvent->Bet[0]['TYPE'] == "Specials" && strpos(strtoupper($cEvent->Bet[0]->BetTypeExtraInfo), 'MOST ') !== false)
-                        {
-                            //Two side prop bet
-                            $oParsedProp = $this->parseTwoSideProp($cEvent);
-                            if ($oParsedProp != null)
-                            {
-                                $oParsedSport->addFetchedProp($oParsedProp);
-                            }
-                        }
                         else if ($cEvent->Bet[0]['TYPE'] == "")
                         {
                             //Regular matchup
@@ -107,27 +98,15 @@ class XMLParserSportsInteraction
                                 $oParsedSport->addParsedMatchup($oParsedMatchup);
                             }
                         }
-                        else if ($cEvent->Bet[0]['TYPE'] == "Total Rounds")
+                        else if ($cEvent->Bet[0]['TYPE'] != "" && (count(array_intersect(['yes','no','over','under'], 
+                                                                   [strtolower($cEvent->Bet[0]->Runner), strtolower($cEvent->Bet[1]->Runner)])) > 0)
                         {
-                            //Prop - Total rounds
-                            if (ParseTools::checkCorrectOdds((string) $cEvent->Bet[0]->Price)
-                                    && ParseTools::checkCorrectOdds((string) $cEvent->Bet[1]->Price))
+                            //Two side prop bet since bet 1 or 2 contains the words yes,no,over or under
+                            $oParsedProp = $this->parseTwoSideProp($cEvent);
+                            if ($oParsedProp != null)
                             {
-
-                                $oTempProp = new ParsedProp(
-                                                (string) $cEvent->Name . ' Total Rounds over ' . $cEvent->Bet[0]->Handicap,
-                                                'Total Rounds under ' . $cEvent->Bet[1]->Handicap,
-                                                (string) $cEvent->Bet[0]->Price,
-                                                (string) $cEvent->Bet[1]->Price);
-
-                                $oTempProp->setCorrelationID(trim($cEvent->Name));
-                                $oParsedSport->addFetchedProp($oTempProp);
+                                $oParsedSport->addFetchedProp($oParsedProp);
                             }
-                        }
-                        else if ($cEvent->Bet[0]['TYPE'] == "How will the Fight Finish")
-                        {
-                            //Prop - Fight finish
-                            //TODO: There is currently no way to handle props that say if the fight ends in e.g. KO/TKO no matter what fighter gets the finish
                         }
                         else
                         {
@@ -136,19 +115,8 @@ class XMLParserSportsInteraction
                             {
                                 if (ParseTools::checkCorrectOdds((string) $cBet->Price))
                                 {
-                                    //Draw does not automatically indicate the matchup so we must add it manually
-                                    if (strtoupper((string) $cBet->Runner) == 'DRAW' || strtoupper((string) $cBet->Runner) == '_DRWTXT_')
-                                    {
-                                        $cBet->Runner = (string) $cEvent->Name . ' - ' . $cBet->Runner;
-                                    }
-                                    //Check for Specials bet and modify runner based on this
-                                    if ($cBet['TYPE'] == 'Specials')
-                                    {
-                                        $cBet->Runner = (string) $cEvent->Name . ' ' . $cBet->BetTypeExtraInfo . ' - ' . $cBet->Runner;
-                                    }
-
                                     $oTempProp = new ParsedProp(
-                                                    (string) $cBet->Runner,
+                                                    (string) $cEvent->Name . ' ::: ' . $cBet->Type . ' :: ' . $cBet->BetTypeExtraInfo . ' : ' . $cBet->Runner,
                                                     '',
                                                     (string) $cBet->Price,
                                                     '-99999');
@@ -206,14 +174,14 @@ class XMLParserSportsInteraction
         if (count($aBets) == 2)
         {
             $oTempProp = new ParsedProp(
-                            (string) $a_cEvent->Name . ' ' . $aBets[0]->BetTypeExtraInfo . ' - ' . $aBets[0]->Runner,
-                            (string) $a_cEvent->Name . ' ' . $aBets[1]->BetTypeExtraInfo . ' - ' . $aBets[1]->Runner,
+                            (string) $a_cEvent->Name . ' ::: ' . $aBets[0]->Type . ' :: ' . $aBets[0]->BetTypeExtraInfo . ' : ' . $aBets[0]->Runner,
+                            (string) $a_cEvent->Name . ' ::: ' . $aBets[1]->Type . ' :: ' . $aBets[1]->BetTypeExtraInfo . ' : ' . $aBets[1]->Runner,
                             (string) $aBets[0]->Price,
                             (string) $aBets[1]->Price);
             $oTempProp->setCorrelationID(trim($a_cEvent->Name));
             return $oTempProp;
         }
-        Logger::getInstance()->log("Invalid special two side prop: " . $a_cEvent->Name . ' ' . $a_cEvent->Bet[0]->BetTypeExtraInfo, -2);
+        Logger::getInstance()->log("Invalid special two side prop: " . $a_cEvent->Name . ' ::: ' . $aBets[0]->Type . ' :: ' . $aBets[0]->BetTypeExtraInfo . ' : ' . $aBets[0]->Runner, -2);
         return null;
     }
 
