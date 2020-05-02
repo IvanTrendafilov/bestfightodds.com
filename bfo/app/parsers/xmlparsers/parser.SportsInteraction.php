@@ -116,7 +116,7 @@ class XMLParserSportsInteraction
                                 if (ParseTools::checkCorrectOdds((string) $cBet->Price))
                                 {
                                     $oTempProp = new ParsedProp(
-                                                    (string) $cEvent->Name . ' ::: ' . $cBet->Type . ' :: ' . $cBet->BetTypeExtraInfo . ' : ' . $cBet->Runner,
+                                                    (string) $cEvent->Name . ' ::: ' . $cBet['TYPE'] . ' :: ' . $cBet->BetTypeExtraInfo . ' : ' . $cBet->Runner,
                                                     '',
                                                     (string) $cBet->Price,
                                                     '-99999');
@@ -174,14 +174,14 @@ class XMLParserSportsInteraction
         if (count($aBets) == 2)
         {
             $oTempProp = new ParsedProp(
-                            (string) $a_cEvent->Name . ' ::: ' . $aBets[0]->Type . ' :: ' . $aBets[0]->BetTypeExtraInfo . ' : ' . $aBets[0]->Runner,
-                            (string) $a_cEvent->Name . ' ::: ' . $aBets[1]->Type . ' :: ' . $aBets[1]->BetTypeExtraInfo . ' : ' . $aBets[1]->Runner,
+                            (string) $a_cEvent->Name . ' ::: ' . $aBets[0]['TYPE'] . ' :: ' . $aBets[0]->Handicap . ' ' . $aBets[0]->BetTypeExtraInfo . ' : ' . $aBets[0]->Runner,
+                            (string) $a_cEvent->Name . ' ::: ' . $aBets[1]['TYPE'] . ' :: ' . $aBets[1]->Handicap . ' ' . $aBets[1]->BetTypeExtraInfo . ' : ' . $aBets[1]->Runner,
                             (string) $aBets[0]->Price,
                             (string) $aBets[1]->Price);
             $oTempProp->setCorrelationID(trim($a_cEvent->Name));
             return $oTempProp;
         }
-        Logger::getInstance()->log("Invalid special two side prop: " . $a_cEvent->Name . ' ::: ' . $aBets[0]->Type . ' :: ' . $aBets[0]->BetTypeExtraInfo . ' : ' . $aBets[0]->Runner, -2);
+        Logger::getInstance()->log("Invalid special two side prop: " . $a_cEvent->Name . ' ::: ' . $aBets[0]['TYPE'] . ' :: ' .  $aBets[0]->Handicap . ' ' . $aBets[0]->BetTypeExtraInfo . ' : ' . $aBets[0]->Runner, -2);
         return null;
     }
 
