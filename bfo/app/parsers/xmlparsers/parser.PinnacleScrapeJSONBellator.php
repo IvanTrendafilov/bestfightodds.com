@@ -34,14 +34,37 @@ class XMLParserPinnacleScrapeJSONBellator
                 if (count($event['Participants']) == 2)
                 {
                     //Regular matchup
+
+                    //Replace anylocation indicator with blank
+                    $event['Participants'][0]['Name'] = str_replace('(AnyLocation=Action)', '', $event['Participants'][0]['Name']);
+                    $event['Participants'][1]['Name'] = str_replace('(AnyLocation=Action)', '', $event['Participants'][1]['Name']);
+                    $event['Participants'][0]['Name'] = str_replace('(Any Location=Action)', '', $event['Participants'][0]['Name']);
+                    $event['Participants'][1]['Name'] = str_replace('(Any Location=Action)', '', $event['Participants'][1]['Name']);
+                    $event['Participants'][0]['Name'] = str_replace('(AnyLocation=Action', '', $event['Participants'][0]['Name']);
+                    $event['Participants'][1]['Name'] = str_replace('(AnyLocation=Action', '', $event['Participants'][1]['Name']);
+
+
                     $oParsedMatchup = new ParsedMatchup(
                         $event['Participants'][0]['Name'],
                         $event['Participants'][1]['Name'],
                         round($event['Participants'][0]['MoneyLine']),
                         round($event['Participants'][1]['MoneyLine'])
                     );
-
+                    $oParsedMatchup->setCorrelationID((string) $event['EventId']);
                     $this->oParsedSport->addParsedMatchup($oParsedMatchup);
+
+                    //Adds over/under if available
+                    if (isset($event['Totals']))
+                    {
+                        $oParsedProp = new ParsedProp(
+                            (string) $event['Participants'][0]['Name'] . ' vs ' . $event['Participants'][1]['Name'] . ' :: Over ' . $event['Totals']['Min'] . ' rounds',
+                            (string) $event['Participants'][0]['Name'] . ' vs ' . $event['Participants'][1]['Name'] . ' :: Under ' . $event['Totals']['Min'] . ' rounds',
+                            round($event['Totals']['OverPrice']),
+                            round($event['Totals']['UnderPrice'])
+                        );
+                        $oParsedProp->setCorrelationID((string) $event['EventId']);
+                        $this->oParsedSport->addFetchedProp($oParsedProp);
+                    }
                 }
             }
         }
