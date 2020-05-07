@@ -74,11 +74,6 @@ class ParseTools
         {
             curl_setopt($rCurl, CURLOPT_HTTPHEADER, ['Authorization: Basic ZmlnaHRvZGRzOmNuODI2Mg==']);
         }
-        else if (substr($a_sURL, 0, strlen('https://lines.betdsi.eu')) === 'https://lines.betdsi.eu')
-        {
-            //Add random unique ID to bust cache
-            $a_sURL = $a_sURL . '/?' . uniqid() . uniqid();
-        }
         else if (substr($a_sURL, 0, strlen('https://www.pinnacle.com/webapi')) === 'https://www.pinnacle.com/webapi')
         {
             curl_setopt($rCurl, CURLOPT_REFERER, "https://www.pinnacle.com/en/odds/match/mixed-martial-arts/ufc/ufc");
@@ -151,11 +146,6 @@ class ParseTools
             else if (substr($sURL, 0, strlen('https://api.pinnacle.com')) === 'https://api.pinnacle.com')
             {
                 curl_setopt($aChannels[$sURL], CURLOPT_HTTPHEADER, ['Authorization: Basic ZmlnaHRvZGRzOmNuODI2Mg==']);
-            }
-            else if (substr($aChannels[$sURL], 0, strlen('https://lines.betdsi.eu')) === 'https://lines.betdsi.eu')
-            {
-                //Add random unique ID to bust cache
-                $aChannels[$sURL] = $aChannels[$sURL] . '/?' . uniqid() . uniqid();
             }
             else if (substr($sURL, 0, strlen('https://www.pinnacle.com/webapi')) === 'https://www.pinnacle.com/webapi')
             {

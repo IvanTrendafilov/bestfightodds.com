@@ -23,11 +23,6 @@ class XMLParserBetDSI
 
     public function parseXML($a_sXML)
     {
-        //Store as latest feed available for ProBoxingOdds.com
-        $rStoreFile = fopen(GENERAL_BASEDIR . '/app/front/externalfeeds/betdsi-latest.xml', 'w');
-        fwrite($rStoreFile, $a_sXML);
-        fclose($rStoreFile);
-
         $oXML = simplexml_load_string($a_sXML);
         if ($oXML == false)
         {
@@ -51,6 +46,10 @@ class XMLParserBetDSI
             return [$oParsedSport];
         }
 
+        //Store as latest feed available for ProBoxingOdds.com
+        $rStoreFile = fopen(GENERAL_BASEDIR . '/app/front/externalfeeds/betdsi-latest.xml', 'w');
+        fwrite($rStoreFile, $a_sXML);
+        fclose($rStoreFile);
         
         foreach ($oXML->Sport as $sport_node)
         {
