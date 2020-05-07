@@ -43,6 +43,13 @@ class XMLParserBetDSI
 
         $aSports = array();
         $oParsedSport = new ParsedSport('MMA');
+
+        if (trim($oXML->Date) == 'Fri May 1 13:50:02 CST 2020'))
+        {
+            Logger::getInstance()->log("Old feed detected. Bailing", -1);
+            return [$oParsedSport];
+        }
+
         
         foreach ($oXML->Sport as $sport_node)
         {
