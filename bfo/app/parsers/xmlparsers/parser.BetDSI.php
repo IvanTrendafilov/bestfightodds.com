@@ -34,6 +34,13 @@ class XMLParserBetDSI
             Logger::getInstance()->log("Warning: XML broke!!", -1);
         }
 
+        //Custom sort function to arrange bet nodes
+        function odd_node_sort($a, $b)
+        {
+            if ((int) $a['Name'] == (int) $b['Name']) return 0;
+            return ((int)$a['Name'] < (int)$b['Name'])?-1:1;
+        }
+
         $aSports = array();
         $oParsedSport = new ParsedSport('MMA');
         
@@ -51,6 +58,9 @@ class XMLParserBetDSI
                         {
                             if ($bet_node['Name'] == 'Bout Odds' || $bet_node['Name'] == 'Match Winner')
                             {
+                                //Sort Odd nodes
+                                $bet_node->Odd = usort($bet_node->Odd,"odd_node_sort");
+
                                 //Regular matchup odds
                                 foreach($bet_node->Odd as $odd_node)
                                 {
