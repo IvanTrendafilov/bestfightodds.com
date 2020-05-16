@@ -596,7 +596,7 @@ class PropParser
             echo "checking: " . $oEvent->getName() . " vs " . $aParsedEvent[0] . " 
             fsim:" . $fSim;*/
 
-            if ($fSim > 95)
+            if ($fSim > 90)
             { 
                 $fNewSim = $fSim;
                 $bFound = true;
@@ -635,12 +635,6 @@ class PropParser
                     $fFoundSim = $fNewSim;
                 }
             }
-        }
-
-        //Temporary fix for TUF 25
-        if ($iFoundEventID == null && trim($aParsedEvent[0]) == 'TUF 25')
-        {
-            $iFoundEventID = 1289;
         }
 
         return array('event' => $iFoundEventID);
