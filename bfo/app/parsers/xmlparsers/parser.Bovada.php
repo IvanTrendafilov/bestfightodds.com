@@ -39,7 +39,7 @@ class XMLParserBovada
 
             foreach ($event['markets'] as $market)
             {
-                if ($market['status'] == 'OPEN')
+                if ($market['status'] == 'OPEN' && $event_name != 'Kickboxing K-1')
                 {
                     if ($market['description'] == 'Fight Winner')
                     {
@@ -51,6 +51,7 @@ class XMLParserBovada
                                         $market['outcomes'][1]['price']['american']);
                         $parsed_matchup->setCorrelationID($correlation_id);
                         $parsed_matchup->setMetaData('event_name', (string) $event_name . ' ' . substr($event['startTime'], 0, 10));
+                        $parsed_matchup->setMetaData('gametime', (string) $date);
                         $parsed_sport->addParsedMatchup($parsed_matchup);
                     }
                     else
