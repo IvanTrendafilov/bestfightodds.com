@@ -32,7 +32,10 @@ class XMLParserBovada
         {
             //Store metadata and correlation ID
             $correlation_id = $event['id'];
-            $date = $event['startTime'];
+
+            //$date = $event['startTime'];
+            $oGameDate = new DateTime($event['startTime']);
+            $date = $oGameDate->getTimestamp();
 
             //Get name from category
             $event_name = $this->getEventFromCategories($event);
