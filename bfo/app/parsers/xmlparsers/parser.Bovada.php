@@ -33,9 +33,9 @@ class XMLParserBovada
             //Store metadata and correlation ID
             $correlation_id = $event['id'];
 
-            //$date = $event['startTime'];
-            $oGameDate = new DateTime($event['startTime']);
-            $date = $oGameDate->getTimestamp();
+            $date = $event['startTime'];
+            //$oGameDate = new DateTime($event['startTime']);
+            //$date = $oGameDate->getTimestamp();
 
             //Get name from category
             $event_name = $this->getEventFromCategories($event);
@@ -54,7 +54,7 @@ class XMLParserBovada
                                         $market['outcomes'][1]['price']['american']);
                         $parsed_matchup->setCorrelationID($correlation_id);
                         $parsed_matchup->setMetaData('event_name', (string) $event_name . ' ' . substr($event['startTime'], 0, 10));
-                        $parsed_matchup->setMetaData('gametime', (string) $date);
+                        //Bovada$parsed_matchup->setMetaData('gametime', (string) $date);
                         $parsed_sport->addParsedMatchup($parsed_matchup);
                     }
                     else
