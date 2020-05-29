@@ -34,6 +34,9 @@ class XMLParserBovada
             $correlation_id = $event['id'];
             $date = $event['startTime'];
 
+            //Get name from category
+            $event_name = $this->getEventFromCategories($event);
+
             foreach ($event['markets'] as $market)
             {
                 if ($market['status'] == 'OPEN')
@@ -47,6 +50,7 @@ class XMLParserBovada
                                         $market['outcomes'][0]['price']['american'],
                                         $market['outcomes'][1]['price']['american']);
                         $parsed_matchup->setCorrelationID($correlation_id);
+                        $parsed_matchup->setMetaData('event_name', (string) $event_name);
                         $parsed_sport->addParsedMatchup($parsed_matchup);
                     }
                     else
@@ -97,6 +101,19 @@ class XMLParserBovada
     public function checkAuthoritiveRun($metadata)
     {
         return $this->auth_run;
+    }
+
+    public function getEventFromCategories($node)
+    {
+        //Loops through all categories child elements and picks out the first one that is not the generic one (1201 / UFC/MMA)
+        foreach ($node['categories'] as $category)
+        {
+            if ($category['code'] != '1201')
+            {
+                return $category['description'];
+            }            
+        }
+        return '';
     }
 }
 
