@@ -39,6 +39,7 @@ class XMLParserBetDSI
         $aSports = array();
         $oParsedSport = new ParsedSport('MMA');
 
+        Logger::getInstance()->log("Feed date: " . trim($oXML->Date), 0);
         if (trim($oXML->Date) == 'Fri May  1 13:50:02 CST 2020' || trim($oXML->Date) == 'Fri May  8 04:25:01 CST 2020')
         
         {
