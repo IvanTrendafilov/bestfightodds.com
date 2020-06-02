@@ -90,13 +90,6 @@ class XMLParser
         }
         else if ($sXML != null && $sXML != '')
         {
-            if (GENERAL_HOSTNAME == 'www.proboxingodds.com')
-            {
-                $rStoreFile = fopen('/var/www/vhosts/proboxingodds.com/httpdocs/app/front/externalfeeds/mig/' . strtolower($a_oParser->getName()) . '.xml', 'w');
-                fwrite($rStoreFile, $sXML);
-                fclose($rStoreFile); 
-            }
-
             $oLogger->log("URL (<a href=\"" . $a_oParser->getParseURL() . "\">" . $a_oParser->getParseURL() . "</a>) fetched OK in " . round(microtime(true) - $fStartTime, 3), 0);
 
             require_once('app/parsers/xmlparsers/parser.' . $a_oParser->getName() . '.php');
