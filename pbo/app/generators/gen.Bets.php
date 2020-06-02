@@ -60,7 +60,6 @@ foreach ($aEvent as $oEvent)
             {
                 $date = new DateTime();
                 $date->setTimestamp($oFight->getMetadata('gametime'));
-                            $date->setTimezone(new DateTimeZone("EST"));
                 $sGameTime = $date->format('H:i');
             }
 
@@ -69,7 +68,7 @@ foreach ($aEvent as $oEvent)
             for ($iX = 1; $iX <= 2; $iX++)
             {
                 echo '<tr ' . (($iX % 2) == 1 ? 'class="even"' : 'class="odd" id="mu-' . $oFight->getID() . '"') . ' ' . (($iX == 2 && $iFightCounter == count($aFights) - 1) ? ' style="border-bottom: 0;" ' : '') . '>'; //If this is the last matchup, add style for it
-                echo '<td class="date-cell" data-time="' . $sGameTime . '">' . ($iX == 1 ? $sGameTime : ($sGameTime != '' ? 'EST' : '')) . '</td><th scope="row"><a href="/fighters/' . $oFight->getFighterAsLinkString($iX) . '"><span class="tw">' . $oFight->getFighterAsString($iX) . '</span></a></th>';
+                echo '<td class="date-cell" data-time="' . $sGameTime . '">' . ($iX == 1 ? $sGameTime : ($sGameTime != '' ? 'UTC' : '')) . '</td><th scope="row"><a href="/fighters/' . $oFight->getFighterAsLinkString($iX) . '"><span class="tw">' . $oFight->getFighterAsString($iX) . '</span></a></th>';
 
                 $iProcessed = 0;
                 $bEverFoundOldOdds = false;
@@ -157,7 +156,6 @@ foreach ($aEvent as $oEvent)
             {
                 $date = new DateTime();
                 $date->setTimestamp($oFight->getMetadata('gametime'));
-                            $date->setTimezone(new DateTimeZone("EST"));
                 $sGameTime = $date->format('H:i');
             }
 
@@ -166,7 +164,7 @@ foreach ($aEvent as $oEvent)
             for ($iX = 1; $iX <= 2; $iX++)
             {
                 echo '<tr ' . (($iX % 2) == 1 ? 'class="even"' : 'class="odd"') . ' ' . (($iX == 2 && $iFightCounter == count($aFights) - 1) ? ' style="border-bottom: 0;" ' : '') . '>'; //If this is the last matchup, add style for it
-                echo '<td class="date-cell" data-time="' . $sGameTime . '">' . ($iX == 1 ? $sGameTime : ($sGameTime != '' ? 'EST' : '')) . '</td><th scope="row"><a href="/fighters/' . $oFight->getFighterAsLinkString($iX) . '"><span class="tw">' . $oFight->getFighterAsString($iX) . '</span></a></th>';
+                echo '<td class="date-cell" data-time="' . $sGameTime . '">' . ($iX == 1 ? $sGameTime : ($sGameTime != '' ? 'UTC' : '')) . '</td><th scope="row"><a href="/fighters/' . $oFight->getFighterAsLinkString($iX) . '"><span class="tw">' . $oFight->getFighterAsString($iX) . '</span></a></th>';
 
                 $iProcessed = 0;
                 $bEverFoundOldOdds = false;
@@ -466,7 +464,7 @@ foreach ($aEvent as $oEvent)
         }
         echo '</tbody>'
         . '</table></div></div></div></div>
-        <div class="table-last-changed">Last change: <span title="' . ($sLastChange == null ? 'n/a' : (date('M jS Y H:i', strtotime($sLastChange)) . ' EST')) . '"><?php echo getTimeDifference("' . strtotime($sLastChange) . '", strtotime("' . GENERAL_TIMEZONE . ' hours")); ?></span></div>';
+        <div class="table-last-changed">Last change: <span title="' . ($sLastChange == null ? 'n/a' : (date('M jS Y H:i', strtotime($sLastChange)) . ' UTC')) . '"><?php echo getTimeDifference("' . strtotime($sLastChange) . '", strtotime("' . GENERAL_TIMEZONE . ' hours")); ?></span></div>';
     }
 
     
