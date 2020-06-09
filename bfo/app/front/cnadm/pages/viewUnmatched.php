@@ -3,8 +3,7 @@
 require_once('lib/bfocore/general/class.EventHandler.php');
 require_once('lib/bfocore/general/class.BookieHandler.php');
 
-
-
+echo '<a href="logic/logic.php?action=clearUnmatched">Clear unmatched table</a>';
 
 $aUnmatchedCol = EventHandler::getUnmatched(1500);
 
@@ -54,7 +53,6 @@ foreach($aUnmatchedCol as $aUnmatched)
 		}
 	}
 
-
 	$sBookie = BookieHandler::getBookieByID($aUnmatched['bookie_id'])->getName();
   	$sModifiedDate = date("Y-m-d H:i:s", strtotime("+6 hours", strtotime($aUnmatched['log_date']))); //Add 6 hours to date for admin timezone
 	
@@ -95,10 +93,6 @@ if ($sPropsMatchup != '')
 	echo '</table><br />';	
 }
 
-if (count($aUnmatchedCol) > 0)
-{
-	echo '<a href="logic/logic.php?action=clearUnmatched">Clear unmatched table</a>';
-}
 echo '<br /><br />';
 
 
