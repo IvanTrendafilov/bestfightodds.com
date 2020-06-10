@@ -13,7 +13,7 @@ $sPropsTemplate = '';
 foreach($aUnmatchedCol as $aUnmatched)
 {
 	$sBookie = BookieHandler::getBookieByID($aUnmatched['bookie_id'])->getName();
-  	$sModifiedDate = date("Y-m-d H:i:s", strtotime("+6 hours", strtotime($aUnmatched['log_date']))); //Add 6 hours to date for admin timezone
+  	$sModifiedDate = date("Y-m-d H:i:s", strtotime($aUnmatched['log_date']));
   	$aSplit = explode(' vs ', $aUnmatched['matchup']);
   	if ($aUnmatched['type'] == 0)
   	{
