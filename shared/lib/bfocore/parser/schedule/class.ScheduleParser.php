@@ -87,7 +87,7 @@ class ScheduleParser
 					foreach ($aStoredEvents as $oStoredEvent)
 					{
 						$aStoredPrefixParts = explode(' ', $oStoredEvent->getName());
-						if ($aStoredPrefixParts[0] == $aPrefixParts[0] && if date('Y-m-d', $aEvent['date']) == substr($oStoredEvent->getDate(),0,10))
+						if ($aStoredPrefixParts[0] == $aPrefixParts[0] && date('Y-m-d', $aEvent['date']) == substr($oStoredEvent->getDate(),0,10))
 						{
 							//Found it!
 							$bFound = true;
