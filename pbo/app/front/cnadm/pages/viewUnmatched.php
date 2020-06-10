@@ -3,7 +3,7 @@
 require_once('lib/bfocore/general/class.EventHandler.php');
 require_once('lib/bfocore/general/class.BookieHandler.php');
 
-echo '<a href="logic/logic.php?action=clearUnmatched">Clear unmatched table</a>';
+echo '<a href="logic/logic.php?action=clearUnmatched">Clear unmatched table</a><br /><br />';
 
 $aUnmatchedCol = EventHandler::getUnmatched(500);
 
