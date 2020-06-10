@@ -58,6 +58,26 @@ class ScheduleParser
 			}
 			if ($bFound == false)
 			{
+				//Match on date (but first word must match, for example for UFC*)
+				$aPrefixParts = explode(' ', $aEvent['title']);
+				if (sizeof($aPrefixParts) > 1)
+				{
+					foreach ($aStoredEvents as $oStoredEvent)
+					{
+						$aStoredPrefixParts = explode(' ', $oStoredEvent->getName());
+						if ($aStoredPrefixParts[0] == $aPrefixParts[0] && date('Y-m-d', $aEvent['date']) == substr($oStoredEvent->getDate(),0,10))
+						{
+							//Found it!
+							$bFound = true;
+							ScheduleHandler::storeManualAction(json_encode(array('eventID' => $oStoredEvent->getID(), 'eventTitle' => $aEvent['title']), JSON_HEX_APOS | JSON_HEX_QUOT), 2);
+							$this->parseMatchups($aEvent, $oStoredEvent);
+							$this->aMatchedExistingEvents[] = $oStoredEvent->getID();
+						}
+					}
+				}
+			}
+			if ($bFound == false)
+			{
 				//Name does not match, do alternative matching on prefix
 				$aPrefixParts = explode(':', $aEvent['title']);
 				if (sizeof($aPrefixParts) > 1)
@@ -73,26 +93,6 @@ class ScheduleParser
 							$this->parseMatchups($aEvent, $oStoredEvent);
 							//But maybe date is still incorrect
 							$this->checkEventDate($aEvent, $oStoredEvent);
-							$this->aMatchedExistingEvents[] = $oStoredEvent->getID();
-						}
-					}
-				}
-			}
-			if ($bFound == false)
-			{
-				//Match on date (but first word must match, for example for UFC*)
-				$aPrefixParts = explode(' ', $aEvent['title']);
-				if (sizeof($aPrefixParts) > 1)
-				{
-					foreach ($aStoredEvents as $oStoredEvent)
-					{
-						$aStoredPrefixParts = explode(' ', $oStoredEvent->getName());
-						if ($aStoredPrefixParts[0] == $aPrefixParts[0] && date('Y-m-d', $aEvent['date']) == substr($oStoredEvent->getDate(),0,10))
-						{
-							//Found it!
-							$bFound = true;
-							ScheduleHandler::storeManualAction(json_encode(array('eventID' => $oStoredEvent->getID(), 'eventTitle' => $aEvent['title']), JSON_HEX_APOS | JSON_HEX_QUOT), 2);
-							$this->parseMatchups($aEvent, $oStoredEvent);
 							$this->aMatchedExistingEvents[] = $oStoredEvent->getID();
 						}
 					}
