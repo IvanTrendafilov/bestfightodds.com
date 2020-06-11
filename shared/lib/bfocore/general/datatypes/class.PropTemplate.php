@@ -11,10 +11,11 @@ class PropTemplate
     private $aTemplateNegPropValues;
     private $iFieldsTypeID;
     private $bIsEventProp = false;
+    private $sLastUsed;
 
     private $bNegIsPrimary = false;
 
-    public function __construct($a_iID, $a_iBookieID, $a_sTemplate, $a_sTemplateNeg, $a_iPropTypeID, $a_iFieldsTypeID)
+    public function __construct($a_iID, $a_iBookieID, $a_sTemplate, $a_sTemplateNeg, $a_iPropTypeID, $a_iFieldsTypeID, $a_sLastUsed)
     {
         $this->iID = $a_iID;
         $this->iBookieID = $a_iBookieID;
@@ -22,6 +23,7 @@ class PropTemplate
         $this->iPropTypeID = $a_iPropTypeID;
         $this->sTemplateNeg = $a_sTemplateNeg;
         $this->iFieldsTypeID = $a_iFieldsTypeID;
+        $this->sLastUsed = $a_sLastUsed;
 
         //Match all prop variables (<A-Z>) and store these as array
         if (preg_match_all('/<[A-Z]+?>/', $this->sTemplate, $this->aTemplatePropValues))
@@ -129,6 +131,11 @@ class PropTemplate
     public function isEventProp()
     {
         return $this->bIsEventProp;
+    }
+
+    public function getLastUsedDate()
+    {
+        return $this->sLastUsed;
     }
 
 }

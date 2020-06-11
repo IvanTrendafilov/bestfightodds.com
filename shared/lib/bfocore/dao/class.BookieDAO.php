@@ -155,7 +155,7 @@ class BookieDAO
 
     public static function getPropTemplatesForBookie($a_iBookieID)
     {
-        $sQuery = 'SELECT bpt.id, bpt.bookie_id, bpt.template, bpt.template_neg, bpt.prop_type, bpt.fields_type, pt.is_eventprop
+        $sQuery = 'SELECT bpt.id, bpt.bookie_id, bpt.template, bpt.template_neg, bpt.prop_type, bpt.fields_type, pt.is_eventprop, bpt.last_used
                     FROM bookies_proptemplates bpt, prop_types pt
                     WHERE bpt.bookie_id = ?
                         AND bpt.prop_type = pt.id';
@@ -166,7 +166,7 @@ class BookieDAO
         $aTemplates = array();
         while ($aTemplate = mysqli_fetch_array($rResult))
         {
-            $oTempObj = new PropTemplate($aTemplate['id'], $aTemplate['bookie_id'], $aTemplate['template'], $aTemplate['template_neg'], $aTemplate['prop_type'], $aTemplate['fields_type']);
+            $oTempObj = new PropTemplate($aTemplate['id'], $aTemplate['bookie_id'], $aTemplate['template'], $aTemplate['template_neg'], $aTemplate['prop_type'], $aTemplate['fields_type'], $aTemplate['last_used']);
             $oTempObj->setEventProp($aTemplate['is_eventprop']);
             $aTemplates[] = $oTempObj;
         }
@@ -181,6 +181,15 @@ class BookieDAO
 
         $aParams = array($a_oPropTemplate->getBookieID(), $a_oPropTemplate->getTemplate(), $a_oPropTemplate->getPropTypeID(), $a_oPropTemplate->getTemplateNeg(), $a_oPropTemplate->getFieldsTypeID());
 
+        DBTools::doParamQuery($sQuery, $aParams);
+
+        return (DBTools::getAffectedRows() > 0 ? true : false);
+    }
+
+    public static function updateTemplateLastUsed($a_iTemplateID)
+    {
+        $sQuery = 'UPDATE bookies_proptemplates SET last_used = NOW() WHERE id = ?';
+        $aParams = array($a_iTemplateID);
         DBTools::doParamQuery($sQuery, $aParams);
 
         return (DBTools::getAffectedRows() > 0 ? true : false);

@@ -58,6 +58,7 @@ class PropParser
             return false;
         }
         $this->oLogger->log('--Template found for ' . $a_oProp->toString() . ': ' . $oTemplate->toString(), 1);
+        BookieHandler::updateTemplateLastUsed($oTemplate->getID());
 
 
         if ($oTemplate->isEventProp() == true) //TODO: Check if prop_type is event only

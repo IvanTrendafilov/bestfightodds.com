@@ -64,6 +64,11 @@ class BookieHandler
 
         return BookieDAO::addNewPropTemplate($a_oPropTemplate);
     }
+
+    public static function updateTemplateLastUsed($a_iTemplateID)
+    {
+        return BookieDAO::updateTemplateLastUsed($a_iTemplateID);
+    }
 }
 
 ?>

@@ -14,7 +14,7 @@ foreach ($aBookies as $oBookie)
 	$aPropTemplates = BookieHandler::getPropTemplatesForBookie($oBookie->getID());
 	foreach ($aPropTemplates as $oPropTemplate)
 	{
-		echo '<tr><td><b>' . $oPropTemplate->getID() . '</b></td><td>' . $oPropTemplate->toString() . '</td><td><b>' . $oPropTemplate->getPropTypeID() . '</b></td><td>e.g: ' . $oPropTemplate->getFieldsTypeAsExample()  . '</td><td></td></tr>';
+		echo '<tr><td><b>' . $oPropTemplate->getID() . '</b></td><td>' . $oPropTemplate->toString() . '</td><td><b>' . $oPropTemplate->getPropTypeID() . '</b></td><td>e.g: ' . $oPropTemplate->getFieldsTypeAsExample()  . '</td><td>' . $oPropTemplate->getLastUsed() . '</td></tr>';
 	}
 	echo '</table><br />';	
 }

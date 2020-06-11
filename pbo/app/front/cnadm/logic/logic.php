@@ -101,7 +101,7 @@ switch ($_GET['action'])
         checkPOSTParam('template');
         checkPOSTParam('negTemplate');
         //($a_iID, $a_iBookieID, $a_sTemplate, $a_sTemplateNeg, $a_iPropTypeID, $a_iFieldsTypeID)
-        $oPropTemplate = new PropTemplate(0, $_POST['bookieID'], $_POST['template'], $_POST['negTemplate'], $_POST['propTypeID'], $_POST['fieldsTypeID']);
+        $oPropTemplate = new PropTemplate(0, $_POST['bookieID'], $_POST['template'], $_POST['negTemplate'], $_POST['propTypeID'], $_POST['fieldsTypeID'], '');
 
         define('RETURN_PAGE', 'addNewPropTemplate');
         if ((BookieHandler::addNewPropTemplate($oPropTemplate)))
