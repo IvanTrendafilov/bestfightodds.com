@@ -481,7 +481,8 @@ $(document).ready(function() {
 
     initPage();
 
-    if ($('#auto-refresh-container').css('display') != 'none') {
+    //TODO: Auto refresh disabled
+    /*if ($('#auto-refresh-container').css('display') != 'none') {
         if (Cookies.get('bfo_autorefresh') !== null && !isNaN(Cookies.get('bfo_autorefresh')) && Cookies.get('bfo_autorefresh') == '0') {
             //Disable auto refresh
             $('#afSelectorOn').removeClass("list-checked");
@@ -496,7 +497,7 @@ $(document).ready(function() {
             $('#afSelectorOn').addClass("list-checked");
             $('span', $('#afSelectorOn')).css('display', 'inline-block');
         }
-    }
+    }*/ 
 
     //Bind dropdowns
     $('#formatSelector1').click(function() {

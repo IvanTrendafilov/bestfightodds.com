@@ -67,8 +67,8 @@
                             ></div>                 
                             <div id="auto-refresh-container"
                                 <?php
-                                 //Only display autorefresh-mode container if we are displaying an event or are on the front page
-                                 if (CURRENT_PAGE != '')
+                                 //TODO: Autorefresh currently disabled! Only display autorefresh-mode container if we are displaying an event or are on the front page
+                                 if (true || CURRENT_PAGE != '')
                                  {
                                      echo ' style="display: none" ';
                                  }
@@ -85,8 +85,8 @@
                             </div>
                             <div id="mob-divider" class="menu-divider"
                                 <?php
-                                 //Only display autorefresh-mode container if we are displaying an event or are on the front page
-                                 if (CURRENT_PAGE != '')
+                                 //TODO: Autorefresh currently disabled! Only display autorefresh-mode container if we are displaying an event or are on the front page
+                                 if (true || CURRENT_PAGE != '')
                                  {
                                      echo ' style="display: none" ';
                                  }
