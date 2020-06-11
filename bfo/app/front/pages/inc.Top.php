@@ -28,7 +28,7 @@
         <title><?php echo (defined('PAGE_OVERRIDE_TITLE') ? PAGE_OVERRIDE_TITLE . ' | Best Fight Odds': 'UFC &amp; MMA Odds &amp; Betting Lines | Best Fight Odds'); ?></title>
     </head>
     <body>
-        <script type="text/javascript" async src="/js/bfo.min.js?v=0.1.1"></script>
+        <script type="text/javascript" async src="/js/bfo.min.js?v=0.1.2"></script>
         <div class="header">
                 <div class="header-top">
                     <a href="/"><div class="logo"></div></a>
