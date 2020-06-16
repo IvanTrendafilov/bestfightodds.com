@@ -30,9 +30,8 @@ class XMLParserBetDSITemp
         //Actually JSON
         $json = json_decode($a_sPage, true);
 
-        foreach ($json[0] as $matchup)
+        foreach ($json as $matchup)
         {
-            var_dump($matchup);
             if ($matchup['SportType']['Name'] == 'MMA' && $matchup['IsLive'] == false) 
             {
                 $oParsedMatchup = new ParsedMatchup(
@@ -45,7 +44,7 @@ class XMLParserBetDSITemp
                 $oParsedSport->addParsedMatchup($oParsedMatchup);
 
                 //Add total if available
-                if (isset($matchup['PreviewOddsTotal']) && count($matchup['PreviewOddsTotal']) == 2)
+                /*if (isset($matchup['PreviewOddsTotal']) && count($matchup['PreviewOddsTotal']) == 2)
                 {
                     $oParsedProp = new ParsedProp(
                         $matchup['Name'] . ' : ' . $matchup['PreviewOddsTotal'][0]['Title'] . ' rounds',
@@ -57,7 +56,7 @@ class XMLParserBetDSITemp
                     //Add correlation ID
                     $oParsedProp->setCorrelationID((string) $matchup['ID']);
                     $oParsedSport->addFetchedProp($oParsedProp);
-                }
+                }*/
             }
         }
  
