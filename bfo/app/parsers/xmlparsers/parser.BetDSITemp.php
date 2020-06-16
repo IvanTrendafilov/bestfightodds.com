@@ -44,7 +44,7 @@ class XMLParserBetDSITemp
                 $oParsedSport->addParsedMatchup($oParsedMatchup);
 
                 //Add total if available
-                /*if (isset($matchup['PreviewOddsTotal']) && count($matchup['PreviewOddsTotal']) == 2)
+                if (isset($matchup['PreviewOddsTotal']) && count($matchup['PreviewOddsTotal']) == 2)
                 {
                     $oParsedProp = new ParsedProp(
                         $matchup['Name'] . ' : ' . $matchup['PreviewOddsTotal'][0]['Title'] . ' rounds',
@@ -56,11 +56,11 @@ class XMLParserBetDSITemp
                     //Add correlation ID
                     $oParsedProp->setCorrelationID((string) $matchup['ID']);
                     $oParsedSport->addFetchedProp($oParsedProp);
-                }*/
+                }
             }
         }
  
-        return $oParsedSport;
+        return [$oParsedSport];
     }
 
     public function checkAuthoritiveRun($a_aMetadata)
