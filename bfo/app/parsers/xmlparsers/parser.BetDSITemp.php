@@ -32,6 +32,7 @@ class XMLParserBetDSITemp
 
         foreach ($json as $matchup)
         {
+            var_dump($matchup);
             if ($matchup['SportType']['Name'] == 'MMA' && $matchup['IsLive'] == false) 
             {
                 $oParsedMatchup = new ParsedMatchup(
