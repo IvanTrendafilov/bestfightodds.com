@@ -30,7 +30,7 @@ class XMLParserBetDSITemp
         //Actually JSON
         $json = json_decode($a_sPage, true);
 
-        foreach ($json as $matchup)
+        foreach ($json[0] as $matchup)
         {
             var_dump($matchup);
             if ($matchup['SportType']['Name'] == 'MMA' && $matchup['IsLive'] == false) 
