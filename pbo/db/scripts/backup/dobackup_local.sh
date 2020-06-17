@@ -10,3 +10,4 @@ echo 'Dump complete'
 zip -j -9 -D $backupdir/$backupfilename.zip $backupdir/$backupfilename.sql
 echo 'Compression complete'
 rm $backupfilename.sql
+find $backupdir/pbo2_backup_* -mtime +8 -exec rm {} \;
