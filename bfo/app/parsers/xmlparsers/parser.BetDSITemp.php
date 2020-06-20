@@ -35,8 +35,8 @@ class XMLParserBetDSITemp
             if (($matchup['SportType']['Name'] == 'MMA' || $matchup['Category']['Name'] == 'UFC') && $matchup['IsLive'] == false) 
             {
                 $oParsedMatchup = new ParsedMatchup(
-                    $matchup['PreviewOddsMoneyLine'][0]['Title'],
-                    $matchup['PreviewOddsMoneyLine'][1]['Title'],
+                    $matchup['HomeTeamName'],
+                    $matchup['AwayTeamName'],
                     OddsTools::convertDecimalToMoneyline($matchup['PreviewOddsMoneyLine'][0]['Value']),
                     OddsTools::convertDecimalToMoneyline($matchup['PreviewOddsMoneyLine'][1]['Value'])
                 );
