@@ -34,6 +34,10 @@ class XMLParserBetDSITemp
         {
             if (($matchup['SportType']['Name'] == 'MMA' || $matchup['Category']['Name'] == 'UFC') && $matchup['IsLive'] == false) 
             {
+                //Fixes flipped names like Gastelum K. into K Gastelum
+                $matchup['HomeTeamName'] = preg_replace('/([a-zA-Z\-\s]+)\s([a-zA-Z])\./', '$2 $1', $matchup['HomeTeamName']);
+                $matchup['AwayTeamName'] = preg_replace('/([a-zA-Z\-\s]+)\s([a-zA-Z])\./', '$2 $1', $matchup['AwayTeamName']);
+
                 $oParsedMatchup = new ParsedMatchup(
                     $matchup['HomeTeamName'],
                     $matchup['AwayTeamName'],
@@ -52,8 +56,8 @@ class XMLParserBetDSITemp
                         if ($matchup['PreviewOddsTotal'][$i]['SpecialBetValue'] == $matchup['PreviewOddsTotal'][$i + 1]['SpecialBetValue'])
                         {
                             $oParsedProp = new ParsedProp(
-                                $matchup['Name'] . ' : ' . $matchup['PreviewOddsTotal'][$i]['Title'] . ' rounds',
-                                $matchup['Name'] . ' : ' . $matchup['PreviewOddsTotal'][$i + 1]['Title'] . ' rounds',
+                                $matchup['HomeTeamName'] . ' - ' . $matchup['AwayTeamName'] . ' : ' . $matchup['PreviewOddsTotal'][$i]['Title'] . ' rounds',
+                                $matchup['HomeTeamName'] . ' - ' . $matchup['AwayTeamName'] . ' : ' . $matchup['PreviewOddsTotal'][$i + 1]['Title'] . ' rounds',
                                 OddsTools::convertDecimalToMoneyline($matchup['PreviewOddsTotal'][$i]['Value']),
                                 OddsTools::convertDecimalToMoneyline($matchup['PreviewOddsTotal'][$i + 1]['Value'])
                             );
