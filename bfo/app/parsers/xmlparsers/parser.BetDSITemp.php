@@ -32,7 +32,7 @@ class XMLParserBetDSITemp
 
         foreach ($json as $matchup)
         {
-            if ($matchup['SportType']['Name'] == 'MMA' && $matchup['IsLive'] == false) 
+            if (($matchup['SportType']['Name'] == 'MMA' || $matchup['Category']['Name'] == 'UFC') && $matchup['IsLive'] == false) 
             {
                 $oParsedMatchup = new ParsedMatchup(
                     $matchup['PreviewOddsMoneyLine'][0]['Title'],
