@@ -46,12 +46,19 @@ class XMLParserBetDSITemp
                 //Add total if available
                 if (isset($matchup['PreviewOddsTotal']) && count($matchup['PreviewOddsTotal']) == 2)
                 {
-                    $oParsedProp = new ParsedProp(
-                        $matchup['Name'] . ' : ' . $matchup['PreviewOddsTotal'][0]['Title'] . ' rounds',
-                        $matchup['Name'] . ' : ' . $matchup['PreviewOddsTotal'][1]['Title'] . ' rounds',
-                        OddsTools::convertDecimalToMoneyline($matchup['PreviewOddsTotal'][0]['Value']),
-                        OddsTools::convertDecimalToMoneyline($matchup['PreviewOddsTotal'][1]['Value'])
-                    );
+                    //Loop through pairs of 1.5, 2.5, ..
+                    for ($i = 0; $i < count($matchup['PreviewOddsTotal']); $i += 2)
+                    {
+                        if ($matchup['PreviewOddsTotal'][$i]['SpecialBetValue'] == $matchup['PreviewOddsTotal'][$i + 1]['SpecialBetValue'])
+                        {
+                            $oParsedProp = new ParsedProp(
+                                $matchup['Name'] . ' : ' . $matchup['PreviewOddsTotal'][$i]['Title'] . ' rounds',
+                                $matchup['Name'] . ' : ' . $matchup['PreviewOddsTotal'][$i + 1]['Title'] . ' rounds',
+                                OddsTools::convertDecimalToMoneyline($matchup['PreviewOddsTotal'][$i]['Value']),
+                                OddsTools::convertDecimalToMoneyline($matchup['PreviewOddsTotal'][$i + 1]['Value'])
+                            );
+                        }
+                    }
 
                     //Add correlation ID
                     $oParsedProp->setCorrelationID((string) $matchup['ID']);
