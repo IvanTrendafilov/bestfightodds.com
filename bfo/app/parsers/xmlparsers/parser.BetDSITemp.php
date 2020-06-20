@@ -44,7 +44,7 @@ class XMLParserBetDSITemp
                 $oParsedSport->addParsedMatchup($oParsedMatchup);
 
                 //Add total if available
-                if (isset($matchup['PreviewOddsTotal']) && count($matchup['PreviewOddsTotal']) == 2)
+                if (isset($matchup['PreviewOddsTotal']) && count($matchup['PreviewOddsTotal']) >= 2)
                 {
                     //Loop through pairs of 1.5, 2.5, ..
                     for ($i = 0; $i < count($matchup['PreviewOddsTotal']); $i += 2)
