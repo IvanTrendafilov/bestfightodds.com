@@ -57,12 +57,13 @@ class XMLParserBetDSITemp
                                 OddsTools::convertDecimalToMoneyline($matchup['PreviewOddsTotal'][$i]['Value']),
                                 OddsTools::convertDecimalToMoneyline($matchup['PreviewOddsTotal'][$i + 1]['Value'])
                             );
+                            //Add correlation ID
+                            $oParsedProp->setCorrelationID((string) $matchup['ID']);
+                            $oParsedSport->addFetchedProp($oParsedProp);
                         }
                     }
 
-                    //Add correlation ID
-                    $oParsedProp->setCorrelationID((string) $matchup['ID']);
-                    $oParsedSport->addFetchedProp($oParsedProp);
+
                 }
             }
         }
