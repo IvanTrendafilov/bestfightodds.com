@@ -71,7 +71,14 @@ class XMLParserBetDSITemp
                 }
             }
         }
- 
+
+        //Declare authorative run if we fill the criteria
+        if (count($oParsedSport->getParsedMatchups()) >= 3)
+        {
+            $this->bAuthorativeRun = true;
+            Logger::getInstance()->log("Declared authoritive run", 0);
+        }
+
         return [$oParsedSport];
     }
 
