@@ -13,6 +13,7 @@ require_once('lib/bfocore/parser/utils/class.ParseTools.php');
  */
 class XMLParserBetOnlineAlt
 {
+    private $bAuthorativeRun = false;
 
     public function parseXML($a_sXML)
     {
@@ -43,6 +44,13 @@ class XMLParserBetOnlineAlt
             }
         }
 
+        //Declare authorative run if we fill the criteria
+        if (count($oParsedSport->getParsedMatchups()) >= 5)
+        {
+            $this->bAuthorativeRun = true;
+            Logger::getInstance()->log("Declared authoritive run", 0);
+        }
+
         $aSports[] = $oParsedSport;
 
         return $aSports;
@@ -71,6 +79,11 @@ class XMLParserBetOnlineAlt
         $sRetXML .= '</matchups>';
 
         return $sRetXML;
+    }
+
+    public function checkAuthoritiveRun($a_aMetadata)
+    {
+        return $this->bAuthorativeRun;
     }
 
 }
