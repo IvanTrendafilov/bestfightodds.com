@@ -14,15 +14,15 @@ if (isset($_GET['b']) && $_GET['b'] == '5')
 		$lang = substr($lang, 0, $strpos);
 	}
 
-	if ($lang == 'en-US')
+	if (strtolower($lang) == 'en-ca')
 	{
-		//Bovada redir
-		$sURL = 'http://record.bettingpartners.com/_3_I4QQ0O0x7R1HsxxA1_FGNd7ZgqdRLk/1/';	
+		//Bodog redir (CA)
+		$sURL = 'https://record.revenuenetwork.com/_0cjkasW-cHa_nF6nwlBnq2Nd7ZgqdRLk/0/';	
 	}
 	else
 	{
-		//Bodog redir
-		$sURL = 'http://record.bettingpartners.com/_3_I4QQ0O0x6cp_Bvs7i_umNd7ZgqdRLk/1/';	
+		//Bovada redir (US)
+		$sURL = 'https://record.revenuenetwork.com/_0cjkasW-cHbRrdgFjGHowWNd7ZgqdRLk/0/';	
 	}
 	
 	header('Location: ' . $sURL);
