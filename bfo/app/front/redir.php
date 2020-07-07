@@ -21,8 +21,9 @@ if (isset($_GET['b']) && $_GET['b'] == '5')
 	}
 	else
 	{
+		$oBookie = BookieHandler::getBookieByID($_GET['b']);
 		//Bovada redir (US)
-		$sURL = 'https://record.revenuenetwork.com/_0cjkasW-cHbRrdgFjGHowWNd7ZgqdRLk/0/';	
+		$sURL = $oBookie->getRefURL();
 	}
 	
 	header('Location: ' . $sURL);
