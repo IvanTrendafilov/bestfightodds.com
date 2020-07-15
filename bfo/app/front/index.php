@@ -147,7 +147,7 @@ if (GENERAL_PRODUCTION_MODE == false && $_GET['p'] == 'event' && $oEvent != null
     }
 
 }
-else if (GENERAL_PRODUCTION_MODE == false && $_GET['p'] = 'event' && $oEvent == null)
+else if (GENERAL_PRODUCTION_MODE == false && $_GET['p'] == 'event' && $oEvent == null)
 {
     error_log('Invalid event requested at ' . $_SERVER['REQUEST_URI']);
     header('Location: https://' . $_SERVER['SERVER_NAME'] . '/', true, 302);
