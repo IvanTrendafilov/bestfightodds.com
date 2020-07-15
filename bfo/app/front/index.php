@@ -116,7 +116,7 @@ else
 }
 
 //Anti scraping check and SEO redirect for old event page URLs
-if ($_GET['p'] == 'event' && $oEvent != null)
+if (isset($_GET['p']) && $_GET['p'] == 'event' && $oEvent != null)
 {
     //Check if incoming URL matches the slug URL for this event. If partially, we accept this and redirect with 301 to the real URL.
     //If not partially, then we assume its a bot scraping so we redirect to the main page
@@ -145,7 +145,7 @@ if ($_GET['p'] == 'event' && $oEvent != null)
     }
 
 }
-else if ($_GET['p'] == 'event' && $oEvent == null)
+else if (isset($_GET['p']) && $_GET['p'] == 'event' && $oEvent == null)
 {
     //No event found, redirect (302 Temporary) to main page
     error_log('Invalid event requested at ' . $_SERVER['REQUEST_URI']);
