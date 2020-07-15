@@ -46,8 +46,7 @@ class XMLParser5Dimes
                     && ((int) $cEvent->IsCancelled) != 1
                     && ((int) $cEvent->isGraded) != 1)
                     && !((trim((string) $cEvent->HomeMoneyLine) == '-99999') && (trim((string) $cEvent->VisitorMoneyLine) == '-99999'))
-                    && !strpos(strtolower((string)$cEvent->Header), 'boxing propositions'
-                    && !(trim($cEvent->GameNumber) == '637517256' && ((float) trim($cEvent->HomeMoneyLineEU)) > 1.2)) //Temporary jack shore dupe remove
+                    && !strpos(strtolower((string)$cEvent->Header), 'boxing propositions')
             )
             {
 
@@ -132,6 +131,13 @@ class XMLParser5Dimes
                 //Entry is a regular matchup, add as one
                 else
                 {
+                    //TODO: Temporary Jack Shore duplicate fix
+                    if ($cEvent->GameNumber == '637517256' && (float) $cEvent->HomeMoneyLineEU > 1.2)
+                    {
+                        Logger::getInstance()->log("Removing the jack shore dupe", -1);
+                        break;
+                    }
+
                     if ((trim((string) $cEvent->HomeMoneyLine) != '')
                     && (trim((string) $cEvent->VisitorMoneyLine) != ''))
                     {
