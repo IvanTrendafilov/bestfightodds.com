@@ -47,7 +47,7 @@ class XMLParser5Dimes
                     && ((int) $cEvent->isGraded) != 1)
                     && !((trim((string) $cEvent->HomeMoneyLine) == '-99999') && (trim((string) $cEvent->VisitorMoneyLine) == '-99999'))
                     && !strpos(strtolower((string)$cEvent->Header), 'boxing propositions'
-                    && !($cEvent->GameNumber == '637517256' && (float) $cEvent->HomeMoneyLineEU > 1.2)) //Temporary jack shore dupe remove
+                    && !(trim($cEvent->GameNumber) == '637517256' && ((float) trim($cEvent->HomeMoneyLineEU)) > 1.2)) //Temporary jack shore dupe remove
             )
             {
 
