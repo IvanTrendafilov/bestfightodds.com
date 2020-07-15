@@ -138,12 +138,13 @@ if (GENERAL_PRODUCTION_MODE == false && $_GET['p'] == 'event' && $oEvent != null
         {
             //Slug matches partially, redirect with 301 to real URL
             echo 'Partial match';
+            header('Location: https://' . $_SERVER['SERVER_NAME'] . '/events/' . $oEvent->getEventAsLinkString()', true, 302);
             exit;
         }
         else
         {
             //Slug does not match partially, redirect to main page with a 302
-            echo 'No partial match';
+            header('Location: https://' . $_SERVER['SERVER_NAME'] . '/', true, 302);
             exit;
         }
     }
@@ -151,9 +152,10 @@ if (GENERAL_PRODUCTION_MODE == false && $_GET['p'] == 'event' && $oEvent != null
 }
 else if (GENERAL_PRODUCTION_MODE == false && $_GET['p'] == 'event' && $oEvent == null)
 {
+    //No event found, redirect (302 Temporary) to main page
     error_log('Invalid event requested at ' . $_SERVER['REQUEST_URI']);
     header('Location: https://' . $_SERVER['SERVER_NAME'] . '/', true, 302);
-    //No event found, redirect (302 Temporary) to main page
+    exit;
 }
 
 
