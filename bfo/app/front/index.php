@@ -121,18 +121,20 @@ if (GENERAL_PRODUCTION_MODE == false && $_GET['p'] == 'event' && $oEvent != null
     //Check if incoming URL matches the slug URL for this event. If partially, we accept this and redirect with 301 to the real URL.
     //If not partially, then we assume its a bot scraping so we redirect to the main page
 
-    echo 'Requested URL is: ' . $_SERVER['REQUEST_URI'];
+    $request_url = rtrim($_SERVER['REQUEST_URI'], "/");
+
+    echo 'Requested URL is: ' . $request_url;
     echo '<br>';
     echo 'Event URL is: /events/' . $oEvent->getEventAsLinkString();
     echo '<br>';
 
-    if ('/events/' . $oEvent->getEventAsLinkString() != $_SERVER['REQUEST_URI'])
+    if ('/events/' . $oEvent->getEventAsLinkString() != $request_url)
     {
         //URL does not match, check partial match
         $iMarkPos = strpos($oEvent->getName(), ':') != null ? strpos($oEvent->getName(), ':') : strlen($oEvent->getName()); //Find position of ':'
         $sMatchEvent = strtolower(LinkTools::slugString(substr($oEvent->getName(), 0, $iMarkPos)));
 
-        if ($sMatchEvent == strtolower(substr($_SERVER['REQUEST_URI'], 8, strlen($sMatchEvent))))
+        if ($sMatchEvent == strtolower(substr($request_url, 8, strlen($sMatchEvent))))
         {
             //Slug matches partially, redirect with 301 to real URL
             echo 'Partial match';
