@@ -137,6 +137,10 @@ class XMLParser5Dimes
                         Logger::getInstance()->log("Removing the jack shore dupe", -1);
                         break;
                     }
+                    else if ($cEvent->GameNumber == '637517256')
+                    {
+                        Logger::getInstance()->log("Could not remove dupe: " . (float) $cEvent->HomeMoneyLineEU, -1);
+                    }
 
                     if ((trim((string) $cEvent->HomeMoneyLine) != '')
                     && (trim((string) $cEvent->VisitorMoneyLine) != ''))
