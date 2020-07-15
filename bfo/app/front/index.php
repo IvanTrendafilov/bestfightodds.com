@@ -11,6 +11,7 @@
  */
 require_once('lib/bfocore/general/class.FighterHandler.php');
 require_once('lib/bfocore/general/class.EventHandler.php');
+require_once('lib/bfocore/utils/class.LinkTools.php');
 
 //Enable override of cookies through params
 if (isset($_GET['display']))
@@ -114,13 +115,43 @@ else
     define('CURRENT_PAGE', '');
 }
 
-//SEO redirect for old event page URLs
+//Anti scraping check and SEO redirect for old event page URLs
 if (GENERAL_PRODUCTION_MODE == false && $_GET['p'] == 'event' && $oEvent != null)
 {
-    //Check if incoming URL matches the slug URL for this event
-    echo 'Slug is: ' . $oEvent->getEventAsLinkString();
-    echo 'Request is: ' .  $_SERVER['REQUEST_URI'];
-    exit;
+    //Check if incoming URL matches the slug URL for this event. If partially, we accept this and redirect with 301 to the real URL.
+    //If not partially, then we assume its a bot scraping so we redirect to the main page
+
+    echo 'Requested URL is: ' . $_SERVER['REQUEST_URI'];
+    echo '<br>';
+    echo 'Event URL is: /events/' . $oEvent->getEventAsLinkString();
+    echo '<br>';
+
+    if ('/events/' . $oEvent->getEventAsLinkString() != $_SERVER['REQUEST_URI'])
+    {
+        //URL does not match, check partial match
+        $iMarkPos = strpos($oEvent->getName(), ':') != null ? strpos($oEvent->getName(), ':') : strlen($oEvent->getName()); //Find position of ':'
+        $sMatchEvent = strtolower(LinkTools::slugString(substr($oEvent->getName(), 0, $iMarkPos)));
+
+        if ($sMatchEvent == strtolower(substr($_SERVER['REQUEST_URI'], 8, strlen($sMatchEvent))))
+        {
+            //Slug matches partially, redirect with 301 to real URL
+            echo 'Partial match';
+            exit;
+        }
+        else
+        {
+            //Slug does not match partially, redirect to main page with a 302
+            echo 'No partial match';
+            exit;
+        }
+    }
+
+}
+else if (GENERAL_PRODUCTION_MODE == false && $_GET['p'] = 'event' && $oEvent == null)
+{
+    error_log('Invalid event requested at ' . $_SERVER['REQUEST_URI']);
+    header('Location: https://' . $_SERVER['SERVER_NAME'] . '/', true, 302);
+    //No event found, redirect (302 Temporary) to main page
 }
 
 
