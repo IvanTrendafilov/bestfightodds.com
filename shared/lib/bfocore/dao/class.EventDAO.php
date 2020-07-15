@@ -942,11 +942,9 @@ fo2.bookie_id, fo2.fight_id ASC;';
         $sQuery = 'SELECT id, date, name, display
                     FROM events
                     WHERE LEFT(date, 10) < LEFT((NOW() - INTERVAL ' . GENERAL_GRACEPERIOD_SHOW . ' HOUR), 10)
-                    ORDER BY date DESC, name DESC LIMIT ?,?';
-        $aParams = array($a_iOffset, $a_iLimit);
+                    ORDER BY date DESC, name DESC LIMIT ' . $a_iOffset . ',' . $a_iLimit . '';
 
-        $rResult = DBTools::doParamQuery($sQuery, $aParams);
-        
+        $rResult = DBTools::doQuery($sQuery);
         $aEvents = array();
         while ($aEvent = mysqli_fetch_array($rResult))
         {
