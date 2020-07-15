@@ -116,17 +116,12 @@ else
 }
 
 //Anti scraping check and SEO redirect for old event page URLs
-if (GENERAL_PRODUCTION_MODE == false && $_GET['p'] == 'event' && $oEvent != null)
+if ($_GET['p'] == 'event' && $oEvent != null)
 {
     //Check if incoming URL matches the slug URL for this event. If partially, we accept this and redirect with 301 to the real URL.
     //If not partially, then we assume its a bot scraping so we redirect to the main page
 
     $request_url = rtrim($_SERVER['REQUEST_URI'], "/");
-
-    echo 'Requested URL is: ' . $request_url;
-    echo '<br>';
-    echo 'Event URL is: /events/' . $oEvent->getEventAsLinkString();
-    echo '<br>';
 
     if ('/events/' . $oEvent->getEventAsLinkString() != $request_url)
     {
@@ -137,8 +132,7 @@ if (GENERAL_PRODUCTION_MODE == false && $_GET['p'] == 'event' && $oEvent != null
         if ($sMatchEvent == strtolower(substr($request_url, 8, strlen($sMatchEvent))))
         {
             //Slug matches partially, redirect with 301 to real URL
-            echo 'Partial match';
-            header('Location: https://' . $_SERVER['SERVER_NAME'] . '/events/' . $oEvent->getEventAsLinkString(), true, 302);
+            header('Location: https://' . $_SERVER['SERVER_NAME'] . '/events/' . $oEvent->getEventAsLinkString(), true, 301);
             exit;
         }
         else
@@ -150,7 +144,7 @@ if (GENERAL_PRODUCTION_MODE == false && $_GET['p'] == 'event' && $oEvent != null
     }
 
 }
-else if (GENERAL_PRODUCTION_MODE == false && $_GET['p'] == 'event' && $oEvent == null)
+else if ($_GET['p'] == 'event' && $oEvent == null)
 {
     //No event found, redirect (302 Temporary) to main page
     error_log('Invalid event requested at ' . $_SERVER['REQUEST_URI']);
