@@ -138,7 +138,7 @@ if (GENERAL_PRODUCTION_MODE == false && $_GET['p'] == 'event' && $oEvent != null
         {
             //Slug matches partially, redirect with 301 to real URL
             echo 'Partial match';
-            header('Location: https://' . $_SERVER['SERVER_NAME'] . '/events/' . $oEvent->getEventAsLinkString()', true, 302);
+            header('Location: https://' . $_SERVER['SERVER_NAME'] . '/events/' . $oEvent->getEventAsLinkString(), true, 302);
             exit;
         }
         else
