@@ -25,28 +25,6 @@ require_once('app/front/pages/inc.FrontLogic.php');
 
 $oEvent = EventHandler::getEvent((int) $_GET['eventID']);
 
-//Check that slugged title matches, to stop bots
-$iMarkPos = 0;
-$sMatchEvent = '';
-if ($oEvent != null)
-{
-    $iMarkPos = strpos($oEvent->getName(), ':') != null ? strpos($oEvent->getName(), ':') : strlen($oEvent->getName());
-    $sMatchEvent = strtolower(LinkTools::slugString(substr($oEvent->getName(), 0, $iMarkPos)));    
-}
-
-if ($oEvent == null ||
-    $sMatchEvent != strtolower(substr($_SERVER['REQUEST_URI'], 8, strlen($sMatchEvent))))
-{
-    error_log('Invalid event requested at ' . $_SERVER['REQUEST_URI']);
-    //Headers already sent so redirect must be done using js
-    echo '<script type="text/javascript">
-        <!--
-        window.location = "/"
-        //-->
-        </script>';
-    exit();
-}
-
 $sOverlibStyle = ', FGCOLOR, \'#eeeeee\', BGCOLOR, \'#1f2a34\', BORDER, 1';
 
 $iCellCounter = 0;
