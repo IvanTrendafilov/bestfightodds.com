@@ -120,6 +120,7 @@ if (GENERAL_PRODUCTION_MODE == false && $_GET['p'] == 'event' && $oEvent != null
     //Check if incoming URL matches the slug URL for this event
     echo 'Slug is: ' . $oEvent->getEventAsLinkString();
     echo 'Request is: ' .  $_SERVER['REQUEST_URI'];
+    exit;
 }
 
 
