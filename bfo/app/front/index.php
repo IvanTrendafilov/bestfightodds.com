@@ -63,6 +63,9 @@ header('Cache-Control: no-cache, no-store, max-age=0, must-revalidate');
 header('Expires: Mon, 12 Jul 1996 04:11:00 GMT'); //Any date passed.
 header('Pragma: no-cache');
 
+$oEvent = null;
+
+//Override titles, descriptions and keywords
 if (isset($_GET['p']))
 {
     define('CURRENT_PAGE', $_GET['p']);
@@ -110,6 +113,18 @@ else
 {
     define('CURRENT_PAGE', '');
 }
+
+//SEO redirect for old event page URLs
+if (GENERAL_PRODUCTION_MODE == false && $_GET['p'] == 'event' && $oEvent != null)
+{
+    //Check if incoming URL matches the slug URL for this event
+    echo 'Slug is: ' . $oEvent->getEventAsLinkString();
+    echo 'Request is: ' .  $_SERVER['REQUEST_URI'];
+}
+
+
+
+
 include_once('app/front/pages/inc.Top.php');
 
 if (isset($_GET['p']) && (
