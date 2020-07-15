@@ -132,6 +132,7 @@ if ($_GET['p'] == 'event' && $oEvent != null)
         if ($sMatchEvent == strtolower(substr($request_url, 8, strlen($sMatchEvent))))
         {
             //Slug matches partially, redirect with 301 to real URL
+            error_log('Incorrect slug URL, correcting with 301: ' . $_SERVER['REQUEST_URI'] . ' - New: /events/' . $oEvent->getEventAsLinkString()); //TODO: Can probably be removed later on when stable
             header('Location: https://' . $_SERVER['SERVER_NAME'] . '/events/' . $oEvent->getEventAsLinkString(), true, 301);
             exit;
         }
