@@ -36,7 +36,7 @@ class ResultsParser
 		$event_parser->startParseEventResults();
 
 		$team_parser = new TeamPageParser($this->logger);
-		//$team_parser->startParseTeamResults();
+		$team_parser->startParseTeamResults();
 
 
 
