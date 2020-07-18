@@ -1054,9 +1054,9 @@ fo2.bookie_id, fo2.fight_id ASC;';
 
     public static function getAllEventsWithMatchupsWithoutResults()
     {
-        $sQuery = 'SELECT DISTINCT e.* FROM fights f INNER JOIN events e ON f.event_id = e.id 
-                    WHERE f.id NOT IN (SELECT mr.matchup_id FROM matchups_results mr)
-                    AND LEFT(e.date, 10) < LEFT((NOW() - INTERVAL ' . GENERAL_GRACEPERIOD_SHOW . ' HOUR), 10);';
+        $sQuery = 'SELECT DISTINCT e.* FROM events e INNER JOIN fights f ON e.id = f.event_id LEFT JOIN matchups_results mr ON mr.matchup_id = f.id WHERE mr.matchup_id IS NULL
+                        AND LEFT(e.date, 10) < LEFT((NOW() - INTERVAL ' . GENERAL_GRACEPERIOD_SHOW . ' HOUR), 10)';
+        
         $rResult = DBTools::doQuery($sQuery);
         $aEvents = array();
         while ($aEvent = mysqli_fetch_array($rResult))

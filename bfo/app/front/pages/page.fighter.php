@@ -54,7 +54,7 @@ if ($bCached == false || empty($sBuffer))
                                 <th>Result</th>
                                 <th>Matchup</th>
                                 <th style="text-align: right; padding-right: 4px;">Open</th>
-                                <th style="text-align: right; width: 110px;" colspan="3">Close (Worst&ndash;Best)</th>
+                                <th style="text-align: center; width: 110px;" colspan="3">Closing range</th>
                                 <th class="header-movement">Movement</th>
                                 <th></th>
                                 <th class="item-non-mobile" style="padding-left: 20px">Event</th>
@@ -164,7 +164,7 @@ if ($bCached == false || empty($sBuffer))
                                         <td class="moneyline" style="padding-right: 4px;"><span id="oID<?php echo $iCellCounter++; ?>"><?php echo $oOpeningOdds->getFighterOddsAsString($iTeamPos); ?></span></td>
                                         <td class="moneyline"><span id="oID<?php echo $iCellCounter++; ?>"><?php echo ($iTeamPos == 1 ? $oFighter1Low->getFighterOddsAsString(1) : $oFighter2Low->getFighterOddsAsString(2)); ?></span></td>
                                         <td class="dash-cell">&ndash;</td>
-                                        <td class="moneyline" style="text-align: left; padding-left: 0; padding-right: 7px;"><span id="oID<?php echo $iCellCounter++; ?>" class="bestbet"><?php echo ($iTeamPos == 1 ? $oFighter1High->getFighterOddsAsString(1) : $oFighter2High->getFighterOddsAsString(2)); ?></span></td>
+                                        <td class="moneyline" style="text-align: left; padding-left: 0; padding-right: 7px;"><span id="oID<?php echo $iCellCounter++; ?>"><?php echo ($iTeamPos == 1 ? $oFighter1High->getFighterOddsAsString(1) : $oFighter2High->getFighterOddsAsString(2)); ?></span></td>
 
                                     <?php
                                         //Disable sparkline if only one row
@@ -193,7 +193,7 @@ if ($bCached == false || empty($sBuffer))
                                                 <td class="moneyline" style="padding-right: 4px;"><span id="oID<?php echo $iCellCounter++; ?>"><?php echo $oOpeningOdds->getFighterOddsAsString($iOtherPos); ?></span></td>
                                                 <td class="moneyline"><span id="oID<?php echo $iCellCounter++; ?>"><?php echo ($iTeamPos == 1 ? $oFighter2Low->getFighterOddsAsString(2) : $oFighter1Low->getFighterOddsAsString(1)); ?></span></td>
                                                 <td class="dash-cell">&ndash;</td>
-                                                <td class="moneyline" style="text-align: left; padding-left: 0"><span id="oID<?php echo $iCellCounter++; ?>" class="bestbet"><?php echo ($iTeamPos == 1 ? $oFighter2High->getFighterOddsAsString(2) : $oFighter1High->getFighterOddsAsString(1)); ?></span></td>
+                                                <td class="moneyline" style="text-align: left; padding-left: 0"><span id="oID<?php echo $iCellCounter++; ?>"><?php echo ($iTeamPos == 1 ? $oFighter2High->getFighterOddsAsString(2) : $oFighter1High->getFighterOddsAsString(1)); ?></span></td>
 
                                         <td class="item-non-mobile" style="padding-left: 20px"><?php echo $sEventDate; ?></td>
                                     </tr>
