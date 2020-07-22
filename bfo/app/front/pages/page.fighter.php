@@ -51,7 +51,7 @@ if ($bCached == false || empty($sBuffer))
                     <table class="team-stats-table" cellspacing="0" summary="Odds history for <?php echo $oFighter->getNameAsString(); ?>">
                         <thead>
                             <tr>
-                                <th>Result</th>
+                                <?php //<th>Result</th> ?>
                                 <th>Matchup</th>
                                 <th style="text-align: right; padding-right: 4px;">Open</th>
                                 <th style="text-align: center; width: 110px;" colspan="3">Closing range</th>
