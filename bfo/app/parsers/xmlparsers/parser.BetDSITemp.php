@@ -32,7 +32,7 @@ class XMLParserBetDSITemp
 
         foreach ($json as $matchup)
         {
-            if (($matchup['SportType']['Name'] == 'MMA' || $matchup['Category']['Name'] == 'UFC') && $matchup['IsLive'] == false) 
+            if (($matchup['SportType']['Name'] == 'MMA' || $matchup['Category']['Name'] == 'UFC' || $matchup['Category']['Name'] == 'LFA' || $matchup['Category']['Name'] == 'Bellator' || $matchup['Category']['Name'] == 'Invicta') && $matchup['IsLive'] == false) 
             {
                 //Fixes flipped names like Gastelum K. into K Gastelum
                 $matchup['HomeTeamName'] = preg_replace('/([a-zA-Z\-\s]+)\s([a-zA-Z])\./', '$2 $1', $matchup['HomeTeamName']);
