@@ -17,7 +17,7 @@ gulp.task('styles', function() {
 
 //Javascript optimizations and concactinations
 gulp.task('scripts', function() {
-        return gulp.src(['./app/front/js/lib/jquery-3.5.1.min.js', './app/front/js/lib/js.cookie.js', './app/front/js/lib/highcharts.js', './app/front/js/lib/highcharts-more.js', './app/front/js/lib/fastclick-min.js'
+        return gulp.src(['./app/front/js/lib/jquery-1.11.3.min.js', './app/front/js/lib/js.cookie.js', './app/front/js/lib/highcharts.js', './app/front/js/lib/highcharts-more.js', './app/front/js/lib/fastclick-min.js'
             ,'./app/front/js/bfo_main.js','./app/front/js/bfo_charts.js'])
         .pipe(uglify({
           output: {
