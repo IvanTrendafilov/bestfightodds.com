@@ -39,12 +39,15 @@ class ScheduleParser
 	{
 		foreach ($a_aSchedule as $aEvent)
 		{
-			//Check if event matches an existing stored event
+			//Check if event matches an existing stored event. Must be numered though
 			$aStoredEvents = EventHandler::getAllUpcomingEvents();
 			$bFound = false;
 			foreach ($aStoredEvents as $oStoredEvent)
 			{
-				if ($oStoredEvent->getName() == $aEvent['title'] && $bFound == false)
+				//Check if numbered as well so we dont match generic ones like UFC Fight Night
+				$aPrefixParts = explode(':', $aEvent['title']);
+				$aPrefixParts = explode(' ', $aPrefixParts[0]);
+				if ($oStoredEvent->getName() == $aEvent['title'] && $bFound == false && is_numeric($aPrefixParts[count($aPrefixParts) - 1]))
 				{
 					$bFound = true;
 					$this->parseMatchups($aEvent, $oStoredEvent);
