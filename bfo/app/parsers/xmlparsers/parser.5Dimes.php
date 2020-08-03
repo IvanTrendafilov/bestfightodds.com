@@ -131,13 +131,6 @@ class XMLParser5Dimes
                 //Entry is a regular matchup, add as one
                 else
                 {
-                    //TODO: Temporary Jack Shore duplicate fix
-                    if ($cEvent->GameNumber == '637517256' && (float) $cEvent->HomeMoneyLineEU > 1.2)
-                    {
-                        Logger::getInstance()->log("Removing the jack shore dupe", -1);
-                        break;
-                    }
-
                     if ((trim((string) $cEvent->HomeMoneyLine) != '')
                     && (trim((string) $cEvent->VisitorMoneyLine) != ''))
                     {
