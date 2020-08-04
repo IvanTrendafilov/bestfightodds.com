@@ -5,6 +5,8 @@
         <meta name="description" content="<?php echo (defined('PAGE_OVERRIDE_DESCRIPTION') ? PAGE_OVERRIDE_DESCRIPTION . ' ' : ''); ?>UFC/MMA odds comparison service. Compare the latest UFC/MMA fight odds and betting lines from the top online sportsbooks" />
         <meta name="keywords" content="<?php echo (defined('PAGE_OVERRIDE_KEYWORDS') ? PAGE_OVERRIDE_KEYWORDS . ', ' : ''); ?>mma odds, mma betting, mma lines, ufc odds, ufc, mma, odds, betting" />
         <meta property="og:image" content="https://www.bestfightodds.com/img/iconv2.jpg" />
+        <link rel="preconnect" href="https://www.google-analytics.com">
+        <link rel="preconnect" href="https://www.google.com">
         <link rel="preconnect" href="https://fonts.googleapis.com" crossorigin />
         <link rel="preload" as="style" href="https://fonts.googleapis.com/css?family=Roboto:500,700,400&display=swap" />
         <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:500,700,400&display=swap" media="print" onload="this.media='all'" />

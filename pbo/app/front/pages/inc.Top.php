@@ -5,6 +5,8 @@
         <meta name="description" content="<?php echo (defined('PAGE_OVERRIDE_DESCRIPTION') ? PAGE_OVERRIDE_DESCRIPTION . ' ' : ''); ?>Boxing odds comparison service. Find and compare the latest boxing lines from the top online betting sites." />
         <meta name="keywords" content="<?php echo (defined('PAGE_OVERRIDE_KEYWORDS') ? PAGE_OVERRIDE_KEYWORDS . ', ' : ''); ?>boxing odds, boxing betting, boxing lines, wbo odds, wbo, odds, betting" />
         <meta property="og:image" content="https://www.proboxingodds.com/img/iconv2.jpg" />
+        <link rel="preconnect" href="https://www.google-analytics.com">
+        <link rel="preconnect" href="https://www.google.com">
         <link rel="preconnect" href="https://fonts.googleapis.com" crossorigin />
         <link rel="preload" as="style" href="https://fonts.googleapis.com/css?family=Roboto:500,700,400&display=swap" />
         <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:500,700,400&display=swap" media="print" onload="this.media='all'" />
