@@ -159,11 +159,11 @@ input[type="submit"] {
   margin: 0 auto;
   width: 938px;
   position: relative;
+  font-size: 12px;
 }
 
 .header-menu-item {
-  height: 20px;
-  font-size: 11px;
+  
   display: inline-block;
   padding: 6px 16px 0 16px;
   font-weight: 500;
@@ -393,7 +393,7 @@ h1 {
 .content-sidebar {
   padding: 18px;
   height: 100%;
-  font-size: 11px;
+  font-size: 12px;
   width: 60%;
   color: #666;
   a {
@@ -882,7 +882,7 @@ ul.share-dropdown ul li a {
 
 table.team-stats-table {
   width: 100%;
-  font-size: 11px;
+  font-size: 12px;
   border-collapse: collapse;
   color: #222;
   background-color: #fff;
@@ -933,7 +933,7 @@ table.team-stats-table {
     th {
       padding-left: 3px;
       color: #1a1a1a;
-      font-size: 11px;
+      //font-size: 11px;
       font-weight: 500;
       word-break: break-word;
       a {
@@ -987,13 +987,12 @@ table.team-stats-table {
         }
       }
       &.resultcell {
-        display: none;
+        //display: none;
         font-weight: 500;
         text-align: center;
         width: 60px;
         div.method {
           font-weight: 400;
-          font-size: 9px;
           color: #777;
           line-height: 8px;
         }

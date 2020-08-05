@@ -72,43 +72,47 @@ if ($bCached == false || empty($sBuffer))
                         //Results processing
                         $aResults = EventHandler::getResultsForMatchup($oFight->getID());
                         $sMethod = '';
-                        switch ($aResults['method'])
+                        
+                        if (isset($aResults['method']))
                         {
-                            case 'unanimous dec':
-                                $sMethod = 'Decision (Unanimous)';
-                                break;
-                            case 'split dec':
-                                $sMethod = 'Decision (Split)';
-                                break;
-                            case 'majority dec':
-                                $sMethod = 'Decision (Majority)';
-                                break; 
-                            case 'tko/ko':
-                            case 'nc':
-                            case 'dq':
-                                $sMethod = strtoupper($aResults['method']);
-                                break;
-                            case 'submission':
-                            case 'draw':
-                            default:
-                                $sMethod = ucfirst($aResults['method']);
+                            switch ($aResults['method'])
+                            {
+                                case 'unanimous dec':
+                                    $sMethod = 'Decision (Unanimous)';
+                                    break;
+                                case 'split dec':
+                                    $sMethod = 'Decision (Split)';
+                                    break;
+                                case 'majority dec':
+                                    $sMethod = 'Decision (Majority)';
+                                    break; 
+                                case 'tko/ko':
+                                case 'nc':
+                                case 'dq':
+                                    $sMethod = strtoupper($aResults['method']);
+                                    break;
+                                case 'submission':
+                                case 'draw':
+                                default:
+                                    $sMethod = ucfirst($aResults['method']);
+                            }
                         }
 
                         //Determine cell class and text based on winner of the fight
                         $sResultClass = '';
                         $sResult = '';
-                        if ($aResults['method'] == 'nc' || $aResults['method'] == 'draw')
+                        if (isset($aResults['method']) && ($aResults['method'] == 'nc' || $aResults['method'] == 'draw'))
                         {
                             $sResultClass = 'drawcell';
                             $sResult = $sMethod;
                             $sMethod = '';
                         }
-                        else if ($aResults['winner'] == $oFighter->getID())
+                        else if (isset($aResults['winner']) && $aResults['winner'] == $oFighter->getID())
                         {
                             $sResultClass = 'wincell';
                             $sResult = 'Win';
                         }
-                        else if (!empty($aResults['winner']) && $aResults['winner'] != $oFighter->getID())
+                        else if (isset($aResults['winner']) && !empty($aResults['winner']) && $aResults['winner'] != $oFighter->getID())
                         {
                             $sResultClass = 'losecell';
                             $sResult = 'Loss';
