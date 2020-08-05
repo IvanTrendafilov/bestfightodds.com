@@ -9,7 +9,7 @@
         //Enable viewport if desktop has not explicitly been requested
         if (!(isset($_COOKIE['bfo_reqdesktop']) && $_COOKIE['bfo_reqdesktop'] == 'true'))
         {
-            echo '<meta name="viewport" content="width=device-width, maximum-scale=1.0, minimum-scale=1.0, initial-scale=1.0" />';
+            echo '<meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=0,viewport-fit=cover" />';
         }
         ?>
         <link rel="preconnect" href="https://www.google-analytics.com">
