@@ -46,7 +46,7 @@ if ($bCached == false || empty($sBuffer))
     <div id="page-container">
     <div class="content-header team-stats-header"><span id="team-name"><?php echo $oFighter->getNameAsString(); ?></span></div>
         <div id="page-inner-wrapper">
-            <div id="page-content">           
+            <div id="page-content">
                 <div id="team-stats-container" style="display: inline-block">
                     <table class="team-stats-table" cellspacing="0" summary="Odds history for <?php echo $oFighter->getNameAsString(); ?>">
                         <thead>
