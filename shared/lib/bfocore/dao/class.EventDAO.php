@@ -850,7 +850,7 @@ fo2.bookie_id, fo2.fight_id ASC;';
         return true;
     }
 
-    //Returns all fights for a fighter. Use future_only to narrow it down
+    //Returns all fights for a fighter
     public static function getAllFightsForFighter($a_iFighterID)
     {
         $sQuery = 'SELECT e.date AS thedate, f.id, f1.name AS fighter1_name, f2.name AS fighter2_name, f.event_id, f1.id AS fighter1_id, f2.id AS fighter2_id,

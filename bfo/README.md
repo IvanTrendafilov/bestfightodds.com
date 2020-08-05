@@ -18,3 +18,21 @@
 
 Changes in 2019-09-21 Build
 - Added prop categories. Installation of new code base will require the new prop categories schema to be run and that props are properly assigned to categories (separate admin interface to be defined)
+
+
+
+How to install locally:
+1. Install Nginx
+2. Point nginx config file in /env in nginx config:
+    
+    http {
+
+    include c:/dev/bfo/bfo/env/nginx/localhost.conf;
+
+3. Install PHP and enable modules for mysqli, gd, etc.
+4. Create a start_php.bat script containing:
+    @ECHO OFF
+    ECHO Starting PHP FastCGI...
+    set PATH=C:\dev\PHP;%PATH%
+    C:\dev\PHP\php-cgi.exe -b 127.0.0.1:9123 -d include_path='c:\dev\bfo\shared/;c:\dev\bfo\bfo'
+5. Start the start_php.bat script and nginx

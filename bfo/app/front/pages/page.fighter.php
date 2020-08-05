@@ -36,8 +36,36 @@ if (CacheControl::isPageCached('team-' . $oFighter->getID() . '-' . strtotime($s
 if ($bCached == false || empty($sBuffer))
 {
     $aFights = EventHandler::getAllFightsForFighter((int) $_GET['fighterID']);
-    $iCellCounter = 0;
+    $iCellCounter = 0; 
     ob_start();
+
+    $futurebreak = 0; //Indicates where break between future and historic matchups are
+    //Loop through fights and find where the first historic one pops up
+    foreach ($aFights as $key => $fight)
+    {
+        if ($fight->isFuture() == false)
+        {
+            $futurebreak = $key;
+            break;
+        }
+    }
+
+
+    if ($futurebreak > 0) //We have upcoming matchups, add a future matchups list
+    {
+        for ($i = 0; $i < $futurebreak; $i++)
+        {
+            if ($aFights[$i]->getEventID() == PARSE_FUTURESEVENT_ID)
+            {
+                echo 'Rumoured matchup ';
+            }
+            else
+            {
+                echo 'Upcoming fight ';
+            }
+        }
+    }
+
 ?>
 
 <div id="page-wrapper" style="max-width: 800px;">
