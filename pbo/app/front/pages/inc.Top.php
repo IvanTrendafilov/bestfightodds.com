@@ -12,8 +12,7 @@
             echo '<meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=0,viewport-fit=cover" />';
         }
         ?>
-        <link rel="preconnect" href="https://www.google-analytics.com">
-        <link rel="preconnect" href="https://www.google.com">
+        <link rel="preconnect" href="https://www.googletagmanager.com">
         <link rel="preconnect" href="https://fonts.googleapis.com" crossorigin />
         <link rel="preload" as="style" href="https://fonts.googleapis.com/css?family=Roboto:500,700,400&display=swap" />
         <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:500,700,400&display=swap" media="print" onload="this.media='all'" />
