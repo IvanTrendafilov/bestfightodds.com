@@ -5,6 +5,13 @@
         <meta name="description" content="<?php echo (defined('PAGE_OVERRIDE_DESCRIPTION') ? PAGE_OVERRIDE_DESCRIPTION . ' ' : ''); ?>UFC/MMA odds comparison service. Compare the latest UFC/MMA fight odds and betting lines from the top online sportsbooks" />
         <meta name="keywords" content="<?php echo (defined('PAGE_OVERRIDE_KEYWORDS') ? PAGE_OVERRIDE_KEYWORDS . ', ' : ''); ?>mma odds, mma betting, mma lines, ufc odds, ufc, mma, odds, betting" />
         <meta property="og:image" content="https://www.bestfightodds.com/img/iconv2.jpg" />
+        <?php
+        //Enable viewport if desktop has not explicitly been requested
+        if (!(isset($_COOKIE['bfo_reqdesktop']) && $_COOKIE['bfo_reqdesktop'] == 'true'))
+        {
+            echo '<meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=0,viewport-fit=cover" />';
+        }
+        ?>
         <link rel="preconnect" href="https://www.google-analytics.com">
         <link rel="preconnect" href="https://www.google.com">
         <link rel="preconnect" href="https://fonts.googleapis.com" crossorigin />
@@ -13,19 +20,6 @@
         <noscript>
             <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:500,700,400&display=swap" />
         </noscript>
-        <script type="text/javascript">
-        <?php
-        //Enable viewport if desktop has not explicitly been requested
-        if (!(isset($_COOKIE['bfo_reqdesktop']) && $_COOKIE['bfo_reqdesktop'] == 'true'))
-        {
-        ?>
-        if( screen.width < 767 ) {
-            document.write( '<meta name="viewport" content="width=device-width, maximum-scale=1.0, minimum-scale=1.0, initial-scale=1.0" />' );
-        }
-        <?php
-        }
-        ?>
-        </script>
         <link rel="stylesheet" type="text/css" href="/css/bfo.min.css" />
         <link rel="shortcut icon" href="https://www.bestfightodds.com/favicon.ico" />
         <link rel="apple-touch-icon" sizes="144x144" href="/apple-touch-icon-144x144.png" />
