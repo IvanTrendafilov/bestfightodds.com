@@ -52,7 +52,6 @@
 if ($_SERVER['SERVER_ADDR'] != '127.0.0.1')
 {
     ?>
-<!-- Global site tag (gtag.js) - Google Analytics -->
 <script async src="https://www.googletagmanager.com/gtag/js?id=UA-2457531-6"></script>
 <script>
   window.dataLayer = window.dataLayer || [];
