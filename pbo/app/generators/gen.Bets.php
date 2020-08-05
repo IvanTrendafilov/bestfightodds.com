@@ -68,7 +68,7 @@ foreach ($aEvent as $oEvent)
             for ($iX = 1; $iX <= 2; $iX++)
             {
                 echo '<tr ' . (($iX % 2) == 1 ? 'class="even"' : 'class="odd" id="mu-' . $oFight->getID() . '"') . ' ' . (($iX == 2 && $iFightCounter == count($aFights) - 1) ? ' style="border-bottom: 0;" ' : '') . '>'; //If this is the last matchup, add style for it
-                echo '<td class="date-cell" data-time="' . $sGameTime . '">' . ($iX == 1 ? $sGameTime : ($sGameTime != '' ? 'UTC' : '')) . '</td><th scope="row"><a href="/fighters/' . $oFight->getFighterAsLinkString($iX) . '"><span class="tw">' . $oFight->getFighterAsString($iX) . '</span></a></th>';
+                echo '<td class="date-cell" data-time="' . $sGameTime . '">' . ($iX == 1 ? $sGameTime : ($sGameTime != '' ? 'UTC' : '')) . '</td><th scope="row"><a href="/fighters/' . $oFight->getFighterAsLinkString($iX) . '"><span class="t-b-fcc">' . $oFight->getFighterAsString($iX) . '</span></a></th>';
 
                 $iProcessed = 0;
                 $bEverFoundOldOdds = false;
@@ -164,7 +164,7 @@ foreach ($aEvent as $oEvent)
             for ($iX = 1; $iX <= 2; $iX++)
             {
                 echo '<tr ' . (($iX % 2) == 1 ? 'class="even"' : 'class="odd"') . ' ' . (($iX == 2 && $iFightCounter == count($aFights) - 1) ? ' style="border-bottom: 0;" ' : '') . '>'; //If this is the last matchup, add style for it
-                echo '<td class="date-cell" data-time="' . $sGameTime . '">' . ($iX == 1 ? $sGameTime : ($sGameTime != '' ? 'UTC' : '')) . '</td><th scope="row"><a href="/fighters/' . $oFight->getFighterAsLinkString($iX) . '"><span class="tw">' . $oFight->getFighterAsString($iX) . '</span></a></th>';
+                echo '<td class="date-cell" data-time="' . $sGameTime . '">' . ($iX == 1 ? $sGameTime : ($sGameTime != '' ? 'UTC' : '')) . '</td><th scope="row"><a href="/fighters/' . $oFight->getFighterAsLinkString($iX) . '"><span class="t-b-fcc">' . $oFight->getFighterAsString($iX) . '</span></a></th>';
 
                 $iProcessed = 0;
                 $bEverFoundOldOdds = false;
@@ -209,7 +209,7 @@ foreach ($aEvent as $oEvent)
 
                         if ($oOldFightOdds->getBookieID() == $iCurrentOperatorID)
                         {
-                            echo '<td><a href="#" class="but-sg" data-li="[' . $oFightOdds->getBookieID() . ',' . $iX . ',' . $oFightOdds->getFightID() . ']" ><span class="tw"><span id="oID' . ('1' . sprintf("%06d", $oFightOdds->getFightID()) . sprintf("%02d", $oFightOdds->getBookieID()) . $iX) . '" ' . $sClassName . '>' . $oFightOdds->getFighterOddsAsString($iX) . '</span>';
+                            echo '<td><a href="#" class="but-sg" data-li="[' . $oFightOdds->getBookieID() . ',' . $iX . ',' . $oFightOdds->getFightID() . ']" ><span class="t-b-cc"><span id="oID' . ('1' . sprintf("%06d", $oFightOdds->getFightID()) . sprintf("%02d", $oFightOdds->getBookieID()) . $iX) . '" ' . $sClassName . '>' . $oFightOdds->getFighterOddsAsString($iX) . '</span>';
                             if ($oFightOdds->getFighterOdds($iX) > $oOldFightOdds->getFighterOdds($iX))
                             {
                                 echo '<span class="aru arage-' . $iChangeID . '">▲</span>';
@@ -226,7 +226,7 @@ foreach ($aEvent as $oEvent)
                     }
                     if (!$bFoundOldOdds)
                     {
-                        echo '<td><a href="#" class="but-sg" data-li="[' . $oFightOdds->getBookieID() . ',' . $iX . ',' . $oFightOdds->getFightID() . ']"  ><span class="tw"><span id="oID' . ('1' . sprintf("%06d", $oFightOdds->getFightID()) . sprintf("%02d", $oFightOdds->getBookieID())  . $iX) . '" ' . $sClassName . '>' . $oFightOdds->getFighterOddsAsString($iX) . '</span></span></a></td>';
+                        echo '<td><a href="#" class="but-sg" data-li="[' . $oFightOdds->getBookieID() . ',' . $iX . ',' . $oFightOdds->getFightID() . ']"  ><span class="t-b-cc"><span id="oID' . ('1' . sprintf("%06d", $oFightOdds->getFightID()) . sprintf("%02d", $oFightOdds->getBookieID())  . $iX) . '" ' . $sClassName . '>' . $oFightOdds->getFighterOddsAsString($iX) . '</span></span></a></td>';
                     }
 
                     $iProcessed++;
@@ -251,7 +251,7 @@ foreach ($aEvent as $oEvent)
                     echo '<td class="button-cell"><span class="but-img i-ng"></span></td>';
                 }
 
-                echo '<td class="prop-cell"><a href="#" data-mu="' . $oFight->getID() . '"><span class="tw">';
+                echo '<td class="prop-cell"><a href="#" data-mu="' . $oFight->getID() . '"><span class="t-b-cc">';
                 $iPropCount = OddsHandler::getPropCountForMatchup($oFight->getID());
                 if ($iPropCount > 0)
                 {
@@ -383,7 +383,7 @@ foreach ($aEvent as $oEvent)
                                     echo '<td>';
                                     if (($iX == 1 ? $oPropOdds->getPropOddsAsString() : $oPropOdds->getNegPropOddsAsString()) != '-99999')
                                     {
-                                        echo '<a href="#" class="but-sgp" data-li="[' . $oPropOdds->getBookieID() . ',' . $iX . ',' . $oPropOdds->getMatchupID() . ',' . $oPropOdds->getPropTypeID() . ',' . $oPropOdds->getTeamNumber() . ']"><span class="tw"><span id="oID' . ('2' . sprintf("%06d", $oPropOdds->getMatchupID()) . sprintf("%02d", $oPropOdds->getBookieID()) . $iX . sprintf("%03d", $oPropOdds->getPropTypeID()) . $oPropOdds->getTeamNumber()) . '" ' . $sClassName . '>' . ($iX == 1 ? $oPropOdds->getPropOddsAsString() : $oPropOdds->getNegPropOddsAsString()) . '</span>';
+                                        echo '<a href="#" class="but-sgp" data-li="[' . $oPropOdds->getBookieID() . ',' . $iX . ',' . $oPropOdds->getMatchupID() . ',' . $oPropOdds->getPropTypeID() . ',' . $oPropOdds->getTeamNumber() . ']"><span class="t-b-cc"><span id="oID' . ('2' . sprintf("%06d", $oPropOdds->getMatchupID()) . sprintf("%02d", $oPropOdds->getBookieID()) . $iX . sprintf("%03d", $oPropOdds->getPropTypeID()) . $oPropOdds->getTeamNumber()) . '" ' . $sClassName . '>' . ($iX == 1 ? $oPropOdds->getPropOddsAsString() : $oPropOdds->getNegPropOddsAsString()) . '</span>';
                                         if ($iCompareOddsNew > $iCompareOddsOld)
                                         {
                                             echo '<span class="aru arage-' . $iChangeID . '">▲</span>';
@@ -400,7 +400,7 @@ foreach ($aEvent as $oEvent)
                                     }
                                     else
                                     {
-                                        echo '<span class="tw"><span class="na">n/a</span></span>';
+                                        echo '<span class="t-b-cc"><span class="na">n/a</span></span>';
                                     }
                                     $bFoundOldOdds = true;
                                     $bEverFoundOldOdds = true;
@@ -413,7 +413,7 @@ foreach ($aEvent as $oEvent)
                                 echo '<td>';
                                 if (($iX == 1 ? $oPropOdds->getPropOddsAsString() : $oPropOdds->getNegPropOddsAsString()) != '-99999')
                                 {
-                                    echo '<a href="#" class="but-sgp" data-li="[' . $oPropOdds->getBookieID() . ',' . $iX . ',' . $oPropOdds->getMatchupID() . ',' . $oPropOdds->getPropTypeID() . ',' . $oPropOdds->getTeamNumber() . ']" ><span class="tw"><span id="oID' . ('2' . sprintf("%06d", $oPropOdds->getMatchupID()) . sprintf("%02d", $oPropOdds->getBookieID()) . $iX . sprintf("%03d", $oPropOdds->getPropTypeID()) . $oPropOdds->getTeamNumber()) . '" ' . $sClassName . '>' . ($iX == 1 ? $oPropOdds->getPropOddsAsString() : $oPropOdds->getNegPropOddsAsString()) . '</span></span></a>';
+                                    echo '<a href="#" class="but-sgp" data-li="[' . $oPropOdds->getBookieID() . ',' . $iX . ',' . $oPropOdds->getMatchupID() . ',' . $oPropOdds->getPropTypeID() . ',' . $oPropOdds->getTeamNumber() . ']" ><span class="t-b-cc"><span id="oID' . ('2' . sprintf("%06d", $oPropOdds->getMatchupID()) . sprintf("%02d", $oPropOdds->getBookieID()) . $iX . sprintf("%03d", $oPropOdds->getPropTypeID()) . $oPropOdds->getTeamNumber()) . '" ' . $sClassName . '>' . ($iX == 1 ? $oPropOdds->getPropOddsAsString() : $oPropOdds->getNegPropOddsAsString()) . '</span></span></a>';
                                 }
                                 else
                                 {
