@@ -149,6 +149,9 @@ input[type="submit"] {
   background-color: $secondarybasecolor;
   height: 26px;
   text-align: left;
+  -webkit-box-shadow: 0 2px 2px -1px #7B7B7B;
+  -moz-box-shadow: 0 2px 2px -1px #7B7B7B;
+  box-shadow: 0 2px 2px -1px #7B7B7B;
 }
 
 .header-menu {
@@ -274,6 +277,10 @@ input[type="submit"] {
   margin-right: 2px;
   vertical-align: middle;
   margin-bottom: 1px;
+  -moz-box-shadow: inset 0 0 1px #666;
+  -webkit-box-shadow: inset 0 0 1px #666;
+  box-shadow: inset 0 0 1px #666;
+
   &.checked {
     color: #000;
   }
@@ -326,6 +333,9 @@ input[type="submit"] {
 #page-wrapper {
   margin-left: auto;
   margin-right: auto;
+  -webkit-box-shadow: 0 1px 1px 1px rgb(170, 170, 170);
+  -moz-box-shadow: 0 1px 1px 1px rgb(170, 170, 170);
+  box-shadow: 0 1px 1px 1px rgb(170, 170, 170);
 }
 
 h1 {
@@ -622,9 +632,9 @@ ul.share-dropdown ul li a {
 }
 
 .popup-window {
-  -webkit-box-shadow: 0 2px 4px 0px rgba(0, 0, 0, 0.4);
-  -moz-box-shadow: 0 2px 4px 0px rgba(0, 0, 0, 0.4);
-  box-shadow: 0 2px 4px 0px rgba(0, 0, 0, 0.4);
+  -webkit-box-shadow: 0 2px 3px 1px rgba(0, 0, 0, 0.4);
+  -moz-box-shadow: 0 2px 3px 1px rgba(0, 0, 0, 0.4);
+  box-shadow: 0 2px 3px 1px rgba(0, 0, 0, 0.4);
   background-color: #fff;
   opacity: 0;
   visibility: hidden;
