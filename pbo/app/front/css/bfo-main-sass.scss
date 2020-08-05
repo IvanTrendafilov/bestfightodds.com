@@ -640,6 +640,7 @@ ul.share-dropdown ul li a {
   transition-property: opacity, scale, transform;
   transform-origin: top left;
   -webkit-transform-origin: top left;
+  border-radius: 4px;
   overflow: hidden;
 }
 
