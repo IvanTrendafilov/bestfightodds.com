@@ -15,10 +15,10 @@
         <link rel="preconnect" href="https://www.googletagmanager.com">
         <link rel="preconnect" href="https://www.google-analytics.com">
         <link rel="preconnect" href="https://fonts.googleapis.com" crossorigin />
-        <link rel="preload" as="style" href="https://fonts.googleapis.com/css?family=Roboto:500,700,400&display=swap" />
-        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:500,700,400&display=swap" media="print" onload="this.media='all'" />
+        <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" />
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" media="print" onload="this.media='all'" />
         <noscript>
-            <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:500,700,400&display=swap" />
+            <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" />
         </noscript>
         <link rel="stylesheet" type="text/css" href="/css/bfo.min.css?v=0.1.2" />
         <link rel="shortcut icon" href="https://www.bestfightodds.com/favicon.ico" />
