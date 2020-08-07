@@ -56,9 +56,7 @@ class StatsDAO
 
         //Gets the last update date (or matchup date) for past events:
         //select FROM_UNIXTIME (mvalue) - INTERVAL 6 HOUR AS lasttime from matchups_metadata where matchup_id = 12155 UNION SELECT max(date) as lasttime from fightodds where fight_id = 12155 order by lasttime desc;
-
-
-        $aParams = [];
+        
         //This logic checks if we are requesting odds from the last hour or last 24 hours. If so, we check if the event is in the past or not. If in the past we want to use either the last odds date or the fight time (from metadata) as the equivalent of now()
 
         /*
@@ -80,16 +78,37 @@ SELECT MAX(DATE) AS lasttime
     ORDER BY storedtime DESC) f1 UNION
 SELECT NOW() AS lasttime, 'NULL' as storedtime
 ORDER BY storedtime, lasttime DESC;
-
-
-
-
         */
 
-        $sExtraWhere = '';
-        $sDateCompare = '>';
-        if ($a_iFrom != 0)
+        $sQuery = '';
+        $aParams = [];
+
+        if ($a_iFrom == 0)
         {
+            //From opening
+            $sQuery = 'SELECT 
+                opening.avg_f1odds as opf1,
+                opening.avg_f2odds as opf2,
+                latest.avg_f1odds as laf1,
+                latest.avg_f2odds as laf2,
+                (opening.avg_f1odds - latest.avg_f1odds)/(opening.avg_f1odds - 1) as f1swing,           
+                (opening.avg_f2odds - latest.avg_f2odds)/(opening.avg_f2odds - 1) as f2swing
+            FROM
+                ((SELECT MoneylineToDecimal(fo1.fighter1_odds) AS avg_f1odds, MoneylineToDecimal(fo1.fighter2_odds) AS avg_f2odds FROM fightodds fo1 WHERE fight_id = ? ORDER BY DATE ASC LIMIT 1) opening
+                JOIN 
+                    (SELECT AVG(f1.dec_f1odds) AS avg_f1odds, AVG(f1.dec_f2odds) AS avg_f2odds 
+                        FROM (SELECT MoneylineToDecimal(m1.fighter1_odds) AS dec_f1odds, MoneylineToDecimal(m1.fighter2_odds) AS dec_f2odds, m1.*
+                            FROM fightodds m1 LEFT JOIN fightodds m2
+                                ON (m1.fight_id = m2.fight_id AND m1.bookie_id = m2.bookie_id AND m1.date < m2.date)
+                                WHERE m2.date IS NULL AND m1.fight_id = ?) f1) latest)';
+                                
+            $aParams[] = $a_iMatchup;
+            $aParams[] = $a_iMatchup;
+        }
+        else
+        {
+            //Last day or hour
+
             //This query is used when a time slice is used, for example last 24 hours or last hour. We need to check if the event is in the past so that past events dont utilize NOW() - 1 HOUR as last hour. The check is as follows: 
             //NOW() < METADATA = NOW()
             //NOW() > METADATA = METADATA UNLESS LAST ODDS > METADATA
@@ -117,7 +136,7 @@ ORDER BY storedtime, lasttime DESC;
             $aParams[] = $a_iMatchup;
             $aParams[] = $a_iMatchup;
             $aParams[] = $a_iMatchup;
-                        $aParams[] = $a_iMatchup;
+            $aParams[] = $a_iMatchup;
             $aParams[] = $a_iMatchup;
             $sDateCompare = '<';
 
@@ -130,35 +149,33 @@ ORDER BY storedtime, lasttime DESC;
                 $sExtraWhere .= " - INTERVAL 1 HOUR ";
             }
 
+            $sQuery = 'SELECT 
+                opening.avg_f1odds as opf1,
+                opening.avg_f2odds as opf2,
+                latest.avg_f1odds as laf1,
+                latest.avg_f2odds as laf2,
+                (opening.avg_f1odds - latest.avg_f1odds)/(opening.avg_f1odds - 1) as f1swing,           
+                (opening.avg_f2odds - latest.avg_f2odds)/(opening.avg_f2odds - 1) as f2swing
+            FROM
+                ((SELECT AVG(f1.dec_f1odds) AS avg_f1odds, AVG(f1.dec_f2odds) AS avg_f2odds 
+                        FROM (SELECT MoneylineToDecimal(m1.fighter1_odds) AS dec_f1odds, MoneylineToDecimal(m1.fighter2_odds) AS dec_f2odds, m1.*
+                            FROM (SELECT fo1.* FROM fightodds fo1 WHERE fight_id = ? ' . $sExtraWhere . ') m1 LEFT JOIN (SELECT fo1.* FROM fightodds fo1 WHERE fight_id = ? ' . $sExtraWhere . ') m2
+                                ON (m1.fight_id = m2.fight_id AND m1.bookie_id = m2.bookie_id AND m1.date < m2.date)
+                                WHERE m2.date IS NULL AND m1.fight_id = ?) f1) opening
+                JOIN 
+                    (SELECT AVG(f1.dec_f1odds) AS avg_f1odds, AVG(f1.dec_f2odds) AS avg_f2odds 
+                        FROM (SELECT MoneylineToDecimal(m1.fighter1_odds) AS dec_f1odds, MoneylineToDecimal(m1.fighter2_odds) AS dec_f2odds, m1.*
+                            FROM fightodds m1 LEFT JOIN fightodds m2
+                                ON (m1.fight_id = m2.fight_id AND m1.bookie_id = m2.bookie_id AND m1.date < m2.date)
+                                WHERE m2.date IS NULL AND m1.fight_id = ?) f1) latest)';
+                                
+            $aParams[] = $a_iMatchup;
+            $aParams[] = $a_iMatchup;
+            $aParams[] = $a_iMatchup;
+            $aParams[] = $a_iMatchup;
         }
-
-        $sQuery = 'SELECT 
-                        opening.avg_f1odds as opf1,
-                        opening.avg_f2odds as opf2,
-                        latest.avg_f1odds as laf1,
-                        latest.avg_f2odds as laf2,
-                        (opening.avg_f1odds - latest.avg_f1odds)/(opening.avg_f1odds - 1) as f1swing,           
-                        (opening.avg_f2odds - latest.avg_f2odds)/(opening.avg_f2odds - 1) as f2swing
-                    from
-                        ((SELECT AVG(f1.dec_f1odds) AS avg_f1odds, AVG(f1.dec_f2odds) AS avg_f2odds 
-                                FROM (SELECT MoneylineToDecimal(m1.fighter1_odds) AS dec_f1odds, MoneylineToDecimal(m1.fighter2_odds) AS dec_f2odds, m1.*
-                                    FROM (SELECT fo1.* FROM fightodds fo1 WHERE fight_id = ? ' . $sExtraWhere . ') m1 LEFT JOIN (SELECT fo1.* FROM fightodds fo1 WHERE fight_id = ? ' . $sExtraWhere . ') m2
-                                        ON (m1.fight_id = m2.fight_id AND m1.bookie_id = m2.bookie_id AND m1.date ' . $sDateCompare . ' m2.date)
-                                        WHERE m2.date IS NULL AND m1.fight_id = ?) f1) opening
-                        JOIN 
-                            (SELECT AVG(f1.dec_f1odds) AS avg_f1odds, AVG(f1.dec_f2odds) AS avg_f2odds 
-                                FROM (SELECT MoneylineToDecimal(m1.fighter1_odds) AS dec_f1odds, MoneylineToDecimal(m1.fighter2_odds) AS dec_f2odds, m1.*
-                                    FROM fightodds m1 LEFT JOIN fightodds m2
-                                        ON (m1.fight_id = m2.fight_id AND m1.bookie_id = m2.bookie_id AND m1.date < m2.date)
-                                        WHERE m2.date IS NULL AND m1.fight_id = ?) f1) latest)';
-
-        $aParams[] = $a_iMatchup;
-        $aParams[] = $a_iMatchup;
-        $aParams[] = $a_iMatchup;
-        $aParams[] = $a_iMatchup;
+        
         $rResult = DBTools::doParamQuery($sQuery, $aParams);
-
-
 
         if ($aRow = mysqli_fetch_array($rResult))
         {
