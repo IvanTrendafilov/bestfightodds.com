@@ -36,3 +36,9 @@ How to install locally:
     set PATH=C:\dev\PHP;%PATH%
     C:\dev\PHP\php-cgi.exe -b 127.0.0.1:9123 -d include_path='c:\dev\bfo\shared/;c:\dev\bfo\bfo'
 5. Start the start_php.bat script and nginx
+
+
+Handy Git stuff:
+- Merging changes in master (origin) to feature branch
+    1. Checkout the feature branch
+    2. Run git merge origin
