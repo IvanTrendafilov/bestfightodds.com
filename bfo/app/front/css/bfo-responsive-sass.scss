@@ -50,7 +50,7 @@
     height: 13px;
     padding: 5px 0px 7px 8px;
     a {
-      font-size: 11px;
+      font-size: 12px;
       -ms-text-overflow: ellipsis;
       -o-text-overflow: ellipsis;
       text-overflow: ellipsis;
@@ -186,7 +186,7 @@
     /* Set the bounds in which to center it, relative to its parent/container */
   }
   #chart-header {
-    font-size: 11px;
+    font-size: 12px;
   }
   #chart-area {}
   .odds-table {
@@ -250,7 +250,6 @@
     overflow: hidden;
   }
   .content-list {
-    font-size: 11px;
     tr {
       &:hover {
         background-color: #fff;
@@ -276,7 +275,7 @@
     padding-right: 10px !important;
     text-align: right;
     input {
-      font-size: 11px;
+      font-size: 12px;
     }
   }
   .team-stats-table {
