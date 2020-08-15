@@ -72,7 +72,7 @@ if ($bCached == false || empty($sBuffer))
 
     
     <div id="page-container">
-    <div class="content-header team-stats-header"><span id="team-name"><?php echo $oFighter->getNameAsString(); ?></span></div>
+    <div class="content-header team-stats-header"><h1 id="team-name"><?php echo $oFighter->getNameAsString(); ?></h1></div>
         <div id="page-inner-wrapper">
             <div id="page-content">
                 <div id="team-stats-container" style="display: inline-block">
@@ -90,8 +90,12 @@ if ($bCached == false || empty($sBuffer))
                         </thead>
                         <tbody>
                     <?php
-                    foreach ($aFights as $oFight)
+                    for ($i = 0; $i < count($aFights); $i++)
                     {
+                        $oFight = $aFights[$i];
+                        
+
+
                         $oEvent = EventHandler::getEvent($oFight->getEventID());
                         $oFightOdds1 = EventHandler::getBestOddsForFightAndFighter($oFight->getID(), 1);
                         $oFightOdds2 = EventHandler::getBestOddsForFightAndFighter($oFight->getID(), 2);
@@ -199,7 +203,7 @@ if ($bCached == false || empty($sBuffer))
                                         <td class="moneyline" style="text-align: left; padding-left: 0; padding-right: 7px;"><span id="oID<?php echo $iCellCounter++; ?>"><?php echo ($iTeamPos == 1 ? $oFighter1High->getFighterOddsAsString(1) : $oFighter2High->getFighterOddsAsString(2)); ?></span></td>
 
                                     <?php
-                                        //Disable sparkline if only one row
+                                        //Disable sparkline if only one line of odds available
                                     if (strpos($sGraphData, ',') !== false) 
                                     {
                                     ?>
