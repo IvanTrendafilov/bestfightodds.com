@@ -160,12 +160,15 @@ input[type="submit"] {
   width: 938px;
   position: relative;
   font-size: 12px;
+  a {
+    padding: 7px 0; 
+  }
 }
 
 .header-menu-item {
   
   display: inline-block;
-  padding: 6px 16px 0 16px;
+  padding: 6px 16px 6px 16px;
   font-weight: 500;
   margin-left: -3px;
   &:hover {
@@ -219,7 +222,7 @@ input[type="submit"] {
     background-color: $secondarybasecolor;
     height: 24px;
     width: 200px;
-    font-size: 11px;
+    font-size: 12px;
     color: #fff;
     border: 1px solid #1d1d1d;
     border-width: 1px;
@@ -380,8 +383,8 @@ h1 {
   color: #787878;
   a {
     color: #9a9a9a;
-    font-size: 11px;
-    padding: 0 5px;
+    font-size: 12px;
+    padding: 10px 5px;
   }
 }
 
@@ -719,7 +722,7 @@ ul.share-dropdown ul li a {
   height: 100%;
   color: #222;
   text-align: left;
-  font-size: 11px;
+  font-size: 12px;
   padding: 9px;
 }
 
@@ -843,7 +846,6 @@ ul.share-dropdown ul li a {
     }
     a {
       color: #202020;
-      font-weight: 500;
     }
   }
 }
@@ -899,6 +901,7 @@ table.team-stats-table {
   }
   tbody {
     tr {
+      height: 20px;
       border-bottom: 0;
       &.main-row {
         border-top: 1px dotted #989898;
@@ -908,7 +911,6 @@ table.team-stats-table {
         border-bottom: 1px solid #E6E8Ea;
         background-color: #E6E8Ea;
         color: #1a1a1a;
-        vertical-align: bottom;
         a {
           color: #1a1a1a;
           &:hover {
@@ -929,12 +931,9 @@ table.team-stats-table {
     th {
       padding-left: 3px;
       color: #1a1a1a;
-      //font-size: 11px;
-      font-weight: 500;
       word-break: break-word;
       a {
         color: #1a1a1a;
-        font-size: 11px;
         height: 20px;
       }
     }
@@ -992,7 +991,7 @@ table.team-stats-table {
           color: #777;
           line-height: 8px;
         }
-        div.result { 
+        div.result {  
           color: #fff;
           padding-top: 2px;
           padding-bottom: 2px;
@@ -1023,7 +1022,6 @@ table.team-stats-table {
   }
   a {
     color: #222;
-    font-weight: 500;
     &:hover {
       color: #666;
     }
@@ -1101,7 +1099,7 @@ table.team-stats-table {
 .event-swing-picker {
     color: #eaeaea;
     font-weight: 400;
-    font-size: 11px;
+    font-size: 12px;
     &.picked {
       font-weight: 700;
     }
@@ -1112,7 +1110,7 @@ table.team-stats-table {
    margin-left: auto;
    margin-right: auto;
    width: 150px;
-   font-size: 11px;
+   font-size: 12px;
    font-weight: 500;
    padding-top: 6px;
    padding-bottom: 8px;  
