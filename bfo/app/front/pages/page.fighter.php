@@ -231,7 +231,7 @@ if ($bCached == false || empty($sBuffer))
                                                 <td class="dash-cell">...</td>
                                                 <td class="moneyline" style="text-align: left; padding-left: 0"><span id="oID<?php echo $iCellCounter++; ?>"><?php echo ($iTeamPos == 1 ? $oFighter2High->getFighterOddsAsString(2) : $oFighter1High->getFighterOddsAsString(1)); ?></span></td>
 
-                                        <td class="item-non-mobile" style="padding-left: 20px"><?php echo $sEventDate; ?></td>
+                                        <td class="item-non-mobile" style="padding-left: 20px; color: #9a9a9a"><?php echo $sEventDate; ?></td>
                                     </tr>
                                     <?php
                                 }
