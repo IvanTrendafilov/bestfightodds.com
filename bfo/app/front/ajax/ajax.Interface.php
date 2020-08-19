@@ -110,7 +110,7 @@ class AjaxInterface
         }
 
 
-        if (CacheControl::isPageCached($sCacheKey) && $_SERVER['REMOTE_ADDR'] != '77.2.84.76')
+        if (CacheControl::isPageCached($sCacheKey) && $_SERVER['REMOTE_ADDR'] != '77.2.84.76' && $_SERVER['REMOTE_ADDR'] != '77.4.124.22')
         {
             echo CacheControl::getCachedPage($sCacheKey);
             return true;
@@ -192,7 +192,7 @@ class AjaxInterface
                 
                 foreach ($aOdds as $iIndex => $oOdds)
                 {
-                        if ($_SERVER['REMOTE_ADDR'] == '77.2.84.76')
+                        if ($_SERVER['REMOTE_ADDR'] == '77.2.84.76' || $_SERVER['REMOTE_ADDR'] == '77.4.124.22')
                         {
                             $scale = pow(10, 3);
                             $dummy = mt_rand(1 * $scale, 3 * $scale) / $scale;
