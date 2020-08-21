@@ -70,9 +70,12 @@ class ScheduleParser
 						$aStoredPrefixParts = explode(' ', $oStoredEvent->getName());
 						if ($aStoredPrefixParts[0] == $aPrefixParts[0] && date('Y-m-d', $aEvent['date']) == substr($oStoredEvent->getDate(),0,10))
 						{
-							//Found it!
+							//Found it! But should maybe be renamed
 							$bFound = true;
-							ScheduleHandler::storeManualAction(json_encode(array('eventID' => $oStoredEvent->getID(), 'eventTitle' => $aEvent['title']), JSON_HEX_APOS | JSON_HEX_QUOT), 2);
+							if ($oStoredEvent->getName() != $aEvent['title'])
+							{
+								ScheduleHandler::storeManualAction(json_encode(array('eventID' => $oStoredEvent->getID(), 'eventTitle' => $aEvent['title']), JSON_HEX_APOS | JSON_HEX_QUOT), 2);
+							}
 							$this->parseMatchups($aEvent, $oStoredEvent);
 							$this->aMatchedExistingEvents[] = $oStoredEvent->getID();
 						}
@@ -94,7 +97,6 @@ class ScheduleParser
 							$bFound = true;
 							if ($oStoredEvent->getName() != $aEvent['title'])
 							{
-								echo 'rename ' . $oStoredEvent->getName() . ' / ' . $aEvent['title'];
 								ScheduleHandler::storeManualAction(json_encode(array('eventID' => $oStoredEvent->getID(), 'eventTitle' => $aEvent['title']), JSON_HEX_APOS | JSON_HEX_QUOT), 2);
 							}
 							$this->parseMatchups($aEvent, $oStoredEvent);
@@ -123,8 +125,8 @@ class ScheduleParser
 					arsort($aFoundMatches);
 					if (sizeof($aFoundMatches) > 1)
 					{
-						echo 'FAIL!';
-						//More than 1.. handle this somehow?
+						echo 'FAIL';
+						//TODO: More than 1.. handle this somehow?
 					}
 					reset($aFoundMatches);
 					//Probably found it! Howver event should be renamed if different
@@ -132,7 +134,6 @@ class ScheduleParser
 					$oFoundEvent = EventHandler::getEvent(key($aFoundMatches));
 					if ($oFoundEvent->getName() != $aEvent['title'])
 					{
-						echo 'rename ' . $oFoundEvent->getName() . ' / ' . $aEvent['title'];
 						ScheduleHandler::storeManualAction(json_encode(array('eventID' => $oFoundEvent->getID(), 'eventTitle' => $aEvent['title']), JSON_HEX_APOS | JSON_HEX_QUOT), 2);
 					}
 					$this->parseMatchups($aEvent, $oFoundEvent);
