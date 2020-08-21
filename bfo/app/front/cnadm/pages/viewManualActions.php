@@ -79,13 +79,13 @@ if ($aManualActions != null && sizeof($aManualActions) > 0)
 				$found1 = false;
 				foreach ($matchups1 as $matchup)
 				{
-					$found1 = $matchup->isFuture() && $matchup->getFighterID(1) != $oMatchup->getFighterID(1) && $matchup->getFighterID(2) != $oMatchup->getFighterID(2);
+					$found1 = ($matchup->isFuture() && ($matchup->getFighterID(1) != $oMatchup->getFighterID(1) || $matchup->getFighterID(2) != $oMatchup->getFighterID(2)));
 				}
 				$matchups2 = EventHandler::getAllFightsForFighter($oMatchup->getTeam(2));
 				$found2 = false;
 				foreach ($matchups2 as $matchup)
 				{
-					$found2 = $matchup->isFuture() && $matchup->getFighterID(1) != $oMatchup->getFighterID(1) && $matchup->getFighterID(2) != $oMatchup->getFighterID(2);
+					$found2 = ($matchup->isFuture() && ($matchup->getFighterID(1) != $oMatchup->getFighterID(1) || $matchup->getFighterID(2) != $oMatchup->getFighterID(2)));
 				}
 
 				$oEvent = EventHandler::getEvent($oMatchup->getEventID());
