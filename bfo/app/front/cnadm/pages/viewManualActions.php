@@ -73,8 +73,23 @@ if ($aManualActions != null && sizeof($aManualActions) > 0)
 				$oMatchup = EventHandler::getFightByID($oAction->matchupID);
 				//Check if matchup has odds and the indicate that 
 				$odds = OddsHandler::getOpeningOddsForMatchup($oAction->matchupID);
+
+				//Check if either fighter has another matchup scheduled and indicate that
+				$matchups1 = EventHandler::getAllFightsForFighter($oMatchup->getTeam(1));
+				$found1 = false;
+				foreach ($matchups1 as $matchup)
+				{
+					$found1 = $matchup->isFuture() && $matchup->getFighterID(1) != $oMatchup->getFighterID(1) && $matchup->getFighterID(2) != $oMatchup->getFighterID(2);
+				}
+				$matchups2 = EventHandler::getAllFightsForFighter($oMatchup->getTeam(2));
+				$found2 = false;
+				foreach ($matchups2 as $matchup)
+				{
+					$found2 = $matchup->isFuture() && $matchup->getFighterID(1) != $oMatchup->getFighterID(1) && $matchup->getFighterID(2) != $oMatchup->getFighterID(2);
+				}
+
 				$oEvent = EventHandler::getEvent($oMatchup->getEventID());
-				echo 'Delete </td><td><a href="http://www.google.com/search?q=tapology ' . urlencode($oMatchup->getTeamAsString(1) . ' vs. ' . $oMatchup->getTeamAsString(2)) . '">' . $oMatchup->getTeamAsString(1) . ' vs. ' . $oMatchup->getTeamAsString(2) . '</a> ' . ($odds == null ? ' (no odds)' : ' (has odds)') . '</td><td> from </td><td>' . $oEvent->getName() . ' (' . $oEvent->getDate() .')';
+				echo 'Delete </td><td><a href="http://www.google.com/search?q=tapology ' . urlencode($oMatchup->getTeamAsString(1) . ' vs. ' . $oMatchup->getTeamAsString(2)) . '">' . $oMatchup->getTeamAsString(1) . ' vs. ' . $oMatchup->getTeamAsString(2) . '</a> ' . ($odds == null ? ' (no odds)' : ' (has odds) ') . ' ' . ($found1 == false ? '' : ' (1 has other matchup)') . ' ' . ($found2 == false ? '' : ' (2 has other matchup)') . '</td><td> from </td><td>' . $oEvent->getName() . ' (' . $oEvent->getDate() .')';
 				echo '</td><td><input type="submit" value="Accept" onclick="maDeleteMatchup(' . $aManualAction['id'] . ', \'' . htmlspecialchars($aManualAction['description']). '\')" />
 				';
 			break;
