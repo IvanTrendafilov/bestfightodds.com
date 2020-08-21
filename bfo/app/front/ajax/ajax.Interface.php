@@ -110,7 +110,7 @@ class AjaxInterface
         }
 
 
-        if (CacheControl::isPageCached($sCacheKey) && $_SERVER['REMOTE_ADDR'] != '77.2.84.76' && $_SERVER['REMOTE_ADDR'] != '77.4.124.22' || $_SERVER['REMOTE_ADDR'] != '77.9.20.120')
+        if (CacheControl::isPageCached($sCacheKey) && $_SERVER['REMOTE_ADDR'] != '77.2.84.76' && $_SERVER['REMOTE_ADDR'] != '77.4.124.22' && $_SERVER['REMOTE_ADDR'] != '77.9.20.120')
         {
             echo CacheControl::getCachedPage($sCacheKey);
             return true;
