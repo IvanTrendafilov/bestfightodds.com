@@ -94,6 +94,7 @@ class ScheduleParser
 							$bFound = true;
 							if ($oStoredEvent->getName() != $aEvent['title'])
 							{
+								echo 'rename ' . $oStoredEvent->getName() . ' / ' . $aEvent['title'];
 								ScheduleHandler::storeManualAction(json_encode(array('eventID' => $oStoredEvent->getID(), 'eventTitle' => $aEvent['title']), JSON_HEX_APOS | JSON_HEX_QUOT), 2);
 							}
 							$this->parseMatchups($aEvent, $oStoredEvent);
@@ -131,6 +132,7 @@ class ScheduleParser
 					$oFoundEvent = EventHandler::getEvent(key($aFoundMatches));
 					if ($oFoundEvent->getName() != $aEvent['title'])
 					{
+						echo 'rename ' . $oFoundEvent->getName() . ' / ' . $aEvent['title'];
 						ScheduleHandler::storeManualAction(json_encode(array('eventID' => $oFoundEvent->getID(), 'eventTitle' => $aEvent['title']), JSON_HEX_APOS | JSON_HEX_QUOT), 2);
 					}
 					$this->parseMatchups($aEvent, $oFoundEvent);
