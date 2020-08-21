@@ -76,6 +76,7 @@ if ($aManualActions != null && sizeof($aManualActions) > 0)
 
 				//Check if either fighter has another matchup scheduled and indicate that
 				$matchups1 = EventHandler::getAllFightsForFighter($oMatchup->getTeam(1));
+				var_dump($matchups1);
 				$found1 = false;
 				foreach ($matchups1 as $matchup)
 				{
@@ -87,6 +88,7 @@ if ($aManualActions != null && sizeof($aManualActions) > 0)
 					}
 				}
 				$matchups2 = EventHandler::getAllFightsForFighter($oMatchup->getTeam(2));
+				var_dump($matchups2);
 				$found2 = false;
 				foreach ($matchups2 as $matchup)
 				{
