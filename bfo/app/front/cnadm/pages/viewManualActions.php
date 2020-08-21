@@ -75,29 +75,17 @@ if ($aManualActions != null && sizeof($aManualActions) > 0)
 				$odds = OddsHandler::getOpeningOddsForMatchup($oAction->matchupID);
 
 				//Check if either fighter has another matchup scheduled and indicate that
-				$matchups1 = EventHandler::getAllFightsForFighter($oMatchup->getTeam(1));
-				var_dump($matchups1);
+				$matchups1 = EventHandler::getAllFightsForFighter($oMatchup->getFighterID(1));
 				$found1 = false;
 				foreach ($matchups1 as $matchup)
 				{
-					echo 'checking ' . $matchup->getTeamAsString(1) . ' / ' . $matchup->getTeamAsString(2) . '<br>';
-					if ($matchup->isFuture() && ($matchup->getFighterID(1) != $oMatchup->getFighterID(1) || $matchup->getFighterID(2) != $oMatchup->getFighterID(2)))
-					{
-						echo 'Found alternative!';
-						$found1 = true;
-					}
+					$found1 = ($matchup->isFuture() && ($matchup->getFighterID(1) != $oMatchup->getFighterID(1) || $matchup->getFighterID(2) != $oMatchup->getFighterID(2)));
 				}
-				$matchups2 = EventHandler::getAllFightsForFighter($oMatchup->getTeam(2));
-				var_dump($matchups2);
+				$matchups2 = EventHandler::getAllFightsForFighter($oMatchup->getFighterID(2));
 				$found2 = false;
 				foreach ($matchups2 as $matchup)
 				{
-					echo 'checking ' . $matchup->getTeamAsString(1) . ' / ' . $matchup->getTeamAsString(2) . '<br>';
-					if ($matchup->isFuture() && ($matchup->getFighterID(1) != $oMatchup->getFighterID(1) || $matchup->getFighterID(2) != $oMatchup->getFighterID(2)))
-					{
-						echo 'Found alternative!';
-						$found2 = true;
-					}
+					$found2 = ($matchup->isFuture() && ($matchup->getFighterID(1) != $oMatchup->getFighterID(1) || $matchup->getFighterID(2) != $oMatchup->getFighterID(2)));
 				}
 
 				$oEvent = EventHandler::getEvent($oMatchup->getEventID());
