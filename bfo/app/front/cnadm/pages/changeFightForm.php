@@ -23,7 +23,7 @@ echo '
 	$aEvents = EventHandler::getAllUpcomingEvents();
   foreach($aEvents as $oEvent)
   {
-    echo '<option value="' . $oEvent->getID() . '" ' . ($oEvent->getID() == $oCurrentFight->getEventID() ? 'selected' : '') . '>' . $oEvent->getName() . '</option>';
+    echo '<option value="' . $oEvent->getID() . '" ' . ($oEvent->getID() == $oCurrentFight->getEventID() ? 'selected' : '') . '>' . $oEvent->getName() . ' - ' . $oEvent->getDate() . '</option>';
   }
   echo '</select><br /><br />
 	<input type="submit" value="Update fight" />

@@ -63,15 +63,17 @@ if ($aManualActions != null && sizeof($aManualActions) > 0)
 				$oMatchup = EventHandler::getFightByID($oAction->matchupID);
 				$oOldEvent = EventHandler::getEvent($oMatchup->getEventID());
 				$oNewEvent = EventHandler::getEvent($oAction->eventID);
-				echo 'Move </td><td>' . $oMatchup->getTeamAsString(1) . ' vs. ' . $oMatchup->getTeamAsString(2) . '</td><td> from </td><td>' . $oOldEvent->getName() . ' (' . $oOldEvent->getDate() . ')</td><td> to </td><td>' . $oNewEvent->getName() . ' (' . $oNewEvent->getDate() . ')';
+				echo 'Move </td><td><a href="http://www.google.com/search?q=tapology ' . urlencode($oMatchup->getTeamAsString(1) . ' vs. ' . $oMatchup->getTeamAsString(2)) . '">' . $oMatchup->getTeamAsString(1) . ' vs. ' . $oMatchup->getTeamAsString(2) . '</a></td><td> from </td><td>' . $oOldEvent->getName() . ' (' . $oOldEvent->getDate() . ')</td><td> to </td><td>' . $oNewEvent->getName() . ' (' . $oNewEvent->getDate() . ')';
 				echo '</td><td><input type="submit" value="Accept" onclick="maMoveMatchup(' . $aManualAction['id'] . ', \'' . htmlspecialchars($aManualAction['description']). '\')" />
 				';
 			break;
 			case 7:
 			//Delete matchup
 				$oMatchup = EventHandler::getFightByID($oAction->matchupID);
+				//Check if matchup has odds and the indicate that 
+				$odds = EventHandler::getLatestOddsForFightAndBookie($oAction->matchupID);
 				$oEvent = EventHandler::getEvent($oMatchup->getEventID());
-				echo 'Delete </td><td><a href="http://www.google.com/search?q=' . urlencode($oMatchup->getTeamAsString(1) . ' vs. ' . $oMatchup->getTeamAsString(2)) . '">' . $oMatchup->getTeamAsString(1) . ' vs. ' . $oMatchup->getTeamAsString(2) . '</a></td><td> from </td><td>' . $oEvent->getName() . ' (' . $oEvent->getDate() .')';
+				echo 'Delete </td><td><a href="http://www.google.com/search?q=tapology ' . urlencode($oMatchup->getTeamAsString(1) . ' vs. ' . $oMatchup->getTeamAsString(2)) . '">' . $oMatchup->getTeamAsString(1) . ' vs. ' . $oMatchup->getTeamAsString(2) . '</a> ' . ($odds == null ? ' (no odds)' : ' (has odds)') . '</td><td> from </td><td>' . $oEvent->getName() . ' (' . $oEvent->getDate() .')';
 				echo '</td><td><input type="submit" value="Accept" onclick="maDeleteMatchup(' . $aManualAction['id'] . ', \'' . htmlspecialchars($aManualAction['description']). '\')" />
 				';
 			break;
