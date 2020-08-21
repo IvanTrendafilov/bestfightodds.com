@@ -95,7 +95,7 @@ if ($aManualActions != null && sizeof($aManualActions) > 0)
 				}
 
 				$oEvent = EventHandler::getEvent($oMatchup->getEventID());
-				echo 'Delete </td><td><a href="http://www.google.com/search?q=tapology ' . urlencode($oMatchup->getTeamAsString(1) . ' vs. ' . $oMatchup->getTeamAsString(2)) . '">' . $oMatchup->getTeamAsString(1) . ' vs. ' . $oMatchup->getTeamAsString(2) . '</a> ' . ($odds == null ? ' (no odds)' : ' (has odds) ') . ' ' . ($found1 == false ? '' : ' (1 has other matchup)') . ' ' . ($found2 == false ? '' : ' (2 has other matchup)') . '</td><td> from </td><td>' . $oEvent->getName() . ' (' . $oEvent->getDate() .')';
+				echo 'Delete </td><td><a href="http://www.google.com/search?q=tapology ' . urlencode($oMatchup->getTeamAsString(1) . ' vs. ' . $oMatchup->getTeamAsString(2)) . '">' . $oMatchup->getTeamAsString(1) . ' vs. ' . $oMatchup->getTeamAsString(2) . '</a> ' . ($odds == null ? ' (no odds)' : ' (has odds) ') . ' ' . ($found1 == false ? '' : ' (' . $oMatchup->getTeamAsString(1) . ' has other matchup)') . ' ' . ($found2 == false ? '' : ' (' .  $oMatchup->getTeamAsString(2) . ' has other matchup)') . '</td><td> from </td><td>' . $oEvent->getName() . ' (' . $oEvent->getDate() .')';
 				echo '</td><td><input type="submit" value="Accept" onclick="maDeleteMatchup(' . $aManualAction['id'] . ', \'' . htmlspecialchars($aManualAction['description']). '\')" />
 				';
 			break;
