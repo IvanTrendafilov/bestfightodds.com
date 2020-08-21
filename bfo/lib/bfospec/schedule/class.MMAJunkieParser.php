@@ -35,6 +35,7 @@ class MMAJunkieParser
             $aMatches = ParseTools::matchBlock($item->description, $sEventRegexp);
             $aNewEvent['date'] = strtotime($aMatches[0][1]);
             $aNewEvent['date'] = strtotime('-8 hour', $aNewEvent['date']);
+            echo 'Event ' . $aNewEvent['title'] . ' is planned for ' . $aNewEvent['date'] . ' compared to ' . time() . '\n\r';
 
             $sFightRegexp = '/<li>[^<]*<a[^>]*>([^<]*)<\/a[^>]*>[^<]*<a[^>]*>([^<]*)<\/a[^>]*>[^<]*<\/li>/';
             $aMatches = ParseTools::matchBlock($item->description, $sFightRegexp);
