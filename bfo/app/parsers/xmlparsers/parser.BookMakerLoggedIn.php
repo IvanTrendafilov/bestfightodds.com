@@ -39,12 +39,12 @@ class XMLParserBookMakerLoggedIn
             foreach ($dategroup['game'] as $game)
             {
                 //Regular matchup
-                $oParsedMatchup = new ParsedMatchup(
+                $oParsedSport->addParsedMatchup(new ParsedMatchup(
                     $game['htm'],
                     $game['vtm'],
                     $game['Derivatives']['line'][0]['hoddst'],
-                    $game['Derivatives']['line'][0]['voddst'])
-                );
+                    $game['Derivatives']['line'][0]['voddst']
+                ));
 
                 //Totals prop
                 if ($game['unt'] != '' && $game['ovt'] != '' && $game['ovoddst'] != '' && $game['unoddst'] != '')
