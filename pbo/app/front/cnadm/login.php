@@ -12,7 +12,7 @@ else
     ?>
     <html>
         <form method="post" action="/cnadm/login.php">
-            <input type="text" name="aupwd">
+            <input type="password" name="aupwd">
             <input type="submit">
         </form>
     </html>
