@@ -42,3 +42,5 @@ Handy Git stuff:
 - Merging changes in master (origin) to feature branch
     1. Checkout the feature branch
     2. Run git merge origin
+- Reverting to a commit
+    1. Run this on dev computer: git revert --no-commit c6018e8..HEAD     (replacing c6018e8 with the commit to revert to)
