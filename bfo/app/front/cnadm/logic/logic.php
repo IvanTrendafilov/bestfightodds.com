@@ -7,6 +7,14 @@ require_once('lib/bfocore/general/inc.GlobalTypes.php');
 require_once('lib/bfocore/general/class.EventHandler.php');
 require_once('lib/bfocore/general/class.BookieHandler.php');
 
+//Check if logged in
+session_start();
+if (!isset($_SESSION['user_id']) || $_SESSION['user_id'] != 'cnadm') {
+    // Redirect them to the login page
+	header("Location: /cnadm/login.php");
+	exit;
+}
+
 if (isset($_GET['returnPage']))
 {
     //Convert any $ to & in return page string

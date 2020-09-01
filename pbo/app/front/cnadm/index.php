@@ -1,5 +1,13 @@
 <?php
 
+//Check if logged in
+session_start();
+if (!isset($_SESSION['user_id']) || $_SESSION['user_id'] != 'cnadm') {
+    // Redirect them to the login page
+	header("Location: /cnadm/login.php");
+	exit;
+}
+
 //Disable caching
 header('Cache-Control: no-cache, no-store, max-age=0, must-revalidate');
 header('Expires: Mon, 12 Jul 1996 04:11:00 GMT'); //Any date passed.

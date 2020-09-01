@@ -12,6 +12,14 @@ require_once('lib/bfocore/general/inc.GlobalTypes.php');
 require_once('lib/bfocore/general/class.EventHandler.php');
 require_once('lib/bfocore/parser/utils/class.ParseTools.php');
 
+//Check if logged in
+session_start();
+if (!isset($_SESSION['user_id']) || $_SESSION['user_id'] != 'cnadm') {
+    // Redirect them to the login page
+	header("Location: /cnadm/login.php");
+	exit;
+}
+
 $sWordsToClear = array('Champ', '*');
 $input = $_POST['input']; //TODO: Validate input
 $iEventID = $_POST['eventID']; //TODO: Validate input

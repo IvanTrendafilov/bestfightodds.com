@@ -1,5 +1,14 @@
 <?php
 
+//Check if logged in
+session_start();
+if (!isset($_SESSION['user_id']) || $_SESSION['user_id'] != 'cnadm') {
+    // Redirect them to the login page
+	header("Location: /cnadm/login.php");
+	exit;
+}
+
+
 define('MATCH_REGEXP_BLOCK', '/<div id="jSft_CPCtr_evC[0-9]*_pnlCopy" class="copy">[\\sa-zA-Z:,.<>0-9="\/&;()-?]*<\/div>/');
 define('MATCH_REGEXP_DATE', '/Date: [a-zA-Z]* [0-9]*, [0-9]*/');
 define('MATCH_REGEXP_FIGHT', '/<li>([^<]*)<\/li>/');
