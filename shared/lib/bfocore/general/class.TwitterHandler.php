@@ -27,7 +27,10 @@ class TwitterHandler
 
         foreach ($aFights as $oFight)
         {
-            if (!TWITTER_GROUP_MATCHUPS || $oFight->isMainEvent())
+            //We don't group if this is a UFC matchup so fetch the event
+            $oEvent = EventHandler::getEvent($oFight->getEventID());
+
+            if (!TWITTER_GROUP_MATCHUPS || $oFight->isMainEvent() || substr(strtoupper($oEvent->getName()), 0, 3) == 'UFC')
             {
                 $aGroups[$oFight->getEventID() . $oFight->getID()]['matchups'][] = $oFight;
                 $aGroups[$oFight->getEventID() . $oFight->getID()]['event_id'] = $oFight->getEventID();

@@ -43,7 +43,7 @@ foreach($aUnmatchedCol as $aUnmatched)
 			else
 			{
 
-				$event_maybe = '  No match.. [<a href="/cnadm/?p=addNewEventForm&eventName=' . $event_name . '&eventDate=' . $link_add . '">create</a>] [<a href="http://www.google.se/search?q=' . $event_name . '">google</a>]';
+				$event_maybe = '  No match.. [<a href="/cnadm/?p=addNewEventForm&eventName=' . $event_name . '&eventDate=' . $link_add . '">create</a>] [<a href="http://www.google.se/search?q=tapology ' . $event_name . '">google</a>]';
 			}
 
 
@@ -58,7 +58,7 @@ foreach($aUnmatchedCol as $aUnmatched)
 	
   	if ($aUnmatched['type'] == 0)
   	{
-  		$sMatchups .= '<tr><td>' . $sModifiedDate . '</td><td><b>' . $sBookie . '</b></td><td>' . $aUnmatched['matchup'] . '</td><td>[<a href="?p=addNewFightForm&inFighter1=' . $aSplit[0] .  '&inFighter2=' . $aSplit[1] . '">add</a>] [<a href="http://www.google.se/search?q=' . $aUnmatched['matchup'] . '">google</a>] ' . $event_text . '</td></tr>';	
+  		$sMatchups .= '<tr><td>' . $sModifiedDate . '</td><td><b>' . $sBookie . '</b></td><td>' . $aUnmatched['matchup'] . '</td><td>[<a href="?p=addNewFightForm&inFighter1=' . $aSplit[0] .  '&inFighter2=' . $aSplit[1] . '">add</a>] [<a href="http://www.google.se/search?q=tapology ' . $aUnmatched['matchup'] . '">google</a>] ' . $event_text . '</td></tr>';	
   	}
   	else if ($aUnmatched['type'] == 1)
   	{

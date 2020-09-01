@@ -5,6 +5,7 @@ Manual actions: <a href="#" onclick="$('input[onclick^=\'maAdd\']').click();" >A
 
 require_once('lib/bfocore/general/class.ScheduleHandler.php');
 require_once('lib/bfocore/general/class.EventHandler.php');
+require_once('lib/bfocore/general/class.OddsHandler.php');
 
 
 $aManualActions = ScheduleHandler::getAllManualActions();
@@ -63,15 +64,38 @@ if ($aManualActions != null && sizeof($aManualActions) > 0)
 				$oMatchup = EventHandler::getFightByID($oAction->matchupID);
 				$oOldEvent = EventHandler::getEvent($oMatchup->getEventID());
 				$oNewEvent = EventHandler::getEvent($oAction->eventID);
-				echo 'Move </td><td>' . $oMatchup->getTeamAsString(1) . ' vs. ' . $oMatchup->getTeamAsString(2) . '</td><td> from </td><td>' . $oOldEvent->getName() . ' (' . $oOldEvent->getDate() . ')</td><td> to </td><td>' . $oNewEvent->getName() . ' (' . $oNewEvent->getDate() . ')';
+				echo 'Move </td><td><a href="http://www.google.com/search?q=tapology ' . urlencode($oMatchup->getTeamAsString(1) . ' vs. ' . $oMatchup->getTeamAsString(2)) . '">' . $oMatchup->getTeamAsString(1) . ' vs. ' . $oMatchup->getTeamAsString(2) . '</a></td><td> from </td><td>' . $oOldEvent->getName() . ' (' . $oOldEvent->getDate() . ')</td><td> to </td><td>' . $oNewEvent->getName() . ' (' . $oNewEvent->getDate() . ')';
 				echo '</td><td><input type="submit" value="Accept" onclick="maMoveMatchup(' . $aManualAction['id'] . ', \'' . htmlspecialchars($aManualAction['description']). '\')" />
 				';
 			break;
 			case 7:
 			//Delete matchup
 				$oMatchup = EventHandler::getFightByID($oAction->matchupID);
+				//Check if matchup has odds and the indicate that 
+				$odds = OddsHandler::getOpeningOddsForMatchup($oAction->matchupID);
+
+				//Check if either fighter has another matchup scheduled and indicate that
+				$matchups1 = EventHandler::getAllFightsForFighter($oMatchup->getFighterID(1));
+				$found1 = false;
+				foreach ($matchups1 as $matchup)
+				{
+					if ($matchup->isFuture() && ($matchup->getFighterID(1) != $oMatchup->getFighterID(1) || $matchup->getFighterID(2) != $oMatchup->getFighterID(2)))
+					{
+						$found1 = true;
+					}
+				}
+				$matchups2 = EventHandler::getAllFightsForFighter($oMatchup->getFighterID(2));
+				$found2 = false;
+				foreach ($matchups2 as $matchup)
+				{
+					if ($matchup->isFuture() && ($matchup->getFighterID(1) != $oMatchup->getFighterID(1) || $matchup->getFighterID(2) != $oMatchup->getFighterID(2)))
+					{
+						$found2 = true;
+					}
+				}
+
 				$oEvent = EventHandler::getEvent($oMatchup->getEventID());
-				echo 'Delete </td><td><a href="http://www.google.com/search?q=' . urlencode($oMatchup->getTeamAsString(1) . ' vs. ' . $oMatchup->getTeamAsString(2)) . '">' . $oMatchup->getTeamAsString(1) . ' vs. ' . $oMatchup->getTeamAsString(2) . '</a></td><td> from </td><td>' . $oEvent->getName() . ' (' . $oEvent->getDate() .')';
+				echo 'Delete </td><td><a href="http://www.google.com/search?q=tapology ' . urlencode($oMatchup->getTeamAsString(1) . ' vs. ' . $oMatchup->getTeamAsString(2)) . '">' . $oMatchup->getTeamAsString(1) . ' vs. ' . $oMatchup->getTeamAsString(2) . '</a> ' . ($odds == null ? ' (no odds)' : ' (has odds) ') . ' ' . ($found1 == false ? '' : ' (' . $oMatchup->getTeamAsString(1) . ' has other matchup)') . ' ' . ($found2 == false ? '' : ' (' .  $oMatchup->getTeamAsString(2) . ' has other matchup)') . '</td><td> from </td><td>' . $oEvent->getName() . ' (' . $oEvent->getDate() .')';
 				echo '</td><td><input type="submit" value="Accept" onclick="maDeleteMatchup(' . $aManualAction['id'] . ', \'' . htmlspecialchars($aManualAction['description']). '\')" />
 				';
 			break;

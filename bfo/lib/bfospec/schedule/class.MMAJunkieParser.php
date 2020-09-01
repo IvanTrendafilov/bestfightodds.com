@@ -34,7 +34,7 @@ class MMAJunkieParser
             $sEventRegexp = '/<p>Date: ([^<]+)<\/p>/';
             $aMatches = ParseTools::matchBlock($item->description, $sEventRegexp);
             $aNewEvent['date'] = strtotime($aMatches[0][1]);
-            $aNewEvent['date'] = strtotime('-8 hour', $aNewEvent['date']);
+            $aNewEvent['date'] = strtotime('-2 hour', $aNewEvent['date']);
 
             $sFightRegexp = '/<li>[^<]*<a[^>]*>([^<]*)<\/a[^>]*>[^<]*<a[^>]*>([^<]*)<\/a[^>]*>[^<]*<\/li>/';
             $aMatches = ParseTools::matchBlock($item->description, $sFightRegexp);

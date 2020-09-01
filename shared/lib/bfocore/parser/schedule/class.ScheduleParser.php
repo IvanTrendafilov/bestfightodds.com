@@ -70,9 +70,12 @@ class ScheduleParser
 						$aStoredPrefixParts = explode(' ', $oStoredEvent->getName());
 						if ($aStoredPrefixParts[0] == $aPrefixParts[0] && date('Y-m-d', $aEvent['date']) == substr($oStoredEvent->getDate(),0,10))
 						{
-							//Found it!
+							//Found it! But should maybe be renamed
 							$bFound = true;
-							ScheduleHandler::storeManualAction(json_encode(array('eventID' => $oStoredEvent->getID(), 'eventTitle' => $aEvent['title']), JSON_HEX_APOS | JSON_HEX_QUOT), 2);
+							if ($oStoredEvent->getName() != $aEvent['title'])
+							{
+								ScheduleHandler::storeManualAction(json_encode(array('eventID' => $oStoredEvent->getID(), 'eventTitle' => $aEvent['title']), JSON_HEX_APOS | JSON_HEX_QUOT), 2);
+							}
 							$this->parseMatchups($aEvent, $oStoredEvent);
 							$this->aMatchedExistingEvents[] = $oStoredEvent->getID();
 						}
@@ -92,7 +95,10 @@ class ScheduleParser
 						{
 							//Found it! However event should be renamed
 							$bFound = true;
-							ScheduleHandler::storeManualAction(json_encode(array('eventID' => $oStoredEvent->getID(), 'eventTitle' => $aEvent['title']), JSON_HEX_APOS | JSON_HEX_QUOT), 2);
+							if ($oStoredEvent->getName() != $aEvent['title'])
+							{
+								ScheduleHandler::storeManualAction(json_encode(array('eventID' => $oStoredEvent->getID(), 'eventTitle' => $aEvent['title']), JSON_HEX_APOS | JSON_HEX_QUOT), 2);
+							}
 							$this->parseMatchups($aEvent, $oStoredEvent);
 							//But maybe date is still incorrect
 							$this->checkEventDate($aEvent, $oStoredEvent);
@@ -119,13 +125,17 @@ class ScheduleParser
 					arsort($aFoundMatches);
 					if (sizeof($aFoundMatches) > 1)
 					{
-						echo 'FAIL!';
-						//More than 1.. handle this somehow?
+						echo 'FAIL';
+						//TODO: More than 1.. handle this somehow?
 					}
 					reset($aFoundMatches);
-					//Probably found it! Howver event should be renamed
+					//Probably found it! Howver event should be renamed if different
+
 					$oFoundEvent = EventHandler::getEvent(key($aFoundMatches));
-					ScheduleHandler::storeManualAction(json_encode(array('eventID' => $oFoundEvent->getID(), 'eventTitle' => $aEvent['title']), JSON_HEX_APOS | JSON_HEX_QUOT), 2);
+					if ($oFoundEvent->getName() != $aEvent['title'])
+					{
+						ScheduleHandler::storeManualAction(json_encode(array('eventID' => $oFoundEvent->getID(), 'eventTitle' => $aEvent['title']), JSON_HEX_APOS | JSON_HEX_QUOT), 2);
+					}
 					$this->parseMatchups($aEvent, $oFoundEvent);
 					//But maybe date is still incorrect
 					$this->checkEventDate($aEvent, $oFoundEvent);
