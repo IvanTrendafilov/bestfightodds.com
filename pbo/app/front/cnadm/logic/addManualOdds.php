@@ -1,13 +1,5 @@
 <?php
 
-//Check if logged in
-session_start();
-if (!isset($_SESSION['user_id']) || $_SESSION['user_id'] != 'cnadm') {
-    // Redirect them to the login page
-	header("Location: /cnadm/login.php");
-	exit;
-}
-
 require_once('lib/bfocore/general/class.EventHandler.php');
 require_once('lib/bfocore/utils/class.OddsTools.php');
 

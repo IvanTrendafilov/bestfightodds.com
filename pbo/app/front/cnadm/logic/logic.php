@@ -1,13 +1,5 @@
 <?php
 
-//Check if logged in
-session_start();
-if (!isset($_SESSION['user_id']) || $_SESSION['user_id'] != 'cnadm') {
-    // Redirect them to the login page
-	header("Location: /cnadm/login.php");
-	exit;
-}
-
 /**
  * This is the main logic class for the admin panel. When an action is performed it is done through this script.
  */
