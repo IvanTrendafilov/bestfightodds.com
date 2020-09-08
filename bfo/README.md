@@ -44,3 +44,6 @@ Handy Git stuff:
     2. Run git merge origin
 - Reverting to a commit
     1. Run this on dev computer: git revert --no-commit c6018e8..HEAD     (replacing c6018e8 with the commit to revert to)
+- Totally resetting an environment
+    1. git fetch --all
+    2. git reset --hard origin/master

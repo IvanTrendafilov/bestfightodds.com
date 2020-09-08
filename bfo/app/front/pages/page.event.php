@@ -66,7 +66,7 @@ if ($oEvent != null)
             $sAddDate = '<span class="table-header-date">' . date('F jS', strtotime($oEvent->getDate())) . '</span>';
         }
 
-        echo '<div class="table-outer-wrapper"><div class="table-div" id="event' . $oEvent->getID() . '"><div class="table-header"><a href="/events/' . $oEvent->getEventAsLinkString() . '">' . $oEvent->getName() . '</a>' . $sAddDate . '';
+        echo '<div class="table-outer-wrapper"><div class="table-div" id="event' . $oEvent->getID() . '"><div class="table-header"><a href="/events/' . $oEvent->getEventAsLinkString() . '"><h1>' . $oEvent->getName() . '</h1></a>' . $sAddDate . '';
 
         $sShareURL = 'https://www.bestfightodds.com/events/' . $oEvent->getEventAsLinkString();
         $sShareDesc = $oEvent->getName() . ' betting lines';

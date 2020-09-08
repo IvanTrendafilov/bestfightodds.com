@@ -69,9 +69,9 @@ require_once('lib/bfocore/general/inc.GlobalTypes.php');
         </div>
         <div class="content-sidebar">
             <p>
-                To create an alert for scheduled/rumored matchups without odds, use the form to the left. To add an alert for a matchup with existing odds, click the  <img src="/img/icon-alert.png" alt="Alert symbol" style="width: 14px; height: 15px;" /> symbol on the <a href="/">front page</a>.<br /><br /><br />
-                <img src="img/info-arrow.gif" class="img-note-box" /> Note that there is a limit of max 50 alerts per e-mail. When an alert is issued or expires you will be able to add a new one.<br /><br />
-                To ensure that alerts show up properly in your inbox, add<br /><b>no-reply@bestfightodds.com</b> to your list of trusted senders.
+                To create an alert for scheduled/rumored matchups without odds, use the form to the left. To add an alert for a matchup with existing odds, click the  <img src="/img/icon-alert.png" alt="Alert symbol" style="width: 14px; height: 15px;" /> symbol on the <a href="/">front page</a>.<br /><br />
+                Note that there is a limit of max 50 alerts per e-mail. When an alert is issued or expires you will be able to add a new one.<br /><br />
+                To ensure that alerts show up properly in your inbox, add<b>no-reply@bestfightodds.com</b> to your list of trusted senders.
             </p>
         </div>
         <div class="clear"></div>

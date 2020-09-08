@@ -812,16 +812,16 @@ initPage = function() {
         $("[data-mu=" + matchup_id + "]").data('toggled', $(this).data('toggled'));
         if ($(this).data('toggled')) {
             if (navigator.appName.indexOf("Microsoft") > -1 && navigator.appVersion.indexOf("MSIE 10.0") == -1) {
-                $(this).closest('tr').next('tr.odd').andSelf('tr.odd').nextUntil('tr.even').css('display', 'block');
+                $(this).closest('tr').next('tr.odd').addBack('tr.odd').nextUntil('tr.even').css('display', 'block');
                 $('#mu-' + matchup_id).nextUntil('tr.even').css('display', 'block');
             } else {
-                $(this).closest('tr').next('tr.odd').andSelf('tr.odd').nextUntil('tr.even').css('display', 'table-row');
+                $(this).closest('tr').next('tr.odd').addBack('tr.odd').nextUntil('tr.even').css('display', 'table-row');
                 $('#mu-' + matchup_id).nextUntil('tr.even').css('display', 'table-row');
             }
             $("[data-mu='" + matchup_id + "']").find(".exp-ard").addClass("exp-aru").removeClass("exp-ard");
             refreshOpenProps[matchup_id] = true;
         } else {
-            $(this).closest('tr').next('tr.odd').andSelf('tr.odd').nextUntil('tr.even').css('display', 'none');
+            $(this).closest('tr').next('tr.odd').addBack('tr.odd').nextUntil('tr.even').css('display', 'none');
             $('#mu-' + matchup_id).nextUntil('tr.even').css('display', 'none');
             $("[data-mu='" + matchup_id + "']").find(".exp-aru").addClass("exp-ard").removeClass("exp-aru");
             refreshOpenProps[matchup_id] = false;

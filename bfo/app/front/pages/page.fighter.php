@@ -39,30 +39,24 @@ if ($bCached == false || empty($sBuffer))
     $iCellCounter = 0; 
     ob_start();
 
-    $futurebreak = 0; //Indicates where break between future and historic matchups are
-    //Loop through fights and find where the first historic one pops up
+    //Loop through fights and categorize as upcoming, rumoured or historic
+    $matchups = ['historic' => [], 'upcoming' => [], 'rumoured' => []];
     foreach ($aFights as $key => $fight)
     {
         if ($fight->isFuture() == false)
         {
-            $futurebreak = $key;
-            break;
+            //Historic
+            array_push($matchups['historic'], $aFights[$key]);
         }
-    }
-
-
-    if ($futurebreak > 0) //We have upcoming matchups, add a future matchups list
-    {
-        for ($i = 0; $i < $futurebreak; $i++)
+        else if ($aFights[$key]->getEventID() == PARSE_FUTURESEVENT_ID)
         {
-            if ($aFights[$i]->getEventID() == PARSE_FUTURESEVENT_ID)
-            {
-                echo 'Rumoured matchup ';
-            }
-            else
-            {
-                echo 'Upcoming fight ';
-            }
+            //Rumoured
+            array_push($matchups['rumoured'], $aFights[$key]);
+        }
+        else
+        {
+            //Upcoming
+            array_push($matchups['upcoming'], $aFights[$key]);
         }
     }
 

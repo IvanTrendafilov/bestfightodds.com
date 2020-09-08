@@ -397,7 +397,6 @@ h1 {
   padding: 18px;
   height: 100%;
   font-size: 12px;
-  width: 60%;
   color: #666;
   a {
     color: #000;
@@ -408,13 +407,6 @@ h1 {
 .img-info-box {
   width: 12px;
   height: 12px;
-  border: 0;
-  margin: 0 1px;
-}
-
-.img-note-box {
-  width: 11px;
-  height: 11px;
   border: 0;
   margin: 0 1px;
 }
@@ -841,7 +833,7 @@ ul.share-dropdown ul li a {
       background-color: #F1F3F7;
     }
     td {
-      padding: 3px 10px;
+      padding: 4px 10px;
     }
     a {
       color: #202020;
@@ -857,6 +849,7 @@ ul.share-dropdown ul li a {
 .content-vs-cell {
   width: 25px;
   text-align: center;
+  color: #909090;
 }
 
 .content-team-left {
@@ -900,7 +893,7 @@ table.team-stats-table {
   }
   tbody {
     tr {
-      height: 20px;
+      height: 23px;
       border-bottom: 0;
       &.main-row {
         border-top: 1px dotted #989898;
@@ -920,20 +913,22 @@ table.team-stats-table {
       &.main-row {
         td {
         padding-top: 4px;
+        padding-bottom: 2px;
       }
       th {
         padding-top: 4px;
+        padding-bottom: 2px;
       }
     }
       &:not(.main-row) {
         
           td {
           padding-bottom: 4px;
-          padding-top: 4px;
+          padding-top: 2px;
         }
         th {
           padding-bottom: 4px;
-          padding-top: 4px;
+          padding-top: 2px;
         }
     }
       &:hover {
@@ -946,7 +941,7 @@ table.team-stats-table {
       word-break: break-word;
       a {
         color: #1a1a1a;
-        height: 20px;
+        height: 23px;
       }
     }
     td {
@@ -1056,7 +1051,7 @@ table.team-stats-table {
 
 .button {
   border-radius: 2px;
-  padding: 4px 10px;
+  padding: 3px 10px;
   background-color: #e8ebf3;
   color: #151515;
   cursor: pointer;
@@ -1066,6 +1061,7 @@ table.team-stats-table {
   &:hover {
    background-color: #d7dae2;
   }
+  margin: 1px 0;
 }
 
 #event-swing-area {
