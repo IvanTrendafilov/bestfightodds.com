@@ -552,27 +552,25 @@ $(document).ready(function() {
     });
 
     //Nightmode/normal selectors
+   
     $('#normalModeSelector').click(function() {
-        $('[id^="nightModeSelector"]').each(function() {
-            $(this).removeClass("list-checked");
-            $('span', this).css('display', 'none');
-        });
+        $('#nightModeSelector').removeClass("list-checked");
+        $('span', $('#nightModeSelector')).css('display', 'none');
         setNightMode(false);
-        $(this).addClass("list-checked");
-        $('span', this).css('display', 'inline-block');
+        $('#nightModeSelector').addClass("list-checked");
+        $('span', $('#nightModeSelector')).css('display', 'inline-block');
+
     });
     $('#nightModeSelector').click(function() {
-        $('[id^="normalModeSelector"]').each(function() {
-            $(this).removeClass("list-checked");
-            $('span', this).css('display', 'none');
-        });
+        $('#normalModeSelector').removeClass("list-checked");
+        $('span', $('#normalModeSelector')).css('display', 'none');
         setNightMode(true);
-        $(this).addClass("list-checked");
-        $('span', this).css('display', 'inline-block');
+        $('#nightModeSelector').addClass("list-checked");
+        $('span', $('#nightModeSelector')).css('display', 'inline-block');
     });
 
-    //Autorefresh selectors
-    $('#afSelectorOn').click(function() {
+    //Autorefresh selectors - Disabled
+    /*$('#afSelectorOn').click(function() {
         $('#afSelectorOff').removeClass("list-checked");
         $('span', $('#afSelectorOff')).css('display', 'none');
         toggleRefresh(true);
@@ -585,7 +583,7 @@ $(document).ready(function() {
         toggleRefresh(false);
         $('#afSelectorOff').addClass("list-checked");
         $('span', $('#afSelectorOff')).css('display', 'inline-block');
-    });
+    });*/
 
     $('#parlay-mode-box').click(function() {
         parlay = [];
