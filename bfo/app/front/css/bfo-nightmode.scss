@@ -1,4 +1,4 @@
-@media (prefers-color-scheme: dark) {
+
     body {
         background-color: #25272a;
     }
@@ -6,7 +6,7 @@
     .header-menu-wrapper {
         -webkit-box-shadow: 0 2px 1px -1px #383838;
         -moz-box-shadow: 0 2px 1px -1px #383838;
-        box-shadow: 0 2px 1px -1px #383838
+        box-shadow: 0 2px 1px -1px #383838;
     }
     
     .odds-table tbody tr {
@@ -49,5 +49,3 @@
         color: #d7d7d7;
         padding: 0 1px;
     }
-  }
-

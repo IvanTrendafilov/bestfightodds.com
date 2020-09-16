@@ -551,7 +551,27 @@ $(document).ready(function() {
         }
     });
 
+    //Nightmode/normal selectors
+    $('#normalModeSelector').click(function() {
+        $('[id^="nightModeSelector"]').each(function() {
+            $(this).removeClass("list-checked");
+            $('span', this).css('display', 'none');
+        });
+        setNightMode(false);
+        $(this).addClass("list-checked");
+        $('span', this).css('display', 'inline-block');
+    });
+    $('#nightModeSelector').click(function() {
+        $('[id^="normalModeSelector"]').each(function() {
+            $(this).removeClass("list-checked");
+            $('span', this).css('display', 'none');
+        });
+        setNightMode(true);
+        $(this).addClass("list-checked");
+        $('span', this).css('display', 'inline-block');
+    });
 
+    //Autorefresh selectors
     $('#afSelectorOn').click(function() {
         $('#afSelectorOff').removeClass("list-checked");
         $('span', $('#afSelectorOff')).css('display', 'none');
@@ -789,8 +809,15 @@ initPage = function() {
         }
     }
 
-
-
+    //Enable night mode if stored in cookie bfo_nightmode
+    if (Cookies.get('bfo_nightmode') !== null) {
+        if (parseInt(Cookies.get('bfo_nightmode')) == 1){
+            $('#normalModeSelector').removeClass("list-checked");
+            $('span', $('#normalModeSelector')).css('display', 'none');
+            $('#nightModeSelector').addClass("list-checked");
+            $('span', $('#nightModeSelector')).css('display', 'inline-block');
+        }
+    }
 
     //Cache tables for scrolling purpose
     $('div.table-scroller').each(function() {
@@ -1114,6 +1141,30 @@ toggleRefresh = function (autoRefresh) {
         }
     }
 };
+
+setNightMode = function(nightmode) {
+    if (nightmode == true) {
+        var e = document.createElement('link'); 
+        e.href = '/css/bfo.nightmode.css';
+        e.type = 'text/css';
+        e.rel = 'stylesheet';
+        e.media = 'screen';
+        e.id = 'nightmodecss';
+        document.getElementsByTagName('head')[0].appendChild(e);
+        Cookies.set('bfo_nightmode', 1, {
+            'expires': 999
+        });
+    }
+    else {
+        var nightmodecss = document.getElementById("nightmodecss");
+        if (typeof nightmodecss !== 'undefined') {
+            nightmodecss.outerHTML = "";
+        }
+        Cookies.set('bfo_nightmode', 0, {
+            'expires': 999
+        });
+    }
+}
 
 
 throttle = function(fn, threshhold, scope) {
