@@ -1142,7 +1142,7 @@ toggleRefresh = function (autoRefresh) {
 
 setNightMode = function(nightmode) {
     if (nightmode == true) {
-        if (typeof document.getElementById("nightmodecss") == 'undefined')
+        if (typeof(document.getElementById("nightmodecss")) == 'undefined' || document.getElementById("nightmodecss") == null)
         {
             var e = document.createElement('link'); 
             e.href = '/css/bfo.nightmode.css';
@@ -1158,7 +1158,7 @@ setNightMode = function(nightmode) {
     }
     else {
         var nightmodecss = document.getElementById("nightmodecss");
-        if (typeof nightmodecss !== 'undefined') {
+        if (typeof(nightmodecss) != 'undefined' && nightmodecss != null) {
             nightmodecss.outerHTML = "";
         }
         Cookies.set('bfo_nightmode', 0, {
