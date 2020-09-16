@@ -551,22 +551,22 @@ $(document).ready(function() {
         }
     });
 
-    //Nightmode/normal selectors
+    //Darkmode/normal selectors
    
     $('#normalModeSelector').click(function() {
-        $('#nightModeSelector').removeClass("list-checked");
-        $('span', $('#nightModeSelector')).css('display', 'none');
-        setNightMode(false);
+        $('#darkModeSelector').removeClass("list-checked");
+        $('span', $('#darkModeSelector')).css('display', 'none');
+        setDarkMode(false);
         $('#normalModeSelector').addClass("list-checked");
         $('span', $('#normalModeSelector')).css('display', 'inline-block');
 
     });
-    $('#nightModeSelector').click(function() {
+    $('#darkModeSelector').click(function() {
         $('#normalModeSelector').removeClass("list-checked");
         $('span', $('#normalModeSelector')).css('display', 'none');
-        setNightMode(true);
-        $('#nightModeSelector').addClass("list-checked");
-        $('span', $('#nightModeSelector')).css('display', 'inline-block');
+        setDarkMode(true);
+        $('#darkModeSelector').addClass("list-checked");
+        $('span', $('#darkModeSelector')).css('display', 'inline-block');
     });
 
     //Autorefresh selectors - Disabled
@@ -807,13 +807,13 @@ initPage = function() {
         }
     }
 
-    //Enable night mode if stored in cookie bfo_nightmode
-    if (Cookies.get('bfo_nightmode') !== null) {
-        if (parseInt(Cookies.get('bfo_nightmode')) == 1){
+    //Enable dark mode if stored in cookie bfo_darkmode
+    if (Cookies.get('bfo_darkmode') !== null) {
+        if (parseInt(Cookies.get('bfo_darkmode')) == 1){
             $('#normalModeSelector').removeClass("list-checked");
             $('span', $('#normalModeSelector')).css('display', 'none');
-            $('#nightModeSelector').addClass("list-checked");
-            $('span', $('#nightModeSelector')).css('display', 'inline-block');
+            $('#darkModeSelector').addClass("list-checked");
+            $('span', $('#darkModeSelector')).css('display', 'inline-block');
         }
     }
 
@@ -1140,28 +1140,28 @@ toggleRefresh = function (autoRefresh) {
     }
 };
 
-setNightMode = function(nightmode) {
-    if (nightmode == true) {
-        if (typeof(document.getElementById("nightmodecss")) == 'undefined' || document.getElementById("nightmodecss") == null)
+setDarkMode = function(darkmode) {
+    if (darkmode == true) {
+        if (typeof(document.getElementById("darkmodecss")) == 'undefined' || document.getElementById("darkmodecss") == null)
         {
             var e = document.createElement('link'); 
-            e.href = '/css/bfo.nightmode.css';
+            e.href = '/css/bfo.darkmode.css';
             e.type = 'text/css';
             e.rel = 'stylesheet';
             e.media = 'screen';
-            e.id = 'nightmodecss';
+            e.id = 'darkmodecss';
             document.getElementsByTagName('head')[0].appendChild(e);
         }
-        Cookies.set('bfo_nightmode', 1, {
+        Cookies.set('bfo_darkmode', 1, {
             'expires': 999
         });
     }
     else {
-        var nightmodecss = document.getElementById("nightmodecss");
-        if (typeof(nightmodecss) != 'undefined' && nightmodecss != null) {
-            nightmodecss.outerHTML = "";
+        var darkmodecss = document.getElementById("darkmodecss");
+        if (typeof(darkmodecss) != 'undefined' && darkmodecss != null) {
+            darkmodecss.outerHTML = "";
         }
-        Cookies.set('bfo_nightmode', 0, {
+        Cookies.set('bfo_darkmode', 0, {
             'expires': 999
         });
     }

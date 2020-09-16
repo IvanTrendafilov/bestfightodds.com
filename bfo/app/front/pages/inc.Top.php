@@ -29,10 +29,10 @@
 
         <?php
 
-        //Check if nightmode is enabled and if so, add appropriate stylesheet. Note that this is also checked in javascript to change dropdown
-        if ($_COOKIE['bfo_nightmode'] == 1)
+        //Check if darkmode is enabled and if so, add appropriate stylesheet. Note that this is also checked in javascript to change dropdown
+        if ($_COOKIE['bfo_darkmode'] == 1)
         {
-            echo '<link rel="stylesheet" type="text/css" href="/css/bfo.nightmode.css?v=0.0.1" id="nightmodecss" />';
+            echo '<link rel="stylesheet" type="text/css" href="/css/bfo.darkmode.css?v=0.0.1" id="darkmodecss" />';
         }
 
         ?>
@@ -108,7 +108,7 @@
                                     <li><a href="#" id="format-toggle-text"><span>Settings &#9660;</span></a>
                                         <ul class="sub_menu">
                                             <li><a href="#" id="normalModeSelector" class="list-checked"><span style="display: inline-block">&#10003;</span>Normal</a></li>
-                                            <li style="border-bottom: 1px solid #393b42"><a href="#" id="nightModeSelector"><span>&#10003;</span>Nightmode</a></li>
+                                            <li style="border-bottom: 1px solid #393b42"><a href="#" id="darkModeSelector"><span>&#10003;</span>Dark mode</a></li>
                                              <li><a href="#" id="formatSelector1" class="list-checked"><span style="display: inline-block">&#10003;</span>Moneyline</a></li>
                                              <li><a href="#" id="formatSelector2"><span>&#10003;</span>Decimal</a></li>
                                              <li><a href="#" id="formatSelector4"><span>&#10003;</span>Fractional</a></li>
