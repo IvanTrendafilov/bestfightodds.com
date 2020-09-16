@@ -8,10 +8,10 @@ var sass = require('gulp-sass');
 var concat = require('gulp-concat');
 
 gulp.task('styles', function() {
-    gulp.src(['./app/front/css/bfo-nightmode.scss'])
+    gulp.src(['./app/front/css/bfo-darkmode.scss'])
     .pipe(sass().on('error', sass.logError))
     .pipe(cleancss())
-    .pipe(concat('bfo.nightmode.css'))
+    .pipe(concat('bfo.darkmode.css'))
     .pipe(gulp.dest('./app/front/css'));
     return gulp.src(['./app/front/css/bfo-main-sass.scss', './app/front/css/bfo-oddstable-sass.scss', './app/front/css/bfo-responsive-sass.scss'])
         .pipe(sass().on('error', sass.logError))
