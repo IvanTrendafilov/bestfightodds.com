@@ -260,7 +260,7 @@ foreach ($aEvent as $oEvent)
                     echo '<td class="button-cell"><span class="but-img i-ng"></span></td>';
                 }
 
-                echo '<td class="prop-cell"><a href="#" data-mu="' . $oFight->getID() . '"><span class="t-b-cc">';
+                echo '<td class="prop-cell"><a href="#" data-mu="' . $oFight->getID() . '" class="prop-cell-exp"><span class="t-b-cc">';
                 $iPropCount = OddsHandler::getPropCountForMatchup($oFight->getID());
                 if ($iPropCount > 0)
                 {
