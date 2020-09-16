@@ -557,8 +557,8 @@ $(document).ready(function() {
         $('#nightModeSelector').removeClass("list-checked");
         $('span', $('#nightModeSelector')).css('display', 'none');
         setNightMode(false);
-        $('#nightModeSelector').addClass("list-checked");
-        $('span', $('#nightModeSelector')).css('display', 'inline-block');
+        $('#normalModeSelector').addClass("list-checked");
+        $('span', $('#normalModeSelector')).css('display', 'inline-block');
 
     });
     $('#nightModeSelector').click(function() {
@@ -1142,13 +1142,16 @@ toggleRefresh = function (autoRefresh) {
 
 setNightMode = function(nightmode) {
     if (nightmode == true) {
-        var e = document.createElement('link'); 
-        e.href = '/css/bfo.nightmode.css';
-        e.type = 'text/css';
-        e.rel = 'stylesheet';
-        e.media = 'screen';
-        e.id = 'nightmodecss';
-        document.getElementsByTagName('head')[0].appendChild(e);
+        if (typeof document.getElementById("nightmodecss") == 'undefined')
+        {
+            var e = document.createElement('link'); 
+            e.href = '/css/bfo.nightmode.css';
+            e.type = 'text/css';
+            e.rel = 'stylesheet';
+            e.media = 'screen';
+            e.id = 'nightmodecss';
+            document.getElementsByTagName('head')[0].appendChild(e);
+        }
         Cookies.set('bfo_nightmode', 1, {
             'expires': 999
         });
