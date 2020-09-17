@@ -868,8 +868,16 @@ initPage = function () {
 
 
     //Sync scrollbars
-    $('div.table-scroller').bind('mousedown touchstart', function () {
+    /*$('div.table-scroller').bind('mousedown touchstart', function () {
         scrollCaptain = $(this);
+    });*/
+    document.querySelectorAll('.table-scroller').forEach(function (item) {
+        item.addEventListener("mousedown", function (event) {
+            scrollCaptain = this;
+        }, {passive: true});
+        item.addEventListener("touchstart", function (event) {
+            scrollCaptain = this;
+        }, {passive: true});
     });
 
     $('div.table-scroller').on('scroll', function () {
