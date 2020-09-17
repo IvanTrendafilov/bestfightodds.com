@@ -767,7 +767,6 @@ $(document).ready(function () {
 
     //Team page: Mean graph text button listener
     $("span.teamPercChange").on('click', function (event) {
-        var opts = $.parseJSON($(this).attr('data-li'));
         var versus = $(this).closest('tr').next('tr').find("th.oppcell").text();
         var title = $("#team-name").text() + " <span style=\"font-weight: normal;\">(vs. " + versus + ") &#150; Mean odds";
         chartCC();
@@ -1013,15 +1012,13 @@ initPage = function () {
     document.querySelectorAll('.but-sg').forEach(function (item) {
         item.addEventListener("click", function (event) {
             event.stopPropagation();
-            //var opts = $.parseJSON($(this).attr('data-li'));
             var opts = JSON.parse(this.getAttribute('data-li'));
             if (parlayMode) {
                 return addToParlay(this);
             } else {
-                //var title = $(this).parent().parent().find("th").find("a").text() + " <span style=\"font-weight: normal;\"> &#150; <a href=\"" + $(this).closest('table').find('th').eq($(this).parent().index()).find("a").attr("href") + "\" target=\"_blank\">" + $(this).closest('table').find('th').eq($(this).parent().index()).find("a").text() + "</a></span>";
                 var title = this.parentNode.parentNode.querySelector("th").querySelector("a").textContent + " <span style=\"font-weight: normal;\"> &#150; <a href=\"" + 
-                this.closest('table').querySelectorAll('th')[index(this.parentNode)].querySelector("a").getAttribute("href") + "\" target=\"_blank\">" + 
-                this.closest('table').querySelectorAll('th')[index(this.parentNode)].querySelector("a").textContent 
+                this.closest('table').querySelectorAll('th')[index(this.parentNode) - 1].querySelector("a").getAttribute("href") + "\" target=\"_blank\">" + 
+                this.closest('table').querySelectorAll('th')[index(this.parentNode) - 1].querySelector("a").textContent 
                 + "</a></span>";
 
                 chartCC();
@@ -1036,7 +1033,7 @@ initPage = function () {
     //Add prop listeners
     document.querySelectorAll('.but-sgp').forEach(function (item) {
         item.addEventListener("click", function () {
-            var opts = $.parseJSON($(this).attr('data-li'));
+            event.stopPropagation();
             if (parlayMode) {
                 return addToParlay(this);
             } else {
@@ -1051,7 +1048,7 @@ initPage = function () {
     //Add event prop listeners
     document.querySelectorAll('.but-sgep').forEach(function (item) {
         item.addEventListener("click", function () {
-            var opts = $.parseJSON($(this).attr('data-li'));
+            event.stopPropagation();
             if (parlayMode) {
                 return addToParlay(this);
             } else {
@@ -1068,7 +1065,7 @@ initPage = function () {
     //Add index graph button listeners
     document.querySelectorAll('.but-si').forEach(function (item) {
         item.addEventListener("click", function () {
-            var opts = $.parseJSON($(this).attr('data-li'));
+            event.stopPropagation();
             if (parlayMode) {
                 return false;
             } else {
@@ -1084,7 +1081,7 @@ initPage = function () {
     //Add prop index graph button listeners
     document.querySelectorAll('.but-sip').forEach(function (item) {
         item.addEventListener("click", function () {
-            var opts = $.parseJSON($(this).attr('data-li'));
+            event.stopPropagation();
             if (parlayMode) {
                 return false;
             } else {
@@ -1100,7 +1097,7 @@ initPage = function () {
     //Add event prop index graph button listeners
     document.querySelectorAll('.but-siep').forEach(function (item) {
         item.addEventListener("click", function () {
-            var opts = $.parseJSON($(this).attr('data-li'));
+            event.stopPropagation();
             if (parlayMode) {
                 return false;
             } else {
@@ -1116,6 +1113,7 @@ initPage = function () {
     //Add alert button form show listeners
     document.querySelectorAll('.but-al').forEach(function (item) {
         item.addEventListener("click", function () {
+            event.stopPropagation();
             var context = {};
             context.opts = $.parseJSON($(this).attr('data-li'));
             context.bestodds = $(this).closest("tr").find(".bestbet").first().text();
@@ -1130,6 +1128,8 @@ initPage = function () {
     });
 };
 
+
+//TODO: Why is this empty??
 addAlert = function (m, tn, b, mail, alert_odds, alert_oddstype) {
 };
 

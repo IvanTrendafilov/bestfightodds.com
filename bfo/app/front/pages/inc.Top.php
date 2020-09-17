@@ -42,7 +42,7 @@
         <script type="text/javascript" async src="/js/bfo.min.js?v=0.1.3"></script>
         <div class="header">
                 <div class="header-top">
-                    <a href="/"><div class="logo"></div></a>
+                    <a href="/"><img src="/img/logo_3.png" class="logo"></a>
                     <div id="header-search-box">
                         <form method="get" action="/search"><input type="text" id="search-box1" class="search-box" name="query" placeholder="MMA Event / Fighter"/> <input type="submit" class="search-button" id="search-button" value="&#128269;" /></form>
                     </div>
