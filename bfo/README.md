@@ -37,6 +37,9 @@ How to install locally:
     C:\dev\PHP\php-cgi.exe -b 127.0.0.1:9123 -d include_path='c:\dev\bfo\shared/;c:\dev\bfo\bfo'
 5. Start the start_php.bat script and nginx
 
+How to run cronjob locally
+- C:\dev\php\php -d include_path="c:\dev\bfo\shared/;c:\dev\bfo\bfo" c:\dev\bfo\shared\lib\bfocore\cron\cron.OddsParser.php
+
 
 Handy Git stuff:
 - Merging changes in master (origin) to feature branch
