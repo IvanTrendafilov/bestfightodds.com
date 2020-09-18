@@ -1020,13 +1020,13 @@ initPage = function () {
     document.querySelectorAll('.but-sg').forEach(function (item) {
         item.addEventListener("click", function (event) {
             event.stopPropagation();
-            var opts = JSON.parse(this.getAttribute('data-li'));
             if (parlayMode) {
                 return addToParlay(this);
             } else {
-                var title = this.parentNode.parentNode.querySelector("th").querySelector("a").textContent + " <span style=\"font-weight: normal;\"> &#150; <a href=\"" + 
-                this.closest('table').querySelectorAll('th')[index(this.parentNode) - 1].querySelector("a").getAttribute("href") + "\" target=\"_blank\">" + 
-                this.closest('table').querySelectorAll('th')[index(this.parentNode) - 1].querySelector("a").textContent 
+                var opts = JSON.parse(this.getAttribute('data-li'));
+                var title = this.parentNode.querySelector("th").querySelector("a").textContent + " <span style=\"font-weight: normal;\"> &#150; <a href=\"" + 
+                this.closest('table').querySelectorAll('th')[index(this) - 1].querySelector("a").getAttribute("href") + "\" target=\"_blank\">" + 
+                this.closest('table').querySelectorAll('th')[index(this) - 1].querySelector("a").textContent 
                 + "</a></span>";
 
                 chartCC();
@@ -1045,6 +1045,7 @@ initPage = function () {
             if (parlayMode) {
                 return addToParlay(this);
             } else {
+                var opts = JSON.parse(this.getAttribute('data-li'));
                 var title = $(this).parent().parent().find("th").text() + " <span style=\"font-weight: normal;\"> &#150; <a href=\"" + $(this).closest('table').find('th').eq($(this).parent().index()).find("a").attr("href") + "\" target=\"_blank\">" + $(this).closest('table').find('th').eq($(this).parent().index()).find("a").text() + "</a></span>";
                 chartCC();
                 createPChart(opts[0], opts[2], opts[1], opts[3], opts[4]);
@@ -1060,6 +1061,7 @@ initPage = function () {
             if (parlayMode) {
                 return addToParlay(this);
             } else {
+                var opts = JSON.parse(this.getAttribute('data-li'));
                 var title = $(this).parent().parent().find("th").text() + " <span style=\"font-weight: normal;\"> &#150; <a href=\"" + $(this).closest('table').find('th').eq($(this).parent().index()).find("a").attr("href") + "\" target=\"_blank\">" + $(this).closest('table').find('th').eq($(this).parent().index()).find("a").text() + "</a></span>";
                 chartCC();
                 createEPChart(opts[0], opts[1], opts[2], opts[3]);
@@ -1077,6 +1079,7 @@ initPage = function () {
             if (parlayMode) {
                 return false;
             } else {
+                var opts = JSON.parse(this.getAttribute('data-li'));
                 var title = $(this).parent().parent().find("th").text() + " <span style=\"font-weight: normal;\"> &#150; Mean odds";
                 chartCC();
                 createMIChart(opts[1], opts[0]);
@@ -1093,6 +1096,7 @@ initPage = function () {
             if (parlayMode) {
                 return false;
             } else {
+                var opts = JSON.parse(this.getAttribute('data-li'));
                 var title = $(this).parent().parent().find("th").text() + " <span style=\"font-weight: normal;\"> &#150; Mean odds";
                 chartCC();
                 createPIChart(opts[1], opts[0], opts[2], opts[3]);
@@ -1109,6 +1113,7 @@ initPage = function () {
             if (parlayMode) {
                 return false;
             } else {
+                var opts = JSON.parse(this.getAttribute('data-li'));
                 var title = $(this).parent().parent().find("th").text() + " <span style=\"font-weight: normal;\"> &#150; Mean odds";
                 chartCC();
                 createEPIChart(opts[0], opts[1], opts[2]);

@@ -1,3 +1,7 @@
+//Table row height
+$tablerowheight: 23px;
+
+
 .table-header {
   background-color: #393B42;
   font-size: 12px;
@@ -56,7 +60,7 @@
     }
     th {
       text-align: center;
-      height: 18px;
+      height: 20px;
       &.table-prop-header {
         text-align: right;
         padding-right: 5px;
@@ -69,13 +73,14 @@
         &:hover {
           color: #999;
         }
+        height: 20px;
       }
     }
   }
   tbody {
     tr {
       background-color: #f5f7f9;
-      height: 23px;
+      height: $tablerowheight;
       &.odd {
         background-color: #fff;
         border-bottom: 1px solid #d6d6d6;
@@ -91,7 +96,7 @@
       &.pr {
         background-color: #DCDEE0;
         display: none;
-        height: 20px;
+        height: $tablerowheight;
       }
       &.pr-odd {
         background-color: #e8eaec;
@@ -132,6 +137,7 @@
       max-width: 47px;
       text-align: center;
       height: 20px;
+      position: relative;
       span.tw {
         width: 100%;
         height: 11px;
@@ -232,7 +238,7 @@
   vertical-align: middle;
   top: 0;
   bottom: 0;
-  line-height: 20px;
+  line-height: $tablerowheight;
   display: inline-block;
 }
 
@@ -246,7 +252,7 @@
   vertical-align: middle;
   top: 0;
   bottom: 0;
-  line-height: 20px;
+  line-height: $tablerowheight;
   display: inline-block;
 }
 
@@ -328,6 +334,22 @@
   background-size: 14px 15px;
   padding: 0 !important;
   display: inline-block;
+}
+
+.but-sg {
+  cursor:pointer;
+}
+
+.but-sg:hover {
+  color: #666;
+}
+
+.prop-cell:hover {
+  cursor:pointer;
+}
+
+.button-cell:hover {
+  cursor:pointer;
 }
 
 .i-ng {

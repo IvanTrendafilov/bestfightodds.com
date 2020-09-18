@@ -26,7 +26,6 @@
         <link rel="apple-touch-icon" sizes="114x114" href="/apple-touch-icon-114x114.png" />
         <link rel="apple-touch-icon" sizes="72x72" href="/apple-touch-icon-72x72.png" />
         <link rel="apple-touch-icon" href="/apple-touch-icon-iphone.png" />
-
         <?php
 
         //Check if darkmode is enabled and if so, add appropriate stylesheet. Note that this is also checked in javascript to change dropdown
@@ -42,7 +41,7 @@
         <script type="text/javascript" async src="/js/bfo.min.js?v=0.1.3"></script>
         <div class="header">
                 <div class="header-top">
-                    <a href="/"><img src="/img/logo_3.png" class="logo"></a>
+                    <a href="/"><img src="/img/logo_3.png" class="logo" alt="Best Fight Odds logo"></a>
                     <div id="header-search-box">
                         <form method="get" action="/search"><input type="text" id="search-box1" class="search-box" name="query" placeholder="MMA Event / Fighter"/> <input type="submit" class="search-button" id="search-button" value="&#128269;" /></form>
                     </div>
