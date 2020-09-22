@@ -73,7 +73,7 @@ if ($bCached == false || empty($sBuffer))
                     <table class="team-stats-table" cellspacing="0" summary="Odds history for <?php echo $oFighter->getNameAsString(); ?>">
                         <thead>
                             <tr>
-                                <?php //<th>Result</th> ?>
+                                <th>Result</th>
                                 <th>Matchup</th>
                                 <th style="text-align: right; padding-right: 4px;">Open</th>
                                 <th style="text-align: center; width: 110px;" colspan="3">Closing range</th>
@@ -172,8 +172,7 @@ if ($bCached == false || empty($sBuffer))
                         $sGraphData = GraphHandler::getMedianSparkLine($oFight->getID(), ($oFight->getFighterID(1) == $oFighter->getID() ? 1 : 2));
 
                         $sEventDate = '';
-                        //TODO: Hardcoded reference to "FUTURE EVENTS". Should be changed to set id
-                        if (strtoupper($oEvent->getName()) != 'FUTURE EVENTS')
+                        if (strtoupper($oEvent->getID()) != PARSE_FUTURESEVENT_ID)
                         {
                             $sEventDate = date('M jS Y', strtotime($oEvent->getDate()));
                         }
