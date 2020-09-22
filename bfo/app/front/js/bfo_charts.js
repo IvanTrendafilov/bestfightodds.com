@@ -735,7 +735,7 @@ $(function() {
             chart = {};
 
             if (arr[1]) {
-                chart.type = arr[1];
+                chart.type = arr[1]; 
             }
             $td.highcharts('SparkLine', {
                 series: [{

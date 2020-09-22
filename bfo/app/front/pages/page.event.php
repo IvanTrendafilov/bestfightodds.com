@@ -472,7 +472,7 @@ if ($oEvent != null)
             }
             echo '<td class="button-cell"></td>';
 
-            echo '<td class="prop-cell" data-mu="e' . $oEvent->getID() . '">';
+            echo '<td class="prop-cell prop-cell-exp" data-mu="e' . $oEvent->getID() . '">';
             echo count($aPropTypes) . '&nbsp;<span class="exp-ard"></span>';
             echo '</td>';
 

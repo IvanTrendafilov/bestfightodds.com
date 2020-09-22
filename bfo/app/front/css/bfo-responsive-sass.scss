@@ -22,7 +22,7 @@
     font-size: 11px;
   }
   .table-outer-wrapper {
-    padding: 0;
+    padding: 0 3px;
     margin-bottom: 9px;
   }
   .odds-table {
@@ -43,7 +43,7 @@
     }
   }
   .table-header {
-    font-size: 14px;
+    
     height: 16px;
     padding: 6px 0px 7px 8px;
     a {
@@ -53,13 +53,16 @@
       text-overflow: ellipsis;
       white-space: nowrap;
       overflow: hidden;
+      h1 {
+        font-size: 14px;
+      }
     }
   }
   .table-header-date {
     padding-left: 5px;
     padding-right: 6px;
-    padding-top: 2px;
-    font-size: 0.9em;
+    padding-top: 1px;
+    font-size: 12px;
     text-align: right;
     white-space: nowrap;
   }
@@ -77,7 +80,7 @@
     height: 54px;
   }
   #page-wrapper {
-    //margin: 5px;
+    margin: 5px;
   }
   .header-menu {
     width: 100%;

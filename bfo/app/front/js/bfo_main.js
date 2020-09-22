@@ -860,11 +860,17 @@ initPage = function () {
     })
 });
 
-    $('tr.eventprop th').find('a').on('click', function (event) {
+    document.querySelectorAll('tr.eventprop th').forEach(function (item) {
+        //event.preventDefault();
+        var event_id = item.getAttribute('data-mu');
+        $('.prop-cell').find("[data-mu=" + event_id + "]").trigger('click'); //Jquery, needs conversion
+    });
+
+    /*$('tr.eventprop th').on('click', function (event) {
         event.preventDefault();
         event_id = $(this).attr('data-mu');
         $('.prop-cell').find("[data-mu=" + event_id + "]").trigger('click');
-    });
+    });*/
 
 
     //Sync scrollbars
@@ -1046,7 +1052,10 @@ initPage = function () {
                 return addToParlay(this);
             } else {
                 var opts = JSON.parse(this.getAttribute('data-li'));
-                var title = $(this).parent().parent().find("th").text() + " <span style=\"font-weight: normal;\"> &#150; <a href=\"" + $(this).closest('table').find('th').eq($(this).parent().index()).find("a").attr("href") + "\" target=\"_blank\">" + $(this).closest('table').find('th').eq($(this).parent().index()).find("a").text() + "</a></span>";
+                var title = this.parentNode.querySelector("th").textContent + " <span style=\"font-weight: normal;\"> &#150; <a href=\"" + 
+                    this.closest('table').querySelectorAll('th')[index(this) - 1].querySelector("a").getAttribute("href") + "\" target=\"_blank\">" + 
+                    this.closest('table').querySelectorAll('th')[index(this) - 1].querySelector("a").textContent 
+                    + "</a></span>";
                 chartCC();
                 createPChart(opts[0], opts[2], opts[1], opts[3], opts[4]);
                 chartSC(title, event.clientX, event.clientY);
@@ -1062,7 +1071,11 @@ initPage = function () {
                 return addToParlay(this);
             } else {
                 var opts = JSON.parse(this.getAttribute('data-li'));
-                var title = $(this).parent().parent().find("th").text() + " <span style=\"font-weight: normal;\"> &#150; <a href=\"" + $(this).closest('table').find('th').eq($(this).parent().index()).find("a").attr("href") + "\" target=\"_blank\">" + $(this).closest('table').find('th').eq($(this).parent().index()).find("a").text() + "</a></span>";
+                //var title = $(this).parent().parent().find("th").text() + " <span style=\"font-weight: normal;\"> &#150; <a href=\"" + $(this).closest('table').find('th').eq($(this).parent().index()).find("a").attr("href") + "\" target=\"_blank\">" + $(this).closest('table').find('th').eq($(this).parent().index()).find("a").text() + "</a></span>";
+                var title = this.parentNode.querySelector("th").textContent + " <span style=\"font-weight: normal;\"> &#150; <a href=\"" + 
+                    this.closest('table').querySelectorAll('th')[index(this) - 1].querySelector("a").getAttribute("href") + "\" target=\"_blank\">" + 
+                    this.closest('table').querySelectorAll('th')[index(this) - 1].querySelector("a").textContent 
+                    + "</a></span>";
                 chartCC();
                 createEPChart(opts[0], opts[1], opts[2], opts[3]);
                 chartSC(title, event.clientX, event.clientY);
