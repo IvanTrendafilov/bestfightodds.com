@@ -47,7 +47,22 @@ function createChart(indata) {
             style: {
                 fontFamily: "'Roboto', Arial, sans-serif"
             },
-            marginTop: 18
+            marginTop: 18,
+            events: {
+                load: function() {
+                    this.renderer.label('BestFightOdds.com', this.chartWidth / 2 - 100, this.chartHeight / 2 - 35)
+                    .attr({
+                        
+
+                    })
+                    .css ({
+                        zIndex: 1000,
+                        color: '#f6f6f6',
+                        fontSize: '24px',
+                    })
+                        .add();
+                }
+            }
         },
         credits: {
             enabled: false
