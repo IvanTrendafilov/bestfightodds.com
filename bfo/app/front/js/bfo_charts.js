@@ -57,8 +57,8 @@ function createChart(indata) {
                     })
                     .css ({
                         zIndex: 1000,
-                        color: '#f9f9f9',
-                        fontSize: '28px',
+                        color: '#f3f3f3',
+                        fontSize: '24px',
                         fontWeight: '500'
                     })
                         .add();
