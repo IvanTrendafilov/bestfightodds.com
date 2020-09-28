@@ -1,6 +1,6 @@
-#*/3     *       *       *       *       /usr/bin/php -d include_path=/var/www/bfo/shared:/var/www/bfo/bfo -d max_execution_time=300 /var/www/bfo/shared/lib/bfocore/cron/cron.OddsParser.php >> /var/www/bfo/bfo/log/parser.log 2>&1
+#*/2     *       *       *       *       /usr/bin/php -d include_path=/var/www/bfo/shared:/var/www/bfo/bfo -d max_execution_time=300 /var/www/bfo/shared/lib/bfocore/cron/cron.OddsParser.php >> /var/www/bfo/bfo/log/parser.log 2>&1
 #10      0       *       *       *       mv /var/www/bfo/bfo/logs/*.log /var/www/bfo/bfo/logs/archived/ && rm -rf /var/www/bfo/bfo/logs/*.log
-#5       *       *       *       *       bash /var/www/bfo/bfo/db/scripts/backup/dobackup.sh
+#5       *       *       *       *       bash /var/www/bfo/bfo/db/scripts/backup/dobackup_local.sh
 #6       6       *       *       *       sleep $[($RANDOM \%1740) + 11] && /usr/bin/php -d include_path=/var/www/bfo/shared:/var/www/bfo/bfo -d max_execution_time=300 /var/www/bfo/shared/lib/bfocore/cron/cron.ScheduleParser.php >> /var/www/bfo/bfo/log/scheduleparser.log 2>&1
 #30      12      *       *       *       /usr/bin/php -d include_path=/var/www/bfo/shared:/var/www/bfo/bfo -d max_execution_time=300 /var/www/bfo/bfo/db/scripts/cron.CleanDatabasev2.php
 #30      0       *       *       *       /usr/bin/php -d include_path=/var/www/bfo/shared:/var/www/bfo/bfo -d max_execution_time=300 /var/www/bfo/bfo/db/scripts/cron.CleanDatabasev2.php
