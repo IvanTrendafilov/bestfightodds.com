@@ -43,8 +43,8 @@ class XMLParserBetOnline
                         && ParseTools::checkCorrectOdds((string) $cEvent->participant[1]->odds->moneyline))
                 {
                     //Fix for invalid character
-                    $cEvent->participant[0]->participant_name = str_replace('\U00A0', ' ', (string) $cEvent->participant[0]->participant_name);
-                    $cEvent->participant[1]->participant_name = str_replace('\U00A0', ' ', (string) $cEvent->participant[1]->participant_name);
+                    $cEvent->participant[0]->participant_name = str_replace('\u00A0', ' ', (string) $cEvent->participant[0]->participant_name);
+                    $cEvent->participant[1]->participant_name = str_replace('\u00A0', ' ', (string) $cEvent->participant[1]->participant_name);
                     
                     $oParsedMatchup = new ParsedMatchup(
                                     (string) $cEvent->participant[0]->participant_name,
