@@ -32,6 +32,9 @@ class XMLParserBetOnlineAlt
         {
             if (ParseTools::checkCorrectOdds(trim((string) $cProp->f1_line)) && ParseTools::checkCorrectOdds(trim((string) $cProp->f2_line)))
             {
+                $cProp->f1 = str_replace('\u00A0', ' ', (string) $cProp->f1);
+                $cProp->f2 = str_replace('\u00A0', ' ', (string) $cProp->f2);
+                
                 $oParsedMatchup = new ParsedMatchup(
                                 (string) $cProp->f1,
                                 (string) $cProp->f2,
