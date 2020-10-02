@@ -66,10 +66,6 @@ class XMLParserBetOnlineAlt
                 }
             }
 
-            //Fix for invalid character
-            $aMatches[$x][1] = str_replace('\u00A0', ' ', (string) $aMatches[$x][1]);
-            $aMatches[$x + 1][1] = str_replace('\u00A0', ' ', (string) $aMatches[$x + 1][1]);
-
             $sRetXML .= '<matchup><f1>' . $aMatches[$x][1] . '</f1><f2>' . $aMatches[$x + 1][1] . '</f2><f1_line>' . $aMatches[$x][2] . '</f1_line><f2_line>' . $aMatches[$x + 1][2] . '</f2_line></matchup>';
         }
 
