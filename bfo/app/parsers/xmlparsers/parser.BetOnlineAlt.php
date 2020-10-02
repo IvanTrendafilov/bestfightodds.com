@@ -56,15 +56,20 @@ class XMLParserBetOnlineAlt
         $aMatches = ParseTools::matchBlock($a_sPage, $sEventRegexp);
         for ($x = 0; $x <= count($aMatches); $x += 2)
         {
-                        //Check if participant name contains a comma, if so restructure the name
-                        for ($y = 0; $y <= 1; $y++)
-                        {
-                            if(isset($aMatches[$x + $y][1]) && strpos($aMatches[$x + $y][1], ',') !== false ) {
-                                //Name contains a comma, split and restructure
-                                $sploded = explode(',', $aMatches[$x + $y][1]);
-                                $aMatches[$x + $y][1] = $sploded[1] . ' ' . $sploded[0];
-                            }
-                        }
+            //Check if participant name contains a comma, if so restructure the name
+            for ($y = 0; $y <= 1; $y++)
+            {
+                if(isset($aMatches[$x + $y][1]) && strpos($aMatches[$x + $y][1], ',') !== false ) {
+                    //Name contains a comma, split and restructure
+                    $sploded = explode(',', $aMatches[$x + $y][1]);
+                    $aMatches[$x + $y][1] = $sploded[1] . ' ' . $sploded[0];
+                }
+            }
+
+            //Fix for invalid character
+            $aMatches[$x][1] = str_replace('\u00A0', ' ', (string) $aMatches[$x][1]);
+            $aMatches[$x + 1][1] = str_replace('\u00A0', ' ', (string) $aMatches[$x + 1][1]);
+
             $sRetXML .= '<matchup><f1>' . $aMatches[$x][1] . '</f1><f2>' . $aMatches[$x + 1][1] . '</f2><f1_line>' . $aMatches[$x][2] . '</f1_line><f2_line>' . $aMatches[$x + 1][2] . '</f2_line></matchup>';
         }
 
