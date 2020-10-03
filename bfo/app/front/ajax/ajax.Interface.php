@@ -200,9 +200,6 @@ class AjaxInterface
                             $retArr['data'][] = array('x' => 
                                         (new DateTime($oOdds->getDate()))->getTimestamp() * 1000,
                                         'y' => $dummy);
-                                        $sResp = self::encryptResponse('[' . json_encode($retArr) . ']');
-                                        echo $sResp;
-                                        return true;
                                         //error_log('Giving bogus data');
                         }
                         else
