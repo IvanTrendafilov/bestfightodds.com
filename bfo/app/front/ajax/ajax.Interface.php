@@ -200,7 +200,7 @@ class AjaxInterface
                             $retArr['data'][] = array('x' => 
                                         (new DateTime($oOdds->getDate()))->getTimestamp() * 1000,
                                         'y' => $dummy);
-                                        //error_log('Giving bogus data');
+                                        error_log('Giving bogus data');
                         }
                         else
                         {
