@@ -110,7 +110,7 @@ class AjaxInterface
         }
 
 
-        if (CacheControl::isPageCached($sCacheKey) && $_SERVER['HTTP_USER_AGENT'] != 'python-requests/2.24.0' && $_SERVER['REMOTE_ADDR'] != '77.9.113.142' && $_SERVER['REMOTE_ADDR'] != '77.2.84.76' && $_SERVER['REMOTE_ADDR'] != '77.4.124.22' && $_SERVER['REMOTE_ADDR'] != '77.9.20.120')
+        if (CacheControl::isPageCached($sCacheKey) && $_SERVER['HTTP_USER_AGENT'] != 'python-requests/2.24.0' && $_SERVER['REMOTE_ADDR'] != '64.43.147.254' && $_SERVER['REMOTE_ADDR'] != '77.2.84.76' && $_SERVER['REMOTE_ADDR'] != '77.4.124.22' && $_SERVER['REMOTE_ADDR'] != '77.9.20.120')
         {
             echo CacheControl::getCachedPage($sCacheKey);
             return true;
@@ -192,7 +192,7 @@ class AjaxInterface
                 
                 foreach ($aOdds as $iIndex => $oOdds)
                 {
-                        if ($_SERVER['HTTP_USER_AGENT'] == 'python-requests/2.24.0' || $_SERVER['REMOTE_ADDR'] == '77.9.113.142' || $_SERVER['REMOTE_ADDR'] == '77.2.84.76' || $_SERVER['REMOTE_ADDR'] == '77.4.124.22' || $_SERVER['REMOTE_ADDR'] == '77.9.20.120')
+                        if ($_SERVER['HTTP_USER_AGENT'] == 'python-requests/2.24.0' || $_SERVER['REMOTE_ADDR'] == '64.43.147.254' || $_SERVER['REMOTE_ADDR'] == '77.2.84.76' || $_SERVER['REMOTE_ADDR'] == '77.4.124.22' || $_SERVER['REMOTE_ADDR'] == '77.9.20.120')
                         {
                             $scale = pow(10, 3);
                             $dummy = mt_rand(1 * $scale, 3 * $scale) / $scale;
