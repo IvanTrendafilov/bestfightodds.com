@@ -34,7 +34,13 @@ class XMLParserBetOnlineAlt
             {
                 $cProp->f1 = str_replace('\u00A0', ' ', (string) $cProp->f1);
                 $cProp->f2 = str_replace('\u00A0', ' ', (string) $cProp->f2);
-                
+
+                //Extract the correlation ID which will essentially be the matchup in order by name (Betonline does not do this be default)
+                $parts = [strtoupper(trim($cProp->f1)), strtoupper(trim($cProp->f2))];
+                sort($parts);
+                $correlation_id = $parts[0] . ' VS ' . $parts[1];
+                Logger::getInstance()->log("Set correlation ID: " . $correlation_id, -1);
+
                 $oParsedMatchup = new ParsedMatchup(
                                 (string) $cProp->f1,
                                 (string) $cProp->f2,
