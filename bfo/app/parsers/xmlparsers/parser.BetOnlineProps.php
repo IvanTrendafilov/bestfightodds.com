@@ -33,7 +33,7 @@ class XMLParserBetOnlineProps
             if (ParseTools::checkCorrectOdds(trim((string) $cProp->f1_line)))
             {
                 //Extract the correlation ID which will essentially be the matchup in order by name (Betonline does not do this be default)
-                $matchup = strtoupper(trim(substr($cProp->f1_line, 0, strpos($string, ':'))));
+                $matchup = strtoupper(trim(substr($cProp->f1_line, 0, strpos($cProp->f1_line, ':'))));
                 $parts = explode(' VS ', $matchup);
                 sort($parts);
                 $correlation_id = $parts[0] . ' VS ' . $parts[1];
