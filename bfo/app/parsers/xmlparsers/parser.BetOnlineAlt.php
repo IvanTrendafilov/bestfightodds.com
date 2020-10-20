@@ -46,6 +46,7 @@ class XMLParserBetOnlineAlt
                                 (string) $cProp->f1_line,
                                 (string) $cProp->f2_line
                 );
+                $oParsedMatchup->setCorrelationID($correlation_id);
 
                 $oParsedSport->addParsedMatchup($oParsedMatchup);
             }
