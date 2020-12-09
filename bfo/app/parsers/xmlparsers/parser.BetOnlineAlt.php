@@ -61,7 +61,7 @@ class XMLParserBetOnlineAlt
     {
 
         $sRetXML = '<?xml version="1.0" encoding="UTF-8"?><matchups>';
-        $sEventRegexp = '/tmId\':\'([^\']+)\'[^>]*\'[^>]*\'aorg\':(-?[0-9]*)/';
+        $sEventRegexp = '/tmId\':\'(.+)\'\},\'[^>]*\'[^>]*\'aorg\':(-?[0-9]*)/';
         $aMatches = ParseTools::matchBlock($a_sPage, $sEventRegexp);
         for ($x = 0; $x <= count($aMatches); $x += 2)
         {
