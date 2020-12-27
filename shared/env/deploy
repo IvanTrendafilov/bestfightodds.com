@@ -1,4 +1,7 @@
 #!/bin/bash
+
+# Deployment script. Retrieves the latest codebase from git and then restart nginx
+
 cd /var/www/bfo
 git pull
 sudo service nginx reload

@@ -1,4 +1,7 @@
 #!/bin/bash
+
+# Used to do a database copy from prod to tst. it connects to the prod database and dumps it to a file, then imports that file into the test database
+
 mysqldump -h ls-9bf1268dd5beed1d539ee8d4c86139bf072394e4.cc2cczpln4tj.us-east-2.rds.amazonaws.com -ubfo_tst -pueyROcZ643eYTjcglHnu --set-gtid-purged=OFF bets > ~/bets_temp.sql
 mysql -h ls-9bf1268dd5beed1d539ee8d4c86139bf072394e4.cc2cczpln4tj.us-east-2.rds.amazonaws.com -ubfo_tst -pueyROcZ643eYTjcglHnu bets_tst < ~/bets_temp.sql
 rm ~/bets_temp.sql
