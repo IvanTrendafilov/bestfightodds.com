@@ -1,6 +1,6 @@
 #!/bin/bash
 
-# This script will do a local backup of the database on the server
+# This script will do a local backup of the database on the server 
 
 backupdir="/var/www/bfo/bfo/db/scripts/backup/"
 backupfilename="bfo2_backup_$(date '+%Y%m%d%H%M%S')"
