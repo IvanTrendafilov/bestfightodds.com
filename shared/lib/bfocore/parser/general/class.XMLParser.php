@@ -302,14 +302,6 @@ class XMLParser
                 $oTempMatchup = new Fight(0, $oParsedMatchup->getTeamName(1), $oParsedMatchup->getTeamName(2), -1);
                 $oMatchedMatchup = EventHandler::getMatchingFight($oTempMatchup);
 
-                //If enabled, perform creative matching
-                if ($oMatchedMatchup == null && PARSE_CREATIVEMATCHING == true)
-                {
-                    $oLogger->log('--No matchup found, performing creative matching', 0);
-                    $oMatchedMatchup = CreativeMatcher::checkMatching($oParsedMatchup);
-                    
-                }
-
                 //If enabled, create matchup if missing
                 if ($oMatchedMatchup == null && PARSE_CREATEMATCHUPS == true && isset($aMeta['gametime']))
                 {

@@ -16,7 +16,6 @@ require_once('lib/bfocore/general/datatypes/class.Bookie.php');
 require_once('lib/bfocore/general/datatypes/class.PropBet.php');
 require_once('lib/bfocore/general/datatypes/class.PropTemplate.php');
 require_once('lib/bfocore/general/datatypes/class.PropType.php');
-require_once('lib/bfocore/general/datatypes/class.Linkout.php');
 
 //2.1
 require_once('lib/bfocore/general/datatypes/class.BookieParser.php');
