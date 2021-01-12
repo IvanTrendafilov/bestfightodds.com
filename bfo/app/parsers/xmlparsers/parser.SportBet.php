@@ -144,20 +144,20 @@ class XMLParserSportBet
                         $oParsedMatchup->setCorrelationID((string) $cEvent->CorrelationId);
 
                         $oParsedSport->addParsedMatchup($oParsedMatchup);
+                    }
 
-    		          //Check if a total is available, if so, add it as a prop
-                        if ( isset($cEvent->TotalPoints) && trim((string) $cEvent->TotalPoints) != '')
-                          {
-                            //Total exists, add it
-                            $oParsedProp = new ParsedProp(
-                                                          (string) $cEvent->HomeTeamID . ' vs ' . (string) $cEvent->VisitorTeamID . ' - OVER ' . (string) $cEvent->TotalPoints,
-                                                          (string) $cEvent->HomeTeamID . ' vs ' . (string) $cEvent->VisitorTeamID . ' - UNDER ' . (string) $cEvent->TotalPoints,
-                                                          (string) $cEvent->TotalPointsOverPrice,
-                                                          (string) $cEvent->TotalPointsUnderPrice);
-                            $oParsedProp->setCorrelationID((string) $cEvent->CorrelationId);
-                            
-                            $oParsedSport->addFetchedProp($oParsedProp);
-                          }
+                    //Check if a total is available, if so, add it as a prop
+                    if ( isset($cEvent->TotalPoints) && trim((string) $cEvent->TotalPoints) != '')
+                    {
+                        //Total exists, add it
+                        $oParsedProp = new ParsedProp(
+                                                        (string) $cEvent->HomeTeamID . ' vs ' . (string) $cEvent->VisitorTeamID . ' - OVER ' . (string) $cEvent->TotalPoints,
+                                                        (string) $cEvent->HomeTeamID . ' vs ' . (string) $cEvent->VisitorTeamID . ' - UNDER ' . (string) $cEvent->TotalPoints,
+                                                        (string) $cEvent->TotalPointsOverPrice,
+                                                        (string) $cEvent->TotalPointsUnderPrice);
+                        $oParsedProp->setCorrelationID((string) $cEvent->CorrelationId);
+                        
+                        $oParsedSport->addFetchedProp($oParsedProp);
                     }
                 }
             }

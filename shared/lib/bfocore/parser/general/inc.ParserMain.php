@@ -14,7 +14,6 @@ require_once('lib/bfocore/parser/general/class.ParsedSport.php');
 require_once('lib/bfocore/parser/general/class.ParsedMatchup.php');
 require_once('lib/bfocore/parser/general/class.PropParser.php');
 require_once('lib/bfocore/parser/general/class.ParsedProp.php');
-require_once('lib/bfocore/parser/general/class.CreativeMatcher.php');
 require_once('lib/bfocore/parser/general/class.ScheduleChangeTracker.php');
 
 require_once('lib/bfocore/parser/utils/class.ParseRunLogger.php');

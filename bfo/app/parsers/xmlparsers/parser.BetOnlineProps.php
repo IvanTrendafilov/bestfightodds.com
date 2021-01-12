@@ -32,6 +32,12 @@ class XMLParserBetOnlineProps
         {
             if (ParseTools::checkCorrectOdds(trim((string) $cProp->f1_line)))
             {
+                //Extract the correlation ID which will essentially be the matchup in order by name (Betonline does not do this be default)
+                $matchup = strtoupper(trim(substr($cProp->f1, 0, strpos($cProp->f1, ':'))));
+                $parts = explode(' VS ', $matchup);
+                sort($parts);
+                $correlation_id = $parts[0] . ' VS ' . $parts[1];
+
                 //One side prop
                 $oParsedProp = new ParsedProp(
                                 (string) $cProp->f1,
@@ -39,6 +45,8 @@ class XMLParserBetOnlineProps
                                 (string) $cProp->f1_line,
                                 (string) ($cProp->f2_line == '' ? '-99999' : $cProp->f2_line) 
                 );
+                $oParsedProp->setCorrelationID($correlation_id);
+
                 $oParsedSport->addFetchedProp($oParsedProp);
             }
         }

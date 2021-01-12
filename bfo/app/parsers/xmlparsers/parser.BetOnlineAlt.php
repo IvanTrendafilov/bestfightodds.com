@@ -32,12 +32,21 @@ class XMLParserBetOnlineAlt
         {
             if (ParseTools::checkCorrectOdds(trim((string) $cProp->f1_line)) && ParseTools::checkCorrectOdds(trim((string) $cProp->f2_line)))
             {
+                $cProp->f1 = str_replace('\u00A0', ' ', (string) $cProp->f1);
+                $cProp->f2 = str_replace('\u00A0', ' ', (string) $cProp->f2);
+
+                //Extract the correlation ID which will essentially be the matchup in order by name (Betonline does not do this be default)
+                $parts = [strtoupper(trim($cProp->f1)), strtoupper(trim($cProp->f2))];
+                sort($parts);
+                $correlation_id = $parts[0] . ' VS ' . $parts[1];
+
                 $oParsedMatchup = new ParsedMatchup(
                                 (string) $cProp->f1,
                                 (string) $cProp->f2,
                                 (string) $cProp->f1_line,
                                 (string) $cProp->f2_line
                 );
+                $oParsedMatchup->setCorrelationID($correlation_id);
 
                 $oParsedSport->addParsedMatchup($oParsedMatchup);
             }
@@ -52,19 +61,20 @@ class XMLParserBetOnlineAlt
     {
 
         $sRetXML = '<?xml version="1.0" encoding="UTF-8"?><matchups>';
-        $sEventRegexp = '/tmId\':\'([^\']+)\'[^>]*\'[^>]*\'aorg\':(-?[0-9]*)/';
+        $sEventRegexp = '/tmId\':\'(.+)\'\},\'[^>]*\'[^>]*\'aorg\':(-?[0-9]*)/';
         $aMatches = ParseTools::matchBlock($a_sPage, $sEventRegexp);
         for ($x = 0; $x <= count($aMatches); $x += 2)
         {
-                        //Check if participant name contains a comma, if so restructure the name
-                        for ($y = 0; $y <= 1; $y++)
-                        {
-                            if(isset($aMatches[$x + $y][1]) && strpos($aMatches[$x + $y][1], ',') !== false ) {
-                                //Name contains a comma, split and restructure
-                                $sploded = explode(',', $aMatches[$x + $y][1]);
-                                $aMatches[$x + $y][1] = $sploded[1] . ' ' . $sploded[0];
-                            }
-                        }
+            //Check if participant name contains a comma, if so restructure the name
+            for ($y = 0; $y <= 1; $y++)
+            {
+                if(isset($aMatches[$x + $y][1]) && strpos($aMatches[$x + $y][1], ',') !== false ) {
+                    //Name contains a comma, split and restructure
+                    $sploded = explode(',', $aMatches[$x + $y][1]);
+                    $aMatches[$x + $y][1] = $sploded[1] . ' ' . $sploded[0];
+                }
+            }
+
             $sRetXML .= '<matchup><f1>' . $aMatches[$x][1] . '</f1><f2>' . $aMatches[$x + 1][1] . '</f2><f1_line>' . $aMatches[$x][2] . '</f1_line><f2_line>' . $aMatches[$x + 1][2] . '</f2_line></matchup>';
         }
 

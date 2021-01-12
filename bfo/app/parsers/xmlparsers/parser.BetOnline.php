@@ -42,8 +42,6 @@ class XMLParserBetOnline
                 if (ParseTools::checkCorrectOdds((string) $cEvent->participant[0]->odds->moneyline)
                         && ParseTools::checkCorrectOdds((string) $cEvent->participant[1]->odds->moneyline))
                 {
-
-                    
                     $oParsedMatchup = new ParsedMatchup(
                                     (string) $cEvent->participant[0]->participant_name,
                                     (string) $cEvent->participant[1]->participant_name,
