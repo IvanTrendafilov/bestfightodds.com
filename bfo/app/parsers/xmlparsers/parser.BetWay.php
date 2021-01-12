@@ -8,7 +8,7 @@
  *
  * Moneylines: Yes
  * Spreads: No
- * Totals: No
+ * Totals: In progress
  * Props: Yes
  * Authoritative run: Yes
  *
@@ -16,7 +16,6 @@
  * URL: https://feeds.betway.com/sbeventsen?key=1E557772&keywords=ufc---martial-arts
  *
  */
-require_once('lib/bfocore/general/class.BookieHandler.php');
 
 class XMLParserBetWay
 {
@@ -37,9 +36,6 @@ class XMLParserBetWay
 
         foreach ($oXML->Event as $cEvent)
         {
-            // Start time: $cEvent['start_at']
-            //Event name:
-
             $event_name = '';
             foreach ($cEvent->Keywords->Keyword as $cKeyword)
             {
@@ -51,7 +47,7 @@ class XMLParserBetWay
 
             foreach ($cEvent->Markets->Market as $cMarket)
             {
-                if ($cMarket->Names->Name == 'Fight Winner') 
+                if ($cMarket['cname'] == 'fight-winner') 
                 {
                     //Regular matchup
                     $oParsedMatchup = new ParsedMatchup(
@@ -76,14 +72,24 @@ class XMLParserBetWay
 
 
                 }
-                else if (count($cMarket->Outcomes->Outcome) % 2 == 0)
+                else if ($cMarket['cname'] == 'to-win-by-decision' ||
+                        $cMarket['cname'] == 'to-win-by-finish' || 
+                        $cMarket['cname'] == 'will-the-fight-go-the-distance' || 
+                        $cMarket['cname'] == 'handicap-goals-over')
                 {
-                    //Props. Props are typically ordered as positive, negative, positive, negative, etc. Or over, under
+                    //Ordered props. These props are typically ordered as positive, negative, positive, negative, etc. Or over, under
                     for ($i = 0; $i < count($cMarket->Outcomes->Outcome); $i += 2)
                     {
+                        //Add handicap figure if available
+                        $handicap = '';
+                        if ($cMarket['handicap'] != 0)
+                        {
+                            $handicap = ' ' . $cMarket['handicap'];
+                        }
+
                         $oParsedProp = new ParsedProp(
-                            $cEvent->Names->Name ' :: ' . $cMarket->Names->Name . ' : ' . $cOutcome[$i]->Names->Name,
-                            $cEvent->Names->Name ' :: ' . $cMarket->Names->Name . ' : ' . $cOutcome[$i + 1]->Names->Name,
+                            $cEvent->Names->Name ' :: ' . $cMarket->Names->Name . ' : ' . $cOutcome[$i]->Names->Name . $handicap,
+                            $cEvent->Names->Name ' :: ' . $cMarket->Names->Name . ' : ' . $cOutcome[$i + 1]->Names->Name . $handicap,
                             OddsTools::convertDecimalToMoneyline($cOutcome[$i]['price_dec']),
                             OddsTools::convertDecimalToMoneyline($cOutcome[$i + 1]['price_dec']));
 
@@ -101,9 +107,42 @@ class XMLParserBetWay
                         $oParsedSport->addFetchedProp($oParsedProp);
                     }
                 }
+                else  if ($cMarket['cname'] == 'round-betting' ||
+                        $cMarket['cname'] == 'method-of-victory')
+                {
+                    //Single line prop
+                    for ($i = 0; $i < count($cMarket->Outcomes->Outcome); $i++)
+                    {
+                        //Add handicap figure if available
+                        $handicap = '';
+                        if ($cMarket['handicap'] != 0)
+                        {
+                            $handicap = ' ' . $cMarket['handicap'];
+                        }
+
+                        $oParsedProp = new ParsedProp(
+                            $cEvent->Names->Name ' :: ' . $cMarket->Names->Name . ' : ' . $cOutcome[$i]->Names->Name . $handicap,
+                            '',
+                            OddsTools::convertDecimalToMoneyline($cOutcome[$i]['price_dec']),
+                            -99999;
+
+                        //Add correlation
+                        $oParsedProp->setCorrelationID($cEvent['id']);
+
+                        //Add metadata
+                        $oGameDate = new DateTime($cEvent['start_at']);
+                        $oParsedProp->setMetaData('gametime', $oGameDate->getTimestamp());
+                        if ($event_name != '')
+                        {
+                            $oParsedProp->setMetaData('event_name', $event_name);
+                        }
+
+                        $oParsedSport->addFetchedProp($oParsedProp);
+                    }
+                }
                 else
                 {
-                    Logger::getInstance()->log("Unhandled market name, maybe add to parser?", -1);
+                    Logger::getInstance()->log("Unhandled market name " . $cMarket->Names->Name . " (" . $cMarket['cname'] . "), maybe add to parser?", -1);
                 }
             }
         }
