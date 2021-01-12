@@ -37,7 +37,7 @@ require_once('lib/bfocore/general/inc.GlobalTypes.php');
                                     //TODO: Hardcoded reference to "FUTURE EVENTS". Should be changed to set id
                                     if (strtoupper($oEvent->getName()) != 'FUTURE EVENTS')
                                     {
-                                        echo '<span style="font-weight: normal;"> - ' . date('M jS Y', strtotime($oEvent->getDate())) . '</span>';
+                                        echo '<span style="font-weight: normal;"> - ' . date('M jS', strtotime($oEvent->getDate())) . '</span>';
                                     }
                                     echo '</div>
 
@@ -46,7 +46,6 @@ require_once('lib/bfocore/general/inc.GlobalTypes.php');
                                     //If non-UFC, only display one entry
                                     if (substr(strtoupper($oEvent->getName()), 0, 3) != 'UFC' 
                                         && substr(strtoupper($oEvent->getName()), 0, 8) != 'BELLATOR' 
-                                        && substr(strtoupper($oEvent->getName()), 0, 4) != 'WSOF'
                                         && substr(strtoupper($oEvent->getName()), 0, 13) != 'FUTURE EVENTS')
                                     {
                                         $aFights = array($aFights[0]);
