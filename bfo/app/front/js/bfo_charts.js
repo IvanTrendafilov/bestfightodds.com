@@ -154,7 +154,7 @@ function createChart(indata) {
                 var formatted_date = days[da.getDay()] + ', ' + monthNames[da.getMonth()] + ' ' + da.getDate() + ', ' + (da.getHours() < 10? '0' : '') + da.getHours() + ':' + (da.getMinutes() < 10? '0' : '') + da.getMinutes();
                 //Old method: Highcharts.dateFormat('%a %d. %b %H:%M', this.x)
 
-                return '<span style="color: #666; font-weight: bold; font-size: 11px">' +  formatted_date + '</span><br/>' + this.series.name + ': <b>' + ttVal + '</b>' + carr + '<br/>';
+                return '<span style="color: #666; font-weight: bold; font-size: 12px">' +  formatted_date + '</span><br/>' + this.series.name + ': <b>' + ttVal + '</b>' + carr + '<br/>';
 
             },
             style: {
@@ -207,7 +207,7 @@ function createChart(indata) {
                     padding: 3,
                     style: {
                         textShadow: 0,
-                        fontSize: '11px',
+                        fontSize: '12px',
                         color: '#fff',
                         fontWeight: 'normal'
 
@@ -259,8 +259,7 @@ $(function() {
                     style: {
                         fontFamily: "'Roboto', Arial, sans-serif",
                         color: '#1a1a1a',
-                        fontSize: '12px',
-                        fontWeight: '500'
+                        fontSize: '12px'
                     },
                     spacingBottom: 3,
                 },
@@ -270,7 +269,6 @@ $(function() {
                         overflow: 'justify',
                         style: {
                             fontSize: '12px',
-                            fontWeight: '500',
                             align: 'left'
                         } 
                     },
@@ -307,8 +305,7 @@ $(function() {
                             style: {
                                 fontFamily: "'Roboto', Arial, sans-serif",
                                 color: '#4d4d4d',
-                                fontSize: '11px',
-                                fontWeight: '500'
+                                fontSize: '12px'
                             },
                             enabled: true,
                             crop: false,
@@ -366,8 +363,7 @@ $(function() {
                   style: {
                     fontFamily: "'Roboto', Arial, sans-serif",
                     color: '#1a1a1a',
-                    fontSize: '12px',
-                    fontWeight: '500'
+                    fontSize: '12px'
                   },
                 },
                 title: {
@@ -380,7 +376,6 @@ $(function() {
                     overflow: 'justify',
                     style: {
                       fontSize: '12px',
-                      fontWeight: '500',
                       align: 'left',
                     }
                   },
@@ -393,15 +388,13 @@ $(function() {
                     overflow: 'justify',
                     style: {
                       fontSize: '12px',
-                      fontWeight: '500',
                       align: 'left'
                     }
                   },
                   style: {
                     fontFamily: "'Roboto', Arial, sans-serif",
                     color: '#1a1a1a',
-                    fontSize: '12px',
-                    fontWeight: '500'
+                    fontSize: '12px'
                   },
                 }],
 
@@ -480,8 +473,7 @@ $(function() {
                    itemStyle: {
                         fontFamily: "'Roboto', Arial, sans-serif",
                         color: '#2a2a2a',
-                        fontSize: '11px',
-                        fontWeight: '500',
+                        fontSize: '12px',
                     }
                 },
                 series: [{
