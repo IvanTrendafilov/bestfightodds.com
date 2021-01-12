@@ -259,7 +259,7 @@ $(function() {
                     style: {
                         fontFamily: "'Roboto', Arial, sans-serif",
                         color: '#1a1a1a',
-                        fontSize: '10px',
+                        fontSize: '12px',
                         fontWeight: '500'
                     },
                     spacingBottom: 3,
@@ -269,7 +269,7 @@ $(function() {
                     labels: {
                         overflow: 'justify',
                         style: {
-                            fontSize: '10px',
+                            fontSize: '12px',
                             fontWeight: '500',
                             align: 'left'
                         } 
@@ -366,7 +366,7 @@ $(function() {
                   style: {
                     fontFamily: "'Roboto', Arial, sans-serif",
                     color: '#1a1a1a',
-                    fontSize: '10px',
+                    fontSize: '12px',
                     fontWeight: '500'
                   },
                 },
@@ -379,7 +379,7 @@ $(function() {
                   labels: {
                     overflow: 'justify',
                     style: {
-                      fontSize: '10px',
+                      fontSize: '12px',
                       fontWeight: '500',
                       align: 'left',
                     }
@@ -392,7 +392,7 @@ $(function() {
                   labels: {
                     overflow: 'justify',
                     style: {
-                      fontSize: '10px',
+                      fontSize: '12px',
                       fontWeight: '500',
                       align: 'left'
                     }
@@ -400,7 +400,7 @@ $(function() {
                   style: {
                     fontFamily: "'Roboto', Arial, sans-serif",
                     color: '#1a1a1a',
-                    fontSize: '10px',
+                    fontSize: '12px',
                     fontWeight: '500'
                   },
                 }],
