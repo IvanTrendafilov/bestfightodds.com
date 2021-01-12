@@ -31,7 +31,6 @@
         }
       }
       td {
-        width: 30px;
         min-width: 60px;
         max-width: 60px;
         &.button-cell {
@@ -41,8 +40,8 @@
     }
     thead {
       th:first-child {
-        max-width: 100px;
-        min-width: 100px;
+        max-width: 95px;
+        min-width: 95px;
       }
     }
   }
