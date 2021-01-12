@@ -18,8 +18,7 @@
   #content {
     width: 100%;
   }
-  .odds-table {
-  }
+
   .table-outer-wrapper {
     padding: 0 3px;
     margin-bottom: 9px;
@@ -31,8 +30,14 @@
         a {
         }
       }
+      th:first {
+        max-width: 100px;
+        min-width: 100px;
+      }
       td {
         width: 30px;
+        min-width: 60px;
+        max-width: 60px;
         &.button-cell {
           width: 14px;
         }
