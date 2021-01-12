@@ -18,3 +18,10 @@
 
 Changes in 2019-09-21 Build
 - Added prop categories. Installation of new code base will require the new prop categories schema to be run and that props are properly assigned to categories (separate admin interface to be defined)
+
+
+
+Useful commands:
+* Merge master into feature> 
+    git checkout feature1
+    git merge master
