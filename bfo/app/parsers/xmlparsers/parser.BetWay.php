@@ -121,9 +121,9 @@ class XMLParserBetWay
                         }
 
                         $oParsedProp = new ParsedProp(
-                            $cEvent->Names->Name . ' :: ' . $cMarket->Names->Name . ' : ' . $cOutcome[$i]->Names->Name . $handicap,
+                            $cEvent->Names->Name . ' :: ' . $cMarket->Names->Name . ' : ' . $cMarket->Outcomes->Outcome[$i]->Names->Name . $handicap,
                             '',
-                            OddsTools::convertDecimalToMoneyline($cOutcome[$i]['price_dec']),
+                            OddsTools::convertDecimalToMoneyline($cMarket->Outcomes->Outcome[$i]['price_dec']),
                             -99999);
 
                         //Add correlation
