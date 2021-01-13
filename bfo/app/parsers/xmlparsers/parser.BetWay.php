@@ -124,7 +124,7 @@ class XMLParserBetWay
                             $cEvent->Names->Name . ' :: ' . $cMarket->Names->Name . ' : ' . $cOutcome[$i]->Names->Name . $handicap,
                             '',
                             OddsTools::convertDecimalToMoneyline($cOutcome[$i]['price_dec']),
-                            -99999;
+                            -99999);
 
                         //Add correlation
                         $oParsedProp->setCorrelationID($cEvent['id']);
