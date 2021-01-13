@@ -51,10 +51,10 @@ class XMLParserBetWay
                 {
                     //Regular matchup
                     $oParsedMatchup = new ParsedMatchup(
-                        $cOutcome[0]->Names->Name,
-                        $cOutcome[1]->Names->Name,
-                        OddsTools::convertDecimalToMoneyline($cOutcome[0]['price_dec']),
-                        OddsTools::convertDecimalToMoneyline($cOutcome[1]['price_dec'])
+                        $cMarket->Outcomes->Outcome[0]->Names->Name,
+                        $cMarket->Outcomes->Outcome[1]->Names->Name,
+                        OddsTools::convertDecimalToMoneyline($cMarket->Outcomes->Outcome[0]['price_dec']),
+                        OddsTools::convertDecimalToMoneyline($cMarket->Outcomes->Outcome[1]['price_dec'])
                     );
 
                     //Add correlation
@@ -88,10 +88,10 @@ class XMLParserBetWay
                         }
 
                         $oParsedProp = new ParsedProp(
-                            $cEvent->Names->Name . ' :: ' . $cMarket->Names->Name . ' : ' . $cOutcome[$i]->Names->Name . $handicap,
-                            $cEvent->Names->Name . ' :: ' . $cMarket->Names->Name . ' : ' . $cOutcome[$i + 1]->Names->Name . $handicap,
-                            OddsTools::convertDecimalToMoneyline($cOutcome[$i]['price_dec']),
-                            OddsTools::convertDecimalToMoneyline($cOutcome[$i + 1]['price_dec']));
+                            $cEvent->Names->Name . ' :: ' . $cMarket->Names->Name . ' : ' . $cMarket->Outcomes->Outcome[$i]->Names->Name . $handicap,
+                            $cEvent->Names->Name . ' :: ' . $cMarket->Names->Name . ' : ' . $cMarket->Outcomes->Outcome[$i + 1]->Names->Name . $handicap,
+                            OddsTools::convertDecimalToMoneyline($cMarket->Outcomes->Outcome[$i]['price_dec']),
+                            OddsTools::convertDecimalToMoneyline($cMarket->Outcomes->Outcome[$i + 1]['price_dec']));
 
                         //Add correlation
                         $oParsedProp->setCorrelationID($cEvent['id']);
