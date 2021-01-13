@@ -88,8 +88,8 @@ class XMLParserBetWay
                         }
 
                         $oParsedProp = new ParsedProp(
-                            $cEvent->Names->Name ' :: ' . $cMarket->Names->Name . ' : ' . $cOutcome[$i]->Names->Name . $handicap,
-                            $cEvent->Names->Name ' :: ' . $cMarket->Names->Name . ' : ' . $cOutcome[$i + 1]->Names->Name . $handicap,
+                            $cEvent->Names->Name . ' :: ' . $cMarket->Names->Name . ' : ' . $cOutcome[$i]->Names->Name . $handicap,
+                            $cEvent->Names->Name . ' :: ' . $cMarket->Names->Name . ' : ' . $cOutcome[$i + 1]->Names->Name . $handicap,
                             OddsTools::convertDecimalToMoneyline($cOutcome[$i]['price_dec']),
                             OddsTools::convertDecimalToMoneyline($cOutcome[$i + 1]['price_dec']));
 
@@ -121,7 +121,7 @@ class XMLParserBetWay
                         }
 
                         $oParsedProp = new ParsedProp(
-                            $cEvent->Names->Name ' :: ' . $cMarket->Names->Name . ' : ' . $cOutcome[$i]->Names->Name . $handicap,
+                            $cEvent->Names->Name . ' :: ' . $cMarket->Names->Name . ' : ' . $cOutcome[$i]->Names->Name . $handicap,
                             '',
                             OddsTools::convertDecimalToMoneyline($cOutcome[$i]['price_dec']),
                             -99999;
