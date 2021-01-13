@@ -30,10 +30,10 @@
     <form id="alert-form">Alert me at e-mail <input type="text" name="alert-mail" id="alert-mail"><br />when the odds reaches <input type="text" name="alert-odds" id="alert-odds"> or better<br/>at <select name="alert-bookie">
         <option value="-1">any bookie</option>
         <option value="1">5Dimes</option>
-        <option value="13">BetDSI</option>
+        <option value="20">BetWay</option>
         <option value="3">BookMaker</option>
         <option value="5">Bovada</option>
-        <option value="10">Bet365</option>
+        <option value="19">Bet365</option>
         <option value="2">SportBet</option>
         <option value="4">Sportsbook</option>
         <option value="17">William Hill</option>
@@ -41,6 +41,7 @@
         <option value="8">SportsInteraction</option>
         <option value="12">BetOnline</option>
         <option value="18">Intertops</option>
+        <option value="13">BetDSI</option>
       </select><br /><div id="alert-button-container"><input type="hidden" name="tn"><input type="hidden" name="m">
         <div class="alert-loader"></div>
         <div class="alert-result">&nbsp;</div>
