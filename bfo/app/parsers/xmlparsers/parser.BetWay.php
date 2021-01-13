@@ -75,7 +75,8 @@ class XMLParserBetWay
                 else if ($cMarket['cname'] == 'to-win-by-decision' ||
                         $cMarket['cname'] == 'to-win-by-finish' || 
                         $cMarket['cname'] == 'will-the-fight-go-the-distance' || 
-                        $cMarket['cname'] == 'handicap-goals-over')
+                        $cMarket['cname'] == 'handicap-goals-over' ||
+                        substr($cMarket['cname'],0, strlen('total-rounds')) == 'total-rounds')
                 {
                     //Ordered props. These props are typically ordered as positive, negative, positive, negative, etc. Or over, under
                     for ($i = 0; $i < count($cMarket->Outcomes->Outcome); $i += 2)
@@ -108,7 +109,11 @@ class XMLParserBetWay
                     }
                 }
                 else  if ($cMarket['cname'] == 'round-betting' ||
-                        $cMarket['cname'] == 'method-of-victory')
+                        $cMarket['cname'] == 'method-of-victory' ||
+                        $cMarket['cname'] == 'decision-victories' ||
+                        $cMarket['cname'] == 'when-will-the-fight-end-' ||
+                        $cMarket['cname'] == 'method-and-round-betting' ||
+                        $cMarket['cname'] == 'gone-in-60-seconds')
                 {
                     //Single line prop
                     for ($i = 0; $i < count($cMarket->Outcomes->Outcome); $i++)
