@@ -8,7 +8,7 @@
  *
  * Moneylines: Yes
  * Spreads: No
- * Totals: In progress
+ * Totals: Yes
  * Props: Yes
  * Authoritative run: Yes
  *
