@@ -26,6 +26,9 @@ $darkmode_shadow: #1c1c1c;
     
     .odds-table thead tr {
         background-color: #30353a;
+        a {
+            color: #cacaca;
+        }
     }
     
     .table-div, #page-wrapper{
@@ -38,9 +41,12 @@ $darkmode_shadow: #1c1c1c;
         color: #d7d7d7;
     }
     
-    .odds-table tbody td a {
-        color: #cacaca;
-    }
+    .odds-table tbody td{
+        color: #d9d9d9;
+        a {
+            color: #cacaca;
+        }
+    } 
     
     .aru {
         color: #358e02;
