@@ -867,11 +867,10 @@ initPage = function () {
         $('.prop-cell').find("[data-mu=" + event_id + "]").trigger('click'); //Jquery, needs conversion
     });*/
 
-    $('tr.eventprop th').on('click', function (event) {
-        event.preventDefault();
+    $('tr.eventprop th').find('a').on('click', function(event) {
         event_id = $(this).attr('data-mu');
-        $('.prop-cell').find("a[data-mu=e" + event_id + "]").trigger('click');
-    });
+        $('.prop-cell-exp[data-mu=\"e' + event_id + '\"]').trigger('click');
+    }); 
 
 
     //Sync scrollbars

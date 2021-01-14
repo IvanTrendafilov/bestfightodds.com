@@ -269,7 +269,7 @@ $(function() {
                         overflow: 'justify',
                         style: {
                             fontSize: '12px',
-                            align: 'left'
+                            align: 'left',
                         } 
                     },
                     max: maxval - 1,
@@ -286,7 +286,7 @@ $(function() {
                     },
                 },
                 tooltip: {
-                    valueSuffix: ' %',
+                    valueSuffix: ' %'
                 },
                 plotOptions: {
                     bar: {
@@ -305,7 +305,8 @@ $(function() {
                             style: {
                                 fontFamily: "'Roboto', Arial, sans-serif",
                                 color: '#4d4d4d',
-                                fontSize: '12px'
+                                fontSize: '12px',
+                                fontWeight: 'normal',
                             },
                             enabled: true,
                             crop: false,
@@ -474,6 +475,7 @@ $(function() {
                         fontFamily: "'Roboto', Arial, sans-serif",
                         color: '#2a2a2a',
                         fontSize: '12px',
+                        fontWeight: 'normal',
                     }
                 },
                 series: [{
