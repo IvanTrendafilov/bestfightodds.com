@@ -29,7 +29,7 @@
         <?php
 
         //Check if darkmode is enabled and if so, add appropriate stylesheet. Note that this is also checked in javascript to change dropdown
-        if ($_COOKIE['bfo_darkmode'] == 1)
+        if (isset($_COOKIE['bfo_darkmode']) && $_COOKIE['bfo_darkmode'] == 1)
         {
             echo '<link rel="stylesheet" type="text/css" href="/css/bfo.darkmode.css?v=0.0.1" id="darkmodecss" />';
         }

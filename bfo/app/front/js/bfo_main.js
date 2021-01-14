@@ -153,9 +153,10 @@ addToParlay = function (obj) {
             return false;
         }
         tmpArr = [];
-        tmpArr["ml"] = $(obj).find('span').find('span').first().text();
-        tmpArr["name"] = $(obj).closest('tr').find('th').text();
-        tmpArr["ref"] = $(obj).find('span').find('span').first().attr('id').substring(3);
+
+        tmpArr["ml"] = obj.firstChild.textContent;
+        tmpArr["name"] = obj.closest('tr').querySelector('th').textContent;
+        tmpArr["ref"] = obj.firstChild.getAttribute('id').substring(3);
 
         found = false;
         foundEl = null;
@@ -180,8 +181,8 @@ addToParlay = function (obj) {
     }
 
     if (parlay.length === 0) {
-        $('#parlay-area').html('Click on a line to add it to your parlay');
-        $('#parlay-header').html('Parlay');
+        document.getElementById('parlay-area').innerHTML = 'Click on a line to add it to your parlay';
+        document.getElementById('parlay-header').innerHTML = 'Parlay';
         return false;
     }
 
@@ -232,14 +233,15 @@ addToParlay = function (obj) {
             dispValue = Math.round(pvalue * 100) / 100;
             break;
         case 3:
-            dispValue = singleDecimalToAmount(pvalue, $('#format-amount-box1').val());
+            dispValue = singleDecimalToAmount(pvalue, document.getElementById('format-amount-box1').value);
             break;
         default:
             break;
     }
 
-    $('#parlay-area').html(tmpText);
-    $('#parlay-header').html('Parlay: ' + dispValue);
+    document.getElementById('parlay-area').innerHTML = tmpText;
+    document.getElementById('parlay-header').innerHTML = 'Parlay: ' + dispValue;
+
     return false;
 };
 
@@ -273,7 +275,6 @@ oddsToDecimal = function () {
         });
     }
 
-
     $('[id^="oID"]').each(function () {
         this.innerHTML = parseFloat(singleMLToDecimal(this.innerHTML)).toFixed(2);
     });
@@ -284,8 +285,7 @@ oddsToDecimal = function () {
 oddsToAmount = function (amount) {
     var value;
     if (amount === null) {
-        //value = document.getElementById('format-amount-box1').value;
-        value = $('#format-amount-box1').val();
+        value = document.getElementById('format-amount-box1').value;
     } else {
         value = amount;
     }
