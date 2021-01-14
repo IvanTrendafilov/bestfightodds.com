@@ -183,7 +183,7 @@ addToParlay = function (obj) {
     if (parlay.length === 0) {
         document.getElementById('parlay-area').innerHTML = 'Click on a line to add it to your parlay';
         document.getElementById('parlay-header').innerHTML = 'Parlay';
-        return false;
+        return false; 
     }
 
     tmpText = '';
@@ -860,17 +860,18 @@ initPage = function () {
     })
 });
 
-    document.querySelectorAll('tr.eventprop th').forEach(function (item) {
+    /*document.querySelectorAll('tr.eventprop th').forEach(function (item) {
+        console.log('here' + item + ' and ');
         //event.preventDefault();
         var event_id = item.getAttribute('data-mu');
         $('.prop-cell').find("[data-mu=" + event_id + "]").trigger('click'); //Jquery, needs conversion
-    });
+    });*/
 
-    /*$('tr.eventprop th').on('click', function (event) {
+    $('tr.eventprop th').on('click', function (event) {
         event.preventDefault();
         event_id = $(this).attr('data-mu');
-        $('.prop-cell').find("[data-mu=" + event_id + "]").trigger('click');
-    });*/
+        $('.prop-cell').find("a[data-mu=e" + event_id + "]").trigger('click');
+    });
 
 
     //Sync scrollbars

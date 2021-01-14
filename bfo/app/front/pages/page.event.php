@@ -463,7 +463,7 @@ if ($oEvent != null)
         if (count($aPropTypes) > 0)
         {
             echo '<tr class="odd even eventprop" id="mu-' . $oEvent->getID() . '">';
-            echo '<th scope="row" style="font-weight: 400" data-mu="e' . $oEvent->getID() . '">Event props</th>';
+            echo '<th scope="row" style="font-weight: 400"><a href="#" data-mu="' . $oEvent->getID() . '">Event props</a></th>';
 
             //Fill empty cells
             for ($iY = 0; $iY < (sizeof($aBookieRefList)); $iY++)
