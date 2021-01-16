@@ -21,7 +21,7 @@
               <?php
             }
           ?>
-    <a href="https://www.bestfightodds.com">MMA Odds</a><span class="menu-seperator">|</span><a href="/terms">Terms of service</a><span class="menu-seperator">|</span><a href="#">18+</a><span class="menu-seperator">|</span><a href="https://www.begambleaware.org/">BeGambleAware</a><span class="menu-seperator">|</span><a href="mailto:info@proboxingodds.com">Contact</a><span class="menu-seperator">|</span><a href="mailto:info@proboxingodds.com">&copy; 2019</a>
+    <a href="https://www.bestfightodds.com" target="_blank" rel="noopener">MMA Odds</a><span class="menu-seperator">|</span><a href="/terms">Terms of service</a><span class="menu-seperator">|</span><a href="#">18+</a><span class="menu-seperator">|</span><a href="https://www.begambleaware.org/">BeGambleAware</a><span class="menu-seperator">|</span><a href="mailto:info@proboxingodds.com">Contact</a><span class="menu-seperator">|</span><a href="mailto:info@proboxingodds.com">&copy; 2019</a>
 </div>
 
 <div id="chart-window" class="popup-window"><div class="popup-header" id="chart-header"><div></div><a href="#" class="cd-popup-close">&#10005;</a></div><div id="chart-area"></div><a target="_blank"><div id="chart-link" class="button">Bet this line at bookie</div></a><div id="chart-disc" style="display: none; color: #333">*Currently this Sportsbook does not accept players that reside in the US. 18+ Gamble Responsibly</div></div>
