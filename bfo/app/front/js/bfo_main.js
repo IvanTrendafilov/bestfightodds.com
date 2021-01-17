@@ -811,6 +811,10 @@ initPage = function () {
         }
     }
 
+
+    //Hide columns based on preferences in bfo_hidebookies cookie
+    hideBookieColumns();
+
     //Enable dark mode if stored in cookie bfo_darkmode
     if (Cookies.get('bfo_darkmode') !== null) {
         if (parseInt(Cookies.get('bfo_darkmode')) == 1) {

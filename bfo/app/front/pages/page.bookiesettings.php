@@ -13,7 +13,6 @@ require_once('lib/bfocore/general/inc.GlobalTypes.php');
                 <table class="content-list">
 
                     <?php 
-                    //Note that bookie handler will give us the bookies in position order
                     $aBookies = BookieHandler::getAllBookies();
                     $aCookieSettings = [];
                     if (isset($_COOKIE['bfo_hidebookies']))
@@ -27,16 +26,11 @@ require_once('lib/bfocore/general/inc.GlobalTypes.php');
                             <td class="content-list-date"><?php echo $oBookie->getName() . '<br />'; ?></td>
                             <?php
                             $foundhidden = false;
-                            foreach($aCookieSettings as $bookieSetting)
+                            if (isset($aCookieSettings[$oBookie->getID()]) && (bool) $aCookieSettings[$oBookie->getID()] == true)
                             {
-                                if ($bookieSettings['bookie_id']['hidden'] == true)
-                                {
-                                    $foundhidden = true;
-                                }
+                                $foundhidden = true;
                             }
-
-                            echo '<td class="content-list-title"><input type="checkbox" ' . ($foundhidden == true ? '' : 'checked') . '></td>';
-
+                            echo '<td class="content-list-title"><input class="bsetting" type="checkbox" ' . ($foundhidden == true ? '' : 'checked') . ' data-bookie="' . $oBookie->getID() . '"></td>';
                             ?>
                             
                         </tr>

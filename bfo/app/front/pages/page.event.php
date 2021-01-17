@@ -173,7 +173,7 @@ if ($oEvent != null)
         foreach ($aBookies as $oBookie)
         {
             $aBookieRefList[] = $oBookie->getID();
-            echo '<th scope="col"><a href="/out/' . $oBookie->getID() . '" onclick="lO(' . $oBookie->getID() . ',' . $oEvent->getID() . ');">' . str_replace(' ', '&nbsp;', (strlen($oBookie->getName()) > 10 ? (substr($oBookie->getName(), 0, 9) . '.') : $oBookie->getName())) . '</a></th>';
+            echo '<th scope="col" data-b="' . $oBookie->getID() . '"><a href="/out/' . $oBookie->getID() . '" onclick="lO(' . $oBookie->getID() . ',' . $oEvent->getID() . ');">' . str_replace(' ', '&nbsp;', (strlen($oBookie->getName()) > 10 ? (substr($oBookie->getName(), 0, 9) . '.') : $oBookie->getName())) . '</a></th>';
         }
         echo '<th scope="col" colspan="3" class="table-prop-header">Props</th></tr></thead><tbody>';
 
