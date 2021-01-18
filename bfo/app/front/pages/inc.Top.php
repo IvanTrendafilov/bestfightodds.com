@@ -112,7 +112,7 @@
                                              <li><a href="#" id="formatSelector2"><span>&#10003;</span>Decimal</a></li>
                                              <li><a href="#" id="formatSelector4"><span>&#10003;</span>Fractional</a></li>
                                              <li style="border-bottom: 1px solid #393b42"><a href="#" id="formatSelector3" style="display: inline"><span>&#10003;</span>Return on </a>$<input type="text" name="amountBox" id="format-amount-box1" maxlength="4" value="100" style="display: inline"/></li>
-                                             <li><a href="/bookiesettings">Customize sportsbooks</a></li>
+                                             <li><a href="#" id="bookieHideSelector">Customize sportsbooks</a></li>
                                         </ul>
                                     </li>
                                 </ul>

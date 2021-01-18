@@ -46,7 +46,7 @@
         <div class="alert-result">&nbsp;</div>
       <input type="submit" value="Add alert" id="alert-submit"></div></form></div>
 </div>
-
+<div id="bookie-settings-window" class="popup-window"><div class="popup-header">Bookie display settings <a href="#" class="cd-popup-close">&#10005;</a></div><div id="bookie-settings-area"></div></div>
 
 <?php
 //Disable if running locally

@@ -18,6 +18,10 @@ document.querySelectorAll('input.bsetting').forEach(function (item) {
     })
 });
 
+document.getElementById('bookieHideSelector').addEventListener("click", function(e) {
+    showSettingsWindow();
+}, false);
+
 function hideBookieColumns() {
     if (Cookies.get('bfo_hidebookies') !== null) {
         hbcookie = Cookies.get('bfo_hidebookies');
@@ -47,4 +51,34 @@ function addCSSRule(sheet, selector, rules, index) {
 	else if("addRule" in sheet) {
 		sheet.addRule(selector, rules, index);
 	}
+}
+
+function showSettingsWindow() {
+    //Gather all bookie IDs and positions
+    var bookies = [];
+    var area = document.getElementById('bookie-settings-area');
+    document.querySelectorAll('th[data-b]').forEach(function (item) {
+        bookies[item.cellIndex] = item.dataset.b;
+
+        area.innerHTML = area.innerHTML + '<br>' + item.innerHTML + '<input type="checkbox">';
+
+    });
+    console.log(bookies);
+
+    var settingswindow = document.getElementById('bookie-settings-window');
+
+    
+    
+
+    console.log(settingswindow);
+    settingswindow.classList.remove('is-visible');
+    settingswindow.classList.add('no-transition');
+
+    //Flush CSS cache. Not sure if this actually has any effect..*/
+    getComputedStyle(settingswindow).display;
+    settingswindow.offsetHeight;
+
+    settingswindow.classList.remove('no-transition');
+    settingswindow.classList.add('is-visible');
+
 }

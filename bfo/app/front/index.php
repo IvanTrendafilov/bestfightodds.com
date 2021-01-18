@@ -107,7 +107,8 @@ if (isset($_GET['p']))
                 define('PAGE_OVERRIDE_KEYWORDS', $oMatchup->getTeamAsString(1) . ', ' . $oMatchup->getTeamAsString(2));
             }
             break;
-        case 'bookiesettings': define('PAGE_OVERRIDE_TITLE', 'Customize bookie settings');
+        case 'bookiesettings': 
+            define('PAGE_OVERRIDE_TITLE', 'Customize bookie settings');
             break;
         default:
     }

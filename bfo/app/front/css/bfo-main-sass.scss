@@ -722,6 +722,27 @@ ul.share-dropdown ul li a {
   height: 155px;
 }
 
+#bookie-settings-window {
+  
+  min-width: 1px;
+  display: block;
+  width: 90%;
+  height: 400px;
+  /* Set your own width: percents, ems, whatever! */
+  margin: auto;
+  /* Center the item vertically & horizontally */
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  /* Set the bounds in which to center it, relative to its parent/container */
+
+}
+
+#bookie-settings-area {
+  color: #202020;
+}
+
 #alert-area {
   color: #222;
   text-align: left;
