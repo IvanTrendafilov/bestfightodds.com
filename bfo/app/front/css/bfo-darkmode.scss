@@ -23,6 +23,16 @@ $darkmode_shadow: #1c1c1c;
         background-color: #3b4047;
         border-bottom: 1px solid #252525;
     }
+
+    //Prop-rows
+    .odds-table tbody tr.pr {
+        background-color: #363b41;
+    }
+
+    .odds-table tbody tr.pr-odd {
+        background-color: #3b4047;
+        border-bottom: 1px solid #252525;
+    }
     
     .odds-table thead tr {
         background-color: #30353a;
