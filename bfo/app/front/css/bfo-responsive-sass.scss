@@ -31,10 +31,15 @@
         }
       }
       td {
-        min-width: 60px;
-        max-width: 60px;
+        &.but-sg {
+          min-width: 60px;
+          max-width: 60px;
+        }
         &.button-cell {
-          width: 14px;
+          width: 18px;
+        }
+        &.prop-cell {
+          width: 34px;
         }
       }
     }
@@ -199,7 +204,7 @@
     }
     tbody tr {
       & th {
-        line-height: 10px;
+
       }
       &:nth-child(even) th {
         padding-bottom: 0;
