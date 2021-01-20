@@ -20,7 +20,7 @@ $darkmode_shadow: #1c1c1c;
         background-color: #363b41;
     }
     
-    .odds-table tbody tr.odd {
+    .odds-table tbody tr:nth-child(2n) {
         background-color: #3b4047;
         border-bottom: 1px solid #252525;
     }
@@ -30,7 +30,7 @@ $darkmode_shadow: #1c1c1c;
         background-color: #2c3136;
     }
 
-    .odds-table tbody tr.pr-odd {
+    .odds-table tbody tr.pr:nth-child(2n) {
         background-color: #2a2c30;
         border-bottom: 1px solid #0d0d0d;
     }
