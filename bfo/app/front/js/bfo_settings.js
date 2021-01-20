@@ -23,7 +23,7 @@ document.getElementById('bookieHideSelector').addEventListener("click", function
 }, false);
 
 function hideBookieColumns() {
-    if (Cookies.get('bfo_hidebookies') !== null) {
+    if (typeof Cookies.get('bfo_hidebookies') !== 'undefined' && Cookies.get('bfo_hidebookies') !== null) {
         hbcookie = Cookies.get('bfo_hidebookies');
         if (hbcookie !== null) {
             hiddenBookies = JSON.parse(hbcookie);

@@ -1,5 +1,5 @@
 //Table row height
-$tablerowheight: 23px;
+$tablerowheight: 25px;
 
 
 .table-header {
@@ -39,6 +39,9 @@ $tablerowheight: 23px;
   width: 100%;
   position: relative;
   display: inline-block;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  overflow: hidden;
 }
 
 .t-b-cc { //Table body column content wrapper span (e.g. line '-500')
@@ -60,7 +63,7 @@ $tablerowheight: 23px;
     }
     th {
       text-align: center;
-      height: 23px;
+      height: 25px;
       &.table-prop-header {
         text-align: right;
         padding-right: 5px;
