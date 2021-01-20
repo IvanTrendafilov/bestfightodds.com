@@ -1,8 +1,8 @@
 <?php
 
 require 'vendor/autoload.php';
-require_once('JSON.php');
-require_once('twitteroauth.php');
+
+use Abraham\TwitterOAuth\TwitterOAuth;
 
 /**
  * Class used to integrate with Twitter API
