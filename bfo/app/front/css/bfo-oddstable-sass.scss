@@ -42,6 +42,8 @@ $tablerowheight: 25px;
   white-space: nowrap;
   text-overflow: ellipsis;
   overflow: hidden;
+  height: 100%;
+  margin-top: 14px;
 }
 
 .t-b-cc { //Table body column content wrapper span (e.g. line '-500')
