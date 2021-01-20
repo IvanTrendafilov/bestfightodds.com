@@ -43,15 +43,6 @@ foreach ($aEvents as $oEvent)
 		{
 			$sArbInfo = '' . $aInfo['profit'] . '';		
 		}
-		
-		if ($sRowSwitch == '')
-		{
-			$sRowSwitch = ' class="oddRow" ';
-		}
-		else
-		{
-			$sRowSwitch = '';
-		}
 		 
 		echo '		
 			<tr' . $sRowSwitch . '>

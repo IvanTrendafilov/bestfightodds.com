@@ -81,10 +81,12 @@ $tablerowheight: 23px;
     tr {
       background-color: #f5f7f9;
       height: $tablerowheight;
-      &.odd {
+      &:nth-child(2n)
+      {
         background-color: #fff;
         border-bottom: 1px solid #d6d6d6;
       }
+
       &.eventprop {
         background-color: #f5f7f9;
         border-top: 1px solid #d6d6d6;
@@ -97,11 +99,10 @@ $tablerowheight: 23px;
         background-color: #DCDEE0;
         display: none;
         height: $tablerowheight;
-      }
-      &.pr-odd {
-        background-color: #e8eaec;
-        border-bottom: 1px solid #c0c0c0;
-        display: none;
+        &:nth-child(2n) {
+          background-color: #e8eaec;
+          border-bottom: 1px solid #c0c0c0;
+        }
       }
     }
     th {
@@ -150,7 +151,7 @@ $tablerowheight: 23px;
       }
     }
     tr {
-      &.pr td, &.pr-odd td {
+      &.pr td {
         /*border-left: 1px dotted #bbb;*/
       }
     }
@@ -210,7 +211,7 @@ $tablerowheight: 23px;
       transition-duration: 0.1s;
     }
     tr {
-      &.pr td:hover:not(.button-cell):not(.chart-cell):not(.prop-cell):not(:empty), &.pr-odd td:hover:not(.button-cell):not(.prop-cell):not(:empty) {
+      &.pr td:hover:not(.button-cell):not(.chart-cell):not(.prop-cell):not(:empty) {
         background-color: #c8c8c8;
         -webkit-transition-property: background-color;
         -moz-transition-property: background-color;

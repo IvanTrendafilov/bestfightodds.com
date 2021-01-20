@@ -30,7 +30,7 @@ table.eventsOverview tr {
 	background-color: #ffffff;
 }
 
-table.eventsOverview tr.oddRow {
+table.eventsOverview tr:nth-child(2n) {
 	background-color: #f0f0f0;
 }
 

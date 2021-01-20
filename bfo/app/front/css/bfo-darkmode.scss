@@ -3,6 +3,7 @@ $darkmode_shadow: #1c1c1c;
 
     html,body {
         background-color: #25272a;
+        color: #d7d7d7;
     }
     
     .header-menu-wrapper {
@@ -26,12 +27,12 @@ $darkmode_shadow: #1c1c1c;
 
     //Prop-rows
     .odds-table tbody tr.pr {
-        background-color: #363b41;
+        background-color: #2c3136;
     }
 
     .odds-table tbody tr.pr-odd {
-        background-color: #3b4047;
-        border-bottom: 1px solid #252525;
+        background-color: #2a2c30;
+        border-bottom: 1px solid #0d0d0d;
     }
     
     .odds-table thead tr {
@@ -41,13 +42,13 @@ $darkmode_shadow: #1c1c1c;
         }
     }
     
-    .table-div, #page-wrapper{
+    .table-div, #page-wrapper, #event-outcome-area, #event-swing-area {
         -webkit-box-shadow: 0 1px 1px 1px $darkmode_shadow;
         -moz-box-shadow: 0 1px 1px 1px $darkmode_shadow;
         box-shadow: 0 1px 1px 1px $darkmode_shadow;
     }
     
-    .odds-table tbody th a {
+    .odds-table tbody th a, .odds-table tbody th {
         color: #d7d7d7;
     }
     

@@ -15,8 +15,7 @@ if (isset($_GET['eventID']) && $oEvent = EventHandler::getEvent($_GET['eventID']
   echo '<table class="eventsOverview">';
 
   $aFights = EventHandler::getAllFightsForEvent($oEvent->getID(), false);
-  $sRowSwitch = ' class="oddRow" ';
-  
+ 
   echo '<tr><th colspan="4">' . $oEvent->getName() . ' <span style="color: #777777">-</span> ' . $oEvent->getDate() . ' &nbsp;<a href="?p=changeEventForm&eventID=' . $oEvent->getID() . '">edit</a> <span style="color: #ffffff">' . sizeof($aFights) . '</span></th></tr>';
   
 	foreach ($aFights as $oFight)
@@ -34,15 +33,6 @@ if (isset($_GET['eventID']) && $oEvent = EventHandler::getEvent($_GET['eventID']
 				<td class="arbitrage">' . $sArbInfo . '</td>
 				<td style="text-align: center;"><a href="logic/logic.php?action=removeFight&fightID=' . $oFight->getID() . '&returnPage=addNewFightForm$eventID=' . $_GET['eventID'] . '" onclick="javascript:return confirm(\'Really remove ' . $oFight->getFighterAsString(1) . ' vs ' . $oFight->getFighterAsString(2) . '?\')" /><b>x</b></a></td>
 			</tr>';
-			
-		if ($sRowSwitch == '')
-		{
-			$sRowSwitch = ' class="oddRow" ';
-		}
-		else
-		{
-			$sRowSwitch = '';
-		}
 	}
 
     echo '		

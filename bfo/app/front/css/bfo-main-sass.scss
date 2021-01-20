@@ -92,7 +92,7 @@ body {
   background-color: #F1F3F7;
   font-family: 'Roboto', Arial, sans-serif;
   font-size: 11px;
-  color: #fff;
+  color: #000;
 }
 
 a {
@@ -105,6 +105,10 @@ a {
 $primarybasecolor: #212427;
 $secondarybasecolor: #393B42;
 $selectedcolor: #212427;
+
+$font_darkcolor: #202020;
+$font_lightcolor: #fff;
+
 
 input[type="text"], select {
   background-color: #fff;
@@ -345,7 +349,7 @@ h1 {
   margin-left: auto;
   margin-right: auto;
   background-color: #fff;
-  color: #202020;
+  color: $font_darkcolor;
   font-size: 12px;
 }
 
@@ -648,6 +652,7 @@ ul.share-dropdown ul li a {
 
 .popup-header {
   background-color: $secondarybasecolor;
+  color: $font_lightcolor;
   font-size: 12px;
   font-weight: 500;
   padding-left: 10px;
@@ -740,7 +745,7 @@ ul.share-dropdown ul li a {
 }
 
 #bookie-settings-area {
-  color: #202020;
+  color: $font_darkcolor;
 }
 
 #alert-area {
@@ -858,7 +863,7 @@ ul.share-dropdown ul li a {
     td {
       padding: 4px 10px;
       a {
-        color: #202020;
+        color: $font_darkcolor;
       }
     }
   }
