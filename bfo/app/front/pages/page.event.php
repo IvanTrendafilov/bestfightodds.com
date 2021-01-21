@@ -258,7 +258,9 @@ if ($oEvent != null)
                 //Add index graph button
                 if ($bEverFoundOldOdds || count($aFightOdds) > 1)
                 {
-                    echo '<td class="button-cell but-si" data-li="[' . $iX . ',' . $oFightOdds->getFightID() . ']"><span class="but-img i-g" title="Betting line movement"></span></td>';
+                    echo '<td class="button-cell but-si" data-li="[' . $iX . ',' . $oFightOdds->getFightID() . ']">
+                        <svg class="svg-i" viewBox="0 0 24 24" preserveAspectRatio="xMidYMid meet" focusable="false"><g><path d="M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zM9 17H7v-7h2v7zm4 0h-2V7h2v10zm4 0h-2v-4h2v4z"></path></g></svg>
+                    </td>';
                 }
                 else
                 {
@@ -436,11 +438,15 @@ if ($oEvent != null)
                             {
                                 $oCurrentPropOddsIndex = $oBestOdds;
                             }
-                            echo '<td class="button-cell but-sip" data-li="[' . $iX . ',' . $oPropOdds->getMatchupID() . ',' . $oPropOdds->getPropTypeID() . ',' . $oPropOdds->getTeamNumber() . ']"><span class="but-img i-g" title="Prop betting line movement"></span></td>';
+                            echo '<td class="button-cell but-sip" data-li="[' . $iX . ',' . $oPropOdds->getMatchupID() . ',' . $oPropOdds->getPropTypeID() . ',' . $oPropOdds->getTeamNumber() . ']">
+                                <svg class="svg-i" viewBox="0 0 24 24" preserveAspectRatio="xMidYMid meet" focusable="false"><g><path d="M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zM9 17H7v-7h2v7zm4 0h-2V7h2v10zm4 0h-2v-4h2v4z"></path></g></svg>
+                            </td>';
                         }
                         else
                         {
-                            echo '<td class="button-cell"><span class="but-img i-ng"></span></td>';
+                            echo '<td class="button-cell">
+                                <svg class="svg-i-disabled" viewBox="0 0 24 24" preserveAspectRatio="xMidYMid meet" focusable="false"><g><path d="M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zM9 17H7v-7h2v7zm4 0h-2V7h2v10zm4 0h-2v-4h2v4z"></path></g></svg>
+                            </td>';
                         }
 
                         //Add empty cell normally used for props
@@ -623,11 +629,15 @@ if ($oEvent != null)
                             {
                                 $oCurrentPropOddsIndex = $oBestOdds;
                             }
-                            echo '<td class="button-cell but-siep" data-li="[' . $oPropOdds->getEventID() . ',' . $iX . ',' . $oPropOdds->getPropTypeID() . ',' . $oPropOdds->getTeamNumber() . ']"><span class="but-img i-g" title="Prop betting line movement"></span></td>';
+                            echo '<td class="button-cell but-siep" data-li="[' . $oPropOdds->getEventID() . ',' . $iX . ',' . $oPropOdds->getPropTypeID() . ',' . $oPropOdds->getTeamNumber() . ']">
+                                <svg class="svg-i" viewBox="0 0 24 24" preserveAspectRatio="xMidYMid meet" focusable="false"><g><path d="M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zM9 17H7v-7h2v7zm4 0h-2V7h2v10zm4 0h-2v-4h2v4z"></path></g></svg>
+                            </td>';
                         }
                         else
                         {
-                            echo '<td class="button-cell"><span class="but-img i-ng"></span></td>';
+                            echo '<td class="button-cell">
+                                <svg class="svg-i-disabled" viewBox="0 0 24 24" preserveAspectRatio="xMidYMid meet" focusable="false"><g><path d="M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zM9 17H7v-7h2v7zm4 0h-2V7h2v10zm4 0h-2v-4h2v4z"></path></g></svg>
+                            </td>';
                         }
 
                         //Add empty cell normally used for props

@@ -249,17 +249,22 @@ foreach ($aEvent as $oEvent)
 
                 //Add alert cell
                 echo '<td class="button-cell but-al" data-li="[' . $oFight->getID() . ',' . $iX . ']">
-                <svg class="svg-i" width="20" height="20" viewBox="0 0 24 24" preserveAspectRatio="xMidYMid meet" focusable="false"><g><path d="M12 22c1.1 0 2-.9 2-2h-4c0 1.1.9 2 2 2zm6-6v-5c0-3.07-1.64-5.64-4.5-6.32V4c0-.83-.67-1.5-1.5-1.5s-1.5.67-1.5 1.5v.68C7.63 5.36 6 7.92 6 11v5l-2 2v1h16v-1l-2-2z"></path></g></svg>
+                <svg class="svg-i" viewBox="0 0 24 24" preserveAspectRatio="xMidYMid meet" focusable="false"><g><path d="M12 22c1.1 0 2-.9 2-2h-4c0 1.1.9 2 2 2zm6-6v-5c0-3.07-1.64-5.64-4.5-6.32V4c0-.83-.67-1.5-1.5-1.5s-1.5.67-1.5 1.5v.68C7.63 5.36 6 7.92 6 11v5l-2 2v1h16v-1l-2-2z"></path></g></svg>
                 </td>';
 
                 //Add index graph button
                 if ($bEverFoundOldOdds || count($aFightOdds) > 1)
                 {
-                    echo '<td class="button-cell but-si" data-li="[' . $iX . ',' . $oFightOdds->getFightID() . ']"><span class="but-img i-g"  title="Betting line movement"></span></td>';
+                    echo '<td class="button-cell but-si" data-li="[' . $iX . ',' . $oFightOdds->getFightID() . ']">
+                        <svg class="svg-i" viewBox="0 0 24 24" preserveAspectRatio="xMidYMid meet" focusable="false"><g><path d="M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zM9 17H7v-7h2v7zm4 0h-2V7h2v10zm4 0h-2v-4h2v4z"></path></g></svg>
+                    </td>';
                 }
                 else
                 {
-                    echo '<td class="button-cell"><span class="but-img i-ng"></span></td>';
+                    echo '<td class="button-cell">
+                        <svg class="svg-i" viewBox="0 0 24 24" preserveAspectRatio="xMidYMid meet" focusable="false"><g><path d="M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zM9 17H7v-7h2v7zm4 0h-2V7h2v10zm4 0h-2v-4h2v4z"></path></g></svg>
+                    </td>';
+                    
                 }
 
                 echo '<td class="prop-cell prop-cell-exp" data-mu="' . $oFight->getID() . '">';
@@ -439,7 +444,7 @@ foreach ($aEvent as $oEvent)
 
                         //Add alert cell
                         echo '<td class="button-cell">
-                            <svg class="svg-i-disabled" width="20" height="20" viewBox="0 0 24 24" preserveAspectRatio="xMidYMid meet" focusable="false"><g><path d="M12 22c1.1 0 2-.9 2-2h-4c0 1.1.9 2 2 2zm6-6v-5c0-3.07-1.64-5.64-4.5-6.32V4c0-.83-.67-1.5-1.5-1.5s-1.5.67-1.5 1.5v.68C7.63 5.36 6 7.92 6 11v5l-2 2v1h16v-1l-2-2z"></path></g></svg>
+                            <svg class="svg-i-disabled" viewBox="0 0 24 24" preserveAspectRatio="xMidYMid meet" focusable="false"><g><path d="M12 22c1.1 0 2-.9 2-2h-4c0 1.1.9 2 2 2zm6-6v-5c0-3.07-1.64-5.64-4.5-6.32V4c0-.83-.67-1.5-1.5-1.5s-1.5.67-1.5 1.5v.68C7.63 5.36 6 7.92 6 11v5l-2 2v1h16v-1l-2-2z"></path></g></svg>
                         </td>';
 
                         //Add index graph
@@ -450,11 +455,15 @@ foreach ($aEvent as $oEvent)
                             {
                                 $oCurrentPropOddsIndex = $oBestOdds;
                             }
-                            echo '<td class="button-cell but-sip" data-li="[' . $iX . ',' . $oPropOdds->getMatchupID() . ',' . $oPropOdds->getPropTypeID() . ',' . $oPropOdds->getTeamNumber() . ']"><span class="but-img i-g" title="Prop betting line movement"></span></td>';
+                            echo '<td class="button-cell but-sip" data-li="[' . $iX . ',' . $oPropOdds->getMatchupID() . ',' . $oPropOdds->getPropTypeID() . ',' . $oPropOdds->getTeamNumber() . ']">
+                                <svg class="svg-i" viewBox="0 0 24 24" preserveAspectRatio="xMidYMid meet" focusable="false"><g><path d="M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zM9 17H7v-7h2v7zm4 0h-2V7h2v10zm4 0h-2v-4h2v4z"></path></g></svg>
+                            </td>';
                         }
                         else
                         {
-                            echo '<td class="button-cell"><span class="but-img i-ng"></span></td>';
+                            echo '<td class="button-cell">
+                                <svg class="svg-i-disabled" viewBox="0 0 24 24" preserveAspectRatio="xMidYMid meet" focusable="false"><g><path d="M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zM9 17H7v-7h2v7zm4 0h-2V7h2v10zm4 0h-2v-4h2v4z"></path></g></svg>
+                            </td>';
                         }
 
                         //Add empty cell normally used for props
@@ -637,7 +646,7 @@ foreach ($aEvent as $oEvent)
 
                         //Add alert cell
                         echo '<td class="button-cell">
-                        <svg class="svg-i-disabled" width="20" height="20" viewBox="0 0 24 24" preserveAspectRatio="xMidYMid meet" focusable="false"><g><path d="M12 22c1.1 0 2-.9 2-2h-4c0 1.1.9 2 2 2zm6-6v-5c0-3.07-1.64-5.64-4.5-6.32V4c0-.83-.67-1.5-1.5-1.5s-1.5.67-1.5 1.5v.68C7.63 5.36 6 7.92 6 11v5l-2 2v1h16v-1l-2-2z"></path></g></svg>
+                        <svg class="svg-i-disabled" viewBox="0 0 24 24" preserveAspectRatio="xMidYMid meet" focusable="false"><g><path d="M12 22c1.1 0 2-.9 2-2h-4c0 1.1.9 2 2 2zm6-6v-5c0-3.07-1.64-5.64-4.5-6.32V4c0-.83-.67-1.5-1.5-1.5s-1.5.67-1.5 1.5v.68C7.63 5.36 6 7.92 6 11v5l-2 2v1h16v-1l-2-2z"></path></g></svg>
                         </td>';
 
                         //Add index graph
@@ -648,11 +657,15 @@ foreach ($aEvent as $oEvent)
                             {
                                 $oCurrentPropOddsIndex = $oBestOdds;
                             }
-                            echo '<td class="button-cell but-siep" data-li="[' . $oPropOdds->getEventID() . ',' . $iX . ',' . $oPropOdds->getPropTypeID() . ']"><span class="but-img i-g" title="Prop betting line movement"></span></td>';
+                            echo '<td class="button-cell but-siep" data-li="[' . $oPropOdds->getEventID() . ',' . $iX . ',' . $oPropOdds->getPropTypeID() . ']">
+                                <svg class="svg-i" viewBox="0 0 24 24" preserveAspectRatio="xMidYMid meet" focusable="false"><g><path d="M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zM9 17H7v-7h2v7zm4 0h-2V7h2v10zm4 0h-2v-4h2v4z"></path></g></svg>
+                            </td>';
                         }
                         else
                         {
-                            echo '<td class="button-cell"><span class="but-img i-ng"></span></td>';
+                            echo '<td class="button-cell">
+                            <svg class="svg-i-disabled" viewBox="0 0 24 24" preserveAspectRatio="xMidYMid meet" focusable="false"><g><path d="M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zM9 17H7v-7h2v7zm4 0h-2V7h2v10zm4 0h-2v-4h2v4z"></path></g></svg>
+                            </td>';
                         }
 
                         //Add empty cell normally used for props

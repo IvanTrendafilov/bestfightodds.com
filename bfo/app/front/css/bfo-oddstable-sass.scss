@@ -100,7 +100,7 @@ $tablerowheight: 25px;
         }
       }
       &.pr {
-        background-color: #DCDEE0;
+        background-color: #e0e2e4;
         display: none;
         height: $tablerowheight;
         &:nth-child(2n) {
@@ -355,10 +355,14 @@ $tablerowheight: 25px;
   color: #53585a;
   fill: var(--iron-icon-fill-color, currentcolor);
   stroke: var(--iron-icon-stroke-color, none);
+  height: 20px;
+  width: 20px;
 } 
 
 .svg-i-disabled {
   color: #a5abb3;
   fill: var(--iron-icon-fill-color, currentcolor);
   stroke: var(--iron-icon-stroke-color, none);
+  height: 20px;
+  width: 20px;
 }
