@@ -42,7 +42,7 @@ $tablerowheight: 25px;
   white-space: nowrap;
   text-overflow: ellipsis;
   overflow: hidden;
-  line-height: 1;
+  margin-top: 4px;
 }
 
 .t-b-cc { //Table body column content wrapper span (e.g. line '-500')
@@ -83,7 +83,7 @@ $tablerowheight: 25px;
   }
   tbody {
     tr {
-      background-color: #f5f7f9;
+      background-color: #f7f9fa;
       height: $tablerowheight;
       &:nth-child(2n)
       {
@@ -180,12 +180,12 @@ $tablerowheight: 25px;
       }
     }
     tr {
-      &:nth-child(even) th {
+      /*&:nth-child(even) th {
         padding-bottom: 1px;
       }
       &:nth-child(odd) th {
         padding-top: 1px;
-      }
+      }*/
     }
   }
 }
@@ -347,14 +347,18 @@ $tablerowheight: 25px;
   background-image: url('/img/icon-nograph.png');
 }
 
-.i-na {
-  background-image: url('/img/icon-noalert.png');
-}
-
 .i-g {
   background-image: url('/img/icon-graph.png');
 }
 
-.i-a {
-  background-image: url('/img/icon-alert.png');
+.svg-i {
+  color: #53585a;
+  fill: var(--iron-icon-fill-color, currentcolor);
+  stroke: var(--iron-icon-stroke-color, none);
+} 
+
+.svg-i-disabled {
+  color: #a5abb3;
+  fill: var(--iron-icon-fill-color, currentcolor);
+  stroke: var(--iron-icon-stroke-color, none);
 }
