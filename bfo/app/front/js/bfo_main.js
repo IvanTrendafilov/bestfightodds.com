@@ -10,6 +10,8 @@ var scrollX = 0;
 var scrollCaptain = null;
 var shareVisible = false;
 
+window.darkmode = true;
+
 function setHeight(el, val) {
     if (typeof val === "function") val = val();
     if (typeof val === "string") el.style.height = val;
@@ -1234,19 +1236,17 @@ setDarkMode = function (darkmode) {
             e.id = 'darkmodecss';
             document.getElementsByTagName('head')[0].appendChild(e);
         }
-        Cookies.set('bfo_darkmode', 1, {
-            'expires': 999
-        });
     }
     else {
         var darkmodecss = document.getElementById("darkmodecss");
         if (typeof (darkmodecss) != 'undefined' && darkmodecss != null) {
             darkmodecss.outerHTML = "";
         }
-        Cookies.set('bfo_darkmode', 0, {
-            'expires': 999
-        });
     }
+    Cookies.set('bfo_darkmode', darkmode === true ? 1 : 0, {
+        'expires': 999
+    });
+    window.darkmode = darkmode;
 }
 
 

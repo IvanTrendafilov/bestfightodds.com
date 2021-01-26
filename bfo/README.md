@@ -39,7 +39,7 @@ How to install locally:
 
 
 How to run cronjob locally
-- C:\dev\php\php -d include_path="c:\dev\bfo\shared/;c:\dev\bfo\bfo" c:\dev\bfo\shared\lib\bfocore\cron\cron.OddsParser.php
+- C:\dev\php\php -d include_path="c:\dev\bfo\shared\;c:\dev\bfo\bfo\" c:\dev\bfo\shared\lib\bfocore\cron\cron.OddsParser.php
 
 
 Handy Git stuff:

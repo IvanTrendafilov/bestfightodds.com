@@ -43,6 +43,8 @@ function createChart(indata) {
 
     $('#chart-area').highcharts({
         chart: {
+            backgroundColor: (window.darkmode === true ? '#363b41' : '#fff'),
+            styledMode: true,
             type: 'line',
             style: {
                 fontFamily: "'Roboto', Arial, sans-serif"
@@ -71,7 +73,7 @@ function createChart(indata) {
         legend: {
             enabled: false
         },
-        colors: ['#393B42'],
+        colors: [(window.darkmode === true ? '#c0c0c0' : '#393B42')],
         title: {
             text: '',
             style: {
