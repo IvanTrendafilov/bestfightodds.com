@@ -52,12 +52,12 @@ class XMLParserBetOnline
     private function parseMatchup($matchup)
     {
         //Check for metadata
-        if (!isset($matchup->scheduleText, $matchup->gameId, $matchup->event_DateTimeGMT))
+        if (!isset($matchup->gameId, $matchup->event_DateTimeGMT))
         {
-            Logger::getInstance()->log('Missing metadata for matchup', -1);
+            Logger::getInstance()->log('Missing metadata (game ID and/or DateTimeGMT) for matchup', -1);
             return false;
         }
-        $event_name = trim((string) $matchup->scheduleText);
+        $event_name = $matchup->scheduleText == null ? '' : trim((string) $matchup->scheduleText);
         $event_correlation_id = trim((string) $matchup->gameId);
         $gd = new DateTime($matchup->event_DateTimeGMT);
         $event_timestamp = $gd->getTimestamp();
@@ -91,7 +91,10 @@ class XMLParserBetOnline
             (string) $matchup->participants[0]->odds->moneyLine,
             (string) $matchup->participants[1]->odds->moneyLine
         );
-        $parsed_matchup->setMetaData('event_name', $event_name);
+        if (!empty($event_name))
+        {
+            $parsed_matchup->setMetaData('event_name', $event_name);
+        }
         $parsed_matchup->setMetaData('gametime', $event_timestamp);
         $parsed_matchup->setCorrelationID($event_correlation_id);
         $this->parsed_sport->addParsedMatchup($parsed_matchup);
