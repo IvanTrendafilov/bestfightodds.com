@@ -13,9 +13,8 @@
  *
  * Comment: Prod version
  * 
- * Pregames URL: https://api.linesfeed.info/v1/pregames/lines/pu?sport=Martial%20Arts&subSport=MMA
- * Props URL: https://api.linesfeed.info/v1/contest/lines/pu?sport=Martial%20Arts&subSport=MMA
- * 
+ * Pregames URL (this feed): https://api.linesfeed.info/v1/pregames/lines/pu?sport=Martial%20Arts&subSport=MMA
+ * Props URL (handled in separate parser): https://api.linesfeed.info/v1/contest/lines/pu?sport=Martial%20Arts&subSport=MMA
  *
  */
 
@@ -102,8 +101,8 @@ class XMLParserBetOnline
             && OddsTools::checkCorrectOdds((string) $matchup->period->total->overAdjust) && OddsTools::checkCorrectOdds((string) $matchup->period->total->underAdjust))
         {
             $parsed_prop = new ParsedProp(
-                $team_1 . ' VS ' . $team_2 . ' - OVER ' . $matchup->period->total->totalPoints,
-                $team_1 . ' VS ' . $team_2 . ' - UNDER ' . $matchup->period->total->totalPoints,
+                $team_1 . ' VS ' . $team_2 . ' OVER ' . $matchup->period->total->totalPoints . ' ROUNDS',
+                $team_1 . ' VS ' . $team_2 . ' UNDER ' . $matchup->period->total->totalPoints . ' ROUNDS',
                 (string) $matchup->period->total->overAdjust,
                 (string) $matchup->period->total->underAdjust);
             $parsed_prop->setCorrelationID($event_correlation_id);
@@ -117,7 +116,6 @@ class XMLParserBetOnline
     {
         return $this->full_run;
     }
-
 }
 
 ?>
