@@ -27,7 +27,7 @@ define('BOOKIE_ID', '12');
 
 $logger = new Katzgrau\KLogger\Logger(GENERAL_KLOGDIR, Psr\Log\LogLevel::DEBUG, ['filename' => 'cron.' . BOOKIE_NAME . '.log']);
 $parser = new ParserJob($logger);
-$parser->run();
+$parser->run('mock');
 
 class ParserJob
 {
@@ -42,19 +42,22 @@ class ParserJob
 
     public function run($mode)
     {
+
+        $content = null;
         if ($mode == 'mock')
         {
-            
+            $this->logger->info("Note: Using mock file at " . PARSE_MOCKFEEDS_DIR . "betonline.json");
+            $content = ParseTools::retrievePageFromFile(PARSE_MOCKFEEDS_DIR . 'betonline.json');
         }
         //Fetch page(s)
         //ParseContent
         $parsed_sport = $this->parseContent($content);
 
-
+        $this->full_run = true;
 
         $op = new OddsProcessor($this->logger, BOOKIE_ID);
-        $op->processParsedObjects();
-      
+        $op->processParsedSport($parsed_sport, $this->full_run);
+    
 
 
 
@@ -82,7 +85,7 @@ class ParserJob
             $this->logger->info("Declared authoritive run");
         }
 
-        return [$this->parsed_sport];
+        return $this->parsed_sport;
     }
 
     private function parseMatchup($matchup)
@@ -151,7 +154,7 @@ class ParserJob
         return true;
     }
 
-    public function checkAuthoritiveRun($a_aMetadata)
+    private function checkAuthoritiveRun($a_aMetadata)
     {
         return $this->full_run;
     }

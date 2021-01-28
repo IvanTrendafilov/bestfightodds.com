@@ -45,13 +45,13 @@ class ParsedSport
 
 
         //Just for DEBUG
-        echo "Pre:
+        /*echo "Pre:
 ";
         foreach ($this->aMatchups as $oMatchup)
         {
             echo $oMatchup->getTeamName(1) . ' - ' . $oMatchup->getTeamName(2) . "
 ";
-        }
+        }*/
 
         $iOrigCount = count($this->aMatchups);
         for ($iY = 0; $iY < $iOrigCount; $iY++)
