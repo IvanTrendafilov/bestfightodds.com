@@ -74,10 +74,6 @@ class ParseTools
         {
             curl_setopt($rCurl, CURLOPT_HTTPHEADER, ['Authorization: Basic ZmlnaHRvZGRzOmNuODI2Mg==']);
         }
-        else if (substr($a_sURL, 0, strlen('https://lines.betdsi.eu')) === 'https://lines.betdsi.eu')
-        {
-            curl_setopt($rCurl, CURLOPT_HTTPHEADER, ['cookie: X-Mapping-ckaojmng=C77180AA09B377277A8F4DBE2FBA964B']);
-        }
         else if (substr($a_sURL, 0, strlen('https://www.pinnacle.com/webapi')) === 'https://www.pinnacle.com/webapi')
         {
             curl_setopt($rCurl, CURLOPT_REFERER, "https://www.pinnacle.com/en/odds/match/mixed-martial-arts/ufc/ufc");
@@ -139,21 +135,13 @@ class ParseTools
                 CURLOPT_FOLLOWLOCATION => true
             ));            
 
-            if ($sURL == 'https://api.mmajunkie.com/rumors/rss')
-            {
-                //curl_setopt($rCurl, CURLOPT_INTERFACE, '89.221.253.24'); If IP blocked
-            }
-            else if (strpos($sURL, 'gamingsystem.') !== false) 
+            if (strpos($sURL, 'gamingsystem.') !== false) 
             {
               curl_setopt($aChannels[$sURL], CURLOPT_SSLVERSION, 6); //TLS 1.2
             }
             else if (substr($sURL, 0, strlen('https://api.pinnacle.com')) === 'https://api.pinnacle.com')
             {
                 curl_setopt($aChannels[$sURL], CURLOPT_HTTPHEADER, ['Authorization: Basic ZmlnaHRvZGRzOmNuODI2Mg==']);
-            }
-            else if (substr($sURL, 0, strlen('https://lines.betdsi.eu')) === 'https://lines.betdsi.eu')
-            {
-                curl_setopt($aChannels[$sURL], CURLOPT_HTTPHEADER, ['cookie: X-Mapping-ckaojmng=C77180AA09B377277A8F4DBE2FBA964B']);
             }
             else if (substr($sURL, 0, strlen('https://www.pinnacle.com/webapi')) === 'https://www.pinnacle.com/webapi')
             {
