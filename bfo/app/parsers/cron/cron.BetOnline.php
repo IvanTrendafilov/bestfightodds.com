@@ -50,6 +50,10 @@ class ParserJob
         //ParseContent
         $parsed_sport = $this->parseContent($content);
 
+
+
+        $op = new OddsProcessor($this->logger, BOOKIE_ID);
+        $op->processParsedObjects();
       
 
 

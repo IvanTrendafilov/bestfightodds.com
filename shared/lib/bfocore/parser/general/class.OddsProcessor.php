@@ -16,9 +16,15 @@ class OddsProcessor
         $this->bookie_id = $bookie_id;
     }
 
-    public function processSport()
+    public function processParsedObjects($parsed_objects)
     {
+        foreach ($parsed_objects as $parsed_item)
+        {
 
+
+            
+
+        }
     }
 
 }
