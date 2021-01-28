@@ -5,10 +5,12 @@ require_once('lib/bfocore/parser/utils/class.ParseTools.php');
 /**
  * XML Parser
  *
- * Bookie: BetOnnline Alternative Parser (site, not xml)
+ * Bookie: BetOnline Alternative Parser (site, not xml)
  * Sport: MMA
  *
- * Comment: In production
+ * Comment: Not in production. Currently replaced by JSON feed parser (BetOnline)
+ *          Note: In order for this to work properly you need to setup a cronjob that fetches the XML using Lynx or similar:
+ *          * /3+1   *       *       *       * lynx -source "https://www.betonline.ag/sportsbook/line/retrievelinedata?param.PrdNo=-1&param.Type=Cntst&param.RequestType=Normal&param.CntstParam.Lv1=MMA+Props" > /var/www/bfo/bfo/app/front/externalfeeds/betonline-props.xml
  *
  */
 class XMLParserBetOnlineAlt

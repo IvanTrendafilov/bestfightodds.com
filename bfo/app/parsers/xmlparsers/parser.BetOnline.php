@@ -1,5 +1,4 @@
 <?php
-
 /**
  * XML Parser
  *
@@ -8,84 +7,118 @@
  *
  * Moneylines: Yes
  * Spreads: No
- * Totals: No
- * Props: No* (*except for totals, BetOnline have been contacted regarding other props)
- * Authoritative run: Yes
+ * Totals: Yes (Only one as specified)
+ * Props: No* (*props are currently handled in a separate parser (BetOnlineProps))
+ * Authoritative run: Yes* (Won't be usable since we are running props in separate parser. The two should be combined into a standalone cron job later)
  *
  * Comment: Prod version
+ * 
+ * Pregames URL (this feed): https://api.linesfeed.info/v1/pregames/lines/pu?sport=Martial%20Arts&subSport=MMA
+ * Props URL (handled in separate parser): https://api.linesfeed.info/v1/contest/lines/pu?sport=Martial%20Arts&subSport=MMA
  *
  */
+
+require_once 'lib/bfocore/parser/general/inc.ParserMain.php';
+
 class XMLParserBetOnline
 {
-    private $bAuthorativeRun = false;
+    private $full_run = false;
+    private $parsed_sport;
 
-    public function parseXML($a_sXML)
+    public function parseXML($a_sJSON)
     {
-
-        $oXML = simplexml_load_string($a_sXML);
-
-        if ($oXML == false)
+        $json = json_decode($a_sJSON);
+        if ($json == false)
         {
-            Logger::getInstance()->log("Warning: XML broke!!", -1);
+            Logger::getInstance()->log("Warning: JSON broke!!", -1);
         }
 
-        $aSports = array();
-        $oParsedSport = new ParsedSport('MMA');
+        $this->parsed_sport = new ParsedSport('MMA');
 
-        foreach ($oXML->event as $cEvent)
+        foreach ($json->preGameEvents as $matchup)
         {
-            //Matchups
-            if ((string) $cEvent->sporttype == 'Martial Arts' 
-                && count($cEvent->participant) == 2 
-                && trim((string) $cEvent->scheduletext) != 'Kickboxing')
-            {
-                if (ParseTools::checkCorrectOdds((string) $cEvent->participant[0]->odds->moneyline)
-                        && ParseTools::checkCorrectOdds((string) $cEvent->participant[1]->odds->moneyline))
-                {
-                    $oParsedMatchup = new ParsedMatchup(
-                                    (string) $cEvent->participant[0]->participant_name,
-                                    (string) $cEvent->participant[1]->participant_name,
-                                    (string) $cEvent->participant[0]->odds->moneyline,
-                                    (string) $cEvent->participant[1]->odds->moneyline
-                    );
-
-                    //Add header of matchup as metadata
-                    if (isset($cEvent->scheduletext) && trim($cEvent->scheduletext) != 'null')
-                    {
-                        $oParsedMatchup->setMetaData('event_name', (string) trim($cEvent->scheduletext));
-                    }
-
-                    $oParsedSport->addParsedMatchup($oParsedMatchup);
-                }
-
-                //Add total as prop
-                if (isset($cEvent->period->total->total_points) && trim($cEvent->period->total->total_points) != '')
-                {
-                    $oParsedSport->addFetchedProp(new ParsedProp(
-                        (string) $cEvent->participant[0]->participant_name . ' vs ' . (string) $cEvent->participant[1]->participant_name . ' over ' . $cEvent->period->total->total_points . ' rounds',
-                        (string) $cEvent->participant[0]->participant_name . ' vs ' . (string) $cEvent->participant[1]->participant_name . ' under ' . $cEvent->period->total->total_points . ' rounds',
-                        (string) $cEvent->period->total->over_adjust,
-                        (string) $cEvent->period->total->under_adjust));
-                }
-
-            }
+            $this->parseMatchup($matchup);
         }
 
-        //Declare authorative run if we fill the criteria
-        if ($oXML != false && count($oParsedSport->getParsedMatchups()) >= 5)
+        if (false && $json != false && count($this->parsed_sport->getParsedMatchups()) >= 5) //Currently disabled since matchup and prop are in separate parsers
         {
-            $this->bAuthorativeRun = true;
+            $this->full_run = true;
             Logger::getInstance()->log("Declared authoritive run", 0);
         }
 
-        return [$oParsedSport];
+        return [$this->parsed_sport];
+    }
+
+    private function parseMatchup($matchup)
+    {
+        //Check for metadata
+        if (!isset($matchup->gameId, $matchup->event_DateTimeGMT))
+        {
+            Logger::getInstance()->log('Missing metadata (game ID and/or DateTimeGMT) for matchup', -1);
+            return false;
+        }
+        $event_name = $matchup->scheduleText == null ? '' : trim((string) $matchup->scheduleText);
+        $event_correlation_id = trim((string) $matchup->gameId);
+        $gd = new DateTime($matchup->event_DateTimeGMT);
+        $event_timestamp = $gd->getTimestamp();
+
+        //Validate existance participants fields and odds
+        if (!@isset($matchup->participants[0]->participantName,
+                    $matchup->participants[1]->odds->moneyLine,
+                    $matchup->participants[0]->participantName,
+                    $matchup->participants[1]->odds->moneyLine))
+        {
+            Logger::getInstance()->log('Missing participant and odds fields for matchup ' + $event_correlation_id + ' at ' + $event_name, -1);
+            return false;
+        }
+
+        //Validate format of participants and odds
+        $team_1 = ParseTools::formatName((string) $matchup->participants[0]->participantName);
+        $team_2 = ParseTools::formatName((string) $matchup->participants[1]->participantName);
+        if (!OddsTools::checkCorrectOdds((string) $matchup->participants[0]->odds->moneyLine) || 
+            !OddsTools::checkCorrectOdds((string) $matchup->participants[1]->odds->moneyLine) ||
+            $team_1 == '' ||
+            $team_2 == '')
+        {
+            Logger::getInstance()->log('Invalid formatting for participant and odds fields for matchup ' + $event_correlation_id + ' at ' + $event_name, -1);
+            return false;
+        }
+
+        //All ok, add matchup
+        $parsed_matchup = new ParsedMatchup(
+            $team_1,
+            $team_2,
+            (string) $matchup->participants[0]->odds->moneyLine,
+            (string) $matchup->participants[1]->odds->moneyLine
+        );
+        if (!empty($event_name))
+        {
+            $parsed_matchup->setMetaData('event_name', $event_name);
+        }
+        $parsed_matchup->setMetaData('gametime', $event_timestamp);
+        $parsed_matchup->setCorrelationID($event_correlation_id);
+        $this->parsed_sport->addParsedMatchup($parsed_matchup);
+
+        //If existant, also add total rounds (e.g. over/under 4.5 rounds)
+        if (@!empty($matchup->period->total->totalPoints) && @!empty($matchup->period->total->overAdjust) && @!empty($matchup->period->total->underAdjust)
+            && OddsTools::checkCorrectOdds((string) $matchup->period->total->overAdjust) && OddsTools::checkCorrectOdds((string) $matchup->period->total->underAdjust))
+        {
+            $parsed_prop = new ParsedProp(
+                $team_1 . ' VS ' . $team_2 . ' OVER ' . $matchup->period->total->totalPoints . ' ROUNDS',
+                $team_1 . ' VS ' . $team_2 . ' UNDER ' . $matchup->period->total->totalPoints . ' ROUNDS',
+                (string) $matchup->period->total->overAdjust,
+                (string) $matchup->period->total->underAdjust);
+            $parsed_prop->setCorrelationID($event_correlation_id);
+            $this->parsed_sport->addFetchedProp($parsed_prop);
+        } 
+            
+        return true;
     }
 
     public function checkAuthoritiveRun($a_aMetadata)
     {
-        return $this->bAuthorativeRun;
+        return $this->full_run;
     }
-
 }
 
 ?>
