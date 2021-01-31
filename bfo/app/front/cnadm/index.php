@@ -1,62 +1,69 @@
 <?php
 
-//Disable caching
-header('Cache-Control: no-cache, no-store, max-age=0, must-revalidate');
-header('Expires: Mon, 12 Jul 1996 04:11:00 GMT'); //Any date passed.
-header('Pragma: no-cache');
+use DI\Container;
+use Slim\Factory\AppFactory;
+use Psr\Http\Message\ResponseInterface as Response;
+use Psr\Http\Message\ServerRequestInterface as Request;
+use Slim\Views\Twig;
+use Slim\Views\TwigMiddleware;
+use League\Plates\Engine;
 
-?>
+
+require_once 'vendor/autoload.php';
+
+// Create Container
+$container = new Container();
+AppFactory::setContainer($container);
+
+// Set view in Container
+$container->set('view', function() {
+    //return Engine::create(__DIR__ . '/templates/');
+    //League\Plates\Engine::create('/path/to/templates', 'phtml');
+    return new League\Plates\Engine(__DIR__ . '/templates/');
+});
+
+// Create new Plates engine
+//$templates = new League\Plates\Engine(__DIR__ . '/templates');
+// Add any additional folders
+//$templates->addFolder('emails', '/path/to/emails');
+// Load any additional extensions
+//$templates->loadExtension(new League\Plates\Extension\Asset('/path/to/public'));
+// Create a new template
+//$template = $templates->make('emails::welcome');
 
 
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
-<head>
-<meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
-<title>Admin</title>
-<script src="js/jquery-1.12.4.min.js" language="JavaScript" type="text/javascript"></script>
-<script src="js/jquery.autocomplete.min.js" language="JavaScript" type="text/javascript"></script>
-<script src="js/admin-main.js" language="JavaScript" type="text/javascript"></script>
-<link rel="stylesheet" type="text/css" href="css/stylesheets.php" />
-</head>
-<body>
-<div id="adminMenu">
-<a href="index.php" style="color: #a30000; text-decoration: none;">
-<h1 style="">Admin</h1></a>
 
-<a href="index.php">Main</a>&nbsp;&nbsp;&nbsp;
-<a href="index.php?p=viewManualActions">Schedule</a>&nbsp;&nbsp;&nbsp;
-<a href="index.php?p=addNewEventForm">New Event</a>&nbsp;&nbsp;&nbsp;
-<a href="index.php?p=addNewFightForm">New Fight</a>&nbsp;&nbsp;&nbsp;
-<a href="index.php?p=eventsOverview">Events overview</a> <a href="?p=eventsOverview&amp;show=all">(all)</a>&nbsp;&nbsp;&nbsp;
-<a href="index.php?p=addFighterAltName">Altnames</a>&nbsp;&nbsp;&nbsp;
-<a href="index.php?p=addOddsManually">New odds</a>&nbsp;&nbsp;&nbsp;
-<a href="index.php?p=clearOddsForMatchupAndBookie">Delete odds</a><br />
-<a href="index.php?p=addNewPropTemplate">New prop template</a>&nbsp;&nbsp;&nbsp;
-<a href="index.php?p=viewPropTemplates">View prop templates</a>&nbsp;&nbsp;&nbsp;
-<a href="index.php?p=resetChangeNum">Reset changenum</a>&nbsp;&nbsp;&nbsp;
-<a href="index.php?p=testMail">Test mail</a>&nbsp;&nbsp;&nbsp;
-<a href="index.php?p=viewLatestLog&log=latest">View latest log</a> <a href="index.php?p=viewLatestLog">(all)</a><br /><br />
-</div>
-<div class="contentWindow">
-<?php
 
-if (isset($_GET['p']) && $_GET['p'] != '' && preg_match('/[a-zA-Z0-9]*/', $_GET['p']))
+// Create App
+$app = AppFactory::create();
+$app->setBasePath('/cnadm');
+
+// Define named route
+/*$app->get('/hello/{name}', function ($request, $response, $args) {
+    return $this->get('view')->render($response, 'profile.html', [
+        'name' => $args['name']
+    ]);
+})->setName('profile');
+
+// Render from string
+$app->get('/hi/{name}', function ($request, $response, $args) {
+    $str = $this->get('view')->fetchFromString(
+        '<p>Hi, my name is {{ name }}.</p>',
+        [
+            'name' => $args['name']
+        ]
+    );
+    $response->getBody()->write($str);
+    return $response;
+});*/
+
+
+// Render from string
+$app->get('/', function ($request, $response, $args) 
 {
+    echo $this->get('view')->render('profile', ['name' => 'Jonathan']);
+    return $response;
+});
 
-	include_once('app/front/cnadm/pages/' . $_GET['p'] . '.php');
-}
-else
-{
-	//Show default
-	include_once('app/front/cnadm/pages/main.php');
-}
-
-/*if (isset($_GET['message']) && $_GET['message'] != '')
-{
-	echo '<script language="Javascript">alert ("' . $_GET['message'] . '")</script>';
-}*/
-
-?>
-</div>
-</body>
-</html>
+// Run app
+$app->run();

@@ -33,6 +33,7 @@ RewriteRule ^fights/([a-zA-Z]+)(.*)$ / [R=301,NC,L]
 RewriteRule ^\[[0-9]\] / [R]
 RewriteRule ^out/([0-9]+) redir.php?b=$1 [nc]
 
+
 RewriteCond %{ENV:REDIRECT_STATUS} ^$
 RewriteCond %{HTTP_USER_AGENT} ^(python|catexplorador) [NC,OR]
 RewriteCond %{HTTP_USER_AGENT} ^$
@@ -45,3 +46,8 @@ RewriteRule ^.* - [F,L]
 <FilesMatch "\.(js|css)$">
         Header set Cache-Control: "max-age=604800, must-revalidate"
 </FilesMatch>
+
+RewriteBase /cnadm/
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteRule ^ index.php [QSA,L]
