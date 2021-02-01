@@ -203,7 +203,7 @@ class AdminAPI
     /**
      * Returns the singleton instance
      * 
-     * @return Logger instance
+     * @return AdminAPI instance
      */
     public static function getInstance()
     {

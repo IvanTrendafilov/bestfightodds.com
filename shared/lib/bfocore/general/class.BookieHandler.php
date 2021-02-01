@@ -69,6 +69,15 @@ class BookieHandler
     {
         return BookieDAO::updateTemplateLastUsed($a_iTemplateID);
     }
+
+    public static function deleteTemplate($a_iID)
+    {
+        if (!is_int($a_iID))
+        {
+            return false;
+        }
+        return BookieDAO::deleteTemplate($a_iID);
+    }
 }
 
 ?>

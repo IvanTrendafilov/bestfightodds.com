@@ -194,6 +194,14 @@ class BookieDAO
 
         return (DBTools::getAffectedRows() > 0 ? true : false);
     }
+
+    public static function deleteTemplate($a_iTemplateID)
+    {
+        $sQuery = 'DELETE FROM bookies_proptemplates WHERE id = ?';
+        $aParams = array($a_iTemplateID);
+        DBTools::doParamQuery($sQuery, $aParams);
+        return (DBTools::getAffectedRows() > 0 ? true : false);
+    }
 }
 
 ?>

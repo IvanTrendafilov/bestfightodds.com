@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "c45df90c417da302a0a628d0a7beeef7",
+    "content-hash": "b6bf1bd4c8ae1e960facfba0b1d9e18d",
     "packages": [
         {
             "name": "abraham/twitteroauth",
@@ -659,6 +659,47 @@
                 "source": "https://github.com/PHP-DI/PhpDocReader/tree/2.2.1"
             },
             "time": "2020-10-12T12:39:22+00:00"
+        },
+        {
+            "name": "php-di/slim-bridge",
+            "version": "3.1.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/PHP-DI/Slim-Bridge.git",
+                "reference": "c118174d07e5b6969f678298d6c44364acb2afd7"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/PHP-DI/Slim-Bridge/zipball/c118174d07e5b6969f678298d6c44364acb2afd7",
+                "reference": "c118174d07e5b6969f678298d6c44364acb2afd7",
+                "shasum": ""
+            },
+            "require": {
+                "php": "^7.1 || ^8.0",
+                "php-di/invoker": "^2.0.0",
+                "php-di/php-di": "^6.0.0",
+                "slim/slim": "^4.2.0"
+            },
+            "require-dev": {
+                "laminas/laminas-diactoros": "^2.1",
+                "phpunit/phpunit": ">= 7.0 < 10"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "DI\\Bridge\\Slim\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "description": "PHP-DI integration in Slim",
+            "support": {
+                "issues": "https://github.com/PHP-DI/Slim-Bridge/issues",
+                "source": "https://github.com/PHP-DI/Slim-Bridge/tree/3.1.0"
+            },
+            "time": "2020-12-02T16:09:06+00:00"
         },
         {
             "name": "phpmailer/phpmailer",
