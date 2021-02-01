@@ -67,6 +67,10 @@ table.eventsOverview tr td.fight a {
 	color: #000000;
 }
 
+.main-event {
+	font-weight: bold;
+}
+
 table.eventsOverview tr td.imageLink a {
 	color: #0033cc;
 	font-weight: bold;
@@ -74,6 +78,11 @@ table.eventsOverview tr td.imageLink a {
 
 table.eventsOverview tr td.arbitrage {
 	color: #cccccc;
+	text-align: center;
+}
+
+table.eventsOverview tr td.positive {
+	color: #33aa00;
 	text-align: center;
 }
 

@@ -9,6 +9,9 @@ require_once 'lib/bfocore/general/class.ScheduleHandler.php';
 require_once 'lib/bfocore/general/class.EventHandler.php';
 require_once 'lib/bfocore/general/class.OddsHandler.php';
 require_once 'lib/bfocore/general/class.BookieHandler.php';
+require_once 'lib/bfocore/general/class.FighterHandler.php';
+require_once 'lib/bfocore/general/class.TwitterHandler.php';
+require_once 'lib/bfocore/general/class.Alerter.php';
 
 class AdminController
 {
@@ -54,13 +57,49 @@ class AdminController
         return $response;
     }
 
-    public function eventsOverview(Request $request, Response $response)
+    public function eventsOverview(Request $request, Response $response, array $args)
     {
+        $view_data = ['events' => []];
+        $events = null;
+        if (isset($args['show']) && $args['show'] == 'all')
+        {
+            $events = EventHandler::getAllEvents();
+        }
+        else
+        {
+            $events = EventHandler::getAllUpcomingEvents();
+        }
+
+        foreach ($events as $event)
+        {
+            $fights = EventHandler::getAllFightsForEvent($event->getID(), false);
+            $event_view = [];
+            foreach ($fights as $fight)
+            {
+                $arbitrage_info = Alerter::getArbitrageInfo($fight->getID(), 100);
+                $fight_view = ['arbitrage_info' => $arbitrage_info];
+
+                $event_view[] = ['fight_obj' => $fight, 'arbitrage_info' => $arbitrage_info];
+            }
+            $view_data['events'][] = ['event_obj' => $event, 'fights' => $event_view];
+        }
+
+        $response->getBody()->write($this->plates->render('events', $view_data));
         return $response;
     }
 
-    public function addFighterAltName(Request $request, Response $response)
+    public function viewFighter(Request $request, Response $response, array $args)
     {
+        if (isset($args['id']))
+        {
+            $fighter = FighterHandler::getFighterByID($args['id']);
+            $twitter_handle = TwitterHandler::getTwitterHandle($args['id']);
+            
+            $view_data = ['fighter_obj' => $fighter, 'twitter_handle' => $twitter_handle];
+            $response->getBody()->write($this->plates->render('fighters', $view_data));
+            return $response;
+        }
+
         return $response;
     }
 
@@ -128,6 +167,19 @@ class AdminController
         }
 
         $response->getBody()->write($this->plates->render('logs', $view_data));
+        return $response;
+    }
+
+    public function viewAlerts(Request $request, Response $response, array $args)
+    {
+        $view_data['alerts'] = [];
+        $alerts = Alerter::getAllAlerts();
+        foreach ($alerts as $alert)
+        {
+            $fight = EventHandler::getFightByID($alert->getFightID());
+            $view_data['alerts'][] = ['alert_obj' => $alert, 'fight_obj' => $fight];
+        }
+        $response->getBody()->write($this->plates->render('alerts', $view_data));
         return $response;
     }
 }

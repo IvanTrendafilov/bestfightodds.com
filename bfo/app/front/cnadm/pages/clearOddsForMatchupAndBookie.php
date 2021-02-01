@@ -3,7 +3,6 @@
 require_once('lib/bfocore/general/class.EventHandler.php');
 require_once('lib/bfocore/general/class.BookieHandler.php');
 
-//Add fighter altname:
 echo '
 
 <form method="post" action="logic/logic.php?action=clearOddsForMatchupAndBookie">';

@@ -57,8 +57,8 @@ $app->get('/', \AdminController::class . ':home');
 $app->get('/manualactions', \AdminController::class . ':viewManualActions');
 $app->get('/addNewEventForm', \AdminController::class . ':addNewEventForm');
 $app->get('/addNewFightForm', \AdminController::class . ':addNewFightForm');
-$app->get('/eventsOverview', \AdminController::class . ':eventsOverview');
-$app->get('/addFighterAltName', \AdminController::class . ':addFighterAltName');
+$app->get('/events[/{show}]', \AdminController::class . ':eventsOverview'); //Almost done!
+$app->get('/fighters/{id}', \AdminController::class . ':viewFighter');
 $app->get('/addOddsManually', \AdminController::class . ':addOddsManually');
 $app->get('/clearOddsForMatchupAndBookie', \AdminController::class . ':clearOddsForMatchupAndBookie');
 $app->get('/addNewPropTemplate', \AdminController::class . ':addNewPropTemplate');
@@ -66,6 +66,8 @@ $app->get('/proptemplates', \AdminController::class . ':viewPropTemplates'); //D
 $app->get('/resetChangeNum', \AdminController::class . ':resetChangeNum');
 $app->get('/testMail', \AdminController::class . ':testMail');
 $app->get('/logs[/{logfile}]', \AdminController::class . ':viewLatestLog'); //DONE!
+$app->get('/alerts', \AdminController::class . ':viewAlerts'); //DONE!
+
 
 // Run app
 $app->run();
