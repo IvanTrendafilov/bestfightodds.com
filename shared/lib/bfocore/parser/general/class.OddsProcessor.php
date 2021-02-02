@@ -44,12 +44,25 @@ class OddsProcessor
                 $matched_matchups[] = $matching_matchup->getID();
 
             }
-
-
         }
 
+        $pp = new PropParserV2($this->logger, $this->bookie_id);
+        $matched_props = $pp->matchProps($parsed_sport->getFetchedProps());
 
-        //Remove prop dupes AFTER MATCH
+
+
+
+//Remove prop dupes AFTER MATCH
+
+
+        //update Matchup Odds
+
+        $pp->updateMatchedProps($matched_props);
+
+
+
+
+        
 
 
         if ($full_run) //If this is a full run we will flag any matchups odds not matched for deletion

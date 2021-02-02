@@ -26,5 +26,6 @@ require_once('lib/bfocore/utils/class.OddsTools.php');
 //New classes to support standalone cron jobs
 
 require_once('lib/bfocore/parser/general/class.OddsProcessor.php');
+require_once('lib/bfocore/parser/general/class.PropParserV2.php');
 
 ?>
