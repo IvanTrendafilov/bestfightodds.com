@@ -1,6 +1,7 @@
 <?php
 
 require_once('lib/bfocore/utils/db/class.DBTools.php');
+require_once('lib/bfocore/utils/db/class.PDOTools.php');
 require_once('lib/bfocore/general/inc.GlobalTypes.php');
 
 class OddsDAO
@@ -911,7 +912,6 @@ class OddsDAO
             $aParams[] = $a_iEventID;
         }
 
-
         $sQuery = 'SELECT
                     lep2.event_id,
                     lep2.bookie_id,
@@ -980,6 +980,66 @@ class OddsDAO
         $aParams = [$a_iMatchupID, $a_iBookieID];
         DBTools::doParamQuery($sQuery, $aParams);
         return DBTools::getAffectedRows();
+    }
+
+    public static function getAllLatestPropOddsForMatchupAndBookie($a_iMatchupID, $a_iBookieID, $a_iPropTypeID = -1)
+    {
+        $sExtraWhere = '';
+        $aParams = [$a_iMatchupID, $a_iBookieID];
+        if ($a_iPropTypeID != -1)
+        {
+            $sExtraWhere = ' AND proptype_id = ?';
+            $aParams[] = $a_iPropTypeID;
+        }
+
+        $sQuery = 'SELECT lp.*, pt.* 
+                    FROM lines_props lp 
+                    LEFT OUTER JOIN lines_props lp2
+                        ON (lp.bookie_id = lp2.bookie_id AND lp.matchup_id = lp2.matchup_id  AND lp.proptype_id = lp2.proptype_id AND lp.team_num = lp2.team_num AND lp.date < lp2.date)
+                        INNER JOIN prop_types pt ON lp.proptype_id = pt.id 
+                    WHERE lp2.bookie_id IS NULL AND lp2.matchup_id IS NULL AND lp2.proptype_id IS NULL AND lp2.team_num IS NULL
+                        AND lp.matchup_id = ? AND lp.bookie_id = ?;' . $sExtraWhere;
+
+        $aResult = PDOTools::findMany($sQuery, $aParams);
+
+        $aRet = [];
+        foreach ($aResult as $aRow)
+        {
+            $aRet[] = new PropBet($aRow['matchup_id'],
+                            $aRow['bookie_id'],
+                            $aRow['prop_desc'],
+                            $aRow['prop_odds'],
+                            $aRow['negprop_desc'],
+                            $aRow['negprop_odds'],
+                            $aRow['proptype_id'],
+                            $aRow['date'],
+                            $aRow['team_num']);
+        }
+        return $aRet;
+    }
+
+    public static function flagOddsForDeletion($a_iBookieID, $a_iMatchupID = null, $a_iEventID = null, $a_iPropTypeID = null, $a_iTeamNum = null)
+    {
+		if (!is_numeric($a_iBookieID) || ($a_iMatchupID == null && $a_iEventID == null))
+		{
+			throw new Exception("Invalid input", 10);	
+        }
+
+        $sQuery = 'INSERT INTO lines_flagged(bookie_id, matchup_id, event_id, proptype_id, team_num)';
+        $aParams = [$a_iBookieID, $a_iMatchupID, $a_iEventID, $a_iPropTypeID, $a_iTeamNum];
+
+        $id = null;
+		try 
+		{
+			$id = PDOTools::insert($sQuery, $aParams);
+		}
+		catch(PDOException $e)
+		{
+		    if($e->getCode() == 23000){
+				throw new Exception("Duplicate entry", 10);	
+		    }
+		}
+		return $id;
     }
 
 }

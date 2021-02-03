@@ -34,6 +34,7 @@ class AlertsModel
 
 		$query = "INSERT INTO alerts_entries(email, oddstype, criterias) VALUES (?,?,?)";
 		$params = [$email, $oddstype, $criterias];
+		$id = null;
 		try 
 		{
 			$id = PDOTools::insert($query, $params);

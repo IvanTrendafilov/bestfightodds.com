@@ -103,7 +103,7 @@ class PropParserV2
                 }
             }            
         }
-        return ['status' => true, 'template' => $template, 'matchup' => $matchup, 'event' => $event, 'matchuped_type' => ($template->isEventProp() ? 'event' : 'matchup')];
+        return ['status' => true, 'template' => $template, 'matchup' => $matchup, 'event' => $event, 'matched_type' => ($template->isEventProp() ? 'event' : 'matchup')];
    }
 
     /** 
@@ -266,15 +266,15 @@ class PropParserV2
         {
             //Check if a manual correlation has been created and stored
             $sSearchProp = ($a_oProp->getMainProp() == 1 ? $a_oProp->getTeamName(1) : $a_oProp->getTeamName(2));
-            $this->logger->info('--- searching for manual correlation: ' . $sSearchProp . ' for bookie ' . $a_oTemplate->getBookieID());
+            $this->logger->debug('--- searching for manual correlation: ' . $sSearchProp . ' for bookie ' . $a_oTemplate->getBookieID());
             $sFoundCorrMatchup = OddsHandler::getMatchupForCorrelation($a_oTemplate->getBookieID(), $sSearchProp);
             if ($sFoundCorrMatchup != null)
             {
-                $this->logger->info('---- prop has manual correlation stored: ' . $sFoundCorrMatchup);
+                $this->logger->debug('---- prop has manual correlation stored: ' . $sFoundCorrMatchup);
                 $oPreMatchedMatchup = EventHandler::getFightByID($sFoundCorrMatchup);
                 if ($oPreMatchedMatchup != null)
                 {
-                    $this->logger->info('----- found stored manual correlation for ' . $sSearchProp . ' : ' . $oPreMatchedMatchup->getID());
+                    $this->logger->debug('----- found stored manual correlation for ' . $sSearchProp . ' : ' . $oPreMatchedMatchup->getID());
                     $aMatchupsToCheck = array($oPreMatchedMatchup);
                     //Even though we have prematched the matchup, we still need to add alt name matchups
                     $aMatchupsToCheck = array_merge($aMatchupsToCheck, $this->addAltNameMatchupsToMatchup($oPreMatchedMatchup));
@@ -282,24 +282,24 @@ class PropParserV2
             }
             else
             {
-                $this->logger->info('---- no stored manual correlation found');
+                $this->logger->debug('---- no stored manual correlation found');
 
                 //Default is we search all upcoming matchups, but if there is a matchup
                 //pre-matched already, we'll just check that
                 if ($a_oProp->getCorrelationID() != '')
                 {
-                    $this->logger->info('--- prop has correlation id: ' . $a_oProp->getCorrelationID());
+                    $this->logger->debug('--- prop has correlation id: ' . $a_oProp->getCorrelationID());
                     $oPreMatchedMatchup = EventHandler::getFightByID(ParseTools::getCorrelation($a_oProp->getCorrelationID()));
                     if ($oPreMatchedMatchup != null)
                     {
-                        $this->logger->info('--- found stored correlation: ' . $oPreMatchedMatchup->getID());
+                        $this->logger->debug('--- found stored correlation: ' . $oPreMatchedMatchup->getID());
                         $aMatchupsToCheck = array($oPreMatchedMatchup);
                         //Even though we have prematched the matchup, we still need to add alt name matchups
                         $aMatchupsToCheck = array_merge($aMatchupsToCheck, $this->addAltNameMatchupsToMatchup($oPreMatchedMatchup));
                     }
                     else
                     {
-                        $this->logger->info('--- no stored correlation found (' . $a_oProp->getCorrelationID() . ')');
+                        $this->logger->debug('--- no stored correlation found (' . $a_oProp->getCorrelationID() . ')');
                     }
                 }
             }
@@ -538,7 +538,7 @@ class PropParserV2
             }
         }
 
-        return array('event' => $iFoundEventID);
+        return array('event_id' => $iFoundEventID);
     }
 
     private function addAltNameMatchupsToMatchup($oMatchupToCheck)
