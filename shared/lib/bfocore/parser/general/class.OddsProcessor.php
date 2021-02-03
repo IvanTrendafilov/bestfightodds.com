@@ -16,22 +16,35 @@ class OddsProcessor
         $this->bookie_id = $bookie_id;
     }
 
+    /**
+     * Processes parsed sport from a bookie parser
+     * 
+     * Steps:
+     * 1. Removes any duplicate moneylines
+     * 2. Removes any duplicate props (including event props)
+     * 3. Looks up and matches all matchups
+     * 4. Looks up and matches all prop bets
+     * 4.5 PENDING: Remove prop dupes after matching
+     * 5. Updates odds in database based on matches <--- NOT DONE
+     * 6. Updates prop odds and event prop odds in database based on matches
+     * 7. (IF full run) Flags matchups for deletion that was not found in parsed feed
+     * 8. (IF full run) Flags prop odds for deletion that was not found in parsed feed
+     * 9. (IF full run) Flags event prop odds for deletion that was not found in parsed feed
+     */
     public function processParsedSport($parsed_sport, $full_run)
     {
 
         $parsed_sport = $this->removeMoneylineDupes($parsed_sport);
         $parsed_sport = $this->removePropDupes($parsed_sport);
 
-
         $matched_matchups = $this->matchMatchups($parsed_sport->getParsedMatchups());
 
         $pp = new PropParserV2($this->logger, $this->bookie_id);
         $matched_props = $pp->matchProps($parsed_sport->getFetchedProps());
 
+        //Pending: Remove prop dupes AFTER MATCH
+        //Pending: update Matchup Odds
 
-        //Remove prop dupes AFTER MATCH
-
-        //update Matchup Odds
         $pp->updateMatchedProps($matched_props);
 
         if ($full_run) //If this is a full run we will flag any matchups odds not matched for deletion
@@ -41,7 +54,6 @@ class OddsProcessor
             $this->flagEventPropOddsForDeletion($matched_props);
         }
     }
-
 
     /**
      * Runs through a set of parsed matchups and finds a matching matchup in the database for them
@@ -143,8 +155,6 @@ class OddsProcessor
             }
         }
     }
-
-
     
     /**
      * Fetches all events where the bookie has previously had event prop odds and checks if the event prop odds are now removed. If so the event prop odds will be flagged for deletion
@@ -187,9 +197,6 @@ class OddsProcessor
             }
         }
     }
-
-
-
 
     /**
      * Loops through all parsed matchups and removes any dupes
