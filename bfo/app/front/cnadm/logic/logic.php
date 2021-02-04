@@ -23,22 +23,7 @@ switch ($_GET['action'])
         checkPOSTParam('eventID');
         $oFight = new Fight(0, $_POST['fighter1NameManual'], $_POST['fighter2NameManual'], $_POST['eventID']);
         EventHandler::addNewFight($oFight);
-        define('RETURN_PAGE', 'addNewFightForm&eventID=' . $_POST['eventID']);
-        finishCall();
-        break;
-
-    case 'addMultipleFights':
-        checkPOSTParam('fights');
-        checkPOSTParam('eventID');
-        $aMatchups = explode(';', $_POST['fights']);
-        foreach ($aMatchups as $sMatchup)
-        {
-            $sTeams = explode('/', $sMatchup);
-            echo 'Adding ' . $sTeams[0] . ' vs ' . $sTeams[1] . '<br />';
-            $oFight = new Fight(0, $sTeams[0], $sTeams[1], $_POST['eventID']);
-            EventHandler::addNewFight($oFight);
-        }
-        define('RETURN_PAGE', 'addNewFightForm&eventID=' . $_POST['eventID']);
+        define('RETURN_PAGE', $_POST['returnPage']);
         finishCall();
         break;
 

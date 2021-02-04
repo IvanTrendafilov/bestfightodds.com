@@ -49,7 +49,10 @@ class AdminController
 
     public function addNewEventForm(Request $request, Response $response)
     {
+
+        $response->getBody()->write($this->plates->render('events_addnew', $view_data));
         return $response;
+
     }
 
     public function addNewFightForm(Request $request, Response $response)
@@ -64,6 +67,10 @@ class AdminController
         if (isset($args['show']) && $args['show'] == 'all')
         {
             $events = EventHandler::getAllEvents();
+        }
+        else if (isset($args['show']) && is_numeric($args['show']))
+        {
+            return $this->showEvent($request, $response, $args);    
         }
         else
         {
@@ -85,6 +92,27 @@ class AdminController
         }
 
         $response->getBody()->write($this->plates->render('events', $view_data));
+        return $response;
+    }
+
+    public function showEvent(Request $request, Response $response, array $args)
+    {
+        $events[] = EventHandler::getEvent($args['show']);
+        $view_data = ['events' => []];
+        foreach ($events as $event)
+        {
+            $fights = EventHandler::getAllFightsForEvent($event->getID(), false);
+            $event_view = [];
+            foreach ($fights as $fight)
+            {
+                $arbitrage_info = Alerter::getArbitrageInfo($fight->getID(), 100);
+                $fight_view = ['arbitrage_info' => $arbitrage_info];
+
+                $event_view[] = ['fight_obj' => $fight, 'arbitrage_info' => $arbitrage_info];
+            }
+            $view_data['events'][] = ['event_obj' => $event, 'fights' => $event_view];
+        }
+        $response->getBody()->write($this->plates->render('events_addnew', $view_data));
         return $response;
     }
 

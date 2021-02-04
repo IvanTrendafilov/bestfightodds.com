@@ -15,7 +15,7 @@
 
 <a href="/cnadm/actions">Schedule</a>&nbsp;&nbsp;&nbsp;
 <a href="index.php?p=addNewEventForm">New Event</a>&nbsp;&nbsp;&nbsp;
-<a href="index.php?p=addNewFightForm">New Fight</a>&nbsp;&nbsp;&nbsp;
+<a href="/cnadm/addNewFightForm">New Fight</a>&nbsp;&nbsp;&nbsp;
 <a href="/cnadm/events">Events overview</a> <a href="/cnadm/events/all">(all)</a>&nbsp;&nbsp;&nbsp;
 <a href="index.php?p=addFighterAltName">Altnames</a>&nbsp;&nbsp;&nbsp;
 <a href="index.php?p=addOddsManually">New odds</a>&nbsp;&nbsp;&nbsp;

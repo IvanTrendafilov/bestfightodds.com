@@ -9,6 +9,7 @@ use League\Plates\Engine;
 
 require 'vendor/autoload.php';
 require 'controller.php';
+require 'api_controller.php';
 
 
 $container = (new \DI\ContainerBuilder())
@@ -55,9 +56,10 @@ $app->get('/abc', function ($request, $response, $args)
 $app->get('/', \AdminController::class . ':home');
 
 $app->get('/manualactions', \AdminController::class . ':viewManualActions');
-$app->get('/addNewEventForm', \AdminController::class . ':addNewEventForm');
+
 $app->get('/addNewFightForm', \AdminController::class . ':addNewFightForm');
 $app->get('/events[/{show}]', \AdminController::class . ':eventsOverview'); //Almost done!
+$app->get('/addNewEventForm', \AdminController::class . ':addNewEventForm');
 $app->get('/fighters/{id}', \AdminController::class . ':viewFighter');
 $app->get('/addOddsManually', \AdminController::class . ':addOddsManually');
 $app->get('/clearOddsForMatchupAndBookie', \AdminController::class . ':clearOddsForMatchupAndBookie');
@@ -67,6 +69,10 @@ $app->get('/resetChangeNum', \AdminController::class . ':resetChangeNum');
 $app->get('/testMail', \AdminController::class . ':testMail');
 $app->get('/logs[/{logfile}]', \AdminController::class . ':viewLatestLog'); //DONE!
 $app->get('/alerts', \AdminController::class . ':viewAlerts'); //DONE!
+
+
+//API Routes
+$app->post('/api/fights', \AdminAPIController::class . ':addNewMatchup'); //DONE!
 
 
 // Run app

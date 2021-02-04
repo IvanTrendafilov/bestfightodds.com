@@ -49,19 +49,13 @@ class ParserJob
             $this->logger->info("Note: Using mock file at " . PARSE_MOCKFEEDS_DIR . "betonline.json");
             $content = ParseTools::retrievePageFromFile(PARSE_MOCKFEEDS_DIR . 'betonline.json');
         }
-        //Fetch page(s)
-        //ParseContent
+
         $parsed_sport = $this->parseContent($content);
 
-        $this->full_run = true;
+        $this->full_run = true; //TEMPORARY
 
         $op = new OddsProcessor($this->logger, BOOKIE_ID);
         $op->processParsedSport($parsed_sport, $this->full_run);
-    
-
-
-
-
     }
 
     private function parseContent($source)
@@ -152,11 +146,6 @@ class ParserJob
         } 
             
         return true;
-    }
-
-    private function checkAuthoritiveRun($a_aMetadata)
-    {
-        return $this->full_run;
     }
 }
 
