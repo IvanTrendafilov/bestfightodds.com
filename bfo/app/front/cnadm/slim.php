@@ -69,10 +69,15 @@ $app->get('/resetChangeNum', \AdminController::class . ':resetChangeNum');
 $app->get('/testMail', \AdminController::class . ':testMail');
 $app->get('/logs[/{logfile}]', \AdminController::class . ':viewLatestLog'); //DONE!
 $app->get('/alerts', \AdminController::class . ':viewAlerts'); //DONE!
+$app->get('/matchups/{id}', \AdminController::class . ':viewMatchup'); //DONE!
 
 
 //API Routes
-$app->post('/api/fights', \AdminAPIController::class . ':addNewMatchup'); //DONE!
+$app->post('/api/matchups', \AdminAPIController::class . ':addNewMatchup'); //DONE!
+$app->put('/api/matchups/{id}', \AdminAPIController::class . ':updateMatchup'); //DONE!
+$app->post('/api/events', \AdminAPIController::class . ':addNewEvent');
+
+
 
 
 // Run app

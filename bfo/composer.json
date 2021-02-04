@@ -1,6 +1,6 @@
 {
     "require": {
-        "respect/validation": "^1.0",
+        "respect/validation": "^2.1",
         "katzgrau/klogger": "dev-master",
         "facebook/php-sdk-v4": "^5.2",
         "phpmailer/phpmailer": "^6.1",

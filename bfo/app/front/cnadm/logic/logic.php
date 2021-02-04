@@ -49,13 +49,6 @@ switch ($_GET['action'])
         finishCall('Fight ' . $_GET['fightID'] . ' with all odds removed.');
         break;
 
-    case 'setFightAsMainEvent':
-        checkGETParam('fightID');
-        checkGETParam('isMain');
-        EventHandler::setFightAsMainEvent($_GET['fightID'], $_GET['isMain']);
-        finishCall();
-        break;
-
     case 'updateEvent':
         checkPOSTParam('eventID');
         checkPOSTParam('eventName');
@@ -70,14 +63,6 @@ switch ($_GET['action'])
             finishCall('Event ' . $_POST['eventID'] . ' NOT updated due to error.');
         }
         break;
-
-    case 'updateFight':
-        checkGETParam('fightID');
-        checkGETParam('eventID');
-        EventHandler::changeFight($_GET['fightID'], $_GET['eventID']);
-        finishCall('Fight ' . $_GET['fightID'] . ' updated.');
-        break;
-
 
     case 'addPropTemplate':
         checkPOSTParam('bookieID');

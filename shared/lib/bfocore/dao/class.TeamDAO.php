@@ -1,6 +1,7 @@
 <?php
 
 require_once('lib/bfocore/utils/db/class.DBTools.php');
+require_once('lib/bfocore/utils/db/class.PDOTools.php');
 require_once('lib/bfocore/general/inc.GlobalTypes.php');
 
 /**
@@ -10,7 +11,9 @@ require_once('lib/bfocore/general/inc.GlobalTypes.php');
  */
 class TeamDAO
 {
-
+    /**
+     * @deprecated Replaced by getAltNamesForTeamByID that takes ID as input not a string name
+     */
     public static function getAllAltNamesForTeam($a_sTeamName)
     {
         $aNames = array();
@@ -31,6 +34,25 @@ class TeamDAO
 
         return null;
     }
+
+    public static function getAltNamesForTeamByID($a_iTeamID)
+    {
+        $aNames = [];
+        $sQuery = "SELECT fa.altname FROM fighters_altnames fa WHERE fa.fighter_id = ?";
+        $rows = PDOTools::findMany($sQuery, [$a_iTeamID]);
+        foreach ($rows as $row)
+        {
+            $aNames[] = $row['altname'];
+        }
+
+        if (count($aNames) > 0)
+        {
+            return $aNames;
+        }
+
+        return null;
+    }
+
 
     /**
      * Gets the latest date when the fighter received an odds update

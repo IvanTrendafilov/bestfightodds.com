@@ -16,7 +16,7 @@ document.addEventListener("DOMContentLoaded", function(event) {
                 team2_name: this.form.querySelector('#team2').value
             })
         };
-        fetch('/cnadm/api/fights', opts).then(function (response) {
+        fetch('/cnadm/api/matchups', opts).then(function (response) {
             return response.json();
         })
         .then(function (body) {
@@ -29,8 +29,6 @@ document.addEventListener("DOMContentLoaded", function(event) {
         });
     });
 });
-
-
 
 </script>
 
