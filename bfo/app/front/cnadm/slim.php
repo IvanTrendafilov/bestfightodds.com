@@ -11,7 +11,6 @@ require 'vendor/autoload.php';
 require 'controller.php';
 require 'api_controller.php';
 
-
 $container = (new \DI\ContainerBuilder())
   ->useAutowiring(true)
   ->addDefinitions([
@@ -24,39 +23,11 @@ $container = (new \DI\ContainerBuilder())
 AppFactory::setContainer($container);
 $app = AppFactory::create();
 
-
-// Define named route
-/*$app->get('/hello/{name}', function ($request, $response, $args) {
-    return $this->get('view')->render($response, 'profile.html', [
-        'name' => $args['name']
-    ]);
-})->setName('profile');
-
-// Render from string
-$app->get('/hi/{name}', function ($request, $response, $args) {
-    $str = $this->get('view')->fetchFromString(
-        '<p>Hi, my name is {{ name }}.</p>',
-        [
-            'name' => $args['name']
-        ]
-    );
-    $response->getBody()->write($str);
-    return $response;
-});*/
-
-
-//Routes
 $app->setBasePath('/cnadm');
-// Render from string
-$app->get('/abc', function ($request, $response, $args) 
-{
-    echo $this->get('view')->render('home', ['name' => 'Jonathan']);
-    return $response;
-});
+
+//Page routes
 $app->get('/', \AdminController::class . ':home');
-
 $app->get('/manualactions', \AdminController::class . ':viewManualActions');
-
 $app->get('/addNewFightForm', \AdminController::class . ':addNewFightForm');
 $app->get('/events[/{show}]', \AdminController::class . ':eventsOverview'); //Almost done!
 $app->get('/addNewEventForm', \AdminController::class . ':addNewEventForm');
@@ -70,15 +41,11 @@ $app->get('/testMail', \AdminController::class . ':testMail');
 $app->get('/logs[/{logfile}]', \AdminController::class . ':viewLatestLog'); //DONE!
 $app->get('/alerts', \AdminController::class . ':viewAlerts'); //DONE!
 $app->get('/matchups/{id}', \AdminController::class . ':viewMatchup'); //DONE!
-
+$app->get('/propcorrelation', \AdminController::class . ':addNewPropCorrelation');
 
 //API Routes
 $app->post('/api/matchups', \AdminAPIController::class . ':addNewMatchup'); //DONE!
 $app->put('/api/matchups/{id}', \AdminAPIController::class . ':updateMatchup'); //DONE!
 $app->post('/api/events', \AdminAPIController::class . ':addNewEvent');
 
-
-
-
-// Run app
 $app->run();

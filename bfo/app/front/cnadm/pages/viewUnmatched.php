@@ -62,7 +62,7 @@ foreach($aUnmatchedCol as $aUnmatched)
   	}
   	else if ($aUnmatched['type'] == 1)
   	{
-  		$sPropsMatchup .= '<tr><td>' . $sModifiedDate . '</td><td><b>' . $sBookie . '</b></td><td>' . $aUnmatched['matchup'] . '</td><td>[<a href="?p=addManualPropCorrelation&inBookieID=' . $aUnmatched['bookie_id'] . '&inCorrelation=' . $aUnmatched['matchup'] . '">link manually</a>]</td></tr>';		
+  		$sPropsMatchup .= '<tr><td>' . $sModifiedDate . '</td><td><b>' . $sBookie . '</b></td><td>' . $aUnmatched['matchup'] . '</td><td>[<a href="/cnadm/propcorrelation/&bookie_id=' . $aUnmatched['bookie_id'] . '&input_prop=' . $aUnmatched['matchup'] . '">link manually</a>]</td></tr>';		
   	}
   	else if ($aUnmatched['type'] == 2)
   	{

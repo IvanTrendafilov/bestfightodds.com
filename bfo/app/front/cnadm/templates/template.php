@@ -14,10 +14,9 @@
 <h1 style="">Admin</h1></a>
 
 <a href="/cnadm/actions">Schedule</a>&nbsp;&nbsp;&nbsp;
-<a href="index.php?p=addNewEventForm">New Event</a>&nbsp;&nbsp;&nbsp;
+<a href="/cnadm/events">New Event</a>&nbsp;&nbsp;&nbsp;
 <a href="/cnadm/addNewFightForm">New Fight</a>&nbsp;&nbsp;&nbsp;
 <a href="/cnadm/events">Events overview</a> <a href="/cnadm/events/all">(all)</a>&nbsp;&nbsp;&nbsp;
-<a href="index.php?p=addFighterAltName">Altnames</a>&nbsp;&nbsp;&nbsp;
 <a href="index.php?p=addOddsManually">New odds</a>&nbsp;&nbsp;&nbsp;
 <a href="index.php?p=clearOddsForMatchupAndBookie">Delete odds</a><br />
 <a href="index.php?p=addNewPropTemplate">New prop template</a>&nbsp;&nbsp;&nbsp;

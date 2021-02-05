@@ -37,6 +37,7 @@ class AdminController
 
     public function viewManualActions(Request $request, Response $response)
     {
+        /*
         $aManualActions = ScheduleHandler::getAllManualActions();
         $iCounter = 0;
 
@@ -148,6 +149,7 @@ class AdminController
                  echo '</td></tr>';
             }
         }
+        */
 
         return $response;
     }
@@ -326,5 +328,27 @@ class AdminController
         $response->getBody()->write($this->plates->render('matchup', $view_data));
         return $response;
     }
+
+    public function addNewPropCorrelation(Request $request, Response $response, array $args)
+    {
+        $view_data['input_prop'] = $request()->get('input_prop');
+        $view_data['bookie_id'] = $request()->get('bookie_id');
+
+        $events = EventHandler::getAllUpcomingEvents();
+        foreach ($events as $event)
+        {
+            $matchups = EventHandler::getAllFightsForEvent($event->getID(), false);
+            $event_view = [];
+            foreach ($matchups as $matchup)
+            {
+                $event_view[] = ['matchup_obj' => $matchup];
+            }
+            $view_data['events'][] = ['event_obj' => $event, 'matchups' => $event_view];
+        }
+        $response->getBody()->write($this->plates->render('propcorrelation', $view_data));
+        return $response;
+    }
+
+    
 
 }
