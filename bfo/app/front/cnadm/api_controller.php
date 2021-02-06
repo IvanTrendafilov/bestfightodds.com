@@ -165,7 +165,7 @@ class AdminAPIController
         $return_data = [];
         $return_data['error'] = false;
 
-        if (v::intType()->validate($data->bookie_id))
+        if (v::intType()->validate(@$data->bookie_id))
         {
             //Reset specific
             if (BookieHandler::resetChangeNum($data->bookie_id))

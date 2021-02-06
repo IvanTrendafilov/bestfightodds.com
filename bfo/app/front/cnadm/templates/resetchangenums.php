@@ -1,6 +1,7 @@
 <?php $this->layout('template', ['title' => 'Admin']) ?>
 
 <script>
+document.addEventListener("DOMContentLoaded", function(event) { 
     document.querySelectorAll('.reset-changenum-button').forEach(item => {
         item.addEventListener('click', e => {
             e.preventDefault();
@@ -10,7 +11,7 @@
                 'Content-type': 'application/json; charset=UTF-8'
             },
             body: JSON.stringify({
-                bookie_id: this.dataset.bookieid
+                bookie_id: e.target.dataset.bookieid
             })
         };
         fetch('/cnadm/api/resetchangenums', opts).then(function (response) {
@@ -21,18 +22,20 @@
                 alert(body.msg);
             }
             else {
-				alert('ok!');
                 location.reload();
             }
-        });
-    });
+        	
+    		});
+		});
+	});
 });
+
 </script>
 
 <?=date('H:i:s')?>
 <br><br>
 
-All <a href="/cnadm/api/resetchangenums" class="reset-changenum-button">Reset</a><br><br>
+All <a href="#" class="reset-changenum-button">Reset</a><br><br>
 <br><br>
 
 <?php foreach ($bookies as $bookie_id => $bookie_name): ?>
