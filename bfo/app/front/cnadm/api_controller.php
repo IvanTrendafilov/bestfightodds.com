@@ -158,6 +158,46 @@ class AdminAPIController
         return $this->returnJson($response);
     }
 
+    public function resetChangeNum(Request $request, Response $response)
+    {
+        $json = $request->getBody();
+        $data = json_decode($json, false);
+        $return_data = [];
+        $return_data['error'] = false;
+
+        if (v::intType()->validate($data->bookie_id))
+        {
+            //Reset specific
+            if (BookieHandler::resetChangeNum($data->bookie_id))
+            {
+                $return_data['msg'] = 'Successfully reset changenum for ' . $data->bookie_id;
+            }
+            else
+            {
+                $response->withStatus(500);
+                $return_data['msg'] = 'Failed to reset changenum for parser ' . $data->bookie_id;
+                $return_data['error'] = true;
+            }
+        }
+        else
+        {
+            //Reset all
+            if (BookieHandler::resetAllChangeNums())
+            {
+                $return_data['msg'] = 'Successfully reset all changenums';
+            }
+            else
+            {
+                $response->withStatus(500);
+                $return_data['msg'] = 'Failed to reset all changenums';
+                $return_data['error'] = true;
+            }
+        }
+
+        $response->getBody()->write(json_encode($return_data));
+        return $this->returnJson($response);
+    }
+
     private function returnJson($response)
     {
         return $response->withHeader('Content-Type', 'application/json');

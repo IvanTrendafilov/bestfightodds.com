@@ -21,7 +21,7 @@
               <?php
             }
           ?>
-    <a href="https://www.proboxingodds.com" target="_blank" rel="noopener">Boxing Odds</a><span class="menu-seperator">|</span><a href="/terms">Terms of service</a><span class="menu-seperator">|</span><a href="#">18+</a><span class="menu-seperator">|</span><a href="https://www.begambleaware.org/">BeGambleAware</a><span class="menu-seperator">|</span><a href="mailto:info1@bestfightodds.com">Contact</a><span class="menu-seperator">|</span><a href="mailto:info1@bestfightodds.com">&copy; 2019</a>
+    <a href="https://www.proboxingodds.com" target="_blank" rel="noopener">Boxing Odds</a><span class="menu-seperator">|</span><a href="/terms">Terms of service</a><span class="menu-seperator">|</span><a href="#">18+</a><span class="menu-seperator">|</span><a href="https://www.begambleaware.org/">BeGambleAware</a><span class="menu-seperator">|</span><a href="mailto:info1@bestfightodds.com">Contact</a><span class="menu-seperator">|</span><a href="mailto:info1@bestfightodds.com">&copy; <?=date('Y')?></a>
 </div>
 
 <div id="chart-window" class="popup-window"><div class="popup-header" id="chart-header"><div></div><a href="#" class="cd-popup-close">&#10005;</a></div><div id="chart-area"></div><a href="#" target="_blank" rel="noopener"><div id="chart-link" class="button">Bet this line at bookie</div></a><div id="chart-disc" style="display: none; color: #333">*Currently this Sportsbook does not accept players that reside in the US. 18+ Gamble Responsibly</div></div>
@@ -50,7 +50,7 @@
 <div id="bookie-settings-window" class="popup-window"><div class="popup-header">Bookie display settings <a href="#" class="cd-popup-close">&#10005;</a></div><div id="bookie-settings-area"></div></div>
 
 <?php
-//Disable if running locally
+//Disable Google Analytics if running locally
 if ($_SERVER['SERVER_ADDR'] != '127.0.0.1')
 {
     ?>

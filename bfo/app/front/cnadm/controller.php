@@ -31,7 +31,10 @@ class AdminController
 
     public function home(Request $request, Response $response)
     {
-        $response->getBody()->write($this->plates->render('home'));
+        $view_data = [];
+        $view_data['runstatus'] = BookieHandler::getAllRunStatuses();
+
+        $response->getBody()->write($this->plates->render('home', $view_data));
         return $response;
     }
 
@@ -266,11 +269,6 @@ class AdminController
         return $response;
     }
 
-    public function resetChangeNum(Request $request, Response $response)
-    {
-        return $response;
-    }
-
     public function testMail(Request $request, Response $response)
     {
         return $response;
@@ -348,7 +346,25 @@ class AdminController
         $response->getBody()->write($this->plates->render('propcorrelation', $view_data));
         return $response;
     }
-
-    
+   
+    public function resetChangeNums(Request $request, Response $response, array $args)
+    {
+        $view_data = [];
+        $bookies = BookieHandler::getAllBookies();
+        foreach ($bookies as $bookie)
+        {
+            $parsers = BookieHandler::getParsers($bookie->getID());
+            foreach ($parsers as $parser)
+            {
+                if ($parser->hasChangenumInUse())
+                {
+                    //Note: We are currently clearing changenums for all parsers at a specific bookie. Maybe extend this to be able to reset for a single parser instead?
+                    $view_data['bookies'][$bookie->getID()] = $bookie->getName();
+                }
+            }
+        }
+        $response->getBody()->write($this->plates->render('resetchangenums', $view_data));
+        return $response;
+    }
 
 }

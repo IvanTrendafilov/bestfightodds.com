@@ -6,7 +6,7 @@ require_once('lib/bfocore/general/class.BookieHandler.php');
 
 $query = 'SELECT bookie_id, MAX(date), AVG(matched_matchups) as average_matched FROM logs_parseruns WHERE date >= NOW() - INTERVAL 1 DAY GROUP BY bookie_id;';
 
-$rows = PDOTools::findMany($query);
+	$rows = PDOTools::findMany($query);
 
 	echo '<table><b>Average matched in the last 24 hours:</b>: <br /><div style="font-size: 12px; display: inline"><tr>';
 	$count = 0;

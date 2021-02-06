@@ -202,6 +202,15 @@ class BookieDAO
         DBTools::doParamQuery($sQuery, $aParams);
         return (DBTools::getAffectedRows() > 0 ? true : false);
     }
+
+    public static function getAllRunStatuses()
+    {
+        $sQuery = 'SELECT b.name, lp.bookie_id, MAX(lp.date), AVG(lp.matched_matchups) as average_matched 
+                    FROM logs_parseruns lp INNER JOIN bookies b  on lp.bookie_id = b.id 
+                    WHERE lp.date >= NOW() - INTERVAL 1 DAY 
+                    GROUP BY lp.bookie_id;';
+	    return PDOTools::findMany($sQuery);
+    }
 }
 
 ?>

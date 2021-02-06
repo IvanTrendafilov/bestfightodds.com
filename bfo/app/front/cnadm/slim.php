@@ -36,7 +36,7 @@ $app->get('/addOddsManually', \AdminController::class . ':addOddsManually');
 $app->get('/clearOddsForMatchupAndBookie', \AdminController::class . ':clearOddsForMatchupAndBookie');
 $app->get('/addNewPropTemplate', \AdminController::class . ':addNewPropTemplate');
 $app->get('/proptemplates', \AdminController::class . ':viewPropTemplates'); //DONE!
-$app->get('/resetChangeNum', \AdminController::class . ':resetChangeNum');
+$app->get('/resetchangenums', \AdminController::class . ':resetChangeNums');
 $app->get('/testMail', \AdminController::class . ':testMail');
 $app->get('/logs[/{logfile}]', \AdminController::class . ':viewLatestLog'); //DONE!
 $app->get('/alerts', \AdminController::class . ':viewAlerts'); //DONE!
@@ -47,5 +47,6 @@ $app->get('/propcorrelation', \AdminController::class . ':addNewPropCorrelation'
 $app->post('/api/matchups', \AdminAPIController::class . ':addNewMatchup'); //DONE!
 $app->put('/api/matchups/{id}', \AdminAPIController::class . ':updateMatchup'); //DONE!
 $app->post('/api/events', \AdminAPIController::class . ':addNewEvent');
+$app->post('/api/resetchangenums', \AdminAPIController::class . ':resetChangeNum');
 
 $app->run();

@@ -78,6 +78,13 @@ class BookieHandler
         }
         return BookieDAO::deleteTemplate($a_iID);
     }
+
+
+    public static function getAllRunStatuses()
+    {
+        return BookieDAO::getAllRunStatuses();
+    }
+
 }
 
 ?>
