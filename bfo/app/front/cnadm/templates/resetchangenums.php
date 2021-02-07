@@ -35,12 +35,12 @@ document.addEventListener("DOMContentLoaded", function(event) {
 <?=date('H:i:s')?>
 <br><br>
 
-All <a href="#" class="reset-changenum-button">Reset</a><br><br>
-<br><br>
+All <a href="#" class="reset-changenum-button">Reset</a><br>
+<br>
 
 <?php foreach ($bookies as $bookie_id => $bookie_name): ?>
 
 	<?=$bookie_name?> 
-	<a href="#" class="reset-changenum-button" data-bookieid="<?=$bookie_id?>">Reset</a><br><br>
+	<a href="#" class="reset-changenum-button" data-bookieid="<?=$bookie_id?>">Reset</a><br>
 
 <?php endforeach ?>

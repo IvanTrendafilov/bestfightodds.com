@@ -11,6 +11,14 @@ table.genericTable {
 	font-size: 12px;
 }
 
+table.odds-table {
+	border: 1px solid #000;
+}
+
+table.odds-table tr {
+	border-top: 1px solid #000;
+}
+
 table.genericTable tr td {
 	border-bottom: 2px solid #cccccc;
 	padding-left: 10px;

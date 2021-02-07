@@ -26,11 +26,11 @@ $app = AppFactory::create();
 $app->setBasePath('/cnadm');
 
 //Page routes
-$app->get('/', \AdminController::class . ':home');
+$app->get('[/]', \AdminController::class . ':home');
 $app->get('/manualactions', \AdminController::class . ':viewManualActions');
-$app->get('/addNewFightForm', \AdminController::class . ':addNewFightForm');
+$app->get('/newmatchup', \AdminController::class . ':createMatchup');
 $app->get('/events[/{show}]', \AdminController::class . ':eventsOverview'); //Almost done!
-$app->get('/addNewEventForm', \AdminController::class . ':addNewEventForm');
+$app->get('/newevent', \AdminController::class . ':createEvent');
 $app->get('/fighters/{id}', \AdminController::class . ':viewFighter');
 $app->get('/addOddsManually', \AdminController::class . ':addOddsManually');
 $app->get('/clearOddsForMatchupAndBookie', \AdminController::class . ':clearOddsForMatchupAndBookie');
@@ -42,11 +42,14 @@ $app->get('/logs[/{logfile}]', \AdminController::class . ':viewLatestLog'); //DO
 $app->get('/alerts', \AdminController::class . ':viewAlerts'); //DONE!
 $app->get('/matchups/{id}', \AdminController::class . ':viewMatchup'); //DONE!
 $app->get('/propcorrelation', \AdminController::class . ':addNewPropCorrelation');
+$app->get('/viewunmatched', \AdminController::class . ':viewUnmatched');
+$app->get('/odds', \AdminController::class . ':oddsOverview');
 
 //API Routes
-$app->post('/api/matchups', \AdminAPIController::class . ':addNewMatchup'); //DONE!
+$app->post('/api/matchups', \AdminAPIController::class . ':createMatchup'); //DONE!
 $app->put('/api/matchups/{id}', \AdminAPIController::class . ':updateMatchup'); //DONE!
-$app->post('/api/events', \AdminAPIController::class . ':addNewEvent');
+$app->delete('/api/matchups/{id}', \AdminAPIController::class . ':deleteMatchup'); //DONE!
+$app->post('/api/events', \AdminAPIController::class . ':createEvent');
 $app->post('/api/resetchangenums', \AdminAPIController::class . ':resetChangeNum');
 
 $app->run();

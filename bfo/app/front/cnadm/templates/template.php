@@ -6,6 +6,7 @@
 <script src="/cnadm/js/jquery-1.12.4.min.js" language="JavaScript" type="text/javascript"></script>
 <script src="/cnadm/js/jquery.autocomplete.min.js" language="JavaScript" type="text/javascript"></script>
 <script src="/cnadm/js/admin-main.js" language="JavaScript" type="text/javascript"></script>
+<script src="/cnadm/js/admin.js" language="JavaScript" type="text/javascript"></script>
 <link rel="stylesheet" type="text/css" href="/cnadm/css/stylesheets.php" />
 </head>
 <body>
@@ -15,7 +16,7 @@
 
 <a href="/cnadm/actions">Schedule</a>&nbsp;&nbsp;&nbsp;
 <a href="/cnadm/events">New Event</a>&nbsp;&nbsp;&nbsp;
-<a href="/cnadm/addNewFightForm">New Fight</a>&nbsp;&nbsp;&nbsp;
+<a href="/cnadm/newmatchup">New Fight</a>&nbsp;&nbsp;&nbsp;
 <a href="/cnadm/events">Events overview</a> <a href="/cnadm/events/all">(all)</a>&nbsp;&nbsp;&nbsp;
 <a href="index.php?p=addOddsManually">New odds</a>&nbsp;&nbsp;&nbsp;
 <a href="index.php?p=clearOddsForMatchupAndBookie">Delete odds</a><br />

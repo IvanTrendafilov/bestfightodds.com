@@ -36,7 +36,7 @@ class AdminAPIController
      * (int) team1
      * (int) team2
      */
-    public function addNewMatchup(Request $request, Response $response)
+    public function createMatchup(Request $request, Response $response)
     {
         $json = $request->getBody();
         $data = json_decode($json, false);
@@ -123,7 +123,60 @@ class AdminAPIController
         return $this->returnJson($response);
     }
 
-    public function addNewEvent(Request $request, Response $response)
+    public function deleteMatchup(Request $request, Response $response)
+    {
+        $json = $request->getBody();
+        $data = json_decode($json, false);
+        $return_data = [];
+        $return_data['error'] = false;
+
+        if (!isset($data->matchup_id) 
+            || (int) $data->matchup_id <= 0)
+        {
+            $response->withStatus(422);
+            $return_data['msg'] = 'Missing parameters';
+            $return_data['error'] = true;
+        }
+        else
+        {
+            /*if (isset($data->is_main_event) && is_bool(boolval($data->is_main_event)))
+            {
+                //Flip main even status
+                if (EventHandler::setFightAsMainEvent($data->matchup_id, $data->is_main_event))
+                {
+                    $return_data['msg'] = 'Successfully switched matchup to main event';
+                    $return_data['matchup_id'] = $data->matchup_id;
+                    $return_data['is_main_event'] = $data->is_main_event;
+                }
+                else
+                {
+                    $response->withStatus(500);
+                    $return_data['msg'] = 'Error updating matchup';
+                    $return_data['error'] = true;
+                }
+            }
+            else if (isset($data->event_id))
+            {
+                //Update matchup event
+                if (EventHandler::changeFight($data->matchup_id, $data->event_id))
+                {
+                    $return_data['msg'] = 'Successfully updated';
+                    $return_data['matchup_id'] = $data->matchup_id;
+                }
+                else
+                {
+                    $response->withStatus(500);
+                    $return_data['msg'] = 'Error updating matchup';
+                    $return_data['error'] = true;
+                }
+            }*/
+        }
+
+        $response->getBody()->write(json_encode($return_data));
+        return $this->returnJson($response);
+    }
+
+    public function createEvent(Request $request, Response $response)
     {
         $json = $request->getBody();
         $data = json_decode($json, false);

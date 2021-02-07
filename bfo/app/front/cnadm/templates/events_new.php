@@ -3,7 +3,7 @@
 <script>
 
 document.addEventListener("DOMContentLoaded", function(event) { 
-    document.getElementById('add-button').addEventListener('click', function(e) {
+    document.getElementById('create-matchup-button').addEventListener('click', function(e) {
         e.preventDefault();
         var opts = {
             method: 'POST',      
@@ -41,7 +41,7 @@ document.addEventListener("DOMContentLoaded", function(event) {
     <table class="eventsOverview">
     <tr style="background-color: #dddddd; ">
         <td class="fight" colspan="2"><input type="text" id="team1" /> <span style="color: #777777">vs</span> <input type="text" id="team2" /></td>
-        <td colspan="2" style="text-align: center;"><input id="add-button" type="submit" value="Add" /></td>
+        <td colspan="2" style="text-align: center;"><input id="create-matchup-button" type="submit" value="Add" /></td>
     </tr>
 
 </table>            

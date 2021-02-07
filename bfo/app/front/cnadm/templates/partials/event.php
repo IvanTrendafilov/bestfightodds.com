@@ -33,13 +33,12 @@ document.addEventListener("DOMContentLoaded", function(event) {
         item.addEventListener('click', e => {
             e.preventDefault();
             var opts = {
-                method: 'PUT',
+                method: 'DELETE',
                 headers: {
                     'Content-type': 'application/json; charset=UTF-8'
                 },
                 body: JSON.stringify({
                     matchup_id: e.target.dataset.matchupid,
-                    is_main_event: e.target.dataset.mainevent,
                 })
             };
             fetch('/cnadm/api/matchups/' + e.target.dataset.matchupid, opts).then(function (response) {

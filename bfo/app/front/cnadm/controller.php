@@ -32,7 +32,34 @@ class AdminController
     public function home(Request $request, Response $response)
     {
         $view_data = [];
+
+        //Get alerts data
+        $view_data['alertcount'] = Alerter::getAlertCount();
+
+        //Get run status data
         $view_data['runstatus'] = BookieHandler::getAllRunStatuses();
+
+        //Get unmatched data
+        $unmatched_col = EventHandler::getUnmatched(1500);
+        foreach ($unmatched_col as $key => $unmatched)
+        {
+
+            $split = explode(' vs ', $unmatched['matchup']);
+            $unmatched_col[$key]['view_indata1'] = $split[0];
+            $unmatched_col[$key]['view_indata2'] = $split[1];
+            if (isset($aUnmatched['metadata']['event_name']))
+            {
+                $event_search = EventHandler::searchEvent($event_name, true);
+            }
+            
+        }
+        $view_data['unmatched'] = $unmatched_col;
+        $bookies = BookieHandler::getAllBookies();
+        $view_data['bookies'] = [];
+        foreach ($bookies as $bookie)
+        {
+            $view_data['bookies'][$bookie->getID()] = $bookie->getName();
+        }
 
         $response->getBody()->write($this->plates->render('home', $view_data));
         return $response;
@@ -157,16 +184,22 @@ class AdminController
         return $response;
     }
 
-    public function addNewEventForm(Request $request, Response $response)
+    public function createEvent(Request $request, Response $response)
     {
 
-        $response->getBody()->write($this->plates->render('events_addnew', $view_data));
+        $response->getBody()->write($this->plates->render('events_new', $view_data));
         return $response;
 
     }
 
-    public function addNewFightForm(Request $request, Response $response)
+    public function createMatchup(Request $request, Response $response)
     {
+        $view_data = [];
+        $view_data['inteam1'] = $request->getQueryParams()['inteam1'] ?? '';
+        $view_data['inteam2'] = $request->getQueryParams()['inteam2'] ?? '';
+        $view_data['events'] = EventHandler::getAllUpcomingEvents();
+        
+        $response->getBody()->write($this->plates->render('matchup_new', $view_data));
         return $response;
     }
 
@@ -222,7 +255,7 @@ class AdminController
             }
             $view_data['events'][] = ['event_obj' => $event, 'fights' => $event_view];
         }
-        $response->getBody()->write($this->plates->render('events_addnew', $view_data));
+        $response->getBody()->write($this->plates->render('events_new', $view_data));
         return $response;
     }
 
@@ -366,5 +399,69 @@ class AdminController
         $response->getBody()->write($this->plates->render('resetchangenums', $view_data));
         return $response;
     }
+
+    public function viewUnmatched(Request $request, Response $response)
+    {
+        $view_data = [];
+
+        $unmatched_col = EventHandler::getUnmatched(1500);
+        foreach ($unmatched_col as $key => $unmatched)
+        {
+
+            $split = explode(' vs ', $unmatched['matchup']);
+            $unmatched_col[$key]['view_indata1'] = $split[0];
+            $unmatched_col[$key]['view_indata2'] = $split[1];
+            if (isset($aUnmatched['metadata']['event_name']))
+            {
+                $event_search = EventHandler::searchEvent($event_name, true);
+            }
+            
+        }
+        $view_data['unmatched'] = $unmatched_col;
+        
+        $bookies = BookieHandler::getAllBookies();
+        $view_data['bookies'] = [];
+        foreach ($bookies as $bookie)
+        {
+            $view_data['bookies'][$bookie->getID()] = $bookie->getName();
+        }
+        $response->getBody()->write($this->plates->render('viewunmatched', $view_data));
+        return $response;
+    }
+
+    public function oddsOverview(Request $request, Response $response)
+    {
+        $view_data = [];
+        $events = EventHandler::getAllUpcomingEvents();
+
+        $bookies = BookieHandler::getAllBookies();
+        $view_data['bookies'] = [];
+        foreach ($bookies as $bookie)
+        {
+            $view_data['bookies'][$bookie->getID()] = $bookie->getName();
+        }
+
+        foreach ($events as $event)
+        {
+            $matchups = EventHandler::getAllFightsForEvent($event->getID());
+            $matchups_view = [];
+            foreach ($matchups as $matchup)
+            {
+                $odds = EventHandler::getAllLatestOddsForFight($matchup->getID());
+                $odds_view = [];
+                foreach ($odds as $odds_part)
+                {
+                    $odds_view[$odds_part->getBookieID()] = $odds_part; 
+                }
+                $matchup_view[] = ['matchup_obj' => $matchup, 'odds' => $odds_view];
+            }
+            $view_data['events'][] = ['event_obj' => $event, 'matchups' => $matchup_view];
+        }
+
+        $response->getBody()->write($this->plates->render('odds', $view_data));
+        return $response;
+    }
+
+
 
 }
