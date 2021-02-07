@@ -41,7 +41,7 @@ $app->get('/testMail', \AdminController::class . ':testMail');
 $app->get('/logs[/{logfile}]', \AdminController::class . ':viewLatestLog'); //DONE!
 $app->get('/alerts', \AdminController::class . ':viewAlerts'); //DONE!
 $app->get('/matchups/{id}', \AdminController::class . ':viewMatchup'); //DONE!
-$app->get('/propcorrelation', \AdminController::class . ':addNewPropCorrelation');
+$app->get('/propcorrelation', \AdminController::class . ':createPropCorrelation');
 $app->get('/viewunmatched', \AdminController::class . ':viewUnmatched');
 $app->get('/odds', \AdminController::class . ':oddsOverview');
 

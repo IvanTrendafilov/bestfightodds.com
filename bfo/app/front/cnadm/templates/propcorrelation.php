@@ -2,15 +2,15 @@
 
 <form method="post" action="logic/logic.php?action=addManualPropCorrelation"  name="addManualPropCorrelationForm">
 Correlation: <input type="text" id="correlation" size="70" value="<?=$input_prop?>" /><br /><br />
-Bookie: <input type="text" id="bookie_id" size="70" value="<?=$bookie_id?>" />
+Bookie: <input type="hidden" id="bookie_id" size="70" value="<?=$bookie_id?>" /> <?=$bookie_id?>
 <br /><br />
 Matchup: <select id="matchup_id">
 
 <?php foreach($events as $event): ?>
 
-    <option value="-' . $oEvent->getID() . '">' . $oEvent->getName() . '</option>
+    <option value="-1"><?=$event['event_obj']->getName()?></option>
 
-    <?php foreach($events['matchups'] as $matchup): ?>
+    <?php foreach($event['matchups'] as $matchup): ?>
         
         <option value="<?=$matchup['matchup_obj']->getID()?>">&nbsp;&nbsp;&nbsp;<?=$matchup['matchup_obj']->getTeamAsString(1)?> vs <?=$matchup['matchup_obj']->getTeamAsString(2)?></option>
         

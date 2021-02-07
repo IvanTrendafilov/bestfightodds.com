@@ -10,11 +10,11 @@ document.addEventListener("DOMContentLoaded", function(event) {
                 'Content-type': 'application/json; charset=UTF-8'
             },
             body: JSON.stringify({
-                matchup_id: this.form.querySelector('#matchup_id').value,
-                event_id: this.form.querySelector('#event_id').value,
+                matchup_id: document.querySelector('#matchup_id').value,
+                event_id: document.querySelector('#event_id').value,
             })
         };
-        fetch('/cnadm/api/matchups/' + this.form.querySelector('#matchup_id').value, opts).then(function (response) {
+        fetch('/cnadm/api/matchups/' + document.querySelector('#matchup_id').value, opts).then(function (response) {
             return response.json();
         })
         .then(function (body) {
@@ -22,7 +22,8 @@ document.addEventListener("DOMContentLoaded", function(event) {
                 alert(body.msg);
             }
             else {
-                location.reload();
+                window.location.href = '/cnadm/events/' + document.querySelector('#event_id').value;
+                
             }
         });
     });

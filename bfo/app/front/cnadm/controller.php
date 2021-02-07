@@ -360,10 +360,27 @@ class AdminController
         return $response;
     }
 
-    public function addNewPropCorrelation(Request $request, Response $response, array $args)
+    public function createPropCorrelation(Request $request, Response $response, array $args)
     {
-        $view_data['input_prop'] = $request()->get('input_prop');
-        $view_data['bookie_id'] = $request()->get('bookie_id');
+
+        $view_data['input_prop'] = $request->getQueryParams()['input_prop'] ?? '';
+        $view_data['bookie_id'] = $request->getQueryParams()['bookie_id'] ?? '';
+
+
+        /*$aSplit = explode(' vs ', $request->getQueryParams()['input_prop']);
+        $oProp = new ParsedProp($aSplit[0], $aSplit[1], '123', '-123');
+        //$oPP = new PropParserV2();
+        $oTemplate = $oPP->matchParsedPropToTemplate($_GET['inBookieID'], $oProp);
+        if ($oTemplate != null)
+        {
+            $aMatchup = $oPP->matchParsedPropToMatchup($oProp, $oTemplate);
+            if ($aMatchup['matchup'] != null)
+            {
+                $iMatchedMatchup = $aMatchup['matchup'];
+                echo 'Prematched: '  . $iMatchedMatchup .  ' <br/>';
+            }
+            $_GET['inCorrelation'] = $oProp->getMainProp() == 1 ? $oProp->getTeamName(1) : $oProp->getTeamName(2);
+        }*/
 
         $events = EventHandler::getAllUpcomingEvents();
         foreach ($events as $event)
