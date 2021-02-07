@@ -30,7 +30,6 @@ $app->get('[/]', \AdminController::class . ':home');
 $app->get('/manualactions', \AdminController::class . ':viewManualActions');
 $app->get('/newmatchup', \AdminController::class . ':createMatchup');
 $app->get('/events[/{show}]', \AdminController::class . ':eventsOverview'); //Almost done!
-$app->get('/newevent', \AdminController::class . ':createEvent');
 $app->get('/fighters/{id}', \AdminController::class . ':viewFighter');
 $app->get('/addOddsManually', \AdminController::class . ':addOddsManually');
 $app->get('/clearOddsForMatchupAndBookie', \AdminController::class . ':clearOddsForMatchupAndBookie');
@@ -50,6 +49,8 @@ $app->post('/api/matchups', \AdminAPIController::class . ':createMatchup'); //DO
 $app->put('/api/matchups/{id}', \AdminAPIController::class . ':updateMatchup'); //DONE!
 $app->delete('/api/matchups/{id}', \AdminAPIController::class . ':deleteMatchup'); //DONE!
 $app->post('/api/events', \AdminAPIController::class . ':createEvent');
+$app->put('/api/events/{id}', \AdminAPIController::class . ':updateEvent'); //DONE!
 $app->post('/api/resetchangenums', \AdminAPIController::class . ':resetChangeNum');
+$app->post('/api/clearunmatched', \AdminAPIController::class . ':clearUnmatched');
 
 $app->run();

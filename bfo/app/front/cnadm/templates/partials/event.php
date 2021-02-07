@@ -10,8 +10,8 @@ document.addEventListener("DOMContentLoaded", function(event) {
                     'Content-type': 'application/json; charset=UTF-8'
                 },
                 body: JSON.stringify({
-                    matchup_id: e.target.dataset.matchupid,
-                    is_main_event: e.target.dataset.mainevent,
+                    matchup_id: parseInt(e.target.dataset.matchupid),
+                    is_main_event: parseInt(e.target.dataset.mainevent),
                 })
             };
             fetch('/cnadm/api/matchups/' + e.target.dataset.matchupid, opts).then(function (response) {
@@ -62,7 +62,7 @@ document.addEventListener("DOMContentLoaded", function(event) {
     <table class="eventsOverview">
 
    <tr>
-       <th colspan="6"><a name="event<?=$event['event_obj']->getID()?>"></a><div style="float: left; <?=($event['event_obj']->isDisplayed() ? '' : 'font-style: italic; color: #909090;')?>"><?=$event['event_obj']->getName()?> 
+       <th colspan="6"><a href="#" name="event<?=$event['event_obj']->getID()?>"></a><div style="float: left; <?=($event['event_obj']->isDisplayed() ? '' : 'font-style: italic; color: #909090;')?>"><?=$event['event_obj']->getName()?> 
        <span style="color: #777777">-</span> <?=$event['event_obj']->getDate()?> &nbsp;
        <a href="/cnadm/events/<?=$event['event_obj']->getID()?>">edit</a></div>
        <div style="float: right; padding-right: 5px;"><span style="color: #ffffff"><?=sizeof($event['fights'])?></span> <b><a href="/cnadm/events/<?=$event['event_obj']->getID()?>">add</a></b></div>

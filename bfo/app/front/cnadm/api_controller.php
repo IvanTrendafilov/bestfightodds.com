@@ -77,8 +77,7 @@ class AdminAPIController
         $return_data = [];
         $return_data['error'] = false;
 
-        if (!isset($data->matchup_id) 
-            || (int) $data->matchup_id <= 0)
+        if (!v::intType()->validate($data->matchup_id))
         {
             $response->withStatus(422);
             $return_data['msg'] = 'Missing parameters';
@@ -211,6 +210,95 @@ class AdminAPIController
         return $this->returnJson($response);
     }
 
+    public function updateEvent(Request $request, Response $response)
+    {
+        $json = $request->getBody();
+        $data = json_decode($json, false);
+        $return_data = [];
+        $return_data['error'] = false;
+
+        if (!v::intType()->validate($data->event_id) 
+            || !v::stringVal()->length(3, null)->validate($data->event_name)
+            || !v::date('Y-m-d')->validate($data->event_date)
+            || !v::boolVal()->validate($data->event_display)) 
+        {
+            $response->withStatus(422);
+            $return_data['msg'] = 'Missing/invalid parameters';
+            $return_data['error'] = true;
+        }
+        else
+        {
+            //Update matchup event
+            if (EventHandler::changeEvent($data->event_id, $data->event_name, $data->event_date, $data->event_display))
+            {
+                $return_data['msg'] = 'Successfully updated';
+                $return_data['event_id'] = $data->event_id;
+            }
+            else
+            {
+                $response->withStatus(500);
+                $return_data['msg'] = 'Error updating matchup';
+                $return_data['error'] = true;
+            }
+        }
+
+        $response->getBody()->write(json_encode($return_data));
+        return $this->returnJson($response);
+    }
+
+
+    public function updateFighter(Request $request, Response $response)
+    {
+        $json = $request->getBody();
+        $data = json_decode($json, false);
+        $return_data = [];
+        $return_data['error'] = false;
+
+        if (!v::intType()->validate($data->fighter_id))
+        {
+            $response->withStatus(422);
+            $return_data['msg'] = 'Missing/invalid parameters';
+            $return_data['error'] = true;
+        }
+        else
+        {
+            //Check for twitter handle update
+            if (v::alnum()->noWhitespace()->validate(@$data->twitter_handle))
+            {
+                if (TwitterHandler::addTwitterHandle($_POST['teamID'], $_POST['twitterHandle']))
+                {
+                    $return_data['msg'] = 'Successfully updated twitter Handle. ';
+                    $return_data['fighter_id'] = $data->fighter_id;
+                }
+                else
+                {
+                    $response->withStatus(500);
+                    $return_data['msg'] = 'Error updating twitter handle';
+                    $return_data['error'] = true;
+                }
+            }
+
+            //Check for alt name update (if so just add it to the bunch)
+            if (v::alnum()->length(5, null)->validate(@$data->alt_name))
+            {
+                if (EventHandler::addFighterAltName($_POST['fighter_id'], $_POST['alt_name']))
+                {
+                    $return_data['msg'] .= 'Successfully updated altname.';
+                    $return_data['fighter_id'] = $data->fighter_id;
+                }
+                else
+                {
+                    $response->withStatus(500);
+                    $return_data['msg'] .= 'Error updating altname';
+                    $return_data['error'] = true;
+                }
+            }
+        }
+
+        $response->getBody()->write(json_encode($return_data));
+        return $this->returnJson($response);
+    }
+
     public function resetChangeNum(Request $request, Response $response)
     {
         $json = $request->getBody();
@@ -245,6 +333,26 @@ class AdminAPIController
                 $return_data['msg'] = 'Failed to reset all changenums';
                 $return_data['error'] = true;
             }
+        }
+
+        $response->getBody()->write(json_encode($return_data));
+        return $this->returnJson($response);
+    }
+
+    public function clearUnmatched(Request $request, Response $response)
+    {
+        $return_data = [];
+        $return_data['error'] = false;
+
+        if (EventHandler::clearUnmatched())
+        {
+            $return_data['msg'] = 'Successfully cleared all unmatched';
+        }
+        else
+        {
+            $response->withStatus(500);
+            $return_data['msg'] = 'Failed to clear unmatched';
+            $return_data['error'] = true;
         }
 
         $response->getBody()->write(json_encode($return_data));

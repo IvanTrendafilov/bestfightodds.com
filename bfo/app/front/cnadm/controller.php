@@ -184,14 +184,6 @@ class AdminController
         return $response;
     }
 
-    public function createEvent(Request $request, Response $response)
-    {
-
-        $response->getBody()->write($this->plates->render('events_new', $view_data));
-        return $response;
-
-    }
-
     public function createMatchup(Request $request, Response $response)
     {
         $view_data = [];
@@ -255,7 +247,7 @@ class AdminController
             }
             $view_data['events'][] = ['event_obj' => $event, 'fights' => $event_view];
         }
-        $response->getBody()->write($this->plates->render('events_new', $view_data));
+        $response->getBody()->write($this->plates->render('event_detailed', $view_data));
         return $response;
     }
 
@@ -366,7 +358,6 @@ class AdminController
         $view_data['input_prop'] = $request->getQueryParams()['input_prop'] ?? '';
         $view_data['bookie_id'] = $request->getQueryParams()['bookie_id'] ?? '';
 
-
         /*$aSplit = explode(' vs ', $request->getQueryParams()['input_prop']);
         $oProp = new ParsedProp($aSplit[0], $aSplit[1], '123', '-123');
         //$oPP = new PropParserV2();
@@ -461,7 +452,7 @@ class AdminController
         foreach ($events as $event)
         {
             $matchups = EventHandler::getAllFightsForEvent($event->getID());
-            $matchups_view = [];
+            $matchup_view = [];
             foreach ($matchups as $matchup)
             {
                 $odds = EventHandler::getAllLatestOddsForFight($matchup->getID());

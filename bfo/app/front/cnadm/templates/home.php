@@ -1,5 +1,30 @@
 <?php $this->layout('template', ['title' => 'Admin']) ?>
 
+<script>
+document.addEventListener("DOMContentLoaded", function(event) { 
+    document.getElementById('clear-unmatched-button').addEventListener('click', function(e) {
+        e.preventDefault();
+        var opts = {
+            method: 'POST',      
+            headers: {
+                'Content-type': 'application/json; charset=UTF-8'
+            }
+        };
+        fetch('/cnadm/api/clearunmatched', opts).then(function (response) {
+            return response.json();
+        })
+        .then(function (body) {
+            if (body.error == true) {
+                alert(body.msg);
+            }
+            else {
+                location.reload();
+            }
+        });
+    });
+});
+</script>
+
 <a href="/cnadm/alerts">Alerts stored: <?=$alertcount?></a>
 
 <br><br>
@@ -16,7 +41,7 @@
 
 <br>
 
-<a href="logic/logic.php?action=clearUnmatched">Clear unmatched table</a><br /><br />
+<a href="#" id="clear-unmatched-button">Clear unmatched table</a><br /><br />
 
 <b>Matchups:</b> <br />
 <table class="genericTable">
