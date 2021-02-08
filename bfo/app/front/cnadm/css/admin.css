@@ -16,7 +16,11 @@ table.odds-table {
 }
 
 table.odds-table tr {
-	border-top: 1px solid #000;
+
+}
+
+table.odds-table tr:nth-child(4n), table.odds-table tr:nth-child(4n - 1) {
+	background-color: #c0c0c0;
 }
 
 table.odds-table td {
@@ -28,14 +32,18 @@ table.odds-table td.action-cell {
 	font-weight: bold;
 }
 
+table.odds-table td.flagged {
+	background-color: #ff6666;
+}
+
 table.odds-table td.add-odds {
 	text-align: center;
-	background-color: #009933;
+	
 }
 
 table.odds-table td.del-odds {
 	text-align: center;
-	background-color: #ff6666;
+	
 }
 
 

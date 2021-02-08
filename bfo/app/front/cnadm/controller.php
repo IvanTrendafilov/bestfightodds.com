@@ -459,12 +459,14 @@ class AdminController
                 $odds_view = [];
                 foreach ($odds as $odds_part)
                 {
-                    $odds_view[$odds_part->getBookieID()] = $odds_part; 
+                    $flagged = OddsHandler::checkIfFlagged($odds_part->getBookieID(), $odds_part->getFightID(), -1, -1, -1);
+                    $odds_view[$odds_part->getBookieID()] = ['odds_obj' => $odds_part, 'flagged' => $flagged]; 
                 }
                 $matchup_view[] = ['matchup_obj' => $matchup, 'odds' => $odds_view];
             }
             $view_data['events'][] = ['event_obj' => $event, 'matchups' => $matchup_view];
         }
+
 
         $response->getBody()->write($this->plates->render('odds', $view_data));
         return $response;

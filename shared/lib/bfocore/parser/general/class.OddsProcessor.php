@@ -42,9 +42,15 @@ class OddsProcessor
         $pp = new PropParserV2($this->logger, $this->bookie_id);
         $matched_props = $pp->matchProps($parsed_sport->getFetchedProps());
 
-        //Pending: Remove prop dupes AFTER MATCH
 
+
+
+        //Pending: Remove prop dupes AFTER MATCH
         //Pending: For Create mode, create new matchups if no match was found
+        //Pending: Remove removal flags for any matchups/orops that may have them but was now detected. Method available in OddsHandler
+
+        $this->logUnmatchedMatchups($matched_matchups);
+        $pp->logUnmatchedProps($matched_props);
 
         $this->updateMatchedMatchups($matched_matchups);
         $pp->updateMatchedProps($matched_props);
@@ -79,7 +85,7 @@ class OddsProcessor
                 $this->logger->info('Found match for ' . $parsed_matchup->getTeamName(1) . ' vs ' . $parsed_matchup->getTeamName(2));
                 $match = true;
             }
-            $matched_items[] = ['parsed_matchup' => $parsed_matchup, 'matched_matchup' => $matching_matchup, 'match_status' => ['status' => $match]];
+            $matched_items[] = ['parsed_matchup' => $parsed_matchup, 'matched_matchup' => $matching_matchup, 'match_result' => ['status' => $match]];
         }
         return $matched_items;
     }
@@ -91,7 +97,7 @@ class OddsProcessor
     {
         foreach ($matched_matchups as $matched_matchup) 
         {
-            if ($matched_matchup['match_status']['status'] == true)
+            if ($matched_matchup['match_result']['status'] == true)
             {
                 $this->updateOneMatchedMatchup($matched_matchup);
             }
@@ -119,7 +125,7 @@ class OddsProcessor
             if ($matched_matchup['parsed_matchup']->getCorrelationID() != '')
             {
                 ParseTools::saveCorrelation($matched_matchup['parsed_matchup']->getCorrelationID(), $matched_matchup['matched_matchup']->getID());
-                $this->logger->info("---------- storing correlation ID: " . $matched_matchup['parsed_matchup']->getCorrelationID());
+                $this->logger->debug("---------- storing correlation ID: " . $matched_matchup['parsed_matchup']->getCorrelationID());
             }
 
             //Store any metadata for the matchup
@@ -167,7 +173,7 @@ class OddsProcessor
                 $found = false;
                 foreach ($matched_matchups as $matched_matchup)
                 {
-                    if ($matched_matchup['match_status']['status'] == true)
+                    if ($matched_matchup['match_result']['status'] == true)
                     {
                         if ($matched_matchup['matched_matchup']->getID() == $upcoming_matchup->getID())
                         {
@@ -362,5 +368,16 @@ class OddsProcessor
         return $parsed_sport;
     }
 
+
+    private function logUnmatchedMatchups($matched_matchups)
+    {
+        foreach ($matched_matchups as $matchup)
+        {
+            if ($matchup['match_result']['status'] == false)
+            {
+                EventHandler::logUnmatched($matchup['parsed_matchup']->toString(), $this->bookie_id, 0, $matchup['parsed_matchup']->getAllMetaData());
+            }
+        }
+    }
 
 }

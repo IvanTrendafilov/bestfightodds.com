@@ -48,19 +48,16 @@ class PropParserV2
                 //Unmatched to either template, matchup or event. Log this both in log file and in database
                 switch ($match['fail_reason'])
                 {
-                    case 'no_template':
+                    case 'no_template_found':
                         $this->logger->warning('--No template found for ' . $prop->toString() . 
                         ' [<a href="?p=addNewPropTemplate&inBookieID=' . $this->bookie_id . '&inTemplate=' . $prop->getTeamName(1) . '&inNegTemplate=' . $prop->getTeamName(2) . '">add</a>]', -1);
-                        EventHandler::logUnmatched($prop->toString(), $this->bookie_id, 2);
                         break;
-                    case 'no_matchup':
-                        $this->logger->warning('---No matchup found for prop values ' . $prop->toString() . ' (Template ' . $template->getID() . ' expecting ft: ' . $template->getFieldsTypeAsExample() . ')' .
+                    case 'no_matchup_found':
+                        $this->logger->warning('---No matchup found for prop values ' . $prop->toString() . ' (Template ' . $match['template']->getID() . ' expecting ft: ' . $match['template']->getFieldsTypeAsExample() . ')' .
                         ' [<a href="?p=addManualPropCorrelation&inBookieID=' . $this->bookie_id . '&inCorrelation=' . ($prop->getMainProp() == 1 ? $prop->getTeamName(1) : $prop->getTeamName(2)) . '">link manually</a>]');
-                        EventHandler::logUnmatched($prop->toString(), $this->bookie_id, 1);
                         break;
-                    case 'no_event':
-                        $this->logger->warning('---No event found for prop values ' . $prop->toString() . ' (Template ' . $template->getID() . ' expecting ft: ' . $template->getFieldsTypeAsExample() . ')');
-                        EventHandler::logUnmatched($prop->toString(), $this->bookie_id, 1);
+                    case 'no_event_found':
+                        $this->logger->warning('---No event found for prop values ' . $prop->toString() . ' (Template ' . $match['template']->getID() . ' expecting ft: ' . $match['template']->getFieldsTypeAsExample() . ')');
                         break;
                     default:
                 }
@@ -76,7 +73,7 @@ class PropParserV2
         if (!$template)
         {
             //No matching template
-            return ['status' => 'false', 'fail_reason' => 'no_template'];
+            return ['status' => 'false', 'fail_reason' => 'no_template_found'];
         }
         BookieHandler::updateTemplateLastUsed($template->getID());
 
@@ -88,7 +85,7 @@ class PropParserV2
             if (!$event)
             {
                 //No matching event
-                return ['status' => false, 'fail_reason' => 'no_event_found'];
+                return ['status' => false, 'fail_reason' => 'no_event_found', 'template' => $template];
             }            
         }
         else
@@ -99,7 +96,7 @@ class PropParserV2
                 $matchup = $this->matchPropToMatchup($prop, $template, false); //Check with correlation ID disabled
                 if (!$matchup['matchup_id'])
                 {
-                    return ['status' => false, 'fail_reason' => 'no_matchup_found'];
+                    return ['status' => false, 'fail_reason' => 'no_matchup_found', 'template' => $template];
                 }
             }            
         }
@@ -308,7 +305,7 @@ class PropParserV2
 
 
 
-        //New Flow:
+        //TODO: New Flow to be implemented at some point:
         //1. Determine if this needs to matchup one or two names (existance of <T> in multiples or only one)
         //2. Get all name combinations
         //3. Run through all combinations and gather a list of fsim
@@ -474,7 +471,7 @@ class PropParserV2
         if (count($aPropValues) != count($aTemplateVariables))
         {
 
-            $this->logger->log('---Template variable count (' . count($aTemplateVariables) . ') does not match prop values count (' . count($aPropValues) . '). Not good, check template.', -2);
+            $this->logger->error('---Template variable count (' . count($aTemplateVariables) . ') does not match prop values count (' . count($aPropValues) . '). Not good, check template.');
             return null;
         }
 
@@ -651,60 +648,48 @@ class PropParserV2
 
     private function updateMatchedEventProp($matched_prop)
     {
-        //Find a matching event for the prop
-        $aResult = $this->matchParsedPropToEvent($a_oProp, $oTemplate);
+        $new_prop = null;
 
-        if ($aResult['event'] == null)
-        {
-            $this->logger->log('---No event found for prop values ' . $a_oProp->toString() . ' (Template ' . $oTemplate->getID() . ' expecting ft: ' . $oTemplate->getFieldsTypeAsExample() . ')' .
-                '', -1);
-            EventHandler::logUnmatched($a_oProp->toString(), $a_iBookieID, 1);
-            return false;
-        }
-        $this->logger->log('---We found a event match for prop values! (' . $aResult['event'] . ')', 2);
-
-        $oNewProp = null;
-
-        if ($oTemplate->isNegPrimary())
+        if ($matched_prop['match_result']['template']->isNegPrimary())
         {
             //Create a EventPropBet object for storage
-            $oNewProp = new EventPropBet($aResult['event'],
+            $new_prop = new EventPropBet($matched_prop['match_result']['event']['event_id'],
                             $a_iBookieID,
                             '',
                             $a_oProp->getMoneyline(($a_oProp->getMainProp() % 2) + 1),
                             '',
                             $a_oProp->getMoneyline($a_oProp->getMainProp()),
-                            $oTemplate->getPropTypeID(),
+                            $matched_prop['match_result']['template']->getPropTypeID(),
                             '');
         }
         else
         {
             //Create a EventPropBet object for storage
-            $oNewProp = new EventPropBet($aResult['event'],
+            $new_prop = new EventPropBet($matched_prop['match_result']['event']['event_id'],
                             $a_iBookieID,
                             '',
                             $a_oProp->getMoneyline($a_oProp->getMainProp()),
                             '',
                             $a_oProp->getMoneyline(($a_oProp->getMainProp() % 2) + 1),
-                            $oTemplate->getPropTypeID(),
+                            $matched_prop['match_result']['template']->getPropTypeID(),
                             '');
         }
 
         //Store prop bet if it has changed
-        if (OddsHandler::checkMatchingEventPropOdds($oNewProp))
+        if (OddsHandler::checkMatchingEventPropOdds($new_prop))
         {
-            $this->logger->log("------- nothing has changed since last event prop odds", 2);
+            $this->logger->info("------- nothing has changed since last event prop odds");
             return true;
         }
         else
         {
-            $this->logger->log("------- adding new event prop odds!", 2);
-            if (OddsHandler::addEventPropBet($oNewProp))
+            $this->logger->info("------- adding new event prop odds!");
+            if (OddsHandler::addEventPropBet($new_prop))
             {
                 return true;
             }
 
-            $this->logger->log('----Prop not stored properly: ' . var_export($oNewProp, true) . '', -2);
+            $this->logger->error('----Prop not stored properly: ' . var_export($new_prop, true) . '');
             return false;
         }
     }
@@ -764,8 +749,31 @@ class PropParserV2
             $this->logger->error('----Prop not stored properly: ' . var_export($new_prop, true) . '');
             return false;
         }
-
     }
+
+    public function logUnmatchedProps($matched_props)
+    {
+        foreach ($matched_props as $prop)
+        {
+            if ($prop['match_result']['status'] == false)
+            {
+                switch ($prop['match_result']['fail_reason'])
+                {
+                    case 'no_template_found':
+                        EventHandler::logUnmatched($prop['prop']->toString(), $this->bookie_id, 2, $prop['prop']->getAllMetaData());
+                        break;
+                    case 'no_matchup_found':
+                        EventHandler::logUnmatched($prop['prop']->toString(), $this->bookie_id, 1, $prop['prop']->getAllMetaData());
+                        break;
+                    case 'no_event_found':
+                        EventHandler::logUnmatched($prop['prop']->toString(), $this->bookie_id, 1, $prop['prop']->getAllMetaData());
+                        break;
+                    default:
+                }
+            }
+        }
+    }
+
 }
 
 ?>

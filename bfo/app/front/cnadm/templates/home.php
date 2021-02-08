@@ -53,7 +53,7 @@ document.addEventListener("DOMContentLoaded", function(event) {
 <?php endforeach ?>
 </table><br />
 
-<b>Props without templates</b>: <br />
+<b>Props without matchups</b>: <br />
 <table class="genericTable">
 <?php foreach ($unmatched as $unmatched_item): ?>
 	<?php if ($unmatched_item['type'] == 1): ?>
@@ -62,7 +62,7 @@ document.addEventListener("DOMContentLoaded", function(event) {
 <?php endforeach ?>
 </table><br />
 
-<b>Props without matchups:</b> <br />
+<b>Props without templates:</b> <br />
 <table class="genericTable">
 <?php foreach ($unmatched as $unmatched_item): ?>
 	<?php if ($unmatched_item['type'] == 2): ?>

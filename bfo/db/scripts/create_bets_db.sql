@@ -265,7 +265,7 @@ CREATE TABLE `lines_flagged` (
   `initial_flagdate` timestamp NULL DEFAULT NULL,
   `last_flagdate` timestamp NULL DEFAULT NULL,
   PRIMARY KEY (`bookie_id`,`matchup_id`,`event_id`,`proptype_id`,`team_num`)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=MyISAM DEFAULT CHARSET=latin1;
 
 
 

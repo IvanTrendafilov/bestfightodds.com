@@ -1049,6 +1049,86 @@ class OddsDAO
 		return $id;
     }
 
+    public static function checkIfFlagged($a_iBookieID, $a_iMatchupID, $a_iEventID, $a_iPropTypeID, $a_iTeamNum)
+    {
+        $sWhere = '';
+        $aParams = [$a_iBookieID];
+        if ($a_iMatchupID != null)
+        {
+            $sWhere .= ' AND matchup_id = ? ';
+            $aParams[] = $a_iMatchupID;
+        }
+        if ($a_iEventID != null)
+        {
+            $sWhere .= ' AND event_id = ? ';
+            $aParams[] = $a_iEventID;
+        }
+        if ($a_iPropTypeID != null)
+        {
+            $sWhere .= ' AND proptype_id = ? ';
+            $aParams[] = $a_iPropTypeID;
+        }
+        if ($a_iTeamNum != null)
+        {
+            $sWhere .= ' AND team_num = ? ';
+            $aParams[] = $a_iTeamNum;
+        }
+
+        $sQuery = 'SELECT * FROM lines_flagged WHERE bookie_id = ? ' . $sWhere;
+
+        $result = null;
+        try 
+		{
+			$result = PDOTools::findMany($sQuery, $aParams);
+		}
+		catch(PDOException $e)
+		{
+            throw new Exception("Unknown error " . $e->getMessage(), 10);	
+        }
+        return $result;
+        
+    }
+
+    public static function removeFlagged($a_iBookieID, $a_iMatchupID, $a_iEventID, $a_iPropTypeID, $a_iTeamNum)
+    {
+        $sWhere = '';
+        $aParams = [$a_iBookieID];
+        if ($a_iMatchupID != null)
+        {
+            $sWhere .= ' AND matchup_id = ? ';
+            $aParams[] = $a_iMatchupID;
+        }
+        if ($a_iEventID != null)
+        {
+            $sWhere .= ' AND event_id = ? ';
+            $aParams[] = $a_iEventID;
+        }
+        if ($a_iPropTypeID != null)
+        {
+            $sWhere .= ' AND proptype_id = ? ';
+            $aParams[] = $a_iPropTypeID;
+        }
+        if ($a_iTeamNum != null)
+        {
+            $sWhere .= ' AND team_num = ? ';
+            $aParams[] = $a_iTeamNum;
+        }
+
+        $sQuery = 'DELETE FROM lines_flagged WHERE bookie_id = ? ' . $sWhere;
+
+        $result = null;
+        try 
+		{
+			$result = PDOTools::delete($sQuery, $aParams);
+		}
+		catch(PDOException $e)
+		{
+            throw new Exception("Unknown error " . $e->getMessage(), 10);	
+        }
+        return $result;
+        
+    }
+
 }
 
 ?>

@@ -386,11 +386,31 @@ class OddsHandler
     public static function flagEventPropOddsForDeletion($a_iBookieID, $a_iEventID, $a_iPropTypeID, $a_iTeamNum)
     {
         if (!is_numeric($a_iEventID) || !is_numeric($a_iBookieID) || !is_numeric($a_iPropTypeID) || !is_numeric($a_iTeamNum)
-            || $a_iEventID <= 0 || $a_iBookieID <= 0 || $a_iPropTypeID <= 0 || $a_iTeamNum <= 0)
+            || $a_iEventID <= 0 || $a_iBookieID <= 0 || $a_iPropTypeID <= 0 || $a_iTeamNum < 0)
         {
             return false;
         }
         return OddsDAO::flagOddsForDeletion($a_iBookieID, null, $a_iEventID, $a_iPropTypeID, $a_iTeamNum);
+    }
+
+    public static function checkIfFlagged($a_iBookieID, $a_iMatchupID, $a_iEventID, $a_iPropTypeID, $a_iTeamNum)
+    {
+        if (!is_numeric($a_iMatchupID) || !is_numeric($a_iEventID) || !is_numeric($a_iBookieID) || !is_numeric($a_iPropTypeID) || !is_numeric($a_iTeamNum)
+            || $a_iBookieID <= 0)
+        {
+                return false;
+        }
+        return OddsDAO::checkIfFlagged($a_iBookieID, $a_iMatchupID, $a_iEventID, $a_iPropTypeID, $a_iTeamNum);
+    }
+
+    public static function removeFlagged($a_iBookieID, $a_iMatchupID, $a_iEventID, $a_iPropTypeID, $a_iTeamNum)
+    {
+        if (!is_numeric($a_iMatchupID) || !is_numeric($a_iEventID) || !is_numeric($a_iBookieID) || !is_numeric($a_iPropTypeID) || !is_numeric($a_iTeamNum)
+        || $a_iBookieID <= 0)
+        {
+                return false;
+        }
+        return OddsDAO::removeFlagged($a_iBookieID, $a_iMatchupID, $a_iEventID, $a_iPropTypeID, $a_iTeamNum);
     }
 }
 
