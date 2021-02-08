@@ -5,62 +5,6 @@
             "sportType": "Martial Arts        ",
             "scheduleText": "UFC 258                                                     ",
             "league": "MMA                           ",
-            "gameId": "489622773",
-            "participants": [
-                {
-                    "participantName": "Gilbert Burns",
-                    "rotNum": 24001,
-                    "visitingHomeDraw": "Visiting",
-                    "odds": {
-                        "moneyLine": "220",
-                        "teamTotal": {
-                            "totalPoints": "",
-                            "overAdjust": "",
-                            "underAdjust": ""
-                        }
-                    },
-                    "pitcher": null
-                },
-                {
-                    "participantName": "Kamaru Usman",
-                    "rotNum": 24002,
-                    "visitingHomeDraw": "Home",
-                    "odds": {
-                        "moneyLine": "-260",
-                        "teamTotal": {
-                            "totalPoints": "",
-                            "overAdjust": "",
-                            "underAdjust": ""
-                        }
-                    },
-                    "pitcher": null
-                }
-            ],
-            "drawRotNum": "",
-            "drawMoneyLine": "",
-            "drawTitle": "",
-            "period": {
-                "peroidDescription": "Game",
-                "periodCutOffDatetimeGTM": "2021-02-13T22:00:00",
-                "periodStatus": "I",
-                "spread": {
-                    "spreadVisiting": "",
-                    "spreadAdjustVisiting": "",
-                    "spreadHome": "",
-                    "spreadAdjustHome": ""
-                },
-                "total": {
-                    "totalPoints": "4.5",
-                    "overAdjust": "-130",
-                    "underAdjust": "100"
-                }
-            }
-        },
-        {
-            "event_DateTimeGMT": "2021-02-13T22:00:01",
-            "sportType": "Martial Arts        ",
-            "scheduleText": "UFC 258                                                     ",
-            "league": "MMA                           ",
             "gameId": "489627576",
             "participants": [
                 {

@@ -43,8 +43,10 @@ class OddsProcessor
         $matched_props = $pp->matchProps($parsed_sport->getFetchedProps());
 
         //Pending: Remove prop dupes AFTER MATCH
-        //Pending: update Matchup Odds
 
+        //Pending: For Create mode, create new matchups if no match was found
+
+        $this->updateMatchedMatchups($matched_matchups);
         $pp->updateMatchedProps($matched_props);
 
         if ($full_run) //If this is a full run we will flag any matchups odds not matched for deletion
@@ -80,6 +82,75 @@ class OddsProcessor
             $matched_items[] = ['parsed_matchup' => $parsed_matchup, 'matched_matchup' => $matching_matchup, 'match_status' => ['status' => $match]];
         }
         return $matched_items;
+    }
+
+    /**
+     * Goes through matched odds for matchups and updates them in the database if anything has changed (through updateOneMatchedMatchup() function)
+     */
+    private function updateMatchedMatchups($matched_matchups)
+    {
+        foreach ($matched_matchups as $matched_matchup) 
+        {
+            if ($matched_matchup['match_status']['status'] == true)
+            {
+                $this->updateOneMatchedMatchup($matched_matchup);
+            }
+        }
+    }
+
+    /**
+     * Takes one matched odds for matchups and updates them in the database if anything has changed
+     * In addition to this, it will also store correlation ID for this matchup (if any other odds will require it) as well as store any meta data for the matchup
+     */
+    private function updateOneMatchedMatchup($matched_matchup)
+    {
+        $event = EventHandler::getEvent($matched_matchup['matched_matchup']->getEventID(), true);
+        $temp_matchup = new Fight(0, $matched_matchup['parsed_matchup']->getTeamName(1), $matched_matchup['parsed_matchup']->getTeamName(2), -1);
+
+        if ($event != null)
+        {
+            //This routine is used to switch the order of odds in a matchup if order has changed through the use of alt names or similar
+            if (($matched_matchup['matched_matchup']->getComment() == 'switched' || $temp_matchup->hasOrderChanged()) && !$matched_matchup['parsed_matchup']->isSwitchedFromOutside())
+            {
+                $matched_matchup['parsed_matchup']->switchOdds();
+            }
+
+            //If parsed matchup contains a correlation ID, we store this in the correlation table. Maybe move this out to other function?
+            if ($matched_matchup['parsed_matchup']->getCorrelationID() != '')
+            {
+                ParseTools::saveCorrelation($matched_matchup['parsed_matchup']->getCorrelationID(), $matched_matchup['matched_matchup']->getID());
+                $this->logger->info("---------- storing correlation ID: " . $matched_matchup['parsed_matchup']->getCorrelationID());
+            }
+
+            //Store any metadata for the matchup
+            $metadata = $matched_matchup['parsed_matchup']->getAllMetaData();
+            foreach ($metadata as $key => $val)
+            {
+                EventHandler::setMetaDataForMatchup($matched_matchup['matched_matchup']->getID(), $key, $val, $this->bookie_id);
+            }
+
+            if ($matched_matchup['parsed_matchup']->hasMoneyline())
+            {
+                $odds = new FightOdds($matched_matchup['matched_matchup']->getID(), $this->bookie_id, $matched_matchup['parsed_matchup']->getTeamOdds(1), $matched_matchup['parsed_matchup']->getTeamOdds(2), ParseTools::standardizeDate(date('Y-m-d')));
+
+                if (EventHandler::checkMatchingOdds($odds))
+                {
+                    $this->logger->info("------- nothing has changed since last odds");
+                }
+                else
+                {
+                    $this->logger->info("------- adding new odds!");
+                    EventHandler::addNewFightOdds($odds);
+                }
+                return true;
+            }
+        }
+        else
+        {
+            //Trying to add odds for a matchup with no upcoming event
+            $this->logger->error("--- match wrongfully matched to event OR odds are old");
+            return false;
+        }
     }
 
     /**

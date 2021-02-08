@@ -256,6 +256,19 @@ ENGINE=MyISAM DEFAULT CHARSET=latin1;
 ;
 
 
+CREATE TABLE `lines_flagged` (
+  `bookie_id` int NOT NULL,
+  `matchup_id` int NOT NULL,
+  `event_id` int NOT NULL,
+  `proptype_id` int NOT NULL,
+  `team_num` int NOT NULL,
+  `initial_flagdate` timestamp NULL DEFAULT NULL,
+  `last_flagdate` timestamp NULL DEFAULT NULL,
+  PRIMARY KEY (`bookie_id`,`matchup_id`,`event_id`,`proptype_id`,`team_num`)
+) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+
+
 
 USE `bets`;
 DROP function IF EXISTS `MoneylineToDecimal`;

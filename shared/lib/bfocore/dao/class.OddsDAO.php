@@ -1025,8 +1025,8 @@ class OddsDAO
 			throw new Exception("Invalid input", 10);	
         }
 
-        $sQuery = 'INSERT INTO lines_flagged(bookie_id, matchup_id, event_id, proptype_id, team_num)';
-        $aParams = [$a_iBookieID, $a_iMatchupID, $a_iEventID, $a_iPropTypeID, $a_iTeamNum];
+        $sQuery = 'INSERT INTO lines_flagged(bookie_id, matchup_id, event_id, proptype_id, team_num, initial_flagdate, last_flagdate) VALUES (?,?,?,?,?, NOW(), NOW()) ON DUPLICATE KEY UPDATE last_flagdate = NOW()';
+        $aParams = [$a_iBookieID, $a_iMatchupID, $a_iEventID ?? -1, $a_iPropTypeID ?? -1, $a_iTeamNum ?? -1];
 
         $id = null;
 		try 
@@ -1035,9 +1035,16 @@ class OddsDAO
 		}
 		catch(PDOException $e)
 		{
-		    if($e->getCode() == 23000){
+            if($e->getCode() == 23000)
+            {
 				throw new Exception("Duplicate entry", 10);	
-		    }
+            }
+            else
+            {
+                throw new Exception("Unknown error " . $e->getMessage(), 10);	
+            }
+            
+
 		}
 		return $id;
     }
