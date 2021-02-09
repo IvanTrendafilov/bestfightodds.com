@@ -64,32 +64,12 @@ switch ($_GET['action'])
         }
         break;
 
-    case 'addPropTemplate':
-        checkPOSTParam('bookieID');
-        checkPOSTParam('propTypeID');
-        checkPOSTParam('fieldsTypeID');
-        checkPOSTParam('template');
-        checkPOSTParam('negTemplate');
-        //($a_iID, $a_iBookieID, $a_sTemplate, $a_sTemplateNeg, $a_iPropTypeID, $a_iFieldsTypeID)
-        $oPropTemplate = new PropTemplate(0, $_POST['bookieID'], $_POST['template'], $_POST['negTemplate'], $_POST['propTypeID'], $_POST['fieldsTypeID'], '');
-
-        define('RETURN_PAGE', 'addNewPropTemplate');
-        if ((BookieHandler::addNewPropTemplate($oPropTemplate)))
-        {
-            finishCall('Prop template added');
-        }
-        else
-        {
-            finishCall('Prop template not added');
-        }
-        break;
-
     case 'dispatchAlerts':
         require_once('lib/bfocore/general/class.Alerter.php');
         finishCall('Alerts dispatched: ' . Alerter::checkAllAlerts());
         break;
 
-    case 'addManualPropCorrelation':
+/*    case 'addManualPropCorrelation':
         require_once('lib/bfocore/general/class.OddsHandler.php');
         checkPOSTParam('bookieID');
         checkPOSTParam('correlation');
@@ -97,7 +77,7 @@ switch ($_GET['action'])
         define('RETURN_PAGE', 'addManualPropCorrelation');
         OddsHandler::storeCorrelations($_POST['bookieID'], array(array('correlation' => $_POST['correlation'], 'matchup_id' => $_POST['matchupID'])));
         finishCall();
-        break;
+        break;*/
 
     case 'addTeamTwitterHandle':
         require_once('lib/bfocore/general/class.TwitterHandler.php');

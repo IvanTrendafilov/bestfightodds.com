@@ -181,9 +181,18 @@ class BookieDAO
 
         $aParams = array($a_oPropTemplate->getBookieID(), $a_oPropTemplate->getTemplate(), $a_oPropTemplate->getPropTypeID(), $a_oPropTemplate->getTemplateNeg(), $a_oPropTemplate->getFieldsTypeID());
 
-        DBTools::doParamQuery($sQuery, $aParams);
-
-        return (DBTools::getAffectedRows() > 0 ? true : false);
+    	$id = null;
+		try 
+		{
+			$id = PDOTools::insert($sQuery, $aParams);
+		}
+		catch(PDOException $e)
+		{
+		    if($e->getCode() == 23000){
+				throw new Exception("Duplicate entry", 10);	
+		    }
+		}
+		return $id;
     }
 
     public static function updateTemplateLastUsed($a_iTemplateID)

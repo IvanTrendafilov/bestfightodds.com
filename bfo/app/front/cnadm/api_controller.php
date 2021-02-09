@@ -299,6 +299,79 @@ class AdminAPIController
         return $this->returnJson($response);
     }
 
+    public function createPropTemplate(Request $request, Response $response)
+    {
+        $json = $request->getBody();
+        $data = json_decode($json, false);
+        $return_data = [];
+        $return_data['error'] = false;
+
+        if (!v::stringVal()->length(10, null)->validate($data->proptemplate)
+            || !v::stringVal()->length(10, null)->validate($data->negproptemplate)
+            || !v::intType()->validate($data->bookie_id)
+            || !v::intType()->validate($data->proptype_id)
+            || !v::intType()->validate($data->fieldstype_id))
+        {
+            $response->withStatus(422);
+            $return_data['msg'] = 'Missing/invalid parameters';
+            $return_data['error'] = true;
+        }
+        else
+        {
+            $template = new PropTemplate(0, $data->bookie_id, $data->proptemplate, $data->negproptemplate, $data->proptype_id, $data->fieldstype_id, '');
+            $new_template_id = BookieHandler::addNewPropTemplate($template);
+            if ($new_template_id)
+            {
+                $return_data['msg'] = 'Successfully added';
+                $return_data['proptemplate_id'] = $new_template_id;
+            }
+            else
+            {
+                $response->withStatus(500);
+                $return_data['msg'] = 'Error creating prop template';
+                $return_data['error'] = true;
+            }
+        }
+
+        $response->getBody()->write(json_encode($return_data));
+        return $this->returnJson($response);
+
+    }
+
+    public function createPropCorrelation(Request $request, Response $response)
+    {
+        $json = $request->getBody();
+        $data = json_decode($json, false);
+        $return_data = [];
+        $return_data['error'] = false;
+
+        if (!v::stringVal()->length(10, null)->validate($data->correlation)
+            || !v::intType()->validate($data->bookie_id)
+            || !v::intType()->validate($data->matchup_id))
+        {
+            $response->withStatus(422);
+            $return_data['msg'] = 'Missing/invalid parameters';
+            $return_data['error'] = true;
+        }
+        else
+        {
+            if (OddsHandler::storeCorrelations($data->bookie_id, [['correlation' => $data->correlation, 'matchup_id' => $data->matchup_id]]))
+            {
+                $return_data['msg'] = 'Successfully added correlation';
+            }
+            else
+            {
+                $response->withStatus(500);
+                $return_data['msg'] = 'Error creating prop correlation';
+                $return_data['error'] = true;
+            }
+        }
+
+        $response->getBody()->write(json_encode($return_data));
+        return $this->returnJson($response);
+
+    }
+
     public function resetChangeNum(Request $request, Response $response)
     {
         $json = $request->getBody();

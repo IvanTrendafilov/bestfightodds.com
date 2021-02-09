@@ -21,7 +21,7 @@
 <a href="/cnadm/odds">Odds overview</a>&nbsp;&nbsp;&nbsp;
 <a href="index.php?p=addOddsManually">New odds</a>&nbsp;&nbsp;&nbsp;
 <a href="index.php?p=clearOddsForMatchupAndBookie">Delete odds</a><br />
-<a href="index.php?p=addNewPropTemplate">New prop template</a>&nbsp;&nbsp;&nbsp;
+<a href="/cnadm/proptemplate">New prop template</a>&nbsp;&nbsp;&nbsp;
 <a href="/cnadm/proptemplates">View prop templates</a>&nbsp;&nbsp;&nbsp;
 <a href="/cnadm/resetchangenums">Reset changenum</a>&nbsp;&nbsp;&nbsp;
 <a href="index.php?p=testMail">Test mail</a>&nbsp;&nbsp;&nbsp;

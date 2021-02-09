@@ -42,9 +42,6 @@ class OddsProcessor
         $pp = new PropParserV2($this->logger, $this->bookie_id);
         $matched_props = $pp->matchProps($parsed_sport->getFetchedProps());
 
-
-
-
         //Pending: Remove prop dupes AFTER MATCH
         //Pending: For Create mode, create new matchups if no match was found
         //Pending: Remove removal flags for any matchups/orops that may have them but was now detected. Method available in OddsHandler

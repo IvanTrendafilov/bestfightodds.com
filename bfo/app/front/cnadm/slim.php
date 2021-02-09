@@ -33,7 +33,7 @@ $app->get('/events[/{show}]', \AdminController::class . ':eventsOverview'); //Al
 $app->get('/fighters/{id}', \AdminController::class . ':viewFighter');
 $app->get('/addOddsManually', \AdminController::class . ':addOddsManually');
 $app->get('/clearOddsForMatchupAndBookie', \AdminController::class . ':clearOddsForMatchupAndBookie');
-$app->get('/addNewPropTemplate', \AdminController::class . ':addNewPropTemplate');
+$app->get('/proptemplate', \AdminController::class . ':addNewPropTemplate');
 $app->get('/proptemplates', \AdminController::class . ':viewPropTemplates'); //DONE!
 $app->get('/resetchangenums', \AdminController::class . ':resetChangeNums');
 $app->get('/testMail', \AdminController::class . ':testMail');
@@ -52,5 +52,7 @@ $app->post('/api/events', \AdminAPIController::class . ':createEvent');
 $app->put('/api/events/{id}', \AdminAPIController::class . ':updateEvent'); //DONE!
 $app->post('/api/resetchangenums', \AdminAPIController::class . ':resetChangeNum');
 $app->post('/api/clearunmatched', \AdminAPIController::class . ':clearUnmatched');
+$app->post('/api/proptemplates', \AdminAPIController::class . ':createPropTemplate');
+$app->post('/api/propcorrelation', \AdminAPIController::class . ':createPropCorrelation');
 
 $app->run();

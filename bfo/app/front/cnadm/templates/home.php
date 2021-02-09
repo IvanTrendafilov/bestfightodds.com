@@ -56,8 +56,8 @@ document.addEventListener("DOMContentLoaded", function(event) {
 <b>Props without matchups</b>: <br />
 <table class="genericTable">
 <?php foreach ($unmatched as $unmatched_item): ?>
-	<?php if ($unmatched_item['type'] == 1): ?>
-		<tr><td><?=date("Y-m-d H:i:s", strtotime($unmatched_item['log_date']))?></td><td><b><?=$bookies[$unmatched_item['bookie_id']]?></b></td><td><?=$unmatched_item['matchup']?></td><td>[<a href="?p=addNewPropTemplate&inBookieID=<?=$unmatched_item['bookie_id']?>&intemplate=<?=$unmatched_item['view_indata1']?>&innegtemplate=<?=$unmatched_item['view_indata1']?>">add</a>]</td></tr>		
+    <?php if ($unmatched_item['type'] == 1): ?>
+        <tr><td><?=date("Y-m-d H:i:s", strtotime($unmatched_item['log_date']))?></td><td><b><?=$bookies[$unmatched_item['bookie_id']]?></b></td><td><?=$unmatched_item['matchup']?></td><td>[<a href="/cnadm/propcorrelation?bookie_id=<?=$unmatched_item['bookie_id']?>&input_prop=<?=$unmatched_item['matchup']?>">link manually</a>]</td></tr>				
 	<?php endif ?>
 <?php endforeach ?>
 </table><br />
@@ -66,7 +66,7 @@ document.addEventListener("DOMContentLoaded", function(event) {
 <table class="genericTable">
 <?php foreach ($unmatched as $unmatched_item): ?>
 	<?php if ($unmatched_item['type'] == 2): ?>
-		<tr><td><?=date("Y-m-d H:i:s", strtotime($unmatched_item['log_date']))?></td><td><b><?=$bookies[$unmatched_item['bookie_id']]?></b></td><td><?=$unmatched_item['matchup']?></td><td>[<a href="/cnadm/propcorrelation?bookie_id=<?=$unmatched_item['bookie_id']?>&input_prop=<?=$unmatched_item['matchup']?>">link manually</a>]</td></tr>				
+        <tr><td><?=date("Y-m-d H:i:s", strtotime($unmatched_item['log_date']))?></td><td><b><?=$bookies[$unmatched_item['bookie_id']]?></b></td><td><?=$unmatched_item['matchup']?></td><td>[<a href="/cnadm/protemplate?in_bookie_id=<?=$unmatched_item['bookie_id']?>&in_template=<?=$unmatched_item['view_indata1']?>&in_negtemplate=<?=$unmatched_item['view_indata1']?>">add</a>]</td></tr>
 	<?php endif ?>
 <?php endforeach ?>
 </table><br />

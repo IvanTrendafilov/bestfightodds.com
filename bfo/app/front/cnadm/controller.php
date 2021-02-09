@@ -278,6 +278,15 @@ class AdminController
 
     public function addNewPropTemplate(Request $request, Response $response)
     {
+        $view_data = [];
+
+        $view_data['in_template'] = $request->getQueryParams()['in_template'] ?? '';
+        $view_data['in_negtemplate'] = $request->getQueryParams()['in_negtemplate'] ?? '';
+        $view_data['in_bookie_id'] = $request->getQueryParams()['in_bookie_id'] ?? '';
+
+        $view_data['bookies'] = BookieHandler::getAllBookies();
+        $view_data['prop_types'] = OddsHandler::getAllPropTypes();
+        $response->getBody()->write($this->plates->render('proptemplate_new', $view_data));
         return $response;
     }
 

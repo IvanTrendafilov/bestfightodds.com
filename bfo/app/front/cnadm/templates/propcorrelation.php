@@ -1,10 +1,42 @@
 <?php $this->layout('template', ['title' => 'Admin']) ?>
 
-<form method="post" action="logic/logic.php?action=addManualPropCorrelation"  name="addManualPropCorrelationForm">
-Correlation: <input type="text" id="correlation" size="70" value="<?=$input_prop?>" /><br /><br />
-Bookie: <input type="hidden" id="bookie_id" size="70" value="<?=$bookie_id?>" /> <?=$bookie_id?>
-<br /><br />
-Matchup: <select id="matchup_id">
+<script>
+
+document.addEventListener("DOMContentLoaded", function(event) { 
+    document.getElementById('create-correlation-button').addEventListener('click', function(e) {
+        e.preventDefault();
+        var opts = {
+            method: 'POST',      
+            headers: {
+                'Content-type': 'application/json; charset=UTF-8'
+            },
+            body: JSON.stringify({
+                bookie_id: parseInt(document.querySelector('#in_bookie_id').value),
+                matchup_id: parseInt(document.querySelector('#in_matchup_id').value),
+                correlation: document.querySelector('#in_correlation').value,
+            })
+        };
+        fetch('/cnadm/api/propcorrelation', opts).then(function (response) {
+            return response.json();
+        })
+        .then(function (body) {
+            if (body.error == true) {
+                alert(body.msg);
+            }
+            else {
+                window.location.href = '/cnadm/';
+            }
+        });
+    });
+});
+
+</script>
+
+<form>
+Correlation: <input type="text" id="in_correlation" size="70" value="<?=$input_prop?>"><br><br>
+Bookie: <input type="hidden" id="in_bookie_id" size="70" value="<?=$bookie_id?>"> <?=$bookie_id?>
+<br><br>
+Matchup: <select id="in_matchup_id">
 
 <?php foreach($events as $event): ?>
 
@@ -20,8 +52,8 @@ Matchup: <select id="matchup_id">
 
 <?php endforeach ?>
 
-</select><br /><br />
+</select><br><br>
 
-<input type="submit" value="Add correlation" />
+<input type="submit" id="create-correlation-button" value="Add correlation">
 </form>
 
