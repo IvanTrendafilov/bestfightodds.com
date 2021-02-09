@@ -44,12 +44,30 @@ document.addEventListener("DOMContentLoaded", function(event) {
 <a href="#" id="clear-unmatched-button">Clear unmatched table</a><br /><br />
 
 <b>Matchups:</b> <br />
+
 <table class="genericTable">
-<?php foreach ($unmatched as $unmatched_item): ?>
-	<?php if ($unmatched_item['type'] == 0): ?>
-		<tr><td><?=date("Y-m-d H:i:s", strtotime($unmatched_item['log_date']))?></td><td><b><?=$bookies[$unmatched_item['bookie_id']]?></b></td><td>
-		<?=$unmatched_item['matchup']?></td><td>[<a href="/cnadm/newmatchup?inteam1=<?=$unmatched_item['view_indata1']?>&inteam2=<?=$unmatched_item['view_indata2']?>">add</a>] [<a href="http://www.google.se/search?q=tapology <?=$unmatched_item['matchup']?>">google</a>] $event_text </td></tr>
-	<?php endif ?>
+
+<?php foreach ($unmatched_groups as $unmatched_group): ?>
+    <tr>
+        <td></td><td></td>
+        <td><b><?=$unmatched_group[0]['metadata']['event_name']?> / <?=$unmatched_group[0]['view_extras']['event_name_reduced']?></b> (<?=$unmatched_group[0]['view_extras']['event_date_formatted']?>)
+
+            <?php if(isset($unmatched_group[0]['view_extras']['event_match']['id'])): ?>
+                    Match: <?=$unmatched_group[0]['view_extras']['event_match']['name']?> (<?=$unmatched_group[0]['view_extras']['event_match']['date']?>) [<a href="/cnadm/?p=addNewFightForm&inEventID=<?=$unmatched_group[0]['view_extras']['event_match']['id']?>&inFighter1=<?=$unmatched_group[0]['view_indata1']?>&inFighter2=<?=$unmatched_group[0]['view_indata2']?> . '">add</a>]
+            <?php else: ?>
+                    No match.. [<a href="/cnadm/?p=addNewEventForm&eventName=<?=$unmatched_group[0]['view_extras']['event_name_reduced']?>&eventDate=<?=$unmatched_group[0]['view_extras']['event_date_formatted']?>">create</a>] [<a href="http://www.google.se/search?q=tapology <?=$unmatched_group[0]['view_extras']['event_name_reduced']?>">google</a>]
+            <?php endif ?>
+
+        </td>
+    </tr>
+    <?php foreach ($unmatched_group as $unmatched_item): ?>
+        <?php if ($unmatched_item['type'] == 0): ?>
+            <tr><td><?=date("Y-m-d H:i:s", strtotime($unmatched_item['log_date']))?></td><td><b><?=$bookies[$unmatched_item['bookie_id']]?></b></td><td>
+            <?=$unmatched_item['matchup']?></td><td>[<a href="/cnadm/newmatchup?inteam1=<?=$unmatched_item['view_indata1']?>&inteam2=<?=$unmatched_item['view_indata2']?>">add</a>] [<a href="http://www.google.se/search?q=tapology <?=$unmatched_item['matchup']?>">google</a>] 
+
+            </td></tr>
+        <?php endif ?>
+    <?php endforeach ?>
 <?php endforeach ?>
 </table><br />
 

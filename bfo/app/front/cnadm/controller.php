@@ -41,19 +41,43 @@ class AdminController
 
         //Get unmatched data
         $unmatched_col = EventHandler::getUnmatched(1500);
+        $unmatched_groups = [];
         foreach ($unmatched_col as $key => $unmatched)
         {
-
             $split = explode(' vs ', $unmatched['matchup']);
             $unmatched_col[$key]['view_indata1'] = $split[0];
             $unmatched_col[$key]['view_indata2'] = $split[1];
-            if (isset($aUnmatched['metadata']['event_name']))
+            if (isset($unmatched['metadata']['event_name']))
             {
-                $event_search = EventHandler::searchEvent($event_name, true);
+                $cut_pos = strpos($unmatched['metadata']['event_name'], " -") != 0 ? strpos($unmatched['metadata']['event_name'], " -") : strlen($unmatched['metadata']['event_name']);
+                $unmatched_col[$key]['view_extras']['event_name_reduced'] = substr($unmatched['metadata']['event_name'], 0, $cut_pos);
+                
+
+                $event_search = EventHandler::searchEvent($unmatched_col[$key]['view_extras']['event_name_reduced'], true);
+                if ($event_search != null)
+                {
+                    $unmatched_col[$key]['view_extras']['event_match'] = ['id' => $event_search[0]->getID(), 'name' => $event_search[0]->getName(), 'date' => $event_search[0]->getDate()];
+                }
+
+                
+            }
+            if (isset($unmatched['metadata']['gametime']))
+            {
+                $unmatched_col[$key]['view_extras']['event_date_formatted'] = (new DateTime('@' . $unmatched['metadata']['gametime']))->format('Y-m-d');
+            }
+
+            //Add to group (only for matchups)
+            if ($unmatched['type'] == 0)
+            {
+                $unmatched_groups[($unmatched_col[$key]['view_extras']['event_name_reduced'] ?? '') . ':' . ($unmatched_col[$key]['view_extras']['event_date_formatted'] ?? '')][] = $unmatched_col[$key];
             }
             
         }
+
+
         $view_data['unmatched'] = $unmatched_col;
+        $view_data['unmatched_groups'] = $unmatched_groups;
+        
         $bookies = BookieHandler::getAllBookies();
         $view_data['bookies'] = [];
         foreach ($bookies as $bookie)
