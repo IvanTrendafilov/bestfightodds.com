@@ -45,13 +45,21 @@ table.odds-table td.del-odds {
 	text-align: center;
 	
 }
+table.genericTable tr.success {
+	background-color: #33aa00;
+}
+table.genericTable tr.failed {
+	background-color: #ff6666;
 
+}
 
 table.genericTable tr td {
 	border-bottom: 2px solid #cccccc;
 	padding-left: 10px;
 	padding-right: 10px;
 }
+
+
 
 table.eventsOverview {
 	padding: 0px;

@@ -209,11 +209,9 @@ input[type="submit"] {
 }
 
 #twitter-icon {
-  height: 11px;
-  width: 14px;
-  vertical-align: middle;
-  margin-right: 6px;
-  margin-top: -3px;
+  height: 11px; width: 14px;
+  position:relative;
+  top: 1px;
 }
 
 #header-search-box {
@@ -383,7 +381,7 @@ h1 {
   padding-bottom: 15px;
   color: #787878;
   a {
-    color: #747474;
+    color: #525252;
     font-size: 12px;
     padding: 10px 5px;
   }
@@ -859,7 +857,7 @@ ul.share-dropdown ul li a {
       background-color: #F1F3F7;
     }
     td {
-      padding: 4px 10px;
+      padding: 6px 10px;
       a {
         color: $font_darkcolor;
       }

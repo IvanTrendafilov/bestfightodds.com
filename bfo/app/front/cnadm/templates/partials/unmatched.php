@@ -4,39 +4,62 @@ document.addEventListener("DOMContentLoaded", function(event) {
         item.addEventListener('click', e => {
             e.preventDefault();
 
-            var structure = JSON.parse(e.target.dataset.create);
-                     
+            event_row = document.querySelector('#' + e.target.dataset.eventlink);
+            structure = JSON.parse(event_row.dataset.create);
 
-        var opts = {
-            method: 'POST',      
-            headers: {
-                'Content-type': 'application/json; charset=UTF-8'
-            },
-            body: JSON.stringify({
-                bookie_id: e.target.dataset.bookieid
-                event_name: this.form.querySelector('#event_name').value,
-                event_date: this.form.querySelector('#event_date').value,
-                event_hidden: this.form.querySelector('#event_hidden').checked
+            var opts = {
+                method: 'POST',      
+                headers: {
+                    'Content-type': 'application/json; charset=UTF-8'
+                },
+                body: JSON.stringify({
+                    event_name: structure.name,
+                    event_date: structure.date,
+                    event_hidden: false
+                })
+            };
+            fetch('/cnadm/api/events', opts).then(function (response) {
+                return response.json();
             })
-        };
-        fetch('/cnadm/api/events', opts).then(function (response) {
-            return response.json();
-        })
-        .then(function (body) {
-            if (body.error == true) {
-                alert(body.msg);
-            }
-            else {
-                //Run through matchups and add them to the event that was created
+            .then(function (body) {
+                if (body.error == true) {
+                    event_row.classList.add("failed")
+                }
+                else {
+                    event_row.classList.add("success")
+                    //Run through matchups and add them to the event that was created
+                    document.querySelectorAll(".matchup-row[data-eventlink='" + e.target.dataset.eventlink + "']").forEach(function (item) {
+                        structure = JSON.parse(item.dataset.create);
+                        var opts = {
+                            method: 'POST',      
+                            headers: {
+                                'Content-type': 'application/json; charset=UTF-8'
+                            },
+                            body: JSON.stringify({
+                                event_id: body.event_id,
+                                team1_name: structure.inteam1,
+                                team2_name: structure.inteam2
+                            })
+                        };
+                        fetch('/cnadm/api/matchups', opts).then(function (response) {
+                            return response.json();
+                        })
+                        .then(function (body) {
+                            if (body.error == true) {
+                                item.classList.add("failed")
+                            }
+                            else {
+                                item.classList.add("success")
+                            }
+                        });
+                    });
+
+
+
+
+                }
                 
-                location.reload();
-            }
-        	
-    		});
-
-
-
-            
+            });
 		});
 	});
 });
@@ -64,7 +87,7 @@ myNameSpace = function(){
 <table class="genericTable">
 
 <?php foreach ($unmatched_groups as $unmatched_group): ?>
-    <tr class="event event-group" date-create="{name: '<?=$unmatched_group[0]['view_extras']['event_name_reduced']?>', date: '<?=$unmatched_group[0]['view_extras']['event_date_formatted']?>'}">
+    <tr class="event event-group" id="event<?=isset($i) ? ++$i : $i = 1?>" data-create="<?=$this->e('{"name": "' . $unmatched_group[0]['view_extras']['event_name_reduced'] . '", "date": "' . $unmatched_group[0]['view_extras']['event_date_formatted'] . '"}')?>">
         <td></td><td></td>
         <td data-date=""><b><?=$unmatched_group[0]['metadata']['event_name']?> / <?=$unmatched_group[0]['view_extras']['event_name_reduced']?></b> (<?=$unmatched_group[0]['view_extras']['event_date_formatted']?>)
 
@@ -76,15 +99,16 @@ myNameSpace = function(){
 
         </td>
     </tr>
+    
     <?php foreach ($unmatched_group as $unmatched_item): ?>
         <?php if ($unmatched_item['type'] == 0): ?>
-            <tr><td><?=date("Y-m-d H:i:s", strtotime($unmatched_item['log_date']))?></td><td><b><?=$bookies[$unmatched_item['bookie_id']]?></b></td><td>
+            <tr class="matchup-row" data-create="<?=$this->e('{"inteam1": "' . $unmatched_item['view_indata1'] . '", "inteam2": "' . $unmatched_item['view_indata1'] . '"}')?>" data-eventlink="event<?=$i?>"><td><?=date("Y-m-d H:i:s", strtotime($unmatched_item['log_date']))?></td><td><b><?=$bookies[$unmatched_item['bookie_id']]?></b></td><td>
             <?=$unmatched_item['matchup']?></td><td>[<a href="/cnadm/newmatchup?inteam1=<?=$unmatched_item['view_indata1']?>&inteam2=<?=$unmatched_item['view_indata2']?>">add</a>] [<a href="http://www.google.se/search?q=tapology <?=$unmatched_item['matchup']?>">google</a>] 
 
             </td></tr>
         <?php endif ?>
     <?php endforeach ?>
-    <tr><td></td><td></td><td></td><td><a href="#">Create all</a></td></tr>
+    <tr><td></td><td></td><td></td><td><a href="#" class="create-event-with-matchups" data-eventlink="event<?=$i?>">Create all</a></td></tr>
 <?php endforeach ?>
 </table><br />
 
