@@ -41,6 +41,19 @@ document.addEventListener("DOMContentLoaded", function(event) {
 	});
 });
 
+/*
+myNameSpace = function(){
+  var current = null;
+  function init(){...}
+  function change(){...}
+  function verify(){...}
+  return{
+    init:init,
+    set:change
+  }
+}();*/
+
+
 </script>
 
 
@@ -51,7 +64,7 @@ document.addEventListener("DOMContentLoaded", function(event) {
 <table class="genericTable">
 
 <?php foreach ($unmatched_groups as $unmatched_group): ?>
-    <tr class="event">
+    <tr class="event event-group" date-create="{name: '<?=$unmatched_group[0]['view_extras']['event_name_reduced']?>', date: '<?=$unmatched_group[0]['view_extras']['event_date_formatted']?>'}">
         <td></td><td></td>
         <td data-date=""><b><?=$unmatched_group[0]['metadata']['event_name']?> / <?=$unmatched_group[0]['view_extras']['event_name_reduced']?></b> (<?=$unmatched_group[0]['view_extras']['event_date_formatted']?>)
 
@@ -71,7 +84,7 @@ document.addEventListener("DOMContentLoaded", function(event) {
             </td></tr>
         <?php endif ?>
     <?php endforeach ?>
-    <tr><td></td><td></td><td></td><td>Create all</td></tr>
+    <tr><td></td><td></td><td></td><td><a href="#">Create all</a></td></tr>
 <?php endforeach ?>
 </table><br />
 

@@ -1,5 +1,5 @@
 //Table row height
-$tablerowheight: 25px;
+$tablerowheight: 27px;
 
 
 .table-header {
@@ -302,7 +302,7 @@ $tablerowheight: 25px;
 }
 
 .exp-ard {
-  width:  px !important;
+  width:  9px !important;
   height: 6px !important;
   background-image: url('/img/expd.png');
   background-size: 9px 6px;
@@ -355,14 +355,14 @@ $tablerowheight: 25px;
   color: #53585a;
   fill: var(--iron-icon-fill-color, currentcolor);
   stroke: var(--iron-icon-stroke-color, none);
-  height: 20px;
-  width: 20px;
+  height: 21px;
+  width: 21px;
 } 
 
 .svg-i-disabled {
   color: #a5abb3;
   fill: var(--iron-icon-fill-color, currentcolor);
   stroke: var(--iron-icon-stroke-color, none);
-  height: 20px;
-  width: 20px;
+  height: 21px;
+  width: 21px;
 }
