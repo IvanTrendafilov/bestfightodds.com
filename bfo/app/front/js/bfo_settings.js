@@ -1,102 +1,36 @@
-
-
 document.getElementById('bookieHideSelector').addEventListener("click", function(e) {
     showSettingsWindow();
 }, false);
-
-function hideBookieColumns() {
-    if (typeof Cookies.get('bfo_hidebookies') !== 'undefined' && Cookies.get('bfo_hidebookies') !== null) {
-        hbcookie = Cookies.get('bfo_hidebookies');
-        if (hbcookie !== null) {
-            hiddenBookies = JSON.parse(hbcookie);
-            for (const [key, value] of Object.entries(hiddenBookies)) {
-                if (value == true)
-                {
-                    //Hide bookie column
-                    var bookiecolumn = document.querySelector('th[data-b="' + key + '"]');
-                    if (bookiecolumn !== null)
-                    {
-                        console.log(bookiecolumn.cellIndex);
-                        addCSSRule(document.styleSheets[1], "table.odds-table th:nth-child(" + (bookiecolumn.cellIndex + 1) + "), td:nth-child(" + (bookiecolumn.cellIndex + 1) + ")", "display: none");
-                    }
-                }
-            }
-        }
-    }
-}
-
-function appendColumnCopy(source) {
-    $("tr > :last-child").each(function () {
-        var $this = $(source);
-        $this.clone().appendTo($this.parent());
-      });
-}
 
 function updateBookieColumns() {
     var current_settings = localStorage.getItem("bfo_bookie_order");
     if (current_settings) 
     {
         current_settings = JSON.parse(current_settings)
-        //Get the current index for each bookie
-        var bookies = [];
-        document.querySelectorAll('.table-scroller')[0].querySelectorAll('th[data-b]').forEach(function (item) {
-            bookies[item.cellIndex] = item.dataset.b;
-            //item.cellIndex = current index
-            //current_settings[item.dataset.b] == index from settings
-            if (item.cellIndex != current_settings[item.dataset.b].order)
-            {
-
-            }
-
-
+        
+        //Re-order columns        
+        remapped = [];
+        Object.entries(current_settings).forEach(function (item) {
+            remapped[item[1].order] = item[0];
         });
-
-
-        document.querySelectorAll('.table-scroller').querySelectorAll('th[data-b]').forEach(function (item) {
-            if (current_settings[item.dataset.b] && current_settings[item.dataset.b].enabled == false)
-            {
-                //Bookie disabled
-                addCSSRule(document.styleSheets[1], "table.odds-table th:nth-child(" + (item.cellIndex + 1) + "), td:nth-child(" + (item.cellIndex + 1) + ")", "display: none");
-            }
-            else
-            {
-                //Bookie enabled
-                addCSSRule(document.styleSheets[1], "table.odds-table th:nth-child(" + (item.cellIndex + 1) + "), td:nth-child(" + (item.cellIndex + 1) + ")", "display: table-cell");
-            }
-    
+        remapped.reverse();
+        remapped.forEach(function (item) {
+            var cur_index = document.querySelectorAll('.table-scroller')[0].querySelector('th[data-b="' + item + '"]').cellIndex;
             
-    
+            document.querySelectorAll('.table-scroller table').forEach(function (table) {
+                for (var i = 0, row; row = table.rows[i]; i++) {
+                    row.cells[0].insertAdjacentElement('afterend', row.cells[cur_index]);
+                    //Check if this bookie should be disabled as well, if so loop through al 
+                    if (current_settings[item].enabled == false) {
+                        row.cells[1].style.display = "none";
+                    }
+                    else {
+                        row.cells[1].setAttribute("style", "");
+                    }
+                }
+            });
         });
-        
     }
-
-    //Hide columns if disabled
-    /*document.querySelectorAll('.table-scroller')[0].querySelectorAll('th[data-b]').forEach(function (item) {
-        if (current_settings[item.dataset.b] && current_settings[item.dataset.b].enabled == false)
-        {
-            //Bookie disabled
-            addCSSRule(document.styleSheets[1], "table.odds-table th:nth-child(" + (item.cellIndex + 1) + "), td:nth-child(" + (item.cellIndex + 1) + ")", "display: none");
-        }
-        else
-        {
-            //Bookie enabled
-            addCSSRule(document.styleSheets[1], "table.odds-table th:nth-child(" + (item.cellIndex + 1) + "), td:nth-child(" + (item.cellIndex + 1) + ")", "display: table-cell");
-        }
-
-        
-
-    });
-    */
-}
-
-
-function addCSSRule(sheet, selector, rules, index) {
-	if("insertRule" in sheet) {
-		sheet.insertRule(selector + "{" + rules + "}", index);
-	}
-	else if("addRule" in sheet) {
-		sheet.addRule(selector, rules, index);
-	}
 }
 
 function showSettingsWindow() {
@@ -117,8 +51,8 @@ function showSettingsWindow() {
         area.innerHTML = area.innerHTML + '<li data-b="' + item.dataset.b + '">' + item.textContent + ' <input type="checkbox" '+ (current_settings[item.dataset.b].enabled ? 'checked' : '') + '></li>';
     });
 
-    //Bind the enable/disable button for each bookie - TODO
-    /*document.querySelectorAll('input.bsetting').forEach(function (item) {
+    
+    document.querySelectorAll('input.bsetting').forEach(function (item) {
         item.addEventListener("click", function () {
             var settings = [];
             document.querySelectorAll('input.bsetting').forEach(function (item) {
@@ -131,7 +65,7 @@ function showSettingsWindow() {
             });
         })
     });
-*/
+
     //Restructure according to previously saved bookie order
     localStorage.getItem("bfo_bookie_order");
 
@@ -151,9 +85,7 @@ function showSettingsWindow() {
                 updateBookieColumns();
             }
         }
-      
-        
-        );
+    );
 
     var settingswindow = document.getElementById('bookie-settings-window');
 
