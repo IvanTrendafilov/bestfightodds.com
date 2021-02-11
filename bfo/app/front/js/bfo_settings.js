@@ -46,10 +46,12 @@ function showSettingsWindow() {
     
     document.querySelectorAll('.table-scroller')[0].querySelectorAll('th[data-b]').forEach(function (item) {
         bookies[item.cellIndex] = item.dataset.b;
-        var checked = (item.dataset.b in current_settings && current_settings[item.dataset.b].enabled ? 'checked' : '');
+        var checked = 'checked';
+        if (current_settings !== null && item.dataset.b in current_settings && current_settings[item.dataset.b].enabled == false) {
+            checked = '';
+        }
         el.innerHTML = el.innerHTML + '<li data-b="' + item.dataset.b + '">' + item.textContent + ' <input class="inp-checkbox" type="checkbox" ' + checked + '></li>';
     });
-
 
     //Restructure according to previously saved bookie order
     //localStorage.getItem("bfo_bookie_order");
