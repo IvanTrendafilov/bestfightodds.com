@@ -55,7 +55,7 @@ $tablerowheight: 27px;
 }
 
 .odds-table {
-  width: 986px;
+  width: 100%;
   font-size: 12px;
   border-collapse: collapse;
   thead {
@@ -155,7 +155,8 @@ $tablerowheight: 27px;
         height: 19px;
       }
       &.prop-cell {
-        width: 24px;
+        width: 30px;
+        min-width: 30px;
         vertical-align: middle;
         a {
           color: #585B5E;
