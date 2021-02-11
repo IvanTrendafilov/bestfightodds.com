@@ -815,7 +815,7 @@ initPage = function () {
 
 
     //Hide columns based on preferences in bfo_hidebookies cookie
-    hideBookieColumns();
+    updateBookieColumns();
 
     //Enable dark mode if stored in cookie bfo_darkmode
     if (Cookies.get('bfo_darkmode') !== null) {
