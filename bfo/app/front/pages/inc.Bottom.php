@@ -32,14 +32,14 @@
         <option value="1">5Dimes</option>
         <option value="20">BetWay</option>
         <option value="3">BookMaker</option>
+        <option value="12">BetOnline</option>
         <option value="5">Bovada</option>
         <option value="19">Bet365</option>
         <option value="2">SportBet</option>
-        <option value="4">Sportsbook</option>
         <option value="17">William Hill</option>
-        <option value="9">Pinnacle</option>
         <option value="8">SportsInteraction</option>
-        <option value="12">BetOnline</option>
+        <option value="9">Pinnacle</option>
+        <option value="4">Sportsbook</option>
         <option value="18">Intertops</option>
         <option value="13">BetDSI</option>
       </select><br /><div id="alert-button-container"><input type="hidden" name="tn"><input type="hidden" name="m">
@@ -47,7 +47,7 @@
         <div class="alert-result">&nbsp;</div>
       <input type="submit" value="Add alert" id="alert-submit"></div></form></div>
 </div>
-<div id="bookie-settings-window" class="popup-window"><div class="popup-header">Bookie display settings <a href="#" class="cd-popup-close">&#10005;</a></div><div id="bookie-settings-area"></div></div>
+<div id="bookie-settings-window" class="popup-window"><div class="popup-header">Bookie display settings <a href="#" class="cd-popup-close">&#10005;</a></div><div id="bookie-settings-area"><ul id="bookie-order-items"></ul></div></div>
 
 <?php
 //Disable Google Analytics if running locally

@@ -1205,7 +1205,7 @@ refreshPage = function () {
     });
 };
 
-toggleRefresh = function (autoRefresh) {
+toggleRefresh = function (autoRefresh) { 
     if (autoRefresh === true) {
         refreshId = setInterval(function () {
             refreshPage();
@@ -1330,3 +1330,5 @@ function hideArrows() {
     }, 0);
 }
 document.oncopy = hideArrows;
+
+

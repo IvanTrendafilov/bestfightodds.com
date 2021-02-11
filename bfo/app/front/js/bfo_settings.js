@@ -1,22 +1,4 @@
-/**
- * Binds a function to all input checkboxes on the settings page. 
- * 
- * If a checkbox is unchecked it will mark that bookie in a cookie bfo_hidebookies as hidden by setting
- * its value to true. A bookie that is visible is not present in the cookie at all
- */
-document.querySelectorAll('input.bsetting').forEach(function (item) {
-    item.addEventListener("click", function () {
-        var settings = [];
-        document.querySelectorAll('input.bsetting').forEach(function (item) {
-            if (item.checked == false) {
-                settings[item.dataset.bookie] = true;
-            }
-        });
-        Cookies.set('bfo_hidebookies', JSON.stringify(settings), {
-            'expires': 999
-        });
-    })
-});
+
 
 document.getElementById('bookieHideSelector').addEventListener("click", function(e) {
     showSettingsWindow();
@@ -43,6 +25,70 @@ function hideBookieColumns() {
     }
 }
 
+function appendColumnCopy(source) {
+    $("tr > :last-child").each(function () {
+        var $this = $(source);
+        $this.clone().appendTo($this.parent());
+      });
+}
+
+function updateBookieColumns() {
+    var current_settings = localStorage.getItem("bfo_bookie_order");
+    if (current_settings) 
+    {
+        current_settings = JSON.parse(current_settings)
+        //Get the current index for each bookie
+        var bookies = [];
+        document.querySelectorAll('.table-scroller')[0].querySelectorAll('th[data-b]').forEach(function (item) {
+            bookies[item.cellIndex] = item.dataset.b;
+            //item.cellIndex = current index
+            //current_settings[item.dataset.b] == index from settings
+            if (item.cellIndex != current_settings[item.dataset.b].order)
+            {
+
+            }
+
+
+        });
+
+
+        document.querySelectorAll('.table-scroller').querySelectorAll('th[data-b]').forEach(function (item) {
+            if (current_settings[item.dataset.b] && current_settings[item.dataset.b].enabled == false)
+            {
+                //Bookie disabled
+                addCSSRule(document.styleSheets[1], "table.odds-table th:nth-child(" + (item.cellIndex + 1) + "), td:nth-child(" + (item.cellIndex + 1) + ")", "display: none");
+            }
+            else
+            {
+                //Bookie enabled
+                addCSSRule(document.styleSheets[1], "table.odds-table th:nth-child(" + (item.cellIndex + 1) + "), td:nth-child(" + (item.cellIndex + 1) + ")", "display: table-cell");
+            }
+    
+            
+    
+        });
+        
+    }
+
+    //Hide columns if disabled
+    /*document.querySelectorAll('.table-scroller')[0].querySelectorAll('th[data-b]').forEach(function (item) {
+        if (current_settings[item.dataset.b] && current_settings[item.dataset.b].enabled == false)
+        {
+            //Bookie disabled
+            addCSSRule(document.styleSheets[1], "table.odds-table th:nth-child(" + (item.cellIndex + 1) + "), td:nth-child(" + (item.cellIndex + 1) + ")", "display: none");
+        }
+        else
+        {
+            //Bookie enabled
+            addCSSRule(document.styleSheets[1], "table.odds-table th:nth-child(" + (item.cellIndex + 1) + "), td:nth-child(" + (item.cellIndex + 1) + ")", "display: table-cell");
+        }
+
+        
+
+    });
+    */
+}
+
 
 function addCSSRule(sheet, selector, rules, index) {
 	if("insertRule" in sheet) {
@@ -56,21 +102,61 @@ function addCSSRule(sheet, selector, rules, index) {
 function showSettingsWindow() {
     //Gather all bookie IDs and positions
     var bookies = [];
-    var area = document.getElementById('bookie-settings-area');
-    document.querySelectorAll('th[data-b]').forEach(function (item) {
+    var area = document.getElementById('bookie-order-items');
+
+    var current_settings = localStorage.getItem("bfo_bookie_order");
+    if (current_settings) 
+    {
+        current_settings = JSON.parse(current_settings)
+    }
+
+    current_settings = JSON.parse(localStorage.getItem("bfo_bookie_order"));
+
+    document.querySelectorAll('.table-scroller')[0].querySelectorAll('th[data-b]').forEach(function (item) {
         bookies[item.cellIndex] = item.dataset.b;
-
-        area.innerHTML = area.innerHTML + '<br>' + item.innerHTML + '<input type="checkbox">';
-
+        area.innerHTML = area.innerHTML + '<li data-b="' + item.dataset.b + '">' + item.textContent + ' <input type="checkbox" '+ (current_settings[item.dataset.b].enabled ? 'checked' : '') + '></li>';
     });
-    console.log(bookies);
+
+    //Bind the enable/disable button for each bookie - TODO
+    /*document.querySelectorAll('input.bsetting').forEach(function (item) {
+        item.addEventListener("click", function () {
+            var settings = [];
+            document.querySelectorAll('input.bsetting').forEach(function (item) {
+                if (item.checked == false) {
+                    settings[item.dataset.bookie] = true;
+                }
+            });
+            Cookies.set('bfo_hidebookies', JSON.stringify(settings), {
+                'expires': 999
+            });
+        })
+    });
+*/
+    //Restructure according to previously saved bookie order
+    localStorage.getItem("bfo_bookie_order");
+
+    var el = document.getElementById('bookie-order-items');
+    var sortable = Sortable.create(el, {
+        onUpdate: function (evt) {
+                //When an element is dropped we update local storage to store this
+                var bookie_orders = {};
+                var i = 0;
+                el.childNodes.forEach(function (item) {
+                    bookie_orders[item.dataset.b] = {};
+                    bookie_orders[item.dataset.b].enabled = item.querySelector('input').checked;
+                    bookie_orders[item.dataset.b].order = i;
+                    i++;
+                });
+                localStorage.setItem("bfo_bookie_order", JSON.stringify(bookie_orders));
+                updateBookieColumns();
+            }
+        }
+      
+        
+        );
 
     var settingswindow = document.getElementById('bookie-settings-window');
 
-    
-    
-
-    console.log(settingswindow);
     settingswindow.classList.remove('is-visible');
     settingswindow.classList.add('no-transition');
 
@@ -82,3 +168,5 @@ function showSettingsWindow() {
     settingswindow.classList.add('is-visible');
 
 }
+
+

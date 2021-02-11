@@ -179,14 +179,9 @@ $tablerowheight: 27px;
         padding: 0 1px;
       }
     }
-    tr {
-      /*&:nth-child(even) th {
-        padding-bottom: 1px;
-      }
-      &:nth-child(odd) th {
-        padding-top: 1px;
-      }*/
-    }
+  }
+  .hidden {
+    display: none;
   }
 }
 
