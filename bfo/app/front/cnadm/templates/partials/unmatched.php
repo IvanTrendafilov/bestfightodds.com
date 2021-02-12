@@ -89,7 +89,7 @@ myNameSpace = function(){
 <?php foreach ($unmatched_groups as $unmatched_group): ?>
     <tr class="event event-group" id="event<?=isset($i) ? ++$i : $i = 1?>" data-create="<?=$this->e('{"name": "' . $unmatched_group[0]['view_extras']['event_name_reduced'] . '", "date": "' . $unmatched_group[0]['view_extras']['event_date_formatted'] . '"}')?>">
         <td></td><td></td>
-        <td data-date=""><b><?=$unmatched_group[0]['metadata']['event_name']?> / <?=$unmatched_group[0]['view_extras']['event_name_reduced']?></b> (<?=$unmatched_group[0]['view_extras']['event_date_formatted']?>)
+        <td data-date=""><b><?=$unmatched_group[0]['metadata']['event_name'] ?? '' ?> / <?=$unmatched_group[0]['view_extras']['event_name_reduced'] ?? ''?></b> (<?=$unmatched_group[0]['view_extras']['event_date_formatted']?>)
 
             <?php if(isset($unmatched_group[0]['view_extras']['event_match']['id'])): ?>
                     Match: <?=$unmatched_group[0]['view_extras']['event_match']['name']?> (<?=$unmatched_group[0]['view_extras']['event_match']['date']?>) [<a href="/cnadm/?p=addNewFightForm&inEventID=<?=$unmatched_group[0]['view_extras']['event_match']['id']?>&inFighter1=<?=$unmatched_group[0]['view_indata1']?>&inFighter2=<?=$unmatched_group[0]['view_indata2']?> . '">add</a>]
@@ -108,7 +108,14 @@ myNameSpace = function(){
             </td></tr>
         <?php endif ?>
     <?php endforeach ?>
-    <tr><td></td><td></td><td></td><td><a href="#" class="create-event-with-matchups" data-eventlink="event<?=$i?>">Create event and matchups</a></td></tr>
+    <tr><td></td><td></td><td></td>
+        <td>
+            <?php if (isset($unmatched_group[0]['view_extras']['event_name_reduced'])): ?>
+                <a href="#" class="create-event-with-matchups" data-eventlink="event<?=$i?>">Create event and matchups</a>
+            <?php else: ?>
+                &nbsp;
+            <?php endif ?>
+        </td></tr>
 <?php endforeach ?>
 </table><br />
 
