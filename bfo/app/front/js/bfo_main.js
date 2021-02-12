@@ -10,7 +10,7 @@ var scrollX = 0;
 var scrollCaptain = null;
 var shareVisible = false;
 
-window.darkmode = true;
+window.darkmode = false;
 
 function setHeight(el, val) {
     if (typeof val === "function") val = val();
