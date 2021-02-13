@@ -104,7 +104,6 @@ myNameSpace = function(){
         <?php if ($unmatched_item['type'] == 0): ?>
             <tr class="matchup-row" data-create="<?=$this->e('{"inteam1": "' . $unmatched_item['view_indata1'] . '", "inteam2": "' . $unmatched_item['view_indata1'] . '"}')?>" data-eventlink="event<?=$i?>"><td><?=date("Y-m-d H:i:s", strtotime($unmatched_item['log_date']))?></td><td><b><?=$bookies[$unmatched_item['bookie_id']]?></b></td><td>
             <?=$this->e($unmatched_item['matchup'], 'strtolower|ucwords')?></td><td>[<a href="/cnadm/newmatchup?inteam1=<?=$unmatched_item['view_indata1']?>&inteam2=<?=$unmatched_item['view_indata2']?>">add</a>] [<a href="http://www.google.se/search?q=tapology <?=$unmatched_item['matchup']?>">google</a>] 
-            <?=$unmatched_item['metadata']['gametime']?>
             </td></tr>
         <?php endif ?>
     <?php endforeach ?>

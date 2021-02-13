@@ -66,7 +66,7 @@ class ParserJob
                 '--window-size=1200,1100',
                 '--headless',
                 '--disable-gpu',
-            ]);
+            ], ['port' => intval('95' . BOOKIE_ID)]);
             $client->request('GET', 'https://sportsbook.draftkings.com/sports/mma');
 
             $matchups = [];
