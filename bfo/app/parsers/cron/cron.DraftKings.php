@@ -2,18 +2,18 @@
 /**
  * XML Parser
  *
- * Bookie: Fanduel
+ * Bookie: DraftKings
  * Sport: MMA
  *
  * Moneylines: Yes
  * Spreads: No
  * Totals: No
  * Props: No
- * Authoritative run: No
+ * Authoritative run: Yes
  *
  * Comment: Dev version
  * 
- * URL: https://sportsbook.fanduel.com/sports/navigation/7287.1
+ * URL: https://sportsbook.draftkings.com/sports/mma
  *
  */
 
@@ -24,10 +24,10 @@ require_once 'lib/bfocore/parser/general/inc.ParserMain.php';
 use Symfony\Component\Panther\Client;
 use Respect\Validation\Validator as v;
 
-define('BOOKIE_NAME', 'fanduel');
-define('BOOKIE_ID', '21');
+define('BOOKIE_NAME', 'draftkings');
+define('BOOKIE_ID', '22');
 
-$logger = new Katzgrau\KLogger\Logger(GENERAL_KLOGDIR, Psr\Log\LogLevel::INFO, ['filename' => 'cron.' . BOOKIE_NAME . '.' . time() . '.log']);
+$logger = new Katzgrau\KLogger\Logger(GENERAL_KLOGDIR, Psr\Log\LogLevel::DEBUG, ['filename' => 'cron.' . BOOKIE_NAME . '.' . time() . '.log']);
 $parser = new ParserJob($logger);
 $parser->run();
 
@@ -67,13 +67,13 @@ class ParserJob
                 '--headless',
                 '--disable-gpu',
             ]);
-            $client->request('GET', 'https://sportsbook.fanduel.com/sports/navigation/7287.1/9886.3');
+            $client->request('GET', 'https://sportsbook.draftkings.com/sports/mma');
 
             $matchups = [];
 
-            $crawler = $client->waitFor('.events_futures');
+            $crawler = $client->waitFor('.league-link__link');
 
-            $tab_count = $crawler->filter('div.events_futures button.btn')->count();
+            $tab_count = $crawler->filter('a.league-link__link')->count();
             if ($tab_count > 10)
             {
                 $this->logger->error('Unusual amount of tabs, bailing' . $tab_count);
@@ -82,25 +82,34 @@ class ParserJob
             for ($x = 0; $x < $tab_count; $x++)
             {
                 $this->logger->debug('Clicking on tab on page');
-                $client->executeScript("document.querySelectorAll('.events_futures button')[" . $x . "].click()");
-                $crawler = $client->waitFor('.events_futures');
-                $crawler->filter('.event')->each(function (\Symfony\Component\DomCrawler\Crawler $event_node) use (&$client, &$matchups)
+                $client->executeScript("document.querySelectorAll('a.league-link__link')[" . $x . "].click()");
+                $crawler = $client->waitFor('.sportsbook-offer-category-card');
+                $crawler->filter('.sportsbook-event-accordion__wrapper')->each(function (\Symfony\Component\DomCrawler\Crawler $event_node) use (&$client, &$matchups)
                 {
-                    if ($event_node->filter('.MMA')->count())
+                    if ($event_node->filter('.sportsbook-outcome-body-wrapper')->count() == 2)
                     {
                         $matchup = [];
                         $i = 1;
-                        $event_node->filter('.selection')->each(function (\Symfony\Component\DomCrawler\Crawler $team_node) use (&$matchup, &$i)
+                        $event_node->filter('.sportsbook-outcome-body-wrapper')->each(function (\Symfony\Component\DomCrawler\Crawler $team_node) use (&$matchup, &$i)
                         {
-                            $matchup['team' . $i . '_name'] = $team_node->filter('.selection-name')->text();
-                            $matchup['team' . $i . '_odds'] = $team_node->filter('.selectionprice')->text();
+                            $matchup['team' . $i . '_name'] = $team_node->filter('.sportsbook-outcome-cell__label-line-container')->text();
+                            $matchup['team' . $i . '_odds'] = $team_node->filter('.sportsbook-odds')->text();
                             $i++;
                         });
-                        $date = new DateTime($event_node->filter('div.time')->text());
+
+                        //Try future date format first
+                        $this->logger->debug('Capturing date');
+                        $date = DateTime::createFromFormat('D jS M g:ia', (string) $event_node->filter('.sportsbook-event-accordion__date')->text());
+                        if ($date == false)
+                        {
+                            $this->logger->debug('Falling back to secondary date format');
+                            $date = new DateTime((string) $event_node->filter('.sportsbook-event-accordion__date')->text());
+                        }
                         $matchup['date'] = $date->getTimestamp();
                         $matchups[] = $matchup;
                     }
                 });
+                $client->back();
             }
         } 
         catch (Exception $e) 
