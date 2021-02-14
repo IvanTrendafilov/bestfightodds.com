@@ -47,7 +47,7 @@
         <div class="alert-result">&nbsp;</div>
       <input type="submit" value="Add alert" id="alert-submit"></div></form></div>
 </div>
-<div id="bookie-settings-window" class="popup-window"><div class="popup-header">Bookie display settings <a href="#" class="cd-popup-close">&#10005;</a></div><div id="bookie-settings-area"><ul id="bookie-order-items"></ul></div></div>
+<div id="bookie-settings-window" class="popup-window"><div class="popup-header">Bookie display settings <a href="#" class="cd-popup-close">&#10005;</a></div><div id="bookie-settings-area">Drag to change order, show/hide using checkbox<ul id="bookie-order-items"></ul><input type="button" class="button" value="Reset to default settings" id="bookieResetDefault"></div></div>
 
 <?php
 //Disable Google Analytics if running locally

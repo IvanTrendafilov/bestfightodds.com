@@ -650,6 +650,7 @@ $(document).ready(function () {
         });
         $('#alert-submit')[0].disabled = true; //.prop( "disabled", true );
         $('.alert-result').removeClass('success error');
+        $('.alert-result-il').removeClass('success error');
         $(event.target).find("input").removeClass('success error');
         $('.alert-loader').css('display', 'inline-block');
         $.get("api?f=aa", {
@@ -713,6 +714,7 @@ $(document).ready(function () {
         var curbut = $(this);
         curbut[0].disabled = true; //.prop( "disabled", true );
         curbut.prevAll('.alert-result').removeClass('success error');
+        curbut.prevAll('.alert-result-il').removeClass('success error');
         $('#alert-mail-il').removeClass('success error');
         curbut.prevAll('.alert-result-il').text('');
         curbut.prevAll('.alert-loader').css('display', 'inline-block');
@@ -1014,6 +1016,13 @@ initPage = function () {
         }
     });
     $('#alert-window').on('click', function (event) {
+        if ($(event.target).is('.cd-popup-close') || $(event.target).is('#alert-window')) {
+            event.preventDefault();
+            $(this).removeClass('is-visible');
+        }
+    });
+
+    $('#bookie-settings-window').on('click', function (event) {
         if ($(event.target).is('.cd-popup-close') || $(event.target).is('#alert-window')) {
             event.preventDefault();
             $(this).removeClass('is-visible');

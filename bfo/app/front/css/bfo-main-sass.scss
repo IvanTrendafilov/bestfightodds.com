@@ -652,8 +652,8 @@ ul.share-dropdown ul li a {
   font-size: 12px;
   font-weight: 500;
   padding-left: 10px;
-  padding-top: 6px;
-  padding-bottom: 6px;
+  padding-top: 8px;
+  padding-bottom: 8px;
   text-align: left;
   -ms-text-overflow: ellipsis;
   -o-text-overflow: ellipsis;
@@ -681,9 +681,9 @@ ul.share-dropdown ul li a {
 
 .cd-popup-close {
   position: absolute;
-  top: 4px;
+  top: 5px;
   right: 3px;
-  font-size: 14px;
+  font-size: 16px;
   padding: 0 8px;
 }
 
@@ -724,31 +724,30 @@ ul.share-dropdown ul li a {
 }
 
 #bookie-settings-window {
-  
   min-width: 1px;
   display: block;
-  width: 90%;
-  height: 400px;
-  /* Set your own width: percents, ems, whatever! */
+  height: 510px;
+  width: 500px;
   margin: auto;
-  /* Center the item vertically & horizontally */
   top: 0;
   left: 0;
   bottom: 0;
   right: 0;
-  /* Set the bounds in which to center it, relative to its parent/container */
-
 }
 
 #bookie-settings-area {
   padding: 10px;
   color: $font_darkcolor;
+    input#bookieResetDefault {
+      margin-top: 10px;
+    }
 }
 
 #bookie-order-items {
   width: 200px;
   margin-left: auto;
-  margin-right: auto
+  margin-right: auto;
+  margin-top: 10px;
 }
 
 #bookie-order-items li {

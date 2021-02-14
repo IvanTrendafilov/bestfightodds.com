@@ -27,7 +27,7 @@ use Respect\Validation\Validator as v;
 define('BOOKIE_NAME', 'draftkings');
 define('BOOKIE_ID', '22');
 
-$logger = new Katzgrau\KLogger\Logger(GENERAL_KLOGDIR, Psr\Log\LogLevel::DEBUG, ['filename' => 'cron.' . BOOKIE_NAME . '.' . time() . '.log']);
+$logger = new Katzgrau\KLogger\Logger(GENERAL_KLOGDIR, Psr\Log\LogLevel::INFO, ['filename' => 'cron.' . BOOKIE_NAME . '.' . time() . '.log']);
 $parser = new ParserJob($logger);
 $parser->run();
 

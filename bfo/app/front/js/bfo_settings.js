@@ -1,7 +1,15 @@
+
+$(document).ready(function () {
 document.getElementById('bookieHideSelector').addEventListener("click", function(e) {
     showSettingsWindow();
 }, false);
 
+document.getElementById('bookieResetDefault').addEventListener("click", function(e) {
+    localStorage.removeItem("bfo_bookie_order");
+    location.reload();
+    //Reset to defaults
+}, false);
+});
 function updateBookieColumns() {
     var current_settings = localStorage.getItem("bfo_bookie_order");
     if (current_settings !== null) 
@@ -19,7 +27,7 @@ function updateBookieColumns() {
             document.querySelectorAll('.table-scroller table').forEach(function (table) {
                 for (var i = 0, row; row = table.rows[i]; i++) {
                     row.cells[0].insertAdjacentElement('afterend', row.cells[cur_index]);
-                    //Check if this bookie should be disabled as well, if so loop through al 
+                    //Check if this bookie should be disabled as well
                     if (current_settings[item].enabled == false) {
                         row.cells[1].style.display = "none";
                     }
@@ -32,11 +40,26 @@ function updateBookieColumns() {
     }
 }
 
+function saveBookieSettings(el) {
+    console.log('Saving settings');
+    var bookie_orders = {};
+    var i = 0;
+    el.childNodes.forEach(function (item) {
+        bookie_orders[item.dataset.b] = {};
+        bookie_orders[item.dataset.b].enabled = item.querySelector('input').checked;
+        bookie_orders[item.dataset.b].order = i;
+        i++;
+    });
+    localStorage.setItem("bfo_bookie_order", JSON.stringify(bookie_orders));
+    updateBookieColumns();
+}
+
 function showSettingsWindow() {
 
     //Gather all bookie IDs and positions
     var bookies = [];
     var el = document.getElementById('bookie-order-items');
+    el.innerHTML = '';
 
     var current_settings = localStorage.getItem("bfo_bookie_order");
     if (current_settings) 
@@ -50,27 +73,19 @@ function showSettingsWindow() {
         if (current_settings !== null && item.dataset.b in current_settings && current_settings[item.dataset.b].enabled == false) {
             checked = '';
         }
-        el.innerHTML = el.innerHTML + '<li data-b="' + item.dataset.b + '">' + item.textContent + ' <input class="inp-checkbox" type="checkbox" ' + checked + '></li>';
+        el.innerHTML = el.innerHTML + '<li data-b="' + item.dataset.b + '">' + item.textContent + '<input class="inp-checkbox" type="checkbox" ' + checked + '></li>';
     });
 
-    //Restructure according to previously saved bookie order
-    //localStorage.getItem("bfo_bookie_order");
+    el.querySelectorAll('.inp-checkbox').forEach(function (item) {
+        item.addEventListener("change", function(e) {
+            saveBookieSettings(document.querySelector('#bookie-order-items'));
+        }, false);
+    });
 
-    var el = document.getElementById('bookie-order-items');
+
+    //Restructure according to previously saved bookie order
     var sortable = new Sortable(el, {
-        onUpdate: function (evt) {
-                //When an element is dropped we update local storage to store this
-                var bookie_orders = {};
-                var i = 0;
-                el.childNodes.forEach(function (item) {
-                    bookie_orders[item.dataset.b] = {};
-                    bookie_orders[item.dataset.b].enabled = item.querySelector('input').checked;
-                    bookie_orders[item.dataset.b].order = i;
-                    i++;
-                });
-                localStorage.setItem("bfo_bookie_order", JSON.stringify(bookie_orders));
-                updateBookieColumns();
-            },
+        onUpdate: function(item) {console.log('update sortable'); saveBookieSettings(el)},
         filter: ".inp-checkbox"
         }
         
