@@ -41,7 +41,6 @@ function updateBookieColumns() {
 }
 
 function saveBookieSettings(el) {
-    console.log('Saving settings');
     var bookie_orders = {};
     var i = 0;
     el.childNodes.forEach(function (item) {
@@ -85,7 +84,7 @@ function showSettingsWindow() {
 
     //Restructure according to previously saved bookie order
     var sortable = new Sortable(el, {
-        onUpdate: function(item) {console.log('update sortable'); saveBookieSettings(el)},
+        onUpdate: function(item) {saveBookieSettings(el)},
         filter: ".inp-checkbox"
         }
         
