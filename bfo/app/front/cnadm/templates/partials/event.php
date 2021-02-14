@@ -74,7 +74,11 @@ document.addEventListener("DOMContentLoaded", function(event) {
            <tr>
                <td class="eventID"><a href="/cnadm/matchups/<?=$fight['fight_obj']->getID()?>"><?=$fight['fight_obj']->getID()?></a></td>
                <td class="fight <?=$fight['fight_obj']->isMainEvent() ? ' main-event' : ''?>"><a href="/cnadm/fighters/<?=$fight['fight_obj']->getFighterID(1)?>"><?=$fight['fight_obj']->getFighterAsString(1)?></a> <span style="color: #777777">vs</span> <a href="/cnadm/fighters/<?=$fight['fight_obj']->getFighterID(2)?>"><?=$fight['fight_obj']->getFighterAsString(2)?></a></td>
-               <td class="arbitrage <?=($fight['arbitrage_info']['profit'] && $fight['arbitrage_info']['profit'] > 1) ? 'positive' : ''?>"><?=$fight['arbitrage_info']['profit'] ?? ''?></td>
+               <?php if (isset($fight['arbitrage_info'])): ?>
+                    <td class="arbitrage <?=($fight['arbitrage_info']['profit'] && $fight['arbitrage_info']['profit'] > 1) ? 'positive' : ''?>"><?=$fight['arbitrage_info']['profit'] ?? ''?></td>
+                <?php else: ?>
+                    <td class="arbitrage"></td>
+                <?php endif ?>
                <td class="imageLink"><a href="https://www.bestfightodds.com/fights/<?=$fight['fight_obj']->getID()?>.png">o</a></td>
                <td><a href="#" class="delete-matchup-button" data-matchupid="<?=$fight['fight_obj']->getID()?>" onclick="javascript:return confirm('Really remove <?=$fight['fight_obj']->getFighterAsString(1)?> vs <?=$fight['fight_obj']->getFighterAsString(2)?>?')"><b>x</b></a></td>
                <td class="mainEvent"><a href="#" class="set-mainevent-button" data-matchupid="<?=$fight['fight_obj']->getID()?>" data-mainevent="<?=$fight['fight_obj']->isMainEvent() ? '0' : '1'?>"><?=$fight['fight_obj']->isMainEvent() ? 'v' : '^'?></a></td>

@@ -25,7 +25,7 @@ sudo apt install -y apache2-utils
 sudo apt install -y php7.4 php7.4-common php7.4-cli
 
 # Install PHP extensions (Mysqli, GD, Mysql, Curl, XML, mbstring)
-sudo apt install -y php7.4-fpm php7.4-mysqli php7.4-gd php7.4-mysql php7.4-curl php7.4-xml php7.4-mbstring
+sudo apt install -y php7.4-fpm php7.4-mysqli php7.4-gd php7.4-mysql php7.4-curl php7.4-xml php7.4-mbstring php7.4-zip
 
 # Install Composer PHP
 curl -sS https://getcomposer.org/installer -o ~/composer-setup.php
