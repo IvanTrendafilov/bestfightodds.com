@@ -53,6 +53,8 @@ class ParserJob
 
         $op = new OddsProcessor($this->logger, BOOKIE_ID);
         $op->processParsedSport($parsed_sport, $this->full_run);
+
+        $this->logger->info('Finished');
     }
 
     private function parseContent($source)
@@ -70,10 +72,6 @@ class ParserJob
             ], ['port' => intval('95' . BOOKIE_ID), 'host' => 'localhost']);
             $crawler = $client->request('GET', 'https://sportsbook.fanduel.com/sports/navigation/7287.1/9886.3');
             
-            echo $crawler->text();
-
-            echo 'Waiting..';
-
             $matchups = [];
 
             $crawler = $client->waitFor('.events_futures');
