@@ -40,7 +40,7 @@ if ($bCached == false || empty($sBuffer))
     ob_start();
 
     //Loop through fights and categorize as upcoming, rumoured or historic
-    $matchups = ['historic' => [], 'upcoming' => [], 'rumoured' => []];
+    /*$matchups = ['historic' => [], 'upcoming' => [], 'rumoured' => []];
     foreach ($aFights as $key => $fight)
     {
         if ($fight->isFuture() == false)
@@ -58,7 +58,7 @@ if ($bCached == false || empty($sBuffer))
             //Upcoming
             array_push($matchups['upcoming'], $aFights[$key]);
         }
-    }
+    }*/
 
 ?>
 
@@ -73,7 +73,7 @@ if ($bCached == false || empty($sBuffer))
                     <table class="team-stats-table" cellspacing="0" summary="Odds history for <?php echo $oFighter->getNameAsString(); ?>">
                         <thead>
                             <tr>
-                                <th>Result</th>
+                                <?php //<th>Result</th>?>
                                 <th>Matchup</th>
                                 <th style="text-align: right; padding-right: 4px;">Open</th>
                                 <th style="text-align: center; width: 110px;" colspan="3">Closing range</th>
@@ -95,8 +95,8 @@ if ($bCached == false || empty($sBuffer))
                         $oFightOdds2 = EventHandler::getBestOddsForFightAndFighter($oFight->getID(), 2);
                         $aOddsForFight = EventHandler::getAllLatestOddsForFight($oFight->getID());
                         
-                        //Results processing
-                        $aResults = EventHandler::getResultsForMatchup($oFight->getID());
+                        //Results processing - Currently disabled
+                        /*$aResults = EventHandler::getResultsForMatchup($oFight->getID());
                         $sMethod = '';
                         
                         if (isset($aResults['method']))
@@ -142,7 +142,7 @@ if ($bCached == false || empty($sBuffer))
                         {
                             $sResultClass = 'losecell';
                             $sResult = 'Loss';
-                        }
+                        }*/
                         
                         $oFighter1Low = null;
                         $oFighter2Low = null;
@@ -186,9 +186,9 @@ if ($bCached == false || empty($sBuffer))
                                     ?>
 
                                     <tr class="main-row">
-                                        <td class="resultcell <?php echo $sResultClass; ?>">
+                                        <?php /*<td class="resultcell <?php echo $sResultClass; ?>">
                                             <div class="result"><?php echo $sResult; ?></div>
-                                        </td>
+                                        </td> */?>
                                         <th class="oppcell"><?php echo '<a href="/fighters/' . $oFight->getFighterAsLinkString($iTeamPos) . '">' . $oFight->getFighterAsString($iTeamPos) . '</a>'; ?></td>
                                         <td class="moneyline" style="padding-right: 4px;"><span id="oID<?php echo $iCellCounter++; ?>"><?php echo $oOpeningOdds->getFighterOddsAsString($iTeamPos); ?></span></td>
                                         <td class="moneyline"><span id="oID<?php echo $iCellCounter++; ?>"><?php echo ($iTeamPos == 1 ? $oFighter1Low->getFighterOddsAsString(1) : $oFighter2Low->getFighterOddsAsString(2)); ?></span></td>
@@ -217,7 +217,7 @@ if ($bCached == false || empty($sBuffer))
                                                 <td class="item-non-mobile" scope="row" style="padding-left: 20px"><a href="/events/<?php echo $oEvent->getEventAsLinkString(); ?>" ><?php echo $oEvent->getName(); ?></a></th>
                                             </tr>
                                             <tr>
-                                                <td class="resultcell"><div class="method"><?php echo (isset($aResults['winner']) && $aResults['winner'] != '-1') ? '' . $sMethod . '' : ''; ?></div></td>
+                                                <?php /* <td class="resultcell"><div class="method"><?php echo (isset($aResults['winner']) && $aResults['winner'] != '-1') ? '' . $sMethod . '' : ''; ?></div></td> */?>
                                                 <th class="oppcell"><?php echo '<a href="/fighters/' . $oFight->getFighterAsLinkString($iOtherPos) . '">' . $oFight->getFighterAsString($iOtherPos) . '</a>'; ?></td>
                                                 <td class="moneyline" style="padding-right: 4px;"><span id="oID<?php echo $iCellCounter++; ?>"><?php echo $oOpeningOdds->getFighterOddsAsString($iOtherPos); ?></span></td>
                                                 <td class="moneyline"><span id="oID<?php echo $iCellCounter++; ?>"><?php echo ($iTeamPos == 1 ? $oFighter2Low->getFighterOddsAsString(2) : $oFighter1Low->getFighterOddsAsString(1)); ?></span></td>
@@ -232,9 +232,9 @@ if ($bCached == false || empty($sBuffer))
                                 {
                                     ?>
                                     <tr class="main-row">
-                                        <td class="resultcell <?php echo $sResultClass; ?>">
+                                        <?php /* <td class="resultcell <?php echo $sResultClass; ?>">
                                             <div class="result"><?php echo $sResult; ?></div>
-                                        </td>
+                                        </td> */?>
                                         <th class="oppcell"><?php echo '<a href="/fighters/' . $oFight->getFighterAsLinkString($iTeamPos) . '">' . $oFight->getFighterAsString($iTeamPos) . '</a>'; ?></td>
                                         <td class="moneyline"></td>
                                         <td class="moneyline">n/a</td>
@@ -245,7 +245,7 @@ if ($bCached == false || empty($sBuffer))
                                         <td class="item-non-mobile" scope="row" style="padding-left: 20px"><a href="/events/<?php echo $oEvent->getEventAsLinkString(); ?>" ><?php echo $oEvent->getName(); ?></a></th>
                                     </tr>
                                     <tr>
-                                             <td class="resultcell"><div class="method"><?php echo $aResults['winner'] != '-1' ? '' . $sMethod . '' : ''; ?></div></td>
+                                        <?php /*    <td class="resultcell"><div class="method"><?php echo $aResults['winner'] != '-1' ? '' . $sMethod . '' : ''; ?></div></td> */?>
                                         <th class="oppcell"><?php echo '<a href="/fighters/' . $oFight->getFighterAsLinkString($iOtherPos) . '">' . $oFight->getFighterAsString($iOtherPos) . '</a>'; ?></td>
                                         <td class="moneyline"></td>
                                         <td class="moneyline">n/a</td>
