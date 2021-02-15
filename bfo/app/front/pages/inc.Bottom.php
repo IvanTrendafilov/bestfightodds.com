@@ -42,6 +42,8 @@
         <option value="4">Sportsbook</option>
         <option value="18">Intertops</option>
         <option value="13">BetDSI</option>
+        <option value="21">FanDuel</option>
+        <option value="22">DraftKings</option>
       </select><br /><div id="alert-button-container"><input type="hidden" name="tn"><input type="hidden" name="m">
         <div class="alert-loader"></div>
         <div class="alert-result">&nbsp;</div>
