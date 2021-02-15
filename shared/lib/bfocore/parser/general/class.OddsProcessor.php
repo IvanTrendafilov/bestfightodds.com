@@ -61,7 +61,7 @@ class OddsProcessor
 
         $oParseRunLogger = new ParseRunLogger();
 
-        $oParseRunLogger->logRun($a_oParser->getID(), [$this->bookie_id,
+        $oParseRunLogger->logRun(-1, [$this->bookie_id,
         'parsed_matchups' => count($parsed_sport->getParsedMatchups()),
         'parsed_props' => count($parsed_sports->getParsedProps()),
         'matched_matchups' => count($matched_matchups),
