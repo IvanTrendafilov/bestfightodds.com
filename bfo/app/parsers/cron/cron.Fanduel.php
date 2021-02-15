@@ -68,7 +68,11 @@ class ParserJob
                 '--headless',
                 '--disable-gpu',
             ], ['port' => intval('95' . BOOKIE_ID), 'host' => 'localhost']);
-            $client->request('GET', 'https://sportsbook.fanduel.com/sports/navigation/7287.1/9886.3');
+            $crawler = $client->request('GET', 'https://sportsbook.fanduel.com/sports/navigation/7287.1/9886.3');
+            
+            echo $crawler->text();
+
+            echo 'Waiting..';
 
             $matchups = [];
 
