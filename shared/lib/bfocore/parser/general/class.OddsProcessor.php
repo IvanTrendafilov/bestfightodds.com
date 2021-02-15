@@ -63,7 +63,7 @@ class OddsProcessor
 
         $oParseRunLogger->logRun(-1, [$this->bookie_id,
         'parsed_matchups' => count($parsed_sport->getParsedMatchups()),
-        'parsed_props' => count($parsed_sports->getParsedProps()),
+        'parsed_props' => count($parsed_sport->getParsedProps()),
         'matched_matchups' => count($matched_matchups),
         'matched_props' => count($matched_props),
         'status' => 1]);
