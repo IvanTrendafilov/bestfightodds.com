@@ -14,7 +14,7 @@
 <a href="/cnadm/" style="color: #a30000; text-decoration: none;">
 <h1 style="">Admin</h1></a>
 
-<a href="/cnadm/actions">Schedule</a>&nbsp;&nbsp;&nbsp;
+<a href="/cnadm/manualactions">Schedule</a>&nbsp;&nbsp;&nbsp;
 <a href="/cnadm/events">New Event</a>&nbsp;&nbsp;&nbsp;
 <a href="/cnadm/newmatchup">New Fight</a>&nbsp;&nbsp;&nbsp;
 <a href="/cnadm/events">Events overview</a> <a href="/cnadm/events/all">(all)</a>&nbsp;&nbsp;&nbsp;
