@@ -67,7 +67,6 @@ class OddsProcessor
         'matched_matchups' => count($matched_matchups),
         'matched_props' => count($matched_props),
         'status' => 1]);
-
     }
 
     /**

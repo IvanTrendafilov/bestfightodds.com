@@ -93,7 +93,7 @@ class AdminController
 
         if ($actions != null && count($actions) > 0)
         {
-            foreach($actions as $action)
+            foreach($actions as &$action)
             {
                 $action['action_obj'] = json_decode($action['description']);
                 switch ((int) $action['type'])
@@ -146,27 +146,21 @@ class AdminController
                     break;
                     case 8:
                     //Move matchup to a non-existant event
-                    
                         $action['view_extra']['new_event'] = EventHandler::getEventByName($action['action_obj']->eventTitle);
+                        $action['view_extra']['matchups'] = [];
                         foreach ($action['action_obj']->matchupIDs as $sMatchup)
                         {
-                            $oMatchup = EventHandler::getFightByID($sMatchup);
-                            echo '&nbsp;' . $oMatchup->getTeamAsString(1) . ' vs. ' . $oMatchup->getTeamAsString(2). '';
-                            $newMA = json_encode(array('matchupID' => $sMatchup, 'eventID' => ($action['view_extra']['new_event'] != null ? $action['view_extra']['new_event']->getID() : '-9999')), JSON_HEX_APOS | JSON_HEX_QUOT);
-                            echo '</td><td><input type="submit" value="Accept" ' .  ($action['view_extra']['new_event'] == null ? ' disabled=true ' : '') . ' onclick="maMoveMatchup(' . $action['id'] . ', \'' . htmlspecialchars($newMA). '\')" /><br/>
-        ';					
+                            $action['view_extra']['matchups'][$sMatchup] = EventHandler::getFightByID($sMatchup);
+                            $action['view_extra']['newma'][$sMatchup] = json_encode(array('matchupID' => $sMatchup, 'eventID' => ($action['view_extra']['new_event'] != null ? $action['view_extra']['new_event']->getID() : '-9999')), JSON_HEX_APOS | JSON_HEX_QUOT);
                         }
         
                     break;
                     default:
-                        echo $action['description'];
                 }
-        
-                 echo '</td></tr>';
             }
         }
-        
 
+        $response->getBody()->write($this->plates->render('manualactions', ['actions' => $actions]));
         return $response;
     }
 
