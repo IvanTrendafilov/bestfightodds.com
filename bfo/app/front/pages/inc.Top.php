@@ -119,8 +119,8 @@
                                 <ul class="dropdown">
                                     <li><a href="#" id="format-toggle-text"><span>Settings &#9660;</span></a>
                                         <ul class="sub_menu">
-                                            <li><a href="#" id="normalModeSelector" class="list-checked"><span style="display: inline-block">&#10003;</span>Normal</a></li>
-                                            <li style="border-bottom: 1px solid #393b42"><a href="#" id="darkModeSelector"><span>&#10003;</span>Dark mode</a></li>
+                                            <?php /*<li><a href="#" id="normalModeSelector" class="list-checked"><span style="display: inline-block">&#10003;</span>Normal</a></li>
+                                            <li style="border-bottom: 1px solid #393b42"><a href="#" id="darkModeSelector"><span>&#10003;</span>Dark mode</a></li> */?>
                                              <li><a href="#" id="formatSelector1" class="list-checked"><span style="display: inline-block">&#10003;</span>Moneyline</a></li>
                                              <li><a href="#" id="formatSelector2"><span>&#10003;</span>Decimal</a></li>
                                              <li><a href="#" id="formatSelector4"><span>&#10003;</span>Fractional</a></li>
