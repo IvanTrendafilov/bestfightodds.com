@@ -226,7 +226,6 @@ function maRedateEvent(ma_id, inputdata)
 
 function clearManulAction(ma_id)
 {
-    inputJSON = $.parseJSON(inputdata);
     var opts = {
         method: 'DELETE',
         headers: {
