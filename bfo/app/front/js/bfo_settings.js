@@ -1,14 +1,20 @@
-
 $(document).ready(function () {
-document.getElementById('bookieHideSelector').addEventListener("click", function(e) {
-    showSettingsWindow();
-}, false);
+    document.getElementById('bookieHideSelector').addEventListener("click", function(e) {
+        showSettingsWindow();
+    }, false);
 
-document.getElementById('bookieResetDefault').addEventListener("click", function(e) {
-    localStorage.removeItem("bfo_bookie_order");
-    location.reload();
-    //Reset to defaults
-}, false);
+    document.getElementById('bookieResetDefault').addEventListener("click", function(e) {
+        localStorage.removeItem("bfo_bookie_order");
+        location.reload();
+        //Reset to defaults
+    }, false);
+
+    var el = document.getElementById('bookie-order-items');
+    var sortable = new Sortable(el, {
+        onUpdate: function(item) {saveBookieSettings(el)},
+        filter: ".inp-checkbox"
+        }
+    );
 });
 function updateBookieColumns() {
     //Only apply to pages that contain table-scroller (an odds table)
@@ -89,15 +95,6 @@ function showSettingsWindow() {
             saveBookieSettings(document.querySelector('#bookie-order-items'));
         }, false);
     });
-
-
-    //Restructure according to previously saved bookie order
-    var sortable = new Sortable(el, {
-        onUpdate: function(item) {saveBookieSettings(el)},
-        filter: ".inp-checkbox"
-        }
-        
-    );
 
     var settingswindow = document.getElementById('bookie-settings-window');
 
