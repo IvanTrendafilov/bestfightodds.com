@@ -181,9 +181,18 @@ class BookieDAO
 
         $aParams = array($a_oPropTemplate->getBookieID(), $a_oPropTemplate->getTemplate(), $a_oPropTemplate->getPropTypeID(), $a_oPropTemplate->getTemplateNeg(), $a_oPropTemplate->getFieldsTypeID());
 
-        DBTools::doParamQuery($sQuery, $aParams);
-
-        return (DBTools::getAffectedRows() > 0 ? true : false);
+    	$id = null;
+		try 
+		{
+			$id = PDOTools::insert($sQuery, $aParams);
+		}
+		catch(PDOException $e)
+		{
+		    if($e->getCode() == 23000){
+				throw new Exception("Duplicate entry", 10);	
+		    }
+		}
+		return $id;
     }
 
     public static function updateTemplateLastUsed($a_iTemplateID)
@@ -193,6 +202,23 @@ class BookieDAO
         DBTools::doParamQuery($sQuery, $aParams);
 
         return (DBTools::getAffectedRows() > 0 ? true : false);
+    }
+
+    public static function deleteTemplate($a_iTemplateID)
+    {
+        $sQuery = 'DELETE FROM bookies_proptemplates WHERE id = ?';
+        $aParams = array($a_iTemplateID);
+        DBTools::doParamQuery($sQuery, $aParams);
+        return (DBTools::getAffectedRows() > 0 ? true : false);
+    }
+
+    public static function getAllRunStatuses()
+    {
+        $sQuery = 'SELECT b.name, lp.bookie_id, MAX(lp.date), AVG(lp.matched_matchups) as average_matched 
+                    FROM logs_parseruns lp INNER JOIN bookies b  on lp.bookie_id = b.id 
+                    WHERE lp.date >= NOW() - INTERVAL 1 DAY 
+                    GROUP BY lp.bookie_id;';
+	    return PDOTools::findMany($sQuery);
     }
 }
 

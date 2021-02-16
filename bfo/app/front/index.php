@@ -107,6 +107,9 @@ if (isset($_GET['p']))
                 define('PAGE_OVERRIDE_KEYWORDS', $oMatchup->getTeamAsString(1) . ', ' . $oMatchup->getTeamAsString(2));
             }
             break;
+        case 'bookiesettings': 
+            define('PAGE_OVERRIDE_TITLE', 'Customize bookie settings');
+            break;
         default:
     }
 }
@@ -168,7 +171,8 @@ if (isset($_GET['p']) && (
         $_GET['p'] == 'stopscrape' || 
         $_GET['p'] == 'odds' ||
         $_GET['p'] == 'matchup' ||
-        $_GET['p'] == 'prefightreport'
+        $_GET['p'] == 'prefightreport' ||
+        $_GET['p'] == 'bookiesettings'
         ))
 {
     require_once('app/front/pages/inc.FrontLogic.php');

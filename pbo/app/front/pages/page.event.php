@@ -97,7 +97,7 @@ if ($oEvent != null)
         $sShareDesc = $oEvent->getName() . ' betting lines';
 
         echo '<div class="share-area"><div class="share-button" alt="Share this"></div></div>
-                                        <div class="share-window"><div data-href="https://twitter.com/intent/tweet?text=' . urlencode($sShareDesc) . '&amp;url=' . urlencode($sShareURL) . '" class="share-item share-twitter"></div><div data-href="https://www.facebook.com/sharer/sharer.php?u=' . urlencode($sShareURL) . '" class="share-item share-facebook"></div><div data-href="https://plus.google.com/share?url=' . urlencode($sShareURL) .'" class="share-item share-google"></div><div data-href="whatsapp://send?text=' . urlencode($sShareDesc) . ' ' . urlencode($sShareURL) . '" data-action="share/whatsapp/share" class="share-item share-whatsapp item-mobile-only"></div></div>';
+                                        <div class="share-window"><div data-href="https://twitter.com/intent/tweet?text=' . urlencode($sShareDesc) . '&amp;url=' . urlencode($sShareURL) . '" class="share-item share-twitter"></div><div data-href="https://www.facebook.com/sharer/sharer.php?u=' . urlencode($sShareURL) . '" class="share-item share-facebook"></div><div data-href="whatsapp://send?text=' . urlencode($sShareDesc) . ' ' . urlencode($sShareURL) . '" data-action="share/whatsapp/share" class="share-item share-whatsapp item-mobile-only"></div></div>';
 
         echo '</div>';
 
@@ -179,7 +179,7 @@ if ($oEvent != null)
         foreach ($aBookies as $oBookie)
         {
             $aBookieRefList[] = $oBookie->getID();
-            echo '<th scope="col"><a href="/out/' . $oBookie->getID() . '" onclick="lO(' . $oBookie->getID() . ',' . $oEvent->getID() . ');">' . str_replace(' ', '&nbsp;', (strlen($oBookie->getName()) > 10 ? (substr($oBookie->getName(), 0, 9) . '.') : $oBookie->getName())) . '</a></th>';
+            echo '<th scope="col" data-b="' . $oBookie->getID() . '"><a href="/out/' . $oBookie->getID() . '" onclick="lO(' . $oBookie->getID() . ',' . $oEvent->getID() . ');">' . str_replace(' ', '&nbsp;', (strlen($oBookie->getName()) > 10 ? (substr($oBookie->getName(), 0, 9) . '.') : $oBookie->getName())) . '</a></th>';
         }
         echo '<th scope="col" colspan="3" class="table-prop-header">Props</th></tr></thead><tbody>';
 
@@ -483,7 +483,7 @@ if ($oEvent != null)
             //Check if event is in the future, if so, add a notifier about alerts, tweets, etc..
             if (strtotime(GENERAL_TIMEZONE . ' hours') < strtotime(date('Y-m-d 23:59:59', strtotime($oEvent->getDate()))))
             {
-                echo '<br /><br /><img src="/img/info.gif" class="img-info-box" /> Get notified when odds are posted either via our <a href="/alerts" style="text-decoration: underline">Alerts</a> functionality or by following us on <a href="http://twitter.com/proboxingodds" target="_blank" style="text-decoration: underline">Twitter</a>';
+                echo '<br /><br /><img src="/img/info.gif" class="img-info-box" /> Get notified when odds are posted either via our <a href="/alerts" style="text-decoration: underline">Alerts</a> functionality or by following us on <a href="http://twitter.com/proboxingodds" target="_blank" rel="noopener" style="text-decoration: underline">Twitter</a>';
             }
             echo '</td></tr>';
         }

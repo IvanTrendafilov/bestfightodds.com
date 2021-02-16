@@ -42,7 +42,7 @@ foreach ($aEvent as $oEvent)
         $sShareDesc = $oEvent->getName() . ' betting lines';
 
         echo '<div class="share-area"><div class="share-button"></div></div>
-                                        <div class="share-window"><div data-href="https://twitter.com/intent/tweet?text=' . urlencode($sShareDesc) . '&amp;url=' . urlencode($sShareURL) . '" class="share-item share-twitter"></div><div data-href="https://www.facebook.com/sharer/sharer.php?u=' . urlencode($sShareURL) . '" class="share-item share-facebook"></div><div data-href="https://plus.google.com/share?url=' . urlencode($sShareURL) .'" class="share-item share-google"></div><div data-href="whatsapp://send?text=' . urlencode($sShareDesc) . ' ' . urlencode($sShareURL) . '" data-action="share/whatsapp/share" class="share-item share-whatsapp item-mobile-only"></div></div>';
+                                        <div class="share-window"><div data-href="https://twitter.com/intent/tweet?text=' . urlencode($sShareDesc) . '&amp;url=' . urlencode($sShareURL) . '" class="share-item share-twitter"></div><div data-href="https://www.facebook.com/sharer/sharer.php?u=' . urlencode($sShareURL) . '" class="share-item share-facebook"></div><div data-href="whatsapp://send?text=' . urlencode($sShareDesc) . ' ' . urlencode($sShareURL) . '" data-action="share/whatsapp/share" class="share-item share-whatsapp item-mobile-only"></div></div>';
 
         echo '</div>';
 
@@ -137,7 +137,7 @@ foreach ($aEvent as $oEvent)
         foreach ($aBookies as $oBookie)
         {
             $aBookieRefList[] = $oBookie->getID();
-            echo '<th scope="col"><a href="/out/' . $oBookie->getID() . '" onclick="lO(' . $oBookie->getID() . ',' . $oEvent->getID() . ');">' . str_replace(' ', '&nbsp;', (strlen($oBookie->getName()) > 10 ? (substr($oBookie->getName(), 0, 9) . '.') : $oBookie->getName())) . '</a></th>';
+            echo '<th scope="col" data-b="' . $oBookie->getID() . '"><a href="/out/' . $oBookie->getID() . '" onclick="lO(' . $oBookie->getID() . ',' . $oEvent->getID() . ');">' . str_replace(' ', '&nbsp;', (strlen($oBookie->getName()) > 10 ? (substr($oBookie->getName(), 0, 9) . '.') : $oBookie->getName())) . '</a></th>';
         }
         echo '<th scope="col" colspan="3" class="table-prop-header">Props</th></tr></thead><tbody>';
 
@@ -251,7 +251,7 @@ foreach ($aEvent as $oEvent)
                     echo '<td class="button-cell"><span class="but-img i-ng"></span></td>';
                 }
 
-                echo '<td class="prop-cell"><a href="#" data-mu="' . $oFight->getID() . '"><span class="t-b-cc">';
+                echo '<td class="prop-cell"><a href="#" data-mu="' . $oFight->getID() . '" class="prop-cell-exp"><span class="t-b-cc">';
                 $iPropCount = OddsHandler::getPropCountForMatchup($oFight->getID());
                 if ($iPropCount > 0)
                 {

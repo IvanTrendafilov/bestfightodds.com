@@ -10,10 +10,21 @@ require_once('lib/bfocore/general/inc.GlobalTypes.php');
  */
 class TeamHandler
 {
-
+    /**
+     * @deprecated Replaced by getAltNamesForTeamByID that takes ID as input not a string name
+     */
     public static function getAllAltNamesForTeam($a_sTeamName)
     {
         return TeamDAO::getAllAltNamesForTeam($a_sTeamName);
+    }
+
+    public static function getAltNamesForTeamByID($a_iTeamID)
+    {
+        if (!$a_iTeamID)
+        {
+            return null;
+        }
+        return TeamDAO::getAltNamesForTeamByID($a_iTeamID);
     }
 
 	/**

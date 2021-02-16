@@ -682,6 +682,9 @@ fo2.bookie_id, fo2.fight_id ASC;';
         $sQuery = "DELETE FROM events WHERE id = ?";
         $aParams = array($a_iEventID);
         DBTools::doParamQuery($sQuery, $aParams);
+
+        //TODO: This needs error check
+        return true;
     }
 
     public static function removeFight($a_iFightID)
@@ -706,6 +709,9 @@ fo2.bookie_id, fo2.fight_id ASC;';
         //Delete tweet status (simply for cleanup)
         $sQuery5 = "DELETE FROM fight_twits WHERE fight_id = ?";
         DBTools::doParamQuery($sQuery5, $aParams);
+
+        //TODO: This needs error check
+        return true;
     }
 
     public static function getBestOddsForFight($a_iFightID)
@@ -850,7 +856,7 @@ fo2.bookie_id, fo2.fight_id ASC;';
         return true;
     }
 
-    //Returns all fights for a fighter. Use future_only to narrow it down
+    //Returns all fights for a fighter
     public static function getAllFightsForFighter($a_iFighterID)
     {
         $sQuery = 'SELECT e.date AS thedate, f.id, f1.name AS fighter1_name, f2.name AS fighter2_name, f.event_id, f1.id AS fighter1_id, f2.id AS fighter2_id,

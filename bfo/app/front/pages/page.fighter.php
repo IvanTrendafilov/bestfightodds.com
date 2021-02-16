@@ -36,22 +36,44 @@ if (CacheControl::isPageCached('team-' . $oFighter->getID() . '-' . strtotime($s
 if ($bCached == false || empty($sBuffer))
 {
     $aFights = EventHandler::getAllFightsForFighter((int) $_GET['fighterID']);
-    $iCellCounter = 0;
+    $iCellCounter = 0; 
     ob_start();
+
+    //Loop through fights and categorize as upcoming, rumoured or historic
+    /*$matchups = ['historic' => [], 'upcoming' => [], 'rumoured' => []];
+    foreach ($aFights as $key => $fight)
+    {
+        if ($fight->isFuture() == false)
+        {
+            //Historic
+            array_push($matchups['historic'], $aFights[$key]);
+        }
+        else if ($aFights[$key]->getEventID() == PARSE_FUTURESEVENT_ID)
+        {
+            //Rumoured
+            array_push($matchups['rumoured'], $aFights[$key]);
+        }
+        else
+        {
+            //Upcoming
+            array_push($matchups['upcoming'], $aFights[$key]);
+        }
+    }*/
+
 ?>
 
 <div id="page-wrapper" style="max-width: 800px;">
 
     
     <div id="page-container">
-    <div class="content-header team-stats-header"><span id="team-name"><?php echo $oFighter->getNameAsString(); ?></span></div>
+    <div class="content-header team-stats-header"><h1 id="team-name"><?php echo $oFighter->getNameAsString(); ?></h1></div>
         <div id="page-inner-wrapper">
-            <div id="page-content">           
+            <div id="page-content">
                 <div id="team-stats-container" style="display: inline-block">
                     <table class="team-stats-table" cellspacing="0" summary="Odds history for <?php echo $oFighter->getNameAsString(); ?>">
                         <thead>
                             <tr>
-                                <?php //<th>Result</th> ?>
+                                <?php //<th>Result</th>?>
                                 <th>Matchup</th>
                                 <th style="text-align: right; padding-right: 4px;">Open</th>
                                 <th style="text-align: center; width: 110px;" colspan="3">Closing range</th>
@@ -62,57 +84,65 @@ if ($bCached == false || empty($sBuffer))
                         </thead>
                         <tbody>
                     <?php
-                    foreach ($aFights as $oFight)
+                    for ($i = 0; $i < count($aFights); $i++)
                     {
+                        $oFight = $aFights[$i];
+                        
+
+
                         $oEvent = EventHandler::getEvent($oFight->getEventID());
                         $oFightOdds1 = EventHandler::getBestOddsForFightAndFighter($oFight->getID(), 1);
                         $oFightOdds2 = EventHandler::getBestOddsForFightAndFighter($oFight->getID(), 2);
                         $aOddsForFight = EventHandler::getAllLatestOddsForFight($oFight->getID());
                         
-                        //Results processing
-                        $aResults = EventHandler::getResultsForMatchup($oFight->getID());
+                        //Results processing - Currently disabled
+                        /*$aResults = EventHandler::getResultsForMatchup($oFight->getID());
                         $sMethod = '';
-                        switch ($aResults['method'])
+                        
+                        if (isset($aResults['method']))
                         {
-                            case 'unanimous dec':
-                                $sMethod = 'Decision (Unanimous)';
-                                break;
-                            case 'split dec':
-                                $sMethod = 'Decision (Split)';
-                                break;
-                            case 'majority dec':
-                                $sMethod = 'Decision (Majority)';
-                                break; 
-                            case 'tko/ko':
-                            case 'nc':
-                            case 'dq':
-                                $sMethod = strtoupper($aResults['method']);
-                                break;
-                            case 'submission':
-                            case 'draw':
-                            default:
-                                $sMethod = ucfirst($aResults['method']);
+                            switch ($aResults['method'])
+                            {
+                                case 'unanimous dec':
+                                    $sMethod = 'Decision (Unanimous)';
+                                    break;
+                                case 'split dec':
+                                    $sMethod = 'Decision (Split)';
+                                    break;
+                                case 'majority dec':
+                                    $sMethod = 'Decision (Majority)';
+                                    break; 
+                                case 'tko/ko':
+                                case 'nc':
+                                case 'dq':
+                                    $sMethod = strtoupper($aResults['method']);
+                                    break;
+                                case 'submission':
+                                case 'draw':
+                                default:
+                                    $sMethod = ucfirst($aResults['method']);
+                            }
                         }
 
                         //Determine cell class and text based on winner of the fight
                         $sResultClass = '';
                         $sResult = '';
-                        if ($aResults['method'] == 'nc' || $aResults['method'] == 'draw')
+                        if (isset($aResults['method']) && ($aResults['method'] == 'nc' || $aResults['method'] == 'draw'))
                         {
                             $sResultClass = 'drawcell';
                             $sResult = $sMethod;
                             $sMethod = '';
                         }
-                        else if ($aResults['winner'] == $oFighter->getID())
+                        else if (isset($aResults['winner']) && $aResults['winner'] == $oFighter->getID())
                         {
                             $sResultClass = 'wincell';
                             $sResult = 'Win';
                         }
-                        else if (!empty($aResults['winner']) && $aResults['winner'] != $oFighter->getID())
+                        else if (isset($aResults['winner']) && !empty($aResults['winner']) && $aResults['winner'] != $oFighter->getID())
                         {
                             $sResultClass = 'losecell';
                             $sResult = 'Loss';
-                        }
+                        }*/
                         
                         $oFighter1Low = null;
                         $oFighter2Low = null;
@@ -142,8 +172,7 @@ if ($bCached == false || empty($sBuffer))
                         $sGraphData = GraphHandler::getMedianSparkLine($oFight->getID(), ($oFight->getFighterID(1) == $oFighter->getID() ? 1 : 2));
 
                         $sEventDate = '';
-                        //TODO: Hardcoded reference to "FUTURE EVENTS". Should be changed to set id
-                        if (strtoupper($oEvent->getName()) != 'FUTURE EVENTS')
+                        if (strtoupper($oEvent->getID()) != PARSE_FUTURESEVENT_ID)
                         {
                             $sEventDate = date('M jS Y', strtotime($oEvent->getDate()));
                         }
@@ -157,17 +186,17 @@ if ($bCached == false || empty($sBuffer))
                                     ?>
 
                                     <tr class="main-row">
-                                        <td class="resultcell <?php echo $sResultClass; ?>">
+                                        <?php /*<td class="resultcell <?php echo $sResultClass; ?>">
                                             <div class="result"><?php echo $sResult; ?></div>
-                                        </td>
-                                        <th class="oppcell"><?php echo '<a href="/fighters/' . $oFight->getFighterAsLinkString($iTeamPos) . '"><div>' . $oFight->getFighterAsString($iTeamPos) . '</div></a>'; ?></td>
+                                        </td> */?>
+                                        <th class="oppcell"><?php echo '<a href="/fighters/' . $oFight->getFighterAsLinkString($iTeamPos) . '">' . $oFight->getFighterAsString($iTeamPos) . '</a>'; ?></td>
                                         <td class="moneyline" style="padding-right: 4px;"><span id="oID<?php echo $iCellCounter++; ?>"><?php echo $oOpeningOdds->getFighterOddsAsString($iTeamPos); ?></span></td>
                                         <td class="moneyline"><span id="oID<?php echo $iCellCounter++; ?>"><?php echo ($iTeamPos == 1 ? $oFighter1Low->getFighterOddsAsString(1) : $oFighter2Low->getFighterOddsAsString(2)); ?></span></td>
                                         <td class="dash-cell">...</td>
                                         <td class="moneyline" style="text-align: left; padding-left: 0; padding-right: 7px;"><span id="oID<?php echo $iCellCounter++; ?>"><?php echo ($iTeamPos == 1 ? $oFighter1High->getFighterOddsAsString(1) : $oFighter2High->getFighterOddsAsString(2)); ?></span></td>
 
                                     <?php
-                                        //Disable sparkline if only one row
+                                        //Disable sparkline if only one line of odds available
                                     if (strpos($sGraphData, ',') !== false) 
                                     {
                                     ?>
@@ -188,14 +217,14 @@ if ($bCached == false || empty($sBuffer))
                                                 <td class="item-non-mobile" scope="row" style="padding-left: 20px"><a href="/events/<?php echo $oEvent->getEventAsLinkString(); ?>" ><?php echo $oEvent->getName(); ?></a></th>
                                             </tr>
                                             <tr>
-                                                <td class="resultcell"><div class="method"><?php echo $aResults['winner'] != '-1' ? '' . $sMethod . '' : ''; ?></div></td>
-                                                <th class="oppcell"><?php echo '<a href="/fighters/' . $oFight->getFighterAsLinkString($iOtherPos) . '"><div>' . $oFight->getFighterAsString($iOtherPos) . '</div></a>'; ?></td>
+                                                <?php /* <td class="resultcell"><div class="method"><?php echo (isset($aResults['winner']) && $aResults['winner'] != '-1') ? '' . $sMethod . '' : ''; ?></div></td> */?>
+                                                <th class="oppcell"><?php echo '<a href="/fighters/' . $oFight->getFighterAsLinkString($iOtherPos) . '">' . $oFight->getFighterAsString($iOtherPos) . '</a>'; ?></td>
                                                 <td class="moneyline" style="padding-right: 4px;"><span id="oID<?php echo $iCellCounter++; ?>"><?php echo $oOpeningOdds->getFighterOddsAsString($iOtherPos); ?></span></td>
                                                 <td class="moneyline"><span id="oID<?php echo $iCellCounter++; ?>"><?php echo ($iTeamPos == 1 ? $oFighter2Low->getFighterOddsAsString(2) : $oFighter1Low->getFighterOddsAsString(1)); ?></span></td>
                                                 <td class="dash-cell">...</td>
                                                 <td class="moneyline" style="text-align: left; padding-left: 0"><span id="oID<?php echo $iCellCounter++; ?>"><?php echo ($iTeamPos == 1 ? $oFighter2High->getFighterOddsAsString(2) : $oFighter1High->getFighterOddsAsString(1)); ?></span></td>
 
-                                        <td class="item-non-mobile" style="padding-left: 20px"><?php echo $sEventDate; ?></td>
+                                        <td class="item-non-mobile" style="padding-left: 20px; color: #9a9a9a"><?php echo $sEventDate; ?></td>
                                     </tr>
                                     <?php
                                 }
@@ -203,9 +232,9 @@ if ($bCached == false || empty($sBuffer))
                                 {
                                     ?>
                                     <tr class="main-row">
-                                        <td class="resultcell <?php echo $sResultClass; ?>">
+                                        <?php /* <td class="resultcell <?php echo $sResultClass; ?>">
                                             <div class="result"><?php echo $sResult; ?></div>
-                                        </td>
+                                        </td> */?>
                                         <th class="oppcell"><?php echo '<a href="/fighters/' . $oFight->getFighterAsLinkString($iTeamPos) . '">' . $oFight->getFighterAsString($iTeamPos) . '</a>'; ?></td>
                                         <td class="moneyline"></td>
                                         <td class="moneyline">n/a</td>
@@ -216,7 +245,7 @@ if ($bCached == false || empty($sBuffer))
                                         <td class="item-non-mobile" scope="row" style="padding-left: 20px"><a href="/events/<?php echo $oEvent->getEventAsLinkString(); ?>" ><?php echo $oEvent->getName(); ?></a></th>
                                     </tr>
                                     <tr>
-                                             <td class="resultcell"><div class="method"><?php echo $aResults['winner'] != '-1' ? '' . $sMethod . '' : ''; ?></div></td>
+                                        <?php /*    <td class="resultcell"><div class="method"><?php echo $aResults['winner'] != '-1' ? '' . $sMethod . '' : ''; ?></div></td> */?>
                                         <th class="oppcell"><?php echo '<a href="/fighters/' . $oFight->getFighterAsLinkString($iOtherPos) . '">' . $oFight->getFighterAsString($iOtherPos) . '</a>'; ?></td>
                                         <td class="moneyline"></td>
                                         <td class="moneyline">n/a</td>

@@ -43,11 +43,29 @@ function createChart(indata) {
 
     $('#chart-area').highcharts({
         chart: {
+            backgroundColor: (window.darkmode === true ? '#363b41' : '#fff'),
+            styledMode: true,
             type: 'line',
             style: {
                 fontFamily: "'Roboto', Arial, sans-serif"
             },
-            marginTop: 18
+            marginTop: 18,
+            /*events: {
+                load: function() {
+                    this.renderer.label('BestFightOdds.com', this.chartWidth / 2 - 110, this.chartHeight / 2 - 35)
+                    .attr({
+                        
+
+                    })
+                    .css ({
+                        zIndex: 1000,
+                        color: '#f3f3f3',
+                        fontSize: '24px',
+                        fontWeight: '500'
+                    })
+                        .add();
+                }
+            }*/
         },
         credits: {
             enabled: false
@@ -55,7 +73,7 @@ function createChart(indata) {
         legend: {
             enabled: false
         },
-        colors: ['#393B42'],
+        colors: [(window.darkmode === true ? '#c0c0c0' : '#393B42')],
         title: {
             text: '',
             style: {
@@ -138,7 +156,7 @@ function createChart(indata) {
                 var formatted_date = days[da.getDay()] + ', ' + monthNames[da.getMonth()] + ' ' + da.getDate() + ', ' + (da.getHours() < 10? '0' : '') + da.getHours() + ':' + (da.getMinutes() < 10? '0' : '') + da.getMinutes();
                 //Old method: Highcharts.dateFormat('%a %d. %b %H:%M', this.x)
 
-                return '<span style="color: #666; font-weight: bold; font-size: 11px">' +  formatted_date + '</span><br/>' + this.series.name + ': <b>' + ttVal + '</b>' + carr + '<br/>';
+                return '<span style="color: #666; font-weight: bold; font-size: 12px">' +  formatted_date + '</span><br/>' + this.series.name + ': <b>' + ttVal + '</b>' + carr + '<br/>';
 
             },
             style: {
@@ -191,7 +209,7 @@ function createChart(indata) {
                     padding: 3,
                     style: {
                         textShadow: 0,
-                        fontSize: '11px',
+                        fontSize: '12px',
                         color: '#fff',
                         fontWeight: 'normal'
 
@@ -243,8 +261,7 @@ $(function() {
                     style: {
                         fontFamily: "'Roboto', Arial, sans-serif",
                         color: '#1a1a1a',
-                        fontSize: '10px',
-                        fontWeight: '500'
+                        fontSize: '12px'
                     },
                     spacingBottom: 3,
                 },
@@ -253,9 +270,8 @@ $(function() {
                     labels: {
                         overflow: 'justify',
                         style: {
-                            fontSize: '10px',
-                            fontWeight: '500',
-                            align: 'left'
+                            fontSize: '12px',
+                            align: 'left',
                         } 
                     },
                     max: maxval - 1,
@@ -272,7 +288,7 @@ $(function() {
                     },
                 },
                 tooltip: {
-                    valueSuffix: ' %',
+                    valueSuffix: ' %'
                 },
                 plotOptions: {
                     bar: {
@@ -291,8 +307,8 @@ $(function() {
                             style: {
                                 fontFamily: "'Roboto', Arial, sans-serif",
                                 color: '#4d4d4d',
-                                fontSize: '11px',
-                                fontWeight: '500'
+                                fontSize: '12px',
+                                fontWeight: 'normal',
                             },
                             enabled: true,
                             crop: false,
@@ -350,8 +366,7 @@ $(function() {
                   style: {
                     fontFamily: "'Roboto', Arial, sans-serif",
                     color: '#1a1a1a',
-                    fontSize: '10px',
-                    fontWeight: '500'
+                    fontSize: '12px'
                   },
                 },
                 title: {
@@ -363,8 +378,7 @@ $(function() {
                   labels: {
                     overflow: 'justify',
                     style: {
-                      fontSize: '10px',
-                      fontWeight: '500',
+                      fontSize: '12px',
                       align: 'left',
                     }
                   },
@@ -376,16 +390,14 @@ $(function() {
                   labels: {
                     overflow: 'justify',
                     style: {
-                      fontSize: '10px',
-                      fontWeight: '500',
+                      fontSize: '12px',
                       align: 'left'
                     }
                   },
                   style: {
                     fontFamily: "'Roboto', Arial, sans-serif",
                     color: '#1a1a1a',
-                    fontSize: '10px',
-                    fontWeight: '500'
+                    fontSize: '12px'
                   },
                 }],
 
@@ -464,8 +476,8 @@ $(function() {
                    itemStyle: {
                         fontFamily: "'Roboto', Arial, sans-serif",
                         color: '#2a2a2a',
-                        fontSize: '11px',
-                        fontWeight: '500',
+                        fontSize: '12px',
+                        fontWeight: 'normal',
                     }
                 },
                 series: [{
@@ -735,7 +747,7 @@ $(function() {
             chart = {};
 
             if (arr[1]) {
-                chart.type = arr[1];
+                chart.type = arr[1]; 
             }
             $td.highcharts('SparkLine', {
                 series: [{

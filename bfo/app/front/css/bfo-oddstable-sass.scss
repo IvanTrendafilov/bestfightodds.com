@@ -1,3 +1,7 @@
+//Table row height
+$tablerowheight: 27px;
+
+
 .table-header {
   background-color: #393B42;
   font-size: 12px;
@@ -12,7 +16,7 @@
   height: 20px;
   a {
     font-weight: 500;
-    font-size: 15px;
+    font-size: 16px;
     text-transform: uppercase;
     &:hover {
       color: #d0d0d0;
@@ -35,6 +39,10 @@
   width: 100%;
   position: relative;
   display: inline-block;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  overflow: hidden;
+  margin-top: 4px; 
 }
 
 .t-b-cc { //Table body column content wrapper span (e.g. line '-500')
@@ -47,8 +55,8 @@
 }
 
 .odds-table {
-  width: 986px;
-  font-size: 11px;
+  width: 100%;
+  font-size: 12px;
   border-collapse: collapse;
   thead {
     tr {
@@ -56,32 +64,39 @@
     }
     th {
       text-align: center;
-      height: 16px;
+      height: 25px;
+      /*width: 60px;
+      min-width: 60px;
+      max-width: 60px;*/
       &.table-prop-header {
         text-align: right;
         padding-right: 5px;
-        color: #707070;
-        font-size: 10px;
-        font-weight: 500;
+        color: #606060;
+        width: 30px;
+        min-width: 30px;
+        max-width: 30px;
       }
       a {
-        color: #707070;
-        font-size: 10px;
-        font-weight: 500;
+        color: #606060;
+        padding-top: 6px;
+        padding-bottom: 6px;
         &:hover {
           color: #999;
         }
+        height: 20px;
       }
     }
   }
   tbody {
     tr {
-      background-color: #f5f7f9;
-      height: 20px;
-      &.odd {
+      background-color: #f7f9fa;
+      height: $tablerowheight;
+      &:nth-child(2n)
+      {
         background-color: #fff;
         border-bottom: 1px solid #d6d6d6;
       }
+
       &.eventprop {
         background-color: #f5f7f9;
         border-top: 1px solid #d6d6d6;
@@ -91,37 +106,30 @@
         }
       }
       &.pr {
-        background-color: #DCDEE0;
+        background-color: #e0e2e4;
         display: none;
-        height: 20px;
-      }
-      &.pr-odd {
-        background-color: #e8eaec;
-        border-bottom: 1px solid #c0c0c0;
-        display: none;
+        height: $tablerowheight;
+        &:nth-child(2n) {
+          background-color: #e8eaec;
+          border-bottom: 1px solid #c0c0c0;
+        }
       }
     }
     th {
       padding-left: 5px;
       width: 110px;
       color: #1a1a1a;
-      font-size: 10px;
-      font-weight: 500;
-      max-width: 110px;
+      font-weight: 400;
+      max-width: 111px;
+      min-width: 111px;
       line-height: 12px;
       padding-right: 2px;
       word-break: break-word;
-      span.tw {
-        width: 100%;
-        position: relative;
-        display: inline-block;
-      }
       a {
         color: #1a1a1a;
-        font-weight: 500;
-        font-size: 10px;
         width: 140px;
         height: 20px;
+        font-weight: 500;
         &:hover {
           color: #666;
         }
@@ -134,14 +142,7 @@
       max-width: 47px;
       text-align: center;
       height: 20px;
-      span.tw {
-        width: 100%;
-        height: 12px;
-        position: relative;
-        padding-top: 4px;
-        padding-bottom: 4px;
-        display: inline-block;
-      }
+      position: relative;
       a {
         margin: 0;
         padding: 0;
@@ -149,7 +150,7 @@
       }
     }
     tr {
-      &.pr td, &.pr-odd td {
+      &.pr td {
         /*border-left: 1px dotted #bbb;*/
       }
     }
@@ -160,7 +161,8 @@
         height: 19px;
       }
       &.prop-cell {
-        width: 24px;
+        width: 30px;
+        min-width: 30px;
         vertical-align: middle;
         a {
           color: #585B5E;
@@ -184,14 +186,9 @@
         padding: 0 1px;
       }
     }
-    tr {
-      &:nth-child(even) th {
-        padding-bottom: 1px;
-      }
-      &:nth-child(odd) th {
-        padding-top: 1px;
-      }
-    }
+  }
+  .hidden {
+    display: none;
   }
 }
 
@@ -209,7 +206,7 @@
       transition-duration: 0.1s;
     }
     tr {
-      &.pr td:hover:not(.button-cell):not(.chart-cell):not(.prop-cell):not(:empty), &.pr-odd td:hover:not(.button-cell):not(.prop-cell):not(:empty) {
+      &.pr td:hover:not(.button-cell):not(.chart-cell):not(.prop-cell):not(:empty) {
         background-color: #c8c8c8;
         -webkit-transition-property: background-color;
         -moz-transition-property: background-color;
@@ -234,7 +231,7 @@
   vertical-align: middle;
   top: 0;
   bottom: 0;
-  line-height: 20px;
+  line-height: $tablerowheight;
   display: inline-block;
 }
 
@@ -248,7 +245,7 @@
   vertical-align: middle;
   top: 0;
   bottom: 0;
-  line-height: 20px;
+  line-height: $tablerowheight;
   display: inline-block;
 }
 
@@ -301,13 +298,13 @@
   position: absolute;
   display: none;
   tbody tr th {
-    width: 90px;
+    width: 95px;
     height: 20px;
   }
 }
 
 .exp-ard {
-  width: 9px !important;
+  width:  9px !important;
   height: 6px !important;
   background-image: url('/img/expd.png');
   background-size: 9px 6px;
@@ -332,18 +329,42 @@
   display: inline-block;
 }
 
-.i-ng {
-  background-image: url('/img/icon-nograph.png');
+.but-sg, .but-sgp, .but-sgep {
+  cursor: pointer;
 }
 
-.i-na {
-  background-image: url('/img/icon-noalert.png');
+.but-sg:hover, .but-sgp:hover, .but-sgep:hover {
+  color: #666;
+}
+
+.prop-cell:hover {
+  cursor:pointer;
+}
+
+.button-cell:hover {
+  cursor:pointer;
+}
+
+.i-ng {
+  background-image: url('/img/icon-nograph.png');
 }
 
 .i-g {
   background-image: url('/img/icon-graph.png');
 }
 
-.i-a {
-  background-image: url('/img/icon-alert.png');
+.svg-i {
+  color: #53585a;
+  fill: var(--iron-icon-fill-color, currentcolor);
+  stroke: var(--iron-icon-stroke-color, none);
+  height: 21px;
+  width: 21px;
+} 
+
+.svg-i-disabled {
+  color: #a5abb3;
+  fill: var(--iron-icon-fill-color, currentcolor);
+  stroke: var(--iron-icon-stroke-color, none);
+  height: 21px;
+  width: 21px;
 }

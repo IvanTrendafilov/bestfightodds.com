@@ -91,8 +91,8 @@ body {
   text-align: center;
   background-color: #F1F3F7;
   font-family: 'Roboto', Arial, sans-serif;
-  font-size: 11px;
-  color: #fff;
+  font-size: 12px;
+  color: #000;
 }
 
 a {
@@ -105,6 +105,10 @@ a {
 $primarybasecolor: #212427;
 $secondarybasecolor: #393B42;
 $selectedcolor: #212427;
+
+$font_darkcolor: #202020;
+$font_lightcolor: #fff;
+
 
 input[type="text"], select {
   background-color: #fff;
@@ -136,12 +140,12 @@ input[type="submit"] {
   width: 100%;
   background-color: $primarybasecolor;
   margin-bottom: 22px;
-  min-width: 1016px;
+  min-width: 1116px;
 }
 
 .header-top {
   height: 65px;
-  width: 1016px;
+  width: 1116px;
   margin: 0 auto;
 }
 
@@ -157,15 +161,18 @@ input[type="submit"] {
 
 .header-menu {
   margin: 0 auto;
-  width: 978px;
+  width: 1078px;
   position: relative;
+  font-size: 12px;
+  a {
+    padding: 7px 0; 
+  }
 }
 
 .header-menu-item {
-  height: 20px;
-  font-size: 11px;
+  
   display: inline-block;
-  padding: 6px 16px 0 16px;
+  padding: 6px 16px 6px 16px;
   font-weight: 500;
   margin-left: -3px;
   &:hover {
@@ -182,7 +189,7 @@ input[type="submit"] {
   margin-top: 13px;
   margin-left: auto;
   margin-right: auto;
-  width: 1016px;
+  width: 1116px;
   select {
     height: 20px;
   }
@@ -199,16 +206,12 @@ input[type="submit"] {
   float: left;
   width: 290px;
   height: 54px;
-  background-image: url('/img/logo_3.png');
-  background-size: 290px 54px;
 }
 
 #twitter-icon {
-  height: 11px;
-  width: 14px;
-  vertical-align: middle;
-  margin-right: 6px;
-  margin-top: -3px;
+  height: 11px; width: 14px;
+  position:relative;
+  top: 1px;
 }
 
 #header-search-box {
@@ -219,7 +222,7 @@ input[type="submit"] {
     background-color: $secondarybasecolor;
     height: 24px;
     width: 200px;
-    font-size: 11px;
+    font-size: 12px;
     color: #fff;
     border: 1px solid #1d1d1d;
     border-width: 1px;
@@ -287,7 +290,7 @@ input[type="submit"] {
 }
 
 #format-container ul li ul {
-  width: 145px;
+  width: 155px;
 }
 
 #format-amount-box1 {
@@ -297,7 +300,7 @@ input[type="submit"] {
 #format-container input {
   height: 16px;
   margin-left: 3px;
-  padding: 3px;
+  padding: 2px;
   width: 45px;
   font-size: 12px;
 }
@@ -334,17 +337,15 @@ input[type="submit"] {
 }
 
 h1 {
-  font-size: 20px;
-  height: 14px;
-  padding-bottom: 15px;
-  font-weight: 700;
+  font-size: 16px;
+  font-weight: 500;
 }
 
 #page-container {
   margin-left: auto;
   margin-right: auto;
   background-color: #fff;
-  color: #202020;
+  color: $font_darkcolor;
   font-size: 12px;
 }
 
@@ -357,6 +358,7 @@ h1 {
   p {
     line-height: 220%;
   }
+
 }
 
 #page-bottom {
@@ -379,9 +381,9 @@ h1 {
   padding-bottom: 15px;
   color: #787878;
   a {
-    color: #9a9a9a;
-    font-size: 11px;
-    padding: 0 5px;
+    color: #525252;
+    font-size: 12px;
+    padding: 10px 9px;
   }
 }
 
@@ -393,8 +395,7 @@ h1 {
 .content-sidebar {
   padding: 18px;
   height: 100%;
-  font-size: 11px;
-  width: 60%;
+  font-size: 12px;
   color: #666;
   a {
     color: #000;
@@ -405,13 +406,6 @@ h1 {
 .img-info-box {
   width: 12px;
   height: 12px;
-  border: 0;
-  margin: 0 1px;
-}
-
-.img-note-box {
-  width: 11px;
-  height: 11px;
   border: 0;
   margin: 0 1px;
 }
@@ -611,10 +605,6 @@ ul.share-dropdown ul li a {
   background: url("/img/sharebuttons.png") -53px 0px;
 }
 
-.share-google {
-  background: url("/img/sharebuttons.png") -104px 0px;
-}
-
 .share-whatsapp {
   background: url("/img/sharebuttons.png") -157px 0px;
 }
@@ -658,11 +648,12 @@ ul.share-dropdown ul li a {
 
 .popup-header {
   background-color: $secondarybasecolor;
+  color: $font_lightcolor;
   font-size: 12px;
   font-weight: 500;
   padding-left: 10px;
-  padding-top: 6px;
-  padding-bottom: 6px;
+  padding-top: 8px;
+  padding-bottom: 8px;
   text-align: left;
   -ms-text-overflow: ellipsis;
   -o-text-overflow: ellipsis;
@@ -690,9 +681,9 @@ ul.share-dropdown ul li a {
 
 .cd-popup-close {
   position: absolute;
-  top: 4px;
+  top: 5px;
   right: 3px;
-  font-size: 14px;
+  font-size: 16px;
   padding: 0 8px;
 }
 
@@ -723,13 +714,59 @@ ul.share-dropdown ul li a {
   height: 100%;
   color: #222;
   text-align: left;
-  font-size: 11px;
+  font-size: 12px;
   padding: 9px;
 }
 
 #alert-window {
   width: 300px;
   height: 155px;
+}
+
+#bookie-settings-window {
+  min-width: 1px;
+  display: block;
+  height: 510px;
+  width: 500px;
+  margin: auto;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+}
+
+#bookie-settings-area {
+  padding: 10px;
+  color: $font_darkcolor;
+    input#bookieResetDefault {
+      margin-top: 10px;
+    }
+}
+
+#bookie-order-items {
+  width: 200px;
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: 10px;
+}
+
+#bookie-order-items li {
+  cursor: move;
+  width: 200px;
+  border: 1px solid #e3e3e3;
+  height: 20px;
+  background-color: #f7f9fa;
+  padding-top: 5px;
+  padding-left: 5px;
+  text-align: left;
+    &.sortable-chosen {
+      background-color: #d7d9da;
+    }
+}
+
+#bookie-order-items li input {
+  float: right;
+  margin-right: 5px;
 }
 
 #alert-area {
@@ -826,9 +863,12 @@ ul.share-dropdown ul li a {
   padding: 6px;
   padding-left: 10px;
   font-weight: 500;
-  font-size: 13px;
-  height: 16px;
+  font-size: 14px;
+  height: 18px;
   color: #fff;
+  a {
+    color: #fff;
+  }
 }
 
 .content-list {
@@ -842,11 +882,10 @@ ul.share-dropdown ul li a {
       background-color: #F1F3F7;
     }
     td {
-      padding: 3px 10px;
-    }
-    a {
-      color: #202020;
-      font-weight: 500;
+      padding: 6px 10px;
+      a {
+        color: $font_darkcolor;
+      }
     }
   }
 }
@@ -859,6 +898,7 @@ ul.share-dropdown ul li a {
 .content-vs-cell {
   width: 25px;
   text-align: center;
+  color: #909090;
 }
 
 .content-team-left {
@@ -881,7 +921,7 @@ ul.share-dropdown ul li a {
 
 table.team-stats-table {
   width: 100%;
-  font-size: 11px;
+  font-size: 12px;
   border-collapse: collapse;
   color: #222;
   background-color: #fff;
@@ -902,6 +942,7 @@ table.team-stats-table {
   }
   tbody {
     tr {
+      height: 23px;
       border-bottom: 0;
       &.main-row {
         border-top: 1px dotted #989898;
@@ -911,7 +952,6 @@ table.team-stats-table {
         border-bottom: 1px solid #E6E8Ea;
         background-color: #E6E8Ea;
         color: #1a1a1a;
-        vertical-align: bottom;
         a {
           color: #1a1a1a;
           &:hover {
@@ -919,12 +959,27 @@ table.team-stats-table {
           }
         }
       }
-      &.main-row td {
-        padding-top: 2px;
-      }
-      &:not(.main-row) td {
+      &.main-row {
+        td {
+        padding-top: 4px;
         padding-bottom: 2px;
       }
+      th {
+        padding-top: 4px;
+        padding-bottom: 2px;
+      }
+    }
+      &:not(.main-row) {
+        
+          td {
+          padding-bottom: 4px;
+          padding-top: 2px;
+        }
+        th {
+          padding-bottom: 4px;
+          padding-top: 2px;
+        }
+    }
       &:hover {
         background-color: #F1F3F7;
       }
@@ -932,13 +987,11 @@ table.team-stats-table {
     th {
       padding-left: 3px;
       color: #1a1a1a;
-      font-size: 11px;
-      font-weight: 500;
       word-break: break-word;
       a {
         color: #1a1a1a;
-        font-size: 11px;
-        height: 20px;
+        height: 23px;
+        font-weight: 500;
       }
     }
     td {
@@ -986,23 +1039,21 @@ table.team-stats-table {
         }
       }
       &.resultcell {
-        display: none;
+        //display: none;
         font-weight: 500;
         text-align: center;
         width: 60px;
         div.method {
           font-weight: 400;
-          font-size: 9px;
+          font-size: 10px;
           color: #777;
           line-height: 8px;
         }
-        div.result { 
+        div.result {  
           color: #fff;
           padding-top: 2px;
           padding-bottom: 2px;
           background-color: #fff;
-          height: 12px;
-          margin-top: 1px;
         }
         padding-right: 15px;
       }
@@ -1027,7 +1078,6 @@ table.team-stats-table {
   }
   a {
     color: #222;
-    font-weight: 500;
     &:hover {
       color: #666;
     }
@@ -1050,7 +1100,7 @@ table.team-stats-table {
 
 .button {
   border-radius: 2px;
-  padding: 4px 10px;
+  padding: 3px 10px;
   background-color: #e8ebf3;
   color: #151515;
   cursor: pointer;
@@ -1060,13 +1110,14 @@ table.team-stats-table {
   &:hover {
    background-color: #d7dae2;
   }
+  margin: 1px 0;
 }
 
 #event-swing-area {
   -webkit-box-shadow: 0 1px 1px 1px rgb(170, 170, 170);
   -moz-box-shadow: 0 1px 1px 1px rgb(170, 170, 170);
   box-shadow: 0 1px 1px 1px rgb(170, 170, 170);
-  width: 424px;
+  width: 494px;
   vertical-align: top;
   display: inline-block;
   margin-right: 22px;
@@ -1076,7 +1127,7 @@ table.team-stats-table {
   -webkit-box-shadow: 0 1px 1px 1px rgb(170, 170, 170);
   -moz-box-shadow: 0 1px 1px 1px rgb(170, 170, 170);
   box-shadow: 0 1px 1px 1px rgb(170, 170, 170);
-  width: 500px;
+  width: 570px;
   vertical-align: top;
   display: inline-block;
 }
@@ -1105,7 +1156,7 @@ table.team-stats-table {
 .event-swing-picker {
     color: #eaeaea;
     font-weight: 400;
-    font-size: 11px;
+    font-size: 12px;
     &.picked {
       font-weight: 700;
     }
@@ -1116,7 +1167,7 @@ table.team-stats-table {
    margin-left: auto;
    margin-right: auto;
    width: 150px;
-   font-size: 11px;
+   font-size: 12px;
    font-weight: 500;
    padding-top: 6px;
    padding-bottom: 8px;  
@@ -1137,3 +1188,4 @@ table.team-stats-table {
 .event-swing-expand {
   color: #666;
 }
+

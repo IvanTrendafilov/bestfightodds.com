@@ -39,7 +39,7 @@ require_once('lib/bfocore/general/class.EventHandler.php');
             </div>
         </div>
         <div class="content-sidebar">
-            <img src="img/info-arrow.gif" class="img-note-box" /> Note that the image for the current best odds will be updated automatically as the betting line changes
+            Note that the image for the current best odds will be updated automatically as the betting line changes
         </div>
         <div class="clear"></div>
     </div>

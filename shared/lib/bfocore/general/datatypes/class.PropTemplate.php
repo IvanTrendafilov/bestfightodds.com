@@ -19,9 +19,9 @@ class PropTemplate
     {
         $this->iID = $a_iID;
         $this->iBookieID = $a_iBookieID;
-        $this->sTemplate = $a_sTemplate;
+        $this->sTemplate = strtoupper($a_sTemplate);
         $this->iPropTypeID = $a_iPropTypeID;
-        $this->sTemplateNeg = $a_sTemplateNeg;
+        $this->sTemplateNeg = strtoupper($a_sTemplateNeg);
         $this->iFieldsTypeID = $a_iFieldsTypeID;
         $this->sLastUsed = $a_sLastUsed;
 

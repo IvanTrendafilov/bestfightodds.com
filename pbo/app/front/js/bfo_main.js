@@ -848,7 +848,7 @@ initPage = function() {
 
 
     //Add prop row togglers
-    $('td.prop-cell').find('a').on('click', function() {
+    document.querySelector(".prop-cell-exp").addEventListener("click", (e) => {
         matchup_id = $(this).attr('data-mu');
         if (typeof $(this).data('toggled') == 'undefined') {
             $(this).data('toggled', false);
@@ -991,7 +991,7 @@ initPage = function() {
             $('#chart-area').empty();
         }
     });
-    //close when clicking anywhere but the grahp (if open that is)
+    //close when clicking anywhere but the graph (if open that is)
     $(document).click(function(event) {
         if (!$(event.target).closest('#chart-window').length) {
             if ($('#chart-window').is(":visible")) {
@@ -1023,7 +1023,7 @@ initPage = function() {
     //Loop through all tr TDs and add event
 
     //Add regular matchup listeners
-    $('a.but-sg').on('click', function(event) {
+    document.querySelector(".but-sg").addEventListener("click", (e) => {
         var opts = $.parseJSON($(this).attr('data-li'));
         if (parlayMode) {
             return addToParlay(this);
@@ -1037,7 +1037,7 @@ initPage = function() {
         }
     });
     //Add prop listeners
-    $('a.but-sgp').on('click', function(event) {
+    document.querySelector(".but-sgp").addEventListener("click", (e) => {
         var opts = $.parseJSON($(this).attr('data-li'));
         if (parlayMode) {
             return addToParlay(this);
@@ -1051,7 +1051,7 @@ initPage = function() {
     });
 
     //Add index graph button listeners
-    $('a.but-si').on('click', function(event) {
+    document.querySelector(".but-si").addEventListener("click", (e) => {
         var opts = $.parseJSON($(this).attr('data-li'));
         if (parlayMode) {
             return false;
@@ -1065,7 +1065,7 @@ initPage = function() {
         }
     });
     //Add prop index graph button listeners
-    $('a.but-sip').on('click', function(event) {
+    document.querySelector(".but-sip").addEventListener("click", (e) => {
         var opts = $.parseJSON($(this).attr('data-li'));
         if (parlayMode) {
             return false;
@@ -1079,7 +1079,7 @@ initPage = function() {
     });
 
     //Add alert button form show listeners
-    $('a.but-al').on('click', function(event) {
+    document.querySelector(".but-al").addEventListener("click", (e) => {
         var context = {};
         context.opts = $.parseJSON($(this).attr('data-li'));
         context.bestodds = $(this).closest("tr").find(".bestbet").first().text();

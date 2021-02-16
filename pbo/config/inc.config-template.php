@@ -66,13 +66,13 @@ define('PARSE_FUTURESEVENT_ID', 197); //Used to identify the event that holds al
 /* Twitter  */
 define('TWITTER_ENABLED', true);
 define('TWITTER_DEV_MODE', true); //In dev mode, no actual tweets are created. Instead they are just echo'ed to the prompt
-define('TWITTER_CONSUMER_KEY', 'OKspPO3VjSMtgZTXR6VXUg');
-define('TWITTER_CONSUMER_SECRET', 'yheM1NCNx4BOdZyh3aeh1UPIQHfn4yRZBL7r3BjiU');
-define('TWITTER_OAUTH_TOKEN', '47427385-7rgoivFKNU7Bv1ABDgqeY3H7ij9nx2i47TPdlD1U2');
-define('TWITTER_OATUH_TOKEN_SECRET', 'S3N7HNMXHAXdFQoIhKrleT1rr3yOoRLzsH8vzmSzg');
+define('TWITTER_CONSUMER_KEY', 'KJPrE1ErwOR2uIOtM9Wkg');
+define('TWITTER_CONSUMER_SECRET', 'YQi2zjWz1JmFLQXaIDFC02NLWbuY8lmVqCS27jE4Y');
+define('TWITTER_OAUTH_TOKEN', '188451945-lh5CpuL31LJmNvzqkaapq6s9GMCybhh5q4lJdvct');
+define('TWITTER_OATUH_TOKEN_SECRET', 'tUsLRF1SASbDTeGeP8SScjC6Bn049LihgfDKtaH7dphp4');
 define('TWITTER_GROUP_MATCHUPS', true); //Used to indicate if we group multiple matchups on the same event into one tweet (does not include main events)
-define('TWITTER_TEMPLATE_SINGLE', '<E>: <T1> (<T1O>) vs. <T2> (<T2O>) https://proboxingodds.com/events/<EVENT_URL>'); //Template used to tweet one matchup in one tweet. <E> = Event name, <T1> = Team one, <T2> = team two, <T1O> = team one odds, <T2O> = team two odds
-define('TWITTER_TEMPLATE_MULTI', 'New lines for <E> posted https://proboxingodds.com/events/<EVENT_URL>'); //Template used to tweet multiple matchups in one tweet (only available if TWITTER_GROUP_MATCHUPS is enabled)
+define('TWITTER_TEMPLATE_SINGLE', "<E>: <T1> (<T1O>) vs. <T2> (<T2O>) https://proboxingodds.com/events/<EVENT_URL>"); //Template used to tweet one matchup in one tweet. <E> = Event name, <T1> = Team one, <T2> = team two, <T1O> = team one odds, <T2O> = team two odds
+define('TWITTER_TEMPLATE_MULTI', "New lines for <E> posted https://proboxingodds.com/events/<EVENT_URL>"); //Template used to tweet multiple matchups in one tweet (only available if TWITTER_GROUP_MATCHUPS is enabled)
 
 
 ?>

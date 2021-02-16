@@ -21,10 +21,10 @@
               <?php
             }
           ?>
-    <a href="https://www.bestfightodds.com">MMA Odds</a><span class="menu-seperator">|</span><a href="/terms">Terms of service</a><span class="menu-seperator">|</span><a href="#">18+</a><span class="menu-seperator">|</span><a href="https://www.begambleaware.org/">BeGambleAware</a><span class="menu-seperator">|</span><a href="mailto:info@proboxingodds.com">Contact</a><span class="menu-seperator">|</span><a href="mailto:info@proboxingodds.com">&copy; 2019</a>
+    <a href="https://www.bestfightodds.com" target="_blank" rel="noopener">MMA Odds</a><span class="menu-seperator">|</span><a href="/terms">Terms of service</a><span class="menu-seperator">|</span><a href="#">18+</a><span class="menu-seperator">|</span><a href="https://www.begambleaware.org/">BeGambleAware</a><span class="menu-seperator">|</span><a href="mailto:info@proboxingodds.com">Contact</a><span class="menu-seperator">|</span><a href="mailto:info@proboxingodds.com">&copy; 2019</a>
 </div>
 
-<div id="chart-window" class="popup-window"><div class="popup-header" id="chart-header"><div></div><a href="#" class="cd-popup-close">&#10005;</a></div><div id="chart-area"></div><a target="_blank"><div id="chart-link" class="button">Bet this line at bookie</div></a><div id="chart-disc" style="display: none; color: #333">*Currently this Sportsbook does not accept players that reside in the US. 18+ Gamble Responsibly</div></div>
+<div id="chart-window" class="popup-window"><div class="popup-header" id="chart-header"><div></div><a href="#" class="cd-popup-close">&#10005;</a></div><div id="chart-area"></div><a href="#" target="_blank" rel="noopener"><div id="chart-link" class="button">Bet this line at bookie</div></a><div id="chart-disc" style="display: none; color: #333">*Currently this Sportsbook does not accept players that reside in the US. 18+ Gamble Responsibly</div></div>
 <div id="parlay-window" class="popup-window"><div class="popup-header" id="parlay-header">Parlay</div><div id="parlay-area">Click on a line to add it to your parlay</div></div>
 <div id="alert-window" class="popup-window"><div class="popup-header" id="alert-header"><div></div><a href="#" class="cd-popup-close">&#10005;</a></div><div id="alert-area">
     <form id="alert-form">Alert me at e-mail <input type="text" name="alert-mail" id="alert-mail"><br />when the odds reaches <input type="text" name="alert-odds" id="alert-odds"> or better<br/>at <select name="alert-bookie">
@@ -52,7 +52,6 @@
 if ($_SERVER['SERVER_ADDR'] != '127.0.0.1')
 {
     ?>
-<!-- Global site tag (gtag.js) - Google Analytics -->
 <script async src="https://www.googletagmanager.com/gtag/js?id=UA-2457531-6"></script>
 <script>
   window.dataLayer = window.dataLayer || [];

@@ -24,6 +24,7 @@ RewriteRule ^prefightreport/{0,1} index.php?p=prefightreport [nc]
 RewriteRule ^links/{0,1} index.php?p=links [nc]
 RewriteRule ^archive/{0,1} index.php?p=archive [nc,QSA]
 RewriteRule ^terms/{0,1} index.php?p=terms [nc]
+RewriteRule ^bookiesettings/{0,1} index.php?p=bookiesettings [nc]
 RewriteRule ^search/{0,1} search.php [nc,QSA]
 RewriteRule ^api ajax/ajax.Interface.php [nc,QSA]
 RewriteRule ^feed feed.php?key=$1 [nc,QSA]
@@ -31,6 +32,7 @@ RewriteRule ^, / [R]
 RewriteRule ^fights/([a-zA-Z]+)(.*)$ / [R=301,NC,L]
 RewriteRule ^\[[0-9]\] / [R]
 RewriteRule ^out/([0-9]+) redir.php?b=$1 [nc]
+
 
 RewriteCond %{ENV:REDIRECT_STATUS} ^$
 RewriteCond %{HTTP_USER_AGENT} ^(python|catexplorador) [NC,OR]
@@ -44,3 +46,8 @@ RewriteRule ^.* - [F,L]
 <FilesMatch "\.(js|css)$">
         Header set Cache-Control: "max-age=604800, must-revalidate"
 </FilesMatch>
+
+RewriteBase /cnadm
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteRule ^ /cnadm/indexslim.php [QSA,L]

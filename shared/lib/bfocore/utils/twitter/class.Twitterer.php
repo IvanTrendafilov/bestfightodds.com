@@ -1,8 +1,8 @@
 <?php
 
 require 'vendor/autoload.php';
-require_once('JSON.php');
-require_once('twitteroauth.php');
+
+use Abraham\TwitterOAuth\TwitterOAuth;
 
 /**
  * Class used to integrate with Twitter API
@@ -55,14 +55,14 @@ class Twitterer
                         $this->m_sOAuthTokenSecret);
         $rResult = $rConnection->post('statuses/update', array('status' => $a_sMessage));
 
-        if (isset($rResult->error))
+        if (isset($rResult->errors))
         {
-            if ($rResult->error == 'Status is a duplicate.') //Treated as success
+            if ($rResult->errors[0]->code == '187') //Duplicate, treated as success
             {
                 $this->logger->info("Duplicate post (OK): (" . strlen($a_sMessage) . "): " . $a_sMessage);
                 return true;
             }
-            $this->logger->info("Error for tweet " . $a_sMessage . " (" . strlen($a_sMessage) . "): " . $rResult->error);
+            $this->logger->info("Error for tweet " . $a_sMessage . " (" . strlen($a_sMessage) . "): " . $rResult->errors[0]->code . ': ' . $rResult->errors[0]->message);
             return false;
         }
 

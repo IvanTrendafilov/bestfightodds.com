@@ -30,13 +30,13 @@ foreach ($aEvent as $oEvent)
             $sAddDate = '<span class="table-header-date">' . date('F jS', strtotime($oEvent->getDate())) . '</span>';
         }
 
-        echo '<div class="table-outer-wrapper"><div class="table-div" id="event' . $oEvent->getID() . '"><div class="table-header"><a href="/events/' . $oEvent->getEventAsLinkString() . '">' . $oEvent->getName() . '</a>' . $sAddDate . '';
+        echo '<div class="table-outer-wrapper"><div class="table-div" id="event' . $oEvent->getID() . '"><div class="table-header"><a href="/events/' . $oEvent->getEventAsLinkString() . '"><h1>' . $oEvent->getName() . '</h1></a>' . $sAddDate . '';
 
         $sShareURL = 'https://www.bestfightodds.com/events/' . $oEvent->getEventAsLinkString();
         $sShareDesc = $oEvent->getName() . ' betting lines';
 
         echo '<div class="share-area"><div class="share-button"></div></div>
-                                        <div class="share-window"><div data-href="https://twitter.com/intent/tweet?text=' . urlencode($sShareDesc) . '&amp;url=' . urlencode($sShareURL) . '" class="share-item share-twitter"></div><div data-href="https://www.facebook.com/sharer/sharer.php?u=' . urlencode($sShareURL) . '" class="share-item share-facebook"></div><div data-href="https://plus.google.com/share?url=' . urlencode($sShareURL) .'" class="share-item share-google"></div><div data-href="whatsapp://send?text=' . urlencode($sShareDesc) . ' ' . urlencode($sShareURL) . '" data-action="share/whatsapp/share" class="share-item share-whatsapp item-mobile-only"></div></div>';
+                                        <div class="share-window"><div data-href="https://twitter.com/intent/tweet?text=' . urlencode($sShareDesc) . '&amp;url=' . urlencode($sShareURL) . '" class="share-item share-twitter"></div><div data-href="https://www.facebook.com/sharer/sharer.php?u=' . urlencode($sShareURL) . '" class="share-item share-facebook"></div><div data-href="whatsapp://send?text=' . urlencode($sShareDesc) . ' ' . urlencode($sShareURL) . '" data-action="share/whatsapp/share" class="share-item share-whatsapp item-mobile-only"></div></div>';
 
         echo '</div>';
 
@@ -52,7 +52,7 @@ foreach ($aEvent as $oEvent)
             $iCurrentOperatorColumn = 0;
             for ($iX = 1; $iX <= 2; $iX++)
             {
-                echo '<tr ' . (($iX % 2) == 1 ? 'class="even"' : 'class="odd" id="mu-' . $oFight->getID() . '"') . ' ' . (($iX == 2 && $iFightCounter == count($aFights) - 1) ? ' style="border-bottom: 0;" ' : '') . '>'; //If this is the last matchup, add style for it
+                echo '<tr id="mu-' . $oFight->getID() . '"' . (($iX == 2 && $iFightCounter == count($aFights) - 1) ? ' style="border-bottom: 0;" ' : '') . '>'; //If this is the last matchup, add style for it
                 echo '<th scope="row"><a href="/fighters/' . $oFight->getFighterAsLinkString($iX) . '"><span class="t-b-fcc">' . $oFight->getFighterAsString($iX) . '</span></a></th>';
 
                 $iProcessed = 0;
@@ -88,7 +88,7 @@ foreach ($aEvent as $oEvent)
                         $oPropType->getPropDesc(str_replace('<T2>', $oFight->getTeamLastNameAsString(($oPropType->getTeamNum() % 2) + 1), $oPropType->getPropDesc()));
                         $oPropType->setPropNegDesc(str_replace('<T2>', $oFight->getTeamLastNameAsString(($oPropType->getTeamNum() % 2) + 1), $oPropType->getPropNegDesc()));
 
-                        echo '<tr class="pr' . (($iX % 2) == 1 ? '' : '-odd') . '"' . (($iX == 2 && $iPropCounter == count($aPropTypes) - 1) ? ' style="border-bottom: 2px solid #f8f8f8;"' : (($iX == 1 && $iFightCounter == count($aFights) - 1 && $iPropCounter == 0) ? ' style="border-top: 1px solid #C6C6C6;"' : '')) . '>';
+                        echo '<tr class="pr"' . (($iX == 2 && $iPropCounter == count($aPropTypes) - 1) ? ' style="border-bottom: 2px solid #f8f8f8;"' : (($iX == 1 && $iFightCounter == count($aFights) - 1 && $iPropCounter == 0) ? ' style="border-top: 1px solid #C6C6C6;"' : '')) . '>';
                         echo '<th scope="row">' . ($iX == 1 ? $oPropType->getPropDesc() : $oPropType->getPropNegDesc()) . '</th>';
 
                         $iProcessedProps = 0;
@@ -111,7 +111,7 @@ foreach ($aEvent as $oEvent)
         $aPropTypes = OddsHandler::getAllPropTypesForEvent($oEvent->getID());
         if (count($aPropTypes) > 0)
         {
-            echo '<tr class="odd even eventprop" id="mu-e' . $oEvent->getID() . '">';
+            echo '<tr class="eventprop" id="mu-e' . $oEvent->getID() . '">';
             echo '<th scope="row" style="font-weight: 400"><a href="#" data-mu="' . $oEvent->getID() . '">Event props</a></th>';
             echo '</tr>';
 
@@ -125,7 +125,7 @@ foreach ($aEvent as $oEvent)
                 for ($iX = 1; $iX <= 2; $iX++)
                 {
                     $iPropRowCounter++;
-                    echo '<tr class="pr' . (($iX % 2) == 1 ? '' : '-odd') . '"' . (($iX == 2 && $iPropCounter == count($aPropTypes) - 1) ? ' style="border-bottom: 2px solid #f8f8f8;"' : (($iX == 1 && $iPropCounter == 0) ? ' style="border-top: 1px solid #C6C6C6;"' : '')) . '>';
+                    echo '<tr class="pr"' . (($iX == 2 && $iPropCounter == count($aPropTypes) - 1) ? ' style="border-bottom: 2px solid #f8f8f8;"' : (($iX == 1 && $iPropCounter == 0) ? ' style="border-top: 1px solid #C6C6C6;"' : '')) . '>';
                     echo '<th scope="row">' . ($iX == 1 ? $oPropType->getPropDesc() : $oPropType->getPropNegDesc()) . '&nbsp;</th>';
 
                     $iProcessedProps = 0;
@@ -155,7 +155,7 @@ foreach ($aEvent as $oEvent)
         foreach ($aBookies as $oBookie)
         {
             $aBookieRefList[] = $oBookie->getID();
-            echo '<th scope="col"><a href="/out/' . $oBookie->getID() . '" onclick="lO(' . $oBookie->getID() . ',' . $oEvent->getID() . ');">' . str_replace(' ', '&nbsp;', (strlen($oBookie->getName()) > 10 ? (substr($oBookie->getName(), 0, 9) . '.') : $oBookie->getName())) . '</a></th>';
+            echo '<th scope="col" data-b="' . $oBookie->getID() . '"><a href="/out/' . $oBookie->getID() . '" onclick="lO(' . $oBookie->getID() . ',' . $oEvent->getID() . ');">' . str_replace(' ', '&nbsp;', (strlen($oBookie->getName()) > 10 ? (substr($oBookie->getName(), 0, 9) . '.') : $oBookie->getName())) . '</a></th>';
         }
         echo '<th scope="col" colspan="3" class="table-prop-header">Props</th></tr></thead><tbody>';
 
@@ -172,7 +172,7 @@ foreach ($aEvent as $oEvent)
             $iCurrentOperatorColumn = 0;
             for ($iX = 1; $iX <= 2; $iX++)
             {
-                echo '<tr ' . (($iX % 2) == 1 ? 'class="even"' : 'class="odd"') . ' ' . (($iX == 2 && $iFightCounter == count($aFights) - 1) ? ' style="border-bottom: 0;" ' : '') . '>'; //If this is the last matchup, add style for it
+                echo '<tr' . (($iX == 2 && $iFightCounter == count($aFights) - 1) ? ' style="border-bottom: 0;" ' : '') . '>'; //If this is the last matchup, add style for it
                 echo '<th scope="row"><a href="/fighters/' . $oFight->getFighterAsLinkString($iX) . '"><span class="t-b-fcc">' . $oFight->getFighterAsString($iX) . '</span></a></th>';
 
                 $iProcessed = 0;
@@ -218,7 +218,7 @@ foreach ($aEvent as $oEvent)
 
                         if ($oOldFightOdds->getBookieID() == $iCurrentOperatorID)
                         {
-                            echo '<td><a href="#" class="but-sg" data-li="[' . $oFightOdds->getBookieID() . ',' . $iX . ',' . $oFightOdds->getFightID() . ']" ><span class="t-b-cc"><span id="oID' . ('1' . sprintf("%06d", $oFightOdds->getFightID()) . sprintf("%02d", $oFightOdds->getBookieID()) . $iX) . '" ' . $sClassName . '>' . $oFightOdds->getFighterOddsAsString($iX) . '</span>';
+                            echo '<td class="but-sg" data-li="[' . $oFightOdds->getBookieID() . ',' . $iX . ',' . $oFightOdds->getFightID() . ']" ><span id="oID' . ('1' . sprintf("%06d", $oFightOdds->getFightID()) . sprintf("%02d", $oFightOdds->getBookieID()) . $iX) . '" ' . $sClassName . '>' . $oFightOdds->getFighterOddsAsString($iX) . '</span>';
                             if ($oFightOdds->getFighterOdds($iX) > $oOldFightOdds->getFighterOdds($iX))
                             {
                                 echo '<span class="aru arage-' . $iChangeID . '">▲</span>';
@@ -228,14 +228,14 @@ foreach ($aEvent as $oEvent)
                                 echo '<span class="ard arage-' . $iChangeID . '">▼</span>';
                             }
  
-                            echo '</span></a></td>';
+                            echo '</td>';
                              $bFoundOldOdds = true;
                             $bEverFoundOldOdds = true;
                         }
                     }
                     if (!$bFoundOldOdds)
                     {
-                        echo '<td><a href="#" class="but-sg" data-li="[' . $oFightOdds->getBookieID() . ',' . $iX . ',' . $oFightOdds->getFightID() . ']"  ><span class="t-b-cc"><span id="oID' . ('1' . sprintf("%06d", $oFightOdds->getFightID()) . sprintf("%02d", $oFightOdds->getBookieID()) . $iX) . '" ' . $sClassName . '>' . $oFightOdds->getFighterOddsAsString($iX) . '</span></span></a></td>';
+                        echo '<td class="but-sg" data-li="[' . $oFightOdds->getBookieID() . ',' . $iX . ',' . $oFightOdds->getFightID() . ']"  ><span id="oID' . ('1' . sprintf("%06d", $oFightOdds->getFightID()) . sprintf("%02d", $oFightOdds->getBookieID()) . $iX) . '" ' . $sClassName . '>' . $oFightOdds->getFighterOddsAsString($iX) . '</span></td>';
                     }
 
                     $iProcessed++;
@@ -248,19 +248,26 @@ foreach ($aEvent as $oEvent)
                 }
 
                 //Add alert cell
-                echo '<td class="button-cell"><a href="#" class="but-al" data-li="[' . $oFight->getID() . ',' . $iX . ']"><span class="but-img i-a" title="Add alert"></span></a></td>';
+                echo '<td class="button-cell but-al" data-li="[' . $oFight->getID() . ',' . $iX . ']">
+                <svg class="svg-i" viewBox="0 0 24 24" preserveAspectRatio="xMidYMid meet" focusable="false"><g><path d="M12 22c1.1 0 2-.9 2-2h-4c0 1.1.9 2 2 2zm6-6v-5c0-3.07-1.64-5.64-4.5-6.32V4c0-.83-.67-1.5-1.5-1.5s-1.5.67-1.5 1.5v.68C7.63 5.36 6 7.92 6 11v5l-2 2v1h16v-1l-2-2z"></path></g></svg>
+                </td>';
 
                 //Add index graph button
                 if ($bEverFoundOldOdds || count($aFightOdds) > 1)
                 {
-                    echo '<td class="button-cell"><a href="#" class="but-si" data-li="[' . $iX . ',' . $oFightOdds->getFightID() . ']"><span class="but-img i-g"  title="Betting line movement"></span></a></td>';
+                    echo '<td class="button-cell but-si" data-li="[' . $iX . ',' . $oFightOdds->getFightID() . ']">
+                        <svg class="svg-i" viewBox="0 0 24 24" preserveAspectRatio="xMidYMid meet" focusable="false"><g><path d="M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zM9 17H7v-7h2v7zm4 0h-2V7h2v10zm4 0h-2v-4h2v4z"></path></g></svg>
+                    </td>';
                 }
                 else
                 {
-                    echo '<td class="button-cell"><span class="but-img i-ng"></span></td>';
+                    echo '<td class="button-cell">
+                        <svg class="svg-i" viewBox="0 0 24 24" preserveAspectRatio="xMidYMid meet" focusable="false"><g><path d="M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zM9 17H7v-7h2v7zm4 0h-2V7h2v10zm4 0h-2v-4h2v4z"></path></g></svg>
+                    </td>';
+                    
                 }
 
-                echo '<td class="prop-cell"><a href="#" data-mu="' . $oFight->getID() . '"><span class="t-b-cc">';
+                echo '<td class="prop-cell prop-cell-exp" data-mu="' . $oFight->getID() . '">';
                 $iPropCount = OddsHandler::getPropCountForMatchup($oFight->getID());
                 if ($iPropCount > 0)
                 {
@@ -270,7 +277,7 @@ foreach ($aEvent as $oEvent)
                 {
                     echo '&nbsp;';   
                 }
-                echo '</span></a></td>';
+                echo '</td>';
 
                 echo '</tr>';
             }
@@ -329,7 +336,7 @@ foreach ($aEvent as $oEvent)
                         $oPropType->getPropDesc(str_replace('<T2>', $oFight->getTeamLastNameAsString(($oPropType->getTeamNum() % 2) + 1), $oPropType->getPropDesc()));
                         $oPropType->setPropNegDesc(str_replace('<T2>', $oFight->getTeamLastNameAsString(($oPropType->getTeamNum() % 2) + 1), $oPropType->getPropNegDesc()));
 
-                        echo '<tr class="pr' . (($iX % 2) == 1 ? '' : '-odd') . '"' . (($iX == 2 && $iPropCounter == count($aPropTypes) - 1) ? ' style="border-bottom: 2px solid #f8f8f8;"' : (($iX == 1 && $iFightCounter == count($aFights) - 1 && $iPropCounter == 0) ? ' style="border-top: 1px solid #C6C6C6;"' : '')) . '>';
+                        echo '<tr class="pr"' . (($iX == 2 && $iPropCounter == count($aPropTypes) - 1) ? ' style="border-bottom: 2px solid #f8f8f8;"' : (($iX == 1 && $iFightCounter == count($aFights) - 1 && $iPropCounter == 0) ? ' style="border-top: 1px solid #C6C6C6;"' : '')) . '>';
                         echo '<th scope="row">' . ($iX == 1 ? $oPropType->getPropDesc() : $oPropType->getPropNegDesc()) . '</th>';
 
                         $iProcessedProps = 0;
@@ -389,10 +396,9 @@ foreach ($aEvent as $oEvent)
 
                                 if ($oOldPropOdds->getBookieID() == $iCurrentOperatorID)
                                 {
-                                    echo '<td>';
                                     if (($iX == 1 ? $oPropOdds->getPropOddsAsString() : $oPropOdds->getNegPropOddsAsString()) != '-99999')
                                     {
-                                        echo '<a href="#" class="but-sgp" data-li="[' . $oPropOdds->getBookieID() . ',' . $iX . ',' . $oPropOdds->getMatchupID() . ',' . $oPropOdds->getPropTypeID() . ',' . $oPropOdds->getTeamNumber() . ']"><span class="t-b-cc"><span id="oID' . ('2' . sprintf("%06d", $oPropOdds->getMatchupID()) . sprintf("%02d", $oPropOdds->getBookieID()) . $iX . sprintf("%03d", $oPropOdds->getPropTypeID()) . $oPropOdds->getTeamNumber()) . '" ' . $sClassName . '>' . ($iX == 1 ? $oPropOdds->getPropOddsAsString() : $oPropOdds->getNegPropOddsAsString()) . '</span>';
+                                        echo '<td class="but-sgp" data-li="[' . $oPropOdds->getBookieID() . ',' . $iX . ',' . $oPropOdds->getMatchupID() . ',' . $oPropOdds->getPropTypeID() . ',' . $oPropOdds->getTeamNumber() . ']"><span id="oID' . ('2' . sprintf("%06d", $oPropOdds->getMatchupID()) . sprintf("%02d", $oPropOdds->getBookieID()) . $iX . sprintf("%03d", $oPropOdds->getPropTypeID()) . $oPropOdds->getTeamNumber()) . '" ' . $sClassName . '>' . ($iX == 1 ? $oPropOdds->getPropOddsAsString() : $oPropOdds->getNegPropOddsAsString()) . '</span>';
                                         if ($iCompareOddsNew > $iCompareOddsOld)
                                         {
                                             echo '<span class="aru arage-' . $iChangeID . '">▲</span>';
@@ -405,30 +411,26 @@ foreach ($aEvent as $oEvent)
                                         {
                                             echo '';
                                         }
-                                        echo '</span></a>';
+                                        echo '</td>';
                                     }
                                     else
                                     {
-                                        echo '<span class="t-b-cc"><span class="na">n/a</span></span>';
+                                        echo '<td><span class="na">n/a</span></td>';
                                     }
                                     $bFoundOldOdds = true;
                                     $bEverFoundOldOdds = true;
-
-                                    echo '</td>';
                                 }
                             }
                             if (!$bFoundOldOdds)
                             {
-                                echo '<td>';
                                 if (($iX == 1 ? $oPropOdds->getPropOddsAsString() : $oPropOdds->getNegPropOddsAsString()) != '-99999')
                                 {
-                                    echo '<a href="#" class="but-sgp" data-li="[' . $oPropOdds->getBookieID() . ',' . $iX . ',' . $oPropOdds->getMatchupID() . ',' . $oPropOdds->getPropTypeID() . ',' . $oPropOdds->getTeamNumber() . ']" ><span class="t-b-cc"><span id="oID' . ('2' . sprintf("%06d", $oPropOdds->getMatchupID()) . sprintf("%02d", $oPropOdds->getBookieID()) . $iX . sprintf("%03d", $oPropOdds->getPropTypeID()) . $oPropOdds->getTeamNumber()) . '" ' . $sClassName . '>' . ($iX == 1 ? $oPropOdds->getPropOddsAsString() : $oPropOdds->getNegPropOddsAsString()) . '</span></span></a>';
+                                    echo '<td class="but-sgp" data-li="[' . $oPropOdds->getBookieID() . ',' . $iX . ',' . $oPropOdds->getMatchupID() . ',' . $oPropOdds->getPropTypeID() . ',' . $oPropOdds->getTeamNumber() . ']" ><span id="oID' . ('2' . sprintf("%06d", $oPropOdds->getMatchupID()) . sprintf("%02d", $oPropOdds->getBookieID()) . $iX . sprintf("%03d", $oPropOdds->getPropTypeID()) . $oPropOdds->getTeamNumber()) . '" ' . $sClassName . '>' . ($iX == 1 ? $oPropOdds->getPropOddsAsString() : $oPropOdds->getNegPropOddsAsString()) . '</span></td>';
                                 }
                                 else
                                 {
-                                    echo '<span class="na">n/a</span>';
+                                    echo '<td><span class="na">n/a</span></td>';
                                 }
-                                echo '</td>';
                             }
 
                             $iProcessedProps++;
@@ -441,7 +443,9 @@ foreach ($aEvent as $oEvent)
                         }
 
                         //Add alert cell
-                        echo '<td class="button-cell"><span class="but-img i-na"></span></td>';
+                        echo '<td class="button-cell">
+                            <svg class="svg-i-disabled" viewBox="0 0 24 24" preserveAspectRatio="xMidYMid meet" focusable="false"><g><path d="M12 22c1.1 0 2-.9 2-2h-4c0 1.1.9 2 2 2zm6-6v-5c0-3.07-1.64-5.64-4.5-6.32V4c0-.83-.67-1.5-1.5-1.5s-1.5.67-1.5 1.5v.68C7.63 5.36 6 7.92 6 11v5l-2 2v1h16v-1l-2-2z"></path></g></svg>
+                        </td>';
 
                         //Add index graph
                         if ($bEverFoundOldOdds || count($aPropsOdds) > 1)
@@ -451,11 +455,15 @@ foreach ($aEvent as $oEvent)
                             {
                                 $oCurrentPropOddsIndex = $oBestOdds;
                             }
-                            echo '<td class="button-cell"><a href="#" class="but-sip" data-li="[' . $iX . ',' . $oPropOdds->getMatchupID() . ',' . $oPropOdds->getPropTypeID() . ',' . $oPropOdds->getTeamNumber() . ']"><span class="but-img i-g" title="Prop betting line movement"></span></a></td>';
+                            echo '<td class="button-cell but-sip" data-li="[' . $iX . ',' . $oPropOdds->getMatchupID() . ',' . $oPropOdds->getPropTypeID() . ',' . $oPropOdds->getTeamNumber() . ']">
+                                <svg class="svg-i" viewBox="0 0 24 24" preserveAspectRatio="xMidYMid meet" focusable="false"><g><path d="M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zM9 17H7v-7h2v7zm4 0h-2V7h2v10zm4 0h-2v-4h2v4z"></path></g></svg>
+                            </td>';
                         }
                         else
                         {
-                            echo '<td class="button-cell"><span class="but-img i-ng"></span></td>';
+                            echo '<td class="button-cell">
+                                <svg class="svg-i-disabled" viewBox="0 0 24 24" preserveAspectRatio="xMidYMid meet" focusable="false"><g><path d="M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zM9 17H7v-7h2v7zm4 0h-2V7h2v10zm4 0h-2v-4h2v4z"></path></g></svg>
+                            </td>';
                         }
 
                         //Add empty cell normally used for props
@@ -476,7 +484,7 @@ foreach ($aEvent as $oEvent)
         $aPropTypes = OddsHandler::getAllPropTypesForEvent($oEvent->getID());
         if (count($aPropTypes) > 0)
         {
-            echo '<tr class="odd even eventprop" id="mu-' . $oEvent->getID() . '">';
+            echo '<tr class="eventprop" id="mu-' . $oEvent->getID() . '">';
             echo '<th scope="row" style="font-weight: 400"><a href="#" data-mu="e' . $oEvent->getID() . '">Event props</a></th>';
 
             //Fill empty cells
@@ -486,9 +494,9 @@ foreach ($aEvent as $oEvent)
             }
             echo '<td class="button-cell"></td><td class="button-cell"></td>';
 
-            echo '<td class="prop-cell"><a href="#" data-mu="e' . $oEvent->getID() . '"><span class="t-b-cc">';
+            echo '<td class="prop-cell" data-mu="e' . $oEvent->getID() . '">';
             echo count($aPropTypes) . '&nbsp;<span class="exp-ard"></span>';
-            echo '</span></a></td>';
+            echo '</td>';
 
 
             echo '</tr>';
@@ -530,7 +538,7 @@ foreach ($aEvent as $oEvent)
                     for ($iX = 1; $iX <= 2; $iX++)
                     {
                         $iPropRowCounter++;
-                        echo '<tr class="pr' . (($iX % 2) == 1 ? '' : '-odd') . '"' . (($iX == 2 && $iPropCounter == count($aPropTypes) - 1) ? ' style="border-bottom: 2px solid #f8f8f8;"' : (($iX == 1 && $iPropCounter == 0) ? ' style="border-top: 1px solid #C6C6C6;"' : '')) . '>';
+                        echo '<tr class="pr"' . (($iX == 2 && $iPropCounter == count($aPropTypes) - 1) ? ' style="border-bottom: 2px solid #f8f8f8;"' : (($iX == 1 && $iPropCounter == 0) ? ' style="border-top: 1px solid #C6C6C6;"' : '')) . '>';
                         echo '<th scope="row">' . ($iX == 1 ? $oPropType->getPropDesc() : $oPropType->getPropNegDesc()) . '&nbsp;</th>';
 
                         $iProcessedProps = 0;
@@ -590,10 +598,9 @@ foreach ($aEvent as $oEvent)
 
                                 if ($oOldPropOdds->getBookieID() == $iCurrentOperatorID)
                                 {
-                                    echo '<td>';
                                     if (($iX == 1 ? $oPropOdds->getPropOddsAsString() : $oPropOdds->getNegPropOddsAsString()) != '-99999')
                                     {
-                                        echo '<a href="#" class="but-sgep" data-li="[' . $oPropOdds->getEventID() . ',' . $oPropOdds->getBookieID() . ',' . $iX . ',' . $oPropOdds->getPropTypeID() . ']"><span class="t-b-cc"><span id="oID' . ('2' . sprintf("%06d", $oPropOdds->getMatchupID()) . sprintf("%02d", $oPropOdds->getBookieID()) . $iX . sprintf("%03d", $oPropOdds->getPropTypeID()) . $oPropOdds->getTeamNumber()) . '" ' . $sClassName . '>' . ($iX == 1 ? $oPropOdds->getPropOddsAsString() : $oPropOdds->getNegPropOddsAsString()) . '</span>';
+                                        echo '<td class="but-sgep" data-li="[' . $oPropOdds->getEventID() . ',' . $oPropOdds->getBookieID() . ',' . $iX . ',' . $oPropOdds->getPropTypeID() . ']"><span id="oID' . ('2' . sprintf("%06d", $oPropOdds->getMatchupID()) . sprintf("%02d", $oPropOdds->getBookieID()) . $iX . sprintf("%03d", $oPropOdds->getPropTypeID()) . $oPropOdds->getTeamNumber()) . '" ' . $sClassName . '>' . ($iX == 1 ? $oPropOdds->getPropOddsAsString() : $oPropOdds->getNegPropOddsAsString()) . '</span>';
                                         if ($iCompareOddsNew > $iCompareOddsOld)
                                         {
                                             echo '<span class="aru arage-' . $iChangeID . '">▲</span>';
@@ -606,30 +613,26 @@ foreach ($aEvent as $oEvent)
                                         {
                                             echo '';
                                         }
-                                        echo '</span></a>';
+                                        echo '</td>';
                                     }
                                     else
                                     {
-                                        echo '<span class="t-b-cc"><span class="na">n/a</span></span>';
+                                        echo '<td><span class="na">n/a</span></td>';
                                     }
                                     $bFoundOldOdds = true;
                                     $bEverFoundOldOdds = true;
-
-                                    echo '</td>';
                                 }
                             }
                             if (!$bFoundOldOdds)
                             {
-                                echo '<td>';
                                 if (($iX == 1 ? $oPropOdds->getPropOddsAsString() : $oPropOdds->getNegPropOddsAsString()) != '-99999')
                                 {
-                                    echo '<a href="#" class="but-sgep" data-li="[' . $oPropOdds->getEventID() . ',' . $oPropOdds->getBookieID() . ',' . $iX . ',' . $oPropOdds->getPropTypeID() . ']" ><span class="t-b-cc"><span id="oID' . ('2' . sprintf("%06d", $oPropOdds->getMatchupID()) . sprintf("%02d", $oPropOdds->getBookieID()) . $iX . sprintf("%03d", $oPropOdds->getPropTypeID()) . $oPropOdds->getTeamNumber()) . '" ' . $sClassName . '>' . ($iX == 1 ? $oPropOdds->getPropOddsAsString() : $oPropOdds->getNegPropOddsAsString()) . '</span></span></a>';
+                                    echo '<td class="but-sgep" data-li="[' . $oPropOdds->getEventID() . ',' . $oPropOdds->getBookieID() . ',' . $iX . ',' . $oPropOdds->getPropTypeID() . ']" ><span id="oID' . ('2' . sprintf("%06d", $oPropOdds->getMatchupID()) . sprintf("%02d", $oPropOdds->getBookieID()) . $iX . sprintf("%03d", $oPropOdds->getPropTypeID()) . $oPropOdds->getTeamNumber()) . '" ' . $sClassName . '>' . ($iX == 1 ? $oPropOdds->getPropOddsAsString() : $oPropOdds->getNegPropOddsAsString()) . '</span></td>';
                                 }
                                 else
                                 {
-                                    echo '<span class="na">n/a</span>';
+                                    echo '<td><span class="na">n/a</span></td>';
                                 }
-                                echo '</td>';
                             }
 
                             $iProcessedProps++;
@@ -642,7 +645,9 @@ foreach ($aEvent as $oEvent)
                         }
 
                         //Add alert cell
-                        echo '<td class="button-cell"><span class="but-img i-na"></span></td>';
+                        echo '<td class="button-cell">
+                        <svg class="svg-i-disabled" viewBox="0 0 24 24" preserveAspectRatio="xMidYMid meet" focusable="false"><g><path d="M12 22c1.1 0 2-.9 2-2h-4c0 1.1.9 2 2 2zm6-6v-5c0-3.07-1.64-5.64-4.5-6.32V4c0-.83-.67-1.5-1.5-1.5s-1.5.67-1.5 1.5v.68C7.63 5.36 6 7.92 6 11v5l-2 2v1h16v-1l-2-2z"></path></g></svg>
+                        </td>';
 
                         //Add index graph
                         if ($bEverFoundOldOdds || count($aPropsOdds) > 1)
@@ -652,11 +657,15 @@ foreach ($aEvent as $oEvent)
                             {
                                 $oCurrentPropOddsIndex = $oBestOdds;
                             }
-                            echo '<td class="button-cell"><a href="#" class="but-siep" data-li="[' . $oPropOdds->getEventID() . ',' . $iX . ',' . $oPropOdds->getPropTypeID() . ']"><span class="but-img i-g" title="Prop betting line movement"></span></a></td>';
+                            echo '<td class="button-cell but-siep" data-li="[' . $oPropOdds->getEventID() . ',' . $iX . ',' . $oPropOdds->getPropTypeID() . ']">
+                                <svg class="svg-i" viewBox="0 0 24 24" preserveAspectRatio="xMidYMid meet" focusable="false"><g><path d="M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zM9 17H7v-7h2v7zm4 0h-2V7h2v10zm4 0h-2v-4h2v4z"></path></g></svg>
+                            </td>';
                         }
                         else
                         {
-                            echo '<td class="button-cell"><span class="but-img i-ng"></span></td>';
+                            echo '<td class="button-cell">
+                            <svg class="svg-i-disabled" viewBox="0 0 24 24" preserveAspectRatio="xMidYMid meet" focusable="false"><g><path d="M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zM9 17H7v-7h2v7zm4 0h-2V7h2v10zm4 0h-2v-4h2v4z"></path></g></svg>
+                            </td>';
                         }
 
                         //Add empty cell normally used for props

@@ -336,6 +336,10 @@ class OddsHandler
 
     public static function removeOddsForMatchupAndBookie($a_iMatchupID, $a_iBookieID)
     {
+        if (!is_int($a_iMatchupID) || !is_int($a_iBookieID))
+        {
+            return false;
+        }
         //First we remove all prop odds so that we don't leave any orphans
         OddsHandler::removePropOddsForMatchupAndBookie($a_iMatchupID, $a_iBookieID);
         return OddsDAO::removeOddsForMatchupAndBookie($a_iMatchupID, $a_iBookieID);
@@ -343,7 +347,70 @@ class OddsHandler
 
     public static function removePropOddsForMatchupAndBookie($a_iMatchupID, $a_iBookieID)
     {
+        if (!is_numeric($a_iMatchupID) || !is_numeric($a_iBookieID))
+        {
+            return false;
+        }
         return OddsDAO::removePropOddsForMatchupAndBookie($a_iMatchupID, $a_iBookieID);
+    }
+
+    public static function getAllLatestPropOddsForMatchupAndBookie($a_iMatchupID, $a_iBookieID, $a_iPropTypeID = -1)
+    {
+        if (!is_numeric($a_iMatchupID) || !is_numeric($a_iBookieID) || !is_numeric($a_iPropTypeID))
+        {
+            return false;
+        }
+        return OddsDAO::getAllLatestPropOddsForMatchupAndBookie($a_iMatchupID, $a_iBookieID, $a_iPropTypeID);
+    }
+
+    public static function flagMatchupOddsForDeletion($a_iBookieID, $a_iMatchupID)
+    {
+        if (!is_numeric($a_iMatchupID) || !is_numeric($a_iBookieID)
+            || $a_iMatchupID <= 0 || $a_iBookieID <= 0)
+        {
+            return false;
+        }
+        return OddsDAO::flagOddsForDeletion($a_iBookieID, $a_iMatchupID, null, null, null);
+    }
+
+    public static function flagPropOddsForDeletion($a_iBookieID, $a_iMatchupID, $a_iPropTypeID, $a_iTeamNum)
+    {
+        if (!is_numeric($a_iMatchupID) || !is_numeric($a_iBookieID) || !is_numeric($a_iPropTypeID) || !is_numeric($a_iTeamNum)
+            || $a_iMatchupID <= 0 || $a_iBookieID <= 0 || $a_iPropTypeID <= 0 || $a_iTeamNum < 0)
+        {
+            return false;
+        }
+        return OddsDAO::flagOddsForDeletion($a_iBookieID, $a_iMatchupID, null, $a_iPropTypeID, $a_iTeamNum);
+    }
+
+    public static function flagEventPropOddsForDeletion($a_iBookieID, $a_iEventID, $a_iPropTypeID, $a_iTeamNum)
+    {
+        if (!is_numeric($a_iEventID) || !is_numeric($a_iBookieID) || !is_numeric($a_iPropTypeID) || !is_numeric($a_iTeamNum)
+            || $a_iEventID <= 0 || $a_iBookieID <= 0 || $a_iPropTypeID <= 0 || $a_iTeamNum < 0)
+        {
+            return false;
+        }
+        return OddsDAO::flagOddsForDeletion($a_iBookieID, null, $a_iEventID, $a_iPropTypeID, $a_iTeamNum);
+    }
+
+    public static function checkIfFlagged($a_iBookieID, $a_iMatchupID, $a_iEventID, $a_iPropTypeID, $a_iTeamNum)
+    {
+        if (!is_numeric($a_iMatchupID) || !is_numeric($a_iEventID) || !is_numeric($a_iBookieID) || !is_numeric($a_iPropTypeID) || !is_numeric($a_iTeamNum)
+            || $a_iBookieID <= 0)
+        {
+                return false;
+        }
+        return OddsDAO::checkIfFlagged($a_iBookieID, $a_iMatchupID, $a_iEventID, $a_iPropTypeID, $a_iTeamNum);
+    }
+
+    public static function removeFlagged($a_iBookieID, $a_iMatchupID, $a_iEventID, $a_iPropTypeID, $a_iTeamNum)
+    {
+        if (!is_numeric($a_iMatchupID) || !is_numeric($a_iEventID) || !is_numeric($a_iBookieID) || !is_numeric($a_iPropTypeID) || !is_numeric($a_iTeamNum)
+        || $a_iBookieID <= 0)
+        {
+                return false;
+        }
+        return OddsDAO::removeFlagged($a_iBookieID, $a_iMatchupID, $a_iEventID, $a_iPropTypeID, $a_iTeamNum);
     }
 }
 

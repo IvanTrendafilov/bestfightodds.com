@@ -18,48 +18,56 @@
   #content {
     width: 100%;
   }
-  .odds-table {
-    font-size: 10px;
-  }
+
   .table-outer-wrapper {
-    padding: 3px;
+    padding: 0 3px;
     margin-bottom: 9px;
   }
   .odds-table {
     tbody {
       th {
-        width: 50px;
+        width: 60px;
         a {
         }
       }
       td {
-        width: 30px;
+        &.but-sg {
+          min-width: 60px;
+          max-width: 60px;
+        }
         &.button-cell {
-          width: 14px;
+          width: 18px;
         }
       }
     }
-    thead th a {
+    thead {
+      th:first-child {
+        max-width: 95px;
+        min-width: 95px;
+      }
     }
   }
   .table-header {
-    font-size: 10px;
-    height: 13px;
-    padding: 5px 0px 7px 8px;
+    
+    height: 16px;
+    padding: 6px 0px 9px 8px;
     a {
-      font-size: 12px;
+      font-size: 16px;
       -ms-text-overflow: ellipsis;
       -o-text-overflow: ellipsis;
       text-overflow: ellipsis;
       white-space: nowrap;
       overflow: hidden;
+      h1 {
+        font-size: 16px;
+      }
     }
   }
   .table-header-date {
     padding-left: 5px;
     padding-right: 6px;
-    padding-top: 2px;
-    font-size: 0.9em;
+    padding-top: 3px;
+    font-size: 12px;
     text-align: right;
     white-space: nowrap;
   }
@@ -67,7 +75,6 @@
     margin-top: 5px;
     width: 240px;
     height: 45px;
-    background-size: 240px 45px;
   }
   .header {
     margin-bottom: 0;
@@ -83,11 +90,12 @@
   .header-menu {
     width: 100%;
   }
+
   .header-menu-item {
-    height: 20px;
-    font-size: 11px;
+    height: 21px;
     padding: 6px 10px 0 10px;
   }
+
   #header-menu-right {
     margin-right: 7px;
   }
@@ -143,7 +151,7 @@
   .table-inner-shadow-left {
     position: absolute;
     top: 0;
-    left: 94px;
+    left: 118px;
     width: 0;
     height: 100%;
     background-color: transparent;
@@ -169,7 +177,7 @@
     margin-bottom: 3px;
     display: none;
   }
-  #chart-window, #alert-window {
+  #chart-window, #alert-window, #bookie-settings-window {
     min-width: 1px;
     display: block;
     width: 90%;
@@ -195,7 +203,7 @@
     }
     tbody tr {
       & th {
-        line-height: 10px;
+
       }
       &:nth-child(even) th {
         padding-bottom: 0;
@@ -250,9 +258,6 @@
       &:hover {
         background-color: #fff;
       }
-      td {
-        padding: 3px 10px;
-      }
     }
   }
   .content-list-date {
@@ -274,13 +279,17 @@
       font-size: 12px;
     }
   }
+
+  /*Team-stats page*/
+
+
   .team-stats-table {
     thead th.header-movement {
       padding-left: 5px;
     }
     tbody {
       th a {
-        font-size: 10px;
+        //font-size: 10px;
         height: 20px;
       }
       td {
@@ -297,7 +306,7 @@
       }
     }
   }
-  /*Team-stats page*/
+
   /*Alerts page*/
   .alert-result-il {
     background-color: #f4f6f8;
