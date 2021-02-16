@@ -147,11 +147,11 @@ class OddsProcessor
 
                 if (EventHandler::checkMatchingOdds($odds))
                 {
-                    $this->logger->info("------- nothing has changed since last odds");
+                    $this->logger->info("- " . $matched_matchup['matched_matchup']->getTeamAsString(1) . " vs " . $matched_matchup['matched_matchup']->getTeamAsString(2) . ": nothing has changed since last odds");
                 }
                 else
                 {
-                    $this->logger->info("------- adding new odds!");
+                    $this->logger->info("- " . $matched_matchup['matched_matchup']->getTeamAsString(1) . " vs " . $matched_matchup['matched_matchup']->getTeamAsString(2) . ": adding new odds");
                     EventHandler::addNewFightOdds($odds);
                 }
                 return true;
