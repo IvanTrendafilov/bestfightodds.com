@@ -682,6 +682,9 @@ fo2.bookie_id, fo2.fight_id ASC;';
         $sQuery = "DELETE FROM events WHERE id = ?";
         $aParams = array($a_iEventID);
         DBTools::doParamQuery($sQuery, $aParams);
+
+        //TODO: This needs error check
+        return true;
     }
 
     public static function removeFight($a_iFightID)
@@ -706,6 +709,9 @@ fo2.bookie_id, fo2.fight_id ASC;';
         //Delete tweet status (simply for cleanup)
         $sQuery5 = "DELETE FROM fight_twits WHERE fight_id = ?";
         DBTools::doParamQuery($sQuery5, $aParams);
+
+        //TODO: This needs error check
+        return true;
     }
 
     public static function getBestOddsForFight($a_iFightID)

@@ -201,7 +201,7 @@ class EventHandler
     /**
      * Changes an event. If any field is left blank it will not be updated.
      */
-    public static function changeEvent($a_iEventID, $a_sName, $a_sDate = '', $a_bDisplay = true)
+    public static function changeEvent($a_iEventID, $a_sName = '', $a_sDate = '', $a_bDisplay = true)
     {
         $oEvent = EventHandler::getEvent($a_iEventID);
 
@@ -220,7 +220,10 @@ class EventHandler
             $oEvent->setDate($a_sDate);
         }
 
-        $oEvent->setDisplay($a_bDisplay);
+        if ($a_bDisplay != null)
+        {
+            $oEvent->setDisplay($a_bDisplay);
+        }
 
         return EventDAO::updateEvent($oEvent);
     }

@@ -121,7 +121,7 @@ class AdminController
                         //Delete matchup
                         $action['view_extra']['matchup'] = EventHandler::getFightByID($action['action_obj']->matchupID);
                         //Check if matchup has odds and the indicate that 
-                        $action['view_extra']['opening_odds'] = OddsHandler::getOpeningOddsForMatchup($action['action_obj']->matchupID);
+                        $action['view_extra']['odds'] = OddsHandler::getOpeningOddsForMatchup($action['action_obj']->matchupID);
         
                         //Check if either fighter has another matchup scheduled and indicate that
                         $matchups1 = EventHandler::getAllFightsForFighter($action['view_extra']['matchup']->getFighterID(1));

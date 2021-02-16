@@ -65,8 +65,9 @@ class TwitDAO
     public static function addTwitterHandle($team_id, $handle)
     {
         $query = 'INSERT INTO teams_twitterhandles(team_id, handle)
-                        VALUES (?, ?)';
-        $params = [$team_id, $handle];
+                        VALUES (?, ?)
+                        ON DUPLICATE KEY UPDATE team_id = ?, handle = ?';
+        $params = [$team_id, $handle, $team_id, $handle];
         return PDOTools::insert($query, $params);
     }
 

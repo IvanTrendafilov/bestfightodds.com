@@ -138,37 +138,32 @@ class AdminAPIController
         }
         else
         {
-            /*if (isset($data->is_main_event) && is_bool(boolval($data->is_main_event)))
-            {
-                //Flip main even status
-                if (EventHandler::setFightAsMainEvent($data->matchup_id, $data->is_main_event))
-                {
-                    $return_data['msg'] = 'Successfully switched matchup to main event';
-                    $return_data['matchup_id'] = $data->matchup_id;
-                    $return_data['is_main_event'] = $data->is_main_event;
-                }
-                else
-                {
-                    $response->withStatus(500);
-                    $return_data['msg'] = 'Error updating matchup';
-                    $return_data['error'] = true;
-                }
-            }
-            else if (isset($data->event_id))
-            {
-                //Update matchup event
-                if (EventHandler::changeFight($data->matchup_id, $data->event_id))
-                {
-                    $return_data['msg'] = 'Successfully updated';
-                    $return_data['matchup_id'] = $data->matchup_id;
-                }
-                else
-                {
-                    $response->withStatus(500);
-                    $return_data['msg'] = 'Error updating matchup';
-                    $return_data['error'] = true;
-                }
-            }*/
+            $result = EventHandler::removeFight($data->matchup_id);
+            $return_data['msg'] = 'Successfully deleted matchup ' . $data->matchup_id;
+        }
+
+        $response->getBody()->write(json_encode($return_data));
+        return $this->returnJson($response);
+    }
+
+    public function deleteEvent(Request $request, Response $response)
+    {
+        $json = $request->getBody();
+        $data = json_decode($json, false);
+        $return_data = [];
+        $return_data['error'] = false;
+
+        if (!isset($data->event_id) 
+            || (int) $data->event_id <= 0)
+        {
+            $response->withStatus(422);
+            $return_data['msg'] = 'Missing parameters';
+            $return_data['error'] = true;
+        }
+        else
+        {
+            $result = EventHandler::removeEvent($data->event_id);
+            $return_data['msg'] = 'Successfully deleted event ' . $data->event_id;
         }
 
         $response->getBody()->write(json_encode($return_data));
@@ -217,10 +212,7 @@ class AdminAPIController
         $return_data = [];
         $return_data['error'] = false;
 
-        if (!v::intType()->validate($data->event_id) 
-            || !v::stringVal()->length(3, null)->validate($data->event_name)
-            || !v::date('Y-m-d')->validate($data->event_date)
-            || !v::boolVal()->validate($data->event_display)) 
+        if (!v::intType()->validate($data->event_id)) 
         {
             $response->withStatus(422);
             $return_data['msg'] = 'Missing/invalid parameters';
@@ -229,7 +221,7 @@ class AdminAPIController
         else
         {
             //Update matchup event
-            if (EventHandler::changeEvent($data->event_id, $data->event_name, $data->event_date, $data->event_display))
+            if (EventHandler::changeEvent($data->event_id, $data->event_name ?? '', $data->event_date ?? '', $data->event_display ?? null))
             {
                 $return_data['msg'] = 'Successfully updated';
                 $return_data['event_id'] = $data->event_id;
@@ -246,13 +238,13 @@ class AdminAPIController
         return $this->returnJson($response);
     }
 
-
     public function updateFighter(Request $request, Response $response)
     {
         $json = $request->getBody();
         $data = json_decode($json, false);
         $return_data = [];
         $return_data['error'] = false;
+        $return_data['msg'] = '';
 
         if (!v::intType()->validate($data->fighter_id))
         {
@@ -263,9 +255,12 @@ class AdminAPIController
         else
         {
             //Check for twitter handle update
-            if (v::alnum()->noWhitespace()->validate(@$data->twitter_handle))
+            if (v::alnum()->noWhitespace()->length(4, null)->validate(@$data->twitter_handle))
             {
-                if (TwitterHandler::addTwitterHandle($_POST['teamID'], $_POST['twitterHandle']))
+                $result = TwitterHandler::addTwitterHandle($data->fighter_id, $data->twitter_handle);
+                echo $result;
+                exit;
+                if (TwitterHandler::addTwitterHandle($data->fighter_id, $data->twitter_handle))
                 {
                     $return_data['msg'] = 'Successfully updated twitter Handle. ';
                     $return_data['fighter_id'] = $data->fighter_id;
@@ -279,9 +274,9 @@ class AdminAPIController
             }
 
             //Check for alt name update (if so just add it to the bunch)
-            if (v::alnum()->length(5, null)->validate(@$data->alt_name))
+            if (v::alnum(' ')->length(5, null)->validate(@$data->alt_name))
             {
-                if (EventHandler::addFighterAltName($_POST['fighter_id'], $_POST['alt_name']))
+                if (EventHandler::addFighterAltName($data->fighter_id, $data->alt_name))
                 {
                     $return_data['msg'] .= 'Successfully updated altname.';
                     $return_data['fighter_id'] = $data->fighter_id;
@@ -435,6 +430,39 @@ class AdminAPIController
     private function returnJson($response)
     {
         return $response->withHeader('Content-Type', 'application/json');
+    }
+
+    public function deleteManualAction(Request $request, Response $response)
+    {
+        $json = $request->getBody();
+        $data = json_decode($json, false);
+        $return_data = [];
+        $return_data['error'] = false;
+
+        if (!isset($data->action_id) 
+            || (int) $data->action_id <= 0)
+        {
+            $response->withStatus(422);
+            $return_data['msg'] = 'Missing parameters';
+            $return_data['error'] = true;
+        }
+        else
+        {
+            $result = ScheduleHandler::clearManualAction($data->action_id);
+            if ($result && $result > 0)
+            {
+                $return_data['msg'] = 'Successfully deleted action ' . $data->action_id;
+            }
+            else
+            {
+                $response->withStatus(500);
+                $return_data['msg'] = 'Failed to delete action with ID ' . $data->action_id;
+                $return_data['error'] = true;
+            }
+        }
+
+        $response->getBody()->write(json_encode($return_data));
+        return $this->returnJson($response);
     }
 
 }
