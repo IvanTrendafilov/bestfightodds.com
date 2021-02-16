@@ -1,7 +1,14 @@
-#*/2     *       *       *       *       /usr/bin/php -d include_path=/var/www/bfo/shared:/var/www/bfo/bfo -d max_execution_time=300 /var/www/bfo/shared/lib/bfocore/cron/cron.OddsParser.php >> /var/www/bfo/bfo/log/parser.log 2>&1
-#10      0       *       *       *       mv /var/www/bfo/bfo/logs/*.log /var/www/bfo/bfo/logs/archived/ && rm -rf /var/www/bfo/bfo/logs/*.log
-#5       *       *       *       *       bash /var/www/bfo/bfo/db/scripts/backup/dobackup_local.sh
-#6       6       *       *       *       sleep $[($RANDOM \%1740) + 11] && /usr/bin/php -d include_path=/var/www/bfo/shared:/var/www/bfo/bfo -d max_execution_time=300 /var/www/bfo/shared/lib/bfocore/cron/cron.ScheduleParser.php >> /var/www/bfo/bfo/log/scheduleparser.log 2>&1
-#30      12      *       *       *       /usr/bin/php -d include_path=/var/www/bfo/shared:/var/www/bfo/bfo -d max_execution_time=300 /var/www/bfo/bfo/db/scripts/cron.CleanDatabasev2.php
-#30      0       *       *       *       /usr/bin/php -d include_path=/var/www/bfo/shared:/var/www/bfo/bfo -d max_execution_time=300 /var/www/bfo/bfo/db/scripts/cron.CleanDatabasev2.php
-#*/5     *       *       *       *       /usr/bin/php -d include_path=/var/www/bfo/shared:/var/www/bfo/bfo -d max_execution_time=300 /var/www/bfo/bfo/lib/bfospec/cron/cron.FacebookPoster.php
+*/2     *       *       *       *       /usr/bin/php -d include_path=/var/www/bfo/shared:/var/www/bfo/bfo -d max_execution_time=300 /var/www/bfo/shared/lib/bfocore/cron/cron.OddsParser.php >> /var/www/bfo/bfo/log/parser.log 2>&1
+10      0       *       *       *       mv /var/www/bfo/bfo/logs/*.log /var/www/bfo/bfo/logs/archived/ && rm -rf /var/www/bfo/bfo/logs/*.log
+5       *       *       *       *       bash /var/www/bfo/bfo/db/scripts/backup/dobackup_local.sh
+6       6       *       *       *       sleep $[($RANDOM \%1740) + 11] && /usr/bin/php -d include_path=/var/www/bfo/shared:/var/www/bfo/bfo -d max_execution_time=300 /var/www/bfo/shared/lib/bfocore/cron/cron.ScheduleParser.php >> /var/www/bfo/bfo/lo\
+g/scheduleparser.log 2>&1
+30      12      *       *       *       /usr/bin/php -d include_path=/var/www/bfo/shared:/var/www/bfo/bfo -d max_execution_time=300 /var/www/bfo/bfo/db/scripts/cron.CleanDatabasev2.php
+30      0       *       *       *       /usr/bin/php -d include_path=/var/www/bfo/shared:/var/www/bfo/bfo -d max_execution_time=300 /var/www/bfo/bfo/db/scripts/cron.CleanDatabasev2.php
+*/5     *       *       *       *       /usr/bin/php -d include_path=/var/www/bfo/shared:/var/www/bfo/bfo -d max_execution_time=300 /var/www/bfo/bfo/lib/bfospec/cron/cron.FacebookPoster.php
+*/3+1   *       *       *       *       lynx -source "https://www.betonline.ag/sportsbook/line/retrievelinedata?param.PrdNo=-1&param.Type=Cntst&param.RequestType=Normal&param.CntstParam.Lv1=MMA+Props" > /var/www/bfo/bfo/app/front/externalfeeds/beton\
+line-props.xml
+*/3     *       *       *       *       lynx -source "https://www.betonline.ag/sportsbook/Line/RetrieveLineData?param.SortOption=D&param.PrdNo=0&param.Type=H2H&param.RequestType=Normal&param.H2HParam.Lv1=Boxing&param.H2HParam.Lv2=Bouts" > /var/www/b\
+fo/bfo/app/front/externalfeeds/betonline-boxing.xml
+#*/3+2       6       *       *       *       sleep $[($RANDOM \%45) + 1] && /usr/bin/php -d include_path=/var/www/bfo/shared:/var/www/bfo/bfo -d max_execution_time=300 /var/www/bfo/bfo/app/parsers/cron/cron.DraftKings.php
+#*/3       6       *       *       *       sleep $[($RANDOM \%45) + 1] && /usr/bin/php -d include_path=/var/www/bfo/shared:/var/www/bfo/bfo -d max_execution_time=300 /var/www/bfo/bfo/app/parsers/cron/cron.Fanduel.php
