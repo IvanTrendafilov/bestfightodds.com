@@ -34,7 +34,7 @@ document.addEventListener("DOMContentLoaded", function(event) {
 
 <div>
 <form>
-    New event: <input id="event_name"> on <input id="event_date" value="<?=date('Y-m-d')?>"> Hide: <input type="checkbox" id="event_hidden"> <input type="submit" value="Add" id="new-event-button">
+    New event: <input id="event_name" value="<?=$in_event_name?>"> on <input id="event_date" value="<?=$in_event_date != '' ?   $in_event_date : date('Y-m-d')?>"> Hide: <input type="checkbox" id="event_hidden"> <input type="submit" value="Add" id="new-event-button">
 </form>
 </div>
 <div>

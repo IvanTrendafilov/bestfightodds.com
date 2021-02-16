@@ -31,6 +31,7 @@ document.addEventListener("DOMContentLoaded", function(event) {
     //Delete matchup
     document.querySelectorAll('.delete-matchup-button').forEach(item => {
         item.addEventListener('click', e => {
+            console.log(e.target.parentNode);
             e.preventDefault();
             var opts = {
                 method: 'DELETE',
@@ -38,10 +39,10 @@ document.addEventListener("DOMContentLoaded", function(event) {
                     'Content-type': 'application/json; charset=UTF-8'
                 },
                 body: JSON.stringify({
-                    matchup_id: e.target.dataset.matchupid,
+                    matchup_id: parseInt(e.target.parentNode.dataset.matchupid),
                 })
             };
-            fetch('/cnadm/api/matchups/' + e.target.dataset.matchupid, opts).then(function (response) {
+            fetch('/cnadm/api/matchups/' + e.target.parentNode.dataset.matchupid, opts).then(function (response) {
                 return response.json();
             })
             .then(function (body) {

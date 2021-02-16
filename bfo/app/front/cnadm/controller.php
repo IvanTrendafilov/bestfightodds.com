@@ -169,6 +169,8 @@ class AdminController
         $view_data = [];
         $view_data['inteam1'] = $request->getQueryParams()['inteam1'] ?? '';
         $view_data['inteam2'] = $request->getQueryParams()['inteam2'] ?? '';
+        $view_data['ineventid'] = $request->getQueryParams()['ineventid'] ?? '';
+
         $view_data['events'] = EventHandler::getAllUpcomingEvents();
         
         $response->getBody()->write($this->plates->render('matchup_new', $view_data));
@@ -178,6 +180,10 @@ class AdminController
     public function eventsOverview(Request $request, Response $response, array $args)
     {
         $view_data = ['events' => []];
+
+        $view_data['in_event_name'] = $request->getQueryParams()['in_event_name'] ?? '';
+        $view_data['in_event_date'] = $request->getQueryParams()['in_event_date'] ?? '';
+
         $events = null;
         if (isset($args['show']) && $args['show'] == 'all')
         {

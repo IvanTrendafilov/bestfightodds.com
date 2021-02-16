@@ -62,6 +62,39 @@ document.addEventListener("DOMContentLoaded", function(event) {
             });
 		});
 	});
+
+    document.querySelectorAll('.create-matchups-for-event').forEach(item => {
+        item.addEventListener('click', e => {
+            e.preventDefault();
+            const event_id =  e.target.dataset.eventid;
+            //Run through matchups and add them to the event
+            document.querySelectorAll(".matchup-row[data-eventlink='" + e.target.dataset.eventlink + "']").forEach(function (item) {
+                structure = JSON.parse(item.dataset.create);
+                var opts = {
+                    method: 'POST',      
+                    headers: {
+                        'Content-type': 'application/json; charset=UTF-8'
+                    },
+                    body: JSON.stringify({
+                        event_id: event_id,
+                        team1_name: structure.inteam1,
+                        team2_name: structure.inteam2
+                    })
+                };
+                fetch('/cnadm/api/matchups', opts).then(function (response) {
+                    return response.json();
+                })
+                .then(function (body) {
+                    if (body.error == true) {
+                        item.classList.add("failed")
+                    }
+                    else {
+                        item.classList.add("success")
+                    }
+                });
+            });
+		});
+	});
 });
 
 /*
@@ -92,9 +125,9 @@ myNameSpace = function(){
         <td data-date=""><b><?=$unmatched_group[0]['metadata']['event_name'] ?? '' ?> / <?=$unmatched_group[0]['view_extras']['event_name_reduced'] ?? ''?></b> (<?=$unmatched_group[0]['view_extras']['event_date_formatted']?>)
 
             <?php if(isset($unmatched_group[0]['view_extras']['event_match']['id'])): ?>
-                    Match: <?=$unmatched_group[0]['view_extras']['event_match']['name']?> (<?=$unmatched_group[0]['view_extras']['event_match']['date']?>) [<a href="/cnadm/?p=addNewFightForm&inEventID=<?=$unmatched_group[0]['view_extras']['event_match']['id']?>&inFighter1=<?=$unmatched_group[0]['view_indata1']?>&inFighter2=<?=$unmatched_group[0]['view_indata2']?> . '">add</a>]
+                    Match: <?=$unmatched_group[0]['view_extras']['event_match']['name']?> (<?=$unmatched_group[0]['view_extras']['event_match']['date']?>) [<a href="#" class="create-matchups-for-event" data-eventid="<?=$unmatched_group[0]['view_extras']['event_match']['id']?>" data-eventlink="event<?=$i?>">Create all matchups below for matched event</a>]
             <?php else: ?>
-                    No match.. [<a href="/cnadm/?p=addNewEventForm&eventName=<?=$unmatched_group[0]['view_extras']['event_name_reduced']?>&eventDate=<?=$unmatched_group[0]['view_extras']['event_date_formatted']?>">create</a>] [<a href="http://www.google.se/search?q=tapology <?=$unmatched_group[0]['view_extras']['event_name_reduced']?>">google</a>]
+                    No match.. [<a href="/cnadm/events?in_event_name=<?=$unmatched_group[0]['view_extras']['event_name_reduced']?>&in_event_date=<?=$unmatched_group[0]['view_extras']['event_date_formatted']?>">create</a>] [<a href="http://www.google.se/search?q=tapology <?=$unmatched_group[0]['view_extras']['event_name_reduced']?>">google</a>]
             <?php endif ?>
 
         </td>
@@ -102,8 +135,8 @@ myNameSpace = function(){
     
     <?php foreach ($unmatched_group as $unmatched_item): ?>
         <?php if ($unmatched_item['type'] == 0): ?>
-            <tr class="matchup-row" data-create="<?=$this->e('{"inteam1": "' . $unmatched_item['view_indata1'] . '", "inteam2": "' . $unmatched_item['view_indata1'] . '"}')?>" data-eventlink="event<?=$i?>"><td><?=date("Y-m-d H:i:s", strtotime($unmatched_item['log_date']))?></td><td><b><?=$bookies[$unmatched_item['bookie_id']]?></b></td><td>
-            <?=$this->e($unmatched_item['matchup'], 'strtolower|ucwords')?></td><td>[<a href="/cnadm/newmatchup?inteam1=<?=$unmatched_item['view_indata1']?>&inteam2=<?=$unmatched_item['view_indata2']?>">add</a>] [<a href="http://www.google.se/search?q=tapology <?=$unmatched_item['matchup']?>">google</a>] 
+            <tr class="matchup-row" data-create="<?=$this->e('{"inteam1": "' . $unmatched_item['view_indata1'] . '", "inteam2": "' . $unmatched_item['view_indata2'] . '"}')?>" data-eventlink="event<?=$i?>"><td><?=date("Y-m-d H:i:s", strtotime($unmatched_item['log_date']))?></td><td><b><?=$bookies[$unmatched_item['bookie_id']]?></b></td><td>
+            <?=$this->e($unmatched_item['matchup'], 'strtolower|ucwords')?></td><td>[<a href="/cnadm/newmatchup?inteam1=<?=$unmatched_item['view_indata1']?>&inteam2=<?=$unmatched_item['view_indata2']?>&ineventid=<?=$unmatched_group[0]['view_extras']['event_match']['id'] ?? '' ?>">add</a>] [<a href="http://www.google.se/search?q=tapology <?=$unmatched_item['matchup']?>">google</a>] 
             </td></tr>
         <?php endif ?>
     <?php endforeach ?>

@@ -23,7 +23,7 @@ document.addEventListener("DOMContentLoaded", function(event) {
                     alert(body.msg);
                 }
                 else {
-                    location.reload();
+                    window.location.href = '/cnadm/events/' + document.querySelector('#event_id').value;
                 }
             });
         });
