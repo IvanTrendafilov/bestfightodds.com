@@ -1089,7 +1089,7 @@ class OddsDAO
         
     }
 
-    public static function removeFlagged($a_iBookieID, $a_iMatchupID, $a_iEventID, $a_iPropTypeID, $a_iTeamNum)
+    public static function removeFlagged($a_iBookieID, $a_iMatchupID = null, $a_iEventID = null, $a_iPropTypeID = null, $a_iTeamNum = null)
     {
         $sWhere = '';
         $aParams = [$a_iBookieID];

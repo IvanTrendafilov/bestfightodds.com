@@ -403,12 +403,12 @@ class OddsHandler
         return OddsDAO::checkIfFlagged($a_iBookieID, $a_iMatchupID, $a_iEventID, $a_iPropTypeID, $a_iTeamNum);
     }
 
-    public static function removeFlagged($a_iBookieID, $a_iMatchupID, $a_iEventID, $a_iPropTypeID, $a_iTeamNum)
+    public static function removeFlagged($a_iBookieID, $a_iMatchupID = null, $a_iEventID = null, $a_iPropTypeID = null, $a_iTeamNum = null)
     {
-        if (!is_numeric($a_iMatchupID) || !is_numeric($a_iEventID) || !is_numeric($a_iBookieID) || !is_numeric($a_iPropTypeID) || !is_numeric($a_iTeamNum)
-        || $a_iBookieID <= 0)
+        if (!is_numeric($a_iBookieID) || $a_iBookieID <= 0
+        || (!$a_iMatchupID && !$a_iEventID && !$a_iPropTypeID && !$a_iTeamNum)) //If all is null we don't proceed
         {
-                return false;
+            return false;
         }
         return OddsDAO::removeFlagged($a_iBookieID, $a_iMatchupID, $a_iEventID, $a_iPropTypeID, $a_iTeamNum);
     }

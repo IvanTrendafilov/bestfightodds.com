@@ -44,7 +44,6 @@ class OddsProcessor
 
         //Pending: Remove prop dupes AFTER MATCH
         //Pending: For Create mode, create new matchups if no match was found
-        //Pending: Remove removal flags for any matchups/orops that may have them but was now detected. Method available in OddsHandler
 
         $this->logUnmatchedMatchups($matched_matchups);
         $pp->logUnmatchedProps($matched_props);
@@ -194,6 +193,7 @@ class OddsProcessor
                 }
                 else
                 {
+                    OddsHandler::removeFlagged($this->bookie_id, $upcoming_matchup->getID()); //Remove any previous flags
                     $this->logger->debug('Odds for ' . $upcoming_matchup->getTeamAsString(1) . ' vs ' . $upcoming_matchup->getTeamAsString(2) . ' still relevant. No flagging');
                 }
             }
@@ -233,6 +233,7 @@ class OddsProcessor
                 }
                 else
                 {
+                    OddsHandler::removeFlagged($this->bookie_id, $stored_prop->getMatchupID(), null, $stored_prop->getPropTypeID(), $stored_prop->getTeamNumber()); //Remove any previous flags
                     $this->logger->debug('Prop odds with type ' . $stored_prop->getPropTypeID() . ' for team num ' . $stored_prop->getTeamNumber() . ' in ' . $upcoming_matchup->getTeamAsString(1) . ' vs ' . $upcoming_matchup->getTeamAsString(2) . ' still relevant');
                 }
             }
@@ -274,6 +275,7 @@ class OddsProcessor
                     }
                     else
                     {
+                        OddsHandler::removeFlagged($this->bookie_id, null, $stored_prop->getEventID(), $stored_prop->getPropTypeID(), $stored_prop->getTeamNumber()); //Remove any previous flags
                         $this->logger->debug('Prop odds with type ' . $stored_prop->getPropTypeID() . ' for event ' . $upcoming_event->getName() . ' still relevant');
                     }
                 }
