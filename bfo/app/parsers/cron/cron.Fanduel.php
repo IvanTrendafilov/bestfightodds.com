@@ -86,7 +86,7 @@ class ParserJob
             {
                 $this->logger->debug('Clicking on tab on page');
                 $client->executeScript("document.querySelectorAll('.events_futures button')[" . $x . "].click()");
-                $crawler = $client->waitFor('.events_futures');
+                $crawler = $client->waitFor('.event');
                 $crawler->filter('.event')->each(function (\Symfony\Component\DomCrawler\Crawler $event_node) use (&$client, &$matchups)
                 {
                     if ($event_node->filter('.MMA')->count())
