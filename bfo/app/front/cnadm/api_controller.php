@@ -12,6 +12,7 @@ require_once 'lib/bfocore/general/class.BookieHandler.php';
 require_once 'lib/bfocore/general/class.FighterHandler.php';
 require_once 'lib/bfocore/general/class.TwitterHandler.php';
 require_once 'lib/bfocore/general/class.Alerter.php';
+require_once 'lib/bfocore/utils/class.OddsTools.php';
 
 class AdminAPIController
 {
@@ -465,4 +466,50 @@ class AdminAPIController
         return $this->returnJson($response);
     }
 
+    public function createOdds(Request $request, Response $response)
+    {
+        $json = $request->getBody();
+        $data = json_decode($json, false);
+        $return_data = [];
+        $return_data['error'] = false;
+
+        if (!v::intType()->validate($data->bookie_id)
+            || !v::intType()->validate($data->matchup_id)
+            || !v::stringVal()->length(2, null)->validate($data->team1_odds)
+            || !v::stringVal()->length(2, null)->validate($data->team2_odds)
+            || !OddsTools::checkCorrectOdds($data->team1_odds) 
+            || !OddsTools::checkCorrectOdds($data->team2_odds))
+        {
+            $response->withStatus(422);
+            $return_data['msg'] = 'Missing parameters';
+            $return_data['error'] = true;
+        }
+        else
+        {
+            $new_odds = new FightOdds($data->matchup_id, $data->bookie_id, $data->team1_odds, $data->team2_odds, OddsTools::standardizeDate(date('Y-m-d')));
+            if (EventHandler::checkMatchingOdds($new_odds))
+            {
+                $return_data['msg'] = 'Odds have not changed (' . $data->team1_odds . '/' . $data->team2_odds . ')';
+            }
+            else
+            {
+                if (EventHandler::addNewFightOdds($new_odds))
+                {
+                    $return_data['msg'] = 'Successfully added odds: (' . $data->team1_odds . '/' . $data->team2_odds . ')';
+                }
+                else
+                {
+                    $response->withStatus(500);
+                    $return_data['msg'] = 'Error adding odds: (' . $data->team1_odds . '/' . $data->team2_odds . ')';
+                    $return_data['error'] = true;
+                }
+            }
+
+            $return_data['matchup_id'] = $data->matchup_id;
+            $return_data['bookie_id'] = $data->bookie_id;
+        }
+
+        $response->getBody()->write(json_encode($return_data));
+        return $this->returnJson($response);
+    }
 }
