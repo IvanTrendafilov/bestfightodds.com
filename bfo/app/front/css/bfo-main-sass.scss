@@ -300,7 +300,7 @@ input[type="submit"] {
 #format-container input {
   height: 16px;
   margin-left: 3px;
-  padding: 3px;
+  padding: 2px;
   width: 45px;
   font-size: 12px;
 }
@@ -759,6 +759,9 @@ ul.share-dropdown ul li a {
   padding-top: 5px;
   padding-left: 5px;
   text-align: left;
+    &.sortable-chosen {
+      background-color: #d7d9da;
+    }
 }
 
 #bookie-order-items li input {

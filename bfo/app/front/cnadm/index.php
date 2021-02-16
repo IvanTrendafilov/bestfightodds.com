@@ -58,6 +58,6 @@ $app->post('/api/resetchangenums', \AdminAPIController::class . ':resetChangeNum
 $app->post('/api/clearunmatched', \AdminAPIController::class . ':clearUnmatched');
 $app->post('/api/proptemplates', \AdminAPIController::class . ':createPropTemplate');
 $app->post('/api/propcorrelation', \AdminAPIController::class . ':createPropCorrelation');
-$app->delete('/api/manualaction', \AdminAPIController::class . ':deleteManualAction');
+$app->delete('/api/manualactions/{id}', \AdminAPIController::class . ':deleteManualAction');
 
 $app->run();

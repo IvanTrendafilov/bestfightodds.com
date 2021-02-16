@@ -114,7 +114,7 @@ class AdminController
                     case 6:
                         //Move matchup
                         $action['view_extra']['matchup'] = EventHandler::getFightByID($action['action_obj']->matchupID);
-                        $action['view_extra']['old_event'] = EventHandler::getEvent($oMatchup->getEventID());
+                        $action['view_extra']['old_event'] = EventHandler::getEvent($action['view_extra']['matchup']->getEventID());
                         $action['view_extra']['new_event'] = EventHandler::getEvent($action['action_obj']->eventID);
                     break;
                     case 7:

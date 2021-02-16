@@ -152,8 +152,8 @@ function maMoveMatchup(ma_id, inputdata)
             'Content-type': 'application/json; charset=UTF-8'
         },
         body: JSON.stringify({
-            matchup_id: inputJSON.matchupID,
-            event_id: inputJSON.eventID,
+            matchup_id: parseInt(inputJSON.matchupID),
+            event_id: parseInt(inputJSON.eventID),
         })
     };
     fetch('/cnadm/api/matchups/' + inputJSON.matchupID, opts).then(function (response) {

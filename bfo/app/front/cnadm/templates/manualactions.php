@@ -57,11 +57,11 @@ Manual actions: <a href="#" onclick="$('input[onclick^=\'maAdd\']').click();" >A
 
 			<?php elseif ($action['type'] == 6): ?>
 
-				<td>Move </td><td><a href="http://www.google.com/search?q=tapology <?=urlencode($action['view_extra']['matchup']->getName()->getTeamAsString(1) . ' vs. ' . $action['view_extra']['matchup']->getName()->getTeamAsString(2))?>"><?=$action['view_extra']['matchup']->getName()->getTeamAsString(1)?> vs. <?=$action['view_extra']['matchup']->getName()->getTeamAsString(2)?></a></td>
+				<td>Move </td><td><a href="http://www.google.com/search?q=tapology <?=urlencode($action['view_extra']['matchup']->getTeamAsString(1) . ' vs. ' . $action['view_extra']['matchup']->getTeamAsString(2))?>"><?=$action['view_extra']['matchup']->getTeamAsString(1)?> vs. <?=$action['view_extra']['matchup']->getTeamAsString(2)?></a></td>
 				<td> from </td>
-				<td><?=$action['view_extra']['old_event']->getName()->getName()?> (<?=$action['view_extra']['old_event']->getDate()?>)</td>
+				<td><?=$action['view_extra']['old_event']->getName()?> (<?=$action['view_extra']['old_event']->getDate()?>)</td>
 				<td> to </td>
-				<td><?=$action['view_extra']['new_event']->getName()->getName()?> (<?=$action['view_extra']['new_event']->getDate()?>)</td>
+				<td><?=$action['view_extra']['new_event']->getName()?> (<?=$action['view_extra']['new_event']->getDate()?>)</td>
 				<td><input type="submit" value="Accept" onclick="maMoveMatchup(<?=$action['id']?>, '<?=htmlspecialchars($action['description'])?>')">
 
 			<?php elseif ($action['type'] == 7): //Delete matchup ?>
