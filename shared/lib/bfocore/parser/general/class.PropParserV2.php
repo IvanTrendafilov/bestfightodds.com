@@ -738,10 +738,6 @@ class PropParserV2
         }
         else
         {
-            if ($new_prop->getPropTypeID() == 11 && $new_prop->getMatchupID() == 21739)
-            {
-                var_dump($new_prop);
-            }
             $this->logger->info("------- adding new prop odds: " . $new_prop->getMatchupID() . " proptype_id: " . $new_prop->getPropTypeID());
             if (OddsHandler::addPropBet($new_prop))
             {

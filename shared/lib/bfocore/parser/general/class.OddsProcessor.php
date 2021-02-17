@@ -42,6 +42,9 @@ class OddsProcessor
         $pp = new PropParserV2($this->logger, $this->bookie_id);
         $matched_props = $pp->matchProps($parsed_sport->getFetchedProps());
 
+
+        $this->removeMatchedPropDupes($matched_props);
+
         //Pending: Remove prop dupes AFTER MATCH
         //Pending: For Create mode, create new matchups if no match was found
 
@@ -375,6 +378,115 @@ class OddsProcessor
         $parsed_sport->setPropList($props);
         return $parsed_sport;
     }
+
+    /**
+     * Loops through all _matched_ props and removes any dupes based on prop_type and matchup
+     */
+    private function removeMatchedPropDupes($matched_props)
+    {
+        $props = $matched_props;
+        for ($y = 0; $y < sizeof($props); $y++)
+        {
+            if ($props[$y]['match_result']['status'] == true)
+            {
+                $matches = [];
+                for ($x = 0; $x < sizeof($props); $x++)
+                {
+                    if ($x != $y) //Ignore self
+                    {
+                        if ($props[$x]['match_result']['status'] == true
+                            && $props[$x]['match_result']['template']->getPropTypeID() == $props[$y]['match_result']['template']->getPropTypeID()
+                            && $props[$x]['match_result']['matchup']['matchup_id'] == $props[$y]['match_result']['matchup']['matchup_id']
+                            && $props[$x]['match_result']['matchup']['team'] == $props[$y]['match_result']['matchup']['team'])
+                        {
+                            //Found a match!
+                            echo 'Matching dupe ' . $props[$x]['match_result']['template']->getPropTypeID() . ' / ' . $props[$x]['match_result']['matchup']['matchup_id'] . '';
+                            echo "
+                            \n\r";
+                            echo '' . $props[$y]['prop']->getTeamOdds(1) . ' / ' . $props[$y]['prop']->getTeamOdds(2);
+                            echo "
+                            \n\r";
+                            echo '' . $props[$x]['prop']->getTeamOdds(1) . ' / ' . $props[$x]['prop']->getTeamOdds(2);
+
+                            $arbitrage_subject = ParseTools::getArbitrage($props[$y]['prop']->getTeamOdds(1), $props[$y]['prop']->getTeamOdds(2));
+                            $arbitrage_challenger = ParseTools::getArbitrage($props[$x]['prop']->getTeamOdds(1), $props[$x]['prop']->getTeamOdds(2));
+
+                            $this->logger->info('Removing dupe for matchup_id: ' . $props[$x]['match_result']['matchup']['matchup_id'] . ' proptype_id: ' . $props[$x]['match_result']['template']->getPropTypeID());
+
+
+                            /**
+                             * 
+                             *  TODO: Fix below so that best price is taken if odds is -99999 on either side
+                             * 
+                             * 
+                             */
+
+                            if ($arbitrage_subject > $arbitrage_challenger) //Challenger won
+                            {
+                                unset($props[$y]);
+                            }
+                            else if ($arbitrage_subject < $arbitrage_challenger) //Subject won
+                            {
+                                unset($props[$x]);
+                            }
+                            else //Draw, remove one
+                            {
+                                unset($props[$x]);
+                            }
+                            $props = array_values($props);
+
+                            $y = 0;
+                            break 1;
+                        }
+                    }
+                }
+            }
+        }
+
+/*
+
+
+
+            for ($x = 0; $x < sizeof($props); $x++)
+            {
+                if ($x != $y
+                        && $props[$y]->getCorrelationID() == $props[$x]->getCorrelationID()
+                        && $props[$y]->getTeamName(1) == $props[$x]->getTeamName(1)
+                        && $props[$y]->getTeamName(2) == $props[$x]->getTeamName(2)
+                        && !($props[$y]->getTeamOdds(1) == $props[$x]->getTeamOdds(1)
+                        && $props[$y]->getTeamOdds(2) == $props[$x]->getTeamOdds(2)))
+                {
+                    //Found a match
+                    $arbitrage_subject = ParseTools::getArbitrage($props[$y]->getTeamOdds(1), $props[$y]->getTeamOdds(2));
+                    $arbitrage_challenger = ParseTools::getArbitrage($props[$x]->getTeamOdds(1), $props[$x]->getTeamOdds(2));
+
+                    $this->logger->info('Removing dupe: ' . $props[$y]->getTeamName(1) . ' vs ' . $props[$y]->getTeamName(2));
+
+                    if ($arbitrage_subject > $arbitrage_challenger) //Challenger won
+                    {
+                        unset($props[$y]);
+                    }
+                    else if ($arbitrage_subject < $arbitrage_challenger) //Subject won
+                    {
+                        unset($props[$x]);
+                    }
+                    else //Draw, remove one
+                    {
+                        unset($props[$x]);
+                    }
+                    $props = array_values($props);
+
+                    $y = 0;
+                    break 1;
+                }
+            }
+        }*/
+
+        /*$parsed_sport->setPropList($props);
+        return $parsed_sport;*/
+    }
+
+
 
 
     private function logUnmatchedMatchups($matched_matchups)
