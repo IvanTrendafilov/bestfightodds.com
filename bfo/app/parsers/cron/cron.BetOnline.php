@@ -43,35 +43,52 @@ class ParserJob
     public function run($mode)
     {
 
-        $content = null;
+        $matchups = null;
+
+        $content = [];
+
         if ($mode == 'mock')
         {
-            $this->logger->info("Note: Using mock file at " . PARSE_MOCKFEEDS_DIR . "betonline.json");
-            $content = ParseTools::retrievePageFromFile(PARSE_MOCKFEEDS_DIR . 'betonline.json');
+            $this->logger->info("Note: Using matchup mock file at " . PARSE_MOCKFEEDS_DIR . "betonline.json");
+            $content['matchups'] = ParseTools::retrievePageFromFile(PARSE_MOCKFEEDS_DIR . 'betonline.json');
+            $this->logger->info("Note: Using props mock file at " . PARSE_MOCKFEEDS_DIR . "betonlineprops.json");
+            $content['props'] = ParseTools::retrievePageFromFile(PARSE_MOCKFEEDS_DIR . 'betonlineprops.json');
+        }
+        else
+        {
+            $matchups_url = 'https://api.linesfeed.info/v1/pregames/lines/pu?sport=Martial%20Arts&subSport=MMA';
+            $props_url = 'https://api.linesfeed.info/v1/contest/lines/pu?sport=Martial%20Arts&subSport=MMA';
+
+            $this->logger->info("Fetching matchups through URL: " . $matchups_url);
+            $this->logger->info("Fetching props through URL: " . $props_url);
+            $contents_arr = ParseTools::retrieveMultiplePagesFromURLs([$matchups_url, $props_url]);
+
+            $content['matchups'] = $contents_arr[$matchups_url];
+            $content['props'] = $contents_arr[$props_url];
+        }
+
+
+        if ($content['matchups'] == 'FAILED' || $content['matchups'] == '')
+        {
+            $this->logger->error('Retrieving matchups failed');
+        }
+        if ($content['props'] == 'FAILED' || $content['props'] == '')
+        {
+            $this->logger->error('Retrieving props failed');
         }
 
         $parsed_sport = $this->parseContent($content);
-
-        $this->full_run = true; //TEMPORARY
 
         $op = new OddsProcessor($this->logger, BOOKIE_ID);
         $op->processParsedSport($parsed_sport, $this->full_run);
     }
 
-    private function parseContent($source)
+    private function parseContent($content)
     {
-        $json = json_decode($source);
-        if ($json == false)
-        {
-            $this->logger->warning("Warning: JSON broke!!");
-        }
-
         $this->parsed_sport = new ParsedSport('MMA');
 
-        foreach ($json->preGameEvents as $matchup)
-        {
-            $this->parseMatchup($matchup);
-        }
+        $this->parseMatchups($content['matchups']);
+        $this->parseProps($content['props']);
 
         if (false && $json != false && count($this->parsed_sport->getParsedMatchups()) >= 5) //Currently disabled since matchup and prop are in separate parsers
         {
@@ -80,6 +97,20 @@ class ParserJob
         }
 
         return $this->parsed_sport;
+    }
+
+    private function parseMatchups($content)
+    {
+        $json = json_decode($content);
+        if ($json == false)
+        {
+            $this->logger->error("Unable to decode JSON: " . substr($content, 0,50) . "...");
+        }
+
+        foreach ($json->preGameEvents as $matchup)
+        {
+            $this->parseMatchup($matchup);
+        }
     }
 
     private function parseMatchup($matchup)
@@ -91,7 +122,7 @@ class ParserJob
             return false;
         }
         $event_name = $matchup->scheduleText == null ? '' : trim((string) $matchup->scheduleText);
-        $event_correlation_id = trim((string) $matchup->gameId);
+
         $gd = new DateTime($matchup->event_DateTimeGMT);
         $event_timestamp = $gd->getTimestamp();
 
@@ -101,7 +132,7 @@ class ParserJob
                     $matchup->participants[0]->participantName,
                     $matchup->participants[1]->odds->moneyLine))
         {
-            $this->logger->warning('Missing participant and odds fields for matchup ' + $event_correlation_id + ' at ' + $event_name);
+            $this->logger->warning('Missing participant and odds fields for matchup ' + trim((string) $matchup->gameId) + ' at ' + $event_name);
             return false;
         }
 
@@ -113,11 +144,16 @@ class ParserJob
             $team_1 == '' ||
             $team_2 == '')
         {
-            $this->logger->warning('Invalid formatting for participant and odds fields for matchup ' + $event_correlation_id + ' at ' + $event_name);
+            $this->logger->warning('Invalid formatting for participant and odds fields for matchup ' + trim((string) $matchup->gameId) + ' at ' + $event_name);
             return false;
         }
 
         //All ok, add matchup
+
+        //Logic to determine correlation ID: We check who is home and visiting team and construct this into a string that matches what can be found in the prop parser:
+        $corr_index = trim((string) strtolower($matchup->participants[0]->visitingHomeDraw)) == 'home' ? 0 : 1;
+        $correlation_id = strtolower($matchup->participants[$corr_index]->participantName . ' vs ' . $matchup->participants[!$corr_index]->participantName);
+
         $parsed_matchup = new ParsedMatchup(
             $team_1,
             $team_2,
@@ -129,7 +165,7 @@ class ParserJob
             $parsed_matchup->setMetaData('event_name', $event_name);
         }
         $parsed_matchup->setMetaData('gametime', $event_timestamp);
-        $parsed_matchup->setCorrelationID($event_correlation_id);
+        $parsed_matchup->setCorrelationID($correlation_id);
         $this->parsed_sport->addParsedMatchup($parsed_matchup);
 
         //If existant, also add total rounds (e.g. over/under 4.5 rounds)
@@ -141,10 +177,86 @@ class ParserJob
                 $team_1 . ' VS ' . $team_2 . ' UNDER ' . $matchup->period->total->totalPoints . ' ROUNDS',
                 (string) $matchup->period->total->overAdjust,
                 (string) $matchup->period->total->underAdjust);
-            $parsed_prop->setCorrelationID($event_correlation_id);
+            $parsed_prop->setCorrelationID($correlation_id);
             $this->parsed_sport->addFetchedProp($parsed_prop);
         } 
             
+        return true;
+    }
+
+    private function parseProps($content) 
+    {
+        $json = json_decode($content);
+        if ($json == false)
+        {
+            $this->logger->error("Unable to decode JSON: " . substr($content, 0,50) . "...");
+        }
+
+        foreach ($json->events as $prop)
+        {
+            if (trim((string) $prop->sport) == "MMA Props")
+            {
+                $this->parseProp($prop);
+            }
+        }
+    }
+
+    private function parseProp($prop)
+    {
+        $correlation_id = trim(strtolower((string) $prop->league));
+
+        if (count($prop->participants) == 2 
+            && (trim(strtolower((string) $prop->participants[0]->name)) == 'yes' && trim(strtolower((string) $prop->participants[0]->name)) == 'no') 
+            || (trim(strtolower((string) $prop->participants[0]->name)) == 'no' && trim(strtolower((string) $prop->participants[0]->name)) == 'yes'))
+        {
+            //Validate existance participants fields and odds
+            if (!@isset($prop->participants[0]->name,
+                        $prop->participants[0]->odds->moneyLine,
+                        $prop->participants[1]->name,
+                        $prop->participants[1]->odds->moneyLine)
+                        || !OddsTools::checkCorrectOdds($prop->participants[0]->odds->moneyLine)
+                        || !OddsTools::checkCorrectOdds($prop->participants[1]->odds->moneyLine))
+            {
+                $this->logger->warning('Missing/invalid options and odds fields for prop ' + trim((string) $prop->description) + ' at ' + $prop->league);
+                return false;
+            }
+
+            //Two way prop
+            $prop_obj = new ParsedProp(
+                trim((string) $prop->league) . ' : ' . trim((string) $prop->description) . ' - ' . trim((string) $prop->participants[0]->name),
+                trim((string) $prop->league) . ' : ' . trim((string) $prop->description) . ' - ' . trim((string) $prop->participants[1]->name),
+                trim((string) $prop->participants[0]->odds->moneyLine),
+                trim((string) $prop->participants[1]->odds->moneyLine) 
+            );
+            $prop_obj->setCorrelationID($correlation_id);
+            $this->parsed_sport->addFetchedProp($prop_obj);
+        }
+        else
+        {
+            //Multiple one way props
+            foreach ($prop->participants as $prop_line)
+            {
+                //Validate existance participants fields and odds
+                if (!@isset($prop_line->name,
+                            $prop_line->odds->moneyLine) 
+                            || !OddsTools::checkCorrectOdds($prop_line->odds->moneyLine))
+                {
+                    $this->logger->warning('Missing/invalid options and odds fields for prop ' + trim((string) $prop->description) + ' at ' + $prop->league);
+                }
+                else
+                {
+                    $prop_obj = new ParsedProp(
+                        trim((string) $prop->league) . ' : ' . trim((string) $prop->description) . ' - ' . trim((string) $prop_line->name),
+                        '',
+                        trim((string) $prop_line->odds->moneyLine),
+                        '-99999'
+                    );
+                    $prop_obj->setCorrelationID($correlation_id);
+                    $this->parsed_sport->addFetchedProp($prop_obj);
+                }
+            }
+        }
+
         return true;
     }
 }

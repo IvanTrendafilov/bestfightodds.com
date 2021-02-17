@@ -49,12 +49,10 @@ class PropParserV2
                 switch ($match['fail_reason'])
                 {
                     case 'no_template_found':
-                        $this->logger->warning('--No template found for ' . $prop->toString() . 
-                        ' [<a href="?p=addNewPropTemplate&inBookieID=' . $this->bookie_id . '&inTemplate=' . $prop->getTeamName(1) . '&inNegTemplate=' . $prop->getTeamName(2) . '">add</a>]', -1);
+                        $this->logger->warning('--No template found for ' . $prop->toString());
                         break;
                     case 'no_matchup_found':
-                        $this->logger->warning('---No matchup found for prop values ' . $prop->toString() . ' (Template ' . $match['template']->getID() . ' expecting ft: ' . $match['template']->getFieldsTypeAsExample() . ')' .
-                        ' [<a href="?p=addManualPropCorrelation&inBookieID=' . $this->bookie_id . '&inCorrelation=' . ($prop->getMainProp() == 1 ? $prop->getTeamName(1) : $prop->getTeamName(2)) . '">link manually</a>]');
+                        $this->logger->warning('---No matchup found for prop values ' . $prop->toString() . ' (Template ' . $match['template']->getID() . ' expecting ft: ' . $match['template']->getFieldsTypeAsExample() . ')');
                         break;
                     case 'no_event_found':
                         $this->logger->warning('---No event found for prop values ' . $prop->toString() . ' (Template ' . $match['template']->getID() . ' expecting ft: ' . $match['template']->getFieldsTypeAsExample() . ')');
@@ -73,7 +71,7 @@ class PropParserV2
         if (!$template)
         {
             //No matching template
-            return ['status' => 'false', 'fail_reason' => 'no_template_found'];
+            return ['status' => false, 'fail_reason' => 'no_template_found'];
         }
         BookieHandler::updateTemplateLastUsed($template->getID());
 
@@ -735,12 +733,16 @@ class PropParserV2
         //Store prop bet if it has changed
         if (OddsHandler::checkMatchingPropOdds($new_prop))
         {
-            $this->logger->info("------- nothing has changed since last prop odds");
+            $this->logger->info("------- nothing has changed since last prop odds - matchup: " . $new_prop->getMatchupID() . " proptype_id: " . $new_prop->getPropTypeID());
             return true;
         }
         else
         {
-            $this->logger->info("------- adding new prop odds!");
+            if ($new_prop->getPropTypeID() == 11 && $new_prop->getMatchupID() == 21739)
+            {
+                var_dump($new_prop);
+            }
+            $this->logger->info("------- adding new prop odds: " . $new_prop->getMatchupID() . " proptype_id: " . $new_prop->getPropTypeID());
             if (OddsHandler::addPropBet($new_prop))
             {
                 return true;

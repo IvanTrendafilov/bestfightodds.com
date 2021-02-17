@@ -18,9 +18,23 @@ class OddsDAO
             $a_oPropBet->getPropTypeID(),
             $a_oPropBet->getTeamNumber());
 
-        DBTools::doParamQuery($sQuery, $aParams);
-
-        return (DBTools::getAffectedRows() > 0 ? true : false);
+        try 
+        {
+            $id = PDOTools::insert($sQuery, $aParams);
+        }
+        catch(PDOException $e)
+        {
+            if($e->getCode() == 23000)
+            {
+                throw new Exception("Duplicate entry", 10);	
+            }
+            else
+            {
+                throw new Exception("Unknown error " . $e->getMessage(), 10);	
+            }
+            return false;
+        }
+        return true;
     }
 
     public static function addEventPropBet($a_oEventPropBet)
@@ -34,9 +48,23 @@ class OddsDAO
             $a_oEventPropBet->getNegPropOdds(),
             $a_oEventPropBet->getPropTypeID());
 
-        DBTools::doParamQuery($sQuery, $aParams);
-
-        return (DBTools::getAffectedRows() > 0 ? true : false);
+        try 
+        {
+            $id = PDOTools::insert($sQuery, $aParams);
+        }
+        catch(PDOException $e)
+        {
+            if($e->getCode() == 23000)
+            {
+                throw new Exception("Duplicate entry", 10);	
+            }
+            else
+            {
+                throw new Exception("Unknown error " . $e->getMessage(), 10);	
+            }
+            return false;
+        }
+        return true;
     }
 
 

@@ -7,6 +7,10 @@ class OddsHandler
 {
     public static function addPropBet($a_oPropBet)
     {
+        if ($a_oPropBet->getPropOdds() == '' || $a_oPropBet->getNegPropOdds() == '')
+        {
+            return false;
+        }
         return OddsDAO::addPropBet($a_oPropBet);
     }
 

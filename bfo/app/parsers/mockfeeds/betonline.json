@@ -1,734 +1,6 @@
 {
     "preGameEvents": [
         {
-            "event_DateTimeGMT": "2021-02-13T22:00:01",
-            "sportType": "Martial Arts        ",
-            "scheduleText": "UFC 258                                                     ",
-            "league": "MMA                           ",
-            "gameId": "489622773",
-            "participants": [
-                {
-                    "participantName": "Gilbert Burns",
-                    "rotNum": 24001,
-                    "visitingHomeDraw": "Visiting",
-                    "odds": {
-                        "moneyLine": "230",
-                        "teamTotal": {
-                            "totalPoints": "",
-                            "overAdjust": "",
-                            "underAdjust": ""
-                        }
-                    },
-                    "pitcher": null
-                },
-                {
-                    "participantName": "Kamaru Usman",
-                    "rotNum": 24002,
-                    "visitingHomeDraw": "Home",
-                    "odds": {
-                        "moneyLine": "-270",
-                        "teamTotal": {
-                            "totalPoints": "",
-                            "overAdjust": "",
-                            "underAdjust": ""
-                        }
-                    },
-                    "pitcher": null
-                }
-            ],
-            "drawRotNum": "",
-            "drawMoneyLine": "",
-            "drawTitle": "",
-            "period": {
-                "peroidDescription": "Game",
-                "periodCutOffDatetimeGTM": "2021-02-13T22:00:00",
-                "periodStatus": "O",
-                "spread": {
-                    "spreadVisiting": "",
-                    "spreadAdjustVisiting": "",
-                    "spreadHome": "",
-                    "spreadAdjustHome": ""
-                },
-                "total": {
-                    "totalPoints": "4.5",
-                    "overAdjust": "-140",
-                    "underAdjust": "110"
-                }
-            }
-        },
-        {
-            "event_DateTimeGMT": "2021-02-13T22:00:01",
-            "sportType": "Martial Arts        ",
-            "scheduleText": "UFC 258                                                     ",
-            "league": "MMA                           ",
-            "gameId": "489627576",
-            "participants": [
-                {
-                    "participantName": "Pedro Munhoz",
-                    "rotNum": 24005,
-                    "visitingHomeDraw": "Visiting",
-                    "odds": {
-                        "moneyLine": "126",
-                        "teamTotal": {
-                            "totalPoints": "",
-                            "overAdjust": "",
-                            "underAdjust": ""
-                        }
-                    },
-                    "pitcher": null
-                },
-                {
-                    "participantName": "Jimmie Rivera",
-                    "rotNum": 24006,
-                    "visitingHomeDraw": "Home",
-                    "odds": {
-                        "moneyLine": "-146",
-                        "teamTotal": {
-                            "totalPoints": "",
-                            "overAdjust": "",
-                            "underAdjust": ""
-                        }
-                    },
-                    "pitcher": null
-                }
-            ],
-            "drawRotNum": "",
-            "drawMoneyLine": "",
-            "drawTitle": "",
-            "period": {
-                "peroidDescription": "Game",
-                "periodCutOffDatetimeGTM": "2021-02-13T22:00:00",
-                "periodStatus": "O",
-                "spread": {
-                    "spreadVisiting": "",
-                    "spreadAdjustVisiting": "",
-                    "spreadHome": "",
-                    "spreadAdjustHome": ""
-                },
-                "total": {
-                    "totalPoints": "2.5",
-                    "overAdjust": "-270",
-                    "underAdjust": "210"
-                }
-            }
-        },
-        {
-            "event_DateTimeGMT": "2021-02-13T22:00:01",
-            "sportType": "Martial Arts        ",
-            "scheduleText": "UFC 258                                                     ",
-            "league": "MMA                           ",
-            "gameId": "489622790",
-            "participants": [
-                {
-                    "participantName": "Ian Heinisch",
-                    "rotNum": 24013,
-                    "visitingHomeDraw": "Visiting",
-                    "odds": {
-                        "moneyLine": "190",
-                        "teamTotal": {
-                            "totalPoints": "",
-                            "overAdjust": "",
-                            "underAdjust": ""
-                        }
-                    },
-                    "pitcher": null
-                },
-                {
-                    "participantName": "Kelvin Gastelum",
-                    "rotNum": 24014,
-                    "visitingHomeDraw": "Home",
-                    "odds": {
-                        "moneyLine": "-225",
-                        "teamTotal": {
-                            "totalPoints": "",
-                            "overAdjust": "",
-                            "underAdjust": ""
-                        }
-                    },
-                    "pitcher": null
-                }
-            ],
-            "drawRotNum": "",
-            "drawMoneyLine": "",
-            "drawTitle": "",
-            "period": {
-                "peroidDescription": "Game",
-                "periodCutOffDatetimeGTM": "2021-02-13T22:00:00",
-                "periodStatus": "O",
-                "spread": {
-                    "spreadVisiting": "",
-                    "spreadAdjustVisiting": "",
-                    "spreadHome": "",
-                    "spreadAdjustHome": ""
-                },
-                "total": {
-                    "totalPoints": "2.5",
-                    "overAdjust": "-265",
-                    "underAdjust": "205"
-                }
-            }
-        },
-        {
-            "event_DateTimeGMT": "2021-02-13T22:00:01",
-            "sportType": "Martial Arts        ",
-            "scheduleText": "UFC 258                                                     ",
-            "league": "MMA                           ",
-            "gameId": "489628371",
-            "participants": [
-                {
-                    "participantName": "Maycee Barber",
-                    "rotNum": 24017,
-                    "visitingHomeDraw": "Visiting",
-                    "odds": {
-                        "moneyLine": "123",
-                        "teamTotal": {
-                            "totalPoints": "",
-                            "overAdjust": "",
-                            "underAdjust": ""
-                        }
-                    },
-                    "pitcher": null
-                },
-                {
-                    "participantName": "Alexa Grasso",
-                    "rotNum": 24018,
-                    "visitingHomeDraw": "Home",
-                    "odds": {
-                        "moneyLine": "-143",
-                        "teamTotal": {
-                            "totalPoints": "",
-                            "overAdjust": "",
-                            "underAdjust": ""
-                        }
-                    },
-                    "pitcher": null
-                }
-            ],
-            "drawRotNum": "",
-            "drawMoneyLine": "",
-            "drawTitle": "",
-            "period": {
-                "peroidDescription": "Game",
-                "periodCutOffDatetimeGTM": "2021-02-13T22:00:00",
-                "periodStatus": "O",
-                "spread": {
-                    "spreadVisiting": "",
-                    "spreadAdjustVisiting": "",
-                    "spreadHome": "",
-                    "spreadAdjustHome": ""
-                },
-                "total": {
-                    "totalPoints": "2.5",
-                    "overAdjust": "-270",
-                    "underAdjust": "210"
-                }
-            }
-        },
-        {
-            "event_DateTimeGMT": "2021-02-13T22:00:01",
-            "sportType": "Martial Arts        ",
-            "scheduleText": "UFC 258                                                     ",
-            "league": "MMA                           ",
-            "gameId": "489628378",
-            "participants": [
-                {
-                    "participantName": "Gabe Green",
-                    "rotNum": 24021,
-                    "visitingHomeDraw": "Visiting",
-                    "odds": {
-                        "moneyLine": "-137",
-                        "teamTotal": {
-                            "totalPoints": "",
-                            "overAdjust": "",
-                            "underAdjust": ""
-                        }
-                    },
-                    "pitcher": null
-                },
-                {
-                    "participantName": "Philip Rowe",
-                    "rotNum": 24022,
-                    "visitingHomeDraw": "Home",
-                    "odds": {
-                        "moneyLine": "117",
-                        "teamTotal": {
-                            "totalPoints": "",
-                            "overAdjust": "",
-                            "underAdjust": ""
-                        }
-                    },
-                    "pitcher": null
-                }
-            ],
-            "drawRotNum": "",
-            "drawMoneyLine": "",
-            "drawTitle": "",
-            "period": {
-                "peroidDescription": "Game",
-                "periodCutOffDatetimeGTM": "2021-02-13T22:00:00",
-                "periodStatus": "O",
-                "spread": {
-                    "spreadVisiting": "",
-                    "spreadAdjustVisiting": "",
-                    "spreadHome": "",
-                    "spreadAdjustHome": ""
-                },
-                "total": {
-                    "totalPoints": "2.5",
-                    "overAdjust": "-110",
-                    "underAdjust": "-120"
-                }
-            }
-        },
-        {
-            "event_DateTimeGMT": "2021-02-13T22:00:01",
-            "sportType": "Martial Arts        ",
-            "scheduleText": "UFC 258                                                     ",
-            "league": "MMA                           ",
-            "gameId": "489622777",
-            "participants": [
-                {
-                    "participantName": "Maki Pitolo",
-                    "rotNum": 24025,
-                    "visitingHomeDraw": "Visiting",
-                    "odds": {
-                        "moneyLine": "137",
-                        "teamTotal": {
-                            "totalPoints": "",
-                            "overAdjust": "",
-                            "underAdjust": ""
-                        }
-                    },
-                    "pitcher": null
-                },
-                {
-                    "participantName": "Julian Marquez",
-                    "rotNum": 24026,
-                    "visitingHomeDraw": "Home",
-                    "odds": {
-                        "moneyLine": "-157",
-                        "teamTotal": {
-                            "totalPoints": "",
-                            "overAdjust": "",
-                            "underAdjust": ""
-                        }
-                    },
-                    "pitcher": null
-                }
-            ],
-            "drawRotNum": "",
-            "drawMoneyLine": "",
-            "drawTitle": "",
-            "period": {
-                "peroidDescription": "Game",
-                "periodCutOffDatetimeGTM": "2021-02-13T22:00:00",
-                "periodStatus": "O",
-                "spread": {
-                    "spreadVisiting": "",
-                    "spreadAdjustVisiting": "",
-                    "spreadHome": "",
-                    "spreadAdjustHome": ""
-                },
-                "total": {
-                    "totalPoints": "1.5",
-                    "overAdjust": "-180",
-                    "underAdjust": "150"
-                }
-            }
-        },
-        {
-            "event_DateTimeGMT": "2021-02-13T22:00:01",
-            "sportType": "Martial Arts        ",
-            "scheduleText": "UFC 258                                                     ",
-            "league": "MMA                           ",
-            "gameId": "489622780",
-            "participants": [
-                {
-                    "participantName": "Polyana Viana",
-                    "rotNum": 24029,
-                    "visitingHomeDraw": "Visiting",
-                    "odds": {
-                        "moneyLine": "135",
-                        "teamTotal": {
-                            "totalPoints": "",
-                            "overAdjust": "",
-                            "underAdjust": ""
-                        }
-                    },
-                    "pitcher": null
-                },
-                {
-                    "participantName": "Mallory Martin",
-                    "rotNum": 24030,
-                    "visitingHomeDraw": "Home",
-                    "odds": {
-                        "moneyLine": "-155",
-                        "teamTotal": {
-                            "totalPoints": "",
-                            "overAdjust": "",
-                            "underAdjust": ""
-                        }
-                    },
-                    "pitcher": null
-                }
-            ],
-            "drawRotNum": "",
-            "drawMoneyLine": "",
-            "drawTitle": "",
-            "period": {
-                "peroidDescription": "Game",
-                "periodCutOffDatetimeGTM": "2021-02-13T22:00:00",
-                "periodStatus": "O",
-                "spread": {
-                    "spreadVisiting": "",
-                    "spreadAdjustVisiting": "",
-                    "spreadHome": "",
-                    "spreadAdjustHome": ""
-                },
-                "total": {
-                    "totalPoints": "2.5",
-                    "overAdjust": "-240",
-                    "underAdjust": "190"
-                }
-            }
-        },
-        {
-            "event_DateTimeGMT": "2021-02-13T22:00:01",
-            "sportType": "Martial Arts        ",
-            "scheduleText": "UFC 258                                                     ",
-            "league": "MMA                           ",
-            "gameId": "489628379",
-            "participants": [
-                {
-                    "participantName": "Anthony Hernandez",
-                    "rotNum": 24033,
-                    "visitingHomeDraw": "Visiting",
-                    "odds": {
-                        "moneyLine": "300",
-                        "teamTotal": {
-                            "totalPoints": "",
-                            "overAdjust": "",
-                            "underAdjust": ""
-                        }
-                    },
-                    "pitcher": null
-                },
-                {
-                    "participantName": "Rodolfo Vieira",
-                    "rotNum": 24034,
-                    "visitingHomeDraw": "Home",
-                    "odds": {
-                        "moneyLine": "-400",
-                        "teamTotal": {
-                            "totalPoints": "",
-                            "overAdjust": "",
-                            "underAdjust": ""
-                        }
-                    },
-                    "pitcher": null
-                }
-            ],
-            "drawRotNum": "",
-            "drawMoneyLine": "",
-            "drawTitle": "",
-            "period": {
-                "peroidDescription": "Game",
-                "periodCutOffDatetimeGTM": "2021-02-13T22:00:00",
-                "periodStatus": "O",
-                "spread": {
-                    "spreadVisiting": "",
-                    "spreadAdjustVisiting": "",
-                    "spreadHome": "",
-                    "spreadAdjustHome": ""
-                },
-                "total": {
-                    "totalPoints": "1.5",
-                    "overAdjust": "125",
-                    "underAdjust": "-155"
-                }
-            }
-        },
-        {
-            "event_DateTimeGMT": "2021-02-13T22:00:01",
-            "sportType": "Martial Arts        ",
-            "scheduleText": "UFC 258                                                     ",
-            "league": "MMA                           ",
-            "gameId": "489631302",
-            "participants": [
-                {
-                    "participantName": "Miranda Maverick",
-                    "rotNum": 24037,
-                    "visitingHomeDraw": "Visiting",
-                    "odds": {
-                        "moneyLine": "-138",
-                        "teamTotal": {
-                            "totalPoints": "",
-                            "overAdjust": "",
-                            "underAdjust": ""
-                        }
-                    },
-                    "pitcher": null
-                },
-                {
-                    "participantName": "Gillian Robertson",
-                    "rotNum": 24038,
-                    "visitingHomeDraw": "Home",
-                    "odds": {
-                        "moneyLine": "118",
-                        "teamTotal": {
-                            "totalPoints": "",
-                            "overAdjust": "",
-                            "underAdjust": ""
-                        }
-                    },
-                    "pitcher": null
-                }
-            ],
-            "drawRotNum": "",
-            "drawMoneyLine": "",
-            "drawTitle": "",
-            "period": {
-                "peroidDescription": "Game",
-                "periodCutOffDatetimeGTM": "2021-02-13T22:00:00",
-                "periodStatus": "O",
-                "spread": {
-                    "spreadVisiting": "",
-                    "spreadAdjustVisiting": "",
-                    "spreadHome": "",
-                    "spreadAdjustHome": ""
-                },
-                "total": {
-                    "totalPoints": "2.5",
-                    "overAdjust": "-175",
-                    "underAdjust": "145"
-                }
-            }
-        },
-        {
-            "event_DateTimeGMT": "2021-02-13T22:00:01",
-            "sportType": "Martial Arts        ",
-            "scheduleText": "UFC 258                                                     ",
-            "league": "MMA                           ",
-            "gameId": "489638325",
-            "participants": [
-                {
-                    "participantName": "Jim Miller",
-                    "rotNum": 24041,
-                    "visitingHomeDraw": "Visiting",
-                    "odds": {
-                        "moneyLine": "215",
-                        "teamTotal": {
-                            "totalPoints": "",
-                            "overAdjust": "",
-                            "underAdjust": ""
-                        }
-                    },
-                    "pitcher": null
-                },
-                {
-                    "participantName": "Bobby Green",
-                    "rotNum": 24042,
-                    "visitingHomeDraw": "Home",
-                    "odds": {
-                        "moneyLine": "-255",
-                        "teamTotal": {
-                            "totalPoints": "",
-                            "overAdjust": "",
-                            "underAdjust": ""
-                        }
-                    },
-                    "pitcher": null
-                }
-            ],
-            "drawRotNum": "",
-            "drawMoneyLine": "",
-            "drawTitle": "",
-            "period": {
-                "peroidDescription": "Game",
-                "periodCutOffDatetimeGTM": "2021-02-13T22:00:00",
-                "periodStatus": "O",
-                "spread": {
-                    "spreadVisiting": "",
-                    "spreadAdjustVisiting": "",
-                    "spreadHome": "",
-                    "spreadAdjustHome": ""
-                },
-                "total": {
-                    "totalPoints": "2.5",
-                    "overAdjust": "-260",
-                    "underAdjust": "200"
-                }
-            }
-        },
-        {
-            "event_DateTimeGMT": "2021-02-13T22:00:01",
-            "sportType": "Martial Arts        ",
-            "scheduleText": "UFC 258                                                     ",
-            "league": "MMA                           ",
-            "gameId": "489638452",
-            "participants": [
-                {
-                    "participantName": "Brian Kelleher",
-                    "rotNum": 24045,
-                    "visitingHomeDraw": "Visiting",
-                    "odds": {
-                        "moneyLine": "206",
-                        "teamTotal": {
-                            "totalPoints": "",
-                            "overAdjust": "",
-                            "underAdjust": ""
-                        }
-                    },
-                    "pitcher": null
-                },
-                {
-                    "participantName": "Ricky Simon",
-                    "rotNum": 24046,
-                    "visitingHomeDraw": "Home",
-                    "odds": {
-                        "moneyLine": "-241",
-                        "teamTotal": {
-                            "totalPoints": "",
-                            "overAdjust": "",
-                            "underAdjust": ""
-                        }
-                    },
-                    "pitcher": null
-                }
-            ],
-            "drawRotNum": "",
-            "drawMoneyLine": "",
-            "drawTitle": "",
-            "period": {
-                "peroidDescription": "Game",
-                "periodCutOffDatetimeGTM": "2021-02-13T22:00:00",
-                "periodStatus": "O",
-                "spread": {
-                    "spreadVisiting": "",
-                    "spreadAdjustVisiting": "",
-                    "spreadHome": "",
-                    "spreadAdjustHome": ""
-                },
-                "total": {
-                    "totalPoints": "2.5",
-                    "overAdjust": "-260",
-                    "underAdjust": "200"
-                }
-            }
-        },
-        {
-            "event_DateTimeGMT": "2021-02-13T22:00:01",
-            "sportType": "Martial Arts        ",
-            "scheduleText": "UFC 258                                                     ",
-            "league": "MMA                           ",
-            "gameId": "489640664",
-            "participants": [
-                {
-                    "participantName": "Dhiego Lima",
-                    "rotNum": 24049,
-                    "visitingHomeDraw": "Visiting",
-                    "odds": {
-                        "moneyLine": "280",
-                        "teamTotal": {
-                            "totalPoints": "",
-                            "overAdjust": "",
-                            "underAdjust": ""
-                        }
-                    },
-                    "pitcher": null
-                },
-                {
-                    "participantName": "Belal Muhammad",
-                    "rotNum": 24050,
-                    "visitingHomeDraw": "Home",
-                    "odds": {
-                        "moneyLine": "-340",
-                        "teamTotal": {
-                            "totalPoints": "",
-                            "overAdjust": "",
-                            "underAdjust": ""
-                        }
-                    },
-                    "pitcher": null
-                }
-            ],
-            "drawRotNum": "",
-            "drawMoneyLine": "",
-            "drawTitle": "",
-            "period": {
-                "peroidDescription": "Game",
-                "periodCutOffDatetimeGTM": "2021-02-13T22:00:00",
-                "periodStatus": "I",
-                "spread": {
-                    "spreadVisiting": "",
-                    "spreadAdjustVisiting": "",
-                    "spreadHome": "",
-                    "spreadAdjustHome": ""
-                },
-                "total": {
-                    "totalPoints": "2.5",
-                    "overAdjust": "-260",
-                    "underAdjust": "200"
-                }
-            }
-        },
-        {
-            "event_DateTimeGMT": "2021-02-13T20:00:01",
-            "sportType": "Martial Arts        ",
-            "scheduleText": "UFC 258                                                     ",
-            "league": "MMA                           ",
-            "gameId": "489641191",
-            "participants": [
-                {
-                    "participantName": "Andre Ewell",
-                    "rotNum": 24053,
-                    "visitingHomeDraw": "Visiting",
-                    "odds": {
-                        "moneyLine": "145",
-                        "teamTotal": {
-                            "totalPoints": "",
-                            "overAdjust": "",
-                            "underAdjust": ""
-                        }
-                    },
-                    "pitcher": null
-                },
-                {
-                    "participantName": "Chris Gutierrez",
-                    "rotNum": 24054,
-                    "visitingHomeDraw": "Home",
-                    "odds": {
-                        "moneyLine": "-170",
-                        "teamTotal": {
-                            "totalPoints": "",
-                            "overAdjust": "",
-                            "underAdjust": ""
-                        }
-                    },
-                    "pitcher": null
-                }
-            ],
-            "drawRotNum": "",
-            "drawMoneyLine": "",
-            "drawTitle": "",
-            "period": {
-                "peroidDescription": "Game",
-                "periodCutOffDatetimeGTM": "2021-02-13T20:00:00",
-                "periodStatus": "I",
-                "spread": {
-                    "spreadVisiting": "",
-                    "spreadAdjustVisiting": "",
-                    "spreadHome": "",
-                    "spreadAdjustHome": ""
-                },
-                "total": {
-                    "totalPoints": "",
-                    "overAdjust": "",
-                    "underAdjust": ""
-                }
-            }
-        },
-        {
             "event_DateTimeGMT": "2021-03-27T22:00:01",
             "sportType": "Martial Arts        ",
             "scheduleText": "UFC 260                                                     ",
@@ -845,14 +117,14 @@
             "sportType": "Martial Arts        ",
             "scheduleText": "UFC Vegas 19                                                ",
             "league": "MMA                           ",
-            "gameId": "489629824",
+            "gameId": "489629821",
             "participants": [
                 {
-                    "participantName": "Andrei Arlovski",
-                    "rotNum": 24405,
+                    "participantName": "Derrick Lewis",
+                    "rotNum": 24401,
                     "visitingHomeDraw": "Visiting",
                     "odds": {
-                        "moneyLine": "225",
+                        "moneyLine": "350",
                         "teamTotal": {
                             "totalPoints": "",
                             "overAdjust": "",
@@ -862,11 +134,11 @@
                     "pitcher": null
                 },
                 {
-                    "participantName": "Tom Aspinall",
-                    "rotNum": 24406,
+                    "participantName": "Curtis Blaydes",
+                    "rotNum": 24402,
                     "visitingHomeDraw": "Home",
                     "odds": {
-                        "moneyLine": "-265",
+                        "moneyLine": "-450",
                         "teamTotal": {
                             "totalPoints": "",
                             "overAdjust": "",
@@ -890,9 +162,65 @@
                     "spreadAdjustHome": ""
                 },
                 "total": {
-                    "totalPoints": "",
-                    "overAdjust": "",
-                    "underAdjust": ""
+                    "totalPoints": "1.5",
+                    "overAdjust": "-185",
+                    "underAdjust": "155"
+                }
+            }
+        },
+        {
+            "event_DateTimeGMT": "2021-02-20T22:00:01",
+            "sportType": "Martial Arts        ",
+            "scheduleText": "UFC Vegas 19                                                ",
+            "league": "MMA                           ",
+            "gameId": "489629824",
+            "participants": [
+                {
+                    "participantName": "Andrei Arlovski",
+                    "rotNum": 24405,
+                    "visitingHomeDraw": "Visiting",
+                    "odds": {
+                        "moneyLine": "205",
+                        "teamTotal": {
+                            "totalPoints": "",
+                            "overAdjust": "",
+                            "underAdjust": ""
+                        }
+                    },
+                    "pitcher": null
+                },
+                {
+                    "participantName": "Tom Aspinall",
+                    "rotNum": 24406,
+                    "visitingHomeDraw": "Home",
+                    "odds": {
+                        "moneyLine": "-240",
+                        "teamTotal": {
+                            "totalPoints": "",
+                            "overAdjust": "",
+                            "underAdjust": ""
+                        }
+                    },
+                    "pitcher": null
+                }
+            ],
+            "drawRotNum": "",
+            "drawMoneyLine": "",
+            "drawTitle": "",
+            "period": {
+                "peroidDescription": "Game",
+                "periodCutOffDatetimeGTM": "2021-02-20T22:00:00",
+                "periodStatus": "I",
+                "spread": {
+                    "spreadVisiting": "",
+                    "spreadAdjustVisiting": "",
+                    "spreadHome": "",
+                    "spreadAdjustHome": ""
+                },
+                "total": {
+                    "totalPoints": "1.5",
+                    "overAdjust": "-175",
+                    "underAdjust": "145"
                 }
             }
         },
@@ -908,7 +236,7 @@
                     "rotNum": 24409,
                     "visitingHomeDraw": "Visiting",
                     "odds": {
-                        "moneyLine": "-115",
+                        "moneyLine": "108",
                         "teamTotal": {
                             "totalPoints": "",
                             "overAdjust": "",
@@ -922,7 +250,7 @@
                     "rotNum": 24410,
                     "visitingHomeDraw": "Home",
                     "odds": {
-                        "moneyLine": "-105",
+                        "moneyLine": "-128",
                         "teamTotal": {
                             "totalPoints": "",
                             "overAdjust": "",
@@ -946,9 +274,9 @@
                     "spreadAdjustHome": ""
                 },
                 "total": {
-                    "totalPoints": "",
-                    "overAdjust": "",
-                    "underAdjust": ""
+                    "totalPoints": "1.5",
+                    "overAdjust": "-115",
+                    "underAdjust": "-115"
                 }
             }
         },
@@ -964,7 +292,7 @@
                     "rotNum": 24413,
                     "visitingHomeDraw": "Visiting",
                     "odds": {
-                        "moneyLine": "155",
+                        "moneyLine": "145",
                         "teamTotal": {
                             "totalPoints": "",
                             "overAdjust": "",
@@ -978,7 +306,7 @@
                     "rotNum": 24414,
                     "visitingHomeDraw": "Home",
                     "odds": {
-                        "moneyLine": "-180",
+                        "moneyLine": "-165",
                         "teamTotal": {
                             "totalPoints": "",
                             "overAdjust": "",
@@ -1002,9 +330,9 @@
                     "spreadAdjustHome": ""
                 },
                 "total": {
-                    "totalPoints": "",
-                    "overAdjust": "",
-                    "underAdjust": ""
+                    "totalPoints": "1.5",
+                    "overAdjust": "120",
+                    "underAdjust": "-150"
                 }
             }
         },
@@ -1058,65 +386,9 @@
                     "spreadAdjustHome": ""
                 },
                 "total": {
-                    "totalPoints": "",
-                    "overAdjust": "",
-                    "underAdjust": ""
-                }
-            }
-        },
-        {
-            "event_DateTimeGMT": "2021-02-20T22:00:01",
-            "sportType": "Martial Arts        ",
-            "scheduleText": "UFC Vegas 19                                                ",
-            "league": "MMA                           ",
-            "gameId": "489629829",
-            "participants": [
-                {
-                    "participantName": "Jai Herbert",
-                    "rotNum": 24421,
-                    "visitingHomeDraw": "Visiting",
-                    "odds": {
-                        "moneyLine": "145",
-                        "teamTotal": {
-                            "totalPoints": "",
-                            "overAdjust": "",
-                            "underAdjust": ""
-                        }
-                    },
-                    "pitcher": null
-                },
-                {
-                    "participantName": "Drakkar Klose",
-                    "rotNum": 24422,
-                    "visitingHomeDraw": "Home",
-                    "odds": {
-                        "moneyLine": "-170",
-                        "teamTotal": {
-                            "totalPoints": "",
-                            "overAdjust": "",
-                            "underAdjust": ""
-                        }
-                    },
-                    "pitcher": null
-                }
-            ],
-            "drawRotNum": "",
-            "drawMoneyLine": "",
-            "drawTitle": "",
-            "period": {
-                "peroidDescription": "Game",
-                "periodCutOffDatetimeGTM": "2021-02-20T22:00:00",
-                "periodStatus": "I",
-                "spread": {
-                    "spreadVisiting": "",
-                    "spreadAdjustVisiting": "",
-                    "spreadHome": "",
-                    "spreadAdjustHome": ""
-                },
-                "total": {
-                    "totalPoints": "",
-                    "overAdjust": "",
-                    "underAdjust": ""
+                    "totalPoints": "2.5",
+                    "overAdjust": "150",
+                    "underAdjust": "-180"
                 }
             }
         },
@@ -1170,9 +442,9 @@
                     "spreadAdjustHome": ""
                 },
                 "total": {
-                    "totalPoints": "",
-                    "overAdjust": "",
-                    "underAdjust": ""
+                    "totalPoints": "2.5",
+                    "overAdjust": "-335",
+                    "underAdjust": "260"
                 }
             }
         },
@@ -1188,7 +460,7 @@
                     "rotNum": 24429,
                     "visitingHomeDraw": "Visiting",
                     "odds": {
-                        "moneyLine": "-135",
+                        "moneyLine": "-146",
                         "teamTotal": {
                             "totalPoints": "",
                             "overAdjust": "",
@@ -1202,7 +474,7 @@
                     "rotNum": 24430,
                     "visitingHomeDraw": "Home",
                     "odds": {
-                        "moneyLine": "115",
+                        "moneyLine": "126",
                         "teamTotal": {
                             "totalPoints": "",
                             "overAdjust": "",
@@ -1226,9 +498,9 @@
                     "spreadAdjustHome": ""
                 },
                 "total": {
-                    "totalPoints": "",
-                    "overAdjust": "",
-                    "underAdjust": ""
+                    "totalPoints": "2.5",
+                    "overAdjust": "-200",
+                    "underAdjust": "160"
                 }
             }
         },
@@ -1244,7 +516,7 @@
                     "rotNum": 24433,
                     "visitingHomeDraw": "Visiting",
                     "odds": {
-                        "moneyLine": "175",
+                        "moneyLine": "195",
                         "teamTotal": {
                             "totalPoints": "",
                             "overAdjust": "",
@@ -1258,7 +530,7 @@
                     "rotNum": 24434,
                     "visitingHomeDraw": "Home",
                     "odds": {
-                        "moneyLine": "-205",
+                        "moneyLine": "-230",
                         "teamTotal": {
                             "totalPoints": "",
                             "overAdjust": "",
@@ -1282,9 +554,9 @@
                     "spreadAdjustHome": ""
                 },
                 "total": {
-                    "totalPoints": "",
-                    "overAdjust": "",
-                    "underAdjust": ""
+                    "totalPoints": "2.5",
+                    "overAdjust": "-200",
+                    "underAdjust": "160"
                 }
             }
         },
@@ -1300,7 +572,7 @@
                     "rotNum": 24441,
                     "visitingHomeDraw": "Visiting",
                     "odds": {
-                        "moneyLine": "100",
+                        "moneyLine": "-120",
                         "teamTotal": {
                             "totalPoints": "",
                             "overAdjust": "",
@@ -1314,7 +586,7 @@
                     "rotNum": 24442,
                     "visitingHomeDraw": "Home",
                     "odds": {
-                        "moneyLine": "-120",
+                        "moneyLine": "100",
                         "teamTotal": {
                             "totalPoints": "",
                             "overAdjust": "",
@@ -1338,9 +610,9 @@
                     "spreadAdjustHome": ""
                 },
                 "total": {
-                    "totalPoints": "",
-                    "overAdjust": "",
-                    "underAdjust": ""
+                    "totalPoints": "2.5",
+                    "overAdjust": "-115",
+                    "underAdjust": "-115"
                 }
             }
         },
@@ -1394,9 +666,9 @@
                     "spreadAdjustHome": ""
                 },
                 "total": {
-                    "totalPoints": "",
-                    "overAdjust": "",
-                    "underAdjust": ""
+                    "totalPoints": "2.5",
+                    "overAdjust": "-180",
+                    "underAdjust": "150"
                 }
             }
         },
@@ -1412,7 +684,7 @@
                     "rotNum": 24449,
                     "visitingHomeDraw": "Visiting",
                     "odds": {
-                        "moneyLine": "190",
+                        "moneyLine": "200",
                         "teamTotal": {
                             "totalPoints": "",
                             "overAdjust": "",
@@ -1426,7 +698,7 @@
                     "rotNum": 24450,
                     "visitingHomeDraw": "Home",
                     "odds": {
-                        "moneyLine": "-225",
+                        "moneyLine": "-235",
                         "teamTotal": {
                             "totalPoints": "",
                             "overAdjust": "",
@@ -1450,9 +722,9 @@
                     "spreadAdjustHome": ""
                 },
                 "total": {
-                    "totalPoints": "",
-                    "overAdjust": "",
-                    "underAdjust": ""
+                    "totalPoints": "1.5",
+                    "overAdjust": "-240",
+                    "underAdjust": "190"
                 }
             }
         },
@@ -1468,7 +740,7 @@
                     "rotNum": 24453,
                     "visitingHomeDraw": "Visiting",
                     "odds": {
-                        "moneyLine": "180",
+                        "moneyLine": "156",
                         "teamTotal": {
                             "totalPoints": "",
                             "overAdjust": "",
@@ -1482,7 +754,7 @@
                     "rotNum": 24454,
                     "visitingHomeDraw": "Home",
                     "odds": {
-                        "moneyLine": "-210",
+                        "moneyLine": "-181",
                         "teamTotal": {
                             "totalPoints": "",
                             "overAdjust": "",
@@ -1506,9 +778,9 @@
                     "spreadAdjustHome": ""
                 },
                 "total": {
-                    "totalPoints": "",
-                    "overAdjust": "",
-                    "underAdjust": ""
+                    "totalPoints": "2.5",
+                    "overAdjust": "-205",
+                    "underAdjust": "165"
                 }
             }
         },
@@ -1524,7 +796,7 @@
                     "rotNum": 24457,
                     "visitingHomeDraw": "Visiting",
                     "odds": {
-                        "moneyLine": "140",
+                        "moneyLine": "135",
                         "teamTotal": {
                             "totalPoints": "",
                             "overAdjust": "",
@@ -1538,7 +810,7 @@
                     "rotNum": 24458,
                     "visitingHomeDraw": "Home",
                     "odds": {
-                        "moneyLine": "-160",
+                        "moneyLine": "-155",
                         "teamTotal": {
                             "totalPoints": "",
                             "overAdjust": "",
@@ -1562,9 +834,121 @@
                     "spreadAdjustHome": ""
                 },
                 "total": {
-                    "totalPoints": "",
-                    "overAdjust": "",
-                    "underAdjust": ""
+                    "totalPoints": "2.5",
+                    "overAdjust": "-260",
+                    "underAdjust": "200"
+                }
+            }
+        },
+        {
+            "event_DateTimeGMT": "2021-02-20T22:00:01",
+            "sportType": "Martial Arts        ",
+            "scheduleText": "UFC Vegas 19                                                ",
+            "league": "MMA                           ",
+            "gameId": "489643714",
+            "participants": [
+                {
+                    "participantName": "Rafael Alves",
+                    "rotNum": 24461,
+                    "visitingHomeDraw": "Visiting",
+                    "odds": {
+                        "moneyLine": "-175",
+                        "teamTotal": {
+                            "totalPoints": "",
+                            "overAdjust": "",
+                            "underAdjust": ""
+                        }
+                    },
+                    "pitcher": null
+                },
+                {
+                    "participantName": "Pat Sabatini",
+                    "rotNum": 24462,
+                    "visitingHomeDraw": "Home",
+                    "odds": {
+                        "moneyLine": "150",
+                        "teamTotal": {
+                            "totalPoints": "",
+                            "overAdjust": "",
+                            "underAdjust": ""
+                        }
+                    },
+                    "pitcher": null
+                }
+            ],
+            "drawRotNum": "",
+            "drawMoneyLine": "",
+            "drawTitle": "",
+            "period": {
+                "peroidDescription": "Game",
+                "periodCutOffDatetimeGTM": "2021-02-20T22:00:00",
+                "periodStatus": "I",
+                "spread": {
+                    "spreadVisiting": "",
+                    "spreadAdjustVisiting": "",
+                    "spreadHome": "",
+                    "spreadAdjustHome": ""
+                },
+                "total": {
+                    "totalPoints": "1.5",
+                    "overAdjust": "-210",
+                    "underAdjust": "170"
+                }
+            }
+        },
+        {
+            "event_DateTimeGMT": "2021-02-20T22:00:01",
+            "sportType": "Martial Arts        ",
+            "scheduleText": "UFC Vegas 19                                                ",
+            "league": "MMA                           ",
+            "gameId": "489643630",
+            "participants": [
+                {
+                    "participantName": "Luis Pena",
+                    "rotNum": 24465,
+                    "visitingHomeDraw": "Visiting",
+                    "odds": {
+                        "moneyLine": "149",
+                        "teamTotal": {
+                            "totalPoints": "",
+                            "overAdjust": "",
+                            "underAdjust": ""
+                        }
+                    },
+                    "pitcher": null
+                },
+                {
+                    "participantName": "Drakkar Klose",
+                    "rotNum": 24466,
+                    "visitingHomeDraw": "Home",
+                    "odds": {
+                        "moneyLine": "-174",
+                        "teamTotal": {
+                            "totalPoints": "",
+                            "overAdjust": "",
+                            "underAdjust": ""
+                        }
+                    },
+                    "pitcher": null
+                }
+            ],
+            "drawRotNum": "",
+            "drawMoneyLine": "",
+            "drawTitle": "",
+            "period": {
+                "peroidDescription": "Game",
+                "periodCutOffDatetimeGTM": "2021-02-20T22:00:00",
+                "periodStatus": "I",
+                "spread": {
+                    "spreadVisiting": "",
+                    "spreadAdjustVisiting": "",
+                    "spreadHome": "",
+                    "spreadAdjustHome": ""
+                },
+                "total": {
+                    "totalPoints": "2.5",
+                    "overAdjust": "-245",
+                    "underAdjust": "195"
                 }
             }
         },
@@ -1580,7 +964,7 @@
                     "rotNum": 24505,
                     "visitingHomeDraw": "Visiting",
                     "odds": {
-                        "moneyLine": "250",
+                        "moneyLine": "290",
                         "teamTotal": {
                             "totalPoints": "",
                             "overAdjust": "",
@@ -1594,7 +978,7 @@
                     "rotNum": 24506,
                     "visitingHomeDraw": "Home",
                     "odds": {
-                        "moneyLine": "-300",
+                        "moneyLine": "-355",
                         "teamTotal": {
                             "totalPoints": "",
                             "overAdjust": "",
@@ -1748,7 +1132,7 @@
                     "rotNum": 24521,
                     "visitingHomeDraw": "Visiting",
                     "odds": {
-                        "moneyLine": "205",
+                        "moneyLine": "200",
                         "teamTotal": {
                             "totalPoints": "",
                             "overAdjust": "",
@@ -1762,7 +1146,7 @@
                     "rotNum": 24522,
                     "visitingHomeDraw": "Home",
                     "odds": {
-                        "moneyLine": "-240",
+                        "moneyLine": "-235",
                         "teamTotal": {
                             "totalPoints": "",
                             "overAdjust": "",
@@ -1860,7 +1244,7 @@
                     "rotNum": 24529,
                     "visitingHomeDraw": "Visiting",
                     "odds": {
-                        "moneyLine": "145",
+                        "moneyLine": "150",
                         "teamTotal": {
                             "totalPoints": "",
                             "overAdjust": "",
@@ -1874,7 +1258,7 @@
                     "rotNum": 24530,
                     "visitingHomeDraw": "Home",
                     "odds": {
-                        "moneyLine": "-165",
+                        "moneyLine": "-175",
                         "teamTotal": {
                             "totalPoints": "",
                             "overAdjust": "",
@@ -2028,7 +1412,7 @@
                     "rotNum": 24545,
                     "visitingHomeDraw": "Visiting",
                     "odds": {
-                        "moneyLine": "155",
+                        "moneyLine": "140",
                         "teamTotal": {
                             "totalPoints": "",
                             "overAdjust": "",
@@ -2042,7 +1426,7 @@
                     "rotNum": 24546,
                     "visitingHomeDraw": "Home",
                     "odds": {
-                        "moneyLine": "-180",
+                        "moneyLine": "-160",
                         "teamTotal": {
                             "totalPoints": "",
                             "overAdjust": "",
@@ -2140,7 +1524,7 @@
                     "rotNum": 24553,
                     "visitingHomeDraw": "Visiting",
                     "odds": {
-                        "moneyLine": "250",
+                        "moneyLine": "225",
                         "teamTotal": {
                             "totalPoints": "",
                             "overAdjust": "",
@@ -2154,7 +1538,7 @@
                     "rotNum": 24554,
                     "visitingHomeDraw": "Home",
                     "odds": {
-                        "moneyLine": "-300",
+                        "moneyLine": "-265",
                         "teamTotal": {
                             "totalPoints": "",
                             "overAdjust": "",
@@ -2185,6 +1569,62 @@
             }
         },
         {
+            "event_DateTimeGMT": "2021-02-27T22:00:01",
+            "sportType": "Martial Arts        ",
+            "scheduleText": "UFC Vegas 20                                                ",
+            "league": "MMA                           ",
+            "gameId": "489644714",
+            "participants": [
+                {
+                    "participantName": "Pedro Munhoz",
+                    "rotNum": 24557,
+                    "visitingHomeDraw": "Visiting",
+                    "odds": {
+                        "moneyLine": "130",
+                        "teamTotal": {
+                            "totalPoints": "",
+                            "overAdjust": "",
+                            "underAdjust": ""
+                        }
+                    },
+                    "pitcher": null
+                },
+                {
+                    "participantName": "Jimmie Rivera",
+                    "rotNum": 24558,
+                    "visitingHomeDraw": "Home",
+                    "odds": {
+                        "moneyLine": "-150",
+                        "teamTotal": {
+                            "totalPoints": "",
+                            "overAdjust": "",
+                            "underAdjust": ""
+                        }
+                    },
+                    "pitcher": null
+                }
+            ],
+            "drawRotNum": "",
+            "drawMoneyLine": "",
+            "drawTitle": "",
+            "period": {
+                "peroidDescription": "Game",
+                "periodCutOffDatetimeGTM": "2021-02-27T22:00:00",
+                "periodStatus": "I",
+                "spread": {
+                    "spreadVisiting": "",
+                    "spreadAdjustVisiting": "",
+                    "spreadHome": "",
+                    "spreadAdjustHome": ""
+                },
+                "total": {
+                    "totalPoints": "2.5",
+                    "overAdjust": "-270",
+                    "underAdjust": "210"
+                }
+            }
+        },
+        {
             "event_DateTimeGMT": "2021-03-06T22:00:01",
             "sportType": "Martial Arts        ",
             "scheduleText": "UFC 259                                                     ",
@@ -2196,7 +1636,7 @@
                     "rotNum": 24701,
                     "visitingHomeDraw": "Visiting",
                     "odds": {
-                        "moneyLine": "225",
+                        "moneyLine": "230",
                         "teamTotal": {
                             "totalPoints": "",
                             "overAdjust": "",
@@ -2210,7 +1650,7 @@
                     "rotNum": 24702,
                     "visitingHomeDraw": "Home",
                     "odds": {
-                        "moneyLine": "-265",
+                        "moneyLine": "-270",
                         "teamTotal": {
                             "totalPoints": "",
                             "overAdjust": "",
@@ -2252,7 +1692,7 @@
                     "rotNum": 24705,
                     "visitingHomeDraw": "Visiting",
                     "odds": {
-                        "moneyLine": "900",
+                        "moneyLine": "800",
                         "teamTotal": {
                             "totalPoints": "",
                             "overAdjust": "",
@@ -2266,7 +1706,7 @@
                     "rotNum": 24706,
                     "visitingHomeDraw": "Home",
                     "odds": {
-                        "moneyLine": "-1300",
+                        "moneyLine": "-1200",
                         "teamTotal": {
                             "totalPoints": "",
                             "overAdjust": "",
@@ -2308,7 +1748,7 @@
                     "rotNum": 24709,
                     "visitingHomeDraw": "Visiting",
                     "odds": {
-                        "moneyLine": "110",
+                        "moneyLine": "120",
                         "teamTotal": {
                             "totalPoints": "",
                             "overAdjust": "",
@@ -2322,7 +1762,7 @@
                     "rotNum": 24710,
                     "visitingHomeDraw": "Home",
                     "odds": {
-                        "moneyLine": "-130",
+                        "moneyLine": "-140",
                         "teamTotal": {
                             "totalPoints": "",
                             "overAdjust": "",
@@ -2347,8 +1787,8 @@
                 },
                 "total": {
                     "totalPoints": "3.5",
-                    "overAdjust": "-110",
-                    "underAdjust": "-120"
+                    "overAdjust": "-120",
+                    "underAdjust": "-110"
                 }
             }
         },
@@ -2364,7 +1804,7 @@
                     "rotNum": 24713,
                     "visitingHomeDraw": "Visiting",
                     "odds": {
-                        "moneyLine": "150",
+                        "moneyLine": "140",
                         "teamTotal": {
                             "totalPoints": "",
                             "overAdjust": "",
@@ -2378,7 +1818,7 @@
                     "rotNum": 24714,
                     "visitingHomeDraw": "Home",
                     "odds": {
-                        "moneyLine": "-175",
+                        "moneyLine": "-160",
                         "teamTotal": {
                             "totalPoints": "",
                             "overAdjust": "",
@@ -2476,7 +1916,7 @@
                     "rotNum": 24721,
                     "visitingHomeDraw": "Visiting",
                     "odds": {
-                        "moneyLine": "260",
+                        "moneyLine": "275",
                         "teamTotal": {
                             "totalPoints": "",
                             "overAdjust": "",
@@ -2490,7 +1930,7 @@
                     "rotNum": 24722,
                     "visitingHomeDraw": "Home",
                     "odds": {
-                        "moneyLine": "-310",
+                        "moneyLine": "-325",
                         "teamTotal": {
                             "totalPoints": "",
                             "overAdjust": "",
@@ -2532,7 +1972,7 @@
                     "rotNum": 24725,
                     "visitingHomeDraw": "Visiting",
                     "odds": {
-                        "moneyLine": "-108",
+                        "moneyLine": "-105",
                         "teamTotal": {
                             "totalPoints": "",
                             "overAdjust": "",
@@ -2546,7 +1986,7 @@
                     "rotNum": 24726,
                     "visitingHomeDraw": "Home",
                     "odds": {
-                        "moneyLine": "-112",
+                        "moneyLine": "-115",
                         "teamTotal": {
                             "totalPoints": "",
                             "overAdjust": "",
@@ -2603,62 +2043,6 @@
                     "visitingHomeDraw": "Home",
                     "odds": {
                         "moneyLine": "-250",
-                        "teamTotal": {
-                            "totalPoints": "",
-                            "overAdjust": "",
-                            "underAdjust": ""
-                        }
-                    },
-                    "pitcher": null
-                }
-            ],
-            "drawRotNum": "",
-            "drawMoneyLine": "",
-            "drawTitle": "",
-            "period": {
-                "peroidDescription": "Game",
-                "periodCutOffDatetimeGTM": "2021-03-06T22:00:00",
-                "periodStatus": "I",
-                "spread": {
-                    "spreadVisiting": "",
-                    "spreadAdjustVisiting": "",
-                    "spreadHome": "",
-                    "spreadAdjustHome": ""
-                },
-                "total": {
-                    "totalPoints": "",
-                    "overAdjust": "",
-                    "underAdjust": ""
-                }
-            }
-        },
-        {
-            "event_DateTimeGMT": "2021-03-06T22:00:01",
-            "sportType": "Martial Arts        ",
-            "scheduleText": "UFC 259                                                     ",
-            "league": "MMA                           ",
-            "gameId": "489622787",
-            "participants": [
-                {
-                    "participantName": "Trevin Jones",
-                    "rotNum": 24733,
-                    "visitingHomeDraw": "Visiting",
-                    "odds": {
-                        "moneyLine": "165",
-                        "teamTotal": {
-                            "totalPoints": "",
-                            "overAdjust": "",
-                            "underAdjust": ""
-                        }
-                    },
-                    "pitcher": null
-                },
-                {
-                    "participantName": "Randy Costa",
-                    "rotNum": 24734,
-                    "visitingHomeDraw": "Home",
-                    "odds": {
-                        "moneyLine": "-190",
                         "teamTotal": {
                             "totalPoints": "",
                             "overAdjust": "",
@@ -2756,7 +2140,7 @@
                     "rotNum": 24741,
                     "visitingHomeDraw": "Visiting",
                     "odds": {
-                        "moneyLine": "-110",
+                        "moneyLine": "-115",
                         "teamTotal": {
                             "totalPoints": "",
                             "overAdjust": "",
@@ -2770,7 +2154,7 @@
                     "rotNum": 24742,
                     "visitingHomeDraw": "Home",
                     "odds": {
-                        "moneyLine": "-110",
+                        "moneyLine": "-105",
                         "teamTotal": {
                             "totalPoints": "",
                             "overAdjust": "",
@@ -2812,7 +2196,7 @@
                     "rotNum": 24745,
                     "visitingHomeDraw": "Visiting",
                     "odds": {
-                        "moneyLine": "145",
+                        "moneyLine": "141",
                         "teamTotal": {
                             "totalPoints": "",
                             "overAdjust": "",
@@ -2826,7 +2210,7 @@
                     "rotNum": 24746,
                     "visitingHomeDraw": "Home",
                     "odds": {
-                        "moneyLine": "-170",
+                        "moneyLine": "-161",
                         "teamTotal": {
                             "totalPoints": "",
                             "overAdjust": "",
@@ -2913,14 +2297,14 @@
             }
         },
         {
-            "event_DateTimeGMT": "2021-02-12T21:00:01",
+            "event_DateTimeGMT": "2021-02-19T21:00:01",
             "sportType": "Martial Arts        ",
-            "scheduleText": "LFA 99                                                      ",
+            "scheduleText": "LFA 100                                                     ",
             "league": "MMA                           ",
-            "gameId": "489641261",
+            "gameId": "489644173",
             "participants": [
                 {
-                    "participantName": "Fabio Cherant",
+                    "participantName": "Victor Altamirano",
                     "rotNum": 25001,
                     "visitingHomeDraw": "Visiting",
                     "odds": {
@@ -2934,7 +2318,7 @@
                     "pitcher": null
                 },
                 {
-                    "participantName": "Myron Dennis",
+                    "participantName": "Nate Smith",
                     "rotNum": 25002,
                     "visitingHomeDraw": "Home",
                     "odds": {
@@ -2953,7 +2337,7 @@
             "drawTitle": "",
             "period": {
                 "peroidDescription": "Game",
-                "periodCutOffDatetimeGTM": "2021-02-12T21:00:00",
+                "periodCutOffDatetimeGTM": "2021-02-19T21:00:00",
                 "periodStatus": "I",
                 "spread": {
                     "spreadVisiting": "",
@@ -2969,18 +2353,18 @@
             }
         },
         {
-            "event_DateTimeGMT": "2021-02-12T21:00:01",
+            "event_DateTimeGMT": "2021-02-19T21:00:01",
             "sportType": "Martial Arts        ",
-            "scheduleText": "LFA 99                                                      ",
+            "scheduleText": "LFA 100                                                     ",
             "league": "MMA                           ",
-            "gameId": "489641264",
+            "gameId": "489644174",
             "participants": [
                 {
-                    "participantName": "Ago Huskic",
+                    "participantName": "Gregory Rodrigues",
                     "rotNum": 25005,
                     "visitingHomeDraw": "Visiting",
                     "odds": {
-                        "moneyLine": "210",
+                        "moneyLine": "115",
                         "teamTotal": {
                             "totalPoints": "",
                             "overAdjust": "",
@@ -2990,11 +2374,11 @@
                     "pitcher": null
                 },
                 {
-                    "participantName": "Brant Moore",
+                    "participantName": "Anthony Adams",
                     "rotNum": 25006,
                     "visitingHomeDraw": "Home",
                     "odds": {
-                        "moneyLine": "-270",
+                        "moneyLine": "-145",
                         "teamTotal": {
                             "totalPoints": "",
                             "overAdjust": "",
@@ -3009,7 +2393,7 @@
             "drawTitle": "",
             "period": {
                 "peroidDescription": "Game",
-                "periodCutOffDatetimeGTM": "2021-02-12T21:00:00",
+                "periodCutOffDatetimeGTM": "2021-02-19T21:00:00",
                 "periodStatus": "I",
                 "spread": {
                     "spreadVisiting": "",
@@ -3025,18 +2409,18 @@
             }
         },
         {
-            "event_DateTimeGMT": "2021-02-12T21:00:01",
+            "event_DateTimeGMT": "2021-02-19T21:00:01",
             "sportType": "Martial Arts        ",
-            "scheduleText": "LFA 99                                                      ",
+            "scheduleText": "LFA 100                                                     ",
             "league": "MMA                           ",
-            "gameId": "489641265",
+            "gameId": "489644175",
             "participants": [
                 {
-                    "participantName": "Nate Richardson",
+                    "participantName": "Jorge Juarez",
                     "rotNum": 25009,
                     "visitingHomeDraw": "Visiting",
                     "odds": {
-                        "moneyLine": "-115",
+                        "moneyLine": "255",
                         "teamTotal": {
                             "totalPoints": "",
                             "overAdjust": "",
@@ -3046,11 +2430,11 @@
                     "pitcher": null
                 },
                 {
-                    "participantName": "Fernando Padilla",
+                    "participantName": "Steven Nguyen",
                     "rotNum": 25010,
                     "visitingHomeDraw": "Home",
                     "odds": {
-                        "moneyLine": "-115",
+                        "moneyLine": "-330",
                         "teamTotal": {
                             "totalPoints": "",
                             "overAdjust": "",
@@ -3065,7 +2449,7 @@
             "drawTitle": "",
             "period": {
                 "peroidDescription": "Game",
-                "periodCutOffDatetimeGTM": "2021-02-12T21:00:00",
+                "periodCutOffDatetimeGTM": "2021-02-19T21:00:00",
                 "periodStatus": "I",
                 "spread": {
                     "spreadVisiting": "",
@@ -3081,14 +2465,14 @@
             }
         },
         {
-            "event_DateTimeGMT": "2021-02-12T21:00:01",
+            "event_DateTimeGMT": "2021-02-19T21:00:01",
             "sportType": "Martial Arts        ",
-            "scheduleText": "LFA 99                                                      ",
+            "scheduleText": "LFA 100                                                     ",
             "league": "MMA                           ",
-            "gameId": "489641266",
+            "gameId": "489644176",
             "participants": [
                 {
-                    "participantName": "Joseph Kropschot",
+                    "participantName": "Karlee Pangilinan",
                     "rotNum": 25013,
                     "visitingHomeDraw": "Visiting",
                     "odds": {
@@ -3102,7 +2486,7 @@
                     "pitcher": null
                 },
                 {
-                    "participantName": "Cody Brundage",
+                    "participantName": "Charles Johnson",
                     "rotNum": 25014,
                     "visitingHomeDraw": "Home",
                     "odds": {
@@ -3121,7 +2505,7 @@
             "drawTitle": "",
             "period": {
                 "peroidDescription": "Game",
-                "periodCutOffDatetimeGTM": "2021-02-12T21:00:00",
+                "periodCutOffDatetimeGTM": "2021-02-19T21:00:00",
                 "periodStatus": "I",
                 "spread": {
                     "spreadVisiting": "",
@@ -3137,18 +2521,18 @@
             }
         },
         {
-            "event_DateTimeGMT": "2021-02-12T21:00:01",
+            "event_DateTimeGMT": "2021-02-19T21:00:01",
             "sportType": "Martial Arts        ",
-            "scheduleText": "LFA 99                                                      ",
+            "scheduleText": "LFA 100                                                     ",
             "league": "MMA                           ",
-            "gameId": "489641267",
+            "gameId": "489644177",
             "participants": [
                 {
-                    "participantName": "Valerie Ann Marie Soto",
+                    "participantName": "Evan Woolsey",
                     "rotNum": 25017,
                     "visitingHomeDraw": "Visiting",
                     "odds": {
-                        "moneyLine": "-260",
+                        "moneyLine": "800",
                         "teamTotal": {
                             "totalPoints": "",
                             "overAdjust": "",
@@ -3158,11 +2542,11 @@
                     "pitcher": null
                 },
                 {
-                    "participantName": "Flore Hani",
+                    "participantName": "Christian Natividad",
                     "rotNum": 25018,
                     "visitingHomeDraw": "Home",
                     "odds": {
-                        "moneyLine": "200",
+                        "moneyLine": "-1200",
                         "teamTotal": {
                             "totalPoints": "",
                             "overAdjust": "",
@@ -3177,7 +2561,7 @@
             "drawTitle": "",
             "period": {
                 "peroidDescription": "Game",
-                "periodCutOffDatetimeGTM": "2021-02-12T21:00:00",
+                "periodCutOffDatetimeGTM": "2021-02-19T21:00:00",
                 "periodStatus": "I",
                 "spread": {
                     "spreadVisiting": "",
@@ -3193,18 +2577,18 @@
             }
         },
         {
-            "event_DateTimeGMT": "2021-02-12T21:00:01",
+            "event_DateTimeGMT": "2021-02-19T21:00:01",
             "sportType": "Martial Arts        ",
-            "scheduleText": "LFA 99                                                      ",
+            "scheduleText": "LFA 100                                                     ",
             "league": "MMA                           ",
-            "gameId": "489641268",
+            "gameId": "489644178",
             "participants": [
                 {
-                    "participantName": "Cesar Gutierrez",
+                    "participantName": "Tommy Aaron",
                     "rotNum": 25021,
                     "visitingHomeDraw": "Visiting",
                     "odds": {
-                        "moneyLine": "400",
+                        "moneyLine": "155",
                         "teamTotal": {
                             "totalPoints": "",
                             "overAdjust": "",
@@ -3214,11 +2598,11 @@
                     "pitcher": null
                 },
                 {
-                    "participantName": "Trevor Wallace",
+                    "participantName": "Gerald Scott",
                     "rotNum": 25022,
                     "visitingHomeDraw": "Home",
                     "odds": {
-                        "moneyLine": "-550",
+                        "moneyLine": "-185",
                         "teamTotal": {
                             "totalPoints": "",
                             "overAdjust": "",
@@ -3233,7 +2617,7 @@
             "drawTitle": "",
             "period": {
                 "peroidDescription": "Game",
-                "periodCutOffDatetimeGTM": "2021-02-12T21:00:00",
+                "periodCutOffDatetimeGTM": "2021-02-19T21:00:00",
                 "periodStatus": "I",
                 "spread": {
                     "spreadVisiting": "",
@@ -3249,74 +2633,18 @@
             }
         },
         {
-            "event_DateTimeGMT": "2021-02-12T21:00:01",
+            "event_DateTimeGMT": "2021-02-19T20:00:01",
             "sportType": "Martial Arts        ",
-            "scheduleText": "LFA 99                                                      ",
+            "scheduleText": "Fight2Win 164                                               ",
             "league": "MMA                           ",
-            "gameId": "489641269",
+            "gameId": "489644179",
             "participants": [
                 {
-                    "participantName": "Craig Fairley",
-                    "rotNum": 25025,
-                    "visitingHomeDraw": "Visiting",
-                    "odds": {
-                        "moneyLine": "425",
-                        "teamTotal": {
-                            "totalPoints": "",
-                            "overAdjust": "",
-                            "underAdjust": ""
-                        }
-                    },
-                    "pitcher": null
-                },
-                {
-                    "participantName": "Darian Weeks",
-                    "rotNum": 25026,
-                    "visitingHomeDraw": "Home",
-                    "odds": {
-                        "moneyLine": "-600",
-                        "teamTotal": {
-                            "totalPoints": "",
-                            "overAdjust": "",
-                            "underAdjust": ""
-                        }
-                    },
-                    "pitcher": null
-                }
-            ],
-            "drawRotNum": "",
-            "drawMoneyLine": "",
-            "drawTitle": "",
-            "period": {
-                "peroidDescription": "Game",
-                "periodCutOffDatetimeGTM": "2021-02-12T21:00:00",
-                "periodStatus": "I",
-                "spread": {
-                    "spreadVisiting": "",
-                    "spreadAdjustVisiting": "",
-                    "spreadHome": "",
-                    "spreadAdjustHome": ""
-                },
-                "total": {
-                    "totalPoints": "",
-                    "overAdjust": "",
-                    "underAdjust": ""
-                }
-            }
-        },
-        {
-            "event_DateTimeGMT": "2021-02-12T08:00:01",
-            "sportType": "Martial Arts        ",
-            "scheduleText": "ACA 117                                                     ",
-            "league": "MMA                           ",
-            "gameId": "489641512",
-            "participants": [
-                {
-                    "participantName": "Elias Silverio",
+                    "participantName": "Vagner Rocha",
                     "rotNum": 25101,
                     "visitingHomeDraw": "Visiting",
                     "odds": {
-                        "moneyLine": "375",
+                        "moneyLine": "100",
                         "teamTotal": {
                             "totalPoints": "",
                             "overAdjust": "",
@@ -3326,11 +2654,11 @@
                     "pitcher": null
                 },
                 {
-                    "participantName": "Ali Bagov",
+                    "participantName": "Yuri Simoes",
                     "rotNum": 25102,
                     "visitingHomeDraw": "Home",
                     "odds": {
-                        "moneyLine": "-500",
+                        "moneyLine": "-130",
                         "teamTotal": {
                             "totalPoints": "",
                             "overAdjust": "",
@@ -3345,7 +2673,7 @@
             "drawTitle": "",
             "period": {
                 "peroidDescription": "Game",
-                "periodCutOffDatetimeGTM": "2021-02-12T08:00:00",
+                "periodCutOffDatetimeGTM": "2021-02-19T20:00:00",
                 "periodStatus": "I",
                 "spread": {
                     "spreadVisiting": "",
@@ -3361,18 +2689,18 @@
             }
         },
         {
-            "event_DateTimeGMT": "2021-02-12T08:00:01",
+            "event_DateTimeGMT": "2021-02-19T20:00:01",
             "sportType": "Martial Arts        ",
-            "scheduleText": "ACA 117                                                     ",
+            "scheduleText": "Fight2Win 164                                               ",
             "league": "MMA                           ",
-            "gameId": "489641513",
+            "gameId": "489644180",
             "participants": [
                 {
-                    "participantName": "Bayzet Khatkhokhu",
+                    "participantName": "Manuel Ribamar",
                     "rotNum": 25105,
                     "visitingHomeDraw": "Visiting",
                     "odds": {
-                        "moneyLine": "145",
+                        "moneyLine": "165",
                         "teamTotal": {
                             "totalPoints": "",
                             "overAdjust": "",
@@ -3382,11 +2710,11 @@
                     "pitcher": null
                 },
                 {
-                    "participantName": "Daud Shaikhaev",
+                    "participantName": "Dante Leon",
                     "rotNum": 25106,
                     "visitingHomeDraw": "Home",
                     "odds": {
-                        "moneyLine": "-175",
+                        "moneyLine": "-205",
                         "teamTotal": {
                             "totalPoints": "",
                             "overAdjust": "",
@@ -3401,7 +2729,7 @@
             "drawTitle": "",
             "period": {
                 "peroidDescription": "Game",
-                "periodCutOffDatetimeGTM": "2021-02-12T08:00:00",
+                "periodCutOffDatetimeGTM": "2021-02-19T20:00:00",
                 "periodStatus": "I",
                 "spread": {
                     "spreadVisiting": "",
@@ -3417,14 +2745,70 @@
             }
         },
         {
-            "event_DateTimeGMT": "2021-02-12T08:00:01",
+            "event_DateTimeGMT": "2021-02-19T20:00:01",
             "sportType": "Martial Arts        ",
-            "scheduleText": "ACA 117                                                     ",
+            "scheduleText": "Fight2Win 164                                               ",
             "league": "MMA                           ",
-            "gameId": "489641518",
+            "gameId": "489644181",
             "participants": [
                 {
-                    "participantName": "Dzhikhad Yunusov",
+                    "participantName": "Oliver Taza",
+                    "rotNum": 25109,
+                    "visitingHomeDraw": "Visiting",
+                    "odds": {
+                        "moneyLine": "140",
+                        "teamTotal": {
+                            "totalPoints": "",
+                            "overAdjust": "",
+                            "underAdjust": ""
+                        }
+                    },
+                    "pitcher": null
+                },
+                {
+                    "participantName": "Pedro Marinho",
+                    "rotNum": 25110,
+                    "visitingHomeDraw": "Home",
+                    "odds": {
+                        "moneyLine": "-170",
+                        "teamTotal": {
+                            "totalPoints": "",
+                            "overAdjust": "",
+                            "underAdjust": ""
+                        }
+                    },
+                    "pitcher": null
+                }
+            ],
+            "drawRotNum": "",
+            "drawMoneyLine": "",
+            "drawTitle": "",
+            "period": {
+                "peroidDescription": "Game",
+                "periodCutOffDatetimeGTM": "2021-02-19T20:00:00",
+                "periodStatus": "I",
+                "spread": {
+                    "spreadVisiting": "",
+                    "spreadAdjustVisiting": "",
+                    "spreadHome": "",
+                    "spreadAdjustHome": ""
+                },
+                "total": {
+                    "totalPoints": "",
+                    "overAdjust": "",
+                    "underAdjust": ""
+                }
+            }
+        },
+        {
+            "event_DateTimeGMT": "2021-02-19T20:00:01",
+            "sportType": "Martial Arts        ",
+            "scheduleText": "Fight2Win 164                                               ",
+            "league": "MMA                           ",
+            "gameId": "489644182",
+            "participants": [
+                {
+                    "participantName": "Gabriel Souza",
                     "rotNum": 25113,
                     "visitingHomeDraw": "Visiting",
                     "odds": {
@@ -3438,7 +2822,7 @@
                     "pitcher": null
                 },
                 {
-                    "participantName": "Leonardo Limberger",
+                    "participantName": "Gianni Grippo",
                     "rotNum": 25114,
                     "visitingHomeDraw": "Home",
                     "odds": {
@@ -3457,287 +2841,7 @@
             "drawTitle": "",
             "period": {
                 "peroidDescription": "Game",
-                "periodCutOffDatetimeGTM": "2021-02-12T08:00:00",
-                "periodStatus": "I",
-                "spread": {
-                    "spreadVisiting": "",
-                    "spreadAdjustVisiting": "",
-                    "spreadHome": "",
-                    "spreadAdjustHome": ""
-                },
-                "total": {
-                    "totalPoints": "",
-                    "overAdjust": "",
-                    "underAdjust": ""
-                }
-            }
-        },
-        {
-            "event_DateTimeGMT": "2021-02-12T08:00:01",
-            "sportType": "Martial Arts        ",
-            "scheduleText": "ACA 117                                                     ",
-            "league": "MMA                           ",
-            "gameId": "489641521",
-            "participants": [
-                {
-                    "participantName": "Artur Astakhov",
-                    "rotNum": 25121,
-                    "visitingHomeDraw": "Visiting",
-                    "odds": {
-                        "moneyLine": "155",
-                        "teamTotal": {
-                            "totalPoints": "",
-                            "overAdjust": "",
-                            "underAdjust": ""
-                        }
-                    },
-                    "pitcher": null
-                },
-                {
-                    "participantName": "Grigor Matevosyan",
-                    "rotNum": 25122,
-                    "visitingHomeDraw": "Home",
-                    "odds": {
-                        "moneyLine": "-185",
-                        "teamTotal": {
-                            "totalPoints": "",
-                            "overAdjust": "",
-                            "underAdjust": ""
-                        }
-                    },
-                    "pitcher": null
-                }
-            ],
-            "drawRotNum": "",
-            "drawMoneyLine": "",
-            "drawTitle": "",
-            "period": {
-                "peroidDescription": "Game",
-                "periodCutOffDatetimeGTM": "2021-02-12T08:00:00",
-                "periodStatus": "I",
-                "spread": {
-                    "spreadVisiting": "",
-                    "spreadAdjustVisiting": "",
-                    "spreadHome": "",
-                    "spreadAdjustHome": ""
-                },
-                "total": {
-                    "totalPoints": "",
-                    "overAdjust": "",
-                    "underAdjust": ""
-                }
-            }
-        },
-        {
-            "event_DateTimeGMT": "2021-02-12T08:00:01",
-            "sportType": "Martial Arts        ",
-            "scheduleText": "ACA 117                                                     ",
-            "league": "MMA                           ",
-            "gameId": "489641522",
-            "participants": [
-                {
-                    "participantName": "Roggers Souza",
-                    "rotNum": 25125,
-                    "visitingHomeDraw": "Visiting",
-                    "odds": {
-                        "moneyLine": "350",
-                        "teamTotal": {
-                            "totalPoints": "",
-                            "overAdjust": "",
-                            "underAdjust": ""
-                        }
-                    },
-                    "pitcher": null
-                },
-                {
-                    "participantName": "Alikhan Vakhaev",
-                    "rotNum": 25126,
-                    "visitingHomeDraw": "Home",
-                    "odds": {
-                        "moneyLine": "-450",
-                        "teamTotal": {
-                            "totalPoints": "",
-                            "overAdjust": "",
-                            "underAdjust": ""
-                        }
-                    },
-                    "pitcher": null
-                }
-            ],
-            "drawRotNum": "",
-            "drawMoneyLine": "",
-            "drawTitle": "",
-            "period": {
-                "peroidDescription": "Game",
-                "periodCutOffDatetimeGTM": "2021-02-12T08:00:00",
-                "periodStatus": "I",
-                "spread": {
-                    "spreadVisiting": "",
-                    "spreadAdjustVisiting": "",
-                    "spreadHome": "",
-                    "spreadAdjustHome": ""
-                },
-                "total": {
-                    "totalPoints": "",
-                    "overAdjust": "",
-                    "underAdjust": ""
-                }
-            }
-        },
-        {
-            "event_DateTimeGMT": "2021-02-12T08:00:01",
-            "sportType": "Martial Arts        ",
-            "scheduleText": "ACA 117                                                     ",
-            "league": "MMA                           ",
-            "gameId": "489641524",
-            "participants": [
-                {
-                    "participantName": "Islam Meshev",
-                    "rotNum": 25133,
-                    "visitingHomeDraw": "Visiting",
-                    "odds": {
-                        "moneyLine": "-105",
-                        "teamTotal": {
-                            "totalPoints": "",
-                            "overAdjust": "",
-                            "underAdjust": ""
-                        }
-                    },
-                    "pitcher": null
-                },
-                {
-                    "participantName": "Rodrigo Praia",
-                    "rotNum": 25134,
-                    "visitingHomeDraw": "Home",
-                    "odds": {
-                        "moneyLine": "-125",
-                        "teamTotal": {
-                            "totalPoints": "",
-                            "overAdjust": "",
-                            "underAdjust": ""
-                        }
-                    },
-                    "pitcher": null
-                }
-            ],
-            "drawRotNum": "",
-            "drawMoneyLine": "",
-            "drawTitle": "",
-            "period": {
-                "peroidDescription": "Game",
-                "periodCutOffDatetimeGTM": "2021-02-12T08:00:00",
-                "periodStatus": "I",
-                "spread": {
-                    "spreadVisiting": "",
-                    "spreadAdjustVisiting": "",
-                    "spreadHome": "",
-                    "spreadAdjustHome": ""
-                },
-                "total": {
-                    "totalPoints": "",
-                    "overAdjust": "",
-                    "underAdjust": ""
-                }
-            }
-        },
-        {
-            "event_DateTimeGMT": "2021-02-12T08:00:01",
-            "sportType": "Martial Arts        ",
-            "scheduleText": "ACA 117                                                     ",
-            "league": "MMA                           ",
-            "gameId": "489641525",
-            "participants": [
-                {
-                    "participantName": "Ramazan Kishev",
-                    "rotNum": 25137,
-                    "visitingHomeDraw": "Visiting",
-                    "odds": {
-                        "moneyLine": "115",
-                        "teamTotal": {
-                            "totalPoints": "",
-                            "overAdjust": "",
-                            "underAdjust": ""
-                        }
-                    },
-                    "pitcher": null
-                },
-                {
-                    "participantName": "Askhab Zulaev",
-                    "rotNum": 25138,
-                    "visitingHomeDraw": "Home",
-                    "odds": {
-                        "moneyLine": "-145",
-                        "teamTotal": {
-                            "totalPoints": "",
-                            "overAdjust": "",
-                            "underAdjust": ""
-                        }
-                    },
-                    "pitcher": null
-                }
-            ],
-            "drawRotNum": "",
-            "drawMoneyLine": "",
-            "drawTitle": "",
-            "period": {
-                "peroidDescription": "Game",
-                "periodCutOffDatetimeGTM": "2021-02-12T08:00:00",
-                "periodStatus": "I",
-                "spread": {
-                    "spreadVisiting": "",
-                    "spreadAdjustVisiting": "",
-                    "spreadHome": "",
-                    "spreadAdjustHome": ""
-                },
-                "total": {
-                    "totalPoints": "",
-                    "overAdjust": "",
-                    "underAdjust": ""
-                }
-            }
-        },
-        {
-            "event_DateTimeGMT": "2021-02-12T08:00:01",
-            "sportType": "Martial Arts        ",
-            "scheduleText": "ACA 117                                                     ",
-            "league": "MMA                           ",
-            "gameId": "489641527",
-            "participants": [
-                {
-                    "participantName": "Alexey Sidorenko",
-                    "rotNum": 25145,
-                    "visitingHomeDraw": "Visiting",
-                    "odds": {
-                        "moneyLine": "300",
-                        "teamTotal": {
-                            "totalPoints": "",
-                            "overAdjust": "",
-                            "underAdjust": ""
-                        }
-                    },
-                    "pitcher": null
-                },
-                {
-                    "participantName": "Batraz Agnaev",
-                    "rotNum": 25146,
-                    "visitingHomeDraw": "Home",
-                    "odds": {
-                        "moneyLine": "-400",
-                        "teamTotal": {
-                            "totalPoints": "",
-                            "overAdjust": "",
-                            "underAdjust": ""
-                        }
-                    },
-                    "pitcher": null
-                }
-            ],
-            "drawRotNum": "",
-            "drawMoneyLine": "",
-            "drawTitle": "",
-            "period": {
-                "peroidDescription": "Game",
-                "periodCutOffDatetimeGTM": "2021-02-12T08:00:00",
+                "periodCutOffDatetimeGTM": "2021-02-19T20:00:00",
                 "periodStatus": "I",
                 "spread": {
                     "spreadVisiting": "",
@@ -3761,10 +2865,10 @@
             "participants": [
                 {
                     "participantName": "Tyron Woodley",
-                    "rotNum": 25907,
+                    "rotNum": 25807,
                     "visitingHomeDraw": "Visiting",
                     "odds": {
-                        "moneyLine": "250",
+                        "moneyLine": "235",
                         "teamTotal": {
                             "totalPoints": "",
                             "overAdjust": "",
@@ -3775,10 +2879,10 @@
                 },
                 {
                     "participantName": "Vicente Luque",
-                    "rotNum": 25908,
+                    "rotNum": 25808,
                     "visitingHomeDraw": "Home",
                     "odds": {
-                        "moneyLine": "-300",
+                        "moneyLine": "-275",
                         "teamTotal": {
                             "totalPoints": "",
                             "overAdjust": "",
@@ -3817,7 +2921,7 @@
             "participants": [
                 {
                     "participantName": "Thomas Almeida",
-                    "rotNum": 25909,
+                    "rotNum": 25809,
                     "visitingHomeDraw": "Visiting",
                     "odds": {
                         "moneyLine": "265",
@@ -3831,7 +2935,7 @@
                 },
                 {
                     "participantName": "Sean OMalley",
-                    "rotNum": 25910,
+                    "rotNum": 25810,
                     "visitingHomeDraw": "Home",
                     "odds": {
                         "moneyLine": "-315",
@@ -3865,15 +2969,239 @@
             }
         },
         {
-            "event_DateTimeGMT": "2021-03-13T22:00:01",
+            "event_DateTimeGMT": "2021-04-09T22:00:01",
             "sportType": "Martial Arts        ",
-            "scheduleText": "Future Events                                               ",
+            "scheduleText": "Bellator 256                                                ",
             "league": "MMA                           ",
-            "gameId": "489630088",
+            "gameId": "489641741",
             "participants": [
                 {
-                    "participantName": "Ryan Hall",
-                    "rotNum": 999013,
+                    "participantName": "Lyoto Machida",
+                    "rotNum": 27001,
+                    "visitingHomeDraw": "Visiting",
+                    "odds": {
+                        "moneyLine": "275",
+                        "teamTotal": {
+                            "totalPoints": "",
+                            "overAdjust": "",
+                            "underAdjust": ""
+                        }
+                    },
+                    "pitcher": null
+                },
+                {
+                    "participantName": "Ryan Bader",
+                    "rotNum": 27002,
+                    "visitingHomeDraw": "Home",
+                    "odds": {
+                        "moneyLine": "-350",
+                        "teamTotal": {
+                            "totalPoints": "",
+                            "overAdjust": "",
+                            "underAdjust": ""
+                        }
+                    },
+                    "pitcher": null
+                }
+            ],
+            "drawRotNum": "",
+            "drawMoneyLine": "",
+            "drawTitle": "",
+            "period": {
+                "peroidDescription": "Game",
+                "periodCutOffDatetimeGTM": "2021-04-09T22:00:00",
+                "periodStatus": "I",
+                "spread": {
+                    "spreadVisiting": "",
+                    "spreadAdjustVisiting": "",
+                    "spreadHome": "",
+                    "spreadAdjustHome": ""
+                },
+                "total": {
+                    "totalPoints": "",
+                    "overAdjust": "",
+                    "underAdjust": ""
+                }
+            }
+        },
+        {
+            "event_DateTimeGMT": "2021-04-09T22:00:01",
+            "sportType": "Martial Arts        ",
+            "scheduleText": "Bellator 256                                                ",
+            "league": "MMA                           ",
+            "gameId": "489641742",
+            "participants": [
+                {
+                    "participantName": "Corey Anderson",
+                    "rotNum": 27003,
+                    "visitingHomeDraw": "Visiting",
+                    "odds": {
+                        "moneyLine": "-140",
+                        "teamTotal": {
+                            "totalPoints": "",
+                            "overAdjust": "",
+                            "underAdjust": ""
+                        }
+                    },
+                    "pitcher": null
+                },
+                {
+                    "participantName": "Dovletdzhan Yagshimuradov",
+                    "rotNum": 27004,
+                    "visitingHomeDraw": "Home",
+                    "odds": {
+                        "moneyLine": "110",
+                        "teamTotal": {
+                            "totalPoints": "",
+                            "overAdjust": "",
+                            "underAdjust": ""
+                        }
+                    },
+                    "pitcher": null
+                }
+            ],
+            "drawRotNum": "",
+            "drawMoneyLine": "",
+            "drawTitle": "",
+            "period": {
+                "peroidDescription": "Game",
+                "periodCutOffDatetimeGTM": "2021-04-09T22:00:00",
+                "periodStatus": "I",
+                "spread": {
+                    "spreadVisiting": "",
+                    "spreadAdjustVisiting": "",
+                    "spreadHome": "",
+                    "spreadAdjustHome": ""
+                },
+                "total": {
+                    "totalPoints": "",
+                    "overAdjust": "",
+                    "underAdjust": ""
+                }
+            }
+        },
+        {
+            "event_DateTimeGMT": "2021-04-16T22:00:01",
+            "sportType": "Martial Arts        ",
+            "scheduleText": "Bellator 257                                                ",
+            "league": "MMA                           ",
+            "gameId": "489641743",
+            "participants": [
+                {
+                    "participantName": "Phil Davis",
+                    "rotNum": 27101,
+                    "visitingHomeDraw": "Visiting",
+                    "odds": {
+                        "moneyLine": "125",
+                        "teamTotal": {
+                            "totalPoints": "",
+                            "overAdjust": "",
+                            "underAdjust": ""
+                        }
+                    },
+                    "pitcher": null
+                },
+                {
+                    "participantName": "Vadim Nemkov",
+                    "rotNum": 27102,
+                    "visitingHomeDraw": "Home",
+                    "odds": {
+                        "moneyLine": "-155",
+                        "teamTotal": {
+                            "totalPoints": "",
+                            "overAdjust": "",
+                            "underAdjust": ""
+                        }
+                    },
+                    "pitcher": null
+                }
+            ],
+            "drawRotNum": "",
+            "drawMoneyLine": "",
+            "drawTitle": "",
+            "period": {
+                "peroidDescription": "Game",
+                "periodCutOffDatetimeGTM": "2021-04-16T22:00:00",
+                "periodStatus": "I",
+                "spread": {
+                    "spreadVisiting": "",
+                    "spreadAdjustVisiting": "",
+                    "spreadHome": "",
+                    "spreadAdjustHome": ""
+                },
+                "total": {
+                    "totalPoints": "",
+                    "overAdjust": "",
+                    "underAdjust": ""
+                }
+            }
+        },
+        {
+            "event_DateTimeGMT": "2021-04-16T22:00:01",
+            "sportType": "Martial Arts        ",
+            "scheduleText": "Bellator 257                                                ",
+            "league": "MMA                           ",
+            "gameId": "489641744",
+            "participants": [
+                {
+                    "participantName": "Anthony Johnson",
+                    "rotNum": 27103,
+                    "visitingHomeDraw": "Visiting",
+                    "odds": {
+                        "moneyLine": "100",
+                        "teamTotal": {
+                            "totalPoints": "",
+                            "overAdjust": "",
+                            "underAdjust": ""
+                        }
+                    },
+                    "pitcher": null
+                },
+                {
+                    "participantName": "Yoel Romero",
+                    "rotNum": 27104,
+                    "visitingHomeDraw": "Home",
+                    "odds": {
+                        "moneyLine": "-130",
+                        "teamTotal": {
+                            "totalPoints": "",
+                            "overAdjust": "",
+                            "underAdjust": ""
+                        }
+                    },
+                    "pitcher": null
+                }
+            ],
+            "drawRotNum": "",
+            "drawMoneyLine": "",
+            "drawTitle": "",
+            "period": {
+                "peroidDescription": "Game",
+                "periodCutOffDatetimeGTM": "2021-04-16T22:00:00",
+                "periodStatus": "I",
+                "spread": {
+                    "spreadVisiting": "",
+                    "spreadAdjustVisiting": "",
+                    "spreadHome": "",
+                    "spreadAdjustHome": ""
+                },
+                "total": {
+                    "totalPoints": "",
+                    "overAdjust": "",
+                    "underAdjust": ""
+                }
+            }
+        },
+        {
+            "event_DateTimeGMT": "2021-03-13T22:00:01",
+            "sportType": "Martial Arts        ",
+            "scheduleText": "UFC Vegas 21                                                ",
+            "league": "MMA                           ",
+            "gameId": "489642863",
+            "participants": [
+                {
+                    "participantName": "Eryk Anders",
+                    "rotNum": 27201,
                     "visitingHomeDraw": "Visiting",
                     "odds": {
                         "moneyLine": "165",
@@ -3886,8 +3214,8 @@
                     "pitcher": null
                 },
                 {
-                    "participantName": "Dan Ige",
-                    "rotNum": 999014,
+                    "participantName": "Darren Stewart",
+                    "rotNum": 27202,
                     "visitingHomeDraw": "Home",
                     "odds": {
                         "moneyLine": "-190",
@@ -3923,16 +3251,16 @@
         {
             "event_DateTimeGMT": "2021-03-13T22:00:01",
             "sportType": "Martial Arts        ",
-            "scheduleText": "Future Events                                               ",
+            "scheduleText": "UFC Vegas 21                                                ",
             "league": "MMA                           ",
-            "gameId": "489630090",
+            "gameId": "489642864",
             "participants": [
                 {
-                    "participantName": "Jairzinho Rozenstruik",
-                    "rotNum": 999015,
+                    "participantName": "Philipe Lins",
+                    "rotNum": 27203,
                     "visitingHomeDraw": "Visiting",
                     "odds": {
-                        "moneyLine": "220",
+                        "moneyLine": "-105",
                         "teamTotal": {
                             "totalPoints": "",
                             "overAdjust": "",
@@ -3942,11 +3270,11 @@
                     "pitcher": null
                 },
                 {
-                    "participantName": "Ciryl Gane",
-                    "rotNum": 999016,
+                    "participantName": "Ben Rothwell",
+                    "rotNum": 27204,
                     "visitingHomeDraw": "Home",
                     "odds": {
-                        "moneyLine": "-260",
+                        "moneyLine": "-115",
                         "teamTotal": {
                             "totalPoints": "",
                             "overAdjust": "",
@@ -3979,16 +3307,16 @@
         {
             "event_DateTimeGMT": "2021-03-13T22:00:01",
             "sportType": "Martial Arts        ",
-            "scheduleText": "Future Events                                               ",
+            "scheduleText": "UFC Vegas 21                                                ",
             "league": "MMA                           ",
-            "gameId": "489630093",
+            "gameId": "489642865",
             "participants": [
                 {
-                    "participantName": "Leon Edwards",
-                    "rotNum": 999017,
+                    "participantName": "Davey Grant",
+                    "rotNum": 27205,
                     "visitingHomeDraw": "Visiting",
                     "odds": {
-                        "moneyLine": "150",
+                        "moneyLine": "245",
                         "teamTotal": {
                             "totalPoints": "",
                             "overAdjust": "",
@@ -3998,11 +3326,403 @@
                     "pitcher": null
                 },
                 {
-                    "participantName": "Khamzat Chimaev",
-                    "rotNum": 999018,
+                    "participantName": "Jonathan Martinez",
+                    "rotNum": 27206,
                     "visitingHomeDraw": "Home",
                     "odds": {
-                        "moneyLine": "-175",
+                        "moneyLine": "-290",
+                        "teamTotal": {
+                            "totalPoints": "",
+                            "overAdjust": "",
+                            "underAdjust": ""
+                        }
+                    },
+                    "pitcher": null
+                }
+            ],
+            "drawRotNum": "",
+            "drawMoneyLine": "",
+            "drawTitle": "",
+            "period": {
+                "peroidDescription": "Game",
+                "periodCutOffDatetimeGTM": "2021-03-13T22:00:00",
+                "periodStatus": "I",
+                "spread": {
+                    "spreadVisiting": "",
+                    "spreadAdjustVisiting": "",
+                    "spreadHome": "",
+                    "spreadAdjustHome": ""
+                },
+                "total": {
+                    "totalPoints": "",
+                    "overAdjust": "",
+                    "underAdjust": ""
+                }
+            }
+        },
+        {
+            "event_DateTimeGMT": "2021-03-13T22:00:01",
+            "sportType": "Martial Arts        ",
+            "scheduleText": "UFC Vegas 21                                                ",
+            "league": "MMA                           ",
+            "gameId": "489642866",
+            "participants": [
+                {
+                    "participantName": "Matthew Semelsberger",
+                    "rotNum": 27207,
+                    "visitingHomeDraw": "Visiting",
+                    "odds": {
+                        "moneyLine": "-150",
+                        "teamTotal": {
+                            "totalPoints": "",
+                            "overAdjust": "",
+                            "underAdjust": ""
+                        }
+                    },
+                    "pitcher": null
+                },
+                {
+                    "participantName": "Jason Witt",
+                    "rotNum": 27208,
+                    "visitingHomeDraw": "Home",
+                    "odds": {
+                        "moneyLine": "130",
+                        "teamTotal": {
+                            "totalPoints": "",
+                            "overAdjust": "",
+                            "underAdjust": ""
+                        }
+                    },
+                    "pitcher": null
+                }
+            ],
+            "drawRotNum": "",
+            "drawMoneyLine": "",
+            "drawTitle": "",
+            "period": {
+                "peroidDescription": "Game",
+                "periodCutOffDatetimeGTM": "2021-03-13T22:00:00",
+                "periodStatus": "I",
+                "spread": {
+                    "spreadVisiting": "",
+                    "spreadAdjustVisiting": "",
+                    "spreadHome": "",
+                    "spreadAdjustHome": ""
+                },
+                "total": {
+                    "totalPoints": "",
+                    "overAdjust": "",
+                    "underAdjust": ""
+                }
+            }
+        },
+        {
+            "event_DateTimeGMT": "2021-03-13T22:00:01",
+            "sportType": "Martial Arts        ",
+            "scheduleText": "UFC Vegas 21                                                ",
+            "league": "MMA                           ",
+            "gameId": "489642867",
+            "participants": [
+                {
+                    "participantName": "Jinh Yu Frey",
+                    "rotNum": 27209,
+                    "visitingHomeDraw": "Visiting",
+                    "odds": {
+                        "moneyLine": "140",
+                        "teamTotal": {
+                            "totalPoints": "",
+                            "overAdjust": "",
+                            "underAdjust": ""
+                        }
+                    },
+                    "pitcher": null
+                },
+                {
+                    "participantName": "Gloria De Paula",
+                    "rotNum": 27210,
+                    "visitingHomeDraw": "Home",
+                    "odds": {
+                        "moneyLine": "-160",
+                        "teamTotal": {
+                            "totalPoints": "",
+                            "overAdjust": "",
+                            "underAdjust": ""
+                        }
+                    },
+                    "pitcher": null
+                }
+            ],
+            "drawRotNum": "",
+            "drawMoneyLine": "",
+            "drawTitle": "",
+            "period": {
+                "peroidDescription": "Game",
+                "periodCutOffDatetimeGTM": "2021-03-13T22:00:00",
+                "periodStatus": "I",
+                "spread": {
+                    "spreadVisiting": "",
+                    "spreadAdjustVisiting": "",
+                    "spreadHome": "",
+                    "spreadAdjustHome": ""
+                },
+                "total": {
+                    "totalPoints": "",
+                    "overAdjust": "",
+                    "underAdjust": ""
+                }
+            }
+        },
+        {
+            "event_DateTimeGMT": "2021-03-13T22:00:01",
+            "sportType": "Martial Arts        ",
+            "scheduleText": "UFC Vegas 21                                                ",
+            "league": "MMA                           ",
+            "gameId": "489642868",
+            "participants": [
+                {
+                    "participantName": "Matheus Nicolau",
+                    "rotNum": 27211,
+                    "visitingHomeDraw": "Visiting",
+                    "odds": {
+                        "moneyLine": "165",
+                        "teamTotal": {
+                            "totalPoints": "",
+                            "overAdjust": "",
+                            "underAdjust": ""
+                        }
+                    },
+                    "pitcher": null
+                },
+                {
+                    "participantName": "Tagir Ulanbekov",
+                    "rotNum": 27212,
+                    "visitingHomeDraw": "Home",
+                    "odds": {
+                        "moneyLine": "-190",
+                        "teamTotal": {
+                            "totalPoints": "",
+                            "overAdjust": "",
+                            "underAdjust": ""
+                        }
+                    },
+                    "pitcher": null
+                }
+            ],
+            "drawRotNum": "",
+            "drawMoneyLine": "",
+            "drawTitle": "",
+            "period": {
+                "peroidDescription": "Game",
+                "periodCutOffDatetimeGTM": "2021-03-13T22:00:00",
+                "periodStatus": "I",
+                "spread": {
+                    "spreadVisiting": "",
+                    "spreadAdjustVisiting": "",
+                    "spreadHome": "",
+                    "spreadAdjustHome": ""
+                },
+                "total": {
+                    "totalPoints": "",
+                    "overAdjust": "",
+                    "underAdjust": ""
+                }
+            }
+        },
+        {
+            "event_DateTimeGMT": "2021-03-13T22:00:01",
+            "sportType": "Martial Arts        ",
+            "scheduleText": "UFC Vegas 21                                                ",
+            "league": "MMA                           ",
+            "gameId": "489642869",
+            "participants": [
+                {
+                    "participantName": "Steve Garcia",
+                    "rotNum": 27213,
+                    "visitingHomeDraw": "Visiting",
+                    "odds": {
+                        "moneyLine": "210",
+                        "teamTotal": {
+                            "totalPoints": "",
+                            "overAdjust": "",
+                            "underAdjust": ""
+                        }
+                    },
+                    "pitcher": null
+                },
+                {
+                    "participantName": "Charles Jourdain",
+                    "rotNum": 27214,
+                    "visitingHomeDraw": "Home",
+                    "odds": {
+                        "moneyLine": "-250",
+                        "teamTotal": {
+                            "totalPoints": "",
+                            "overAdjust": "",
+                            "underAdjust": ""
+                        }
+                    },
+                    "pitcher": null
+                }
+            ],
+            "drawRotNum": "",
+            "drawMoneyLine": "",
+            "drawTitle": "",
+            "period": {
+                "peroidDescription": "Game",
+                "periodCutOffDatetimeGTM": "2021-03-13T22:00:00",
+                "periodStatus": "I",
+                "spread": {
+                    "spreadVisiting": "",
+                    "spreadAdjustVisiting": "",
+                    "spreadHome": "",
+                    "spreadAdjustHome": ""
+                },
+                "total": {
+                    "totalPoints": "",
+                    "overAdjust": "",
+                    "underAdjust": ""
+                }
+            }
+        },
+        {
+            "event_DateTimeGMT": "2021-03-13T22:00:01",
+            "sportType": "Martial Arts        ",
+            "scheduleText": "UFC Vegas 21                                                ",
+            "league": "MMA                           ",
+            "gameId": "489642871",
+            "participants": [
+                {
+                    "participantName": "Ricardo Ramos",
+                    "rotNum": 27215,
+                    "visitingHomeDraw": "Visiting",
+                    "odds": {
+                        "moneyLine": "185",
+                        "teamTotal": {
+                            "totalPoints": "",
+                            "overAdjust": "",
+                            "underAdjust": ""
+                        }
+                    },
+                    "pitcher": null
+                },
+                {
+                    "participantName": "Zubaira Tukhugov",
+                    "rotNum": 27216,
+                    "visitingHomeDraw": "Home",
+                    "odds": {
+                        "moneyLine": "-220",
+                        "teamTotal": {
+                            "totalPoints": "",
+                            "overAdjust": "",
+                            "underAdjust": ""
+                        }
+                    },
+                    "pitcher": null
+                }
+            ],
+            "drawRotNum": "",
+            "drawMoneyLine": "",
+            "drawTitle": "",
+            "period": {
+                "peroidDescription": "Game",
+                "periodCutOffDatetimeGTM": "2021-03-13T22:00:00",
+                "periodStatus": "I",
+                "spread": {
+                    "spreadVisiting": "",
+                    "spreadAdjustVisiting": "",
+                    "spreadHome": "",
+                    "spreadAdjustHome": ""
+                },
+                "total": {
+                    "totalPoints": "",
+                    "overAdjust": "",
+                    "underAdjust": ""
+                }
+            }
+        },
+        {
+            "event_DateTimeGMT": "2021-03-13T22:00:01",
+            "sportType": "Martial Arts        ",
+            "scheduleText": "UFC Vegas 21                                                ",
+            "league": "MMA                           ",
+            "gameId": "489642872",
+            "participants": [
+                {
+                    "participantName": "Ray Rodriguez",
+                    "rotNum": 27217,
+                    "visitingHomeDraw": "Visiting",
+                    "odds": {
+                        "moneyLine": "260",
+                        "teamTotal": {
+                            "totalPoints": "",
+                            "overAdjust": "",
+                            "underAdjust": ""
+                        }
+                    },
+                    "pitcher": null
+                },
+                {
+                    "participantName": "Rani Yahya",
+                    "rotNum": 27218,
+                    "visitingHomeDraw": "Home",
+                    "odds": {
+                        "moneyLine": "-310",
+                        "teamTotal": {
+                            "totalPoints": "",
+                            "overAdjust": "",
+                            "underAdjust": ""
+                        }
+                    },
+                    "pitcher": null
+                }
+            ],
+            "drawRotNum": "",
+            "drawMoneyLine": "",
+            "drawTitle": "",
+            "period": {
+                "peroidDescription": "Game",
+                "periodCutOffDatetimeGTM": "2021-03-13T22:00:00",
+                "periodStatus": "I",
+                "spread": {
+                    "spreadVisiting": "",
+                    "spreadAdjustVisiting": "",
+                    "spreadHome": "",
+                    "spreadAdjustHome": ""
+                },
+                "total": {
+                    "totalPoints": "",
+                    "overAdjust": "",
+                    "underAdjust": ""
+                }
+            }
+        },
+        {
+            "event_DateTimeGMT": "2021-03-13T22:00:01",
+            "sportType": "Martial Arts        ",
+            "scheduleText": "UFC Vegas 21                                                ",
+            "league": "MMA                           ",
+            "gameId": "489642873",
+            "participants": [
+                {
+                    "participantName": "Don Madge",
+                    "rotNum": 27219,
+                    "visitingHomeDraw": "Visiting",
+                    "odds": {
+                        "moneyLine": "240",
+                        "teamTotal": {
+                            "totalPoints": "",
+                            "overAdjust": "",
+                            "underAdjust": ""
+                        }
+                    },
+                    "pitcher": null
+                },
+                {
+                    "participantName": "Nasrat Haqparast",
+                    "rotNum": 27220,
+                    "visitingHomeDraw": "Home",
+                    "odds": {
+                        "moneyLine": "-280",
                         "teamTotal": {
                             "totalPoints": "",
                             "overAdjust": "",
@@ -4100,7 +3820,7 @@
                     "rotNum": 999025,
                     "visitingHomeDraw": "Visiting",
                     "odds": {
-                        "moneyLine": "-105",
+                        "moneyLine": "130",
                         "teamTotal": {
                             "totalPoints": "",
                             "overAdjust": "",
@@ -4114,7 +3834,7 @@
                     "rotNum": 999026,
                     "visitingHomeDraw": "Home",
                     "odds": {
-                        "moneyLine": "-115",
+                        "moneyLine": "-150",
                         "teamTotal": {
                             "totalPoints": "",
                             "overAdjust": "",
@@ -4369,6 +4089,62 @@
             }
         },
         {
+            "event_DateTimeGMT": "2021-04-10T22:00:01",
+            "sportType": "Martial Arts        ",
+            "scheduleText": "Future Events                                               ",
+            "league": "MMA                           ",
+            "gameId": "489644734",
+            "participants": [
+                {
+                    "participantName": "Darren Till",
+                    "rotNum": 999039,
+                    "visitingHomeDraw": "Visiting",
+                    "odds": {
+                        "moneyLine": "110",
+                        "teamTotal": {
+                            "totalPoints": "",
+                            "overAdjust": "",
+                            "underAdjust": ""
+                        }
+                    },
+                    "pitcher": null
+                },
+                {
+                    "participantName": "Marvin Vettori",
+                    "rotNum": 999040,
+                    "visitingHomeDraw": "Home",
+                    "odds": {
+                        "moneyLine": "-130",
+                        "teamTotal": {
+                            "totalPoints": "",
+                            "overAdjust": "",
+                            "underAdjust": ""
+                        }
+                    },
+                    "pitcher": null
+                }
+            ],
+            "drawRotNum": "",
+            "drawMoneyLine": "",
+            "drawTitle": "",
+            "period": {
+                "peroidDescription": "Game",
+                "periodCutOffDatetimeGTM": "2021-04-10T22:00:00",
+                "periodStatus": "I",
+                "spread": {
+                    "spreadVisiting": "",
+                    "spreadAdjustVisiting": "",
+                    "spreadHome": "",
+                    "spreadAdjustHome": ""
+                },
+                "total": {
+                    "totalPoints": "",
+                    "overAdjust": "",
+                    "underAdjust": ""
+                }
+            }
+        },
+        {
             "event_DateTimeGMT": "2021-08-01T22:00:01",
             "sportType": "Martial Arts        ",
             "scheduleText": null,
@@ -4466,62 +4242,6 @@
             "period": {
                 "peroidDescription": "Game",
                 "periodCutOffDatetimeGTM": "2021-08-01T22:10:00",
-                "periodStatus": "I",
-                "spread": {
-                    "spreadVisiting": "",
-                    "spreadAdjustVisiting": "",
-                    "spreadHome": "",
-                    "spreadAdjustHome": ""
-                },
-                "total": {
-                    "totalPoints": "",
-                    "overAdjust": "",
-                    "underAdjust": ""
-                }
-            }
-        },
-        {
-            "event_DateTimeGMT": "2021-08-01T23:00:01",
-            "sportType": "Martial Arts        ",
-            "scheduleText": null,
-            "league": "MMA                           ",
-            "gameId": "489619549",
-            "participants": [
-                {
-                    "participantName": "Anthony Johnson",
-                    "rotNum": 999041,
-                    "visitingHomeDraw": "Visiting",
-                    "odds": {
-                        "moneyLine": "135",
-                        "teamTotal": {
-                            "totalPoints": "",
-                            "overAdjust": "",
-                            "underAdjust": ""
-                        }
-                    },
-                    "pitcher": null
-                },
-                {
-                    "participantName": "Yoel Romero",
-                    "rotNum": 999042,
-                    "visitingHomeDraw": "Home",
-                    "odds": {
-                        "moneyLine": "-155",
-                        "teamTotal": {
-                            "totalPoints": "",
-                            "overAdjust": "",
-                            "underAdjust": ""
-                        }
-                    },
-                    "pitcher": null
-                }
-            ],
-            "drawRotNum": "",
-            "drawMoneyLine": "",
-            "drawTitle": "",
-            "period": {
-                "peroidDescription": "Game",
-                "periodCutOffDatetimeGTM": "2021-08-01T23:00:00",
                 "periodStatus": "I",
                 "spread": {
                     "spreadVisiting": "",
@@ -4746,6 +4466,62 @@
             "period": {
                 "peroidDescription": "Game",
                 "periodCutOffDatetimeGTM": "2021-09-01T22:00:00",
+                "periodStatus": "I",
+                "spread": {
+                    "spreadVisiting": "",
+                    "spreadAdjustVisiting": "",
+                    "spreadHome": "",
+                    "spreadAdjustHome": ""
+                },
+                "total": {
+                    "totalPoints": "",
+                    "overAdjust": "",
+                    "underAdjust": ""
+                }
+            }
+        },
+        {
+            "event_DateTimeGMT": "2021-12-31T23:59:01",
+            "sportType": "Martial Arts        ",
+            "scheduleText": null,
+            "league": "MMA                           ",
+            "gameId": "489644154",
+            "participants": [
+                {
+                    "participantName": "Jorge Masvidal",
+                    "rotNum": 999503,
+                    "visitingHomeDraw": "Visiting",
+                    "odds": {
+                        "moneyLine": "260",
+                        "teamTotal": {
+                            "totalPoints": "",
+                            "overAdjust": "",
+                            "underAdjust": ""
+                        }
+                    },
+                    "pitcher": null
+                },
+                {
+                    "participantName": "Kamaru Usman",
+                    "rotNum": 999504,
+                    "visitingHomeDraw": "Home",
+                    "odds": {
+                        "moneyLine": "-310",
+                        "teamTotal": {
+                            "totalPoints": "",
+                            "overAdjust": "",
+                            "underAdjust": ""
+                        }
+                    },
+                    "pitcher": null
+                }
+            ],
+            "drawRotNum": "",
+            "drawMoneyLine": "",
+            "drawTitle": "",
+            "period": {
+                "peroidDescription": "Game",
+                "periodCutOffDatetimeGTM": "2021-12-31T23:59:00",
                 "periodStatus": "I",
                 "spread": {
                     "spreadVisiting": "",
