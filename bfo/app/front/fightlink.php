@@ -116,7 +116,6 @@ class FightLinkCreator
 
         $rImage = imagecreatetruecolor(LINK_WIDTH, $iCalculatedHeight)
                 or die("Cannot Initialize new GD image stream");
-        imageantialias($rImage, false);
 
         $rFrameColor = imagecolorallocate($rImage, 96, 98, 100);
         $rMiddleFrameColor = imagecolorallocate($rImage, 194, 194, 194);
