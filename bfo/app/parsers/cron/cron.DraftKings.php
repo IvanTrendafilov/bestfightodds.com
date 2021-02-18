@@ -75,7 +75,7 @@ class ParserJob
                 '--no-zygote',
                 '--single-process', // <- this one doesn't works in Windows
                 '--disable-gpu',
-                '--blink-settings=imagesEnabled=false'
+                '--blink-settings=imagesEnabled=false,scriptEnabled=false'
               ], ['port' => intval('95' . BOOKIE_ID)]);
             $client->request('GET', 'https://sportsbook.draftkings.com/sports/mma');
 
