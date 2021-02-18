@@ -15,6 +15,9 @@ sudo apt update
 # Install nginx
 sudo apt install -y nginx
 
+# Install emacs (just personal preference)
+sudo apt install -y emacs
+
 # Install python-pip (required for aws cli), 
 sudo apt install -y python-pip
 
