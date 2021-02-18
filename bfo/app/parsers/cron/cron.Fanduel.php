@@ -70,7 +70,7 @@ class ParserJob
             '--window-size=1200,1100',
             '--headless',
             '--disable-gpu'],
-             ['port' => intval('95' . BOOKIE_ID), 'host' => 'localhost']);
+             ['port' => intval('95' . BOOKIE_ID), 'host' => 'localhost', 'platform' => 'linux']);
             /*$client = Client::createChromeClient(null, [
                 '--no-sandbox',
                 '--user-agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/79.0.3945.88 Safari/537.36',
