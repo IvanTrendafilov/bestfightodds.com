@@ -33,7 +33,7 @@ sudo php ~/composer-setup.php --install-dir=/usr/local/bin --filename=composer
 rm -f ~/composer-setup.php
 
 # Install AWS CLI via PIP
-sudo pip install awscli
+sudo pip install -y awscli
 
 # Install Mysql client for accessing mysql from ssh
 sudo apt install -y mysql-client

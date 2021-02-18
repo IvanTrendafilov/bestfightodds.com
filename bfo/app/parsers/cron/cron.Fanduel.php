@@ -75,10 +75,15 @@ class ParserJob
                 '--no-sandbox',
                 '--user-agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/79.0.3945.88 Safari/537.36',
                 '--window-size=1200,1100',
+                '--disable-setuid-sandbox',
+                '--disable-dev-shm-usage',
+                '--disable-accelerated-2d-canvas',
+                '--no-first-run',
                 '--headless',
-                '--disable-gpu',
-                '--disable-extensions'
-            ], ['port' => intval('95' . BOOKIE_ID), 'host' => 'localhost']);
+                '--no-zygote',
+                '--single-process', // <- this one doesn't works in Windows
+                '--disable-gpu'
+              ], ['port' => intval('95' . BOOKIE_ID)]);
             $crawler = $client->request('GET', 'https://sportsbook.fanduel.com/sports/navigation/7287.1/9886.3');
             
             $matchups = [];

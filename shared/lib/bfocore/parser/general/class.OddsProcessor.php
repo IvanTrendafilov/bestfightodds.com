@@ -442,48 +442,6 @@ class OddsProcessor
                 }
             }
         }
-
-/*
-
-
-
-            for ($x = 0; $x < sizeof($props); $x++)
-            {
-                if ($x != $y
-                        && $props[$y]->getCorrelationID() == $props[$x]->getCorrelationID()
-                        && $props[$y]->getTeamName(1) == $props[$x]->getTeamName(1)
-                        && $props[$y]->getTeamName(2) == $props[$x]->getTeamName(2)
-                        && !($props[$y]->getTeamOdds(1) == $props[$x]->getTeamOdds(1)
-                        && $props[$y]->getTeamOdds(2) == $props[$x]->getTeamOdds(2)))
-                {
-                    //Found a match
-                    $arbitrage_subject = ParseTools::getArbitrage($props[$y]->getTeamOdds(1), $props[$y]->getTeamOdds(2));
-                    $arbitrage_challenger = ParseTools::getArbitrage($props[$x]->getTeamOdds(1), $props[$x]->getTeamOdds(2));
-
-                    $this->logger->info('Removing dupe: ' . $props[$y]->getTeamName(1) . ' vs ' . $props[$y]->getTeamName(2));
-
-                    if ($arbitrage_subject > $arbitrage_challenger) //Challenger won
-                    {
-                        unset($props[$y]);
-                    }
-                    else if ($arbitrage_subject < $arbitrage_challenger) //Subject won
-                    {
-                        unset($props[$x]);
-                    }
-                    else //Draw, remove one
-                    {
-                        unset($props[$x]);
-                    }
-                    $props = array_values($props);
-
-                    $y = 0;
-                    break 1;
-                }
-            }
-        }*/
-
-        /*$parsed_sport->setPropList($props);
-        return $parsed_sport;*/
     }
 
 
