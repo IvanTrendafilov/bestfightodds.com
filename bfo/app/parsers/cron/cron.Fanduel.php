@@ -82,7 +82,8 @@ class ParserJob
                 '--headless',
                 '--no-zygote',
                 '--single-process', // <- this one doesn't works in Windows
-                '--disable-gpu'
+                '--disable-gpu',
+                '--blink-settings=imagesEnabled=false'
               ], ['port' => intval('95' . BOOKIE_ID)]);
             $crawler = $client->request('GET', 'https://sportsbook.fanduel.com/sports/navigation/7287.1/9886.3');
             
