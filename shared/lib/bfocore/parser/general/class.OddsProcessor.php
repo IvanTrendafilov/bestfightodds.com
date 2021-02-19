@@ -385,8 +385,21 @@ class OddsProcessor
     private function removeMatchedPropDupes($matched_props)
     {
         $props = $matched_props;
+
+
+
+
         for ($y = 0; $y < sizeof($props); $y++)
         {
+            $count = 0;
+            foreach ($props as $prop)
+            {
+                if ($prop['match_result']['status'] == true && $prop['match_result']['matchup']['matchup_id'] == 21751 && $prop['match_result']['template']->getPropTypeID() == 11)
+                {
+                    $count++;
+                }
+            }
+            $this->logger->info('There are ' . $count . ' entries for this prop when going for ' . $y . ' of ' . sizeof($props));
             if ($props[$y]['match_result']['status'] == true)
             {
                 $matches = [];
@@ -399,43 +412,30 @@ class OddsProcessor
                             && $props[$x]['match_result']['matchup']['matchup_id'] == $props[$y]['match_result']['matchup']['matchup_id']
                             && $props[$x]['match_result']['matchup']['team'] == $props[$y]['match_result']['matchup']['team'])
                         {
-                            //Found a match!
-                            echo 'Matching dupe ' . $props[$x]['match_result']['template']->getPropTypeID() . ' / ' . $props[$x]['match_result']['matchup']['matchup_id'] . '';
-                            echo "
-                            \n\r";
-                            echo '' . $props[$y]['prop']->getTeamOdds(1) . ' / ' . $props[$y]['prop']->getTeamOdds(2);
-                            echo "
-                            \n\r";
-                            echo '' . $props[$x]['prop']->getTeamOdds(1) . ' / ' . $props[$x]['prop']->getTeamOdds(2);
+                            $this->logger->info('Matching dupe for proptype_id: ' . $props[$x]['match_result']['template']->getPropTypeID() . ', matchup_id: ' . $props[$x]['match_result']['matchup']['matchup_id'] . 
+                                    ' ' . $props[$y]['prop']->getTeamOdds(1) . '/' . $props[$y]['prop']->getTeamOdds(2) . ' and ' . $props[$x]['prop']->getTeamOdds(1) . '/' . $props[$x]['prop']->getTeamOdds(2));
 
                             $arbitrage_subject = ParseTools::getArbitrage($props[$y]['prop']->getTeamOdds(1), $props[$y]['prop']->getTeamOdds(2));
                             $arbitrage_challenger = ParseTools::getArbitrage($props[$x]['prop']->getTeamOdds(1), $props[$x]['prop']->getTeamOdds(2));
 
-                            $this->logger->info('Removing dupe for matchup_id: ' . $props[$x]['match_result']['matchup']['matchup_id'] . ' proptype_id: ' . $props[$x]['match_result']['template']->getPropTypeID());
-
-
-                            /**
-                             * 
-                             *  TODO: Fix below so that best price is taken if odds is -99999 on either side
-                             * 
-                             * 
-                             */
-
                             if ($arbitrage_subject > $arbitrage_challenger) //Challenger won
                             {
+                                $this->logger->info('Removing subject dupe: ' . $props[$y]['prop']->getTeamOdds(1) . '/' . $props[$y]['prop']->getTeamOdds(2) . ' for matchup_id: ' . $props[$x]['match_result']['matchup']['matchup_id'] . ' proptype_id: ' . $props[$x]['match_result']['template']->getPropTypeID());
                                 unset($props[$y]);
                             }
                             else if ($arbitrage_subject < $arbitrage_challenger) //Subject won
                             {
+                                $this->logger->info('Removing challenger dupe: ' . $props[$x]['prop']->getTeamOdds(1) . '/' . $props[$x]['prop']->getTeamOdds(2) . ' for matchup_id: ' . $props[$x]['match_result']['matchup']['matchup_id'] . ' proptype_id: ' . $props[$x]['match_result']['template']->getPropTypeID());
                                 unset($props[$x]);
                             }
                             else //Draw, remove one
                             {
+                                $this->logger->info('Removing identical dupe: ' . $props[$x]['prop']->getTeamOdds(1) . '/' . $props[$x]['prop']->getTeamOdds(2) . ' for matchup_id: ' . $props[$x]['match_result']['matchup']['matchup_id'] . ' proptype_id: ' . $props[$x]['match_result']['template']->getPropTypeID());
                                 unset($props[$x]);
                             }
                             $props = array_values($props);
 
-                            $y = 0;
+                            $y = -1;
                             break 1;
                         }
                     }

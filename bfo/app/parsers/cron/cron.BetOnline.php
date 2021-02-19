@@ -206,8 +206,8 @@ class ParserJob
         $correlation_id = trim(strtolower((string) $prop->league));
 
         if (count($prop->participants) == 2 
-            && (trim(strtolower((string) $prop->participants[0]->name)) == 'yes' && trim(strtolower((string) $prop->participants[0]->name)) == 'no') 
-            || (trim(strtolower((string) $prop->participants[0]->name)) == 'no' && trim(strtolower((string) $prop->participants[0]->name)) == 'yes'))
+            && (trim(strtolower((string) $prop->participants[0]->name)) == 'yes' && trim(strtolower((string) $prop->participants[1]->name)) == 'no') 
+            || (trim(strtolower((string) $prop->participants[0]->name)) == 'no' && trim(strtolower((string) $prop->participants[1]->name)) == 'yes'))
         {
             //Validate existance participants fields and odds
             if (!@isset($prop->participants[0]->name,
