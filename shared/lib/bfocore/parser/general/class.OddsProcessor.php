@@ -43,7 +43,7 @@ class OddsProcessor
         $matched_props = $pp->matchProps($parsed_sport->getFetchedProps());
 
 
-        $this->removeMatchedPropDupes($matched_props);
+        $matched_props = $this->removeMatchedPropDupes($matched_props);
 
         //Pending: Remove prop dupes AFTER MATCH
         //Pending: For Create mode, create new matchups if no match was found
@@ -382,24 +382,10 @@ class OddsProcessor
     /**
      * Loops through all _matched_ props and removes any dupes based on prop_type and matchup
      */
-    private function removeMatchedPropDupes($matched_props)
+    private function removeMatchedPropDupes($props)
     {
-        $props = $matched_props;
-
-
-
-
         for ($y = 0; $y < sizeof($props); $y++)
         {
-            $count = 0;
-            foreach ($props as $prop)
-            {
-                if ($prop['match_result']['status'] == true && $prop['match_result']['matchup']['matchup_id'] == 21751 && $prop['match_result']['template']->getPropTypeID() == 11)
-                {
-                    $count++;
-                }
-            }
-            $this->logger->info('There are ' . $count . ' entries for this prop when going for ' . $y . ' of ' . sizeof($props));
             if ($props[$y]['match_result']['status'] == true)
             {
                 $matches = [];
@@ -420,17 +406,17 @@ class OddsProcessor
 
                             if ($arbitrage_subject > $arbitrage_challenger) //Challenger won
                             {
-                                $this->logger->info('Removing subject dupe: ' . $props[$y]['prop']->getTeamOdds(1) . '/' . $props[$y]['prop']->getTeamOdds(2) . ' for matchup_id: ' . $props[$x]['match_result']['matchup']['matchup_id'] . ' proptype_id: ' . $props[$x]['match_result']['template']->getPropTypeID());
+                                $this->logger->info('Removing subject dupe: ' . $props[$y]['prop']->getTeamOdds(1) . '/' . $props[$y]['prop']->getTeamOdds(2) . ' for matchup_id: ' . $props[$x]['match_result']['matchup']['matchup_id'] . ' proptype_id: ' . $props[$x]['match_result']['template']->getPropTypeID() . ' team_num: ' . $props[$y]['match_result']['matchup']['team']);
                                 unset($props[$y]);
                             }
                             else if ($arbitrage_subject < $arbitrage_challenger) //Subject won
                             {
-                                $this->logger->info('Removing challenger dupe: ' . $props[$x]['prop']->getTeamOdds(1) . '/' . $props[$x]['prop']->getTeamOdds(2) . ' for matchup_id: ' . $props[$x]['match_result']['matchup']['matchup_id'] . ' proptype_id: ' . $props[$x]['match_result']['template']->getPropTypeID());
+                                $this->logger->info('Removing challenger dupe: ' . $props[$x]['prop']->getTeamOdds(1) . '/' . $props[$x]['prop']->getTeamOdds(2) . ' for matchup_id: ' . $props[$x]['match_result']['matchup']['matchup_id'] . ' proptype_id: ' . $props[$x]['match_result']['template']->getPropTypeID() . ' team_num: ' . $props[$y]['match_result']['matchup']['team']);
                                 unset($props[$x]);
                             }
                             else //Draw, remove one
                             {
-                                $this->logger->info('Removing identical dupe: ' . $props[$x]['prop']->getTeamOdds(1) . '/' . $props[$x]['prop']->getTeamOdds(2) . ' for matchup_id: ' . $props[$x]['match_result']['matchup']['matchup_id'] . ' proptype_id: ' . $props[$x]['match_result']['template']->getPropTypeID());
+                                $this->logger->info('Removing identical dupe: ' . $props[$x]['prop']->getTeamOdds(1) . '/' . $props[$x]['prop']->getTeamOdds(2) . ' for matchup_id: ' . $props[$x]['match_result']['matchup']['matchup_id'] . ' proptype_id: ' . $props[$x]['match_result']['template']->getPropTypeID() . ' team_num: ' . $props[$y]['match_result']['matchup']['team']);
                                 unset($props[$x]);
                             }
                             $props = array_values($props);
@@ -442,6 +428,7 @@ class OddsProcessor
                 }
             }
         }
+        return $props;
     }
 
 

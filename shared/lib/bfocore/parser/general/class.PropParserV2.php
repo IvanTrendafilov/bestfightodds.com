@@ -738,7 +738,7 @@ class PropParserV2
         }
         else
         {
-            $this->logger->info("------- adding new prop odds: " . $new_prop->getMatchupID() . " proptype_id: " . $new_prop->getPropTypeID());
+            $this->logger->info("------- adding new prop odds: " . $new_prop->getMatchupID() . " proptype_id: " . $new_prop->getPropTypeID() . " team_num: " . $new_prop->getTeamNumber());
             if (OddsHandler::addPropBet($new_prop))
             {
                 return true;
