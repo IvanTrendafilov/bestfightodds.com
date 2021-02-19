@@ -61,6 +61,34 @@ class ParserJob
     {
         $this->parsed_sport = new ParsedSport('MMA');
 
+
+        use Facebook\WebDriver\Chrome\ChromeOptions;
+        use Facebook\WebDriver\Remote\DesiredCapabilities;
+        use Facebook\WebDriver\Remote\RemoteWebDriver;
+        
+        class ParserService
+        {
+            private $webdriver;
+        
+            public function __construct()
+            {
+                $host = 'http://localhost:4444';
+                $options = new ChromeOptions();
+                $options->setExperimentalOption("prefs", [
+                    "download.prompt_for_download" => false,
+                    "download.directory_upgrade" => true,
+                    "safebrowsing.enabled" => true,
+                    "download.default_directory" => "/path/to/dir",
+                ]);
+                $caps = DesiredCapabilities::chrome();
+                $caps->setCapability(ChromeOptions::CAPABILITY, $options);
+                $this->webdriver = RemoteWebDriver::create($host, $caps);
+            }
+        }
+        exit;
+
+
+
         try 
         {
 

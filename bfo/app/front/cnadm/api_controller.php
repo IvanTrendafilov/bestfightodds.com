@@ -221,8 +221,14 @@ class AdminAPIController
         }
         else
         {
+            $display = true;
+            if (isset($data->event_display))
+            {
+                $display = boolval($data->event_display);
+            }
+            
             //Update matchup event
-            if (EventHandler::changeEvent($data->event_id, $data->event_name ?? '', $data->event_date ?? '', $data->event_display ?? null))
+            if (EventHandler::changeEvent($data->event_id, $data->event_name ?? '', $data->event_date ?? '', $display))
             {
                 $return_data['msg'] = 'Successfully updated';
                 $return_data['event_id'] = $data->event_id;

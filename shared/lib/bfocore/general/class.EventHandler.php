@@ -220,10 +220,7 @@ class EventHandler
             $oEvent->setDate($a_sDate);
         }
 
-        if ($a_bDisplay != null)
-        {
-            $oEvent->setDisplay($a_bDisplay);
-        }
+        $oEvent->setDisplay($a_bDisplay);
 
         return EventDAO::updateEvent($oEvent);
     }
