@@ -67,16 +67,6 @@ class ParserJob
             $content['props'] = $contents_arr[$props_url];
         }
 
-
-        if ($content['matchups'] == 'FAILED' || $content['matchups'] == '')
-        {
-            $this->logger->error('Retrieving matchups failed');
-        }
-        if ($content['props'] == 'FAILED' || $content['props'] == '')
-        {
-            $this->logger->error('Retrieving props failed');
-        }
-
         $parsed_sport = $this->parseContent($content);
 
         $op = new OddsProcessor($this->logger, BOOKIE_ID);
@@ -90,7 +80,19 @@ class ParserJob
         $this->parseMatchups($content['matchups']);
         $this->parseProps($content['props']);
 
-        if (false && $json != false && count($this->parsed_sport->getParsedMatchups()) >= 5) //Currently disabled since matchup and prop are in separate parsers
+        $missing_content = false;
+        if ($content['matchups'] == 'FAILED' || $content['matchups'] == '')
+        {
+            $this->logger->error('Retrieving matchups failed');
+            $missing_content = true;
+        }
+        if ($content['props'] == 'FAILED' || $content['props'] == '')
+        {
+            $this->logger->error('Retrieving props failed');
+            $missing_content = true;
+        }
+
+        if (!$missing_content && count($this->parsed_sport->getParsedMatchups()) >= 5 && count($this->parsed_sport->getFetchedProps()) >= 5)
         {
             $this->full_run = true;
             $this->logger->info("Declared authoritive run");
