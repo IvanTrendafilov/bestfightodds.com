@@ -678,7 +678,7 @@ class PropParserV2
         //Store prop bet if it has changed
         if (OddsHandler::checkMatchingEventPropOdds($new_prop))
         {
-            $this->logger->info("------- nothing has changed since last event prop odds");
+            $this->logger->debug("------- nothing has changed since last event prop odds");
             return true;
         }
         else
@@ -735,7 +735,7 @@ class PropParserV2
         //Store prop bet if it has changed
         if (OddsHandler::checkMatchingPropOdds($new_prop))
         {
-            $this->logger->info("------- nothing has changed since last prop odds - matchup: " . $new_prop->getMatchupID() . " proptype_id: " . $new_prop->getPropTypeID() . " team_num: " . $new_prop->getTeamNumber());
+            $this->logger->debug("------- nothing has changed since last prop odds - matchup: " . $new_prop->getMatchupID() . " proptype_id: " . $new_prop->getPropTypeID() . " team_num: " . $new_prop->getTeamNumber());
             return true;
         }
         else
