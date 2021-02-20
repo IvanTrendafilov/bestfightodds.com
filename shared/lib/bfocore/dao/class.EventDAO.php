@@ -706,9 +706,13 @@ fo2.bookie_id, fo2.fight_id ASC;';
         $sQuery4 = "DELETE FROM lines_props WHERE matchup_id = ?";
         DBTools::doParamQuery($sQuery4, $aParams);
 
-        //Delete tweet status (simply for cleanup)
+        //Delete tweet status
         $sQuery5 = "DELETE FROM fight_twits WHERE fight_id = ?";
         DBTools::doParamQuery($sQuery5, $aParams);
+
+        //Delete any flagged lines related to the fight
+        $sQuery6 = "DELETE FROM lines_flagged WHERE matchup_id = ?";
+        DBTools::doParamQuery($sQuery6, $aParams);
 
         //TODO: This needs error check
         return true;
