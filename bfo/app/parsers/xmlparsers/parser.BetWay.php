@@ -116,7 +116,7 @@ class XMLParserBetWay
                             (string) $cMarket['cname'] == 'when-will-the-fight-end-' ||
                             (string) $cMarket['cname'] == 'method-and-round-betting' ||
                             (string) $cMarket['cname'] == 'gone-in-60-seconds' ||
-                            (string) $cMarket['cname'] == '#betyourway')
+                            (string) $cMarket['cname'] == 'betyourway')
                     {
                         //Single line prop
                         for ($i = 0; $i < count($cMarket->Outcomes->Outcome); $i++)
