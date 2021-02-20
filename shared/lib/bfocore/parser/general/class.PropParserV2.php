@@ -14,11 +14,15 @@ class PropParserV2
     private $matchups;
     private $events;
     private $bookie_id;
+    private $templates;
 
     public function __construct($logger, $bookie_id)
     {
         $this->logger = $logger;
         $this->bookie_id = $bookie_id;
+        
+        //Prefetch bookie prop templates
+        $this->templates = BookieHandler::getPropTemplatesForBookie($bookie_id);
 
         //Prefetch all upcoming matchups and events
         $this->matchups = EventHandler::getAllUpcomingMatchups(true);
@@ -111,12 +115,9 @@ class PropParserV2
      */
     public function matchPropToTemplate($prop, $bookie_id)
     {
-        //Fetch all templates for bookie
-        $templates = BookieHandler::getPropTemplatesForBookie($bookie_id);
-
         $is_found = false;
         $found_template = null;
-        foreach ($templates as $template)
+        foreach ($this->templates as $template)
         {
             $template_str = '';
             if ($template->isNegPrimary())

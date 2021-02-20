@@ -13,12 +13,14 @@ class PropParser
     private $oLogger;
     private $aMatchups;
     private $aEvents;
+    private $aCachedTemplates;
 
     public function __construct()
     {
         $this->oLogger = Logger::getInstance();
         $this->aMatchups = EventHandler::getAllUpcomingMatchups(true);
         $this->aEvents = EventHandler::getAllUpcomingEvents();
+        $this->aCachedTemplates = [];
 
         //We will need to check the alt names as well so for each upcoming matchup fetched , fetch the associated altnames for each team and add a new matchup using this
         $aNewMatchupList = $this->aMatchups;
@@ -211,8 +213,13 @@ class PropParser
 
     public function matchParsedPropToTemplate($a_iBookieID, &$a_oProp)
     {
-        //Fetch all templates for bookie
-        $aTemplates = BookieHandler::getPropTemplatesForBookie($a_iBookieID);
+        //Fetch all templates for bookie if not done earlier
+        $aTemplates = null;
+        if (!isset($this->aCachedTemplates[$a_iBookieID]))
+        {
+            $this->aCachedTemplates[$a_iBookieID] = BookieHandler::getPropTemplatesForBookie($a_iBookieID);
+        }
+        $aTemplates = $this->aCachedTemplates[$a_iBookieID];
 
         //Ex: TEMPLATE =  <T>/<T> goes <*> round distance
         //Ex: ParsedProp = Howard/Alves goes 3 round distance
