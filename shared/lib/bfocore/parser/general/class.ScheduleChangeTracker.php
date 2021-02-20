@@ -149,7 +149,7 @@ class ScheduleChangeTracker
                     if ($datetime > $nowdatetime) 
                     {
                         Logger::getInstance()->log('-Matchup: ' . $oUpMatch->getID() . ' was not found in feed and will be removed (event date:' . $datetime->format('Y-m-d') . ' / now date: ' . $nowdatetime->format('Y-m-d') .  ') <a href="#/" onclick="removeOddsForMatchupAndBookie(\'' . $oUpMatch->getID() . '\',\'' . $sKey . '\')">remove</a>', 0);
-                        if (OddsHandler::removeOddsForMatchupAndBookie($oUpMatch->getID(), $sKey))
+                        if (OddsHandler::removeOddsForMatchupAndBookie(intval($oUpMatch->getID()), intval($sKey)))
                         {
                             Logger::getInstance()->log('--Removed', 0);
                         }

@@ -342,7 +342,6 @@ class OddsHandler
     {
         if (!is_int($a_iMatchupID) || !is_int($a_iBookieID))
         {
-            echo 'invalid input';
             return false;
         }
         //First we remove all prop odds so that we don't leave any orphans
