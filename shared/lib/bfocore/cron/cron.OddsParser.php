@@ -120,8 +120,8 @@ $bSuccess = PageGenerator::generatePage(PARSE_GENERATORDIR . 'gen.Bets.php', PAR
 $oLogger->log("Odds page generated: " . $bSuccess, ($bSuccess ? 0 : -2));
 
 //Generate XML feed with latest odds
-$bSuccess = PageGenerator::generatePage(PARSE_GENERATORDIR . 'gen.XMLFeed.php', PARSE_PAGEDIR . 'page.feed.xml');
-$oLogger->log("XML feed generated: " . $bSuccess, ($bSuccess ? 0 : -2));
+//$bSuccess = PageGenerator::generatePage(PARSE_GENERATORDIR . 'gen.XMLFeed.php', PARSE_PAGEDIR . 'page.feed.xml');
+//$oLogger->log("XML feed generated: " . $bSuccess, ($bSuccess ? 0 : -2));
 
 
 //Tweet new fight odds
