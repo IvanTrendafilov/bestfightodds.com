@@ -62,6 +62,12 @@ class BookieHandler
             return false;
         }
 
+        //Check if there an occurence of <T>. Add a template cannot be added without indicating at least one team/event in the template
+        if (strpos($a_oPropTemplate->getTemplate(), '<T>') === false) 
+        {
+            return false;
+        }
+
         return BookieDAO::addNewPropTemplate($a_oPropTemplate);
     }
 

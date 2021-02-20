@@ -114,8 +114,8 @@ class PropParserV2
         //Fetch all templates for bookie
         $templates = BookieHandler::getPropTemplatesForBookie($bookie_id);
 
-        $bFound = false;
-        $oFoundTemplate = null;
+        $is_found = false;
+        $found_template = null;
         foreach ($templates as $template)
         {
             $template_str = '';
@@ -129,6 +129,8 @@ class PropParserV2
             }
 
             //Convert template variables to equivalent regexps
+            $template_str = str_replace(' - ', ' \- ', $template_str);
+            $template_str = str_replace(' + ', ' \+ ', $template_str);
             $template_str = strtoupper(str_replace('<T>', '([^:]+?)', $template_str));
             $template_str = str_replace('<*>', '.+?', $template_str);
             $template_str = str_replace('<.>', '.?', $template_str);
@@ -174,18 +176,18 @@ class PropParserV2
                 $prop->setMainProp(2);
                 $propvalue_matches = $propvalue_matches2;
             }
-            $bFound = ($found1 || $found2);
+            $is_found = ($found1 || $found2);
 
-            if ($bFound == true)
+            if ($is_found == true)
             {
                 //Check if value is already stored, if so we have multiple templates matching the prop which is not good
-                if ($oFoundTemplate != null)
+                if ($found_template != null)
                 {
                     $this->logger->warning('--Multiple templates matched. Will accept longest one');
                 }
             
                 //Replacing only template if the new one is longer (better match)
-                if ($oFoundTemplate == null || strlen($template->getTemplate()) > strlen($oFoundTemplate->getTemplate()))
+                if ($found_template == null || strlen($template->getTemplate()) > strlen($found_template->getTemplate()))
                 {
                     //Remove the first element in the array since that contains the full regexp match
                     array_shift($propvalue_matches);
@@ -200,13 +202,13 @@ class PropParserV2
                         //Store the prop values in the prop
                         $prop->setPropValues($propvalue_matches);
                     }
-                    $oFoundTemplate = $template;
+                    $found_template = $template;
                 }
             
             }
-            $bFound = false;
+            $is_found = false;
         }
-        return $oFoundTemplate;
+        return $found_template;
     }
 
     public function matchPropToMatchup($a_oProp, $a_oTemplate, $use_correlation_id = true)

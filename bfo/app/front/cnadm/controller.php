@@ -45,8 +45,8 @@ class AdminController
         foreach ($unmatched_col as $key => $unmatched)
         {
             $split = explode(' vs ', $unmatched['matchup']);
-            $unmatched_col[$key]['view_indata1'] = $split[0];
-            $unmatched_col[$key]['view_indata2'] = $split[1];
+            $unmatched_col[$key]['view_indata1'] = $split[0] == '' ? $split[1] : $split[0]; //Swap places if first part is blank
+            $unmatched_col[$key]['view_indata2'] = $split[0] == '' ? $split[0] : $split[1];
             if (isset($unmatched['metadata']['event_name']))
             {
                 $cut_pos = strpos($unmatched['metadata']['event_name'], " -") != 0 ? strpos($unmatched['metadata']['event_name'], " -") : strlen($unmatched['metadata']['event_name']);
@@ -57,8 +57,6 @@ class AdminController
                 {
                     $unmatched_col[$key]['view_extras']['event_match'] = ['id' => $event_search[0]->getID(), 'name' => $event_search[0]->getName(), 'date' => $event_search[0]->getDate()];
                 }
-
-                
             }
             if (isset($unmatched['metadata']['gametime']))
             {
@@ -400,35 +398,6 @@ class AdminController
             }
         }
         $response->getBody()->write($this->plates->render('resetchangenums', $view_data));
-        return $response;
-    }
-
-    public function viewUnmatched(Request $request, Response $response)
-    {
-        $view_data = [];
-
-        $unmatched_col = EventHandler::getUnmatched(1500);
-        foreach ($unmatched_col as $key => $unmatched)
-        {
-
-            $split = explode(' vs ', $unmatched['matchup']);
-            $unmatched_col[$key]['view_indata1'] = $split[0];
-            $unmatched_col[$key]['view_indata2'] = $split[1];
-            if (isset($aUnmatched['metadata']['event_name']))
-            {
-                $event_search = EventHandler::searchEvent($event_name, true);
-            }
-            
-        }
-        $view_data['unmatched'] = $unmatched_col;
-        
-        $bookies = BookieHandler::getAllBookies();
-        $view_data['bookies'] = [];
-        foreach ($bookies as $bookie)
-        {
-            $view_data['bookies'][$bookie->getID()] = $bookie->getName();
-        }
-        $response->getBody()->write($this->plates->render('viewunmatched', $view_data));
         return $response;
     }
 

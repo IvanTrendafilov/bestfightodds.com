@@ -309,7 +309,6 @@ class AdminAPIController
         $return_data['error'] = false;
 
         if (!v::stringVal()->length(10, null)->validate($data->proptemplate)
-            || !v::stringVal()->length(10, null)->validate($data->negproptemplate)
             || !v::intType()->validate($data->bookie_id)
             || !v::intType()->validate($data->proptype_id)
             || !v::intType()->validate($data->fieldstype_id))
@@ -320,7 +319,7 @@ class AdminAPIController
         }
         else
         {
-            $template = new PropTemplate(0, $data->bookie_id, $data->proptemplate, $data->negproptemplate, $data->proptype_id, $data->fieldstype_id, '');
+            $template = new PropTemplate(0, $data->bookie_id, $data->proptemplate, $data->negproptemplate ?? '', $data->proptype_id, $data->fieldstype_id, '');
             $new_template_id = BookieHandler::addNewPropTemplate($template);
             if ($new_template_id)
             {

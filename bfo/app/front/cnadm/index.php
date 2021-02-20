@@ -41,7 +41,6 @@ $app->get('/logs[/{logfile}]', \AdminController::class . ':viewLatestLog');
 $app->get('/alerts', \AdminController::class . ':viewAlerts');
 $app->get('/matchups/{id}', \AdminController::class . ':viewMatchup');
 $app->get('/propcorrelation', \AdminController::class . ':createPropCorrelation');
-$app->get('/viewunmatched', \AdminController::class . ':viewUnmatched');
 $app->get('/odds', \AdminController::class . ':oddsOverview');
 
 //API Routes

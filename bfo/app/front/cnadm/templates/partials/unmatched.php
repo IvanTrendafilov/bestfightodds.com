@@ -155,7 +155,7 @@ myNameSpace = function(){
 <table class="genericTable">
 <?php foreach ($unmatched as $unmatched_item): ?>
     <?php if ($unmatched_item['type'] == 1): ?>
-        <tr><td><?=date("Y-m-d H:i:s", strtotime($unmatched_item['log_date']))?></td><td><b><?=$bookies[$unmatched_item['bookie_id']]?></b></td><td><?=$unmatched_item['matchup']?></td><td>[<a href="/cnadm/propcorrelation?bookie_id=<?=$unmatched_item['bookie_id']?>&input_prop=<?=$unmatched_item['matchup']?>">link manually</a>]</td></tr>				
+        <tr><td><?=date("Y-m-d H:i:s", strtotime($unmatched_item['log_date']))?></td><td><b><?=$bookies[$unmatched_item['bookie_id']]?></b></td><td><?=$unmatched_item['matchup']?></td><td>[<a href="/cnadm/propcorrelation?bookie_id=<?=$unmatched_item['bookie_id']?>&input_prop=<?=urlencode($unmatched_item['matchup'])?>">link manually</a>]</td></tr>				
 	<?php endif ?>
 <?php endforeach ?>
 </table><br />
@@ -164,7 +164,7 @@ myNameSpace = function(){
 <table class="genericTable">
 <?php foreach ($unmatched as $unmatched_item): ?>
 	<?php if ($unmatched_item['type'] == 2): ?>
-        <tr><td><?=date("Y-m-d H:i:s", strtotime($unmatched_item['log_date']))?></td><td><b><?=$bookies[$unmatched_item['bookie_id']]?></b></td><td><?=$unmatched_item['matchup']?></td><td>[<a href="/cnadm/protemplate?in_bookie_id=<?=$unmatched_item['bookie_id']?>&in_template=<?=$unmatched_item['view_indata1']?>&in_negtemplate=<?=$unmatched_item['view_indata1']?>">add</a>]</td></tr>
+        <tr><td><?=date("Y-m-d H:i:s", strtotime($unmatched_item['log_date']))?></td><td><b><?=$bookies[$unmatched_item['bookie_id']]?></b></td><td><?=$unmatched_item['matchup']?></td><td>[<a href="/cnadm/proptemplate?in_bookie_id=<?=$unmatched_item['bookie_id']?>&in_template=<?=urlencode($unmatched_item['view_indata1'])?>&in_negtemplate=<?=urlencode($unmatched_item['view_indata2'])?>">add</a>]</td></tr>
 	<?php endif ?>
 <?php endforeach ?>
 </table><br />
