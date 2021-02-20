@@ -25,9 +25,11 @@ require_once 'lib/bfocore/parser/general/inc.ParserMain.php';
 define('BOOKIE_NAME', 'betonline');
 define('BOOKIE_ID', '12');
 
+$options = getopt("", ["mode::"]);
+
 $logger = new Katzgrau\KLogger\Logger(GENERAL_KLOGDIR, Psr\Log\LogLevel::INFO, ['filename' => 'cron.' . BOOKIE_NAME . '.' . time() . '.log']);
 $parser = new ParserJob($logger);
-$parser->run('mock');
+$parser->run($options['mode'] ?? '');
 
 class ParserJob
 {
@@ -40,9 +42,8 @@ class ParserJob
         $this->logger = $logger;
     }
 
-    public function run($mode)
+    public function run($mode = 'normal')
     {
-
         $matchups = null;
 
         $content = [];
@@ -107,6 +108,7 @@ class ParserJob
         if ($json == false)
         {
             $this->logger->error("Unable to decode JSON: " . substr($content, 0,50) . "...");
+            return false;
         }
 
         foreach ($json->preGameEvents as $matchup)
@@ -192,6 +194,7 @@ class ParserJob
         if ($json == false)
         {
             $this->logger->error("Unable to decode JSON: " . substr($content, 0,50) . "...");
+            return false;
         }
 
         foreach ($json->events as $prop)

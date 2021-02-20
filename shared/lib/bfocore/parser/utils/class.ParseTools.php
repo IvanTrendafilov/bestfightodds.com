@@ -175,7 +175,6 @@ class ParseTools
             while ($resp == CURLM_CALL_MULTI_PERFORM);
         }
 
-
         //Fetch data into storage when all is done
         foreach ($aChannels as $sChannelKey => $rChannelVal)
         {
