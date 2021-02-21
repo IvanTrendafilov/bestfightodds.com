@@ -294,38 +294,73 @@ if ($oEvent != null)
 
             $iPropCounter = 0;
             $iPropRowCounter = 0;
-            foreach ($prop_odds[$oEvent->getID()][$oFight->getID()] as $proptype_id => $team_num)
+            foreach ($prop_odds[$oEvent->getID()][$oFight->getID()] as $proptype_id => $team_num_row)
             {
-                foreach ($team_num as $prop)
+                foreach ($team_num_row as $team_num => $prop)
                 {
                     for ($i = 1; $i <= 2; $i++)
                     {
+                        
+                        $desc = $i == 1 ?  $prop[array_key_first($prop)]['prop_desc'] : $prop[array_key_first($prop)]['negprop_desc'];
+                        
+                        
+
+
+                        //Determine best odds
                         foreach ($aBookies as $bookie)
                         {
-                            //Determine best odds
                             $best_odds = -99999;
                             if (isset($prop[$bookie->getID()]))
                             {
-                                if (intval($prop[$bookie->getID()][$i + 1]) > $best_odds)
+                                $odds = $i == 1 ?  $prop[$bookie->getID()]['prop_odds'] : $prop[$bookie->getID()]['negprop_odds'];
+                                if (intval($odds) > $best_odds)
                                 {
-                                    $best_odds = $prop[$bookie->getID()][$i + 1];
+                                    $best_odds = $odds;
                                 }
                             }
                         }
 
                         echo '<tr class="pr"' . (($i == 2 && $iPropCounter == count($aPropTypes) - 1) ? ' style="border-bottom: 2px solid #f8f8f8;"' : (($i == 1 && $iFightCounter == count($aFights) - 1 && $iPropCounter == 0) ? ' style="border-top: 1px solid #C6C6C6;"' : '')) . '>';
-                        echo '<th scope="row">' . ($i == 1 ? $prop[array_key_first($prop)][0] : $prop[array_key_first($prop)][1]) . '</th>';
-
-
-                        
-
+                        echo '<th scope="row">' . $desc . '</th>';
+                       
                         foreach ($aBookies as $bookie)
                         {
-                            //Print out odds
-
                             if (isset($prop[$bookie->getID()]))
                             {
-                                echo '<td>' . $prop[$bookie->getID()][$i + 1] . '</td>';
+                                $odds = $i == 1 ?  $prop[$bookie->getID()]['prop_odds'] : $prop[$bookie->getID()]['negprop_odds'];
+                                $previous_odds = $i == 1 ?  $prop[$bookie->getID()]['previous_prop_odds'] : $prop[$bookie->getID()]['previous_negprop_odds'];
+
+
+                                $date = 'nope'; //TODO: FIX
+
+                                $class_extra = '';
+                                if ($odds == $best_odds)
+                                {
+                                    $class_extra = ' class="bestbet"';
+                                }
+
+                                if ($odds != '-99999')
+                                {
+                                    echo '<td class="but-sgp" data-li="[' . $bookie->getID() . ',' . $i . ',' . $oFight->getID() . ',' . $proptype_id . ',' . $team_num . ']"><span id="oID' . ('2' . sprintf("%06d", $oFight->getID()) . sprintf("%02d", $bookie->getID()) . $i . sprintf("%03d", $proptype_id) . $team_num) . '" ' . $class_extra . '>' . $odds . '</span>';
+                                    if ($previous_odds != '' && $odds > $previous_odds)
+                                    {
+                                        echo '<span class="aru changedate-' . $date .'">▲</span>';
+                                    }
+                                    else if ($previous_odds != '' && $odds < $previous_odds)
+                                    {
+                                        echo '<span class="ard changedate-' . $date .'">▼</span>';
+                                    }
+                                    else
+                                    {
+                                        echo '';
+                                    }
+                                    echo '</td>';
+                                }
+                                else
+                                {
+                                    echo '<td><span class="na">n/a</span></td>';
+                                }
+                                
                             }
                             else
                             {

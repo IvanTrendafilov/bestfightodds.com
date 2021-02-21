@@ -437,13 +437,13 @@ class OddsHandler
             if (!isset($return[$row['event_id']][$row['matchup_id']][$row['proptype_id']][$row['team_num']][$row['bookie_id']])) 
                 $return[$row['event_id']][$row['matchup_id']][$row['proptype_id']][$row['team_num']][$row['bookie_id']] = [];
 
-            $return[$row['event_id']]
-                        [$row['matchup_id']]
-                            [$row['proptype_id']]
-                                [$row['team_num']]
-                                    [$row['bookie_id']] = 
-                [$row['prop_desc'], $row['negprop_desc'], $row['prop_odds'], $row['negprop_odds']];
-
+            $return[$row['event_id']][$row['matchup_id']][$row['proptype_id']][$row['team_num']][$row['bookie_id']] = 
+                ['prop_desc' =>    $row['prop_desc'], 
+                 'negprop_desc' => $row['negprop_desc'], 
+                 'prop_odds' =>    $row['prop_odds'], 
+                 'negprop_odds' => $row['negprop_odds'],
+                 'previous_prop_odds' => $row['previous_prop_odds'],
+                 'previous_negprop_odds' => $row['previous_negprop_odds']];
         }
         return $return;
     }
