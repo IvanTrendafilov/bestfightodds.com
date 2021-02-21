@@ -28,4 +28,10 @@ class MainController
         return $response;
     }
 
+    public function terms(Request $request, Response $response)
+    {
+        $response->getBody()->write($this->plates->render('terms', []));
+        return $response;
+    }
+
 }

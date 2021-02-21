@@ -26,6 +26,8 @@ $app = AppFactory::create();
 //$app->setBasePath('/cnadm');
 
 $app->get('[/]', \MainController::class . ':home');
+$app->get('/alerts', \MainController::class . ':alerts');
+$app->get('/terms', \MainController::class . ':terms');
 
 //Page routes
 /*$app->get('[/]', \AdminController::class . ':home');
