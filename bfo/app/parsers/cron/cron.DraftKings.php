@@ -51,8 +51,8 @@ class ParserJob
 
         $parsed_sport = $this->parseContent($content);
 
-        $op = new OddsProcessor($this->logger, BOOKIE_ID);
-        $op->processParsedSport($parsed_sport, $this->full_run);
+        /*$op = new OddsProcessor($this->logger, BOOKIE_ID);
+        $op->processParsedSport($parsed_sport, $this->full_run);*/
 
         $this->logger->info('Finished');
     }
