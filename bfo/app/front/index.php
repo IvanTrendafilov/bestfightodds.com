@@ -168,6 +168,7 @@ if (isset($_GET['p']) && (
         $_GET['p'] == 'fighter' ||
         $_GET['p'] == 'terms' ||
         $_GET['p'] == 'event' ||
+        $_GET['p'] == 'event2' ||
         $_GET['p'] == 'stopscrape' || 
         $_GET['p'] == 'odds' ||
         $_GET['p'] == 'matchup' ||

@@ -1157,6 +1157,53 @@ class OddsDAO
         
     }
 
+
+    
+    public static function getLatestPropOddsV2($a_iEventID = null, $a_iMatchupID = null, $a_iBookieID = null, $a_iPropTypeID = null, $a_iTeamNum = null)
+    {
+        $aParams = [];
+        $sExtraWhere = '';
+        if ($a_iEventID != null)
+        {
+            $sExtraWhere .= ' AND e.id = ? ';
+            $aParams[] = $a_iEventID;
+        }
+        if ($a_iMatchupID != null)
+        {
+            $sExtraWhere .= ' AND f.id = ? ';
+            $aParams[] = $a_iMatchupID;
+        }
+
+        $sQuery = 'select e.*, f.*, lp.*, pt.*, lp2.prop_odds as previous_prop_odds, lp2.negprop_odds as previous_negprop_odds from events e 
+        left join fights f ON e.id = f.event_id 
+        LEFT JOIN lines_props lp ON f.id = lp.matchup_id
+        LEFT JOIN prop_types pt ON lp.proptype_id = pt.id
+        LEFT JOIN lines_props lp2 ON lp.matchup_id = lp2.matchup_id AND lp.proptype_id = lp2.proptype_id AND lp.bookie_id = lp2.bookie_id AND lp.team_num = lp2.team_num  AND lp2.date = (SELECT MAX(date) FROM lines_props lp3 WHERE lp.bookie_id = lp3.bookie_id AND lp.matchup_id = lp3.matchup_id AND lp.proptype_id = lp3.proptype_id AND lp.team_num = lp3.team_num AND lp3.date < lp.date)
+    WHERE lp.date = (SELECT MAX(lpd.date) FROM lines_props lpd WHERE lp.bookie_id = lpd.bookie_id AND lp.matchup_id = lpd.matchup_id AND lp.proptype_id = lpd.proptype_id AND lp.team_num = lpd.team_num) 
+    ' . $sExtraWhere . ' 
+    ORDER BY LEFT(pt.prop_desc,4) = "Over" DESC ';
+
+        $ret = null;
+        try 
+        {
+            $ret = PDOTools::findMany($sQuery, $aParams);
+        }
+        catch(PDOException $e)
+        {
+            if($e->getCode() == 23000)
+            {
+                throw new Exception("Duplicate entry", 10);	
+            }
+            else
+            {
+                throw new Exception("Unknown error " . $e->getMessage(), 10);	
+            }
+            return false;
+        }
+        return $ret;
+
+    }
+
 }
 
 ?>

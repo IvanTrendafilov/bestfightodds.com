@@ -416,6 +416,37 @@ class OddsHandler
         }
         return OddsDAO::removeFlagged($a_iBookieID, $a_iMatchupID, $a_iEventID, $a_iPropTypeID, $a_iTeamNum);
     }
+
+    public static function getLatestPropOddsV2($a_iEventID = null, $a_iMatchupID = null, $a_iBookieID = null, $a_iPropTypeID = null, $a_iTeamNum = null)
+    {
+        $result = OddsDAO::getLatestPropOddsV2($a_iEventID, $a_iMatchupID, $a_iBookieID, $a_iPropTypeID, $a_iTeamNum);
+
+        $return = [];
+        //Fold structure into multidimensional array containing 
+        foreach ($result as $row)
+        {
+            //This segment initializes a key if not set before
+            if (!isset($return[$row['event_id']])) 
+                $return[$row['event_id']] = [];
+            if (!isset($return[$row['event_id']][$row['matchup_id']])) 
+                $return[$row['event_id']][$row['matchup_id']] = [];
+            if (!isset($return[$row['event_id']][$row['matchup_id']][$row['proptype_id']]))
+                $return[$row['event_id']][$row['matchup_id']][$row['proptype_id']] = [];
+            if (!isset($return[$row['event_id']][$row['matchup_id']][$row['proptype_id']][$row['team_num']]))
+                $return[$row['event_id']][$row['matchup_id']][$row['proptype_id']][$row['team_num']] = [];
+            if (!isset($return[$row['event_id']][$row['matchup_id']][$row['proptype_id']][$row['team_num']][$row['bookie_id']])) 
+                $return[$row['event_id']][$row['matchup_id']][$row['proptype_id']][$row['team_num']][$row['bookie_id']] = [];
+
+            $return[$row['event_id']]
+                        [$row['matchup_id']]
+                            [$row['proptype_id']]
+                                [$row['team_num']]
+                                    [$row['bookie_id']] = 
+                [$row['prop_desc'], $row['negprop_desc'], $row['prop_odds'], $row['negprop_odds']];
+
+        }
+        return $return;
+    }
 }
 
 ?>
