@@ -300,22 +300,21 @@ if ($oEvent != null)
                 {
                     for ($i = 1; $i <= 2; $i++)
                     {
-                        
+                        //Adjust prop name description
                         $desc = $i == 1 ?  $prop[array_key_first($prop)]['prop_desc'] : $prop[array_key_first($prop)]['negprop_desc'];
-                        
-                        
-
+                        $desc = str_replace('<T>', $oFight->getTeamLastNameAsString($team_num), $desc);
+                        $desc = str_replace('<T2>', $oFight->getTeamLastNameAsString(($team_num % 2) + 1), $desc);
 
                         //Determine best odds
+                        $best_odds = -99999;
                         foreach ($aBookies as $bookie)
                         {
-                            $best_odds = -99999;
                             if (isset($prop[$bookie->getID()]))
                             {
                                 $odds = $i == 1 ?  $prop[$bookie->getID()]['prop_odds'] : $prop[$bookie->getID()]['negprop_odds'];
                                 if (intval($odds) > $best_odds)
                                 {
-                                    $best_odds = $odds;
+                                    $best_odds = intval($odds);
                                 }
                             }
                         }
