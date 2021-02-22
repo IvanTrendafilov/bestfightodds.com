@@ -459,10 +459,10 @@ class OddsHandler
             //This segment initializes a key if not set before
             if (!isset($return[$row['event_id']])) 
                 $return[$row['event_id']] = [];
-            if (!isset($return[$row['event_id']][$row['matchup_id']])) 
-                $return[$row['event_id']][$row['matchup_id']] = [];
-            if (!isset($return[$row['event_id']][$row['matchup_id']][$row['bookie_id']]))
-                $return[$row['event_id']][$row['matchup_id']][$row['bookie_id']] = [];
+            if (!isset($return[$row['event_id']][$row['fight_id']])) 
+                $return[$row['event_id']][$row['fight_id']] = [];
+            if (!isset($return[$row['event_id']][$row['fight_id']][$row['bookie_id']]))
+                $return[$row['event_id']][$row['fight_id']][$row['bookie_id']] = [];
             
 
             $fo_obj = new FightOdds($row['fight_id'], $row['bookie_id'], $row['fighter1_odds'], $row['fighter2_odds'], $row['date']);

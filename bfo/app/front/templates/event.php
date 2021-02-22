@@ -149,14 +149,14 @@ $iCellCounter = 0;*/
                 <tbody>';
                 <?php foreach ($matchups as $matchup_id => $matchup): ?>
 
-                    <?php $odds = $matchup_odds[$event->getID()][$matchup->getID()][$bookie->getID()]; //TODO: Not recommended by plates but simplifies access to this object. Any alternative way to handle this? ?>
-
                     <?php for ($i = 1; $i <= 2; $i++): ?>
 
                         <tr <?=(($i == 2 && $matchup_id == array_key_last($matchups)) ? ' style="border-bottom: 0;" ' : '')?>>
                         <th scope="row"><a href="/fighters/<?=$matchup->getFighterAsLinkString($i)?>"><span class="t-b-fcc"><?=$matchup->getFighterAsString($i)?></span></a></th>
 
                         <?php foreach ($bookies as $bookie): ?>
+
+                            <?php $odds = $matchup_odds[$event->getID()][$matchup->getID()][$bookie->getID()]; //TODO: Not recommended by plates but simplifies access to this object. Any alternative way to handle this? ?>
 
                             <?php if (isset($odds['odds_obj'])): ?>
 
@@ -181,7 +181,7 @@ $iCellCounter = 0;*/
 
                         <?php endforeach ?>
 
-                        <td class="button-cell"><a href="#" class="but-al" data-li="[<?=$fight->getID()?>,<?=$i?>]"><div class="but-img i-a" title="Add alert"></div></a></td>
+                        <td class="button-cell"><a href="#" class="but-al" data-li="[<?=$matchup_id?>,<?=$i?>]"><div class="but-img i-a" title="Add alert"></div></a></td>
 
                         //Add index graph button
                         <?php if (count($matchup_odds[$event->getID()][$matchup->getID()]) >= 1): //TODO: Needs check here to check if old odds was found?>
@@ -195,7 +195,7 @@ $iCellCounter = 0;*/
 
                         <?php endif ?>
 
-                        <td class="prop-cell prop-cell-exp" data-mu="<?=$fight->getID()?>">
+                        <td class="prop-cell prop-cell-exp" data-mu="<?=$matchup_id?>">
                         <?php //TODO: Need to populate this from the controller 
                         /*$iPropCount = OddsHandler::getPropCountForMatchup($oFight->getID());
                         if ($iPropCount > 0)
