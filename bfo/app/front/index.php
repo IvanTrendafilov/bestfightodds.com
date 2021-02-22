@@ -74,10 +74,6 @@ if (isset($_GET['p']))
     {
         case 'alerts': define('PAGE_OVERRIDE_TITLE', 'Alerts');
             break;
-        case 'howto': define('PAGE_OVERRIDE_TITLE', 'How to bet');
-            break;
-        case 'listfighters': define('PAGE_OVERRIDE_TITLE', 'Fighters odds archive');
-            break;
         case 'links': define('PAGE_OVERRIDE_TITLE', 'On your website/blog');
             break;
         case 'fighter':
@@ -106,9 +102,6 @@ if (isset($_GET['p']))
                 define('PAGE_OVERRIDE_DESCRIPTION', $oMatchup->getTeamAsString(1) . ' vs. ' . $oMatchup->getTeamAsString(2) . ' odds & betting lines.');
                 define('PAGE_OVERRIDE_KEYWORDS', $oMatchup->getTeamAsString(1) . ', ' . $oMatchup->getTeamAsString(2));
             }
-            break;
-        case 'bookiesettings': 
-            define('PAGE_OVERRIDE_TITLE', 'Customize bookie settings');
             break;
         default:
     }

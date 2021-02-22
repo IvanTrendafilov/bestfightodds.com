@@ -2,8 +2,8 @@
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en"> 
     <head>
         <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
-        <meta name="description" content="<?php echo (defined('PAGE_OVERRIDE_DESCRIPTION') ? PAGE_OVERRIDE_DESCRIPTION . ' ' : ''); ?>UFC/MMA odds comparison service. Compare the latest UFC/MMA fight odds and betting lines from the top online sportsbooks" />
-        <meta name="keywords" content="<?php echo (defined('PAGE_OVERRIDE_KEYWORDS') ? PAGE_OVERRIDE_KEYWORDS . ', ' : ''); ?>mma odds, mma betting, mma lines, ufc odds, ufc, mma, odds, betting" />
+        <meta name="description" content="<?=isset($meta_desc) ? $meta_desc . ' ' : ''?>UFC/MMA odds comparison service. Compare the latest UFC/MMA fight odds and betting lines from the top online sportsbooks" />
+        <meta name="keywords" content="<?=isset($meta_keywords) ? $meta_keywords . ' ' : ''?>mma odds, mma betting, mma lines, ufc odds, ufc, mma, odds, betting" />
         <meta property="og:image" content="https://www.bestfightodds.com/img/iconv2.jpg" />
         <?php
         //Enable viewport if desktop has not explicitly been requested
@@ -35,7 +35,9 @@
         }
 
         ?>
-        <title><?php echo (defined('PAGE_OVERRIDE_TITLE') ? PAGE_OVERRIDE_TITLE . ' | Best Fight Odds': 'UFC &amp; MMA Odds &amp; Betting Lines | Best Fight Odds'); ?></title>
+        <title>
+            <?=isset($title) ? $title . ' | Best Fight Odds' : 'UFC &amp; MMA Odds &amp; Betting Lines | Best Fight Odds'?>
+        </title>
     </head>
     <body>
         <script type="text/javascript" async src="/js/bfo.min.js?v=0.2"></script>
@@ -48,10 +50,10 @@
                 </div>
                 <div class="header-menu-wrapper">
                         <div class="header-menu">
-                        <a href="/"><div class="header-menu-item <?php echo CURRENT_PAGE == '' ? ' header-menu-selected ' : ''; ?>" style="margin-left: 10px">Latest<span class="item-non-mob-mini"> odds</span></div></a>
-                        <a href="/archive"><div class="header-menu-item <?php echo (CURRENT_PAGE == 'archive' || CURRENT_PAGE == 'fighter' || CURRENT_PAGE == 'event' || CURRENT_PAGE == 'search_results') ? ' header-menu-selected ' : ''; ?>">Archive</div></a>
-                        <a href="/alerts"><div class="header-menu-item <?php echo CURRENT_PAGE == 'alerts' ? ' header-menu-selected ' : ''; ?>">Alerts</div></a>
-                        <a href="/links"><div class="header-menu-item <?php echo CURRENT_PAGE == 'links' ? ' header-menu-selected ' : ''; ?> item-non-mobile">Widget</div></a>
+                        <a href="/"><div class="header-menu-item <?=!isset($current_page) || $current_page = '' ? ' header-menu-selected ' : ''?>" style="margin-left: 10px">Latest<span class="item-non-mob-mini"> odds</span></div></a>
+                        <a href="/archive"><div class="header-menu-item <?=isset($current_page) && $current_page = 'archive' ? ' header-menu-selected ' : ''?>">Archive</div></a>
+                        <a href="/alerts"><div class="header-menu-item <?=isset($current_page) && $current_page = 'alerts' ? ' header-menu-selected ' : ''?>">Alerts</div></a>
+                        <a href="/links"><div class="header-menu-item <?=isset($current_page) && $current_page = 'links' ? ' header-menu-selected ' : ''?> item-non-mobile">Widget</div></a>
                         <a href="https://www.proboxingodds.com" target="_blank" rel="noopener"><div class="header-menu-item  item-non-mobile">Boxing</div></a>
                         <a href="http://twitter.com/bestfightodds" target="_blank" rel="noopener"><div class="header-menu-item">
                             <svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
@@ -69,34 +71,24 @@
                         </div></a>
                         <div id="header-menu-right">
                            <div id="parlay-mode-container" 
-                                 <?php
-                                 //Only display parlay-mode container if we are displaying an event or are on the front page
-                                 if (CURRENT_PAGE != '' && CURRENT_PAGE != 'event')
-                                 {
-                                     echo ' style="visibility: hidden" ';
-                                 }
-                                 ?>
-                                 >
+                                 <?php if (isset($current_page) && $current_page != '' && $current_page != 'event'): ?>
+                                     style="visibility: hidden" 
+                                 <?php endif ?>
+                            >
                                 <a href="#" id="parlay-mode-box"><div class="bfo-check-box">✓</div> Parlay</a>
                             </div>
                             <div class="menu-divider"
-                                <?php
-                                 //Only display autorefresh-mode container if we are displaying an event or are on the front page
-                                 if (CURRENT_PAGE != '')
-                                 {
-                                     echo ' style="display: none" ';
-                                 }
-                                 ?>
+
+                                <?php if (!isset($current_page) || $current_page != ''): ?>
+                                    style="display: none"
+                                 <?php endif ?>
+
                             ></div>                 
                             <div id="auto-refresh-container"
-                                <?php
-                                 //TODO: Autorefresh currently disabled! Only display autorefresh-mode container if we are displaying an event or are on the front page
-                                 if (true || CURRENT_PAGE != '')
-                                 {
-                                     echo ' style="display: none" ';
-                                 }
-                                 ?>
-                                >
+                                <?php if (true || !isset($current_page) || $current_page != ''): //Auto-refresh current disabled ?>
+                                    style="display: none"
+                                 <?php endif ?>
+                            >
                                 <ul class="dropdown">
                                     <li><a href="#"  onclick="toggleRefresh()" style="padding-left: 20px;"><img src="/img/refresh.png" class="refresh-ind" id="autoRefresh" alt="Toggle auto-refresh"/>&#9660;</a>
                                             <ul class="sub_menu">
@@ -107,13 +99,9 @@
                                 </ul>
                             </div>
                             <div id="mob-divider" class="menu-divider"
-                                <?php
-                                 //TODO: Autorefresh currently disabled! Only display autorefresh-mode container if we are displaying an event or are on the front page
-                                 if (true || CURRENT_PAGE != '')
-                                 {
+                                <?php if (true || !isset($current_page) || $current_page != ''): //Auto-refresh current disabled ?>
                                      echo ' style="display: none" ';
-                                 }
-                                 ?>
+                                <?php endif ?>
                             ></div>
                             <div id="format-container">
                                 <ul class="dropdown">

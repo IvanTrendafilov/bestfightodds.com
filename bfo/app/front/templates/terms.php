@@ -1,4 +1,4 @@
-<?php $this->layout('template', ['title' => 'Admin']) ?>
+<?php $this->layout('template', ['title' => 'Terms of service']) ?>
 
 <div id="page-wrapper">
     <div id="page-container">
