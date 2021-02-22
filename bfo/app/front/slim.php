@@ -29,6 +29,7 @@ $app->get('[/]', \MainController::class . ':home');
 $app->get('/alerts', \MainController::class . ':alerts');
 $app->get('/terms', \MainController::class . ':terms');
 $app->get('/archive', \MainController::class . ':archive');
+$app->get('/search', \MainController::class . ':search');
 
 //Page routes
 /*$app->get('[/]', \AdminController::class . ':home');

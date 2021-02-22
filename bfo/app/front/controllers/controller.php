@@ -6,6 +6,7 @@ use Psr\Http\Message\ServerRequestInterface as Request;
 require_once 'config/inc.config.php'; //TODO: Required?
 require_once 'lib/bfocore/general/class.EventHandler.php';
 require_once 'lib/bfocore/general/class.BookieHandler.php';
+require_once 'lib/bfocore/general/class.FighterHandler.php';
 
 class MainController
 {
@@ -75,6 +76,60 @@ class MainController
         $view_data['in_alertmail'] = $cookies['bfo_alertmail'] ?? '';
 
         $response->getBody()->write($this->plates->render('alerts', $view_data));
+        return $response;
+    }
+
+    public function search(Request $request, Response $response)
+    {
+        $view_data = [];
+
+        $search_query = $request->getQueryParams()['query'] ?? '';
+        $view_data['search_query'] = $search_query;
+
+        if (strlen($search_query) >= 3)
+        {
+            $teams = FighterHandler::searchFighter($search_query);
+            $events = EventHandler::searchEvent($search_query);
+            if ($teams != null || $events != null)
+            {
+                //If we only get one result we will redirect to that page right away
+                if ((count($teams) + count($events)) == 1)
+                {
+                    if (count($teams) == 1)
+                    {
+                        return $response
+                            ->withHeader('Location', '/fighters/' . $teams[0]->getFighterAsLinkString())
+                            ->withStatus(302);
+                    }
+                    else
+                    {
+                        return $response
+                            ->withHeader('Location', '/events/' . $events[0]->getEventAsLinkString())
+                            ->withStatus(302);
+                    }
+                }
+                else if (count($teams) + count($events) > 1)
+                {
+                    //Reduce teams lists if exceeding 25
+                    $view_data['teams_totalsize'] = count($teams);
+                    if (count($teams) > 25)
+                    {
+                        $teams = array_slice($teams, 0, 25);
+                    }
+                    //Reduce events lists if exceeding 25
+                    $view_data['events_totalsize'] = count($events);
+                    if (count($events) > 25)
+                    {
+                        $events = array_slice($events, 0, 25);
+                    }
+                }
+            }
+            $view_data['teams_results'] = $teams ?? [];
+            $view_data['events_results'] = $events ?? [];
+
+        }
+
+        $response->getBody()->write($this->plates->render('searchresults', $view_data));
         return $response;
     }
 
