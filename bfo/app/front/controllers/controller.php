@@ -318,20 +318,19 @@ class MainController
 
         $bookies = $aBookies = BookieHandler::getAllBookies();
         $matchups = EventHandler::getAllFightsForEvent($event->getID(), true);
-        foreach ($matchups as $matchup)
-        {
-            $aFightOdds = EventHandler::getAllLatestOddsForFight($oFight->getID());
-            $aOldFightOdds = EventHandler::getAllLatestOddsForFight($oFight->getID(), 1);
-            $oBestOdds = EventHandler::getBestOddsForFight($oFight->getID());
-        }
+
         $prop_odds = OddsHandler::getLatestPropOddsV2($event->getID());
+        $matchup_odds = OddsHandler::getLatestMatchupOddsV2($event->getID());
 
 
 
 
         $view_data = [];
+        $view_data['event'] = $event;
+        $view_data['matchups'] = $matchups;
+        $view_data['prop_odds'] = $prop_odds;
+        $view_data['matchup_odds'] = $matchup_odds;
         
-
         $page_content = $this->plates->render('event', $view_data);
 
         //Cache page

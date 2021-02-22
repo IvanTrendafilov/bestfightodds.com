@@ -1,7 +1,7 @@
-<?php
+<?php $this->layout('template', ['title' => 'Event']) ?>
 
 
-require_once('lib/bfocore/general/class.EventHandler.php');
+/*require_once('lib/bfocore/general/class.EventHandler.php');
 require_once('lib/bfocore/general/class.BookieHandler.php');
 require_once('lib/bfocore/general/class.OddsHandler.php');
 require_once('lib/bfocore/general/inc.GlobalTypes.php');
@@ -15,53 +15,39 @@ require_once('app/front/pages/inc.FrontLogic.php');
 
 $oEvent = EventHandler::getEvent((int) $_GET['eventID']);
 
-$iCellCounter = 0;
+$iCellCounter = 0;*/
 
-//List event
-if ($oEvent != null)
-{
-    $sBuffer = '';
-    $sLastChange = EventHandler::getLatestChangeDate($oEvent->getID());
-    $bCached = false;
+       
 
-
-
-    if ($bCached == false || empty($sBuffer))
-    {
-        $aBookies = BookieHandler::getAllBookies();
-        if (sizeof($aBookies) == 0)
-        {
-            echo 'No bookies found';
-            exit();
-        }
+        <div class="table-outer-wrapper"><div class="table-div" id="event<?=$event->getID()?>"><div class="table-header"><a href="/events/<?=$event->getEventAsLinkString()?>"><h1><?=$event->getName()?></h1></a>
         
-        //Generate new page and display to user
-        ob_start();
-        $aFights = EventHandler::getAllFightsForEvent($oEvent->getID(), true);
+            <?php if (strtoupper($event->getName()) != 'FUTURE EVENTS'): //Add date for all events except for FUTURE EVENTS?>
+                <span class="table-header-date"><?=date('F jS', strtotime($event->getDate()))?></span>
+            <?php endif ?>
+            <div class="share-area">
+                <div class="share-button"></div>
+            </div>
+            <div class="share-window">
+                <div data-href="https://twitter.com/intent/tweet?text=<?=urlencode($event->getName() . ' betting lines')?>&amp;url=<?=urlencode('https://www.bestfightodds.com/events/' . $event->getEventAsLinkString())?>" class="share-item share-twitter"></div>
+                <div data-href="https://www.facebook.com/sharer/sharer.php?u=<?=urlencode('https://www.bestfightodds.com/events/' . $event->getEventAsLinkString())?>" class="share-item share-facebook"></div>
+                <div data-href="whatsapp://send?text=<?=urlencode($event->getName() . ' betting lines')?> <?=urlencode('https://www.bestfightodds.com/events/' . $event->getEventAsLinkString())?>" data-action="share/whatsapp/share" class="share-item share-whatsapp item-mobile-only"></div>
+            </div>
 
-        //Check if event is named FUTURE EVENTS, if so, do not display the date
-        //TODO: Hardcoded reference to "FUTURE EVENTS". Should be changed to set id
-        $sAddDate = '';
-        if (strtoupper($oEvent->getName()) != 'FUTURE EVENTS')
-        {
-            $sAddDate = '<span class="table-header-date">' . date('F jS', strtotime($oEvent->getDate())) . '</span>';
-        }
+        </div>
+        <?php /*
+        <table class="odds-table odds-table-responsive-header">
+            <thead>
+                <tr>
+                    <th scope="col"></th>
+                </tr>
+            </thead>
+            <tbody>
 
-        echo '<div class="table-outer-wrapper"><div class="table-div" id="event' . $oEvent->getID() . '"><div class="table-header"><a href="/events/' . $oEvent->getEventAsLinkString() . '"><h1>' . $oEvent->getName() . '</h1></a>' . $sAddDate . '';
+            <?php foreach ($matchups as $matchup): ?>
 
-        $sShareURL = 'https://www.bestfightodds.com/events/' . $oEvent->getEventAsLinkString();
-        $sShareDesc = $oEvent->getName() . ' betting lines';
 
-        echo '<div class="share-area"><div class="share-button"></div></div>
-                                        <div class="share-window"><div data-href="https://twitter.com/intent/tweet?text=' . urlencode($sShareDesc) . '&amp;url=' . urlencode($sShareURL) . '" class="share-item share-twitter"></div><div data-href="https://www.facebook.com/sharer/sharer.php?u=' . urlencode($sShareURL) . '" class="share-item share-facebook"></div><div data-href="whatsapp://send?text=' . urlencode($sShareDesc) . ' ' . urlencode($sShareURL) . '" data-action="share/whatsapp/share" class="share-item share-whatsapp item-mobile-only"></div></div>';
-
-        echo '</div>';
-
-        echo '<table class="odds-table odds-table-responsive-header"><thead>'
-        . '<tr><th scope="col"></th></tr></thead>'
-        . '<tbody>';
-
-        $iFightCounter = 0;
+            <?php endforeach ?>
+      <?php /*  $iFightCounter = 0;
         foreach ($aFights as $oFight)
         {
             $iCurrentOperatorColumn = 0;
@@ -113,11 +99,11 @@ if ($oEvent != null)
         }
 
         //Add event prop rows
-        $aPropTypes = OddsHandler::getAllPropTypesForEvent($oEvent->getID());
+        $aPropTypes = OddsHandler::getAllPropTypesForEvent($event->getID());
         if (count($aPropTypes) > 0)
         {
-            echo '<tr class="eventprop" id="mu-e' . $oEvent->getID() . '">';
-            echo '<th scope="row" style="font-weight: 400"><a href="#" data-mu="' . $oEvent->getID() . '">Event props</a></th>';
+            echo '<tr class="eventprop" id="mu-e' . $event->getID() . '">';
+            echo '<th scope="row" style="font-weight: 400"><a href="#" data-mu="' . $event->getID() . '">Event props</a></th>';
             echo '</tr>';
 
             $iPropCounter = 0;
@@ -141,30 +127,100 @@ if ($oEvent != null)
 
         echo '</tbody>'
         . '</table>';
-    
+    */?>
 
-        $sLastChange = EventHandler::getLatestChangeDate($oEvent->getID());
+        $sLastChange = EventHandler::getLatestChangeDate($event->getID());
 
-        echo '<div class="table-inner-wrapper"><div class="table-inner-shadow-left"></div><div class="table-inner-shadow-right"></div><div class="table-scroller"><table class="odds-table">'
-        . '<thead>'
-        . '<tr><th scope="col"></th>';
+        <div class="table-inner-wrapper"><div class="table-inner-shadow-left"></div><div class="table-inner-shadow-right"></div>
+            <div class="table-scroller">
+                <table class="odds-table">
+                <thead>
+                    <tr>
+                        <th scope="col"></th>
+                        <?php foreach ($bookies as $bookie): ?>
+                            <th scope="col" data-b="<?=$bookie->getID()?>">
+                            <a href="/out/<?=$bookie->getID()?>" onclick="lO(<?=$bookie->getID()?>,<?=$event->getID()?>);">
+                                <?=str_replace(' ', '&nbsp;', (strlen($oBookie->getName()) > 10 ? (substr($oBookie->getName(), 0, 9) . '.') : $oBookie->getName()))?>
+                            </a></th>
+                        <?php endforeach ?>
+                        <th scope="col" colspan="3" class="table-prop-header">Props</th>
+                    </tr>
+                </thead>
+                <tbody>';
+                <?php foreach ($matchups as $key => $matchup): ?>
 
-        //List all bookies, save a reference list for later use in table
-        $aBookieRefList = array();
-        foreach ($aBookies as $oBookie)
-        {
-            $aBookieRefList[] = $oBookie->getID();
-            echo '<th scope="col" data-b="' . $oBookie->getID() . '"><a href="/out/' . $oBookie->getID() . '" onclick="lO(' . $oBookie->getID() . ',' . $oEvent->getID() . ');">' . str_replace(' ', '&nbsp;', (strlen($oBookie->getName()) > 10 ? (substr($oBookie->getName(), 0, 9) . '.') : $oBookie->getName())) . '</a></th>';
-        }
-        echo '<th scope="col" colspan="3" class="table-prop-header">Props</th></tr></thead><tbody>';
+                    <?php $odds = $matchup_odds[$event->getID()][$matchup->getID()][$bookie->getID()]; //TODO: Not recommended by plates but simplifies access to this object. Any alternative way to handle this? ?>
 
+                    <?php for ($i = 1; $i <= 2; $i++): ?>
+
+                        <tr <?=(($i == 2 && $key == count($matchups) - 1) ? ' style="border-bottom: 0;" ' : '')?>>
+                        <th scope="row"><a href="/fighters/<?=$matchup->getFighterAsLinkString($i)?>"><span class="t-b-fcc"><?=$matchup->getFighterAsString($i)?></span></a></th>
+
+                        <?php foreach ($bookies as $bookie): ?>
+
+                            <?php if (isset($odds['odds_obj'])): ?>
+
+                                <td class="but-sg" data-li="[<?=$odds['odds_obj']->getBookieID()?>,<?=$i?>,<?=$odds['odds_obj']->getFightID()?>]">
+                                    <span id="oID<?=('1' . sprintf("%06d", $odds['odds_obj']->getFightID()) . sprintf("%02d", $odds['odds_obj']->getBookieID()) . $i)?>" <?=$sClassName?>>
+                                        <?=$odds['odds_obj']->getFighterOddsAsString($i)?>
+                                    </span>
+                                    <?php if (isset($odds['previous_team' . $i . '_odds'])): ?>
+                                        <?php if ($odds['odds_obj']->getFighterOdds($iX) > $odds['previous_team' . $i . '_odds']): ?>
+                                            <span class="aru changedate-<?=$odds['odds_obj']->getDate()?>">▲</span>
+                                        <?php elseif ($odds['odds_obj']->getFighterOdds($iX) < $odds['previous_team' . $i . '_odds']): ?>
+                                            <span class="ard changedate-<?=$odds['odds_obj']->getDate()?>">▼</span>
+                                        <?php endif ?>
+                                    <?php endif ?>
+                                </td>
+
+                            <?php else: ?>    
+
+                                <td></td>
+
+                            <?php endif ?>
+
+                        <?php endforeach ?>
+
+                        <td class="button-cell"><a href="#" class="but-al" data-li="[<?=$fight->getID()?>,<?=$i?>]"><div class="but-img i-a" title="Add alert"></div></a></td>
+
+                        //Add index graph button
+                        if ($bEverFoundOldOdds || count($aFightOdds) > 1)
+                        {
+                            echo '<td class="button-cell but-si" data-li="[' . $iX . ',' . $oFightOdds->getFightID() . ']">
+                                <svg class="svg-i" viewBox="0 0 24 24" preserveAspectRatio="xMidYMid meet" focusable="false"><g><path d="M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zM9 17H7v-7h2v7zm4 0h-2V7h2v10zm4 0h-2v-4h2v4z"></path></g></svg>
+                            </td>';
+                        }
+                        else
+                        {
+                            echo '<td class="button-cell but-si">
+                                <svg class="svg-i-disabled" viewBox="0 0 24 24" preserveAspectRatio="xMidYMid meet" focusable="false"><g><path d="M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zM9 17H7v-7h2v7zm4 0h-2V7h2v10zm4 0h-2v-4h2v4z"></path></g></svg>
+                            </td>';
+                        }
+
+                        <td class="prop-cell prop-cell-exp" data-mu="<?=$fight->getID()?>">
+                        $iPropCount = OddsHandler::getPropCountForMatchup($oFight->getID());
+                        if ($iPropCount > 0)
+                        {
+                            echo $iPropCount . '&nbsp;<span class="exp-ard"></span>';
+                        }
+                        else
+                        {
+                            echo '&nbsp;';
+                        }
+                        </td>
+
+                        </tr>
+
+                    <?php endfor ?>
+                <?php endforeach ?>
         $iFightCounter = 0;
         $bSomeOddsFound = false;
 
 
-        $prop_odds = OddsHandler::getLatestPropOddsV2($oEvent->getID());
+        $prop_odds = OddsHandler::getLatestPropOddsV2($event->getID());
+        $matchup_odds = OddsHandler::getLatestPropOddsV2($event->getID());
             
-        foreach ($aFights as $oFight)
+        foreach ($matchups as $matchup)
         {
             //List all odds for the fight
             $aFightOdds = EventHandler::getAllLatestOddsForFight($oFight->getID());
@@ -224,7 +280,7 @@ if ($oEvent != null)
                     }
                     if (!$bFoundOldOdds)
                     {
-                        echo '<td class="but-sg" data-li="[' . $oFightOdds->getBookieID() . ',' . $iX . ',' . $oFightOdds->getFightID() . ']"  ><span id="oID' . ('1' . sprintf("%06d", $oFightOdds->getFightID()) . sprintf("%02d", $oFightOdds->getBookieID()) . $iX) . '" ' . $sClassName . '>' . $oFightOdds->getFighterOddsAsString($iX) . '</span></td>';
+                        echo '<td class="but-sg" data-li="[' . $oFightOdds->getBookieID() . ',' . $iX . ',' . $oFightOdds->getFightID() . ']" ><span id="oID' . ('1' . sprintf("%06d", $oFightOdds->getFightID()) . sprintf("%02d", $oFightOdds->getBookieID()) . $iX) . '" ' . $sClassName . '>' . $oFightOdds->getFighterOddsAsString($iX) . '</span></td>';
                     }
 
                     $iProcessed++;
@@ -275,7 +331,7 @@ if ($oEvent != null)
 
             $iPropCounter = 0;
             $iPropRowCounter = 0;
-            foreach ($prop_odds[$oEvent->getID()][$oFight->getID()] as $proptype_id => $team_num_row)
+            foreach ($prop_odds[$event->getID()][$oFight->getID()] as $proptype_id => $team_num_row)
             {
                 foreach ($team_num_row as $team_num => $prop)
                 {
@@ -536,11 +592,11 @@ if ($oEvent != null)
 
 
         //Add event prop rows
-        $aPropTypes = OddsHandler::getAllPropTypesForEvent($oEvent->getID());
+        $aPropTypes = OddsHandler::getAllPropTypesForEvent($event->getID());
         if (count($aPropTypes) > 0)
         {
-            echo '<tr class="eventprop" id="mu-' . $oEvent->getID() . '">';
-            echo '<th scope="row" style="font-weight: 400"><a href="#" data-mu="' . $oEvent->getID() . '">Event props</a></th>';
+            echo '<tr class="eventprop" id="mu-' . $event->getID() . '">';
+            echo '<th scope="row" style="font-weight: 400"><a href="#" data-mu="' . $event->getID() . '">Event props</a></th>';
 
             //Fill empty cells
             for ($iY = 0; $iY < (sizeof($aBookieRefList)); $iY++)
@@ -549,7 +605,7 @@ if ($oEvent != null)
             }
             echo '<td class="button-cell"></td>';
 
-            echo '<td class="prop-cell prop-cell-exp" data-mu="e' . $oEvent->getID() . '">';
+            echo '<td class="prop-cell prop-cell-exp" data-mu="e' . $event->getID() . '">';
             echo count($aPropTypes) . '&nbsp;<span class="exp-ard"></span>';
             echo '</td>';
 
@@ -557,8 +613,8 @@ if ($oEvent != null)
             echo '</tr>';
 
 
-            $aAllPropOdds = OddsHandler::getCompletePropsForEvent($oEvent->getID());
-            $aAllOldPropOdds = OddsHandler::getCompletePropsForEvent($oEvent->getID(), 1);
+            $aAllPropOdds = OddsHandler::getCompletePropsForEvent($event->getID());
+            $aAllOldPropOdds = OddsHandler::getCompletePropsForEvent($event->getID(), 1);
 
             $iPropCounter = 0;
             $iPropRowCounter = 0;
@@ -586,7 +642,7 @@ if ($oEvent != null)
                         }
                     }
 
-                    $oBestOdds = OddsHandler::getBestPropOddsForEvent($oEvent->getID(), $oPropType->getID());
+                    $oBestOdds = OddsHandler::getBestPropOddsForEvent($event->getID(), $oPropType->getID());
 
                     $iProcessedProps = 0;
                     $iCurrentOperatorColumn = 0;
@@ -727,7 +783,7 @@ if ($oEvent != null)
         {
             echo '<tr><td colspan="' . (sizeof($aBookies) + 3) . '" style="padding: 20px 0; ">No betting lines available for this event';
             //Check if event is in the future, if so, add a notifier about alerts, tweets, etc..
-            if (strtotime(GENERAL_TIMEZONE . ' hours') < strtotime(date('Y-m-d 23:59:59', strtotime($oEvent->getDate()))))
+            if (strtotime(GENERAL_TIMEZONE . ' hours') < strtotime(date('Y-m-d 23:59:59', strtotime($event->getDate()))))
             {
                 echo '<br /><br /><img src="/img/info.gif" class="img-info-box" /> Get notified when odds are posted either via our <a href="/alerts" style="text-decoration: underline">Alerts</a> functionality or by following us on <a href="http://twitter.com/bestfightodds" target="_blank" rel="noopener" style="text-decoration: underline">Twitter</a>';
             }
@@ -752,7 +808,7 @@ if ($oEvent != null)
         $aSeriesNames = ['Change since opening', 'Change in the last 24 hours', 'Change in the last hour'];
         for ($x = 0; $x <= 2; $x++)
         {
-            $aSwings = StatsHandler::getAllDiffsForEvent($oEvent->getID(), $x);
+            $aSwings = StatsHandler::getAllDiffsForEvent($event->getID(), $x);
             $aRowData = [];
             
             foreach ($aSwings as $aSwing)
@@ -796,7 +852,7 @@ if ($oEvent != null)
 <?php
 
         //TODO: This should be refactored to use the generic getExpectedOutcomes instead
-        $aOutcomes = StatsHandler::getExpectedOutcomesForEvent($oEvent->getID());
+        $aOutcomes = StatsHandler::getExpectedOutcomesForEvent($event->getID());
         $aRowData = [];
         foreach ($aOutcomes as $aOutcome)
         {
@@ -827,12 +883,10 @@ if ($oEvent != null)
 
         $sBuffer = ob_get_clean();
 
-        CacheControl::cleanPageCacheWC('event-' . $oEvent->getID() . '-*');
-        CacheControl::cachePage($sBuffer, 'event-' . $oEvent->getID() . '-' . strtotime($sLastChange) . '.php');
+        CacheControl::cleanPageCacheWC('event-' . $event->getID() . '-*');
+        CacheControl::cachePage($sBuffer, 'event-' . $event->getID() . '-' . strtotime($sLastChange) . '.php');
         
         echo '<!--C:MIS-->';
-
-    }
 
     //Dynamically replace last change placeholder
     $sBufferLastChange = '<div class="table-last-changed">Last change: <span title="' . ($sLastChange == null ? 'n/a' : (date('M jS Y H:i', strtotime($sLastChange)) . ' EST')) . '">' . getTimeDifference(strtotime($sLastChange), strtotime(GENERAL_TIMEZONE . ' hours')) . '</span></div> ';
@@ -859,6 +913,5 @@ if ($oEvent != null)
     //Replace last changed placeholder
 
 
-}
 
 ?>

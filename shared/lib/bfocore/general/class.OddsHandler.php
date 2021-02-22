@@ -464,13 +464,13 @@ class OddsHandler
             if (!isset($return[$row['event_id']][$row['matchup_id']][$row['bookie_id']]))
                 $return[$row['event_id']][$row['matchup_id']][$row['bookie_id']] = [];
             
-            $return[$row['event_id']][$row['matchup_id']][$row['proptype_id']][$row['team_num']][$row['bookie_id']] = 
-                ['prop_desc' =>    $row['prop_desc'], 
-                 'negprop_desc' => $row['negprop_desc'], 
-                 'prop_odds' =>    $row['prop_odds'], 
-                 'negprop_odds' => $row['negprop_odds'],
-                 'previous_prop_odds' => $row['previous_prop_odds'],
-                 'previous_negprop_odds' => $row['previous_negprop_odds']];
+
+            $fo_obj = new FightOdds($row['fight_id'], $row['bookie_id'], $row['fighter1_odds'], $row['fighter2_odds'], $row['date']);
+
+            $return[$row['event_id']][$row['fight_id']][$row['bookie_id']] = 
+                ['odds_obj' => $fo_obj, 
+                 'previous_team1_odds' => $row['previous_team1_odds'],
+                 'previous_team2_odds' => $row['previous_team2_odds']];
         }
         return $return;
     }

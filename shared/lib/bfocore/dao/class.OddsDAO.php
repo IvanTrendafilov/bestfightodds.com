@@ -1212,7 +1212,7 @@ class OddsDAO
             $aParams[] = $a_iMatchupID;
         }
 
-        $sQuery = 'select e.*, f.*, fo.*, fo2.fighter1_odds as previous_prop_odds, fo2.fighter2_odds as previous_negprop_odds from events e 
+        $sQuery = 'select e.*, f.*, fo.*, fo2.fighter1_odds as previous_team1_odds, fo2.fighter2_odds as previous_team2_odds from events e 
                     LEFT JOIN fights f ON e.id = f.event_id 
                     LEFT JOIN fightodds fo ON f.id = fo.fight_id
                     LEFT JOIN fightodds fo2 ON fo.fight_id = fo2.fight_id AND fo.bookie_id = fo2.bookie_id AND fo2.date = (SELECT MAX(date) FROM fightodds fo3 WHERE fo.bookie_id = fo3.bookie_id AND fo.fight_id = fo3.fight_id AND fo3.date < fo.date)
