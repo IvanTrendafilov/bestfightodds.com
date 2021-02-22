@@ -147,13 +147,13 @@ $iCellCounter = 0;*/
                     </tr>
                 </thead>
                 <tbody>';
-                <?php foreach ($matchups as $key => $matchup): ?>
+                <?php foreach ($matchups as $matchup_id => $matchup): ?>
 
                     <?php $odds = $matchup_odds[$event->getID()][$matchup->getID()][$bookie->getID()]; //TODO: Not recommended by plates but simplifies access to this object. Any alternative way to handle this? ?>
 
                     <?php for ($i = 1; $i <= 2; $i++): ?>
 
-                        <tr <?=(($i == 2 && $key == count($matchups) - 1) ? ' style="border-bottom: 0;" ' : '')?>>
+                        <tr <?=(($i == 2 && $matchup_id == array_key_last($matchups)) ? ' style="border-bottom: 0;" ' : '')?>>
                         <th scope="row"><a href="/fighters/<?=$matchup->getFighterAsLinkString($i)?>"><span class="t-b-fcc"><?=$matchup->getFighterAsString($i)?></span></a></th>
 
                         <?php foreach ($bookies as $bookie): ?>
@@ -184,21 +184,20 @@ $iCellCounter = 0;*/
                         <td class="button-cell"><a href="#" class="but-al" data-li="[<?=$fight->getID()?>,<?=$i?>]"><div class="but-img i-a" title="Add alert"></div></a></td>
 
                         //Add index graph button
-                        if ($bEverFoundOldOdds || count($aFightOdds) > 1)
-                        {
-                            echo '<td class="button-cell but-si" data-li="[' . $iX . ',' . $oFightOdds->getFightID() . ']">
+                        <?php if (count($matchup_odds[$event->getID()][$matchup->getID()]) >= 1): //TODO: Needs check here to check if old odds was found?>
+                            <td class="button-cell but-si" data-li="[<?=$i?>,<?=$matchup_id?>]">
                                 <svg class="svg-i" viewBox="0 0 24 24" preserveAspectRatio="xMidYMid meet" focusable="false"><g><path d="M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zM9 17H7v-7h2v7zm4 0h-2V7h2v10zm4 0h-2v-4h2v4z"></path></g></svg>
-                            </td>';
-                        }
-                        else
-                        {
-                            echo '<td class="button-cell but-si">
+                            </td>
+                        <?php else: ?>
+                            <td class="button-cell but-si">
                                 <svg class="svg-i-disabled" viewBox="0 0 24 24" preserveAspectRatio="xMidYMid meet" focusable="false"><g><path d="M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zM9 17H7v-7h2v7zm4 0h-2V7h2v10zm4 0h-2v-4h2v4z"></path></g></svg>
-                            </td>';
-                        }
+                            </td>
+
+                        <?php endif ?>
 
                         <td class="prop-cell prop-cell-exp" data-mu="<?=$fight->getID()?>">
-                        $iPropCount = OddsHandler::getPropCountForMatchup($oFight->getID());
+                        <?php //TODO: Need to populate this from the controller 
+                        /*$iPropCount = OddsHandler::getPropCountForMatchup($oFight->getID());
                         if ($iPropCount > 0)
                         {
                             echo $iPropCount . '&nbsp;<span class="exp-ard"></span>';
@@ -206,125 +205,14 @@ $iCellCounter = 0;*/
                         else
                         {
                             echo '&nbsp;';
-                        }
+                        }*/ ?>
                         </td>
 
                         </tr>
 
                     <?php endfor ?>
                 <?php endforeach ?>
-        $iFightCounter = 0;
-        $bSomeOddsFound = false;
-
-
-        $prop_odds = OddsHandler::getLatestPropOddsV2($event->getID());
-        $matchup_odds = OddsHandler::getLatestPropOddsV2($event->getID());
-            
-        foreach ($matchups as $matchup)
-        {
-            //List all odds for the fight
-            $aFightOdds = EventHandler::getAllLatestOddsForFight($oFight->getID());
-            $aOldFightOdds = EventHandler::getAllLatestOddsForFight($oFight->getID(), 1);
-            $oBestOdds = EventHandler::getBestOddsForFight($oFight->getID());
-
-            $iProcessed = 0;
-            $iCurrentOperatorColumn = 0;
-            for ($iX = 1; $iX <= 2; $iX++)
-            {
-                echo '<tr' . (($iX == 2 && $iFightCounter == count($aFights) - 1) ? ' style="border-bottom: 0;" ' : '') . '>'; //If this is the last matchup, add style for it
-                echo '<th scope="row"><a href="/fighters/' . $oFight->getFighterAsLinkString($iX) . '"><span class="t-b-fcc">' . $oFight->getFighterAsString($iX) . '</span></a></th>';
-
-                $iProcessed = 0;
-                $bEverFoundOldOdds = false;
-
-                foreach ($aFightOdds as $oFightOdds)
-                {
-                    $bSomeOddsFound = true;
-
-                    $iCurrentOperatorColumn = $iProcessed;
-                    while (isset($aBookieRefList[$iCurrentOperatorColumn]) && $aBookieRefList[$iCurrentOperatorColumn] != $oFightOdds->getBookieID())
-                    {
-                        echo '<td></td>';
-                        $iCurrentOperatorColumn++;
-                        $iProcessed++;
-                    }
-
-                    $sClassName = '';
-                    if ($oFightOdds->getFighterOdds($iX) == $oBestOdds->getFighterOdds($iX))
-                    {
-                        $sClassName = 'class="bestbet"';
-                    }
-
-                    //Loop through the previous odds and check if odds is higher or lower or non-existant (kinda ugly, needs a fix)
-                    $iCurrentOperatorID = $oFightOdds->getBookieID();
-                    $bFoundOldOdds = false;
-
-                    foreach ($aOldFightOdds as $oOldFightOdds)
-                    {
-                        if ($oOldFightOdds->getBookieID() == $iCurrentOperatorID)
-                        {
-                            echo '<td class="but-sg" data-li="[' . $oFightOdds->getBookieID() . ',' . $iX . ',' . $oFightOdds->getFightID() . ']" ><span id="oID' . ('1' . sprintf("%06d", $oFightOdds->getFightID()) . sprintf("%02d", $oFightOdds->getBookieID()) . $iX) . '" ' . $sClassName . '>' . $oFightOdds->getFighterOddsAsString($iX) . '</span>';
-                            if ($oFightOdds->getFighterOdds($iX) > $oOldFightOdds->getFighterOdds($iX))
-                            {
-                                echo '<span class="aru changedate-' . $oFightOdds->getDate() .'">▲</span>';
-                            }
-                            else if ($oFightOdds->getFighterOdds($iX) < $oOldFightOdds->getFighterOdds($iX))
-                            {
-                                echo '<span class="ard changedate-' . $oFightOdds->getDate() .'">▼</span>';
-                            }
-
-                            echo '</td>';
-                             $bFoundOldOdds = true;
-                            $bEverFoundOldOdds = true;
-                        }
-                    }
-                    if (!$bFoundOldOdds)
-                    {
-                        echo '<td class="but-sg" data-li="[' . $oFightOdds->getBookieID() . ',' . $iX . ',' . $oFightOdds->getFightID() . ']" ><span id="oID' . ('1' . sprintf("%06d", $oFightOdds->getFightID()) . sprintf("%02d", $oFightOdds->getBookieID()) . $iX) . '" ' . $sClassName . '>' . $oFightOdds->getFighterOddsAsString($iX) . '</span></td>';
-                    }
-
-                    $iProcessed++;
-                }
-
-                //Fill empty cells
-                for ($iY = $iCurrentOperatorColumn; $iY < (sizeof($aBookieRefList) - 1); $iY++)
-                {
-                    echo '<td></td>';
-                }
-
-                //Add alert cell
-                //echo '<td class="button-cell"><a href="#" class="but-al" data-li="[' . $oFight->getID() . ',' . $iX . ']"><div class="but-img i-a" title="Add alert"></div></a></td>';
-
-                //Add index graph button
-                if ($bEverFoundOldOdds || count($aFightOdds) > 1)
-                {
-                    echo '<td class="button-cell but-si" data-li="[' . $iX . ',' . $oFightOdds->getFightID() . ']">
-                        <svg class="svg-i" viewBox="0 0 24 24" preserveAspectRatio="xMidYMid meet" focusable="false"><g><path d="M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zM9 17H7v-7h2v7zm4 0h-2V7h2v10zm4 0h-2v-4h2v4z"></path></g></svg>
-                    </td>';
-                }
-                else
-                {
-                    echo '<td class="button-cell but-si">
-                        <svg class="svg-i-disabled" viewBox="0 0 24 24" preserveAspectRatio="xMidYMid meet" focusable="false"><g><path d="M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zM9 17H7v-7h2v7zm4 0h-2V7h2v10zm4 0h-2v-4h2v4z"></path></g></svg>
-                    </td>';
-                }
-
-                echo '<td class="prop-cell prop-cell-exp" data-mu="' . $oFight->getID() . '">';
-                $iPropCount = OddsHandler::getPropCountForMatchup($oFight->getID());
-                if ($iPropCount > 0)
-                {
-                    echo $iPropCount . '&nbsp;<span class="exp-ard"></span>';
-                }
-                else
-                {
-                    echo '&nbsp;';
-                }
-                echo '</td>';
-
-                echo '</tr>';
-            }
-
-            
+           
             
 
             //Add prop rows
