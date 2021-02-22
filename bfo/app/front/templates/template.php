@@ -35,9 +35,7 @@
         }
 
         ?>
-        <title>
-            <?=isset($title) ? $title . ' | Best Fight Odds' : 'UFC &amp; MMA Odds &amp; Betting Lines | Best Fight Odds'?>
-        </title>
+        <title><?=isset($title) ? $title . ' | Best Fight Odds' : 'UFC &amp; MMA Odds &amp; Betting Lines | Best Fight Odds'?></title>
     </head>
     <body>
         <script type="text/javascript" async src="/js/bfo.min.js?v=0.2"></script>
@@ -53,7 +51,7 @@
                         <a href="/"><div class="header-menu-item <?=!isset($current_page) || $current_page == '' ? ' header-menu-selected ' : ''?>" style="margin-left: 10px">Latest<span class="item-non-mob-mini"> odds</span></div></a>
                         <a href="/archive"><div class="header-menu-item <?=isset($current_page) && $current_page == 'archive' ? ' header-menu-selected ' : ''?>">Archive</div></a>
                         <a href="/alerts"><div class="header-menu-item <?=isset($current_page) && $current_page == 'alerts' ? ' header-menu-selected ' : ''?>">Alerts</div></a>
-                        <a href="/links"><div class="header-menu-item <?=isset($current_page) && $current_page == 'links' ? ' header-menu-selected ' : ''?> item-non-mobile">Widget</div></a>
+                        <a href="/widget"><div class="header-menu-item <?=isset($current_page) && $current_page == 'widget' ? ' header-menu-selected ' : ''?> item-non-mobile">Widget</div></a>
                         <a href="https://www.proboxingodds.com" target="_blank" rel="noopener"><div class="header-menu-item  item-non-mobile">Boxing</div></a>
                         <a href="http://twitter.com/bestfightodds" target="_blank" rel="noopener"><div class="header-menu-item">
                             <svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"

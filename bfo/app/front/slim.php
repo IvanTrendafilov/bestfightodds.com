@@ -30,6 +30,10 @@ $app->get('/alerts', \MainController::class . ':alerts');
 $app->get('/terms', \MainController::class . ':terms');
 $app->get('/archive', \MainController::class . ':archive');
 $app->get('/search', \MainController::class . ':search');
+$app->get('/widget', \MainController::class . ':widget');
+$app->get('/fighters/{id}', \MainController::class . ':viewTeam');
+$app->get('/events2/{id}', \MainController::class . ':viewEvent');
+
 
 //Page routes
 /*$app->get('[/]', \AdminController::class . ':home');

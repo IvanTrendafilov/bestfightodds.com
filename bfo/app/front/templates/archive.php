@@ -1,4 +1,3 @@
-
 <?php $this->layout('template', ['title' => 'Archive', 'current_page' => 'archive']) ?>
 
 <div id="page-wrapper" style="max-width: 750px;">

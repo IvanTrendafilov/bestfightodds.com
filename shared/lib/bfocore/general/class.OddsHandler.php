@@ -422,7 +422,7 @@ class OddsHandler
         $result = OddsDAO::getLatestPropOddsV2($a_iEventID, $a_iMatchupID, $a_iBookieID, $a_iPropTypeID, $a_iTeamNum);
 
         $return = [];
-        //Fold structure into multidimensional array containing 
+        //Move result into multidimensional array 
         foreach ($result as $row)
         {
             //This segment initializes a key if not set before
@@ -437,6 +437,33 @@ class OddsHandler
             if (!isset($return[$row['event_id']][$row['matchup_id']][$row['proptype_id']][$row['team_num']][$row['bookie_id']])) 
                 $return[$row['event_id']][$row['matchup_id']][$row['proptype_id']][$row['team_num']][$row['bookie_id']] = [];
 
+            $return[$row['event_id']][$row['matchup_id']][$row['proptype_id']][$row['team_num']][$row['bookie_id']] = 
+                ['prop_desc' =>    $row['prop_desc'], 
+                 'negprop_desc' => $row['negprop_desc'], 
+                 'prop_odds' =>    $row['prop_odds'], 
+                 'negprop_odds' => $row['negprop_odds'],
+                 'previous_prop_odds' => $row['previous_prop_odds'],
+                 'previous_negprop_odds' => $row['previous_negprop_odds']];
+        }
+        return $return;
+    }
+
+    public static function getLatestMatchupOddsV2($a_iEventID = null, $a_iMatchupID = null)
+    {
+        $result = OddsDAO::getLatestMatchupOddsV2($a_iEventID, $a_iMatchupID);
+
+        $return = [];
+        //Move result into multidimensional array
+        foreach ($result as $row)
+        {
+            //This segment initializes a key if not set before
+            if (!isset($return[$row['event_id']])) 
+                $return[$row['event_id']] = [];
+            if (!isset($return[$row['event_id']][$row['matchup_id']])) 
+                $return[$row['event_id']][$row['matchup_id']] = [];
+            if (!isset($return[$row['event_id']][$row['matchup_id']][$row['bookie_id']]))
+                $return[$row['event_id']][$row['matchup_id']][$row['bookie_id']] = [];
+            
             $return[$row['event_id']][$row['matchup_id']][$row['proptype_id']][$row['team_num']][$row['bookie_id']] = 
                 ['prop_desc' =>    $row['prop_desc'], 
                  'negprop_desc' => $row['negprop_desc'], 
