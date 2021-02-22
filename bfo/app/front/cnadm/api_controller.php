@@ -264,9 +264,6 @@ class AdminAPIController
             //Check for twitter handle update
             if (v::alnum()->noWhitespace()->length(4, null)->validate(@$data->twitter_handle))
             {
-                $result = TwitterHandler::addTwitterHandle($data->fighter_id, $data->twitter_handle);
-                echo $result;
-                exit;
                 if (TwitterHandler::addTwitterHandle($data->fighter_id, $data->twitter_handle))
                 {
                     $return_data['msg'] = 'Successfully updated twitter Handle. ';
@@ -281,7 +278,7 @@ class AdminAPIController
             }
 
             //Check for alt name update (if so just add it to the bunch)
-            if (v::alnum(' ')->length(5, null)->validate(@$data->alt_name))
+            if (v::length(5, null)->validate(@$data->alt_name))
             {
                 if (EventHandler::addFighterAltName($data->fighter_id, $data->alt_name))
                 {
