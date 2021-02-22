@@ -126,7 +126,6 @@ class MainController
             }
             $view_data['teams_results'] = $teams ?? [];
             $view_data['events_results'] = $events ?? [];
-
         }
 
         $response->getBody()->write($this->plates->render('searchresults', $view_data));
