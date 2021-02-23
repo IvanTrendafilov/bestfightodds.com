@@ -36,13 +36,6 @@
 
         ?>
         <title><?php echo (defined('PAGE_OVERRIDE_TITLE') ? PAGE_OVERRIDE_TITLE . ' | Best Fight Odds': 'UFC &amp; MMA Odds &amp; Betting Lines | Best Fight Odds'); ?></title>
-        <?php
-        //Custom css block for iPad
-        if(stristr($_SERVER['HTTP_USER_AGENT'], 'iPad')) 
-        {
-            echo '<style>html { -webkit-text-size-adjust: none; }</style>';
-        }
-        ?>
     </head>
     <body>
         <script type="text/javascript" async src="/js/bfo.min.js?v=0.2"></script>
