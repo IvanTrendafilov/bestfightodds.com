@@ -437,11 +437,19 @@ class OddsHandler
             if (!isset($return[$row['event_id']][$row['matchup_id']][$row['proptype_id']][$row['team_num']][$row['bookie_id']])) 
                 $return[$row['event_id']][$row['matchup_id']][$row['proptype_id']][$row['team_num']][$row['bookie_id']] = [];
 
+
+            $prop_obj = new PropBet($row['matchup_id'],
+                            $row['bookie_id'],
+                            $row['prop_desc'],
+                            $row['prop_odds'],
+                            $row['negprop_desc'],
+                            $row['negprop_odds'],
+                            $row['proptype_id'],
+                            $row['date'],
+                            $row['team_num']);
+
             $return[$row['event_id']][$row['matchup_id']][$row['proptype_id']][$row['team_num']][$row['bookie_id']] = 
-                ['prop_desc' =>    $row['prop_desc'], 
-                 'negprop_desc' => $row['negprop_desc'], 
-                 'prop_odds' =>    $row['prop_odds'], 
-                 'negprop_odds' => $row['negprop_odds'],
+                ['odds_obj' =>    $prop_obj, 
                  'previous_prop_odds' => $row['previous_prop_odds'],
                  'previous_negprop_odds' => $row['previous_negprop_odds']];
         }

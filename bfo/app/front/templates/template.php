@@ -49,7 +49,7 @@
                 <div class="header-menu-wrapper">
                         <div class="header-menu">
                         <a href="/"><div class="header-menu-item <?=!isset($current_page) || $current_page == '' ? ' header-menu-selected ' : ''?>" style="margin-left: 10px">Latest<span class="item-non-mob-mini"> odds</span></div></a>
-                        <a href="/archive"><div class="header-menu-item <?=isset($current_page) && $current_page == 'archive' ? ' header-menu-selected ' : ''?>">Archive</div></a>
+                        <a href="/archive"><div class="header-menu-item <?=isset($current_page) && ($current_page == 'archive' || $current_page == 'event') ? ' header-menu-selected ' : ''?>">Archive</div></a>
                         <a href="/alerts"><div class="header-menu-item <?=isset($current_page) && $current_page == 'alerts' ? ' header-menu-selected ' : ''?>">Alerts</div></a>
                         <a href="/widget"><div class="header-menu-item <?=isset($current_page) && $current_page == 'widget' ? ' header-menu-selected ' : ''?> item-non-mobile">Widget</div></a>
                         <a href="https://www.proboxingodds.com" target="_blank" rel="noopener"><div class="header-menu-item  item-non-mobile">Boxing</div></a>

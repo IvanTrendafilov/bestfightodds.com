@@ -11,6 +11,7 @@ require_once 'lib/bfocore/general/class.OddsHandler.php';
 require_once 'lib/bfocore/general/class.GraphHandler.php';
 require_once 'lib/bfocore/general/class.TeamHandler.php';
 require_once 'lib/bfocore/general/caching/class.CacheControl.php';
+require_once 'lib/bfocore/general/class.StatsHandler.php';
 
 class MainController
 {
@@ -275,8 +276,6 @@ class MainController
         $event_id = substr($args['id'], strrpos($args['id'], '-') + 1);
         if (!intval($event_id))
         {
-            echo 'no event';
-            exit;
             return $response->withHeader('Location', '/')->withStatus(302);
         }
         $event = EventHandler::getEvent((int) $event_id);
@@ -316,20 +315,137 @@ class MainController
         }
         
 
-        $bookies = $aBookies = BookieHandler::getAllBookies();
+        $bookies = BookieHandler::getAllBookies();
         $matchups = EventHandler::getAllFightsForEvent($event->getID(), true);
+
+        //Convert matchups array to associative
+        $matchups_assoc = [];
+        foreach ($matchups as $matchup)
+        {
+            $matchups_assoc[$matchup->getID()] = $matchup;
+        }
 
         $prop_odds = OddsHandler::getLatestPropOddsV2($event->getID());
         $matchup_odds = OddsHandler::getLatestMatchupOddsV2($event->getID());
 
 
+        //Loop through prop odds and update prop bet descriptions with team names
+        foreach ($prop_odds as $prop_odds_entry)
+        {
 
+        }
 
         $view_data = [];
+
+        //Loop through prop odds and count the number of props available for each matchup
+        $view_data['matchup_prop_count'] = [];
+        foreach ($prop_odds as $event_entry)
+        {
+            foreach ($event_entry as $matchup_key => $matchup_entry)
+            {
+                foreach ($matchup_entry as $proptype_entry)
+                {
+                    foreach ($proptype_entry as $team_num_key => $team_num_entry)
+                    {
+                        //Count entries per matchup
+                        if (!isset($view_data['matchup_prop_count'][$matchup_key]))
+                        {
+                            $view_data['matchup_prop_count'][$matchup_key] = 0;
+                        }
+                        $view_data['matchup_prop_count'][$matchup_key]++;
+
+                        foreach ($team_num_entry as $bookie_odds)
+                        {
+                            //Adjust prop name description
+                            $prop_desc = $bookie_odds['odds_obj']->getPropName();
+                            $prop_desc = str_replace(['<T>', '<T2>'], 
+                                            [$matchups_assoc[$matchup_key]->getTeamLastNameAsString($team_num_key),
+                                            $matchups_assoc[$matchup_key]->getTeamLastNameAsString(($team_num_key % 2) + 1)]
+                                            , $prop_desc);
+                            $prop_desc = $bookie_odds['odds_obj']->setPropName($prop_desc);
+
+                            $prop_desc = $bookie_odds['odds_obj']->getNegPropName();
+                            $prop_desc = str_replace(['<T>', '<T2>'], 
+                                            [$matchups_assoc[$matchup_key]->getTeamLastNameAsString($team_num_key),
+                                            $matchups_assoc[$matchup_key]->getTeamLastNameAsString(($team_num_key % 2) + 1)]
+                                            , $prop_desc);
+                            $prop_desc = $bookie_odds['odds_obj']->setNegPropName($prop_desc);
+                        }
+
+                    }
+                }
+            }
+        }
+        
         $view_data['event'] = $event;
+        $view_data['bookies'] = $bookies;
         $view_data['matchups'] = $matchups;
         $view_data['prop_odds'] = $prop_odds;
         $view_data['matchup_odds'] = $matchup_odds;
+
+
+        //Add swing chart data (= change since opening, last 24h, last h)
+        $data = [];
+        $series_names = ['Change since opening', 'Change in the last 24 hours', 'Change in the last hour'];
+        for ($x = 0; $x <= 2; $x++)
+        {
+            $swings = StatsHandler::getAllDiffsForEvent($event->getID(), $x);
+            $row_data = [];
+            
+            foreach ($swings as $swing)
+            {
+                if ($swing[2]['swing'] < 0.01 && $swing[2]['swing'] > 0.00)
+                {
+                    $swing[2]['swing'] = 0.01;
+                }
+                if (round($swing[2]['swing'] * 100) != 0)
+                {
+                    
+                    $row_data[]  = [$swing[0]->getTeamAsString($swing[1]), -round($swing[2]['swing'] * 100)];
+                }
+            }
+            if (count($row_data) == 0)
+            {
+                $row_data[] = ['No ' . strtolower($series_names[$x]), null];
+            }
+            $data[]  = ["name" => $series_names[$x], "data" => $row_data, "visible" => ($x == 0 ? true : false)];
+        }
+        $view_data['swing_chart_data'] = $data;
+
+
+        //Add expected outcome data
+        //TODO: This should be refactored to use the generic getExpectedOutcomes instead
+        $outcomes = StatsHandler::getExpectedOutcomesForEvent($event->getID());
+        $row_data = [];
+        foreach ($outcomes as $outcome)
+        {
+            $labels = [$outcome[0]->getTeamAsString(1), $outcome[0]->getTeamAsString(2)];
+
+            $points = [$outcome[1]['team1_dec'],
+                        $outcome[1]['team1_itd'],
+                        $outcome[1]['draw'],
+                        $outcome[1]['team2_itd'],
+                        $outcome[1]['team2_dec']];
+            $row_data[] = [$labels, $points];
+
+        }
+        if (count($row_data) == 0)
+        {
+            $points = [0,0,0,0,0];
+            $row_data[] = [['N/A','N/A'], $points];
+        }
+        $view_data['expected_outcome_data']  = ["name" => 'Outcomes', "data" => $row_data];
+
+        
+
+
+
+
+
+        //Add page title and metadata
+        $view_data['team_title'] = $event->getName() . ' Odds & Betting Lines';
+        $view_data['meta_desc'] = $event->getName() . ' odds & betting lines.';
+        $view_data['meta_keywords'] = $event->getName();
         
         $page_content = $this->plates->render('event', $view_data);
 
