@@ -293,6 +293,7 @@ $iCellCounter = 0;*/
                                 </td>
 
                         </tr>
+                        <tr style="display: none;"></tr>
 
                         <?php foreach ($event_prop_odds[$event->getID()] as $proptype_id => $prop): ?>
 
@@ -345,7 +346,7 @@ $iCellCounter = 0;*/
                                     <?php endif ?>
 
                                 <td class="prop-cell"></td>
-                                
+
                                 </tr>
                             <?php endfor ?>
 
