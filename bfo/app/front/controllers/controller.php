@@ -447,7 +447,7 @@ class MainController
         
         //Loop through event prop odds and count the number of props available for each matchup
         $view_data['event_prop_count'] = 0;
-        foreach ($prop_odds as &$event_entry)
+        foreach ($event_prop_odds as &$event_entry)
         {
             foreach ($event_entry as &$proptype_entry)
             {
@@ -497,6 +497,7 @@ class MainController
         $view_data['matchups'] = $matchups;
         $view_data['prop_odds'] = $prop_odds;
         $view_data['matchup_odds'] = $matchup_odds;
+        $view_data['event_prop_odds'] = $event_prop_odds;
 
 
         //Add swing chart data (= change since opening, last 24h, last h)

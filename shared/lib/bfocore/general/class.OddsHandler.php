@@ -471,7 +471,7 @@ class OddsHandler
             if (!isset($return[$row['event_id']][$row['proptype_id']][$row['bookie_id']])) 
                 $return[$row['event_id']][$row['proptype_id']][$row['bookie_id']] = [];
 
-            $prop_obj = new EventPropBet($row['event?id'],
+            $prop_obj = new EventPropBet($row['event_id'],
                             $row['bookie_id'],
                             $row['prop_desc'],
                             $row['prop_odds'],
