@@ -310,6 +310,38 @@ class MainController
         {
             //Retrieve cached page
             $cached_contents = CacheControl::getCachedPage('event-' . $event->getID() . '-' . strtotime($last_change));
+
+            //Dynamically replace last change placeholder
+            $last_change = EventHandler::getLatestChangeDate($event->getID());
+            if ($last_change == null)
+            {
+                $cached_contents = str_replace('%last_change_date%', 'n/a', $cached_contents);
+                $cached_contents = str_replace('%last_change_diff%', 'n/a', $cached_contents);
+            }
+            else
+            {
+                $cached_contents = str_replace('%last_change_date%', date('M jS Y H:i', strtotime($last_change)) . ' UTC', $cached_contents);
+                $cached_contents = str_replace('%last_change_diff%', $this->viewEventgetTimeDifference(strtotime($last_change), strtotime(GENERAL_TIMEZONE . ' hours')), $cached_contents);
+            } 
+
+            //Perform dynamic modifications to the content
+            $cached_contents = preg_replace_callback('/changedate-([^\"]*)/', function ($matches)
+            {
+                $hour_diff = intval(floor((time() - strtotime($matches[1])) / 3600));
+                if ($hour_diff >= 72)
+                {
+                    return 'arage-3';
+                }
+                else if ($hour_diff >= 24)
+                {
+                    return 'arage-2"';
+                }
+                else
+                {
+                    return 'arage-1"';
+                }
+            }, $cached_contents);
+
             $response->getBody()->write($cached_contents);
             return $response;
         }
@@ -555,15 +587,132 @@ class MainController
         $view_data['team_title'] = $event->getName() . ' Odds & Betting Lines';
         $view_data['meta_desc'] = $event->getName() . ' odds & betting lines.';
         $view_data['meta_keywords'] = $event->getName();
+        $view_data['disable alerts'] = true;
         
         $page_content = $this->plates->render('event', $view_data);
 
         //Cache page
         CacheControl::cleanPageCacheWC('event-' . $event->getID() . '-*');
         CacheControl::cachePage($page_content, 'event-' . $event->getID() . '-' . strtotime($last_change) . '.php');
-       
+        
+        //Dynamically replace last change placeholder
+        $last_change = EventHandler::getLatestChangeDate($event->getID());
+        if ($last_change == null)
+        {
+            $page_content = str_replace('%last_change_date%', 'n/a', $page_content);
+            $page_content = str_replace('%last_change_diff%', 'n/a', $page_content);
+        }
+        else
+        {
+            $page_content = str_replace('%last_change_date%', date('M jS Y H:i', strtotime($last_change)) . ' UTC', $page_content);
+            $page_content = str_replace('%last_change_diff%', $this->viewEventgetTimeDifference(strtotime($last_change), strtotime(GENERAL_TIMEZONE . ' hours')), $page_content);
+        } 
+
+        //Perform dynamic modifications to the content
+        $page_content = preg_replace_callback('/changedate-([^\"]*)/', function ($matches)
+        {
+            $hour_diff = intval(floor((time() - strtotime($matches[1])) / 3600));
+            if ($hour_diff >= 72)
+            {
+                return 'arage-3';
+            }
+            else if ($hour_diff >= 24)
+            {
+                return 'arage-2"';
+            }
+            else
+            {
+                return 'arage-1"';
+            }
+        }, $page_content);
+
+
         $response->getBody()->write($page_content);
         return $response;
+    }
+
+    /**
+     *  Used by viewEvent function to get a readable format for difference between two dates
+     */
+    private function viewEventgetTimeDifference($a_sStart, $a_sEnd)
+    {
+        if ($a_sStart == '')
+        {
+            return 'n/a';
+        }
+
+        if ($a_sStart !== -1 && $a_sEnd !== -1)
+        {
+            if ($a_sEnd >= $a_sStart)
+            {
+                $sRetString = '';
+
+                $diff = $a_sEnd - $a_sStart;
+                if ($days = intval(floor($diff / 86400)))
+                {
+                    $diff = $diff % 86400;
+                }
+                if ($hours = intval(floor($diff / 3600)))
+                {
+                    $diff = $diff % 3600;
+                }
+                if ($minutes = intval(floor($diff / 60)))
+                {
+                    $diff = $diff % 60;
+                }
+                if ($days == 0 && $hours == 0 && $minutes == 0)
+                {
+                    $minutes = 1;
+                }
+
+                if ($days > 0)
+                {
+                    if ($days == 1)
+                    {
+                        $sRetString .= '1 day';
+                        if ($hours > 0)
+                        {
+                            $sRetString .= ' ' . $hours . ' hr';
+                        }
+                        else
+                        {
+                            if ($minutes > 0)
+                            {
+                                $sRetString .= ' ' . $minutes . ' min';
+                            }
+                        }
+                    }
+                    else
+                    {
+                        $sRetString .= $days . ' days';
+                    }
+                }
+                else
+                {
+                    if ($hours > 0)
+                    {
+                        $sRetString .= $hours . ' hr';
+                        if ($minutes > 0)
+                        {
+                            $sRetString .= ' ' . $minutes . ' min';
+                        }
+                    }
+                    else
+                    {
+                        if ($minutes == 1)
+                        {
+                            $sRetString .= '&lt; ';
+                        }
+                        $sRetString .= $minutes . ' min';
+                    }
+                }
+
+                $sRetString .= ' ago';
+
+                return $sRetString;
+            }
+        }
+        return '';
     }
 
 }
