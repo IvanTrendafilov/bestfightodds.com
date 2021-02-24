@@ -437,7 +437,6 @@ class OddsHandler
             if (!isset($return[$row['event_id']][$row['matchup_id']][$row['proptype_id']][$row['team_num']][$row['bookie_id']])) 
                 $return[$row['event_id']][$row['matchup_id']][$row['proptype_id']][$row['team_num']][$row['bookie_id']] = [];
 
-
             $prop_obj = new PropBet($row['matchup_id'],
                             $row['bookie_id'],
                             $row['prop_desc'],
@@ -449,6 +448,39 @@ class OddsHandler
                             $row['team_num']);
 
             $return[$row['event_id']][$row['matchup_id']][$row['proptype_id']][$row['team_num']][$row['bookie_id']] = 
+                ['odds_obj' =>    $prop_obj, 
+                 'previous_prop_odds' => $row['previous_prop_odds'],
+                 'previous_negprop_odds' => $row['previous_negprop_odds']];
+        }
+        return $return;
+    }
+
+    public static function getLatestEventPropOddsV2($a_iEventID = null, $a_iMatchupID = null, $a_iBookieID = null, $a_iPropTypeID = null, $a_iTeamNum = null)
+    {
+        $result = OddsDAO::getLatestEventPropOddsV2($a_iEventID, $a_iMatchupID, $a_iBookieID, $a_iPropTypeID, $a_iTeamNum);
+
+        $return = [];
+        //Move result into multidimensional array 
+        foreach ($result as $row)
+        {
+            //This segment initializes a key if not set before
+            if (!isset($return[$row['event_id']])) 
+                $return[$row['event_id']] = [];
+            if (!isset($return[$row['event_id']][$row['proptype_id']]))
+                $return[$row['event_id']][$row['proptype_id']] = [];
+            if (!isset($return[$row['event_id']][$row['proptype_id']][$row['bookie_id']])) 
+                $return[$row['event_id']][$row['proptype_id']][$row['bookie_id']] = [];
+
+            $prop_obj = new EventPropBet($row['event?id'],
+                            $row['bookie_id'],
+                            $row['prop_desc'],
+                            $row['prop_odds'],
+                            $row['negprop_desc'],
+                            $row['negprop_odds'],
+                            $row['proptype_id'],
+                            $row['date']);
+
+            $return[$row['event_id']][$row['proptype_id']][$row['bookie_id']] = 
                 ['odds_obj' =>    $prop_obj, 
                  'previous_prop_odds' => $row['previous_prop_odds'],
                  'previous_negprop_odds' => $row['previous_negprop_odds']];

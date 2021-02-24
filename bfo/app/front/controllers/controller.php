@@ -314,8 +314,8 @@ class MainController
             return $response;
         }
         
-
-        $bookies = BookieHandler::getAllBookies();
+        $view_data = [];
+        $view_data['bookies'] = BookieHandler::getAllBookies();
         $matchups = EventHandler::getAllFightsForEvent($event->getID(), true);
 
         //Convert matchups array to associative
@@ -327,25 +327,60 @@ class MainController
 
         $prop_odds = OddsHandler::getLatestPropOddsV2($event->getID());
         $matchup_odds = OddsHandler::getLatestMatchupOddsV2($event->getID());
+        $event_prop_odds = OddsHandler::getLatestEventPropOddsV2($event->getID());
 
-
-        //Loop through prop odds and update prop bet descriptions with team names
-        foreach ($prop_odds as $prop_odds_entry)
+        foreach ($matchup_odds as &$event_entry)
         {
-
+            foreach ($event_entry as &$matchup_entry)
+            {
+                $best_odds_team1 = null;
+                $best_odds_team2 = null;
+                foreach ($matchup_entry as $odds_key => $bookie_odds)
+                {
+                    //Indicate which line is best on both sides
+                    if ($best_odds_team1 == null)
+                    {
+                        $matchup_entry[$odds_key]['is_best_team1'] = true;
+                        $best_odds_team1 = $odds_key;
+                    }
+                    else if ($bookie_odds['odds_obj']->getOdds(1) > $matchup_entry[$best_odds_team1]['odds_obj']->getOdds(1))
+                    {
+                        $matchup_entry[$best_odds_team1]['is_best_team1'] = false;
+                        $matchup_entry[$odds_key]['is_best_team1'] = true;
+                        $best_odds_team1 = $odds_key;
+                    }
+                    else 
+                    {
+                        $matchup_entry[$odds_key]['is_best_team1'] = false;
+                    }
+                    if ($best_odds_team2 == null)
+                    {
+                        $matchup_entry[$odds_key]['is_best_team2'] = true;
+                        $best_odds_team2 = $odds_key;
+                    }
+                    else if ($bookie_odds['odds_obj']->getOdds(2) > $matchup_entry[$best_odds_team2]['odds_obj']->getOdds(2))
+                    {
+                        $matchup_entry[$best_odds_team2]['is_best_team2'] = false;
+                        $matchup_entry[$odds_key]['is_best_team2'] = true;
+                        $best_odds_team2 = $odds_key;
+                    }
+                    else
+                    {
+                        $matchup_entry[$odds_key]['is_best_team2'] = false;
+                    }
+                }
+            }
         }
-
-        $view_data = [];
 
         //Loop through prop odds and count the number of props available for each matchup
         $view_data['matchup_prop_count'] = [];
-        foreach ($prop_odds as $event_entry)
+        foreach ($prop_odds as &$event_entry)
         {
-            foreach ($event_entry as $matchup_key => $matchup_entry)
+            foreach ($event_entry as $matchup_key => &$matchup_entry)
             {
-                foreach ($matchup_entry as $proptype_entry)
+                foreach ($matchup_entry as &$proptype_entry)
                 {
-                    foreach ($proptype_entry as $team_num_key => $team_num_entry)
+                    foreach ($proptype_entry as $team_num_key => &$team_num_entry)
                     {
                         //Count entries per matchup
                         if (!isset($view_data['matchup_prop_count'][$matchup_key]))
@@ -353,9 +388,43 @@ class MainController
                             $view_data['matchup_prop_count'][$matchup_key] = 0;
                         }
                         $view_data['matchup_prop_count'][$matchup_key]++;
-
-                        foreach ($team_num_entry as $bookie_odds)
+                        
+                        $best_odds = null;
+                        $best_negodds = null;
+                        foreach ($team_num_entry as $odds_key => $bookie_odds)
                         {
+                            //Indicate which line is best on both sides (prop and negprop)
+                            if ($best_odds == null)
+                            {
+                                $team_num_entry[$odds_key]['is_best_pos'] = true;
+                                $best_odds = $odds_key;
+                            }
+                            else if ($bookie_odds['odds_obj']->getPropOdds() > $team_num_entry[$best_odds]['odds_obj']->getPropOdds())
+                            {
+                                $team_num_entry[$best_odds]['is_best_pos'] = false;
+                                $team_num_entry[$odds_key]['is_best_pos'] = true;
+                                $best_odds = $odds_key;
+                            }
+                            else 
+                            {
+                                $team_num_entry[$odds_key]['is_best_pos'] = false;
+                            }
+                            if ($best_negodds == null)
+                            {
+                                $team_num_entry[$odds_key]['is_best_neg'] = true;
+                                $best_negodds = $odds_key;
+                            }
+                            else if ($bookie_odds['odds_obj']->getNegPropOdds() > $team_num_entry[$best_negodds]['odds_obj']->getNegPropOdds())
+                            {
+                                $team_num_entry[$best_negodds]['is_best_neg'] = false;
+                                $team_num_entry[$odds_key]['is_best_neg'] = true;
+                                $best_negodds = $odds_key;
+                            }
+                            else
+                            {
+                                $team_num_entry[$odds_key]['is_best_neg'] = false;
+                            }
+
                             //Adjust prop name description
                             $prop_desc = $bookie_odds['odds_obj']->getPropName();
                             $prop_desc = str_replace(['<T>', '<T2>'], 
@@ -371,14 +440,60 @@ class MainController
                                             , $prop_desc);
                             $prop_desc = $bookie_odds['odds_obj']->setNegPropName($prop_desc);
                         }
-
                     }
                 }
             }
         }
         
+        //Loop through event prop odds and count the number of props available for each matchup
+        $view_data['event_prop_count'] = 0;
+        foreach ($prop_odds as &$event_entry)
+        {
+            foreach ($event_entry as &$proptype_entry)
+            {
+                $view_data['event_prop_count']++;
+                
+                $best_odds = null;
+                $best_negodds = null;
+                foreach ($proptype_entry as $odds_key => $bookie_odds)
+                {
+                    //Indicate which line is best on both sides (prop and negprop)
+                    if ($best_odds == null)
+                    {
+                        $proptype_entry[$odds_key]['is_best_pos'] = true;
+                        $best_odds = $odds_key;
+                    }
+                    else if ($bookie_odds['odds_obj']->getPropOdds() > $proptype_entry[$best_odds]['odds_obj']->getPropOdds())
+                    {
+                        $proptype_entry[$best_odds]['is_best_pos'] = false;
+                        $proptype_entry[$odds_key]['is_best_pos'] = true;
+                        $best_odds = $odds_key;
+                    }
+                    else 
+                    {
+                        $proptype_entry[$odds_key]['is_best_pos'] = false;
+                    }
+                    if ($best_negodds == null)
+                    {
+                        $proptype_entry[$odds_key]['is_best_neg'] = true;
+                        $best_negodds = $odds_key;
+                    }
+                    else if ($bookie_odds['odds_obj']->getNegPropOdds() > $proptype_entry[$best_negodds]['odds_obj']->getNegPropOdds())
+                    {
+                        $proptype_entry[$best_negodds]['is_best_neg'] = false;
+                        $proptype_entry[$odds_key]['is_best_neg'] = true;
+                        $best_negodds = $odds_key;
+                    }
+                    else
+                    {
+                        $proptype_entry[$odds_key]['is_best_neg'] = false;
+                    }
+                }
+            }
+        }
+
         $view_data['event'] = $event;
-        $view_data['bookies'] = $bookies;
+        
         $view_data['matchups'] = $matchups;
         $view_data['prop_odds'] = $prop_odds;
         $view_data['matchup_odds'] = $matchup_odds;
@@ -412,7 +527,6 @@ class MainController
         }
         $view_data['swing_chart_data'] = $data;
 
-
         //Add expected outcome data
         //TODO: This should be refactored to use the generic getExpectedOutcomes instead
         $outcomes = StatsHandler::getExpectedOutcomesForEvent($event->getID());
@@ -435,12 +549,6 @@ class MainController
             $row_data[] = [['N/A','N/A'], $points];
         }
         $view_data['expected_outcome_data']  = ["name" => 'Outcomes', "data" => $row_data];
-
-        
-
-
-
-
 
         //Add page title and metadata
         $view_data['team_title'] = $event->getName() . ' Odds & Betting Lines';

@@ -164,9 +164,7 @@ $iCellCounter = 0;*/
                                 <?php if (isset($odds['odds_obj'])): ?>
 
                                     <td class="but-sg" data-li="[<?=$odds['odds_obj']->getBookieID()?>,<?=$i?>,<?=$odds['odds_obj']->getFightID()?>]">
-                                        <span id="oID<?=('1' . sprintf("%06d", $odds['odds_obj']->getFightID()) . sprintf("%02d", $odds['odds_obj']->getBookieID()) . $i)?>">
-                                            <?=$odds['odds_obj']->getFighterOddsAsString($i)?>
-                                        </span>
+                                        <span id="oID<?=('1' . sprintf("%06d", $odds['odds_obj']->getFightID()) . sprintf("%02d", $odds['odds_obj']->getBookieID()) . $i)?>"<?=$odds['is_best_team' . $i] ? ' class="bestbet"' : ''?>><?=$odds['odds_obj']->getFighterOddsAsString($i)?></span>
                                         <?php if (isset($odds['previous_team' . $i . '_odds'])): ?>
                                             <?php if ($odds['odds_obj']->getFighterOdds($i) > $odds['previous_team' . $i . '_odds']): ?>
                                                 <span class="aru changedate-<?=$odds['odds_obj']->getDate()?>">▲</span>
@@ -246,17 +244,9 @@ $iCellCounter = 0;*/
 
                                         <?php if (isset($odds['odds_obj'])): ?>
 
-
-                                            <?php/* TODO:
-                                            $class_extra = '';
-                                            if ($odds == $best_odds)
-                                            {
-                                                $class_extra = ' class="bestbet"';
-                                            }*/?>
-
                                             <?php if (($i == 1 ? $odds['odds_obj']->getPropOddsAsString() : $odds['odds_obj']->getNegPropOddsAsString()) != '-99999'): ?>
 
-                                                <td class="but-sgp" data-li="[<?=$bookie->getID()?>,<?=$i?>,<?=$matchup->getID()?>,<?=$proptype_id?>,<?=$team_num?>]"><span id="oID<?=('2' . sprintf("%06d", $matchup->getID()) . sprintf("%02d", $bookie->getID()) . $i . sprintf("%03d", $proptype_id) . $team_num)?>" ' . $class_extra . '><?=$i == 1 ? $odds['odds_obj']->getPropOddsAsString() : $odds['odds_obj']->getNegPropOddsAsString()?></span>
+                                                <td class="but-sgp" data-li="[<?=$bookie->getID()?>,<?=$i?>,<?=$matchup->getID()?>,<?=$proptype_id?>,<?=$team_num?>]"><span id="oID<?=('2' . sprintf("%06d", $matchup->getID()) . sprintf("%02d", $bookie->getID()) . $i . sprintf("%03d", $proptype_id) . $team_num)?>"<?=$i == 1 ? ($odds['is_best_pos'] ? ' class="bestbet"' : '') : ($odds['is_best_neg'] ? ' class="bestbet"': '') ?>><?=$i == 1 ? $odds['odds_obj']->getPropOddsAsString() : $odds['odds_obj']->getNegPropOddsAsString()?></span>
                                                 <?php if (isset($previous_odds_val)): ?>
                                                     <?php if ($odds_val > $previous_odds_val): ?>
                                                                 <span class="aru changedate-<?=$odds['odds_obj']->getDate()?>">▲</span>
