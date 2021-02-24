@@ -34,7 +34,7 @@ $iCellCounter = 0;*/
             </div>
 
         </div>
-        <?php /*
+
         <table class="odds-table odds-table-responsive-header">
             <thead>
                 <tr>
@@ -43,93 +43,50 @@ $iCellCounter = 0;*/
             </thead>
             <tbody>
 
-            <?php foreach ($matchups as $matchup): ?>
+            <?php //============== Add matchups ====================== ?>
+                <?php foreach ($matchups as $matchup_key => $matchup): ?>
+                    <?php for ($i = 1; $i <= 2; $i++): ?>
+                        <tr <?=(($i == 2 && $matchup_key == array_key_last($matchups)) ? ' style="border-bottom: 0;" ' : '')?>>
+                            <th scope="row"><a href="/fighters/<?=$matchup->getFighterAsLinkString($i)?>"><span class="t-b-fcc"><?=$matchup->getFighterAsString($i)?></span></a></th>
+                        </tr>
+                    <?php endfor ?>
+                    <?php //============== Add props ======================= ?>
+                    <?php foreach ($prop_odds[$event->getID()][$matchup->getID()] as $proptype_id => $team_num_row): ?>
+                        <?php foreach ($team_num_row as $team_num => $prop): ?>
+                            <?php for ($i = 1; $i <= 2; $i++): ?>
+                                <tr class="pr">
+                                    <th scope="row"><?=$i == 1 ? $prop[array_key_first($prop)]['odds_obj']->getPropName() : $prop[array_key_first($prop)]['odds_obj']->getNegPropName()?></th>
+                                </tr>
+                            <?php endfor ?>
+                        <?php endforeach ?>
+                    <?php endforeach ?>
+                <?php endforeach ?>
 
+                <?php //============== Add event props ======================= ?>
 
-            <?php endforeach ?>
-      <?php /*  $iFightCounter = 0;
-        foreach ($aFights as $oFight)
-        {
-            $iCurrentOperatorColumn = 0;
-            for ($i = 1; $i <= 2; $i++)
-            {
-                echo '<tr id="mu-' . $oFight->getID() . '" ' . (($i == 2 && $iFightCounter == count($aFights) - 1) ? ' style="border-bottom: 0;" ' : '') . '>'; //If this is the last matchup, add style for it
-                echo '<th scope="row"><a href="/fighters/' . $oFight->getFighterAsLinkString($i) . '"><span class="t-b-fcc">' . $oFight->getFighterAsString($i) . '</span></a></th>';
+                <?php if (count($event_prop_odds[$event->getID()]) > 1): ?>
+                    <tr class="eventprop" id="mu-<?=$event->getID()?>">
+                            <th scope="row" style="font-weight: 400"><a href="#" data-mu="<?=$event->getID()?>">Event props</a></th>
+                            <?php foreach ($bookies as $bookie): ?>
+                                <td></td>
+                            <?php endforeach ?>
+                            <td class="button-cell"></td>
+                            <td class="prop-cell prop-cell-exp" data-mu="e<?=$event->getID()?>">
+                                <?=$event_prop_count?>&nbsp;<span class="exp-ard"></span>
+                            </td>
+                    </tr>
+                    <tr style="display: none;"></tr>
+                    <?php foreach ($event_prop_odds[$event->getID()] as $proptype_id => $prop): ?>
+                            <?php for ($i = 1; $i <= 2; $i++): ?>
+                                <tr class="pr">
+                                    <th scope="row"><?=$i == 1 ? $prop[array_key_first($prop)]['odds_obj']->getPropName() : $prop[array_key_first($prop)]['odds_obj']->getNegPropName()?></th>
+                                </tr>
+                        <?php endfor ?>
+                    <?php endforeach ?>
+                <?php endif ?>
 
-                echo '</tr>';
-            }
-
-            //Add prop rows
-            $aPropTypes = OddsHandler::getAllPropTypesForMatchup($oFight->getID());
-
-            if (count($aPropTypes) > 0)
-            {
-                $iPropCounter = 0;
-                $iPropRowCounter = 0;
-                foreach ($aPropTypes as $oPropType)
-                {
-                    $iCurrentOperatorColumn = 0;
-                    for ($i = 1; $i <= 2; $i++)
-                    {
-                        //If order has changed in the database we need to switch the odds
-                        if ($oFight->hasOrderChanged())
-                        {
-                            $oPropType->invertTeamNum();
-                        }
-                        
-                        $iPropRowCounter++;
-                        //Replace template placeholders for team names
-                        $oPropType->setPropDesc(str_replace('<T>', $oFight->getTeamLastNameAsString($oPropType->getTeamNum()), $oPropType->getPropDesc()));
-                        $oPropType->setPropNegDesc(str_replace('<T>', $oFight->getTeamLastNameAsString($oPropType->getTeamNum()), $oPropType->getPropNegDesc()));
-                        $oPropType->getPropDesc(str_replace('<T2>', $oFight->getTeamLastNameAsString(($oPropType->getTeamNum() % 2) + 1), $oPropType->getPropDesc()));
-                        $oPropType->setPropNegDesc(str_replace('<T2>', $oFight->getTeamLastNameAsString(($oPropType->getTeamNum() % 2) + 1), $oPropType->getPropNegDesc()));
-
-                        echo '<tr class="pr"' . (($i == 2 && $iPropCounter == count($aPropTypes) - 1) ? ' style="border-bottom: 2px solid #f8f8f8;"' : (($i == 1 && $iFightCounter == count($aFights) - 1 && $iPropCounter == 0) ? ' style="border-top: 1px solid #C6C6C6;"' : '')) . '>';
-                        echo '<th scope="row">' . ($i == 1 ? $oPropType->getPropDesc() : $oPropType->getPropNegDesc()) . '</th>';
-                        echo '</tr>';
-                    }
-
-                    $iPropCounter++;
-                }
-            }
-
-            //Finished adding props
-
-            $iFightCounter++;
-        }
-
-        //Add event prop rows
-        $aPropTypes = OddsHandler::getAllPropTypesForEvent($event->getID());
-        if (count($aPropTypes) > 0)
-        {
-            echo '<tr class="eventprop" id="mu-e' . $event->getID() . '">';
-            echo '<th scope="row" style="font-weight: 400"><a href="#" data-mu="' . $event->getID() . '">Event props</a></th>';
-            echo '</tr>';
-
-            $iPropCounter = 0;
-            $iPropRowCounter = 0;
-            foreach ($aPropTypes as $oPropType)
-            {
-                    $iCurrentOperatorColumn = 0;
-                    for ($i = 1; $i <= 2; $i++)
-                    {
-                        $iPropRowCounter++;
-                        echo '<tr class="pr"' . (($i == 2 && $iPropCounter == count($aPropTypes) - 1) ? ' style="border-bottom: 2px solid #f8f8f8;"' : (($i == 1 && $iPropCounter == 0) ? ' style="border-top: 1px solid #C6C6C6;"' : '')) . '>';
-                        echo '<th scope="row">' . ($i == 1 ? $oPropType->getPropDesc() : $oPropType->getPropNegDesc()) . '&nbsp;</th>';
-
-                        echo '</tr>';
-                    }
-                    $iPropCounter++;
-            }
-        }
-
-
-
-        echo '</tbody>'
-        . '</table>';
-    */?>
-
-        <?php /*$sLastChange = EventHandler::getLatestChangeDate($event->getID());*/?>
+            </tbody>
+        </table>
 
         <div class="table-inner-wrapper"><div class="table-inner-shadow-left"></div><div class="table-inner-shadow-right"></div>
             <div class="table-scroller">
@@ -161,7 +118,7 @@ $iCellCounter = 0;*/
                                 <?php if (isset($odds['odds_obj'])): ?>
 
                                     <td class="but-sg" data-li="[<?=$odds['odds_obj']->getBookieID()?>,<?=$i?>,<?=$odds['odds_obj']->getFightID()?>]">
-                                        <span id="oID<?=('1' . sprintf("%06d", $odds['odds_obj']->getFightID()) . sprintf("%02d", $odds['odds_obj']->getBookieID()) . $i)?>"<?=$odds['is_best_team' . $i] ? ' class="bestbet"' : ''?>><?=$odds['odds_obj']->getFighterOddsAsString($i)?></span>
+                                        <span id="oID<?=('1' . sprintf("%06d", $odds['odds_obj']->getFightID()) . sprintf("%02d", $odds['odds_obj']->getBookieID()) . $i)?>"<?=isset($odds['is_best_team' . $i]) ? ' class="bestbet"' : ''?>><?=$odds['odds_obj']->getFighterOddsAsString($i)?></span>
                                         <?php if (isset($odds['previous_team' . $i . '_odds'])): ?>
                                             <?php if ($odds['odds_obj']->getFighterOdds($i) > $odds['previous_team' . $i . '_odds']): ?>
                                                 <span class="aru changedate-<?=$odds['odds_obj']->getDate()?>">▲</span>
@@ -210,7 +167,7 @@ $iCellCounter = 0;*/
 
                                 <?php for ($i = 1; $i <= 2; $i++): ?>
 
-                                    <tr class="pr"<?=(($i == 2 && $team_num == array_key_last($team_num_row)) ? ' style="border-bottom: 2px solid #f8f8f8;"' : (($i == 1) ? ' style="border-top: 1px solid #C6C6C6;"' : ''))?>>
+                                    <tr class="pr">
                                     <th scope="row"><?=$i == 1 ? $prop[array_key_first($prop)]['odds_obj']->getPropName() : $prop[array_key_first($prop)]['odds_obj']->getNegPropName()?></th>
                                 
                                     <?php foreach ($bookies as $bookie): ?>
@@ -223,7 +180,7 @@ $iCellCounter = 0;*/
 
                                             <?php if (($i == 1 ? $odds['odds_obj']->getPropOddsAsString() : $odds['odds_obj']->getNegPropOddsAsString()) != '-99999'): ?>
 
-                                                <td class="but-sgp" data-li="[<?=$bookie->getID()?>,<?=$i?>,<?=$matchup->getID()?>,<?=$proptype_id?>,<?=$team_num?>]"><span id="oID<?=('2' . sprintf("%06d", $matchup->getID()) . sprintf("%02d", $bookie->getID()) . $i . sprintf("%03d", $proptype_id) . $team_num)?>"<?=$i == 1 ? ($odds['is_best_pos'] ? ' class="bestbet"' : '') : ($odds['is_best_neg'] ? ' class="bestbet"': '') ?>><?=$i == 1 ? $odds['odds_obj']->getPropOddsAsString() : $odds['odds_obj']->getNegPropOddsAsString()?></span>
+                                                <td class="but-sgp" data-li="[<?=$bookie->getID()?>,<?=$i?>,<?=$matchup->getID()?>,<?=$proptype_id?>,<?=$team_num?>]"><span id="oID<?=('2' . sprintf("%06d", $matchup->getID()) . sprintf("%02d", $bookie->getID()) . $i . sprintf("%03d", $proptype_id) . $team_num)?>"<?=$i == 1 ? (isset($odds['is_best_pos']) ? ' class="bestbet"' : '') : (isset($odds['is_best_neg']) ? ' class="bestbet"': '') ?>><?=$i == 1 ? $odds['odds_obj']->getPropOddsAsString() : $odds['odds_obj']->getNegPropOddsAsString()?></span>
                                                 <?php if (isset($previous_odds_val)): ?>
                                                     <?php if ($odds_val > $previous_odds_val): ?>
                                                                 <span class="aru changedate-<?=$odds['odds_obj']->getDate()?>">▲</span>
@@ -246,16 +203,9 @@ $iCellCounter = 0;*/
 
                                     <?php endforeach ?>
 
-                                    <?php if (count($prop) > 1): //TODO: Add $bEverFoundOldOddscheck ?>
-                                            <td class="button-cell but-sip" data-li="[' . $i . ',' . $oPropOdds->getMatchupID() . ',' . $oPropOdds->getPropTypeID() . ',' . $oPropOdds->getTeamNumber() . ']">
-                                                <svg class="svg-i" viewBox="0 0 24 24" preserveAspectRatio="xMidYMid meet" focusable="false"><g><path d="M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zM9 17H7v-7h2v7zm4 0h-2V7h2v10zm4 0h-2v-4h2v4z"></path></g></svg>
-                                            </td>
-                                    <?php else: ?>
-                                        <td class="button-cell">
-                                            <svg class="svg-i-disabled" viewBox="0 0 24 24" preserveAspectRatio="xMidYMid meet" focusable="false"><g><path d="M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zM9 17H7v-7h2v7zm4 0h-2V7h2v10zm4 0h-2v-4h2v4z"></path></g></svg>
-                                        </td>
-                                    <?php endif ?>
-
+                                    <td class="button-cell but-sip" data-li="[<?=$i?>,<?=$matchup->getID()?>,<?=$proptype_id?>,<?=$team_num?>]">
+                                        <svg class="svg-i" viewBox="0 0 24 24" preserveAspectRatio="xMidYMid meet" focusable="false"><g><path d="M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zM9 17H7v-7h2v7zm4 0h-2V7h2v10zm4 0h-2v-4h2v4z"></path></g></svg>
+                                    </td>
 
                                     <td class="prop-cell"></td>
                                     </tr>
@@ -291,7 +241,7 @@ $iCellCounter = 0;*/
 
                                 <?php for ($i = 1; $i <= 2; $i++): ?>
 
-                                    <tr class="pr"<?=(($i == 2 && $proptype_id == array_key_last($event_prop_odds[$event->getID()])) ? ' style="border-bottom: 2px solid #f8f8f8;"' : (($i == 1) ? ' style="border-top: 1px solid #C6C6C6;"' : ''))?>>
+                                    <tr class="pr">
                                     <th scope="row"><?=$i == 1 ? $prop[array_key_first($prop)]['odds_obj']->getPropName() : $prop[array_key_first($prop)]['odds_obj']->getNegPropName()?></th>
 
                                     <?php foreach ($bookies as $bookie): ?>
@@ -304,7 +254,7 @@ $iCellCounter = 0;*/
 
                                             <?php if (($i == 1 ? $odds['odds_obj']->getPropOddsAsString() : $odds['odds_obj']->getNegPropOddsAsString()) != '-99999'): ?>
 
-                                                <td class="but-sgep" data-li="[<?=$event->getID()?>,<?=$bookie->getID()?>,<?=$i?>,<?=$proptype_id?>,0]"><span id="oID<?=('2' . sprintf("%06d", $odds['odds_obj']->getMatchupID()) . sprintf("%02d", $bookie->getID()) . $i . sprintf("%03d", $proptype_id) . 0)?>"<?=$i == 1 ? ($odds['is_best_pos'] ? ' class="bestbet"' : '') : ($odds['is_best_neg'] ? ' class="bestbet"': '') ?>><?=($i == 1 ? $odds['odds_obj']->getPropOddsAsString() : $odds['odds_obj']->getNegPropOddsAsString())?></span>
+                                                <td class="but-sgep" data-li="[<?=$event->getID()?>,<?=$bookie->getID()?>,<?=$i?>,<?=$proptype_id?>,0]"><span id="oID<?=('2' . sprintf("%06d", $odds['odds_obj']->getMatchupID()) . sprintf("%02d", $bookie->getID()) . $i . sprintf("%03d", $proptype_id) . 0)?>"<?=$i == 1 ? (isset($odds['is_best_pos']) ? ' class="bestbet"' : '') : (isset($odds['is_best_neg']) ? ' class="bestbet"': '') ?>><?=($i == 1 ? $odds['odds_obj']->getPropOddsAsString() : $odds['odds_obj']->getNegPropOddsAsString())?></span>
                                                 <?php if (isset($previous_odds_val)): ?>
                                                     <?php if ($odds_val > $previous_odds_val): ?>
                                                                 <span class="aru changedate-<?=$odds['odds_obj']->getDate()?>">▲</span>
@@ -327,15 +277,9 @@ $iCellCounter = 0;*/
 
                                     <?php endforeach ?>
 
-                                    <?php if (count($prop) > 1): ?>
-                                        <td class="button-cell but-siep" data-li="[<?=$event->getID()?>,<?=$i?>,<?=$proptype_id?>, 0]">
-                                            <svg class="svg-i" viewBox="0 0 24 24" preserveAspectRatio="xMidYMid meet" focusable="false"><g><path d="M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zM9 17H7v-7h2v7zm4 0h-2V7h2v10zm4 0h-2v-4h2v4z"></path></g></svg>
-                                        </td>
-                                    <?php else: ?>
-                                        <td class="button-cell">
-                                            <svg class="svg-i-disabled" viewBox="0 0 24 24" preserveAspectRatio="xMidYMid meet" focusable="false"><g><path d="M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zM9 17H7v-7h2v7zm4 0h-2V7h2v10zm4 0h-2v-4h2v4z"></path></g></svg>
-                                        </td>
-                                    <?php endif ?>
+                                    <td class="button-cell but-siep" data-li="[<?=$event->getID()?>,<?=$i?>,<?=$proptype_id?>, 0]">
+                                        <svg class="svg-i" viewBox="0 0 24 24" preserveAspectRatio="xMidYMid meet" focusable="false"><g><path d="M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zM9 17H7v-7h2v7zm4 0h-2V7h2v10zm4 0h-2v-4h2v4z"></path></g></svg>
+                                    </td>
 
                                 <td class="prop-cell"></td>
 
@@ -353,9 +297,7 @@ $iCellCounter = 0;*/
     </div>
 </div>
 
-<div class="table-last-changed">Last change: <span title="%last_change_date">%last_change_diff%</span></div> ';
-
-
+<div class="table-last-changed">Last change: <span title="%last_change_date">%last_change_diff%</span></div>
 
 <div class="table-outer-wrapper">
 

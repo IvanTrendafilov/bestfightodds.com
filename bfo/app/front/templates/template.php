@@ -76,11 +76,9 @@
                                 <a href="#" id="parlay-mode-box"><div class="bfo-check-box">✓</div> Parlay</a>
                             </div>
                             <div class="menu-divider"
-
                                 <?php if (!isset($current_page) || $current_page != ''): ?>
                                     style="display: none"
                                  <?php endif ?>
-
                             ></div>                 
                             <div id="auto-refresh-container"
                                 <?php if (true || !isset($current_page) || $current_page != ''): //Auto-refresh current disabled ?>

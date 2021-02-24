@@ -1171,7 +1171,7 @@ initPage = function () {
                 return false;
             } else {
                 var opts = JSON.parse(this.getAttribute('data-li'));
-                var title = $(this).parent().parent().find("th").text() + " <span style=\"font-weight: normal;\"> &#150; Mean odds";
+                var title = this.parentNode.querySelector('th').innerText + " <span style=\"font-weight: normal;\"> &#150; Mean odds";
                 chartCC();
                 createEPIChart(opts[0], opts[1], opts[2]);
                 chartSC(title, event.clientX, event.clientY);

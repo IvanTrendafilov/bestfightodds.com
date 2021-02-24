@@ -365,41 +365,43 @@ class MainController
         {
             foreach ($event_entry as &$matchup_entry)
             {
-                $best_odds_team1 = null;
-                $best_odds_team2 = null;
+                $best_odds_reflist1 = [];
+                $best_odds_reflist2 = [];
                 foreach ($matchup_entry as $odds_key => $bookie_odds)
                 {
                     //Indicate which line is best on both sides
-                    if ($best_odds_team1 == null)
+                    if (count($best_odds_reflist1) == 0)
                     {
-                        $matchup_entry[$odds_key]['is_best_team1'] = true;
-                        $best_odds_team1 = $odds_key;
+                        $best_odds_reflist1[] = $odds_key;
                     }
-                    else if ($bookie_odds['odds_obj']->getOdds(1) > $matchup_entry[$best_odds_team1]['odds_obj']->getOdds(1))
+                    else if ($bookie_odds['odds_obj']->getOdds(1) > $matchup_entry[$best_odds_reflist1[0]]['odds_obj']->getOdds(1))
                     {
-                        $matchup_entry[$best_odds_team1]['is_best_team1'] = false;
-                        $matchup_entry[$odds_key]['is_best_team1'] = true;
-                        $best_odds_team1 = $odds_key;
+                        $best_odds_reflist1 = [$odds_key];
                     }
-                    else 
+                    else if ($bookie_odds['odds_obj']->getOdds(1) == $matchup_entry[$best_odds_reflist1[0]]['odds_obj']->getOdds(1))
                     {
-                        $matchup_entry[$odds_key]['is_best_team1'] = false;
+                        $best_odds_reflist1[] = $odds_key;
                     }
-                    if ($best_odds_team2 == null)
+                    if (count($best_odds_reflist2) == 0)
                     {
-                        $matchup_entry[$odds_key]['is_best_team2'] = true;
-                        $best_odds_team2 = $odds_key;
+                        $best_odds_reflist2[] = $odds_key;
                     }
-                    else if ($bookie_odds['odds_obj']->getOdds(2) > $matchup_entry[$best_odds_team2]['odds_obj']->getOdds(2))
+                    else if ($bookie_odds['odds_obj']->getOdds(2) > $matchup_entry[$best_odds_reflist2[0]]['odds_obj']->getOdds(2))
                     {
-                        $matchup_entry[$best_odds_team2]['is_best_team2'] = false;
-                        $matchup_entry[$odds_key]['is_best_team2'] = true;
-                        $best_odds_team2 = $odds_key;
+                        $best_odds_reflist2 = [$odds_key];
                     }
-                    else
+                    else if ($bookie_odds['odds_obj']->getOdds(2) == $matchup_entry[$best_odds_reflist2[0]]['odds_obj']->getOdds(2))
                     {
-                        $matchup_entry[$odds_key]['is_best_team2'] = false;
+                        $best_odds_reflist2[] = $odds_key;
                     }
+                }
+                foreach ($best_odds_reflist1 as $bookie_key)
+                {
+                    $matchup_entry[$bookie_key]['is_best_team1'] = true;
+                }
+                foreach ($best_odds_reflist2 as $bookie_key)
+                {
+                    $matchup_entry[$bookie_key]['is_best_team2'] = true;
                 }
             }
         }
@@ -421,40 +423,34 @@ class MainController
                         }
                         $view_data['matchup_prop_count'][$matchup_key]++;
                         
-                        $best_odds = null;
-                        $best_negodds = null;
+                        $best_odds_reflist1 = [];
+                        $best_odds_reflist2 = [];
                         foreach ($team_num_entry as $odds_key => $bookie_odds)
                         {
-                            //Indicate which line is best on both sides (prop and negprop)
-                            if ($best_odds == null)
+                            //Indicate which line is best on both sides
+                            if (count($best_odds_reflist1) == 0)
                             {
-                                $team_num_entry[$odds_key]['is_best_pos'] = true;
-                                $best_odds = $odds_key;
+                                $best_odds_reflist1[] = $odds_key;
                             }
-                            else if ($bookie_odds['odds_obj']->getPropOdds() > $team_num_entry[$best_odds]['odds_obj']->getPropOdds())
+                            else if ($bookie_odds['odds_obj']->getPropOdds() > $team_num_entry[$best_odds_reflist1[0]]['odds_obj']->getPropOdds())
                             {
-                                $team_num_entry[$best_odds]['is_best_pos'] = false;
-                                $team_num_entry[$odds_key]['is_best_pos'] = true;
-                                $best_odds = $odds_key;
+                                $best_odds_reflist1 = [$odds_key];
                             }
-                            else 
+                            else if ($bookie_odds['odds_obj']->getPropOdds() == $team_num_entry[$best_odds_reflist1[0]]['odds_obj']->getPropOdds())
                             {
-                                $team_num_entry[$odds_key]['is_best_pos'] = false;
+                                $best_odds_reflist1[] = $odds_key;
                             }
-                            if ($best_negodds == null)
+                            if (count($best_odds_reflist2) == 0)
                             {
-                                $team_num_entry[$odds_key]['is_best_neg'] = true;
-                                $best_negodds = $odds_key;
+                                $best_odds_reflist2[] = $odds_key;
                             }
-                            else if ($bookie_odds['odds_obj']->getNegPropOdds() > $team_num_entry[$best_negodds]['odds_obj']->getNegPropOdds())
+                            else if ($bookie_odds['odds_obj']->getNegPropOdds() > $team_num_entry[$best_odds_reflist2[0]]['odds_obj']->getNegPropOdds())
                             {
-                                $team_num_entry[$best_negodds]['is_best_neg'] = false;
-                                $team_num_entry[$odds_key]['is_best_neg'] = true;
-                                $best_negodds = $odds_key;
+                                $best_odds_reflist2 = [$odds_key];
                             }
-                            else
+                            else if ($bookie_odds['odds_obj']->getNegPropOdds() == $team_num_entry[$best_odds_reflist2[0]]['odds_obj']->getNegPropOdds())
                             {
-                                $team_num_entry[$odds_key]['is_best_neg'] = false;
+                                $best_odds_reflist2[] = $odds_key;
                             }
 
                             //Adjust prop name description
@@ -472,6 +468,15 @@ class MainController
                                             , $prop_desc);
                             $prop_desc = $bookie_odds['odds_obj']->setNegPropName($prop_desc);
                         }
+
+                        foreach ($best_odds_reflist1 as $bookie_key)
+                        {
+                            $team_num_entry[$bookie_key]['is_best_pos'] = true;
+                        }
+                        foreach ($best_odds_reflist2 as $bookie_key)
+                        {
+                            $team_num_entry[$bookie_key]['is_best_neg'] = true;
+                        }
                     }
                 }
             }
@@ -485,41 +490,43 @@ class MainController
             {
                 $view_data['event_prop_count']++;
                 
-                $best_odds = null;
-                $best_negodds = null;
+                $best_odds_reflist1 = [];
+                $best_odds_reflist2 = [];
                 foreach ($proptype_entry as $odds_key => $bookie_odds)
                 {
-                    //Indicate which line is best on both sides (prop and negprop)
-                    if ($best_odds == null)
+                    //Indicate which line is best on both sides
+                    if (count($best_odds_reflist1) == 0)
                     {
-                        $proptype_entry[$odds_key]['is_best_pos'] = true;
-                        $best_odds = $odds_key;
+                        $best_odds_reflist1[] = $odds_key;
                     }
-                    else if ($bookie_odds['odds_obj']->getPropOdds() > $proptype_entry[$best_odds]['odds_obj']->getPropOdds())
+                    else if ($bookie_odds['odds_obj']->getPropOdds() > $proptype_entry[$best_odds_reflist1[0]]['odds_obj']->getPropOdds())
                     {
-                        $proptype_entry[$best_odds]['is_best_pos'] = false;
-                        $proptype_entry[$odds_key]['is_best_pos'] = true;
-                        $best_odds = $odds_key;
+                        $best_odds_reflist1 = [$odds_key];
                     }
-                    else 
+                    else if ($bookie_odds['odds_obj']->getPropOdds() == $proptype_entry[$best_odds_reflist1[0]]['odds_obj']->getPropOdds())
                     {
-                        $proptype_entry[$odds_key]['is_best_pos'] = false;
+                        $best_odds_reflist1[] = $odds_key;
                     }
-                    if ($best_negodds == null)
+                    if (count($best_odds_reflist2) == 0)
                     {
-                        $proptype_entry[$odds_key]['is_best_neg'] = true;
-                        $best_negodds = $odds_key;
+                        $best_odds_reflist2[] = $odds_key;
                     }
-                    else if ($bookie_odds['odds_obj']->getNegPropOdds() > $proptype_entry[$best_negodds]['odds_obj']->getNegPropOdds())
+                    else if ($bookie_odds['odds_obj']->getNegPropOdds() > $proptype_entry[$best_odds_reflist2[0]]['odds_obj']->getNegPropOdds())
                     {
-                        $proptype_entry[$best_negodds]['is_best_neg'] = false;
-                        $proptype_entry[$odds_key]['is_best_neg'] = true;
-                        $best_negodds = $odds_key;
+                        $best_odds_reflist2 = [$odds_key];
                     }
-                    else
+                    else if ($bookie_odds['odds_obj']->getNegPropOdds() == $proptype_entry[$best_odds_reflist2[0]]['odds_obj']->getNegPropOdds())
                     {
-                        $proptype_entry[$odds_key]['is_best_neg'] = false;
+                        $best_odds_reflist2[] = $odds_key;
                     }
+                }
+                foreach ($best_odds_reflist1 as $bookie_key)
+                {
+                    $proptype_entry[$bookie_key]['is_best_pos'] = true;
+                }
+                foreach ($best_odds_reflist2 as $bookie_key)
+                {
+                    $proptype_entry[$bookie_key]['is_best_neg'] = true;
                 }
             }
         }
@@ -530,7 +537,6 @@ class MainController
         $view_data['prop_odds'] = $prop_odds;
         $view_data['matchup_odds'] = $matchup_odds;
         $view_data['event_prop_odds'] = $event_prop_odds;
-
 
         //Add swing chart data (= change since opening, last 24h, last h)
         $data = [];
