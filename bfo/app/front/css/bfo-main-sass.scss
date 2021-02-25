@@ -1190,3 +1190,46 @@ table.team-stats-table {
   color: #666;
 }
 
+header {
+  background-color: orangered;
+  height: 100px;
+  display: flex;
+  justify-content: center;
+}
+
+.flex-header-wrap {
+  align-self: center;
+}
+
+/* DESKTOP */
+@media (min-width: 600px) {
+  header {
+    display: flex;
+    justify-content: center;
+  }
+  .flex-header-wrap {
+    max-width: 800px;
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+  }
+  #header-search-box {
+    display: block;
+    margin-right: 20px;
+    align-self: center;
+  }
+  section {
+    max-width: 800px;
+    width: calc(100% - 40px);
+  }
+  footer {
+    max-width: 900px;
+    width: 100%;
+  }
+  section,
+  footer {
+    margin-left: auto;
+    margin-right: auto;
+  }
+}

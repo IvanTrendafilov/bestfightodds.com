@@ -30,13 +30,13 @@
     </head>
     <body>
         <script type="text/javascript" async src="/js/bfo.min.js?v=0.3"></script>
-        <header>
-                <div class="flex-header-wrap">
+        <div class="header">
+                <div class="header-top">
                     <a href="/"><img src="/img/logo_3.png" class="logo" alt="Best Fight Odds logo"></a>
                     <div id="header-search-box">
                         <form method="get" action="/search"><input type="text" id="search-box1" class="search-box" name="query" placeholder="MMA Event / Fighter"> <input type="submit" class="search-button" id="search-button" value="&#128269;"></form>
                     </div>
-                
+                </div>
                 <div class="header-menu-wrapper">
                         <div class="header-menu">
                         <a href="/"><div class="header-menu-item <?=!isset($current_page) || $current_page == '' ? ' header-menu-selected ' : ''?>" style="margin-left: 10px">Latest<span class="item-non-mob-mini"> odds</span></div></a>
@@ -108,13 +108,12 @@
                         </div>
                     </div>
                 </div>
-                </div>
-        </header>
-                <section>    
+        </div>
+                <div id="content">    
 
     <?=$this->section('content')?>
 
-                                </section>
+    </div>
 <div class="legend-container">
     <img src="/img/loading.gif" class="hidden-image" alt="Loading indicator">
     <img src="/img/expu.png" class="hidden-image" alt="Loading indicator">
