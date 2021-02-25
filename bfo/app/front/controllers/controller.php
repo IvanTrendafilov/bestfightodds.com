@@ -32,7 +32,50 @@ class MainController
     {
         $view_data = [];
 
-        $response->getBody()->write($this->plates->render('home', $view_data));
+        //Retrieve pre-generated page
+        $cached_contents = @file_get_contents(PARSE_PAGEDIR . 'upcoming_odds.php');
+        if ($cached_contents == null)
+        {
+            //TODO: Implement fallback if odds page cannot be included
+            $cached_contents = 'Temporary maintenance';
+        }
+
+        $events = EventHandler::getAllUpcomingEvents();
+        foreach ($events as $event)
+        {
+            //Dynamically replace last change placeholder
+            $last_change = EventHandler::getLatestChangeDate($event->getID());
+            if ($last_change == null)
+            {
+                $cached_contents = str_replace('%' . $event->getID() . '_last_change_date%', 'n/a', $cached_contents);
+                $cached_contents = str_replace('%' . $event->getID() . '_last_change_diff%', 'n/a', $cached_contents);
+            }
+            else
+            {
+                $cached_contents = str_replace('%' . $event->getID() . '_last_change_date%', date('M jS Y H:i', strtotime($last_change)) . ' UTC', $cached_contents);
+                $cached_contents = str_replace('%' . $event->getID() . '_last_change_diff%', $this->viewEventgetTimeDifference(strtotime($last_change), strtotime(GENERAL_TIMEZONE . ' hours')), $cached_contents);
+            } 
+        }
+
+        //Perform dynamic modifications to the content
+        $cached_contents = preg_replace_callback('/changedate-([^\"]*)/', function ($matches)
+        {
+            $hour_diff = intval(floor((time() - strtotime($matches[1])) / 3600));
+            if ($hour_diff >= 72)
+            {
+                return 'arage-3';
+            }
+            else if ($hour_diff >= 24)
+            {
+                return 'arage-2"';
+            }
+            else
+            {
+                return 'arage-1"';
+            }
+        }, $cached_contents);
+
+        $response->getBody()->write($cached_contents);
         return $response;
     }
 
@@ -315,13 +358,13 @@ class MainController
             $last_change = EventHandler::getLatestChangeDate($event->getID());
             if ($last_change == null)
             {
-                $cached_contents = str_replace('%last_change_date%', 'n/a', $cached_contents);
-                $cached_contents = str_replace('%last_change_diff%', 'n/a', $cached_contents);
+                $cached_contents = str_replace('%' . $event->getID() . '_last_change_date%', 'n/a', $cached_contents);
+                $cached_contents = str_replace('%' . $event->getID() . '_last_change_diff%', 'n/a', $cached_contents);
             }
             else
             {
-                $cached_contents = str_replace('%last_change_date%', date('M jS Y H:i', strtotime($last_change)) . ' UTC', $cached_contents);
-                $cached_contents = str_replace('%last_change_diff%', $this->viewEventgetTimeDifference(strtotime($last_change), strtotime(GENERAL_TIMEZONE . ' hours')), $cached_contents);
+                $cached_contents = str_replace('%' . $event->getID() . '_last_change_date%', date('M jS Y H:i', strtotime($last_change)) . ' UTC', $cached_contents);
+                $cached_contents = str_replace('%' . $event->getID() . '_last_change_diff%', $this->viewEventgetTimeDifference(strtotime($last_change), strtotime(GENERAL_TIMEZONE . ' hours')), $cached_contents);
             } 
 
             //Perform dynamic modifications to the content
@@ -346,197 +389,8 @@ class MainController
             return $response;
         }
         
-        $view_data = [];
+        $view_data = OddsHandler::getEventViewData($event->getID());
         $view_data['bookies'] = BookieHandler::getAllBookies();
-        $matchups = EventHandler::getAllFightsForEvent($event->getID(), true);
-
-        //Convert matchups array to associative
-        $matchups_assoc = [];
-        foreach ($matchups as $matchup)
-        {
-            $matchups_assoc[$matchup->getID()] = $matchup;
-        }
-
-        $prop_odds = OddsHandler::getLatestPropOddsV2($event->getID());
-        $matchup_odds = OddsHandler::getLatestMatchupOddsV2($event->getID());
-        $event_prop_odds = OddsHandler::getLatestEventPropOddsV2($event->getID());
-
-        foreach ($matchup_odds as &$event_entry)
-        {
-            foreach ($event_entry as &$matchup_entry)
-            {
-                $best_odds_reflist1 = [];
-                $best_odds_reflist2 = [];
-                foreach ($matchup_entry as $odds_key => $bookie_odds)
-                {
-                    //Indicate which line is best on both sides
-                    if (count($best_odds_reflist1) == 0)
-                    {
-                        $best_odds_reflist1[] = $odds_key;
-                    }
-                    else if ($bookie_odds['odds_obj']->getOdds(1) > $matchup_entry[$best_odds_reflist1[0]]['odds_obj']->getOdds(1))
-                    {
-                        $best_odds_reflist1 = [$odds_key];
-                    }
-                    else if ($bookie_odds['odds_obj']->getOdds(1) == $matchup_entry[$best_odds_reflist1[0]]['odds_obj']->getOdds(1))
-                    {
-                        $best_odds_reflist1[] = $odds_key;
-                    }
-                    if (count($best_odds_reflist2) == 0)
-                    {
-                        $best_odds_reflist2[] = $odds_key;
-                    }
-                    else if ($bookie_odds['odds_obj']->getOdds(2) > $matchup_entry[$best_odds_reflist2[0]]['odds_obj']->getOdds(2))
-                    {
-                        $best_odds_reflist2 = [$odds_key];
-                    }
-                    else if ($bookie_odds['odds_obj']->getOdds(2) == $matchup_entry[$best_odds_reflist2[0]]['odds_obj']->getOdds(2))
-                    {
-                        $best_odds_reflist2[] = $odds_key;
-                    }
-                }
-                foreach ($best_odds_reflist1 as $bookie_key)
-                {
-                    $matchup_entry[$bookie_key]['is_best_team1'] = true;
-                }
-                foreach ($best_odds_reflist2 as $bookie_key)
-                {
-                    $matchup_entry[$bookie_key]['is_best_team2'] = true;
-                }
-            }
-        }
-
-        //Loop through prop odds and count the number of props available for each matchup
-        $view_data['matchup_prop_count'] = [];
-        foreach ($prop_odds as &$event_entry)
-        {
-            foreach ($event_entry as $matchup_key => &$matchup_entry)
-            {
-                foreach ($matchup_entry as &$proptype_entry)
-                {
-                    foreach ($proptype_entry as $team_num_key => &$team_num_entry)
-                    {
-                        //Count entries per matchup
-                        if (!isset($view_data['matchup_prop_count'][$matchup_key]))
-                        {
-                            $view_data['matchup_prop_count'][$matchup_key] = 0;
-                        }
-                        $view_data['matchup_prop_count'][$matchup_key]++;
-                        
-                        $best_odds_reflist1 = [];
-                        $best_odds_reflist2 = [];
-                        foreach ($team_num_entry as $odds_key => $bookie_odds)
-                        {
-                            //Indicate which line is best on both sides
-                            if (count($best_odds_reflist1) == 0)
-                            {
-                                $best_odds_reflist1[] = $odds_key;
-                            }
-                            else if ($bookie_odds['odds_obj']->getPropOdds() > $team_num_entry[$best_odds_reflist1[0]]['odds_obj']->getPropOdds())
-                            {
-                                $best_odds_reflist1 = [$odds_key];
-                            }
-                            else if ($bookie_odds['odds_obj']->getPropOdds() == $team_num_entry[$best_odds_reflist1[0]]['odds_obj']->getPropOdds())
-                            {
-                                $best_odds_reflist1[] = $odds_key;
-                            }
-                            if (count($best_odds_reflist2) == 0)
-                            {
-                                $best_odds_reflist2[] = $odds_key;
-                            }
-                            else if ($bookie_odds['odds_obj']->getNegPropOdds() > $team_num_entry[$best_odds_reflist2[0]]['odds_obj']->getNegPropOdds())
-                            {
-                                $best_odds_reflist2 = [$odds_key];
-                            }
-                            else if ($bookie_odds['odds_obj']->getNegPropOdds() == $team_num_entry[$best_odds_reflist2[0]]['odds_obj']->getNegPropOdds())
-                            {
-                                $best_odds_reflist2[] = $odds_key;
-                            }
-
-                            //Adjust prop name description
-                            $prop_desc = $bookie_odds['odds_obj']->getPropName();
-                            $prop_desc = str_replace(['<T>', '<T2>'], 
-                                            [$matchups_assoc[$matchup_key]->getTeamLastNameAsString($team_num_key),
-                                            $matchups_assoc[$matchup_key]->getTeamLastNameAsString(($team_num_key % 2) + 1)]
-                                            , $prop_desc);
-                            $prop_desc = $bookie_odds['odds_obj']->setPropName($prop_desc);
-
-                            $prop_desc = $bookie_odds['odds_obj']->getNegPropName();
-                            $prop_desc = str_replace(['<T>', '<T2>'], 
-                                            [$matchups_assoc[$matchup_key]->getTeamLastNameAsString($team_num_key),
-                                            $matchups_assoc[$matchup_key]->getTeamLastNameAsString(($team_num_key % 2) + 1)]
-                                            , $prop_desc);
-                            $prop_desc = $bookie_odds['odds_obj']->setNegPropName($prop_desc);
-                        }
-
-                        foreach ($best_odds_reflist1 as $bookie_key)
-                        {
-                            $team_num_entry[$bookie_key]['is_best_pos'] = true;
-                        }
-                        foreach ($best_odds_reflist2 as $bookie_key)
-                        {
-                            $team_num_entry[$bookie_key]['is_best_neg'] = true;
-                        }
-                    }
-                }
-            }
-        }
-        
-        //Loop through event prop odds and count the number of props available for each matchup
-        $view_data['event_prop_count'] = 0;
-        foreach ($event_prop_odds as &$event_entry)
-        {
-            foreach ($event_entry as &$proptype_entry)
-            {
-                $view_data['event_prop_count']++;
-                
-                $best_odds_reflist1 = [];
-                $best_odds_reflist2 = [];
-                foreach ($proptype_entry as $odds_key => $bookie_odds)
-                {
-                    //Indicate which line is best on both sides
-                    if (count($best_odds_reflist1) == 0)
-                    {
-                        $best_odds_reflist1[] = $odds_key;
-                    }
-                    else if ($bookie_odds['odds_obj']->getPropOdds() > $proptype_entry[$best_odds_reflist1[0]]['odds_obj']->getPropOdds())
-                    {
-                        $best_odds_reflist1 = [$odds_key];
-                    }
-                    else if ($bookie_odds['odds_obj']->getPropOdds() == $proptype_entry[$best_odds_reflist1[0]]['odds_obj']->getPropOdds())
-                    {
-                        $best_odds_reflist1[] = $odds_key;
-                    }
-                    if (count($best_odds_reflist2) == 0)
-                    {
-                        $best_odds_reflist2[] = $odds_key;
-                    }
-                    else if ($bookie_odds['odds_obj']->getNegPropOdds() > $proptype_entry[$best_odds_reflist2[0]]['odds_obj']->getNegPropOdds())
-                    {
-                        $best_odds_reflist2 = [$odds_key];
-                    }
-                    else if ($bookie_odds['odds_obj']->getNegPropOdds() == $proptype_entry[$best_odds_reflist2[0]]['odds_obj']->getNegPropOdds())
-                    {
-                        $best_odds_reflist2[] = $odds_key;
-                    }
-                }
-                foreach ($best_odds_reflist1 as $bookie_key)
-                {
-                    $proptype_entry[$bookie_key]['is_best_pos'] = true;
-                }
-                foreach ($best_odds_reflist2 as $bookie_key)
-                {
-                    $proptype_entry[$bookie_key]['is_best_neg'] = true;
-                }
-            }
-        }
-
-        $view_data['event'] = $event;
-        
-        $view_data['matchups'] = $matchups;
-        $view_data['prop_odds'] = $prop_odds;
-        $view_data['matchup_odds'] = $matchup_odds;
-        $view_data['event_prop_odds'] = $event_prop_odds;
 
         //Add swing chart data (= change since opening, last 24h, last h)
         $data = [];
@@ -595,7 +449,7 @@ class MainController
         $view_data['meta_keywords'] = $event->getName();
         $view_data['disable alerts'] = true;
         
-        $page_content = $this->plates->render('event', $view_data);
+        $page_content = $this->plates->render('single_event', $view_data);
 
         //Cache page
         CacheControl::cleanPageCacheWC('event-' . $event->getID() . '-*');
@@ -605,13 +459,13 @@ class MainController
         $last_change = EventHandler::getLatestChangeDate($event->getID());
         if ($last_change == null)
         {
-            $page_content = str_replace('%last_change_date%', 'n/a', $page_content);
-            $page_content = str_replace('%last_change_diff%', 'n/a', $page_content);
+            $page_content = str_replace('%' . $event->getID() . '_last_change_date%', 'n/a', $page_content);
+            $page_content = str_replace('%' . $event->getID() . '_last_change_diff%', 'n/a', $page_content);
         }
         else
         {
-            $page_content = str_replace('%last_change_date%', date('M jS Y H:i', strtotime($last_change)) . ' UTC', $page_content);
-            $page_content = str_replace('%last_change_diff%', $this->viewEventgetTimeDifference(strtotime($last_change), strtotime(GENERAL_TIMEZONE . ' hours')), $page_content);
+            $page_content = str_replace('%' . $event->getID() . '_last_change_date%', date('M jS Y H:i', strtotime($last_change)) . ' UTC', $page_content);
+            $page_content = str_replace('%' . $event->getID() . '_last_change_diff%', $this->viewEventgetTimeDifference(strtotime($last_change), strtotime(GENERAL_TIMEZONE . ' hours')), $page_content);
         } 
 
         //Perform dynamic modifications to the content

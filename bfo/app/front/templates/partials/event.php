@@ -1,5 +1,3 @@
-<?php $this->layout('template', ['title' => $team_title, 'meta_desc' => $meta_desc, 'meta_keywords' => $meta_keywords, 'current_page' => 'event']) ?>
-
 <div class="table-outer-wrapper"><div class="table-div" id="event<?=$event->getID()?>"><div class="table-header"><a href="/events/<?=$event->getEventAsLinkString()?>"><h1><?=$event->getName()?></h1></a>
 
     <?php if (strtoupper($event->getName()) != 'FUTURE EVENTS'): //Add date for all events except for FUTURE EVENTS?>
@@ -32,20 +30,22 @@
                         </tr>
                     <?php endfor ?>
                     <?php //============== Add props ======================= ?>
-                    <?php foreach ($prop_odds[$event->getID()][$matchup->getID()] as $proptype_id => $team_num_row): ?>
-                        <?php foreach ($team_num_row as $team_num => $prop): ?>
-                            <?php for ($i = 1; $i <= 2; $i++): ?>
-                                <tr class="pr">
-                                    <th scope="row"><?=$i == 1 ? $prop[array_key_first($prop)]['odds_obj']->getPropName() : $prop[array_key_first($prop)]['odds_obj']->getNegPropName()?></th>
-                                </tr>
-                            <?php endfor ?>
+                    <?php if (isset($matchup_prop_count[$matchup->getID()]) && $matchup_prop_count[$matchup->getID()] > 0): ?>
+                        <?php foreach ($prop_odds[$event->getID()][$matchup->getID()] as $proptype_id => $team_num_row): ?>
+                            <?php foreach ($team_num_row as $team_num => $prop): ?>
+                                <?php for ($i = 1; $i <= 2; $i++): ?>
+                                    <tr class="pr">
+                                        <th scope="row"><?=$i == 1 ? $prop[array_key_first($prop)]['odds_obj']->getPropName() : $prop[array_key_first($prop)]['odds_obj']->getNegPropName()?></th>
+                                    </tr>
+                                <?php endfor ?>
+                            <?php endforeach ?>
                         <?php endforeach ?>
-                    <?php endforeach ?>
+                    <?php endif ?>
                 <?php endforeach ?>
 
                 <?php //============== Add event props ======================= ?>
 
-                <?php if ($event_prop_count > 1): ?>
+                <?php if ($event_prop_count > 0): ?>
                     <tr class="eventprop" id="mu-<?=$event->getID()?>">
                             <th scope="row" style="font-weight: 400"><a href="#" data-mu="<?=$event->getID()?>">Event props</a></th>
                             <?php foreach ($bookies as $bookie): ?>
@@ -117,7 +117,14 @@
 
                             <?php endforeach ?>
 
-                            <?php if (count($matchup_odds[$event->getID()][$matchup->getID()]) >= 1): //TODO: Needs check here to check if old odds was found?>
+
+                            <?php if (isset($alerts_enabled) && $alerts_enabled == true): //Add alert cell only if enabled for this type of page?>
+                                <td class="button-cell but-al" data-li="[<?=$matchup->getID()?>,<?=$i?>]">
+                                    <svg class="svg-i" viewBox="0 0 24 24" preserveAspectRatio="xMidYMid meet" focusable="false"><g><path d="M12 22c1.1 0 2-.9 2-2h-4c0 1.1.9 2 2 2zm6-6v-5c0-3.07-1.64-5.64-4.5-6.32V4c0-.83-.67-1.5-1.5-1.5s-1.5.67-1.5 1.5v.68C7.63 5.36 6 7.92 6 11v5l-2 2v1h16v-1l-2-2z"></path></g></svg>
+                                </td>
+                            <?php endif ?>
+
+                            <?php if (count($matchup_odds[$event->getID()][$matchup->getID()]) >= 1): ?>
                                 <td class="button-cell but-si" data-li="[<?=$i?>,<?=$matchup->getID()?>]">
                                     <svg class="svg-i" viewBox="0 0 24 24" preserveAspectRatio="xMidYMid meet" focusable="false"><g><path d="M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zM9 17H7v-7h2v7zm4 0h-2V7h2v10zm4 0h-2v-4h2v4z"></path></g></svg>
                                 </td>
@@ -141,60 +148,68 @@
 
                         <?php //============== Add props ======================= ?>
 
-                        <?php foreach ($prop_odds[$event->getID()][$matchup->getID()] as $proptype_id => $team_num_row): ?>
+                        <?php if (isset($matchup_prop_count[$matchup->getID()]) && $matchup_prop_count[$matchup->getID()] > 0): ?>
+                            <?php foreach ($prop_odds[$event->getID()][$matchup->getID()] as $proptype_id => $team_num_row): ?>
 
-                            <?php foreach ($team_num_row as $team_num => $prop): ?>
+                                <?php foreach ($team_num_row as $team_num => $prop): ?>
 
-                                <?php for ($i = 1; $i <= 2; $i++): ?>
+                                    <?php for ($i = 1; $i <= 2; $i++): ?>
 
-                                    <tr class="pr">
-                                    <th scope="row"><?=$i == 1 ? $prop[array_key_first($prop)]['odds_obj']->getPropName() : $prop[array_key_first($prop)]['odds_obj']->getNegPropName()?></th>
-                                
-                                    <?php foreach ($bookies as $bookie): ?>
+                                        <tr class="pr">
+                                        <th scope="row"><?=$i == 1 ? $prop[array_key_first($prop)]['odds_obj']->getPropName() : $prop[array_key_first($prop)]['odds_obj']->getNegPropName()?></th>
+                                    
+                                        <?php foreach ($bookies as $bookie): ?>
 
-                                        <?php $odds = @$prop[$bookie->getID()]; //TODO: Not recommended by plates but simplifies access to this object. Any alternative way to handle this? ?>
-                                        <?php if (isset($odds['odds_obj'])) { $odds_val = ($i == 1 ? $odds['odds_obj']->getPropOdds() : $odds['odds_obj']->getNegPropOdds()); } //TODO: Not recommended by plates but simplifies access to this object. Any alternative way to handle this? ?>
-                                        <?php $previous_odds_val = $i == 1 ?  @$prop[$bookie->getID()]['previous_prop_odds'] : @$prop[$bookie->getID()]['previous_negprop_odds']; //TODO: Not recommended by plates but simplifies access to this object. Any alternative way to handle this? ?>
+                                            <?php $odds = @$prop[$bookie->getID()]; //TODO: Not recommended by plates but simplifies access to this object. Any alternative way to handle this? ?>
+                                            <?php if (isset($odds['odds_obj'])) { $odds_val = ($i == 1 ? $odds['odds_obj']->getPropOdds() : $odds['odds_obj']->getNegPropOdds()); } //TODO: Not recommended by plates but simplifies access to this object. Any alternative way to handle this? ?>
+                                            <?php $previous_odds_val = $i == 1 ?  @$prop[$bookie->getID()]['previous_prop_odds'] : @$prop[$bookie->getID()]['previous_negprop_odds']; //TODO: Not recommended by plates but simplifies access to this object. Any alternative way to handle this? ?>
 
-                                        <?php if (isset($odds['odds_obj'])): ?>
+                                            <?php if (isset($odds['odds_obj'])): ?>
 
-                                            <?php if (($i == 1 ? $odds['odds_obj']->getPropOddsAsString() : $odds['odds_obj']->getNegPropOddsAsString()) != '-99999'): ?>
+                                                <?php if (($i == 1 ? $odds['odds_obj']->getPropOddsAsString() : $odds['odds_obj']->getNegPropOddsAsString()) != '-99999'): ?>
 
-                                                <td class="but-sgp" data-li="[<?=$bookie->getID()?>,<?=$i?>,<?=$matchup->getID()?>,<?=$proptype_id?>,<?=$team_num?>]"><span id="oID<?=('2' . sprintf("%06d", $matchup->getID()) . sprintf("%02d", $bookie->getID()) . $i . sprintf("%03d", $proptype_id) . $team_num)?>"<?=$i == 1 ? (isset($odds['is_best_pos']) ? ' class="bestbet"' : '') : (isset($odds['is_best_neg']) ? ' class="bestbet"': '') ?>><?=$i == 1 ? $odds['odds_obj']->getPropOddsAsString() : $odds['odds_obj']->getNegPropOddsAsString()?></span>
-                                                <?php if (isset($previous_odds_val)): ?>
-                                                    <?php if ($odds_val > $previous_odds_val): ?>
-                                                                <span class="aru changedate-<?=$odds['odds_obj']->getDate()?>">▲</span>
-                                                    <?php elseif ($odds_val < $previous_odds_val): ?>
-                                                                <span class="ard changedate-<?=$odds['odds_obj']->getDate()?>">▼</span>
+                                                    <td class="but-sgp" data-li="[<?=$bookie->getID()?>,<?=$i?>,<?=$matchup->getID()?>,<?=$proptype_id?>,<?=$team_num?>]"><span id="oID<?=('2' . sprintf("%06d", $matchup->getID()) . sprintf("%02d", $bookie->getID()) . $i . sprintf("%03d", $proptype_id) . $team_num)?>"<?=$i == 1 ? (isset($odds['is_best_pos']) ? ' class="bestbet"' : '') : (isset($odds['is_best_neg']) ? ' class="bestbet"': '') ?>><?=$i == 1 ? $odds['odds_obj']->getPropOddsAsString() : $odds['odds_obj']->getNegPropOddsAsString()?></span>
+                                                    <?php if (isset($previous_odds_val)): ?>
+                                                        <?php if ($odds_val > $previous_odds_val): ?>
+                                                                    <span class="aru changedate-<?=$odds['odds_obj']->getDate()?>">▲</span>
+                                                        <?php elseif ($odds_val < $previous_odds_val): ?>
+                                                                    <span class="ard changedate-<?=$odds['odds_obj']->getDate()?>">▼</span>
+                                                        <?php endif ?>
                                                     <?php endif ?>
+
+                                                    </td>
+
+                                                <?php else: ?>
+                                                    <td><span class="na">n/a</span></td>
                                                 <?php endif ?>
-
-                                                </td>
-
+                                                
                                             <?php else: ?>
-                                                <td><span class="na">n/a</span></td>
+
+                                                <td></td>
+
                                             <?php endif ?>
-                                            
-                                        <?php else: ?>
 
-                                            <td></td>
+                                        <?php endforeach ?>
 
+                                        <?php if (isset($alerts_enabled) && $alerts_enabled == true): //Add alert cell only if enabled for this type of page?>                                
+                                        <td class="button-cell">
+                                            <svg class="svg-i-disabled" viewBox="0 0 24 24" preserveAspectRatio="xMidYMid meet" focusable="false"><g><path d="M12 22c1.1 0 2-.9 2-2h-4c0 1.1.9 2 2 2zm6-6v-5c0-3.07-1.64-5.64-4.5-6.32V4c0-.83-.67-1.5-1.5-1.5s-1.5.67-1.5 1.5v.68C7.63 5.36 6 7.92 6 11v5l-2 2v1h16v-1l-2-2z"></path></g></svg>
+                                        </td>
                                         <?php endif ?>
 
-                                    <?php endforeach ?>
+                                        <td class="button-cell but-sip" data-li="[<?=$i?>,<?=$matchup->getID()?>,<?=$proptype_id?>,<?=$team_num?>]">
+                                            <svg class="svg-i" viewBox="0 0 24 24" preserveAspectRatio="xMidYMid meet" focusable="false"><g><path d="M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zM9 17H7v-7h2v7zm4 0h-2V7h2v10zm4 0h-2v-4h2v4z"></path></g></svg>
+                                        </td>
 
-                                    <td class="button-cell but-sip" data-li="[<?=$i?>,<?=$matchup->getID()?>,<?=$proptype_id?>,<?=$team_num?>]">
-                                        <svg class="svg-i" viewBox="0 0 24 24" preserveAspectRatio="xMidYMid meet" focusable="false"><g><path d="M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zM9 17H7v-7h2v7zm4 0h-2V7h2v10zm4 0h-2v-4h2v4z"></path></g></svg>
-                                    </td>
+                                        <td class="prop-cell"></td>
+                                        </tr>
 
-                                    <td class="prop-cell"></td>
-                                    </tr>
+                                    <?php endfor ?>
 
-                                <?php endfor ?>
+                                <?php endforeach ?>
 
                             <?php endforeach ?>
-
-                        <?php endforeach ?>
+                        <?php endif ?>
 
                     <?php endforeach ?>
 
@@ -264,6 +279,12 @@
 
                                     <?php endforeach ?>
 
+                                    <?php if (isset($alerts_enabled) && $alerts_enabled == true): //Add alert cell only if enabled for this type of page?>                                
+                                    <td class="button-cell">
+                                        <svg class="svg-i-disabled" viewBox="0 0 24 24" preserveAspectRatio="xMidYMid meet" focusable="false"><g><path d="M12 22c1.1 0 2-.9 2-2h-4c0 1.1.9 2 2 2zm6-6v-5c0-3.07-1.64-5.64-4.5-6.32V4c0-.83-.67-1.5-1.5-1.5s-1.5.67-1.5 1.5v.68C7.63 5.36 6 7.92 6 11v5l-2 2v1h16v-1l-2-2z"></path></g></svg>
+                                    </td>
+                                    <?php endif ?>
+
                                     <td class="button-cell but-siep" data-li="[<?=$event->getID()?>,<?=$i?>,<?=$proptype_id?>, 0]">
                                         <svg class="svg-i" viewBox="0 0 24 24" preserveAspectRatio="xMidYMid meet" focusable="false"><g><path d="M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zM9 17H7v-7h2v7zm4 0h-2V7h2v10zm4 0h-2v-4h2v4z"></path></g></svg>
                                     </td>
@@ -283,20 +304,4 @@
         </div>
     </div>
 </div>
-
-<div class="table-last-changed">Last change: <span title="%last_change_date%">%last_change_diff%</span></div>
-<div class="table-outer-wrapper">
-    <div id="event-swing-area">
-        <div id="page-container">
-            <div class="content-header">Line movement <div id="event-swing-picker-menu"><a href="#" class="event-swing-picker picked" data-li="0">Since opening</a> | <a href="#" class="event-swing-picker" data-li="1">Last 24 hours</a> | <a href="#" class="event-swing-picker" data-li="2">Last hour</a></div></div>
-                <div id="event-swing-container" data-moves="<?=htmlentities(json_encode($swing_chart_data), ENT_QUOTES, 'UTF-8')?>" style="height: <?=(50 + (count($swing_chart_data[0]['data']) < 10 ? count($swing_chart_data[0]['data']) : 10) * 18)?>px;"></div>
-                <div class="event-swing-expandarea <?=count($swing_chart_data[0]['data']) < 10 ? ' hidden' : ''?>"><a href="#" class="event-swing-expand"><span>Show all</span><div class="event-swing-expandarrow"></div></a></div>
-            </div>
-        </div>
-    <div id="event-outcome-area">
-        <div id="page-container">
-            <div class="content-header">Expected outcome</div>
-            <div id="event-outcome-container" data-outcomes="<?=htmlentities(json_encode($expected_outcome_data), ENT_QUOTES, 'UTF-8')?>" style="height: <?=(67 + count($expected_outcome_data['data']) * 20)?>px;"></div>
-        </div>
-    </div>
-</div>
+<div class="table-last-changed">Last change: <span title="%<?=$event->getID()?>_last_change_date%">%<?=$event->getID()?>_last_change_diff%</span></div>

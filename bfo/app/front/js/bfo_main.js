@@ -1341,3 +1341,9 @@ function hideArrows() {
 document.oncopy = hideArrows;
 
 
+function setDesktop(value) {
+    Cookies.set('bfo_reqdesktop', value, {
+        'expires': 999
+    });
+    location.reload();
+}

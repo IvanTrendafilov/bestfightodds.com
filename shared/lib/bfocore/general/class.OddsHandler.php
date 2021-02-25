@@ -514,6 +514,211 @@ class OddsHandler
         }
         return $return;
     }
+
+    public static function getEventViewData($a_iEventID)
+    {
+        if ($a_iEventID == null || !is_numeric($a_iEventID))
+        {
+            return false;
+        }
+
+        $view_data = [];
+
+        $event = EventHandler::getEvent((int) $a_iEventID);
+
+        $matchups = EventHandler::getAllFightsForEvent($event->getID(), true);
+
+        //Convert matchups array to associative
+        $matchups_assoc = [];
+        foreach ($matchups as $matchup)
+        {
+            $matchups_assoc[$matchup->getID()] = $matchup;
+        }
+
+        $prop_odds = OddsHandler::getLatestPropOddsV2($event->getID());
+        $matchup_odds = OddsHandler::getLatestMatchupOddsV2($event->getID());
+        $event_prop_odds = OddsHandler::getLatestEventPropOddsV2($event->getID());
+
+        foreach ($matchup_odds as &$event_entry)
+        {
+            foreach ($event_entry as &$matchup_entry)
+            {
+                $best_odds_reflist1 = [];
+                $best_odds_reflist2 = [];
+                foreach ($matchup_entry as $odds_key => $bookie_odds)
+                {
+                    //Indicate which line is best on both sides
+                    if (count($best_odds_reflist1) == 0)
+                    {
+                        $best_odds_reflist1[] = $odds_key;
+                    }
+                    else if ($bookie_odds['odds_obj']->getOdds(1) > $matchup_entry[$best_odds_reflist1[0]]['odds_obj']->getOdds(1))
+                    {
+                        $best_odds_reflist1 = [$odds_key];
+                    }
+                    else if ($bookie_odds['odds_obj']->getOdds(1) == $matchup_entry[$best_odds_reflist1[0]]['odds_obj']->getOdds(1))
+                    {
+                        $best_odds_reflist1[] = $odds_key;
+                    }
+                    if (count($best_odds_reflist2) == 0)
+                    {
+                        $best_odds_reflist2[] = $odds_key;
+                    }
+                    else if ($bookie_odds['odds_obj']->getOdds(2) > $matchup_entry[$best_odds_reflist2[0]]['odds_obj']->getOdds(2))
+                    {
+                        $best_odds_reflist2 = [$odds_key];
+                    }
+                    else if ($bookie_odds['odds_obj']->getOdds(2) == $matchup_entry[$best_odds_reflist2[0]]['odds_obj']->getOdds(2))
+                    {
+                        $best_odds_reflist2[] = $odds_key;
+                    }
+                }
+                foreach ($best_odds_reflist1 as $bookie_key)
+                {
+                    $matchup_entry[$bookie_key]['is_best_team1'] = true;
+                }
+                foreach ($best_odds_reflist2 as $bookie_key)
+                {
+                    $matchup_entry[$bookie_key]['is_best_team2'] = true;
+                }
+            }
+        }
+
+        //Loop through prop odds and count the number of props available for each matchup
+        $view_data['matchup_prop_count'] = [];
+        foreach ($prop_odds as &$event_entry)
+        {
+            foreach ($event_entry as $matchup_key => &$matchup_entry)
+            {
+                foreach ($matchup_entry as &$proptype_entry)
+                {
+                    foreach ($proptype_entry as $team_num_key => &$team_num_entry)
+                    {
+                        //Count entries per matchup
+                        if (!isset($view_data['matchup_prop_count'][$matchup_key]))
+                        {
+                            $view_data['matchup_prop_count'][$matchup_key] = 0;
+                        }
+                        $view_data['matchup_prop_count'][$matchup_key]++;
+                        
+                        $best_odds_reflist1 = [];
+                        $best_odds_reflist2 = [];
+                        foreach ($team_num_entry as $odds_key => $bookie_odds)
+                        {
+                            //Indicate which line is best on both sides
+                            if (count($best_odds_reflist1) == 0)
+                            {
+                                $best_odds_reflist1[] = $odds_key;
+                            }
+                            else if ($bookie_odds['odds_obj']->getPropOdds() > $team_num_entry[$best_odds_reflist1[0]]['odds_obj']->getPropOdds())
+                            {
+                                $best_odds_reflist1 = [$odds_key];
+                            }
+                            else if ($bookie_odds['odds_obj']->getPropOdds() == $team_num_entry[$best_odds_reflist1[0]]['odds_obj']->getPropOdds())
+                            {
+                                $best_odds_reflist1[] = $odds_key;
+                            }
+                            if (count($best_odds_reflist2) == 0)
+                            {
+                                $best_odds_reflist2[] = $odds_key;
+                            }
+                            else if ($bookie_odds['odds_obj']->getNegPropOdds() > $team_num_entry[$best_odds_reflist2[0]]['odds_obj']->getNegPropOdds())
+                            {
+                                $best_odds_reflist2 = [$odds_key];
+                            }
+                            else if ($bookie_odds['odds_obj']->getNegPropOdds() == $team_num_entry[$best_odds_reflist2[0]]['odds_obj']->getNegPropOdds())
+                            {
+                                $best_odds_reflist2[] = $odds_key;
+                            }
+
+                            //Adjust prop name description
+                            $prop_desc = $bookie_odds['odds_obj']->getPropName();
+                            $prop_desc = str_replace(['<T>', '<T2>'], 
+                                            [$matchups_assoc[$matchup_key]->getTeamLastNameAsString($team_num_key),
+                                            $matchups_assoc[$matchup_key]->getTeamLastNameAsString(($team_num_key % 2) + 1)]
+                                            , $prop_desc);
+                            $prop_desc = $bookie_odds['odds_obj']->setPropName($prop_desc);
+
+                            $prop_desc = $bookie_odds['odds_obj']->getNegPropName();
+                            $prop_desc = str_replace(['<T>', '<T2>'], 
+                                            [$matchups_assoc[$matchup_key]->getTeamLastNameAsString($team_num_key),
+                                            $matchups_assoc[$matchup_key]->getTeamLastNameAsString(($team_num_key % 2) + 1)]
+                                            , $prop_desc);
+                            $prop_desc = $bookie_odds['odds_obj']->setNegPropName($prop_desc);
+                        }
+
+                        foreach ($best_odds_reflist1 as $bookie_key)
+                        {
+                            $team_num_entry[$bookie_key]['is_best_pos'] = true;
+                        }
+                        foreach ($best_odds_reflist2 as $bookie_key)
+                        {
+                            $team_num_entry[$bookie_key]['is_best_neg'] = true;
+                        }
+                    }
+                }
+            }
+        }
+        
+        //Loop through event prop odds and count the number of props available for each matchup
+        $view_data['event_prop_count'] = 0;
+        foreach ($event_prop_odds as &$event_entry)
+        {
+            foreach ($event_entry as &$proptype_entry)
+            {
+                $view_data['event_prop_count']++;
+                
+                $best_odds_reflist1 = [];
+                $best_odds_reflist2 = [];
+                foreach ($proptype_entry as $odds_key => $bookie_odds)
+                {
+                    //Indicate which line is best on both sides
+                    if (count($best_odds_reflist1) == 0)
+                    {
+                        $best_odds_reflist1[] = $odds_key;
+                    }
+                    else if ($bookie_odds['odds_obj']->getPropOdds() > $proptype_entry[$best_odds_reflist1[0]]['odds_obj']->getPropOdds())
+                    {
+                        $best_odds_reflist1 = [$odds_key];
+                    }
+                    else if ($bookie_odds['odds_obj']->getPropOdds() == $proptype_entry[$best_odds_reflist1[0]]['odds_obj']->getPropOdds())
+                    {
+                        $best_odds_reflist1[] = $odds_key;
+                    }
+                    if (count($best_odds_reflist2) == 0)
+                    {
+                        $best_odds_reflist2[] = $odds_key;
+                    }
+                    else if ($bookie_odds['odds_obj']->getNegPropOdds() > $proptype_entry[$best_odds_reflist2[0]]['odds_obj']->getNegPropOdds())
+                    {
+                        $best_odds_reflist2 = [$odds_key];
+                    }
+                    else if ($bookie_odds['odds_obj']->getNegPropOdds() == $proptype_entry[$best_odds_reflist2[0]]['odds_obj']->getNegPropOdds())
+                    {
+                        $best_odds_reflist2[] = $odds_key;
+                    }
+                }
+                foreach ($best_odds_reflist1 as $bookie_key)
+                {
+                    $proptype_entry[$bookie_key]['is_best_pos'] = true;
+                }
+                foreach ($best_odds_reflist2 as $bookie_key)
+                {
+                    $proptype_entry[$bookie_key]['is_best_neg'] = true;
+                }
+            }
+        }
+
+        $view_data['event'] = $event;
+        
+        $view_data['matchups'] = $matchups;
+        $view_data['prop_odds'] = $prop_odds;
+        $view_data['matchup_odds'] = $matchup_odds;
+        $view_data['event_prop_odds'] = $event_prop_odds;
+
+        return $view_data;
+    }
+
 }
 
 ?>

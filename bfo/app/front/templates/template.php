@@ -5,13 +5,10 @@
         <meta name="description" content="<?=isset($meta_desc) ? $meta_desc . ' ' : ''?>UFC/MMA odds comparison service. Compare the latest UFC/MMA fight odds and betting lines from the top online sportsbooks">
         <meta name="keywords" content="<?=isset($meta_keywords) ? $meta_keywords . ' ' : ''?>mma odds, mma betting, mma lines, ufc odds, ufc, mma, odds, betting">
         <meta property="og:image" content="https://www.bestfightodds.com/img/iconv2.jpg">
-        <?php
-        //Enable viewport if desktop has not explicitly been requested
-        if (!(isset($_COOKIE['bfo_reqdesktop']) && $_COOKIE['bfo_reqdesktop'] == 'true'))
-        {
-            echo '<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">';
-        }
-        ?>
+
+        <?php if (!(isset($_COOKIE['bfo_reqdesktop']) && $_COOKIE['bfo_reqdesktop'] == 'true')): //Enable viewport if desktop has not explicitly been requested?>
+            <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+        <?php endif ?>
         <link rel="preconnect" href="https://www.googletagmanager.com">
         <link rel="preconnect" href="https://www.google-analytics.com">
         <link rel="preconnect" href="https://fonts.googleapis.com" crossorigin>
@@ -20,25 +17,19 @@
         <noscript>
             <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap">
         </noscript>
-        <link rel="stylesheet" type="text/css" href="/css/bfo.min.css?v=0.2.7">
+        <link rel="stylesheet" type="text/css" href="/css/bfo.min.css?v=0.2.9">
         <link rel="shortcut icon" href="https://www.bestfightodds.com/favicon.ico">
         <link rel="apple-touch-icon" sizes="144x144" href="/apple-touch-icon-144x144.png">
         <link rel="apple-touch-icon" sizes="114x114" href="/apple-touch-icon-114x114.png">
         <link rel="apple-touch-icon" sizes="72x72" href="/apple-touch-icon-72x72.png">
         <link rel="apple-touch-icon" href="/apple-touch-icon-iphone.png">
-        <?php
-
-        //Check if darkmode is enabled and if so, add appropriate stylesheet. Note that this is also checked in javascript to change dropdown
-        if (isset($_COOKIE['bfo_darkmode']) && $_COOKIE['bfo_darkmode'] == 1)
-        {
-            echo '<link rel="stylesheet" type="text/css" href="/css/bfo.darkmode.css?v=0.0.1" id="darkmodecss">';
-        }
-
-        ?>
+        <?php if (isset($_COOKIE['bfo_darkmode']) && $_COOKIE['bfo_darkmode'] == 1): //Check if darkmode is enabled and if so, add appropriate stylesheet. Note that this is also checked in javascript to change dropdown ?>
+            <link rel="stylesheet" type="text/css" href="/css/bfo.darkmode.css?v=0.0.1" id="darkmodecss">
+        <?php endif ?>
         <title><?=isset($title) ? $title . ' | Best Fight Odds' : 'UFC &amp; MMA Odds &amp; Betting Lines | Best Fight Odds'?></title>
     </head>
     <body>
-        <script type="text/javascript" async src="/js/bfo.min.js?v=0.2"></script>
+        <script type="text/javascript" async src="/js/bfo.min.js?v=0.3"></script>
         <div class="header">
                 <div class="header-top">
                     <a href="/"><img src="/img/logo_3.png" class="logo" alt="Best Fight Odds logo"></a>
@@ -96,7 +87,7 @@
                             </div>
                             <div id="mob-divider" class="menu-divider"
                                 <?php if (true || !isset($current_page) || $current_page != ''): //Auto-refresh current disabled ?>
-                                     echo ' style="display: none" ';
+                                      style="display: none" 
                                 <?php endif ?>
                             ></div>
                             <div id="format-container">
@@ -130,21 +121,11 @@
 
 <div id="bottom-container">
     <a href="/">Home</a><span class="menu-seperator">|</span>
-         <?php   
-         //Display switch to mobile if on forced desktop
-            if ((isset($_COOKIE['bfo_reqdesktop']) && $_COOKIE['bfo_reqdesktop'] == 'true'))
-            {
-          ?>
-            <a href="/?desktop=off">Mobile</a><span class="menu-seperator">|</span>
-            <?php
-            }
-            else
-            {
-              ?>
-            <a href="/?desktop=on">Desktop site</a><span class="menu-seperator">|</span>
-              <?php
-            }
-          ?>
+        <?php if ((isset($_COOKIE['bfo_reqdesktop']) && $_COOKIE['bfo_reqdesktop'] == 'true')): //Display switch to mobile if on forced desktop?>
+            <a href="#" onclick="setDesktop(false);">Mobile</a><span class="menu-seperator">|</span>
+        <?php else: ?>
+            <a href="#" onclick="setDesktop(true);">Desktop site</a><span class="menu-seperator">|</span>
+        <?php endif ?>
     <a href="https://www.proboxingodds.com" target="_blank" rel="noopener">Boxing Odds</a><span class="menu-seperator">|</span><a href="/terms">Terms of service</a><span class="menu-seperator">|</span><a href="#">18+</a><span class="menu-seperator">|</span><a href="https://www.begambleaware.org/">BeGambleAware</a><span class="menu-seperator">|</span><a href="mailto:info1@bestfightodds.com">Contact</a><span class="menu-seperator">|</span><a href="mailto:info1@bestfightodds.com">&copy; <?=date('Y')?></a>
 </div>
 
@@ -175,11 +156,9 @@
 </div>
 <div id="bookie-settings-window" class="popup-window"><div class="popup-header">Bookie display settings <a href="#" class="cd-popup-close">&#10005;</a></div><div id="bookie-settings-area">Drag to change order, show/hide using checkbox<ul id="bookie-order-items"></ul><input type="button" class="button" value="Reset to default settings" id="bookieResetDefault"></div></div>
 
-<?php
-//Disable Google Analytics if running locally
-if ($_SERVER['SERVER_ADDR'] != '127.0.0.1')
-{
-    ?>
+
+
+<?php if (isset($_SERVER['SERVER_ADDR']) && $_SERVER['SERVER_ADDR'] != '127.0.0.1'): //Disable Google Analytics if running locally ?>
 <script async src="https://www.googletagmanager.com/gtag/js?id=UA-2457531-1"></script>
 <script>
   window.dataLayer = window.dataLayer || [];
@@ -188,11 +167,7 @@ if ($_SERVER['SERVER_ADDR'] != '127.0.0.1')
 
   gtag('config', 'UA-2457531-1');
 </script>
-
-<?php
-}
-?>
-
+<?php endif ?>
 
 </body>
 </html>
