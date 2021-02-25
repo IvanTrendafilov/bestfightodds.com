@@ -20,6 +20,8 @@
                         </thead>
                         <tbody>
                         
+                        <?php $odds_counter = 0; ?>
+
                         <?php foreach ($matchups as $matchup): ?>
 
                             <tr class="event-header item-mobile-only-row">
