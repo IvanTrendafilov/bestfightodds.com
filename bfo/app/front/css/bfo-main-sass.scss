@@ -1205,7 +1205,7 @@ nav {
   background-color: orangered;
   height: 100px;
   display: flex;
-  justify-content: center;
+  justify-content: space-between;
 }
 
 /* Ref: https://stackoverflow.com/questions/57762372/an-html-page-with-screen-wide-header-limit-width-content-flexbox-logo-elements */
@@ -1216,7 +1216,7 @@ nav {
     display: flex;
     justify-content: center;
   }
-  .flex-header-wrap {
+  .flex-header-wrap, nav {
     max-width: 1116px;
     width: 100%;
     display: flex;
