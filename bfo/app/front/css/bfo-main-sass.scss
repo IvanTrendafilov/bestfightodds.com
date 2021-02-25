@@ -1201,14 +1201,16 @@ header {
   align-self: center;
 }
 
+/* Ref: https://stackoverflow.com/questions/57762372/an-html-page-with-screen-wide-header-limit-width-content-flexbox-logo-elements */
+
 /* DESKTOP */
-@media (min-width: 600px) {
+@media (min-width: 900px) {
   header {
     display: flex;
     justify-content: center;
   }
   .flex-header-wrap {
-    max-width: 800px;
+    max-width: 1116px;
     width: 100%;
     display: flex;
     justify-content: space-between;
@@ -1220,7 +1222,7 @@ header {
     align-self: center;
   }
   section {
-    max-width: 800px;
+    max-width: 1116px;
     width: calc(100% - 40px);
   }
   footer {
