@@ -39,6 +39,7 @@
             </div>
         </header>
                 <nav>
+                    <div class="flex-header-wrap">
                         <div class="flex-header-menu">
                             <a href="/"><div class="header-menu-item <?=!isset($current_page) || $current_page == '' ? ' header-menu-selected ' : ''?>" style="margin-left: 10px">Latest<span class="item-non-mob-mini"> odds</span></div></a>
                             <a href="/archive"><div class="header-menu-item <?=isset($current_page) && ($current_page == 'archive' || $current_page == 'event') ? ' header-menu-selected ' : ''?>">Archive</div></a>
@@ -109,7 +110,7 @@
                             </div>
                         </div>
                     </div>
-                
+                    </div>
                 </nav>
         
                 <section>    
