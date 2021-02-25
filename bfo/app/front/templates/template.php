@@ -38,7 +38,7 @@
                     </div>
         </div>
                 <nav>
-                        <div class="header-menu">
+                        <div class="flex-header-menu">
                             <a href="/"><div class="header-menu-item <?=!isset($current_page) || $current_page == '' ? ' header-menu-selected ' : ''?>" style="margin-left: 10px">Latest<span class="item-non-mob-mini"> odds</span></div></a>
                             <a href="/archive"><div class="header-menu-item <?=isset($current_page) && ($current_page == 'archive' || $current_page == 'event') ? ' header-menu-selected ' : ''?>">Archive</div></a>
                             <a href="/alerts"><div class="header-menu-item <?=isset($current_page) && $current_page == 'alerts' ? ' header-menu-selected ' : ''?>">Alerts</div></a>
@@ -59,7 +59,7 @@
                                 </svg></a>
                             </div>
                         </div>
-                        <div id="header-menu-right">
+                        <div id="flex-header-menu-right">
                            <div id="parlay-mode-container" 
                                  <?php if (isset($current_page) && $current_page != '' && $current_page != 'event'): ?>
                                      style="visibility: hidden" 
