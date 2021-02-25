@@ -1219,7 +1219,7 @@ flex-header-menu-right {
 }
 /* Ref: https://stackoverflow.com/questions/57762372/an-html-page-with-screen-wide-header-limit-width-content-flexbox-logo-elements */
 
-  nav,header {
+  nav,header, section {
     display: flex;
     justify-content: center;
     flex-direction: column;
@@ -1236,7 +1236,8 @@ flex-header-menu-right {
     margin-right: 20px;
     align-self: center;
   }
-  section {
+  .flex-content-wrapper {
     max-width: 1116px;
     width: calc(100% - 40px);
   }
+

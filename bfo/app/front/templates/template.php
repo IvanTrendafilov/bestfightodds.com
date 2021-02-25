@@ -114,9 +114,10 @@
                 </nav>
         
                 <section>    
+                    <div class="flex-content-wrapper">
 
     <?=$this->section('content')?>
-
+                                </div>
                                 </section>
 <div class="legend-container">
     <img src="/img/loading.gif" class="hidden-image" alt="Loading indicator">
