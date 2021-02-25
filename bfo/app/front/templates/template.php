@@ -36,7 +36,8 @@
                     <div id="header-search-box">
                         <form method="get" action="/search"><input type="text" id="search-box1" class="search-box" name="query" placeholder="MMA Event / Fighter"> <input type="submit" class="search-button" id="search-button" value="&#128269;"></form>
                     </div>
-        </div>
+            </div>
+        </header>
                 <nav>
                         <div class="flex-header-menu">
                             <a href="/"><div class="header-menu-item <?=!isset($current_page) || $current_page == '' ? ' header-menu-selected ' : ''?>" style="margin-left: 10px">Latest<span class="item-non-mob-mini"> odds</span></div></a>
@@ -110,7 +111,7 @@
                     </div>
                 
                 </nav>
-        </header>
+        
                 <section>    
 
     <?=$this->section('content')?>
