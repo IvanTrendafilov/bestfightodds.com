@@ -1190,9 +1190,11 @@ table.team-stats-table {
   color: #666;
 }
 
+
+
+
 header {
   background-color: orangered;
-  height: 100px;
   display: flex;
   justify-content: center;
 }
@@ -1210,11 +1212,10 @@ nav {
 
 /* Ref: https://stackoverflow.com/questions/57762372/an-html-page-with-screen-wide-header-limit-width-content-flexbox-logo-elements */
 
-/* DESKTOP */
-@media (min-width: 900px) {
   header {
     display: flex;
     justify-content: center;
+    flex-direction: column;
   }
   .flex-header-wrap, nav {
     max-width: 1116px;
@@ -1232,13 +1233,3 @@ nav {
     max-width: 1116px;
     width: calc(100% - 40px);
   }
-  footer {
-    max-width: 900px;
-    width: 100%;
-  }
-  section,
-  footer {
-    margin-left: auto;
-    margin-right: auto;
-  }
-}
