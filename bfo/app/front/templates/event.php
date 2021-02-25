@@ -1,27 +1,8 @@
 <?php $this->layout('template', ['title' => $team_title, 'meta_desc' => $meta_desc, 'meta_keywords' => $meta_keywords, 'current_page' => 'event']) ?>
 
-<?php
-/*require_once('lib/bfocore/general/class.EventHandler.php');
-require_once('lib/bfocore/general/class.BookieHandler.php');
-require_once('lib/bfocore/general/class.OddsHandler.php');
-require_once('lib/bfocore/general/inc.GlobalTypes.php');
-require_once('config/inc.config.php');
-require_once('lib/bfocore/general/caching/class.CacheControl.php');
-require_once('lib/bfocore/utils/class.LinkTools.php');
-require_once('lib/bfocore/utils/class.OddsTools.php');
-require_once('lib/bfocore/general/class.StatsHandler.php');
+<div class="table-outer-wrapper"><div class="table-div" id="event<?=$event->getID()?>"><div class="table-header"><a href="/events/<?=$event->getEventAsLinkString()?>"><h1><?=$event->getName()?></h1></a>
 
-require_once('app/front/pages/inc.FrontLogic.php');
-
-$oEvent = EventHandler::getEvent((int) $_GET['eventID']);
-
-$iCellCounter = 0;*/
-?>
-       
-
-        <div class="table-outer-wrapper"><div class="table-div" id="event<?=$event->getID()?>"><div class="table-header"><a href="/events/<?=$event->getEventAsLinkString()?>"><h1><?=$event->getName()?></h1></a>
-        
-            <?php if (strtoupper($event->getName()) != 'FUTURE EVENTS'): //Add date for all events except for FUTURE EVENTS?>
+    <?php if (strtoupper($event->getName()) != 'FUTURE EVENTS'): //Add date for all events except for FUTURE EVENTS?>
                 <span class="table-header-date"><?=date('F jS', strtotime($event->getDate()))?></span>
             <?php endif ?>
             <div class="share-area">
@@ -46,7 +27,7 @@ $iCellCounter = 0;*/
             <?php //============== Add matchups ====================== ?>
                 <?php foreach ($matchups as $matchup_key => $matchup): ?>
                     <?php for ($i = 1; $i <= 2; $i++): ?>
-                        <tr <?=(($i == 2 && $matchup_key == array_key_last($matchups)) ? ' style="border-bottom: 0;" ' : '')?>>
+                        <tr id="mu-<?=$matchup->getID()?>" <?=(($i == 2 && $matchup_key == array_key_last($matchups)) ? ' style="border-bottom: 0;" ' : '')?>>
                             <th scope="row"><a href="/fighters/<?=$matchup->getFighterAsLinkString($i)?>"><span class="t-b-fcc"><?=$matchup->getFighterAsString($i)?></span></a></th>
                         </tr>
                     <?php endfor ?>
@@ -64,7 +45,7 @@ $iCellCounter = 0;*/
 
                 <?php //============== Add event props ======================= ?>
 
-                <?php if (count($event_prop_odds[$event->getID()]) > 1): ?>
+                <?php if ($event_prop_count > 1): ?>
                     <tr class="eventprop" id="mu-<?=$event->getID()?>">
                             <th scope="row" style="font-weight: 400"><a href="#" data-mu="<?=$event->getID()?>">Event props</a></th>
                             <?php foreach ($bookies as $bookie): ?>
@@ -147,7 +128,6 @@ $iCellCounter = 0;*/
                             <?php endif ?>
 
                             <td class="prop-cell prop-cell-exp" data-mu="<?=$matchup->getID()?>">
-
                             <?php if (isset($matchup_prop_count[$matchup->getID()])): ?> 
                                 <?=$matchup_prop_count[$matchup->getID()]?>&nbsp;<span class="exp-ard"></span>
                             <?php else: ?>
@@ -220,7 +200,7 @@ $iCellCounter = 0;*/
 
                     <?php //============== Add event props ======================= ?>
 
-                    <?php if (count($event_prop_odds[$event->getID()]) > 1): ?>
+                    <?php if ($event_prop_count > 1): ?>
 
                         <tr class="eventprop" id="mu-<?=$event->getID()?>">
                                 <th scope="row" style="font-weight: 400"><a href="#" data-mu="<?=$event->getID()?>">Event props</a></th>
@@ -297,10 +277,8 @@ $iCellCounter = 0;*/
     </div>
 </div>
 
-<div class="table-last-changed">Last change: <span title="%last_change_date">%last_change_diff%</span></div>
-
+<div class="table-last-changed">Last change: <span title="%last_change_date%">%last_change_diff%</span></div>
 <div class="table-outer-wrapper">
-
     <div id="event-swing-area">
         <div id="page-container">
             <div class="content-header">Line movement <div id="event-swing-picker-menu"><a href="#" class="event-swing-picker picked" data-li="0">Since opening</a> | <a href="#" class="event-swing-picker" data-li="1">Last 24 hours</a> | <a href="#" class="event-swing-picker" data-li="2">Last hour</a></div></div>
@@ -308,13 +286,10 @@ $iCellCounter = 0;*/
                 <div class="event-swing-expandarea <?=count($swing_chart_data[0]['data']) < 10 ? ' hidden' : ''?>"><a href="#" class="event-swing-expand"><span>Show all</span><div class="event-swing-expandarrow"></div></a></div>
             </div>
         </div>
-
-    <div id="event-outcome-area" style="">
+    <div id="event-outcome-area">
         <div id="page-container">
             <div class="content-header">Expected outcome</div>
             <div id="event-outcome-container" data-outcomes="<?=htmlentities(json_encode($expected_outcome_data), ENT_QUOTES, 'UTF-8')?>" style="height: <?=(67 + count($expected_outcome_data['data']) * 20)?>px;"></div>
-
         </div>
     </div>
 </div>
-

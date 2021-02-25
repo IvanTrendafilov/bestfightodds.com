@@ -1,37 +1,37 @@
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en"> 
     <head>
-        <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
-        <meta name="description" content="<?=isset($meta_desc) ? $meta_desc . ' ' : ''?>UFC/MMA odds comparison service. Compare the latest UFC/MMA fight odds and betting lines from the top online sportsbooks" />
-        <meta name="keywords" content="<?=isset($meta_keywords) ? $meta_keywords . ' ' : ''?>mma odds, mma betting, mma lines, ufc odds, ufc, mma, odds, betting" />
-        <meta property="og:image" content="https://www.bestfightodds.com/img/iconv2.jpg" />
+        <meta http-equiv="Content-Type" content="text/html;charset=utf-8">
+        <meta name="description" content="<?=isset($meta_desc) ? $meta_desc . ' ' : ''?>UFC/MMA odds comparison service. Compare the latest UFC/MMA fight odds and betting lines from the top online sportsbooks">
+        <meta name="keywords" content="<?=isset($meta_keywords) ? $meta_keywords . ' ' : ''?>mma odds, mma betting, mma lines, ufc odds, ufc, mma, odds, betting">
+        <meta property="og:image" content="https://www.bestfightodds.com/img/iconv2.jpg">
         <?php
         //Enable viewport if desktop has not explicitly been requested
         if (!(isset($_COOKIE['bfo_reqdesktop']) && $_COOKIE['bfo_reqdesktop'] == 'true'))
         {
-            echo '<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover" />';
+            echo '<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">';
         }
         ?>
         <link rel="preconnect" href="https://www.googletagmanager.com">
         <link rel="preconnect" href="https://www.google-analytics.com">
-        <link rel="preconnect" href="https://fonts.googleapis.com" crossorigin />
-        <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" />
-        <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" media="print" onload="this.media='all'" />
+        <link rel="preconnect" href="https://fonts.googleapis.com" crossorigin>
+        <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap">
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" media="print" onload="this.media='all'">
         <noscript>
-            <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" />
+            <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap">
         </noscript>
-        <link rel="stylesheet" type="text/css" href="/css/bfo.min.css?v=0.2.7" />
-        <link rel="shortcut icon" href="https://www.bestfightodds.com/favicon.ico" />
-        <link rel="apple-touch-icon" sizes="144x144" href="/apple-touch-icon-144x144.png" />
-        <link rel="apple-touch-icon" sizes="114x114" href="/apple-touch-icon-114x114.png" />
-        <link rel="apple-touch-icon" sizes="72x72" href="/apple-touch-icon-72x72.png" />
-        <link rel="apple-touch-icon" href="/apple-touch-icon-iphone.png" />
+        <link rel="stylesheet" type="text/css" href="/css/bfo.min.css?v=0.2.7">
+        <link rel="shortcut icon" href="https://www.bestfightodds.com/favicon.ico">
+        <link rel="apple-touch-icon" sizes="144x144" href="/apple-touch-icon-144x144.png">
+        <link rel="apple-touch-icon" sizes="114x114" href="/apple-touch-icon-114x114.png">
+        <link rel="apple-touch-icon" sizes="72x72" href="/apple-touch-icon-72x72.png">
+        <link rel="apple-touch-icon" href="/apple-touch-icon-iphone.png">
         <?php
 
         //Check if darkmode is enabled and if so, add appropriate stylesheet. Note that this is also checked in javascript to change dropdown
         if (isset($_COOKIE['bfo_darkmode']) && $_COOKIE['bfo_darkmode'] == 1)
         {
-            echo '<link rel="stylesheet" type="text/css" href="/css/bfo.darkmode.css?v=0.0.1" id="darkmodecss" />';
+            echo '<link rel="stylesheet" type="text/css" href="/css/bfo.darkmode.css?v=0.0.1" id="darkmodecss">';
         }
 
         ?>
@@ -43,7 +43,7 @@
                 <div class="header-top">
                     <a href="/"><img src="/img/logo_3.png" class="logo" alt="Best Fight Odds logo"></a>
                     <div id="header-search-box">
-                        <form method="get" action="/search"><input type="text" id="search-box1" class="search-box" name="query" placeholder="MMA Event / Fighter"/> <input type="submit" class="search-button" id="search-button" value="&#128269;" /></form>
+                        <form method="get" action="/search"><input type="text" id="search-box1" class="search-box" name="query" placeholder="MMA Event / Fighter"> <input type="submit" class="search-button" id="search-button" value="&#128269;"></form>
                     </div>
                 </div>
                 <div class="header-menu-wrapper">
@@ -51,7 +51,7 @@
                         <a href="/"><div class="header-menu-item <?=!isset($current_page) || $current_page == '' ? ' header-menu-selected ' : ''?>" style="margin-left: 10px">Latest<span class="item-non-mob-mini"> odds</span></div></a>
                         <a href="/archive"><div class="header-menu-item <?=isset($current_page) && ($current_page == 'archive' || $current_page == 'event') ? ' header-menu-selected ' : ''?>">Archive</div></a>
                         <a href="/alerts"><div class="header-menu-item <?=isset($current_page) && $current_page == 'alerts' ? ' header-menu-selected ' : ''?>">Alerts</div></a>
-                        <a href="/widget"><div class="header-menu-item <?=isset($current_page) && $current_page == 'widget' ? ' header-menu-selected ' : ''?> item-non-mobile">Widget</div></a>
+                        <a href="/links"><div class="header-menu-item <?=isset($current_page) && $current_page == 'widget' ? ' header-menu-selected ' : ''?> item-non-mobile">Widget</div></a>
                         <a href="https://www.proboxingodds.com" target="_blank" rel="noopener"><div class="header-menu-item  item-non-mobile">Boxing</div></a>
                         <a href="http://twitter.com/bestfightodds" target="_blank" rel="noopener"><div class="header-menu-item">
                             <svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
@@ -86,7 +86,7 @@
                                  <?php endif ?>
                             >
                                 <ul class="dropdown">
-                                    <li><a href="#"  onclick="toggleRefresh()" style="padding-left: 20px;"><img src="/img/refresh.png" class="refresh-ind" id="autoRefresh" alt="Toggle auto-refresh"/>&#9660;</a>
+                                    <li><a href="#"  onclick="toggleRefresh()" style="padding-left: 20px;"><img src="/img/refresh.png" class="refresh-ind" id="autoRefresh" alt="Toggle auto-refresh">&#9660;</a>
                                             <ul class="sub_menu">
                                                  <li><a href="#" id="afSelectorOn" class="list-checked"><span style="display: inline-block">&#10004;</span>Auto-refresh: On</a></li>
                                                  <li><a href="#" id="afSelectorOff"><span>&#10004;</span>Auto-refresh: Off</a></li>
@@ -108,7 +108,7 @@
                                              <li><a href="#" id="formatSelector1" class="list-checked"><span style="display: inline-block">&#10003;</span>Moneyline</a></li>
                                              <li><a href="#" id="formatSelector2"><span>&#10003;</span>Decimal</a></li>
                                              <li><a href="#" id="formatSelector4"><span>&#10003;</span>Fractional</a></li>
-                                             <li style="border-bottom: 1px solid #4a4c53"><a href="#" id="formatSelector3" style="display: inline"><span>&#10003;</span>Return on </a>$<input type="text" name="amountBox" id="format-amount-box1" maxlength="4" value="100" style="display: inline"/></li>
+                                             <li style="border-bottom: 1px solid #4a4c53"><a href="#" id="formatSelector3" style="display: inline"><span>&#10003;</span>Return on </a>$<input type="text" name="amountBox" id="format-amount-box1" maxlength="4" value="100" style="display: inline"></li>
                                              <li><a href="#" id="bookieHideSelector">Customize view</a></li>
                                         </ul>
                                     </li>
@@ -124,8 +124,8 @@
 
     </div>
 <div class="legend-container">
-    <img src="/img/loading.gif" class="hidden-image" alt="Loading indicator" />
-    <img src="/img/expu.png" class="hidden-image" alt="Loading indicator" />
+    <img src="/img/loading.gif" class="hidden-image" alt="Loading indicator">
+    <img src="/img/expu.png" class="hidden-image" alt="Loading indicator">
 </div>
 
 <div id="bottom-container">
@@ -151,7 +151,7 @@
 <div id="chart-window" class="popup-window"><div class="popup-header" id="chart-header"><div></div><a href="#" class="cd-popup-close">&#10005;</a></div><div id="chart-area"></div><a href="#" target="_blank" rel="noopener"><div id="chart-link" class="button">Bet this line at bookie</div></a><div id="chart-disc" style="display: none; color: #333">*Currently this Sportsbook does not accept players that reside in the US. 18+ Gamble Responsibly</div></div>
 <div id="parlay-window" class="popup-window"><div class="popup-header" id="parlay-header">Parlay</div><div id="parlay-area">Click on a line to add it to your parlay</div></div>
 <div id="alert-window" class="popup-window"><div class="popup-header" id="alert-header"><div></div><a href="#" class="cd-popup-close">&#10005;</a></div><div id="alert-area">
-    <form id="alert-form">Alert me at e-mail <input type="text" name="alert-mail" id="alert-mail"><br />when the odds reaches <input type="text" name="alert-odds" id="alert-odds"> or better<br/>at <select name="alert-bookie">
+    <form id="alert-form">Alert me at e-mail <input type="text" name="alert-mail" id="alert-mail"><br>when the odds reaches <input type="text" name="alert-odds" id="alert-odds"> or better<br>at <select name="alert-bookie">
         <option value="-1">any bookie</option>
         <option value="1">5Dimes</option>
         <option value="20">BetWay</option>
@@ -168,7 +168,7 @@
         <option value="13">BetDSI</option>
         <option value="21">FanDuel</option>
         <option value="22">DraftKings</option>
-      </select><br /><div id="alert-button-container"><input type="hidden" name="tn"><input type="hidden" name="m">
+      </select><br><div id="alert-button-container"><input type="hidden" name="tn"><input type="hidden" name="m">
         <div class="alert-loader"></div>
         <div class="alert-result">&nbsp;</div>
       <input type="submit" value="Add alert" id="alert-submit"></div></form></div>

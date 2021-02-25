@@ -3,8 +3,10 @@
 use DI\Container;
 use DI\ContainerBuilder;
 use Slim\Factory\AppFactory;
+use Slim\Psr7\Factory\StreamFactory;
 use Psr\Http\Message\ResponseInterface as Response;
 use Psr\Http\Message\ServerRequestInterface as Request;
+use Psr\Http\Server\RequestHandlerInterface as RequestHandler;
 use League\Plates\Engine;
 
 require 'vendor/autoload.php';
@@ -23,6 +25,14 @@ $container = (new \DI\ContainerBuilder())
 AppFactory::setContainer($container);
 $app = AppFactory::create();
 
+//Add minify middleware
+$app->add(function (Request $request, RequestHandler $handler) {
+  $response = $handler->handle($request);
+  $data = $response->getBody();
+  $minified = preg_replace('/\>\s+\</m', '><', $data);
+  return $response->withBody((new StreamFactory())->createStream($minified));
+});
+
 //$app->setBasePath('/cnadm');
 
 $app->get('[/]', \MainController::class . ':home');
@@ -30,7 +40,7 @@ $app->get('/alerts', \MainController::class . ':alerts');
 $app->get('/terms', \MainController::class . ':terms');
 $app->get('/archive', \MainController::class . ':archive');
 $app->get('/search', \MainController::class . ':search');
-$app->get('/widget', \MainController::class . ':widget');
+$app->get('/links', \MainController::class . ':widget');
 $app->get('/fighters/{id}', \MainController::class . ':viewTeam');
 $app->get('/events2/{id}', \MainController::class . ':viewEvent');
 
