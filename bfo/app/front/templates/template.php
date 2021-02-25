@@ -36,8 +36,8 @@
                     <div id="header-search-box">
                         <form method="get" action="/search"><input type="text" id="search-box1" class="search-box" name="query" placeholder="MMA Event / Fighter"> <input type="submit" class="search-button" id="search-button" value="&#128269;"></form>
                     </div>
-                
-                <div class="header-menu-wrapper">
+                <div>
+                <nav>
                         <div class="header-menu">
                         <a href="/"><div class="header-menu-item <?=!isset($current_page) || $current_page == '' ? ' header-menu-selected ' : ''?>" style="margin-left: 10px">Latest<span class="item-non-mob-mini"> odds</span></div></a>
                         <a href="/archive"><div class="header-menu-item <?=isset($current_page) && ($current_page == 'archive' || $current_page == 'event') ? ' header-menu-selected ' : ''?>">Archive</div></a>
@@ -107,8 +107,8 @@
                             </div>
                         </div>
                     </div>
-                </div>
-                </div>
+                
+                </nav>
         </header>
                 <section>    
 
