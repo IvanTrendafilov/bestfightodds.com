@@ -30,10 +30,8 @@ class MainController
 
     public function home(Request $request, Response $response)
     {
-        $view_data = [];
-
         //Retrieve pre-generated page
-        $cached_contents = @file_get_contents(PARSE_PAGEDIR . 'upcoming_odds.php');
+        $cached_contents = @file_get_contents(PARSE_PAGEDIR . 'oddspage.php');
         if ($cached_contents == null)
         {
             //TODO: Implement fallback if odds page cannot be included
@@ -75,7 +73,7 @@ class MainController
             }
         }, $cached_contents);
 
-        $response->getBody()->write($cached_contents);
+        $response->getBody()->write($this->plates->render('home', ['contents' => $cached_contents]));
         return $response;
     }
 
@@ -212,7 +210,9 @@ class MainController
         {
             return $response->withHeader('Location', '/')->withStatus(302);
         }
+
         $team = FighterHandler::getFighterByID((int) $team_id);
+
         if ($team == null)
         {
             return $response->withHeader('Location', '/')->withStatus(302);
@@ -224,21 +224,22 @@ class MainController
             return $response->withHeader('Location', '/')->withStatus(302);
         }
 
+        $view_data = [];
+
         //Check if page is cached or not. If so, fetch from cache and include
         $last_change = TeamHandler::getLastChangeDate($team->getID());
         if (CacheControl::isPageCached('team-' . $team->getID() . '-' . strtotime($last_change)))
         {
             //Retrieve cached page
-            $cached_contents = CacheControl::getCachedPage('team-' . $team->getID() . '-' . strtotime($last_change));
-            $response->getBody()->write($cached_contents);
+            $view_data['team_title'] = $team->getNameAsString() . '\'s MMA Odds History';
+            $view_data['meta_desc'] = $team->getNameAsString() . ' betting odds history.';
+            $view_data['meta_keywords'] = $team->getNameAsString();
+            $view_data['contents'] = CacheControl::getCachedPage('team-' . $team->getID() . '-' . strtotime($last_change));
+            $response->getBody()->write($this->plates->render('team', $view_data));
             return $response;
         }
         
-        $view_data = [];
         $view_data['team'] = $team;
-        $view_data['team_title'] = $team->getNameAsString() . '\'s MMA Odds History';
-        $view_data['meta_desc'] = $team->getNameAsString() . ' betting odds history.';
-        $view_data['meta_keywords'] = $team->getNameAsString();
         $view_data['matchups'] = [];
 
         $matchups = EventHandler::getAllFightsForFighter($team->getID());
@@ -298,13 +299,19 @@ class MainController
             $view_data['matchups'][] = $view_matchup;
         }
 
-        $page_content = $this->plates->render('team', $view_data);
+        $page_content = $this->plates->render('gen_teampage', $view_data);
+        
+        $view_data = [];
+        $view_data['contents'] = $page_content;
+        $view_data['team_title'] = $team->getNameAsString() . '\'s MMA Odds History';
+        $view_data['meta_desc'] = $team->getNameAsString() . ' betting odds history.';
+        $view_data['meta_keywords'] = $team->getNameAsString();
 
         //Cache page
         CacheControl::cleanPageCacheWC('team-' . $team->getID() . '-*');
         CacheControl::cachePage($page_content, 'team-' . $team->getID() . '-' . strtotime($last_change) . '.php');
-       
-        $response->getBody()->write($page_content);
+
+        $response->getBody()->write($this->plates->render('team', $view_data));
         return $response;
     }
 
@@ -385,7 +392,13 @@ class MainController
                 }
             }, $cached_contents);
 
-            $response->getBody()->write($cached_contents);
+            $view_data = [];
+            $view_data['contents'] = $cached_contents;
+            $view_data['team_title'] = $event->getName() . ' Odds & Betting Lines';
+            $view_data['meta_desc'] = $event->getName() . ' odds & betting lines.';
+            $view_data['meta_keywords'] = $event->getName();
+
+            $response->getBody()->write($this->plates->render('single_event', $view_data));
             return $response;
         }
         
@@ -443,13 +456,9 @@ class MainController
         }
         $view_data['expected_outcome_data']  = ["name" => 'Outcomes', "data" => $row_data];
 
-        //Add page title and metadata
-        $view_data['team_title'] = $event->getName() . ' Odds & Betting Lines';
-        $view_data['meta_desc'] = $event->getName() . ' odds & betting lines.';
-        $view_data['meta_keywords'] = $event->getName();
         $view_data['disable alerts'] = true;
         
-        $page_content = $this->plates->render('single_event', $view_data);
+        $page_content = $this->plates->render('gen_eventpage', $view_data);
 
         //Cache page
         CacheControl::cleanPageCacheWC('event-' . $event->getID() . '-*');
@@ -486,8 +495,14 @@ class MainController
             }
         }, $page_content);
 
+        //Add page title and metadata
+        $view_data = [];
+        $view_data['contents'] = $page_content;
+        $view_data['team_title'] = $event->getName() . ' Odds & Betting Lines';
+        $view_data['meta_desc'] = $event->getName() . ' odds & betting lines.';
+        $view_data['meta_keywords'] = $event->getName();
 
-        $response->getBody()->write($page_content);
+        $response->getBody()->write($this->plates->render('single_event', $view_data));
         return $response;
     }
 

@@ -1,3 +1,3 @@
-<?php $this->layout('template', ['title' => 'Admin']) ?>
+<?php $this->layout('template') ?>
 
-This is home
+<?=$contents?>

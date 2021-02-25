@@ -137,18 +137,18 @@ if (ALERTER_SITE_NAME == 'Best Fight Odds')
             }
         }
     }
-    $rendered_page = $plates->render('upcoming_events', $view_data);
-    $rPage = fopen(PARSE_PAGEDIR . 'upcoming_odds.php', 'w');
+    $rendered_page = $plates->render('gen_oddspage', $view_data);
+    $rPage = fopen(PARSE_PAGEDIR . 'oddspage.php', 'w');
     if ($rPage != null)
     {
         $minified = preg_replace('/\>\s+\</m', '><', $rendered_page);
         fwrite($rPage, $minified);
         fclose($rPage);
-        $oLogger->log("Plates odds page (upcoming_odds) generated: 1");
+        $oLogger->log("Plates odds page (oddspage) generated: 1");
     }
     else
     {
-        $oLogger->log("Failed to generate odds page (upcoming_odds)");
+        $oLogger->log("Failed to generate odds page (oddspage)");
     }
 }
 else
