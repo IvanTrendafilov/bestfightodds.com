@@ -202,7 +202,7 @@
 
                     <?php if ($event_prop_count > 1): ?>
 
-                        <tr class="eventprop" id="mu-<?=$event->getID()?>">
+                        <tr class="eventprop" id="mu-e<?=$event->getID()?>">
                                 <th scope="row" style="font-weight: 400"><a href="#" data-mu="<?=$event->getID()?>">Event props</a></th>
     
                                 <?php foreach ($bookies as $bookie): ?>
@@ -215,7 +215,14 @@
                                 </td>
 
                         </tr>
-                        <tr style="display: none;"></tr>
+                        <tr style="display: none;">
+                            <th scope="row"></th>
+                            <?php foreach ($bookies as $bookie): ?>
+                                        <td></td>
+                            <?php endforeach ?>
+                            <td class="button-cell"></td>
+                            <td class="prop-cell prop-cell-exp">
+                        </tr>
 
                         <?php foreach ($event_prop_odds[$event->getID()] as $proptype_id => $prop): ?>
 
