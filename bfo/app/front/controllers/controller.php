@@ -35,7 +35,7 @@ class MainController
         if ($cached_contents == null)
         {
             //TODO: Implement fallback if odds page cannot be included
-            $cached_contents = 'Temporary maintenance';
+            $cached_contents = '<div style="margin-left: auto; margin-right: auto; width: 200px; margin-top: 40px; margin-bottom: 40px;">Temporary maintenance</div>';
         }
 
         $events = EventHandler::getAllUpcomingEvents();
