@@ -171,11 +171,9 @@ input[type="submit"] {
 }
 
 .header-menu-item {
-  
   display: inline-block;
   padding: 6px 16px 6px 16px;
   font-weight: 500;
-  margin-left: -3px;
   &:hover {
     background-color: $selectedcolor;
   }
@@ -355,6 +353,7 @@ h1 {
 }
 
 #page-content {
+  text-align: left;
   font-size: 13px;
   p {
     line-height: 220%;
@@ -449,7 +448,6 @@ ul {
       z-index: 999;
       color: #fff;
       height: 100%;
-      padding-top: 1px;
       text-align: left;
     }
     a {
@@ -459,7 +457,7 @@ ul {
       a {
         display: block;
         border-right: 1px solid #333;
-        padding-top: 5px;
+        padding-top: 7px;
         padding-bottom: 7px;
         padding-left: 0;
         color: #fff;
@@ -1193,52 +1191,60 @@ table.team-stats-table {
 
 
 
-header {
-  background-color: orangered;
+.flex-header {
   display: flex;
   justify-content: center;
+  width: 100%;
+  background-color: $primarybasecolor;
 }
 
-.flex-header-wrap {
-  align-self: center;
-}
-
-nav {
-  background-color: orangered;
-  height: 100px;
+.flex-nav {
   display: flex;
   justify-content: space-between;
+  background-color: $secondarybasecolor;
+  height: 26px;
+  border-bottom: 2px solid #212427;
+  -webkit-box-shadow: 0 2px 1px -1px rgba(155, 155, 155, 1);
+  -moz-box-shadow: 0 2px 1px -1px rgba(155, 155, 155, 1);
+  box-shadow: 0 2px 1px -1px rgba(155, 155, 155, 1);
+  margin-bottom: 22px;
 }
 
-flex-header-menu {
-
+.flex-section {
+  margin-top: 13px;
+  text-align: left;
 }
 
-flex-header-menu-right {
-
-}
 /* Ref: https://stackoverflow.com/questions/57762372/an-html-page-with-screen-wide-header-limit-width-content-flexbox-logo-elements */
 
-  nav,header, section {
+  .flex-nav,.flex-header,.flex-section {
     display: flex;
     justify-content: center;
-    flex-direction: column;
   }
+
   .flex-header-wrap {
     max-width: 1116px;
     width: 100%;
     display: flex;
     justify-content: space-between;
     align-items: flex-start;
-  }
-  #header-search-box {
-    display: block;
-    margin-right: 20px;
     align-self: center;
+    height: 65px;
   }
-  .flex-content-wrapper {
+
+  .flex-nav-wrap {
+    max-width: 1078px;
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    align-self: center;
+    
+  }
+
+  .flex-content-wrap {
     max-width: 1116px;
-    width: calc(100% - 40px);
+    width: 100%;
     align-self: center;
   }
 
