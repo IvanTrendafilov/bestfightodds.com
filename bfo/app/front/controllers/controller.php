@@ -300,7 +300,10 @@ class MainController
         }
 
         $page_content = $this->plates->render('gen_teampage', $view_data);
-        
+
+        //Minify
+        $page_content = preg_replace('/\>\s+\</m', '><', $page_content);
+
         $view_data = [];
         $view_data['contents'] = $page_content;
         $view_data['team_title'] = $team->getNameAsString() . '\'s MMA Odds History';
@@ -459,6 +462,9 @@ class MainController
         $view_data['disable alerts'] = true;
         
         $page_content = $this->plates->render('gen_eventpage', $view_data);
+
+        //Minify
+        $page_content = preg_replace('/\>\s+\</m', '><', $page_content);
 
         //Cache page
         CacheControl::cleanPageCacheWC('event-' . $event->getID() . '-*');

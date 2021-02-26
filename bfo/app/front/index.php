@@ -31,12 +31,10 @@ $app = AppFactory::create();
 //Add minify middleware
 $app->add(function (Request $request, RequestHandler $handler) {
   $response = $handler->handle($request);
-  $data = $response->getBody();
-  $minified = preg_replace('/\>\s+\</m', '><', $data);
   $response = $response->withHeader('Cache-Control', 'no-cache, public, must-revalidate, proxy-revalidate');
   $response = $response->withHeader('Expires', 'Mon, 12 Jul 1996 04:11:00 GMT');
   $response = $response->withHeader('Pragma', 'no-cache');
-  return $response->withBody((new StreamFactory())->createStream($minified));
+  return $response;
 });
 
 // Add Routing Middleware

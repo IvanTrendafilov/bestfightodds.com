@@ -141,7 +141,8 @@ if (ALERTER_SITE_NAME == 'Best Fight Odds')
     $rPage = fopen(PARSE_PAGEDIR . 'oddspage.php', 'w');
     if ($rPage != null)
     {
-        $minified = preg_replace('/\>\s+\</m', '><', $rendered_page);
+        //Minify
+        $rendered_page = preg_replace('/\>\s+\</m', '><', $rendered_page);
         fwrite($rPage, $minified);
         fclose($rPage);
         $oLogger->log("Plates odds page (oddspage) generated: 1");
