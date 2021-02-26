@@ -3,9 +3,7 @@
   body, #page {
     width: 100%;
   }
-  #header-search-box, #auto-refresh-container {
-    display: none;
-  }
+
   .odds-table-responsive-header {
     display: block;
   }
@@ -360,6 +358,17 @@
     padding-top: 0;
   }
 
+  #header-search-box {
+    padding-right: 10px;
+    margin-top: 16px;
+  }
+
+}
+
+@media only screen and (max-width: 575px) {
+  #header-search-box, #auto-refresh-container {
+    display: none;
+  }
 }
 
 @media only screen and (max-width: 372px) {
