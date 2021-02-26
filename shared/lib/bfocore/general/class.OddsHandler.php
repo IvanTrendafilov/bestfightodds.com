@@ -594,6 +594,7 @@ class OddsHandler
                 {
                     foreach ($proptype_entry as $team_num_key => &$team_num_entry)
                     {
+
                         //Count entries per matchup
                         if (!isset($view_data['matchup_prop_count'][$matchup_key]))
                         {
@@ -631,18 +632,32 @@ class OddsHandler
                                 $best_odds_reflist2[] = $odds_key;
                             }
 
+                            //If fight has changed order in database we must switch team nums
+                            $temp_team_num_key = $team_num_key;
+                            if ($matchups_assoc[$matchup_key]->hasOrderChanged())
+                            {
+                                if ($team_num_key == 1)
+                                {
+                                    $temp_team_num_key = 2;
+                                }
+                                else if ($team_num_key == 2)
+                                {
+                                    $temp_team_num_key = 1;
+                                }
+                            }
+
                             //Adjust prop name description
                             $prop_desc = $bookie_odds['odds_obj']->getPropName();
                             $prop_desc = str_replace(['<T>', '<T2>'], 
-                                            [$matchups_assoc[$matchup_key]->getTeamLastNameAsString($team_num_key),
-                                            $matchups_assoc[$matchup_key]->getTeamLastNameAsString(($team_num_key % 2) + 1)]
+                                            [$matchups_assoc[$matchup_key]->getTeamLastNameAsString($temp_team_num_key),
+                                            $matchups_assoc[$matchup_key]->getTeamLastNameAsString(($temp_team_num_key % 2) + 1)]
                                             , $prop_desc);
                             $prop_desc = $bookie_odds['odds_obj']->setPropName($prop_desc);
 
                             $prop_desc = $bookie_odds['odds_obj']->getNegPropName();
                             $prop_desc = str_replace(['<T>', '<T2>'], 
-                                            [$matchups_assoc[$matchup_key]->getTeamLastNameAsString($team_num_key),
-                                            $matchups_assoc[$matchup_key]->getTeamLastNameAsString(($team_num_key % 2) + 1)]
+                                            [$matchups_assoc[$matchup_key]->getTeamLastNameAsString($temp_team_num_key),
+                                            $matchups_assoc[$matchup_key]->getTeamLastNameAsString(($temp_team_num_key % 2) + 1)]
                                             , $prop_desc);
                             $prop_desc = $bookie_odds['odds_obj']->setNegPropName($prop_desc);
                         }

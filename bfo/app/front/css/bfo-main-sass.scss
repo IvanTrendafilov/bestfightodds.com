@@ -344,6 +344,12 @@ h1 {
   margin: 0 5px;
 }
 
+#chart-container {
+  background-color: #fff;
+  color: $font_darkcolor;
+  font-size: 12px;
+}
+
 #page-inner-wrapper {
   padding: 18px 22px;
 }
@@ -1116,6 +1122,7 @@ table.team-stats-table {
   vertical-align: top;
   display: inline-block;
   margin-right: 22px;
+  background-color: #fff;
 }
 
 #event-outcome-area {
@@ -1125,6 +1132,7 @@ table.team-stats-table {
   width: 570px;
   vertical-align: top;
   display: inline-block;
+  background-color: #fff;
 }
 
 
