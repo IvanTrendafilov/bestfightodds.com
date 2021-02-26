@@ -143,7 +143,7 @@ if (ALERTER_SITE_NAME == 'Best Fight Odds')
     {
         //Minify
         $rendered_page = preg_replace('/\>\s+\</m', '><', $rendered_page);
-        fwrite($rPage, $minified);
+        fwrite($rPage, $rendered_page);
         fclose($rPage);
         $oLogger->log("Plates odds page (oddspage) generated: 1");
     }
