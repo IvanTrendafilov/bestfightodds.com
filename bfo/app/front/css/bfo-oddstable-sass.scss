@@ -34,6 +34,15 @@ $tablerowheight: 27px;
   padding-top: 3px;
 }
 
+.no-odds {
+  text-align: center;
+  padding: 25px 0;
+  background-color: #fff;
+  a {
+    color: #202020;
+  }
+}
+
 
 .t-b-fcc { //Table body first column content wrapper span (e.g. fighter name 'Jon Jones')
   width: 100%;

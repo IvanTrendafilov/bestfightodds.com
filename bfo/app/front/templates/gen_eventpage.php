@@ -1,3 +1,4 @@
+
 <?php $this->insert('partials/event', $this->data) ?>
 
 <div class="table-outer-wrapper">
