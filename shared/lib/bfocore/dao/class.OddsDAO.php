@@ -941,7 +941,7 @@ class OddsDAO
         if ($a_iBookieID != null)
         {
 
-            $sExtraQuery = ' AND bookie_id = ? ';
+            $sExtraQuery .= ' AND bookie_id = ? ';
             $aParams[] = $a_iBookieID;
         }
 
