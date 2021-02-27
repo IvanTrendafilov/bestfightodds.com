@@ -919,7 +919,7 @@ class OddsDAO
         return null;
     }
 
-    public static function getCompletePropsForEvent($a_iEventID, $a_iOffset = 0)
+    public static function getCompletePropsForEvent($a_iEventID, $a_iOffset = 0, $a_iBookieID = null)
     {
         if ($a_iOffset != 0 && $a_iOffset != 1)
         {
@@ -937,6 +937,12 @@ class OddsDAO
                 lep5.event_id = ? AND lep5.bookie_id =
                 lep4.bookie_id AND lep5.proptype_id = lep4.proptype_id) ';
             $aParams[] = $a_iEventID;
+        }
+        if ($a_iBookieID != null)
+        {
+
+            $sExtraQuery = ' AND bookie_id = ? ';
+            $aParams[] = $a_iBookieID;
         }
 
         $sQuery = 'SELECT

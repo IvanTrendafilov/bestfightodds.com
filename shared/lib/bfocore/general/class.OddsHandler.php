@@ -322,9 +322,9 @@ class OddsHandler
         return OddsDAO::getOpeningOddsForEventPropAndBookie($a_iEventID, $a_iPropTypeID, $a_iBookieID);
     }
 
-    public static function getCompletePropsForEvent($a_iEventID, $a_iOffset = 0)
+    public static function getCompletePropsForEvent($a_iEventID, $a_iOffset = 0, $a_iBookieID = null)
     {
-        return OddsDAO::getCompletePropsForEvent($a_iEventID, $a_iOffset);
+        return OddsDAO::getCompletePropsForEvent($a_iEventID, $a_iOffset, $a_iBookieID);
     }
 
     public static function checkMatchingEventPropOdds($a_oEventPropBet)

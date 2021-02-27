@@ -252,7 +252,7 @@ class OddsProcessor
         foreach ($upcoming_events as $upcoming_event)
         {
             //Todo: Possible improvement here is that we retrieve odds for all bookies. Could be limited to single bookie
-            $stored_props = OddsHandler::getCompletePropsForEvent($upcoming_event->getID());
+            $stored_props = OddsHandler::getCompletePropsForEvent($upcoming_event->getID(), 0, $this->bookie_id);
             if ($stored_props != null)
             {
                 foreach ($stored_props as $stored_prop)
