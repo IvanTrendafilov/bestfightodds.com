@@ -53,6 +53,10 @@ class XMLParserSportBet
                 //Check if entry is a prop, if so add it as a parsed prop
                 if (trim((string) $cEvent->SportSubType) == 'Props' || trim((string) $cEvent->SportSubType) == 'MMA Props')
                 {
+
+                    //TODO: Temporary rewrite of event name
+                    $cEvent->Header = str_replace('UFC ON ESPN+ 44', 'UFC Fight Night 186', $cEvent->Header);
+
                     $oParsedProp = null;
 
                     if ((trim((string) $cEvent->HomeMoneyLine) != '')
