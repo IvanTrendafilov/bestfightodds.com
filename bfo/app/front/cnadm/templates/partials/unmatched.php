@@ -120,7 +120,11 @@ myNameSpace = function(){
 <table class="genericTable">
 
 <?php foreach ($unmatched_groups as $unmatched_group): ?>
-    <tr class="event event-group" id="event<?=isset($i) ? ++$i : $i = 1?>" data-create="<?=$this->e('{"name": "' . $unmatched_group[0]['view_extras']['event_name_reduced'] . '", "date": "' . $unmatched_group[0]['view_extras']['event_date_formatted'] . '"}')?>">
+    <?php if (isset($unmatched_group[0]['view_extras'])): ?>
+        <tr class="event event-group" id="event<?=isset($i) ? ++$i : $i = 1?>" data-create="<?=$this->e('{"name": "' . $unmatched_group[0]['view_extras']['event_name_reduced'] . '", "date": "' . $unmatched_group[0]['view_extras']['event_date_formatted'] . '"}')?>">
+    <?php else: ?>
+        <tr class="event event-group" id="event<?=isset($i) ? ++$i : $i = 1?>">
+    <?php endif ?>
         <td></td><td></td>
         <td data-date=""><b><?=$unmatched_group[0]['metadata']['event_name'] ?? '' ?> / <?=$unmatched_group[0]['view_extras']['event_name_reduced'] ?? ''?></b> (<?=$unmatched_group[0]['view_extras']['event_date_formatted']?>)
 
