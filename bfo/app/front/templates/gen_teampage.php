@@ -63,7 +63,7 @@
                                                 <span id="oID<?=$odds_counter++?>"><?=($matchup['team_pos'] == 1 ? $matchup['team2_high']->getFighterOddsAsString(2) : $matchup['team1_high']->getFighterOddsAsString(1))?></span>
                                             </td>
 
-                                    <td class="item-non-mobile" style="padding-left: 20px; color: #9a9a9a"><?=$matchup['event_date'] ?></td>
+                                    <td class="item-non-mobile" style="padding-left: 20px; color: #767676"><?=$matchup['event_date'] ?></td>
                                 </tr>
 
                             <?php else: ?>
@@ -90,7 +90,7 @@
                                     <td class="moneyline"></td>
                                     <td></td>
                                     <td></td>
-                                    <td class="item-non-mobile" style="padding-left: 20px"><?=$matchup['event_date'] ?></td>
+                                    <td class="item-non-mobile" style="padding-left: 20px; color: #767676"><?=$matchup['event_date'] ?></td>
                                 </tr>
 
                             <?php endif ?>
