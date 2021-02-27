@@ -55,7 +55,7 @@ class XMLParserSportBet
                 {
 
                     //TODO: Temporary rewrite of event name
-                    $cEvent->Header = str_replace('UFC ON ESPN+ 44', 'UFC Fight Night 186', $cEvent->Header);
+                    $cEvent->Header = str_replace('UFC on ESPN+ 44', 'UFC Fight Night 186', $cEvent->Header);
 
                     $oParsedProp = null;
 
