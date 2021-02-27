@@ -459,7 +459,7 @@ class MainController
         }
         $view_data['expected_outcome_data']  = ["name" => 'Outcomes', "data" => $row_data];
 
-        $view_data['disable alerts'] = true;
+        $view_data['alerts_enabled'] = false;
         
         $page_content = $this->plates->render('gen_eventpage', $view_data);
 

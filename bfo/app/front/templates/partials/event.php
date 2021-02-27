@@ -48,7 +48,7 @@
                     <?php //============== Add event props ======================= ?>
 
                     <?php if ($event_prop_count > 0): ?>
-                        <tr class="eventprop" id="mu-<?=$event->getID()?>">
+                        <tr class="eventprop" id="mu-e<?=$event->getID()?>">
                                 <th scope="row" style="font-weight: 400"><a href="#" data-mu="<?=$event->getID()?>">Event props</a></th>
                         </tr>
                         <tr style="display: none;"></tr>
@@ -187,9 +187,9 @@
                                             <?php endforeach ?>
 
                                             <?php if (isset($alerts_enabled) && $alerts_enabled == true): //Add alert cell only if enabled for this type of page?>                                
-                                            <td class="button-cell">
-                                                <svg class="svg-i-disabled" viewBox="0 0 24 24" preserveAspectRatio="xMidYMid meet" focusable="false"><g><path d="M12 22c1.1 0 2-.9 2-2h-4c0 1.1.9 2 2 2zm6-6v-5c0-3.07-1.64-5.64-4.5-6.32V4c0-.83-.67-1.5-1.5-1.5s-1.5.67-1.5 1.5v.68C7.63 5.36 6 7.92 6 11v5l-2 2v1h16v-1l-2-2z"></path></g></svg>
-                                            </td>
+                                                <td class="button-cell">
+                                                    <svg class="svg-i-disabled" viewBox="0 0 24 24" preserveAspectRatio="xMidYMid meet" focusable="false"><g><path d="M12 22c1.1 0 2-.9 2-2h-4c0 1.1.9 2 2 2zm6-6v-5c0-3.07-1.64-5.64-4.5-6.32V4c0-.83-.67-1.5-1.5-1.5s-1.5.67-1.5 1.5v.68C7.63 5.36 6 7.92 6 11v5l-2 2v1h16v-1l-2-2z"></path></g></svg>
+                                                </td>
                                             <?php endif ?>
 
                                             <td class="button-cell but-sip" data-li="[<?=$i?>,<?=$matchup->getID()?>,<?=$proptype_id?>,<?=$team_num?>]">
@@ -218,7 +218,9 @@
                                     <?php foreach ($bookies as $bookie): ?>
                                         <td></td>
                                     <?php endforeach ?>
-
+                                    <?php if (isset($alerts_enabled) && $alerts_enabled == true): //Add alert cell only if enabled for this type of page?>                                
+                                        <td class="button-cell"></td>
+                                    <?php endif ?>
                                     <td class="button-cell"></td>
                                     <td class="prop-cell prop-cell-exp" data-mu="e<?=$event->getID()?>">
                                         <?=$event_prop_count?>&nbsp;<span class="exp-ard"></span>
@@ -275,9 +277,9 @@
                                         <?php endforeach ?>
 
                                         <?php if (isset($alerts_enabled) && $alerts_enabled == true): //Add alert cell only if enabled for this type of page?>                                
-                                        <td class="button-cell">
-                                            <svg class="svg-i-disabled" viewBox="0 0 24 24" preserveAspectRatio="xMidYMid meet" focusable="false"><g><path d="M12 22c1.1 0 2-.9 2-2h-4c0 1.1.9 2 2 2zm6-6v-5c0-3.07-1.64-5.64-4.5-6.32V4c0-.83-.67-1.5-1.5-1.5s-1.5.67-1.5 1.5v.68C7.63 5.36 6 7.92 6 11v5l-2 2v1h16v-1l-2-2z"></path></g></svg>
-                                        </td>
+                                            <td class="button-cell">
+                                                <svg class="svg-i-disabled" viewBox="0 0 24 24" preserveAspectRatio="xMidYMid meet" focusable="false"><g><path d="M12 22c1.1 0 2-.9 2-2h-4c0 1.1.9 2 2 2zm6-6v-5c0-3.07-1.64-5.64-4.5-6.32V4c0-.83-.67-1.5-1.5-1.5s-1.5.67-1.5 1.5v.68C7.63 5.36 6 7.92 6 11v5l-2 2v1h16v-1l-2-2z"></path></g></svg>
+                                            </td>
                                         <?php endif ?>
 
                                         <td class="button-cell but-siep" data-li="[<?=$event->getID()?>,<?=$i?>,<?=$proptype_id?>, 0]">
