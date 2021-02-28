@@ -106,17 +106,27 @@ class ParserJob
                 {
                     if ($event_node->filter('.MMA')->count())
                     {
-                        $matchup = [];
-                        $i = 1;
-                        $event_node->filter('.selection')->each(function (\Symfony\Component\DomCrawler\Crawler $team_node) use (&$matchup, &$i)
-                        {
-                            $matchup['team' . $i . '_name'] = $team_node->filter('.selection-name')->text();
-                            $matchup['team' . $i . '_odds'] = $team_node->filter('.selectionprice')->text();
-                            $i++;
-                        });
                         $date = new DateTime($event_node->filter('div.time')->text());
-                        $matchup['date'] = $date->getTimestamp();
-                        $matchups[] = $matchup;
+                        
+
+                        if (strpos(strtoupper($date), 'LIVE') !== false) 
+                        {
+                            $this->logger->info('Live event, will skip : ' . $date);    
+                        }
+                        else
+                        {
+                            $matchup = [];
+                            $i = 1;
+                            $event_node->filter('.selection')->each(function (\Symfony\Component\DomCrawler\Crawler $team_node) use (&$matchup, &$i)
+                            {
+                                $matchup['team' . $i . '_name'] = $team_node->filter('.selection-name')->text();
+                                $matchup['team' . $i . '_odds'] = $team_node->filter('.selectionprice')->text();
+                                $i++;
+                            });
+                            
+                            $matchup['date'] = $date->getTimestamp();
+                            $matchups[] = $matchup;
+                        }
                     }
                 });
             }

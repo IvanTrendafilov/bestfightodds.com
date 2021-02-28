@@ -1067,6 +1067,14 @@ initPage = function () {
     //Bind graph clicks on table
     //Loop through all tr TDs and add event
 
+    //Event delegation changes:
+    /*document.querySelectorAll('.odds-table').forEach(function (item) {
+        item.addEventListener("click", function (e) {
+            console.log(e.target);
+        });
+        
+    });*/
+
     //Add regular matchup listeners
     document.querySelectorAll('.but-sg').forEach(function (item) {
         item.addEventListener("click", function (event) {
