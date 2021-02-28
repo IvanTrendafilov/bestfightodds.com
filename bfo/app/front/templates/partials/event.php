@@ -27,7 +27,7 @@
                 <?php //============== Add matchups ====================== ?>
                     <?php foreach ($matchups as $matchup_key => $matchup): ?>
                         <?php for ($i = 1; $i <= 2; $i++): ?>
-                            <tr id="mu-<?=$matchup->getID()?>" <?=(($i == 2 && $matchup_key == array_key_last($matchups)) ? ' style="border-bottom: 0;" ' : '')?>>
+                            <tr <?=$i == 1 ? 'id="mu-' . $matchup->getID() . '"' : ''?> <?=(($i == 2 && $matchup_key == array_key_last($matchups)) ? ' style="border-bottom: 0;" ' : '')?>>
                                 <th scope="row"><a href="/fighters/<?=$matchup->getFighterAsLinkString($i)?>"><span class="t-b-fcc"><?=$matchup->getFighterAsString($i)?></span></a></th>
                             </tr>
                         <?php endfor ?>
