@@ -29,7 +29,7 @@
         <title><?=isset($title) ? $title . ' | Best Fight Odds' : 'UFC &amp; MMA Odds &amp; Betting Lines | Best Fight Odds'?></title>
     </head>
     <body>
-        <script type="text/javascript" async src="/js/bfo.min.js?v=0.4.2"></script>
+        <script type="text/javascript" async src="/js/bfo.min.js?v=0.4.3"></script>
         <div class="flex-header">
                 <div class="flex-header-wrap">
                     <a href="/"><img src="/img/logo_3.png" class="logo" alt="Best Fight Odds logo"></a>
