@@ -32,7 +32,7 @@
         <script async src="/js/bfo.min.js?v=0.4.3"></script>
         <div class="flex-header">
                 <div class="flex-header-wrap">
-                    <a href="/"><img src="/img/logo_3.png" class="logo" alt="Best Fight Odds logo"></a>
+                    <a href="/"><img src="/img/logo_3.png" class="logo" width="290" height="54" alt="Best Fight Odds logo"></a>
                     <div id="header-search-box">
                         <form method="get" action="/search"><input type="text" id="search-box1" class="search-box" name="query" placeholder="MMA Event / Fighter"> <input type="submit" class="search-button" id="search-button" value="&#128269;"></form>
                     </div>
@@ -119,8 +119,8 @@
                     </div>
                 </div>
     <div class="legend-container">
-        <img src="/img/loading.gif" class="hidden-image" alt="Loading indicator">
-        <img src="/img/expu.png" class="hidden-image" alt="Expand symbol">
+        <img src="/img/loading.gif" class="hidden-image" alt="Loading indicator" width="0" height="0">
+        <img src="/img/expu.png" class="hidden-image" alt="Expand symbol" width="0" height="0">
     </div>
 
     <div id="bottom-container">
