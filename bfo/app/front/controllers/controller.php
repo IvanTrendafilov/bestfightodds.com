@@ -65,11 +65,11 @@ class MainController
             }
             else if ($hour_diff >= 24)
             {
-                return 'arage-2"';
+                return 'arage-2';
             }
             else
             {
-                return 'arage-1"';
+                return 'arage-1';
             }
         }, $cached_contents);
 
@@ -493,11 +493,11 @@ class MainController
             }
             else if ($hour_diff >= 24)
             {
-                return 'arage-2"';
+                return 'arage-2';
             }
             else
             {
-                return 'arage-1"';
+                return 'arage-1';
             }
         }, $page_content);
 

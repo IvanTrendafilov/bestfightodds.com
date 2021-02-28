@@ -111,9 +111,7 @@
                             </div>
                         </div>
                     </div>
-                    </div>
                 </div>
-        
                 <div class="flex-section">    
                     <div class="flex-content-wrap">
 
