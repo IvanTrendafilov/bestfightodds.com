@@ -42,7 +42,7 @@ document.addEventListener("DOMContentLoaded", function(event) {
 
 	<br>
 	Twitter handle 
-		[<a href="http://www.google.se/search?q=site:twitter.com<?=$fighter_obj->getName()?>">google</a>]
+		[<a href="http://www.google.se/search?q=site:twitter.com <?=$fighter_obj->getName()?>">google</a>]
 		 &nbsp;
 	<input type="text" id="twitter_handle" style="width: 200px;" value="<?=$twitter_handle ?? ''?>"/>
 	<br><br>
