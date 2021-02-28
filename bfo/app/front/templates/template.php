@@ -29,7 +29,7 @@
         <title><?=isset($title) ? $title . ' | Best Fight Odds' : 'UFC &amp; MMA Odds &amp; Betting Lines | Best Fight Odds'?></title>
     </head>
     <body>
-        <script type="text/javascript" async src="/js/bfo.min.js?v=0.4.3"></script>
+        <script async src="/js/bfo.min.js?v=0.4.3"></script>
         <div class="flex-header">
                 <div class="flex-header-wrap">
                     <a href="/"><img src="/img/logo_3.png" class="logo" alt="Best Fight Odds logo"></a>
@@ -58,8 +58,9 @@
                                             c-4.07-17.54,1.49-35.92,14.61-48.25c20.34-19.12,52.33-18.14,71.45,2.19c11.31-2.23,22.15-6.38,32.07-12.26
                                             c-3.77,11.69-11.66,21.62-22.2,27.93c10.01-1.18,19.79-3.86,29-7.95C240.37,35.29,231.83,44.14,221.95,51.29z"/>
                                     </g>
-                                </svg></a>
+                                </svg>
                             </div>
+                            </a>
                         </div>
                         <div id="flex-header-menu-right">
                            <div id="parlay-mode-container" 
