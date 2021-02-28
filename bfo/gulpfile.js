@@ -26,11 +26,11 @@ gulp.task('scripts', function() {
             ,'./app/front/js/bfo_main.js','./app/front/js/bfo_charts.js', './app/front/js/bfo_settings.js'])
             /*return gulp.src(['./app/front/js/lib/jquery-3.5.1.min.js', './app/front/js/lib/js.cookie-3.min.js', './app/front/js/lib/highcharts4-final.js', './app/front/js/lib/highcharts4-more-final.js', './app/front/js/lib/fastclick-min.js'
             ,'./app/front/js/bfo_main.js','./app/front/js/bfo_charts.js'])*/
-        /*.pipe(uglify({
+        .pipe(uglify({
             output: {
                 comments: saveLicense
             }
-        }))*/
+        }))
         .pipe(concat('bfo.min.js'))
         .pipe(gulp.dest('./app/front/js/'));
 });
