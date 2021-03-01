@@ -32,15 +32,18 @@
 
                     .odds-table {
                         font-size: 0.6em;
-                        font-family: 'Roboto';
                         -webkit-text-size-adjust: none;
                         
                     }
                     .odds-table tbody tr {
-                        height: 20px;
+                        height: 12px;
                     }
                     .svg-i, .svg-i-disabled {
                         height: 18px;
+                    }
+
+                    .odds-table-responsive-header tbody tr th {
+                        height: 12px;
                     }
 
             </style>
