@@ -31,7 +31,7 @@
             <style>
 
                     .odds-table {
-                        font-size: 10px;
+                        font-size: 0.6em;
                         -webkit-text-size-adjust: none;
                         
                     }
