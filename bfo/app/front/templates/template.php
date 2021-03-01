@@ -5,7 +5,6 @@
         <meta name="description" content="<?=isset($meta_desc) ? $meta_desc . ' ' : ''?>UFC/MMA odds comparison service. Compare the latest UFC/MMA fight odds and betting lines from the top online sportsbooks">
         <meta name="keywords" content="<?=isset($meta_keywords) ? $meta_keywords . ' ' : ''?>mma odds, mma betting, mma lines, ufc odds, ufc, mma, odds, betting">
         <meta property="og:image" content="https://www.bestfightodds.com/img/iconv2.jpg">
-
         <?php if (!(isset($_COOKIE['bfo_reqdesktop']) && $_COOKIE['bfo_reqdesktop'] == 'true')): //Enable viewport if desktop has not explicitly been requested?>
             <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
         <?php endif ?>
@@ -27,13 +26,6 @@
             <link rel="stylesheet" type="text/css" href="/css/bfo.darkmode.css?v=0.0.1" id="darkmodecss">
         <?php endif ?>
         <title><?=isset($title) ? $title . ' | Best Fight Odds' : 'UFC &amp; MMA Odds &amp; Betting Lines | Best Fight Odds'?></title>
-
-            <style>
-                    .odds-table {
-                        font-size: 1.0em;
-                        -webkit-text-size-adjust: none;
-                    }
-            </style>
     </head>
     <body>
         <script async src="/js/bfo.min.js?v=0.4.3"></script>
