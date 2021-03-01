@@ -135,7 +135,7 @@
                 </div>
                 <div class="flex-section">    
                     <div class="flex-content-wrap">
-
+                    <?=$_SERVER['HTTP_USER_AGENT']?>
     <?=$this->section('content')?>
                     </div>
                 </div>
