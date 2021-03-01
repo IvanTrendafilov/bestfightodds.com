@@ -29,14 +29,10 @@
         <title><?=isset($title) ? $title . ' | Best Fight Odds' : 'UFC &amp; MMA Odds &amp; Betting Lines | Best Fight Odds'?></title>
 
             <style>
-
                     .odds-table {
-                        
+                        font-size: 1.0em;
                         -webkit-text-size-adjust: none;
-                        
                     }
-
-
             </style>
     </head>
     <body>
