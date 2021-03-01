@@ -7,7 +7,7 @@
         <meta property="og:image" content="https://www.bestfightodds.com/img/iconv2.jpg">
 
         <?php if (!(isset($_COOKIE['bfo_reqdesktop']) && $_COOKIE['bfo_reqdesktop'] == 'true')): //Enable viewport if desktop has not explicitly been requested?>
-            <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+            <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
         <?php endif ?>
         <link rel="preconnect" href="https://www.googletagmanager.com">
         <link rel="preconnect" href="https://www.google-analytics.com">
