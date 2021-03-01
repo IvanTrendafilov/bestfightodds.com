@@ -29,11 +29,19 @@
         <title><?=isset($title) ? $title . ' | Best Fight Odds' : 'UFC &amp; MMA Odds &amp; Betting Lines | Best Fight Odds'?></title>
         <?php if(strpos($_SERVER['HTTP_USER_AGENT'],'iPad')): ?>
             <style>
+
                     .odds-table {
-                        font-size: 0.65rem;
-                        -webkit-text-size-adjust: 100%;
+                        font-size: 10px;
+                        -webkit-text-size-adjust: none;
                         
                     }
+                    .odds-table tbody tr {
+                        height: 20px;
+                    }
+                    .svg-i, .svg-i-disabled {
+                        height: 18px;
+                    }
+
             </style>
         <?php endif ?>
     </head>
