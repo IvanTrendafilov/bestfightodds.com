@@ -33,7 +33,10 @@
                     .odds-table {
                         font-size: 10px;
                         -webkit-text-size-adjust: none;
-                        zoom: 1;
+                        
+                    }
+                    .odds-table tbody tr {
+                        height: 22px;
                     }
                 }
             </style>
