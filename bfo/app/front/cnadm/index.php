@@ -8,8 +8,8 @@ use Psr\Http\Message\ServerRequestInterface as Request;
 use League\Plates\Engine;
 
 require 'vendor/autoload.php';
-require 'controller.php';
-require 'api_controller.php';
+require 'controllers/admin_controller.php';
+require 'controllers/admin_api_controller.php';
 
 $container = (new \DI\ContainerBuilder())
   ->useAutowiring(true)

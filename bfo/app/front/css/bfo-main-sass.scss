@@ -1118,7 +1118,7 @@ table.team-stats-table {
   -webkit-box-shadow: 0 1px 1px 1px rgb(170, 170, 170);
   -moz-box-shadow: 0 1px 1px 1px rgb(170, 170, 170);
   box-shadow: 0 1px 1px 1px rgb(170, 170, 170);
-  width: 494px;
+  width: calc(45% - 15px);
   vertical-align: top;
   display: inline-block;
   margin-right: 22px;
@@ -1129,7 +1129,7 @@ table.team-stats-table {
   -webkit-box-shadow: 0 1px 1px 1px rgb(170, 170, 170);
   -moz-box-shadow: 0 1px 1px 1px rgb(170, 170, 170);
   box-shadow: 0 1px 1px 1px rgb(170, 170, 170);
-  width: 570px;
+  width: calc(55% - 10px); 
   vertical-align: top;
   display: inline-block;
   background-color: #fff;

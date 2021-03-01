@@ -252,6 +252,17 @@
     display: inline-block;
     background-size: 203px 31px;
   }
+
+  //Event page graphs
+  #event-swing-area, #event-outcome-area {
+    width: 100%;
+    vertical-align: top;
+    margin: 3px 0 8px 0;
+  }
+  #event-charts-area {
+    padding-top: 0;
+  }
+
   /* Content pages */
   .content-header {
     padding-left: 6px;
@@ -354,18 +365,8 @@
 }
 
 @media only screen and (max-width: 1132px) {
-  //Event page graphs
-  #event-swing-area, #event-outcome-area {
-    width: 100%;
-    vertical-align: top;
-    margin: 3px 0 8px 0;
-  }
   #flex-header-menu-right {
     margin-right: 7px;
-  }
-
-  #event-charts-area {
-    padding-top: 0;
   }
 }
 
