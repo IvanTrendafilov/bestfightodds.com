@@ -27,6 +27,13 @@
             <link rel="stylesheet" type="text/css" href="/css/bfo.darkmode.css?v=0.0.1" id="darkmodecss">
         <?php endif ?>
         <title><?=isset($title) ? $title . ' | Best Fight Odds' : 'UFC &amp; MMA Odds &amp; Betting Lines | Best Fight Odds'?></title>
+        <?php if(strpos($_SERVER['HTTP_USER_AGENT'],'iPad')): ?>
+            <style>
+                .odds-table {
+                    font-size: 0.9em;
+                }
+            </style>
+        <?php endif ?>
     </head>
     <body>
         <script async src="/js/bfo.min.js?v=0.4.3"></script>
