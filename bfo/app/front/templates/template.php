@@ -31,7 +31,7 @@
             <style>
                 @media only screen and (max-width: 768px) {
                     .odds-table {
-                        font-size: 0.65rem;
+                        font-size: 0.25rem;
                         -webkit-text-size-adjust: 100%;
                         
                     }
