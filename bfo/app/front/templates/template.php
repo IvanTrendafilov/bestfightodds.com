@@ -30,7 +30,7 @@
         <?php if(strpos($_SERVER['HTTP_USER_AGENT'],'iPad')): ?>
             <style>
                     .odds-table {
-                        font-size: 0.8rem;
+                        font-size: 0.65rem;
                         -webkit-text-size-adjust: 100%;
                         
                     }
