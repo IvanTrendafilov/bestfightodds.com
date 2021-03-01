@@ -32,6 +32,10 @@
                 .odds-table tbody tr {
                     height: 12px;
                     font-size: 10px;
+                    zoom: 1;
+                }
+                body {
+                    zoom: 1;
                 }
             </style>
     </head>
