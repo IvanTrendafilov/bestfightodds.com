@@ -415,7 +415,7 @@ class PropParserV2
                         else if ($fNewSim == $fFoundSim)
                         {
                             $this->logger->warning('----Fsims are identical, cannot determine winner. Bailing..');
-                            return array('matchup' => null, 'team' => 0);
+                            return array('matchup_id' => null, 'team' => 0);
                         }
                         else
                         {
