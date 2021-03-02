@@ -114,7 +114,7 @@ class XMLParserSportsInteraction
                             foreach ($cEvent->Bet as $cBet)
                             {
                                 if (ParseTools::checkCorrectOdds((string) $cBet->Price) 
-                                    && !(inval($cBet->Price) < -9000))
+                                    && !(intval($cBet->Price) < -9000))
                                 {
                                     $oTempProp = new ParsedProp(
                                                     (string) $cEvent->Name . ' ::: ' . $cBet['TYPE'] . ' :: ' . $cBet->BetTypeExtraInfo . ' : ' . $cBet->Runner,
