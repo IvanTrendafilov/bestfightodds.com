@@ -341,8 +341,22 @@ class AdminController
                 preg_match('/cron\.([a-zA-Z0-9]+)\.[0-9]+/m',$filename, $matches);
                 if (isset($matches[0]))
                 {
-                    $view_data['bookies'][$matches[1]] = ($view_data['bookies'][$matches[1]] ?? 0) + 1;
+                    if (!isset($view_data['bookies'][$matches[1]]))
+                    {
+                        $view_data['bookies'][$matches[1]] = [];
+                    }
+                    $view_data['bookies'][$matches[1]]['count'] = ($view_data['bookies'][$matches[1]]['count'] ?? 0) + 1;
                 }
+            }
+            //Loop through the latest log for each bookie and create a preview
+            foreach ($view_data['bookies'] as $bookie => $values)
+            {
+                $filenames = glob(GENERAL_KLOGDIR . 'cron.' . $bookie . '.*');
+                $log_contents =  file_get_contents(end($filenames));
+                $view_data['bookies'][$bookie]['preview'] = '';
+                $str = explode("\n", $log_contents);
+                end($str);
+                $view_data['bookies'][$bookie]['preview'] = $str[0] . "\n...\n" . prev($str);;
             }
         }
 
