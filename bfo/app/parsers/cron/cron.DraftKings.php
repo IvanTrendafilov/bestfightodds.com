@@ -44,6 +44,8 @@ class ParserJob
 
     public function run($mode = 'normal')
     {
+        $this->logger->info('Started parser');
+
         $content = null;
         if ($mode == 'mock')
         {
