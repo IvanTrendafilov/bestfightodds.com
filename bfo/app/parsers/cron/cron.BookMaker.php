@@ -6,9 +6,9 @@
  * Sport: MMA
  *
  * Moneylines: Yes
- * Spreads: No
- * Totals: No
- * Props: No
+ * Spreads: Yes
+ * Totals: Yes
+ * Props: Yes
  * Authoritative run: Yes
  *
  * Comment: Dev version
@@ -61,8 +61,16 @@ class ParserJob
 
         $parsed_sport = $this->parseContent($content);
 
-        $op = new OddsProcessor($this->logger, BOOKIE_ID);
-        $op->processParsedSport($parsed_sport, $this->full_run);
+        try 
+        {
+            $op = new OddsProcessor($this->logger, BOOKIE_ID);
+            $op->processParsedSport($parsed_sport, $this->full_run);
+        }
+        catch (Exception $e)
+        {
+            $this->logger->error('Exception: ' . $e->getMessage());
+        }
+        
 
         $this->logger->info('Finished');
     }
