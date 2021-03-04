@@ -1,3 +1,7 @@
+//Table row height
+$tablerowheight: 27px;
+
+
 .table-header {
   font-size: 15px;
   text-transform: uppercase;
@@ -26,10 +30,22 @@
   padding-top: 3px;
 }
 
+.no-odds {
+  text-align: center;
+  padding: 25px 0;
+  background-color: #fff;
+  a {
+    color: #202020;
+  }
+}
 .t-b-fcc { //Table body first column content wrapper span (e.g. fighter name 'Jon Jones')
   width: 100%;
   position: relative;
   display: inline-block;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  overflow: hidden;
+  margin-top: 4px; 
 }
 
 .t-b-cc { //Table body column content wrapper span (e.g. line '-500')
@@ -43,7 +59,7 @@
 
 .odds-table {
   width: 944px;
-  font-size: 11px;
+  font-size: 12px;
   border-collapse: collapse;
   thead {
     tr {
@@ -52,13 +68,15 @@
     }
     th {
       text-align: center;
-      height: 16px;
+      height: 25px;
       width: 50px;
       &.table-prop-header {
         text-align: right;
         padding-right: 5px;
         color: #505050;
-        font-size: 10px;
+        width: 30px;
+        min-width: 30px;
+        max-width: 30px;
         font-weight: 500;
       }
       &.date-head {
@@ -66,31 +84,31 @@
       }
       a {
         color: #787878;
-        font-size: 10px;
-        font-weight: 500;
+        padding-top: 6px;
+        padding-bottom: 6px;
         &:hover {
           color: #999;
         }
+        height: 20px;
       }
     }
   }
   tbody {
     tr {
       background-color: #f5f7f9;
-      height: 20px;
-      &.odd {
+      height: $tablerowheight;
+      &:nth-child(2n) {
         background-color: #fff;
         border-bottom: 1px solid #D6D6D6;
       }
       &.pr {
         background-color: #DCDEE0;
         display: none;
-        height: 20px;
-      }
-      &.pr-odd {
-        background-color: #e8eaec;
-        border-bottom: 1px solid #c0c0c0;
-        display: none;
+        height: $tablerowheight;
+        &:nth-child(2n) {
+          background-color: #e8eaec;
+          border-bottom: 1px solid #c0c0c0;
+        }
       }
     }
     th {
@@ -99,8 +117,9 @@
       color: #1a1a1a;
       font-size: 10px;
       font-weight: 500;
-      max-width: 110px;
-      line-height: 10px;
+      max-width: 111px;
+      min-width: 111px;
+      line-height: 12px;
       padding-right: 2px;
       word-break: break-word;
       span.tw {
@@ -110,10 +129,9 @@
       }
       a {
         color: #1a1a1a;
-        font-weight: 500;
-        font-size: 10px;
         width: 140px;
         height: 20px;
+        font-weight: 500;
         &:hover {
           color: #999;
         }
@@ -159,7 +177,8 @@
         height: 19px;
       }
       &.prop-cell {
-        width: 28px;
+        width: 30px;
+        min-width: 30px;
         vertical-align: middle;
         a {
           color: #585B5E;
@@ -191,6 +210,9 @@
         padding-top: 1px;
       }
     }
+  }
+  .hidden {
+    display: none;
   }
 }
 
@@ -233,7 +255,7 @@
   vertical-align: middle;
   top: 0;
   bottom: 0;
-  line-height: 20px;
+  line-height: $tablerowheight;
   display: inline-block;
 }
 
@@ -247,7 +269,7 @@
   vertical-align: middle;
   top: 0;
   bottom: 0;
-  line-height: 20px;
+  line-height: $tablerowheight;
   display: inline-block;
 }
 
@@ -265,21 +287,18 @@
   filter: alpha(opacity = 30);
 }
 
-.table-inner-wrapper {
-  -webkit-box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
-  -moz-box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
-  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
-  border-radius: 1px;
-  border: 1px solid #C0C2C4;
-}
-
 .table-outer-wrapper {
   padding: 0 15px;
   font-size: 12px;
 }
 
 .table-div {
+  -webkit-box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
+  -moz-box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
+  border-radius: 1px;
   position: relative;
+  border: 1px solid #C0C2C4;
 }
 
 .table-last-changed {
@@ -289,6 +308,7 @@
   text-align: right;
   padding-top: 1px;
   padding-right: 19px;
+  margin-bottom: 10px;
 }
 
 .button-cell div:hover {
@@ -334,18 +354,42 @@
   display: inline-block;
 }
 
-.i-ng {
-  background-image: url('/img/icon-nograph.png');
+.but-sg, .but-sgp, .but-sgep {
+  cursor: pointer;
 }
 
-.i-na {
-  background-image: url('/img/icon-noalert.png');
+.but-sg:hover, .but-sgp:hover, .but-sgep:hover {
+  color: #666;
+}
+
+.prop-cell:hover {
+  cursor:pointer;
+}
+
+.button-cell:hover {
+  cursor:pointer;
+}
+
+.i-ng {
+  background-image: url('/img/icon-nograph.png');
 }
 
 .i-g {
   background-image: url('/img/icon-graph.png');
 }
 
-.i-a {
-  background-image: url('/img/icon-alert.png');
+.svg-i {
+  color: #53585a;
+  fill: var(--iron-icon-fill-color, currentcolor);
+  stroke: var(--iron-icon-stroke-color, none);
+  height: 21px;
+  width: 21px;
+} 
+
+.svg-i-disabled {
+  color: #a5abb3;
+  fill: var(--iron-icon-fill-color, currentcolor);
+  stroke: var(--iron-icon-stroke-color, none);
+  height: 21px;
+  width: 21px;
 }
