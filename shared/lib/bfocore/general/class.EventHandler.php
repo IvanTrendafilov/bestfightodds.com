@@ -120,7 +120,9 @@ class EventHandler
         if ($a_oFightOdds->getFightID() != '' && is_numeric($a_oFightOdds->getFightID()) &&
                 $a_oFightOdds->getBookieID() != '' && is_numeric($a_oFightOdds->getBookieID()) &&
                 $a_oFightOdds->getFighterOdds(1) != '' && is_numeric($a_oFightOdds->getFighterOdds(1)) &&
-                $a_oFightOdds->getFighterOdds(2) != '' && is_numeric($a_oFightOdds->getFighterOdds(2))
+                $a_oFightOdds->getFighterOdds(2) != '' && is_numeric($a_oFightOdds->getFighterOdds(2)) &&
+                !(intval($a_oFightOdds->getFighterOdds(1)) >= -99 && intval($a_oFightOdds->getFighterOdds(1) <= 99)) &&
+                !(intval($a_oFightOdds->getFighterOdds(2)) >= -99 && intval($a_oFightOdds->getFighterOdds(2) <= 99))
         )
         {
             EventDAO::addNewFightOdds($a_oFightOdds);

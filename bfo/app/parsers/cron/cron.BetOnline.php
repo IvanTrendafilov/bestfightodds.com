@@ -44,6 +44,8 @@ class ParserJob
 
     public function run($mode = 'normal')
     {
+        $this->logger->info('Started parser');
+
         $matchups = null;
 
         $content = [];
@@ -73,6 +75,8 @@ class ParserJob
 
         $op = new OddsProcessor($this->logger, BOOKIE_ID);
         $op->processParsedSport($parsed_sport, $this->full_run);
+
+        $this->logger->info('Finished');
     }
 
     private function parseContent($content)

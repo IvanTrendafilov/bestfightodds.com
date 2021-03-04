@@ -22,6 +22,7 @@ require_once('lib/bfocore/general/caching/class.CacheControl.php');
 require_once('lib/bfocore/general/class.TwitterHandler.php');
 require_once('lib/bfocore/general/class.OddsHandler.php');
 require_once('lib/bfocore/general/class.BookieHandler.php');
+require_once('lib/bfocore/general/class.EventHandler.php');
 require_once('lib/bfocore/parser/utils/class.ParseRunLogger.php');
 
 
@@ -116,12 +117,48 @@ $iSuccess = OddsHandler::cleanCorrelations();
 $oLogger->log("Old correlations cleaned: " . $iSuccess, 0);
 
 //Generate new front page with latest odds
-$bSuccess = PageGenerator::generatePage(PARSE_GENERATORDIR . 'gen.Bets.php', PARSE_PAGEDIR . 'page.odds.php');
-$oLogger->log("Odds page generated: " . $bSuccess, ($bSuccess ? 0 : -2));
+if (ALERTER_SITE_NAME == 'Best Fight Odds')
+{
+    //Generate new type of page (not applicable for PBO yet) - TODO: Ugly check to see if we are on BFO..
+    $plates = new League\Plates\Engine(GENERAL_BASEDIR . '/app/front/templates/');
+    $aEvents = EventHandler::getAllUpcomingEvents();
 
-//Generate XML feed with latest odds
-//$bSuccess = PageGenerator::generatePage(PARSE_GENERATORDIR . 'gen.XMLFeed.php', PARSE_PAGEDIR . 'page.feed.xml');
-//$oLogger->log("XML feed generated: " . $bSuccess, ($bSuccess ? 0 : -2));
+    $view_data = [];
+    $view_data['bookies'] = BookieHandler::getAllBookies();
+    $view_data['events'] = [];
+    foreach ($aEvents as $oEvent)
+    {
+        if ($oEvent->isDisplayed())
+        {
+            $event_data = OddsHandler::getEventViewData($oEvent->getID());
+            if (count($event_data['matchups']) > 0)
+            {
+                $view_data['events'][] = $event_data;
+            }
+        }
+    }
+    $rendered_page = $plates->render('gen_oddspage', $view_data);
+    $rPage = fopen(PARSE_PAGEDIR . 'oddspage.php', 'w');
+    if ($rPage != null)
+    {
+        //Minify
+        $rendered_page = preg_replace('/\>\s+\</m', '><', $rendered_page);
+        fwrite($rPage, $rendered_page);
+        fclose($rPage);
+        $oLogger->log("Plates odds page (oddspage) generated: 1");
+    }
+    else
+    {
+        $oLogger->log("Failed to generate odds page (oddspage)");
+    }
+}
+else
+{
+    //Old way using PageGenerator   
+    $bSuccess = PageGenerator::generatePage(PARSE_GENERATORDIR . 'gen.Bets.php', PARSE_PAGEDIR . 'page.odds.php');
+    $oLogger->log("Odds page generated: " . $bSuccess, ($bSuccess ? 0 : -2));
+}
+
 
 
 //Tweet new fight odds

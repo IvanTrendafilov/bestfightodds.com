@@ -44,6 +44,8 @@ class ParserJob
 
     public function run($mode = 'normal')
     {
+        $this->logger->info('Started parser');
+
         $content = null;
         if ($mode == 'mock')
         {
@@ -96,7 +98,13 @@ class ParserJob
                 $crawler = $client->waitFor('.sportsbook-offer-category-card');
                 $crawler->filter('.sportsbook-event-accordion__wrapper')->each(function (\Symfony\Component\DomCrawler\Crawler $event_node) use (&$client, &$matchups)
                 {
-                    if ($event_node->filter('.sportsbook-outcome-body-wrapper')->count() == 2)
+                    //Check for live indicator, if so we skip this entry
+                    $live_crawler = $event_node->filter('.sportsbook__icon--live');
+                    if ($live_crawler->count() > 0)
+                    {
+                        $this->logger->info('Live event, will skip');
+                    }
+                    else if ($event_node->filter('.sportsbook-outcome-body-wrapper')->count() == 2)
                     {
                         $matchup = [];
                         $i = 1;

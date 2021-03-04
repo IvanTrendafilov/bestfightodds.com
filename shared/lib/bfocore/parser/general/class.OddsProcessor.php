@@ -34,6 +34,13 @@ class OddsProcessor
     public function processParsedSport($parsed_sport, $full_run)
     {
 
+        //Pre-populate correlation table with entries from database. These can be overwritten later in the matching matchups method
+        $correlations = OddsHandler::getCorrelationsForBookie($this->bookie_id);
+        foreach ($correlations as $correlation)
+        {
+            ParseTools::saveCorrelation($correlation['correlation'], $correlation['matchup_id']);
+        }
+
         $parsed_sport = $this->removeMoneylineDupes($parsed_sport);
         $parsed_sport = $this->removePropDupes($parsed_sport);
 
@@ -91,6 +98,12 @@ class OddsProcessor
             else
             {
                 $this->logger->info('Found match for ' . $parsed_matchup->getTeamName(1) . ' vs ' . $parsed_matchup->getTeamName(2));
+                //If parsed matchup contains a correlation ID, we store this in the correlation table. Maybe move this out to other function?
+                if ($parsed_matchup->getCorrelationID() != '')
+                {
+                    ParseTools::saveCorrelation($parsed_matchup->getCorrelationID(), $matching_matchup->getID());
+                    $this->logger->debug("---------- storing correlation ID: " . $parsed_matchup->getCorrelationID() . ' to matchup ' . $matching_matchup->getID());
+                }
                 $match = true;
             }
             $matched_items[] = ['parsed_matchup' => $parsed_matchup, 'matched_matchup' => $matching_matchup, 'match_result' => ['status' => $match]];
@@ -129,13 +142,6 @@ class OddsProcessor
                 $matched_matchup['parsed_matchup']->switchOdds();
             }
 
-            //If parsed matchup contains a correlation ID, we store this in the correlation table. Maybe move this out to other function?
-            if ($matched_matchup['parsed_matchup']->getCorrelationID() != '')
-            {
-                ParseTools::saveCorrelation($matched_matchup['parsed_matchup']->getCorrelationID(), $matched_matchup['matched_matchup']->getID());
-                $this->logger->debug("---------- storing correlation ID: " . $matched_matchup['parsed_matchup']->getCorrelationID());
-            }
-
             //Store any metadata for the matchup
             $metadata = $matched_matchup['parsed_matchup']->getAllMetaData();
             foreach ($metadata as $key => $val)
@@ -157,7 +163,11 @@ class OddsProcessor
                 else
                 {
                     $this->logger->info("- " . $matched_matchup['matched_matchup']->getTeamAsString(1) . " vs " . $matched_matchup['matched_matchup']->getTeamAsString(2) . ": adding new odds");
-                    EventHandler::addNewFightOdds($odds);
+                    $result = EventHandler::addNewFightOdds($odds);
+                    if (!$result)
+                    {
+                        $this->logger->error("-- Error adding odds");
+                    }
                 }
                 return true;
             }
@@ -255,7 +265,7 @@ class OddsProcessor
         foreach ($upcoming_events as $upcoming_event)
         {
             //Todo: Possible improvement here is that we retrieve odds for all bookies. Could be limited to single bookie
-            $stored_props = OddsHandler::getCompletePropsForEvent($upcoming_event->getID());
+            $stored_props = OddsHandler::getCompletePropsForEvent($upcoming_event->getID(), 0, $this->bookie_id);
             if ($stored_props != null)
             {
                 foreach ($stored_props as $stored_prop)

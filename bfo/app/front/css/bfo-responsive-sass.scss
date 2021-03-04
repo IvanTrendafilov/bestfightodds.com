@@ -1,11 +1,9 @@
 /* Mobile */
-@media only screen and (max-width: 767px) {
+@media only screen and (max-width: 961px) {
   body, #page {
     width: 100%;
   }
-  #header-search-box, #auto-refresh-container {
-    display: none;
-  }
+
   .odds-table-responsive-header {
     display: block;
   }
@@ -85,8 +83,20 @@
     width: 100%;
     height: 54px;
   }
+  .flex-header-wrap {
+    height: 54px;
+  }
+  .flex-header {
+    margin-bottom: 0;
+  }
+
+  .flex-nav {
+    margin-bottom: 0;
+    white-space: nowrap;
+  }
+
   #page-wrapper {
-    margin: 5px;
+    
   }
   .header-menu {
     width: 100%;
@@ -94,21 +104,19 @@
 
   .header-menu-item {
     height: 21px;
-    padding: 6px 10px 0 10px;
+    padding: 7px 10px 0 10px;
   }
 
   #header-menu-right {
     margin-right: 7px;
   }
-  .menu-divider, .item-non-mobile {
+  .menu-divider {
     display: none;
   }
   .item-mobile-only {
     display: block;
   }
-  .item-mobile-only-row {
-    display: table-row;
-  }
+
   #page-content {
     width: 100%;
     padding-top: 6px;
@@ -244,6 +252,17 @@
     display: inline-block;
     background-size: 203px 31px;
   }
+
+  //Event page graphs
+  #event-swing-area, #event-outcome-area {
+    width: 100%;
+    vertical-align: top;
+    margin: 3px 0 8px 0;
+  }
+  #event-charts-area {
+    padding-top: 0;
+  }
+
   /* Content pages */
   .content-header {
     padding-left: 6px;
@@ -334,20 +353,36 @@
     display: inline-block;
   }
 
-  //Event page graphs
-  #event-swing-area, #event-outcome-area {
-    width: 100%;
-    vertical-align: top;
-    margin: 3px 0 8px 0;
+  #header-search-box {
+    padding-right: 10px;
+    margin-top: 16px;
   }
 
-  #event-charts-area {
-    padding-top: 0;
+  .search-button {
+    font-size: 12px;
   }
 
 }
 
-@media only screen and (max-width: 372px) {
+@media only screen and (max-width: 1132px) {
+  #flex-header-menu-right {
+    margin-right: 7px;
+  }
+}
+
+@media only screen and (max-width: 575px) {
+  #header-search-box, #auto-refresh-container {
+    display: none;
+  }
+  .item-non-mobile {
+    display: none;
+  }
+  .item-mobile-only-row {
+    display: table-row;
+  }
+}
+
+@media only screen and (max-width: 376px) {
   .header-menu-item {
     padding: 6px 8px 0 8px;
   }

@@ -120,18 +120,22 @@ myNameSpace = function(){
 <table class="genericTable">
 
 <?php foreach ($unmatched_groups as $unmatched_group): ?>
-    <tr class="event event-group" id="event<?=isset($i) ? ++$i : $i = 1?>" data-create="<?=$this->e('{"name": "' . $unmatched_group[0]['view_extras']['event_name_reduced'] . '", "date": "' . $unmatched_group[0]['view_extras']['event_date_formatted'] . '"}')?>">
-        <td></td><td></td>
-        <td data-date=""><b><?=$unmatched_group[0]['metadata']['event_name'] ?? '' ?> / <?=$unmatched_group[0]['view_extras']['event_name_reduced'] ?? ''?></b> (<?=$unmatched_group[0]['view_extras']['event_date_formatted']?>)
-
-            <?php if(isset($unmatched_group[0]['view_extras']['event_match']['id'])): ?>
-                    Match: <?=$unmatched_group[0]['view_extras']['event_match']['name']?> (<?=$unmatched_group[0]['view_extras']['event_match']['date']?>) [<a href="#" class="create-matchups-for-event" data-eventid="<?=$unmatched_group[0]['view_extras']['event_match']['id']?>" data-eventlink="event<?=$i?>">Create all matchups below for matched event</a>]
-            <?php else: ?>
-                    No match.. [<a href="/cnadm/events?in_event_name=<?=$unmatched_group[0]['view_extras']['event_name_reduced']?>&in_event_date=<?=$unmatched_group[0]['view_extras']['event_date_formatted']?>">create</a>] [<a href="http://www.google.se/search?q=tapology <?=$unmatched_group[0]['view_extras']['event_name_reduced']?>">google</a>]
-            <?php endif ?>
-
-        </td>
-    </tr>
+    <?php if (isset($unmatched_group[0]['view_extras'])): ?>
+        <tr class="event event-group" id="event<?=isset($i) ? ++$i : $i = 1?>" data-create="<?=$this->e('{"name": "' . $unmatched_group[0]['view_extras']['event_name_reduced'] . '", "date": "' . $unmatched_group[0]['view_extras']['event_date_formatted'] . '"}')?>">
+            <td></td><td></td>
+            <td data-date=""><b><?=$unmatched_group[0]['metadata']['event_name'] ?? '' ?> / <?=$unmatched_group[0]['view_extras']['event_name_reduced'] ?? ''?></b> (<?=$unmatched_group[0]['view_extras']['event_date_formatted']?>)
+                <?php if(isset($unmatched_group[0]['view_extras']['event_match']['id'])): ?>
+                        Match: <?=$unmatched_group[0]['view_extras']['event_match']['name']?> (<?=$unmatched_group[0]['view_extras']['event_match']['date']?>) [<a href="#" class="create-matchups-for-event" data-eventid="<?=$unmatched_group[0]['view_extras']['event_match']['id']?>" data-eventlink="event<?=$i?>">Create all matchups below for matched event</a>]
+                <?php else: ?>
+                        No match.. [<a href="/cnadm/events?in_event_name=<?=$unmatched_group[0]['view_extras']['event_name_reduced']?>&in_event_date=<?=$unmatched_group[0]['view_extras']['event_date_formatted']?>">create</a>] [<a href="http://www.google.se/search?q=tapology <?=$unmatched_group[0]['view_extras']['event_name_reduced']?>">google</a>]
+                <?php endif ?>
+            </td>
+    <?php else: ?>
+        <tr class="event event-group" id="event<?=isset($i) ? ++$i : $i = 1?>">
+            <td></td><td></td>
+            <td data-date=""></td>
+    <?php endif ?>
+        </tr>
     
     <?php foreach ($unmatched_group as $unmatched_item): ?>
         <?php if ($unmatched_item['type'] == 0): ?>

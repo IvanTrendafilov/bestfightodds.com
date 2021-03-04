@@ -321,6 +321,50 @@ class AdminController
         return $response;
     }
 
+    public function viewParserLogs(Request $request, Response $response, array $args)
+    {
+        $view_data = [];
+        if (isset($args['bookie_name']))
+        {
+            $logfile = $args['bookie_name'];
+            $filenames = glob(GENERAL_KLOGDIR . 'cron.' . $args['bookie_name'] . '.*');
+            $log_contents =  file_get_contents(end($filenames));
+            $view_data = ['log_contents' => $log_contents];
+        }
+        else
+        {
+            //List all available log files
+            $filenames = glob(GENERAL_KLOGDIR . 'cron.*.*');
+            $view_data['bookies'] = [];
+            foreach ($filenames as $filename)
+            {
+                preg_match('/cron\.([a-zA-Z0-9]+)\.[0-9]+/m',$filename, $matches);
+                if (isset($matches[0]))
+                {
+                    if (!isset($view_data['bookies'][$matches[1]]))
+                    {
+                        $view_data['bookies'][$matches[1]] = [];
+                    }
+                    $view_data['bookies'][$matches[1]]['count'] = ($view_data['bookies'][$matches[1]]['count'] ?? 0) + 1;
+                }
+            }
+            //Loop through the latest log for each bookie and create a preview
+            foreach ($view_data['bookies'] as $bookie => $values)
+            {
+                $filenames = glob(GENERAL_KLOGDIR . 'cron.' . $bookie . '.*');
+                $log_contents =  file_get_contents(end($filenames));
+                $view_data['bookies'][$bookie]['preview'] = '';
+                $str = explode("\n", $log_contents);
+                end($str);
+                $view_data['bookies'][$bookie]['preview'] = $str[0] . "\n...\n" . prev($str);;
+            }
+        }
+
+        $response->getBody()->write($this->plates->render('parserlogs', $view_data));
+        return $response;
+    }
+
+
     public function viewAlerts(Request $request, Response $response, array $args)
     {
         $view_data['alerts'] = [];
@@ -434,6 +478,11 @@ class AdminController
 
         $response->getBody()->write($this->plates->render('odds', $view_data));
         return $response;
+    }
+
+    public function viewFlaggedOdds(Request $request, Response $response)
+    {
+        
     }
 
 

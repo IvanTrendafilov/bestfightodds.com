@@ -25,6 +25,7 @@
 <a href="/cnadm/proptemplates">View prop templates</a>&nbsp;&nbsp;&nbsp;
 <a href="/cnadm/resetchangenums">Reset changenum</a>&nbsp;&nbsp;&nbsp;
 <a href="index.php?p=testMail">Test mail</a>&nbsp;&nbsp;&nbsp;
+<a href="/cnadm/parserlogs">View parser logs</a><br />
 <a href="/cnadm/logs/latest">View latest log</a> <a href="/cnadm/logs">(all)</a><br /><br />
 </div>
 <div class="contentWindow">

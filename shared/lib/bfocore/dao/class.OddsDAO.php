@@ -305,7 +305,6 @@ class OddsDAO
         return null;
     }
 
-
     public static function getLatestEventPropOdds($a_iEventID, $a_iBookieID, $a_iPropTypeID, $a_iOffset = 0)
     {
         $aParams = array($a_iEventID, $a_iBookieID, $a_iPropTypeID);
@@ -920,7 +919,7 @@ class OddsDAO
         return null;
     }
 
-    public static function getCompletePropsForEvent($a_iEventID, $a_iOffset = 0)
+    public static function getCompletePropsForEvent($a_iEventID, $a_iOffset = 0, $a_iBookieID = null)
     {
         if ($a_iOffset != 0 && $a_iOffset != 1)
         {
@@ -938,6 +937,12 @@ class OddsDAO
                 lep5.event_id = ? AND lep5.bookie_id =
                 lep4.bookie_id AND lep5.proptype_id = lep4.proptype_id) ';
             $aParams[] = $a_iEventID;
+        }
+        if ($a_iBookieID != null)
+        {
+
+            $sExtraQuery .= ' AND bookie_id = ? ';
+            $aParams[] = $a_iBookieID;
         }
 
         $sQuery = 'SELECT
@@ -1157,6 +1162,17 @@ class OddsDAO
         
     }
 
+    public static function removeAllOldFlagged()
+    {
+        //TODO:
+        /*$query = 'SELECT lf.* 
+                    FROM lines_flagged lf 
+                        LEFT JOIN fights f ON lf.matchup_id = f.id 
+                        LEFT JOIN events e ON f.event_id = e.id 
+                    WHERE LEFT(e.date, 10) < LEFT((NOW() - INTERVAL ' . GENERAL_GRACEPERIOD_SHOW . ' HOUR), 10)';*/
+        return false;
+    }
+
 
     
     public static function getLatestPropOddsV2($a_iEventID = null, $a_iMatchupID = null, $a_iBookieID = null, $a_iPropTypeID = null, $a_iTeamNum = null)
@@ -1173,15 +1189,30 @@ class OddsDAO
             $sExtraWhere .= ' AND f.id = ? ';
             $aParams[] = $a_iMatchupID;
         }
+        if ($a_iBookieID != null)
+        {
+            $sExtraWhere .= ' AND lp.bookie_id = ? ';
+            $aParams[] = $a_iBookieID;
+        }
+        if ($a_iPropTypeID != null)
+        {
+            $sExtraWhere .= ' AND pt.id = ? ';
+            $aParams[] = $a_iPropTypeID;
+        }
+        if ($a_iTeamNum != null)
+        {
+            $sExtraWhere .= ' AND lp.team_num = ? ';
+            $aParams[] = $a_iTeamNum;
+        }
 
         $sQuery = 'select e.*, f.*, lp.*, pt.*, lp2.prop_odds as previous_prop_odds, lp2.negprop_odds as previous_negprop_odds from events e 
-        left join fights f ON e.id = f.event_id 
-        LEFT JOIN lines_props lp ON f.id = lp.matchup_id
-        LEFT JOIN prop_types pt ON lp.proptype_id = pt.id
-        LEFT JOIN lines_props lp2 ON lp.matchup_id = lp2.matchup_id AND lp.proptype_id = lp2.proptype_id AND lp.bookie_id = lp2.bookie_id AND lp.team_num = lp2.team_num  AND lp2.date = (SELECT MAX(date) FROM lines_props lp3 WHERE lp.bookie_id = lp3.bookie_id AND lp.matchup_id = lp3.matchup_id AND lp.proptype_id = lp3.proptype_id AND lp.team_num = lp3.team_num AND lp3.date < lp.date)
-    WHERE lp.date = (SELECT MAX(lpd.date) FROM lines_props lpd WHERE lp.bookie_id = lpd.bookie_id AND lp.matchup_id = lpd.matchup_id AND lp.proptype_id = lpd.proptype_id AND lp.team_num = lpd.team_num) 
-    ' . $sExtraWhere . ' 
-    ORDER BY LEFT(pt.prop_desc,4) = "Over" DESC ';
+                LEFT JOIN fights f ON e.id = f.event_id 
+                LEFT JOIN lines_props lp ON f.id = lp.matchup_id
+                LEFT JOIN prop_types pt ON lp.proptype_id = pt.id
+                LEFT JOIN lines_props lp2 ON lp.matchup_id = lp2.matchup_id AND lp.proptype_id = lp2.proptype_id AND lp.bookie_id = lp2.bookie_id AND lp.team_num = lp2.team_num  AND lp2.date = (SELECT MAX(date) FROM lines_props lp3 WHERE lp.bookie_id = lp3.bookie_id AND lp.matchup_id = lp3.matchup_id AND lp.proptype_id = lp3.proptype_id AND lp.team_num = lp3.team_num AND lp3.date < lp.date)
+            WHERE lp.date = (SELECT MAX(lpd.date) FROM lines_props lpd WHERE lp.bookie_id = lpd.bookie_id AND lp.matchup_id = lpd.matchup_id AND lp.proptype_id = lpd.proptype_id AND lp.team_num = lpd.team_num) 
+            ' . $sExtraWhere . ' 
+            ORDER BY LEFT(pt.prop_desc,4) = "Over" DESC, pt.id ASC, lp.team_num ASC';
 
         $ret = null;
         try 
@@ -1190,14 +1221,92 @@ class OddsDAO
         }
         catch(PDOException $e)
         {
-            if($e->getCode() == 23000)
-            {
-                throw new Exception("Duplicate entry", 10);	
-            }
-            else
-            {
-                throw new Exception("Unknown error " . $e->getMessage(), 10);	
-            }
+            throw new Exception("Unknown error " . $e->getMessage(), 10);	
+            return false;
+        }
+        return $ret;
+
+    }
+
+    public static function getLatestEventPropOddsV2($a_iEventID, $a_iBookieID = null, $a_iPropTypeID = null)
+    {
+        $aParams = [];
+        $aParams[] = $a_iEventID;
+        $sExtraWhere = '';
+        if ($a_iEventID == null) //Required
+        {
+            return false;
+        }
+        if ($a_iBookieID != null)
+        {
+            $sExtraWhere .= ' AND pt.bookie_id = ? ';
+            $aParams[] = $a_iBookieID;
+        }
+        if ($a_iPropTypeID != null)
+        {
+            $sExtraWhere .= ' AND pt.id = ? ';
+            $aParams[] = $a_iPropTypeID;
+        }
+
+        $sQuery = 'SELECT e.*, lp.*, pt.*, lp2.prop_odds as previous_prop_odds, lp2.negprop_odds as previous_negprop_odds from events e 
+                    LEFT JOIN lines_eventprops lp ON e.id = lp.event_id
+                    LEFT JOIN prop_types pt ON lp.proptype_id = pt.id
+                    LEFT JOIN lines_eventprops lp2 ON lp.event_id = lp2.event_id AND lp.proptype_id = lp2.proptype_id AND lp.bookie_id = lp2.bookie_id AND lp2.date = (SELECT MAX(date) FROM lines_eventprops lp3 WHERE lp.bookie_id = lp3.bookie_id AND lp.event_id = lp3.event_id AND lp.proptype_id = lp3.proptype_id AND lp3.date < lp.date)
+                WHERE lp.date = (SELECT MAX(lpd.date) FROM lines_eventprops lpd WHERE lp.bookie_id = lpd.bookie_id AND lp.event_id = lpd.event_id AND lp.proptype_id = lpd.proptype_id) 
+                AND e.id = ? 
+                ' . $sExtraWhere . ' 
+                ORDER BY pt.id ASC;';
+        
+        $ret = null;
+        try 
+        {
+            $ret = PDOTools::findMany($sQuery, $aParams);
+        }
+        catch(PDOException $e)
+        {
+            throw new Exception("Unknown error " . $e->getMessage(), 10);	
+            return false;
+        }
+        return $ret;
+
+    }
+
+    public static function getLatestMatchupOddsV2($a_iEventID = null, $a_iMatchupID = null)
+    {
+        $aParams = [];
+        $sExtraWhere = '';
+
+        if ($a_iEventID == null && $a_iMatchupID == null) //Either event ID or matchup ID needs to be specified
+        {
+            return false;
+        }
+
+        if ($a_iEventID != null)
+        {
+            $sExtraWhere .= ' AND e.id = ? ';
+            $aParams[] = $a_iEventID;
+        }
+        if ($a_iMatchupID != null)
+        {
+            $sExtraWhere .= ' AND f.id = ? ';
+            $aParams[] = $a_iMatchupID;
+        }
+
+        $sQuery = 'select e.*, f.*, fo.*, fo2.fighter1_odds as previous_team1_odds, fo2.fighter2_odds as previous_team2_odds from events e 
+                    LEFT JOIN fights f ON e.id = f.event_id 
+                    LEFT JOIN fightodds fo ON f.id = fo.fight_id
+                    LEFT JOIN fightodds fo2 ON fo.fight_id = fo2.fight_id AND fo.bookie_id = fo2.bookie_id AND fo2.date = (SELECT MAX(date) FROM fightodds fo3 WHERE fo.bookie_id = fo3.bookie_id AND fo.fight_id = fo3.fight_id AND fo3.date < fo.date)
+                WHERE fo.date = (SELECT MAX(fod.date) FROM fightodds fod WHERE fo.bookie_id = fod.bookie_id AND fo.fight_id = fod.fight_id)  
+        ' . $sExtraWhere . '';
+
+        $ret = null;
+        try 
+        {
+            $ret = PDOTools::findMany($sQuery, $aParams);
+        }
+        catch(PDOException $e)
+        {
+            throw new Exception("Unknown error " . $e->getMessage(), 10);	
             return false;
         }
         return $ret;

@@ -49,7 +49,7 @@ class XMLParserBetWay
 
                 foreach ($cEvent->Markets->Market as $cMarket)
                 {
-                    if ((string) $cMarket['cname'] == 'fight-winner') 
+                    if ((string) $cMarket['cname'] == 'fight-winner' && count($cMarket->Outcomes->Outcome) == 2) 
                     {
                         //Regular matchup
                         $oParsedMatchup = new ParsedMatchup(
@@ -71,7 +71,6 @@ class XMLParserBetWay
                         }
                         
                         $oParsedSport->addParsedMatchup($oParsedMatchup);
-
 
                     }
                     else if ((string) $cMarket['cname'] == 'to-win-by-decision' ||

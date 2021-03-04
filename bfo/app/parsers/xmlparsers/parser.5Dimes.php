@@ -55,6 +55,9 @@ class XMLParser5Dimes
                 {
                     $oParsedProp = null;
 
+                    //TODO: Temporary rewrite of event name
+                    $cEvent->Header = str_replace('UFC on ESPN+ 44', 'UFC Fight Night 186', $cEvent->Header);
+
                     if ((trim((string) $cEvent->HomeMoneyLine) != '')
                     && (trim((string) $cEvent->VisitorMoneyLine) != ''))
                     {

@@ -403,7 +403,7 @@ class PropParserV2
                     }
                     else if ($oFoundMatchup != null)
                     {
-                        $this->logger->info('---Found multiple matches for prop values. Comparing fsims, challenger: ' . $oMatchup->getTeamAsString(1) . ' vs ' . $oMatchup->getTeamAsString(2) . ' ' . $oMatchup->getID() . ' (' . $fNewSim . ') and current: ' . $oFoundMatchup->getTeamAsString(1) . ' vs ' . $oFoundMatchup->getTeamAsString(2) . ' ' . $oFoundMatchup->getID() . ' (' . $fFoundSim . ')', 0);
+                        $this->logger->info('---Found multiple matches for prop values. Comparing fsims, challenger: ' . $oMatchup->getTeamAsString(1) . ' vs ' . $oMatchup->getTeamAsString(2) . ' ' . $oMatchup->getID() . ' (' . $fNewSim . ') and current: ' . $oFoundMatchup->getTeamAsString(1) . ' vs ' . $oFoundMatchup->getTeamAsString(2) . ' ' . $oFoundMatchup->getID() . ' (' . $fFoundSim . ')');
                         if ($fNewSim > $fFoundSim)
                         {
                             $oFoundMatchup = $oMatchup;
@@ -415,7 +415,7 @@ class PropParserV2
                         else if ($fNewSim == $fFoundSim)
                         {
                             $this->logger->warning('----Fsims are identical, cannot determine winner. Bailing..');
-                            return array('matchup' => null, 'team' => 0);
+                            return array('matchup_id' => null, 'team' => 0);
                         }
                         else
                         {
@@ -509,22 +509,22 @@ class PropParserV2
             {
                 if ($oFoundEvent != null)
                 {
-                    $this->logger->log('---Found multiple matches for prop values. Comparing fsims, challenger: ' . $oEvent->getName() . ' ' . $oEvent->getID() . ' (' . $fNewSim . ') and current: ' . $oFoundEvent->getName() . ' ' . $oFoundEvent->getID() . ' (' . $fFoundSim . ')', 0);
+                    $this->logger->info('---Found multiple matches for prop values. Comparing fsims, challenger: ' . $oEvent->getName() . ' ' . $oEvent->getID() . ' (' . $fNewSim . ') and current: ' . $oFoundEvent->getName() . ' ' . $oFoundEvent->getID() . ' (' . $fFoundSim . ')');
                     if ($fNewSim > $fFoundSim)
                     {
                         $oFoundEvent = $oEvent;
                         $iFoundEventID = $oFoundEvent->getID();
                         $fFoundSim = $fNewSim;
-                        $this->logger->log('----Challenger won, changing matched to new one: ' . $iFoundEventID);
+                        $this->logger->info('----Challenger won, changing matched to new one: ' . $iFoundEventID);
                     }
                     else if ($fNewSim == $fFoundSim)
                     {
-                        $this->logger->log('----Fsims are identical, cannot determine winner. Bailing..');
+                        $this->logger->info('----Fsims are identical, cannot determine winner. Bailing..');
                         return array('event' => null);
                     }
                     else
                     {
-                        $this->logger->log('----Current won. Sticking with current');
+                        $this->logger->info('----Current won. Sticking with current');
                     }
                 }
                 else
