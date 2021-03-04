@@ -160,7 +160,11 @@ class OddsProcessor
                 else
                 {
                     $this->logger->info("- " . $matched_matchup['matched_matchup']->getTeamAsString(1) . " vs " . $matched_matchup['matched_matchup']->getTeamAsString(2) . ": adding new odds");
-                    EventHandler::addNewFightOdds($odds);
+                    $result = EventHandler::addNewFightOdds($odds);
+                    if (!$result)
+                    {
+                        $this->logger->error("-- Error adding odds");
+                    }
                 }
                 return true;
             }

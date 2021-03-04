@@ -21,7 +21,6 @@ require_once 'config/inc.config.php';
 require_once 'vendor/autoload.php';
 require_once 'lib/bfocore/parser/general/inc.ParserMain.php';
 
-use Symfony\Component\Panther\Client;
 use Respect\Validation\Validator as v;
 
 define('BOOKIE_NAME', 'bookmaker');

@@ -634,7 +634,7 @@ class OddsHandler
 
                             //If fight has changed order in database we must switch team nums
                             $temp_team_num_key = $team_num_key;
-                            if ($matchups_assoc[$matchup_key]->hasOrderChanged())
+                            if (isset($matchups_assoc[$matchup_key]) && $matchups_assoc[$matchup_key]->hasOrderChanged())
                             {
                                 if ($team_num_key == 1)
                                 {
