@@ -417,6 +417,11 @@ class OddsHandler
         return OddsDAO::removeFlagged($a_iBookieID, $a_iMatchupID, $a_iEventID, $a_iPropTypeID, $a_iTeamNum);
     }
 
+    public static function removeAllOldFlagged()
+    {
+        return OddsDAO::removeAllOldFlagged();
+    }
+
     public static function getLatestPropOddsV2($a_iEventID = null, $a_iMatchupID = null, $a_iBookieID = null, $a_iPropTypeID = null, $a_iTeamNum = null)
     {
         $result = OddsDAO::getLatestPropOddsV2($a_iEventID, $a_iMatchupID, $a_iBookieID, $a_iPropTypeID, $a_iTeamNum);

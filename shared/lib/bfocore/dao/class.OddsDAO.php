@@ -1162,6 +1162,17 @@ class OddsDAO
         
     }
 
+    public static function removeAllOldFlagged()
+    {
+        //TODO:
+        /*$query = 'SELECT lf.* 
+                    FROM lines_flagged lf 
+                        LEFT JOIN fights f ON lf.matchup_id = f.id 
+                        LEFT JOIN events e ON f.event_id = e.id 
+                    WHERE LEFT(e.date, 10) < LEFT((NOW() - INTERVAL ' . GENERAL_GRACEPERIOD_SHOW . ' HOUR), 10)';*/
+        return false;
+    }
+
 
     
     public static function getLatestPropOddsV2($a_iEventID = null, $a_iMatchupID = null, $a_iBookieID = null, $a_iPropTypeID = null, $a_iTeamNum = null)

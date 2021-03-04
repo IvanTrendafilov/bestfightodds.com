@@ -480,6 +480,11 @@ class AdminController
         return $response;
     }
 
+    public function viewFlaggedOdds(Request $request, Response $response)
+    {
+        
+    }
+
 
 
 }
