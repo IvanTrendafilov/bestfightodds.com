@@ -140,7 +140,10 @@ class OddsProcessor
             $metadata = $matched_matchup['parsed_matchup']->getAllMetaData();
             foreach ($metadata as $key => $val)
             {
-                EventHandler::setMetaDataForMatchup($matched_matchup['matched_matchup']->getID(), $key, $val, $this->bookie_id);
+                if ($this->bookie_id != 12) //TODO: Temporary disable BetOnline from storing metadata
+                {
+                    EventHandler::setMetaDataForMatchup($matched_matchup['matched_matchup']->getID(), $key, $val, $this->bookie_id);
+                }
             }
 
             if ($matched_matchup['parsed_matchup']->hasMoneyline())
