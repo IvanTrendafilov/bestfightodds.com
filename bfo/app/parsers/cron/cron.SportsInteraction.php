@@ -95,6 +95,10 @@ class ParserJob
         {
             $this->logger->error("Error: " . $oXML['reason']);
         }
+        if ($oXML->getName() == 'feed-unchanged')
+        {
+            $this->logger->info("Feed reported no changes");
+        }
 
         $oParsedSport = new ParsedSport('MMA');
 
