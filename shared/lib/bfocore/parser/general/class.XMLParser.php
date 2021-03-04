@@ -406,7 +406,11 @@ class XMLParser
         else
         {
             $oLogger->log("------- adding new odds!", 2);
-            EventHandler::addNewFightOdds($oTempMatchupOdds);
+            $result = EventHandler::addNewFightOdds($oTempMatchupOdds);
+            if (!$result)
+            {
+                $oLogger->log("------- Error adding odds!", -2);
+            }
         }
     }
 
