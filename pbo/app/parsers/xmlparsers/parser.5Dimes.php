@@ -127,7 +127,10 @@ class XMLParser5Dimes
                 else
                 {
                     if ((trim((string) $cEvent->HomeMoneyLine) != '')
-                    && (trim((string) $cEvent->VisitorMoneyLine) != ''))
+                    && (trim((string) $cEvent->VisitorMoneyLine) != '')
+                    && !preg_match("/ DECISION/", strtoupper($cEvent->HomeTeamID))
+                    && !preg_match("/ DRAW/", strtoupper($cEvent->HomeTeamID))
+                    && !preg_match("/ DISTANCE/", strtoupper($cEvent->HomeTeamID)))
                     {
                         $oParsedMatchup = new ParsedMatchup(
                                         (string) $cEvent->HomeTeamID,
