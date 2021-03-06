@@ -101,7 +101,7 @@ class ParserJob
 
                 foreach ($cEvent->Markets->Market as $cMarket)
                 {
-                    if ((string) $cMarket['cname'] == 'fight-winner' && count($cMarket->Outcomes->Outcome) == 2) 
+                    if (((string) $cMarket['cname'] == 'fight-winner' || (string) $cMarket['cname'] == 'fight-winner-') && count($cMarket->Outcomes->Outcome) == 2) 
                     {
                         //Regular matchup
                         $oParsedMatchup = new ParsedMatchup(
