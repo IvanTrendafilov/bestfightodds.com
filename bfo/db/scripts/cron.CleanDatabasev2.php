@@ -107,8 +107,8 @@ while (($iRemovedOdds > 0 || $iRemovedPropOdds > 0)  && $iCounter < 10)
 
 
 
-echo "\r\nCleaned over/under inconsistensies: " . clearOverUnderIncons();
-echo "\r\nCleaned handicap (e.g. +3 points) inconsistensies: " . clearPointsHandicapIncons();
+//echo "\r\nCleaned over/under inconsistensies: " . clearOverUnderIncons();
+//echo "\r\nCleaned handicap (e.g. +3 points) inconsistensies: " . clearPointsHandicapIncons();
 
 /**
  * Returns all fight odds that are considered duplicates. A duplicate is one
