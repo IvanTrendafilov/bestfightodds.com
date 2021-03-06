@@ -655,11 +655,11 @@ class PropParserV2
         {
             //Create a EventPropBet object for storage
             $new_prop = new EventPropBet($matched_prop['match_result']['event']['event_id'],
-                            $a_iBookieID,
+                            $this->bookie_id,
                             '',
-                            $a_oProp->getMoneyline(($a_oProp->getMainProp() % 2) + 1),
+                            $matched_prop['prop']->getMoneyline(($matched_prop['prop']->getMainProp() % 2) + 1),
                             '',
-                            $a_oProp->getMoneyline($a_oProp->getMainProp()),
+                            $matched_prop['prop']->getMoneyline($matched_prop['prop']->getMainProp()),
                             $matched_prop['match_result']['template']->getPropTypeID(),
                             '');
         }
@@ -667,11 +667,11 @@ class PropParserV2
         {
             //Create a EventPropBet object for storage
             $new_prop = new EventPropBet($matched_prop['match_result']['event']['event_id'],
-                            $a_iBookieID,
+                            $this->bookie_id,
                             '',
-                            $a_oProp->getMoneyline($a_oProp->getMainProp()),
+                            $matched_prop['prop']->getMoneyline($matched_prop['prop']->getMainProp()),
                             '',
-                            $a_oProp->getMoneyline(($a_oProp->getMainProp() % 2) + 1),
+                            $matched_prop['prop']->getMoneyline(($matched_prop['prop']->getMainProp() % 2) + 1),
                             $matched_prop['match_result']['template']->getPropTypeID(),
                             '');
         }
