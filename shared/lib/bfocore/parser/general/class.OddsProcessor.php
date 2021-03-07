@@ -146,7 +146,7 @@ class OddsProcessor
             $metadata = $matched_matchup['parsed_matchup']->getAllMetaData();
             foreach ($metadata as $key => $val)
             {
-                if ($this->bookie_id != 12 && $this->bookie_id != 5) //TODO: Temporary disable BetOnline and Bovada from storing metadata
+                if ($this->bookie_id != 12  && $this->bookie_id != 5 && $this->bookie_id != 17) //TODO: Temporary disable BetOnline, Bovada, William Hill from storing metadata
                 {
                     EventHandler::setMetaDataForMatchup($matched_matchup['matched_matchup']->getID(), $key, $val, $this->bookie_id);
                 }
