@@ -2,17 +2,12 @@
 /**
  * XML Parser
  *
- * Bookie: SportsInteraction
+ * Bookie: Betway
  * Sport: MMA
  *
  * Moneylines: Yes
- * Spreads: No
- * Totals: Yes
  * Props: Yes
- * Authoritative run: Yes
  *
- * Comment: Dev version
- * 
  * URL: https://feeds.betway.com/sbeventsen?key=1E557772&keywords=ufc---martial-arts
  *
  */
