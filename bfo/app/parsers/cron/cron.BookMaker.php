@@ -26,9 +26,11 @@ use Respect\Validation\Validator as v;
 define('BOOKIE_NAME', 'bookmaker');
 define('BOOKIE_ID', '3');
 
+$options = getopt("", ["mode::"]);
+
 $logger = new Katzgrau\KLogger\Logger(GENERAL_KLOGDIR, Psr\Log\LogLevel::INFO, ['filename' => 'cron.' . BOOKIE_NAME . '.' . time() . '.log']);
 $parser = new ParserJob($logger);
-$parser->run();
+$parser->run($options['mode'] ?? '');
 
 class ParserJob
 {
@@ -123,12 +125,19 @@ class ParserJob
                         else
                         {
                             //Not a prop, add as matchup
-                            $this->parsed_sport->addParsedMatchup(new ParsedMatchup(
+                            $new_matchup = new ParsedMatchup(
                                             (string) $cGame['vtm'],
                                             (string) $cGame['htm'],
                                             (string) $cLine['voddst'],
                                             (string) $cLine['hoddst']
-                            ));
+                            );
+
+                            //Add game time metadata
+                            $date_obj = new DateTime((string) $cGame['gmdt'] . ' ' . $cGame['gmtm']);
+                            $new_matchup->setMetaData('gametime', $date_obj->getTimestamp());
+                            $new_matchup->setMetaData('event_name', $cBanner[0]['vtm']);
+
+                            $this->parsed_sport->addParsedMatchup($new_matchup);
 
                             //Check if a total is available, if so, add it as a prop. line[0] is always over and line[1] always under
                             if (isset($cLine['unt']) && 
