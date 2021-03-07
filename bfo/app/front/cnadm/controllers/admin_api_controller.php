@@ -262,7 +262,7 @@ class AdminAPIController
         else
         {
             //Check for twitter handle update
-            if (v::alnum()->noWhitespace()->length(4, null)->validate(@$data->twitter_handle))
+            if (v::noWhitespace()->length(4, null)->validate(@$data->twitter_handle))
             {
                 if (TwitterHandler::addTwitterHandle($data->fighter_id, $data->twitter_handle))
                 {
