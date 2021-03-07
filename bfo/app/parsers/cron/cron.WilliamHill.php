@@ -20,7 +20,7 @@ require_once 'lib/bfocore/general/class.BookieHandler.php';
 use Respect\Validation\Validator as v;
 
 define('BOOKIE_NAME', 'williamhill');
-define('BOOKIE_ID', '3');
+define('BOOKIE_ID', '17');
 
 $options = getopt("", ["mode::"]);
 
