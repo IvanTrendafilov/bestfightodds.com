@@ -359,7 +359,7 @@ class AdminController
                 $last_row = prev($str);
                 $second_last_row = prev($str);
                 
-                $view_data['bookies'][$bookie]['preview'] = $str[0] . "\n" . $str[1] . "\n...\n" . $second_last_row . "\n" . $last_row;
+                $view_data['bookies'][$bookie]['preview'] = $str[0] . "\n...\n" . $second_last_row . "\n" . $last_row;
             }
         }
 
