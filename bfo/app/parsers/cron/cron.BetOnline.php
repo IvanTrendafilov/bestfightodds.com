@@ -86,12 +86,12 @@ class ParserJob
         $this->parseProps($content['props']);
 
         $missing_content = false;
-        if ($content['matchups'] == 'FAILED' || $content['matchups'] == '')
+        if ($content['matchups'] == '')
         {
             $this->logger->error('Retrieving matchups failed');
             $missing_content = true;
         }
-        if ($content['props'] == 'FAILED' || $content['props'] == '')
+        if ($content['props'] == '')
         {
             $this->logger->error('Retrieving props failed');
             $missing_content = true;
@@ -117,7 +117,17 @@ class ParserJob
 
         foreach ($json->preGameEvents as $matchup)
         {
-            $this->parseMatchup($matchup);
+            //Ignore certain events (e.g. non-MMA)
+            if (isset($matchup->scheduleText) && substr(trim((string) $matchup->scheduleText),0,4) == 'BKFC')
+            {
+                $this->logger->info('Skipping matchup for event ' . $matchup->scheduleText);
+            }
+            else
+            {
+                $this->parseMatchup($matchup);
+            }
+
+            
         }
     }
 
