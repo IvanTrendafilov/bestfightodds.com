@@ -63,10 +63,10 @@ class ParserJob
     {
         $this->parsed_sport = new ParsedSport('MMA');
 
+        $matchups = [];
+
         try 
         {
-
-
             /*$client = Client::createFirefoxClient(null, ['--no-sandbox',
             '--user-agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/79.0.3945.88 Safari/537.36',
             '--window-size=1200,1100',
@@ -89,7 +89,7 @@ class ParserJob
               ], ['port' => intval('95' . BOOKIE_ID)]);
             $crawler = $client->request('GET', 'https://sportsbook.fanduel.com/sports/navigation/7287.1/9886.3');
             
-            $matchups = [];
+            
 
             $crawler = $client->waitFor('.events_futures');
 
@@ -135,7 +135,6 @@ class ParserJob
         } 
         catch (Exception $e) 
         {
-            var_dump($e);
             $this->logger->error('Exception when retrieving page contents: ' . $e->getMessage());
         } 
         finally {
