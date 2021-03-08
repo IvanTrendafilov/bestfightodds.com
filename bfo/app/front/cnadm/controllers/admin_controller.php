@@ -356,7 +356,8 @@ class AdminController
                 $view_data['bookies'][$bookie]['preview'] = '';
                 $str = explode("\n", $log_contents);
                 end($str);
-                $view_data['bookies'][$bookie]['preview'] = $str[0] . "\n" . $str[0] . "\n...\n" . prev($str) . "\n" . prev($str);
+                prev($str);
+                $view_data['bookies'][$bookie]['preview'] = $str[0] . "\n" . $str[1] . "\n...\n" . prev($str) . "\n" . end($str);
             }
         }
 
