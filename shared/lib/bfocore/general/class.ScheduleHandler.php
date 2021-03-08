@@ -1,6 +1,7 @@
 <?php
 
 require_once('lib/bfocore/dao/class.ScheduleDAO.php');
+require_once('lib/bfocore/utils/class.OddsTools.php');
 
 class ScheduleHandler
 {
@@ -38,6 +39,46 @@ class ScheduleHandler
 	public static function clearManualAction($a_iManualActionID)
 	{
 		return ScheduleDAO::clearManualAction($a_iManualActionID);
+	}
+
+	/**
+	 * Checks for all matchup entries that appear in both unmatched (from a bookie) and in the parsed schedule
+	 */
+	public static function getAllUnmatchedAndScheduled()
+	{
+		$return_actions = [];
+
+		$manual_actions_col = self::getAllManualActions();
+		$unmatched_col = EventHandler::getUnmatched(10000);
+		foreach ($manual_actions_col as $manual_action) 
+		{
+			$found = false;
+			if ((int) $manual_action['type'] == 1 || (int) $manual_action['type'] == 5)
+			{
+				//Create event with matchups (1) or single matchup (5)
+				$action = json_decode($manual_action['description']);
+				foreach ($action->matchups as $matchup)
+				{
+					foreach ($unmatched_col as $unmatched)
+					{
+						if ($unmatched['type'] == 0 && $found == false)
+						{
+							$unmatched_matchup_parts = explode(' vs ', $unmatched['matchup']);
+							sort($matchup_parts);
+							sort($matchup);
+							if (OddsTools::compareNames($matchup[0], $unmatched_matchup_parts[0]) > 82 &&
+								OddsTools::compareNames($matchup[1], $unmatched_matchup_parts[1]) > 82)
+							{
+								$found = true;
+								$return_actions[] = $manual_action;
+							}
+						}
+					}
+				}
+			}
+		}
+
+		return $return_actions;
 	}
 
 }
