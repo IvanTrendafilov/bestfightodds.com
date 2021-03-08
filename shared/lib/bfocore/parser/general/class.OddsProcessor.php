@@ -49,10 +49,8 @@ class OddsProcessor
         $pp = new PropParserV2($this->logger, $this->bookie_id);
         $matched_props = $pp->matchProps($parsed_sport->getFetchedProps());
 
-
         $matched_props = $this->removeMatchedPropDupes($matched_props);
 
-        //Pending: Remove prop dupes AFTER MATCH
         //Pending: For Create mode, create new matchups if no match was found
 
         $this->logUnmatchedMatchups($matched_matchups);
@@ -68,8 +66,9 @@ class OddsProcessor
             $this->flagEventPropOddsForDeletion($matched_props);
         }
 
-        $oParseRunLogger = new ParseRunLogger();
+        $this->logger->info('Result - Matchups: ' . count($matched_matchups) . '/' . count($parsed_sport->getParsedMatchups()) . ' Props: ' . count($matched_props) . '/' . count($parsed_sport->getFetchedProps()) . ' Full run: ' . ($full_run ? 'Yes' : 'No'));
 
+        $oParseRunLogger = new ParseRunLogger();
         $oParseRunLogger->logRun(-1, ['bookie_id' => $this->bookie_id,
         'parsed_matchups' => count($parsed_sport->getParsedMatchups()),
         'parsed_props' => count($parsed_sport->getFetchedProps()),
