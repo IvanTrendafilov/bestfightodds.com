@@ -65,7 +65,6 @@ class ParserJob
             $this->logger->info("Fetching matchups through URL: " . $matchups_url);
             $this->logger->info("Fetching props through URL: " . $props_url);
             ParseTools::retrieveMultiplePagesFromURLs([$matchups_url, $props_url]);
-            ParseTools::getStoredContentForURL($matchups_url);
 
             $content['matchups'] = ParseTools::getStoredContentForURL($matchups_url);
             $content['props'] = ParseTools::getStoredContentForURL($props_url);;
