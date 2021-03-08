@@ -135,6 +135,7 @@ class ParserJob
         } 
         catch (Exception $e) 
         {
+            var_dump($e);
             $this->logger->error('Exception when retrieving page contents: ' . $e->getMessage());
         } 
         finally {
