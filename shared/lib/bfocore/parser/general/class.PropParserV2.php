@@ -239,9 +239,10 @@ class PropParserV2
 
         //Loop through the parsed prop values and determine fields type. Default is full name
         $iNewFT = self::determineFieldsType($aParsedMatchup);
+        $fields_type = $a_oTemplate->getFieldsTypeID();
         if ($iNewFT != false)
         {
-            $a_oTemplate->setFieldsTypeID($iNewFT);
+            $fields_type = $iNewFT;
         }
 
         sort($aParsedMatchup);
@@ -320,7 +321,7 @@ class PropParserV2
             foreach ($aMatchupsToCheck as $oMatchup)
             {
                 $aStoredMatchup = null;
-                switch ($a_oTemplate->getFieldsTypeID())
+                switch ($fields_type)
                 {
                     //1 lastname vs lastname (koscheck vs miller)
                     case 1:
@@ -366,7 +367,7 @@ class PropParserV2
                         $aStoredMatchup = array($aInitials[0] . ' ' . ParseTools::getLastnameFromName($oMatchup->getTeam($iY), $bOnlyOneLastName));
                         break;
                     default:
-                        $this->logger->error('---Unknown fields type ID in PropTemplate: ' . $a_oTemplate->getFieldsTypeID());
+                        $this->logger->error('---Unknown fields type ID in PropTemplate: ' . $fields_type);
                         return null;
                 }
 
