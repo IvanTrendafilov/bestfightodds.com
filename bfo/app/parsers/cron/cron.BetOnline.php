@@ -118,7 +118,9 @@ class ParserJob
         foreach ($json->preGameEvents as $matchup)
         {
             //Ignore certain events (e.g. non-MMA)
-            if (isset($matchup->scheduleText) && substr(trim((string) $matchup->scheduleText),0,4) == 'BKFC')
+            if (isset($matchup->scheduleText) 
+                && substr(trim((string) $matchup->scheduleText),0,4) == 'BKFC'
+                && substr(trim((string) $matchup->scheduleText),0,9) == 'Fight2Win')
             {
                 $this->logger->info('Skipping matchup for event ' . $matchup->scheduleText);
             }
