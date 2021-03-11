@@ -755,10 +755,12 @@ class PropParserV2
 
     public function logUnmatchedProps($matched_props)
     {
+        $counter = 0;
         foreach ($matched_props as $prop)
         {
             if ($prop['match_result']['status'] == false)
             {
+                $counter++;
                 switch ($prop['match_result']['fail_reason'])
                 {
                     case 'no_template_found':
@@ -774,6 +776,7 @@ class PropParserV2
                 }
             }
         }
+        return $counter;
     }
 
 }

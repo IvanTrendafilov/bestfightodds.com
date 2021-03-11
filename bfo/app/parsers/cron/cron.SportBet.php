@@ -1,5 +1,4 @@
 <?php
-
 /**
  * XML Parser
  *
@@ -7,30 +6,86 @@
  * Sport: MMA
  *
  * Moneylines: Yes
- * Spreads: No
- * Totals: No
  * Props: Yes
- * Authoritative run: Yes
- *
- * Comment: Prod version
+ * 
+ * URL: http://lines.sportbet.com/linesfeed/getlinefeeds.aspx?UID=bestfightodds5841
  *
  */
-require_once('lib/bfocore/general/class.BookieHandler.php');
 
-class XMLParserSportBet
+require_once 'config/inc.config.php';
+require_once 'vendor/autoload.php';
+require_once 'lib/bfocore/parser/general/inc.ParserMain.php';
+require_once 'lib/bfocore/general/class.BookieHandler.php';
+
+use Respect\Validation\Validator as v;
+
+define('BOOKIE_NAME', 'sportbet');
+define('BOOKIE_ID', '2');
+
+$options = getopt("", ["mode::"]);
+
+$logger = new Katzgrau\KLogger\Logger(GENERAL_KLOGDIR, Psr\Log\LogLevel::INFO, ['filename' => 'cron.' . BOOKIE_NAME . '.' . time() . '.log']);
+$parser = new ParserJob($logger);
+$parser->run($options['mode'] ?? '');
+
+class ParserJob
 {
-    private $bAuthorativeRun = false;
+    private $full_run = false;
+    private $parsed_sport;
+    private $logger = null;
+    private $change_num = -1;
 
-    public function parseXML($a_sXML)
+    public function __construct(\Psr\Log\LoggerInterface $logger)
+    {
+        $this->logger = $logger;
+    }
+
+    public function run($mode = 'normal')
+    {
+        $this->logger->info('Started parser');
+
+        $content = null;
+        if ($mode == 'mock')
+        {
+            $this->logger->info("Note: Using matchup mock file at " . PARSE_MOCKFEEDS_DIR . "sportbet.xml");
+            $content = ParseTools::retrievePageFromFile(PARSE_MOCKFEEDS_DIR . 'sportbet.xml');
+        }
+        else
+        {
+            $matchups_url = 'http://lines.sportbet.com/linesfeed/getlinefeeds.aspx?UID=bestfightodds5841';
+            $this->change_num = BookieHandler::getChangeNum(BOOKIE_ID);
+            if ($this->change_num != -1)
+            {
+                $this->logger->info("Using changenum: &changenum=" . $this->change_num);
+                $matchups_url .= '&changenum=' . $this->change_num;
+            }
+            $this->logger->info("Fetching matchups through URL: " . $matchups_url);
+            $content = ParseTools::retrievePageFromURL($matchups_url);
+        }
+
+        $parsed_sport = $this->parseContent($content);
+
+        try 
+        {
+            $op = new OddsProcessor($this->logger, BOOKIE_ID);
+            $op->processParsedSport($parsed_sport, $this->full_run);
+        }
+        catch (Exception $e)
+        {
+            $this->logger->error('Exception: ' . $e->getMessage());
+        }
+
+        $this->logger->info('Finished');
+    }
+
+    public function parseContent($a_sXML)
     {
         $oXML = simplexml_load_string($a_sXML);
 
         if ($oXML == false)
         {
-            Logger::getInstance()->log("Warning: XML broke!!", -1);
+            $this->logger->warning("Warning: XML broke!!");
         }
-
-        $aSports = array();
 
         $oParsedSport = new ParsedSport('MMA');
 
@@ -53,10 +108,6 @@ class XMLParserSportBet
                 //Check if entry is a prop, if so add it as a parsed prop
                 if (trim((string) $cEvent->SportSubType) == 'Props' || trim((string) $cEvent->SportSubType) == 'MMA Props')
                 {
-
-                    //TODO: Temporary rewrite of event name
-                    $cEvent->Header = str_replace('UFC on ESPN+ 44', 'UFC Fight Night 186', $cEvent->Header);
-
                     $oParsedProp = null;
 
                     if ((trim((string) $cEvent->HomeMoneyLine) != '')
@@ -64,14 +115,13 @@ class XMLParserSportBet
                     {
                         //Regular prop
 
-
                         //Workaround for props that are not sent in the correct order:
                         if (strtoupper(substr(trim((string) $cEvent->HomeTeamID), 0, 4)) == 'NOT ' || strtoupper(substr(trim((string) $cEvent->HomeTeamID), 0, 4)) == 'ANY ')
                         {
                             //Prop starts with NOT, switch home and visitor fields
                             $oParsedProp = new ParsedProp(
                                             (string) ':: ' . $cEvent->Header . ' : ' . $cEvent->VisitorTeamID,
-                                            (string) ':: ' . $cEvent->Header . ' : ' . $cEvent->HomeTeamID,
+                                            (string) ':: ' . $cEvent->Header . ' : ' .$cEvent->HomeTeamID,
                                             (string) $cEvent->VisitorMoneyLine,
                                             (string) $cEvent->HomeMoneyLine);
                         }
@@ -98,6 +148,7 @@ class XMLParserSportBet
                     && (trim((string) $cEvent->HomeSpread) != '')
                     && (trim((string) $cEvent->VisitorSpread) != ''))
                     {
+
                         //One combined:
                         $oParsedProp = new ParsedProp(
                             (string) $cEvent->HomeTeamID . ' ' . (string) $cEvent->HomeSpread,
@@ -126,23 +177,25 @@ class XMLParserSportBet
                     else
                     {
                         //Unhandled prop
-                        Logger::getInstance()->log("Unhandled prop: " . (string) $cEvent->HomeTeamID . " / " . (string) $cEvent->VisitorTeamID . ", check parser", -1);
+                        $this->logger->warning("Unhandled prop: " . (string) $cEvent->HomeTeamID . " / " . (string) $cEvent->VisitorTeamID . ", check parser");
                     }
 
                     $oParsedProp = null;
+                    
                 }
                 //Entry is a regular matchup, add as one
                 else
                 {
-                   if ((trim((string) $cEvent->HomeMoneyLine) != '')
+                    if ((trim((string) $cEvent->HomeMoneyLine) != '')
                     && (trim((string) $cEvent->VisitorMoneyLine) != ''))
-                        {
+                    {
                         $oParsedMatchup = new ParsedMatchup(
                                         (string) $cEvent->HomeTeamID,
                                         (string) $cEvent->VisitorTeamID,
                                         (string) $cEvent->HomeMoneyLine,
                                         (string) $cEvent->VisitorMoneyLine
                         );
+
                         //Add correlation ID to match matchups to props
                         $oParsedMatchup->setCorrelationID((string) $cEvent->CorrelationId);
 
@@ -158,7 +211,7 @@ class XMLParserSportBet
                         {
                             $oParsedMatchup->setMetaData('event_name', (string) $cEvent->Header);
                         }
-
+                        
                         $oParsedSport->addParsedMatchup($oParsedMatchup);
                     }
 
@@ -167,10 +220,10 @@ class XMLParserSportBet
                     {
                         //Total exists, add it
                         $oParsedProp = new ParsedProp(
-                                                        (string) $cEvent->HomeTeamID . ' vs ' . (string) $cEvent->VisitorTeamID . ' - OVER ' . (string) $cEvent->TotalPoints,
-                                                        (string) $cEvent->HomeTeamID . ' vs ' . (string) $cEvent->VisitorTeamID . ' - UNDER ' . (string) $cEvent->TotalPoints,
-                                                        (string) $cEvent->TotalPointsOverPrice,
-                                                        (string) $cEvent->TotalPointsUnderPrice);
+                                        (string) $cEvent->HomeTeamID . ' vs ' . (string) $cEvent->VisitorTeamID . ' - OVER ' . (string) $cEvent->TotalPoints,
+                                        (string) $cEvent->HomeTeamID . ' vs ' . (string) $cEvent->VisitorTeamID . ' - UNDER ' . (string) $cEvent->TotalPoints,
+                                        (string) $cEvent->TotalPointsOverPrice,
+                                        (string) $cEvent->TotalPointsUnderPrice);
                         $oParsedProp->setCorrelationID((string) $cEvent->CorrelationId);
                         
                         $oParsedSport->addFetchedProp($oParsedProp);
@@ -180,47 +233,35 @@ class XMLParserSportBet
         }
 
         //Declare authorative run if we fill the criteria
-        if (count($oParsedSport->getParsedMatchups()) > 10 && $oParsedSport->getPropCount() > 10)
+        if (count($oParsedSport->getParsedMatchups()) > 10 && $oParsedSport->getPropCount() > 10 && $this->change_num == -1)
         {
-            $this->bAuthorativeRun = true;
-            Logger::getInstance()->log("Declared authoritive run (but only valid if changenum is reset)", 0);
+            $this->full_run = true;
+            $this->logger->info("Declared authoritive run");
         }
 
-        $aSports[] = $oParsedSport;
-
         //Before finishing up, save the changenum to be able to fetch future feeds
-        $sCN = trim((string) $oXML->NewDataSet->LastChange->ChangeNum);
-        if ($sCN != '-1' && $sCN != null && $sCN != '')
+        $new_changenum = trim((string) $oXML->NewDataSet->LastChange->ChangeNum);
+        if ($new_changenum != '-1' && $new_changenum != null && $new_changenum != '')
         {
-            //Store the changenum - WARNING, bookie_id is hardcoded here, should be fixed..
-            $sCN = ((float) $sCN) - 1000;
-            if (BookieHandler::saveChangeNum(2, $sCN))
+            //Store the changenum
+            $new_changenum = ((float) $new_changenum) - 1000;
+            if (BookieHandler::saveChangeNum(BOOKIE_ID, $new_changenum))
             {
-                Logger::getInstance()->log("ChangeNum stored OK: " . $sCN, 0);
+                $this->logger->info("ChangeNum stored OK: " . $new_changenum);
             }
             else
             {
-                Logger::getInstance()->log("Error: ChangeNum was not stored", -2);
+                $this->logger->error("Error: ChangeNum was not stored");
             }
         }
         else
         {
-            Logger::getInstance()->log("Error: Bad ChangeNum in feed. Message: " . $oXML->Error->ErrorMessage, -2);
+            $this->logger->error("Error: Bad ChangeNum in feed. Message: " . $oXML->Error->ErrorMessage);
         }
 
-        return $aSports;
-    }
+        return $oParsedSport;
 
-    public function checkAuthoritiveRun($a_aMetadata)
-    {
-        //Only report as an authoritive run if changenum has been reset. This in combination with the number of parsed matchups declares
-        if (isset($a_aMetadata['changenum']) && $a_aMetadata['changenum'] == -1)
-        {
-            return $this->bAuthorativeRun;
-        }
-        return false;
     }
-
 }
-?>
 
+?>

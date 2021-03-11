@@ -53,8 +53,8 @@ class OddsProcessor
 
         //Pending: For Create mode, create new matchups if no match was found
 
-        $this->logUnmatchedMatchups($matched_matchups);
-        $pp->logUnmatchedProps($matched_props);
+        $matchup_unmatched_count = $this->logUnmatchedMatchups($matched_matchups);
+        $prop_unmatched_count = $pp->logUnmatchedProps($matched_props);
 
         $this->updateMatchedMatchups($matched_matchups);
         $pp->updateMatchedProps($matched_props);
@@ -66,14 +66,14 @@ class OddsProcessor
             $this->flagEventPropOddsForDeletion($matched_props);
         }
 
-        $this->logger->info('Result - Matchups: ' . count($matched_matchups) . '/' . count($parsed_sport->getParsedMatchups()) . ' Props: ' . count($matched_props) . '/' . count($parsed_sport->getFetchedProps()) . ' Full run: ' . ($full_run ? 'Yes' : 'No'));
+        $this->logger->info('Result - Matchups: ' . (count($matched_matchups) - $matchup_unmatched_count) . '/' . count($parsed_sport->getParsedMatchups()) . ' Props: ' . (count($matched_props) - $prop_unmatched_count) . '/' . count($parsed_sport->getFetchedProps()) . ' Full run: ' . ($full_run ? 'Yes' : 'No'));
 
         $oParseRunLogger = new ParseRunLogger();
         $oParseRunLogger->logRun(-1, ['bookie_id' => $this->bookie_id,
         'parsed_matchups' => count($parsed_sport->getParsedMatchups()),
         'parsed_props' => count($parsed_sport->getFetchedProps()),
-        'matched_matchups' => count($matched_matchups),
-        'matched_props' => count($matched_props),
+        'matched_matchups' => (count($matched_matchups) - $matchup_unmatched_count),
+        'matched_props' => (count($matched_props) - $prop_unmatched_count),
         'status' => 1]);
     }
 
@@ -448,13 +448,16 @@ class OddsProcessor
 
     private function logUnmatchedMatchups($matched_matchups)
     {
+        $counter = 0;
         foreach ($matched_matchups as $matchup)
         {
             if ($matchup['match_result']['status'] == false)
             {
+                $counter++;
                 EventHandler::logUnmatched($matchup['parsed_matchup']->toString(), $this->bookie_id, 0, $matchup['parsed_matchup']->getAllMetaData());
             }
         }
+        return $counter;
     }
 
 }
