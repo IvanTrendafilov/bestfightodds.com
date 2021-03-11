@@ -11,7 +11,7 @@ document.addEventListener("DOMContentLoaded", function(event) {
                 'Content-type': 'application/json; charset=UTF-8'
             },
             body: JSON.stringify({
-                bookie_id: e.target.dataset.bookieid
+                bookie_id: parseInt(e.target.dataset.bookieid)
             })
         };
         fetch('/cnadm/api/resetchangenums', opts).then(function (response) {
