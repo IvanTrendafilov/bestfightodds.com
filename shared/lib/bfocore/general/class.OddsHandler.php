@@ -7,7 +7,8 @@ class OddsHandler
 {
     public static function addPropBet($a_oPropBet)
     {
-        if ($a_oPropBet->getPropOdds() == '' || $a_oPropBet->getNegPropOdds() == '')
+        if ($a_oPropBet->getPropOdds() == '' || $a_oPropBet->getNegPropOdds() == ''
+        || (intval($a_oPropBet->getPropOdds()) > 0 && intval($a_oPropBet->getNegPropOdds()) > 0)) //Ignore odds that are positive on both ends (should indicate an incorrect line)
         {
             return false;
         }
