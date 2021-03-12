@@ -129,31 +129,41 @@ class ParserJob
                         //Ordered props. These props are typically ordered as positive, negative, positive, negative, etc. Or over, under
                         for ($i = 0; $i < count($cMarket->Outcomes->Outcome); $i += 2)
                         {
-                            //Add handicap figure if available
-                            $handicap = '';
-                            if ((float) $cMarket['handicap'] != 0)
+                            $node1 = $cMarket->Outcomes->xpath('Outcome[@index="' .  ($i + 1) . '"]');
+                            $node2 = $cMarket->Outcomes->xpath('Outcome[@index="' .  ($i + 2) . '"]');
+
+                            if (!$node1 || !$node2)
                             {
-                                $handicap = ' ' . ((float) $cMarket['handicap']);
+                                $this->logger->warning('Unable to fetch outcome for prop, using index ' . ($i + 1) . ' or ' . ($i + 2) . ': ' . var_export($cMarket->Outcomes, true));
                             }
-
-                            $oParsedProp = new ParsedProp(
-                                (string) $cEvent->Names->Name . ' :: ' . (string) $cMarket->Names->Name . ' : ' . (string) $cMarket->Outcomes->Outcome[$i]->Names->Name . $handicap,
-                                (string) $cEvent->Names->Name . ' :: ' . (string) $cMarket->Names->Name . ' : ' . (string) $cMarket->Outcomes->Outcome[$i + 1]->Names->Name . $handicap,
-                                OddsTools::convertDecimalToMoneyline((float) $cMarket->Outcomes->Outcome[$i]['price_dec']),
-                                OddsTools::convertDecimalToMoneyline((float) $cMarket->Outcomes->Outcome[$i + 1]['price_dec']));
-
-                            //Add correlation
-                            $oParsedProp->setCorrelationID((string) $cEvent['id']);
-
-                            //Add metadata
-                            $oGameDate = new DateTime((string) $cEvent['start_at']);
-                            $oParsedProp->setMetaData('gametime', $oGameDate->getTimestamp());
-                            if ($event_name != '')
+                            else
                             {
-                                $oParsedProp->setMetaData('event_name', $event_name);
-                            }
+                                //Add handicap figure if available
+                                $handicap = '';
+                                if ((float) $cMarket['handicap'] != 0)
+                                {
+                                    $handicap = ' ' . ((float) $cMarket['handicap']);
+                                }
 
-                            $oParsedSport->addFetchedProp($oParsedProp);
+                                $oParsedProp = new ParsedProp(
+                                    (string) $cEvent->Names->Name . ' :: ' . (string) $cMarket->Names->Name . ' : ' . (string) $node1[0]->Names->Name . $handicap,
+                                    (string) $cEvent->Names->Name . ' :: ' . (string) $cMarket->Names->Name . ' : ' . (string) $node2[0]->Names->Name . $handicap,
+                                    OddsTools::convertDecimalToMoneyline((float) $node1[0]['price_dec']),
+                                    OddsTools::convertDecimalToMoneyline((float) $node2[0]['price_dec']));
+
+                                //Add correlation
+                                $oParsedProp->setCorrelationID((string) $cEvent['id']);
+
+                                //Add metadata
+                                $oGameDate = new DateTime((string) $cEvent['start_at']);
+                                $oParsedProp->setMetaData('gametime', $oGameDate->getTimestamp());
+                                if ($event_name != '')
+                                {
+                                    $oParsedProp->setMetaData('event_name', $event_name);
+                                }
+
+                                $oParsedSport->addFetchedProp($oParsedProp);
+                            }
                         }
                     }
                     else  if ((string) $cMarket['cname'] == 'round-betting' ||
@@ -210,6 +220,15 @@ class ParserJob
         }
 
         return $oParsedSport;
+    }
+
+    private function sortOutcomes($outcomes)
+    {
+        foreach ($outcomes as $outcome)
+        {
+            var_dump($outcome);
+        }
+        exit;
     }
 }
 
