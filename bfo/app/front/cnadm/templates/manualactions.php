@@ -78,14 +78,14 @@ Manual actions: <a href="#" onclick="$('input[onclick^=\'maAdd\']').click();" >A
 
 			<?php elseif ($action['type'] == 8): //Move matchup to a non-existant event ?>
 
-				<td>Move the following matchups</td>
+				<td>Move the following matchups:<br>
+					<?php foreach ($action['view_extra']['matchups'] as $key => $matchup): ?>
+						&nbsp;<?=$matchup->getTeamAsString(1)?> vs. <?=$matchup->getTeamAsString(2)?><br>
+					<?php endforeach ?>
+				</td>
 				<td> to </td>
-				<td><?=$action['view_extra']['new_event'] != null ? $action['view_extra']['new_event']->getName() : 'TBD'?><br>
-				<?php foreach ($action['view_extra']['matchups'] as $key => $matchup): ?>
-					&nbsp;<?=$matchup->getTeamAsString(1)?> vs. <?=$matchup->getTeamAsString(2)?>
-					</td>
-					<td><input type="submit" value="Accept" ' .  <?=$action['view_extra']['new_event'] == null ? ' disabled=true ' : ''?> onclick="maMoveMatchup(<?=$action['id']?>, '<?=htmlspecialchars($action['view_extra']['newma'][$key])?>')"><br>
-				<?php endforeach ?>
+				<td><?=$action['view_extra']['new_event'] != null ? $action['view_extra']['new_event']->getName() : 'TBD'?></td>
+				<td><input type="submit" value="Accept" ' .  <?=$action['view_extra']['new_event'] == null ? ' disabled=true ' : ''?> onclick="maMoveMatchup(<?=$action['id']?>, '<?=htmlspecialchars($action['view_extra']['newma'][$key])?>')"><br>
 
 			<?php else: ?>
 
