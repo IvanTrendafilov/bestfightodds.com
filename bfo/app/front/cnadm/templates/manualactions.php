@@ -76,7 +76,7 @@ Manual actions: <a href="#" onclick="$('input[onclick^=\'maAdd\']').click();" >A
 				<td><?=$action['view_extra']['old_event']->getName()?> (<?=$action['view_extra']['old_event']->getDate()?>)</td>
 				<td><input type="submit" value="Accept" onclick="maDeleteMatchup(<?=$action['id']?>, '<?=htmlspecialchars($action['description'])?>')">
 
-			<?php elseif ($action['type'] == 7): //Move matchup to a non-existant event ?>
+			<?php elseif ($action['type'] == 8): //Move matchup to a non-existant event ?>
 
 				<td>Move the following matchups</td>
 				<td> to </td>
