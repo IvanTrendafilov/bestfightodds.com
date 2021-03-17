@@ -38,7 +38,9 @@ class AdminController
     public function login(Request $request, Response $response)
     {
         $input = $request->getParsedBody();
-        if (isset($input['pwd']) && $input['pwd'] == GENERAL_CNADM)
+        if (isset($input['nm']) && $input['nm'] == GENERAL_CNADM_LOGIN
+            && isset($input['pwd']) && $input['pwd'] == GENERAL_CNADM_PWD)
+            
         {
             $_SESSION['authenticated'] = true;
             return $response->withHeader('Location', '/cnadm/')->withStatus(302);
