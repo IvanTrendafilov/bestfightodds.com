@@ -32,8 +32,8 @@ $app->add(SessionMiddleware::class);
 $app->setBasePath('/cnadm');
 
 //Login/logout
-$app->get('/login', \AdminController::class . ':loginPage');
-$app->post('/login', \AdminController::class . ':login');
+$app->get('/lin', \AdminController::class . ':loginPage');
+$app->post('/lin', \AdminController::class . ':login');
 $app->get('/logout', \AdminController::class . ':logout');
 
 //Page routes

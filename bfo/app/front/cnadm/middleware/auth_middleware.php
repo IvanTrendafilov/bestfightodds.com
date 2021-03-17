@@ -18,7 +18,7 @@ class AuthMiddleware
         $response = $handler->handle($request);
         if ($_SESSION['authenticated'] != true)
         {
-            return $response->withHeader('Location', '/cnadm/login')->withStatus(302);
+            return $response->withHeader('Location', '/cnadm/lin')->withStatus(302);
         }
         return $response;
     }

@@ -43,7 +43,7 @@ class AdminController
             $_SESSION['authenticated'] = true;
             return $response->withHeader('Location', '/cnadm/')->withStatus(302);
         }
-        return $response->withHeader('Location', '/cnadm/login')->withStatus(302);
+        return $response->withHeader('Location', '/cnadm/lin')->withStatus(302);
     }
     
     public function logout(Request $request, Response $response)
@@ -51,7 +51,7 @@ class AdminController
         $_SESSION['authenticated'] = false;
         unset($_SESSION['authenticated']);
         session_destroy();
-        return $response->withHeader('Location', '/cnadm/login')->withStatus(302);
+        return $response->withHeader('Location', '/cnadm/lin')->withStatus(302);
     }
 
     public function home(Request $request, Response $response)
