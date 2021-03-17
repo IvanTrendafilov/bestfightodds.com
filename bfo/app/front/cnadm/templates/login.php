@@ -1,0 +1,1 @@
+<form action="/cnadm/login" method="post"><input name="pwd" type="text"><input type="submit"></form>

@@ -29,6 +29,31 @@ class AdminController
         return $response;
     }
 
+    public function loginPage(Request $request, Response $response)
+    {
+        $response->getBody()->write($this->plates->render('login'));
+        return $response;
+    }
+
+    public function login(Request $request, Response $response)
+    {
+        $input = $request->getParsedBody();
+        if (isset($input['pwd']) && $input['pwd'] == GENERAL_CNADM)
+        {
+            $_SESSION['authenticated'] = true;
+            return $response->withHeader('Location', '/cnadm/')->withStatus(302);
+        }
+        return $response->withHeader('Location', '/cnadm/login')->withStatus(302);
+    }
+    
+    public function logout(Request $request, Response $response)
+    {
+        $_SESSION['authenticated'] = false;
+        unset($_SESSION['authenticated']);
+        session_destroy();
+        return $response->withHeader('Location', '/cnadm/login')->withStatus(302);
+    }
+
     public function home(Request $request, Response $response)
     {
         $view_data = [];
@@ -42,6 +67,7 @@ class AdminController
         //Get unmatched data
         $unmatched_col = EventHandler::getUnmatched(1500);
         $unmatched_groups = [];
+        $unmatched_matchup_groups = [];
         foreach ($unmatched_col as $key => $unmatched)
         {
             $split = explode(' vs ', $unmatched['matchup']);
@@ -67,12 +93,26 @@ class AdminController
             if ($unmatched['type'] == 0)
             {
                 $unmatched_groups[($unmatched_col[$key]['view_extras']['event_name_reduced'] ?? '') . ':' . ($unmatched_col[$key]['view_extras']['event_date_formatted'] ?? '')][] = $unmatched_col[$key];
+
+                /*//Add to matchup group
+                if (!isset($unmatched_matchup_groups[$unmatched['matchup']]['bookies']))
+                {
+                    $unmatched_matchup_groups[$unmatched['matchup']]['bookies'] = [];
+                }
+                if (!isset($unmatched_matchup_groups[$unmatched['matchup']]['events']))
+                {
+                    $unmatched_matchup_groups[$unmatched['matchup']]['events'] = [];
+                }
+
+                $unmatched_matchup_groups[$unmatched['matchup']]['bookies'][] = $unmatched['bookie_id'];
+                $unmatched_matchup_groups[$unmatched['matchup']]['events'][] = $unmatched_col[$key]['view_extras']['event_name_reduced'] ?? '' . ':' . $unmatched_col[$key]['view_extras']['event_date_formatted'] ?? '';*/
             }
             
         }
 
         $view_data['unmatched'] = $unmatched_col;
         $view_data['unmatched_groups'] = $unmatched_groups;
+        $view_data['unmatched_matchup_groups'] = $unmatched_matchup_groups;
         
         $bookies = BookieHandler::getAllBookies();
         $view_data['bookies'] = [];

@@ -3,6 +3,8 @@
 use DI\Container;
 use DI\ContainerBuilder;
 use Slim\Factory\AppFactory;
+use Slim\Routing\RouteCollectorProxy;
+use Slim\Middleware\SessionCookie;
 use Psr\Http\Message\ResponseInterface as Response;
 use Psr\Http\Message\ServerRequestInterface as Request;
 use League\Plates\Engine;
@@ -10,6 +12,8 @@ use League\Plates\Engine;
 require 'vendor/autoload.php';
 require 'controllers/admin_controller.php';
 require 'controllers/admin_api_controller.php';
+require 'middleware/auth_middleware.php';
+require 'middleware/session_middleware.php';
 
 $container = (new \DI\ContainerBuilder())
   ->useAutowiring(true)
@@ -23,44 +27,55 @@ $container = (new \DI\ContainerBuilder())
 AppFactory::setContainer($container);
 $app = AppFactory::create();
 
+$app->add(SessionMiddleware::class);
+
 $app->setBasePath('/cnadm');
 
+//Login/logout
+$app->get('/login', \AdminController::class . ':loginPage');
+$app->post('/login', \AdminController::class . ':login');
+$app->get('/logout', \AdminController::class . ':logout');
+
 //Page routes
-$app->get('[/]', \AdminController::class . ':home');
-$app->get('/manualactions', \AdminController::class . ':viewManualActions');
-$app->get('/newmatchup', \AdminController::class . ':createMatchup');
-$app->get('/events[/{show}]', \AdminController::class . ':eventsOverview');
-$app->get('/fighters/{id}', \AdminController::class . ':viewFighter');
-$app->get('/addOddsManually', \AdminController::class . ':addOddsManually');
-$app->get('/clearOddsForMatchupAndBookie', \AdminController::class . ':clearOddsForMatchupAndBookie');
-$app->get('/proptemplate', \AdminController::class . ':addNewPropTemplate');
-$app->get('/proptemplates', \AdminController::class . ':viewPropTemplates');
-$app->get('/resetchangenums', \AdminController::class . ':resetChangeNums');
-$app->get('/testMail', \AdminController::class . ':testMail');
-$app->get('/logs[/{logfile}]', \AdminController::class . ':viewLatestLog');
-$app->get('/parserlogs[/{bookie_name}]', \AdminController::class . ':viewParserLogs');
-$app->get('/alerts', \AdminController::class . ':viewAlerts');
-$app->get('/matchups/{id}', \AdminController::class . ':viewMatchup');
-$app->get('/propcorrelation', \AdminController::class . ':createPropCorrelation');
-$app->get('/odds', \AdminController::class . ':oddsOverview');
+$app->group('', function (RouteCollectorProxy $group) {
+  $group->get('[/]', \AdminController::class . ':home');
+  $group->get('/manualactions', \AdminController::class . ':viewManualActions');
+  $group->get('/newmatchup', \AdminController::class . ':createMatchup');
+  $group->get('/events[/{show}]', \AdminController::class . ':eventsOverview');
+  $group->get('/fighters/{id}', \AdminController::class . ':viewFighter');
+  $group->get('/addOddsManually', \AdminController::class . ':addOddsManually');
+  $group->get('/clearOddsForMatchupAndBookie', \AdminController::class . ':clearOddsForMatchupAndBookie');
+  $group->get('/proptemplate', \AdminController::class . ':addNewPropTemplate');
+  $group->get('/proptemplates', \AdminController::class . ':viewPropTemplates');
+  $group->get('/resetchangenums', \AdminController::class . ':resetChangeNums');
+  $group->get('/testMail', \AdminController::class . ':testMail');
+  $group->get('/logs[/{logfile}]', \AdminController::class . ':viewLatestLog');
+  $group->get('/parserlogs[/{bookie_name}]', \AdminController::class . ':viewParserLogs');
+  $group->get('/alerts', \AdminController::class . ':viewAlerts');
+  $group->get('/matchups/{id}', \AdminController::class . ':viewMatchup');
+  $group->get('/propcorrelation', \AdminController::class . ':createPropCorrelation');
+  $group->get('/odds', \AdminController::class . ':oddsOverview');
+})->add(new AuthMiddleware());
 
 //API Routes
-$app->post('/api/matchups', \AdminAPIController::class . ':createMatchup');
-$app->put('/api/matchups/{id}', \AdminAPIController::class . ':updateMatchup');
-$app->delete('/api/matchups/{id}', \AdminAPIController::class . ':deleteMatchup');
+$app->group('/api', function (RouteCollectorProxy $group) {
+  
+  $group->post('/matchups', \AdminAPIController::class . ':createMatchup');
+  $group->put('/matchups/{id}', \AdminAPIController::class . ':updateMatchup');
+  $group->delete('/matchups/{id}', \AdminAPIController::class . ':deleteMatchup');
 
-$app->post('/api/events', \AdminAPIController::class . ':createEvent');
-$app->put('/api/events/{id}', \AdminAPIController::class . ':updateEvent');
-$app->delete('/api/events/{id}', \AdminAPIController::class . ':deleteEvent');
+  $group->post('/events', \AdminAPIController::class . ':createEvent');
+  $group->put('/events/{id}', \AdminAPIController::class . ':updateEvent');
+  $group->delete('/events/{id}', \AdminAPIController::class . ':deleteEvent');
 
-$app->put('/api/fighters/{id}', \AdminAPIController::class . ':updateFighter');
+  $group->put('/fighters/{id}', \AdminAPIController::class . ':updateFighter');
 
-$app->post('/api/resetchangenums', \AdminAPIController::class . ':resetChangeNum');
-$app->post('/api/clearunmatched', \AdminAPIController::class . ':clearUnmatched');
-$app->post('/api/proptemplates', \AdminAPIController::class . ':createPropTemplate');
-$app->post('/api/propcorrelation', \AdminAPIController::class . ':createPropCorrelation');
-$app->delete('/api/manualactions/{id}', \AdminAPIController::class . ':deleteManualAction');
+  $group->post('/resetchangenums', \AdminAPIController::class . ':resetChangeNum');
+  $group->post('/clearunmatched', \AdminAPIController::class . ':clearUnmatched');
+  $group->post('/proptemplates', \AdminAPIController::class . ':createPropTemplate');
+  $group->post('/propcorrelation', \AdminAPIController::class . ':createPropCorrelation');
+  $group->delete('/manualactions/{id}', \AdminAPIController::class . ':deleteManualAction');
 
-$app->delete('/api/odds', \AdminAPIController::class . ':deleteOdds');
-
+  $group->delete('/odds', \AdminAPIController::class . ':deleteOdds');
+});
 $app->run();

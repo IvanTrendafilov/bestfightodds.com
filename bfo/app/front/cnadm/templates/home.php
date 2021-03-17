@@ -41,4 +41,4 @@ document.addEventListener("DOMContentLoaded", function(event) {
 
 <br>
 
-<?php $this->insert('partials/unmatched', ['bookies' => $bookies, 'unmatched_groups' => $unmatched_groups, 'unmatched' => $unmatched]) ?>
+<?php $this->insert('partials/unmatched', ['bookies' => $bookies, 'unmatched_matchup_groups' => $unmatched_matchup_groups, 'unmatched_groups' => $unmatched_groups, 'unmatched' => $unmatched]) ?>

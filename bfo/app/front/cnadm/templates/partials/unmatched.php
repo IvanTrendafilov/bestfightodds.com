@@ -117,6 +117,28 @@ myNameSpace = function(){
 
 <b>Matchups:</b> <br />
 
+
+<table class="genericTable">
+
+    <tr>
+        <td>Event</td>
+        <td>Matchup</td>
+        <td>Bookies</td>
+    </tr>
+    <?php foreach ($unmatched_matchup_groups as $key => $matchup_group): ?>
+    <tr>
+    <td></td>
+        <td><?=$key?></td>
+        <td>
+        <?php foreach ($matchup_group['bookies'] as $bookie): ?>
+            <?=$bookies[$bookie]?><br>
+        <?php endforeach ?>
+        </td>
+    </tr>
+    <?php endforeach ?>
+
+</table><br />
+
 <table class="genericTable">
 
 <?php foreach ($unmatched_groups as $unmatched_group): ?>
