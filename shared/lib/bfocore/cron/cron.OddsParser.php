@@ -10,7 +10,6 @@
  * - Generates a new fighter list for browsing purposes
  * - Tweet new fight odds
  *
- * @author Christian Nordvaller
  */
 require_once('config/inc.config.php');
 

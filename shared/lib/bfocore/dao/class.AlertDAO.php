@@ -165,6 +165,11 @@ class AlertDAO
 
     public static function getReachedAlerts()
     {
+
+        //New approach:
+        // This query gives all alerts where FO exist. Needs to be updated to check also if condition is met:
+        // select * from alerts a left join (select fight_id, bookie_id, MAX(date) AS maxdate from fightodds group by bookie_id) fo on a.fight_id = fo.fight_id where fo.maxdate is not null;
+        
         $aReachedAlerts = array();
 
         $aAlerts = AlertDAO::getAllAlerts();
