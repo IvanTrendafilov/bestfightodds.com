@@ -7,7 +7,6 @@
 <script src="/cnadm/js/jquery.autocomplete.min.js" language="JavaScript" type="text/javascript"></script>
 <script src="/cnadm/js/admin-main.js" language="JavaScript" type="text/javascript"></script>
 <script src="/cnadm/js/admin.js" language="JavaScript" type="text/javascript"></script>
-<link rel="stylesheet" type="text/css" href="/cnadm/css/tailwind.min.css" />
 <link rel="stylesheet" type="text/css" href="/cnadm/css/stylesheets.php" />
 </head>
 <body>
