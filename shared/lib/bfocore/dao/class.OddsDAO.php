@@ -1126,13 +1126,17 @@ class OddsDAO
 
     public static function removeAllOldFlagged()
     {
-        //TODO:
-        /*$query = 'SELECT lf.* 
-                    FROM lines_flagged lf 
+        $query = 'DELETE lf FROM lines_flagged lf 
                         LEFT JOIN fights f ON lf.matchup_id = f.id 
                         LEFT JOIN events e ON f.event_id = e.id 
-                    WHERE LEFT(e.date, 10) < LEFT((NOW() - INTERVAL ' . GENERAL_GRACEPERIOD_SHOW . ' HOUR), 10)';*/
-        return false;
+                    WHERE LEFT(e.date, 10) < LEFT((NOW() - INTERVAL ' . GENERAL_GRACEPERIOD_SHOW . ' HOUR), 10)';
+        $result = null;
+        try {
+            $result = PDOTools::delete($query, []);
+        } catch (PDOException $e) {
+            throw new Exception("Unknown error " . $e->getMessage(), 10);
+        }
+        return $result;
     }
 
     public static function getAllFlaggedMatchups()

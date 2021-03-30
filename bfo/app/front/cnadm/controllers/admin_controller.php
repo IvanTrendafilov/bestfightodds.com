@@ -480,22 +480,32 @@ class AdminController
     public function viewFlaggedOdds(Request $request, Response $response)
     {
         $flagged = OddsHandler::getAllFlaggedMatchups();
+
         //Group into matchup groups
         $matchup_groups = [];
         foreach ($flagged as $flagged_row) {
             $key = $flagged_row['fight_obj']->getTeamAsString(1) . ' / ' . $flagged_row['fight_obj']->getTeamAsString(2);
             if (!isset($matchup_groups[$key])) {
+
+                $first_date = date_create($flagged_row['initial_flagdate']);
+                $last_date = date_create($flagged_row['last_flagdate']);
+
+                $date_diff = date_diff($first_date, $last_date);
+                $hours_diff = $date_diff->days * 24 + $date_diff->h;
+
                 $matchup_groups[$key] = [
                     'fight_obj' => $flagged_row['fight_obj'],
                     'event_obj' => $flagged_row['event_obj'],
                     'bookies' => [$flagged_row['bookie_id']],
                     'initial_flagdate' => $flagged_row['initial_flagdate'],
-                    'last_flagdate' => $flagged_row['last_flagdate']
+                    'last_flagdate' => $flagged_row['last_flagdate'],
+                    'hours_diff' => $hours_diff
                 ];
             } else {
                 $matchup_groups[$key]['bookies'][] = $flagged_row['bookie_id'];
             }
         }
+
         $view_data['flagged'] = $matchup_groups;
         $response->getBody()->write($this->plates->render('flagged_odds', $view_data));
         return $response;

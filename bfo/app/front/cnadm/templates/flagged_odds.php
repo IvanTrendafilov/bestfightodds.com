@@ -21,6 +21,7 @@
             </td>
             <td><?=$flagged_item['initial_flagdate']?></td>
             <td><?=$flagged_item['last_flagdate']?></td>
+            <td><?=$flagged_item['hours_diff']?></td>
         </tr>
     <?php endforeach ?>
 </table>
