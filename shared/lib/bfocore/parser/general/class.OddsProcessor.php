@@ -190,6 +190,7 @@ class OddsProcessor
             $odds = EventHandler::getLatestOddsForFightAndBookie($upcoming_matchup->getID(), $this->bookie_id);
             if ($odds != null)
             {
+                $this->logger->debug('Bookie has odds for ' . $upcoming_matchup->getTeamAsString(1) . ' vs ' . $upcoming_matchup->getTeamAsString(2) . '. Checking if this should be flagged for deletion');
                 $found = false;
                 foreach ($matched_matchups as $matched_matchup)
                 {
