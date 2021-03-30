@@ -18,10 +18,10 @@ require 'middleware/session_middleware.php';
 $container = (new \DI\ContainerBuilder())
   ->useAutowiring(true)
   ->addDefinitions([
-    \League\Plates\Engine::class => function(){
-        return new League\Plates\Engine(__DIR__ . '/templates/');
+    \League\Plates\Engine::class => function () {
+      return new League\Plates\Engine(__DIR__ . '/templates/');
     }
-])
+  ])
   ->build();
 
 AppFactory::setContainer($container);
@@ -55,11 +55,12 @@ $app->group('', function (RouteCollectorProxy $group) {
   $group->get('/matchups/{id}', \AdminController::class . ':viewMatchup');
   $group->get('/propcorrelation', \AdminController::class . ':createPropCorrelation');
   $group->get('/odds', \AdminController::class . ':oddsOverview');
+  $group->get('/flagged', \AdminController::class . ':viewFlaggedOdds');
 })->add(new AuthMiddleware());
 
 //API Routes
 $app->group('/api', function (RouteCollectorProxy $group) {
-  
+
   $group->post('/matchups', \AdminAPIController::class . ':createMatchup');
   $group->put('/matchups/{id}', \AdminAPIController::class . ':updateMatchup');
   $group->delete('/matchups/{id}', \AdminAPIController::class . ':deleteMatchup');

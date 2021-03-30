@@ -11,26 +11,22 @@ class OddsDAO
         $sQuery = 'INSERT IGNORE INTO lines_props(matchup_id, bookie_id, prop_odds, negprop_odds, proptype_id, date, team_num)
                     VALUES(?, ?, ?, ?, ?, NOW(), ?)';
 
-        $aParams = array($a_oPropBet->getMatchupID(),
+        $aParams = array(
+            $a_oPropBet->getMatchupID(),
             $a_oPropBet->getBookieID(),
             $a_oPropBet->getPropOdds(),
             $a_oPropBet->getNegPropOdds(),
             $a_oPropBet->getPropTypeID(),
-            $a_oPropBet->getTeamNumber());
+            $a_oPropBet->getTeamNumber()
+        );
 
-        try 
-        {
+        try {
             $id = PDOTools::insert($sQuery, $aParams);
-        }
-        catch(PDOException $e)
-        {
-            if($e->getCode() == 23000)
-            {
-                throw new Exception("Duplicate entry", 10);	
-            }
-            else
-            {
-                throw new Exception("Unknown error " . $e->getMessage(), 10);	
+        } catch (PDOException $e) {
+            if ($e->getCode() == 23000) {
+                throw new Exception("Duplicate entry", 10);
+            } else {
+                throw new Exception("Unknown error " . $e->getMessage(), 10);
             }
             return false;
         }
@@ -42,25 +38,21 @@ class OddsDAO
         $sQuery = 'INSERT IGNORE INTO lines_eventprops(event_id, bookie_id, prop_odds, negprop_odds, proptype_id, date)
                     VALUES(?, ?, ?, ?, ?, NOW())';
 
-        $aParams = array($a_oEventPropBet->getEventID(),
+        $aParams = array(
+            $a_oEventPropBet->getEventID(),
             $a_oEventPropBet->getBookieID(),
             $a_oEventPropBet->getPropOdds(),
             $a_oEventPropBet->getNegPropOdds(),
-            $a_oEventPropBet->getPropTypeID());
+            $a_oEventPropBet->getPropTypeID()
+        );
 
-        try 
-        {
+        try {
             $id = PDOTools::insert($sQuery, $aParams);
-        }
-        catch(PDOException $e)
-        {
-            if($e->getCode() == 23000)
-            {
-                throw new Exception("Duplicate entry", 10);	
-            }
-            else
-            {
-                throw new Exception("Unknown error " . $e->getMessage(), 10);	
+        } catch (PDOException $e) {
+            if ($e->getCode() == 23000) {
+                throw new Exception("Duplicate entry", 10);
+            } else {
+                throw new Exception("Unknown error " . $e->getMessage(), 10);
             }
             return false;
         }
@@ -79,17 +71,18 @@ class OddsDAO
         $rResult = DBTools::doParamQuery($sQuery, $aParams);
 
         $aProps = array();
-        while ($aRow = mysqli_fetch_array($rResult))
-        {
-            $aProps[] = new PropBet($a_iMatchupID,
-                            $aRow['bookie_id'],
-                            $aRow['prop_desc'],
-                            $aRow['prop_odds'],
-                            $aRow['negprop_desc'],
-                            $aRow['negprop_odds'],
-                            $aRow['proptype_id'],
-                            $aRow['date'],
-                            $aRow['team_num']);
+        while ($aRow = mysqli_fetch_array($rResult)) {
+            $aProps[] = new PropBet(
+                $a_iMatchupID,
+                $aRow['bookie_id'],
+                $aRow['prop_desc'],
+                $aRow['prop_odds'],
+                $aRow['negprop_desc'],
+                $aRow['negprop_odds'],
+                $aRow['proptype_id'],
+                $aRow['date'],
+                $aRow['team_num']
+            );
         }
 
         return $aProps;
@@ -140,11 +133,12 @@ class OddsDAO
         $rResult = DBTools::doParamQuery($sQuery, [$a_iEventID]);
 
         $aPropTypes = array();
-        while ($aRow = mysqli_fetch_array($rResult))
-        {
-            $aPropTypes[] = new PropType($aRow['id'],
-                            $aRow['prop_desc'],
-                            $aRow['negprop_desc']);
+        while ($aRow = mysqli_fetch_array($rResult)) {
+            $aPropTypes[] = new PropType(
+                $aRow['id'],
+                $aRow['prop_desc'],
+                $aRow['negprop_desc']
+            );
         }
 
         return $aPropTypes;
@@ -160,11 +154,12 @@ class OddsDAO
         $rResult = DBTools::doQuery($sQuery);
 
         $aPropTypes = array();
-        while ($aRow = mysqli_fetch_array($rResult))
-        {
-            $oTempPT = new PropType($aRow['id'],
-                            $aRow['prop_desc'],
-                            $aRow['negprop_desc']);
+        while ($aRow = mysqli_fetch_array($rResult)) {
+            $oTempPT = new PropType(
+                $aRow['id'],
+                $aRow['prop_desc'],
+                $aRow['negprop_desc']
+            );
             $oTempPT->setEventProp($aRow['is_eventprop']);
             $aPropTypes[] = $oTempPT;
         }
@@ -181,17 +176,17 @@ class OddsDAO
         $rResult = DBTools::doParamQuery($sQuery, [$a_iID]);
 
         $aPropTypes = array();
-        while ($aRow = mysqli_fetch_array($rResult))
-        {
-            $oTempPT = new PropType($aRow['id'],
-                            $aRow['prop_desc'],
-                            $aRow['negprop_desc']);
+        while ($aRow = mysqli_fetch_array($rResult)) {
+            $oTempPT = new PropType(
+                $aRow['id'],
+                $aRow['prop_desc'],
+                $aRow['negprop_desc']
+            );
             $oTempPT->setEventProp($aRow['is_eventprop']);
             $aPropTypes[] = $oTempPT;
         }
 
-        if (sizeof($aPropTypes) > 0)
-        {
+        if (sizeof($aPropTypes) > 0) {
             return $aPropTypes[0];
         }
         return null;
@@ -220,12 +215,13 @@ class OddsDAO
         $rResult = DBTools::doParamQuery($sQuery, $aParams);
 
         $aPropTypes = array();
-        while ($aRow = mysqli_fetch_array($rResult))
-        {
-            $aPropTypes[] = new PropType($aRow['id'],
-                            $aRow['prop_desc'],
-                            $aRow['negprop_desc'],
-                            $aRow['team_num']);
+        while ($aRow = mysqli_fetch_array($rResult)) {
+            $aPropTypes[] = new PropType(
+                $aRow['id'],
+                $aRow['prop_desc'],
+                $aRow['negprop_desc'],
+                $aRow['team_num']
+            );
         }
 
         return $aPropTypes;
@@ -251,12 +247,13 @@ class OddsDAO
         $rResult = DBTools::doParamQuery($sQuery, $aParams);
 
         $aPropTypes = array();
-        while ($aRow = mysqli_fetch_array($rResult))
-        {
-            $aPropTypes[] = new PropType($aRow['id'],
-                            $aRow['prop_desc'],
-                            $aRow['negprop_desc'],
-                            0);
+        while ($aRow = mysqli_fetch_array($rResult)) {
+            $aPropTypes[] = new PropType(
+                $aRow['id'],
+                $aRow['prop_desc'],
+                $aRow['negprop_desc'],
+                0
+            );
         }
 
         return $aPropTypes;
@@ -267,8 +264,7 @@ class OddsDAO
     {
         $aParams = array($a_iMatchupID, $a_iBookieID, $a_iPropTypeID, $a_iTeamNum);
 
-        if (!is_integer($a_iOffset))
-        {
+        if (!is_integer($a_iOffset)) {
             return null;
         }
 
@@ -285,20 +281,20 @@ class OddsDAO
         $rResult = DBTools::doParamQuery($sQuery, $aParams);
 
         $aProps = array();
-        while ($aRow = mysqli_fetch_array($rResult))
-        {
-            $aProps[] = new PropBet($a_iMatchupID,
-                            $aRow['bookie_id'],
-                            $aRow['prop_desc'],
-                            $aRow['prop_odds'],
-                            $aRow['negprop_desc'],
-                            $aRow['negprop_odds'],
-                            $aRow['proptype_id'],
-                            $aRow['date'],
-                            $aRow['team_num']);
+        while ($aRow = mysqli_fetch_array($rResult)) {
+            $aProps[] = new PropBet(
+                $a_iMatchupID,
+                $aRow['bookie_id'],
+                $aRow['prop_desc'],
+                $aRow['prop_odds'],
+                $aRow['negprop_desc'],
+                $aRow['negprop_odds'],
+                $aRow['proptype_id'],
+                $aRow['date'],
+                $aRow['team_num']
+            );
         }
-        if (count($aProps) > 0)
-        {
+        if (count($aProps) > 0) {
             return $aProps[0];
         }
 
@@ -309,8 +305,7 @@ class OddsDAO
     {
         $aParams = array($a_iEventID, $a_iBookieID, $a_iPropTypeID);
 
-        if (!is_integer($a_iOffset))
-        {
+        if (!is_integer($a_iOffset)) {
             return null;
         }
 
@@ -326,19 +321,19 @@ class OddsDAO
         $rResult = DBTools::doParamQuery($sQuery, $aParams);
 
         $aProps = array();
-        while ($aRow = mysqli_fetch_array($rResult))
-        {
-            $aProps[] = new EventPropBet($a_iEventID,
-                            $aRow['bookie_id'],
-                            $aRow['prop_desc'],
-                            $aRow['prop_odds'],
-                            $aRow['negprop_desc'],
-                            $aRow['negprop_odds'],
-                            $aRow['proptype_id'],
-                            $aRow['date']);
+        while ($aRow = mysqli_fetch_array($rResult)) {
+            $aProps[] = new EventPropBet(
+                $a_iEventID,
+                $aRow['bookie_id'],
+                $aRow['prop_desc'],
+                $aRow['prop_odds'],
+                $aRow['negprop_desc'],
+                $aRow['negprop_odds'],
+                $aRow['proptype_id'],
+                $aRow['date']
+            );
         }
-        if (count($aProps) > 0)
-        {
+        if (count($aProps) > 0) {
             return $aProps[0];
         }
 
@@ -362,8 +357,8 @@ class OddsDAO
             AND co1.team_num = ?
               GROUP BY co1.matchup_id, co1.team_num, co1.proptype_id
               LIMIT 0,1;';
-        
-        
+
+
 
         $aParams = array($a_iMatchupID, $a_iPropTypeID, $a_iTeam, $a_iMatchupID, $a_iPropTypeID, $a_iTeam);
 
@@ -371,17 +366,18 @@ class OddsDAO
 
         //$aFightOddsCol = array();
 
-        if ($aRow = mysqli_fetch_array($rResult))
-        {
-            return new PropBet($a_iMatchupID,
-                            $aRow['bookie_id'],
-                            '',
-                            $aRow['prop_odds'],
-                            '',
-                            $aRow['negprop_odds'],
-                            $a_iPropTypeID,
-                            $aRow['date'],
-                            $a_iTeam);
+        if ($aRow = mysqli_fetch_array($rResult)) {
+            return new PropBet(
+                $a_iMatchupID,
+                $aRow['bookie_id'],
+                '',
+                $aRow['prop_odds'],
+                '',
+                $aRow['negprop_odds'],
+                $a_iPropTypeID,
+                $aRow['date'],
+                $a_iTeam
+            );
         }
         return null;
     }
@@ -400,23 +396,24 @@ class OddsDAO
             AND co1.proptype_id = ?
               GROUP BY co1.event_id, co1.proptype_id
               LIMIT 0,1;';
-        
+
         $aParams = array($a_iEventID, $a_iPropTypeID, $a_iEventID, $a_iPropTypeID);
 
         $rResult = DBTools::doParamQuery($sQuery, $aParams);
 
         //$aFightOddsCol = array();
 
-        if ($aRow = mysqli_fetch_array($rResult))
-        {
-            return new EventPropBet($a_iEventID,
-                            $aRow['bookie_id'],
-                            '',
-                            $aRow['prop_odds'],
-                            '',
-                            $aRow['negprop_odds'],
-                            $a_iPropTypeID,
-                            $aRow['date']);
+        if ($aRow = mysqli_fetch_array($rResult)) {
+            return new EventPropBet(
+                $a_iEventID,
+                $aRow['bookie_id'],
+                '',
+                $aRow['prop_odds'],
+                '',
+                $aRow['negprop_odds'],
+                $a_iPropTypeID,
+                $aRow['date']
+            );
         }
         return null;
     }
@@ -449,17 +446,18 @@ class OddsDAO
         $rResult = DBTools::doParamQuery($sQuery, $aParams);
 
         $aProps = array();
-        while ($aRow = mysqli_fetch_array($rResult))
-        {
-            $aProps[] = new PropBet($a_iMatchupID,
-                            $aRow['bookie_id'],
-                            $aRow['prop_desc'],
-                            $aRow['prop_odds'],
-                            $aRow['negprop_desc'],
-                            $aRow['negprop_odds'],
-                            $aRow['proptype_id'],
-                            $aRow['date'],
-                            $aRow['team_num']);
+        while ($aRow = mysqli_fetch_array($rResult)) {
+            $aProps[] = new PropBet(
+                $a_iMatchupID,
+                $aRow['bookie_id'],
+                $aRow['prop_desc'],
+                $aRow['prop_odds'],
+                $aRow['negprop_desc'],
+                $aRow['negprop_odds'],
+                $aRow['proptype_id'],
+                $aRow['date'],
+                $aRow['team_num']
+            );
         }
 
         return $aProps;
@@ -490,16 +488,17 @@ class OddsDAO
         $rResult = DBTools::doParamQuery($sQuery, $aParams);
 
         $aProps = array();
-        while ($aRow = mysqli_fetch_array($rResult))
-        {
-            $aProps[] = new EventPropBet($a_iEventID,
-                            $aRow['bookie_id'],
-                            $aRow['prop_desc'],
-                            $aRow['prop_odds'],
-                            $aRow['negprop_desc'],
-                            $aRow['negprop_odds'],
-                            $aRow['proptype_id'],
-                            $aRow['date']);
+        while ($aRow = mysqli_fetch_array($rResult)) {
+            $aProps[] = new EventPropBet(
+                $a_iEventID,
+                $aRow['bookie_id'],
+                $aRow['prop_desc'],
+                $aRow['prop_odds'],
+                $aRow['negprop_desc'],
+                $aRow['negprop_odds'],
+                $aRow['proptype_id'],
+                $aRow['date']
+            );
         }
 
         return $aProps;
@@ -519,12 +518,10 @@ class OddsDAO
         $rResult = DBTools::doParamQuery($sQuery, $aParams);
 
         $aFightOddsCol = array();
-        while ($aFightOdds = mysqli_fetch_array($rResult))
-        {
+        while ($aFightOdds = mysqli_fetch_array($rResult)) {
             $aFightOddsCol[] = new FightOdds($aFightOdds['fight_id'], $aFightOdds['bookie_id'], $aFightOdds['fighter1_odds'], $aFightOdds['fighter2_odds'], $aFightOdds['date']);
         }
-        if (sizeof($aFightOddsCol) > 0)
-        {
+        if (sizeof($aFightOddsCol) > 0) {
             return $aFightOddsCol[0];
         }
         return null;
@@ -553,12 +550,10 @@ class OddsDAO
         $rResult = DBTools::doParamQuery($sQuery, $aParams);
 
         $aFightOddsCol = array();
-        while ($aFightOdds = mysqli_fetch_array($rResult))
-        {
+        while ($aFightOdds = mysqli_fetch_array($rResult)) {
             $aFightOddsCol[] = new FightOdds($aFightOdds['fight_id'], $aFightOdds['bookie_id'], $aFightOdds['fighter1_odds'], $aFightOdds['fighter2_odds'], $aFightOdds['date']);
         }
-        if (sizeof($aFightOddsCol) > 0)
-        {
+        if (sizeof($aFightOddsCol) > 0) {
 
             return $aFightOddsCol[0];
         }
@@ -588,20 +583,20 @@ class OddsDAO
         $rResult = DBTools::doParamQuery($sQuery, $aParams);
 
         $aProps = array();
-        while ($aRow = mysqli_fetch_array($rResult))
-        {
-            $aProps[] = new PropBet($a_iMatchupID,
-                            $aRow['bookie_id'],
-                            $aRow['prop_desc'],
-                            $aRow['prop_odds'],
-                            $aRow['negprop_desc'],
-                            $aRow['negprop_odds'],
-                            $aRow['proptype_id'],
-                            $aRow['date'],
-                            $aRow['team_num']);
+        while ($aRow = mysqli_fetch_array($rResult)) {
+            $aProps[] = new PropBet(
+                $a_iMatchupID,
+                $aRow['bookie_id'],
+                $aRow['prop_desc'],
+                $aRow['prop_odds'],
+                $aRow['negprop_desc'],
+                $aRow['negprop_odds'],
+                $aRow['proptype_id'],
+                $aRow['date'],
+                $aRow['team_num']
+            );
         }
-        if (count($aProps) > 0)
-        {
+        if (count($aProps) > 0) {
             return $aProps[0];
         }
 
@@ -631,19 +626,19 @@ class OddsDAO
         $rResult = DBTools::doParamQuery($sQuery, $aParams);
 
         $aProps = array();
-        while ($aRow = mysqli_fetch_array($rResult))
-        {
-            $aProps[] = new EventPropBet($a_iEventID,
-                            $aRow['bookie_id'],
-                            $aRow['prop_desc'],
-                            $aRow['prop_odds'],
-                            $aRow['negprop_desc'],
-                            $aRow['negprop_odds'],
-                            $aRow['proptype_id'],
-                            $aRow['date']);
+        while ($aRow = mysqli_fetch_array($rResult)) {
+            $aProps[] = new EventPropBet(
+                $a_iEventID,
+                $aRow['bookie_id'],
+                $aRow['prop_desc'],
+                $aRow['prop_odds'],
+                $aRow['negprop_desc'],
+                $aRow['negprop_odds'],
+                $aRow['proptype_id'],
+                $aRow['date']
+            );
         }
-        if (count($aProps) > 0)
-        {
+        if (count($aProps) > 0) {
             return $aProps[0];
         }
 
@@ -675,20 +670,20 @@ class OddsDAO
         $rResult = DBTools::doParamQuery($sQuery, $aParams);
 
         $aProps = array();
-        while ($aRow = mysqli_fetch_array($rResult))
-        {
-            $aProps[] = new PropBet($a_iMatchupID,
-                            $aRow['bookie_id'],
-                            $aRow['prop_desc'],
-                            $aRow['prop_odds'],
-                            $aRow['negprop_desc'],
-                            $aRow['negprop_odds'],
-                            $aRow['proptype_id'],
-                            $aRow['date'],
-                            $aRow['team_num']);
+        while ($aRow = mysqli_fetch_array($rResult)) {
+            $aProps[] = new PropBet(
+                $a_iMatchupID,
+                $aRow['bookie_id'],
+                $aRow['prop_desc'],
+                $aRow['prop_odds'],
+                $aRow['negprop_desc'],
+                $aRow['negprop_odds'],
+                $aRow['proptype_id'],
+                $aRow['date'],
+                $aRow['team_num']
+            );
         }
-        if (count($aProps) > 0)
-        {
+        if (count($aProps) > 0) {
             return $aProps[0];
         }
 
@@ -719,19 +714,19 @@ class OddsDAO
         $rResult = DBTools::doParamQuery($sQuery, $aParams);
 
         $aProps = array();
-        while ($aRow = mysqli_fetch_array($rResult))
-        {
-            $aProps[] = new EventPropBet($a_iEventID,
-                            $aRow['bookie_id'],
-                            $aRow['prop_desc'],
-                            $aRow['prop_odds'],
-                            $aRow['negprop_desc'],
-                            $aRow['negprop_odds'],
-                            $aRow['proptype_id'],
-                            $aRow['date']);
+        while ($aRow = mysqli_fetch_array($rResult)) {
+            $aProps[] = new EventPropBet(
+                $a_iEventID,
+                $aRow['bookie_id'],
+                $aRow['prop_desc'],
+                $aRow['prop_odds'],
+                $aRow['negprop_desc'],
+                $aRow['negprop_odds'],
+                $aRow['proptype_id'],
+                $aRow['date']
+            );
         }
-        if (count($aProps) > 0)
-        {
+        if (count($aProps) > 0) {
             return $aProps[0];
         }
 
@@ -756,10 +751,11 @@ class OddsDAO
         $rResult = DBTools::doParamQuery($sQuery, $aParams);
 
         $aReturn = array();
-        while ($aRow = mysqli_fetch_array($rResult))
-        {
-            $aReturn[] = array('correlation' => $aRow['correlation'],
-                'matchup_id' => $aRow['matchup_id']);
+        while ($aRow = mysqli_fetch_array($rResult)) {
+            $aReturn[] = array(
+                'correlation' => $aRow['correlation'],
+                'matchup_id' => $aRow['matchup_id']
+            );
         }
         return $aReturn;
     }
@@ -773,7 +769,7 @@ class OddsDAO
                     FROM lines_correlations 
                     WHERE bookie_id = ? AND correlation = ?';
 
-        $rResult = DBTools::doParamQuery($sQuery, $aParams);        
+        $rResult = DBTools::doParamQuery($sQuery, $aParams);
 
         return DBTools::getSingleValue($rResult);
     }
@@ -793,15 +789,12 @@ class OddsDAO
         $aParams = array();
 
         $sQuery = 'INSERT IGNORE INTO lines_correlations(correlation, bookie_id, matchup_id) VALUES ';
-        foreach ($a_aCorrelations as $aCorrelation)
-        {
-            if (count($aParams) > 0)
-            {
+        foreach ($a_aCorrelations as $aCorrelation) {
+            if (count($aParams) > 0) {
                 $sQuery .= ', ';
             }
 
-            if (isset($aCorrelation['correlation']) && isset($aCorrelation['matchup_id']))
-            {
+            if (isset($aCorrelation['correlation']) && isset($aCorrelation['matchup_id'])) {
                 $aParams[] = $aCorrelation['correlation'];
                 $aParams[] = $a_iBookieID;
                 $aParams[] = $aCorrelation['matchup_id'];
@@ -811,8 +804,7 @@ class OddsDAO
         }
 
         //Only execute if we are adding at least one entry
-        if (count($aParams) > 0)
-        {
+        if (count($aParams) > 0) {
             DBTools::doParamQuery($sQuery, $aParams);
             return (DBTools::getAffectedRows() > 0 ? true : false);
         }
@@ -831,7 +823,7 @@ class OddsDAO
                         LEFT JOIN fights f ON lc.matchup_id = f.id 
                         LEFT JOIN events e ON f.event_id = e.id 
                     WHERE LEFT(e.date, 10) < LEFT((NOW() - INTERVAL ' . GENERAL_GRACEPERIOD_SHOW . ' HOUR), 10)';
-        
+
         DBTools::doQuery($sQuery);
         $iCount = DBTools::getAffectedRows();
 
@@ -851,15 +843,13 @@ class OddsDAO
 
     public static function getCompletePropsForMatchup($a_iMatchup, $a_iOffset = 0)
     {
-        if ($a_iOffset != 0 && $a_iOffset != 1)
-        {
+        if ($a_iOffset != 0 && $a_iOffset != 1) {
             return false;
         }
 
         $sExtraQuery = '';
         $aParams = array($a_iMatchup, $a_iMatchup);
-        if ($a_iOffset == 1)
-        {
+        if ($a_iOffset == 1) {
 
             $sExtraQuery = ' AND lp4.date != (SELECT
                 MAX(lp5.date)  FROM        lines_props lp5
@@ -899,20 +889,20 @@ class OddsDAO
         $rResult = DBTools::doParamQuery($sQuery, $aParams);
 
         $aProps = array();
-        while ($aRow = mysqli_fetch_array($rResult))
-        {
-            $aProps[] = new PropBet($a_iMatchup,
-                            $aRow['bookie_id'],
-                            $aRow['prop_desc'],
-                            $aRow['prop_odds'],
-                            $aRow['negprop_desc'],
-                            $aRow['negprop_odds'],
-                            $aRow['proptype_id'],
-                            $aRow['date'],
-                            $aRow['team_num']);
+        while ($aRow = mysqli_fetch_array($rResult)) {
+            $aProps[] = new PropBet(
+                $a_iMatchup,
+                $aRow['bookie_id'],
+                $aRow['prop_desc'],
+                $aRow['prop_odds'],
+                $aRow['negprop_desc'],
+                $aRow['negprop_odds'],
+                $aRow['proptype_id'],
+                $aRow['date'],
+                $aRow['team_num']
+            );
         }
-        if (count($aProps) > 0)
-        {
+        if (count($aProps) > 0) {
             return $aProps;
         }
 
@@ -921,15 +911,13 @@ class OddsDAO
 
     public static function getCompletePropsForEvent($a_iEventID, $a_iOffset = 0, $a_iBookieID = null)
     {
-        if ($a_iOffset != 0 && $a_iOffset != 1)
-        {
+        if ($a_iOffset != 0 && $a_iOffset != 1) {
             return false;
         }
 
         $sExtraQuery = '';
         $aParams = array($a_iEventID, $a_iEventID);
-        if ($a_iOffset == 1)
-        {
+        if ($a_iOffset == 1) {
 
             $sExtraQuery = ' AND lep4.date != (SELECT
                 MAX(lep5.date)  FROM lines_eventprops lep5
@@ -938,8 +926,7 @@ class OddsDAO
                 lep4.bookie_id AND lep5.proptype_id = lep4.proptype_id) ';
             $aParams[] = $a_iEventID;
         }
-        if ($a_iBookieID != null)
-        {
+        if ($a_iBookieID != null) {
 
             $sExtraQuery .= ' AND bookie_id = ? ';
             $aParams[] = $a_iBookieID;
@@ -972,25 +959,25 @@ class OddsDAO
         $rResult = DBTools::doParamQuery($sQuery, $aParams);
 
         $aProps = array();
-        while ($aRow = mysqli_fetch_array($rResult))
-        {
-            $aProps[] = new EventPropBet($a_iEventID,
-                            $aRow['bookie_id'],
-                            $aRow['prop_desc'],
-                            $aRow['prop_odds'],
-                            $aRow['negprop_desc'],
-                            $aRow['negprop_odds'],
-                            $aRow['proptype_id'],
-                            $aRow['date']);
+        while ($aRow = mysqli_fetch_array($rResult)) {
+            $aProps[] = new EventPropBet(
+                $a_iEventID,
+                $aRow['bookie_id'],
+                $aRow['prop_desc'],
+                $aRow['prop_odds'],
+                $aRow['negprop_desc'],
+                $aRow['negprop_odds'],
+                $aRow['proptype_id'],
+                $aRow['date']
+            );
         }
-        if (count($aProps) > 0)
-        {
+        if (count($aProps) > 0) {
             return $aProps;
         }
 
         return null;
     }
-    
+
     public static function removeOddsForMatchupAndBookie($a_iMatchupID, $a_iBookieID)
     {
         $sQuery = 'DELETE fo.*
@@ -1019,8 +1006,7 @@ class OddsDAO
     {
         $sExtraWhere = '';
         $aParams = [$a_iMatchupID, $a_iBookieID];
-        if ($a_iPropTypeID != -1)
-        {
+        if ($a_iPropTypeID != -1) {
             $sExtraWhere = ' AND proptype_id = ?';
             $aParams[] = $a_iPropTypeID;
         }
@@ -1036,73 +1022,61 @@ class OddsDAO
         $aResult = PDOTools::findMany($sQuery, $aParams);
 
         $aRet = [];
-        foreach ($aResult as $aRow)
-        {
-            $aRet[] = new PropBet($aRow['matchup_id'],
-                            $aRow['bookie_id'],
-                            $aRow['prop_desc'],
-                            $aRow['prop_odds'],
-                            $aRow['negprop_desc'],
-                            $aRow['negprop_odds'],
-                            $aRow['proptype_id'],
-                            $aRow['date'],
-                            $aRow['team_num']);
+        foreach ($aResult as $aRow) {
+            $aRet[] = new PropBet(
+                $aRow['matchup_id'],
+                $aRow['bookie_id'],
+                $aRow['prop_desc'],
+                $aRow['prop_odds'],
+                $aRow['negprop_desc'],
+                $aRow['negprop_odds'],
+                $aRow['proptype_id'],
+                $aRow['date'],
+                $aRow['team_num']
+            );
         }
         return $aRet;
     }
 
     public static function flagOddsForDeletion($a_iBookieID, $a_iMatchupID = null, $a_iEventID = null, $a_iPropTypeID = null, $a_iTeamNum = null)
     {
-		if (!is_numeric($a_iBookieID) || ($a_iMatchupID == null && $a_iEventID == null))
-		{
-			throw new Exception("Invalid input", 10);	
+        if (!is_numeric($a_iBookieID) || ($a_iMatchupID == null && $a_iEventID == null)) {
+            throw new Exception("Invalid input", 10);
         }
 
         $sQuery = 'INSERT INTO lines_flagged(bookie_id, matchup_id, event_id, proptype_id, team_num, initial_flagdate, last_flagdate) VALUES (?,?,?,?,?, NOW(), NOW()) ON DUPLICATE KEY UPDATE last_flagdate = NOW()';
         $aParams = [$a_iBookieID, $a_iMatchupID, $a_iEventID ?? -1, $a_iPropTypeID ?? -1, $a_iTeamNum ?? -1];
 
         $id = null;
-		try 
-		{
-			$id = PDOTools::insert($sQuery, $aParams);
-		}
-		catch(PDOException $e)
-		{
-            if($e->getCode() == 23000)
-            {
-				throw new Exception("Duplicate entry", 10);	
+        try {
+            $id = PDOTools::insert($sQuery, $aParams);
+        } catch (PDOException $e) {
+            if ($e->getCode() == 23000) {
+                throw new Exception("Duplicate entry", 10);
+            } else {
+                throw new Exception("Unknown error " . $e->getMessage(), 10);
             }
-            else
-            {
-                throw new Exception("Unknown error " . $e->getMessage(), 10);	
-            }
-            
-
-		}
-		return $id;
+        }
+        return $id;
     }
 
     public static function checkIfFlagged($a_iBookieID, $a_iMatchupID, $a_iEventID, $a_iPropTypeID, $a_iTeamNum)
     {
         $sWhere = '';
         $aParams = [$a_iBookieID];
-        if ($a_iMatchupID != null)
-        {
+        if ($a_iMatchupID != null) {
             $sWhere .= ' AND matchup_id = ? ';
             $aParams[] = $a_iMatchupID;
         }
-        if ($a_iEventID != null)
-        {
+        if ($a_iEventID != null) {
             $sWhere .= ' AND event_id = ? ';
             $aParams[] = $a_iEventID;
         }
-        if ($a_iPropTypeID != null)
-        {
+        if ($a_iPropTypeID != null) {
             $sWhere .= ' AND proptype_id = ? ';
             $aParams[] = $a_iPropTypeID;
         }
-        if ($a_iTeamNum != null)
-        {
+        if ($a_iTeamNum != null) {
             $sWhere .= ' AND team_num = ? ';
             $aParams[] = $a_iTeamNum;
         }
@@ -1110,39 +1084,31 @@ class OddsDAO
         $sQuery = 'SELECT * FROM lines_flagged WHERE bookie_id = ? ' . $sWhere;
 
         $result = null;
-        try 
-		{
-			$result = PDOTools::findMany($sQuery, $aParams);
-		}
-		catch(PDOException $e)
-		{
-            throw new Exception("Unknown error " . $e->getMessage(), 10);	
+        try {
+            $result = PDOTools::findMany($sQuery, $aParams);
+        } catch (PDOException $e) {
+            throw new Exception("Unknown error " . $e->getMessage(), 10);
         }
         return $result;
-        
     }
 
     public static function removeFlagged($a_iBookieID, $a_iMatchupID = null, $a_iEventID = null, $a_iPropTypeID = null, $a_iTeamNum = null)
     {
         $sWhere = '';
         $aParams = [$a_iBookieID];
-        if ($a_iMatchupID != null)
-        {
+        if ($a_iMatchupID != null) {
             $sWhere .= ' AND matchup_id = ? ';
             $aParams[] = $a_iMatchupID;
         }
-        if ($a_iEventID != null)
-        {
+        if ($a_iEventID != null) {
             $sWhere .= ' AND event_id = ? ';
             $aParams[] = $a_iEventID;
         }
-        if ($a_iPropTypeID != null)
-        {
+        if ($a_iPropTypeID != null) {
             $sWhere .= ' AND proptype_id = ? ';
             $aParams[] = $a_iPropTypeID;
         }
-        if ($a_iTeamNum != null)
-        {
+        if ($a_iTeamNum != null) {
             $sWhere .= ' AND team_num = ? ';
             $aParams[] = $a_iTeamNum;
         }
@@ -1150,16 +1116,12 @@ class OddsDAO
         $sQuery = 'DELETE FROM lines_flagged WHERE bookie_id = ? ' . $sWhere;
 
         $result = null;
-        try 
-		{
-			$result = PDOTools::delete($sQuery, $aParams);
-		}
-		catch(PDOException $e)
-		{
-            throw new Exception("Unknown error " . $e->getMessage(), 10);	
+        try {
+            $result = PDOTools::delete($sQuery, $aParams);
+        } catch (PDOException $e) {
+            throw new Exception("Unknown error " . $e->getMessage(), 10);
         }
         return $result;
-        
     }
 
     public static function removeAllOldFlagged()
@@ -1173,34 +1135,47 @@ class OddsDAO
         return false;
     }
 
+    public static function getAllFlaggedMatchups()
+    {
+        $query = 'SELECT f.*, e.name as event_name, e.date as event_date, f1.name AS team1_name, f2.name AS team2_name, lf.* 
+                        FROM bets.lines_flagged lf 
+                            LEFT JOIN fights f ON lf.matchup_id = f.id 
+                            LEFT JOIN fighters f1 ON f.fighter1_id = f1.id 
+                            LEFT JOIN fighters f2 ON f.fighter2_id = f2.id 
+                            LEFT JOIN events e ON f.event_id = e.id 
+                    WHERE proptype_id = -1
+                    ORDER BY e.date ASC';
 
-    
+        $result = null;
+        try {
+            $result = PDOTools::findMany($query);
+        } catch (PDOException $e) {
+            throw new Exception("Unknown error " . $e->getMessage(), 10);
+        }
+        return $result;
+    }
+
     public static function getLatestPropOddsV2($a_iEventID = null, $a_iMatchupID = null, $a_iBookieID = null, $a_iPropTypeID = null, $a_iTeamNum = null)
     {
         $aParams = [];
         $sExtraWhere = '';
-        if ($a_iEventID != null)
-        {
+        if ($a_iEventID != null) {
             $sExtraWhere .= ' AND e.id = ? ';
             $aParams[] = $a_iEventID;
         }
-        if ($a_iMatchupID != null)
-        {
+        if ($a_iMatchupID != null) {
             $sExtraWhere .= ' AND f.id = ? ';
             $aParams[] = $a_iMatchupID;
         }
-        if ($a_iBookieID != null)
-        {
+        if ($a_iBookieID != null) {
             $sExtraWhere .= ' AND lp.bookie_id = ? ';
             $aParams[] = $a_iBookieID;
         }
-        if ($a_iPropTypeID != null)
-        {
+        if ($a_iPropTypeID != null) {
             $sExtraWhere .= ' AND pt.id = ? ';
             $aParams[] = $a_iPropTypeID;
         }
-        if ($a_iTeamNum != null)
-        {
+        if ($a_iTeamNum != null) {
             $sExtraWhere .= ' AND lp.team_num = ? ';
             $aParams[] = $a_iTeamNum;
         }
@@ -1215,17 +1190,13 @@ class OddsDAO
             ORDER BY LEFT(pt.prop_desc,4) = "Over" DESC, pt.id ASC, lp.team_num ASC';
 
         $ret = null;
-        try 
-        {
+        try {
             $ret = PDOTools::findMany($sQuery, $aParams);
-        }
-        catch(PDOException $e)
-        {
-            throw new Exception("Unknown error " . $e->getMessage(), 10);	
+        } catch (PDOException $e) {
+            throw new Exception("Unknown error " . $e->getMessage(), 10);
             return false;
         }
         return $ret;
-
     }
 
     public static function getLatestEventPropOddsV2($a_iEventID, $a_iBookieID = null, $a_iPropTypeID = null)
@@ -1237,13 +1208,11 @@ class OddsDAO
         {
             return false;
         }
-        if ($a_iBookieID != null)
-        {
+        if ($a_iBookieID != null) {
             $sExtraWhere .= ' AND pt.bookie_id = ? ';
             $aParams[] = $a_iBookieID;
         }
-        if ($a_iPropTypeID != null)
-        {
+        if ($a_iPropTypeID != null) {
             $sExtraWhere .= ' AND pt.id = ? ';
             $aParams[] = $a_iPropTypeID;
         }
@@ -1256,19 +1225,15 @@ class OddsDAO
                 AND e.id = ? 
                 ' . $sExtraWhere . ' 
                 ORDER BY pt.id ASC;';
-        
+
         $ret = null;
-        try 
-        {
+        try {
             $ret = PDOTools::findMany($sQuery, $aParams);
-        }
-        catch(PDOException $e)
-        {
-            throw new Exception("Unknown error " . $e->getMessage(), 10);	
+        } catch (PDOException $e) {
+            throw new Exception("Unknown error " . $e->getMessage(), 10);
             return false;
         }
         return $ret;
-
     }
 
     public static function getLatestMatchupOddsV2($a_iEventID = null, $a_iMatchupID = null)
@@ -1281,13 +1246,11 @@ class OddsDAO
             return false;
         }
 
-        if ($a_iEventID != null)
-        {
+        if ($a_iEventID != null) {
             $sExtraWhere .= ' AND e.id = ? ';
             $aParams[] = $a_iEventID;
         }
-        if ($a_iMatchupID != null)
-        {
+        if ($a_iMatchupID != null) {
             $sExtraWhere .= ' AND f.id = ? ';
             $aParams[] = $a_iMatchupID;
         }
@@ -1300,19 +1263,12 @@ class OddsDAO
         ' . $sExtraWhere . '';
 
         $ret = null;
-        try 
-        {
+        try {
             $ret = PDOTools::findMany($sQuery, $aParams);
-        }
-        catch(PDOException $e)
-        {
-            throw new Exception("Unknown error " . $e->getMessage(), 10);	
+        } catch (PDOException $e) {
+            throw new Exception("Unknown error " . $e->getMessage(), 10);
             return false;
         }
         return $ret;
-
     }
-
 }
-
-?>
