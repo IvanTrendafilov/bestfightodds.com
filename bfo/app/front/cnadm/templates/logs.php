@@ -1,4 +1,4 @@
-<?php $this->layout('template', ['title' => 'Admin - Log Viewer']) ?>
+<?php $this->layout('base/layout', ['title' => 'Admin - Log Viewer']) ?>
 
 <?php if (isset($logs)): ?>
 

@@ -1,4 +1,4 @@
-<?php $this->layout('template', ['title' => 'Admin']) ?>
+<?php $this->layout('base/layout', ['title' => 'Admin']) ?>
 
 <script>
 

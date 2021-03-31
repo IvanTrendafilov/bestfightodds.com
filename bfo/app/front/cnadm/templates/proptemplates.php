@@ -1,29 +1,42 @@
-<?php $this->layout('template', ['title' => 'Admin - View Prop Templates']) ?>
+<?php $this->layout('base/layout', ['title' => 'Admin - View Prop Templates']) ?>
+
+
+
 
 <?php foreach($bookies as $bookie): ?>
 
-	<b><?=$this->e($bookie['bookie']->getName())?></b><br />
-	<table class="genericTable">
-		<tr>
-			<th>Template ID</th>
-			<th>Template / Neg Template</th>
-			<th>Proptype ID</th>
-			<th>Field type</th>
-			<th>Last used</th>
-		</tr>
+	<h4 class="text-gray-600"><?=$this->e($bookie['bookie']->getName())?></h4>
 
-	<?php foreach($bookie['templates'] as $template): ?>
-		
-		<tr>
-			<td><b><?=$template->getID()?></b></td>
-			<td><?=$template->toString()?></td>
-			<td><b><?=$template->getPropTypeID()?></b></td>
-			<td>e.g: <?=$template->getFieldsTypeAsExample() ?></td>
-			<td><?=$template->getLastUsedDate()?></td>
-			<td><input type="submit" data-li="<?=$template->getID()?>" value="Delete" disabled></td>
-		</tr>
-	
-	<?php endforeach ?>
-	</table><br />	
+	<div class="flex flex-col mt-8">
+    <div class="-my-2 py-2 overflow-x-auto sm:-mx-6 sm:px-6 lg:-mx-8 lg:px-8">
+        <div class="align-middle inline-block min-w-full shadow overflow-hidden sm:rounded-lg border-b border-gray-200">
+            <table class="min-w-full">
+                <thead>
+                    <tr>
+                        <th class="px-6 py-3 border-b border-gray-200 bg-gray-50 text-left text-xs leading-4 font-medium text-gray-500 uppercase tracking-wider">ID</th>
+                        <th class="px-6 py-3 border-b border-gray-200 bg-gray-50 text-left text-xs leading-4 font-medium text-gray-500 uppercase tracking-wider">Template</th>
+                        <th class="px-6 py-3 border-b border-gray-200 bg-gray-50 text-left text-xs leading-4 font-medium text-gray-500 uppercase tracking-wider">Proptype ID</th>
+                        <th class="px-6 py-3 border-b border-gray-200 bg-gray-50 text-left text-xs leading-4 font-medium text-gray-500 uppercase tracking-wider">Field Type</th>
+                        <th class="px-6 py-3 border-b border-gray-200 bg-gray-50 text-left text-xs leading-4 font-medium text-gray-500 uppercase tracking-wider">Last used</th>
+						<th class="px-6 py-3 border-b border-gray-200 bg-gray-50 text-left text-xs leading-4 font-medium text-gray-500 uppercase tracking-wider">Action</th>
+                    </tr>
+                </thead>
+
+                <tbody class="bg-white">
+					<?php foreach($bookie['templates'] as $template): ?>
+                        <tr>
+                            <td class="px-6 py-4 whitespace-no-wrap border-b border-gray-200 text-sm leading-5 text-gray-500"><?=$template->getID()?></td>
+                            <td class="px-6 py-4 whitespace-no-wrap border-b border-gray-200 text-sm leading-5 text-gray-500"><div><?=str_replace(' / ', '</div><div>', $template->toString())?></div></td>
+                            <td class="px-6 py-4 whitespace-no-wrap border-b border-gray-200 text-sm leading-5 text-gray-500"><?=$template->getPropTypeID()?></td>
+                            <td class="px-6 py-4 whitespace-no-wrap border-b border-gray-200 text-sm leading-5 text-gray-500">e.g: <?=$template->getFieldsTypeAsExample() ?></td>
+                            <td class="px-6 py-4 whitespace-no-wrap border-b border-gray-200 text-sm leading-5 text-gray-500"><?=$template->getLastUsedDate()?></td>
+							<td class="px-6 py-4 whitespace-no-wrap border-b border-gray-200 text-sm leading-5 text-gray-500"><button data-li="<?=$template->getID()?>">Delete</button></td>
+                        </tr>
+                    <?php endforeach ?>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
 
 <?php endforeach ?>

@@ -1,4 +1,4 @@
-<?php $this->layout('template', ['title' => 'Admin']) ?>
+<?php $this->layout('base/layout', ['title' => 'Admin']) ?>
 
 Manual actions: <a href="#" onclick="$('input[onclick^=\'maAdd\']').click();" >Accept all <b>Create</b> actions below</a>
 <br /><br />

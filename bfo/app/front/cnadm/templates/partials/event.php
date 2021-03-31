@@ -31,7 +31,7 @@ document.addEventListener("DOMContentLoaded", function(event) {
     //Delete matchup
     document.querySelectorAll('.delete-matchup-button').forEach(item => {
         item.addEventListener('click', e => {
-            console.log(e.target.parentNode);
+            console.log(e.target);
             e.preventDefault();
             var opts = {
                 method: 'DELETE',
@@ -39,10 +39,10 @@ document.addEventListener("DOMContentLoaded", function(event) {
                     'Content-type': 'application/json; charset=UTF-8'
                 },
                 body: JSON.stringify({
-                    matchup_id: parseInt(e.target.parentNode.dataset.matchupid),
+                    matchup_id: parseInt(e.target.dataset.matchupid),
                 })
             };
-            fetch('/cnadm/api/matchups/' + e.target.parentNode.dataset.matchupid, opts).then(function (response) {
+            fetch('/cnadm/api/matchups/' + e.target.dataset.matchupid, opts).then(function (response) {
                 return response.json();
             })
             .then(function (body) {
@@ -60,34 +60,48 @@ document.addEventListener("DOMContentLoaded", function(event) {
 
 <?php foreach($events as $event): ?>
    
-    <table class="eventsOverview">
 
-   <tr>
-       <th colspan="6"><a href="#" name="event<?=$event['event_obj']->getID()?>"></a><div style="float: left; <?=($event['event_obj']->isDisplayed() ? '' : 'font-style: italic; color: #909090;')?>"><?=$event['event_obj']->getName()?> 
-       <span style="color: #777777">-</span> <?=$event['event_obj']->getDate()?> &nbsp;
-       <a href="/cnadm/events/<?=$event['event_obj']->getID()?>">edit</a></div>
-       <div style="float: right; padding-right: 5px;"><span style="color: #ffffff"><?=sizeof($event['fights'])?></span> <b><a href="/cnadm/events/<?=$event['event_obj']->getID()?>">add</a></b></div>
-   </th>
-   </tr>
-
-   <?php foreach($event['fights'] as $fight): ?>
-
-           <tr>
-               <td class="eventID"><a href="/cnadm/matchups/<?=$fight['fight_obj']->getID()?>"><?=$fight['fight_obj']->getID()?></a></td>
-               <td class="fight <?=$fight['fight_obj']->isMainEvent() ? ' main-event' : ''?>"><a href="/cnadm/fighters/<?=$fight['fight_obj']->getFighterID(1)?>"><?=$fight['fight_obj']->getFighterAsString(1)?></a> <span style="color: #777777">vs</span> <a href="/cnadm/fighters/<?=$fight['fight_obj']->getFighterID(2)?>"><?=$fight['fight_obj']->getFighterAsString(2)?></a></td>
-               <?php if (isset($fight['arbitrage_info'])): ?>
-                    <td class="arbitrage <?=($fight['arbitrage_info']['profit'] && $fight['arbitrage_info']['profit'] > 1) ? 'positive' : ''?>"><?=$fight['arbitrage_info']['profit'] ?? ''?></td>
-                <?php else: ?>
-                    <td class="arbitrage"></td>
-                <?php endif ?>
-               <td class="imageLink"><a href="https://www.bestfightodds.com/fights/<?=$fight['fight_obj']->getID()?>.png">o</a></td>
-               <td><a href="#" class="delete-matchup-button" data-matchupid="<?=$fight['fight_obj']->getID()?>" onclick="javascript:return confirm('Really remove <?=$fight['fight_obj']->getFighterAsString(1)?> vs <?=$fight['fight_obj']->getFighterAsString(2)?>?')"><b>x</b></a></td>
-               <td class="mainEvent"><a href="#" class="set-mainevent-button" data-matchupid="<?=$fight['fight_obj']->getID()?>" data-mainevent="<?=$fight['fight_obj']->isMainEvent() ? '0' : '1'?>"><?=$fight['fight_obj']->isMainEvent() ? 'v' : '^'?></a></td>
-           </tr>
-   
-   <?php endforeach ?>
-
-</table>
+<div class="flex flex-col mt-8">
+    <div class="-my-2 py-2 overflow-x-auto sm:-mx-6 sm:px-6 lg:-mx-8 lg:px-8">
+        <div class="align-middle inline-block min-w-full shadow overflow-hidden sm:rounded-lg border-b border-gray-200">
+            <div class="bg-gray-300 flex p-3 text-gray-900">
+                <a href="#" name="event<?=$event['event_obj']->getID()?>"></a><div style="<?=($event['event_obj']->isDisplayed() ? '' : 'font-style: italic; color: #909090;')?>"><?=$event['event_obj']->getName()?> 
+                <span style="color: #777777">-</span> <?=$event['event_obj']->getDate()?> &nbsp;
+                <a href="/cnadm/events/<?=$event['event_obj']->getID()?>">edit</a></div>
+                <div><span style="color: #ffffff"><?=sizeof($event['fights'])?></span> <b><a href="/cnadm/events/<?=$event['event_obj']->getID()?>">add</a></b></div>
+            </div>
+            <table class="min-w-full">
+                <thead>
+                    <tr>
+                        <th class="px-6 py-3 border-b border-gray-200 bg-gray-50 text-left text-xs leading-4 font-medium text-gray-500 uppercase tracking-wider">ID</th>
+                        <th class="px-6 py-3 border-b border-gray-200 bg-gray-50 text-left text-xs leading-4 font-medium text-gray-500 uppercase tracking-wider">Matchup</th>
+                        <th class="px-6 py-3 border-b border-gray-200 bg-gray-50 text-left text-xs leading-4 font-medium text-gray-500 uppercase tracking-wider">Arbitrage</th>
+                        <th class="px-6 py-3 border-b border-gray-200 bg-gray-50 text-left text-xs leading-4 font-medium text-gray-500 uppercase tracking-wider">Imagelink</th>
+                        <th class="px-6 py-3 border-b border-gray-200 bg-gray-50 text-left text-xs leading-4 font-medium text-gray-500 uppercase tracking-wider">Actions</th>
+                    </tr>
+                </thead>
+                <tbody class="bg-white">
+                <?php foreach($event['fights'] as $fight): ?>
+                        <tr>
+                            <td class="px-6 py-4 whitespace-no-wrap border-b border-gray-200 text-sm leading-5 text-gray-500"><a href="/cnadm/matchups/<?=$fight['fight_obj']->getID()?>"><?=$fight['fight_obj']->getID()?></a></td>
+                            <td class="px-6 py-4 whitespace-no-wrap border-b border-gray-200 text-sm leading-5 text-gray-500 <?=$fight['fight_obj']->isMainEvent() ? ' font-bold' : ''?>"><a href="/cnadm/fighters/<?=$fight['fight_obj']->getFighterID(1)?>"><?=$fight['fight_obj']->getFighterAsString(1)?></a> <span style="color: #777777">vs</span> <a href="/cnadm/fighters/<?=$fight['fight_obj']->getFighterID(2)?>"><?=$fight['fight_obj']->getFighterAsString(2)?></a></td>
+                            <td class="px-6 py-4 whitespace-no-wrap border-b border-gray-200 text-sm leading-5 text-gray-500">
+                            <?php if (isset($fight['arbitrage_info'])): ?>
+                                <?=$fight['arbitrage_info']['profit'] ?? ''?>
+                            <?php endif ?>
+                            </td>
+                            <td class="px-6 py-4 whitespace-no-wrap border-b border-gray-200 text-sm leading-5 text-gray-500"><a href="https://www.bestfightodds.com/fights/<?=$fight['fight_obj']->getID()?>.png">Link</a></td>
+                            <td class="px-6 py-4 whitespace-no-wrap border-b border-gray-200 text-sm leading-5 text-gray-500">
+                                <button class="delete-matchup-button set-mainevent-button px-4 py-2 bg-red-500 text-gray-100 rounded-md hover:bg-red-400 focus:outline-none focus:bg-red-400" data-matchupid="<?=$fight['fight_obj']->getID()?>" onclick="javascript:return confirm('Really remove <?=$fight['fight_obj']->getFighterAsString(1)?> vs <?=$fight['fight_obj']->getFighterAsString(2)?>?')">Delete</a>
+                                <button class="set-mainevent-button px-4 py-2 bg-blue-500 text-gray-100 rounded-md hover:bg-blue-400 focus:outline-none focus:bg-blue-400" data-matchupid="<?=$fight['fight_obj']->getID()?>" data-mainevent="<?=$fight['fight_obj']->isMainEvent() ? '0' : '1'?>"><?=$fight['fight_obj']->isMainEvent() ? 'Demote' : 'Promote'?></a>
+                            </td>
+                        </tr>
+                    <?php endforeach ?>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
 
 <?php endforeach ?>
 

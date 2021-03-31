@@ -1,4 +1,4 @@
-<?php $this->layout('template', ['title' => 'Admin']) ?>
+<?php $this->layout('base/layout', ['title' => 'Admin']) ?>
 
 <table border="1" cellspacing="3">
 <tr><td>E-mail</td><td>Fight</td><td>Fighter</td><td>Bookie</td><td>Limit</td><td>Odds type</td></tr>

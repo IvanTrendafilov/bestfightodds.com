@@ -1,5 +1,5 @@
 
-<?php $this->layout('template', ['title' => 'Admin - Events']) ?>
+<?php $this->layout('base/layout', ['title' => 'Admin - Events']) ?>
 Add new fight:
 <form method="post">
   <input type="text" id="team1" value="<?=$inteam1?>"> vs 
