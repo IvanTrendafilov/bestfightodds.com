@@ -517,18 +517,26 @@ fo2.bookie_id, fo2.fight_id ASC;';
         return true;
     }
 
-    public static function addNewFighter($a_sFighterName)
+    public static function addNewFighter($fighter_name)
     {
-        $a_sFighterName = strtoupper($a_sFighterName);
-        $params = [$a_sFighterName];
-        if (EventDAO::getFighterIDByName($a_sFighterName) == null) {
-            $sQuery = 'INSERT INTO fighters(name, url)
-                            VALUES(?, \'\')';
-
-            DBTools::doParamQuery($sQuery, $params);
-            return true;
+        if (EventDAO::getFighterIDByName($fighter_name) != null) {
+            return false;
         }
-        return false;
+
+        $params = [strtoupper($fighter_name)];
+        $query = 'INSERT INTO fighters(name, url)
+                        VALUES(?, \'\')';
+        try {
+            $id = PDOTools::insert($query, $params);
+        } catch (PDOException $e) {
+            if ($e->getCode() == 23000) {
+                throw new Exception("Duplicate entry", 10);
+            } else {
+                throw new Exception("Unknown error " . $e->getMessage(), 10);
+            }
+            return false;
+        }
+        return $id;
     }
 
     /**
@@ -536,39 +544,45 @@ fo2.bookie_id, fo2.fight_id ASC;';
      *
      * TODO: Add check to see that event doesn't already exist
      */
-    public static function addNewEvent($a_oEvent)
+    public static function addNewEvent($event_obj)
     {
-        $sQuery = 'INSERT INTO events(date, name, display)
+        $query = 'INSERT INTO events(date, name, display)
                         VALUES(?, ?, ?)';
 
-        $aParams = array($a_oEvent->getDate(), $a_oEvent->getName(), ($a_oEvent->isDisplayed() ? '1' : '0'));
+        $params = array($event_obj->getDate(), $event_obj->getName(), ($event_obj->isDisplayed() ? '1' : '0'));
 
-        if (DBTools::doParamQuery($sQuery, $aParams)) {
-            return DBTools::getLatestID();
+        try {
+            $id = PDOTools::insert($query, $params);
+        } catch (PDOException $e) {
+            if ($e->getCode() == 23000) {
+                throw new Exception("Duplicate entry", 10);
+            } else {
+                throw new Exception("Unknown error " . $e->getMessage(), 10);
+            }
+            return false;
         }
-        return false;
+        return $id;
     }
 
-    public static function getFighterIDByName($a_sFighterName)
+    public static function getFighterIDByName($fighter_name)
     {
-        $a_sFighterName = strtoupper($a_sFighterName);
-        $sQuery = 'SELECT fn.id
+        $query = 'SELECT fn.id
                     FROM (SELECT f.id as id, f.name as name FROM fighters f
                         UNION
                         SELECT fa.fighter_id as id, fa.altname as name FROM fighters_altnames fa
                         ) AS fn
                     WHERE fn.name = ?';
 
-        $aParams = array($a_sFighterName);
+        $params = [strtoupper($fighter_name)];
 
-        $rResult = DBTools::doParamQuery($sQuery, $aParams);
+        $result = DBTools::doParamQuery($query, $params);
 
-        $aFighters = array();
-        while ($aFighter = mysqli_fetch_array($rResult)) {
-            $aFighters[] = $aFighter['id'];
+        $fighters = array();
+        while ($row = mysqli_fetch_array($result)) {
+            $fighters[] = $row['id'];
         }
-        if (sizeof($aFighters) > 0) {
-            return $aFighters[0];
+        if (sizeof($fighters) > 0) {
+            return $fighters[0];
         }
         return null;
     }
@@ -580,27 +594,25 @@ fo2.bookie_id, fo2.fight_id ASC;';
             //Check if fight isn't already added
             if (EventDAO::getFight($a_oFight->getFighter(1), $a_oFight->getFighter(2), $a_oFight->getEventID()) == null) {
                 //Check that both fighters exist, if not, add them
-                if (EventDAO::getFighterIDByName($a_oFight->getFighter(1)) == null) {
-                    EventDAO::addNewFighter($a_oFight->getFighter(1));
+                $fighter1_id = EventDAO::getFighterIDByName($a_oFight->getFighter(1));
+                if ($fighter1_id == null) {
+                    $fighter1_id = EventDAO::addNewFighter($a_oFight->getFighter(1));
                 }
-                if (EventDAO::getFighterIDByName($a_oFight->getFighter(2)) == null) {
-                    EventDAO::addNewFighter($a_oFight->getFighter(2));
+                $fighter2_id = EventDAO::getFighterIDByName($a_oFight->getFighter(2));
+                if ($fighter2_id == null) {
+                    $fighter2_id = EventDAO::addNewFighter($a_oFight->getFighter(2));
                 }
 
-                $sQuery = 'INSERT INTO fights(fighter1_id, fighter2_id, event_id)
-                                VALUES(
-                                    (SELECT f1.id
-                                        FROM fighters f1
-                                        WHERE f1.name = ?
-                                        ORDER BY f1.id ASC LIMIT 1),
-                                    (SELECT f2.id
-                                        FROM fighters f2
-                                        WHERE f2.name = ?
-                                        ORDER BY f2.id ASC LIMIT 1),
-                                        ?)';
+                if ($fighter1_id == null || $fighter2_id == null)
+                {
+                    return false;
+                }
 
-                $aParams = array($a_oFight->getFighter(1), $a_oFight->getFighter(2), $a_oFight->getEventID());
-                DBTools::doParamQuery($sQuery, $aParams);
+                $query = 'INSERT INTO fights(fighter1_id, fighter2_id, event_id)
+                                VALUES(?, ?, ?)';
+
+                $params = array($fighter1_id, $fighter2_id, $a_oFight->getEventID());
+                DBTools::doParamQuery($query, $params);
 
                 //Invalidate cache whenever we add a matchup in case some running function is caching matchups
                 DBTools::invalidateCache();
