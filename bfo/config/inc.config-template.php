@@ -54,11 +54,11 @@ define('FACEBOOK_ACCESS_TOKEN', 'EAAYxZA2qZC7e4BAOUww5RhqvWr9inuQZCW1koLMhTgVFAA
 define('FACEBOOK_PAGEID', '1759833807635369');
 
 /* Parser */
-define('PARSE_LOGDIR', GENERAL_BASEDIR . '/logs/'); //Directory where logs should be stored
+define('PARSE_LOGDIR', GENERAL_BASEDIR . '/logs/'); //Directory where logs should be stored @deprecated
 define('PARSE_GENERATORDIR', GENERAL_BASEDIR . '/app/generators/');  //Directory where page generators are stored
 define('PARSE_PAGEDIR', GENERAL_BASEDIR . '/app/front/pages/');  //Directory where generated pages should be stored
-define('PARSE_LOG_LEVEL', 2); //Level of detail in the logs, from -2 to 2 . At the lowest level, only errors are shown
-define('PARSE_PARSERS', 'WilliamHill');
+define('PARSE_LOG_LEVEL', 2); //Level of detail in the logs, from -2 to 2 . At the lowest level, only errors are shown @deprecated
+define('PARSE_PARSERS', 'WilliamHill'); //@deprecated
 define('PARSE_MOCKFEEDS_ON', false); //Enable/disable mock feed mode parsing from static files instead of real feeds
 define('PARSE_MOCKFEEDS_DIR', GENERAL_BASEDIR . '/app/parsers/mockfeeds/');  //Directory where mock feeds are stored
 define('PARSE_CREATIVEMATCHING', false); //Used to specify if parser should try creative ways to match matchups (use with caution);

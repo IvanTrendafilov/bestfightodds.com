@@ -34,8 +34,9 @@ class MainController
         $cached_contents = @file_get_contents(PARSE_PAGEDIR . 'oddspage.php');
         if ($cached_contents == null)
         {
-            //TODO: Implement fallback if odds page cannot be included
-            $cached_contents = '<div style="margin-left: auto; margin-right: auto; width: 200px; margin-top: 40px; margin-bottom: 40px;">Temporary maintenance</div>';
+            //Display maintenance page
+            $response->getBody()->write($this->plates->render('maintenance', []));
+            return $response;
         }
 
         $events = EventHandler::getAllUpcomingEvents();

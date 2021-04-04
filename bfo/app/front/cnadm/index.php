@@ -10,16 +10,16 @@ use Psr\Http\Message\ServerRequestInterface as Request;
 use League\Plates\Engine;
 
 require 'vendor/autoload.php';
-require 'controllers/admin_controller.php';
-require 'controllers/admin_api_controller.php';
-require 'middleware/auth_middleware.php';
-require 'middleware/session_middleware.php';
+require 'app/admin/controllers/admin_controller.php';
+require 'app/admin/controllers/admin_api_controller.php';
+require 'app/admin/middleware/auth_middleware.php';
+require 'app/admin/middleware/session_middleware.php';
 
 $container = (new \DI\ContainerBuilder())
   ->useAutowiring(true)
   ->addDefinitions([
     \League\Plates\Engine::class => function () {
-      return new League\Plates\Engine(__DIR__ . '/templates/');
+      return new League\Plates\Engine(__DIR__ . '/../../../../shared/app/admin/templates/');
     }
   ])
   ->build();

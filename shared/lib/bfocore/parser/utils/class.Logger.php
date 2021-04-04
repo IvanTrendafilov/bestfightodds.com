@@ -12,6 +12,8 @@ require_once('config/inc.config.php');
  * 4. Seperate log entries by calling the seperate() method (not required but makes it look nice)
  * 5. Call the end(filename) method to finish the logging and save log to filename.
  * 
+ * @deprecated Use a standardized logging library instead
+ * 
  */
 class Logger
 {
