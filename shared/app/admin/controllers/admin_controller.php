@@ -71,6 +71,11 @@ class AdminController
         $unmatched_groups = [];
         $unmatched_matchup_groups = [];
         foreach ($unmatched_col as $key => $unmatched) {
+
+            if (isset($unmatched['metadata']['gametime'])) {
+                $unmatched_col[$key]['view_extras']['event_date_formatted'] = (new DateTime('@' . $unmatched['metadata']['gametime']))->format('Y-m-d');
+            }
+
             $split = explode(' vs ', $unmatched['matchup']);
             $unmatched_col[$key]['view_indata1'] = $split[0] == '' ? $split[1] : $split[0]; //Swap places if first part is blank
             $unmatched_col[$key]['view_indata2'] = $split[0] == '' ? $split[0] : $split[1];
@@ -80,12 +85,19 @@ class AdminController
 
                 $event_search = EventHandler::searchEvent($unmatched_col[$key]['view_extras']['event_name_reduced'], true);
                 if ($event_search != null) {
-                    $unmatched_col[$key]['view_extras']['event_match'] = ['id' => $event_search[0]->getID(), 'name' => $event_search[0]->getName(), 'date' => $event_search[0]->getDate()];
+                    $matched_event = $event_search[0];
+                    if (count($event_search) > 1) {
+                        //Multiple matches, match on date if possible
+                        foreach ($event_search as $item) {
+                            if ($item->getDate() == $unmatched_col[$key]['view_extras']['event_date_formatted']) {
+                                $matched_event = $item;
+                            }
+                        }
+                    }
+                    $unmatched_col[$key]['view_extras']['event_match'] = ['id' => $matched_event->getID(), 'name' => $matched_event->getName(), 'date' => $matched_event->getDate()];
                 }
             }
-            if (isset($unmatched['metadata']['gametime'])) {
-                $unmatched_col[$key]['view_extras']['event_date_formatted'] = (new DateTime('@' . $unmatched['metadata']['gametime']))->format('Y-m-d');
-            }
+
 
             //Add to group (only for matchups)
             if ($unmatched['type'] == 0) {
