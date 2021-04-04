@@ -5,7 +5,6 @@ require_once('lib/bfocore/general/inc.GlobalTypes.php');
 
 class BookieDAO
 {
-
     public static function getAllBookies()
     {
         $sQuery = 'SELECT id, name, url, refurl
@@ -14,16 +13,14 @@ class BookieDAO
 					ORDER BY position, id  ASC';
 
         $rResult = DBTools::getCachedQuery($sQuery);
-        if ($rResult == null)
-        {
+        if ($rResult == null) {
             $rResult = DBTools::doQuery($sQuery);
             DBTools::cacheQueryResults($sQuery, $rResult);
         }
 
         $aBookies = array();
 
-        while ($aBookie = mysqli_fetch_array($rResult))
-        {
+        while ($aBookie = mysqli_fetch_array($rResult)) {
             $aBookies[] = new Bookie($aBookie['id'], $aBookie['name'], $aBookie['url'], $aBookie['refurl']);
         }
 
@@ -41,12 +38,10 @@ class BookieDAO
 
         $aBookies = array();
 
-        while ($aBookie = mysqli_fetch_array($rResult))
-        {
+        while ($aBookie = mysqli_fetch_array($rResult)) {
             $aBookies[] = new Bookie($aBookie['id'], $aBookie['name'], $aBookie['url'], $aBookie['refurl']);
         }
-        if (sizeof($aBookies) > 0)
-        {
+        if (sizeof($aBookies) > 0) {
             return $aBookies[0];
         }
         return null;
@@ -63,12 +58,10 @@ class BookieDAO
 
         $aBookies = array();
 
-        while ($aBookie = mysqli_fetch_array($rResult))
-        {
+        while ($aBookie = mysqli_fetch_array($rResult)) {
             $aBookies[] = new Bookie($aBookie['id'], $aBookie['name'], $aBookie['url'], $aBookie['refurl']);
         }
-        if (sizeof($aBookies) > 0)
-        {
+        if (sizeof($aBookies) > 0) {
             return $aBookies[0];
         }
         return null;
@@ -82,8 +75,7 @@ class BookieDAO
 
         $bResult = DBTools::doParamQuery($sQuery, $aParams);
 
-        if ($bResult == false)
-        {
+        if ($bResult == false) {
             return false;
         }
         return true;
@@ -109,8 +101,7 @@ class BookieDAO
         $aParams = array($a_iBookieID);
         $bResult = DBTools::doParamQuery($sQuery, $aParams);
 
-        if ($bResult == false)
-        {
+        if ($bResult == false) {
             return false;
         }
         return true;
@@ -122,8 +113,7 @@ class BookieDAO
                     INNER JOIN bookies_parsers bp ON bcn.bookie_id = bp.bookie_id
                     SET bcn.changenum = bp.cn_initial';
         $bResult = DBTools::doQuery($sQuery);
-        if ($bResult == false)
-        {
+        if ($bResult == false) {
             return false;
         }
         return true;
@@ -134,8 +124,7 @@ class BookieDAO
         $aParams = array();
         $sExtraWhere = '';
         //If argument is passed as -1 we fetch all parsers
-        if ($a_iBookieID != -1)
-        {
+        if ($a_iBookieID != -1) {
             $aParams[] = $a_iBookieID;
             $sExtraWhere = ' WHERE bookie_id = ?';
         }
@@ -145,8 +134,7 @@ class BookieDAO
         $rResult = DBTools::doParamQuery($sQuery, $aParams);
 
         $aParsers = array();
-        while ($aParser = mysqli_fetch_array($rResult))
-        {
+        while ($aParser = mysqli_fetch_array($rResult)) {
             $aParsers[] = new BookieParser($aParser['id'], $aParser['bookie_id'], $aParser['name'], $aParser['parse_url'], $aParser['mockfile'], $aParser['cn_inuse'], $aParser['cn_urlsuffix']);
         }
         return $aParsers;
@@ -164,8 +152,7 @@ class BookieDAO
         $rResult = DBTools::doParamQuery($sQuery, $aParams);
 
         $aTemplates = array();
-        while ($aTemplate = mysqli_fetch_array($rResult))
-        {
+        while ($aTemplate = mysqli_fetch_array($rResult)) {
             $oTempObj = new PropTemplate($aTemplate['id'], $aTemplate['bookie_id'], $aTemplate['template'], $aTemplate['template_neg'], $aTemplate['prop_type'], $aTemplate['fields_type'], $aTemplate['last_used']);
             $oTempObj->setEventProp($aTemplate['is_eventprop']);
             $aTemplates[] = $oTempObj;
@@ -181,18 +168,15 @@ class BookieDAO
 
         $aParams = array($a_oPropTemplate->getBookieID(), $a_oPropTemplate->getTemplate(), $a_oPropTemplate->getPropTypeID(), $a_oPropTemplate->getTemplateNeg(), $a_oPropTemplate->getFieldsTypeID());
 
-    	$id = null;
-		try 
-		{
-			$id = PDOTools::insert($sQuery, $aParams);
-		}
-		catch(PDOException $e)
-		{
-		    if($e->getCode() == 23000){
-				throw new Exception("Duplicate entry", 10);	
-		    }
-		}
-		return $id;
+        $id = null;
+        try {
+            $id = PDOTools::insert($sQuery, $aParams);
+        } catch (PDOException $e) {
+            if ($e->getCode() == 23000) {
+                throw new Exception("Duplicate entry", 10);
+            }
+        }
+        return $id;
     }
 
     public static function updateTemplateLastUsed($a_iTemplateID)
@@ -218,8 +202,6 @@ class BookieDAO
                     FROM logs_parseruns lp INNER JOIN bookies b  on lp.bookie_id = b.id 
                     WHERE lp.date >= NOW() - INTERVAL 1 DAY 
                     GROUP BY lp.bookie_id;';
-	    return PDOTools::findMany($sQuery);
+        return PDOTools::findMany($sQuery);
     }
 }
-
-?>
