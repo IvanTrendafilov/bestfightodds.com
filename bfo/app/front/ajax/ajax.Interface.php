@@ -51,6 +51,9 @@ class AjaxInterface
         echo $iResult;
     }
 
+    /**
+     * Not updated to match slim based approach. Remove or redo
+     */
     public static function refreshPage()
     {
         include_once('app/front/pages/page.odds.php');

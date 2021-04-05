@@ -5,7 +5,7 @@
 <title>Admin</title>
 <script src="/cnadm/js/jquery-1.12.4.min.js" language="JavaScript" type="text/javascript"></script>
 <script src="/cnadm/js/admin-main.js" language="JavaScript" type="text/javascript"></script>
-<link rel="stylesheet" type="text/css" href="/cnadm/css/stylesheets.php" />
+<link rel="stylesheet" type="text/css" href="/cnadm/css/admin.css" />
 </head>
 <body>
 <div id="adminMenu">
