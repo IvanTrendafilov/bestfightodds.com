@@ -1002,6 +1002,18 @@ class OddsDAO
         return DBTools::getAffectedRows();
     }
 
+    public static function removePropOddsForEventAndBookie($event_id, $bookie_id)
+    {
+        $query = 'DELETE lep.*
+                    FROM lines_eventprops lep
+                    WHERE
+                        lep.event_id = ?
+                        AND lep.bookie_id = ?';
+        $params = [$event_id, $bookie_id];
+        DBTools::doParamQuery($query, $params);
+        return DBTools::getAffectedRows();
+    }
+
     public static function getAllLatestPropOddsForMatchupAndBookie($a_iMatchupID, $a_iBookieID, $a_iPropTypeID = -1)
     {
         $sExtraWhere = '';
@@ -1157,6 +1169,43 @@ class OddsDAO
             throw new Exception("Unknown error " . $e->getMessage(), 10);
         }
         return $result;
+    }
+
+    public static function deleteFlaggedOdds()
+    {
+        //Get all flagged odds first
+        $query = 'SELECT lf.*, TIMESTAMPDIFF(HOUR, initial_flagdate, NOW()) AS timediff FROM lines_flagged lf 
+                    LEFT JOIN fights f ON lf.matchup_id = f.id 
+                    LEFT JOIN events e ON f.event_id = e.id 
+                WHERE LEFT(e.date, 10) >= LEFT((NOW() - INTERVAL 8 HOUR), 10) HAVING timediff > 24;';
+        $result = null;
+        try {
+            $result = PDOTools::findMany($query, []);
+        } catch (PDOException $e) {
+            throw new Exception("Unknown error " . $e->getMessage(), 10);
+        }
+
+        $counter = [
+            'matchup_odds' => 0,
+            'prop_odds' => 0,
+            'event_prop_odds' => 0
+        ];
+        foreach ($result as $row) {
+            if ($row['matchup_id'] != -1) {
+                if ($row['proptype_id'] == -1) {
+                    //Remove matchup odds
+                    $counter['matchup_odds']++;
+                } else {
+                    //Remove prop odds for matchup
+                    $counter['prop_odds']++;
+                }
+            } else if ($row['event_id'] != -1 && $row['proptype_id'] != -1) {
+                //Remove event prop odds
+                $counter['event_prop_odds']++;
+            }
+        }
+
+        return $counter;
     }
 
     public static function getLatestPropOddsV2($a_iEventID = null, $a_iMatchupID = null, $a_iBookieID = null, $a_iPropTypeID = null, $a_iTeamNum = null)

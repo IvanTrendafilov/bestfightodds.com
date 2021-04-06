@@ -193,7 +193,6 @@ class EventDAO
         $aParams = array($a_iFightID, $a_iFightID);
         $sExtraQuery = '';
 
-
         if ($a_iOffset == 1) {
             $sExtraQuery = ' AND fo4.date < (SELECT
                 MAX(fo5.date) AS date
@@ -204,23 +203,21 @@ class EventDAO
             $aParams[] = $a_iFightID;
         }
 
-
-
         $sQuery = 'SELECT
-   fo2.fight_id, fo2.fighter1_odds, fo2.fighter2_odds, fo2.bookie_id, fo2.date
-FROM
-    fightodds AS fo2, bookies bo,
-    (SELECT
-        MAX(fo4.date) as date, bookie_id
-    FROM
-        fightodds fo4
-    WHERE
-        fo4.fight_id = ? ' . $sExtraQuery . ' 
-    GROUP BY bookie_id) AS fo3
-WHERE
-    fo2.fight_id = ? AND fo2.bookie_id = fo3.bookie_id AND fo2.date
-= fo3.date AND fo2.bookie_id = bo.id GROUP BY fo2.bookie_id ORDER BY bo.position,
-fo2.bookie_id, fo2.fight_id ASC;';
+            fo2.fight_id, fo2.fighter1_odds, fo2.fighter2_odds, fo2.bookie_id, fo2.date
+            FROM
+                fightodds AS fo2, bookies bo,
+                (SELECT
+                    MAX(fo4.date) as date, bookie_id
+                FROM
+                    fightodds fo4
+                WHERE
+                    fo4.fight_id = ? ' . $sExtraQuery . ' 
+                GROUP BY bookie_id) AS fo3
+            WHERE
+                fo2.fight_id = ? AND fo2.bookie_id = fo3.bookie_id AND fo2.date
+            = fo3.date AND fo2.bookie_id = bo.id GROUP BY fo2.bookie_id ORDER BY bo.position,
+            fo2.bookie_id, fo2.fight_id ASC;';
 
         $rResult = DBTools::doParamQuery($sQuery, $aParams);
 
@@ -603,8 +600,7 @@ fo2.bookie_id, fo2.fight_id ASC;';
                     $fighter2_id = EventDAO::addNewFighter($a_oFight->getFighter(2));
                 }
 
-                if ($fighter1_id == null || $fighter2_id == null)
-                {
+                if ($fighter1_id == null || $fighter2_id == null) {
                     return false;
                 }
 

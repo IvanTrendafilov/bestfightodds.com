@@ -338,6 +338,14 @@ class OddsHandler
         return OddsDAO::removePropOddsForMatchupAndBookie($a_iMatchupID, $a_iBookieID);
     }
 
+    public static function removePropOddsForEventAndBookie($event_id, $bookie_id)
+    {
+        if (!is_numeric($event_id) || !is_numeric($bookie_id)) {
+            return false;
+        }
+        return OddsDAO::removePropOddsForEventAndBookie($event_id, $bookie_id);
+    }
+
     public static function getAllLatestPropOddsForMatchupAndBookie($a_iMatchupID, $a_iBookieID, $a_iPropTypeID = -1)
     {
         if (!is_numeric($a_iMatchupID) || !is_numeric($a_iBookieID) || !is_numeric($a_iPropTypeID)) {
@@ -418,6 +426,11 @@ class OddsHandler
             $ret[] = $ret_row;
         }
         return $ret;
+    }
+
+    public static function deleteFlaggedOdds()
+    {
+        return OddsDAO::deleteFlaggedOdds();
     }
 
     public static function getLatestPropOddsV2($a_iEventID = null, $a_iMatchupID = null, $a_iBookieID = null, $a_iPropTypeID = null, $a_iTeamNum = null)
