@@ -118,7 +118,7 @@ class OddsJob
         $this->logger->info($result . ' cleared');
 
         //Delete odds that have been flagged for over 24 hours
-        $this->logger->info("Deleteing odds that have been flagged for over 24 hours");
+        $this->logger->info("Deleting odds that have been flagged for over 24 hours");
         $result = OddsHandler::deleteFlaggedOdds();
         $this->logger->info('(Would have) Deleted ' . $result['matchup_odds'] . ' matchup odds');
         $this->logger->info('(Would have) Deleted ' . $result['prop_odds'] . ' prop odds');
