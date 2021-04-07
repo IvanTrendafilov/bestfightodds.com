@@ -8,6 +8,8 @@
     <title>BFO Admin</title>
     <!-- Tailwind -->
     <link href="https://unpkg.com/tailwindcss/dist/tailwind.min.css" rel="stylesheet">
+    <script src="/cnadm/js/jquery-1.12.4.min.js" language="JavaScript" type="text/javascript"></script>
+    <script src="/cnadm/js/admin-main.js" language="JavaScript" type="text/javascript"></script>
 </head>
 <body>
         <div x-data="{ sidebarOpen: false }" class="flex h-screen bg-gray-200 font-roboto">
