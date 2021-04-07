@@ -324,12 +324,13 @@ class AdminController
     {
         $view_data = [];
         if (isset($args['logfile'])) {
-            $logfile = $args['logfile'] == 'latest' ? scandir(PARSE_LOGDIR, SCANDIR_SORT_DESCENDING)[0] : $args['logfile'];
+            $filenames = glob(GENERAL_KLOGDIR . 'cron.oddsjob.*');
+            $logfile = $args['logfile'] == 'latest' ? end($filenames) : $args['logfile'];
             $log_contents =  file_get_contents(PARSE_LOGDIR . '/' . $logfile);
             $view_data = ['log_contents' => $log_contents];
         } else {
             //List all available log files
-            $logdir = opendir(PARSE_LOGDIR);
+            $logdir = opendir(GENERAL_KLOGDIR);
             $files = [];
             while ($file = readdir($logdir)) {
                 if (substr($file, 0, 1) != ".") {
