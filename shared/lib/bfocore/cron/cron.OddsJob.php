@@ -110,8 +110,6 @@ class OddsJob
         $cleared_runs = (new ParseRunLogger())->clearOldRuns();
         $this->logger->info("Cleared old logged runs: " . $cleared_runs);
 
-        $this->logger->info("Parsing/alerting/generating/twittering done!");
-
         //Clear old flagged odds that belong to historic matchups
         $this->logger->info("Clearing old flagged odds for historic matchups");
         $result = OddsHandler::removeAllOldFlagged();
@@ -123,6 +121,8 @@ class OddsJob
         $this->logger->info('(Would have) Deleted ' . $result['matchup_odds'] . ' matchup odds');
         $this->logger->info('(Would have) Deleted ' . $result['prop_odds'] . ' prop odds');
         $this->logger->info('(Would have) Deleted ' . $result['event_prop_odds'] . ' event prop odds');
+
+        $this->logger->info("Finished");
 
     }
 }
