@@ -12,7 +12,7 @@ class EventDAO
         $sQuery = 'SELECT id, date, name, display
                     FROM events
                     WHERE LEFT(date, 10) >= LEFT((NOW() - INTERVAL ' . GENERAL_GRACEPERIOD_SHOW . ' HOUR), 10)
-                    ORDER BY date ASC, LEFT(name,3) = "UFC" DESC, name ASC';
+                    ORDER BY date ASC, LEFT(name,3) = "UFC" DESC, LEFT(name,8) = "Bellator" DESC, name ASC;';
         $rResult = DBTools::doQuery($sQuery);
         $aEvents = array();
         while ($aEvent = mysqli_fetch_array($rResult)) {
