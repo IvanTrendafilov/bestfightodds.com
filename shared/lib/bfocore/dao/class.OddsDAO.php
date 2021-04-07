@@ -700,11 +700,11 @@ class OddsDAO
      */
     public static function getOpeningOddsForEventPropAndBookie($a_iEventID, $a_iPropTypeID, $a_iBookieID)
     {
-        $aParams = array($a_iEventID, $a_iPropTypeID, $a_iBookieID, $a_iTeamNum);
+        $aParams = array($a_iEventID, $a_iPropTypeID, $a_iBookieID);
 
         $sQuery = 'SELECT lep.bookie_id, lep.prop_odds, lep.negprop_odds, lep.proptype_id, lep.date, pt.prop_desc, pt.negprop_desc, lep.date
                     FROM lines_eventprops lep, prop_types pt
-                    WHERE lep.matchup_id = ?
+                    WHERE lep.event_id = ?
                         AND lep.proptype_id = ?
                         AND lep.bookie_id = ?
                         AND lep.proptype_id = pt.id
@@ -1072,28 +1072,16 @@ class OddsDAO
         return $id;
     }
 
-    public static function checkIfFlagged($a_iBookieID, $a_iMatchupID, $a_iEventID, $a_iPropTypeID, $a_iTeamNum)
+    public static function checkIfFlagged($a_iBookieID, $a_iMatchupID = null, $a_iEventID = null, $a_iPropTypeID = null, $a_iTeamNum = null)
     {
-        $sWhere = '';
-        $aParams = [$a_iBookieID];
-        if ($a_iMatchupID != null) {
-            $sWhere .= ' AND matchup_id = ? ';
-            $aParams[] = $a_iMatchupID;
-        }
-        if ($a_iEventID != null) {
-            $sWhere .= ' AND event_id = ? ';
-            $aParams[] = $a_iEventID;
-        }
-        if ($a_iPropTypeID != null) {
-            $sWhere .= ' AND proptype_id = ? ';
-            $aParams[] = $a_iPropTypeID;
-        }
-        if ($a_iTeamNum != null) {
-            $sWhere .= ' AND team_num = ? ';
-            $aParams[] = $a_iTeamNum;
-        }
+        $aParams = [$a_iBookieID, $a_iMatchupID ?? -1, $a_iEventID ?? -1, $a_iPropTypeID ?? -1, $a_iTeamNum ?? -1];
 
-        $sQuery = 'SELECT * FROM lines_flagged WHERE bookie_id = ? ' . $sWhere;
+        $sQuery = 'SELECT * FROM lines_flagged 
+                WHERE bookie_id = ? 
+                AND matchup_id = ?
+                AND event_id = ?
+                AND proptype_id = ?
+                AND team_num = ?';
 
         $result = null;
         try {
@@ -1106,26 +1094,14 @@ class OddsDAO
 
     public static function removeFlagged($a_iBookieID, $a_iMatchupID = null, $a_iEventID = null, $a_iPropTypeID = null, $a_iTeamNum = null)
     {
-        $sWhere = '';
-        $aParams = [$a_iBookieID];
-        if ($a_iMatchupID != null) {
-            $sWhere .= ' AND matchup_id = ? ';
-            $aParams[] = $a_iMatchupID;
-        }
-        if ($a_iEventID != null) {
-            $sWhere .= ' AND event_id = ? ';
-            $aParams[] = $a_iEventID;
-        }
-        if ($a_iPropTypeID != null) {
-            $sWhere .= ' AND proptype_id = ? ';
-            $aParams[] = $a_iPropTypeID;
-        }
-        if ($a_iTeamNum != null) {
-            $sWhere .= ' AND team_num = ? ';
-            $aParams[] = $a_iTeamNum;
-        }
+        $aParams = [$a_iBookieID, $a_iMatchupID ?? -1, $a_iEventID ?? -1, $a_iPropTypeID ?? -1, $a_iTeamNum ?? -1];
 
-        $sQuery = 'DELETE FROM lines_flagged WHERE bookie_id = ? ' . $sWhere;
+        $sQuery = 'DELETE FROM lines_flagged 
+            WHERE bookie_id = ? 
+            AND matchup_id = ?
+            AND event_id = ?
+            AND proptype_id = ?
+            AND team_num = ?';
 
         $result = null;
         try {
