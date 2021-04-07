@@ -152,7 +152,7 @@ class ParserJob
                     $matchup->participants[0]->participantName,
                     $matchup->participants[1]->odds->moneyLine))
         {
-            $this->logger->warning('Missing participant and odds fields for matchup ' + trim((string) $matchup->gameId) + ' at ' + $event_name);
+            $this->logger->warning('Missing participant and odds fields for matchup ' . trim((string) $matchup->gameId) . ' at ' . $event_name);
             return false;
         }
 
@@ -164,7 +164,7 @@ class ParserJob
             $team_1 == '' ||
             $team_2 == '')
         {
-            $this->logger->warning('Invalid formatting for participant and odds fields for matchup ' + trim((string) $matchup->gameId) + ' at ' + $event_name);
+            $this->logger->warning('Invalid formatting for participant and odds fields for matchup ' . trim((string) $matchup->gameId) . ' at ' . $event_name);
             return false;
         }
 
@@ -238,7 +238,7 @@ class ParserJob
                         || !OddsTools::checkCorrectOdds($prop->participants[0]->odds->moneyLine)
                         || !OddsTools::checkCorrectOdds($prop->participants[1]->odds->moneyLine))
             {
-                $this->logger->warning('Missing/invalid options and odds fields for prop ' + trim((string) $prop->description) + ' at ' + $prop->league);
+                $this->logger->warning('Missing/invalid options and odds fields for prop ' . trim((string) $prop->description) . ' at ' . $prop->league);
                 return false;
             }
 
@@ -262,7 +262,7 @@ class ParserJob
                             $prop_line->odds->moneyLine) 
                             || !OddsTools::checkCorrectOdds($prop_line->odds->moneyLine))
                 {
-                    $this->logger->warning('Missing/invalid options and odds fields for prop ' + trim((string) $prop->description) + ' at ' + $prop->league);
+                    $this->logger->warning('Missing/invalid options and odds fields for prop ' . trim((string) $prop->description) . ' at ' . $prop->league);
                 }
                 else
                 {

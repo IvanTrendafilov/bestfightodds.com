@@ -15,14 +15,14 @@
         <tr>
             <td><?=$matchup['matchup_obj']->getTeamAsString(1)?></td>
             <?php foreach ($bookies as $key => $bookie): ?>
-                <td class="<?=(@$matchup['odds'][$key]['flagged'] ? 'flagged' : '')?>"><?=(isset($matchup['odds'][$key]) ? $matchup['odds'][$key]['odds_obj']->getOdds(1) : 'n/a')?></td>
+                <td class="<?=(@$matchup['odds'][$key]['flagged'] ? 'flagged' : '')?>"><?=(isset($matchup['odds'][$key]) ? $matchup['odds'][$key]['odds_obj']->getOdds(1) : '')?></td>
                 <td class="action-cell add-odds">+</td>
             <?php endforeach ?>
         </tr>
         <tr>
             <td><?=$matchup['matchup_obj']->getTeamAsString(2)?></td>
             <?php foreach ($bookies as $key => $bookie): ?>
-                <td class="<?=(@$matchup['odds'][$key]['flagged'] ? 'flagged' : '')?>"><?=(isset($matchup['odds'][$key]) ? $matchup['odds'][$key]['odds_obj']->getOdds(2) : 'n/a')?></td>
+                <td class="<?=(@$matchup['odds'][$key]['flagged'] ? 'flagged' : '')?>"><?=(isset($matchup['odds'][$key]) ? $matchup['odds'][$key]['odds_obj']->getOdds(2) : '')?></td>
                 <?php if (isset($matchup['odds'][$key])): ?>
                     <td class="action-cell del-odds">-</td>
                 <?php else: ?>

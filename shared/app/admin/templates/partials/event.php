@@ -82,7 +82,6 @@
                             <th class="px-6 py-3 border-b border-gray-200 bg-gray-50 text-left text-xs leading-4 font-medium text-gray-500 uppercase tracking-wider">ID</th>
                             <th class="px-6 py-3 border-b border-gray-200 bg-gray-50 text-left text-xs leading-4 font-medium text-gray-500 uppercase tracking-wider">Matchup</th>
                             <th class="px-6 py-3 border-b border-gray-200 bg-gray-50 text-left text-xs leading-4 font-medium text-gray-500 uppercase tracking-wider">Arbitrage</th>
-                            <th class="px-6 py-3 border-b border-gray-200 bg-gray-50 text-left text-xs leading-4 font-medium text-gray-500 uppercase tracking-wider">Imagelink</th>
                             <th class="px-6 py-3 border-b border-gray-200 bg-gray-50 text-left text-xs leading-4 font-medium text-gray-500 uppercase tracking-wider">Actions</th>
                         </tr>
                     </thead>
@@ -96,7 +95,6 @@
                                         <?= $fight['arbitrage_info']['profit'] ?? '' ?>
                                     <?php endif ?>
                                 </td>
-                                <td class="px-6 py-4 whitespace-no-wrap border-b border-gray-200 text-sm leading-5 text-gray-500"><a href="https://www.bestfightodds.com/fights/<?= $fight['fight_obj']->getID() ?>.png">Link</a></td>
                                 <td class="px-6 py-4 whitespace-no-wrap border-b border-gray-200 text-sm leading-5 text-gray-500">
                                     <button class="delete-matchup-button px-4 py-1 bg-red-500 text-gray-100 rounded-md hover:bg-red-400 focus:outline-none focus:bg-red-400" data-matchupid="<?= $fight['fight_obj']->getID() ?>">Delete</a>
                                     <button class="set-mainevent-button px-4 py-1 bg-blue-500 text-gray-100 rounded-md hover:bg-blue-400 focus:outline-none focus:bg-blue-400" data-matchupid="<?= $fight['fight_obj']->getID() ?>" data-mainevent="<?= $fight['fight_obj']->isMainEvent() ? '0' : '1' ?>"><?= $fight['fight_obj']->isMainEvent() ? 'Demote' : 'Promote' ?></a>
