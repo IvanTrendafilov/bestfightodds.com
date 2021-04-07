@@ -326,7 +326,7 @@ class AdminController
         if (isset($args['logfile'])) {
             $filenames = glob(GENERAL_KLOGDIR . 'cron.oddsjob.*');
             $logfile = $args['logfile'] == 'latest' ? end($filenames) : $args['logfile'];
-            $log_contents =  file_get_contents(PARSE_LOGDIR . '/' . $logfile);
+            $log_contents =  file_get_contents($logfile);
             $view_data = ['log_contents' => $log_contents];
         } else {
             //List all available log files
