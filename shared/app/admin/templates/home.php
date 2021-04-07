@@ -36,7 +36,7 @@
         <div class="flex flex-wrap -mx-6">
             <?php foreach ($runstatus as $runstatus_entry) : ?>
 
-                <div class="w-full px-6 w-18">
+                <div class="px-6 w-18">
                     <div class="flex items-center px-5 py-3 shadow-sm rounded-md bg-white">
                         <div class="p-3 rounded-full <?= ($runstatus_entry['average_matched'] <= 0 ? 'bg-red-500' : 'bg-green-500') ?> bg-opacity-75">
                             <svg class="h-6 w-6 text-white" viewBox="0 0 28 30" fill="none" xmlns="http://www.w3.org/2000/svg">
