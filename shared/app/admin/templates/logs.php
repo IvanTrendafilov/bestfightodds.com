@@ -8,6 +8,6 @@
 
 <?php elseif(isset($log_contents)) : ?>
     <pre>
-        <?=$log_contents?>
+<?=$log_contents?>
     </pre>
 <?php endif ?>
