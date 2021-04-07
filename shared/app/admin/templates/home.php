@@ -36,7 +36,7 @@
         <div class="flex flex-wrap">
             <?php foreach ($runstatus as $runstatus_entry) : ?>
                 <a href="/cnadm/parserlogs/<?=strtolower($runstatus_entry['name'])?>">
-                <div class="px-2 w-52">
+                <div class="px-2 mb-2 w-52">
                     <div class="flex items-center px-5 py-3 shadow-sm rounded-md bg-white">
                         <div class="p-3 rounded-full <?= ($runstatus_entry['average_matched'] <= 0 ? 'bg-red-500' : 'bg-green-500') ?> bg-opacity-75">
                         
