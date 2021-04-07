@@ -7,7 +7,7 @@
     <?php endforeach ?>
 
 <?php elseif(isset($log_contents)) : ?>
-
-    <?=$log_contents?>
-
+    <pre>
+        <?=$log_contents?>
+    </pre>
 <?php endif ?>
