@@ -96,8 +96,8 @@
                                     <?php endif ?>
                                 </td>
                                 <td class="px-6 py-4 whitespace-no-wrap border-b border-gray-200 text-sm leading-5 text-gray-500">
-                                    <button class="delete-matchup-button px-4 py-1 bg-red-500 text-gray-100 rounded-md hover:bg-red-400 focus:outline-none focus:bg-red-400" data-matchupid="<?= $fight['fight_obj']->getID() ?>">Delete</a>
-                                    <button class="set-mainevent-button px-4 py-1 bg-blue-500 text-gray-100 rounded-md hover:bg-blue-400 focus:outline-none focus:bg-blue-400" data-matchupid="<?= $fight['fight_obj']->getID() ?>" data-mainevent="<?= $fight['fight_obj']->isMainEvent() ? '0' : '1' ?>"><?= $fight['fight_obj']->isMainEvent() ? 'Demote' : 'Promote' ?></a>
+                                    <button class="delete-matchup-button px-4 py-1 bg-red-500 text-gray-100 rounded-md hover:bg-red-400 focus:outline-none focus:bg-red-400" data-matchupid="<?= $fight['fight_obj']->getID() ?>">Delete</button>
+                                    <button class="set-mainevent-button px-4 py-1 bg-blue-500 text-gray-100 rounded-md hover:bg-blue-400 focus:outline-none focus:bg-blue-400" data-matchupid="<?= $fight['fight_obj']->getID() ?>" data-mainevent="<?= $fight['fight_obj']->isMainEvent() ? '0' : '1' ?>"><?= $fight['fight_obj']->isMainEvent() ? 'Demote' : 'Promote' ?></button>
                                 </td>
                             </tr>
                         <?php endforeach ?>
