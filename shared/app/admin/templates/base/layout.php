@@ -21,7 +21,9 @@
 	<style>
 		body {
 			font-family: ui-sans-serif,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,"Noto Sans",sans-serif,"Apple Color Emoji","Segoe UI Emoji","Segoe UI Symbol","Noto Color Emoji", sans-serif !important;			
-			font-size: 12px;
+		}
+		table {
+			font-size: 0.9em;
 		}
 
 	</style>

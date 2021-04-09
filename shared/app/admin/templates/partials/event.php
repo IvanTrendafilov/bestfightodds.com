@@ -96,8 +96,8 @@
                             <?php endif ?>
                         </td>
                         <td>
-                            <button class="delete-matchup-button btn btn-danger" data-matchupid="<?= $fight['fight_obj']->getID() ?>">Delete</button>
-                            <button class="set-mainevent-button btn btn-primary" data-matchupid="<?= $fight['fight_obj']->getID() ?>" data-mainevent="<?= $fight['fight_obj']->isMainEvent() ? '0' : '1' ?>"><?= $fight['fight_obj']->isMainEvent() ? 'Demote' : 'Promote' ?></button>
+                            <button class="delete-matchup-button btn btn-sm btn-danger" data-matchupid="<?= $fight['fight_obj']->getID() ?>">Delete</button>
+                            <button class="set-mainevent-button btn btn-sm btn-primary" data-matchupid="<?= $fight['fight_obj']->getID() ?>" data-mainevent="<?= $fight['fight_obj']->isMainEvent() ? '0' : '1' ?>"><?= $fight['fight_obj']->isMainEvent() ? 'Demote' : 'Promote' ?></button>
                         </td>
                     </tr>
                 <?php endforeach ?>
