@@ -18,6 +18,13 @@
 	<script src="/cnadm/js/admin-main.js" language="JavaScript" type="text/javascript"></script>
 
 	<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
+	<style>
+		body {
+			font-family: ui-sans-serif,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,"Noto Sans",sans-serif,"Apple Color Emoji","Segoe UI Emoji","Segoe UI Symbol","Noto Color Emoji", sans-serif !important;			
+			font-size: 12px;
+		}
+
+	</style>
 </head>
 
 <body>
