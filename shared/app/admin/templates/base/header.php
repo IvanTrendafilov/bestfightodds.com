@@ -6,7 +6,7 @@
             </svg>
         </button>
 
-        <div class="relative mx-4 lg:mx-0">
+        <div class="flex relative mx-4 lg:mx-0">
 
         <?php foreach ($runstatus as $runstatus_entry) : ?>
             <a href="/cnadm/parser_status">
