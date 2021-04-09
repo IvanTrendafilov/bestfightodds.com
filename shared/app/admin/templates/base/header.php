@@ -8,10 +8,9 @@
 
         <div class="relative mx-4 lg:mx-0">
 
-
         <?php foreach ($runstatus as $runstatus_entry) : ?>
             <a href="/cnadm/parser_status">
-                <div class="px-2 mb-2 w-52">
+                <div class="px-2 mb-2">
                     <div class="flex items-center px-5 py-3 shadow-sm rounded-md bg-white">
                         <div class="p-3 rounded-full <?= ($runstatus_entry['average_matched'] <= 0 ? 'bg-red-500' : 'bg-green-500') ?> bg-opacity-75">
                             <svg class="h-1 w-1 text-white" viewBox="0 0 28 30" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -27,14 +26,7 @@
                 </div>
             </a>
         <?php endforeach ?>
-
-            <span class="absolute inset-y-0 left-0 pl-3 flex items-center">
-                <svg class="h-5 w-5 text-gray-500" viewBox="0 0 24 24" fill="none">
-                    <path d="M21 21L15 15M17 10C17 13.866 13.866 17 10 17C6.13401 17 3 13.866 3 10C3 6.13401 6.13401 3 10 3C13.866 3 17 6.13401 17 10Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-                </svg>
-            </span>
-
-            <input class="form-input w-32 sm:w-64 rounded-md pl-10 pr-4 focus:border-red-600" type="text" placeholder="Search">
+           
         </div>
     </div>
     
