@@ -1,6 +1,6 @@
 <?php $this->layout('base/layout', ['title' => 'Admin']) ?>
 
-Manual actions: <button class="px-4 py-2 bg-gray-800 text-gray-200 rounded-md hover:bg-gray-700 focus:outline-none focus:bg-gray-700" onclick="$('input[onclick^=\'maAdd\']').click();" >Accept all <b>Create</b> actions below</button>
+Manual actions: <button class="btn btn-primary" onclick="$('input[onclick^=\'maAdd\']').click();" >Accept all <b>Create</b> actions below</button>
 <br /><br />
 
 <?php if ($actions != null && count($actions) > 0): ?>

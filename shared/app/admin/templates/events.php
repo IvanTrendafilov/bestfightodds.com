@@ -55,7 +55,7 @@
                     <div class="w-full md:w-1/12 px-3">
                         <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" for="grid-last-name">
                         </label>
-                        <button class="px-4 py-2 bg-gray-800 text-gray-200 rounded-md hover:bg-gray-700 focus:outline-none focus:bg-gray-700 mt-4" id="new-event-button">Add</button>
+                        <button class="btn btn-primary" id="new-event-button">Add</button>
                     </div>
                 </div>
             </form>

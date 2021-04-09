@@ -28,4 +28,8 @@
 
 <br><br>
 
+<?php $this->insert('parser_status', ['runstatus' => $runstatus]) ?>
+
+<br><br>
+
 <?php $this->insert('partials/unmatched', ['bookies' => $bookies, 'unmatched_matchup_groups' => $unmatched_matchup_groups, 'unmatched_groups' => $unmatched_groups, 'unmatched' => $unmatched]) ?>
