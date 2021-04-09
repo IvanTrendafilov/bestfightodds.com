@@ -2,7 +2,7 @@
 
 use Psr\Http\Message\ResponseInterface as Response;
 use Psr\Http\Message\ServerRequestInterface as Request;
-
+use DI\Container;
 
 require_once 'config/inc.config.php';
 require_once 'lib/bfocore/general/class.ScheduleHandler.php';
@@ -14,7 +14,7 @@ require_once 'lib/bfocore/general/class.TeamHandler.php';
 require_once 'lib/bfocore/general/class.TwitterHandler.php';
 require_once 'lib/bfocore/general/class.Alerter.php';
 
-class AdminController
+class AdminController 
 {
     private $plates;
 
@@ -22,6 +22,9 @@ class AdminController
     public function __construct(\League\Plates\Engine $plates)
     {
         $this->plates = $plates;
+
+        //Get run status data
+        $plates->addData(['runstatus' => BookieHandler::getAllRunStatuses()]);
     }
 
     public function __invoke(Request $request, Response $response)
@@ -63,8 +66,7 @@ class AdminController
         //Get alerts data
         $view_data['alertcount'] = Alerter::getAlertCount();
 
-        //Get run status data
-        $view_data['runstatus'] = BookieHandler::getAllRunStatuses();
+        
 
         //Get unmatched data
         $unmatched_col = EventHandler::getUnmatched(1500);
