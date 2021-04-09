@@ -523,4 +523,13 @@ class AdminController
         $response->getBody()->write($this->plates->render('flagged_odds', $view_data));
         return $response;
     }
+
+    public function viewParserStatus(Request $request, Response $response, array $args)
+    {
+        //Get run status data
+        $view_data['runstatus'] = BookieHandler::getAllRunStatuses();
+
+        $response->getBody()->write($this->plates->render('parser_status', $view_data));
+        return $response;
+    }
 }

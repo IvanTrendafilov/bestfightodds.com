@@ -56,6 +56,7 @@ $app->group('', function (RouteCollectorProxy $group) {
   $group->get('/propcorrelation', \AdminController::class . ':createPropCorrelation');
   $group->get('/odds', \AdminController::class . ':oddsOverview');
   $group->get('/flagged', \AdminController::class . ':viewFlaggedOdds');
+  $group->get('/parser_status', \AdminController::class . ':viewParserStatus');
 })->add(new AuthMiddleware());
 
 //API Routes
