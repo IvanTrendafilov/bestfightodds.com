@@ -110,15 +110,13 @@
 
 <button id="clear-unmatched-button" class="btn btn-primary">Clear unmatched table</button><br /><br />
 
-<b>Matchups:</b> <br />
-
 <div class="card">
     <div class="card-header">
-        <h5 class="card-title">Flagged odds</h5>
-        <h6 class="card-subtitle text-muted">These odds have been flagged for deletion as they have not been seen by the parser during a full run
+        <h5 class="card-title">Matchups</h5>
         </h6>
     </div>
-    <table class="table table-responsive">
+    <div class="table-responsive">
+    <table class="table">
         <thead>
             <tr>
                 <th>Last seen</th>
@@ -179,6 +177,7 @@
                 <?php endforeach ?>
         </tbody>
     </table>
+    </div>
 </div>
 
 <table class="genericTable">

@@ -1,6 +1,6 @@
 <nav id="sidebar" class="sidebar">
 	<div class="sidebar-content js-simplebar">
-		<a class="sidebar-brand" href="index.html">
+		<a class="sidebar-brand" href="/cnadm/">
 			<img style="height: 30px; width: 30px; margin-right: 10px;" src="/img/iconv2.jpg">
 			<span class="align-middle">BFO Admin</span>
 		</a>

@@ -1149,11 +1149,13 @@ class OddsDAO
 
     public static function deleteFlaggedOdds()
     {
+        $time = GENERAL_GRACEPERIOD_SHOW + 12; //We add 12 hours to grace period to avoid deleting events that closed earlier that day
+
         //Get all flagged odds first
         $query = 'SELECT lf.*, TIMESTAMPDIFF(HOUR, initial_flagdate, NOW()) AS timediff FROM lines_flagged lf 
                     LEFT JOIN fights f ON lf.matchup_id = f.id 
                     LEFT JOIN events e ON f.event_id = e.id 
-                WHERE LEFT(e.date, 10) >= LEFT((NOW() - INTERVAL 8 HOUR), 10) HAVING timediff > 24;';
+                WHERE LEFT(e.date, 10) >= LEFT((NOW() - INTERVAL ' . $time . ' HOUR), 10) HAVING timediff > 24;';
         $result = null;
         try {
             $result = PDOTools::findMany($query, []);

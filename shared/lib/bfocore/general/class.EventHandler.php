@@ -143,15 +143,15 @@ class EventHandler
 
             $iID = EventDAO::addNewFight($a_oFight);
 
-            //Check if fight is only one for this event, if so, set it as main event. Not applicable if we automatically create events
-            if (PARSE_CREATEMATCHUPS == false)
+            //Check if fight is only one for this event, if so, set it as main event. Not applicable if we automatically create events - DISABLED
+            /*if (PARSE_CREATEMATCHUPS == false)
             {
                 $aMatchups = self::getAllFightsForEvent($a_oFight->getEventID());
                 if (count($aMatchups) == 1 && $aMatchups[0]->getID() == $iID)
                 {
                     self::setFightAsMainEvent($iID);
                 }
-            }
+            }*/
 
             return $iID;
         }
