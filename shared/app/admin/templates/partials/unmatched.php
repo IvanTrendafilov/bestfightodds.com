@@ -118,7 +118,7 @@
         <h6 class="card-subtitle text-muted">These odds have been flagged for deletion as they have not been seen by the parser during a full run
         </h6>
     </div>
-    <table class="table">
+    <table class="table table-responsive">
         <thead>
             <tr>
                 <th>Last seen</th>
