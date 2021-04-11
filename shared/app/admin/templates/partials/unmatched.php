@@ -112,111 +112,78 @@
 
 <b>Matchups:</b> <br />
 
-<div class="flex flex-col mt-8">
-    <div class="-my-2 py-2 overflow-x-auto sm:-mx-6 sm:px-6 lg:-mx-8 lg:px-8">
-        <div class="align-middle inline-block min-w-full shadow overflow-hidden sm:rounded-lg border-b border-gray-200">
-            <table class="min-w-full">
-                <thead>
-                    <tr>
-                        <th class="px-6 py-3 border-b border-gray-200 bg-gray-50 text-left text-xs leading-4 font-medium text-gray-500 uppercase tracking-wider">Last seen</th>
-                        <th class="px-6 py-3 border-b border-gray-200 bg-gray-50 text-left text-xs leading-4 font-medium text-gray-500 uppercase tracking-wider">Bookie</th>
-                        <th class="px-6 py-3 border-b border-gray-200 bg-gray-50 text-left text-xs leading-4 font-medium text-gray-500 uppercase tracking-wider">Matchup</th>
-                        <th class="px-6 py-3 border-b border-gray-200 bg-gray-50 text-left text-xs leading-4 font-medium text-gray-500 uppercase tracking-wider">Actions</th>
-                    </tr>
-                </thead>
-
-                <tbody class="bg-white">
-                    <?php /*foreach ($unmatched_groups as $unmatched_group) : ?>
-                        <tr>
-                            <td class="px-6 py-4 whitespace-no-wrap border-b border-gray-200">
-                                <div class="flex items-center">
-                                    <div class="flex-shrink-0 h-10 w-10">
-                                        <img class="h-10 w-10 rounded-full" src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80" alt="" />
-                                    </div>
-
-                                    <div class="ml-4">
-                                        <div class="text-sm leading-5 font-medium text-gray-900">John Doe</div>
-                                        <div class="text-sm leading-5 text-gray-500">john@example.com</div>
-                                    </div>
-                                </div>
-                            </td>
-
-                            <td class="px-6 py-4 whitespace-no-wrap border-b border-gray-200">
-                                <div class="text-sm leading-5 text-gray-900">Software Engineer</div>
-                                <div class="text-sm leading-5 text-gray-500">Web dev</div>
-                            </td>
-
-                            <td class="px-6 py-4 whitespace-no-wrap border-b border-gray-200">
-                                <span class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-green-100 text-green-800">Active</span>
-                            </td>
-
-                            <td class="px-6 py-4 whitespace-no-wrap border-b border-gray-200 text-sm leading-5 text-gray-500">Owner</td>
-
-                            <td class="px-6 py-4 whitespace-no-wrap text-right border-b border-gray-200 text-sm leading-5 font-medium">
-                                <a href="#" class="text-indigo-600 hover:text-indigo-900">Edit</a>
-                            </td>
-                        </tr>
-                    <?php endforeach */?>
-
-<?php foreach ($unmatched_groups as $unmatched_group) : ?>
-        <?php if (isset($unmatched_group[0]['view_extras'])) : ?>
-            <tr class="event event-group" id="event<?= isset($i) ? ++$i : $i = 1 ?>" data-create="<?= $this->e('{"name": "' . ($unmatched_group[0]['view_extras']['event_name_reduced'] ?? '') . '", "date": "' . $unmatched_group[0]['view_extras']['event_date_formatted'] . '"}') ?>">
-                <td class="text-xs px-6 py-4 whitespace-no-wrap border-b border-gray-200"></td>
-                <td class="text-xs px-6 py-4 whitespace-no-wrap border-b border-gray-200"></td>
-                <td class="text-xs px-6 py-4 whitespace-no-wrap border-b border-gray-200" data-date=""><b><?= $unmatched_group[0]['metadata']['event_name'] ?? '' ?> / <?= $unmatched_group[0]['view_extras']['event_name_reduced'] ?? '' ?></b> (<?= $unmatched_group[0]['view_extras']['event_date_formatted'] ?>)
-                    <?php if (isset($unmatched_group[0]['view_extras']['event_match']['id'])) : ?>
-                        Match: <?= $unmatched_group[0]['view_extras']['event_match']['name'] ?> (<?= $unmatched_group[0]['view_extras']['event_match']['date'] ?>) <a href="#" class="create-matchups-for-event" data-eventid="<?= $unmatched_group[0]['view_extras']['event_match']['id'] ?>" data-eventlink="event<?= $i ?>"><button class="btn btn-primary">Create all matchups below for matched event</button></a>
-                    <?php else : ?>
-                        No match.. <a href="/cnadm/events?in_event_name=<?= $unmatched_group[0]['view_extras']['event_name_reduced'] ?? '' ?>&in_event_date=<?= $unmatched_group[0]['view_extras']['event_date_formatted'] ?>"><button class="btn btn-primary">create</button></a> <a href="http://www.google.se/search?q=tapology <?= $unmatched_group[0]['view_extras']['event_name_reduced'] ?? '' ?>"><button class="btn btn-primary">google</button></a>
-                    <?php endif ?>
-                </td>
-                <td class="text-xs px-6 py-4 whitespace-no-wrap border-b border-gray-200"></td>
-            <?php else : ?>
-            <tr class="event event-group" id="event<?= isset($i) ? ++$i : $i = 1 ?>">
-                <td class="text-xs px-6 py-4 whitespace-no-wrap border-b border-gray-200"></td>
-                <td class="text-xs px-6 py-4 whitespace-no-wrap border-b border-gray-200"></td>
-                <td class="text-xs px-6 py-4 whitespace-no-wrap border-b border-gray-200" data-date=""></td>
-                <td class="text-xs px-6 py-4 whitespace-no-wrap border-b border-gray-200"></td>
-            <?php endif ?>
+<div class="card">
+    <div class="card-header">
+        <h5 class="card-title">Flagged odds</h5>
+        <h6 class="card-subtitle text-muted">These odds have been flagged for deletion as they have not been seen by the parser during a full run
+        </h6>
+    </div>
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Last seen</th>
+                <th>Bookie</th>
+                <th>Matchup</th>
+                <th>Actions</th>
             </tr>
+        </thead>
 
-            <?php foreach ($unmatched_group as $unmatched_item) : ?>
-                <?php if ($unmatched_item['type'] == 0) : ?>
-                    <tr class="matchup-row" data-create="<?= $this->e('{"inteam1": "' . $unmatched_item['view_indata1'] . '", "inteam2": "' . $unmatched_item['view_indata2'] . '"}') ?>" data-eventlink="event<?= $i ?>">
-                        <td class="text-xs px-6 py-4 whitespace-no-wrap border-b border-gray-200"><?= date("Y-m-d H:i:s", strtotime($unmatched_item['log_date'])) ?></td>
-                        <td class="text-xs px-6 py-4 whitespace-no-wrap border-b border-gray-200"><b><?= $bookies[$unmatched_item['bookie_id']] ?></b></td>
-                        <td class="text-xs px-6 py-4 whitespace-no-wrap border-b border-gray-200">
-                            <?= $this->e($unmatched_item['matchup'], 'strtolower|ucwords') ?></td>
-                        <td class="text-xs px-6 py-4 whitespace-no-wrap border-b border-gray-200"><a href="/cnadm/newmatchup?inteam1=<?= $unmatched_item['view_indata1'] ?>&inteam2=<?= $unmatched_item['view_indata2'] ?>&ineventid=<?= $unmatched_group[0]['view_extras']['event_match']['id'] ?? '' ?>"><button class="btn btn-primary">add</button></a> <a href="http://www.google.se/search?q=tapology <?= $unmatched_item['matchup'] ?>"><button class="btn btn-primary">google</button></a>
+        <tbody>
+
+            <?php foreach ($unmatched_groups as $unmatched_group) : ?>
+                <?php if (isset($unmatched_group[0]['view_extras'])) : ?>
+                    <tr class="event event-group" id="event<?= isset($i) ? ++$i : $i = 1 ?>" data-create="<?= $this->e('{"name": "' . ($unmatched_group[0]['view_extras']['event_name_reduced'] ?? '') . '", "date": "' . $unmatched_group[0]['view_extras']['event_date_formatted'] . '"}') ?>">
+                        <td></td>
+                        <td></td>
+                        <td data-date=""><b><?= $unmatched_group[0]['metadata']['event_name'] ?? '' ?> / <?= $unmatched_group[0]['view_extras']['event_name_reduced'] ?? '' ?></b> (<?= $unmatched_group[0]['view_extras']['event_date_formatted'] ?>)
+                            <?php if (isset($unmatched_group[0]['view_extras']['event_match']['id'])) : ?>
+                                Match: <?= $unmatched_group[0]['view_extras']['event_match']['name'] ?> (<?= $unmatched_group[0]['view_extras']['event_match']['date'] ?>) <a href="#" class="create-matchups-for-event" data-eventid="<?= $unmatched_group[0]['view_extras']['event_match']['id'] ?>" data-eventlink="event<?= $i ?>"><button class="btn btn-primary">Create all matchups below for matched event</button></a>
+                            <?php else : ?>
+                                No match.. <a href="/cnadm/events?in_event_name=<?= $unmatched_group[0]['view_extras']['event_name_reduced'] ?? '' ?>&in_event_date=<?= $unmatched_group[0]['view_extras']['event_date_formatted'] ?>"><button class="btn btn-primary">create</button></a> <a href="http://www.google.se/search?q=tapology <?= $unmatched_group[0]['view_extras']['event_name_reduced'] ?? '' ?>"><button class="btn btn-primary">google</button></a>
+                            <?php endif ?>
+                        </td>
+                        <td></td>
+                    <?php else : ?>
+                    <tr class="event event-group" id="event<?= isset($i) ? ++$i : $i = 1 ?>">
+                        <td></td>
+                        <td></td>
+                        <td data-date=""></td>
+                        <td></td>
+                    <?php endif ?>
+                    </tr>
+
+                    <?php foreach ($unmatched_group as $unmatched_item) : ?>
+                        <?php if ($unmatched_item['type'] == 0) : ?>
+                            <tr class="matchup-row" data-create="<?= $this->e('{"inteam1": "' . $unmatched_item['view_indata1'] . '", "inteam2": "' . $unmatched_item['view_indata2'] . '"}') ?>" data-eventlink="event<?= $i ?>">
+                                <td><?= date("Y-m-d H:i:s", strtotime($unmatched_item['log_date'])) ?></td>
+                                <td><b><?= $bookies[$unmatched_item['bookie_id']] ?></b></td>
+                                <td>
+                                    <?= $this->e($unmatched_item['matchup'], 'strtolower|ucwords') ?></td>
+                                <td><a href="/cnadm/newmatchup?inteam1=<?= $unmatched_item['view_indata1'] ?>&inteam2=<?= $unmatched_item['view_indata2'] ?>&ineventid=<?= $unmatched_group[0]['view_extras']['event_match']['id'] ?? '' ?>"><button class="btn btn-primary">add</button></a> <a href="http://www.google.se/search?q=tapology <?= $unmatched_item['matchup'] ?>"><button class="btn btn-primary">google</button></a>
+                                </td>
+                            </tr>
+                        <?php endif ?>
+                    <?php endforeach ?>
+                    <tr>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td>
+                            <?php if (isset($unmatched_group[0]['view_extras']['event_name_reduced'])) : ?>
+                                <a href="#" class="create-event-with-matchups" data-eventlink="event<?= $i ?>"><button class="btn btn-primary">Create event and matchups</button></a>
+                            <?php else : ?>
+                                &nbsp;
+                            <?php endif ?>
                         </td>
                     </tr>
-                <?php endif ?>
-            <?php endforeach ?>
-            <tr>
-                <td class="text-xs px-6 py-4 whitespace-no-wrap border-b border-gray-200"></td>
-                <td class="text-xs px-6 py-4 whitespace-no-wrap border-b border-gray-200"></td>
-                <td class="text-xs px-6 py-4 whitespace-no-wrap border-b border-gray-200"></td>
-                <td class="text-xs px-6 py-4 whitespace-no-wrap border-b border-gray-200">
-                    <?php if (isset($unmatched_group[0]['view_extras']['event_name_reduced'])) : ?>
-                        <a href="#" class="create-event-with-matchups" data-eventlink="event<?= $i ?>"><button class="btn btn-primary">Create event and matchups</button></a>
-                    <?php else : ?>
-                        &nbsp;
-                    <?php endif ?>
-                </td>
-            </tr>
-        <?php endforeach ?>
-
-
-                </tbody>
-            </table>
-
-        </div>
-    </div>
+                <?php endforeach ?>
+        </tbody>
+    </table>
 </div>
 
 <table class="genericTable">
 
-    
+
 </table><br />
 
 <b>Props without matchups</b>: <br />
