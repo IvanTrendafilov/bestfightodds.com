@@ -1147,14 +1147,19 @@ class OddsDAO
         return $result;
     }
 
-    public static function deleteFlaggedOdds()
+    public static function getFlaggedOddsForDeletion()
     {
         $time = GENERAL_GRACEPERIOD_SHOW + 12; //We add 12 hours to grace period to avoid deleting events that closed earlier that day
 
         //Get all flagged odds first
-        $query = 'SELECT lf.*, TIMESTAMPDIFF(HOUR, initial_flagdate, NOW()) AS timediff FROM lines_flagged lf 
+        $query = 'SELECT lf.*, TIMESTAMPDIFF(HOUR, initial_flagdate, NOW()) AS timediff, pt.prop_desc, pt.negprop_desc, 
+                        f1.name AS team1_name, f2.name AS team2_name, b.name AS bookie_name, e.name AS event_name FROM lines_flagged lf 
                     LEFT JOIN fights f ON lf.matchup_id = f.id 
                     LEFT JOIN events e ON f.event_id = e.id 
+                    LEFT JOIN prop_types pt ON lf.proptype_id = pt.id
+                    LEFT JOIN fighters f1 ON f.fighter1_id = f1.id
+                    LEFT JOIN fighters f2 ON f.fighter2_id = f2.id 
+                    LEFT JOIN bookies b ON lf.bookie_id = b.id 
                 WHERE LEFT(e.date, 10) >= LEFT((NOW() - INTERVAL ' . $time . ' HOUR), 10) HAVING timediff > 24;';
         $result = null;
         try {
@@ -1163,27 +1168,27 @@ class OddsDAO
             throw new Exception("Unknown error " . $e->getMessage(), 10);
         }
 
-        $counter = [
-            'matchup_odds' => 0,
-            'prop_odds' => 0,
-            'event_prop_odds' => 0
+        $flagged_odds = [
+            'matchup_odds' => [],
+            'prop_odds' => [],
+            'event_prop_odds' => []
         ];
         foreach ($result as $row) {
             if ($row['matchup_id'] != -1) {
                 if ($row['proptype_id'] == -1) {
                     //Remove matchup odds
-                    $counter['matchup_odds']++;
+                    $flagged_odds['matchup_odds'][] = $row;
                 } else {
                     //Remove prop odds for matchup
-                    $counter['prop_odds']++;
+                    $flagged_odds['prop_odds'][] = $row;
                 }
             } else if ($row['event_id'] != -1 && $row['proptype_id'] != -1) {
                 //Remove event prop odds
-                $counter['event_prop_odds']++;
+                $flagged_odds['event_prop_odds'][] = $row;
             }
         }
 
-        return $counter;
+        return $flagged_odds;
     }
 
     public static function getLatestPropOddsV2($a_iEventID = null, $a_iMatchupID = null, $a_iBookieID = null, $a_iPropTypeID = null, $a_iTeamNum = null)

@@ -327,6 +327,8 @@ class OddsHandler
         }
         //First we remove all prop odds so that we don't leave any orphans
         OddsHandler::removePropOddsForMatchupAndBookie($a_iMatchupID, $a_iBookieID);
+        //We also remove any flags related to this matchup
+        OddsHandler::removeFlagged($a_iBookieID, $a_iMatchupID);
         return OddsDAO::removeOddsForMatchupAndBookie($a_iMatchupID, $a_iBookieID);
     }
 
@@ -430,7 +432,31 @@ class OddsHandler
 
     public static function deleteFlaggedOdds()
     {
-        return OddsDAO::deleteFlaggedOdds();
+        $flagged_col = OddsDAO::getFlaggedOddsForDeletion();
+
+        //Log to common audit log file
+        $logger = new Katzgrau\KLogger\Logger(GENERAL_KLOGDIR, Psr\Log\LogLevel::INFO, ['filename' => 'changeaudit.log']);
+
+        //Iterate each type and delete
+        foreach ($flagged_col['matchup_odds'] as $flagged) {
+            $result = OddsHandler::removeOddsForMatchupAndBookie((int) $flagged['matchup_id'], (int) $flagged['bookie_id']);
+            if ($result > 0) {
+                $logger->info('Deleted odds for ' . ucwords(strtolower($flagged['team1_name'])) . ' vs ' . ucwords(strtolower($flagged['team2_name'])) . ' (' . $flagged['matchup_id'] . ') at ' . $flagged['event_name'] . ' for ' . $flagged['bookie_name']);
+            } else {
+                $logger->error('Error deleting odds for ' . ucwords(strtolower($flagged['team1_name'])) . ' vs ' . ucwords(strtolower($flagged['team2_name'])) . ' (' . $flagged['matchup_id'] . ') at ' . $flagged['event_name'] . ' for ' . $flagged['bookie_name']);
+            }
+        }
+
+        //TODO:
+        foreach ($flagged_col['prop_odds'] as $flagged) {
+            $logger->info('Deleting prop odds for ' . ucwords(strtolower($flagged['team1_name'])) . ' vs ' . ucwords(strtolower($flagged['team2_name'])) . ' (' . $flagged['matchup_id'] . '), prop ' . $flagged['prop_desc'] . '(' . $flagged['proptype_id'] . ') for ' . $flagged['bookie_name']);
+        }
+        //TODO:
+        foreach ($flagged_col['event_prop_odds'] as $flagged) {
+            $logger->info('Deleting event prop odds for ' . $flagged['event_name'] . '(' . $flagged['event_id'] . '), prop ' . $flagged['prop_desc'] . '(' . $flagged['proptype_id'] . ') for ' . $flagged['bookie_name']);
+        }
+
+        return count($flagged_col['matchup_odds']) + count($flagged_col['prop_odds']) + count($flagged_col['event_prop_odds']);
     }
 
     public static function getLatestPropOddsV2($a_iEventID = null, $a_iMatchupID = null, $a_iBookieID = null, $a_iPropTypeID = null, $a_iTeamNum = null)

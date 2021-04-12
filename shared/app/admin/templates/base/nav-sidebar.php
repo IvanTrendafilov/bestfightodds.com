@@ -118,6 +118,12 @@
 					<i class="align-middle" data-feather="map"></i> <span class="align-middle">Odds job log</span>
 				</a>
 			</li>
+
+			<li class="sidebar-item">
+				<a class="sidebar-link" href="/cnadm/changeauditlog">
+					<i class="align-middle" data-feather="map"></i> <span class="align-middle">Change audit log</span>
+				</a>
+			</li>
 		</ul>
 		
 	</div>

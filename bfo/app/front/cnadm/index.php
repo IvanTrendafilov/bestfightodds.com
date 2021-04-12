@@ -57,7 +57,11 @@ $app->group('', function (RouteCollectorProxy $group) {
   $group->get('/odds', \AdminController::class . ':oddsOverview');
   $group->get('/flagged', \AdminController::class . ':viewFlaggedOdds');
   $group->get('/parser_status', \AdminController::class . ':viewParserStatus');
+  $group->get('/changeauditlog', \AdminController::class . ':viewChangeAuditLog');
+  
 })->add(new AuthMiddleware());
+
+
 
 //API Routes
 $app->group('/api', function (RouteCollectorProxy $group) {
