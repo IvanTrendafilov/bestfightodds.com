@@ -150,15 +150,18 @@ class ParserJob
 
     private function getEventFromCategories($node)
     {
-        //Loops through all categories child elements and picks out the first one that is not the generic one (1201 / UFC/MMA)
+        //Loops through all categories child elements and picks out the one with the longest ID (most specific event)
+        $found_desc = '';
+        $largest = 0;
         foreach ($node['categories'] as $category)
         {
-            if ($category['code'] != '1201')
+            if (intval($category['code']) > $largest)
             {
-                return $category['description'];
-            }            
+                $largest = intval($category['code']);
+                $found_desc = $category['description'];
+            }
         }
-        return '';
+        return $found_desc;
     }
 }
 
