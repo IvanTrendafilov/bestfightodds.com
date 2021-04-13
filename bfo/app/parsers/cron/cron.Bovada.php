@@ -100,7 +100,7 @@ class ParserJob
                                         $market['outcomes'][0]['price']['american'],
                                         $market['outcomes'][1]['price']['american']);
                         $parsed_matchup->setCorrelationID($correlation_id);
-                        $parsed_matchup->setMetaData('event_name', (string) $event_name . ' ' . substr($event['startTime'], 0, 10));
+                        $parsed_matchup->setMetaData('event_name', (string) $event_name);
                         
                         $parsed_matchup->setMetaData('gametime', (string) $date);
                         $parsed_sport->addParsedMatchup($parsed_matchup);
