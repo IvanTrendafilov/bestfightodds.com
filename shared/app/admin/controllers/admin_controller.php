@@ -14,7 +14,7 @@ require_once 'lib/bfocore/general/class.TeamHandler.php';
 require_once 'lib/bfocore/general/class.TwitterHandler.php';
 require_once 'lib/bfocore/general/class.Alerter.php';
 
-class AdminController 
+class AdminController
 {
     private $plates;
 
@@ -66,12 +66,11 @@ class AdminController
         //Get alerts data
         $view_data['alertcount'] = Alerter::getAlertCount();
 
-        
+
 
         //Get unmatched data
         $unmatched_col = EventHandler::getUnmatched(1500);
         $unmatched_groups = [];
-        $unmatched_matchup_groups = [];
         foreach ($unmatched_col as $key => $unmatched) {
 
             if (isset($unmatched['metadata']['gametime'])) {
@@ -100,29 +99,140 @@ class AdminController
                 }
             }
 
-
-            //Add to group (only for matchups)
             if ($unmatched['type'] == 0) {
                 $unmatched_groups[($unmatched_col[$key]['view_extras']['event_name_reduced'] ?? '') . ':' . ($unmatched_col[$key]['view_extras']['event_date_formatted'] ?? '')][] = $unmatched_col[$key];
-
-                /*//Add to matchup group
-                if (!isset($unmatched_matchup_groups[$unmatched['matchup']]['bookies']))
-                {
-                    $unmatched_matchup_groups[$unmatched['matchup']]['bookies'] = [];
-                }
-                if (!isset($unmatched_matchup_groups[$unmatched['matchup']]['events']))
-                {
-                    $unmatched_matchup_groups[$unmatched['matchup']]['events'] = [];
-                }
-
-                $unmatched_matchup_groups[$unmatched['matchup']]['bookies'][] = $unmatched['bookie_id'];
-                $unmatched_matchup_groups[$unmatched['matchup']]['events'][] = $unmatched_col[$key]['view_extras']['event_name_reduced'] ?? '' . ':' . $unmatched_col[$key]['view_extras']['event_date_formatted'] ?? '';*/
             }
         }
 
+        $groups = [];
+        foreach ($unmatched_col as $unmatched) {
+
+            if ($unmatched['type'] == 0) {
+
+                //First check if this can be grouped to an existing key using similarity
+                $key = $unmatched['matchup'];
+                foreach ($groups as $search_key => $value) {
+                    similar_text($search_key, $unmatched['matchup'], $fSim);
+
+                    if ($fSim > 87) {
+                        //Matches existing, add to this one
+                        $key = $search_key;
+
+                        //TODO: Search for existing fighters to get the best match for name
+                    }
+                }
+                if (!isset($groups[$key])) {
+                    $groups[$key] = [];
+                }
+                if (!isset($groups[$key]['dates'])) {
+                    $groups[$key]['dates'] = [];
+                }
+
+                $date = (new DateTime('@' . $unmatched['metadata']['gametime']))->format('Y-m-d');
+                if (!isset($groups[$key]['dates'][$date]['unmatched'])) {
+                    $groups[$key]['dates'][$date]['unmatched'] = [];
+                }
+                $groups[$key]['dates'][$date]['unmatched'][] = $unmatched;
+
+                //Match events
+                if (isset($unmatched['metadata']['event_name'])) {
+
+
+                    if (!isset($groups[$key]['dates'][$date]['parsed_events'])) {
+                        $groups[$key]['dates'][$date]['parsed_events'] = [];
+                    }
+                    if (!isset($groups[$key]['dates'][$date]['matched_events'])) {
+                        $groups[$key]['dates'][$date]['matched_events'] = [];
+                    }
+
+
+                    //Reduce event name
+                    $cut_pos = strpos($unmatched['metadata']['event_name'], " -") != 0 ? strpos($unmatched['metadata']['event_name'], " -") : strlen($unmatched['metadata']['event_name']);
+                    $reduced_name = substr($unmatched['metadata']['event_name'], 0, $cut_pos);
+                    $groups[$key]['dates'][$date]['parsed_events'][] = $reduced_name;
+
+                    $event_search = EventHandler::searchEvent($reduced_name, true);
+                    //Match on date for the matched events
+                    $matched_event = '';
+                    foreach ($event_search as $event) {
+                        if ($event->getDate() == $date) {
+                            $matched_event = $event->getName();
+                        }
+                    }
+                    $groups[$key]['dates'][$date]['matched_events'][] = $matched_event;
+                }
+            }
+        }
+
+        
+        //Re-index the main key (matchup) based on what name combination is the most frequently occuring
+        foreach ($groups as $key_matchup => $group)
+        {
+            foreach ($group['dates'] as $key_date => $date_group) {
+                $count_arr = [];
+                foreach ($date_group['unmatched'] as $unmatched) {
+                    $count_arr[] = $unmatched['matchup'];
+                }
+                $count_arr = array_count_values($count_arr);
+                arsort($count_arr);
+                if ($key_matchup != array_key_first($count_arr)) {
+                    $groups[array_key_first($count_arr)] = $groups[$key_matchup];
+                    unset($groups[$key_matchup]);
+                    echo 'switching first.  old:' . $key_matchup . ' new: ' . array_key_first($count_arr);
+                }
+            }
+        }
+
+        ///Match dates to events
+        /*foreach ($groups as $group) {
+            foreach ($group['dates'] as &$group_date) {
+                foreach ($group_date['unmatched'] as &$group_date_unmatched) {
+
+                    if (isset($group_date_unmatched['metadata']['event_name'])) {
+
+                        //Has event name metadata
+                        if (!isset($group_date_unmatched['matched_events'])) {
+                            $group_date_unmatched['matched_events'] = [];
+                        }
+                        $group_date_unmatched['matched_events'][] = $group_date_unmatched['metadata']['event_name'];
+
+                        echo '<pre>';
+                        var_dump($group_date_unmatched);
+                        exit;
+                        /*$cut_pos = strpos($unmatched['metadata']['event_name'], " -") != 0 ? strpos($unmatched['metadata']['event_name'], " -") : strlen($unmatched['metadata']['event_name']);
+                        $unmatched_col[$key]['view_extras']['event_name_reduced'] = substr($unmatched['metadata']['event_name'], 0, $cut_pos);
+        
+                        $event_search = EventHandler::searchEvent($unmatched_col[$key]['view_extras']['event_name_reduced'], true);
+                        if ($event_search != null) {
+                            $matched_event = $event_search[0];
+                            if (count($event_search) > 1) {
+                                //Multiple matches, match on date if possible
+                                foreach ($event_search as $item) {
+                                    if ($item->getDate() == $unmatched_col[$key]['view_extras']['event_date_formatted']) {
+                                        $matched_event = $item;
+                                    }
+                                }
+                            }
+                            $unmatched_col[$key]['view_extras']['event_match'] = ['id' => $matched_event->getID(), 'name' => $matched_event->getName(), 'date' => $matched_event->getDate()];
+                        }
+                    }
+                }
+            }
+        }
+
+*/
+
+        /*echo '<pre>';
+        var_dump($groups);
+        echo '</pre>';
+        exit;*/
+
+
+
         $view_data['unmatched'] = $unmatched_col;
+        var_dump($view_data['unmatched']);
         $view_data['unmatched_groups'] = $unmatched_groups;
-        $view_data['unmatched_matchup_groups'] = $unmatched_matchup_groups;
+        $view_data['unmatched_matchup_groups'] = $groups;
 
         $bookies = BookieHandler::getAllBookies();
         $view_data['bookies'] = [];

@@ -138,9 +138,6 @@ class EventHandler
     {
         if ($a_oFight->getFighter(1) != '' && $a_oFight->getFighter(2) != '')
         {
-
-            //TODO: Fetch all fighters and check if the fighter already exists either as full name or alt name
-
             $iID = EventDAO::addNewFight($a_oFight);
 
             //Check if fight is only one for this event, if so, set it as main event. Not applicable if we automatically create events - DISABLED

@@ -110,6 +110,68 @@
 
 <button id="clear-unmatched-button" class="btn btn-primary">Clear unmatched table</button><br /><br />
 
+
+<div class="card">
+    <div class="card-header">
+        <h5 class="card-title">Matchups</h5>
+        </h6>
+    </div>
+    <div class="table-responsive">
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>Matchup</th>
+                    <th>Dates</th>
+                    <th>Parsed events</th>
+                    <th>Matched events</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+
+            <tbody>
+
+                <?php foreach ($unmatched_matchup_groups as $key_matchup => $unmatched_matchup_group) : ?>
+                    <tr>
+                        <td><?= $this->e($key_matchup, 'strtolower|ucwords') ?></td>
+                        <td>
+                            <?php foreach ($unmatched_matchup_group['dates'] as $key_date => $date) : ?>
+
+                                <?= $key_date ?>
+                                <?php foreach ($date['unmatched'] as $unmatched) : ?>
+                                    <?= $bookies[$unmatched['bookie_id']] ?>
+                                <?php endforeach ?><br>
+                            <?php endforeach ?>
+                        </td>
+                        <td>
+
+                            <?php foreach ($unmatched_matchup_group['dates'] as $key_date => $date) : ?>
+                                <?php if (isset($date['parsed_events'])) : ?>
+                                    <?php foreach ($date['parsed_events'] as $event) : ?>
+                                        <?= $event ?><br>
+                                    <?php endforeach ?>
+                                <?php endif ?>
+                            <?php endforeach ?>
+                        </td>
+
+                        <td>
+
+                            <?php foreach ($unmatched_matchup_group['dates'] as $key_date => $date) : ?>
+                                <?php if (isset($date['matched_events'])) : ?>
+                                    <?php foreach ($date['matched_events'] as $event) : ?>
+                                        <?= $event ?><br>
+                                    <?php endforeach ?>
+                                <?php endif ?>
+                            <?php endforeach ?>
+                        </td>
+
+                        <td></td>
+                    </tr>
+                <?php endforeach ?>
+            </tbody>
+        </table>
+    </div>
+</div>
+
 <div class="card">
     <div class="card-header">
         <h5 class="card-title">Matchups</h5>
@@ -139,7 +201,7 @@
                             </td>
                             <td><a href="#" class="create-matchups-for-event" data-eventid="<?= $unmatched_group[0]['view_extras']['event_match']['id'] ?>" data-eventlink="event<?= $i ?>"><button class="btn btn-primary">Create all below at matched event</button></a></td>
                         <?php else : ?>
-                            No match.. 
+                            No match..
                             </td>
                             <td><a href="/cnadm/events?in_event_name=<?= $unmatched_group[0]['view_extras']['event_name_reduced'] ?? '' ?>&in_event_date=<?= $unmatched_group[0]['view_extras']['event_date_formatted'] ?>"><button class="btn btn-primary">create</button></a> <a href="http://www.google.se/search?q=tapology <?= $unmatched_group[0]['view_extras']['event_name_reduced'] ?? '' ?>"><button class="btn btn-primary">google</button></a></td>
                         <?php endif ?>
