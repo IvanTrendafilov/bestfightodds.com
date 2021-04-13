@@ -276,7 +276,7 @@ class AdminController
 
                         //Check if either fighter has another matchup scheduled and indicate that
                         $matchups1 = EventHandler::getAllFightsForFighter($action['view_extra']['matchup']->getFighterID(1));
-                        $action['view_extra']['found1'] = true;
+                        $action['view_extra']['found1'] = false;
                         foreach ($matchups1 as $matchup) {
                             if ($matchup->isFuture() && ($matchup->getFighterID(1) != $action['view_extra']['matchup']->getFighterID(1) || $matchup->getFighterID(2) != $action['view_extra']['matchup']->getFighterID(2))) {
                                 $action['view_extra']['found1'] = true;

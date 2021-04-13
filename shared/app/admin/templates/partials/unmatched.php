@@ -112,10 +112,6 @@
 
 
 <div class="card">
-    <div class="card-header">
-        <h5 class="card-title">Matchups</h5>
-        </h6>
-    </div>
     <div class="table-responsive">
         <table class="table">
             <thead>

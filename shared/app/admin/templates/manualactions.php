@@ -1,126 +1,123 @@
 <?php $this->layout('base/layout', ['title' => 'Admin']) ?>
 
-Manual actions: <button class="btn btn-primary" onclick="$('input[onclick^=\'maAdd\']').click();" >Accept all <b>Create</b> actions below</button>
+Manual actions: <button class="btn btn-primary" onclick="$('input[onclick^=\'maAdd\']').click();">Accept all <b>Create</b> actions below</button>
 <br /><br />
 
-<?php if ($actions != null && count($actions) > 0): ?>
-	
+<?php if ($actions != null && count($actions) > 0) : ?>
 
-	<div class="flex flex-col mt-8">
-    <div class="-my-2 py-2 overflow-x-auto sm:-mx-6 sm:px-6 lg:-mx-8 lg:px-8">
-        <div class="align-middle inline-block min-w-full shadow overflow-hidden sm:rounded-lg border-b border-gray-200">
-            <table class="min-w-full">
-                <thead>
-                    <tr>
-                        <th class="px-6 py-3 border-b border-gray-200 bg-gray-50 text-left text-xs leading-4 font-medium text-gray-500 uppercase tracking-wider">Action</th>
-                        <th class="px-6 py-3 border-b border-gray-200 bg-gray-50 text-left text-xs leading-4 font-medium text-gray-500 uppercase tracking-wider">Event/Matchup</th>
-                        <th class="px-6 py-3 border-b border-gray-200 bg-gray-50 text-left text-xs leading-4 font-medium text-gray-500 uppercase tracking-wider">From</th>
-						<th class="px-6 py-3 border-b border-gray-200 bg-gray-50 text-left text-xs leading-4 font-medium text-gray-500 uppercase tracking-wider"></th>
-                        <th class="px-6 py-3 border-b border-gray-200 bg-gray-50 text-left text-xs leading-4 font-medium text-gray-500 uppercase tracking-wider">To</th>
-						<th class="px-6 py-3 border-b border-gray-200 bg-gray-50 text-left text-xs leading-4 font-medium text-gray-500 uppercase tracking-wider"></th>
-                        <th class="px-6 py-3 border-b border-gray-200 bg-gray-50 text-left text-xs leading-4 font-medium text-gray-500 uppercase tracking-wider">Accept</th>
-                    </tr>
-                </thead>
+	<div class="card">
+		<div class="table-responsive">
+			<table class="table">
+				<thead>
+					<tr>
+						<th>Action</th>
+						<th>Event/Matchup</th>
+						<th>From</th>
+						<th></th>
+						<th>To</th>
+						<th></th>
+						<th>Action</th>
+					</tr>
+				</thead>
+				<tbody>
+					<?php foreach ($actions as $action) : ?>
+						<tr id="ma<?= $action['id'] ?>">
 
-                <tbody class="bg-white">
-				<?php foreach($actions as $action): ?>
+							<?php if ($action['type'] == 1) : ?>
 
+								<td>Create new event: </td>
+								<td><?= $action['action_obj']->eventTitle ?></td>
+								<td> at </td>
+								<td><?= $action['action_obj']->eventDate ?> with matchups: <br>
+									<?php foreach ($action['action_obj']->matchups as $aMatchup) : ?>
+										&nbsp;<?= $aMatchup[0] ?> vs <?= $aMatchup[1] ?><br>
+									<?php endforeach ?>
+								</td>
+								<td><input type="submit" value="Accept" onclick="maAddEventWithMatchups(<?= $action['id'] ?>, '<?= htmlspecialchars($action['description']) ?>')">
 
+								<?php elseif ($action['type'] == 2) : ?>
 
-	
+								<td>Rename event </td>
+								<td><?= $action['view_extra']['new_event']->getName() ?></td>
+								<td> to </td>
+								<td><?= $action['action_obj']->eventTitle ?></td>
+								<td><input type="submit" value="Accept" onclick="maRenameEvent(<?= $action['id'] ?>, '<?= htmlspecialchars($action['description']) ?>')">
 
-		<tr id="ma<?=$action['id']?>">
+								<?php elseif ($action['type'] == 3) : ?>
 
-			<?php if ($action['type'] == 1): ?>
+								<td>Change date of </td>
+								<td><?= $action['view_extra']['new_event']->getName() ?></td>
+								<td> from </td>
+								<td><?= $action['view_extra']['new_event']->getDate() ?></td>
+								<td> to </td>
+								<td><?= $action['action_obj']->eventDate ?></td>
+								<td><input type="submit" value="Accept" onclick="maRedateEvent(<?= $action['id'] ?>, '<?= htmlspecialchars($action['description']) ?>')">
 
-				<td class="px-6 py-4 whitespace-no-wrap border-b border-gray-200 text-sm leading-5 text-gray-500">Create new event: </td>
-				<td class="px-6 py-4 whitespace-no-wrap border-b border-gray-200 text-sm leading-5 text-gray-500"><?=$action['action_obj']->eventTitle?></td>
-				<td class="px-6 py-4 whitespace-no-wrap border-b border-gray-200 text-sm leading-5 text-gray-500"> at </td>
-				<td class="px-6 py-4 whitespace-no-wrap border-b border-gray-200 text-sm leading-5 text-gray-500"><?=$action['action_obj']->eventDate?> with matchups: <br>
-				<?php foreach ($action['action_obj']->matchups as $aMatchup): ?>
-					&nbsp;<?=$aMatchup[0]?> vs <?=$aMatchup[1]?><br>
-				<?php endforeach ?>
-				</td>
-				<td class="px-6 py-4 whitespace-no-wrap border-b border-gray-200 text-sm leading-5 text-gray-500"><input type="submit" value="Accept" onclick="maAddEventWithMatchups(<?=$action['id']?>, '<?=htmlspecialchars($action['description'])?>')">
+								<?php elseif ($action['type'] == 4) : ?>
 
-			<?php elseif ($action['type'] == 2): ?>
-				
-				<td class="px-6 py-4 whitespace-no-wrap border-b border-gray-200 text-sm leading-5 text-gray-500">Rename event </td>
-				<td class="px-6 py-4 whitespace-no-wrap border-b border-gray-200 text-sm leading-5 text-gray-500"><?=$action['view_extra']['new_event']->getName()?></td>
-				<td class="px-6 py-4 whitespace-no-wrap border-b border-gray-200 text-sm leading-5 text-gray-500"> to </td>
-				<td class="px-6 py-4 whitespace-no-wrap border-b border-gray-200 text-sm leading-5 text-gray-500"><?=$action['action_obj']->eventTitle?></td>
-				<td class="px-6 py-4 whitespace-no-wrap border-b border-gray-200 text-sm leading-5 text-gray-500"><input type="submit" value="Accept" onclick="maRenameEvent(<?=$action['id']?>, '<?=htmlspecialchars($action['description'])?>')">
+								<td>Delete event </td>
+								<td></td>
+								<td></td>
+								<td><?= $action['view_extra']['new_event']->getName() ?> - <?= $action['view_extra']['new_event']->getDate() ?></td>
+								<td></td>
+								<td></td>
+								<td><input type="submit" value="Accept" onclick="maDeleteEvent(<?= $action['id'] ?>, '<?= htmlspecialchars($action['description']) ?>')">
 
-			<?php elseif ($action['type'] == 3): ?>
-			
-				<td class="px-6 py-4 whitespace-no-wrap border-b border-gray-200 text-sm leading-5 text-gray-500">Change date of </td>
-				<td class="px-6 py-4 whitespace-no-wrap border-b border-gray-200 text-sm leading-5 text-gray-500"><?=$action['view_extra']['new_event']->getName()?></td>
-				<td class="px-6 py-4 whitespace-no-wrap border-b border-gray-200 text-sm leading-5 text-gray-500"> from </td>
-				<td class="px-6 py-4 whitespace-no-wrap border-b border-gray-200 text-sm leading-5 text-gray-500"><?=$action['view_extra']['new_event']->getDate()?></td>
-				<td class="px-6 py-4 whitespace-no-wrap border-b border-gray-200 text-sm leading-5 text-gray-500"> to </td>
-				<td class="px-6 py-4 whitespace-no-wrap border-b border-gray-200 text-sm leading-5 text-gray-500"><?=$action['action_obj']->eventDate?></td>
-				<td class="px-6 py-4 whitespace-no-wrap border-b border-gray-200 text-sm leading-5 text-gray-500"><input type="submit" value="Accept" onclick="maRedateEvent(<?=$action['id']?>, '<?=htmlspecialchars($action['description'])?>')">
+								<?php elseif ($action['type'] == 5) : ?>
 
-			<?php elseif ($action['type'] == 4): ?>
-				
-				<td class="px-6 py-4 whitespace-no-wrap border-b border-gray-200 text-sm leading-5 text-gray-500">Delete event </td>
-				<td class="px-6 py-4 whitespace-no-wrap border-b border-gray-200 text-sm leading-5 text-gray-500"><?=$action['view_extra']['new_event']->getName()?> - <?=$action['view_extra']['new_event']->getDate()?></td>
-				<td class="px-6 py-4 whitespace-no-wrap border-b border-gray-200 text-sm leading-5 text-gray-500"><input type="submit" value="Accept" onclick="maDeleteEvent(<?=$action['id']?>, '<?=htmlspecialchars($action['description'])?>')">
+								<td>Create matchup </td>
+								<td><?= $action['action_obj']->matchups[0]->team1 ?> vs. <?= $action['action_obj']->matchups[0]->team2 ?></td>
+								<td> at </td>
+								<td><?= $action['view_extra']['new_event']->getName() ?></td>
+								<td><input type="submit" value="Accept" onclick="maAddMatchup(<?= $action['id'] ?>, '<?= htmlspecialchars($action['description']) ?>')">
 
-			<?php elseif ($action['type'] == 5): ?>
-				
-				<td class="px-6 py-4 whitespace-no-wrap border-b border-gray-200 text-sm leading-5 text-gray-500">Create matchup </td>
-				<td class="px-6 py-4 whitespace-no-wrap border-b border-gray-200 text-sm leading-5 text-gray-500"><?=$action['action_obj']->matchups[0]->team1?> vs. <?=$action['action_obj']->matchups[0]->team2?></td>
-				<td class="px-6 py-4 whitespace-no-wrap border-b border-gray-200 text-sm leading-5 text-gray-500"> at </td>
-				<td class="px-6 py-4 whitespace-no-wrap border-b border-gray-200 text-sm leading-5 text-gray-500"><?=$action['view_extra']['new_event']->getName()?></td>
-				<td class="px-6 py-4 whitespace-no-wrap border-b border-gray-200 text-sm leading-5 text-gray-500"><input type="submit" value="Accept" onclick="maAddMatchup(<?=$action['id']?>, '<?=htmlspecialchars($action['description'])?>')">
+								<?php elseif ($action['type'] == 6) : ?>
 
-			<?php elseif ($action['type'] == 6): ?>
+								<td>Move </td>
+								<td><a href="http://www.google.com/search?q=tapology <?= urlencode($action['view_extra']['matchup']->getTeamAsString(1) . ' vs. ' . $action['view_extra']['matchup']->getTeamAsString(2)) ?>"><?= $action['view_extra']['matchup']->getTeamAsString(1) ?> vs. <?= $action['view_extra']['matchup']->getTeamAsString(2) ?></a></td>
+								<td> from </td>
+								<td><?= $action['view_extra']['old_event']->getName() ?> (<?= $action['view_extra']['old_event']->getDate() ?>)</td>
+								<td> to </td>
+								<td><?= $action['view_extra']['new_event']->getName() ?> (<?= $action['view_extra']['new_event']->getDate() ?>)</td>
+								<td><input type="submit" value="Accept" onclick="maMoveMatchup(<?= $action['id'] ?>, '<?= htmlspecialchars($action['description']) ?>')">
 
-				<td class="px-6 py-4 whitespace-no-wrap border-b border-gray-200 text-sm leading-5 text-gray-500">Move </td><td class="px-6 py-4 whitespace-no-wrap border-b border-gray-200 text-sm leading-5 text-gray-500"><a href="http://www.google.com/search?q=tapology <?=urlencode($action['view_extra']['matchup']->getTeamAsString(1) . ' vs. ' . $action['view_extra']['matchup']->getTeamAsString(2))?>"><?=$action['view_extra']['matchup']->getTeamAsString(1)?> vs. <?=$action['view_extra']['matchup']->getTeamAsString(2)?></a></td>
-				<td class="px-6 py-4 whitespace-no-wrap border-b border-gray-200 text-sm leading-5 text-gray-500"> from </td>
-				<td class="px-6 py-4 whitespace-no-wrap border-b border-gray-200 text-sm leading-5 text-gray-500"><?=$action['view_extra']['old_event']->getName()?> (<?=$action['view_extra']['old_event']->getDate()?>)</td>
-				<td class="px-6 py-4 whitespace-no-wrap border-b border-gray-200 text-sm leading-5 text-gray-500"> to </td>
-				<td class="px-6 py-4 whitespace-no-wrap border-b border-gray-200 text-sm leading-5 text-gray-500"><?=$action['view_extra']['new_event']->getName()?> (<?=$action['view_extra']['new_event']->getDate()?>)</td>
-				<td class="px-6 py-4 whitespace-no-wrap border-b border-gray-200 text-sm leading-5 text-gray-500"><input type="submit" value="Accept" onclick="maMoveMatchup(<?=$action['id']?>, '<?=htmlspecialchars($action['description'])?>')">
+								<?php elseif ($action['type'] == 7) : //Delete matchup 
+								?>
 
-			<?php elseif ($action['type'] == 7): //Delete matchup ?>
+								<td>Delete </td>
+								<td><a href="http://www.google.com/search?q=tapology <?= urlencode($action['view_extra']['matchup']->getTeamAsString(1) . ' vs. ' . $action['view_extra']['matchup']->getTeamAsString(2)) ?>"><?= $action['view_extra']['matchup']->getTeamAsString(1) ?> vs. <?= $action['view_extra']['matchup']->getTeamAsString(2) ?></a>
+									<?= $action['view_extra']['odds'] == null ? ' <span class="badge bg-success">No odds</span> ' : ' <span class="badge bg-warning">Has odds</span>' ?>
+									<?= $action['view_extra']['found1'] ? ' <span class="badge bg-success">' . $action['view_extra']['matchup']->getTeamAsString(1) . ' has other matchup</span> ' : '' ?>
+									<?= $action['view_extra']['found2'] ? ' <span class="badge bg-success">' . $action['view_extra']['matchup']->getTeamAsString(2) . ' has other matchup</span> ' : '' ?>
+								</td>
+								<td> from </td>
+								<td><?= $action['view_extra']['old_event']->getName() ?> (<?= $action['view_extra']['old_event']->getDate() ?>)</td>
+								<td></td>
+								<td></td>
+								<td><input type="submit" value="Accept" onclick="maDeleteMatchup(<?= $action['id'] ?>, '<?= htmlspecialchars($action['description']) ?>')">
 
-				<td class="px-6 py-4 whitespace-no-wrap border-b border-gray-200 text-sm leading-5 text-gray-500">Delete </td>
-				<td class="px-6 py-4 whitespace-no-wrap border-b border-gray-200 text-sm leading-5 text-gray-500"><a href="http://www.google.com/search?q=tapology <?=urlencode($action['view_extra']['matchup']->getTeamAsString(1) . ' vs. ' . $action['view_extra']['matchup']->getTeamAsString(2))?>"><?=$action['view_extra']['matchup']->getTeamAsString(1)?> vs. <?=$action['view_extra']['matchup']->getTeamAsString(2)?></a> 
-					<?=$action['view_extra']['odds'] == null ? ' (no odds)' : ' (has odds)'?>
-					<?=$action['view_extra']['found1'] ? $action['view_extra']['matchup']->getTeamAsString(1) . ' has other matchup' : ''?>
-					<?=$action['view_extra']['found2'] ? $action['view_extra']['matchup']->getTeamAsString(2) . ' has other matchup' : ''?>
-				</td>
-				<td class="px-6 py-4 whitespace-no-wrap border-b border-gray-200 text-sm leading-5 text-gray-500"> from </td>
-				<td class="px-6 py-4 whitespace-no-wrap border-b border-gray-200 text-sm leading-5 text-gray-500"><?=$action['view_extra']['old_event']->getName()?> (<?=$action['view_extra']['old_event']->getDate()?>)</td>
-				<td class="px-6 py-4 whitespace-no-wrap border-b border-gray-200 text-sm leading-5 text-gray-500"><input type="submit" value="Accept" onclick="maDeleteMatchup(<?=$action['id']?>, '<?=htmlspecialchars($action['description'])?>')">
+								<?php elseif ($action['type'] == 8) : //Move matchup to a non-existant event 
+								?>
 
-			<?php elseif ($action['type'] == 8): //Move matchup to a non-existant event ?>
+								<td>Move the following matchups:<br>
+									<?php foreach ($action['view_extra']['matchups'] as $key => $matchup) : ?>
+										&nbsp;<?= $matchup->getTeamAsString(1) ?> vs. <?= $matchup->getTeamAsString(2) ?><br>
+									<?php endforeach ?>
+								</td>
+								<td> to </td>
+								<td><?= $action['view_extra']['new_event'] != null ? $action['view_extra']['new_event']->getName() : 'TBD' ?></td>
+								<td><input type="submit" value="Accept" ' .  <?= $action['view_extra']['new_event'] == null ? ' disabled=true ' : '' ?> onclick="maMoveMatchup(<?= $action['id'] ?>, ' <?= htmlspecialchars($action['view_extra']['newma'][$key]) ?>')"><br>
 
-				<td class="px-6 py-4 whitespace-no-wrap border-b border-gray-200 text-sm leading-5 text-gray-500">Move the following matchups:<br>
-					<?php foreach ($action['view_extra']['matchups'] as $key => $matchup): ?>
-						&nbsp;<?=$matchup->getTeamAsString(1)?> vs. <?=$matchup->getTeamAsString(2)?><br>
+								<?php else : ?>
+
+								<td>Unknown action: <?= $action['description'] ?></td>
+
+							<?php endif ?>
+						</tr>
 					<?php endforeach ?>
-				</td>
-				<td class="px-6 py-4 whitespace-no-wrap border-b border-gray-200 text-sm leading-5 text-gray-500"> to </td>
-				<td class="px-6 py-4 whitespace-no-wrap border-b border-gray-200 text-sm leading-5 text-gray-500"><?=$action['view_extra']['new_event'] != null ? $action['view_extra']['new_event']->getName() : 'TBD'?></td>
-				<td class="px-6 py-4 whitespace-no-wrap border-b border-gray-200 text-sm leading-5 text-gray-500"><input type="submit" value="Accept" ' .  <?=$action['view_extra']['new_event'] == null ? ' disabled=true ' : ''?> onclick="maMoveMatchup(<?=$action['id']?>, '<?=htmlspecialchars($action['view_extra']['newma'][$key])?>')"><br>
+				</tbody>
+			</table>
+		</div>
+	</div>
 
-			<?php else: ?>
-
-				<td class="px-6 py-4 whitespace-no-wrap border-b border-gray-200 text-sm leading-5 text-gray-500">Unknown action: <?=$action['description']?></td>
-
-			<?php endif ?>
-
-		</tr>
-
-		<?php endforeach ?>
-                </tbody>
-            </table>
-        </div>
-    </div>
-</div>
-	
 <?php endif ?>
-
