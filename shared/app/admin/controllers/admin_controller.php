@@ -163,9 +163,8 @@ class AdminController
                 }
             }
         }
-
         
-        //Re-index the main key (matchup) based on what name combination is the most frequently occuring
+        //Re-index the main key (matchup) based on what name combination is the most frequently occurring
         foreach ($groups as $key_matchup => $group)
         {
             foreach ($group['dates'] as $key_date => $date_group) {
@@ -178,7 +177,6 @@ class AdminController
                 if ($key_matchup != array_key_first($count_arr)) {
                     $groups[array_key_first($count_arr)] = $groups[$key_matchup];
                     unset($groups[$key_matchup]);
-                    echo 'switching first.  old:' . $key_matchup . ' new: ' . array_key_first($count_arr);
                 }
             }
         }
@@ -230,7 +228,6 @@ class AdminController
 
 
         $view_data['unmatched'] = $unmatched_col;
-        var_dump($view_data['unmatched']);
         $view_data['unmatched_groups'] = $unmatched_groups;
         $view_data['unmatched_matchup_groups'] = $groups;
 

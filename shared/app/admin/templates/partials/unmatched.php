@@ -137,8 +137,8 @@
                             <?php foreach ($unmatched_matchup_group['dates'] as $key_date => $date) : ?>
 
                                 <?= $key_date ?>
-                                <?php foreach ($date['unmatched'] as $unmatched) : ?>
-                                    <?= $bookies[$unmatched['bookie_id']] ?>
+                                <?php foreach ($date['unmatched'] as $unmatched_item) : ?>
+                                    <?= $bookies[$unmatched_item['bookie_id']] ?>
                                 <?php endforeach ?><br>
                             <?php endforeach ?>
                         </td>
@@ -164,7 +164,8 @@
                             <?php endforeach ?>
                         </td>
 
-                        <td></td>
+                        <td>
+                        </td>
                     </tr>
                 <?php endforeach ?>
             </tbody>
@@ -252,6 +253,7 @@
 
 <b>Props without matchups</b>: <br />
 <table class="genericTable">
+
     <?php foreach ($unmatched as $unmatched_item) : ?>
         <?php if ($unmatched_item['type'] == 1) : ?>
             <tr>
