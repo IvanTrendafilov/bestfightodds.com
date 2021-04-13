@@ -978,38 +978,57 @@ class OddsDAO
         return null;
     }
 
-    public static function removeOddsForMatchupAndBookie($a_iMatchupID, $a_iBookieID)
+    public static function removeOddsForMatchupAndBookie($matchup_id, $bookie_id)
     {
-        $sQuery = 'DELETE fo.*
+        $query = 'DELETE fo.*
                     FROM fightodds fo
                     WHERE
                         fo.fight_id = ?
                         AND fo.bookie_id = ?';
-        $aParams = [$a_iMatchupID, $a_iBookieID];
-        DBTools::doParamQuery($sQuery, $aParams);
+        $params = [$matchup_id, $bookie_id];
+        DBTools::doParamQuery($query, $params);
         return DBTools::getAffectedRows();
     }
 
-    public static function removePropOddsForMatchupAndBookie($a_iMatchupID, $a_iBookieID)
+    public static function removePropOddsForMatchupAndBookie($matchup_id, $bookie_id, $proptype_id = null, $team_num = null)
     {
-        $sQuery = 'DELETE lp.*
+        $params = [$matchup_id, $bookie_id];
+        $extra_where = '';
+        if ($proptype_id != null) {
+            $params[] = $proptype_id;
+            $extra_where .= ' AND proptype_id = ? ';
+        }
+        if ($team_num != null) {
+            $params[] = $team_num;
+            $extra_where .= ' AND team_num = ? ';
+        }
+
+        $query = 'DELETE lp.*
                     FROM lines_props lp
                     WHERE
                         lp.matchup_id = ?
-                        AND lp.bookie_id = ?';
-        $aParams = [$a_iMatchupID, $a_iBookieID];
-        DBTools::doParamQuery($sQuery, $aParams);
+                        AND lp.bookie_id = ? ' . $extra_where;
+
+
+        DBTools::doParamQuery($query, $params);
         return DBTools::getAffectedRows();
     }
 
-    public static function removePropOddsForEventAndBookie($event_id, $bookie_id)
+    public static function removePropOddsForEventAndBookie($event_id, $bookie_id, $proptype_id = null)
     {
+        $params = [$event_id, $bookie_id];
+        $extra_where = '';
+        if ($proptype_id != null) {
+            $params[] = $proptype_id;
+            $extra_where .= ' AND proptype_id = ? ';
+        }
+
         $query = 'DELETE lep.*
                     FROM lines_eventprops lep
                     WHERE
                         lep.event_id = ?
-                        AND lep.bookie_id = ?';
-        $params = [$event_id, $bookie_id];
+                        AND lep.bookie_id = ? ' . $extra_where;
+
         DBTools::doParamQuery($query, $params);
         return DBTools::getAffectedRows();
     }
@@ -1129,12 +1148,13 @@ class OddsDAO
 
     public static function getAllFlaggedMatchups()
     {
-        $query = 'SELECT f.*, e.name as event_name, e.date as event_date, f1.name AS team1_name, f2.name AS team2_name, lf.* 
+        $query = 'SELECT f.*, e.name as event_name, e.date as event_date, f1.name AS team1_name, f2.name AS team2_name, lf.*, b.name as bookie_name 
                         FROM bets.lines_flagged lf 
                             LEFT JOIN fights f ON lf.matchup_id = f.id 
                             LEFT JOIN fighters f1 ON f.fighter1_id = f1.id 
                             LEFT JOIN fighters f2 ON f.fighter2_id = f2.id 
                             LEFT JOIN events e ON f.event_id = e.id 
+                            LEFT JOIN bookies b ON lf.bookie_id = b.id
                     WHERE proptype_id = -1
                     ORDER BY e.date ASC';
 
@@ -1149,18 +1169,21 @@ class OddsDAO
 
     public static function getFlaggedOddsForDeletion()
     {
-        $time = GENERAL_GRACEPERIOD_SHOW + 12; //We add 12 hours to grace period to avoid deleting events that closed earlier that day
+        //Get all flagged odds first. We select all flagged odds that have been flagged for more than 24 hours AND belongs to an event that is not starting in the next 24 hours.
 
-        //Get all flagged odds first
+        //These values can be tuned with time (TODO: Maybe move to config file?):
+        $event_threshold = 24; //If the event is within this value (hours) we will not remove
+        $flagged_time = 24; //How many hours the line must be flagged before deletion 
+
         $query = 'SELECT lf.*, TIMESTAMPDIFF(HOUR, initial_flagdate, NOW()) AS timediff, pt.prop_desc, pt.negprop_desc, 
                         f1.name AS team1_name, f2.name AS team2_name, b.name AS bookie_name, e.name AS event_name FROM lines_flagged lf 
                     LEFT JOIN fights f ON lf.matchup_id = f.id 
-                    LEFT JOIN events e ON f.event_id = e.id 
+                    LEFT JOIN events e ON (f.event_id = e.id  OR lf.event_id = e.id)
                     LEFT JOIN prop_types pt ON lf.proptype_id = pt.id
                     LEFT JOIN fighters f1 ON f.fighter1_id = f1.id
                     LEFT JOIN fighters f2 ON f.fighter2_id = f2.id 
                     LEFT JOIN bookies b ON lf.bookie_id = b.id 
-                WHERE LEFT(e.date, 10) >= LEFT((NOW() - INTERVAL ' . $time . ' HOUR), 10) HAVING timediff > 24;';
+                WHERE LEFT(e.date, 10) >= LEFT((NOW() - INTERVAL -' . $event_threshold . ' HOUR), 10) HAVING timediff > ' . $flagged_time . ';';
         $result = null;
         try {
             $result = PDOTools::findMany($query, []);

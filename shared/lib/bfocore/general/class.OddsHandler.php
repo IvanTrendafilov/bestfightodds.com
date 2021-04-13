@@ -320,32 +320,34 @@ class OddsHandler
         return false;
     }
 
-    public static function removeOddsForMatchupAndBookie($a_iMatchupID, $a_iBookieID)
+    public static function removeOddsForMatchupAndBookie($matchup_id, $bookie_id)
     {
-        if (!is_int($a_iMatchupID) || !is_int($a_iBookieID)) {
+        if (!is_int($matchup_id) || !is_int($bookie_id)) {
             return false;
         }
         //First we remove all prop odds so that we don't leave any orphans
-        OddsHandler::removePropOddsForMatchupAndBookie($a_iMatchupID, $a_iBookieID);
+        OddsHandler::removePropOddsForMatchupAndBookie($matchup_id, $bookie_id);
         //We also remove any flags related to this matchup
-        OddsHandler::removeFlagged($a_iBookieID, $a_iMatchupID);
-        return OddsDAO::removeOddsForMatchupAndBookie($a_iMatchupID, $a_iBookieID);
+        OddsHandler::removeFlagged($bookie_id, $matchup_id);
+        return OddsDAO::removeOddsForMatchupAndBookie($matchup_id, $bookie_id);
     }
 
-    public static function removePropOddsForMatchupAndBookie($a_iMatchupID, $a_iBookieID)
+    public static function removePropOddsForMatchupAndBookie($matchup_id, $bookie_id, $proptype_id = null, $team_num = null)
     {
-        if (!is_numeric($a_iMatchupID) || !is_numeric($a_iBookieID)) {
+        if (!is_numeric($matchup_id) || !is_numeric($bookie_id)) {
             return false;
         }
-        return OddsDAO::removePropOddsForMatchupAndBookie($a_iMatchupID, $a_iBookieID);
+        OddsHandler::removeFlagged($bookie_id, $matchup_id, null, $proptype_id, $team_num);
+        return OddsDAO::removePropOddsForMatchupAndBookie($matchup_id, $bookie_id, $proptype_id, $team_num);
     }
 
-    public static function removePropOddsForEventAndBookie($event_id, $bookie_id)
+    public static function removePropOddsForEventAndBookie($event_id, $bookie_id, $proptype_id = null)
     {
         if (!is_numeric($event_id) || !is_numeric($bookie_id)) {
             return false;
         }
-        return OddsDAO::removePropOddsForEventAndBookie($event_id, $bookie_id);
+        OddsHandler::removeFlagged($bookie_id, null, $event_id, $proptype_id);
+        return OddsDAO::removePropOddsForEventAndBookie($event_id, $bookie_id, $proptype_id);
     }
 
     public static function getAllLatestPropOddsForMatchupAndBookie($a_iMatchupID, $a_iBookieID, $a_iPropTypeID = -1)
@@ -441,19 +443,27 @@ class OddsHandler
         foreach ($flagged_col['matchup_odds'] as $flagged) {
             $result = OddsHandler::removeOddsForMatchupAndBookie((int) $flagged['matchup_id'], (int) $flagged['bookie_id']);
             if ($result > 0) {
-                $logger->info('Deleted odds for ' . ucwords(strtolower($flagged['team1_name'])) . ' vs ' . ucwords(strtolower($flagged['team2_name'])) . ' (' . $flagged['matchup_id'] . ') at ' . $flagged['event_name'] . ' for ' . $flagged['bookie_name']);
+                $logger->info('Deleted odds for ' . ucwords(strtolower($flagged['team1_name'])) . ' vs ' . ucwords(strtolower($flagged['team2_name'])) . ' (' . $flagged['matchup_id'] . ') at ' . $flagged['event_name'] . ' for ' . $flagged['bookie_name'] . ' (' . $flagged['bookie_id'] . '). Odds removed: ' . $result);
             } else {
-                $logger->error('Error deleting odds for ' . ucwords(strtolower($flagged['team1_name'])) . ' vs ' . ucwords(strtolower($flagged['team2_name'])) . ' (' . $flagged['matchup_id'] . ') at ' . $flagged['event_name'] . ' for ' . $flagged['bookie_name']);
+                $logger->error('Error deleting odds for ' . ucwords(strtolower($flagged['team1_name'])) . ' vs ' . ucwords(strtolower($flagged['team2_name'])) . ' (' . $flagged['matchup_id'] . ') at ' . $flagged['event_name'] . ' for ' . $flagged['bookie_name'] . ' (' . $flagged['bookie_id'] . ')');
             }
         }
 
-        //TODO:
         foreach ($flagged_col['prop_odds'] as $flagged) {
-            $logger->info('Deleting prop odds for ' . ucwords(strtolower($flagged['team1_name'])) . ' vs ' . ucwords(strtolower($flagged['team2_name'])) . ' (' . $flagged['matchup_id'] . '), prop ' . $flagged['prop_desc'] . '(' . $flagged['proptype_id'] . ') for ' . $flagged['bookie_name']);
+            $result = OddsHandler::removePropOddsForMatchupAndBookie((int) $flagged['matchup_id'], (int) $flagged['bookie_id'], (int) $flagged['proptype_id'], (int) $flagged['team_num']);
+            if ($result > 0) {
+                $logger->info('Deleted prop odds for ' . ucwords(strtolower($flagged['team1_name'])) . ' vs ' . ucwords(strtolower($flagged['team2_name'])) . ' (' . $flagged['matchup_id'] . '), prop ' . (str_replace('<', '&#60;', str_replace('>', '&#62;', $flagged['prop_desc']))) . ' (' . $flagged['proptype_id'] . '), team_num ' .  $flagged['team_num'] . ' for ' . $flagged['bookie_name'] . ' (' . $flagged['bookie_id'] . '). Odds removed: ' . $result);
+            } else {
+                $logger->info('Unable to delete prop odds for ' . ucwords(strtolower($flagged['team1_name'])) . ' vs ' . ucwords(strtolower($flagged['team2_name'])) . ' (' . $flagged['matchup_id'] . '), prop ' . (str_replace('<', '&#60;', str_replace('>', '&#62;', $flagged['prop_desc']))) . ' (' . $flagged['proptype_id'] . '), team_num ' .  $flagged['team_num'] . ' for ' . $flagged['bookie_name'] . ' (' . $flagged['bookie_id'] . '). Probably due to deleted matchup');
+            }
         }
-        //TODO:
         foreach ($flagged_col['event_prop_odds'] as $flagged) {
-            $logger->info('Deleting event prop odds for ' . $flagged['event_name'] . '(' . $flagged['event_id'] . '), prop ' . $flagged['prop_desc'] . '(' . $flagged['proptype_id'] . ') for ' . $flagged['bookie_name']);
+            $result = OddsHandler::removePropOddsForEventAndBookie((int) $flagged['event_id'], (int) $flagged['bookie_id'], (int) $flagged['proptype_id']);
+            if ($result > 0) {
+                $logger->info('Deleted event prop odds for ' . $flagged['event_name'] . ' (' . $flagged['event_id'] . '), prop ' . (str_replace('<', '&#60;', str_replace('>', '&#62;', $flagged['prop_desc']))) . ' (' . $flagged['proptype_id'] . ') for ' . $flagged['bookie_name'] . ' (' . $flagged['bookie_id'] . '). Odds removed: ' . $result);
+            } else {
+                $logger->error('Error deleting event prop odds for ' . $flagged['event_name'] . ' (' . $flagged['event_id'] . '), prop ' . (str_replace('<', '&#60;', str_replace('>', '&#62;', $flagged['prop_desc']))) . ' (' . $flagged['proptype_id'] . ') for ' . $flagged['bookie_name'] . ' (' . $flagged['bookie_id'] . ')');
+            }
         }
 
         return count($flagged_col['matchup_odds']) + count($flagged_col['prop_odds']) + count($flagged_col['event_prop_odds']);

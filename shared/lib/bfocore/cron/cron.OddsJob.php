@@ -111,16 +111,15 @@ class OddsJob
         $this->logger->info("Cleared old logged runs: " . $cleared_runs);
 
         //Clear old flagged odds that belong to historic matchups
-        $this->logger->info("Clearing old flagged odds for historic matchups");
+        $this->logger->info("Clearing old flags for historic matchups");
         $result = OddsHandler::removeAllOldFlagged();
         $this->logger->info($result . ' cleared');
 
         //Delete odds that have been flagged for over 24 hours
         $this->logger->info("Deleting odds that have been flagged for over 24 hours");
         $result = OddsHandler::deleteFlaggedOdds();
-        $this->logger->info('(Would have) Deleted ' . $result . ' odds');
+        $this->logger->info('Removed ' . $result . ' odds');
 
         $this->logger->info("Finished");
-
     }
 }

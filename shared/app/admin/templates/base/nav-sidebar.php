@@ -41,6 +41,12 @@
 			</li>
 
 			<li class="sidebar-item">
+				<a class="sidebar-link" href="/cnadm/resetchangenums">
+					<i class="align-middle" data-feather="book"></i> <span class="align-middle">Reset changenums</span>
+				</a>
+			</li>
+
+			<li class="sidebar-item">
 				<a class="sidebar-link" href="/cnadm/newmatchup">
 					<i class="align-middle" data-feather="book"></i> <span class="align-middle">New odds (in progress)</span>
 				</a>
@@ -64,14 +70,26 @@
 				</a>
 			</li>
 
+			<li class="sidebar-header">
+				Logs
+			</li>
+
 			<li class="sidebar-item">
-				<a href="#auth" data-bs-toggle="collapse" class="sidebar-link collapsed">
-					<i class="align-middle" data-feather="users"></i> <span class="align-middle">Auth</span>
+				<a class="sidebar-link" href="/cnadm/parserlogs">
+					<i class="align-middle" data-feather="bar-chart-2"></i> <span class="align-middle">Parser logs</span>
 				</a>
-				<ul id="auth" class="sidebar-dropdown list-unstyled collapse " data-bs-parent="#sidebar">
-					<li class="sidebar-item"><a class="sidebar-link" href="pages-sign-in.html">Sign In</a></li>
-					<li class="sidebar-item"><a class="sidebar-link" href="pages-sign-up.html">Sign Up</a></li>
-				</ul>
+			</li>
+
+			<li class="sidebar-item">
+				<a class="sidebar-link" href="/cnadm/logs/latest">
+					<i class="align-middle" data-feather="map"></i> <span class="align-middle">Odds job log</span>
+				</a>
+			</li>
+
+			<li class="sidebar-item">
+				<a class="sidebar-link" href="/cnadm/changeauditlog">
+					<i class="align-middle" data-feather="map"></i> <span class="align-middle">Change audit log</span>
+				</a>
 			</li>
 
 			<li class="sidebar-header">
@@ -103,27 +121,6 @@
 				</a>
 			</li>
 
-			<li class="sidebar-header">
-				Logs
-			</li>
-
-			<li class="sidebar-item">
-				<a class="sidebar-link" href="/cnadm/parserlogs">
-					<i class="align-middle" data-feather="bar-chart-2"></i> <span class="align-middle">Parser logs</span>
-				</a>
-			</li>
-
-			<li class="sidebar-item">
-				<a class="sidebar-link" href="/cnadm/logs/latest">
-					<i class="align-middle" data-feather="map"></i> <span class="align-middle">Odds job log</span>
-				</a>
-			</li>
-
-			<li class="sidebar-item">
-				<a class="sidebar-link" href="/cnadm/changeauditlog">
-					<i class="align-middle" data-feather="map"></i> <span class="align-middle">Change audit log</span>
-				</a>
-			</li>
 		</ul>
 		
 	</div>

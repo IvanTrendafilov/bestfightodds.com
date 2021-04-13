@@ -14,16 +14,10 @@ class PDOTools
      */
     private static function getConnection()
     {
-        if (!isset(self::$db))
-        {
-            try 
-            {
+        if (!isset(self::$db)) {
+            try {
                 self::$db = new PDO("mysql:host=" . DB_HOST . ";dbname=" . DB_SCHEME . ';charset=utf8', DB_USER, DB_PASSWORD, [PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION]);
-                //self::$db = new PDO("mysql:host=" . DB_HOST . ";dbname=" . DB_SCHEME . ';charset=utf8', DB_USER, DB_PASSWORD, [\PDO::MYSQL_ATTR_INIT_COMMAND =>"SET time_zone = '-6:00';", PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION]);
-               
-            } 
-            catch (PDOException $e) 
-            {
+            } catch (PDOException $e) {
                 throw new PDOException("Error  : " . $e->getMessage());
             }
         }
@@ -31,45 +25,42 @@ class PDOTools
     }
 
     public static function insert($query, array $data)
-    {   
+    {
         self::getConnection()->prepare($query)->execute($data);
         return self::getConnection()->lastInsertId();
     }
 
-    public static function update($query, array $data) 
+    public static function update($query, array $data)
     {
-        $stmt = self::executeQuery($query,$data);
-        return $stmt->rowCount();       
+        $stmt = self::executeQuery($query, $data);
+        return $stmt->rowCount();
     }
 
-    public static function delete($query, array $data) 
+    public static function delete($query, array $data)
     {
-        $stmt = self::executeQuery($query,$data);
-        return $stmt->rowCount();       
+        $stmt = self::executeQuery($query, $data);
+        return $stmt->rowCount();
     }
 
     public static function findOne($query, array $data = null)
-    {        
-        $stmt = self::executeQuery($query,$data);          
+    {
+        $stmt = self::executeQuery($query, $data);
         return $stmt->fetchObject();
     }
 
     public static function findMany($query, array $data = null)
     {
-        $stmt = self::executeQuery($query,$data);
-        return($stmt->fetchAll());
+        $stmt = self::executeQuery($query, $data);
+        return ($stmt->fetchAll());
     }
 
     public static function executeQuery($query, $data = null)
     {
-        try 
-        {
+        try {
             $stmt = self::getConnection()->prepare($query);
             $stmt->execute($data);
             return $stmt;
-        }
-        catch (PDOException $e)
-        {
+        } catch (PDOException $e) {
             //TODO: Catch all generic SQL errors but pass on others
             throw $e;
         }
@@ -86,8 +77,7 @@ class PDOTools
      */
     public static function cacheQueryResults($query, $results)
     {
-        if (!empty($query) && !empty($results))
-        {
+        if (!empty($query) && !empty($results)) {
             self::$cached_queries[$query] = $results;
             return true;
         }
@@ -102,10 +92,8 @@ class PDOTools
      */
     public static function getCachedQuery($query)
     {
-        if (array_key_exists($query, self::$cached_queries))
-        {
-            if (self::$cached_queries[$query]->fetchColumn() > 0)
-            {
+        if (array_key_exists($query, self::$cached_queries)) {
+            if (self::$cached_queries[$query]->fetchColumn() > 0) {
                 return self::$cached_queries[$query];
             }
         }
@@ -123,5 +111,3 @@ class PDOTools
         return true;
     }
 }
-
-?>

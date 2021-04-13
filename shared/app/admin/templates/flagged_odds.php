@@ -13,9 +13,9 @@
                 <th>Event Date</th>
                 <th>Matchup</th>
                 <th>Bookie</th>
-                <th>First seen</th>
-                <th>Last seen</th>
-                <th>Hour diff</th>
+                <th>First flagged</th>
+                <th>Last flagged</th>
+                <th>Flagged for</th>
                 <th>Action</th>
             </tr>
         </thead>
@@ -34,7 +34,7 @@
                     </td>
                     <td><?= $flagged_item['initial_flagdate'] ?></td>
                     <td><?= $flagged_item['last_flagdate'] ?></td>
-                    <td><?= $flagged_item['hours_diff'] ?></td>
+                    <td><?= $flagged_item['hours_diff'] ?> hours</td>
                     <td>
                         <a href="#">Action</a>
                     </td>

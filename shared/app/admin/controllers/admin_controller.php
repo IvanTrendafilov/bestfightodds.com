@@ -513,19 +513,21 @@ class AdminController
                 $first_date = date_create($flagged_row['initial_flagdate']);
                 $last_date = date_create($flagged_row['last_flagdate']);
 
-                $date_diff = date_diff($first_date, $last_date);
+                $cur_date = new DateTime();
+
+                $date_diff = date_diff($first_date, $cur_date);
                 $hours_diff = $date_diff->days * 24 + $date_diff->h;
 
                 $matchup_groups[$key] = [
                     'fight_obj' => $flagged_row['fight_obj'],
                     'event_obj' => $flagged_row['event_obj'],
-                    'bookies' => [$flagged_row['bookie_id']],
+                    'bookies' => [$flagged_row['bookie_name']],
                     'initial_flagdate' => $flagged_row['initial_flagdate'],
                     'last_flagdate' => $flagged_row['last_flagdate'],
                     'hours_diff' => $hours_diff
                 ];
             } else {
-                $matchup_groups[$key]['bookies'][] = $flagged_row['bookie_id'];
+                $matchup_groups[$key]['bookies'][] = $flagged_row['bookie_name'];
             }
         }
 
