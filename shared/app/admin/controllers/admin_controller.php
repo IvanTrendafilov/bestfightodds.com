@@ -128,7 +128,11 @@ class AdminController
                     $groups[$key]['dates'] = [];
                 }
 
-                $date = (new DateTime('@' . $unmatched['metadata']['gametime']))->format('Y-m-d');
+                $date = 'UNKNOWN';
+                if (@isset($unmatched['metadata']['gametime'])) {
+                    $date = (new DateTime('@' . $unmatched['metadata']['gametime']))->format('Y-m-d');
+                }
+
                 if (!isset($groups[$key]['dates'][$date]['unmatched'])) {
                     $groups[$key]['dates'][$date]['unmatched'] = [];
                 }
@@ -163,10 +167,9 @@ class AdminController
                 }
             }
         }
-        
+
         //Re-index the main key (matchup) based on what name combination is the most frequently occurring
-        foreach ($groups as $key_matchup => $group)
-        {
+        foreach ($groups as $key_matchup => $group) {
             foreach ($group['dates'] as $key_date => $date_group) {
                 $count_arr = [];
                 foreach ($date_group['unmatched'] as $unmatched) {
