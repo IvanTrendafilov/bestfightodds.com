@@ -124,8 +124,8 @@ class ParserJob
                             $oParsedMatchup = null;
                             if (isset($cEvent->Bet[2]))
                             {
-                                if (ParseTools::checkCorrectOdds((string) $cEvent->Bet[0]->Price)
-                                        && ParseTools::checkCorrectOdds((string) $cEvent->Bet[2]->Price)
+                                if (OddsTools::checkCorrectOdds((string) $cEvent->Bet[0]->Price)
+                                        && OddsTools::checkCorrectOdds((string) $cEvent->Bet[2]->Price)
                                         && !isset($cEvent->Bet[3]) //Temporary fix to remove props such as FOTN
                                         && !isset($cEvent->Bet[4]) //Temporary fix to remove props such as FOTN
 				                        && !((string) $cEvent->Bet[0]->Price == '-10000' && (string) $cEvent->Bet[2]->Price == '-10000'))
@@ -139,8 +139,8 @@ class ParserJob
                             }
                             else
                             {
-                                if (ParseTools::checkCorrectOdds((string) $cEvent->Bet[0]->Price)
-                                        && ParseTools::checkCorrectOdds((string) $cEvent->Bet[1]->Price)
+                                if (OddsTools::checkCorrectOdds((string) $cEvent->Bet[0]->Price)
+                                        && OddsTools::checkCorrectOdds((string) $cEvent->Bet[1]->Price)
                                         && !isset($cEvent->Bet[3]) //Temporary fix to remove props such as FOTN
                                         && !isset($cEvent->Bet[4]) //Temporary fix to remove props such as FOTN
 				                        && !((string) $cEvent->Bet[0]->Price == '-10000' && (string) $cEvent->Bet[1]->Price == '-10000'))
@@ -154,6 +154,13 @@ class ParserJob
                             }
                             if ($oParsedMatchup != null)
                             {
+                                //Add time of matchup as metadata
+                                if (isset($cEvent->Date))
+                                {
+                                    $oGameDate = new DateTime($cEvent->Date);
+                                    $oParsedMatchup->setMetaData('gametime', $oGameDate->getTimestamp());
+                                }
+
                                 $oParsedMatchup->setCorrelationID(trim($cEvent->Name));
                                 $oParsedSport->addParsedMatchup($oParsedMatchup);
                             }
