@@ -69,6 +69,16 @@ class OddsJob
         $success = OddsHandler::cleanCorrelations();
         $this->logger->info("Old correlations cleaned: " . $success);
 
+        //Clear old flagged odds that belong to historic matchups
+        $this->logger->info("Clearing old flags for historic matchups");
+        $result = OddsHandler::removeAllOldFlagged();
+        $this->logger->info($result . ' cleared');
+
+        //Delete odds that have been flagged for over 24 hours
+        $this->logger->info("Deleting odds that have been flagged for over 24 hours");
+        $result = OddsHandler::deleteFlaggedOdds();
+        $this->logger->info('Removed ' . $result . ' odds');
+
         //Generate new front page with latest odds
         $plates = new League\Plates\Engine(GENERAL_BASEDIR . '/app/front/templates/');
         $events = EventHandler::getAllUpcomingEvents();
@@ -109,16 +119,6 @@ class OddsJob
         //Clear old logged runs in database
         $cleared_runs = (new ParseRunLogger())->clearOldRuns();
         $this->logger->info("Cleared old logged runs: " . $cleared_runs);
-
-        //Clear old flagged odds that belong to historic matchups
-        $this->logger->info("Clearing old flags for historic matchups");
-        $result = OddsHandler::removeAllOldFlagged();
-        $this->logger->info($result . ' cleared');
-
-        //Delete odds that have been flagged for over 24 hours
-        $this->logger->info("Deleting odds that have been flagged for over 24 hours");
-        $result = OddsHandler::deleteFlaggedOdds();
-        $this->logger->info('Removed ' . $result . ' odds');
 
         $this->logger->info("Finished");
     }
