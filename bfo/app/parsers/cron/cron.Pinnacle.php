@@ -120,6 +120,14 @@ class ParserJob
                             round($event['Participants'][1]['MoneyLine'])
                         );
                         $oParsedMatchup->setCorrelationID((string) $event['EventId']);
+
+                        //Add time of matchup as metadata
+                        if (isset($event['Cutoff']))
+                        {
+                            $oGameDate = new DateTime((string) $event['Cutoff']);
+                            $oParsedMatchup->setMetaData('gametime', $oGameDate->getTimestamp());
+                        }
+
                         $parsed_sport->addParsedMatchup($oParsedMatchup);
                         $counter++;
 
