@@ -29,39 +29,21 @@
     });
 </script>
 
-<div class="mt-8">
-    <div class="mt-4">
-        <div class="p-6 bg-white rounded-md shadow-md">
-            <form class="w-full max-w-xl">
-                <div class="flex flex-wrap -mx-3 ">
-                    <div class="w-full md:w-1/2 px-3 md:mb-0">
-                        <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" for="grid-first-name">
-                            Name
-                        </label>
-                        <input class="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white" id="event_name" type="text" placeholder="UFC Fight Night" value="<?= $in_event_name ?>">
-                    </div>
-                    <div class="w-full md:w-1/4 px-3">
-                        <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" for="grid-last-name">
-                            Date
-                        </label>
-                        <input class="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500" id="event_date" type="text" value="<?= $in_event_date != '' ?   $in_event_date : date('Y-m-d') ?>">
-                    </div>
-                    <div class="w-full md:w-1/12 px-3">
-                        <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" for="grid-last-name">
-                            Hidden
-                        </label>
-                        <input type="checkbox" class="form-checkbox h-5 w-5 text-red-600 mt-3" id="event_hidden">
-                    </div>
-                    <div class="w-full md:w-1/12 px-3">
-                        <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" for="grid-last-name">
-                        </label>
-                        <button class="btn btn-primary" id="new-event-button">Add</button>
-                    </div>
-                </div>
-            </form>
-        </div>
-    </div>
-</div>
+<div class="card">
+								<div class="card-header">
+									<h5 class="card-title mb-0">Input</h5>
+								</div>
+								<div class="card-body">
+									<input class="form-control" id="event_name" type="text" placeholder="Event name" value="<?= $in_event_name ?>">
+                                    <input class="form-control" type="text" placeholder="Date" id="event_date" value="<?= $in_event_date != '' ?   $in_event_date : date('Y-m-d') ?>">
+                                    <div class="form-check form-switch">
+										<input class="form-check-input" type="checkbox" id="event_hidden">
+										<label class="form-check-label" for="event_hidden">Hidden</label>
+									</div>
+                                    <button class="btn btn-primary" id="new-event-button">Add</button>
+								</div>
+							</div>
+
 
 <div>
     <div style="float: left;">

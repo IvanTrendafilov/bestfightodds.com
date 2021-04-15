@@ -33,7 +33,7 @@ Manual actions: <button class="btn btn-primary" onclick="$('input[onclick^=\'maA
 										&nbsp;<?= $aMatchup[0] ?> vs <?= $aMatchup[1] ?><br>
 									<?php endforeach ?>
 								</td>
-								<td><input type="submit" value="Accept" onclick="maAddEventWithMatchups(<?= $action['id'] ?>, '<?= htmlspecialchars($action['description']) ?>')">
+								<td><button class="btn btn-primary" onclick="maAddEventWithMatchups(<?= $action['id'] ?>, '<?= htmlspecialchars($action['description']) ?>')">Accept</button>
 
 								<?php elseif ($action['type'] == 2) : ?>
 
@@ -41,7 +41,7 @@ Manual actions: <button class="btn btn-primary" onclick="$('input[onclick^=\'maA
 								<td><?= $action['view_extra']['new_event']->getName() ?></td>
 								<td> to </td>
 								<td><?= $action['action_obj']->eventTitle ?></td>
-								<td><input type="submit" value="Accept" onclick="maRenameEvent(<?= $action['id'] ?>, '<?= htmlspecialchars($action['description']) ?>')">
+								<td><button class="btn btn-primary" onclick="maRenameEvent(<?= $action['id'] ?>, '<?= htmlspecialchars($action['description']) ?>')">Accept</button>
 
 								<?php elseif ($action['type'] == 3) : ?>
 
@@ -51,7 +51,7 @@ Manual actions: <button class="btn btn-primary" onclick="$('input[onclick^=\'maA
 								<td><?= $action['view_extra']['new_event']->getDate() ?></td>
 								<td> to </td>
 								<td><?= $action['action_obj']->eventDate ?></td>
-								<td><input type="submit" value="Accept" onclick="maRedateEvent(<?= $action['id'] ?>, '<?= htmlspecialchars($action['description']) ?>')">
+								<td><button class="btn btn-primary" onclick="maRedateEvent(<?= $action['id'] ?>, '<?= htmlspecialchars($action['description']) ?>')">Accept</button>
 
 								<?php elseif ($action['type'] == 4) : ?>
 
@@ -61,7 +61,7 @@ Manual actions: <button class="btn btn-primary" onclick="$('input[onclick^=\'maA
 								<td><?= $action['view_extra']['new_event']->getName() ?> - <?= $action['view_extra']['new_event']->getDate() ?></td>
 								<td></td>
 								<td></td>
-								<td><input type="submit" value="Accept" onclick="maDeleteEvent(<?= $action['id'] ?>, '<?= htmlspecialchars($action['description']) ?>')">
+								<td><button class="btn btn-primary" onclick="maDeleteEvent(<?= $action['id'] ?>, '<?= htmlspecialchars($action['description']) ?>')">Accept</button>
 
 								<?php elseif ($action['type'] == 5) : ?>
 
@@ -69,7 +69,7 @@ Manual actions: <button class="btn btn-primary" onclick="$('input[onclick^=\'maA
 								<td><?= $action['action_obj']->matchups[0]->team1 ?> vs. <?= $action['action_obj']->matchups[0]->team2 ?></td>
 								<td> at </td>
 								<td><?= $action['view_extra']['new_event']->getName() ?></td>
-								<td><input type="submit" value="Accept" onclick="maAddMatchup(<?= $action['id'] ?>, '<?= htmlspecialchars($action['description']) ?>')">
+								<td><button class="btn btn-primary" onclick="maAddMatchup(<?= $action['id'] ?>, '<?= htmlspecialchars($action['description']) ?>')">Accept</button>
 
 								<?php elseif ($action['type'] == 6) : ?>
 
@@ -79,7 +79,7 @@ Manual actions: <button class="btn btn-primary" onclick="$('input[onclick^=\'maA
 								<td><?= $action['view_extra']['old_event']->getName() ?> (<?= $action['view_extra']['old_event']->getDate() ?>)</td>
 								<td> to </td>
 								<td><?= $action['view_extra']['new_event']->getName() ?> (<?= $action['view_extra']['new_event']->getDate() ?>)</td>
-								<td><input type="submit" value="Accept" onclick="maMoveMatchup(<?= $action['id'] ?>, '<?= htmlspecialchars($action['description']) ?>')">
+								<td><button class="btn btn-primary" onclick="maMoveMatchup(<?= $action['id'] ?>, '<?= htmlspecialchars($action['description']) ?>')">Accept</button>
 
 								<?php elseif ($action['type'] == 7) : //Delete matchup 
 								?>
@@ -94,7 +94,7 @@ Manual actions: <button class="btn btn-primary" onclick="$('input[onclick^=\'maA
 								<td><?= $action['view_extra']['old_event']->getName() ?> (<?= $action['view_extra']['old_event']->getDate() ?>)</td>
 								<td></td>
 								<td></td>
-								<td><input type="submit" value="Accept" onclick="maDeleteMatchup(<?= $action['id'] ?>, '<?= htmlspecialchars($action['description']) ?>')">
+								<td><button class="btn btn-primary" onclick="maDeleteMatchup(<?= $action['id'] ?>, '<?= htmlspecialchars($action['description']) ?>')">Accept</button>
 
 								<?php elseif ($action['type'] == 8) : //Move matchup to a non-existant event 
 								?>
@@ -106,7 +106,7 @@ Manual actions: <button class="btn btn-primary" onclick="$('input[onclick^=\'maA
 								</td>
 								<td> to </td>
 								<td><?= $action['view_extra']['new_event'] != null ? $action['view_extra']['new_event']->getName() : 'TBD' ?></td>
-								<td><input type="submit" value="Accept" ' .  <?= $action['view_extra']['new_event'] == null ? ' disabled=true ' : '' ?> onclick="maMoveMatchup(<?= $action['id'] ?>, ' <?= htmlspecialchars($action['view_extra']['newma'][$key]) ?>')"><br>
+								<td><button class="btn btn-primary" ' .  <?= $action['view_extra']['new_event'] == null ? ' disabled=true ' : '' ?> onclick="maMoveMatchup(<?= $action['id'] ?>, ' <?= htmlspecialchars($action['view_extra']['newma'][$key]) ?>')"><br>Accept</button>
 
 								<?php else : ?>
 
