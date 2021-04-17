@@ -101,6 +101,14 @@ class XMLParserSportsInteraction
                             if ($oParsedMatchup != null)
                             {
                                 $oParsedMatchup->setCorrelationID(trim($cEvent->Name));
+
+                                //Add time of matchup as metadata
+                                if (isset($cEvent->Date))
+                                {
+                                    $oGameDate = new DateTime($cEvent->Date);
+                                    $oParsedMatchup->setMetaData('gametime', $oGameDate->getTimestamp());
+                                }
+
                                 $oParsedSport->addParsedMatchup($oParsedMatchup);
                             }
                         }
