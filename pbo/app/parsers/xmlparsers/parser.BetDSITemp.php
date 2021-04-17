@@ -35,8 +35,8 @@ class XMLParserBetDSITemp
             if ($matchup['Category']['Name'] == 'Boxing Matches' && $matchup['IsLive'] == false) 
             {
                 //Fixes flipped names like Gastelum K. into K Gastelum
-                $matchup['HomeTeamName'] = preg_replace('/([a-zA-Z\-\s]+)\s([a-zA-Z])\./', '$2 $1', $matchup['HomeTeamName']);
-                $matchup['AwayTeamName'] = preg_replace('/([a-zA-Z\-\s]+)\s([a-zA-Z])\./', '$2 $1', $matchup['AwayTeamName']);
+                //$matchup['HomeTeamName'] = preg_replace('/([a-zA-Z\-\s]+)\s([a-zA-Z])\./', '$2 $1', $matchup['HomeTeamName']);
+                //$matchup['AwayTeamName'] = preg_replace('/([a-zA-Z\-\s]+)\s([a-zA-Z])\./', '$2 $1', $matchup['AwayTeamName']);
 
                 $oParsedMatchup = new ParsedMatchup(
                     $matchup['HomeTeamName'],
