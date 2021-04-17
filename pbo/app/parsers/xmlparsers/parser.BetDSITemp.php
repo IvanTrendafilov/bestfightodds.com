@@ -45,6 +45,11 @@ class XMLParserBetDSITemp
                     OddsTools::convertDecimalToMoneyline($matchup['PreviewOddsMoneyLine'][1]['Value'])
                 );
                 $oParsedMatchup->setCorrelationID((string) $matchup['ID']);
+
+                //Add game time metadata
+                $date_obj = new DateTime((string) $matchup['DateOfMatch']);
+                $oParsedMatchup->setMetaData('gametime', $date_obj->getTimestamp());
+
                 $oParsedSport->addParsedMatchup($oParsedMatchup);
 
                 //Add total if available
