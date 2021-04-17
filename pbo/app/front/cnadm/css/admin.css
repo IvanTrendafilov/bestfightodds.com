@@ -1,14 +1,56 @@
 body {
 	font-family: Verdana;
-	font-size: 14px;
+	font-size: 12px;
 }
 
 #adminMenu {
 	width: 1200px;
+	font-size: 16px;
 }
 
 table.genericTable {
-	font-size: 12px;
+}
+
+table.odds-table {
+	border: 1px solid #000;
+}
+
+table.odds-table tr {
+
+}
+
+table.odds-table tr:nth-child(4n), table.odds-table tr:nth-child(4n - 1) {
+	background-color: #c0c0c0;
+}
+
+table.odds-table td {
+	text-align: right;
+}
+
+table.odds-table td.action-cell {
+	text-align: center;
+	font-weight: bold;
+}
+
+table.odds-table td.flagged {
+	background-color: #ff6666;
+}
+
+table.odds-table td.add-odds {
+	text-align: center;
+	
+}
+
+table.odds-table td.del-odds {
+	text-align: center;
+	
+}
+table.genericTable tr.success {
+	background-color: #33aa00;
+}
+table.genericTable tr.failed {
+	background-color: #ff6666;
+
 }
 
 table.genericTable tr td {
@@ -17,13 +59,14 @@ table.genericTable tr td {
 	padding-right: 10px;
 }
 
+
+
 table.eventsOverview {
 	padding: 0px;
 	margin: 0px;
 	border: 1px solid black;
 	border-collapse: collapse;
-	font-size: 12px;
-	
+	width: 100%;
 }
 
 table.eventsOverview tr {
@@ -67,6 +110,10 @@ table.eventsOverview tr td.fight a {
 	color: #000000;
 }
 
+.main-event {
+	font-weight: bold;
+}
+
 table.eventsOverview tr td.imageLink a {
 	color: #0033cc;
 	font-weight: bold;
@@ -74,6 +121,11 @@ table.eventsOverview tr td.imageLink a {
 
 table.eventsOverview tr td.arbitrage {
 	color: #cccccc;
+	text-align: center;
+}
+
+table.eventsOverview tr td.positive {
+	color: #33aa00;
 	text-align: center;
 }
 
