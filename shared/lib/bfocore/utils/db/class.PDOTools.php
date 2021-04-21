@@ -61,7 +61,6 @@ class PDOTools
             $stmt->execute($data);
             return $stmt;
         } catch (PDOException $e) {
-            //TODO: Catch all generic SQL errors but pass on others
             throw $e;
         }
     }

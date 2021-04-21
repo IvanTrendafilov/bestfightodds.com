@@ -33,7 +33,7 @@ class Alert
             $a_iLimit = '100';
         }
 
-        $this->sEmail = $a_sEmail;
+        $this->sEmail = trim($a_sEmail);
         $this->iFightID = $a_iFightID;
         $this->iFighter = $a_iFighter;
         $this->iOddsType = $a_iOddsType;
