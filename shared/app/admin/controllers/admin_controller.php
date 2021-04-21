@@ -66,8 +66,6 @@ class AdminController
         //Get alerts data
         $view_data['alertcount'] = Alerter::getAlertCount();
 
-
-
         //Get unmatched data
         $unmatched_col = EventHandler::getUnmatched(1500);
         $unmatched_groups = [];
@@ -183,52 +181,6 @@ class AdminController
                 }
             }
         }
-
-        ///Match dates to events
-        /*foreach ($groups as $group) {
-            foreach ($group['dates'] as &$group_date) {
-                foreach ($group_date['unmatched'] as &$group_date_unmatched) {
-
-                    if (isset($group_date_unmatched['metadata']['event_name'])) {
-
-                        //Has event name metadata
-                        if (!isset($group_date_unmatched['matched_events'])) {
-                            $group_date_unmatched['matched_events'] = [];
-                        }
-                        $group_date_unmatched['matched_events'][] = $group_date_unmatched['metadata']['event_name'];
-
-                        echo '<pre>';
-                        var_dump($group_date_unmatched);
-                        exit;
-                        /*$cut_pos = strpos($unmatched['metadata']['event_name'], " -") != 0 ? strpos($unmatched['metadata']['event_name'], " -") : strlen($unmatched['metadata']['event_name']);
-                        $unmatched_col[$key]['view_extras']['event_name_reduced'] = substr($unmatched['metadata']['event_name'], 0, $cut_pos);
-        
-                        $event_search = EventHandler::searchEvent($unmatched_col[$key]['view_extras']['event_name_reduced'], true);
-                        if ($event_search != null) {
-                            $matched_event = $event_search[0];
-                            if (count($event_search) > 1) {
-                                //Multiple matches, match on date if possible
-                                foreach ($event_search as $item) {
-                                    if ($item->getDate() == $unmatched_col[$key]['view_extras']['event_date_formatted']) {
-                                        $matched_event = $item;
-                                    }
-                                }
-                            }
-                            $unmatched_col[$key]['view_extras']['event_match'] = ['id' => $matched_event->getID(), 'name' => $matched_event->getName(), 'date' => $matched_event->getDate()];
-                        }
-                    }
-                }
-            }
-        }
-
-*/
-
-        /*echo '<pre>';
-        var_dump($groups);
-        echo '</pre>';
-        exit;*/
-
-
 
         $view_data['unmatched'] = $unmatched_col;
         $view_data['unmatched_groups'] = $unmatched_groups;
@@ -576,37 +528,6 @@ class AdminController
             }
         }
         $response->getBody()->write($this->plates->render('resetchangenums', $view_data));
-        return $response;
-    }
-
-    public function oddsOverview(Request $request, Response $response)
-    {
-        $view_data = [];
-        $events = EventHandler::getAllUpcomingEvents();
-
-        $bookies = BookieHandler::getAllBookies();
-        $view_data['bookies'] = [];
-        foreach ($bookies as $bookie) {
-            $view_data['bookies'][$bookie->getID()] = $bookie->getName();
-        }
-
-        foreach ($events as $event) {
-            $matchups = EventHandler::getAllFightsForEvent($event->getID());
-            $matchup_view = [];
-            foreach ($matchups as $matchup) {
-                $odds = EventHandler::getAllLatestOddsForFight($matchup->getID());
-                $odds_view = [];
-                foreach ($odds as $odds_part) {
-                    $flagged = OddsHandler::checkIfFlagged($odds_part->getBookieID(), $odds_part->getFightID(), -1, -1, -1);
-                    $odds_view[$odds_part->getBookieID()] = ['odds_obj' => $odds_part, 'flagged' => $flagged];
-                }
-                $matchup_view[] = ['matchup_obj' => $matchup, 'odds' => $odds_view];
-            }
-            $view_data['events'][] = ['event_obj' => $event, 'matchups' => $matchup_view];
-        }
-
-
-        $response->getBody()->write($this->plates->render('odds', $view_data));
         return $response;
     }
 

@@ -11,11 +11,6 @@ class BookieHandler
         return BookieDAO::getAllBookies();
     }
 
-    public static function getBookieByName($a_sBookieName)
-    {
-        return BookieDAO::getBookieByName($a_sBookieName);
-    }
-
     public static function getBookieByID($a_iBookieID)
     {
         return BookieDAO::getBookieByID($a_iBookieID);
@@ -41,7 +36,7 @@ class BookieHandler
         return BookieDAO::resetChangenum($a_iBookieID);
     }
 
-    public static function getParsers($a_iBookieID = -1)
+    public static function getParsers($a_iBookieID = null)
     {
         return BookieDAO::getParsers($a_iBookieID);
     }

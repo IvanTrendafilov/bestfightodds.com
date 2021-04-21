@@ -228,11 +228,6 @@ class PropParser
         $oFoundTemplate = null;
         foreach ($aTemplates as $oTemplate)
         {
-            //TODO: Big problem here is when the prop with no entries is being checked against (i.e. the one that is blank '').
-            //There should be a check so that we do not match a prop like that and instead switch to the negative prop entry directly
-            //To fix: Just do a simple check if the proptemplate is blank.. if so it should be switched to the negative prop.. this should at least fix one part of the problem.. might be more though..
-            //Create regexp string to match template against parsed prop. Note that we prepare to collect the prop values by using ()
-
             $sTemplate = '';
             if ($oTemplate->isNegPrimary())
             {

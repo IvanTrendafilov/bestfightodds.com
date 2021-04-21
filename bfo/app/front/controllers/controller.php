@@ -348,7 +348,6 @@ class MainController
             if ($shortened_event == strtolower(substr($args['id'], 0, strlen($shortened_event))))
             {
                 //Slug matches partially, redirect with 301 to real URL
-                //error_log('Incorrect slug URL, correcting with 301: ' . $_SERVER['REQUEST_URI'] . ' - New: /events/' . $event->getEventAsLinkString()); //TODO: Can probably be removed later on when stable
                 return $response->withHeader('Location', '/events/' . $event->getEventAsLinkString())->withStatus(301);
             }
             else

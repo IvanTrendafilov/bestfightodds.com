@@ -9,7 +9,6 @@ require_once('lib/bfocore/utils/db/class.PDOTools.php');
  *
  * Handles all calls to the database related to tweets
  *
- * @author Christian
  */
 class TwitDAO
 {

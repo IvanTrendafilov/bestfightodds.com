@@ -54,7 +54,6 @@ $app->group('', function (RouteCollectorProxy $group) {
   $group->get('/alerts', \AdminController::class . ':viewAlerts');
   $group->get('/matchups/{id}', \AdminController::class . ':viewMatchup');
   $group->get('/propcorrelation', \AdminController::class . ':createPropCorrelation');
-  $group->get('/odds', \AdminController::class . ':oddsOverview');
   $group->get('/flagged', \AdminController::class . ':viewFlaggedOdds');
   $group->get('/parser_status', \AdminController::class . ':viewParserStatus');
   $group->get('/changeauditlog', \AdminController::class . ':viewChangeAuditLog');

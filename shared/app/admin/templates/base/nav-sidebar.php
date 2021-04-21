@@ -35,12 +35,6 @@
 			</li>
 
 			<li class="sidebar-item">
-				<a class="sidebar-link" href="/cnadm/odds">
-					<i class="align-middle" data-feather="book"></i> <span class="align-middle">Odds overview</span>
-				</a>
-			</li>
-
-			<li class="sidebar-item">
 				<a class="sidebar-link" href="/cnadm/resetchangenums">
 					<i class="align-middle" data-feather="book"></i> <span class="align-middle">Reset changenums</span>
 				</a>
@@ -93,31 +87,12 @@
 			</li>
 
 			<li class="sidebar-header">
-				Tools & Components
-			</li>
-			<li class="sidebar-item">
-				<a data-bs-target="#ui" data-bs-toggle="collapse" class="sidebar-link collapsed">
-					<i class="align-middle" data-feather="briefcase"></i> <span class="align-middle">UI Elements</span>
-				</a>
-				<ul id="ui" class="sidebar-dropdown list-unstyled collapse " data-bs-parent="#sidebar">
-					<li class="sidebar-item"><a class="sidebar-link" href="ui-alerts.html">Alerts</a></li>
-					<li class="sidebar-item"><a class="sidebar-link" href="ui-buttons.html">Buttons</a></li>
-					<li class="sidebar-item"><a class="sidebar-link" href="ui-cards.html">Cards</a></li>
-					<li class="sidebar-item"><a class="sidebar-link" href="ui-general.html">General</a></li>
-					<li class="sidebar-item"><a class="sidebar-link" href="ui-grid.html">Grid</a></li>
-					<li class="sidebar-item"><a class="sidebar-link" href="ui-typography.html">Typography</a></li>
-				</ul>
+				Dev Components
 			</li>
 
 			<li class="sidebar-item">
-				<a class="sidebar-link" href="icons-feather.html">
-					<i class="align-middle" data-feather="coffee"></i> <span class="align-middle">Icons</span>
-				</a>
-			</li>
-
-			<li class="sidebar-item">
-				<a class="sidebar-link" href="forms-basic-inputs.html">
-					<i class="align-middle" data-feather="check-circle"></i> <span class="align-middle">Forms</span>
+				<a class="sidebar-link" href="/cnadm/index.html">
+					<i class="align-middle" data-feather="map"></i> <span class="align-middle">Admin Kit</span>
 				</a>
 			</li>
 

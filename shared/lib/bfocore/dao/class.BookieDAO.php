@@ -7,99 +7,84 @@ class BookieDAO
 {
     public static function getAllBookies()
     {
-        $sQuery = 'SELECT id, name, url, refurl
+        $query = 'SELECT id, name, url, refurl
 					FROM bookies 
 					WHERE active = true 
 					ORDER BY position, id  ASC';
 
-        $rResult = DBTools::getCachedQuery($sQuery);
-        if ($rResult == null) {
-            $rResult = DBTools::doQuery($sQuery);
-            DBTools::cacheQueryResults($sQuery, $rResult);
+        $result = DBTools::getCachedQuery($query);
+        if ($result == null) {
+            $result = DBTools::doQuery($query);
+            DBTools::cacheQueryResults($query, $result);
         }
 
-        $aBookies = array();
+        $bookies = array();
 
-        while ($aBookie = mysqli_fetch_array($rResult)) {
-            $aBookies[] = new Bookie($aBookie['id'], $aBookie['name'], $aBookie['url'], $aBookie['refurl']);
+        while ($row = mysqli_fetch_array($result)) {
+            $bookies[] = new Bookie($row['id'], $row['name'], $row['url'], $row['refurl']);
         }
 
-        return $aBookies;
+        return $bookies;
     }
 
-    public static function getBookieByName($a_sBookieName)
+    public static function getBookieByID($bookie_id)
     {
-        $sQuery = 'SELECT id, name, url, refurl
+        $query = 'SELECT id, name, url, refurl
 					FROM bookies 
 					WHERE active = true 
-					AND name = \'' . $a_sBookieName . '\'  
-					ORDER BY id ASC';
-        $rResult = DBTools::doQuery($sQuery);
+					AND id = ? ';
 
-        $aBookies = array();
+        $params = [$bookie_id];
 
-        while ($aBookie = mysqli_fetch_array($rResult)) {
-            $aBookies[] = new Bookie($aBookie['id'], $aBookie['name'], $aBookie['url'], $aBookie['refurl']);
+        $result = DBTools::doParamQuery($query, $params);
+        $bookies = array();
+
+        while ($row = mysqli_fetch_array($result)) {
+            $bookies[] = new Bookie($row['id'], $row['name'], $row['url'], $row['refurl']);
         }
-        if (sizeof($aBookies) > 0) {
-            return $aBookies[0];
+        if (sizeof($bookies) > 0) {
+            return $bookies[0];
         }
         return null;
     }
 
-    public static function getBookieByID($a_iBookieID)
+    public static function saveChangeNum($bookie_id, $change_num)
     {
-        $sQuery = 'SELECT id, name, url, refurl
-					FROM bookies 
-					WHERE active = true 
-					AND id = \'' . $a_iBookieID . '\'  
-					ORDER BY id ASC';
-        $rResult = DBTools::doQuery($sQuery);
+        $query = 'UPDATE bookies_changenums 
+                    SET changenum = ? 
+                    WHERE bookie_id = ?';
 
-        $aBookies = array();
+        $params = array($change_num, $bookie_id);
 
-        while ($aBookie = mysqli_fetch_array($rResult)) {
-            $aBookies[] = new Bookie($aBookie['id'], $aBookie['name'], $aBookie['url'], $aBookie['refurl']);
-        }
-        if (sizeof($aBookies) > 0) {
-            return $aBookies[0];
-        }
-        return null;
-    }
+        $result = DBTools::doParamQuery($query, $params);
 
-    public static function saveChangeNum($a_iBookieID, $a_sChangeNum)
-    {
-        $sQuery = 'UPDATE bookies_changenums SET changenum = ? WHERE bookie_id = ?';
-
-        $aParams = array($a_sChangeNum, $a_iBookieID);
-
-        $bResult = DBTools::doParamQuery($sQuery, $aParams);
-
-        if ($bResult == false) {
+        if ($result == false) {
             return false;
         }
         return true;
     }
 
-    public static function getChangeNum($a_iBookieID)
+    public static function getChangeNum($bookie_id)
     {
-        $sQuery = 'SELECT changenum FROM bookies_changenums WHERE bookie_id = ?';
+        $query = 'SELECT changenum 
+                    FROM bookies_changenums 
+                    WHERE bookie_id = ?';
 
-        $aParams = array($a_iBookieID);
+        $params = array($bookie_id);
 
-        $rResult = DBTools::doParamQuery($sQuery, $aParams);
+        $result = DBTools::doParamQuery($query, $params);
 
-        return DBTools::getSingleValue($rResult);
+        return DBTools::getSingleValue($result);
     }
 
     public static function resetChangenum($a_iBookieID)
     {
-        $sQuery = 'UPDATE bookies_changenums bcn
+        $query = 'UPDATE bookies_changenums bcn
                     INNER JOIN bookies_parsers bp ON bcn.bookie_id = bp.bookie_id
                     SET bcn.changenum = bp.cn_initial WHERE bcn.bookie_id = ?';
 
-        $aParams = array($a_iBookieID);
-        $bResult = DBTools::doParamQuery($sQuery, $aParams);
+        $params = array($a_iBookieID);
+        $bResult = DBTools::doParamQuery($query, $params);
 
         if ($bResult == false) {
             return false;
@@ -109,47 +94,47 @@ class BookieDAO
 
     public static function resetAllChangeNums()
     {
-        $sQuery = 'UPDATE bookies_changenums bcn
+        $query = 'UPDATE bookies_changenums bcn
                     INNER JOIN bookies_parsers bp ON bcn.bookie_id = bp.bookie_id
                     SET bcn.changenum = bp.cn_initial';
-        $bResult = DBTools::doQuery($sQuery);
+        $bResult = DBTools::doQuery($query);
         if ($bResult == false) {
             return false;
         }
         return true;
     }
 
-    public static function getParsers($a_iBookieID = -1)
+    public static function getParsers($bookie_id = null)
     {
-        $aParams = array();
-        $sExtraWhere = '';
-        //If argument is passed as -1 we fetch all parsers
-        if ($a_iBookieID != -1) {
-            $aParams[] = $a_iBookieID;
-            $sExtraWhere = ' WHERE bookie_id = ?';
+        $params = [];
+        $extra_where = '';
+        if ($bookie_id != null) {
+            $params[] = $bookie_id;
+            $extra_where = ' WHERE bookie_id = ?';
         }
 
-        $sQuery = 'SELECT id, bookie_id, name, parse_url, cn_inuse, mockfile, cn_urlsuffix FROM bookies_parsers b ' . $sExtraWhere;
+        $query = 'SELECT id, bookie_id, name, parse_url, cn_inuse, mockfile, cn_urlsuffix 
+                    FROM bookies_parsers b ' . $extra_where;
 
-        $rResult = DBTools::doParamQuery($sQuery, $aParams);
+        $result = DBTools::doParamQuery($query, $params);
 
-        $aParsers = array();
-        while ($aParser = mysqli_fetch_array($rResult)) {
-            $aParsers[] = new BookieParser($aParser['id'], $aParser['bookie_id'], $aParser['name'], $aParser['parse_url'], $aParser['mockfile'], $aParser['cn_inuse'], $aParser['cn_urlsuffix']);
+        $parsers = [];
+        while ($row = mysqli_fetch_array($result)) {
+            $parsers[] = new BookieParser($row['id'], $row['bookie_id'], $row['name'], $row['parse_url'], $row['mockfile'], $row['cn_inuse'], $row['cn_urlsuffix']);
         }
-        return $aParsers;
+        return $parsers;
     }
 
 
     public static function getPropTemplatesForBookie($a_iBookieID)
     {
-        $sQuery = 'SELECT bpt.id, bpt.bookie_id, bpt.template, bpt.template_neg, bpt.prop_type, bpt.fields_type, pt.is_eventprop, bpt.last_used
+        $query = 'SELECT bpt.id, bpt.bookie_id, bpt.template, bpt.template_neg, bpt.prop_type, bpt.fields_type, pt.is_eventprop, bpt.last_used
                     FROM bookies_proptemplates bpt, prop_types pt
                     WHERE bpt.bookie_id = ?
                         AND bpt.prop_type = pt.id';
-        $aParams = array($a_iBookieID);
+        $params = array($a_iBookieID);
 
-        $rResult = DBTools::doParamQuery($sQuery, $aParams);
+        $rResult = DBTools::doParamQuery($query, $params);
 
         $aTemplates = array();
         while ($aTemplate = mysqli_fetch_array($rResult)) {
@@ -163,14 +148,14 @@ class BookieDAO
 
     public static function addNewPropTemplate($a_oPropTemplate)
     {
-        $sQuery = 'INSERT INTO bookies_proptemplates(bookie_id, template, prop_type, template_neg, fields_type)
+        $query = 'INSERT INTO bookies_proptemplates(bookie_id, template, prop_type, template_neg, fields_type)
                     VALUES (?, ?, ?, ?, ?)';
 
-        $aParams = array($a_oPropTemplate->getBookieID(), $a_oPropTemplate->getTemplate(), $a_oPropTemplate->getPropTypeID(), $a_oPropTemplate->getTemplateNeg(), $a_oPropTemplate->getFieldsTypeID());
+        $params = array($a_oPropTemplate->getBookieID(), $a_oPropTemplate->getTemplate(), $a_oPropTemplate->getPropTypeID(), $a_oPropTemplate->getTemplateNeg(), $a_oPropTemplate->getFieldsTypeID());
 
         $id = null;
         try {
-            $id = PDOTools::insert($sQuery, $aParams);
+            $id = PDOTools::insert($query, $params);
         } catch (PDOException $e) {
             if ($e->getCode() == 23000) {
                 throw new Exception("Duplicate entry", 10);
@@ -181,27 +166,27 @@ class BookieDAO
 
     public static function updateTemplateLastUsed($a_iTemplateID)
     {
-        $sQuery = 'UPDATE bookies_proptemplates SET last_used = NOW() WHERE id = ?';
-        $aParams = array($a_iTemplateID);
-        DBTools::doParamQuery($sQuery, $aParams);
+        $query = 'UPDATE bookies_proptemplates SET last_used = NOW() WHERE id = ?';
+        $params = array($a_iTemplateID);
+        DBTools::doParamQuery($query, $params);
 
         return (DBTools::getAffectedRows() > 0 ? true : false);
     }
 
     public static function deleteTemplate($a_iTemplateID)
     {
-        $sQuery = 'DELETE FROM bookies_proptemplates WHERE id = ?';
-        $aParams = array($a_iTemplateID);
-        DBTools::doParamQuery($sQuery, $aParams);
+        $query = 'DELETE FROM bookies_proptemplates WHERE id = ?';
+        $params = array($a_iTemplateID);
+        DBTools::doParamQuery($query, $params);
         return (DBTools::getAffectedRows() > 0 ? true : false);
     }
 
     public static function getAllRunStatuses()
     {
-        $sQuery = 'SELECT b.name, lp.bookie_id, MAX(lp.date), AVG(lp.matched_matchups) as average_matched 
+        $query = 'SELECT b.name, lp.bookie_id, MAX(lp.date), AVG(lp.matched_matchups) as average_matched 
                     FROM logs_parseruns lp INNER JOIN bookies b  on lp.bookie_id = b.id 
                     WHERE lp.date >= NOW() - INTERVAL 1 DAY 
                     GROUP BY lp.bookie_id;';
-        return PDOTools::findMany($sQuery);
+        return PDOTools::findMany($query);
     }
 }
