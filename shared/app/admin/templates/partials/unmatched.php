@@ -152,14 +152,14 @@
                             <?php foreach ($unmatched_matchup_group['dates'] as $key_date => $date) : ?>
                                 <?php if (isset($date['matched_events'])) : ?>
                                     <?php foreach ($date['matched_events'] as $event) : ?>
-                                        <?= $event ?><br>
+                                        <?= $event->getName() ?><br>
                                     <?php endforeach ?>
                                 <?php endif ?>
                             <?php endforeach ?>
                         </td>
 
                         <td>
-                            <a href="/cnadm/newmatchup?inteam1=<?= $this->e($unmatched_matchup_group['teams'][0], 'urlencode') ?>&inteam2=<?= $this->e($unmatched_matchup_group['teams'][1], 'urlencode') ?>&ineventid=<?= $unmatched_matchup_group['dates'][0]['matched_events'][0] ?? '' ?>"><button class="btn btn-primary">add</button></a>
+                            <a href="/cnadm/newmatchup?inteam1=<?= $this->e($unmatched_matchup_group['teams'][0], 'urlencode') ?>&inteam2=<?= $this->e($unmatched_matchup_group['teams'][1], 'urlencode') ?>&ineventid=<?=isset(array_values($unmatched_matchup_group['dates'])[0]['matched_events'][0]) ? array_values(@$unmatched_matchup_group['dates'])[0]['matched_events'][0]->getID() : '' ?>"><button class="btn btn-primary">add</button></a>
                         </td>
                     </tr>
                 <?php endforeach ?>

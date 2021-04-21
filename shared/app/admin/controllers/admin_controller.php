@@ -158,10 +158,14 @@ class AdminController
                     $matched_event = '';
                     foreach ($event_search as $event) {
                         if ($event->getDate() == $date) {
-                            $matched_event = $event->getName();
+                            $matched_event = $event;
                         }
                     }
-                    $groups[$key]['dates'][$date]['matched_events'][] = $matched_event;
+                    if ($matched_event != '')
+                    {
+                        $groups[$key]['dates'][$date]['matched_events'][] = $matched_event;
+                    }
+                    
                 }
             }
         }
@@ -186,7 +190,6 @@ class AdminController
         foreach ($groups as $key_matchup => $group) {
             $groups[$key_matchup]['teams'] = explode(' vs ', $key_matchup);
         }
-
 
         $view_data['unmatched'] = $unmatched_col;
         $view_data['unmatched_groups'] = $unmatched_groups;
