@@ -1,11 +1,15 @@
 /* Mobile */
-@media only screen and (max-width: 961px) {
+@media only screen and (max-width: 767px) {
   body, #page {
     width: 100%;
   }
-
+  #header-search-box, #auto-refresh-container {
+    display: none;
+  }
   .odds-table-responsive-header {
     display: block;
+    border-top: 1px solid #c0c0c0;
+    border-left: 1px solid #c0c0c0;
   }
   .table-scroller {
     width: 100%;
@@ -16,57 +20,59 @@
   #content {
     width: 100%;
   }
-
+  .odds-table {
+    font-size: 10px;
+  }
   .table-outer-wrapper {
-    padding: 0 3px;
-    margin-bottom: 9px;
+    padding: 0;
+    margin-bottom: 5px;
+
   }
   .odds-table {
     tbody {
       th {
-        width: 60px;
+        width: 77px;
+        font-size: 9px;
         a {
+          font-size: 9px;
+        }
+        &.date-head {
+          width: 20px;
         }
       }
       td {
-        min-width: 60px;
-        max-width: 60px;
-
+        width: 30px;
         &.button-cell {
-          width: 18px;
-          min-width: 30px;
-          max-width: 30px;
+          width: 14px;
+        }
+        &.date-cell {
+          font-size: 9px;
+          width: 20px;
         }
       }
     }
-    thead {
-      th:first-child {
-        max-width: 95px;
-        min-width: 95px;
-      }
+    thead th a {
+      font-size: 9px;
     }
   }
   .table-header {
-    
-    height: 16px;
-    padding: 7px 0px 8px 8px;
+    font-size: 12px;
+    height: 12px;
+    padding: 0 0 4px 4px;
     a {
-      font-size: 14px;
+      font-size: 11px;
       -ms-text-overflow: ellipsis;
       -o-text-overflow: ellipsis;
       text-overflow: ellipsis;
       white-space: nowrap;
       overflow: hidden;
-      h1 {
-        font-size: 14px;
-      }
     }
   }
   .table-header-date {
     padding-left: 5px;
     padding-right: 6px;
-    padding-top: 1px;
-    font-size: 12px;
+    padding-top: 2px;
+    font-size: 0.9em;
     text-align: right;
     white-space: nowrap;
   }
@@ -74,6 +80,8 @@
     margin-top: 5px;
     width: 240px;
     height: 45px;
+    background-size: 240px 45px;
+    margin-left: 10px;
   }
   .header {
     margin-bottom: 0;
@@ -83,40 +91,29 @@
     width: 100%;
     height: 54px;
   }
-  .flex-header-wrap {
-    height: 54px;
-  }
-  .flex-header {
-    margin-bottom: 0;
-  }
-
-  .flex-nav {
-    margin-bottom: 0;
-    white-space: nowrap;
-  }
-
   #page-wrapper {
-    
+    margin: 5px;
   }
   .header-menu {
     width: 100%;
   }
-
   .header-menu-item {
-    height: 21px;
-    padding: 7px 10px 0 10px;
+    height: 20px;
+    font-size: 11px;
+    padding: 6px 10px 0 10px;
   }
-
   #header-menu-right {
     margin-right: 7px;
   }
-  .menu-divider {
+  .menu-divider, .item-non-mobile {
     display: none;
   }
   .item-mobile-only {
     display: block;
   }
-
+  .item-mobile-only-row {
+    display: table-row;
+  }
   #page-content {
     width: 100%;
     padding-top: 6px;
@@ -160,7 +157,7 @@
   .table-inner-shadow-left {
     position: absolute;
     top: 0;
-    left: 118px;
+    left: 124px;
     width: 0;
     height: 100%;
     background-color: transparent;
@@ -186,7 +183,7 @@
     margin-bottom: 3px;
     display: none;
   }
-  #chart-window, #alert-window, #bookie-settings-window {
+  #chart-window, #alert-window {
     min-width: 1px;
     display: block;
     width: 90%;
@@ -200,7 +197,7 @@
     /* Set the bounds in which to center it, relative to its parent/container */
   }
   #chart-header {
-    font-size: 12px;
+    font-size: 11px;
   }
   #chart-area {}
   .odds-table {
@@ -212,7 +209,7 @@
     }
     tbody tr {
       & th {
-
+        line-height: 10px;
       }
       &:nth-child(even) th {
         padding-bottom: 0;
@@ -252,20 +249,10 @@
     display: inline-block;
     background-size: 203px 31px;
   }
-
-  //Event page graphs
-  #event-swing-area, #event-outcome-area {
-    width: 100%;
-    vertical-align: top;
-    margin: 3px 0 8px 0;
-  }
-  #event-charts-area {
-    padding-top: 0;
-  }
-
   /* Content pages */
   .content-header {
     padding-left: 6px;
+    font-size: 12px;
     margin-bottom: 3px;
     -ms-text-overflow: ellipsis;
     -o-text-overflow: ellipsis;
@@ -274,9 +261,13 @@
     overflow: hidden;
   }
   .content-list {
+    font-size: 11px;
     tr {
       &:hover {
         background-color: #fff;
+      }
+      td {
+        padding: 3px 10px;
       }
     }
   }
@@ -296,20 +287,16 @@
     padding-right: 10px !important;
     text-align: right;
     input {
-      font-size: 12px;
+      font-size: 11px;
     }
   }
-
-  /*Team-stats page*/
-
-
   .team-stats-table {
     thead th.header-movement {
       padding-left: 5px;
     }
     tbody {
       th a {
-        //font-size: 10px;
+        font-size: 10px;
         height: 20px;
       }
       td {
@@ -326,7 +313,7 @@
       }
     }
   }
-
+  /*Team-stats page*/
   /*Alerts page*/
   .alert-result-il {
     background-color: #f4f6f8;
@@ -352,37 +339,9 @@
   #mob-divider {
     display: inline-block;
   }
-
-  #header-search-box {
-    padding-right: 10px;
-    margin-top: 16px;
-  }
-
-  .search-button {
-    font-size: 12px;
-  }
-
 }
 
-@media only screen and (max-width: 1132px) {
-  #flex-header-menu-right {
-    margin-right: 7px;
-  }
-}
-
-@media only screen and (max-width: 575px) {
-  #header-search-box, #auto-refresh-container {
-    display: none;
-  }
-  .item-non-mobile {
-    display: none;
-  }
-  .item-mobile-only-row {
-    display: table-row;
-  }
-}
-
-@media only screen and (max-width: 376px) {
+@media only screen and (max-width: 372px) {
   .header-menu-item {
     padding: 6px 8px 0 8px;
   }

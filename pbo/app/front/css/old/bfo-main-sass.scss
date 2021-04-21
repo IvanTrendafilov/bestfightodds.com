@@ -8,7 +8,6 @@ html {
 body, div, dl, dt, dd, ul, ol, li, h1, h2, h3, h4, h5, h6, pre, code, form, fieldset, legend, input, textarea, p, blockquote, th, td {
   margin: 0;
   padding: 0;
-  -webkit-text-size-adjust: 100%;
 }
 
 table {
@@ -41,7 +40,7 @@ h1, h2, h3, h4, h5, h6 {
 q {
   &:before, &:after {
     content: '';
-  }
+  } 
 }
 
 abbr, acronym {
@@ -63,7 +62,7 @@ input, textarea, select {
   font-weight: inherit;
 }
 
-input, textarea, select {
+input, textarea, select { 
   *font-size: 100%;
 }
 
@@ -92,24 +91,20 @@ body {
   text-align: center;
   background-color: #edeff1;
   font-family: 'Roboto', Arial, sans-serif;
-  font-size: 12px;
+  font-size: 11px;
   color: #fff;
 }
 
 a {
   color: #fff;
   text-decoration: none;
-}
+} 
 
-/* BFO Start */
+/* PBO Start */
 
 $primarybasecolor: #262C38;
 $secondarybasecolor: #333b4a;
 $selectedcolor: #262C38;
-
-$font_darkcolor: #202020;
-$font_lightcolor: #fff;
-
 
 input[type="text"], select {
   background-color: #fff;
@@ -140,47 +135,50 @@ input[type="submit"] {
 .header {
   width: 100%;
   background-color: $primarybasecolor;
-  margin-bottom: 22px;
-  min-width: 1116px;
+  margin-bottom: 18px;
+  min-width: 976px;
 }
 
 .header-top {
   height: 65px;
-  width: 1116px;
+  width: 976px;
   margin: 0 auto;
 }
 
 .header-menu-wrapper {
   background-color: $secondarybasecolor;
   height: 26px;
-
+  text-align: left;
   -webkit-box-shadow: 0 2px 2px -1px #7B7B7B;
   -moz-box-shadow: 0 2px 2px -1px #7B7B7B;
   box-shadow: 0 2px 2px -1px #7B7B7B;
-  text-align: left;
 }
 
 .header-menu {
   margin: 0 auto;
-  width: 1078px;
+  width: 938px;
   position: relative;
-  font-size: 12px;
-  a {
-    padding: 7px 0; 
+    a {
+    color: #fff; 
   }
 }
 
 .header-menu-item {
+  height: 20px;
+  font-size: 11px;
   display: inline-block;
-  padding: 6px 16px 6px 16px;
+  padding: 6px 16px 0 16px;
   font-weight: 500;
+  margin-left: -3px;
   &:hover {
     background-color: $selectedcolor;
+    color: #fff; 
   }
 }
 
 .header-menu-selected {
   background-color: $selectedcolor;
+    color: #fff; 
 }
 
 #content {
@@ -188,7 +186,7 @@ input[type="submit"] {
   margin-top: 13px;
   margin-left: auto;
   margin-right: auto;
-  width: 1116px;
+  width: 976px;
   select {
     height: 20px;
   }
@@ -201,25 +199,31 @@ input[type="submit"] {
 
 .logo {
   margin-top: 6px;
-  margin-left: 12px;
+  margin-left: 14px;
+  float: left;
   width: 290px;
   height: 54px;
+  background-image: url('/img/logo_3.png');
+  background-size: 290px 54px;
 }
 
 #twitter-icon {
-  height: 11px; width: 14px;
-  position:relative;
-  top: 1px;
+  height: 11px;
+  width: 14px;
+  vertical-align: middle;
+  margin-right: 6px;
+  margin-top: -3px;
 }
 
 #header-search-box {
+  float: right;
   padding-right: 20px;
   margin-top: 22px;
   input {
-    background-color: $secondarybasecolor;
+    background-color: #343944;
     height: 24px;
     width: 200px;
-    font-size: 12px;
+    font-size: 11px;
     color: #CFCFCF;
     border: 1px solid #232121;
     border-width: 1px;
@@ -233,6 +237,7 @@ input[type="submit"] {
     width: 50px;
     font-size: 15px;
     height: 26px;
+    float: right;
   }
 }
 
@@ -275,6 +280,7 @@ input[type="submit"] {
   -moz-box-shadow: inset 0 0 1px #666;
   -webkit-box-shadow: inset 0 0 1px #666;
   box-shadow: inset 0 0 1px #666;
+
   &.checked {
     color: #000;
   }
@@ -286,7 +292,7 @@ input[type="submit"] {
 }
 
 #format-container ul li ul {
-  width: 155px;
+  width: 145px;
 }
 
 #format-amount-box1 {
@@ -296,7 +302,7 @@ input[type="submit"] {
 #format-container input {
   height: 16px;
   margin-left: 3px;
-  padding: 2px;
+  padding: 3px;
   width: 45px;
   font-size: 12px;
 }
@@ -327,27 +333,25 @@ input[type="submit"] {
 #page-wrapper {
   margin-left: auto;
   margin-right: auto;
-}
-
-h1 {
-  font-size: 16px;
-  font-weight: 500;
-}
-
-#page-container {
-  background-color: #fff;
-  color: $font_darkcolor;
-  font-size: 12px;
   -webkit-box-shadow: 0 1px 1px 1px rgb(170, 170, 170);
   -moz-box-shadow: 0 1px 1px 1px rgb(170, 170, 170);
   box-shadow: 0 1px 1px 1px rgb(170, 170, 170);
-  margin: 0 5px;
 }
 
-#chart-container {
+h1 {
+  font-size: 20px;
+  height: 14px;
+  padding-bottom: 15px;
+  font-weight: 700;
+}
+
+#page-container {
+  margin-left: auto;
+  margin-right: auto;
   background-color: #fff;
-  color: $font_darkcolor;
+  color: #202020;
   font-size: 12px;
+  position: relative;
 }
 
 #page-inner-wrapper {
@@ -355,12 +359,10 @@ h1 {
 }
 
 #page-content {
-  text-align: left;
   font-size: 13px;
   p {
     line-height: 220%;
   }
-
 }
 
 #page-bottom {
@@ -382,10 +384,11 @@ h1 {
   text-align: center;
   padding-bottom: 15px;
   color: #787878;
+  margin-top: -15px;
   a {
     color: #9a9a9a;
-    font-size: 12px;
-    padding: 10px 9px;
+    font-size: 11px;
+    padding: 0 5px;
   }
 }
 
@@ -397,7 +400,8 @@ h1 {
 .content-sidebar {
   padding: 18px;
   height: 100%;
-  font-size: 12px;
+  font-size: 11px;
+  width: 60%;
   color: #666;
   a {
     color: #000;
@@ -450,6 +454,7 @@ ul {
       z-index: 999;
       color: #fff;
       height: 100%;
+      padding-top: 1px;
       text-align: left;
     }
     a {
@@ -459,7 +464,7 @@ ul {
       a {
         display: block;
         border-right: 1px solid #333;
-        padding-top: 7px;
+        padding-top: 5px;
         padding-bottom: 7px;
         padding-left: 0;
         color: #fff;
@@ -476,9 +481,6 @@ ul {
       visibility: hidden;
       position: absolute;
       right: 0;
-      -webkit-box-shadow: 0 1px 2px 1px rgba(0, 0, 0, 0.4);
-      -moz-box-shadow: 0 1px 2px 1px rgba(0, 0, 0, 0.4);
-      box-shadow: 0 1px 2px 1px rgba(0, 0, 0, 0.4);
       li {
         font-weight: 400;
         background: $selectedcolor;
@@ -540,7 +542,7 @@ ul {
 .share-button {
   width: 35px;
   height: 32px;
-  opacity: 0.3;
+  opacity: 0.4;
   background: url("/img/share_3.png");
   background-size: 13px 13px;
   background-repeat: no-repeat;
@@ -637,6 +639,7 @@ ul.share-dropdown ul li a {
   transition-property: opacity, scale, transform;
   transform-origin: top left;
   -webkit-transform-origin: top left;
+  overflow: hidden;
 }
 
 .no-transition {
@@ -648,21 +651,24 @@ ul.share-dropdown ul li a {
 }
 
 .popup-header {
-  background-color: $secondarybasecolor;
-  color: $font_lightcolor;
+  background-color: #343944;
   font-size: 12px;
   font-weight: 500;
   padding-left: 10px;
-  padding-top: 8px;
-  padding-bottom: 8px;
+  padding-top: 6px;
+  padding-bottom: 6px;
   text-align: left;
   -ms-text-overflow: ellipsis;
   -o-text-overflow: ellipsis;
   text-overflow: ellipsis;
   white-space: nowrap;
   overflow: hidden;
-  a:hover {
-    color: #efefef;
+  color: #fff;
+  a {
+    color: #fff;
+    &:hover {
+      color: #efefef;
+    }
   }
 }
 
@@ -682,9 +688,9 @@ ul.share-dropdown ul li a {
 
 .cd-popup-close {
   position: absolute;
-  top: 5px;
+  top: 4px;
   right: 3px;
-  font-size: 16px;
+  font-size: 13px;
   padding: 0 8px;
 }
 
@@ -715,59 +721,13 @@ ul.share-dropdown ul li a {
   height: 100%;
   color: #222;
   text-align: left;
-  font-size: 12px;
+  font-size: 11px;
   padding: 9px;
 }
 
 #alert-window {
   width: 300px;
   height: 155px;
-}
-
-#bookie-settings-window {
-  min-width: 1px;
-  display: block;
-  height: 510px;
-  width: 500px;
-  margin: auto;
-  top: 0;
-  left: 0;
-  bottom: 0;
-  right: 0;
-}
-
-#bookie-settings-area {
-  padding: 10px;
-  color: $font_darkcolor;
-    input#bookieResetDefault {
-      margin-top: 10px;
-    }
-}
-
-#bookie-order-items {
-  width: 200px;
-  margin-left: auto;
-  margin-right: auto;
-  margin-top: 10px;
-}
-
-#bookie-order-items li {
-  cursor: move;
-  width: 200px;
-  border: 1px solid #e3e3e3;
-  height: 20px;
-  background-color: #f7f9fa;
-  padding-top: 5px;
-  padding-left: 5px;
-  text-align: left;
-    &.sortable-chosen {
-      background-color: #d7d9da;
-    }
-}
-
-#bookie-order-items li input {
-  float: right;
-  margin-right: 5px;
 }
 
 #alert-area {
@@ -864,12 +824,10 @@ ul.share-dropdown ul li a {
   padding: 6px;
   padding-left: 10px;
   font-weight: 500;
-  font-size: 14px;
-  height: 18px;
+  font-size: 13px;
+  height: 16px;
   color: #fff;
-  a {
-    color: #fff;
-  }
+  margin-bottom: 4px;
 }
 
 .content-list {
@@ -883,10 +841,11 @@ ul.share-dropdown ul li a {
       background-color: #e9eaed;
     }
     td {
-      padding: 6px 10px;
-      a {
-        color: $font_darkcolor;
-      }
+      padding: 3px 10px;
+    }
+    a {
+      color: #202020;
+      font-weight: 500;
     }
   }
 }
@@ -899,7 +858,6 @@ ul.share-dropdown ul li a {
 .content-vs-cell {
   width: 25px;
   text-align: center;
-  color: #909090;
 }
 
 .content-team-left {
@@ -922,7 +880,7 @@ ul.share-dropdown ul li a {
 
 table.team-stats-table {
   width: 100%;
-  font-size: 12px;
+  font-size: 11px;
   border-collapse: collapse;
   color: #222;
   background-color: #fff;
@@ -943,7 +901,6 @@ table.team-stats-table {
   }
   tbody {
     tr {
-      height: 23px;
       border-bottom: 0;
       &.main-row {
         border-top: 1px dotted #989898;
@@ -953,6 +910,7 @@ table.team-stats-table {
         border-bottom: 1px solid #E6E8Ea;
         background-color: #E6E8Ea;
         color: #1a1a1a;
+        vertical-align: bottom;
         a {
           color: #1a1a1a;
           &:hover {
@@ -960,27 +918,12 @@ table.team-stats-table {
           }
         }
       }
-      &.main-row {
-        td {
-        padding-top: 4px;
+      &.main-row td {
+        padding-top: 2px;
+      }
+      &:not(.main-row) td {
         padding-bottom: 2px;
       }
-      th {
-        padding-top: 4px;
-        padding-bottom: 2px;
-      }
-    }
-      &:not(.main-row) {
-        
-          td {
-          padding-bottom: 4px;
-          padding-top: 2px;
-        }
-        th {
-          padding-bottom: 4px;
-          padding-top: 2px;
-        }
-    }
       &:hover {
         background-color: #e9eaed;
       }
@@ -988,17 +931,19 @@ table.team-stats-table {
     th {
       padding-left: 3px;
       color: #1a1a1a;
+      font-size: 11px;
+      font-weight: 500;
       word-break: break-word;
       a {
         color: #1a1a1a;
-        height: 23px;
-        font-weight: 500;
+        font-size: 11px;
+        height: 20px;
       }
     }
     td {
       color: #1a1a1a;
       height: 18px;
-      padding-left: 3px;
+      padding-left: 3px; 
       &.oppcell {
         max-width: 70px;
         div {
@@ -1015,7 +960,7 @@ table.team-stats-table {
         text-align: right;
         font-family: Arial, sans-serif;
         width: 40px;
-        padding-left: 5px;
+        padding-left: 10px;
       }
       &.chart-cell {
         width: 52px;
@@ -1027,7 +972,6 @@ table.team-stats-table {
         width: 12px;
         padding: 0;
         text-align: center;
-        color: #c0c0c0;
       }
       &.change-cell {
         text-align: left;
@@ -1039,46 +983,11 @@ table.team-stats-table {
           cursor: pointer;
         }
       }
-      &.resultcell {
-        //display: none;
-        font-weight: 500;
-        text-align: center;
-        width: 60px;
-        div.method {
-          font-weight: 400;
-          font-size: 10px;
-          color: #777;
-          line-height: 8px;
-        }
-        div.result {  
-          color: #fff;
-          padding-top: 2px;
-          padding-bottom: 2px;
-          background-color: #fff;
-        }
-        padding-right: 15px;
-      }
-      &.wincell {
-        div.result {
-          background-color: rgba(65,175,1,0.8);
-        }
-        
-      }
-      &.losecell {
-        div.result {
-          background-color: rgba(215, 25, 0, 0.8);
-        }
-        
-      }
-      &.drawcell {
-        div.result {
-          background-color: #9B9EA0;
-        }
-      }
     }
   }
   a {
     color: #222;
+    font-weight: 500;
     &:hover {
       color: #666;
     }
@@ -1090,18 +999,13 @@ table.team-stats-table {
   padding: 6px 0 8px 10px;
 }
 
-.team-stats-subheader {
-  font-size: 14px;
-  font-weight: 500;
-}
-
 .item-mobile-only, .item-mobile-only-row {
   display: none;
 }
 
 .button {
   border-radius: 2px;
-  padding: 3px 10px;
+  padding: 4px 10px;
   background-color: #e8ebf3;
   color: #151515;
   cursor: pointer;
@@ -1111,144 +1015,4 @@ table.team-stats-table {
   &:hover {
    background-color: #d7dae2;
   }
-  margin: 1px 0;
 }
-
-#event-swing-area {
-  -webkit-box-shadow: 0 1px 1px 1px rgb(170, 170, 170);
-  -moz-box-shadow: 0 1px 1px 1px rgb(170, 170, 170);
-  box-shadow: 0 1px 1px 1px rgb(170, 170, 170);
-  width: calc(45% - 15px);
-  vertical-align: top;
-  display: inline-block;
-  margin-right: 22px;
-  background-color: #fff;
-}
-
-#event-outcome-area {
-  -webkit-box-shadow: 0 1px 1px 1px rgb(170, 170, 170);
-  -moz-box-shadow: 0 1px 1px 1px rgb(170, 170, 170);
-  box-shadow: 0 1px 1px 1px rgb(170, 170, 170);
-  width: calc(55% - 10px); 
-  vertical-align: top;
-  display: inline-block;
-  background-color: #fff;
-}
-
-
-#event-swing-container {
-  width: 100%;
-  -moz-transition: height 0.05s ease-out;
-  -webkit-transition: height 0.05s ease-out;
-  -o-transition: height 0.05s ease-out;
-  transition: height 0.05s ease-out;
-}
-
-#event-swing-container .highcharts-container {
-  -moz-transition: height 0.05s ease-out;
-  -webkit-transition: height 0.05s ease-out;
-  -o-transition: height 0.05s ease-out;
-  transition: height 0.05s ease-out;
-}
-
-#event-swing-picker-menu {
-  float: right;
-  color: #666; 
-}
-
-.event-swing-picker {
-    color: #eaeaea;
-    font-weight: 400;
-    font-size: 12px;
-    &.picked {
-      font-weight: 700;
-    }
-}
-
-.event-swing-expandarea {
-  text-align: center;
-   margin-left: auto;
-   margin-right: auto;
-   width: 150px;
-   font-size: 12px;
-   font-weight: 500;
-   padding-top: 6px;
-   padding-bottom: 8px;  
-   &.hidden {
-    visibility: hidden;
-   }
-}
-.event-swing-expandarrow
-{
-  background-image: url(/img/expd.png);
-   margin-left: auto;
-   margin-right: auto;
-   background-size: 9px 6px;
-   width: 9px;
-   height: 6px;
-}
-
-.event-swing-expand {
-  color: #666;
-}
-
-
-
-
-.flex-header {
-  display: flex;
-  justify-content: center;
-  width: 100%;
-  background-color: $primarybasecolor;
-}
-
-.flex-nav {
-  display: flex;
-  justify-content: space-between;
-  background-color: $secondarybasecolor;
-  height: 26px;
-  border-bottom: 2px solid #212427;
-  -webkit-box-shadow: 0 2px 1px -1px rgba(155, 155, 155, 1);
-  -moz-box-shadow: 0 2px 1px -1px rgba(155, 155, 155, 1);
-  box-shadow: 0 2px 1px -1px rgba(155, 155, 155, 1);
-  margin-bottom: 22px;
-}
-
-.flex-section {
-  margin-top: 13px;
-  text-align: left;
-}
-
-/* Ref: https://stackoverflow.com/questions/57762372/an-html-page-with-screen-wide-header-limit-width-content-flexbox-logo-elements */
-
-  .flex-nav,.flex-header,.flex-section {
-    display: flex;
-    justify-content: center;
-  }
-
-  .flex-header-wrap {
-    max-width: 1116px;
-    width: 100%;
-    display: flex;
-    justify-content: space-between;
-    align-items: flex-start;
-    align-self: center;
-    height: 65px;
-  }
-
-  .flex-nav-wrap {
-    max-width: 1078px;
-    width: 100%;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    align-self: center;
-    
-  }
-
-  .flex-content-wrap {
-    max-width: 1116px;
-    width: 100%;
-    align-self: center;
-  }
-
