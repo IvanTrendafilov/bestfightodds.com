@@ -479,16 +479,18 @@ class EventDAO
      * Ugly little function that is needed to check if a fight is stored not lexiographically order in the database.
      * For example: RAMEAU SOKOUDJU, LYOTO MACHIDA gives false, BJ PENN, JOE STEVENSON gives true
      */
-    public static function isFightOrderedInDatabase($a_iFightID)
+    public static function isFightOrderedInDatabase($fight_id)
     {
-        $sQuery = 'SELECT f.id, f1.name AS fighter1_name, f2.name AS fighter2_name, f.event_id
+        $query = 'SELECT f.id, f1.name AS fighter1_name, f2.name AS fighter2_name, f.event_id
                     FROM fights f, fighters f1, fighters f2
                     WHERE f1.id = f.fighter1_id
                         AND f2.id = f.fighter2_id
-                        AND f.id = ' . $a_iFightID . '
+                        AND f.id = ? 
                     LIMIT 0,1';
 
-        $rResult = DBTools::doQuery($sQuery);
+        $params = [$fight_id];
+
+        $rResult = DBTools::doParamQuery($query, $params);
 
         $aFight = mysqli_fetch_array($rResult);
         if (sizeof($aFight) > 0) {
@@ -501,16 +503,23 @@ class EventDAO
         return null;
     }
 
-    public static function addNewFightOdds($a_oFightOdds)
+    public static function addNewFightOdds($fightodds_obj)
     {
-        $sQuery = 'INSERT INTO fightodds(fight_id, fighter1_odds, fighter2_odds, bookie_id, date)
-                        VALUES(' . $a_oFightOdds->getFightID() . ',
-                                ' . $a_oFightOdds->getFighterOdds(1) . ',
-                                ' . $a_oFightOdds->getFighterOdds(2) . ',
-                                ' . $a_oFightOdds->getBookieID() . ',
-                                NOW())';
+        $query = 'INSERT INTO fightodds(fight_id, fighter1_odds, fighter2_odds, bookie_id, date)
+                        VALUES(?, ?, ?, ?, NOW())';
 
-        DBTools::doQuery($sQuery);
+        $params = [$fightodds_obj->getFightID(), $fightodds_obj->getFighterOdds(1), $fightodds_obj->getFighterOdds(2), $fightodds_obj->getBookieID()];
+
+        try {
+            $id = PDOTools::insert($query, $params);
+        } catch (PDOException $e) {
+            if ($e->getCode() == 23000) {
+                throw new Exception("Duplicate entry", 10);
+            } else {
+                throw new Exception("Unknown error " . $e->getMessage(), 10);
+            }
+            return false;
+        }
         return true;
     }
 
