@@ -182,6 +182,12 @@ class AdminController
             }
         }
 
+        //Loop through each group and add exploded matchup names
+        foreach ($groups as $key_matchup => $group) {
+            $groups[$key_matchup]['teams'] = explode(' vs ', $key_matchup);
+        }
+
+
         $view_data['unmatched'] = $unmatched_col;
         $view_data['unmatched_groups'] = $unmatched_groups;
         $view_data['unmatched_matchup_groups'] = $groups;

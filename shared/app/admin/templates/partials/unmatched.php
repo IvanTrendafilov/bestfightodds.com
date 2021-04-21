@@ -107,9 +107,7 @@
     }();*/
 </script>
 
-
 <button id="clear-unmatched-button" class="btn btn-primary">Clear unmatched table</button><br /><br />
-
 
 <div class="card">
     <div class="table-responsive">
@@ -128,7 +126,7 @@
 
                 <?php foreach ($unmatched_matchup_groups as $key_matchup => $unmatched_matchup_group) : ?>
                     <tr>
-                        <td><?= $this->e($key_matchup, 'strtolower|ucwords') ?></td>
+                        <td><a href="http://www.google.se/search?q=tapology <?= $this->e($key_matchup, 'strtolower|ucwords') ?>"><?= $this->e($key_matchup, 'strtolower|ucwords') ?></a></td>
                         <td>
                             <?php foreach ($unmatched_matchup_group['dates'] as $key_date => $date) : ?>
 
@@ -161,6 +159,7 @@
                         </td>
 
                         <td>
+                            <a href="/cnadm/newmatchup?inteam1=<?= $this->e($unmatched_matchup_group['teams'][0], 'urlencode') ?>&inteam2=<?= $this->e($unmatched_matchup_group['teams'][1], 'urlencode') ?>&ineventid=<?= $unmatched_matchup_group['dates'][0]['matched_events'][0] ?? '' ?>"><button class="btn btn-primary">add</button></a>
                         </td>
                     </tr>
                 <?php endforeach ?>
