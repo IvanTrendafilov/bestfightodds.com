@@ -47,7 +47,7 @@ chartSC = function (content, xcord, ycord) {
         chartdisc.style.display = 'none';
         chartlink.innerHTML = 'Bet this line at ' + bookie[1];
         chartlink.style.display = '';
-        chartlink.parentNode.setAttribute('href', 'https://www.bestfightodds.com' + url[1]);
+        chartlink.parentNode.setAttribute('href', 'https://www.proboxingodds.com' + url[1]);
         setHeight(chartwindow, 260);
         
         //Fix for Bet365 to discourage US players:
@@ -1460,10 +1460,10 @@ fightSelected = function () {
             imageLink = 'events/' + Math.abs(fightID) + type + '.png';
         }
         $('[name="webTestImage"]')[0].src = "/img/loading.gif";
-        $("#webHTML").val('<!-- Begin BestFightOdds code -->\n<a href="https://www.bestfightodds.com" target="_blank"><img src="https://www.bestfightodds.com/' + imageLink + '" alt="' + ftitle + ' odds - BestFightOdds" style="width: 216px; border: 0;" /></a>\n<!-- End BestFightOdds code -->');
-        $("#webForum").val('[url=https://www.bestfightodds.com][img]https://www.bestfightodds.com/' + imageLink + '[/img][/url]');
+        $("#webHTML").val('<!-- Begin ProBoxingOdds code -->\n<a href="https://www.proboxingodds.com" target="_blank"><img src="https://www.proboxingodds.com/' + imageLink + '" alt="' + ftitle + ' odds - ProBoxingOdds" style="width: 216px; border: 0;" /></a>\n<!-- End ProBoxingOdds code -->');
+        $("#webForum").val('[url=https://www.proboxingodds.com][img]https://www.proboxingodds.com/' + imageLink + '[/img][/url]');
         $('[name="webTestImage"]')[0].src = '' + imageLink;
-        $("#webImageLink").val('https://www.bestfightodds.com/' + imageLink);
+        $("#webImageLink").val('https://www.proboxingodds.com/' + imageLink);
         $("#webFields").css({ 'display': '' });
     }
     else {
