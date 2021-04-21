@@ -925,10 +925,17 @@ class EventDAO
     /**
      * Clears all unmatched entries
      */
-    public static function clearUnmatched()
+    public static function clearUnmatched($unmatched_item = null, $bookie_id = null)
     {
-        $sQuery = 'DELETE FROM matchups_unmatched';
-        DBTools::doQuery($sQuery);
+        $extra_where = '';
+        $params = [];
+        if ($unmatched_item != null && $bookie_id != null) {
+            $extra_where = ' WHERE matchup = ? AND bookie_id = ? ';
+            $params = [$unmatched_item, $bookie_id];
+        }
+
+        $query = 'DELETE FROM matchups_unmatched ' . $extra_where;
+        DBTools::doParamQuery($query, $params);
         return DBTools::getAffectedRows();
     }
 

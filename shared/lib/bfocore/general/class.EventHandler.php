@@ -351,9 +351,9 @@ class EventHandler
     /**
      * Clears all unmatched entries
      */
-    public static function clearUnmatched()
+    public static function clearUnmatched($unmatched_item = null, $bookie_id = null)
     {
-        return EventDAO::clearUnmatched();
+        return EventDAO::clearUnmatched($unmatched_item, $bookie_id);
     }
 
     public static function getGenericEventForDate($a_sDate)

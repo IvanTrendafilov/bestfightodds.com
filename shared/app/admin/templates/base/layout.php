@@ -11,8 +11,8 @@
 
 	<title>BFO Admin</title>
 
-	<link rel="stylesheet" href="https://unpkg.com/@adminkit/core@latest/dist/css/app.css">
-	<script src="https://unpkg.com/@adminkit/core@latest/dist/js/app.js"></script>
+	<link rel="stylesheet" href="/cnadm/css/admin-kit.css">
+	<script src="/cnadm/js/admin-kit.js"></script>
 
 	<script src="/cnadm/js/jquery-1.12.4.min.js" language="JavaScript" type="text/javascript"></script>
 	<script src="/cnadm/js/admin-main.js" language="JavaScript" type="text/javascript"></script>
