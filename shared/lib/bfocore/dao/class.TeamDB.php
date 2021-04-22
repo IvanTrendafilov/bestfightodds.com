@@ -13,17 +13,14 @@ class TeamDB
 {
     public static function getAllFighters($a_bOnlyWithFights)
     {
-        if ($a_bOnlyWithFights == true)
-        {
+        if ($a_bOnlyWithFights == true) {
             $sQuery = 'SELECT DISTINCT fi.id, fi.name
 					FROM fighters fi 
 						LEFT JOIN fights f ON (fi.id = f.fighter1_id OR fi.id = f.fighter2_id), fighters f1, fighters f2
 					WHERE f.fighter1_id = f1.id
 						AND f.fighter2_id = f2.id
 					ORDER BY fi.name ASC';
-        }
-        else
-        {
+        } else {
             $sQuery = 'SELECT f.id, f.name 
 						FROM fighters f 
 						ORDER BY f.name ASC';
@@ -33,8 +30,7 @@ class TeamDB
 
         $aFighters = array();
 
-        while ($aFighter = mysqli_fetch_array($rResult))
-        {
+        while ($aFighter = mysqli_fetch_array($rResult)) {
             $aFighters[] = new Fighter($aFighter['name'], $aFighter['id']);
         }
 
@@ -55,8 +51,7 @@ class TeamDB
 
         $aFighters = array();
 
-        while ($aFighter = mysqli_fetch_array($rResult))
-        {
+        while ($aFighter = mysqli_fetch_array($rResult)) {
             $aFighters[] = new Fighter($aFighter['name'], $aFighter['id']);
         }
 
@@ -69,13 +64,11 @@ class TeamDB
         $aParams = array($a_iID);
         $rResult = DBTools::doParamQuery($sQuery, $aParams);
 
-        if ($aFighter = mysqli_fetch_array($rResult))
-        {
+        if ($aFighter = mysqli_fetch_array($rResult)) {
             return new Fighter($aFighter['name'], $aFighter['id']);
         }
         return null;
     }
-
 
     /**
      * @deprecated Replaced by getAltNamesForTeamByID that takes ID as input not a string name
@@ -88,13 +81,11 @@ class TeamDB
 
         $rResult = DBTools::doParamQuery($sQuery, $aParams);
 
-        while ($aTeamName = mysqli_fetch_array($rResult))
-        {
+        while ($aTeamName = mysqli_fetch_array($rResult)) {
             $aNames[] = $aTeamName['altname'];
         }
 
-        if (count($aNames) > 0)
-        {
+        if (count($aNames) > 0) {
             return $aNames;
         }
 
@@ -106,13 +97,11 @@ class TeamDB
         $aNames = [];
         $sQuery = "SELECT fa.altname FROM fighters_altnames fa WHERE fa.fighter_id = ?";
         $rows = PDOTools::findMany($sQuery, [$a_iTeamID]);
-        foreach ($rows as $row)
-        {
+        foreach ($rows as $row) {
             $aNames[] = $row['altname'];
         }
 
-        if (count($aNames) > 0)
-        {
+        if (count($aNames) > 0) {
             return $aNames;
         }
 
@@ -158,8 +147,7 @@ class TeamDB
                         AND LEFT(e.date, 10) < LEFT((NOW() - INTERVAL ' . GENERAL_GRACEPERIOD_SHOW . ' HOUR), 10)';
         $rResult = DBTools::doQuery($sQuery);
         $aFighters = [];
-        while ($aFighter = mysqli_fetch_array($rResult))
-        {
+        while ($aFighter = mysqli_fetch_array($rResult)) {
             $aFighters[] = new Fighter($aFighter['name'], $aFighter['id']);
         }
         return $aFighters;
@@ -182,7 +170,4 @@ class TeamDB
 
         return true;
     }
-
 }
-
-?>
