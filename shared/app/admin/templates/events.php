@@ -30,19 +30,21 @@
 </script>
 
 <div class="card">
-								<div class="card-header">
-									<h5 class="card-title mb-0">Input</h5>
-								</div>
-								<div class="card-body">
-									<input class="form-control" id="event_name" type="text" placeholder="Event name" value="<?= $in_event_name ?>">
-                                    <input class="form-control" type="text" placeholder="Date" id="event_date" value="<?= $in_event_date != '' ?   $in_event_date : date('Y-m-d') ?>">
-                                    <div class="form-check form-switch">
-										<input class="form-check-input" type="checkbox" id="event_hidden">
-										<label class="form-check-label" for="event_hidden">Hidden</label>
-									</div>
-                                    <button class="btn btn-primary" id="new-event-button">Add</button>
-								</div>
-							</div>
+    <div class="card-header">
+        <h5 class="card-title mb-0">Input</h5>
+    </div>
+    <div class="card-body">
+    <form>
+        <input class="form-control" id="event_name" type="text" placeholder="Event name" value="<?= $in_event_name ?>">
+        <input class="form-control" type="text" placeholder="Date" id="event_date" value="<?= $in_event_date != '' ?   $in_event_date : date('Y-m-d') ?>">
+        <div class="form-check form-switch">
+            <input class="form-check-input" type="checkbox" id="event_hidden">
+            <label class="form-check-label" for="event_hidden">Hidden</label>
+        </div>
+        <button class="btn btn-primary" id="new-event-button">Add</button>
+        </form>
+    </div>
+</div>
 
 
 <div>
