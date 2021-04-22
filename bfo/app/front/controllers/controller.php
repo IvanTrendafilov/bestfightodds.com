@@ -6,10 +6,9 @@ use Psr\Http\Message\ServerRequestInterface as Request;
 require_once 'config/inc.config.php';
 require_once 'lib/bfocore/general/class.EventHandler.php';
 require_once 'lib/bfocore/general/class.BookieHandler.php';
-require_once 'lib/bfocore/general/class.FighterHandler.php';
+require_once 'lib/bfocore/general/class.TeamHandler.php';
 require_once 'lib/bfocore/general/class.OddsHandler.php';
 require_once 'lib/bfocore/general/class.GraphHandler.php';
-require_once 'lib/bfocore/general/class.TeamHandler.php';
 require_once 'lib/bfocore/general/caching/class.CacheControl.php';
 require_once 'lib/bfocore/general/class.StatsHandler.php';
 
@@ -152,7 +151,7 @@ class MainController
 
         if (strlen($search_query) >= 3)
         {
-            $teams = FighterHandler::searchFighter($search_query);
+            $teams = TeamHandler::searchFighter($search_query);
             $events = EventHandler::searchEvent($search_query);
             if ($teams != null || $events != null)
             {
@@ -212,7 +211,7 @@ class MainController
             return $response->withHeader('Location', '/')->withStatus(302);
         }
 
-        $team = FighterHandler::getFighterByID((int) $team_id);
+        $team = TeamHandler::getFighterByID((int) $team_id);
 
         if ($team == null)
         {

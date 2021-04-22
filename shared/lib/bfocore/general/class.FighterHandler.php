@@ -1,29 +1,28 @@
 <?php
 
-//TODO: Rename to TeamHandler (make generic)
+//TODO: Move these to TeamHandler (make generic)
 
-require_once('lib/bfocore/dao/class.FighterDAO.php');
+require_once('lib/bfocore/dao/class.TeamDB.php');
 
 class FighterHandler
 {
-
-    public static function getAllFighters($a_bOnlyWithFightOdds = false)
+    public static function getAllFighters($only_with_odds = false)
     {
-        return FighterDAO::getAllFighters($a_bOnlyWithFightOdds);
+        return TeamDB::getAllFighters($only_with_odds);
     }
 
-    public static function searchFighter($a_sFighterName)
+    public static function searchFighter($name)
     {
-        if (strlen($a_sFighterName) < 2)
+        if (strlen($name) < 2)
         {
             return false;
         }
-        return FighterDAO::searchFighter($a_sFighterName);
+        return TeamDB::searchFighter($name);
     }
 
-    public static function getFighterByID($a_iFighterID)
+    public static function getFighterByID($id)
     {
-        return FighterDAO::getFighterByID($a_iFighterID);
+        return TeamDB::getFighterByID($id);
     }
 }
 

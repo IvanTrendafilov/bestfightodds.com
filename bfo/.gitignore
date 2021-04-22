@@ -7,5 +7,4 @@
 /node_modules/*
 /vendor/*
 /log/*
-/logs/*
 /config/inc.config.php

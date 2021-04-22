@@ -9,7 +9,6 @@ require_once 'lib/bfocore/general/class.ScheduleHandler.php';
 require_once 'lib/bfocore/general/class.EventHandler.php';
 require_once 'lib/bfocore/general/class.OddsHandler.php';
 require_once 'lib/bfocore/general/class.BookieHandler.php';
-require_once 'lib/bfocore/general/class.FighterHandler.php';
 require_once 'lib/bfocore/general/class.TeamHandler.php';
 require_once 'lib/bfocore/general/class.TwitterHandler.php';
 require_once 'lib/bfocore/general/class.Alerter.php';
@@ -341,7 +340,7 @@ class AdminController
     public function viewFighter(Request $request, Response $response, array $args)
     {
         if (isset($args['id'])) {
-            $fighter = FighterHandler::getFighterByID($args['id']);
+            $fighter = TeamHandler::getFighterByID($args['id']);
             $twitter_handle = TwitterHandler::getTwitterHandle($args['id']);
             $alt_names = TeamHandler::getAltNamesForTeamByID($args['id']);
             $view_data = ['fighter_obj' => $fighter, 'twitter_handle' => $twitter_handle, 'altnames' => $alt_names ?? []];

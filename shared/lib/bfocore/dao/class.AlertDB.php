@@ -4,7 +4,7 @@ require_once('lib/bfocore/general/inc.GlobalTypes.php');
 require_once('lib/bfocore/general/class.EventHandler.php');
 require_once('lib/bfocore/utils/db/class.DBTools.php');
 
-class AlertDAO
+class AlertDB
 {
     /**
      * Adds a new alert
@@ -22,12 +22,12 @@ class AlertDAO
     public static function addNewAlert($alert_obj)
     {
         //Check that alert doesn't already exist
-        if (AlertDAO::matchAlert($alert_obj)) {
+        if (AlertDB::matchAlert($alert_obj)) {
             return 2;
         }
 
         //Check that the email hasn't reached the current limit. Only applicable if the email is not extempt. Which is checked first
-        if (!AlertDAO::hasLimitExemption($alert_obj->getEmail()) && AlertDAO::reachedLimit($alert_obj->getEmail())) {
+        if (!AlertDB::hasLimitExemption($alert_obj->getEmail()) && AlertDB::reachedLimit($alert_obj->getEmail())) {
             return -6;
         }
 
@@ -150,7 +150,7 @@ class AlertDAO
 
         $reached_alerts = array();
 
-        $alerts = AlertDAO::getAllAlerts();
+        $alerts = AlertDB::getAllAlerts();
         foreach ($alerts as $alert) {
             $odds_obj = null;
             if ($alert->getBookieID() == -1) {

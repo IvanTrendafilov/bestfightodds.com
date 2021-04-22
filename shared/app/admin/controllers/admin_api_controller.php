@@ -6,10 +6,10 @@ use Respect\Validation\Validator as v;
 
 require_once 'config/inc.config.php';
 require_once 'lib/bfocore/general/class.ScheduleHandler.php';
+require_once 'lib/bfocore/general/class.TeamHandler.php';
 require_once 'lib/bfocore/general/class.EventHandler.php';
 require_once 'lib/bfocore/general/class.OddsHandler.php';
 require_once 'lib/bfocore/general/class.BookieHandler.php';
-require_once 'lib/bfocore/general/class.FighterHandler.php';
 require_once 'lib/bfocore/general/class.TwitterHandler.php';
 require_once 'lib/bfocore/general/class.Alerter.php';
 require_once 'lib/bfocore/utils/class.OddsTools.php';
@@ -280,7 +280,7 @@ class AdminAPIController
             //Check for alt name update (if so just add it to the bunch)
             if (v::length(5, null)->validate(@$data->alt_name))
             {
-                if (EventHandler::addFighterAltName($data->fighter_id, $data->alt_name))
+                if (TeamHandler::addFighterAltName($data->fighter_id, $data->alt_name))
                 {
                     $return_data['msg'] .= 'Successfully updated altname.';
                     $return_data['fighter_id'] = $data->fighter_id;
