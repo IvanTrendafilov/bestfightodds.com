@@ -2,7 +2,6 @@
 
 use Psr\Http\Message\ResponseInterface as Response;
 use Psr\Http\Message\ServerRequestInterface as Request;
-use Respect\Validation\Validator as v;
 
 require_once 'config/inc.config.php';
 require_once 'lib/bfocore/general/class.GraphHandler.php';
@@ -25,16 +24,24 @@ class APIController
 
     public function addAlert(Request $request, Response $response)
     {
-        $args = $request->getQueryParams();
+        $args = $request->getParsedBody();
+
+        //Validate input
+        if (!isset($args['alertFight'], $args['alertFighter'], $args['alertMail'], $args['alertOdds'], $args['alertBookie'], $args['alertOddsType'])) {
+            $response->getBody()->write('invalid input');
+            return $response;
+        }
+
         $result = Alerter::addNewAlert($args['alertFight'], $args['alertFighter'], $args['alertMail'], $args['alertOdds'], $args['alertBookie'], $args['alertOddsType']);
-        $response->getBody()->write($result);
+        $response->getBody()->write((string) $result);
         return $response;
     }
 
     public function getGraphData(Request $request, Response $response)
     {
         $args = $request->getQueryParams();
-        //Validate args, only numeric values allowed
+
+        //Validate input, only numeric values allowed
         foreach ($args as $arg) {
             if (!is_numeric($arg)) {
                 $response->getBody()->write('invalid input');
@@ -103,6 +110,7 @@ class APIController
                     }
 
                     foreach ($odds as $odds_key => $odds_obj) {
+                        //TODO: Temporary measure to prevent bot data scraping
                         if ($_SERVER['HTTP_USER_AGENT'] == 'python-requests/2.24.0' || $_SERVER['REMOTE_ADDR'] == '77.4.141.237' || $_SERVER['REMOTE_ADDR'] == '77.2.84.76' || $_SERVER['REMOTE_ADDR'] == '77.4.124.22' || $_SERVER['REMOTE_ADDR'] == '77.9.20.120') {
                             $scale = pow(10, 3);
                             $dummy = mt_rand(1 * $scale, 3 * $scale) / $scale;

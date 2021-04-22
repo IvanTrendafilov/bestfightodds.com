@@ -517,6 +517,7 @@ class AdminAPIController
 
     public function deleteOdds(Request $request, Response $response)
     {
+        //In progress
         $json = $request->getBody();
         $data = json_decode($json, false);
         $return_data = [];

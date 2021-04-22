@@ -1,15 +1,11 @@
 <?php
 
-/**
- */
-
 require_once('lib/bfocore/general/inc.GlobalTypes.php');
 require_once('lib/bfocore/general/class.EventHandler.php');
 require_once('lib/bfocore/utils/db/class.DBTools.php');
 
 class AlertDAO
 {
-
     /**
      * Adds a new alert
      *
@@ -23,61 +19,60 @@ class AlertDAO
      * 		-7 = Odds already reached
      * 		2 = Alert already exists
      */
-    public static function addNewAlert($a_oAlert)
+    public static function addNewAlert($alert_obj)
     {
         //Check that alert doesn't already exist
-        if (AlertDAO::matchAlert($a_oAlert)) {
+        if (AlertDAO::matchAlert($alert_obj)) {
             return 2;
         }
 
         //Check that the email hasn't reached the current limit. Only applicable if the email is not extempt. Which is checked first
-        if (!AlertDAO::hasLimitExemption($a_oAlert->getEmail()) && AlertDAO::reachedLimit($a_oAlert->getEmail())) {
+        if (!AlertDAO::hasLimitExemption($alert_obj->getEmail()) && AlertDAO::reachedLimit($alert_obj->getEmail())) {
             return -6;
         }
 
         //Check that the e-mail is in the right format
-        if (!filter_var($a_oAlert->getEmail(), FILTER_VALIDATE_EMAIL)) {
+        if (!filter_var($alert_obj->getEmail(), FILTER_VALIDATE_EMAIL)) {
             return -4;
         }
 
         //Check that the limit is in the right format
-        $sPattern = '/([+-]{0,1}[0-9]{3}[0-9]*)/';
-        if (preg_match($sPattern, $a_oAlert->getLimit()) != 1) {
+        $pattern = '/([+-]{0,1}[0-9]{3}[0-9]*)/';
+        if (preg_match($pattern, $alert_obj->getLimit()) != 1) {
             return -5;
         }
 
         //Check that the fighter selection is correct
-        if ($a_oAlert->getFighter() != 1 && $a_oAlert->getFighter() != 2) {
+        if ($alert_obj->getFighter() != 1 && $alert_obj->getFighter() != 2) {
             return -3;
         }
 
         //Check that odds type is correct (1-3)
-        if ($a_oAlert->getOddsType() != '1' && $a_oAlert->getOddsType() != '2' && $a_oAlert->getOddsType() != '3' && $a_oAlert->getOddsType() != '4') {
+        if ($alert_obj->getOddsType() != '1' && $alert_obj->getOddsType() != '2' && $alert_obj->getOddsType() != '3' && $alert_obj->getOddsType() != '4') {
             return -5;
         }
 
-
         //Check that fight exists and is not outdated
-        $oTempFight = EventHandler::getFightByID($a_oAlert->getFightID());
-        if ($oTempFight == null) {
+        $fight_obj = EventHandler::getFightByID($alert_obj->getFightID());
+        if ($fight_obj == null) {
             return -1;
         }
-        if (EventHandler::getEvent($oTempFight->getEventID(), true) == false) {
+        if (EventHandler::getEvent($fight_obj->getEventID(), true) == false) {
             return -2;
         }
 
         //Check that limit hasn't already been reached
-        $oFightOdds = null;
-        if ($a_oAlert->getBookieID() == -1) {
+        $odds_obj = null;
+        if ($alert_obj->getBookieID() == -1) {
             //Check best of all
-            $oFightOdds = EventHandler::getBestOddsForFight($a_oAlert->getFightID());
+            $odds_obj = EventHandler::getBestOddsForFight($alert_obj->getFightID());
         } else {
             //Check best for bookie
-            $oFightOdds = EventHandler::getLatestOddsForFightAndBookie($a_oAlert->getFightID(), $a_oAlert->getBookieID());
+            $odds_obj = EventHandler::getLatestOddsForFightAndBookie($alert_obj->getFightID(), $alert_obj->getBookieID());
         }
 
-        if ($oFightOdds != null) {
-            if ($oFightOdds->getFighterOdds($a_oAlert->getFighter()) >= $a_oAlert->getLimit()) {
+        if ($odds_obj != null) {
+            if ($odds_obj->getFighterOdds($alert_obj->getFighter()) >= $alert_obj->getLimit()) {
                 return -7;
             }
         }
@@ -85,12 +80,12 @@ class AlertDAO
         $query = "INSERT INTO alerts(email, fight_id, fighter, bookie_id, odds, odds_type) VALUES (?, ?, ?, ?, ?, ?)";
 
         $params = array(
-            $a_oAlert->getEmail(),
-            $a_oAlert->getFightID(),
-            $a_oAlert->getFighter(),
-            $a_oAlert->getBookieID(),
-            $a_oAlert->getLimit(),
-            $a_oAlert->getOddsType()
+            $alert_obj->getEmail(),
+            $alert_obj->getFightID(),
+            $alert_obj->getFighter(),
+            $alert_obj->getBookieID(),
+            $alert_obj->getLimit(),
+            $alert_obj->getOddsType()
         );
 
         return DBTools::doParamQuery($query, $params);
@@ -101,14 +96,14 @@ class AlertDAO
      *
      * If none exists then null is returned.
      */
-    public static function matchAlert($a_oAlert)
+    public static function matchAlert($alert_obj)
     {
         $query = 'SELECT a.* FROM alerts a WHERE email = ? AND fight_id = ? AND fighter = ? AND bookie_id = ? AND odds = ?;';
 
-        $params = array($a_oAlert->getEmail(), $a_oAlert->getFightID(), $a_oAlert->getFighter(), $a_oAlert->getBookieID(), $a_oAlert->getLimit());
+        $params = array($alert_obj->getEmail(), $alert_obj->getFightID(), $alert_obj->getFighter(), $alert_obj->getBookieID(), $alert_obj->getLimit());
 
-        $rResult = DBTools::doParamQuery($query, $params);
-        if ($aData = mysqli_fetch_array($rResult)) {
+        $result = DBTools::doParamQuery($query, $params);
+        if ($data = mysqli_fetch_array($result)) {
             return true;
         }
         return false;
@@ -122,9 +117,9 @@ class AlertDAO
         $query = "SELECT COUNT(*) AS limitcount FROM alerts WHERE email = ? GROUP BY email;";
         $params = array($a_sEmail);
 
-        $rResult = DBTools::doParamQuery($query, $params);
-        if ($aData = mysqli_fetch_array($rResult)) {
-            if ($aData['limitcount'] >= 50) {
+        $result = DBTools::doParamQuery($query, $params);
+        if ($data = mysqli_fetch_array($result)) {
+            if ($data['limitcount'] >= 50) {
                 return true;
             }
         }
@@ -134,7 +129,6 @@ class AlertDAO
     public static function clearAlert($a_iAlert)
     {
         $query = "DELETE FROM alerts WHERE id = ?";
-
         $params = array($a_iAlert);
 
         DBTools::doParamQuery($query, $params);
@@ -154,26 +148,26 @@ class AlertDAO
         // This query gives all alerts where FO exist. Needs to be updated to check also if condition is met:
         // select * from alerts a left join (select fight_id, bookie_id, MAX(date) AS maxdate from fightodds group by bookie_id) fo on a.fight_id = fo.fight_id where fo.maxdate is not null;
 
-        $aReachedAlerts = array();
+        $reached_alerts = array();
 
-        $aAlerts = AlertDAO::getAllAlerts();
-        foreach ($aAlerts as $oAlert) {
-            $oFightOdds = null;
-            if ($oAlert->getBookieID() == -1) {
+        $alerts = AlertDAO::getAllAlerts();
+        foreach ($alerts as $alert) {
+            $odds_obj = null;
+            if ($alert->getBookieID() == -1) {
                 //Alert is not bookie specific
-                $oFightOdds = EventHandler::getBestOddsForFight($oAlert->getFightID());
+                $odds_obj = EventHandler::getBestOddsForFight($alert->getFightID());
             } else {
                 //Alert is bookie specific
-                $oFightOdds = EventHandler::getLatestOddsForFightAndBookie($oAlert->getFightID(), $oAlert->getBookieID());
+                $odds_obj = EventHandler::getLatestOddsForFightAndBookie($alert->getFightID(), $alert->getBookieID());
             }
 
-            if ($oFightOdds != null && $oFightOdds->getFighterOdds($oAlert->getFighter()) >= $oAlert->getLimit()) {
+            if ($odds_obj != null && $odds_obj->getFighterOdds($alert->getFighter()) >= $alert->getLimit()) {
                 //Match
-                $aReachedAlerts[] = $oAlert;
+                $reached_alerts[] = $alert;
             }
         }
 
-        return $aReachedAlerts;
+        return $reached_alerts;
     }
 
     public static function getExpiredAlerts()
@@ -184,37 +178,37 @@ class AlertDAO
 						AND f.event_id = e.id
 						AND LEFT(e.date,10) < LEFT((NOW() - INTERVAL 1 HOUR), 10);';
 
-        $rResult = DBTools::doQuery($query);
-        $aAlerts = array();
-        while ($aAlert = mysqli_fetch_array($rResult)) {
-            $aAlerts[] = new Alert($aAlert['email'], $aAlert['fight_id'], $aAlert['fighter'], $aAlert['bookie_id'], $aAlert['odds'], $aAlert['id'], $aAlert['odds_type']);
+        $result = DBTools::doQuery($query);
+        $alerts = array();
+        while ($row = mysqli_fetch_array($result)) {
+            $alerts[] = new Alert($row['email'], $row['fight_id'], $row['fighter'], $row['bookie_id'], $row['odds'], $row['id'], $row['odds_type']);
         }
 
-        return $aAlerts;
+        return $alerts;
     }
 
     public static function getAllAlerts()
     {
         $query = 'SELECT id, email, fight_id, fighter, bookie_id, odds, odds_type FROM alerts ORDER BY id ASC';
 
-        $rResult = DBTools::doQuery($query);
-        $aAlerts = array();
+        $result = DBTools::doQuery($query);
+        $alerts = array();
 
-        while ($aAlert = mysqli_fetch_array($rResult)) {
-            $aAlerts[] = new Alert($aAlert['email'], $aAlert['fight_id'], $aAlert['fighter'], $aAlert['bookie_id'], $aAlert['odds'], $aAlert['id'], $aAlert['odds_type']);
+        while ($row = mysqli_fetch_array($result)) {
+            $alerts[] = new Alert($row['email'], $row['fight_id'], $row['fighter'], $row['bookie_id'], $row['odds'], $row['id'], $row['odds_type']);
         }
 
-        return $aAlerts;
+        return $alerts;
     }
 
     public static function getAlertCount()
     {
         $query = 'SELECT COUNT(*) AS alertcount FROM alerts a;';
 
-        $rResult = DBTools::doQuery($query);
+        $result = DBTools::doQuery($query);
 
-        if ($aResult = mysqli_fetch_array($rResult)) {
-            return $aResult['alertcount'];
+        if ($result = mysqli_fetch_array($result)) {
+            return $result['alertcount'];
         }
 
         return -1;
@@ -233,9 +227,9 @@ class AlertDAO
         $query = "SELECT email FROM alerts_exemptions WHERE email = ?;";
         $params = array(strtolower($a_sEmail));
 
-        $rResult = DBTools::doParamQuery($query, $params);
+        $result = DBTools::doParamQuery($query, $params);
 
-        if (DBTools::getSingleValue($rResult) != null) {
+        if (DBTools::getSingleValue($result) != null) {
             return true;
         }
         return false;

@@ -653,7 +653,7 @@ $(document).ready(function () {
         $('.alert-result-il').removeClass('success error');
         $(event.target).find("input").removeClass('success error');
         $('.alert-loader').css('display', 'inline-block');
-        $.get("api?f=aa", {
+        $.post("api/aa", {
             'alertFight': values['m'],
             'alertFighter': values['tn'],
             'alertBookie': values['alert-bookie'],
@@ -718,7 +718,7 @@ $(document).ready(function () {
         $('#alert-mail-il').removeClass('success error');
         curbut.prevAll('.alert-result-il').text('');
         curbut.prevAll('.alert-loader').css('display', 'inline-block');
-        $.get("/api?f=aa", {
+        $.post("/api/aa", {
             'alertFight': $(this).data("mu"),
             'alertFighter': '1',
             'alertBookie': values['alert-bookie-il'],
