@@ -131,9 +131,7 @@
 
                                 <td class="prop-cell prop-cell-exp" data-mu="<?=$matchup->getID()?>">
                                 <?php if (isset($matchup_prop_count[$matchup->getID()])): ?> 
-                                    <?=$matchup_prop_count[$matchup->getID()]?>&nbsp;<span class="exp-ard"></span>
-                                <?php else: ?>
-                                    &nbsp;
+                                    <?=$matchup_prop_count[$matchup->getID()]?><span class="exp-ard"></span>
                                 <?php endif ?>
                                 </td>
 
