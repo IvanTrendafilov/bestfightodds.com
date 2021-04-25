@@ -67,7 +67,18 @@ class TwitDAO
                         VALUES (?, ?)
                         ON DUPLICATE KEY UPDATE team_id = ?, handle = ?';
         $params = [$team_id, $handle, $team_id, $handle];
-        return PDOTools::insert($query, $params);
+        
+        try {
+            $id = PDOTools::insert($query, $params);
+        } catch (PDOException $e) {
+            if ($e->getCode() == 23000) {
+                throw new Exception("Duplicate entry", 10);
+            } else {
+                throw new Exception("Unknown error " . $e->getMessage(), 10);
+            }
+            return false;
+        }
+        return true;
     }
 
     public static function getTwitterHandle($team_id)
