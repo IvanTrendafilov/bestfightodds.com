@@ -43,11 +43,6 @@ $tablerowheight: 27px;
     color: #202020;
   }
 }
-<<<<<<< HEAD
-
-
-=======
->>>>>>> 57f1e9f52de0cd2332f6a0ba016bfbfc5ba1d29a
 .t-b-fcc { //Table body first column content wrapper span (e.g. fighter name 'Jon Jones')
   width: 100%;
   position: relative;
@@ -68,11 +63,7 @@ $tablerowheight: 27px;
 }
 
 .odds-table {
-<<<<<<< HEAD
-  width: 100%;
-=======
   width: 944px;
->>>>>>> 57f1e9f52de0cd2332f6a0ba016bfbfc5ba1d29a
   font-size: 12px;
   border-collapse: collapse;
   thead {
@@ -82,18 +73,6 @@ $tablerowheight: 27px;
     th {
       text-align: center;
       height: 25px;
-<<<<<<< HEAD
-      /*width: 60px;
-      min-width: 60px;
-      max-width: 60px;*/
-      &.table-prop-header {
-        text-align: right;
-        padding-right: 5px;
-        color: #606060;
-        width: 30px;
-        min-width: 30px;
-        max-width: 30px;
-=======
       width: 50px;
       &.table-prop-header {
         text-align: right;
@@ -103,7 +82,6 @@ $tablerowheight: 27px;
         min-width: 30px;
         max-width: 30px;
         font-weight: 500;
->>>>>>> 57f1e9f52de0cd2332f6a0ba016bfbfc5ba1d29a
       }
       &.date-head {
         width: 40px;
@@ -121,36 +99,14 @@ $tablerowheight: 27px;
   }
   tbody {
     tr {
-<<<<<<< HEAD
-      background-color: #f7f9fa;
-      height: $tablerowheight;
-      &:nth-child(2n)
-      {
-=======
       background-color: #f5f7f9;
       height: $tablerowheight;
       &:nth-child(2n) {
->>>>>>> 57f1e9f52de0cd2332f6a0ba016bfbfc5ba1d29a
         background-color: #fff;
         border-bottom: 1px solid #d6d6d6;
       }
-<<<<<<< HEAD
-
-      &.eventprop {
-        background-color: #f5f7f9;
-        border-top: 1px solid #d6d6d6;
-        border-bottom: 1px solid #c6c6c6;
-        border-bottom: 0;
-        & th a {
-          font-weight: 400;
-        }
-      }
-      &.pr {
-        background-color: #e0e2e4;
-=======
       &.pr {
         background-color: #DCDEE0;
->>>>>>> 57f1e9f52de0cd2332f6a0ba016bfbfc5ba1d29a
         display: none;
         height: $tablerowheight;
         &:nth-child(2n) {
@@ -163,12 +119,8 @@ $tablerowheight: 27px;
       padding-left: 5px;
       width: 110px;
       color: #1a1a1a;
-<<<<<<< HEAD
-      font-weight: 400;
-=======
       font-size: 10px;
       font-weight: 500;
->>>>>>> 57f1e9f52de0cd2332f6a0ba016bfbfc5ba1d29a
       max-width: 111px;
       min-width: 111px;
       line-height: 12px;
@@ -332,11 +284,7 @@ $tablerowheight: 27px;
   box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
   border-radius: 1px;
   position: relative;
-<<<<<<< HEAD
-  border: 1px solid #c0c2c4;
-=======
   border: 1px solid #C0C2C4;
->>>>>>> 57f1e9f52de0cd2332f6a0ba016bfbfc5ba1d29a
 }
 
 .table-last-changed {
