@@ -284,7 +284,7 @@ if ($oEvent != null)
                 $iPropCount = OddsHandler::getPropCountForMatchup($oFight->getID());
                 if ($iPropCount > 0)
                 {
-                    echo $iPropCount . '<a href="#" data-mu="' . $oFight->getID() . '"><span class="t-b-cc"><span class="exp-ard"></span></span></a>';
+                    echo '<a href="#" data-mu="' . $oFight->getID() . '"><span class="t-b-cc">' . $iPropCount . '<span class="exp-ard"></span></span></a>';
                 }
                 echo '</td>';
 
