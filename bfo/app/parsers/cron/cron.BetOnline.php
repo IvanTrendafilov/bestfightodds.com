@@ -121,6 +121,7 @@ class ParserJob
             if (isset($matchup->scheduleText) 
                 && (substr(trim((string) $matchup->scheduleText),0,4) == 'BKFC'
                 || substr(trim((string) $matchup->scheduleText),0,9) == 'Fight2Win'
+                || substr(trim((string) $matchup->scheduleText),0,3) == 'WNO'
                 || substr(trim((string) $matchup->scheduleText),0,3) == 'SUG'))
             {
                 $this->logger->info('Skipping matchup for event ' . $matchup->scheduleText);
