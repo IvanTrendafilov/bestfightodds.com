@@ -41,8 +41,12 @@
     }
     thead {
       th:first-child {
-        max-width: 95px;
-        min-width: 95px;
+        max-width: 25px;
+        min-width: 25px;
+      }
+      th:nth-child(2) {
+        max-width: 70px;
+        min-width: 70px;
       }
     }
   }
@@ -160,7 +164,7 @@
   .table-inner-shadow-left {
     position: absolute;
     top: 0;
-    left: 118px;
+    left: 178px;
     width: 0;
     height: 100%;
     background-color: transparent;

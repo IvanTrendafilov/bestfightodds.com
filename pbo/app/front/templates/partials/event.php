@@ -34,10 +34,12 @@
 
                     <?php //============== Add matchups ====================== 
                     ?>
-                    <?php foreach ($matchups as $matchup_key => $matchup) : ?>
+                    <?php foreach (array_reverse($matchups) as $matchup_key => $matchup) : ?>
+                        
+
                         <?php for ($i = 1; $i <= 2; $i++) : ?>
                             <tr <?= $i == 1 ? 'id="mu-' . $matchup->getID() . '"' : '' ?> <?= (($i == 2 && $matchup_key == array_key_last($matchups)) ? ' style="border-bottom: 0;" ' : '') ?>>
-                                <td class="date-cell" data-time="<?=' . $sGameTime . '?>"><?= ($i == 1 ? $sGameTime : ($sGameTime != '' ? 'UTC' : '')) ?>ds</td>
+                                <td class="date-cell" data-time="<?=date('H:i', $matchup->getMetadata('gametime'))?>"><?= ($i == 1 ? date('H:i', $matchup->getMetadata('gametime')) : (date('H:i', $matchup->getMetadata('gametime')) != '' ? 'UTC' : '')) ?></td>
                                 <th scope="row"><a href="/fighters/<?= $matchup->getFighterAsLinkString($i) ?>"><span class="t-b-fcc"><?= $matchup->getFighterAsString($i) ?></span></a></th>
                             </tr>
                         <?php endfor ?>
@@ -48,7 +50,7 @@
                                 <?php foreach ($team_num_row as $team_num => $prop) : ?>
                                     <?php for ($i = 1; $i <= 2; $i++) : ?>
                                         <tr class="pr">
-                                            <th scope="row"><?= $i == 1 ? $prop[array_key_first($prop)]['odds_obj']->getPropName() : $prop[array_key_first($prop)]['odds_obj']->getNegPropName() ?></th>
+                                            <th scope="row"  colspan="2"><?= $i == 1 ? $prop[array_key_first($prop)]['odds_obj']->getPropName() : $prop[array_key_first($prop)]['odds_obj']->getNegPropName() ?></th>
                                         </tr>
                                     <?php endfor ?>
                                 <?php endforeach ?>
@@ -67,7 +69,7 @@
                         <?php foreach ($event_prop_odds[$event->getID()] as $proptype_id => $prop) : ?>
                             <?php for ($i = 1; $i <= 2; $i++) : ?>
                                 <tr class="pr">
-                                    <th scope="row"><?= $i == 1 ? $prop[array_key_first($prop)]['odds_obj']->getPropName() : $prop[array_key_first($prop)]['odds_obj']->getNegPropName() ?></th>
+                                    <th scope="row"  colspan="2"><?= $i == 1 ? $prop[array_key_first($prop)]['odds_obj']->getPropName() : $prop[array_key_first($prop)]['odds_obj']->getNegPropName() ?></th>
                                 </tr>
                             <?php endfor ?>
                         <?php endforeach ?>
@@ -96,12 +98,12 @@
                             <?php //============== Add matchups ====================== 
                             ?>
 
-                            <?php foreach ($matchups as $matchup_key => $matchup) : ?>
+                            <?php foreach (array_reverse($matchups) as $matchup_key => $matchup) : ?>
 
                                 <?php for ($i = 1; $i <= 2; $i++) : ?>
 
                                     <tr <?= (($i == 2 && $matchup_key == array_key_last($matchups)) ? ' style="border-bottom: 0;" ' : '') ?>>
-                                        <td class="date-cell" data-time="' . $sGameTime . '"><?= ($i == 1 ? $sGameTime : ($sGameTime != '' ? 'UTC' : '')) ?>ds</td>
+                                        <td class="date-cell" data-time="<?=date('H:i', $matchup->getMetadata('gametime'))?>"><?= ($i == 1 ? date('H:i', $matchup->getMetadata('gametime')) : (date('H:i', $matchup->getMetadata('gametime')) != '' ? 'UTC' : '')) ?></td>
                                         <th scope="row"><a href="/fighters/<?= $matchup->getFighterAsLinkString($i) ?>"><span class="t-b-fcc"><?= $matchup->getFighterAsString($i) ?></span></a></th>
 
                                         <?php foreach ($bookies as $bookie) : ?>
@@ -183,7 +185,7 @@
                                             <?php for ($i = 1; $i <= 2; $i++) : ?>
 
                                                 <tr class="pr">
-                                                    <th scope="row"><?= $i == 1 ? $prop[array_key_first($prop)]['odds_obj']->getPropName() : $prop[array_key_first($prop)]['odds_obj']->getNegPropName() ?></th>
+                                                    <th scope="row" colspan="2"><?= $i == 1 ? $prop[array_key_first($prop)]['odds_obj']->getPropName() : $prop[array_key_first($prop)]['odds_obj']->getNegPropName() ?></th>
 
                                                     <?php foreach ($bookies as $bookie) : ?>
 

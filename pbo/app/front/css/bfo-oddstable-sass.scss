@@ -63,7 +63,7 @@ $tablerowheight: 27px;
 }
 
 .odds-table {
-  width: 944px;
+  width: 100%;
   font-size: 12px;
   border-collapse: collapse;
   thead {
@@ -73,7 +73,9 @@ $tablerowheight: 27px;
     th {
       text-align: center;
       height: 25px;
-      width: 50px;
+      /*width: 60px;
+      min-width: 60px;
+      max-width: 60px;*/
       &.table-prop-header {
         text-align: right;
         padding-right: 5px;
@@ -119,7 +121,7 @@ $tablerowheight: 27px;
       padding-left: 5px;
       width: 110px;
       color: #1a1a1a;
-      font-size: 10px;
+      font-size: 12px;
       font-weight: 500;
       max-width: 111px;
       min-width: 111px;
@@ -157,7 +159,7 @@ $tablerowheight: 27px;
     }
     td {
       &.date-cell {
-        font-size: 10px;
+        font-size: 12px;
         color: #a8a8a8;
         font-family: 'Roboto', Arial, sans-serif;
         width: 40px;
@@ -367,7 +369,7 @@ $tablerowheight: 27px;
 }
 
 .svg-i {
-  color: #53585a;
+  color: #3d5274;
   fill: var(--iron-icon-fill-color, currentcolor);
   stroke: var(--iron-icon-stroke-color, none);
   height: 21px;

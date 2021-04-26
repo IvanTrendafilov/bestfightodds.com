@@ -4,7 +4,7 @@ $(document).ready(function () {
     }, false);
 
     document.getElementById('bookieResetDefault').addEventListener("click", function(e) {
-        localStorage.removeItem("bfo_bookie_order");
+        localStorage.removeItem("pbo_bookie_order");
         location.reload();
         //Reset to defaults
     }, false);
@@ -21,7 +21,7 @@ function updateBookieColumns() {
     //Only apply to pages that contain table-scroller (an odds table)
     if (document.querySelector('.table-scroller'))
     {
-        var current_settings = localStorage.getItem("bfo_bookie_order");
+        var current_settings = localStorage.getItem("pbo_bookie_order");
         if (current_settings !== null) 
         {
             current_settings = JSON.parse(current_settings)
@@ -36,13 +36,13 @@ function updateBookieColumns() {
                 
                 document.querySelectorAll('.table-scroller table').forEach(function (table) {
                     for (var i = 0, row; row = table.rows[i]; i++) {
-                        row.cells[0].insertAdjacentElement('afterend', row.cells[cur_index]);
+                        row.cells[1].insertAdjacentElement('afterend', row.cells[cur_index]);
                         //Check if this bookie should be disabled as well
                         if (current_settings[item].enabled == false) {
-                            row.cells[1].style.display = "none";
+                            row.cells[2].style.display = "none";
                         }
                         else {
-                            row.cells[1].setAttribute("style", "");
+                            row.cells[2].setAttribute("style", "");
                         }
                     }
                 });
@@ -65,7 +65,7 @@ function saveBookieSettings(el) {
         bookie_orders[item.dataset.b].order = i;
         i++;
     });
-    localStorage.setItem("bfo_bookie_order", JSON.stringify(bookie_orders));
+    localStorage.setItem("pbo_bookie_order", JSON.stringify(bookie_orders));
     updateBookieColumns();
 }
 
@@ -76,7 +76,7 @@ function showSettingsWindow() {
     var el = document.getElementById('bookie-order-items');
     el.innerHTML = '';
 
-    var current_settings = localStorage.getItem("bfo_bookie_order");
+    var current_settings = localStorage.getItem("pbo_bookie_order");
     if (current_settings) 
     {
         current_settings = JSON.parse(current_settings)
