@@ -162,6 +162,8 @@ $tablerowheight: 27px;
         color: #a8a8a8;
         font-family: 'Roboto', Arial, sans-serif;
         width: 40px;
+        max-width: 40px;
+        min-width: 40px;
       }
       &.button-cell {
         width: 16px;
