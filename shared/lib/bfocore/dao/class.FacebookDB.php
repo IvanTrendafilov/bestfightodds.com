@@ -10,7 +10,7 @@ require_once('lib/bfocore/utils/db/class.PDOTools.php');
  *
  * @author Christian Nordvaller
  */
-class FacebookDAO
+class FacebookDB
 {
     public static function saveMatchupAsPosted($matchup_id, $skipped)
     {

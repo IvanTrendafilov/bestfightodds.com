@@ -1,10 +1,10 @@
 <?php
 
-require_once('lib/bfocore/dao/class.TeamDAO.php');
+require_once('lib/bfocore/dao/class.TeamDB.php');
 require_once('lib/bfocore/general/inc.GlobalTypes.php');
 
 /**
- * TeamHandler (Replaces FighterHandler eventually)
+ * TeamHandler
  *
  * @author Christian
  */
@@ -15,7 +15,7 @@ class TeamHandler
      */
     public static function getAllAltNamesForTeam($a_sTeamName)
     {
-        return TeamDAO::getAllAltNamesForTeam($a_sTeamName);
+        return TeamDB::getAllAltNamesForTeam($a_sTeamName);
     }
 
     public static function getAltNamesForTeamByID($a_iTeamID)
@@ -24,7 +24,7 @@ class TeamHandler
         {
             return null;
         }
-        return TeamDAO::getAltNamesForTeamByID($a_iTeamID);
+        return TeamDB::getAltNamesForTeamByID($a_iTeamID);
     }
 
 	/**
@@ -32,12 +32,36 @@ class TeamHandler
      */
     public static function getLastChangeDate($a_iFighterID)
     {
-     	return TeamDAO::getLastChangeDate($a_iFighterID);
+     	return TeamDB::getLastChangeDate($a_iFighterID);
     }
 
     public static function getAllTeamsWithMissingResults()
     {
-        return TeamDAO::getAllTeamsWithMissingResults();
+        return TeamDB::getAllTeamsWithMissingResults();
+    }
+
+    public static function addFighterAltName($fighter_id, $new_alt_name)
+    {
+        return TeamDB::addFighterAltName($fighter_id, $new_alt_name);
+    }
+
+    public static function getAllFighters($only_with_odds = false)
+    {
+        return TeamDB::getAllFighters($only_with_odds);
+    }
+
+    public static function searchFighter($name)
+    {
+        if (strlen($name) < 2)
+        {
+            return false;
+        }
+        return TeamDB::searchFighter($name);
+    }
+
+    public static function getFighterByID($id)
+    {
+        return TeamDB::getFighterByID($id);
     }
 
 }

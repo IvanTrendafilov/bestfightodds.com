@@ -1,6 +1,7 @@
 <?php
 require_once('config/inc.config.php');
-require_once('lib/bfocore/general/class.FighterHandler.php');
+require_once('lib/bfocore/general/class.TeamHandler.php');
+require_once('lib/bfocore/general/class.TeamHandler.php');
 require_once('lib/bfocore/general/class.EventHandler.php');
 require_once('lib/bfocore/general/inc.GlobalTypes.php');
 
@@ -15,7 +16,7 @@ if ($_POST['execute'] == true)
         exit;
     }
 
-    Scenario();
+    Scenario1();
 }
 
 //Scenario 1: Matching prop with second team having an altname that changes the lexographical order of the matchup
@@ -35,8 +36,8 @@ function Scenario1()
     echo 'Step 2: Added odds to new matchup<br />';
 
     //Step 3: Add alt name to secondary fighter 
-    $aFighters = FighterHandler::searchFighter($oMatchup->getFighter2());
-    EventHandler::addFighterAltName($aFighters[0]->getID(), 'Alastname');
+    $aFighters = TeamHandler::searchFighter($oMatchup->getFighter2());
+    TeamHandler::addFighterAltName($aFighters[0]->getID(), 'Alastname');
     echo 'Step 3: Added alt name to secondary fighter<br />';
 
     //Step 4: Parse prop for template Bookie ID 1, prop template ID 2,  <T> WINS INSIDE DISTANCE 

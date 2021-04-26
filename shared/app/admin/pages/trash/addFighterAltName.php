@@ -1,7 +1,7 @@
 <?php
 
 require_once('lib/bfocore/general/class.EventHandler.php');
-require_once('lib/bfocore/general/class.FighterHandler.php');
+require_once('lib/bfocore/general/class.TeamHandler.php');
 require_once('lib/bfocore/general/class.TwitterHandler.php');
 
 //Add fighter altname:
@@ -12,7 +12,7 @@ echo '
 		Fighter: <select name="fighter_id">
 			<option value="-1">(none)</option>';
 
-			$aFighters = FighterHandler::getAllFighters();
+			$aFighters = TeamHandler::getAllFighters();
 			foreach ($aFighters as $oFighter)
 			{
 				if (isset($_GET['fighterName']) && $oFighter->getName() == $_GET['fighterName'])

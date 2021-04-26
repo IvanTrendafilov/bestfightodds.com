@@ -10,7 +10,7 @@ define('GENERAL_BASEDIR', '/var/www/bfo/bfo'); //Used to specify base directory 
 define('GENERAL_HOSTNAME', 'www.bestfightodds.com'); //Used to specify the hostname where this site is hosted. Used mainly to generate URLs in various contexts
 define('GENERAL_PRODUCTION_MODE', false); //Used to specify production mode. In production mode, some features are disabled for security purposes. E.g. some tests cannot be run
 define('GENERAL_TIMEZONE', 0);	//Timezone for website (if different from system)
-define('GENERAL_IMAGE_DIRECTORY', GENERAL_BASEDIR . '/app/front/img/'); //Used to specify image directory (required for some functions)
+define('GENERAL_IMAGE_DIRECTORY', GENERAL_BASEDIR . '/app/front/img/'); //Used to specify image directory (required for some functions) @deprecated
 define('GENERAL_KLOGDIR', GENERAL_BASEDIR . '/log/'); //Directory where Klogger logs should be stored
 define('GENERAL_GRACEPERIOD_SHOW', 8); //Defines how many hours an event should be considered active even if it has passed its event date. Used for example to continue showing the event past its start
 define('GENERAL_CNADM_LOGIN', '');
@@ -59,7 +59,7 @@ define('PARSE_GENERATORDIR', GENERAL_BASEDIR . '/app/generators/');  //Directory
 define('PARSE_PAGEDIR', GENERAL_BASEDIR . '/app/front/pages/');  //Directory where generated pages should be stored
 define('PARSE_LOG_LEVEL', 2); //Level of detail in the logs, from -2 to 2 . At the lowest level, only errors are shown @deprecated
 define('PARSE_PARSERS', 'WilliamHill'); //@deprecated
-define('PARSE_MOCKFEEDS_ON', false); //Enable/disable mock feed mode parsing from static files instead of real feeds
+define('PARSE_MOCKFEEDS_ON', false); //Enable/disable mock feed mode parsing from static files instead of real feeds @deprecated
 define('PARSE_MOCKFEEDS_DIR', GENERAL_BASEDIR . '/app/parsers/mockfeeds/');  //Directory where mock feeds are stored
 define('PARSE_CREATIVEMATCHING', false); //Used to specify if parser should try creative ways to match matchups (use with caution);
 define('PARSE_CREATEMATCHUPS', false); //Used to specify if parser should create matchups that was not found (use with caution);

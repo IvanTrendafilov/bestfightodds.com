@@ -1,7 +1,7 @@
 <?php
 
 require_once('lib/bfocore/general/inc.GlobalTypes.php');
-require_once('lib/bfocore/dao/class.AlertDAO.php');
+require_once('lib/bfocore/dao/class.AlertDB.php');
 require_once('lib/bfocore/general/class.EventHandler.php');
 require_once('config/inc.config.php');
 require_once('lib/bfocore/utils/class.OddsTools.php');
@@ -14,7 +14,6 @@ require_once('lib/bfocore/utils/aws-ses/class.SESMailer.php');
  */
 class Alerter
 {
-
     /**
      * Adds a new alert
      *
@@ -65,7 +64,7 @@ class Alerter
         }
 
         $oAlert = new Alert($a_sEmail, $a_iFightID, $a_iFighter, $a_iBookieID, $a_iLimit, -1, $a_iOddsType);
-        return AlertDAO::addNewAlert($oAlert);
+        return AlertDB::addNewAlert($oAlert);
     }
 
     /**
@@ -78,14 +77,14 @@ class Alerter
     public static function checkAllAlerts()
     {
         $iAlertCount = 0;
-        $aAlerts = AlertDAO::getReachedAlerts();
+        $aAlerts = AlertDB::getReachedAlerts();
         foreach ($aAlerts as $oAlert)
         {
             $bSuccess = Alerter::dispatchAlert($oAlert);
             if ($bSuccess)
             {
                 $iAlertCount++;
-                $bClearSuccess = AlertDAO::clearAlert($oAlert->getID());
+                $bClearSuccess = AlertDB::clearAlert($oAlert->getID());
             }
         }
         return $iAlertCount;
@@ -196,12 +195,12 @@ Good luck!\n
      */
     public static function cleanAlerts()
     {
-        $aAlerts = AlertDAO::getExpiredAlerts();
+        $aAlerts = AlertDB::getExpiredAlerts();
 
         $iCleared = 0;
         foreach ($aAlerts as $oAlert)
         {
-            if (AlertDAO::clearAlert($oAlert->getID()))
+            if (AlertDB::clearAlert($oAlert->getID()))
             {
                 $iCleared++;
             }
@@ -216,7 +215,7 @@ Good luck!\n
      */
     public static function getAlertCount()
     {
-        return AlertDAO::getAlertCount();
+        return AlertDB::getAlertCount();
     }
 
     /**
@@ -273,7 +272,7 @@ Good luck!\n
      */
     public static function getAllAlerts()
     {
-        return AlertDAO::getAllAlerts();
+        return AlertDB::getAllAlerts();
     }
 
 }

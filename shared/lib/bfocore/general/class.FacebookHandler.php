@@ -2,7 +2,7 @@
 
 require 'vendor/autoload.php';
 require_once('config/inc.config.php');
-require_once('lib/bfocore/dao/class.FacebookDAO.php');
+require_once('lib/bfocore/dao/class.FacebookDB.php');
 
 class FacebookHandler
 {
@@ -55,22 +55,22 @@ class FacebookHandler
 
 	public function saveMatchupAsPosted($matchup_id, $skipped = false)
 	{
-		return FacebookDAO::saveMatchupAsPosted($matchup_id, $skipped);
+		return FacebookDB::saveMatchupAsPosted($matchup_id, $skipped);
 	}
 
 	public function saveEventAsPosted($event_id, $skipped = false)
 	{
-		return FacebookDAO::saveEventAsPosted($event_id, $skipped);
+		return FacebookDB::saveEventAsPosted($event_id, $skipped);
 	}
 
 	public function getUnpostedMatchups()
 	{
-		return FacebookDAO::getUnpostedMatchups();
+		return FacebookDB::getUnpostedMatchups();
 	}
 	
 	public function getUnpostedEvents()
 	{
-		return FacebookDAO::getUnpostedEvents();
+		return FacebookDB::getUnpostedEvents();
 	}
 }
 

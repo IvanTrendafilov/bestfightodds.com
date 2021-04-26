@@ -280,17 +280,13 @@ if ($oEvent != null)
                     echo '<td class="button-cell"><span class="but-img i-ng" alt="No index graph available"></span></td>';
                 }
 
-                echo '<td class="prop-cell"><a href="#" data-mu="' . $oFight->getID() . '"><span class="t-b-cc">';
+                echo '<td class="prop-cell">';
                 $iPropCount = OddsHandler::getPropCountForMatchup($oFight->getID());
                 if ($iPropCount > 0)
                 {
-                    echo $iPropCount . '&nbsp;<span class="exp-ard"></span>';
+                    echo '<a href="#" data-mu="' . $oFight->getID() . '"><span class="t-b-cc">' . $iPropCount . '<span class="exp-ard"></span></span></a>';
                 }
-                else
-                {
-                    echo '&nbsp;';
-                }
-                echo '</span></a></td>';
+                echo '</td>';
 
                 echo '</tr>';
             }

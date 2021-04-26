@@ -1,89 +1,89 @@
 <?php
 
 require_once('lib/bfocore/general/inc.GlobalTypes.php');
-require_once('lib/bfocore/dao/class.BookieDAO.php');
+require_once('lib/bfocore/dao/class.BookieDB.php');
 
 class BookieHandler
 {
 
     public static function getAllBookies()
     {
-        return BookieDAO::getAllBookies();
+        return BookieDB::getAllBookies();
     }
 
-    public static function getBookieByID($a_iBookieID)
+    public static function getBookieByID($id)
     {
-        return BookieDAO::getBookieByID($a_iBookieID);
+        return BookieDB::getBookieByID($id);
     }
 
-    public static function saveChangeNum($a_iBookieID, $a_sChangeNum)
+    public static function saveChangeNum($bookie_id, $change_num)
     {
-        return BookieDAO::saveChangeNum($a_iBookieID, $a_sChangeNum);
+        return BookieDB::saveChangeNum($bookie_id, $change_num);
     }
 
-    public static function getChangeNum($a_iBookieID)
+    public static function getChangeNum($bookie_id)
     {
-        return BookieDAO::getChangeNum($a_iBookieID);
+        return BookieDB::getChangeNum($bookie_id);
     }
 
     public static function resetAllChangeNums()
     {
-        return BookieDAO::resetAllChangeNums();
+        return BookieDB::resetAllChangeNums();
     }
 
-    public static function resetChangenum($a_iBookieID)
+    public static function resetChangenum($bookie_id)
     {
-        return BookieDAO::resetChangenum($a_iBookieID);
+        return BookieDB::resetChangenum($bookie_id);
     }
 
-    public static function getParsers($a_iBookieID = null)
+    public static function getParsers($bookie_id = null)
     {
-        return BookieDAO::getParsers($a_iBookieID);
+        return BookieDB::getParsers($bookie_id);
     }
 
 
-    public static function getPropTemplatesForBookie($a_iBookieID)
+    public static function getPropTemplatesForBookie($bookie_id)
     {
-        return BookieDAO::getPropTemplatesForBookie($a_iBookieID);
+        return BookieDB::getPropTemplatesForBookie($bookie_id);
     }
 
-    public static function addNewPropTemplate($a_oPropTemplate)
+    public static function addNewPropTemplate($proptemplate_obj)
     {
         //TODO: Add check to see if we are trying to add a duplicate
 
         //Check if fields type ID is within the span 1-6
-        if ($a_oPropTemplate->getFieldsTypeID() < 1 || $a_oPropTemplate->getFieldsTypeID() > 8)
+        if ($proptemplate_obj->getFieldsTypeID() < 1 || $proptemplate_obj->getFieldsTypeID() > 8)
         {
             return false;
         }
 
         //Check if there an occurence of <T>. Add a template cannot be added without indicating at least one team/event in the template
-        if (strpos($a_oPropTemplate->getTemplate(), '<T>') === false) 
+        if (strpos($proptemplate_obj->getTemplate(), '<T>') === false) 
         {
             return false;
         }
 
-        return BookieDAO::addNewPropTemplate($a_oPropTemplate);
+        return BookieDB::addNewPropTemplate($proptemplate_obj);
     }
 
-    public static function updateTemplateLastUsed($a_iTemplateID)
+    public static function updateTemplateLastUsed($template_id)
     {
-        return BookieDAO::updateTemplateLastUsed($a_iTemplateID);
+        return BookieDB::updateTemplateLastUsed($template_id);
     }
 
-    public static function deleteTemplate($a_iID)
+    public static function deleteTemplate($template_id)
     {
-        if (!is_int($a_iID))
+        if (!is_int($template_id))
         {
             return false;
         }
-        return BookieDAO::deleteTemplate($a_iID);
+        return BookieDB::deleteTemplate($template_id);
     }
 
 
     public static function getAllRunStatuses()
     {
-        return BookieDAO::getAllRunStatuses();
+        return BookieDB::getAllRunStatuses();
     }
 
 }

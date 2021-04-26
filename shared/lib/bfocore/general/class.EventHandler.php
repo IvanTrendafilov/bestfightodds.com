@@ -1,6 +1,6 @@
 <?php
 
-require_once('lib/bfocore/dao/class.EventDAO.php');
+require_once('lib/bfocore/dao/class.EventDB.php');
 require_once('config/inc.config.php');
 
 class EventHandler
@@ -8,22 +8,22 @@ class EventHandler
 
     public static function getAllUpcomingEvents()
     {
-        return EventDAO::getAllUpcomingEvents();
+        return EventDB::getAllUpcomingEvents();
     }
 
     public static function getAllEvents()
     {
-        return EventDAO::getAllEvents();
+        return EventDB::getAllEvents();
     }
 
-    public static function getAllFightsForEvent($a_iEventID, $a_bOnlyWithOdds = false)
+    public static function getAllFightsForEvent($event_id, $only_with_odds = false)
     {
-        return EventDAO::getAllFightsForEvent($a_iEventID, $a_bOnlyWithOdds);
+        return EventDB::getAllFightsForEvent($event_id, $only_with_odds);
     }
 
-    public static function getAllUpcomingMatchups($a_bOnlyWithOdds = false)
+    public static function getAllUpcomingMatchups($only_with_odds = false)
     {
-        return EventDAO::getAllUpcomingMatchups($a_bOnlyWithOdds);
+        return EventDB::getAllUpcomingMatchups($only_with_odds);
     }
 
     /**
@@ -31,46 +31,46 @@ class EventHandler
      * If the second parameter is specified it is possible to jump to historic
      * odds, for example getting the previous odds and comparing to the current
      */
-    public static function getAllLatestOddsForFight($a_iFightID, $a_iHistoric = 0)
+    public static function getAllLatestOddsForFight($fight_id, $historic_offset = 0)
     {
-        return EventDAO::getAllLatestOddsForFight($a_iFightID, $a_iHistoric);
+        return EventDB::getAllLatestOddsForFight($fight_id, $historic_offset);
     }
 
-    public static function getLatestOddsForFightAndBookie($a_iFightID, $a_iBookieID)
+    public static function getLatestOddsForFightAndBookie($fight_id, $bookie_id)
     {
-        return EventDAO::getLatestOddsForFightAndBookie($a_iFightID, $a_iBookieID);
+        return EventDB::getLatestOddsForFightAndBookie($fight_id, $bookie_id);
     }
 
-    public static function getAllOddsForFightAndBookie($a_iFightID, $a_iBookieID)
+    public static function getAllOddsForFightAndBookie($fight_id, $bookie_id)
     {
-        return EventDAO::getAllOddsForFightAndBookie($a_iFightID, $a_iBookieID);
+        return EventDB::getAllOddsForFightAndBookie($fight_id, $bookie_id);
     }
 
-    public static function getAllOddsForMatchup($a_iMatchupID)
+    public static function getAllOddsForMatchup($matchup_id)
     {
-        return EventDAO::getAllOddsForMatchup($a_iMatchupID);
+        return EventDB::getAllOddsForMatchup($matchup_id);
     }
 
-    public static function getEvent($a_iEventID, $a_bFutureEventsOnly = false)
+    public static function getEvent($event_id, $future_event_only = false)
     {
-        return EventDAO::getEvent($a_iEventID, $a_bFutureEventsOnly);
+        return EventDB::getEvent($event_id, $future_event_only);
     }
 
     public static function getEventByName($a_sName)
     {
-        return EventDAO::getEventByName($a_sName);
+        return EventDB::getEventByName($a_sName);
     }
 
     /**
      * Get matching fight
      *
-     * @param Fight $a_oFight
+     * @param Fight $matchup_obj
      * @return Fight Matching fight
      * @deprecated Use getMatchinFightV2() instead
      */
-    public static function getMatchingFight($a_oFight)
+    public static function getMatchingFight($matchup_obj)
     {
-        return EventDAO::getFight($a_oFight->getFighter(1), $a_oFight->getFighter(2), $a_oFight->getEventID());
+        return EventDB::getFight($matchup_obj->getFighter(1), $matchup_obj->getFighter(2), $matchup_obj->getEventID());
     }
 
     //New version of getFight above. Improvements are the possibility of finding old matchups
@@ -82,21 +82,19 @@ class EventHandler
     /**
      * Get matching fight (V2)
      *
-     * @param Fight $a_oFight
      * @return Fight Matching fight
      */
-    public static function getMatchingFightV2($a_aParams)
+    public static function getMatchingFightV2($params)
     {
-        return EventDAO::getMatchingFightV2($a_aParams);
+        return EventDB::getMatchingFightV2($params);
     }
 
-    public static function getFightByID($a_iID)
+    public static function getFightByID($id)
     {
-        if ($a_iID == null)
-        {
+        if ($id == null) {
             return null;
         }
-        return EventDAO::getFightByID($a_iID);
+        return EventDB::getFightByID($id);
     }
 
     /**
@@ -105,40 +103,36 @@ class EventHandler
      * @param FightOdds object to look for (date is not checked).
      * @return true if the exact odds exists and false if it doesn't.
      */
-    public static function checkMatchingOdds($a_oFightOdds)
+    public static function checkMatchingOdds($odds_obj)
     {
-        $oExistingFightOdds = EventHandler::getLatestOddsForFightAndBookie($a_oFightOdds->getFightID(), $a_oFightOdds->getBookieID());
-        if ($oExistingFightOdds != null)
-        {
-            return $oExistingFightOdds->equals($a_oFightOdds);
+        $found_odds_obj = EventHandler::getLatestOddsForFightAndBookie($odds_obj->getFightID(), $odds_obj->getBookieID());
+        if ($found_odds_obj != null) {
+            return $found_odds_obj->equals($odds_obj);
         }
         return false;
     }
 
-    public static function addNewFightOdds($a_oFightOdds)
+    public static function addNewFightOdds($odds_obj)
     {
-        if ($a_oFightOdds->getFightID() != '' && is_numeric($a_oFightOdds->getFightID()) &&
-                $a_oFightOdds->getBookieID() != '' && is_numeric($a_oFightOdds->getBookieID()) &&
-                $a_oFightOdds->getFighterOdds(1) != '' && is_numeric($a_oFightOdds->getFighterOdds(1)) &&
-                $a_oFightOdds->getFighterOdds(2) != '' && is_numeric($a_oFightOdds->getFighterOdds(2)) &&
-                !(intval($a_oFightOdds->getFighterOdds(1)) >= -99 && intval($a_oFightOdds->getFighterOdds(1) <= 99)) &&
-                !(intval($a_oFightOdds->getFighterOdds(2)) >= -99 && intval($a_oFightOdds->getFighterOdds(2) <= 99))
-        )
-        {
-            EventDAO::addNewFightOdds($a_oFightOdds);
+        if (
+            $odds_obj->getFightID() != '' && is_numeric($odds_obj->getFightID()) &&
+            $odds_obj->getBookieID() != '' && is_numeric($odds_obj->getBookieID()) &&
+            $odds_obj->getFighterOdds(1) != '' && is_numeric($odds_obj->getFighterOdds(1)) &&
+            $odds_obj->getFighterOdds(2) != '' && is_numeric($odds_obj->getFighterOdds(2)) &&
+            !(intval($odds_obj->getFighterOdds(1)) >= -99 && intval($odds_obj->getFighterOdds(1) <= 99)) &&
+            !(intval($odds_obj->getFighterOdds(2)) >= -99 && intval($odds_obj->getFighterOdds(2) <= 99))
+        ) {
+            EventDB::addNewFightOdds($odds_obj);
             return true;
-        }
-        else
-        {
+        } else {
             return false;
         }
     }
 
     public static function addNewFight($a_oFight)
     {
-        if ($a_oFight->getFighter(1) != '' && $a_oFight->getFighter(2) != '')
-        {
-            $iID = EventDAO::addNewFight($a_oFight);
+        if ($a_oFight->getFighter(1) != '' && $a_oFight->getFighter(2) != '') {
+            $iID = EventDB::addNewFight($a_oFight);
 
             //Check if fight is only one for this event, if so, set it as main event. Not applicable if we automatically create events - DISABLED
             /*if (PARSE_CREATEMATCHUPS == false)
@@ -157,164 +151,150 @@ class EventHandler
 
     public static function addNewFighter($a_sFighterName)
     {
-        return EventDAO::addNewFighter($a_sFighterName);
+        return EventDB::addNewFighter($a_sFighterName);
     }
 
     public static function addNewEvent($a_oEvent)
     {
-        if ($a_oEvent->getName() != '' && $a_oEvent->getDate() != '')
-        {
-            return EventDAO::addNewEvent($a_oEvent);
+        if ($a_oEvent->getName() != '' && $a_oEvent->getDate() != '') {
+            return EventDB::addNewEvent($a_oEvent);
         }
         return false;
     }
 
-    public static function getBestOddsForFight($a_iFightID)
+    public static function getBestOddsForFight($matchup_id)
     {
-        return EventDAO::getBestOddsForFight($a_iFightID);
+        return EventDB::getBestOddsForFight($matchup_id);
     }
 
-    public static function getBestOddsForFightAndFighter($a_iFightID, $a_iFighter)
+    public static function getBestOddsForFightAndFighter($matchup_id, $fighter_pos)
     {
-        return EventDAO::getBestOddsForFightAndFighter($a_iFightID, $a_iFighter);
+        return EventDB::getBestOddsForFightAndFighter($matchup_id, $fighter_pos);
     }
 
-    public static function removeFight($a_iFightID)
+    public static function removeFight($matchup_id)
     {
-        return EventDAO::removeFight($a_iFightID);
+        return EventDB::removeFight($matchup_id);
     }
 
-    public static function removeEvent($a_iEventID)
+    public static function removeEvent($event_id)
     {
         //First remove all matchups for this event
-        $aMatchups = EventHandler::getAllFightsForEvent($a_iEventID);
-        foreach($aMatchups as $oMatchup)
-        {
-            self::removeFight($oMatchup->getID());
+        $matchups = EventHandler::getAllFightsForEvent($event_id);
+        foreach ($matchups as $matchup) {
+            self::removeFight($matchup->getID());
         }
-        return EventDAO::removeEvent($a_iEventID);
+        return EventDB::removeEvent($event_id);
     }
 
-    public static function getAllFightsForEventWithoutOdds($a_iEventID)
+    public static function getAllFightsForEventWithoutOdds($event_id)
     {
-        return EventDAO::getAllFightsForEventWithoutOdds($a_iEventID);
+        return EventDB::getAllFightsForEventWithoutOdds($event_id);
     }
 
     /**
      * Changes an event. If any field is left blank it will not be updated.
      */
-    public static function changeEvent($a_iEventID, $a_sName = '', $a_sDate = '', $a_bDisplay = true)
+    public static function changeEvent($event_id, $new_event_name = '', $new_event_date = '', $new_is_visible = true)
     {
-        $oEvent = EventHandler::getEvent($a_iEventID);
+        $event_obj = EventHandler::getEvent($event_id);
 
-        if ($oEvent == null)
-        {
+        if ($event_obj == null) {
             return false;
         }
 
-        if ($a_sName != '')
-        {
-            $oEvent->setName($a_sName);
+        if ($new_event_name != '') {
+            $event_obj->setName($new_event_name);
         }
 
-        if ($a_sDate != '')
-        {
-            $oEvent->setDate($a_sDate);
+        if ($new_event_date != '') {
+            $event_obj->setDate($new_event_date);
         }
 
-        $oEvent->setDisplay($a_bDisplay);
+        $event_obj->setDisplay($new_is_visible);
 
-        return EventDAO::updateEvent($oEvent);
+        return EventDB::updateEvent($event_obj);
     }
 
-    public static function changeFight($a_iFightID, $a_iEventID)
+    public static function changeFight($matchup_id, $event_id)
     {
-        $oFight = EventHandler::getFightByID($a_iFightID);
+        $matchup_obj = EventHandler::getFightByID($matchup_id);
 
-        if ($oFight == null)
-        {
+        if ($matchup_obj == null) {
             return false;
         }
 
-        if ($a_iEventID != '')
-        {
-            $oFight->setEventID($a_iEventID);
+        if ($event_id != '') {
+            $matchup_obj->setEventID($event_id);
         }
 
-        return EventDAO::updateFight($oFight);
-    }
-
-    public static function addFighterAltName($a_iFighterID, $a_sAltName)
-    {
-        //TODO: Move this function to FighterHandler
-        return EventDAO::addFighterAltName($a_iFighterID, $a_sAltName);
+        return EventDB::updateFight($matchup_obj);
     }
 
     public static function getCurrentOddsIndex($a_iFightID, $a_iFighter)
     {
-        if ($a_iFighter > 2 || $a_iFighter < 1)
-        {
+        if ($a_iFighter > 2 || $a_iFighter < 1) {
             return null;
         }
 
         $aFightOdds = EventHandler::getAllLatestOddsForFight($a_iFightID);
 
-        if ($aFightOdds == null || sizeof($aFightOdds) == 0)
-        {
+        if ($aFightOdds == null || sizeof($aFightOdds) == 0) {
             return null;
         }
-        if (sizeof($aFightOdds) == 1)
-        {
+        if (sizeof($aFightOdds) == 1) {
             return new FightOdds($a_iFightID, -1, ($a_iFighter == 1 ? $aFightOdds[0]->getFighterOdds($a_iFighter) : 0), ($a_iFighter == 2 ? $aFightOdds[0]->getFighterOdds($a_iFighter) : 0), -1);
         }
         $iCurrentOddsTotal = 0;
-        foreach ($aFightOdds as $oFightOdds)
-        {
+        foreach ($aFightOdds as $oFightOdds) {
             $iCurrOdds = $oFightOdds->getFighterOdds($a_iFighter);
             $iCurrentOddsTotal += $iCurrOdds < 0 ? ($iCurrOdds + 100) : ($iCurrOdds - 100);
         }
         $iCurrentOddsTotal = round($iCurrentOddsTotal / sizeof($aFightOdds) + ($iCurrentOddsTotal < 0 ? -100 : 100));
 
-        $oReturnOdds = new FightOdds($a_iFightID, -1, ($a_iFighter == 1 ? $iCurrentOddsTotal : 0),
-                        ($a_iFighter == 2 ? $iCurrentOddsTotal : 0), -1);
+        $oReturnOdds = new FightOdds(
+            $a_iFightID,
+            -1,
+            ($a_iFighter == 1 ? $iCurrentOddsTotal : 0),
+            ($a_iFighter == 2 ? $iCurrentOddsTotal : 0),
+            -1
+        );
 
         return $oReturnOdds;
     }
 
-    public static function getAllFightsForFighter($a_iFighterID)
+    public static function getAllFightsForFighter($team_id)
     {
-        return EventDAO::getAllFightsForFighter($a_iFighterID);
+        return EventDB::getAllFightsForFighter($team_id);
     }
 
-    public static function setFightAsMainEvent($a_iFightID, $a_bIsMainEvent = true)
+    public static function setFightAsMainEvent($fight_id, $set_as_main_event = true)
     {
-        return EventDAO::setFightAsMainEvent($a_iFightID, $a_bIsMainEvent);
+        return EventDB::setFightAsMainEvent($fight_id, $set_as_main_event);
     }
 
-    public static function searchEvent($a_sEventName, $a_bFutureEventsOnly = false)
+    public static function searchEvent($event_name, $only_future_events = false)
     {
-        return EventDAO::searchEvent($a_sEventName, $a_bFutureEventsOnly);
+        return EventDB::searchEvent($event_name, $only_future_events);
     }
 
     /**
      * Retrieve recent events
      *
-     * @param int $a_iLimit Event limit (default 10)
+     * @param int $limit Event limit (default 10)
      * @return array List of events
      */
-    public static function getRecentEvents($a_iLimit = 10, $a_iOffset = 0)
+    public static function getRecentEvents($limit = 10, $offset = 0)
     {
 
-        if (!is_integer($a_iLimit) || $a_iLimit <= 0)
-        {
+        if (!is_integer($limit) || $limit <= 0) {
             return null;
         }
-        if (!is_integer((int) $a_iOffset) || (int) $a_iOffset < 0)
-        {
+        if (!is_integer((int) $offset) || (int) $offset < 0) {
             return null;
         }
 
-        return EventDAO::getRecentEvents($a_iLimit, $a_iOffset);
+        return EventDB::getRecentEvents($limit, $offset);
     }
 
     /**
@@ -325,7 +305,7 @@ class EventHandler
     public static function logUnmatched($a_sMatchup, $a_iBookieID, $a_iType, $a_aMetaData = null)
     {
         $metadata = serialize($a_aMetaData);
-        return EventDAO::logUnmatched($a_sMatchup, $a_iBookieID, $a_iType, $metadata);
+        return EventDB::logUnmatched($a_sMatchup, $a_iBookieID, $a_iType, $metadata);
     }
 
     /**
@@ -333,17 +313,15 @@ class EventHandler
      *
      * Returns an associated array
      */
-    public static function getUnmatched($a_iLimit = 10)
+    public static function getUnmatched($limit = 10)
     {
-        $unmatches = EventDAO::getUnmatched($a_iLimit);
+        $unmatches = EventDB::getUnmatched($limit);
 
         //Before returning, unserialize the metadata field
-        foreach ($unmatches as $key => $val)
-        {
-            if ($val['metadata'] != '')
-            {
+        foreach ($unmatches as $key => $val) {
+            if ($val['metadata'] != '') {
                 $unmatches[$key]['metadata'] = unserialize($unmatches[$key]['metadata']);
-            } 
+            }
         }
         return $unmatches;
     }
@@ -353,55 +331,48 @@ class EventHandler
      */
     public static function clearUnmatched($unmatched_item = null, $bookie_id = null)
     {
-        return EventDAO::clearUnmatched($unmatched_item, $bookie_id);
+        return EventDB::clearUnmatched($unmatched_item, $bookie_id);
     }
 
-    public static function getGenericEventForDate($a_sDate)
+    public static function getGenericEventForDate($date_str)
     {
         //Check first if future events date, if so, fetch that one
-        if ($a_sDate == '2030-12-31') 
-        {
+        if ($date_str == '2030-12-31') {
             return self::getEvent(PARSE_FUTURESEVENT_ID);
         }
-        $oEvent = EventDAO::getGenericEventForDate($a_sDate);
-        if ($oEvent == null)
-        {
+        $event_obj = EventDB::getGenericEventForDate($date_str);
+        if ($event_obj == null) {
             //No generic event was found, create it
-            $iEventID = self::addNewEvent(new Event(0, $a_sDate, $a_sDate, true));
-            if ($iEventID != false)
-            {
-               $oEvent = self::getEvent($iEventID);    
+            $event_id = self::addNewEvent(new Event(0, $date_str, $date_str, true));
+            if ($event_id != false) {
+                $event_obj = self::getEvent($event_id);
             }
         }
-        return $oEvent;
+        return $event_obj;
     }
 
-    public static function setMetaDataForMatchup($a_iMatchup_ID, $a_sAttribute, $a_sValue, $a_iBookieID)
+    public static function setMetaDataForMatchup($matchup_id, $metadata_attribute, $metadata_value, $bookie_id)
     {
-        return EventDAO::setMetaDataForMatchup($a_iMatchup_ID, $a_sAttribute, $a_sValue, $a_iBookieID);
+        return EventDB::setMetaDataForMatchup($matchup_id, $metadata_attribute, $metadata_value, $bookie_id);
     }
 
-    public static function getLatestChangeDate($a_iEventID)
+    public static function getLatestChangeDate($event_id)
     {
-        return EventDAO::getLatestChangeDate($a_iEventID);
+        return EventDB::getLatestChangeDate($event_id);
     }
-
 
     public static function getAllEventsWithMatchupsWithoutResults()
     {
-        return EventDAO::getAllEventsWithMatchupsWithoutResults();
+        return EventDB::getAllEventsWithMatchupsWithoutResults();
     }
 
-    public static function addMatchupResults($a_aParams)
+    public static function addMatchupResults($params)
     {
-        return EventDAO::addMatchupResults($a_aParams);
+        return EventDB::addMatchupResults($params);
     }
 
-    public static function getResultsForMatchup($a_iMatchup_ID)
+    public static function getResultsForMatchup($matchup_id)
     {
-        return EventDAO::getResultsForMatchup($a_iMatchup_ID);
+        return EventDB::getResultsForMatchup($matchup_id);
     }
-
 }
-
-?>

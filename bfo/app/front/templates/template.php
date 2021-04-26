@@ -16,7 +16,7 @@
         <noscript>
             <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap">
         </noscript>
-        <link rel="stylesheet" type="text/css" href="/css/bfo.min.css?v=0.3.3">
+        <link rel="stylesheet" type="text/css" href="/css/bfo.min.css?v=0.3.4">
         <link rel="shortcut icon" href="https://www.bestfightodds.com/favicon.ico">
         <link rel="apple-touch-icon" sizes="144x144" href="/apple-touch-icon-144x144.png">
         <link rel="apple-touch-icon" sizes="114x114" href="/apple-touch-icon-114x114.png">
@@ -28,7 +28,7 @@
         <title><?=isset($title) ? $title . ' | Best Fight Odds' : 'UFC &amp; MMA Odds &amp; Betting Lines | Best Fight Odds'?></title>
     </head>
     <body>
-        <script async src="/js/bfo.min.js?v=0.4.3"></script>
+        <script async src="/js/bfo.min.js?v=0.4.5"></script>
         <div class="flex-header">
                 <div class="flex-header-wrap">
                     <a href="/"><img src="/img/logo_3.png" class="logo" width="290" height="54" alt="Best Fight Odds logo"></a>

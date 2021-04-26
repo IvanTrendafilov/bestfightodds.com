@@ -3,7 +3,7 @@
 require_once('lib/bfocore/utils/db/class.DBTools.php');
 require_once('lib/bfocore/general/inc.GlobalTypes.php');
 
-class BookieDAO
+class BookieDB
 {
     public static function getAllBookies()
     {

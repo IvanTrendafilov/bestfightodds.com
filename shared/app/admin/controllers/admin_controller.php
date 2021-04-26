@@ -9,7 +9,6 @@ require_once 'lib/bfocore/general/class.ScheduleHandler.php';
 require_once 'lib/bfocore/general/class.EventHandler.php';
 require_once 'lib/bfocore/general/class.OddsHandler.php';
 require_once 'lib/bfocore/general/class.BookieHandler.php';
-require_once 'lib/bfocore/general/class.FighterHandler.php';
 require_once 'lib/bfocore/general/class.TeamHandler.php';
 require_once 'lib/bfocore/general/class.TwitterHandler.php';
 require_once 'lib/bfocore/general/class.Alerter.php';
@@ -68,6 +67,9 @@ class AdminController
 
         //Get unmatched data
         $unmatched_col = EventHandler::getUnmatched(1500);
+
+
+        //Old approach:
         $unmatched_groups = [];
         foreach ($unmatched_col as $key => $unmatched) {
 
@@ -102,7 +104,9 @@ class AdminController
             }
         }
 
+        //New approach:
         $groups = [];
+        $event_groups = [];
         foreach ($unmatched_col as $unmatched) {
 
             if ($unmatched['type'] == 0) {
@@ -147,11 +151,24 @@ class AdminController
                         $groups[$key]['dates'][$date]['matched_events'] = [];
                     }
 
-
                     //Reduce event name
                     $cut_pos = strpos($unmatched['metadata']['event_name'], " -") != 0 ? strpos($unmatched['metadata']['event_name'], " -") : strlen($unmatched['metadata']['event_name']);
                     $reduced_name = substr($unmatched['metadata']['event_name'], 0, $cut_pos);
-                    $groups[$key]['dates'][$date]['parsed_events'][] = $reduced_name;
+
+                    //If event name is a subset (shorter version) of another event name we'll assume it is same as the longer one
+                    $found = false;
+                    foreach ($groups[$key]['dates'][$date]['parsed_events'] as $previously_parsed_event) {
+                        if (substr($previously_parsed_event, 0, strlen($reduced_name)) == $reduced_name) {
+                            $found = true;
+                        }
+                    }
+                    if (!$found) {
+                        //Add parsed event as child for each matchup but also assign this matchup to a parent event
+                        $groups[$key]['dates'][$date]['parsed_events'][] = $reduced_name;
+                        if (!isset($event_groups[$reduced_name])) {
+                            $event_groups[$reduced_name] = [];
+                        }
+                    }
 
                     $event_search = EventHandler::searchEvent($reduced_name, true);
                     //Match on date for the matched events
@@ -341,7 +358,7 @@ class AdminController
     public function viewFighter(Request $request, Response $response, array $args)
     {
         if (isset($args['id'])) {
-            $fighter = FighterHandler::getFighterByID($args['id']);
+            $fighter = TeamHandler::getFighterByID($args['id']);
             $twitter_handle = TwitterHandler::getTwitterHandle($args['id']);
             $alt_names = TeamHandler::getAltNamesForTeamByID($args['id']);
             $view_data = ['fighter_obj' => $fighter, 'twitter_handle' => $twitter_handle, 'altnames' => $alt_names ?? []];

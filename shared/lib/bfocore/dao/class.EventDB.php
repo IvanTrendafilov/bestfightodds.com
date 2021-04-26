@@ -4,9 +4,8 @@ require_once('lib/bfocore/utils/db/class.DBTools.php');
 require_once('lib/bfocore/general/inc.GlobalTypes.php');
 require_once('lib/bfocore/utils/class.OddsTools.php');
 
-class EventDAO
+class EventDB
 {
-
     public static function getAllUpcomingEvents()
     {
         $sQuery = 'SELECT id, date, name, display
@@ -342,9 +341,9 @@ class EventDAO
                 if (OddsTools::compareNames($oTempFight->getFighter(2), $a_sFighter2) > 82) {
                     $aFoundFight = null;
                     if ($aFight['original'] == '0') {
-                        $aFoundFight = EventDAO::getFightByID($aFight['id']);
+                        $aFoundFight = EventDB::getFightByID($aFight['id']);
 
-                        $bCheckFight = EventDAO::isFightOrderedInDatabase($aFight['id']);
+                        $bCheckFight = EventDB::isFightOrderedInDatabase($aFight['id']);
                         if ($bCheckFight == true) {
                             if ($oTempFight->getComment() == 'switched') {
                                 $aFoundFight->setComment('switched');
@@ -427,9 +426,9 @@ class EventDAO
                 if (OddsTools::compareNames($oTempFight->getFighter(($a_aParams['team1_name'] >= $a_aParams['team2_name'] ? 1 : 2)), $a_aParams['team2_name']) > 82) {
                     $aFoundFight = null;
                     if ($aFight['original'] == '0') {
-                        $aFoundFight = EventDAO::getFightByID($aFight['id']);
+                        $aFoundFight = EventDB::getFightByID($aFight['id']);
 
-                        $bCheckFight = EventDAO::isFightOrderedInDatabase($aFight['id']);
+                        $bCheckFight = EventDB::isFightOrderedInDatabase($aFight['id']);
                         if ($bCheckFight == true) {
                             if ($oTempFight->getComment() == 'switched') {
                                 $aFoundFight->setComment('switched');
@@ -525,7 +524,7 @@ class EventDAO
 
     public static function addNewFighter($fighter_name)
     {
-        if (EventDAO::getFighterIDByName($fighter_name) != null) {
+        if (EventDB::getFighterIDByName($fighter_name) != null) {
             return false;
         }
 
@@ -596,17 +595,17 @@ class EventDAO
     public static function addNewFight($a_oFight)
     {
         //Check that event is ok
-        if (EventDAO::getEvent($a_oFight->getEventID()) != null) {
+        if (EventDB::getEvent($a_oFight->getEventID()) != null) {
             //Check if fight isn't already added
-            if (EventDAO::getFight($a_oFight->getFighter(1), $a_oFight->getFighter(2), $a_oFight->getEventID()) == null) {
+            if (EventDB::getFight($a_oFight->getFighter(1), $a_oFight->getFighter(2), $a_oFight->getEventID()) == null) {
                 //Check that both fighters exist, if not, add them
-                $fighter1_id = EventDAO::getFighterIDByName($a_oFight->getFighter(1));
+                $fighter1_id = EventDB::getFighterIDByName($a_oFight->getFighter(1));
                 if ($fighter1_id == null) {
-                    $fighter1_id = EventDAO::addNewFighter($a_oFight->getFighter(1));
+                    $fighter1_id = EventDB::addNewFighter($a_oFight->getFighter(1));
                 }
-                $fighter2_id = EventDAO::getFighterIDByName($a_oFight->getFighter(2));
+                $fighter2_id = EventDB::getFighterIDByName($a_oFight->getFighter(2));
                 if ($fighter2_id == null) {
-                    $fighter2_id = EventDAO::addNewFighter($a_oFight->getFighter(2));
+                    $fighter2_id = EventDB::addNewFighter($a_oFight->getFighter(2));
                 }
 
                 if ($fighter1_id == null || $fighter2_id == null) {
@@ -777,24 +776,6 @@ class EventDAO
 
         $bResult = DBTools::doParamQuery($sQuery, $aParams);
 
-        if ($bResult == false) {
-            return false;
-        }
-
-        return true;
-    }
-
-    public static function addFighterAltName($a_iFighterID, $a_sAltName)
-    {
-        if ($a_iFighterID == "" || $a_sAltName == "") {
-            return false;
-        }
-
-        $sQuery = 'INSERT INTO fighters_altnames(fighter_id, altname)
-                    VALUES (?,?)';
-
-        $aParams = array($a_iFighterID, strtoupper($a_sAltName));
-        $bResult = DBTools::doParamQuery($sQuery, $aParams);
         if ($bResult == false) {
             return false;
         }
