@@ -1,35 +1,35 @@
 function createMChart(b, p, m) {
-    $.get('/api?f=ggd&b=' + b + '&m=' + m + '&p=' + p, function(indata) {
+    $.get('/api/ggd?b=' + b + '&m=' + m + '&p=' + p, function(indata) {
         createChart($.parseJSON(notIn(indata)));
     });
 }
 
 function createMIChart(m, p) {
-    $.get('/api?f=ggd&m=' + m + '&p=' + p, function(indata) {
+    $.get('/api/ggd?m=' + m + '&p=' + p, function(indata) {
         createChart($.parseJSON(notIn(indata)));
     });
 }
 
 function createPChart(b, m, p, pt, tn) {
-    $.get('/api?f=ggd&b=' + b + '&m=' + m + '&p=' + p + '&pt=' + pt + '&tn=' + tn, function(indata) {
+    $.get('/api/ggd?b=' + b + '&m=' + m + '&p=' + p + '&pt=' + pt + '&tn=' + tn, function(indata) {
         createChart($.parseJSON(notIn(indata)));
     });
 }
 
 function createPIChart(m, p, pt, tn) {
-    $.get('/api?f=ggd&m=' + m + '&p=' + p + '&pt=' + pt + '&tn=' + tn, function(indata) {
+    $.get('/api/ggd?m=' + m + '&p=' + p + '&pt=' + pt + '&tn=' + tn, function(indata) {
         createChart($.parseJSON(notIn(indata)));
     });
 }
 
 function createEPChart(e, b, p, pt) {
-    $.get('/api?f=ggd&b=' + b + '&e=' + e + '&p=' + p + '&pt=' + pt, function(indata) {
+    $.get('/api/ggd?b=' + b + '&e=' + e + '&p=' + p + '&pt=' + pt, function(indata) {
         createChart($.parseJSON(notIn(indata)));
     });
 }
 
 function createEPIChart(e, p, pt) {
-    $.get('/api?f=ggd&e=' + e + '&p=' + p + '&pt=' + pt, function(indata) {
+    $.get('/api/ggd?e=' + e + '&p=' + p + '&pt=' + pt, function(indata) {
         createChart($.parseJSON(notIn(indata)));
     });
 }
