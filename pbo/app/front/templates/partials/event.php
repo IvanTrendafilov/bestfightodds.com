@@ -12,9 +12,9 @@
             <div class="share-button"></div>
         </div>
         <div class="share-window">
-            <div data-href="https://twitter.com/intent/tweet?text=<?= urlencode($event->getName() . ' betting lines') ?>&amp;url=<?= urlencode('https://www.bestfightodds.com/events/' . $event->getEventAsLinkString()) ?>" class="share-item share-twitter"></div>
-            <div data-href="https://www.facebook.com/sharer/sharer.php?u=<?= urlencode('https://www.bestfightodds.com/events/' . $event->getEventAsLinkString()) ?>" class="share-item share-facebook"></div>
-            <div data-href="whatsapp://send?text=<?= urlencode($event->getName() . ' betting lines') ?> <?= urlencode('https://www.bestfightodds.com/events/' . $event->getEventAsLinkString()) ?>" data-action="share/whatsapp/share" class="share-item share-whatsapp item-mobile-only"></div>
+            <div data-href="https://twitter.com/intent/tweet?text=<?= urlencode($event->getName() . ' betting lines') ?>&amp;url=<?= urlencode('https://www.proboxingodds.com/events/' . $event->getEventAsLinkString()) ?>" class="share-item share-twitter"></div>
+            <div data-href="https://www.facebook.com/sharer/sharer.php?u=<?= urlencode('https://www.proboxingodds.com/events/' . $event->getEventAsLinkString()) ?>" class="share-item share-facebook"></div>
+            <div data-href="whatsapp://send?text=<?= urlencode($event->getName() . ' betting lines') ?> <?= urlencode('https://www.proboxingodds.com/events/' . $event->getEventAsLinkString()) ?>" data-action="share/whatsapp/share" class="share-item share-whatsapp item-mobile-only"></div>
         </div>
 
     </div>
@@ -366,7 +366,7 @@
         <?php else : ?>
 
             <div class="no-odds">There are currently no odds available for this event<br><br>
-                Get notified when odds are available using our <a href="/alerts" style="text-decoration: underline">Alerts</a> feature or by following us on <a href="http://twitter.com/bestfightodds" target="_blank" rel="noopener" style="text-decoration: underline">Twitter</a>
+                Get notified when odds are available using our <a href="/alerts" style="text-decoration: underline">Alerts</a> feature or by following us on <a href="http://twitter.com/proboxingodds" target="_blank" rel="noopener" style="text-decoration: underline">Twitter</a>
             </div>
 
         <?php endif ?>

@@ -8,10 +8,10 @@ var sass = require('gulp-sass');
 var concat = require('gulp-concat');
 
 gulp.task('styles', function () {
-    return gulp.src(['./app/front/css/bfo-main-sass.scss', './app/front/css/bfo-oddstable-sass.scss', './app/front/css/bfo-responsive-sass.scss'])
+    return gulp.src(['./app/front/css/pbo-main-sass.scss', './app/front/css/pbo-oddstable-sass.scss', './app/front/css/pbo-responsive-sass.scss'])
         .pipe(sass().on('error', sass.logError))
         .pipe(cleancss())
-        .pipe(concat('bfo.min.css'))
+        .pipe(concat('pbo.min.css'))
         .pipe(gulp.dest('./app/front/css'));
 });
 

@@ -83,14 +83,14 @@ html {
   margin: 0;
   padding: 0;
   text-align: center;
-  background-color: #edeff1;
+  background-color: #f1f3f7;
 }
 
 body {
   margin: 0;
   padding: 0;
   text-align: center;
-  background-color: #edeff1;
+  background-color: #f1f3f7;
   font-family: 'Roboto', Arial, sans-serif;
   font-size: 12px;
   color: #fff;
@@ -103,9 +103,9 @@ a {
 
 /* BFO Start */
 
-$primarybasecolor: #262C38;
+$primarybasecolor: #1f242d;
 $secondarybasecolor: #333b4a;
-$selectedcolor: #262C38;
+$selectedcolor: #1f242d;
 
 $font_darkcolor: #202020;
 $font_lightcolor: #fff;
@@ -974,11 +974,11 @@ table.team-stats-table {
         
           td {
           padding-bottom: 4px;
-          padding-top: 2px;
+          padding-top: 4px;
         }
         th {
           padding-bottom: 4px;
-          padding-top: 2px;
+          padding-top: 4px;
         }
     }
       &:hover {
@@ -1211,7 +1211,7 @@ table.team-stats-table {
   -webkit-box-shadow: 0 2px 1px -1px rgba(155, 155, 155, 1);
   -moz-box-shadow: 0 2px 1px -1px rgba(155, 155, 155, 1);
   box-shadow: 0 2px 1px -1px rgba(155, 155, 155, 1);
-  margin-bottom: 22px;
+  margin-bottom: 15px;
 }
 
 .flex-section {

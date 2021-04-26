@@ -1,7 +1,7 @@
 
 <?php $this->insert('partials/event', $this->data) ?>
 
-<div class="table-outer-wrapper">
+<div class="table-outer-wrapper" style="margin-top: 10px;">
     <div id="event-swing-area">
         <div class="chart-container">
             <div class="content-header">Line movement <div id="event-swing-picker-menu"><a href="#" class="event-swing-picker picked" data-li="0">Since opening</a> | <a href="#" class="event-swing-picker" data-li="1">Last 24 hours</a> | <a href="#" class="event-swing-picker" data-li="2">Last hour</a></div></div>

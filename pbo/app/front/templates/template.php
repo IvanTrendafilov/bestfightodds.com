@@ -16,19 +16,19 @@
         <noscript>
             <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap">
         </noscript>
-        <link rel="stylesheet" type="text/css" href="/css/bfo.min.css?v=0.3.4">
+        <link rel="stylesheet" type="text/css" href="/css/pbo.min.css?v=0.3.5">
         <link rel="shortcut icon" href="https://www.proboxingodds.com/favicon.ico">
         <link rel="apple-touch-icon" sizes="144x144" href="/apple-touch-icon-144x144.png">
         <link rel="apple-touch-icon" sizes="114x114" href="/apple-touch-icon-114x114.png">
         <link rel="apple-touch-icon" sizes="72x72" href="/apple-touch-icon-72x72.png">
         <link rel="apple-touch-icon" href="/apple-touch-icon-iphone.png">
         <?php if (isset($_COOKIE['bfo_darkmode']) && $_COOKIE['bfo_darkmode'] == 1): //Check if darkmode is enabled and if so, add appropriate stylesheet. Note that this is also checked in javascript to change dropdown ?>
-            <link rel="stylesheet" type="text/css" href="/css/bfo.darkmode.css?v=0.0.1" id="darkmodecss">
+            <link rel="stylesheet" type="text/css" href="/css/pbo.darkmode.css?v=0.0.1" id="darkmodecss">
         <?php endif ?>
         <title><?=isset($title) ? $title . ' | Pro Boxing Odds' : 'Boxing Odds &amp; Betting Lines | Pro Boxing Odds'?></title>
     </head>
     <body>
-        <script async src="/js/bfo.min.js?v=0.4.3"></script>
+        <script async src="/js/bfo.min.js?v=0.4.4"></script>
         <div class="flex-header">
                 <div class="flex-header-wrap">
                     <a href="/"><img src="/img/logo_3.png" class="logo" width="290" height="54" alt="Pro Boxing Odds logo"></a>
@@ -128,7 +128,7 @@
             <?php else: ?>
                 <a href="#" onclick="setDesktop(true);">Desktop site</a><span class="menu-seperator">|</span>
             <?php endif ?>
-        <a href="https://www.bestfightodds.com" target="_blank" rel="noopener">MMA Odds</a><span class="menu-seperator">|</span><a href="/terms">Terms of service</a><span class="menu-seperator">|</span><a href="#">18+</a><span class="menu-seperator">|</span><a href="https://www.begambleaware.org/">BeGambleAware</a><span class="menu-seperator">|</span><a href="mailto:info1@bestfightodds.com">Contact</a><span class="menu-seperator">|</span><a href="mailto:info1@bestfightodds.com">&copy; <?=date('Y')?></a>
+        <a href="https://www.bestfightodds.com" target="_blank" rel="noopener">MMA Odds</a><span class="menu-seperator">|</span><a href="/terms">Terms of service</a><span class="menu-seperator">|</span><a href="#">18+</a><span class="menu-seperator">|</span><a href="https://www.begambleaware.org/">BeGambleAware</a><span class="menu-seperator">|</span><a href="mailto:info@proboxingodds.com">Contact</a><span class="menu-seperator">|</span><a href="mailto:info@proboxingodds.com">&copy; <?=date('Y')?></a>
     </div>
 
     <div id="chart-window" class="popup-window"><div class="popup-header" id="chart-header"><div></div><a href="#" class="cd-popup-close">&#10005;</a></div><div id="chart-area"></div><a href="#" target="_blank" rel="noopener"><div id="chart-link" class="button">Bet this line at bookie</div></a><div id="chart-disc" style="display: none; color: #333">*Currently this Sportsbook does not accept players that reside in the US. 18+ Gamble Responsibly</div></div>
@@ -158,17 +158,15 @@
     </div>
     <div id="bookie-settings-window" class="popup-window"><div class="popup-header">Bookie display settings <a href="#" class="cd-popup-close">&#10005;</a></div><div id="bookie-settings-area">Drag to change order, show/hide using checkbox<ul id="bookie-order-items"></ul><input type="button" class="button" value="Reset to default settings" id="bookieResetDefault"></div></div>
 
-
-
     <?php if (isset($_SERVER['SERVER_ADDR']) && $_SERVER['SERVER_ADDR'] != '127.0.0.1'): //Disable Google Analytics if running locally ?>
-    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-2457531-1"></script>
-    <script>
-    window.dataLayer = window.dataLayer || [];
-    function gtag(){dataLayer.push(arguments);}
-    gtag('js', new Date());
+        <script async src="https://www.googletagmanager.com/gtag/js?id=UA-2457531-6"></script>
+        <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
 
-    gtag('config', 'UA-2457531-1');
-    </script>
+        gtag('config', 'UA-2457531-6');
+        </script>
     <?php endif ?>
 </body>
 </html>

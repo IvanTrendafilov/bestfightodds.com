@@ -6,7 +6,7 @@ $tablerowheight: 27px;
   font-size: 12px;
   padding: 6px 0px 6px 11px;
   text-transform: uppercase;
-  color: #858993;
+  color: #696c76;
   display: -webkit-box;
   display: -moz-box;
   display: -ms-flexbox;
@@ -15,12 +15,12 @@ $tablerowheight: 27px;
   z-index: 2;
   height: 20px;
   a {
-    color: #858993;
+    color: #696c76;
     font-weight: 500;
     font-size: 16px;
     text-transform: uppercase;
     &:hover {
-      color: #d0d0d0;
+      color: #898d99;
     }
   }
 }
@@ -79,17 +79,16 @@ $tablerowheight: 27px;
       &.table-prop-header {
         text-align: right;
         padding-right: 5px;
-        color: #505050;
+        color: #606060;
         width: 30px;
         min-width: 30px;
         max-width: 30px;
-        font-weight: 500;
       }
       &.date-head {
         width: 40px;
       }
       a {
-        color: #787878;
+        color: #606060;
         padding-top: 6px;
         padding-bottom: 6px;
         &:hover {
@@ -108,7 +107,7 @@ $tablerowheight: 27px;
         border-bottom: 1px solid #d6d6d6;
       }
       &.pr {
-        background-color: #DCDEE0;
+        background-color: #e0e3e6;
         display: none;
         height: $tablerowheight;
         &:nth-child(2n) {
@@ -296,7 +295,6 @@ $tablerowheight: 27px;
   text-align: right;
   padding-top: 3px;
   padding-right: 19px;
-  margin-bottom: 10px;
 }
 
 .button-cell div:hover {

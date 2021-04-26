@@ -201,7 +201,7 @@ class MainController
         $last_change = TeamHandler::getLastChangeDate($team->getID());
         if (CacheControl::isPageCached('team-' . $team->getID() . '-' . strtotime($last_change))) {
             //Retrieve cached page
-            $view_data['team_title'] = $team->getNameAsString() . '\'s MMA Odds History';
+            $view_data['team_title'] = $team->getNameAsString();
             $view_data['meta_desc'] = $team->getNameAsString() . ' betting odds history.';
             $view_data['meta_keywords'] = $team->getNameAsString();
             $view_data['contents'] = CacheControl::getCachedPage('team-' . $team->getID() . '-' . strtotime($last_change));
@@ -227,7 +227,7 @@ class MainController
 
         $view_data = [];
         $view_data['contents'] = $page_content;
-        $view_data['team_title'] = $team->getNameAsString() . '\'s MMA Odds History';
+        $view_data['team_title'] = $team->getNameAsString();
         $view_data['meta_desc'] = $team->getNameAsString() . ' betting odds history.';
         $view_data['meta_keywords'] = $team->getNameAsString();
 

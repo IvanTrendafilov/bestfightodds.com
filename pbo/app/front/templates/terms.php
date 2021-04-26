@@ -9,7 +9,7 @@
                 on an "as is" and "as available" basis. We expressely disclaim any and all
                 warranties, express or implied, including any warranties as to the
                 availability, accuracy or content of the information.</p>
-                            <p style="padding: 10px 0;">For any questions regarding the site and its content, please contact us at <a href="mailto:info1@bestfightodds.com" style="color: #222;">info1@bestfightodds.com</a></p>
+                            <p style="padding: 10px 0;">For any questions regarding the site and its content, please contact us at <a href="mailto:info@proboxingodds.com" style="color: #222;">info@proboxingodds.com</a></p>
             </div>
         </div>
     </div>
