@@ -13,8 +13,8 @@ use Psr\Http\Message\ServerRequestInterface;
 use Slim\Psr7\Response;
 
 require 'vendor/autoload.php';
-require 'controllers/controller.php';
-require 'controllers/api_controller.php';
+require 'app/front/controllers/controller.php';
+require 'app/front/controllers/api_controller.php';
 
 $container = (new \DI\ContainerBuilder())
   ->useAutowiring(true)

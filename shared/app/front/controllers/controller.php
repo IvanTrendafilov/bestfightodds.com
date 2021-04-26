@@ -6,10 +6,9 @@ use Psr\Http\Message\ServerRequestInterface as Request;
 require_once 'config/inc.config.php';
 require_once 'lib/bfocore/general/class.EventHandler.php';
 require_once 'lib/bfocore/general/class.BookieHandler.php';
-require_once 'lib/bfocore/general/class.FighterHandler.php';
+require_once 'lib/bfocore/general/class.TeamHandler.php';
 require_once 'lib/bfocore/general/class.OddsHandler.php';
 require_once 'lib/bfocore/general/class.GraphHandler.php';
-require_once 'lib/bfocore/general/class.TeamHandler.php';
 require_once 'lib/bfocore/general/caching/class.CacheControl.php';
 require_once 'lib/bfocore/general/class.StatsHandler.php';
 
@@ -146,7 +145,7 @@ class MainController
         $view_data['search_query'] = $search_query;
 
         if (strlen($search_query) >= 3) {
-            $teams = FighterHandler::searchFighter($search_query);
+            $teams = TeamHandler::searchFighter($search_query);
             $events = EventHandler::searchEvent($search_query);
             if ($teams != null || $events != null) {
                 //If we only get one result we will redirect to that page right away
@@ -195,7 +194,7 @@ class MainController
             return $response->withHeader('Location', '/')->withStatus(302);
         }
 
-        $team = FighterHandler::getFighterByID((int) $team_id);
+        $team = TeamHandler::getFighterByID((int) $team_id);
 
         if ($team == null) {
             return $response->withHeader('Location', '/')->withStatus(302);
@@ -225,51 +224,10 @@ class MainController
 
         $matchups = EventHandler::getAllFightsForFighter($team->getID());
         foreach ($matchups as $matchup) {
-            $view_matchup = [];
-
-            $view_matchup['event'] = EventHandler::getEvent($matchup->getEventID());
-            $view_matchup['event_date'] = '';
-            if (strtoupper($view_matchup['event']->getID()) != PARSE_FUTURESEVENT_ID) {
-                $view_matchup['event_date'] = date('M jS Y', strtotime($view_matchup['event']->getDate()));
+            $team_odds = $this->populateTeamOdds($matchup, $team);
+            if (!($team_odds['event']->getID() == PARSE_FUTURESEVENT_ID && $team_odds['odds_opening'] == null)) { //Filters out future events with no opening odds
+                $view_data['matchups'][] = $this->populateTeamOdds($matchup, $team);
             }
-
-            $view_matchup['odds_opening'] = OddsHandler::getOpeningOddsForMatchup($matchup->getID());
-
-            //Determine range for this fight
-            $matchup_odds = EventHandler::getAllLatestOddsForFight($matchup->getID());
-            $view_matchup['team1_low'] = null;
-            $view_matchup['team2_low'] = null;
-            $view_matchup['team1_high'] = null;
-            $view_matchup['team2_high'] = null;
-            foreach ($matchup_odds as $odds) {
-                if ($view_matchup['team1_low'] == null || $odds->getFighterOddsAsDecimal(1, true) < $view_matchup['team1_low']->getFighterOddsAsDecimal(1, true)) {
-                    $view_matchup['team1_low'] = $odds;
-                }
-                if ($view_matchup['team2_low'] == null || $odds->getFighterOddsAsDecimal(2, true) < $view_matchup['team2_low']->getFighterOddsAsDecimal(2, true)) {
-                    $view_matchup['team2_low'] = $odds;
-                }
-                if ($view_matchup['team1_high'] == null || $odds->getFighterOddsAsDecimal(1, true) > $view_matchup['team1_high']->getFighterOddsAsDecimal(1, true)) {
-                    $view_matchup['team1_high'] = $odds;
-                }
-                if ($view_matchup['team2_high'] == null || $odds->getFighterOddsAsDecimal(2, true) > $view_matchup['team2_high']->getFighterOddsAsDecimal(2, true)) {
-                    $view_matchup['team2_high'] = $odds;
-                }
-            }
-
-            $team_pos = ((int) $matchup->getFighterID(2) == $team->getID()) + 1;
-            $view_matchup['team_pos'] = $team_pos;
-            $view_matchup['other_pos'] = ($team_pos == 1 ? 2 : 1);
-            $latest_index = EventHandler::getCurrentOddsIndex($matchup->getID(), $team_pos);
-
-            //Calculate % change from opening to mean
-            $view_matchup['percentage_change'] = 0;
-            if ($latest_index != null && $view_matchup['odds_opening'] != null) {
-                $view_matchup['percentage_change'] = round((($latest_index->getFighterOddsAsDecimal($team_pos, true) - $view_matchup['odds_opening']->getFighterOddsAsDecimal($team_pos, true)) / $latest_index->getFighterOddsAsDecimal($team_pos, true)) * 100, 1);
-            }
-
-            $view_matchup['graph_data'] = GraphHandler::getMedianSparkLine($matchup->getID(), ($matchup->getFighterID(1) == $team->getID() ? 1 : 2));
-            $view_matchup['matchup_obj'] = $matchup;
-            $view_data['matchups'][] = $view_matchup;
         }
 
         $page_content = $this->plates->render('gen_teampage', $view_data);
@@ -289,6 +247,55 @@ class MainController
 
         $response->getBody()->write($this->plates->render('team', $view_data));
         return $response;
+    }
+
+    private function populateTeamOdds($matchup, $team)
+    {
+        $view_matchup = [];
+
+        $view_matchup['event'] = EventHandler::getEvent($matchup->getEventID());
+        $view_matchup['event_date'] = '';
+        if (strtoupper($view_matchup['event']->getID()) != PARSE_FUTURESEVENT_ID) {
+            $view_matchup['event_date'] = date('M jS Y', strtotime($view_matchup['event']->getDate()));
+        }
+
+        $view_matchup['odds_opening'] = OddsHandler::getOpeningOddsForMatchup($matchup->getID());
+
+        //Determine range for this fight
+        $matchup_odds = EventHandler::getAllLatestOddsForFight($matchup->getID());
+        $view_matchup['team1_low'] = null;
+        $view_matchup['team2_low'] = null;
+        $view_matchup['team1_high'] = null;
+        $view_matchup['team2_high'] = null;
+        foreach ($matchup_odds as $odds) {
+            if ($view_matchup['team1_low'] == null || $odds->getFighterOddsAsDecimal(1, true) < $view_matchup['team1_low']->getFighterOddsAsDecimal(1, true)) {
+                $view_matchup['team1_low'] = $odds;
+            }
+            if ($view_matchup['team2_low'] == null || $odds->getFighterOddsAsDecimal(2, true) < $view_matchup['team2_low']->getFighterOddsAsDecimal(2, true)) {
+                $view_matchup['team2_low'] = $odds;
+            }
+            if ($view_matchup['team1_high'] == null || $odds->getFighterOddsAsDecimal(1, true) > $view_matchup['team1_high']->getFighterOddsAsDecimal(1, true)) {
+                $view_matchup['team1_high'] = $odds;
+            }
+            if ($view_matchup['team2_high'] == null || $odds->getFighterOddsAsDecimal(2, true) > $view_matchup['team2_high']->getFighterOddsAsDecimal(2, true)) {
+                $view_matchup['team2_high'] = $odds;
+            }
+        }
+
+        $team_pos = ((int) $matchup->getFighterID(2) == $team->getID()) + 1;
+        $view_matchup['team_pos'] = $team_pos;
+        $view_matchup['other_pos'] = ($team_pos == 1 ? 2 : 1);
+        $latest_index = EventHandler::getCurrentOddsIndex($matchup->getID(), $team_pos);
+
+        //Calculate % change from opening to mean
+        $view_matchup['percentage_change'] = 0;
+        if ($latest_index != null && $view_matchup['odds_opening'] != null) {
+            $view_matchup['percentage_change'] = round((($latest_index->getFighterOddsAsDecimal($team_pos, true) - $view_matchup['odds_opening']->getFighterOddsAsDecimal($team_pos, true)) / $latest_index->getFighterOddsAsDecimal($team_pos, true)) * 100, 1);
+        }
+
+        $view_matchup['graph_data'] = GraphHandler::getMedianSparkLine($matchup->getID(), ($matchup->getFighterID(1) == $team->getID() ? 1 : 2));
+        $view_matchup['matchup_obj'] = $matchup;
+        return $view_matchup;
     }
 
     public function viewEvent(Request $request, Response $response, array $args)
