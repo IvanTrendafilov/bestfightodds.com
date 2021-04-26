@@ -28,7 +28,7 @@
         <title><?=isset($title) ? $title . ' | Pro Boxing Odds' : 'Boxing Odds &amp; Betting Lines | Pro Boxing Odds'?></title>
     </head>
     <body>
-        <script async src="/js/bfo.min.js?v=0.4.4"></script>
+        <script async src="/js/bfo.min.js?v=0.4.5"></script>
         <div class="flex-header">
                 <div class="flex-header-wrap">
                     <a href="/"><img src="/img/logo_3.png" class="logo" width="290" height="54" alt="Pro Boxing Odds logo"></a>
