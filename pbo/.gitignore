@@ -1,9 +1,10 @@
 /app/front/pages/cache/*.php
 /app/front/pages/page.odds.php
+/app/front/pages/oddspage.php
+/app/front/pages/upcoming_odds.php
 /app/front/pages/page.feed.xml
 /app/front/img/cache/*.png
 /node_modules/*
-/lib/bfocore/*
 /vendor/*
 /log/*
 /logs/*
