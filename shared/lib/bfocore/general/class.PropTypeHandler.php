@@ -1,12 +1,12 @@
 <?php
 
-require_once('lib/bfocore/dao/class.PropTypeDAO.php');
+require_once('lib/bfocore/db/class.PropTypeDB.php');
 
 class PropTypeHandler
 {
     public static function getPropTypes($category_id = null)
     {
-        return PropTypeDAO::getPropTypes($category_id);
+        return PropTypeDB::getPropTypes($category_id);
     }
 
 }

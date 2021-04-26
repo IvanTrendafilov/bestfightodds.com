@@ -16,7 +16,7 @@ class CacheControl
 
             while ($sFile = readdir($rDir))
             {
-                if ($sFile != "." && $sFile != "..")
+                if ($sFile != "." && $sFile != ".." && $sFile != '.gitignore')
                 {
                     if (!is_dir(IMAGE_CACHE_DIR . "/" . $sFile))
                     {

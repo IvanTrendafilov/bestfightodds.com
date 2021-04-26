@@ -1,7 +1,7 @@
 <?php
 
 require_once('lib/bfocore/general/inc.GlobalTypes.php');
-require_once('lib/bfocore/dao/class.AlertDB.php');
+require_once('lib/bfocore/db/class.AlertDB.php');
 require_once('lib/bfocore/general/class.EventHandler.php');
 require_once('config/inc.config.php');
 require_once('lib/bfocore/utils/class.OddsTools.php');

@@ -1,6 +1,6 @@
 <?php
 
-require_once('lib/bfocore/dao/class.ScheduleDAO.php');
+require_once('lib/bfocore/db/class.ScheduleDB.php');
 require_once('lib/bfocore/utils/class.OddsTools.php');
 
 class ScheduleHandler
@@ -23,22 +23,22 @@ class ScheduleHandler
 		{
 			return false;
 		}
-		return ScheduleDAO::storeManualAction($a_sMessage, $a_iType);
+		return ScheduleDB::storeManualAction($a_sMessage, $a_iType);
 	}
 
 	public static function getAllManualActions()
 	{
-		return ScheduleDAO::getAllManualActions();
+		return ScheduleDB::getAllManualActions();
 	}
 
 	public static function clearAllManualActions()
 	{
-		return ScheduleDAO::clearAllManualActions();
+		return ScheduleDB::clearAllManualActions();
 	}
 
 	public static function clearManualAction($a_iManualActionID)
 	{
-		return ScheduleDAO::clearManualAction($a_iManualActionID);
+		return ScheduleDB::clearManualAction($a_iManualActionID);
 	}
 
 	/**

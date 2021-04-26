@@ -2,7 +2,7 @@
 
 //TODO: Move these to TeamHandler (make generic)
 
-require_once('lib/bfocore/dao/class.TeamDB.php');
+require_once('lib/bfocore/db/class.TeamDB.php');
 
 class FighterHandler
 {

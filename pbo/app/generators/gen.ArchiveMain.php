@@ -1,11 +1,11 @@
 <?php
 
-require_once('lib/bfocore/dao/class.StatsDAO.php');
+require_once('lib/bfocore/db/class.StatsDB.php');
 require_once('lib/bfocore/general/inc.GlobalTypes.php');
 require_once('lib/bfocore/general/class.FighterHandler.php');
 
-$aFavourites = StatsDAO::getTopFavourites();
-$aDogs = StatsDAO::getTopUnderdogs();
+$aFavourites = StatsDB::getTopFavourites();
+$aDogs = StatsDB::getTopUnderdogs();
 
 //Assemble top 5 favourites and skip dupes
 $aTopFiveFavs = array();
@@ -78,7 +78,7 @@ echo '</div>';
 
 
 
-$aBiggestChange = StatsDAO::getBiggestChange();
+$aBiggestChange = StatsDB::getBiggestChange();
 foreach ($aBiggestChange as $aBigChange)
 {
     $oFighter = FighterHandler::getFighterByID($aBigChange['fighter_id']);

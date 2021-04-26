@@ -1,36 +1,39 @@
 <?php
 
 require_once('lib/bfocore/general/inc.GlobalTypes.php');
-require_once('lib/bfocore/utils/db/class.DBTools.php');
 require_once('lib/bfocore/utils/db/class.PDOTools.php');
 
 /**
- * Twitter DAO
+ * Twitter DB access
  *
  * Handles all calls to the database related to tweets
  *
  */
-class TwitDAO
+class TwitterDB
 {
-    public static function saveFightAsTwittered($a_iFightID)
+    public static function saveFightAsTwittered($fight_id)
     {
-        $sQuery = 'INSERT INTO fight_twits(fight_id, twitdate)
+        $query = 'INSERT INTO fight_twits(fight_id, twitdate)
                         VALUES (?, NOW())';
 
-        $aParams = array($a_iFightID);
+        $params = array($fight_id);
 
-        DBTools::doParamQuery($sQuery, $aParams);
-
-        if (DBTools::getAffectedRows() == 1)
-        {
-            return true;
+        try {
+            $id = PDOTools::insert($query, $params);
+        } catch (PDOException $e) {
+            if ($e->getCode() == 23000) {
+                throw new Exception("Duplicate entry", 10);
+            } else {
+                throw new Exception("Unknown error " . $e->getMessage(), 10);
+            }
+            return false;
         }
-        return false;
+        return true;
     }
 
     public static function getUntwitteredFights()
     {
-        $sQuery = 'SELECT f.*, f1.name AS fighter1_name, f2.name AS fighter2_name 
+        $query = 'SELECT f.*, f1.name AS fighter1_name, f2.name AS fighter2_name 
                     FROM fights f, events e, fighters f1, fighters f2
                     WHERE NOT EXISTS
                         (SELECT ft.*
@@ -45,20 +48,16 @@ class TwitDAO
                         AND f2.id = f.fighter2_id
                         AND e.display = 1';
 
-
-        $rResult = DBTools::doQuery($sQuery);
-
-        $aFights = array();
-        while ($aFight = mysqli_fetch_array($rResult))
-        {
-            $oTempFight = new Fight($aFight['id'], $aFight['fighter1_name'], $aFight['fighter2_name'], $aFight['event_id']);
-            $oTempFight->setFighterID(1, $aFight['fighter1_id']);
-            $oTempFight->setFighterID(2, $aFight['fighter2_id']);
-            $oTempFight->setMainEvent(($aFight['is_mainevent'] == 1 ? true : false));
-            $aFights[] = $oTempFight;
+        $fights = [];
+        $results = PDOTools::findMany($query);
+        foreach ($results as $row) {
+            $fight = new Fight($row['id'], $row['fighter1_name'], $row['fighter2_name'], $row['event_id']);
+            $fight->setFighterID(1, $row['fighter1_id']);
+            $fight->setFighterID(2, $row['fighter2_id']);
+            $fight->setMainEvent(($row['is_mainevent'] == 1 ? true : false));
+            $fights[] = $fight;
         }
-
-        return $aFights;
+        return $fights;
     }
 
     public static function addTwitterHandle($team_id, $handle)
@@ -67,7 +66,7 @@ class TwitDAO
                         VALUES (?, ?)
                         ON DUPLICATE KEY UPDATE team_id = ?, handle = ?';
         $params = [$team_id, $handle, $team_id, $handle];
-        
+
         try {
             $id = PDOTools::insert($query, $params);
         } catch (PDOException $e) {
@@ -88,4 +87,3 @@ class TwitDAO
         return PDOTools::findOne($query, $params);
     }
 }
-?>

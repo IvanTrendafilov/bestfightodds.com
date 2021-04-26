@@ -6,11 +6,9 @@ require_once('lib/bfocore/general/inc.GlobalTypes.php');
 require_once('lib/bfocore/parser/utils/class.ParseTools.php'); //TODO: Try to avoid having dependecies to the parsing component. Move this functionality to another class in the general library
 
 /**
- * Statistics DAO
- *
- * @author Christian
+ * Statistics DB
  */
-class StatsDAO
+class StatsDB
 {
     /**
      * Top Swings (most movement in terms of line value)

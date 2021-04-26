@@ -2,7 +2,7 @@
 
 require 'vendor/autoload.php';
 require_once('config/inc.config.php');
-require_once('lib/bfocore/dao/class.FacebookDB.php');
+require_once('lib/bfocore/db/class.FacebookDB.php');
 
 class FacebookHandler
 {

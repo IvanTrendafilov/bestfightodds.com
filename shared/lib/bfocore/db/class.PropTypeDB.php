@@ -10,7 +10,7 @@ require_once('lib/bfocore/utils/db/class.PDOTools.php');
 require_once('lib/bfocore/general/inc.GlobalTypes.php');
 
 
-class PropTypeDAO
+class PropTypeDB
 {
     public static function getPropTypes($category_id = null)
     {        

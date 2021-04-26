@@ -1,6 +1,6 @@
 <?php
 
-require_once('lib/bfocore/dao/class.StatsDAO.php');
+require_once('lib/bfocore/db/class.StatsDB.php');
 require_once('lib/bfocore/general/class.EventHandler.php');
 require_once('lib/bfocore/utils/class.OddsTools.php');
 require_once('lib/bfocore/general/class.PropTypeHandler.php');
@@ -32,7 +32,7 @@ class StatsHandler
 		{
 			return null;
 		}
-		return StatsDAO::getSwingForMatchup($a_iMatchupID);
+		return StatsDB::getSwingForMatchup($a_iMatchupID);
 	}*/
 
 	public static function getAllDiffsForEvent($a_iEventID, $a_iFrom = 0) //0 Opening, 1 = 1 day ago, 2 = 1 hour ago
@@ -64,7 +64,7 @@ class StatsHandler
 		{
 			return null;
 		}
-		return StatsDAO::getDiffForMatchup($a_iMatchupID, $a_iFrom);
+		return StatsDB::getDiffForMatchup($a_iMatchupID, $a_iFrom);
 	}
 
 

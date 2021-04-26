@@ -4,7 +4,7 @@ require_once('lib/bfocore/utils/db/class.DBTools.php');
 require_once('lib/bfocore/utils/db/class.PDOTools.php');
 require_once('lib/bfocore/general/inc.GlobalTypes.php');
 
-class OddsDAO
+class OddsDB
 {
     public static function addPropBet($a_oPropBet)
     {

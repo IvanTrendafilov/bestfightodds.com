@@ -1,6 +1,6 @@
 <?php
 
-require_once('lib/bfocore/dao/class.TeamDB.php');
+require_once('lib/bfocore/db/class.TeamDB.php');
 require_once('lib/bfocore/general/inc.GlobalTypes.php');
 
 /**

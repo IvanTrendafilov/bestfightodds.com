@@ -2,7 +2,7 @@
 
 require_once('lib/bfocore/utils/db/class.DBTools.php');
 
-class ScheduleDAO
+class ScheduleDB
 {
 	public static function storeManualAction($a_sMessage, $a_iType)
 	{

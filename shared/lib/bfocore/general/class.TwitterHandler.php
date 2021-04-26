@@ -5,7 +5,7 @@ require_once('config/inc.config.php');
 require_once('lib/bfocore/utils/twitter/class.Twitterer.php');
 require_once('lib/bfocore/general/class.EventHandler.php');
 
-require_once('lib/bfocore/dao/class.TwitDAO.php');
+require_once('lib/bfocore/db/class.TwitterDB.php');
 
 /**
  * Handles all Twitter-updates for new odds
@@ -16,11 +16,10 @@ require_once('lib/bfocore/dao/class.TwitDAO.php');
  */
 class TwitterHandler
 {
-
     public static function twitterNewFights()
     {
         $iTwits = 0;
-        $aFights = TwitDAO::getUntwitteredFights();
+        $aFights = TwitterDB::getUntwitteredFights();
 
         // Fights are mainly grouped based on event, however main events are always seperated into their own group
         $aGroups = array();
@@ -116,7 +115,7 @@ class TwitterHandler
             {
                 foreach ($aGroup['matchups'] as $oEventFight)
                 {
-                    TwitDAO::saveFightAsTwittered($oEventFight->getID());
+                    TwitterDB::saveFightAsTwittered($oEventFight->getID());
                 }
                 $iTwits++;
             }
@@ -127,12 +126,12 @@ class TwitterHandler
 
     public static function addTwitterHandle($team_id, $handle)
     {
-        return TwitDAO::addTwitterHandle($team_id, $handle);
+        return TwitterDB::addTwitterHandle($team_id, $handle);
     }
 
     public static function getTwitterHandle($team_id)
     {
-        $result = TwitDAO::getTwitterHandle($team_id);
+        $result = TwitterDB::getTwitterHandle($team_id);
         return isset($result->handle) ? $result->handle : false;
     }
 

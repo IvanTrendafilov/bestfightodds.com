@@ -4,7 +4,7 @@ require_once('lib/bfocore/general/inc.GlobalTypes.php');
 require_once('lib/bfocore/utils/db/class.PDOTools.php');
 
 /**
- * Facebook DAO
+ * Facebook DB
  *
  * Handles all calls to the database related to Facebook posts
  *

@@ -1,7 +1,7 @@
 <?php
 
 require_once('lib/bfocore/general/inc.GlobalTypes.php');
-require_once('lib/bfocore/dao/class.BookieDB.php');
+require_once('lib/bfocore/db/class.BookieDB.php');
 
 class BookieHandler
 {
