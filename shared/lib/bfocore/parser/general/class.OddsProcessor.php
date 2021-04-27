@@ -36,8 +36,7 @@ class OddsProcessor
 
         //Pre-populate correlation table with entries from database. These can be overwritten later in the matching matchups method
         $correlations = OddsHandler::getCorrelationsForBookie($this->bookie_id);
-        foreach ($correlations as $correlation)
-        {
+        foreach ($correlations as $correlation) {
             ParseTools::saveCorrelation($correlation['correlation'], $correlation['matchup_id']);
         }
 
@@ -52,6 +51,9 @@ class OddsProcessor
         $matched_props = $this->removeMatchedPropDupes($matched_props);
 
         //Pending: For Create mode, create new matchups if no match was found
+        if (false && PARSE_CREATEMATCHUPS == true) {
+            $matched_matchups = $this->createUnmatchedMatchups($matched_matchups);
+        }
 
         $matchup_unmatched_count = $this->logUnmatchedMatchups($matched_matchups);
         $prop_unmatched_count = $pp->logUnmatchedProps($matched_props);
@@ -68,13 +70,15 @@ class OddsProcessor
 
         $this->logger->info('Result - Matchups: ' . (count($matched_matchups) - $matchup_unmatched_count) . '/' . count($parsed_sport->getParsedMatchups()) . ' Props: ' . (count($matched_props) - $prop_unmatched_count) . '/' . count($parsed_sport->getFetchedProps()) . ' Full run: ' . ($full_run ? 'Yes' : 'No'));
 
-        $oParseRunLogger = new ParseRunLogger();
-        $oParseRunLogger->logRun(-1, ['bookie_id' => $this->bookie_id,
-        'parsed_matchups' => count($parsed_sport->getParsedMatchups()),
-        'parsed_props' => count($parsed_sport->getFetchedProps()),
-        'matched_matchups' => (count($matched_matchups) - $matchup_unmatched_count),
-        'matched_props' => (count($matched_props) - $prop_unmatched_count),
-        'status' => 1]);
+        $parse_run_logger = new ParseRunLogger();
+        $parse_run_logger->logRun(-1, [
+            'bookie_id' => $this->bookie_id,
+            'parsed_matchups' => count($parsed_sport->getParsedMatchups()),
+            'parsed_props' => count($parsed_sport->getFetchedProps()),
+            'matched_matchups' => (count($matched_matchups) - $matchup_unmatched_count),
+            'matched_props' => (count($matched_props) - $prop_unmatched_count),
+            'status' => 1
+        ]);
     }
 
     /**
@@ -83,23 +87,20 @@ class OddsProcessor
     private function matchMatchups($parsed_matchups)
     {
         $matched_items = [];
-        foreach ($parsed_matchups as $parsed_matchup)
-        {
+        foreach ($parsed_matchups as $parsed_matchup) {
             $match = false;
-            $matching_matchup = EventHandler::getMatchingFightV2(['team1_name' => $parsed_matchup->getTeamName(1),
-                                            'team2_name' => $parsed_matchup->getTeamName(2),
-                                            'future_only' => true]);
+            $matching_matchup = EventHandler::getMatchingFightV2([
+                'team1_name' => $parsed_matchup->getTeamName(1),
+                'team2_name' => $parsed_matchup->getTeamName(2),
+                'future_only' => true
+            ]);
 
-            if (!$matching_matchup)
-            {
+            if (!$matching_matchup) {
                 $this->logger->warning('No matchup found for ' . $parsed_matchup->getTeamName(1) . ' vs ' . $parsed_matchup->getTeamName(2));
-            }
-            else
-            {
+            } else {
                 $this->logger->info('Found match for ' . $parsed_matchup->getTeamName(1) . ' vs ' . $parsed_matchup->getTeamName(2));
                 //If parsed matchup contains a correlation ID, we store this in the correlation table. Maybe move this out to other function?
-                if ($parsed_matchup->getCorrelationID() != '')
-                {
+                if ($parsed_matchup->getCorrelationID() != '') {
                     ParseTools::saveCorrelation($parsed_matchup->getCorrelationID(), $matching_matchup->getID());
                     $this->logger->debug("---------- storing correlation ID: " . $parsed_matchup->getCorrelationID() . ' to matchup ' . $matching_matchup->getID());
                 }
@@ -115,10 +116,8 @@ class OddsProcessor
      */
     private function updateMatchedMatchups($matched_matchups)
     {
-        foreach ($matched_matchups as $matched_matchup) 
-        {
-            if ($matched_matchup['match_result']['status'] == true)
-            {
+        foreach ($matched_matchups as $matched_matchup) {
+            if ($matched_matchup['match_result']['status'] == true) {
                 $this->updateOneMatchedMatchup($matched_matchup);
             }
         }
@@ -133,46 +132,36 @@ class OddsProcessor
         $event = EventHandler::getEvent($matched_matchup['matched_matchup']->getEventID(), true);
         $temp_matchup = new Fight(0, $matched_matchup['parsed_matchup']->getTeamName(1), $matched_matchup['parsed_matchup']->getTeamName(2), -1);
 
-        if ($event != null)
-        {
+        if ($event != null) {
             //This routine is used to switch the order of odds in a matchup if order has changed through the use of alt names or similar
-            if (($matched_matchup['matched_matchup']->getComment() == 'switched' || $temp_matchup->hasOrderChanged()) && !$matched_matchup['parsed_matchup']->isSwitchedFromOutside())
-            {
+            if (($matched_matchup['matched_matchup']->getComment() == 'switched' || $temp_matchup->hasOrderChanged()) && !$matched_matchup['parsed_matchup']->isSwitchedFromOutside()) {
                 $matched_matchup['parsed_matchup']->switchOdds();
             }
 
             //Store any metadata for the matchup
             $metadata = $matched_matchup['parsed_matchup']->getAllMetaData();
-            foreach ($metadata as $key => $val)
-            {
+            foreach ($metadata as $key => $val) {
                 if ($this->bookie_id != 12  && $this->bookie_id != 5 && $this->bookie_id != 17 && $this->bookie_id != 4 && $this->bookie_id != 19 && $this->bookie_id != 18 && $this->bookie_id != 13) //TODO: Temporary disable BetOnline, Bovada, William Hill, Sportsbook, Bet365, Intertops, BetDSI from storing metadata
                 {
                     EventHandler::setMetaDataForMatchup($matched_matchup['matched_matchup']->getID(), $key, $val, $this->bookie_id);
                 }
             }
 
-            if ($matched_matchup['parsed_matchup']->hasMoneyline())
-            {
+            if ($matched_matchup['parsed_matchup']->hasMoneyline()) {
                 $odds = new FightOdds($matched_matchup['matched_matchup']->getID(), $this->bookie_id, $matched_matchup['parsed_matchup']->getTeamOdds(1), $matched_matchup['parsed_matchup']->getTeamOdds(2), ParseTools::standardizeDate(date('Y-m-d')));
 
-                if (EventHandler::checkMatchingOdds($odds))
-                {
+                if (EventHandler::checkMatchingOdds($odds)) {
                     $this->logger->info("- " . $matched_matchup['matched_matchup']->getTeamAsString(1) . " vs " . $matched_matchup['matched_matchup']->getTeamAsString(2) . ": nothing has changed since last odds");
-                }
-                else
-                {
+                } else {
                     $this->logger->info("- " . $matched_matchup['matched_matchup']->getTeamAsString(1) . " vs " . $matched_matchup['matched_matchup']->getTeamAsString(2) . ": adding new odds");
                     $result = EventHandler::addNewFightOdds($odds);
-                    if (!$result)
-                    {
+                    if (!$result) {
                         $this->logger->error("-- Error adding odds");
                     }
                 }
                 return true;
             }
-        }
-        else
-        {
+        } else {
             //Trying to add odds for a matchup with no upcoming event
             $this->logger->error("--- match wrongfully matched to event OR odds are old");
             return false;
@@ -185,30 +174,22 @@ class OddsProcessor
     private function flagMatchupOddsForDeletion($matched_matchups)
     {
         $upcoming_matchups = EventHandler::getAllUpcomingMatchups();
-        foreach ($upcoming_matchups as $upcoming_matchup)
-        {
+        foreach ($upcoming_matchups as $upcoming_matchup) {
             $odds = EventHandler::getLatestOddsForFightAndBookie($upcoming_matchup->getID(), $this->bookie_id);
-            if ($odds != null)
-            {
+            if ($odds != null) {
                 $this->logger->debug('Bookie has odds for ' . $upcoming_matchup->getTeamAsString(1) . ' vs ' . $upcoming_matchup->getTeamAsString(2) . '. Checking if this should be flagged for deletion');
                 $found = false;
-                foreach ($matched_matchups as $matched_matchup)
-                {
-                    if ($matched_matchup['match_result']['status'] == true)
-                    {
-                        if ($matched_matchup['matched_matchup']->getID() == $upcoming_matchup->getID())
-                        {
+                foreach ($matched_matchups as $matched_matchup) {
+                    if ($matched_matchup['match_result']['status'] == true) {
+                        if ($matched_matchup['matched_matchup']->getID() == $upcoming_matchup->getID()) {
                             $found = true;
                         }
-                    }   
+                    }
                 }
-                if (!$found)
-                {
+                if (!$found) {
                     $this->logger->info('Odds for ' . $upcoming_matchup->getTeamAsString(1) . ' vs ' . $upcoming_matchup->getTeamAsString(2) . ' will be flagged for deletion');
                     OddsHandler::flagMatchupOddsForDeletion($this->bookie_id, $upcoming_matchup->getID());
-                }
-                else
-                {
+                } else {
                     OddsHandler::removeFlagged($this->bookie_id, $upcoming_matchup->getID()); //Remove any previous flags
                     $this->logger->debug('Odds for ' . $upcoming_matchup->getTeamAsString(1) . ' vs ' . $upcoming_matchup->getTeamAsString(2) . ' still relevant. No flagging');
                 }
@@ -222,75 +203,62 @@ class OddsProcessor
     private function flagPropOddsForDeletion($matched_props)
     {
         $upcoming_matchups = EventHandler::getAllUpcomingMatchups();
-        foreach ($upcoming_matchups as $upcoming_matchup)
-        {
+        foreach ($upcoming_matchups as $upcoming_matchup) {
             $stored_props = OddsHandler::getAllLatestPropOddsForMatchupAndBookie($upcoming_matchup->getID(), $this->bookie_id);
-            foreach ($stored_props as $stored_prop)
-            {
+            foreach ($stored_props as $stored_prop) {
                 $found = false;
-                foreach ($matched_props as $matched_prop)
-                {
-                    if ($matched_prop['match_result']['status'] == true && $matched_prop['match_result']['matched_type'] == 'matchup')
-                    {
-                        if ($matched_prop['match_result']['matchup']['matchup_id'] == $stored_prop->getMatchupID()
+                foreach ($matched_props as $matched_prop) {
+                    if ($matched_prop['match_result']['status'] == true && $matched_prop['match_result']['matched_type'] == 'matchup') {
+                        if (
+                            $matched_prop['match_result']['matchup']['matchup_id'] == $stored_prop->getMatchupID()
                             && $matched_prop['match_result']['template']->getPropTypeID() == $stored_prop->getPropTypeID()
                             && $matched_prop['match_result']['matchup']['team'] == $stored_prop->getTeamNumber()
-                            && $this->bookie_id == $stored_prop->getBookieID())
-                        {
+                            && $this->bookie_id == $stored_prop->getBookieID()
+                        ) {
                             $found = true;
                         }
                     }
                 }
 
-                if (!$found)
-                {
+                if (!$found) {
                     $this->logger->info('Prop odds with type ' . $stored_prop->getPropTypeID() . ' for team num ' . $stored_prop->getTeamNumber() . ' in ' . $upcoming_matchup->getTeamAsString(1) . ' vs ' . $upcoming_matchup->getTeamAsString(2) . ' will be flagged for deletion');
                     OddsHandler::flagPropOddsForDeletion($this->bookie_id, $stored_prop->getMatchupID(), $stored_prop->getPropTypeID(), $stored_prop->getTeamNumber());
-                }
-                else
-                {
+                } else {
                     OddsHandler::removeFlagged($this->bookie_id, $stored_prop->getMatchupID(), null, $stored_prop->getPropTypeID(), $stored_prop->getTeamNumber()); //Remove any previous flags
                     $this->logger->debug('Prop odds with type ' . $stored_prop->getPropTypeID() . ' for team num ' . $stored_prop->getTeamNumber() . ' in ' . $upcoming_matchup->getTeamAsString(1) . ' vs ' . $upcoming_matchup->getTeamAsString(2) . ' still relevant');
                 }
             }
         }
     }
-    
+
     /**
      * Fetches all events where the bookie has previously had event prop odds and checks if the event prop odds are now removed. If so the event prop odds will be flagged for deletion
      */
     private function flagEventPropOddsForDeletion($matched_props)
     {
         $upcoming_events = EventHandler::getAllUpcomingEvents();
-        foreach ($upcoming_events as $upcoming_event)
-        {
+        foreach ($upcoming_events as $upcoming_event) {
             //Todo: Possible improvement here is that we retrieve odds for all bookies. Could be limited to single bookie
             $stored_props = OddsHandler::getCompletePropsForEvent($upcoming_event->getID(), 0, $this->bookie_id);
-            if ($stored_props != null)
-            {
-                foreach ($stored_props as $stored_prop)
-                {
+            if ($stored_props != null) {
+                foreach ($stored_props as $stored_prop) {
                     $found = false;
-                    foreach ($matched_props as $matched_prop)
-                    {
-                        if ($matched_prop['match_result']['status'] == true && $matched_prop['match_result']['matched_type'] == 'event')
-                        {
-                            if ($matched_prop['match_result']['event']['event_id'] == $stored_prop->getEventID()
+                    foreach ($matched_props as $matched_prop) {
+                        if ($matched_prop['match_result']['status'] == true && $matched_prop['match_result']['matched_type'] == 'event') {
+                            if (
+                                $matched_prop['match_result']['event']['event_id'] == $stored_prop->getEventID()
                                 && $matched_prop['match_result']['template']->getPropTypeID() == $stored_prop->getPropTypeID()
-                                && $this->bookie_id == $stored_prop->getBookieID())
-                            {
+                                && $this->bookie_id == $stored_prop->getBookieID()
+                            ) {
                                 $found = true;
                             }
                         }
                     }
 
-                    if (!$found)
-                    {
+                    if (!$found) {
                         $this->logger->info('Prop odds with type ' . $stored_prop->getPropTypeID() . ' for event ' . $upcoming_event->getName() . ' will be flagged for deletion');
                         OddsHandler::flagEventPropOddsForDeletion($this->bookie_id, $stored_prop->getEventID(), $stored_prop->getPropTypeID(), $stored_prop->getTeamNumber());
-                    }
-                    else
-                    {
+                    } else {
                         OddsHandler::removeFlagged($this->bookie_id, null, $stored_prop->getEventID(), $stored_prop->getPropTypeID(), $stored_prop->getTeamNumber()); //Remove any previous flags
                         $this->logger->debug('Prop odds with type ' . $stored_prop->getPropTypeID() . ' for event ' . $upcoming_event->getName() . ' still relevant');
                     }
@@ -305,16 +273,15 @@ class OddsProcessor
     private function removeMoneylineDupes($parsed_sport)
     {
         $matchups = $parsed_sport->getParsedMatchups();
-        for ($y = 0; $y < sizeof($matchups); $y++)
-        {
-            for ($x = 0; $x < sizeof($matchups); $x++)
-            {
-                if ($x != $y
-                        && $matchups[$y]->getTeamName(1) == $matchups[$x]->getTeamName(1)
-                        && $matchups[$y]->getTeamName(2) == $matchups[$x]->getTeamName(2)
-                        && !($matchups[$y]->getTeamOdds(1) == $matchups[$x]->getTeamOdds(1)
-                        && $matchups[$y]->getTeamOdds(2) == $matchups[$x]->getTeamOdds(2)))
-                {
+        for ($y = 0; $y < sizeof($matchups); $y++) {
+            for ($x = 0; $x < sizeof($matchups); $x++) {
+                if (
+                    $x != $y
+                    && $matchups[$y]->getTeamName(1) == $matchups[$x]->getTeamName(1)
+                    && $matchups[$y]->getTeamName(2) == $matchups[$x]->getTeamName(2)
+                    && !($matchups[$y]->getTeamOdds(1) == $matchups[$x]->getTeamOdds(1)
+                        && $matchups[$y]->getTeamOdds(2) == $matchups[$x]->getTeamOdds(2))
+                ) {
                     //Found a match
                     $arbitrage_subject = ParseTools::getArbitrage($matchups[$y]->getTeamOdds(1), $matchups[$y]->getTeamOdds(2));
                     $arbitrage_challenger = ParseTools::getArbitrage($matchups[$x]->getTeamOdds(1), $matchups[$x]->getTeamOdds(2));
@@ -324,12 +291,10 @@ class OddsProcessor
                     if ($arbitrage_subject > $arbitrage_challenger) //Challenger won
                     {
                         unset($matchups[$y]);
-                    }
-                    else if ($arbitrage_subject < $arbitrage_challenger) //Subject won
+                    } else if ($arbitrage_subject < $arbitrage_challenger) //Subject won
                     {
                         unset($matchups[$x]);
-                    }
-                    else //Draw, remove one
+                    } else //Draw, remove one
                     {
                         unset($matchups[$x]);
                     }
@@ -351,17 +316,16 @@ class OddsProcessor
     private function removePropDupes($parsed_sport)
     {
         $props = $parsed_sport->getFetchedProps();
-        for ($y = 0; $y < sizeof($props); $y++)
-        {
-            for ($x = 0; $x < sizeof($props); $x++)
-            {
-                if ($x != $y
-                        && $props[$y]->getCorrelationID() == $props[$x]->getCorrelationID()
-                        && $props[$y]->getTeamName(1) == $props[$x]->getTeamName(1)
-                        && $props[$y]->getTeamName(2) == $props[$x]->getTeamName(2)
-                        && !($props[$y]->getTeamOdds(1) == $props[$x]->getTeamOdds(1)
-                        && $props[$y]->getTeamOdds(2) == $props[$x]->getTeamOdds(2)))
-                {
+        for ($y = 0; $y < sizeof($props); $y++) {
+            for ($x = 0; $x < sizeof($props); $x++) {
+                if (
+                    $x != $y
+                    && $props[$y]->getCorrelationID() == $props[$x]->getCorrelationID()
+                    && $props[$y]->getTeamName(1) == $props[$x]->getTeamName(1)
+                    && $props[$y]->getTeamName(2) == $props[$x]->getTeamName(2)
+                    && !($props[$y]->getTeamOdds(1) == $props[$x]->getTeamOdds(1)
+                        && $props[$y]->getTeamOdds(2) == $props[$x]->getTeamOdds(2))
+                ) {
                     //Found a match
                     $arbitrage_subject = ParseTools::getArbitrage($props[$y]->getTeamOdds(1), $props[$y]->getTeamOdds(2));
                     $arbitrage_challenger = ParseTools::getArbitrage($props[$x]->getTeamOdds(1), $props[$x]->getTeamOdds(2));
@@ -371,12 +335,10 @@ class OddsProcessor
                     if ($arbitrage_subject > $arbitrage_challenger) //Challenger won
                     {
                         unset($props[$y]);
-                    }
-                    else if ($arbitrage_subject < $arbitrage_challenger) //Subject won
+                    } else if ($arbitrage_subject < $arbitrage_challenger) //Subject won
                     {
                         unset($props[$x]);
-                    }
-                    else //Draw, remove one
+                    } else //Draw, remove one
                     {
                         unset($props[$x]);
                     }
@@ -397,22 +359,20 @@ class OddsProcessor
      */
     private function removeMatchedPropDupes($props)
     {
-        for ($y = 0; $y < sizeof($props); $y++)
-        {
-            if ($props[$y]['match_result']['status'] == true)
-            {
+        for ($y = 0; $y < sizeof($props); $y++) {
+            if ($props[$y]['match_result']['status'] == true) {
                 $matches = [];
-                for ($x = 0; $x < sizeof($props); $x++)
-                {
+                for ($x = 0; $x < sizeof($props); $x++) {
                     if ($x != $y) //Ignore self
                     {
-                        if ($props[$x]['match_result']['status'] == true
+                        if (
+                            $props[$x]['match_result']['status'] == true
                             && $props[$x]['match_result']['template']->getPropTypeID() == $props[$y]['match_result']['template']->getPropTypeID()
                             && $props[$x]['match_result']['matchup']['matchup_id'] == $props[$y]['match_result']['matchup']['matchup_id']
-                            && $props[$x]['match_result']['matchup']['team'] == $props[$y]['match_result']['matchup']['team'])
-                        {
-                            $this->logger->info('Matching dupe for proptype_id: ' . $props[$x]['match_result']['template']->getPropTypeID() . ', matchup_id: ' . $props[$x]['match_result']['matchup']['matchup_id'] . 
-                                    ' ' . $props[$y]['prop']->getTeamOdds(1) . '/' . $props[$y]['prop']->getTeamOdds(2) . ' and ' . $props[$x]['prop']->getTeamOdds(1) . '/' . $props[$x]['prop']->getTeamOdds(2));
+                            && $props[$x]['match_result']['matchup']['team'] == $props[$y]['match_result']['matchup']['team']
+                        ) {
+                            $this->logger->info('Matching dupe for proptype_id: ' . $props[$x]['match_result']['template']->getPropTypeID() . ', matchup_id: ' . $props[$x]['match_result']['matchup']['matchup_id'] .
+                                ' ' . $props[$y]['prop']->getTeamOdds(1) . '/' . $props[$y]['prop']->getTeamOdds(2) . ' and ' . $props[$x]['prop']->getTeamOdds(1) . '/' . $props[$x]['prop']->getTeamOdds(2));
 
                             $arbitrage_subject = ParseTools::getArbitrage($props[$y]['prop']->getTeamOdds(1), $props[$y]['prop']->getTeamOdds(2));
                             $arbitrage_challenger = ParseTools::getArbitrage($props[$x]['prop']->getTeamOdds(1), $props[$x]['prop']->getTeamOdds(2));
@@ -421,13 +381,11 @@ class OddsProcessor
                             {
                                 $this->logger->info('Removing subject dupe: ' . $props[$y]['prop']->getTeamOdds(1) . '/' . $props[$y]['prop']->getTeamOdds(2) . ' for matchup_id: ' . $props[$x]['match_result']['matchup']['matchup_id'] . ' proptype_id: ' . $props[$x]['match_result']['template']->getPropTypeID() . ' team_num: ' . $props[$y]['match_result']['matchup']['team']);
                                 unset($props[$y]);
-                            }
-                            else if ($arbitrage_subject < $arbitrage_challenger) //Subject won
+                            } else if ($arbitrage_subject < $arbitrage_challenger) //Subject won
                             {
                                 $this->logger->info('Removing challenger dupe: ' . $props[$x]['prop']->getTeamOdds(1) . '/' . $props[$x]['prop']->getTeamOdds(2) . ' for matchup_id: ' . $props[$x]['match_result']['matchup']['matchup_id'] . ' proptype_id: ' . $props[$x]['match_result']['template']->getPropTypeID() . ' team_num: ' . $props[$y]['match_result']['matchup']['team']);
                                 unset($props[$x]);
-                            }
-                            else //Draw, remove one
+                            } else //Draw, remove one
                             {
                                 $this->logger->info('Removing identical dupe: ' . $props[$x]['prop']->getTeamOdds(1) . '/' . $props[$x]['prop']->getTeamOdds(2) . ' for matchup_id: ' . $props[$x]['match_result']['matchup']['matchup_id'] . ' proptype_id: ' . $props[$x]['match_result']['template']->getPropTypeID() . ' team_num: ' . $props[$y]['match_result']['matchup']['team']);
                                 unset($props[$x]);
@@ -444,16 +402,11 @@ class OddsProcessor
         return $props;
     }
 
-
-
-
     private function logUnmatchedMatchups($matched_matchups)
     {
         $counter = 0;
-        foreach ($matched_matchups as $matchup)
-        {
-            if ($matchup['match_result']['status'] == false)
-            {
+        foreach ($matched_matchups as $matchup) {
+            if ($matchup['match_result']['status'] == false) {
                 $counter++;
                 EventHandler::logUnmatched($matchup['parsed_matchup']->toString(), $this->bookie_id, 0, $matchup['parsed_matchup']->getAllMetaData());
             }
@@ -461,4 +414,26 @@ class OddsProcessor
         return $counter;
     }
 
+    private function createUnmatchedMatchups($matched_matchups) 
+    {
+        $mc = new MatchupCreator($this->logger, $this->bookie_id);
+        foreach ($matched_matchups as $matchup) {
+            if ($matchup['match_result']['status'] == false) {
+
+                $metadata = $matchup['parsed_matchup']->getAllMetaData();
+                if (!isset($metadata['event_name'], $metadata['gametime'])) {
+                    $this->logger->debug('Unable to evaluate matchup ' . $matchup['parsed_matchup']->getTeamName(1) . ' vs ' . $matchup['parsed_matchup']->getTeamName(2) . ' for creation due to missing metadata');
+                }
+                else {
+                    $team1 = $matchup['parsed_matchup']->getTeamName(1);
+                    $team2 = $matchup['parsed_matchup']->getTeamName(2);
+                    $event_name = $metadata['event_name'];
+                    $matchup_time = $metadata['gametime'];
+                    $this->logger->debug('Evaluating matchup ' . $matchup['parsed_matchup']->getTeamName(1) . ' vs ' . $matchup['parsed_matchup']->getTeamName(2) . ' for creation');
+                    $mc->evaluateMatchup($team1, $team2, $event_name, $matchup_time);
+                }
+            }
+        }
+        return $matched_matchups;
+    }
 }

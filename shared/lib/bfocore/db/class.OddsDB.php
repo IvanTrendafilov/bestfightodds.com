@@ -1173,7 +1173,7 @@ class OddsDB
 
         //These values can be tuned with time (TODO: Maybe move to config file?):
         $event_threshold = 24; //If the event is within this value (hours) we will not remove
-        $flagged_time = 12; //How many hours the line must be flagged before deletion 
+        $flagged_time = 8; //How many hours the line must be flagged before deletion 
 
         $query = 'SELECT lf.*, TIMESTAMPDIFF(HOUR, initial_flagdate, NOW()) AS timediff, pt.prop_desc, pt.negprop_desc, 
                         f1.name AS team1_name, f2.name AS team2_name, b.name AS bookie_name, e.name AS event_name FROM lines_flagged lf 
@@ -1183,7 +1183,7 @@ class OddsDB
                     LEFT JOIN fighters f1 ON f.fighter1_id = f1.id
                     LEFT JOIN fighters f2 ON f.fighter2_id = f2.id 
                     LEFT JOIN bookies b ON lf.bookie_id = b.id 
-                WHERE LEFT(e.date, 10) >= LEFT((NOW() - INTERVAL -' . $event_threshold . ' HOUR), 10) HAVING timediff > ' . $flagged_time . ';';
+                WHERE LEFT(e.date, 10) >= LEFT((NOW() - INTERVAL -' . $event_threshold . ' HOUR), 10) HAVING timediff >= ' . $flagged_time . ';';
         $result = null;
         try {
             $result = PDOTools::findMany($query, []);
