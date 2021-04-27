@@ -9,3 +9,4 @@
 /log/*
 /logs/*
 /config/inc.config.php
+/db/scripts/backup/bfo*.zip
