@@ -189,10 +189,10 @@ class AdminAPIController
         else
         {
             $event = new Event(0, $data->event_date, $data->event_name, !$data->event_hidden);
-            if (($event_id = EventHandler::addNewEvent($event)))
+            if (($event_obj = EventHandler::addNewEvent($event)))
             {
                 $return_data['msg'] = 'Successfully added';
-                $return_data['event_id'] = $event_id;
+                $return_data['event_id'] = $event_obj->getID();
             }
             else
             {

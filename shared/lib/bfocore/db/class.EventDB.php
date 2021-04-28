@@ -897,19 +897,26 @@ class EventDB
     /**
      * Retrieves all stored unmatched entries
      */
-    public static function getUnmatched($a_iLimit = 10)
+    public static function getUnmatched($limit = 10, $type = -1)
     {
-        $sQuery = 'SELECT matchup, bookie_id, log_date, type, metadata
-                    FROM matchups_unmatched 
-                    ORDER BY bookie_id ASC, log_date DESC
-                    LIMIT 0, ' . $a_iLimit;
-
-        $rResult = DBTools::doQuery($sQuery);
-        $aUnmatched = array();
-        while ($aRow = mysqli_fetch_array($rResult)) {
-            $aUnmatched[] = $aRow;
+        $params = [];
+        $extra_where = '';
+        if (in_array($type, [0,1,2])) {
+            $extra_where = ' WHERE type = ? ';
+            $params[] = $type;
         }
-        return $aUnmatched;
+        $query = 'SELECT matchup, bookie_id, log_date, type, metadata
+                    FROM matchups_unmatched 
+                    ' . $extra_where . ' 
+                    ORDER BY bookie_id ASC, log_date DESC
+                    LIMIT 0, ' . $limit;
+
+        $result = DBTools::doParamQuery($query, $params);
+        $unmatched = array();
+        while ($row = mysqli_fetch_array($result)) {
+            $unmatched[] = $row;
+        }
+        return $unmatched;
     }
 
     /**

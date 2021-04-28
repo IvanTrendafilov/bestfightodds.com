@@ -157,7 +157,11 @@ class EventHandler
     public static function addNewEvent($a_oEvent)
     {
         if ($a_oEvent->getName() != '' && $a_oEvent->getDate() != '') {
-            return EventDB::addNewEvent($a_oEvent);
+            $id = EventDB::addNewEvent($a_oEvent);
+            if ($id != false && $id != null) {
+                return EventHandler::getEvent($id);
+            }
+            return false;
         }
         return false;
     }
@@ -313,9 +317,9 @@ class EventHandler
      *
      * Returns an associated array
      */
-    public static function getUnmatched($limit = 10)
+    public static function getUnmatched($limit = 10, $type = -1)
     {
-        $unmatches = EventDB::getUnmatched($limit);
+        $unmatches = EventDB::getUnmatched($limit, $type);
 
         //Before returning, unserialize the metadata field
         foreach ($unmatches as $key => $val) {
@@ -343,10 +347,7 @@ class EventHandler
         $event_obj = EventDB::getGenericEventForDate($date_str);
         if ($event_obj == null) {
             //No generic event was found, create it
-            $event_id = self::addNewEvent(new Event(0, $date_str, $date_str, true));
-            if ($event_id != false) {
-                $event_obj = self::getEvent($event_id);
-            }
+            $event_obj = self::addNewEvent(new Event(0, $date_str, $date_str, true));
         }
         return $event_obj;
     }

@@ -41,10 +41,10 @@ class OddsJob
 
     public function run()
     {
-        if (PARSE_CREATEMATCHUPS == true) {
+        /*if (PARSE_CREATEMATCHUPS == true) {
             //Check if there are changes proposed by scheduler AND logged as unmatched. These should be automatically created
             $matches = ScheduleHandler::getAllUnmatchedAndScheduled();
-        }
+        }*/
 
         //Clean and check alerts
         if (ALERTER_ENABLED == true) {

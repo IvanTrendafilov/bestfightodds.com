@@ -374,7 +374,7 @@ class PropParserV2
             }
 
             //Check if we found a match, then exit loop by setting Y. Kinda ugly..
-            if ($bFound == true && $iFoundMatchupID != null) {
+            if ($iFoundMatchupID != null) {
                 $iY = 3;
             }
         }

@@ -85,7 +85,7 @@ class ParserJob
                         $event_name = trim((string) $cKeyword);
                     }
                 }
-                if ($event_name != 'Submission Underground') {
+                if ($event_name != 'Submission Underground' && $event_name != 'BKFC') {
                     foreach ($cEvent->Markets->Market as $cMarket) {
                         if (((string) $cMarket['cname'] == 'fight-winner' || (string) $cMarket['cname'] == 'fight-winner-') && count($cMarket->Outcomes->Outcome) == 2) {
                             //Regular matchup

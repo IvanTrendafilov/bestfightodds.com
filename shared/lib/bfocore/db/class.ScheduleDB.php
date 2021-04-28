@@ -4,42 +4,51 @@ require_once('lib/bfocore/utils/db/class.DBTools.php');
 
 class ScheduleDB
 {
-	public static function storeManualAction($a_sMessage, $a_iType)
+	public static function storeManualAction($message, $type)
 	{
-		$sQuery = 'INSERT INTO schedule_manualactions(description, type) VALUES (?,?)';
-		$aParams = array($a_sMessage, $a_iType);
+		$query = 'INSERT INTO schedule_manualactions(description, type) VALUES (?,?)';
+		$params = array($message, $type);
 
-		return DBTools::doParamQuery($sQuery, $aParams);
+		return DBTools::doParamQuery($query, $params);
 	}
 
-	public static function getAllManualActions()
+	public static function getAllManualActions($type = -1)
 	{
-		$sQuery = 'SELECT id, description, type FROM schedule_manualactions';
-		$rResult = DBTools::doQuery($sQuery);
-
-		$aReturn = array();
-        while ($aRow = mysqli_fetch_array($rResult))
-        {
-        	$aReturn[] = $aRow;
+        $params = [];
+		$extra_where = '';
+        if ((1 <= $type) && ($type <= 8)) {
+            $extra_where = ' WHERE type = ? ';
+            $params[] = $type;
         }
-        if (sizeof($aReturn) == 0)
+
+		$query = 'SELECT id, description, type 
+					FROM schedule_manualactions
+					' . $extra_where . ' ';
+		$result = DBTools::doParamQuery($query, $params);
+
+		$return = array();
+        while ($row = mysqli_fetch_array($result))
+        {
+        	$return[] = $row;
+        }
+        if (sizeof($return) == 0)
         {
         	return false;
         }
-        return $aReturn;
+        return $return;
 	}
 
 	public static function clearAllManualActions()
 	{
-		$sQuery = 'TRUNCATE schedule_manualactions';
-		DBTools::doQuery($sQuery);
+		$query = 'TRUNCATE schedule_manualactions';
+		DBTools::doQuery($query);
 		return true;
 	}
 
-	public static function clearManualAction($a_iManualActionID)
+	public static function clearManualAction($action_id)
 	{
-		$sQuery = 'DELETE FROM schedule_manualactions WHERE id = ?';
-		DBTools::doParamQuery($sQuery, array($a_iManualActionID));
+		$query = 'DELETE FROM schedule_manualactions WHERE id = ?';
+		DBTools::doParamQuery($query, array($action_id));
 		return DBTools::getAffectedRows();
 	}
 }

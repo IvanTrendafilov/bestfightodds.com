@@ -45,15 +45,15 @@ class OddsProcessor
 
         $matched_matchups = $this->matchMatchups($parsed_sport->getParsedMatchups());
 
+        //Pending: For Create mode, create new matchups if no match was found
+        if (PARSE_CREATEMATCHUPS == true) {
+            $matched_matchups = $this->createUnmatchedMatchups($matched_matchups);
+        }
+
         $pp = new PropParserV2($this->logger, $this->bookie_id);
         $matched_props = $pp->matchProps($parsed_sport->getFetchedProps());
 
         $matched_props = $this->removeMatchedPropDupes($matched_props);
-
-        //Pending: For Create mode, create new matchups if no match was found
-        if (false && PARSE_CREATEMATCHUPS == true) {
-            $matched_matchups = $this->createUnmatchedMatchups($matched_matchups);
-        }
 
         $matchup_unmatched_count = $this->logUnmatchedMatchups($matched_matchups);
         $prop_unmatched_count = $pp->logUnmatchedProps($matched_props);
@@ -417,20 +417,24 @@ class OddsProcessor
     private function createUnmatchedMatchups($matched_matchups) 
     {
         $mc = new MatchupCreator($this->logger, $this->bookie_id);
-        foreach ($matched_matchups as $matchup) {
+        foreach ($matched_matchups as &$matchup) {
             if ($matchup['match_result']['status'] == false) {
 
                 $metadata = $matchup['parsed_matchup']->getAllMetaData();
-                if (!isset($metadata['event_name'], $metadata['gametime'])) {
-                    $this->logger->debug('Unable to evaluate matchup ' . $matchup['parsed_matchup']->getTeamName(1) . ' vs ' . $matchup['parsed_matchup']->getTeamName(2) . ' for creation due to missing metadata');
+                if (!isset($metadata['gametime'])) {
+                    $this->logger->debug('Unable to evaluate matchup ' . $matchup['parsed_matchup']->getTeamName(1) . ' vs ' . $matchup['parsed_matchup']->getTeamName(2) . ' for creation due to missing gametime');
                 }
                 else {
                     $team1 = $matchup['parsed_matchup']->getTeamName(1);
                     $team2 = $matchup['parsed_matchup']->getTeamName(2);
-                    $event_name = $metadata['event_name'];
+                    $event_name = $metadata['event_name'] ?? '';
                     $matchup_time = $metadata['gametime'];
                     $this->logger->debug('Evaluating matchup ' . $matchup['parsed_matchup']->getTeamName(1) . ' vs ' . $matchup['parsed_matchup']->getTeamName(2) . ' for creation');
-                    $mc->evaluateMatchup($team1, $team2, $event_name, $matchup_time);
+                    $created_matchup = $mc->evaluateMatchup($team1, $team2, $event_name, $matchup_time);
+                    if ($created_matchup != null) {
+                        $matchup['match_result']['status'] = true;
+                        $matchup['matched_matchup'] = $created_matchup;
+                    }
                 }
             }
         }

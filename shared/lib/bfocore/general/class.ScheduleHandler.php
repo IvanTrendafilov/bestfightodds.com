@@ -17,18 +17,18 @@ class ScheduleHandler
      * 7: Matchup to be deleted
      * 8: Matchup to be moved to a different not yet created event
      */
-	public static function storeManualAction($a_sMessage, $a_iType)
+	public static function storeManualAction($message, $type)
 	{
-		if ($a_sMessage == '' || !is_integer($a_iType))
+		if ($message == '' || !is_integer($type))
 		{
 			return false;
 		}
-		return ScheduleDB::storeManualAction($a_sMessage, $a_iType);
+		return ScheduleDB::storeManualAction($message, $type);
 	}
 
-	public static function getAllManualActions()
+	public static function getAllManualActions($type = -1)
 	{
-		return ScheduleDB::getAllManualActions();
+		return ScheduleDB::getAllManualActions($type);
 	}
 
 	public static function clearAllManualActions()
@@ -36,9 +36,9 @@ class ScheduleHandler
 		return ScheduleDB::clearAllManualActions();
 	}
 
-	public static function clearManualAction($a_iManualActionID)
+	public static function clearManualAction($action_id)
 	{
-		return ScheduleDB::clearManualAction($a_iManualActionID);
+		return ScheduleDB::clearManualAction($action_id);
 	}
 
 	/**
