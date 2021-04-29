@@ -54,10 +54,12 @@ class ParserJob
             //2. Bellator
             //3. Cage Warriors
             //4. Invicta
+            //5. PFL
             $urls = ['https://www.pinnacle.com/webapi/1.17/api/v1/GuestLines/Deadball/22/1624',
                     'https://www.pinnacle.com/webapi/1.17/api/v1/GuestLines/Deadball/22/1619',
                     'https://www.pinnacle.com/webapi/1.17/api/v1/GuestLines/Deadball/22/208746',
-                    'https://www.pinnacle.com/webapi/1.17/api/v1/GuestLines/Deadball/22/208187'];
+                    'https://www.pinnacle.com/webapi/1.17/api/v1/GuestLines/Deadball/22/208187',
+                    'https://www.pinnacle.com/webapi/1.17/api/v1/GuestLines/Deadball/22/207442'];
             ParseTools::retrieveMultiplePagesFromURLs($urls);
             foreach ($urls as $url)
             {
