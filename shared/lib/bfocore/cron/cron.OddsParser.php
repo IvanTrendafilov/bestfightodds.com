@@ -118,7 +118,7 @@ $oLogger->log("Old correlations cleaned: " . $iSuccess, 0);
 //Generate new front page with latest odds
 if (ALERTER_SITE_NAME == 'Pro Boxing Odds')
 {
-    //Generate new type of page (not applicable for PBO yet) - TODO: Ugly check to see if we are on BFO..
+    //Generate new type of page
     $plates = new League\Plates\Engine(GENERAL_BASEDIR . '/app/front/templates/');
     $aEvents = EventHandler::getAllUpcomingEvents();
 
