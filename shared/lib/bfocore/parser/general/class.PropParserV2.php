@@ -9,7 +9,6 @@ require_once('lib/bfocore/general/class.TeamHandler.php');
 
 class PropParserV2
 {
-
     private $logger;
     private $matchups;
     private $events;
