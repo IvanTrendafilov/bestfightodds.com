@@ -10,10 +10,16 @@ class Ruleset
         $event_name = strtoupper($event_name);
         $event_pieces = explode(' ', $event_name);
 
-        //BetOnline checks
         if ($bookie_obj->getName() == 'BetOnline') {
             $whitelisted_events = ['OKTAGON', 'LFA', 'CES', 'PFL', 'UFC', 'BELLATOR'];
             if (in_array($event_pieces[0], $whitelisted_events) || $event_name == 'FUTURE EVENTS') {
+                return true;
+            }
+        }
+
+        if ($bookie_obj->getName() == 'BetWay') {
+            $whitelisted_events = ['EFC'];
+            if (in_array($event_pieces[0], $whitelisted_events)) {
                 return true;
             }
         }
@@ -26,7 +32,6 @@ class Ruleset
         $event_name = strtoupper($event_name);
         $event_pieces = explode(' ', $event_name);
 
-        //BetOnline checks
         if ($bookie_obj->getName() == 'BetOnline') {
             $whitelisted_events = ['OKTAGON', 'LFA', 'CES', 'PFL', 'UFC', 'BELLATOR'];
             if (in_array($event_pieces[0], $whitelisted_events)) {
@@ -34,6 +39,13 @@ class Ruleset
                 if (preg_match('/\\d/', $event_name) > 0) {
                     return true;
                 }
+            }
+        }
+
+        if ($bookie_obj->getName() == 'BetWay') {
+            $whitelisted_events = ['EFC'];
+            if (in_array($event_pieces[0], $whitelisted_events)) {
+                return true;
             }
         }
 
