@@ -5,7 +5,25 @@
 require_once('config/inc.config.php');
 require_once('lib/bfocore/utils/pagegen/class.PageGenerator.php');
 
-PageGenerator::generatePage(PARSE_GENERATORDIR . 'gen.EventXMLSitemap.php',  PARSE_PAGEDIR . 'sitemap-events.xml');
-PageGenerator::generatePage(PARSE_GENERATORDIR . 'gen.TeamXMLSitemap.php',  PARSE_PAGEDIR . 'sitemap-teams.xml');
+generatePage(PARSE_GENERATORDIR . 'gen.EventXMLSitemap.php',  PARSE_PAGEDIR . 'sitemap-events.xml');
+generatePage(PARSE_GENERATORDIR . 'gen.TeamXMLSitemap.php',  PARSE_PAGEDIR . 'sitemap-teams.xml');
 
-?>
+function generatePage($generator_file, $target_file)
+{
+    if ($generator_file == null || $target_file == null || !file_exists($generator_file))
+    {
+        return null;
+    }
+
+    ob_start();
+    include_once($generator_file);
+    $buffer = ob_get_clean();
+    if (strlen($buffer) > 200)
+    {
+        $page = fopen($target_file, 'w');
+        fwrite($page, $buffer);
+        fclose($page);
+        return true;
+    }
+    return false;
+}

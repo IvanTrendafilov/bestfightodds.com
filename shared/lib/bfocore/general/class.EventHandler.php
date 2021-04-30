@@ -114,19 +114,30 @@ class EventHandler
 
     public static function addNewFightOdds($odds_obj)
     {
+        //Validate input
         if (
-            $odds_obj->getFightID() != '' && is_numeric($odds_obj->getFightID()) &&
-            $odds_obj->getBookieID() != '' && is_numeric($odds_obj->getBookieID()) &&
-            $odds_obj->getFighterOdds(1) != '' && is_numeric($odds_obj->getFighterOdds(1)) &&
-            $odds_obj->getFighterOdds(2) != '' && is_numeric($odds_obj->getFighterOdds(2)) &&
-            !(intval($odds_obj->getFighterOdds(1)) >= -99 && intval($odds_obj->getFighterOdds(1) <= 99)) &&
-            !(intval($odds_obj->getFighterOdds(2)) >= -99 && intval($odds_obj->getFighterOdds(2) <= 99))
+            $odds_obj->getFightID() == '' || !is_numeric($odds_obj->getFightID()) ||
+            $odds_obj->getBookieID() == '' || !is_numeric($odds_obj->getBookieID()) ||
+            $odds_obj->getFighterOdds(1) == '' || !is_numeric($odds_obj->getFighterOdds(1)) ||
+            $odds_obj->getFighterOdds(2) == '' || !is_numeric($odds_obj->getFighterOdds(2))
         ) {
-            EventDB::addNewFightOdds($odds_obj);
-            return true;
-        } else {
             return false;
         }
+        //Validate that odds is not in range -99 => +99
+        if (
+            (intval($odds_obj->getFighterOdds(1)) >= -99 && intval($odds_obj->getFighterOdds(1) <= 99)) ||
+            (intval($odds_obj->getFighterOdds(2)) >= -99 && intval($odds_obj->getFighterOdds(2) <= 99))
+        ) {
+            return false;
+        }
+
+        //Validate that odds is not positive on both sides (=surebet, most likely invalid)
+        if (intval($odds_obj->getFighterOdds(1)) >= 0 && intval($odds_obj->getFighterOdds(2) >= 0)
+        ) {
+            return false;
+        }
+
+        return EventDB::addNewFightOdds($odds_obj);
     }
 
     public static function addNewFight($a_oFight)
@@ -154,14 +165,22 @@ class EventHandler
         return EventDB::addNewFighter($a_sFighterName);
     }
 
-    public static function addNewEvent($a_oEvent)
+    public static function addNewEvent($event)
     {
-        if ($a_oEvent->getName() != '' && $a_oEvent->getDate() != '') {
-            $id = EventDB::addNewEvent($a_oEvent);
-            if ($id != false && $id != null) {
-                return EventHandler::getEvent($id);
-            }
+        if ($event->getName() == '' || $event->getDate() == '') {
             return false;
+        }
+
+        //Validate date
+        $dt = DateTime::createFromFormat("Y-m-d", $event->getDate());
+        if ($dt === false || array_sum($dt::getLastErrors()) > 0) {
+
+            return false;
+        }
+
+        $id = EventDB::addNewEvent($event);
+        if ($id != false && $id != null) {
+            return EventHandler::getEvent($id);
         }
         return false;
     }

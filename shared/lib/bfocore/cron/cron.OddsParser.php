@@ -110,55 +110,42 @@ $oLogger->log("Deleting page cache: " . $bCacheDeleted, ($bCacheDeleted ? 0 : -2
 CacheControl::cleanPageCacheWC('graphdata-*');
 $oLogger->log("Deleting graph cache", 0);
 
-
 //Cleanup old correlations
 $iSuccess = OddsHandler::cleanCorrelations();
 $oLogger->log("Old correlations cleaned: " . $iSuccess, 0);
 
-//Generate new front page with latest odds
-if (ALERTER_SITE_NAME == 'Pro Boxing Odds')
-{
-    //Generate new type of page
-    $plates = new League\Plates\Engine(GENERAL_BASEDIR . '/app/front/templates/');
-    $aEvents = EventHandler::getAllUpcomingEvents();
+//Generate new type of page
+$plates = new League\Plates\Engine(GENERAL_BASEDIR . '/app/front/templates/');
+$aEvents = EventHandler::getAllUpcomingEvents();
 
-    $view_data = [];
-    $view_data['bookies'] = BookieHandler::getAllBookies();
-    $view_data['events'] = [];
-    foreach ($aEvents as $oEvent)
+$view_data = [];
+$view_data['bookies'] = BookieHandler::getAllBookies();
+$view_data['events'] = [];
+foreach ($aEvents as $oEvent)
+{
+    if ($oEvent->isDisplayed())
     {
-        if ($oEvent->isDisplayed())
+        $event_data = OddsHandler::getEventViewData($oEvent->getID());
+        if (count($event_data['matchups']) > 0)
         {
-            $event_data = OddsHandler::getEventViewData($oEvent->getID());
-            if (count($event_data['matchups']) > 0)
-            {
-                $view_data['events'][] = $event_data;
-            }
+            $view_data['events'][] = $event_data;
         }
     }
-    $rendered_page = $plates->render('gen_oddspage', $view_data);
-    $rPage = fopen(PARSE_PAGEDIR . 'oddspage.php', 'w');
-    if ($rPage != null)
-    {
-        //Minify
-        $rendered_page = preg_replace('/\>\s+\</m', '><', $rendered_page);
-        fwrite($rPage, $rendered_page);
-        fclose($rPage);
-        $oLogger->log("Plates odds page (oddspage) generated: 1");
-    }
-    else
-    {
-        $oLogger->log("Failed to generate odds page (oddspage)");
-    }
+}
+$rendered_page = $plates->render('gen_oddspage', $view_data);
+$rPage = fopen(PARSE_PAGEDIR . 'oddspage.php', 'w');
+if ($rPage != null)
+{
+    //Minify
+    $rendered_page = preg_replace('/\>\s+\</m', '><', $rendered_page);
+    fwrite($rPage, $rendered_page);
+    fclose($rPage);
+    $oLogger->log("Plates odds page (oddspage) generated: 1");
 }
 else
 {
-    //Old way using PageGenerator   
-    $bSuccess = PageGenerator::generatePage(PARSE_GENERATORDIR . 'gen.Bets.php', PARSE_PAGEDIR . 'page.odds.php');
-    $oLogger->log("Odds page generated: " . $bSuccess, ($bSuccess ? 0 : -2));
+    $oLogger->log("Failed to generate odds page (oddspage)");
 }
-
-
 
 //Tweet new fight odds
 if (TWITTER_ENABLED == true)

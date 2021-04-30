@@ -1,6 +1,7 @@
 <?php
 
 require_once('lib/bfocore/utils/db/class.DBTools.php');
+require_once('lib/bfocore/utils/db/class.PDOTools.php');
 require_once('lib/bfocore/general/inc.GlobalTypes.php');
 require_once('lib/bfocore/utils/class.OddsTools.php');
 
@@ -504,6 +505,7 @@ class EventDB
 
     public static function addNewFightOdds($fightodds_obj)
     {
+        //TODO: This query should be updated to check for valid value from fights and bookie table
         $query = 'INSERT INTO fightodds(fight_id, fighter1_odds, fighter2_odds, bookie_id, date)
                         VALUES(?, ?, ?, ?, NOW())';
 
