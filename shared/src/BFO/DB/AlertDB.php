@@ -6,7 +6,6 @@ use BFO\DataTypes\Alert;
 use BFO\General\EventHandler;
 
 use BFO\Utils\DB\DBTools;
-use BFO\Utils\DB\PDOTools;
 
 class AlertDB
 {

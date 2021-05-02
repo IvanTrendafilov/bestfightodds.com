@@ -29,9 +29,9 @@ class OddsDB
             $id = PDOTools::insert($sQuery, $aParams);
         } catch (\PDOException $e) {
             if ($e->getCode() == 23000) {
-                throw new Exception("Duplicate entry", 10);
+                throw new \Exception("Duplicate entry", 10);
             } else {
-                throw new Exception("Unknown error " . $e->getMessage(), 10);
+                throw new \Exception("Unknown error " . $e->getMessage(), 10);
             }
             return false;
         }
@@ -1069,7 +1069,7 @@ class OddsDB
     public static function flagOddsForDeletion($a_iBookieID, $a_iMatchupID = null, $a_iEventID = null, $a_iPropTypeID = null, $a_iTeamNum = null)
     {
         if (!is_numeric($a_iBookieID) || ($a_iMatchupID == null && $a_iEventID == null)) {
-            throw new Exception("Invalid input", 10);
+            throw new \Exception("Invalid input", 10);
         }
 
         $sQuery = 'INSERT INTO lines_flagged(bookie_id, matchup_id, event_id, proptype_id, team_num, initial_flagdate, last_flagdate) VALUES (?,?,?,?,?, NOW(), NOW()) ON DUPLICATE KEY UPDATE last_flagdate = NOW()';
@@ -1080,9 +1080,9 @@ class OddsDB
             $id = PDOTools::insert($sQuery, $aParams);
         } catch (\PDOException $e) {
             if ($e->getCode() == 23000) {
-                throw new Exception("Duplicate entry", 10);
+                throw new \Exception("Duplicate entry", 10);
             } else {
-                throw new Exception("Unknown error " . $e->getMessage(), 10);
+                throw new \Exception("Unknown error " . $e->getMessage(), 10);
             }
         }
         return $id;
@@ -1103,7 +1103,7 @@ class OddsDB
         try {
             $result = PDOTools::findMany($sQuery, $aParams);
         } catch (\PDOException $e) {
-            throw new Exception("Unknown error " . $e->getMessage(), 10);
+            throw new \Exception("Unknown error " . $e->getMessage(), 10);
         }
         return $result;
     }
@@ -1123,7 +1123,7 @@ class OddsDB
         try {
             $result = PDOTools::delete($sQuery, $aParams);
         } catch (\PDOException $e) {
-            throw new Exception("Unknown error " . $e->getMessage(), 10);
+            throw new \Exception("Unknown error " . $e->getMessage(), 10);
         }
         return $result;
     }
@@ -1138,7 +1138,7 @@ class OddsDB
         try {
             $result = PDOTools::delete($query, []);
         } catch (\PDOException $e) {
-            throw new Exception("Unknown error " . $e->getMessage(), 10);
+            throw new \Exception("Unknown error " . $e->getMessage(), 10);
         }
         return $result;
     }
@@ -1159,7 +1159,7 @@ class OddsDB
         try {
             $result = PDOTools::findMany($query);
         } catch (\PDOException $e) {
-            throw new Exception("Unknown error " . $e->getMessage(), 10);
+            throw new \Exception("Unknown error " . $e->getMessage(), 10);
         }
         return $result;
     }
@@ -1185,7 +1185,7 @@ class OddsDB
         try {
             $result = PDOTools::findMany($query, []);
         } catch (\PDOException $e) {
-            throw new Exception("Unknown error " . $e->getMessage(), 10);
+            throw new \Exception("Unknown error " . $e->getMessage(), 10);
         }
 
         $flagged_odds = [
@@ -1249,7 +1249,7 @@ class OddsDB
         try {
             $ret = PDOTools::findMany($sQuery, $aParams);
         } catch (\PDOException $e) {
-            throw new Exception("Unknown error " . $e->getMessage(), 10);
+            throw new \Exception("Unknown error " . $e->getMessage(), 10);
             return false;
         }
         return $ret;
@@ -1285,7 +1285,7 @@ class OddsDB
         try {
             $ret = PDOTools::findMany($sQuery, $aParams);
         } catch (\PDOException $e) {
-            throw new Exception("Unknown error " . $e->getMessage(), 10);
+            throw new \Exception("Unknown error " . $e->getMessage(), 10);
             return false;
         }
         return $ret;
@@ -1320,7 +1320,7 @@ class OddsDB
         try {
             $ret = PDOTools::findMany($sQuery, $aParams);
         } catch (\PDOException $e) {
-            throw new Exception("Unknown error " . $e->getMessage(), 10);
+            throw new \Exception("Unknown error " . $e->getMessage(), 10);
             return false;
         }
         return $ret;

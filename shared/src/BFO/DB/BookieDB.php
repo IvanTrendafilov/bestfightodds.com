@@ -4,7 +4,6 @@ namespace BFO\DB;
 
 use BFO\Utils\DB\DBTools;
 use BFO\Utils\DB\PDOTools;
-
 use BFO\DataTypes\Bookie;
 use BFO\DataTypes\BookieParser;
 use BFO\DataTypes\PropTemplate;

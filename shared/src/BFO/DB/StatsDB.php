@@ -14,7 +14,7 @@ class StatsDB
         if ($matchup_id == null) {
             return false;
         }
- 
+
         $query = '';
         $params = [];
 
@@ -35,7 +35,7 @@ class StatsDB
                             FROM fightodds m1 LEFT JOIN fightodds m2
                                 ON (m1.fight_id = m2.fight_id AND m1.bookie_id = m2.bookie_id AND m1.date < m2.date)
                                 WHERE m2.date IS NULL AND m1.fight_id = ?) f1) latest)';
-                                
+
             $params[] = $matchup_id;
             $params[] = $matchup_id;
         } else {
@@ -97,7 +97,7 @@ class StatsDB
                             FROM fightodds m1 LEFT JOIN fightodds m2
                                 ON (m1.fight_id = m2.fight_id AND m1.bookie_id = m2.bookie_id AND m1.date < m2.date)
                                 WHERE m2.date IS NULL AND m1.fight_id = ?) f1) latest)';
-                                
+
             $params[] = $matchup_id;
             $params[] = $matchup_id;
             $params[] = $matchup_id;
@@ -105,23 +105,20 @@ class StatsDB
         }
 
         $row = PDOTools::findOne($query, $params);
-        /* var_dump($result);
-         exit;
 
-         $result = DBTools::doParamQuery($query, $params);
-
-         if ($row = mysqli_fetch_array($result))
-         {*/
         if ($row) {
-            return array('f1' => array(
-                            'opening' => $row->opf1,
-                            'latest' => $row->laf1,
-                            'swing' => $row->f1swing),
-                    'f2' => array(
-                            'opening' => $row->opf2,
-                            'latest' => $row->laf2,
-                            'swing' => $row->f2swing
-                        ));
+            return array(
+                'f1' => array(
+                    'opening' => $row->opf1,
+                    'latest' => $row->laf1,
+                    'swing' => $row->f1swing
+                ),
+                'f2' => array(
+                    'opening' => $row->opf2,
+                    'latest' => $row->laf2,
+                    'swing' => $row->f2swing
+                )
+            );
         }
         return false;
     }

@@ -10,20 +10,20 @@ class AlertsModel
     {
         //Validate input
         if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
-            throw new Exception("Invalid e-mail format", 30);
+            throw new \Exception("Invalid e-mail format", 30);
         }
         if (!$this->isJson($criterias) || strlen($criterias) > 1000) {
-            throw new Exception("Invalid criterias", 20);
+            throw new \Exception("Invalid criterias", 20);
         }
         if (!is_int($oddstype) || ($oddstype > 4 || $oddstype < 1)) {
-            throw new Exception("Invalid odds type", 40);
+            throw new \Exception("Invalid odds type", 40);
         }
 
         //Validate proper combinations
         $json = json_decode($criterias, true);
         if (!(isset($criterias['matchup_id']) && isset($criterias['team_num'])
             || !(isset($criterias['proptype_id']) && (isset($criterias['matchup_id']) || isset($criterias['event_id']))))) {
-            throw new Exception("Invalid field combinations", 50);
+            throw new \Exception("Invalid field combinations", 50);
         }
 
         //Validate event/matchup/proptype_id (maybe)
@@ -33,9 +33,9 @@ class AlertsModel
         $id = null;
         try {
             $id = PDOTools::insert($query, $params);
-        } catch (PDOException $e) {
+        } catch (\PDOException $e) {
             if ($e->getCode() == 23000) {
-                throw new Exception("Duplicate entry", 10);
+                throw new \Exception("Duplicate entry", 10);
             }
         }
         return $id;
@@ -44,7 +44,7 @@ class AlertsModel
     public function deleteAlert($id)
     {
         if (!is_int($id)) {
-            throw new Exception("Invalid ID", 10);
+            throw new \Exception("Invalid ID", 10);
         }
         $query = "DELETE FROM alerts_entries WHERE id = ?";
         $params = [$id];

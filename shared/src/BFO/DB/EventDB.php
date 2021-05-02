@@ -5,7 +5,6 @@ namespace BFO\DB;
 use BFO\Utils\DB\DBTools;
 use BFO\Utils\DB\PDOTools;
 use BFO\Utils\OddsTools;
-
 use BFO\DataTypes\Event;
 use BFO\DataTypes\Fight;
 use BFO\DataTypes\FightOdds;
@@ -515,11 +514,11 @@ class EventDB
 
         try {
             $id = PDOTools::insert($query, $params);
-        } catch (PDOException $e) {
+        } catch (\PDOException $e) {
             if ($e->getCode() == 23000) {
-                throw new Exception("Duplicate entry", 10);
+                throw new \Exception("Duplicate entry", 10);
             } else {
-                throw new Exception("Unknown error " . $e->getMessage(), 10);
+                throw new \Exception("Unknown error " . $e->getMessage(), 10);
             }
             return false;
         }
@@ -537,11 +536,11 @@ class EventDB
                         VALUES(?, \'\')';
         try {
             $id = PDOTools::insert($query, $params);
-        } catch (PDOException $e) {
+        } catch (\PDOException $e) {
             if ($e->getCode() == 23000) {
-                throw new Exception("Duplicate entry", 10);
+                throw new \Exception("Duplicate entry", 10);
             } else {
-                throw new Exception("Unknown error " . $e->getMessage(), 10);
+                throw new \Exception("Unknown error " . $e->getMessage(), 10);
             }
             return false;
         }
@@ -562,11 +561,11 @@ class EventDB
 
         try {
             $id = PDOTools::insert($query, $params);
-        } catch (PDOException $e) {
+        } catch (\PDOException $e) {
             if ($e->getCode() == 23000) {
-                throw new Exception("Duplicate entry", 10);
+                throw new \Exception("Duplicate entry", 10);
             } else {
-                throw new Exception("Unknown error " . $e->getMessage(), 10);
+                throw new \Exception("Unknown error " . $e->getMessage(), 10);
             }
             return false;
         }
