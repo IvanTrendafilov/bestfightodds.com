@@ -25,7 +25,7 @@ class DBTools
      * Executes a query without any parameters
      *
      * @param string $a_sQuery Query to execute
-     * @return Resource Query results
+     * @return \mysqli_result Query results
      */
     public static function doQuery($a_sQuery)
     {
@@ -53,7 +53,7 @@ class DBTools
      *
      * @param string $a_sQuery Query to execute
      * @param array $aParams Parameters to include
-     * @return Resource Query results
+     * @return \mysqli_result Query results
      */
     public static function doParamQuery($a_sQuery, $a_aParams)
     {
@@ -119,7 +119,7 @@ class DBTools
      * Retrieves a previously cached query
      *
      * @param string $a_sQuery Query to find cached
-     * @return Resource The cached query or false if it could not be found
+     * @return \mysqli_result The cached query or false if it could not be found
      */
     public static function getCachedQuery($a_sQuery)
     {

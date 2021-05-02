@@ -1,7 +1,9 @@
 <?php
 
-require_once('lib/bfocore/parser/utils/class.ParseTools.php');
-require_once('lib/bfocore/parser/general/class.ParsedMoneyline.php');
+namespace BFO\Parser;
+
+use BFO\Parser\ParsedMoneyline;
+use BFO\Parser\Utils\ParseTools;
 
 class ParsedMatchup
 {

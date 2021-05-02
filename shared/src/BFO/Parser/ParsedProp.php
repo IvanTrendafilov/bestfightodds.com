@@ -1,6 +1,6 @@
 <?php
 
-require_once('lib/bfocore/parser/general/class.ParsedMatchup.php');
+namespace BFO\Parser;
 
 class ParsedProp extends ParsedMatchup
 {

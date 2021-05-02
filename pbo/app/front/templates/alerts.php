@@ -1,11 +1,5 @@
 <?php $this->layout('template', ['title' => 'Alerts', 'current_page' => 'alerts']) ?>
 
-<?php
-require_once('lib/bfocore/general/class.EventHandler.php');
-require_once('lib/bfocore/general/class.BookieHandler.php');
-require_once('lib/bfocore/general/inc.GlobalTypes.php');
-?>
-
 <div id="page-wrapper" style="max-width: 800px;">
     <div id="page-container">
         <div id="page-inner-wrapper">

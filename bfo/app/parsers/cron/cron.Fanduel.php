@@ -17,9 +17,15 @@
  *
  */
 
-require_once 'config/inc.config.php';
-require_once 'vendor/autoload.php';
-require_once 'lib/bfocore/parser/general/inc.ParserMain.php';
+require_once __DIR__ . "/../../../bootstrap.php";
+require_once __DIR__ . "/../../../config/class.Ruleset.php";
+
+use BFO\Parser\Utils\ParseTools;
+use BFO\Utils\OddsTools;
+use BFO\Parser\OddsProcessor;
+use BFO\Parser\ParsedSport;
+use BFO\Parser\ParsedMatchup;
+use BFO\Parser\ParsedProp;
 
 use Symfony\Component\Panther\Client;
 use Respect\Validation\Validator as v;
@@ -53,7 +59,7 @@ class ParserJob
 
         $parsed_sport = $this->parseContent($content);
 
-        $op = new OddsProcessor($this->logger, BOOKIE_ID);
+        $op = new OddsProcessor($this->logger, BOOKIE_ID, new Ruleset());
         $op->processParsedSport($parsed_sport, $this->full_run);
 
         $this->logger->info('Finished');
@@ -111,7 +117,7 @@ class ParserJob
                         $date = new DateTime($event_node->filter('div.time')->text());
                         
 
-                        if (strpos(strtoupper($date), 'LIVE') !== false) 
+                        if (strpos(strtoupper($event_node->filter('div.time')->text()), 'LIVE') !== false) 
                         {
                             $this->logger->info('Live event, will skip : ' . $date);    
                         }

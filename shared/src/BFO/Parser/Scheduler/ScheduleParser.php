@@ -1,8 +1,10 @@
 <?php
 
-require_once('lib/bfocore/general/class.EventHandler.php');
-require_once('lib/bfocore/general/class.ScheduleHandler.php');
-require_once('config/inc.config.php');
+namespace BFO\Parser\Scheduler;
+
+use BFO\General\EventHandler;
+use BFO\General\ScheduleHandler;
+use BFO\DataTypes\Fight;
 
 class ScheduleParser
 {

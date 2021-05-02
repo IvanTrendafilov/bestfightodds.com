@@ -1,6 +1,6 @@
 <?php
 
-require_once('config/inc.config.php');
+namespace BFO\Parser\Utils;
 
 /**
  * Singleton logging class used when parsing data.

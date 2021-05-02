@@ -1,8 +1,15 @@
 <?php
 
-require_once('lib/bfocore/general/class.BookieHandler.php');
-require_once('lib/bfocore/general/class.ScheduleHandler.php');
-require_once('config/class.RuleSet.php');
+namespace BFO\Parser;
+
+use BFO\General\BookieHandler;
+use BFO\General\ScheduleHandler;
+use BFO\General\EventHandler;
+use BFO\Utils\OddsTools;
+
+use BFO\DataTypes\Fight;
+use BFO\DataTypes\Event;
+use BFO\Parser\RulesetInterface;
 
 //Create matchup: If bookie has odds for other matchups on this event (and event name and date matches)
 //Create event and matchups: If matching whitelisting criteria (site specific). E.g. BFO, BetOnline and OKTAGON
@@ -20,14 +27,15 @@ class MatchupCreator
     private $audit_log = null;
     private $manual_actions_create_events = null;
     private $manual_actions_create_matchups = null;
+    private $creation_ruleset = null;
 
-    public function __construct(object $logger, int $bookie_id)
+    public function __construct(object $logger, int $bookie_id, RulesetInterface $creation_ruleset)
     {
         $this->logger = $logger;
         $this->bookie_obj = BookieHandler::getBookieByID($bookie_id);
-        $this->ruleset = new RuleSet();
+        $this->creation_ruleset = $creation_ruleset;
 
-        $this->audit_log = new Katzgrau\KLogger\Logger(GENERAL_KLOGDIR, Psr\Log\LogLevel::INFO, ['filename' => 'changeaudit.log']);
+        $this->audit_log = new \Katzgrau\KLogger\Logger(GENERAL_KLOGDIR, \Psr\Log\LogLevel::INFO, ['filename' => 'changeaudit.log']);
 
         //Prefetch manual actions that we will check against later on
         $this->manual_actions_create_events = ScheduleHandler::getAllManualActions(1);
@@ -50,11 +58,11 @@ class MatchupCreator
 
         $this->logger->info("Evaluating if " . $team1 . " vs " . $team2 . " at " . $event_name . " on " . $matchup_time . " can be created..");
 
-        $approved_by_ruleset = $this->ruleset->evaluateMatchup($this->bookie_obj, $team1, $team2, $event_name, $matchup_time);
+        $approved_by_ruleset = $this->creation_ruleset->evaluateMatchup($this->bookie_obj, $team1, $team2, $event_name, $matchup_time);
         $in_scheduler = $this->matchupProposedBySchedule($team1, $team2);
 
         if (($approved_by_ruleset || $in_scheduler['found']) && isset($event_name, $matchup_time)) {
-            $date_obj = new DateTime();
+            $date_obj = new \DateTime();
             $date_obj = $date_obj->setTimestamp($matchup_time);
 
             $matched_event = $this->getMatchingEvent($event_name, $date_obj, $in_scheduler);
@@ -157,12 +165,12 @@ class MatchupCreator
     private function tryToCreateEvent(string $event_name, string $matchup_time, object $date_obj, array $in_scheduler)
     {
         //Check that ruleset allows for creation of this event
-        $approved_by_ruleset = $this->ruleset->evaluateEvent($this->bookie_obj, $event_name, $matchup_time);
+        $approved_by_ruleset = $this->creation_ruleset->evaluateEvent($this->bookie_obj, $event_name, $matchup_time);
 
         //Note: Blessing can also come from the scheduler (if event is scheduled)
 
         //Check that date is not in the past
-        $current_date = new DateTime();
+        $current_date = new \DateTime();
         if (($approved_by_ruleset && $date_obj > $current_date) || ($in_scheduler['found'] && $in_scheduler['event_name'] != null && $in_scheduler['event_date'] != null)) { //Create event either if ruleset allows it or if the scheduler has it planned
 
             $new_event = null;
@@ -190,7 +198,7 @@ class MatchupCreator
     private function createMatchup(string $team1, string $team2, object $matched_event, object $date_obj, array $in_scheduler)
     {
         //Check that date is not in the past
-        if ($date_obj > new DateTime()) {
+        if ($date_obj > new \DateTime()) {
             $new_matchup = null;
             if ($in_scheduler['found'] && $in_scheduler['team1'] != null && $in_scheduler['team2'] != null) {
                 //Found in scheduler as well, use names from scheduler instead since they are more accurate

@@ -1,9 +1,15 @@
 <?php
 
-require 'vendor/autoload.php';
-require_once('lib/bfocore/parser/general/inc.ParserMain.php');
-require_once('config/inc.config.php');
+namespace BFO\Parser;
 
+use BFO\Parser\Utils\ParseRunLogger;
+use BFO\Parser\Utils\Logger;
+use BFO\General\BookieHandler;
+use BFO\General\OddsHandler;
+use BFO\Parser\Utils\ParseTools;
+use BFO\General\EventHandler;
+use BFO\DataTypes\Fight;
+use BFO\DataTypes\FightOdds;
 
 /**
  * Main XML parser
@@ -19,14 +25,14 @@ class XMLParser
      * Retrieves the feed from the bookie and launches the bookie specific XML parser. The
      * result is then passed to the parseEvents function to store the new odds.
      *
-     * @param string $a_oParser BookieParser object
+     * @param Object $a_oParser BookieParser object
      * @return boolean If dispatch was successful or not
      *
      */
     public static function dispatch($a_oParser)
     {
         if (self::$klogger == null) {
-            self::$klogger = new Katzgrau\KLogger\Logger(GENERAL_KLOGDIR, Psr\Log\LogLevel::DEBUG, ['filename' => 'xmlparser.log']);
+            self::$klogger = new \Katzgrau\KLogger\Logger(GENERAL_KLOGDIR, \Psr\Log\LogLevel::DEBUG, ['filename' => 'xmlparser.log']);
         }
 
         $aAuthorativeMetadata = [];

@@ -1,11 +1,16 @@
 <?php
 
-require_once('lib/bfocore/general/class.BookieHandler.php');
-require_once('lib/bfocore/general/inc.GlobalTypes.php');
-require_once('lib/bfocore/parser/general/class.ParsedProp.php');
-require_once('lib/bfocore/parser/utils/class.Logger.php');
-require_once('lib/bfocore/general/class.EventHandler.php');
-require_once('lib/bfocore/general/class.TeamHandler.php');
+namespace BFO\Parser;
+
+use BFO\General\BookieHandler;
+use BFO\General\OddsHandler;
+use BFO\Parser\Utils\Logger;
+use BFO\Parser\Utils\ParseTools;
+use BFO\General\EventHandler;
+use BFO\General\TeamHandler;
+use BFO\DataTypes\PropBet;
+use BFO\DataTypes\EventPropBet;
+use BFO\DataTypes\Fight;
 
 class PropParser
 {

@@ -12,11 +12,14 @@
  *
  */
 
-require_once 'config/inc.config.php';
-require_once 'vendor/autoload.php';
-require_once 'lib/bfocore/parser/general/inc.ParserMain.php';
+require_once __DIR__ . "/../../../bootstrap.php";
+require_once __DIR__ . "/../../../config/class.Ruleset.php";
 
-use Respect\Validation\Validator as v;
+use BFO\Parser\Utils\ParseTools;
+use BFO\Parser\OddsProcessor;
+use BFO\Parser\ParsedSport;
+use BFO\Parser\ParsedMatchup;
+use BFO\Parser\ParsedProp;
 
 define('BOOKIE_NAME', 'pinnacle');
 define('BOOKIE_ID', '9');
@@ -72,7 +75,7 @@ class ParserJob
 
         try 
         {
-            $op = new OddsProcessor($this->logger, BOOKIE_ID);
+            $op = new OddsProcessor($this->logger, BOOKIE_ID, new Ruleset());
             $op->processParsedSport($parsed_sport, $this->full_run);
         }
         catch (Exception $e)

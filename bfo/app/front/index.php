@@ -11,10 +11,11 @@ use Psr\Http\Server\RequestHandlerInterface as RequestHandler;
 use League\Plates\Engine;
 use Psr\Http\Message\ServerRequestInterface;
 use Slim\Psr7\Response;
+use Psr\Log\LoggerInterface;
 
 require_once __DIR__ . "/../../bootstrap.php";
-require __DIR__ . "/../../../shared/app/front/controllers/controller.php";
-require __DIR__ . "/../../../shared/app/front/controllers/api_controller.php";
+require_once __DIR__ . "/../../../shared/app/front/controllers/controller.php";
+require_once __DIR__ . "/../../../shared/app/front/controllers/api_controller.php";
 
 $container = (new \DI\ContainerBuilder())
   ->useAutowiring(true)
@@ -51,13 +52,13 @@ $customErrorHandler = function (
   ?LoggerInterface $logger = null
 ) use ($app) {
   $response = $app->getResponseFactory()->createResponse();
-  $response->getBody()->write('Error ' . $exception->getMessage() . $exception->getCode());
+  $response->getBody()->write('Error ' . $exception->getCode());
   return $response;
 };
 
 // Add Error Middleware
-/*$errorMiddleware = $app->addErrorMiddleware(true, true, true, null);
-$errorMiddleware->setDefaultErrorHandler($customErrorHandler);*/
+$errorMiddleware = $app->addErrorMiddleware(true, true, true, null);
+$errorMiddleware->setDefaultErrorHandler($customErrorHandler);
 
 //Page routes
 $app->group('', function (RouteCollectorProxy $group) {

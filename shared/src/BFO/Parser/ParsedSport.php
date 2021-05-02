@@ -1,7 +1,6 @@
 <?php
 
-require_once('lib/bfocore/parser/general/class.ParsedMatchup.php');
-require_once('lib/bfocore/parser/utils/class.ParseTools.php');
+namespace BFO\Parser;
 
 class ParsedSport
 {

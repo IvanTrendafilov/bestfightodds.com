@@ -17,9 +17,14 @@
  *
  */
 
-require_once 'config/inc.config.php';
-require_once 'vendor/autoload.php';
-require_once 'lib/bfocore/parser/general/inc.ParserMain.php';
+require_once __DIR__ . "/../../../bootstrap.php";
+require_once __DIR__ . "/../../../config/class.Ruleset.php";
+
+use BFO\Parser\Utils\ParseTools;
+use BFO\Utils\OddsTools;
+use BFO\Parser\OddsProcessor;
+use BFO\Parser\ParsedSport;
+use BFO\Parser\ParsedMatchup;
 
 use Symfony\Component\Panther\Client;
 use Respect\Validation\Validator as v;
@@ -53,7 +58,7 @@ class ParserJob
 
         $parsed_sport = $this->parseContent($content);
 
-        $op = new OddsProcessor($this->logger, BOOKIE_ID);
+        $op = new OddsProcessor($this->logger, BOOKIE_ID, new Ruleset());
         $op->processParsedSport($parsed_sport, $this->full_run);
 
         $this->logger->info('Finished');

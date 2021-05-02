@@ -9,8 +9,7 @@ Each prop type can in turn be assigned to a specific category.
 The purpose of prop categories is to be able to use these when generating pre fight report and eventually also for alerts */
 
 use BFO\Utils\DB\PDOTools;
-require_once('lib/bfocore/general/inc.GlobalTypes.php');
-
+use BFO\DataTypes\PropType;
 
 class PropTypeDB
 {
@@ -44,9 +43,9 @@ class PropTypeDB
         $params = [$proptype_id, $category_id];
         try {
             $id = PDOTools::insert($query, $params);
-        } catch (PDOException $e) {
+        } catch (\PDOException $e) {
             if ($e->getCode() == 23000) {
-                throw new Exception("Duplicate entry", 10);
+                throw new \Exception("Duplicate entry", 10);
             }
         }
         return $id;

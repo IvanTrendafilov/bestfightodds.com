@@ -1,10 +1,12 @@
 <?php
 
+namespace BFO\Parser\Utils;
+
 /*
  * The purpose of this class is to provide logging of any parsing runs that have been made. Logged runs are simply stored in the database for later analysis and monitoring
  */
 
-require_once('lib/bfocore/utils/db/class.PDOTools.php');
+use BFO\Utils\DB\PDOTools;
 
 class ParseRunLogger
 {
@@ -35,9 +37,9 @@ class ParseRunLogger
         $id = null;
         try {
             $id = PDOTools::insert($query, $params);
-        } catch (PDOException $e) {
+        } catch (\PDOException $e) {
             if ($e->getCode() == 23000) {
-                throw new Exception("Duplicate entry", 10);
+                throw new \Exception("Duplicate entry", 10);
             }
         }
         return $id;
@@ -50,8 +52,8 @@ class ParseRunLogger
         $rows = 0;
         try {
             $rows = PDOTools::delete($query, [$age]);
-        } catch (PDOException $e) {
-            throw new Exception("Unable to delete old entries", 10);
+        } catch (\PDOException $e) {
+            throw new \Exception("Unable to delete old entries", 10);
         }
         return $rows;
     }

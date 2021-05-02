@@ -5,7 +5,9 @@ declare(strict_types=1);
 use PHPUnit\Framework\TestCase;
 
 require_once 'bfo/bootstrap.php';
-require_once 'shared/lib/bfocore/general/class.EventHandler.php';
+
+use BFO\General\EventHandler;
+use BFO\DataTypes\Event;
 
 final class CreateEventTest extends TestCase
 {

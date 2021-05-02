@@ -1,5 +1,7 @@
 <?php
 
+namespace BFO\Parser;
+
 /**
  * Description of ParsedMoneyline
  *

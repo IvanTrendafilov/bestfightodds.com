@@ -1,6 +1,13 @@
 <?php
 
-require_once('lib/bfocore/parser/general/inc.ParserMain.php');
+namespace BFO\Parser;
+
+use BFO\Parser\Utils\ParseTools;
+use BFO\Parser\Utils\ParseRunLogger;
+use BFO\General\OddsHandler;
+use BFO\General\EventHandler;
+use BFO\DataTypes\Fight;
+use BFO\DataTypes\FightOdds;
 
 /**
  * OddsProcessor - Goes through parsed matchups and props, matches and stores them in the database. Also keeps track of changes to matchups and more..
@@ -9,11 +16,13 @@ class OddsProcessor
 {
     private $logger = null;
     private $bookie_id = null;
+    private $creation_ruleset = null;
 
-    public function __construct($logger, $bookie_id)
+    public function __construct($logger, $bookie_id, $creation_ruleset)
     {
         $this->logger = $logger;
         $this->bookie_id = $bookie_id;
+        $this->creation_ruleset = $creation_ruleset;
     }
 
     /**
@@ -404,7 +413,7 @@ class OddsProcessor
 
     private function createUnmatchedMatchups($matched_matchups)
     {
-        $mc = new MatchupCreator($this->logger, $this->bookie_id);
+        $mc = new MatchupCreator($this->logger, $this->bookie_id, $this->creation_ruleset);
         foreach ($matched_matchups as &$matchup) {
             if ($matchup['match_result']['status'] == false) {
                 $metadata = $matchup['parsed_matchup']->getAllMetaData();

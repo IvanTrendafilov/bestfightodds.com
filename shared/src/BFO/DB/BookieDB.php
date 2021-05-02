@@ -6,6 +6,8 @@ use BFO\Utils\DB\DBTools;
 use BFO\Utils\DB\PDOTools;
 
 use BFO\DataTypes\Bookie;
+use BFO\DataTypes\BookieParser;
+use BFO\DataTypes\PropTemplate;
 
 class BookieDB
 {
@@ -160,9 +162,9 @@ class BookieDB
         $id = null;
         try {
             $id = PDOTools::insert($query, $params);
-        } catch (PDOException $e) {
+        } catch (\PDOException $e) {
             if ($e->getCode() == 23000) {
-                throw new Exception("Duplicate entry", 10);
+                throw new \Exception("Duplicate entry", 10);
             }
         }
         return (int) $id;

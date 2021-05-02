@@ -2,8 +2,6 @@
 
 namespace BFO\DB;
 
-require_once('lib/bfocore/general/inc.GlobalTypes.php');
-
 use BFO\Utils\DB\PDOTools;
 
 /**
@@ -23,11 +21,11 @@ class TwitterDB
 
         try {
             $id = PDOTools::insert($query, $params);
-        } catch (PDOException $e) {
+        } catch (\PDOException $e) {
             if ($e->getCode() == 23000) {
-                throw new Exception("Duplicate entry", 10);
+                throw new \Exception("Duplicate entry", 10);
             } else {
-                throw new Exception("Unknown error " . $e->getMessage(), 10);
+                throw new \Exception("Unknown error " . $e->getMessage(), 10);
             }
             return false;
         }
@@ -72,11 +70,11 @@ class TwitterDB
 
         try {
             $id = PDOTools::insert($query, $params);
-        } catch (PDOException $e) {
+        } catch (\PDOException $e) {
             if ($e->getCode() == 23000) {
-                throw new Exception("Duplicate entry", 10);
+                throw new \Exception("Duplicate entry", 10);
             } else {
-                throw new Exception("Unknown error " . $e->getMessage(), 10);
+                throw new \Exception("Unknown error " . $e->getMessage(), 10);
             }
             return false;
         }

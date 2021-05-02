@@ -1,6 +1,9 @@
 <?php
 
+namespace BFO\Parser\Utils;
+
 use BFO\Utils\OddsTools;
+use BFO\DataTypes\FightOdds;
 
 /**
  * ParseTools

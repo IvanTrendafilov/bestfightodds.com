@@ -1,8 +1,10 @@
 <?php
 
-require_once('lib/bfocore/general/class.EventHandler.php');
-require_once('lib/bfocore/general/class.OddsHandler.php');
-require_once('config/inc.config.php');
+namespace BFO\Parser;
+
+use BFO\General\OddsHandler;
+use BFO\General\EventHandler;
+use BFO\Parser\Utils\Logger;
 
 class ScheduleChangeTracker
 {
@@ -78,7 +80,7 @@ class ScheduleChangeTracker
     public function checkForChanges()
     {
         //Fetch future event date, we need to use it later to exclude it
-        $sFutureEventDate = (new DateTime(EventHandler::getEvent(PARSE_FUTURESEVENT_ID)->getDate()))->format('Y-m-d');
+        $sFutureEventDate = (new \DateTime(EventHandler::getEvent(PARSE_FUTURESEVENT_ID)->getDate()))->format('Y-m-d');
 
         $aUpcomingMatchups = EventHandler::getAllUpcomingMatchups(true);
         $aProcessedBookieMatchups = [];
@@ -88,12 +90,12 @@ class ScheduleChangeTracker
             $sFoundNewDate = '';
             $sFoundOwner = '';
             $oEvent = EventHandler::getEvent($oUpMatch->getEventID());
-            $oCurDate = new DateTime($oEvent->getDate());
+            $oCurDate = new \DateTime($oEvent->getDate());
             foreach ($this->aMatchups as $aMatchup) {
                 if ($aMatchup['matchup_id'] == $oUpMatch->getID()) {
                     $aProcessedBookieMatchups[$aMatchup['bookie_id']][$aMatchup['matchup_id']] = true;
                     if (isset($aMatchup['date']) && $aMatchup['date'] != '') {
-                        $oNewDate = new DateTime();
+                        $oNewDate = new \DateTime();
                         $oNewDate->setTimestamp($aMatchup['date']);
                         //Subtract 6 hours to adjust for timezones (but not for future events) - Disabled: We are now using UTC TODO: Remove later
                         //if ($oNewDate->format('Y-m-d') != $sFutureEventDate)
@@ -101,7 +103,7 @@ class ScheduleChangeTracker
                         //    $oNewDate->sub(new DateInterval('PT6H'));
                         //}
                         //Check that new date is not in the past
-                        if (new DateTime() < $oNewDate) {
+                        if (new \DateTime() < $oNewDate) {
                             //We'll favour the earliest date since it is most likely to not be a preliminary date
                             if ($sFoundNewDate == '' || $oNewDate->format('Y-m-d') < $sFoundNewDate) {
                                 $sFoundNewDate = $oNewDate->format('Y-m-d');
@@ -129,8 +131,8 @@ class ScheduleChangeTracker
                 if (!array_key_exists($oUpMatch->getID(), $aProcessedBookieMatchups[$sKey]) && EventHandler::getLatestOddsForFightAndBookie($oUpMatch->getID(), $sKey) != null) {
                     //Only remove matchups that are > 24 hours away to avoid removing on-the-day matchups by accident
                     $oEvent = EventHandler::getEvent($oUpMatch->getEventID());
-                    $datetime = new DateTime($oEvent->getDate());
-                    $nowdatetime = new Datetime();
+                    $datetime = new \DateTime($oEvent->getDate());
+                    $nowdatetime = new \Datetime();
                     $nowdatetime->modify('+1 day');
                     if ($datetime > $nowdatetime) {
                         Logger::getInstance()->log('-Matchup: ' . $oUpMatch->getID() . ' was not found in feed and will be removed (event date:' . $datetime->format('Y-m-d') . ' / now date: ' . $nowdatetime->format('Y-m-d') .  ') <a href="#/" onclick="removeOddsForMatchupAndBookie(\'' . $oUpMatch->getID() . '\',\'' . $sKey . '\')">remove</a>', 0);
