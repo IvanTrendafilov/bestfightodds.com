@@ -137,7 +137,7 @@ class AlerterV2
 
     private function formatAlertMail($alerts)
     {
-        if (!function_exists('sortAlerts')) {
+        if (!function_exists('BFO\Alerter\sortAlerts')) {
             function sortAlerts($a, $b)
             {
                 //Determine if prop is matchup or event, use that ID as value to compare

@@ -21,7 +21,7 @@ class StatsHandler
             $aSwings[] = array($oMatchup, 2, $aStats['f2']);
         }
 
-        if (!function_exists('cmpdiff')) {
+        if (!function_exists('BFO\General\cmpdiff')) {
             function cmpdiff($a, $b)
             {
                 return $a[2]['swing'] < $b[2]['swing'];
