@@ -17,5 +17,10 @@
     "require-dev": {
         "dbrekelmans/bdi": "^0.3.0",
         "phpunit/phpunit": "9"
+    },
+    "autoload": {
+        "psr-4": {
+            "BFO\\": "shared/src/BFO/"
+        }
     }
 }
