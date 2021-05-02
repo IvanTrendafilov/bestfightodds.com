@@ -1,5 +1,7 @@
 <?php
 
+namespace BFO\General;
+
 require_once('lib/bfocore/db/class.StatsDB.php');
 require_once('lib/bfocore/general/class.EventHandler.php');
 require_once('lib/bfocore/utils/class.OddsTools.php');

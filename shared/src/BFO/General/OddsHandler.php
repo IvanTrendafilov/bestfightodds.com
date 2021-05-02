@@ -1,5 +1,7 @@
 <?php
 
+namespace BFO\General;
+
 require_once('lib/bfocore/db/class.OddsDB.php');
 require_once('lib/bfocore/general/class.BookieHandler.php');
 

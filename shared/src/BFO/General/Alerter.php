@@ -1,5 +1,7 @@
 <?php
 
+namespace BFO\General;
+
 require_once('lib/bfocore/general/inc.GlobalTypes.php');
 require_once('lib/bfocore/db/class.AlertDB.php');
 require_once('lib/bfocore/general/class.EventHandler.php');

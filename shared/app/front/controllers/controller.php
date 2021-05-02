@@ -3,14 +3,14 @@
 use Psr\Http\Message\ResponseInterface as Response;
 use Psr\Http\Message\ServerRequestInterface as Request;
 
-require_once 'config/inc.config.php';
-require_once 'lib/bfocore/general/class.EventHandler.php';
-require_once 'lib/bfocore/general/class.BookieHandler.php';
-require_once 'lib/bfocore/general/class.TeamHandler.php';
-require_once 'lib/bfocore/general/class.OddsHandler.php';
-require_once 'lib/bfocore/general/class.GraphHandler.php';
-require_once 'lib/bfocore/general/caching/class.CacheControl.php';
-require_once 'lib/bfocore/general/class.StatsHandler.php';
+use BFO\General\EventHandler;
+use BFO\General\BookieHandler;
+use BFO\General\TeamHandler;
+use BFO\General\OddsHandler;
+use BFO\General\GraphHandler;
+use BFO\General\StatsHandler;
+
+use BFO\Caching\CacheControl;
 
 class MainController
 {

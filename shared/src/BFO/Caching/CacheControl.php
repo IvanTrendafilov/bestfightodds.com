@@ -1,6 +1,6 @@
 <?php
 
-require_once('config/inc.config.php');
+namespace BFO\Caching;
 
 class CacheControl
 {

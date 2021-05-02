@@ -1,5 +1,7 @@
 <?php
 
+namespace BFO\General;
+
 require_once('lib/bfocore/db/class.EventDB.php');
 require_once('config/inc.config.php');
 

@@ -1,5 +1,7 @@
 <?php
 
+namespace BFO\General;
+
 //TODO: Move these to TeamHandler (make generic)
 
 require_once('lib/bfocore/db/class.TeamDB.php');

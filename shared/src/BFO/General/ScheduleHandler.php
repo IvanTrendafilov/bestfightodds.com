@@ -1,5 +1,7 @@
 <?php
 
+namespace BFO\General;
+
 require_once('lib/bfocore/db/class.ScheduleDB.php');
 require_once('lib/bfocore/utils/class.OddsTools.php');
 

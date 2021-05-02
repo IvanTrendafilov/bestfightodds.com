@@ -1,5 +1,7 @@
 <?php
 
+namespace BFO\General;
+
 require 'vendor/autoload.php';
 require_once('config/inc.config.php');
 require_once('lib/bfocore/db/class.FacebookDB.php');
