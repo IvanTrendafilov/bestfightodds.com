@@ -14,7 +14,6 @@
 require_once('config/inc.config.php');
 
 require_once('lib/bfocore/parser/general/class.XMLParser.php');
-require_once('lib/bfocore/utils/pagegen/class.PageGenerator.php');
 
 require_once('lib/bfocore/general/class.Alerter.php');
 require_once('lib/bfocore/general/caching/class.CacheControl.php');

@@ -84,9 +84,9 @@ class BookieDB
                     SET bcn.changenum = bp.cn_initial WHERE bcn.bookie_id = ?';
 
         $params = array($a_iBookieID);
-        $bResult = DBTools::doParamQuery($query, $params);
+        $result = DBTools::doParamQuery($query, $params);
 
-        if ($bResult == false) {
+        if ($result == false) {
             return false;
         }
         return true;
@@ -97,8 +97,8 @@ class BookieDB
         $query = 'UPDATE bookies_changenums bcn
                     INNER JOIN bookies_parsers bp ON bcn.bookie_id = bp.bookie_id
                     SET bcn.changenum = bp.cn_initial';
-        $bResult = DBTools::doQuery($query);
-        if ($bResult == false) {
+        $result = DBTools::doQuery($query);
+        if ($result == false) {
             return false;
         }
         return true;
@@ -134,10 +134,10 @@ class BookieDB
                         AND bpt.prop_type = pt.id';
         $params = array($a_iBookieID);
 
-        $rResult = DBTools::doParamQuery($query, $params);
+        $result = DBTools::doParamQuery($query, $params);
 
         $aTemplates = array();
-        while ($aTemplate = mysqli_fetch_array($rResult)) {
+        while ($aTemplate = mysqli_fetch_array($result)) {
             $oTempObj = new PropTemplate($aTemplate['id'], $aTemplate['bookie_id'], $aTemplate['template'], $aTemplate['template_neg'], $aTemplate['prop_type'], $aTemplate['fields_type'], $aTemplate['last_used']);
             $oTempObj->setEventProp($aTemplate['is_eventprop']);
             $aTemplates[] = $oTempObj;
@@ -146,12 +146,12 @@ class BookieDB
         return $aTemplates;
     }
 
-    public static function addNewPropTemplate($a_oPropTemplate)
+    public static function addNewPropTemplate($prop_template)
     {
         $query = 'INSERT INTO bookies_proptemplates(bookie_id, template, prop_type, template_neg, fields_type)
                     VALUES (?, ?, ?, ?, ?)';
 
-        $params = array($a_oPropTemplate->getBookieID(), $a_oPropTemplate->getTemplate(), $a_oPropTemplate->getPropTypeID(), $a_oPropTemplate->getTemplateNeg(), $a_oPropTemplate->getFieldsTypeID());
+        $params = array($prop_template->getBookieID(), $prop_template->getTemplate(), $prop_template->getPropTypeID(), $prop_template->getTemplateNeg(), $prop_template->getFieldsTypeID());
 
         $id = null;
         try {
@@ -161,22 +161,22 @@ class BookieDB
                 throw new Exception("Duplicate entry", 10);
             }
         }
-        return $id;
+        return (int) $id;
     }
 
-    public static function updateTemplateLastUsed($a_iTemplateID)
+    public static function updateTemplateLastUsed($id)
     {
         $query = 'UPDATE bookies_proptemplates SET last_used = NOW() WHERE id = ?';
-        $params = array($a_iTemplateID);
+        $params = array($id);
         DBTools::doParamQuery($query, $params);
 
         return (DBTools::getAffectedRows() > 0 ? true : false);
     }
 
-    public static function deleteTemplate($a_iTemplateID)
+    public static function deleteTemplate($id)
     {
         $query = 'DELETE FROM bookies_proptemplates WHERE id = ?';
-        $params = array($a_iTemplateID);
+        $params = array($id);
         DBTools::doParamQuery($query, $params);
         return (DBTools::getAffectedRows() > 0 ? true : false);
     }

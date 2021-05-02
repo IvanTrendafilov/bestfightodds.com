@@ -6,6 +6,8 @@ require_once('lib/bfocore/parser/general/class.ParsedProp.php');
 require_once('lib/bfocore/parser/utils/class.Logger.php');
 require_once('lib/bfocore/general/class.EventHandler.php');
 require_once('lib/bfocore/general/class.TeamHandler.php');
+require_once('lib/bfocore/general/class.OddsHandler.php');
+
 
 class PropParserV2
 {
