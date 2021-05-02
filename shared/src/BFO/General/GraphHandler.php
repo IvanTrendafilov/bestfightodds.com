@@ -2,8 +2,11 @@
 
 namespace BFO\General;
 
-require_once('lib/bfocore/general/class.EventHandler.php');
-require_once('lib/bfocore/general/class.OddsHandler.php');
+use BFO\General\EventHandler;
+use BFO\General\OddsHandler;
+
+use BFO\DataTypes\FightOdds;
+use BFO\DataTypes\PropBet;
 
 class GraphHandler
 {
@@ -261,8 +264,8 @@ class GraphHandler
         }
 
         //Determine high/low/step
-        $iLow = (new DateTime($aLines[0]->getDate()))->getTimestamp() * 1000;
-        $iHigh = (new DateTime($aLines[sizeof($aLines)-1]->getDate()))->getTimestamp() * 1000;
+        $iLow = (new \DateTime($aLines[0]->getDate()))->getTimestamp() * 1000;
+        $iHigh = (new \DateTime($aLines[sizeof($aLines)-1]->getDate()))->getTimestamp() * 1000;
         $fStep = ($iHigh - $iLow) / ($iSparklineSteps - 1);
 
         $aBookieLatestLine = array();
@@ -270,7 +273,7 @@ class GraphHandler
         $sRetStr = '';
 
         foreach ($aLines as $aLine) {
-            $sLineDate = (new DateTime($aLine->getDate()))->getTimestamp() * 1000;
+            $sLineDate = (new \DateTime($aLine->getDate()))->getTimestamp() * 1000;
             $aBookieLatestLine[$aLine->getBookieID()] = $aLine;
             // Once we reach a line that passes the step date, flush the stored ones and create an index for that
             if ($sLineDate >= $iLow + ($fStep * $iStepCounter)) {

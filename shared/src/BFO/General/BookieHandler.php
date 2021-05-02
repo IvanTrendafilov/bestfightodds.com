@@ -2,8 +2,7 @@
 
 namespace BFO\General;
 
-require_once('lib/bfocore/general/inc.GlobalTypes.php');
-require_once('lib/bfocore/db/class.BookieDB.php');
+use BFO\DB\BookieDB;
 
 class BookieHandler
 {
@@ -77,7 +76,6 @@ class BookieHandler
         }
         return BookieDB::deleteTemplate($template_id);
     }
-
 
     public static function getAllRunStatuses()
     {

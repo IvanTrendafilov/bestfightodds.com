@@ -2,8 +2,7 @@
 
 namespace BFO\General;
 
-require_once('lib/bfocore/db/class.TeamDB.php');
-require_once('lib/bfocore/general/inc.GlobalTypes.php');
+use BFO\DB\TeamDB;
 
 /**
  * TeamHandler

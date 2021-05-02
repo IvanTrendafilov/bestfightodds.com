@@ -2,12 +2,9 @@
 
 namespace BFO\General;
 
-require_once('lib/bfocore/general/inc.GlobalTypes.php');
-require_once('config/inc.config.php');
-require_once('lib/bfocore/utils/twitter/class.Twitterer.php');
-require_once('lib/bfocore/general/class.EventHandler.php');
-
-require_once('lib/bfocore/db/class.TwitterDB.php');
+use BFO\DB\TwitterDB;
+use BFO\General\EventHandler;
+use BFO\Utils\Twitter\Twitterer;
 
 /**
  * Handles all Twitter-updates for new odds

@@ -2,12 +2,10 @@
 
 namespace BFO\General;
 
-require_once('lib/bfocore/general/inc.GlobalTypes.php');
-require_once('lib/bfocore/db/class.AlertDB.php');
-require_once('lib/bfocore/general/class.EventHandler.php');
-require_once('config/inc.config.php');
-require_once('lib/bfocore/utils/class.OddsTools.php');
-require_once('lib/bfocore/utils/aws-ses/class.SESMailer.php');
+use BFO\DB\AlertDB;
+use BFO\General\EventHandler;
+use BFO\Utils\OddsTools;
+use BFO\Utils\AWS_SES\SESMailer;
 
 /**
  * Class Alerter - The alerter is a feature that warns (e-mails) a user whenever odds for a certain fight drops below a certain number

@@ -1,6 +1,8 @@
 <?php
 
-require_once('lib/bfocore/general/class.BookieHandler.php');
+require_once __DIR__ . "/../../bootstrap.php";
+
+use BFO\General\BookieHandler;
 
 //This script is used to redirect to different urls depending on different variables such as locale
 

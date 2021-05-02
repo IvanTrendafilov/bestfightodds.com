@@ -4,14 +4,13 @@ use Psr\Http\Message\ResponseInterface as Response;
 use Psr\Http\Message\ServerRequestInterface as Request;
 use DI\Container;
 
-require_once 'config/inc.config.php';
-require_once 'lib/bfocore/general/class.ScheduleHandler.php';
-require_once 'lib/bfocore/general/class.EventHandler.php';
-require_once 'lib/bfocore/general/class.OddsHandler.php';
-require_once 'lib/bfocore/general/class.BookieHandler.php';
-require_once 'lib/bfocore/general/class.TeamHandler.php';
-require_once 'lib/bfocore/general/class.TwitterHandler.php';
-require_once 'lib/bfocore/general/class.Alerter.php';
+use BFO\General\ScheduleHandler;
+use BFO\General\EventHandler;
+use BFO\General\OddsHandler;
+use BFO\General\BookieHandler;
+use BFO\General\TeamHandler;
+use BFO\General\TwitterHandler;
+use BFO\General\Alerter;
 
 class AdminController
 {

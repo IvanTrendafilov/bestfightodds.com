@@ -7,8 +7,11 @@
   regenerating them if the are missing. These are removed whenever the odds are
   updated. Therefor it would need to work with the parsing-engine. */
 
+require_once __DIR__ . "/../../bootstrap.php";
 
-require_once('lib/bfocore/general/caching/class.CacheControl.php');
+use BFO\General\EventHandler;
+use BFO\General\OddsHandler;
+use BFO\Caching\CacheControl;
 
 define('LINK_HEIGHT', 65);  //Only used for single fights - Events use dynamic height
 define('LINK_WIDTH', 216);
@@ -17,29 +20,24 @@ define('FONT_SIZE', 8);
 define('FONT_SIZE_BIG', 9);
 define('FONT_TYPE', dirname(__FILE__) . "/micross.ttf");
 
-
 $sLineType = isset($_GET['type']) ? $_GET['type'] : 'current';
 $iFormatType = isset($_GET['format']) ? $_GET['format'] : 1;
 
 if (isset($_GET['fight']) && is_numeric($_GET['fight']) && $_GET['fight'] > 0 && $_GET['fight'] < 99999)
 {
-    $sImageName = 'link-fight_' . $_GET['fight'] . '_' . $sLineType . '_' . $iFormatType;
+    $image_filename = 'link-fight_' . $_GET['fight'] . '_' . $sLineType . '_' . $iFormatType;
     $rShowImage = null;
 
-    if (CacheControl::isCached($sImageName))
+    if (CacheControl::isCached($image_filename))
     {
-        $rShowImage = CacheControl::getCachedImage($sImageName);
+        $rShowImage = CacheControl::getCachedImage($image_filename);
     }
     else
     {
-        require_once('lib/bfocore/general/inc.GlobalTypes.php');
-        require_once('lib/bfocore/general/class.EventHandler.php');
-        require_once('lib/bfocore/general/class.OddsHandler.php');
-
         $rShowImage = FightLinkCreator::createFightLink($_GET['fight'], $sLineType, $iFormatType);
         if ($rShowImage != false)
         {
-           CacheControl::cacheImage($rShowImage, $sImageName);
+           CacheControl::cacheImage($rShowImage, $image_filename);
         }
     }
 
@@ -52,23 +50,19 @@ if (isset($_GET['fight']) && is_numeric($_GET['fight']) && $_GET['fight'] > 0 &&
 }
 else if (isset($_GET['event']) && is_numeric($_GET['event']) && $_GET['event'] > 0 && $_GET['event'] < 99999)
 {
-    $sImageName = 'link-event_' . $_GET['event'] . '_' . $sLineType . '_' . $iFormatType;
+    $image_filename = 'link-event_' . $_GET['event'] . '_' . $sLineType . '_' . $iFormatType;
     $rShowImage = null;
 
-    if (CacheControl::isCached($sImageName))
+    if (CacheControl::isCached($image_filename))
     {
-        $rShowImage = CacheControl::getCachedImage($sImageName);
+        $rShowImage = CacheControl::getCachedImage($image_filename);
     }
     else
     {
-        require_once('lib/bfocore/general/inc.GlobalTypes.php');
-        require_once('lib/bfocore/general/class.EventHandler.php');
-        require_once('lib/bfocore/general/class.OddsHandler.php');
-
         $rShowImage = FightLinkCreator::createEventLink($_GET['event'], $sLineType, $iFormatType);
         if ($rShowImage != false)
         {
-            CacheControl::cacheImage($rShowImage, $sImageName);
+            CacheControl::cacheImage($rShowImage, $image_filename);
         }
     }
 
@@ -88,19 +82,19 @@ else
 class FightLinkCreator
 {
 
-    public static function createEventLink($a_iEventID, $a_iLineType, $a_iFormat)
+    public static function createEventLink($event_id, $line_type, $format)
     {
-        $aMatchups = EventHandler::getAllFightsForEvent($a_iEventID, true);
-        return self::createLink($aMatchups, $a_iLineType, $a_iFormat);
+        $aMatchups = EventHandler::getAllFightsForEvent($event_id, true);
+        return self::createLink($aMatchups, $line_type, $format);
     }
 
-    public static function createFightLink($a_iFightID, $a_iLineType, $a_iFormat)
+    public static function createFightLink($a_iFightID, $line_type, $format)
     {
         $oMatchup = EventHandler::getFightByID($a_iFightID);
-        return self::createLink(array($oMatchup), $a_iLineType, $a_iFormat);
+        return self::createLink(array($oMatchup), $line_type, $format);
     }
 
-    public static function createLink($aFights, $a_iLineType, $a_iFormat) //1 = Moneyline, 2 = Decimal
+    public static function createLink($aFights, $line_type, $format) //1 = Moneyline, 2 = Decimal
     {
         if (count($aFights) < 1 || $aFights[0] == null)
         {
@@ -138,7 +132,7 @@ class FightLinkCreator
 
             $oFightOdds = null;
             //Fetch odds based on desired type, opening or current best (default)
-            if ($a_iLineType == 'opening')
+            if ($line_type == 'opening')
             {
                 $oFightOdds = OddsHandler::getOpeningOddsForMatchup($oFight->getID());
             }
@@ -152,7 +146,7 @@ class FightLinkCreator
 
             if ($oFightOdds != null)
             {
-                if ($a_iFormat == 2)
+                if ($format == 2)
                 {
                     //Decimal
                     $sFighter1Odds = sprintf("%1\$.2f", $oFightOdds->getFighterOddsAsDecimal(1));

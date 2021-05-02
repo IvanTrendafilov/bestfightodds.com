@@ -2,9 +2,7 @@
 
 namespace BFO\General;
 
-require 'vendor/autoload.php';
-require_once('config/inc.config.php');
-require_once('lib/bfocore/db/class.FacebookDB.php');
+use BFO\DB\FacebookDB;
 
 class FacebookHandler
 {
@@ -13,10 +11,10 @@ class FacebookHandler
 
     public function __construct()
     {
-        $this->logger = new Katzgrau\KLogger\Logger(GENERAL_KLOGDIR, Psr\Log\LogLevel::DEBUG, ['filename' => 'facebook.log']);
+        $this->logger = new \Katzgrau\KLogger\Logger(GENERAL_KLOGDIR, Psr\Log\LogLevel::DEBUG, ['filename' => 'facebook.log']);
 
         if (FACEBOOK_DEV_MODE == false) {
-            $this->fb = new Facebook\Facebook([
+            $this->fb = new \Facebook\Facebook([
               'app_id' => FACEBOOK_APP_ID,
               'app_secret' => FACEBOOK_APP_SECRET,
               'default_graph_version' => 'v2.6',
@@ -35,11 +33,11 @@ class FacebookHandler
         $response = null;
         try {
             $response = $this->fb->post('/' . FACEBOOK_PAGEID . '/feed', ['message' => $message, 'link' => $link]);
-        } catch (Facebook\Exceptions\FacebookResponseException $e) {
+        } catch (\Facebook\Exceptions\FacebookResponseException $e) {
             // When Graph returns an error
             $this->logger->error('Graph returned an error: ' . $e->getMessage());
             return false;
-        } catch (Facebook\Exceptions\FacebookSDKException $e) {
+        } catch (\Facebook\Exceptions\FacebookSDKException $e) {
             // When validation fails or other local issues
             $this->logger->error('Facebook SDK returned an error: ' . $e->getMessage());
             return false;

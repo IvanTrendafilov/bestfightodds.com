@@ -56,8 +56,8 @@ $customErrorHandler = function (
 };
 
 // Add Error Middleware
-$errorMiddleware = $app->addErrorMiddleware(true, true, true, null);
-$errorMiddleware->setDefaultErrorHandler($customErrorHandler);
+/*$errorMiddleware = $app->addErrorMiddleware(true, true, true, null);
+$errorMiddleware->setDefaultErrorHandler($customErrorHandler);*/
 
 //Page routes
 $app->group('', function (RouteCollectorProxy $group) {

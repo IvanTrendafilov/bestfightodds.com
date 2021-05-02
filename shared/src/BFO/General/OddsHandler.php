@@ -2,8 +2,13 @@
 
 namespace BFO\General;
 
-require_once('lib/bfocore/db/class.OddsDB.php');
-require_once('lib/bfocore/general/class.BookieHandler.php');
+use BFO\DB\OddsDB;
+use BFO\General\BookieHandler;
+use BFO\DataTypes\FightOdds;
+use BFO\DataTypes\PropBet;
+use BFO\DataTypes\EventPropBet;
+use BFO\DataTypes\Fight;
+use BFO\DataTypes\Event;
 
 class OddsHandler
 {
@@ -435,7 +440,7 @@ class OddsHandler
         $flagged_col = OddsDB::getFlaggedOddsForDeletion();
 
         //Log to common audit log file
-        $logger = new Katzgrau\KLogger\Logger(GENERAL_KLOGDIR, Psr\Log\LogLevel::INFO, ['filename' => 'changeaudit.log']);
+        $logger = new \Katzgrau\KLogger\Logger(GENERAL_KLOGDIR, \Psr\Log\LogLevel::INFO, ['filename' => 'changeaudit.log']);
 
         //Iterate each type and delete
         foreach ($flagged_col['matchup_odds'] as $flagged) {

@@ -2,8 +2,8 @@
 
 namespace BFO\General;
 
-require_once('lib/bfocore/db/class.ScheduleDB.php');
-require_once('lib/bfocore/utils/class.OddsTools.php');
+use BFO\DB\ScheduleDB;
+use BFO\Utils\OddsTools;
 
 class ScheduleHandler
 {

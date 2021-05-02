@@ -4,15 +4,18 @@ use Psr\Http\Message\ResponseInterface as Response;
 use Psr\Http\Message\ServerRequestInterface as Request;
 use Respect\Validation\Validator as v;
 
-require_once 'config/inc.config.php';
-require_once 'lib/bfocore/general/class.ScheduleHandler.php';
-require_once 'lib/bfocore/general/class.TeamHandler.php';
-require_once 'lib/bfocore/general/class.EventHandler.php';
-require_once 'lib/bfocore/general/class.OddsHandler.php';
-require_once 'lib/bfocore/general/class.BookieHandler.php';
-require_once 'lib/bfocore/general/class.TwitterHandler.php';
-require_once 'lib/bfocore/general/class.Alerter.php';
-require_once 'lib/bfocore/utils/class.OddsTools.php';
+use BFO\General\ScheduleHandler;
+use BFO\General\TeamHandler;
+use BFO\General\EventHandler;
+use BFO\General\OddsHandler;
+use BFO\General\BookieHandler;
+use BFO\General\TwitterHandler;
+use BFO\Utils\OddsTools;
+
+use BFO\DataTypes\Fight;
+use BFO\DataTypes\Event;
+use BFO\DataTypes\PropTemplate;
+use BFO\DataTypes\FightOdds;
 
 class AdminAPIController
 {

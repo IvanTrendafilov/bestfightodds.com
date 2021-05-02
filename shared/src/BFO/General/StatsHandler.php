@@ -2,11 +2,11 @@
 
 namespace BFO\General;
 
-require_once('lib/bfocore/db/class.StatsDB.php');
-require_once('lib/bfocore/general/class.EventHandler.php');
-require_once('lib/bfocore/utils/class.OddsTools.php');
-require_once('lib/bfocore/general/class.PropTypeHandler.php');
-require_once('lib/bfocore/utils/class.LinkTools.php');
+use BFO\DB\StatsDB;
+use BFO\General\EventHandler;
+use BFO\Utils\OddsTools;
+use BFO\General\PropTypeHandler;
+use BFO\Utils\LinkTools;
 
 class StatsHandler
 {
@@ -27,7 +27,7 @@ class StatsHandler
                 return $a[2]['swing'] < $b[2]['swing'];
             }
         }
-        usort($aSwings, "cmpdiff");
+        usort($aSwings, "BFO\General\cmpdiff");
 
         return $aSwings;
     }

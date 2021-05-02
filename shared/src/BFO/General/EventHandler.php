@@ -2,8 +2,8 @@
 
 namespace BFO\General;
 
-require_once('lib/bfocore/db/class.EventDB.php');
-require_once('config/inc.config.php');
+use BFO\DB\EventDB;
+use BFO\DataTypes\FightOdds;
 
 class EventHandler
 {
@@ -173,7 +173,7 @@ class EventHandler
         }
 
         //Validate date
-        $dt = DateTime::createFromFormat("Y-m-d", $event->getDate());
+        $dt = \DateTime::createFromFormat("Y-m-d", $event->getDate());
         if ($dt === false || array_sum($dt::getLastErrors()) > 0) {
             return false;
         }

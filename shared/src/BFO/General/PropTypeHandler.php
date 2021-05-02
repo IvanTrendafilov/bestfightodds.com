@@ -2,7 +2,7 @@
 
 namespace BFO\General;
 
-require_once('lib/bfocore/db/class.PropTypeDB.php');
+use BFO\DB\PropTypeDB;
 
 class PropTypeHandler
 {
