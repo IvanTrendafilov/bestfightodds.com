@@ -28,25 +28,19 @@ class Fight
     public function __construct($a_iID, $a_sFighter1, $a_sFighter2, $a_iEventID, $a_sComment = '')
     {
         $this->iID = $a_iID;
-        if (trim($a_sFighter1) > trim($a_sFighter2))
-        {
+        if (trim($a_sFighter1) > trim($a_sFighter2)) {
             $this->sFighter1 = trim(strtoupper($a_sFighter2));
             $this->sFighter2 = trim(strtoupper($a_sFighter1));
             $this->bOrderChanged = true;
-        }
-        else
-        {
+        } else {
             $this->sFighter1 = trim(strtoupper($a_sFighter1));
             $this->sFighter2 = trim(strtoupper($a_sFighter2));
             $this->bOrderChanged = false;
         }
 
-        if ($a_iEventID == '')
-        {
+        if ($a_iEventID == '') {
             $this->iEventID = -1;
-        }
-        else
-        {
+        } else {
             $this->iEventID = $a_iEventID;
         }
         $this->sComment = $a_sComment;
@@ -149,32 +143,31 @@ class Fight
     {
         $string = $a_sFighter;
 
-		$word_splitters = array(' ', '.', '-', "O'", "L'", "D'", 'St.', 'Mc');
-		$lowercase_exceptions = array('the', 'van', 'den', 'von', 'und', 'der', 'de', 'da', 'of', 'and', "l'", "d'");
-		$uppercase_exceptions = array('III', 'IV', 'VI', 'VII', 'VIII', 'IX');
-	
-		$string = strtolower($string);
-		foreach ($word_splitters as $delimiter)
-		{ 
-			$words = explode($delimiter, $string); 
-			$newwords = array(); 
-			foreach ($words as $word)
-			{ 
-				if (in_array(strtoupper($word), $uppercase_exceptions))
-					$word = strtoupper($word);
-				else
-				if (!in_array($word, $lowercase_exceptions))
-					$word = ucfirst($word); 
-	
-				$newwords[] = $word;
-			}
-	
-			if (in_array(strtolower($delimiter), $lowercase_exceptions))
-				$delimiter = strtolower($delimiter);
-	
-			$string = join($delimiter, $newwords); 
-		} 
-		return trim($string); 
+        $word_splitters = array(' ', '.', '-', "O'", "L'", "D'", 'St.', 'Mc');
+        $lowercase_exceptions = array('the', 'van', 'den', 'von', 'und', 'der', 'de', 'da', 'of', 'and', "l'", "d'");
+        $uppercase_exceptions = array('III', 'IV', 'VI', 'VII', 'VIII', 'IX');
+    
+        $string = strtolower($string);
+        foreach ($word_splitters as $delimiter) {
+            $words = explode($delimiter, $string);
+            $newwords = array();
+            foreach ($words as $word) {
+                if (in_array(strtoupper($word), $uppercase_exceptions)) {
+                    $word = strtoupper($word);
+                } elseif (!in_array($word, $lowercase_exceptions)) {
+                    $word = ucfirst($word);
+                }
+    
+                $newwords[] = $word;
+            }
+    
+            if (in_array(strtolower($delimiter), $lowercase_exceptions)) {
+                $delimiter = strtolower($delimiter);
+            }
+    
+            $string = join($delimiter, $newwords);
+        }
+        return trim($string);
     }
 
     /**
@@ -185,12 +178,10 @@ class Fight
      */
     public function getFighterID($a_iFighter)
     {
-        if (!isset($this->iFighter1ID) || !isset($this->iFighter2ID))
-        {
+        if (!isset($this->iFighter1ID) || !isset($this->iFighter2ID)) {
             return -1;
         }
-        switch ($a_iFighter)
-        {
+        switch ($a_iFighter) {
             case 1: return $this->iFighter1ID;
                 break;
             case 2: return $this->iFighter2ID;
@@ -222,25 +213,16 @@ class Fight
 
     public function setFighterID($a_iFighter, $a_iFighterID)
     {
-        if ($this->bOrderChanged == true)
-        {
-            if ($a_iFighter == 1)
-            {
+        if ($this->bOrderChanged == true) {
+            if ($a_iFighter == 1) {
                 $this->iFighter2ID = $a_iFighterID;
-            }
-            else if ($a_iFighter == 2)
-            {
+            } elseif ($a_iFighter == 2) {
                 $this->iFighter1ID = $a_iFighterID;
             }
-        }
-        else
-        {
-            if ($a_iFighter == 1)
-            {
+        } else {
+            if ($a_iFighter == 1) {
                 $this->iFighter1ID = $a_iFighterID;
-            }
-            else if ($a_iFighter == 2)
-            {
+            } elseif ($a_iFighter == 2) {
                 $this->iFighter2ID = $a_iFighterID;
             }
         }
@@ -248,8 +230,7 @@ class Fight
 
     public function setMainEvent($a_bIsMainEvent)
     {
-        switch ($a_bIsMainEvent)
-        {
+        switch ($a_bIsMainEvent) {
             case 1: $a_bIsMainEvent = true;
                 break;
             case 0: $a_bIsMainEvent = false;
@@ -261,8 +242,7 @@ class Fight
 
     public function isMainEvent()
     {
-        if (isset($this->bIsMainEvent))
-        {
+        if (isset($this->bIsMainEvent)) {
             return $this->bIsMainEvent;
         }
         return false;
@@ -270,8 +250,7 @@ class Fight
 
     public function setIsFuture($a_bIsFuture)
     {
-        switch ($a_bIsFuture)
-        {
+        switch ($a_bIsFuture) {
             case 1: $a_bIsFuture = true;
                 break;
             case 0: $a_bIsFuture = false;
@@ -283,8 +262,7 @@ class Fight
 
     public function isFuture()
     {
-        if (isset($this->bIsFuture))
-        {
+        if (isset($this->bIsFuture)) {
             return $this->bIsFuture;
         }
         return false;
@@ -298,8 +276,7 @@ class Fight
 
     public function getTeam($a_iTeam)
     {
-        switch ($a_iTeam)
-        {
+        switch ($a_iTeam) {
             case 1: return $this->sFighter1;
                 break;
             case 2: return $this->sFighter2;
@@ -320,5 +297,3 @@ class Fight
         return isset($this->aMetadata[(string) $a_sAttribute]) ? $this->aMetadata[(string) $a_sAttribute] : false;
     }
 }
-
-?>

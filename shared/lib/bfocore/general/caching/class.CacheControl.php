@@ -6,20 +6,15 @@ class CacheControl
 {
     public static function cleanGraphCache()
     {
-        if (is_dir(IMAGE_CACHE_DIR))
-        {
+        if (is_dir(IMAGE_CACHE_DIR)) {
             $rDir = opendir(IMAGE_CACHE_DIR);
-            if ($rDir == false)
-            {
+            if ($rDir == false) {
                 return false;
             }
 
-            while ($sFile = readdir($rDir))
-            {
-                if ($sFile != "." && $sFile != ".." && $sFile != '.gitignore')
-                {
-                    if (!is_dir(IMAGE_CACHE_DIR . "/" . $sFile))
-                    {
+            while ($sFile = readdir($rDir)) {
+                if ($sFile != "." && $sFile != ".." && $sFile != '.gitignore') {
+                    if (!is_dir(IMAGE_CACHE_DIR . "/" . $sFile)) {
                         unlink(IMAGE_CACHE_DIR . '/' . $sFile);
                     }
                 }
@@ -32,8 +27,7 @@ class CacheControl
 
     public static function isCached($a_sName)
     {
-        if (!CACHE_IMAGE_CACHE_ENABLED)
-        {
+        if (!CACHE_IMAGE_CACHE_ENABLED) {
             return false;
         }
 
@@ -60,20 +54,15 @@ class CacheControl
 
     public static function cleanPageCache()
     {
-        if (is_dir(CACHE_PAGE_DIR))
-        {
+        if (is_dir(CACHE_PAGE_DIR)) {
             $rDir = opendir(CACHE_PAGE_DIR);
-            if ($rDir == false)
-            {
+            if ($rDir == false) {
                 return false;
             }
 
-            while ($sFile = readdir($rDir))
-            {
-                if ($sFile != "." && $sFile != "..")
-                {
-                    if (!is_dir(CACHE_PAGE_DIR . DIRECTORY_SEPARATOR . $sFile))
-                    {
+            while ($sFile = readdir($rDir)) {
+                if ($sFile != "." && $sFile != "..") {
+                    if (!is_dir(CACHE_PAGE_DIR . DIRECTORY_SEPARATOR . $sFile)) {
                         unlink(CACHE_PAGE_DIR . DIRECTORY_SEPARATOR . $sFile);
                     }
                 }
@@ -93,8 +82,7 @@ class CacheControl
 
     public static function isPageCached($a_sName)
     {
-        if (!CACHE_PAGE_CACHE_ENABLED)
-        {
+        if (!CACHE_PAGE_CACHE_ENABLED) {
             return false;
         }
 
@@ -115,29 +103,25 @@ class CacheControl
     }
 
 
-    public static function file_put_contents_atomic($a_sCacheDir, $filename, $content) 
-    { 
-        $temp = tempnam($a_sCacheDir, 'temp'); 
-        if (!($f = @fopen($temp, 'wb'))) { 
-            $temp = $a_sCacheDir . DIRECTORY_SEPARATOR . uniqid('temp'); 
-            if (!($f = @fopen($temp, 'wb'))) { 
-                trigger_error("file_put_contents_atomic() : error writing temporary file '$temp'", E_USER_WARNING); 
-                return false; 
-            } 
-        } 
-        fwrite($f, $content); 
-        fclose($f); 
+    public static function file_put_contents_atomic($a_sCacheDir, $filename, $content)
+    {
+        $temp = tempnam($a_sCacheDir, 'temp');
+        if (!($f = @fopen($temp, 'wb'))) {
+            $temp = $a_sCacheDir . DIRECTORY_SEPARATOR . uniqid('temp');
+            if (!($f = @fopen($temp, 'wb'))) {
+                trigger_error("file_put_contents_atomic() : error writing temporary file '$temp'", E_USER_WARNING);
+                return false;
+            }
+        }
+        fwrite($f, $content);
+        fclose($f);
        
-        if (!@rename($temp, CACHE_PAGE_DIR . DIRECTORY_SEPARATOR . $filename)) { 
-            @unlink(CACHE_PAGE_DIR . DIRECTORY_SEPARATOR . $filename); 
-            @rename($temp, CACHE_PAGE_DIR . DIRECTORY_SEPARATOR . $filename); 
-        } 
+        if (!@rename($temp, CACHE_PAGE_DIR . DIRECTORY_SEPARATOR . $filename)) {
+            @unlink(CACHE_PAGE_DIR . DIRECTORY_SEPARATOR . $filename);
+            @rename($temp, CACHE_PAGE_DIR . DIRECTORY_SEPARATOR . $filename);
+        }
        
-        @chmod(CACHE_PAGE_DIR . DIRECTORY_SEPARATOR . $filename, 0777); 
-        return true; 
-    } 
-
-
+        @chmod(CACHE_PAGE_DIR . DIRECTORY_SEPARATOR . $filename, 0777);
+        return true;
+    }
 }
-
-?>

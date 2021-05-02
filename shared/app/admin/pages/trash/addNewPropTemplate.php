@@ -10,13 +10,10 @@ echo '<form method="post" action="logic/logic.php?action=addPropTemplate"  name=
 echo 'Bookie: <select name="bookieID">';
 echo '<option value="0" selected>- pick one -</option>';
 $aBookies = BookieHandler::getAllBookies();
-foreach ($aBookies as $oBookie)
-{
-    if (isset($_GET['inBookieID']) && $_GET['inBookieID'] == $oBookie->getID())
-    {
+foreach ($aBookies as $oBookie) {
+    if (isset($_GET['inBookieID']) && $_GET['inBookieID'] == $oBookie->getID()) {
         echo '<option value="' . $oBookie->getID() . '" selected>' . $oBookie->getName() . '</option>';
-    } else
-    {
+    } else {
         echo '<option value="' . $oBookie->getID() . '">' . $oBookie->getName() . '</option>';
     }
 }
@@ -25,8 +22,7 @@ echo '</select><br /><br />';
 echo 'Prop Type: <select name="propTypeID">';
 echo '<option value="0" selected>- pick one -</option>';
 $aPropTypes = OddsHandler::getAllPropTypes();
-foreach ($aPropTypes as $oPropType)
-{
+foreach ($aPropTypes as $oPropType) {
     echo '<option value="' . $oPropType->getID() . '">' . $oPropType->getPropDesc() . '</option>';
 }
 echo '</select><br /><br />';
@@ -49,8 +45,6 @@ Neg Template: <input type="text" id="templateNegField" name="negTemplate"  size=
 echo '<input type="submit" value="Add template" onclick="javascript:return confirm(\'Are you sure?\')"/>';
 echo '</form><br />';
 
-if (isset($_GET['message']))
-{
+if (isset($_GET['message'])) {
     echo $_GET['message'];
 }
-?>

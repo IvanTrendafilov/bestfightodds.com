@@ -5,7 +5,7 @@ use PHPMailer\PHPMailer\Exception;
 
 require 'vendor/autoload.php';
 
-class SESMailer 
+class SESMailer
 {
     private $mailer;
     private $logger;
@@ -49,7 +49,4 @@ class SESMailer
             return false;
         }
     }
-
 }
-
-?>

@@ -12,7 +12,6 @@ require_once('lib/bfocore/utils/class.OddsTools.php');
  */
 class ParseTools
 {
-
     private static $aCorrelationTable = array();
     private static $aFeedStorage = array();
 
@@ -28,10 +27,8 @@ class ParseTools
     {
         $sContents = '';
         $rFile = fopen($a_sFile, 'r');
-        if ($rFile)
-        {
-            while (!feof($rFile))
-            {
+        if ($rFile) {
+            while (!feof($rFile)) {
                 $sContents .= fread($rFile, 8192);
             }
             fclose($rFile);
@@ -46,13 +43,12 @@ class ParseTools
 
         //Get credentials
         $sCred = self::getCredentialsFromURL($a_sURL);
-        if ($sCred != null)
-        {
+        if ($sCred != null) {
             curl_setopt($rCurl, CURLOPT_USERPWD, $sCred);
             curl_setopt($rCurl, CURLOPT_HTTPAUTH, CURLAUTH_BASIC);
         }
 
-        // Set some options - we are passing in a useragent too here        
+        // Set some options - we are passing in a useragent too here
         curl_setopt_array($rCurl, array(
             CURLOPT_IPRESOLVE => CURL_IPRESOLVE_V4,
             CURLOPT_RETURNTRANSFER => 1,
@@ -66,22 +62,16 @@ class ParseTools
         ));
 
         //TODO: Hardcoded stuff. Ugly and should be moved out
-        if (strpos($a_sURL, 'gamingsystem.') !== false) 
-        {
+        if (strpos($a_sURL, 'gamingsystem.') !== false) {
             curl_setopt($rCurl, CURLOPT_SSLVERSION, 6); //TLS 1.2
-        }
-        else if (substr($a_sURL, 0, strlen('https://api.pinnacle.com')) === 'https://api.pinnacle.com')
-        {
+        } elseif (substr($a_sURL, 0, strlen('https://api.pinnacle.com')) === 'https://api.pinnacle.com') {
             curl_setopt($rCurl, CURLOPT_HTTPHEADER, ['Authorization: Basic ZmlnaHRvZGRzOmNuODI2Mg==']);
-        }
-        else if (substr($a_sURL, 0, strlen('https://www.pinnacle.com/webapi')) === 'https://www.pinnacle.com/webapi')
-        {
+        } elseif (substr($a_sURL, 0, strlen('https://www.pinnacle.com/webapi')) === 'https://www.pinnacle.com/webapi') {
             curl_setopt($rCurl, CURLOPT_REFERER, "https://www.pinnacle.com/en/odds/match/mixed-martial-arts/ufc/ufc");
         }
 
         //Set custom curl options if specified
-        if (!empty($a_sCurlOpts))
-        {
+        if (!empty($a_sCurlOpts)) {
             curl_setopt_array($rCurl, $a_sCurlOpts);
         }
 
@@ -90,16 +80,14 @@ class ParseTools
         // Close request to clear up some resources
         curl_close($rCurl);
 
-        if ($sReturn == '')
-        {
+        if ($sReturn == '') {
             return 'FAILED';
         }
 
 
         //Check if gzipped, if so, decode and return that
-        if(substr($sReturn, 0, 2) == "\x1F\x8B")
-        {
-            return gzinflate(substr($sReturn,10,-8));
+        if (substr($sReturn, 0, 2) == "\x1F\x8B") {
+            return gzinflate(substr($sReturn, 10, -8));
         }
 
         return $sReturn;
@@ -111,14 +99,12 @@ class ParseTools
         $mh = curl_multi_init();
 
         //Create individual channels for each URL
-        foreach ($a_aURLs as $sURL)
-        {
+        foreach ($a_aURLs as $sURL) {
             $aChannels[$sURL] = curl_init();
 
             //Get credentials
             $sCred = self::getCredentialsFromURL($sURL);
-            if ($sCred != null)
-            {
+            if ($sCred != null) {
                 curl_setopt($aChannels[$sURL], CURLOPT_USERPWD, $sCred);
                 curl_setopt($aChannels[$sURL], CURLOPT_HTTPAUTH, CURLAUTH_BASIC);
             }
@@ -133,18 +119,13 @@ class ParseTools
                 CURLOPT_SSL_VERIFYPEER => 0,
                 CURLOPT_SSL_VERIFYHOST => 0,
                 CURLOPT_FOLLOWLOCATION => true
-            ));            
+            ));
 
-            if (strpos($sURL, 'gamingsystem.') !== false) 
-            {
-              curl_setopt($aChannels[$sURL], CURLOPT_SSLVERSION, 6); //TLS 1.2
-            }
-            else if (substr($sURL, 0, strlen('https://api.pinnacle.com')) === 'https://api.pinnacle.com')
-            {
+            if (strpos($sURL, 'gamingsystem.') !== false) {
+                curl_setopt($aChannels[$sURL], CURLOPT_SSLVERSION, 6); //TLS 1.2
+            } elseif (substr($sURL, 0, strlen('https://api.pinnacle.com')) === 'https://api.pinnacle.com') {
                 curl_setopt($aChannels[$sURL], CURLOPT_HTTPHEADER, ['Authorization: Basic ZmlnaHRvZGRzOmNuODI2Mg==']);
-            }
-            else if (substr($sURL, 0, strlen('https://www.pinnacle.com/webapi')) === 'https://www.pinnacle.com/webapi')
-            {
+            } elseif (substr($sURL, 0, strlen('https://www.pinnacle.com/webapi')) === 'https://www.pinnacle.com/webapi') {
                 curl_setopt($aChannels[$sURL], CURLOPT_REFERER, "https://www.pinnacle.com/en/odds/match/mixed-martial-arts/ufc/ufc");
             }
 
@@ -159,40 +140,30 @@ class ParseTools
         } while ($running > 0);*/
 
         $running = null;
-        do
-        {
+        do {
             $resp = curl_multi_exec($mh, $running);
-        }
-        while ($resp == CURLM_CALL_MULTI_PERFORM);
+        } while ($resp == CURLM_CALL_MULTI_PERFORM);
 
-        while ($running && $resp == CURLM_OK)
-        {
+        while ($running && $resp == CURLM_OK) {
             curl_multi_select($mh);
-            do
-            {
+            do {
                 $resp = curl_multi_exec($mh, $running);
-            }
-            while ($resp == CURLM_CALL_MULTI_PERFORM);
+            } while ($resp == CURLM_CALL_MULTI_PERFORM);
         }
 
         //Fetch data into storage when all is done
-        foreach ($aChannels as $sChannelKey => $rChannelVal)
-        {
+        foreach ($aChannels as $sChannelKey => $rChannelVal) {
             $sContent = curl_multi_getcontent($rChannelVal);
-            if(substr($sContent, 0, 2) == "\x1F\x8B")
-            {
-                self::$aFeedStorage[$sChannelKey] = gzinflate(substr($sContent,10,-8)); 
-            }
-            else
-            {
-                self::$aFeedStorage[$sChannelKey] = $sContent;   
+            if (substr($sContent, 0, 2) == "\x1F\x8B") {
+                self::$aFeedStorage[$sChannelKey] = gzinflate(substr($sContent, 10, -8));
+            } else {
+                self::$aFeedStorage[$sChannelKey] = $sContent;
             }
         }
 
         //Close channels
-        foreach ($aChannels as $rChannel)
-        {
-            curl_multi_remove_handle($mh, $rChannel);        
+        foreach ($aChannels as $rChannel) {
+            curl_multi_remove_handle($mh, $rChannel);
         }
         curl_multi_close($mh);
         return true;
@@ -202,9 +173,8 @@ class ParseTools
     {
         $aMatches = array();
         preg_match('/:\/\/([^:]+:[^@]+)@/', $a_sURL, $aMatches);
-        if (isset($aMatches[1]))
-        {
-            return $aMatches[1];    
+        if (isset($aMatches[1])) {
+            return $aMatches[1];
         }
         return null;
     }
@@ -248,13 +218,11 @@ class ParseTools
      */
     public static function formatOdds($a_sOdds)
     {
-        if ($a_sOdds == 'EV' || $a_sOdds == 'ev' || $a_sOdds == 'Even' || $a_sOdds == 'even' || $a_sOdds == 'EVEN')
-        {
+        if ($a_sOdds == 'EV' || $a_sOdds == 'ev' || $a_sOdds == 'Even' || $a_sOdds == 'even' || $a_sOdds == 'EVEN') {
             $a_sOdds = '+100';
         }
         //Check if odds is in decimal format, if so change it to moneyline
-        else if (preg_match('/[0-9]*\\.[0-9]*/', $a_sOdds))
-        {
+        elseif (preg_match('/[0-9]*\\.[0-9]*/', $a_sOdds)) {
             $a_sOdds = ParseTools::convertOddsEUToUS($a_sOdds);
         }
         return $a_sOdds;
@@ -305,18 +273,14 @@ class ParseTools
      */
     public static function getLastnameFromName($a_sName, $a_bOnlyLast = true)
     {
-        if ($a_bOnlyLast == true)
-        {
+        if ($a_bOnlyLast == true) {
             //Gets only last part (e.g. Santos from Junior Dos Santos)
             $aParts = explode(' ', $a_sName);
-            return $aParts[count($aParts) - 1];    
-        }
-        else
-        {
+            return $aParts[count($aParts) - 1];
+        } else {
             //Get all last names (e.g Dos Santos from Junior Dos Santos)
             $aParts = explode(' ', $a_sName, 2);
-            if (sizeof($aParts) == 1)
-            {
+            if (sizeof($aParts) == 1) {
                 return $aParts[0];
             }
             return $aParts[1];
@@ -326,8 +290,7 @@ class ParseTools
     public static function getInitialsFromName($a_sName)
     {
         $aInitials = array();
-        foreach (explode(" ", $a_sName) as $sName)
-        {
+        foreach (explode(" ", $a_sName) as $sName) {
             $aInitials[] = strtoupper(substr($sName, 0, 1));
         }
         return $aInitials;
@@ -348,7 +311,7 @@ class ParseTools
      *
      * @param string First money line
      * @param string Second money line
-     * @return float Arbitrage value in decimal 
+     * @return float Arbitrage value in decimal
      */
     public static function getArbitrage($a_sMoneyline1, $a_sMoneyline2)
     {
@@ -362,8 +325,7 @@ class ParseTools
 
     public static function checkTeamName($a_sTeamName)
     {
-        if (preg_match('/^[a-zA-Z0-9\'\\s-]*$/', $a_sTeamName))
-        {
+        if (preg_match('/^[a-zA-Z0-9\'\\s-]*$/', $a_sTeamName)) {
             return true;
         }
         return false;
@@ -382,13 +344,11 @@ class ParseTools
     public static function isProp($a_sName)
     {
         //Check if either parameter is 4 or more words, then its probably a prop bet
-        if (count(explode(" ", ParseTools::formatName($a_sName))) >= 4)
-        {
+        if (count(explode(" ", ParseTools::formatName($a_sName))) >= 4) {
             return true;
         }
         //Check if prop is either YES or NO, if that is the case then it is probably a prop
-        if (strcasecmp($a_sName, 'yes') == 0 || strcasecmp($a_sName, 'no') == 0)
-        {
+        if (strcasecmp($a_sName, 'yes') == 0 || strcasecmp($a_sName, 'no') == 0) {
             return true;
         }
 
@@ -404,10 +364,10 @@ class ParseTools
 
     /**
      * Stores a correlation for the lifetime of the execution
-     * 
+     *
      * Correlation can be used to link different parsed objects with eachother
      * e.g. matchups and props
-     * 
+     *
      * @param String $a_sSource Key
      * @param String $a_sTarget Value
      * @return boolean If correlation was stored or not
@@ -420,14 +380,13 @@ class ParseTools
 
     /**
      * Retrieves a stored correlation
-     * 
+     *
      * @param String $a_sSource Key
-     * @return String Value for the specified key 
+     * @return String Value for the specified key
      */
     public static function getCorrelation($a_sSource)
     {
-        if (isset(self::$aCorrelationTable[$a_sSource]))
-        {
+        if (isset(self::$aCorrelationTable[$a_sSource])) {
             return self::$aCorrelationTable[$a_sSource];
         }
         return null;
@@ -446,8 +405,7 @@ class ParseTools
 
     public static function getStoredContentForURL($a_sURL)
     {
-        if (isset(self::$aFeedStorage[$a_sURL]))
-        {
+        if (isset(self::$aFeedStorage[$a_sURL])) {
             return self::$aFeedStorage[$a_sURL];
         }
         return false;
@@ -458,18 +416,15 @@ class ParseTools
      */
     public static function stripForeignChars($a_sText)
     {
-        $a = 'ÀÁÂÃÄÅÆÇÈÉÊËÌÍÎÏÐÑÒÓÔÕÖØÙÚÛÜÝÞßàáâãäåæçèéêëìíîïðñòóôõöøùúûýýþÿŔŕ '; 
-        $b = 'aaaaaaaceeeeiiiidnoooooouuuuybsaaaaaaaceeeeiiiidnoooooouuuyybyRr '; 
-        $a_sText = utf8_decode($a_sText);     
-        $a_sText = strtr($a_sText, utf8_decode($a), $b); 
-        return utf8_encode($a_sText); 
+        $a = 'ÀÁÂÃÄÅÆÇÈÉÊËÌÍÎÏÐÑÒÓÔÕÖØÙÚÛÜÝÞßàáâãäåæçèéêëìíîïðñòóôõöøùúûýýþÿŔŕ ';
+        $b = 'aaaaaaaceeeeiiiidnoooooouuuuybsaaaaaaaceeeeiiiidnoooooouuuyybyRr ';
+        $a_sText = utf8_decode($a_sText);
+        $a_sText = strtr($a_sText, utf8_decode($a), $b);
+        return utf8_encode($a_sText);
     }
-
 }
 
 function getArrayVal($a_aArray, $a_sKey)
 {
     return $a_aArray[$a_sKey];
 }
-
-?>

@@ -66,5 +66,3 @@ class Bookie
         return $this->sRefURL;
     }
 }
-
-?>

@@ -19,7 +19,7 @@ class Twitterer
 
     /**
      * Constructor
-     * 
+     *
      * @param String $a_sConsumerKey Consumer Key
      * @param String $a_sConsumerSecret Consumer Secret
      * @param String $a_sOAuthToken OAuth Token
@@ -43,22 +43,21 @@ class Twitterer
      */
     public function updateStatus($a_sMessage)
     {
-        if ($this->m_bDebug == true)
-        {
+        if ($this->m_bDebug == true) {
             $this->logger->debug("Simulating posting (" . strlen($a_sMessage) . "): " . $a_sMessage);
             return true;
         }
 
-        $rConnection = new TwitterOAuth($this->m_sConsumerKey,
-                        $this->m_sConsumerSecret,
-                        $this->m_sOAuthToken,
-                        $this->m_sOAuthTokenSecret);
+        $rConnection = new TwitterOAuth(
+            $this->m_sConsumerKey,
+            $this->m_sConsumerSecret,
+            $this->m_sOAuthToken,
+            $this->m_sOAuthTokenSecret
+        );
         $rResult = $rConnection->post('statuses/update', array('status' => $a_sMessage));
 
-        if (isset($rResult->errors))
-        {
-            if ($rResult->errors[0]->code == '187') //Duplicate, treated as success
-            {
+        if (isset($rResult->errors)) {
+            if ($rResult->errors[0]->code == '187') { //Duplicate, treated as success
                 $this->logger->info("Duplicate post (OK): (" . strlen($a_sMessage) . "): " . $a_sMessage);
                 return true;
             }
@@ -75,5 +74,3 @@ class Twitterer
         $this->m_bDebug = $a_bDebug;
     }
 }
-
-?>

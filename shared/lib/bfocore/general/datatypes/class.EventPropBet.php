@@ -24,15 +24,13 @@ class EventPropBet extends PropBet
 
     public function equals($a_oPropBet)
     {
-        $bEquals = ($this->iEventID == $a_oPropBet->getEventID() &&
+        $bEquals = (
+            $this->iEventID == $a_oPropBet->getEventID() &&
                 $this->getBookieID() == $a_oPropBet->getBookieID() &&
                 $this->getPropOdds() == $a_oPropBet->getPropOdds() &&
                 $this->getNegPropOdds() == $a_oPropBet->getNegPropOdds() &&
                 $this->getPropTypeID() == $a_oPropBet->getPropTypeID()
-                );
+        );
         return $bEquals;
     }
-
 }
-
-?>

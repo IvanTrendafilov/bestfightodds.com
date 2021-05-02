@@ -72,7 +72,6 @@ class AdminController
         //Old approach:
         $unmatched_groups = [];
         foreach ($unmatched_col as $key => $unmatched) {
-
             if (isset($unmatched['metadata']['gametime'])) {
                 $unmatched_col[$key]['view_extras']['event_date_formatted'] = (new DateTime('@' . $unmatched['metadata']['gametime']))->format('Y-m-d');
             }
@@ -108,7 +107,6 @@ class AdminController
         $groups = [];
         $event_groups = [];
         foreach ($unmatched_col as $unmatched) {
-
             if ($unmatched['type'] == 0) {
 
                 //First check if this can be grouped to an existing key using similarity
@@ -142,8 +140,6 @@ class AdminController
 
                 //Match events
                 if (isset($unmatched['metadata']['event_name'])) {
-
-
                     if (!isset($groups[$key]['dates'][$date]['parsed_events'])) {
                         $groups[$key]['dates'][$date]['parsed_events'] = [];
                     }
@@ -178,11 +174,9 @@ class AdminController
                             $matched_event = $event;
                         }
                     }
-                    if ($matched_event != '')
-                    {
+                    if ($matched_event != '') {
                         $groups[$key]['dates'][$date]['matched_events'][] = $matched_event;
                     }
-                    
                 }
             }
         }
@@ -252,7 +246,7 @@ class AdminController
                     case 7:
                         //Delete matchup
                         $action['view_extra']['matchup'] = EventHandler::getFightByID($action['action_obj']->matchupID);
-                        //Check if matchup has odds and the indicate that 
+                        //Check if matchup has odds and the indicate that
                         $action['view_extra']['odds'] = OddsHandler::getOpeningOddsForMatchup($action['action_obj']->matchupID);
 
                         //Check if either fighter has another matchup scheduled and indicate that
@@ -314,7 +308,7 @@ class AdminController
         $events = null;
         if (isset($args['show']) && $args['show'] == 'all') {
             $events = EventHandler::getAllEvents();
-        } else if (isset($args['show']) && is_numeric($args['show'])) {
+        } elseif (isset($args['show']) && is_numeric($args['show'])) {
             return $this->showEvent($request, $response, $args);
         } else {
             $events = EventHandler::getAllUpcomingEvents();
@@ -508,7 +502,6 @@ class AdminController
 
     public function createPropCorrelation(Request $request, Response $response, array $args)
     {
-
         $view_data['input_prop'] = $request->getQueryParams()['input_prop'] ?? '';
         $view_data['bookie_id'] = $request->getQueryParams()['bookie_id'] ?? '';
 
@@ -566,7 +559,6 @@ class AdminController
         foreach ($flagged as $flagged_row) {
             $key = $flagged_row['fight_obj']->getTeamAsString(1) . ' / ' . $flagged_row['fight_obj']->getTeamAsString(2);
             if (!isset($matchup_groups[$key])) {
-
                 $first_date = date_create($flagged_row['initial_flagdate']);
                 $last_date = date_create($flagged_row['last_flagdate']);
 

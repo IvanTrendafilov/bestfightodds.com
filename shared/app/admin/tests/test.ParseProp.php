@@ -3,7 +3,7 @@
     </head>
     <body style="font-size: 12px; font-family: Verdana">
         <form method="get" action ="/cnadm/tests/test.ParseProp.php">
-            Prop text to match: <input type="text" name="prop" value="<?php echo (isset($_GET['prop']) ? $_GET['prop'] : ''); ?>" style="width: 400px;"/>
+            Prop text to match: <input type="text" name="prop" value="<?php echo(isset($_GET['prop']) ? $_GET['prop'] : ''); ?>" style="width: 400px;"/>
             <input type="submit" value="Execute" />
         </form>
         <br />
@@ -16,8 +16,7 @@
             require_once('lib/bfocore/parser/utils/class.ParseTools.php');
 
 
-            if (isset($_GET['prop']))
-            {
+            if (isset($_GET['prop'])) {
 
 
 
@@ -26,32 +25,22 @@
                 $oPropParser = new PropParser();
 
                 //For each bookie, check if it can match the prop
-                foreach ($aBookies as $oBookie)
-                {
+                foreach ($aBookies as $oBookie) {
                     echo 'Checking ' . $oBookie->getName() . '<br />';
 
                     $oParsedProp = new ParsedProp($_GET['prop'], '', '-115', '-115');
                     $oTemplate = $oPropParser->matchParsedPropToTemplate($oBookie->getID(), $oParsedProp);
 
-                    if ($oTemplate == null)
-                    {
+                    if ($oTemplate == null) {
                         echo '&nbsp;&nbsp;&nbsp;Found no template' . '<br />';
-                    }
-                    else
-                    {
-
-
+                    } else {
                         echo '&nbsp;&nbsp;&nbsp;Found template: ' . $oTemplate->toString() . '<br />';
                         $aMatchup = $oPropParser->matchParsedPropToMatchup($oParsedProp, $oTemplate);
 
 
-                        if ($aMatchup['matchup'] == null)
-                        {
-
+                        if ($aMatchup['matchup'] == null) {
                             echo '&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Found no matchup' . '<br />';
-                        }
-                        else
-                        {
+                        } else {
                             $oMatchup = EventHandler::getFightByID($aMatchup['matchup']);
 
 

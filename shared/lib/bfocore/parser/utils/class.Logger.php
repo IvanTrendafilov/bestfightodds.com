@@ -11,13 +11,12 @@ require_once('config/inc.config.php');
  * 3. Log something with the log(message, severity) method
  * 4. Seperate log entries by calling the seperate() method (not required but makes it look nice)
  * 5. Call the end(filename) method to finish the logging and save log to filename.
- * 
+ *
  * @deprecated Use a standardized logging library instead
- * 
+ *
  */
 class Logger
 {
-
     private static $instance;
     private $rFileHandle;
 
@@ -26,18 +25,16 @@ class Logger
      */
     private function __construct()
     {
-
     }
 
     /**
      * Returns the singleton instance
-     * 
+     *
      * @return Logger instance
      */
     public static function getInstance()
     {
-        if (!self::$instance)
-        {
+        if (!self::$instance) {
             self::$instance = new Logger();
         }
         return self::$instance;
@@ -54,11 +51,9 @@ class Logger
      */
     public function log($a_sMessage, $a_iSeverity = 0)
     {
-        if ($a_iSeverity <= PARSE_LOG_LEVEL)
-        {
+        if ($a_iSeverity <= PARSE_LOG_LEVEL) {
             $sClass = '';
-            switch ($a_iSeverity)
-            {
+            switch ($a_iSeverity) {
                 case 1: $sClass = 'sev1';
                     break;
                 case 2: $sClass = 'sev2';
@@ -100,7 +95,4 @@ class Logger
     {
         fclose($this->rFileHandle);
     }
-
 }
-
-?>

@@ -40,20 +40,16 @@ header('Pragma: no-cache');
 <div class="contentWindow">
 <?php
 
-if (isset($_GET['p']) && $_GET['p'] != '' && preg_match('/[a-zA-Z0-9]*/', $_GET['p']))
-{
-
-	include_once('app/front/cnadm/pages/' . $_GET['p'] . '.php');
-}
-else
-{
-	//Show default
-	include_once('app/front/cnadm/pages/main.php');
+if (isset($_GET['p']) && $_GET['p'] != '' && preg_match('/[a-zA-Z0-9]*/', $_GET['p'])) {
+    include_once('app/front/cnadm/pages/' . $_GET['p'] . '.php');
+} else {
+    //Show default
+    include_once('app/front/cnadm/pages/main.php');
 }
 
 /*if (isset($_GET['message']) && $_GET['message'] != '')
 {
-	echo '<script language="Javascript">alert ("' . $_GET['message'] . '")</script>';
+    echo '<script language="Javascript">alert ("' . $_GET['message'] . '")</script>';
 }*/
 
 ?>

@@ -17,11 +17,10 @@ $oEvent = EventHandler::getEvent($iEvent);
 echo '<table border=1>';
 echo '<tr><td>event_id</td><td>event_name</td><td>event_date</td><td>fighter1_id</td><td>fighter1_name</td><td>fighter1_line</td><td>fighter2_id</td><td>fighter2_name</td><td>fighter2_line</td></tr>';
 
-for ($iFightX = 0; $iFightX < count($aFights); $iFightX++)
-{
-	$oFight = $aFights[$iFightX];
-	$oFightOdds = EventHandler::getBestOddsForFight($oFight->getID());
-	echo '<tr><td>' . $iEvent . '</td>
+for ($iFightX = 0; $iFightX < count($aFights); $iFightX++) {
+    $oFight = $aFights[$iFightX];
+    $oFightOdds = EventHandler::getBestOddsForFight($oFight->getID());
+    echo '<tr><td>' . $iEvent . '</td>
 				<td>' . $oEvent->getName() . '</td>
 				<td> ' . $oEvent->getDate() . '</td>
 				<td>' . $oFight->getFighterID(1) . '</td>
@@ -34,8 +33,3 @@ for ($iFightX = 0; $iFightX < count($aFights); $iFightX++)
 }
 
 echo '</table>';
-
-
-
-
-?>

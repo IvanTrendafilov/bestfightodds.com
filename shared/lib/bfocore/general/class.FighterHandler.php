@@ -13,8 +13,7 @@ class FighterHandler
 
     public static function searchFighter($name)
     {
-        if (strlen($name) < 2)
-        {
+        if (strlen($name) < 2) {
             return false;
         }
         return TeamDB::searchFighter($name);
@@ -25,5 +24,3 @@ class FighterHandler
         return TeamDB::getFighterByID($id);
     }
 }
-
-?>

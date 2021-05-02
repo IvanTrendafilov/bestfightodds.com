@@ -15,7 +15,7 @@ class AlertV2
         $this->id = (int) $id;
         $this->email = (string) $email;
         $this->oddstype = (int) $oddstype;
-        $this->criterias = (string) $criterias;        
+        $this->criterias = (string) $criterias;
     }
 
     public function getID()
@@ -38,5 +38,3 @@ class AlertV2
         return json_decode($this->criterias, true);
     }
 }
-
-?>

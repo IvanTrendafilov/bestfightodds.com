@@ -47,8 +47,7 @@ class FacebookDB
 
         $results = PDOTools::findMany($query);
         $matchups = [];
-        foreach ($results as $row)
-        {
+        foreach ($results as $row) {
             $tmp_matchup = new Fight($row['id'], $row['fighter1_name'], $row['fighter2_name'], $row['event_id']);
             $tmp_matchup->setFighterID(1, $row['fighter1_id']);
             $tmp_matchup->setFighterID(2, $row['fighter2_id']);
@@ -64,15 +63,13 @@ class FacebookDB
         $query = 'SELECT * FROM events e LEFT JOIN matchups_fbposts ff ON e.id = ff.event_id WHERE ff.event_id IS NULL
         			AND LEFT(NOW(), 10) = LEFT(e.date, 10)
         			AND e.display = 1';
-                    //AND LEFT(NOW() + INTERVAL 36 HOUR, 10) = LEFT(e.date, 10)
+        //AND LEFT(NOW() + INTERVAL 36 HOUR, 10) = LEFT(e.date, 10)
 
         $results = PDOTools::findMany($query);
         $events = [];
-        foreach ($results as $row)
-        {
+        foreach ($results as $row) {
             $events[] = new Event($row['id'], $row['date'], $row['name'], $row['display']);
         }
         return $events;
     }
 }
-?>

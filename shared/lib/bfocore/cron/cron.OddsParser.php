@@ -36,30 +36,25 @@ $aParsers = explode(';', PARSE_PARSERS);
 $aStoredParsers = BookieHandler::getParsers();
 
 //Pre-fetch data from bookie URLs (skip if in mock feed mode)
-if (PARSE_MOCKFEEDS_ON == false)
-{
+if (PARSE_MOCKFEEDS_ON == false) {
     $aURLs = array();
     $fStartTime = microtime(true);
-    foreach ($aParsers as $sParser)
-    {
-        $filtered = array_filter($aStoredParsers, function($entry) use ($sParser) {
+    foreach ($aParsers as $sParser) {
+        $filtered = array_filter($aStoredParsers, function ($entry) use ($sParser) {
             return ($entry->getName() == $sParser);
         });
         $filtered = reset($filtered);
-        if ($filtered != null)
-        {
+        if ($filtered != null) {
             $sURL = $filtered->getParseURL();
-            if ($filtered->hasChangenumInUse())
-            {
+            if ($filtered->hasChangenumInUse()) {
                 $iChangeNum = BookieHandler::getChangeNum($filtered->getBookieID());
-                if ($iChangeNum != -1)
-                {
+                if ($iChangeNum != -1) {
                     $sURL .= $filtered->getChangenumSuffix() . $iChangeNum;
                 }
             }
             $aURLs[] = $sURL;
             
-            $oLogger->log("Preparing prefetch of <a href=\"" . end($aURLs) . "\" target=\"_blank\">" . end($aURLs) . "</a>", 0);        
+            $oLogger->log("Preparing prefetch of <a href=\"" . end($aURLs) . "\" target=\"_blank\">" . end($aURLs) . "</a>", 0);
         }
     }
     ParseTools::retrieveMultiplePagesFromURLs($aURLs);
@@ -69,13 +64,11 @@ if (PARSE_MOCKFEEDS_ON == false)
 
 
 //Dispatch all bookie-specific parsers as defined in config
-foreach ($aParsers as $sParser)
-{
-    $filtered = array_filter($aStoredParsers, function($file) use ($sParser) {
+foreach ($aParsers as $sParser) {
+    $filtered = array_filter($aStoredParsers, function ($file) use ($sParser) {
         return ($file->getName() == $sParser);
     });
-    if (reset($filtered) != null)
-    {
+    if (reset($filtered) != null) {
         XMLParser::dispatch(reset($filtered));
     }
 }
@@ -86,14 +79,12 @@ $oLogger->log("Parsing done. ", 0);
 $oLogger->seperate();
 
 //Evaluate changes to matchup dates as proposed by xml feeds
-if (PARSE_CREATEMATCHUPS == true)
-{
+if (PARSE_CREATEMATCHUPS == true) {
     ScheduleChangeTracker::getInstance()->checkForChanges();
 }
 
 //Clean and check alerts
-if (ALERTER_ENABLED == true)
-{
+if (ALERTER_ENABLED == true) {
     $iAlertsCleaned = Alerter::cleanAlerts();
     $oLogger->log("Cleaning expired alerts. Alerts cleaned: " . $iAlertsCleaned . "", 0);
     $iAlerts = Alerter::checkAllAlerts();
@@ -120,38 +111,33 @@ $aEvents = EventHandler::getAllUpcomingEvents();
 $view_data = [];
 $view_data['bookies'] = BookieHandler::getAllBookies();
 $view_data['events'] = [];
-foreach ($aEvents as $oEvent)
-{
-    if ($oEvent->isDisplayed())
-    {
+foreach ($aEvents as $oEvent) {
+    if ($oEvent->isDisplayed()) {
         $event_data = OddsHandler::getEventViewData($oEvent->getID());
-        if (count($event_data['matchups']) > 0)
-        {
+        if (count($event_data['matchups']) > 0) {
             $view_data['events'][] = $event_data;
         }
     }
 }
 $rendered_page = $plates->render('gen_oddspage', $view_data);
 $rPage = fopen(PARSE_PAGEDIR . 'oddspage.php', 'w');
-if ($rPage != null)
-{
+if ($rPage != null) {
     //Minify
     $rendered_page = preg_replace('/\>\s+\</m', '><', $rendered_page);
     fwrite($rPage, $rendered_page);
     fclose($rPage);
     $oLogger->log("Plates odds page (oddspage) generated: 1");
-}
-else
-{
+} else {
     $oLogger->log("Failed to generate odds page (oddspage)");
 }
 
 //Tweet new fight odds
-if (TWITTER_ENABLED == true)
-{
+if (TWITTER_ENABLED == true) {
     $aTwitResults = TwitterHandler::twitterNewFights();
-    $oLogger->log("Tweeted new matchups/events: " . $aTwitResults['post_twittered'] . " of " . $aTwitResults['pre_untwittered_events'],
-            ($aTwitResults['pre_untwittered_events'] == $aTwitResults['post_twittered'] ? 0 : -2));
+    $oLogger->log(
+        "Tweeted new matchups/events: " . $aTwitResults['post_twittered'] . " of " . $aTwitResults['pre_untwittered_events'],
+        ($aTwitResults['pre_untwittered_events'] == $aTwitResults['post_twittered'] ? 0 : -2)
+    );
 }
 
 //Clear old logged runs in database
@@ -166,4 +152,3 @@ $oLogger->end(PARSE_LOGDIR . date('Ymd-Hi') . '.log');
 
 
 echo 'Done!';
-?>

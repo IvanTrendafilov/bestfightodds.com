@@ -10,8 +10,7 @@ class OddsHandler
         if (
             $a_oPropBet->getPropOdds() == '' || $a_oPropBet->getNegPropOdds() == ''
             || (intval($a_oPropBet->getPropOdds()) > 0 && intval($a_oPropBet->getNegPropOdds()) > 0)
-        ) //Ignore odds that are positive on both ends (should indicate an incorrect line)
-        {
+        ) { //Ignore odds that are positive on both ends (should indicate an incorrect line)
             return false;
         }
         return OddsDB::addPropBet($a_oPropBet);
@@ -39,7 +38,6 @@ class OddsHandler
 
     public static function checkMatchingPropOdds($a_oPropBet)
     {
-
         $oExistingPropOdds = OddsHandler::getLatestPropOdds($a_oPropBet->getMatchupID(), $a_oPropBet->getBookieID(), $a_oPropBet->getPropTypeID(), $a_oPropBet->getTeamNumber());
         if ($oExistingPropOdds != null) {
             return $oExistingPropOdds->equals($a_oPropBet);
@@ -118,10 +116,10 @@ class OddsHandler
 
     /**
      * Get the openings odds for a specific matchup
-     * 
-     * 
+     *
+     *
      * @param int Matchup ID
-     * @return FightOdds The opening odds or null if none was found 
+     * @return FightOdds The opening odds or null if none was found
      */
     public static function getOpeningOddsForMatchup($a_iMatchupID)
     {
@@ -130,10 +128,10 @@ class OddsHandler
 
     /**
      * Get the opening odds for a specified matchup and bookie
-     * 
+     *
      * @param int $a_iMatchupID Matchup ID
      * @param int $a_iBookieID Bookie ID
-     * @return FightOdds The opening odds or null if no line was found 
+     * @return FightOdds The opening odds or null if no line was found
      */
     public static function getOpeningOddsForMatchupAndBookie($a_iMatchupID, $a_iBookieID)
     {
@@ -142,10 +140,10 @@ class OddsHandler
 
     /**
      * Get openings odds for a specific prop
-     * 
+     *
      * @param int Matchup ID
      * @param int Proptype ID
-     * @return FightOdds The opening odds or null if none was found 
+     * @return FightOdds The opening odds or null if none was found
      */
     public static function getOpeningOddsForProp($a_iMatchupID, $a_iPropTypeID, $a_iTeamNum)
     {
@@ -154,7 +152,7 @@ class OddsHandler
 
     /**
      * Get openings odds for a specific prop and bookkie
-     * 
+     *
      * @param int Matchup ID
      * @param int Proptype ID
      * @param int Bookie ID
@@ -167,9 +165,9 @@ class OddsHandler
 
     /**
      * Get all correlations for the specified bookie
-     * 
+     *
      * @param int $a_iBookieID Bookie ID
-     * @return array Collection of correlations 
+     * @return array Collection of correlations
      */
     public static function getCorrelationsForBookie($a_iBookieID)
     {
@@ -180,11 +178,11 @@ class OddsHandler
 
     /**
      * Stores a collection of correlations
-     * 
+     *
      * Accepts an array of correlations defined as follows:
-     * 
+     *
      * array('correlation' => xxx, 'matchup_id' => xxx)
-     * 
+     *
      * @param int $a_iBookieID Bookie ID
      * @param array $a_aCorrelations Collection of correlations as defined above
      */
@@ -312,7 +310,6 @@ class OddsHandler
 
     public static function checkMatchingEventPropOdds($a_oEventPropBet)
     {
-
         $oExistingPropOdds = OddsHandler::getLatestEventPropOdds($a_oEventPropBet->getEventID(), $a_oEventPropBet->getBookieID(), $a_oEventPropBet->getPropTypeID());
         if ($oExistingPropOdds != null) {
             return $oExistingPropOdds->equals($a_oEventPropBet);
@@ -407,8 +404,7 @@ class OddsHandler
         if (
             !is_numeric($a_iBookieID) || $a_iBookieID <= 0
             || (!$a_iMatchupID && !$a_iEventID && !$a_iPropTypeID && !$a_iTeamNum)
-        ) //If all is null we don't proceed
-        {
+        ) { //If all is null we don't proceed
             return false;
         }
         return OddsDB::removeFlagged($a_iBookieID, $a_iMatchupID, $a_iEventID, $a_iPropTypeID, $a_iTeamNum);
@@ -474,19 +470,24 @@ class OddsHandler
         $result = OddsDB::getLatestPropOddsV2($a_iEventID, $a_iMatchupID, $a_iBookieID, $a_iPropTypeID, $a_iTeamNum);
 
         $return = [];
-        //Move result into multidimensional array 
+        //Move result into multidimensional array
         foreach ($result as $row) {
             //This segment initializes a key if not set before
-            if (!isset($return[$row['event_id']]))
+            if (!isset($return[$row['event_id']])) {
                 $return[$row['event_id']] = [];
-            if (!isset($return[$row['event_id']][$row['matchup_id']]))
+            }
+            if (!isset($return[$row['event_id']][$row['matchup_id']])) {
                 $return[$row['event_id']][$row['matchup_id']] = [];
-            if (!isset($return[$row['event_id']][$row['matchup_id']][$row['proptype_id']]))
+            }
+            if (!isset($return[$row['event_id']][$row['matchup_id']][$row['proptype_id']])) {
                 $return[$row['event_id']][$row['matchup_id']][$row['proptype_id']] = [];
-            if (!isset($return[$row['event_id']][$row['matchup_id']][$row['proptype_id']][$row['team_num']]))
+            }
+            if (!isset($return[$row['event_id']][$row['matchup_id']][$row['proptype_id']][$row['team_num']])) {
                 $return[$row['event_id']][$row['matchup_id']][$row['proptype_id']][$row['team_num']] = [];
-            if (!isset($return[$row['event_id']][$row['matchup_id']][$row['proptype_id']][$row['team_num']][$row['bookie_id']]))
+            }
+            if (!isset($return[$row['event_id']][$row['matchup_id']][$row['proptype_id']][$row['team_num']][$row['bookie_id']])) {
                 $return[$row['event_id']][$row['matchup_id']][$row['proptype_id']][$row['team_num']][$row['bookie_id']] = [];
+            }
 
             $prop_obj = new PropBet(
                 $row['matchup_id'],
@@ -515,15 +516,18 @@ class OddsHandler
         $result = OddsDB::getLatestEventPropOddsV2($a_iEventID, $a_iMatchupID, $a_iBookieID, $a_iPropTypeID, $a_iTeamNum);
 
         $return = [];
-        //Move result into multidimensional array 
+        //Move result into multidimensional array
         foreach ($result as $row) {
             //This segment initializes a key if not set before
-            if (!isset($return[$row['event_id']]))
+            if (!isset($return[$row['event_id']])) {
                 $return[$row['event_id']] = [];
-            if (!isset($return[$row['event_id']][$row['proptype_id']]))
+            }
+            if (!isset($return[$row['event_id']][$row['proptype_id']])) {
                 $return[$row['event_id']][$row['proptype_id']] = [];
-            if (!isset($return[$row['event_id']][$row['proptype_id']][$row['bookie_id']]))
+            }
+            if (!isset($return[$row['event_id']][$row['proptype_id']][$row['bookie_id']])) {
                 $return[$row['event_id']][$row['proptype_id']][$row['bookie_id']] = [];
+            }
 
             $prop_obj = new EventPropBet(
                 $row['event_id'],
@@ -554,12 +558,15 @@ class OddsHandler
         //Move result into multidimensional array
         foreach ($result as $row) {
             //This segment initializes a key if not set before
-            if (!isset($return[$row['event_id']]))
+            if (!isset($return[$row['event_id']])) {
                 $return[$row['event_id']] = [];
-            if (!isset($return[$row['event_id']][$row['fight_id']]))
+            }
+            if (!isset($return[$row['event_id']][$row['fight_id']])) {
                 $return[$row['event_id']][$row['fight_id']] = [];
-            if (!isset($return[$row['event_id']][$row['fight_id']][$row['bookie_id']]))
+            }
+            if (!isset($return[$row['event_id']][$row['fight_id']][$row['bookie_id']])) {
                 $return[$row['event_id']][$row['fight_id']][$row['bookie_id']] = [];
+            }
 
 
             $fo_obj = new FightOdds($row['fight_id'], $row['bookie_id'], $row['fighter1_odds'], $row['fighter2_odds'], $row['date']);
@@ -604,16 +611,16 @@ class OddsHandler
                     //Indicate which line is best on both sides
                     if (count($best_odds_reflist1) == 0) {
                         $best_odds_reflist1[] = $odds_key;
-                    } else if ($bookie_odds['odds_obj']->getOdds(1) > $matchup_entry[$best_odds_reflist1[0]]['odds_obj']->getOdds(1)) {
+                    } elseif ($bookie_odds['odds_obj']->getOdds(1) > $matchup_entry[$best_odds_reflist1[0]]['odds_obj']->getOdds(1)) {
                         $best_odds_reflist1 = [$odds_key];
-                    } else if ($bookie_odds['odds_obj']->getOdds(1) == $matchup_entry[$best_odds_reflist1[0]]['odds_obj']->getOdds(1)) {
+                    } elseif ($bookie_odds['odds_obj']->getOdds(1) == $matchup_entry[$best_odds_reflist1[0]]['odds_obj']->getOdds(1)) {
                         $best_odds_reflist1[] = $odds_key;
                     }
                     if (count($best_odds_reflist2) == 0) {
                         $best_odds_reflist2[] = $odds_key;
-                    } else if ($bookie_odds['odds_obj']->getOdds(2) > $matchup_entry[$best_odds_reflist2[0]]['odds_obj']->getOdds(2)) {
+                    } elseif ($bookie_odds['odds_obj']->getOdds(2) > $matchup_entry[$best_odds_reflist2[0]]['odds_obj']->getOdds(2)) {
                         $best_odds_reflist2 = [$odds_key];
-                    } else if ($bookie_odds['odds_obj']->getOdds(2) == $matchup_entry[$best_odds_reflist2[0]]['odds_obj']->getOdds(2)) {
+                    } elseif ($bookie_odds['odds_obj']->getOdds(2) == $matchup_entry[$best_odds_reflist2[0]]['odds_obj']->getOdds(2)) {
                         $best_odds_reflist2[] = $odds_key;
                     }
                 }
@@ -645,16 +652,16 @@ class OddsHandler
                             //Indicate which line is best on both sides
                             if (count($best_odds_reflist1) == 0) {
                                 $best_odds_reflist1[] = $odds_key;
-                            } else if ($bookie_odds['odds_obj']->getPropOdds() > $team_num_entry[$best_odds_reflist1[0]]['odds_obj']->getPropOdds()) {
+                            } elseif ($bookie_odds['odds_obj']->getPropOdds() > $team_num_entry[$best_odds_reflist1[0]]['odds_obj']->getPropOdds()) {
                                 $best_odds_reflist1 = [$odds_key];
-                            } else if ($bookie_odds['odds_obj']->getPropOdds() == $team_num_entry[$best_odds_reflist1[0]]['odds_obj']->getPropOdds()) {
+                            } elseif ($bookie_odds['odds_obj']->getPropOdds() == $team_num_entry[$best_odds_reflist1[0]]['odds_obj']->getPropOdds()) {
                                 $best_odds_reflist1[] = $odds_key;
                             }
                             if (count($best_odds_reflist2) == 0) {
                                 $best_odds_reflist2[] = $odds_key;
-                            } else if ($bookie_odds['odds_obj']->getNegPropOdds() > $team_num_entry[$best_odds_reflist2[0]]['odds_obj']->getNegPropOdds()) {
+                            } elseif ($bookie_odds['odds_obj']->getNegPropOdds() > $team_num_entry[$best_odds_reflist2[0]]['odds_obj']->getNegPropOdds()) {
                                 $best_odds_reflist2 = [$odds_key];
-                            } else if ($bookie_odds['odds_obj']->getNegPropOdds() == $team_num_entry[$best_odds_reflist2[0]]['odds_obj']->getNegPropOdds()) {
+                            } elseif ($bookie_odds['odds_obj']->getNegPropOdds() == $team_num_entry[$best_odds_reflist2[0]]['odds_obj']->getNegPropOdds()) {
                                 $best_odds_reflist2[] = $odds_key;
                             }
 
@@ -663,7 +670,7 @@ class OddsHandler
                             if (isset($matchups_assoc[$matchup_key]) && $matchups_assoc[$matchup_key]->hasOrderChanged()) {
                                 if ($team_num_key == 1) {
                                     $temp_team_num_key = 2;
-                                } else if ($team_num_key == 2) {
+                                } elseif ($team_num_key == 2) {
                                     $temp_team_num_key = 1;
                                 }
                             }
@@ -715,16 +722,16 @@ class OddsHandler
                     //Indicate which line is best on both sides
                     if (count($best_odds_reflist1) == 0) {
                         $best_odds_reflist1[] = $odds_key;
-                    } else if ($bookie_odds['odds_obj']->getPropOdds() > $proptype_entry[$best_odds_reflist1[0]]['odds_obj']->getPropOdds()) {
+                    } elseif ($bookie_odds['odds_obj']->getPropOdds() > $proptype_entry[$best_odds_reflist1[0]]['odds_obj']->getPropOdds()) {
                         $best_odds_reflist1 = [$odds_key];
-                    } else if ($bookie_odds['odds_obj']->getPropOdds() == $proptype_entry[$best_odds_reflist1[0]]['odds_obj']->getPropOdds()) {
+                    } elseif ($bookie_odds['odds_obj']->getPropOdds() == $proptype_entry[$best_odds_reflist1[0]]['odds_obj']->getPropOdds()) {
                         $best_odds_reflist1[] = $odds_key;
                     }
                     if (count($best_odds_reflist2) == 0) {
                         $best_odds_reflist2[] = $odds_key;
-                    } else if ($bookie_odds['odds_obj']->getNegPropOdds() > $proptype_entry[$best_odds_reflist2[0]]['odds_obj']->getNegPropOdds()) {
+                    } elseif ($bookie_odds['odds_obj']->getNegPropOdds() > $proptype_entry[$best_odds_reflist2[0]]['odds_obj']->getNegPropOdds()) {
                         $best_odds_reflist2 = [$odds_key];
-                    } else if ($bookie_odds['odds_obj']->getNegPropOdds() == $proptype_entry[$best_odds_reflist2[0]]['odds_obj']->getNegPropOdds()) {
+                    } elseif ($bookie_odds['odds_obj']->getNegPropOdds() == $proptype_entry[$best_odds_reflist2[0]]['odds_obj']->getNegPropOdds()) {
                         $best_odds_reflist2[] = $odds_key;
                     }
                 }

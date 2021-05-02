@@ -26,17 +26,14 @@ class PropTemplate
         $this->sLastUsed = $a_sLastUsed;
 
         //Match all prop variables (<A-Z>) and store these as array
-        if (preg_match_all('/<[A-Z]+?>/', $this->sTemplate, $this->aTemplatePropValues))
-        {
+        if (preg_match_all('/<[A-Z]+?>/', $this->sTemplate, $this->aTemplatePropValues)) {
             $this->aTemplatePropValues = $this->aTemplatePropValues[0];
         }
-        if (preg_match_all('/<[A-Z]+?>/', $this->sTemplateNeg, $this->aTemplateNegPropValues))
-        {
+        if (preg_match_all('/<[A-Z]+?>/', $this->sTemplateNeg, $this->aTemplateNegPropValues)) {
             $this->aTemplateNegPropValues = $this->aTemplateNegPropValues[0];
         }
 
-        if ($a_sTemplate == '')
-        {
+        if ($a_sTemplate == '') {
             $this->bNegIsPrimary = true;
         }
     }
@@ -101,8 +98,7 @@ class PropTemplate
 
     public function getFieldsTypeAsExample()
     {
-        switch ($this->iFieldsTypeID)
-        {
+        switch ($this->iFieldsTypeID) {
             case 1: return 'koscheck vs miller';
             break;
             case 2: return 'josh koscheck vs dan miller';
@@ -114,7 +110,7 @@ class PropTemplate
             case 5: return 'j.koscheck';
             break;
             case 6: return 'j.koscheck vs d.miller';
-            break;               
+            break;
             case 7: return 'j koscheck vs d miller';
             break;
             case 8: return 'j koscheck';
@@ -137,7 +133,4 @@ class PropTemplate
     {
         return $this->sLastUsed;
     }
-
 }
-
-?>

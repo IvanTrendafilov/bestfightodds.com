@@ -81,8 +81,8 @@ Manual actions: <button class="btn btn-primary" onclick="$('input[onclick^=\'maA
 								<td><?= $action['view_extra']['new_event']->getName() ?> (<?= $action['view_extra']['new_event']->getDate() ?>)</td>
 								<td><button class="btn btn-primary" onclick="maMoveMatchup(<?= $action['id'] ?>, '<?= htmlspecialchars($action['description']) ?>')">Accept</button>
 
-								<?php elseif ($action['type'] == 7) : //Delete matchup 
-								?>
+								<?php elseif ($action['type'] == 7) : //Delete matchup
+                                ?>
 
 								<td>Delete </td>
 								<td><a href="http://www.google.com/search?q=tapology <?= urlencode($action['view_extra']['matchup']->getTeamAsString(1) . ' vs. ' . $action['view_extra']['matchup']->getTeamAsString(2)) ?>"><?= $action['view_extra']['matchup']->getTeamAsString(1) ?> vs. <?= $action['view_extra']['matchup']->getTeamAsString(2) ?></a>
@@ -96,8 +96,8 @@ Manual actions: <button class="btn btn-primary" onclick="$('input[onclick^=\'maA
 								<td></td>
 								<td><button class="btn btn-primary" onclick="maDeleteMatchup(<?= $action['id'] ?>, '<?= htmlspecialchars($action['description']) ?>')">Accept</button>
 
-								<?php elseif ($action['type'] == 8) : //Move matchup to a non-existant event 
-								?>
+								<?php elseif ($action['type'] == 8) : //Move matchup to a non-existant event
+                                ?>
 
 								<td>Move the following matchups:<br>
 									<?php foreach ($action['view_extra']['matchups'] as $key => $matchup) : ?>

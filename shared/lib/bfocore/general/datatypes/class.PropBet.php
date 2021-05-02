@@ -114,16 +114,11 @@ class PropBet
 
     private function getOddsAsString($a_sOdds)
     {
-        if ($a_sOdds == 0)
-        {
+        if ($a_sOdds == 0) {
             return 'error';
-        }
-        else if ($a_sOdds > 0)
-        {
+        } elseif ($a_sOdds > 0) {
             return '+' . $a_sOdds;
-        }
-        else
-        {
+        } else {
             return $a_sOdds;
         }
     }
@@ -150,23 +145,21 @@ class PropBet
 
     public function equals($a_oPropBet)
     {
-        $bEquals = ($this->iMatchupID == $a_oPropBet->getMatchupID() &&
+        $bEquals = (
+            $this->iMatchupID == $a_oPropBet->getMatchupID() &&
                 $this->iBookieID == $a_oPropBet->getBookieID() &&
                 $this->sPropOdds == $a_oPropBet->getPropOdds() &&
                 $this->sNegPropOdds == $a_oPropBet->getNegPropOdds() &&
                 $this->iPropTypeID == $a_oPropBet->getPropTypeID()
-                );
+        );
         return $bEquals;
     }
 
     public function getOdds($a_iTeamNumber)
     {
-        if ($a_iTeamNumber == '1')
-        {
+        if ($a_iTeamNumber == '1') {
             return $this->sPropOdds;
-        }
-        else if ($a_iTeamNumber == '2')
-        {
+        } elseif ($a_iTeamNumber == '2') {
             return $this->sNegPropOdds;
         }
         return null;
@@ -176,30 +169,19 @@ class PropBet
     public static function moneylineToDecimal($a_iMoneyline, $a_bNoRounding = false)
     {
         $fOdds = 0;
-        if ($a_iMoneyline == 100)
-        {
+        if ($a_iMoneyline == 100) {
             return 2.0;
-        }
-        else if ($a_iMoneyline > 0)
-        {
-            if ($a_bNoRounding == true)
-            {
+        } elseif ($a_iMoneyline > 0) {
+            if ($a_bNoRounding == true) {
                 $fOdds = round((($a_iMoneyline / 100) + 1) * 100000) / 100000;
-            }
-            else
-            {
+            } else {
                 $fOdds = round((($a_iMoneyline / 100) + 1) * 100) / 100;
             }
-        }
-        else
-        {
+        } else {
             $a_iMoneyline = substr($a_iMoneyline, 1);
-            if ($a_bNoRounding == true)
-            {
+            if ($a_bNoRounding == true) {
                 $fOdds = round(((100 / $a_iMoneyline) + 1) * 100000) / 100000;
-            }
-            else
-            {
+            } else {
                 $fOdds = round(((100 / $a_iMoneyline) + 1) * 100) / 100;
             }
         }
@@ -209,20 +191,10 @@ class PropBet
     public static function decimalToMoneyline($a_fDecimal)
     {
         $a_fDecimal--;
-        if ($a_fDecimal < 1)
-        {
+        if ($a_fDecimal < 1) {
             return '-' . round((1 / $a_fDecimal) * 100);
-        }
-        else //(a_iOdds >= 1)
-        {
+        } else { //(a_iOdds >= 1)
             return round($a_fDecimal * 100);
         }
     }
-
-
-    
-
-
 }
-
-?>

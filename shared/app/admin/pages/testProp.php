@@ -13,18 +13,14 @@ echo '
 		Fighter: <select name="fighter_id">
 			<option value="-1">(none)</option>';
 
-			$aFighters = TeamHandler::getAllFighters();
-			foreach ($aFighters as $oFighter)
-			{
-				if (isset($_GET['fighterName']) && $oFighter->getName() == $_GET['fighterName'])
-				{
-					echo '<option value="' . $oFighter->getID() . '" selected>' . $oFighter->getNameAsString() . '</option>';
-				}
-				else
-				{
-					echo '<option value="' . $oFighter->getID() . '">' . $oFighter->getNameAsString() . '</option>';
-				}
-			}
+            $aFighters = TeamHandler::getAllFighters();
+            foreach ($aFighters as $oFighter) {
+                if (isset($_GET['fighterName']) && $oFighter->getName() == $_GET['fighterName']) {
+                    echo '<option value="' . $oFighter->getID() . '" selected>' . $oFighter->getNameAsString() . '</option>';
+                } else {
+                    echo '<option value="' . $oFighter->getID() . '">' . $oFighter->getNameAsString() . '</option>';
+                }
+            }
 
 echo '</select>&nbsp; aka &nbsp;
 	<input type="text" name="alt_name" style="width: 200px;"/>
@@ -34,5 +30,3 @@ echo '</select>&nbsp; aka &nbsp;
 
 
 ';
-
-?>

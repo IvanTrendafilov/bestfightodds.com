@@ -22,5 +22,3 @@ require_once('lib/bfocore/general/datatypes/class.BookieParser.php');
 
 //2.2
 require_once('lib/bfocore/general/datatypes/class.EventPropBet.php');
-
-?>

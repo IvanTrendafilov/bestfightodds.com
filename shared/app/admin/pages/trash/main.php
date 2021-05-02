@@ -12,5 +12,3 @@ require_once('app/front/cnadm/pages/runStatus.php');
 echo '<br /><br />';
 
 require_once('app/front/cnadm/pages/viewUnmatched.php');
-
-?>

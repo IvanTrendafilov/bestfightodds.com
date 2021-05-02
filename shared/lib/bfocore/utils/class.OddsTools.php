@@ -20,16 +20,12 @@ class OddsTools
     public static function convertDecimalToMoneyline($a_fOdds)
     {
         $a_fOdds = (float) $a_fOdds - 1.0;
-        if ($a_fOdds == 0)
-        {
+        if ($a_fOdds == 0) {
             return '-25000';
         }
-        if ($a_fOdds < 1)
-        {
+        if ($a_fOdds < 1) {
             return '-' . round((1 / $a_fOdds) * 100);
-        }
-        else
-        {
+        } else {
             return round($a_fOdds * 100);
         }
     }
@@ -38,30 +34,19 @@ class OddsTools
     {
         $iOdds = $a_sMoneyLine;
         $fOdds = 0;
-        if ($iOdds == 100)
-        {
+        if ($iOdds == 100) {
             return 2.0;
-        }
-        else if ($iOdds > 0)
-        {
-            if ($a_bNoRounding == true)
-            {
+        } elseif ($iOdds > 0) {
+            if ($a_bNoRounding == true) {
                 $fOdds = round((($iOdds / 100) + 1) * 100000) / 100000;
-            }
-            else
-            {
+            } else {
                 $fOdds = round((($iOdds / 100) + 1) * 100) / 100;
             }
-        }
-        else
-        {
+        } else {
             $iOdds = substr($iOdds, 1);
-            if ($a_bNoRounding == true)
-            {
+            if ($a_bNoRounding == true) {
                 $fOdds = round(((100 / $iOdds) + 1) * 100000) / 100000;
-            }
-            else
-            {
+            } else {
                 $fOdds = round(((100 / $iOdds) + 1) * 100) / 100;
             }
         }
@@ -76,20 +61,15 @@ class OddsTools
         $aPieces = explode(" ", $a_sFighterName);
 
         //If name only contains one single name, do not shorten
-        if (count($aPieces) == 1)
-        {
+        if (count($aPieces) == 1) {
             return $a_sFighterName;
         }
 
         $a_sFighterName = '';
-        for ($iX = 0; $iX < sizeof($aPieces); $iX++)
-        {
-            if ($iX == 0)
-            {
+        for ($iX = 0; $iX < sizeof($aPieces); $iX++) {
+            if ($iX == 0) {
                 $a_sFighterName .= substr($aPieces[$iX], 0, 1);
-            }
-            else
-            {
+            } else {
                 $a_sFighterName .= ' ' . $aPieces[$iX];
             }
         }
@@ -103,13 +83,11 @@ class OddsTools
     {
         $a_sOdds = trim($a_sOdds);
 
-        if (strtoupper($a_sOdds) == 'EV' || strtoupper($a_sOdds) == 'EVEN')
-        {
+        if (strtoupper($a_sOdds) == 'EV' || strtoupper($a_sOdds) == 'EVEN') {
             return true;
         }
 
-        if (preg_match('/[+-]{0,1}[0-9]{2,5}/', $a_sOdds))
-        {
+        if (preg_match('/[+-]{0,1}[0-9]{2,5}/', $a_sOdds)) {
             return true;
         }
 
@@ -142,13 +120,11 @@ class OddsTools
         $aNames2 = self::getNameCombinations($aNameParts2, $iPartCount);
 
         $fTopSim = 0;
-        foreach ($aNames1 as $aName1)
-        {
-            foreach ($aNames2 as $aName2)
-            {
+        foreach ($aNames1 as $aName1) {
+            foreach ($aNames2 as $aName2) {
                 $fSim = 0;
                 similar_text($aName1, $aName2, $fSim);
-                $fTopSim = $fSim > $fTopSim ? $fSim : $fTopSim;       
+                $fTopSim = $fSim > $fTopSim ? $fSim : $fTopSim;
             }
         }
         return $fTopSim;
@@ -164,29 +140,29 @@ class OddsTools
 
         self::depth_picker($a_sNameParts, "", $aRetNames, $a_iParts);
         //Add a shortened version of the name using a letter for the first name (e.g. N Diaz for Nathan Diaz)
-        if (count($a_sNameParts) > 1) 
-        {
+        if (count($a_sNameParts) > 1) {
             $aRetNames[] = OddsTools::shortenName(implode(' ', $a_sNameParts));
         }
         return $aRetNames;
     }
 
-    private static function depth_picker($arr, $temp_string, &$collect, $part_count) {
-        if ($temp_string != "")
-            if (substr_count(trim($temp_string), " ") == $part_count - 1)
+    private static function depth_picker($arr, $temp_string, &$collect, $part_count)
+    {
+        if ($temp_string != "") {
+            if (substr_count(trim($temp_string), " ") == $part_count - 1) {
                 $collect []= trim($temp_string);
+            }
+        }
         for ($i=0; $i<sizeof($arr);$i++) {
             $arrcopy = $arr;
             $elem = array_splice($arrcopy, $i, 1); // removes and returns the i'th element
             if (sizeof($arrcopy) > 0) {
                 self::depth_picker($arrcopy, $temp_string ." " . $elem[0], $collect, $part_count);
             } else {
-                if (substr_count(trim($temp_string. " " . $elem[0]), " ") == $part_count - 1)
+                if (substr_count(trim($temp_string. " " . $elem[0]), " ") == $part_count - 1) {
                     $collect[] = trim($temp_string. " " . $elem[0]);
-            }   
-        }   
+                }
+            }
+        }
     }
 }
-
-
-?>

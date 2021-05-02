@@ -20,19 +20,18 @@ class TeamHandler
 
     public static function getAltNamesForTeamByID($a_iTeamID)
     {
-        if (!$a_iTeamID)
-        {
+        if (!$a_iTeamID) {
             return null;
         }
         return TeamDB::getAltNamesForTeamByID($a_iTeamID);
     }
 
-	/**
+    /**
      * Gets the latest date when the fighter received an odds update
      */
     public static function getLastChangeDate($a_iFighterID)
     {
-     	return TeamDB::getLastChangeDate($a_iFighterID);
+        return TeamDB::getLastChangeDate($a_iFighterID);
     }
 
     public static function getAllTeamsWithMissingResults()
@@ -52,8 +51,7 @@ class TeamHandler
 
     public static function searchFighter($name)
     {
-        if (strlen($name) < 2)
-        {
+        if (strlen($name) < 2) {
             return false;
         }
         return TeamDB::searchFighter($name);
@@ -63,7 +61,4 @@ class TeamHandler
     {
         return TeamDB::getFighterByID($id);
     }
-
 }
-
-?>

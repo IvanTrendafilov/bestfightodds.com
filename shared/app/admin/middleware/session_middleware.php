@@ -18,7 +18,7 @@ class SessionMiddleware
         session_set_cookie_params(
             30 * 24 * 60,
             '/cnadm'
-         );
+        );
         session_start();
         $request = $request->withAttribute('session', $_SESSION);
         return $handler->handle($request);

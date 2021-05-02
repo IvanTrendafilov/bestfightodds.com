@@ -4,9 +4,8 @@ require_once('config/inc.config.php');
 
 class DBTools
 {
-
-    static $aCachedResults = array();
-    static $rDBConnection;
+    public static $aCachedResults = array();
+    public static $rDBConnection;
 
     /**
      * Gets the current database connection or creates a new one if no one exists
@@ -15,8 +14,7 @@ class DBTools
      */
     private static function getConnection()
     {
-        if (!isset(self::$rDBConnection))
-        {
+        if (!isset(self::$rDBConnection)) {
             self::$rDBConnection = mysqli_connect(DB_HOST, DB_USER, DB_PASSWORD, DB_SCHEME);
         }
 
@@ -31,19 +29,19 @@ class DBTools
      */
     public static function doQuery($a_sQuery)
     {
-        //$sStart = microtime(); 
+        //$sStart = microtime();
         $rResult = mysqli_query(self::getConnection(), $a_sQuery) or die('MySQL error: ' . mysqli_error(self::getConnection()));
 
-/*if (microtime() - $sStart > 0.05)
-{
-         echo "
+        /*if (microtime() - $sStart > 0.05)
+        {
+                 echo "
 
-          ";
-          echo 'query: ' . (microtime() - $sStart) . ' ' . $a_sQuery . '<br /><br />';
-          echo "
+                  ";
+                  echo 'query: ' . (microtime() - $sStart) . ' ' . $a_sQuery . '<br /><br />';
+                  echo "
 
-          "; 
-}*/
+                  ";
+        }*/
         return $rResult;
     }
 
@@ -60,18 +58,15 @@ class DBTools
     public static function doParamQuery($a_sQuery, $a_aParams)
     {
         $iParamCount = 0;
-        while ($iPos = strpos($a_sQuery, '?'))
-        {
-            if (sizeof($a_aParams) < ($iParamCount + 1))
-            {
+        while ($iPos = strpos($a_sQuery, '?')) {
+            if (sizeof($a_aParams) < ($iParamCount + 1)) {
                 return false;
             }
             $a_sQuery = substr_replace($a_sQuery, "'" . DBTools::makeParamSafe($a_aParams[$iParamCount]) . "'", $iPos, 1);
             $iParamCount++;
         }
 
-        if (($iParamCount + 1) < sizeof($a_aParams))
-        {
+        if (($iParamCount + 1) < sizeof($a_aParams)) {
             return false;
         }
 
@@ -113,8 +108,7 @@ class DBTools
      */
     public static function cacheQueryResults($a_sQuery, $a_rResults)
     {
-        if ($a_sQuery != '' && $a_rResults != null)
-        {
+        if ($a_sQuery != '' && $a_rResults != null) {
             DBTools::$aCachedResults[$a_sQuery] = $a_rResults;
             return true;
         }
@@ -129,10 +123,8 @@ class DBTools
      */
     public static function getCachedQuery($a_sQuery)
     {
-        if (array_key_exists($a_sQuery, DBTools::$aCachedResults))
-        {
-            if (mysqli_num_rows(DBTools::$aCachedResults[$a_sQuery]) > 0)
-            {
+        if (array_key_exists($a_sQuery, DBTools::$aCachedResults)) {
+            if (mysqli_num_rows(DBTools::$aCachedResults[$a_sQuery]) > 0) {
                 mysqli_data_seek(DBTools::$aCachedResults[$a_sQuery], 0);
                 return DBTools::$aCachedResults[$a_sQuery];
             }
@@ -175,17 +167,12 @@ class DBTools
      */
     public static function getSingleValue($a_rResults)
     {
-        if ($a_rResults != null)
-        {
+        if ($a_rResults != null) {
             $aRow = mysqli_fetch_row($a_rResults);
-            if ($aRow != null && isset($aRow[0]))
-            {
+            if ($aRow != null && isset($aRow[0])) {
                 return $aRow[0];
             }
         }
         return null;
     }
-
 }
-
-?>

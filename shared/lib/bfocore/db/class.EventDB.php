@@ -60,7 +60,6 @@ class EventDB
 
     public static function getEventByName($a_sName)
     {
-
         $sQuery = 'SELECT id, date, name, display FROM events WHERE name = ?';
         $rResult = DBTools::doParamQuery($sQuery, array($a_sName));
         $aEvents = array();
@@ -295,15 +294,13 @@ class EventDB
 
     /**
      * Retrieves a future fight
-     * 
+     *
      * Matches the specified matchup using lexographical checks
-     * 
+     *
      * TODO: (Low) Parts of this should be moved to EventHandler
      */
     public static function getFight($a_sFighter1, $a_sFighter2, $a_iEventID = -1)
     {
-
-
         $sExtraWhere = '';
         if ($a_iEventID != -1) {
             $sExtraWhere = ' AND event_id = ' . $a_iEventID . ' ';
@@ -698,17 +695,16 @@ class EventDB
             $aFightOddsCol[] = new FightOdds($a_iFightID, -1, $aFightOdds['fighter1_odds'], $aFightOdds['fighter2_odds'], '');
         }
         if (sizeof($aFightOddsCol) > 0) {
-
             return $aFightOddsCol[0];
         }
         return null;
     }
 
     /**
-     * Get best odds for a fight and fighter 
-     * 
+     * Get best odds for a fight and fighter
+     *
      * TODO: What is the difference between this one and getBestOddsForFight? Can this one be replaced?
-     * 
+     *
      * @param int Fight ID
      * @param int Fighter number (1 or 2)
      * @return null|\FightOdds Odds

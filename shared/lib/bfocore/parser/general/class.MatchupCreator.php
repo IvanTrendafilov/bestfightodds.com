@@ -54,7 +54,6 @@ class MatchupCreator
         $in_scheduler = $this->matchupProposedBySchedule($team1, $team2);
 
         if (($approved_by_ruleset || $in_scheduler['found']) && isset($event_name, $matchup_time)) {
-
             $date_obj = new DateTime();
             $date_obj = $date_obj->setTimestamp($matchup_time);
 
@@ -65,7 +64,6 @@ class MatchupCreator
             }
 
             if ($matched_event != null) {
-
                 if (!$this->teamHasOtherMatchup($matched_event, $team1, $team2, $in_scheduler)) {
                     return $this->createMatchup($team1, $team2, $matched_event, $date_obj, $in_scheduler);
                 }
@@ -148,7 +146,6 @@ class MatchupCreator
                     || OddsTools::compareNames($matchup->getFighter(2), $team1) > 82
                     || OddsTools::compareNames($matchup->getFighter(2), $team2) > 82
                 ) {
-
                     $this->logger->info("- Found other matchup " . $matchup->getFighter(1) . " vs " . $matchup->getFighter(2) . ". Will not create");
                     return true;
                 }
@@ -194,7 +191,6 @@ class MatchupCreator
     {
         //Check that date is not in the past
         if ($date_obj > new DateTime()) {
-
             $new_matchup = null;
             if ($in_scheduler['found'] && $in_scheduler['team1'] != null && $in_scheduler['team2'] != null) {
                 //Found in scheduler as well, use names from scheduler instead since they are more accurate

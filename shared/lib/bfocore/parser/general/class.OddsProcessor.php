@@ -18,7 +18,7 @@ class OddsProcessor
 
     /**
      * Processes parsed sport from a bookie parser
-     * 
+     *
      * Steps:
      * 1. Removes any duplicate moneylines
      * 2. Removes any duplicate props (including event props)
@@ -61,8 +61,7 @@ class OddsProcessor
         $this->updateMatchedMatchups($matched_matchups);
         $pp->updateMatchedProps($matched_props);
 
-        if ($full_run) //If this is a full run we will flag any matchups odds not matched for deletion
-        {
+        if ($full_run) { //If this is a full run we will flag any matchups odds not matched for deletion
             $this->flagMatchupOddsForDeletion($matched_matchups);
             $this->flagPropOddsForDeletion($matched_props);
             $this->flagEventPropOddsForDeletion($matched_props);
@@ -141,8 +140,7 @@ class OddsProcessor
             //Store any metadata for the matchup
             $metadata = $matched_matchup['parsed_matchup']->getAllMetaData();
             foreach ($metadata as $key => $val) {
-                if ($this->bookie_id != 12  && $this->bookie_id != 5 && $this->bookie_id != 17 && $this->bookie_id != 4 && $this->bookie_id != 19 && $this->bookie_id != 18 && $this->bookie_id != 13) //TODO: Temporary disable BetOnline, Bovada, William Hill, Sportsbook, Bet365, Intertops, BetDSI from storing metadata
-                {
+                if ($this->bookie_id != 12  && $this->bookie_id != 5 && $this->bookie_id != 17 && $this->bookie_id != 4 && $this->bookie_id != 19 && $this->bookie_id != 18 && $this->bookie_id != 13) { //TODO: Temporary disable BetOnline, Bovada, William Hill, Sportsbook, Bet365, Intertops, BetDSI from storing metadata
                     EventHandler::setMetaDataForMatchup($matched_matchup['matched_matchup']->getID(), $key, $val, $this->bookie_id);
                 }
             }
@@ -288,14 +286,11 @@ class OddsProcessor
 
                     $this->logger->info('Removing dupe: ' . $matchups[$y]->getTeamName(1) . ' vs ' . $matchups[$y]->getTeamName(2));
 
-                    if ($arbitrage_subject > $arbitrage_challenger) //Challenger won
-                    {
+                    if ($arbitrage_subject > $arbitrage_challenger) { //Challenger won
                         unset($matchups[$y]);
-                    } else if ($arbitrage_subject < $arbitrage_challenger) //Subject won
-                    {
+                    } elseif ($arbitrage_subject < $arbitrage_challenger) { //Subject won
                         unset($matchups[$x]);
-                    } else //Draw, remove one
-                    {
+                    } else { //Draw, remove one
                         unset($matchups[$x]);
                     }
                     $matchups = array_values($matchups);
@@ -332,14 +327,11 @@ class OddsProcessor
 
                     $this->logger->info('Removing dupe: ' . $props[$y]->getTeamName(1) . ' vs ' . $props[$y]->getTeamName(2));
 
-                    if ($arbitrage_subject > $arbitrage_challenger) //Challenger won
-                    {
+                    if ($arbitrage_subject > $arbitrage_challenger) { //Challenger won
                         unset($props[$y]);
-                    } else if ($arbitrage_subject < $arbitrage_challenger) //Subject won
-                    {
+                    } elseif ($arbitrage_subject < $arbitrage_challenger) { //Subject won
                         unset($props[$x]);
-                    } else //Draw, remove one
-                    {
+                    } else { //Draw, remove one
                         unset($props[$x]);
                     }
                     $props = array_values($props);
@@ -363,8 +355,7 @@ class OddsProcessor
             if ($props[$y]['match_result']['status'] == true) {
                 $matches = [];
                 for ($x = 0; $x < sizeof($props); $x++) {
-                    if ($x != $y) //Ignore self
-                    {
+                    if ($x != $y) { //Ignore self
                         if (
                             $props[$x]['match_result']['status'] == true
                             && $props[$x]['match_result']['template']->getPropTypeID() == $props[$y]['match_result']['template']->getPropTypeID()
@@ -377,16 +368,13 @@ class OddsProcessor
                             $arbitrage_subject = ParseTools::getArbitrage($props[$y]['prop']->getTeamOdds(1), $props[$y]['prop']->getTeamOdds(2));
                             $arbitrage_challenger = ParseTools::getArbitrage($props[$x]['prop']->getTeamOdds(1), $props[$x]['prop']->getTeamOdds(2));
 
-                            if ($arbitrage_subject > $arbitrage_challenger) //Challenger won
-                            {
+                            if ($arbitrage_subject > $arbitrage_challenger) { //Challenger won
                                 $this->logger->info('Removing subject dupe: ' . $props[$y]['prop']->getTeamOdds(1) . '/' . $props[$y]['prop']->getTeamOdds(2) . ' for matchup_id: ' . $props[$x]['match_result']['matchup']['matchup_id'] . ' proptype_id: ' . $props[$x]['match_result']['template']->getPropTypeID() . ' team_num: ' . $props[$y]['match_result']['matchup']['team']);
                                 unset($props[$y]);
-                            } else if ($arbitrage_subject < $arbitrage_challenger) //Subject won
-                            {
+                            } elseif ($arbitrage_subject < $arbitrage_challenger) { //Subject won
                                 $this->logger->info('Removing challenger dupe: ' . $props[$x]['prop']->getTeamOdds(1) . '/' . $props[$x]['prop']->getTeamOdds(2) . ' for matchup_id: ' . $props[$x]['match_result']['matchup']['matchup_id'] . ' proptype_id: ' . $props[$x]['match_result']['template']->getPropTypeID() . ' team_num: ' . $props[$y]['match_result']['matchup']['team']);
                                 unset($props[$x]);
-                            } else //Draw, remove one
-                            {
+                            } else { //Draw, remove one
                                 $this->logger->info('Removing identical dupe: ' . $props[$x]['prop']->getTeamOdds(1) . '/' . $props[$x]['prop']->getTeamOdds(2) . ' for matchup_id: ' . $props[$x]['match_result']['matchup']['matchup_id'] . ' proptype_id: ' . $props[$x]['match_result']['template']->getPropTypeID() . ' team_num: ' . $props[$y]['match_result']['matchup']['team']);
                                 unset($props[$x]);
                             }
@@ -414,17 +402,15 @@ class OddsProcessor
         return $counter;
     }
 
-    private function createUnmatchedMatchups($matched_matchups) 
+    private function createUnmatchedMatchups($matched_matchups)
     {
         $mc = new MatchupCreator($this->logger, $this->bookie_id);
         foreach ($matched_matchups as &$matchup) {
             if ($matchup['match_result']['status'] == false) {
-
                 $metadata = $matchup['parsed_matchup']->getAllMetaData();
                 if (!isset($metadata['gametime'])) {
                     $this->logger->debug('Unable to evaluate matchup ' . $matchup['parsed_matchup']->getTeamName(1) . ' vs ' . $matchup['parsed_matchup']->getTeamName(2) . ' for creation due to missing gametime');
-                }
-                else {
+                } else {
                     $team1 = $matchup['parsed_matchup']->getTeamName(1);
                     $team2 = $matchup['parsed_matchup']->getTeamName(2);
                     $event_name = $metadata['event_name'] ?? '';

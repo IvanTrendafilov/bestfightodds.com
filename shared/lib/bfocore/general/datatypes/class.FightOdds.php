@@ -1,14 +1,13 @@
 <?php
 
 /**
- * FightOdds class 
+ * FightOdds class
  *
  * The odds for the fighters are always sorted lexiographically by name
  * Example: Quinton Jackson (Fighter 2 odds) vs Chuck Liddell (Fighter 1 odds)
  */
 class FightOdds
 {
-
     private $iFightID;
     private $iBookieID;
     private $sFighter1Odds;
@@ -20,21 +19,15 @@ class FightOdds
         $this->iFightID = $a_iFightID;
         $this->iBookieID = $a_iBookieID;
 
-        if (strtoupper($a_sFighter1Odds) == 'EV' || strtoupper($a_sFighter1Odds) == 'EVEN')
-        {
+        if (strtoupper($a_sFighter1Odds) == 'EV' || strtoupper($a_sFighter1Odds) == 'EVEN') {
             $this->sFighter1Odds = '100';
-        }
-        else
-        {
+        } else {
             $this->sFighter1Odds = str_replace('+', '', $a_sFighter1Odds);
         }
 
-        if (strtoupper($a_sFighter2Odds) == 'EV' || strtoupper($a_sFighter2Odds) == 'EVEN')
-        {
+        if (strtoupper($a_sFighter2Odds) == 'EV' || strtoupper($a_sFighter2Odds) == 'EVEN') {
             $this->sFighter2Odds = '100';
-        }
-        else
-        {
+        } else {
             $this->sFighter2Odds = str_replace('+', '', $a_sFighter2Odds);
         }
 
@@ -77,8 +70,7 @@ class FightOdds
     */
     public function getFighterOdds($a_iFighter)
     {
-        switch ($a_iFighter)
-        {
+        switch ($a_iFighter) {
             case 1: return $this->sFighter1Odds;
                 break;
             case 2: return $this->sFighter2Odds;
@@ -94,30 +86,19 @@ class FightOdds
     {
         $iOdds = $this->getFighterOdds($a_iFighter);
         $fOdds = 0;
-        if ($iOdds == 100)
-        {
+        if ($iOdds == 100) {
             return 2.0;
-        }
-        else if ($iOdds > 0)
-        {
-            if ($a_bNoRounding == true)
-            {
+        } elseif ($iOdds > 0) {
+            if ($a_bNoRounding == true) {
                 $fOdds = round((($iOdds / 100) + 1) * 100000) / 100000;
-            }
-            else
-            {
+            } else {
                 $fOdds = round((($iOdds / 100) + 1) * 100) / 100;
             }
-        }
-        else
-        {
+        } else {
             $iOdds = substr($iOdds, 1);
-            if ($a_bNoRounding == true)
-            {
+            if ($a_bNoRounding == true) {
                 $fOdds = round(((100 / $iOdds) + 1) * 100000) / 100000;
-            }
-            else
-            {
+            } else {
                 $fOdds = round(((100 / $iOdds) + 1) * 100) / 100;
             }
         }
@@ -131,16 +112,11 @@ class FightOdds
     public function getFighterOddsAsString($a_iFighter)
     {
         $sOdds = $this->getFighterOdds($a_iFighter);
-        if ($sOdds == 0)
-        {
+        if ($sOdds == 0) {
             return 'error';
-        }
-        else if ($sOdds > 0)
-        {
+        } elseif ($sOdds > 0) {
             return '+' . $sOdds;
-        }
-        else
-        {
+        } else {
             return $sOdds;
         }
     }
@@ -157,8 +133,7 @@ class FightOdds
 
     public function getOdds($a_iTeamNumber)
     {
-        switch ($a_iTeamNumber)
-        {
+        switch ($a_iTeamNumber) {
             case 1: return $this->sFighter1Odds;
                 break;
             case 2: return $this->sFighter2Odds;
@@ -170,12 +145,9 @@ class FightOdds
     public static function convertOddsEUToUS($a_iOdds)
     {
         $a_iOdds--;
-        if ($a_iOdds < 1)
-        {
+        if ($a_iOdds < 1) {
             return '-' . round((1 / $a_iOdds) * 100);
-        }
-        else //(a_iOdds >= 1)
-        {
+        } else { //(a_iOdds >= 1)
             return round($a_iOdds * 100);
         }
     }
@@ -186,30 +158,19 @@ class FightOdds
     public static function moneylineToDecimal($a_iMoneyline, $a_bNoRounding = false)
     {
         $fOdds = 0;
-        if ($a_iMoneyline == 100)
-        {
+        if ($a_iMoneyline == 100) {
             return 2.0;
-        }
-        else if ($a_iMoneyline > 0)
-        {
-            if ($a_bNoRounding == true)
-            {
+        } elseif ($a_iMoneyline > 0) {
+            if ($a_bNoRounding == true) {
                 $fOdds = round((($a_iMoneyline / 100) + 1) * 100000) / 100000;
-            }
-            else
-            {
+            } else {
                 $fOdds = round((($a_iMoneyline / 100) + 1) * 100) / 100;
             }
-        }
-        else
-        {
+        } else {
             $a_iMoneyline = substr($a_iMoneyline, 1);
-            if ($a_bNoRounding == true)
-            {
+            if ($a_bNoRounding == true) {
                 $fOdds = round(((100 / $a_iMoneyline) + 1) * 100000) / 100000;
-            }
-            else
-            {
+            } else {
                 $fOdds = round(((100 / $a_iMoneyline) + 1) * 100) / 100;
             }
         }
@@ -219,17 +180,10 @@ class FightOdds
     public static function decimalToMoneyline($a_fDecimal)
     {
         $a_fDecimal--;
-        if ($a_fDecimal < 1)
-        {
+        if ($a_fDecimal < 1) {
             return '-' . round((1 / $a_fDecimal) * 100);
-        }
-        else //(a_iOdds >= 1)
-        {
+        } else { //(a_iOdds >= 1)
             return round($a_fDecimal * 100);
         }
     }
-
-
 }
-
-?>

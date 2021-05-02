@@ -20,5 +20,3 @@ $rSP->parseSched();
 
 echo 'Done
 ';
-
-?>

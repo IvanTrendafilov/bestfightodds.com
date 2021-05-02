@@ -17,15 +17,12 @@ class ParsedMatchup
     public function __construct($a_sTeam1, $a_sTeam2, $a_sTeam1Odds, $a_sTeam2Odds, $a_sDate = '')
     {
         //Make sure that teams are in lexigraphical order
-        if (trim($a_sTeam1) > trim($a_sTeam2))
-        {
+        if (trim($a_sTeam1) > trim($a_sTeam2)) {
             $this->sTeam1Name = ParseTools::formatName($a_sTeam2);
             $this->sTeam2Name = ParseTools::formatName($a_sTeam1);
             $this->oMoneyline = new ParsedMoneyline(trim($a_sTeam2Odds), trim($a_sTeam1Odds));
             $this->bSwitched = true;
-        }
-        else
-        {
+        } else {
             $this->sTeam1Name = ParseTools::formatName($a_sTeam1);
             $this->sTeam2Name = ParseTools::formatName($a_sTeam2);
             $this->oMoneyline = new ParsedMoneyline(trim($a_sTeam1Odds), trim($a_sTeam2Odds));
@@ -38,8 +35,7 @@ class ParsedMatchup
 
     public function getTeamName($a_iTeam)
     {
-        switch ($a_iTeam)
-        {
+        switch ($a_iTeam) {
             case 1: return $this->sTeam1Name;
                 break;
             case 2: return $this->sTeam2Name;
@@ -78,8 +74,7 @@ class ParsedMatchup
     {
         $oML = $this->getMoneyLineObj();
 
-        if ($oML == null)
-        {
+        if ($oML == null) {
             return false;
         }
 
@@ -90,8 +85,7 @@ class ParsedMatchup
     {
         $this->bSwitchedFromOutside = true;
         //Switch moneyline
-        if ($this->oMoneyline != null && !$this->oMoneyline->isSwitched())
-        {
+        if ($this->oMoneyline != null && !$this->oMoneyline->isSwitched()) {
             $this->oMoneyline->switchOdds();
         }
         return true;
@@ -105,8 +99,7 @@ class ParsedMatchup
     public function addMoneyLineObj($a_oMoneyline)
     {
         $this->oMoneyline = $a_oMoneyline;
-        if ($this->bSwitched == true && !$this->oMoneyline->isSwitched())
-        {
+        if ($this->bSwitched == true && !$this->oMoneyline->isSwitched()) {
             $this->oMoneyline->switchOdds();
         }
     }
@@ -128,10 +121,10 @@ class ParsedMatchup
 
     /**
      * Sets a correlation ID
-     * 
+     *
      * The correlation ID can be used to store an identifier that is used to
      * match the matchup with other parsed content such as props
-     * 
+     *
      * @param String $a_sCorrID Correlation ID
      */
     public function setCorrelationID($a_sCorrID)
@@ -142,8 +135,8 @@ class ParsedMatchup
 
     /**
      * Gets the associated correlation ID (if applicable)
-     * 
-     * @return String Correlation ID 
+     *
+     * @return String Correlation ID
      */
     public function getCorrelationID()
     {
@@ -159,7 +152,4 @@ class ParsedMatchup
     {
         return $this->aMetaData;
     }
-
 }
-
-?>

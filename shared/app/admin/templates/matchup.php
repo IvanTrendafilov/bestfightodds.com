@@ -36,7 +36,7 @@ document.addEventListener("DOMContentLoaded", function(event) {
 	Fight ID: <?=$matchup->getID()?><br />
 	Fight event: <select id="event_id">
 
-    <?php foreach($events as $event): ?>
+    <?php foreach ($events as $event): ?>
         <option value="<?=$event->getID()?>" <?=($event->getID() == $matchup->getEventID() ? 'selected' : '')?>><?=$event->getName()?> - <?=$event->getDate()?></option>
     <?php endforeach ?>
 

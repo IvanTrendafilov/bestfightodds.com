@@ -4,7 +4,6 @@ require_once('lib/bfocore/utils/class.LinkTools.php');
 
 class Event
 {
-
     private $iID;
     private $sDate;
     private $sName;
@@ -38,12 +37,11 @@ class Event
         return $this->sName;
     }
 
-    //Short name converts a longer name to a shorter one by omitting everything after the first : .E.g. UFC 201: Lawler vs. Woodley => UFC 201 
+    //Short name converts a longer name to a shorter one by omitting everything after the first : .E.g. UFC 201: Lawler vs. Woodley => UFC 201
     public function getShortName()
     {
         $iMarkPos = strpos($this->getName(), ':');
-        if ($iMarkPos != null)
-        {
+        if ($iMarkPos != null) {
             return substr($this->getName(), 0, $iMarkPos);
         }
         return $this->getName();
@@ -76,7 +74,4 @@ class Event
         $sName = LinkTools::slugString($this->sName);
         return strtolower($sName . '-' . $this->iID);
     }
-
 }
-
-?>

@@ -55,7 +55,7 @@ class MainController
             $hour_diff = intval(floor((time() - strtotime($matches[1])) / 3600));
             if ($hour_diff >= 72) {
                 return 'arage-3';
-            } else if ($hour_diff >= 24) {
+            } elseif ($hour_diff >= 24) {
                 return 'arage-2';
             } else {
                 return 'arage-1';
@@ -112,8 +112,7 @@ class MainController
         $events = EventHandler::getAllUpcomingEvents();
         foreach ($events as $event) {
             $matchups = EventHandler::getAllFightsForEventWithoutOdds($event->getID());
-            if (count($matchups) > 0) //Only add the event if matchups were found
-            {
+            if (count($matchups) > 0) { //Only add the event if matchups were found
                 //If non bellator, ufc or future events we limit to just the main event (first fight)
                 if (
                     substr(strtoupper($event->getName()), 0, 3) != 'UFC'
@@ -159,7 +158,7 @@ class MainController
                             ->withHeader('Location', '/events/' . $events[0]->getEventAsLinkString())
                             ->withStatus(302);
                     }
-                } else if (count($teams) + count($events) > 1) {
+                } elseif (count($teams) + count($events) > 1) {
                     //Reduce teams lists if exceeding 25
                     $view_data['teams_totalsize'] = count($teams);
                     if (count($teams) > 25) {
@@ -350,7 +349,7 @@ class MainController
                 $hour_diff = intval(floor((time() - strtotime($matches[1])) / 3600));
                 if ($hour_diff >= 72) {
                     return 'arage-3';
-                } else if ($hour_diff >= 24) {
+                } elseif ($hour_diff >= 24) {
                     return 'arage-2"';
                 } else {
                     return 'arage-1"';
@@ -382,7 +381,6 @@ class MainController
                     $swing[2]['swing'] = 0.01;
                 }
                 if (round($swing[2]['swing'] * 100) != 0) {
-
                     $row_data[]  = [$swing[0]->getTeamAsString($swing[1]), -round($swing[2]['swing'] * 100)];
                 }
             }
@@ -441,7 +439,7 @@ class MainController
             $hour_diff = intval(floor((time() - strtotime($matches[1])) / 3600));
             if ($hour_diff >= 72) {
                 return 'arage-3';
-            } else if ($hour_diff >= 24) {
+            } elseif ($hour_diff >= 24) {
                 return 'arage-2';
             } else {
                 return 'arage-1';

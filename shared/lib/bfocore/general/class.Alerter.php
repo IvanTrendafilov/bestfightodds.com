@@ -27,38 +27,28 @@ class Alerter
     public static function addNewAlert($a_iFightID, $a_iFighter, $a_sEmail, $a_iLimit, $a_iBookieID, $a_iOddsType = 1)
     {
         //If odds type == 3 (return on ..) then convert back to moneyline (1)
-        if ($a_iOddsType == 3)
-        {
+        if ($a_iOddsType == 3) {
             $a_iOddsType = 1;
         }
 
         //Override cooke set odds format if the format of the submitted odds is of a specific type. Only when limit is specified though
-        if ($a_iLimit != '-9999')
-        {
-            if ($a_iLimit[0] == '+' || $a_iLimit[0] == '-')
-            {
+        if ($a_iLimit != '-9999') {
+            if ($a_iLimit[0] == '+' || $a_iLimit[0] == '-') {
                 //Starts with - or +, its moneyline
                 //Note: + cannot be dected right now since the javascript removes it
                 $a_iOddsType = 1;
-            }
-            else if (strpos($a_iLimit, '.') !== false)
-            {
+            } elseif (strpos($a_iLimit, '.') !== false) {
                 //Contains a ., its decimal
                 $a_iOddsType = 2;
-            }
-            else if (strpos($a_iLimit, '/') !== false)
-            {
+            } elseif (strpos($a_iLimit, '/') !== false) {
                 //Contains a /, its fraction
                 $a_iOddsType = 4;
             }
 
             //If oddstype differs from moneyline (1) then convert from the previous format
-            if ($a_iOddsType == 2) //Decimal
-            {
+            if ($a_iOddsType == 2) { //Decimal
                 $a_iLimit = OddsTools::convertDecimalToMoneyline($a_iLimit);
-            }
-            else if ($a_iOddsType == 4)
-            {
+            } elseif ($a_iOddsType == 4) {
                 //TODO: Create conversion from fractional odds
             }
         }
@@ -78,11 +68,9 @@ class Alerter
     {
         $iAlertCount = 0;
         $aAlerts = AlertDB::getReachedAlerts();
-        foreach ($aAlerts as $oAlert)
-        {
+        foreach ($aAlerts as $oAlert) {
             $bSuccess = Alerter::dispatchAlert($oAlert);
-            if ($bSuccess)
-            {
+            if ($bSuccess) {
                 $iAlertCount++;
                 $bClearSuccess = AlertDB::clearAlert($oAlert->getID());
             }
@@ -99,41 +87,34 @@ class Alerter
     public static function dispatchAlert($a_oAlert)
     {
         $oFightOdds = null;
-        if ($a_oAlert->getBookieID() == -1)
-        {
+        if ($a_oAlert->getBookieID() == -1) {
             //Alert is not bookie specific
             $oFightOdds = EventHandler::getBestOddsForFight($a_oAlert->getFightID());
-        } else
-        {
+        } else {
             //Alert is bookie specific
             $oFightOdds = EventHandler::getLatestOddsForFightAndBookie($a_oAlert->getFightID(), $a_oAlert->getBookieID());
         }
 
         $oFight = EventHandler::getFightByID($a_oAlert->getFightID());
-        if ($oFightOdds == null || $oFight == null)
-        {
+        if ($oFightOdds == null || $oFight == null) {
             return false;
         }
 
         //Convert odds type if necessary
         $sTeamOdds[1] = $oFightOdds->getFighterOddsAsString(1);
         $sTeamOdds[2] = $oFightOdds->getFighterOddsAsString(2);
-        if ($a_oAlert->getOddsType() == 2)
-        {
+        if ($a_oAlert->getOddsType() == 2) {
             //Decimal
             $sTeamOdds[1] = OddsTools::convertMoneylineToDecimal($sTeamOdds[1]);
             $sTeamOdds[2] = OddsTools::convertMoneylineToDecimal($sTeamOdds[2]);
-        }
-        else if ($a_oAlert->getOddsType() == 3)
-        {
+        } elseif ($a_oAlert->getOddsType() == 3) {
             //Fraction
             //TODO: Create this when fraction support is introduced
         }
 
 
         //If odds is set to -9999 then we just want to announce that the fight has got odds
-        if ($a_oAlert->getLimit() == -9999)
-        {
+        if ($a_oAlert->getLimit() == -9999) {
             $sText = "Odds for " . $oFight->getFighterAsString(1) . " (" . $sTeamOdds[1] . ") vs " . $oFight->getFighterAsString(2) . " (" . $sTeamOdds[2] . ") has just been posted at " . ALERTER_SITE_NAME . "\n
 Check out " . ALERTER_SITE_LINK . " to view the latest listings.\n
 You are receiving this e-mail because you have signed up to be notified when odds were added for a certain matchup. If you did not sign up for this you don't have to do anything as your e-mail will not be stored for future use.\n
@@ -142,8 +123,7 @@ Good luck!\n
 
             $sMessageHTML = "<b>Alert: New odds added</b><br><br>" . $oFight->getFighterAsString(1) . " <b>" . $sTeamOdds[1] . "</b><br>" . $oFight->getFighterAsString(2) . " <b>" . $sTeamOdds[2] . "</b><br>";
             $sSubject = 'Odds for ' . $oFight->getFighterAsString(1) . ' vs ' . $oFight->getFighterAsString(2) . ' available';
-        } else
-        {
+        } else {
             $sText = "The odds for " . $oFight->getFighterAsString($a_oAlert->getFighter()) . " has reached " . $sTeamOdds[$a_oAlert->getFighter()] . " in his/her upcoming fight against " . $oFight->getFighterAsString(($a_oAlert->getFighter() == 1 ? 2 : 1)) . "\n
 Check out " . ALERTER_SITE_LINK . " to view the latest listings.\n
 You are receiving this e-mail because you have signed up to be notified when the odds changed for a certain matchup. If you did not sign up for this you don't have to do anything as your e-mail will not be stored for future use.\n
@@ -169,20 +149,17 @@ Good luck!\n
         $sTextHTML = str_replace('{{SITEURL}}', ALERTER_SITE_LINK, $sTextHTML);
 
         $bSuccess = false;
-        if (ALERTER_DEV_MODE == true)
-        {
+        if (ALERTER_DEV_MODE == true) {
             //If dev mode, do not send any e-mail alert
             $bSuccess = true;
             echo 'Sent one: ' . $sSubject .'
             ';
             echo 'Message:' . $sText;
-        } else
-        {
+        } else {
             //Send e-mail alert
             $mailer = new SESMailer(MAIL_SMTP_HOST, MAIL_SMTP_PORT, MAIL_SMTP_USERNAME, MAIL_SMTP_PASSWORD);
-            $bSuccess = $mailer->sendMail(ALERTER_MAIL_SENDER_MAIL, ALERTER_MAIL_FROM, $sTo, $sSubject, $sTextHTML, $sText);       
+            $bSuccess = $mailer->sendMail(ALERTER_MAIL_SENDER_MAIL, ALERTER_MAIL_FROM, $sTo, $sSubject, $sTextHTML, $sText);
             //$bSuccess = mail($sTo, $sSubject, $sText, $sHeaders);
-
         }
 
         return $bSuccess;
@@ -198,10 +175,8 @@ Good luck!\n
         $aAlerts = AlertDB::getExpiredAlerts();
 
         $iCleared = 0;
-        foreach ($aAlerts as $oAlert)
-        {
-            if (AlertDB::clearAlert($oAlert->getID()))
-            {
+        foreach ($aAlerts as $oAlert) {
+            if (AlertDB::clearAlert($oAlert->getID())) {
                 $iCleared++;
             }
         }
@@ -235,8 +210,7 @@ Good luck!\n
     {
         $oFightOdds = EventHandler::getBestOddsForFight($a_iFightID);
 
-        if ($oFightOdds == null)
-        {
+        if ($oFightOdds == null) {
             return null;
         }
 
@@ -274,7 +248,4 @@ Good luck!\n
     {
         return AlertDB::getAllAlerts();
     }
-
 }
-
-?>

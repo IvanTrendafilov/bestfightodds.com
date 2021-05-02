@@ -93,13 +93,13 @@ class PropParserV2
         return ['status' => true, 'template' => $template, 'matchup' => $matchup, 'event' => $event, 'matched_type' => ($template->isEventProp() ? 'event' : 'matchup')];
     }
 
-    /** 
+    /**
      * Finds a matching proptemplate for the specified prop and bookie
-     * 
+     *
      * For example, matching the follow template to the follow prop:
      *   TEMPLATE =   <T>/<T> goes <*> round distance
      *   ParsedProp = Howard/Alves goes 3 round distance
-     * 
+     *
      */
     public function matchPropToTemplate($prop, $bookie_id)
     {
@@ -133,7 +133,7 @@ class PropParserV2
                     $this->logger->warning('---Proptype 65, picking main prop 1 anyway. TODO: Remove this when no odds are live!');
                     $prop->setMainProp(1);
                     $propvalue_matches = $propvalue_matches1;
-                } else if (strlen($prop->getTeamName(1)) <= strlen($prop->getTeamName(2))) {
+                } elseif (strlen($prop->getTeamName(1)) <= strlen($prop->getTeamName(2))) {
                     $this->logger->debug('---Field 1 wins');
                     $prop->setMainProp(1);
                     $propvalue_matches = $propvalue_matches1;
@@ -142,11 +142,11 @@ class PropParserV2
                     $prop->setMainProp(2);
                     $propvalue_matches = $propvalue_matches2;
                 }
-            } else if ($found1) {
+            } elseif ($found1) {
                 //Found in team 1
                 $prop->setMainProp(1);
                 $propvalue_matches = $propvalue_matches1;
-            } else if ($found2) {
+            } elseif ($found2) {
                 //Found in team 2
                 $prop->setMainProp(2);
                 $propvalue_matches = $propvalue_matches2;
@@ -181,7 +181,6 @@ class PropParserV2
 
     public function matchPropToMatchup($a_oProp, $a_oTemplate, $use_correlation_id = true)
     {
-
         $aTemplateVariables = array();
         if ($a_oTemplate->isNegPrimary()) {
             $aTemplateVariables = $a_oTemplate->getNegPropVariables();
@@ -193,7 +192,6 @@ class PropParserV2
         $aPropValues = $a_oProp->getPropValues();
 
         if (count($aPropValues) != count($aTemplateVariables)) {
-
             $this->logger->error('---Template variable count (' . count($aTemplateVariables) . ') does not match prop values count (' . count($aPropValues) . '). Not good, check template.');
             return null;
         }
@@ -343,7 +341,7 @@ class PropParserV2
                     //First check if the match we found is just an alt name match for the same matchup
                     if ($oFoundMatchup != null && $oFoundMatchup->getID() == $oMatchup->getID()) {
                         //In that case, do nothing
-                    } else if ($oFoundMatchup != null) {
+                    } elseif ($oFoundMatchup != null) {
                         $this->logger->info('---Found multiple matches for prop values. Comparing fsims, challenger: ' . $oMatchup->getTeamAsString(1) . ' vs ' . $oMatchup->getTeamAsString(2) . ' ' . $oMatchup->getID() . ' (' . $fNewSim . ') and current: ' . $oFoundMatchup->getTeamAsString(1) . ' vs ' . $oFoundMatchup->getTeamAsString(2) . ' ' . $oFoundMatchup->getID() . ' (' . $fFoundSim . ')');
                         if ($fNewSim > $fFoundSim) {
                             $oFoundMatchup = $oMatchup;
@@ -351,7 +349,7 @@ class PropParserV2
                             $fFoundSim = $fNewSim;
                             $this->logger->info('----Challenger won, changing matched to new one: ' . $iFoundMatchupID);
                             $iFoundTeam = ($iY == 3 ? '0' : $iY); //If Y = 3 then team is not relevant, set it to 0
-                        } else if ($fNewSim == $fFoundSim) {
+                        } elseif ($fNewSim == $fFoundSim) {
                             $this->logger->warning('----Fsims are identical, cannot determine winner. Bailing..');
                             return array('matchup_id' => null, 'team' => 0);
                         } else {
@@ -366,7 +364,7 @@ class PropParserV2
                         if ($oFoundMatchup->hasOrderChanged() == true) {
                             if ($iFoundTeam == 1) {
                                 $iFoundTeam = 2;
-                            } else if ($iFoundTeam == 2) {
+                            } elseif ($iFoundTeam == 2) {
                                 $iFoundTeam = 1;
                             }
                         }
@@ -396,7 +394,6 @@ class PropParserV2
         $aPropValues = $a_oProp->getPropValues();
 
         if (count($aPropValues) != count($aTemplateVariables)) {
-
             $this->logger->error('---Template variable count (' . count($aTemplateVariables) . ') does not match prop values count (' . count($aPropValues) . '). Not good, check template.');
             return null;
         }
@@ -434,7 +431,7 @@ class PropParserV2
                         $iFoundEventID = $oFoundEvent->getID();
                         $fFoundSim = $fNewSim;
                         $this->logger->info('----Challenger won, changing matched to new one: ' . $iFoundEventID);
-                    } else if ($fNewSim == $fFoundSim) {
+                    } elseif ($fNewSim == $fFoundSim) {
                         $this->logger->info('----Fsims are identical, cannot determine winner. Bailing..');
                         return array('event' => null);
                     } else {
@@ -491,8 +488,8 @@ class PropParserV2
                     //Probably Koscheck
                     $aFoundFieldsType[$iZ] = (count($aParsedMatchup) > 1 ? 1 : 3);
                 }
-            } else if (preg_match('/^[^\s] [^\n]+/', $aParsedMatchup[$iZ])) {
-                //Probably J Koscheck   
+            } elseif (preg_match('/^[^\s] [^\n]+/', $aParsedMatchup[$iZ])) {
+                //Probably J Koscheck
                 $aFoundFieldsType[$iZ] = (count($aParsedMatchup) > 1 ? 7 : 8);
             } else {
                 //Could be J. Koscheck

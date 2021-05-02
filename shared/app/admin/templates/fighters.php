@@ -36,7 +36,7 @@ document.addEventListener("DOMContentLoaded", function(event) {
 	<input type="text" id="alt_name" style="width: 200px;"/>
 	<br>
 	Existing alt names:<br>
-	<?php foreach($altnames as $altname): ?>
+	<?php foreach ($altnames as $altname): ?>
 		<?=$altname?><br>
 	<?php endforeach ?>
 

@@ -2,15 +2,13 @@
 
 require_once('lib/bfocore/general/class.EventHandler.php');
 
-if (!isset($_GET['eventID']) || $_GET['eventID'] == '')
-{
-	exit();
+if (!isset($_GET['eventID']) || $_GET['eventID'] == '') {
+    exit();
 }
 
 $oCurrentEvent = EventHandler::getEvent($_GET['eventID']);
-if ($oCurrentEvent == null)
-{
-	exit();
+if ($oCurrentEvent == null) {
+    exit();
 }
 
 echo '
@@ -22,7 +20,3 @@ echo '
 	<input type="submit" value="Update event" />
 </form>
 ';
-
-
-
-?>

@@ -119,7 +119,7 @@ class APIController
                                 'x' => (new DateTime($odds_obj->getDate()))->getTimestamp() * 1000,
                                 'y' => $dummy
                             ];
-                            //error_log('Giving bogus data');
+                        //error_log('Giving bogus data');
                         } else {
                             $return_data['data'][] = [
                                 'x' => (new DateTime($odds_obj->getDate()))->getTimestamp() * 1000,

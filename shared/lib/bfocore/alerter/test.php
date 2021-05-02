@@ -9,30 +9,24 @@ $alerter = new AlerterV2();
 
 //Initialization: Clear all alerts
 $alerts = $alerter->getAllAlerts();
-foreach ($alerts as $alert)
-{
-	$alerter->deleteAlert($alert->getID());
+foreach ($alerts as $alert) {
+    $alerter->deleteAlert($alert->getID());
 }
 
 
 //Create some random alerts
 
 $aPropTypes = OddsHandler::getAllPropTypes();
-foreach ($aPropTypes as $oPropType)
-{
-	if (!$oPropType->isEventProp())
-	{
-		//If prop contains <T> then this is a team prop so we need to add both 1 and 2
-		if (strpos($oPropType->getPropDesc(), '<T>') !== false)
-		{
-			translateResult($alerter->addAlert('csacsa@gmail.com', 2, '{"matchup_id": 12435, "proptype_id": ' .  $oPropType->getID()  . ', "team_num": 1}'));
-			translateResult($alerter->addAlert('csacsa@gmail.com', 2, '{"matchup_id": 12435, "proptype_id": ' .  $oPropType->getID()  . ', "team_num": 2}'));
-		}
-		else
-		{
-			translateResult($alerter->addAlert('csacsa@gmail.com', 2, '{"matchup_id": 12435, "proptype_id": ' .  $oPropType->getID()  . ', "team_num": 0}'));
-		}		
-	}
+foreach ($aPropTypes as $oPropType) {
+    if (!$oPropType->isEventProp()) {
+        //If prop contains <T> then this is a team prop so we need to add both 1 and 2
+        if (strpos($oPropType->getPropDesc(), '<T>') !== false) {
+            translateResult($alerter->addAlert('csacsa@gmail.com', 2, '{"matchup_id": 12435, "proptype_id": ' .  $oPropType->getID()  . ', "team_num": 1}'));
+            translateResult($alerter->addAlert('csacsa@gmail.com', 2, '{"matchup_id": 12435, "proptype_id": ' .  $oPropType->getID()  . ', "team_num": 2}'));
+        } else {
+            translateResult($alerter->addAlert('csacsa@gmail.com', 2, '{"matchup_id": 12435, "proptype_id": ' .  $oPropType->getID()  . ', "team_num": 0}'));
+        }
+    }
 }
 
 
@@ -52,39 +46,36 @@ translateResult($alerter->addAlert('cnordvaller@gmail.com', 2, '{"matchup_id": 1
 
 function translateResult($result)
 {
-	switch ($result)
-	{
-		case 1:
-			echo "OK!
+    switch ($result) {
+        case 1:
+            echo "OK!
 			";
-		break;
-		case -100:
-			echo "Criteria already met
+        break;
+        case -100:
+            echo "Criteria already met
 			";
-		break;
-		case -210: 
-			echo "Duplicate entry
+        break;
+        case -210:
+            echo "Duplicate entry
 			";
-		break;
-		case -220: 
-			echo "Invalid criterias
+        break;
+        case -220:
+            echo "Invalid criterias
 			";
-		break;
-		case -230: 
-			echo "Invalid e-mail
+        break;
+        case -230:
+            echo "Invalid e-mail
 			";
-		break;
-		case -240: 
-			echo "Invalid odds type
+        break;
+        case -240:
+            echo "Invalid odds type
 			";
-		break;
-		case -250: 
-			echo "Invalid criterias combination
+        break;
+        case -250:
+            echo "Invalid criterias combination
 			";
-		break;
-	}
+        break;
+    }
 }
 
 $alerter->checkAlerts();
-
-?>

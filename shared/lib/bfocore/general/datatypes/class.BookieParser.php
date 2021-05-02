@@ -76,7 +76,4 @@ class BookieParser
     {
         return $this->sCNURLSuffix;
     }
-
 }
-
-?>

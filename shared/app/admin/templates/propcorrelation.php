@@ -38,11 +38,11 @@ Bookie: <input type="hidden" id="in_bookie_id" size="70" value="<?=$bookie_id?>"
 <br><br>
 Matchup: <select id="in_matchup_id">
 
-<?php foreach($events as $event): ?>
+<?php foreach ($events as $event): ?>
 
     <option value="-1"><?=$event['event_obj']->getName()?></option>
 
-    <?php foreach($event['matchups'] as $matchup): ?>
+    <?php foreach ($event['matchups'] as $matchup): ?>
         
         <option value="<?=$matchup['matchup_obj']->getID()?>">&nbsp;&nbsp;&nbsp;<?=$matchup['matchup_obj']->getTeamAsString(1)?> vs <?=$matchup['matchup_obj']->getTeamAsString(2)?></option>
         

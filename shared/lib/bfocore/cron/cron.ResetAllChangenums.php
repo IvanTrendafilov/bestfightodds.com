@@ -5,5 +5,3 @@
 require_once('lib/bfocore/general/class.BookieHandler.php');
 
 BookieHandler::resetAllChangeNums();
-
-?>

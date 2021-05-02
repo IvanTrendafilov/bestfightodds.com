@@ -5,7 +5,6 @@ require_once('lib/bfocore/db/class.BookieDB.php');
 
 class BookieHandler
 {
-
     public static function getAllBookies()
     {
         return BookieDB::getAllBookies();
@@ -52,14 +51,12 @@ class BookieHandler
         //TODO: Add check to see if we are trying to add a duplicate
 
         //Check if fields type ID is within the span 1-6
-        if ($proptemplate_obj->getFieldsTypeID() < 1 || $proptemplate_obj->getFieldsTypeID() > 8)
-        {
+        if ($proptemplate_obj->getFieldsTypeID() < 1 || $proptemplate_obj->getFieldsTypeID() > 8) {
             return false;
         }
 
         //Check if there an occurence of <T>. Add a template cannot be added without indicating at least one team/event in the template
-        if (strpos($proptemplate_obj->getTemplate(), '<T>') === false) 
-        {
+        if (strpos($proptemplate_obj->getTemplate(), '<T>') === false) {
             return false;
         }
 
@@ -73,8 +70,7 @@ class BookieHandler
 
     public static function deleteTemplate($template_id)
     {
-        if (!is_int($template_id))
-        {
+        if (!is_int($template_id)) {
             return false;
         }
         return BookieDB::deleteTemplate($template_id);
@@ -85,7 +81,4 @@ class BookieHandler
     {
         return BookieDB::getAllRunStatuses();
     }
-
 }
-
-?>

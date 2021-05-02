@@ -15,8 +15,7 @@ class PropType
         $this->sPropDesc = $a_sPropDesc;
         $this->sPropNegDesc = $a_sPropNegDesc;
 
-        if (preg_match('/<T>/', $a_sPropDesc) > 0 || preg_match('/<T>/', $a_sPropNegDesc) > 0)
-        {
+        if (preg_match('/<T>/', $a_sPropDesc) > 0 || preg_match('/<T>/', $a_sPropNegDesc) > 0) {
             $this->bTeamSpecific = true;
         }
 
@@ -65,13 +64,10 @@ class PropType
 
     public function invertTeamNum()
     {
-        if ($this->iTeamNum == 1)
-        {
+        if ($this->iTeamNum == 1) {
             $this->iTeamNum = 2;
             return true;
-        }
-        else if ($this->iTeamNum == 2)
-        {
+        } elseif ($this->iTeamNum == 2) {
             $this->iTeamNum = 1;
             return true;
         }
@@ -87,8 +83,4 @@ class PropType
     {
         return $this->bIsEventProp;
     }
-
-
 }
-
-?>

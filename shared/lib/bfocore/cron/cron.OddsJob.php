@@ -4,7 +4,7 @@
  * Odds Job
  *
  *  This is v2 of cron.OddsParser.php and does not handle feed parsing but the following activities:
- * 
+ *
  * - Checks if any alerts needs to be dispatched or cleaned out
  * - Clears the image cache for graphs
  * - Generates a new front page with latest odds

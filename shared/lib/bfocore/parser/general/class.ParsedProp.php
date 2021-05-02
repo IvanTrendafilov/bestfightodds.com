@@ -4,7 +4,6 @@ require_once('lib/bfocore/parser/general/class.ParsedMatchup.php');
 
 class ParsedProp extends ParsedMatchup
 {
-
     private $iMatchedMatchupID = null;
     private $iMatchedTeamNumber = null;
     private $aPropValues = null;
@@ -60,8 +59,7 @@ class ParsedProp extends ParsedMatchup
     public function setPropValues($aPropValues)
     {
         //Trim values before adding
-        foreach ($aPropValues as &$sPropValue)
-        {
+        foreach ($aPropValues as &$sPropValue) {
             $sPropValue = trim($sPropValue, ' -\t');
         }
 
@@ -80,14 +78,11 @@ class ParsedProp extends ParsedMatchup
 
     /**
      * Function used to set which of the team names that contains the main prop. The other will be the negative prop
-     * 
+     *
      * @param int $a_iProp Team 1 or 2
      */
     public function setMainProp($a_iProp)
     {
         $this->iMainProp = $a_iProp;
     }
-
 }
-
-?>

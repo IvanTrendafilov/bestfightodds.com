@@ -12,16 +12,14 @@ class StatsDB
 {
     public static function getDiffForMatchup($matchup_id, $from = 0) //0 Opening, 1 = 1 day ago, 2 = 1 hour ago
     {
-        if ($matchup_id == null)
-        {
+        if ($matchup_id == null) {
             return false;
         }
  
         $query = '';
         $params = [];
 
-        if ($from == 0)
-        {
+        if ($from == 0) {
             //From opening
             $query = 'SELECT 
                 opening.avg_f1odds as opf1,
@@ -41,12 +39,10 @@ class StatsDB
                                 
             $params[] = $matchup_id;
             $params[] = $matchup_id;
-        }
-        else
-        {
+        } else {
             //Last day or hour
 
-            //This query is used when a time slice is used, for example last 24 hours or last hour. We need to check if the event is in the past so that past events dont utilize NOW() - 1 HOUR as last hour. The check is as follows: 
+            //This query is used when a time slice is used, for example last 24 hours or last hour. We need to check if the event is in the past so that past events dont utilize NOW() - 1 HOUR as last hour. The check is as follows:
             //NOW() < METADATA = NOW()
             //NOW() > METADATA = METADATA UNLESS LAST ODDS > METADATA
             //!METADATA, IS_PAST( YES = LAST ODDS, NO = NOW() )
@@ -77,12 +73,9 @@ class StatsDB
             $params[] = $matchup_id;
             $sDateCompare = '<';
 
-            if ($from == 1) //24 hour
-            {
+            if ($from == 1) { //24 hour
                 $extra_where .= " - INTERVAL 1 DAY ";
-            }
-            else if ($from == 2) //1 Hour
-            {
+            } elseif ($from == 2) { //1 Hour
                 $extra_where .= " - INTERVAL 1 HOUR ";
             }
 
@@ -113,18 +106,18 @@ class StatsDB
         }
 
         $row = PDOTools::findOne($query, $params);
-       /* var_dump($result);
-        exit;
+        /* var_dump($result);
+         exit;
 
-        $result = DBTools::doParamQuery($query, $params);
+         $result = DBTools::doParamQuery($query, $params);
 
-        if ($row = mysqli_fetch_array($result))
-        {*/
+         if ($row = mysqli_fetch_array($result))
+         {*/
         if ($row) {
             return array('f1' => array(
                             'opening' => $row->opf1,
                             'latest' => $row->laf1,
-                            'swing' => $row->f1swing), 
+                            'swing' => $row->f1swing),
                     'f2' => array(
                             'opening' => $row->opf2,
                             'latest' => $row->laf2,
@@ -134,4 +127,3 @@ class StatsDB
         return false;
     }
 }
-?>

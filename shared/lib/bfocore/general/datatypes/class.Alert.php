@@ -7,7 +7,6 @@ require_once('lib/bfocore/utils/class.OddsTools.php');
  */
 class Alert
 {
-
     private $sEmail;
     private $iFightID;
     private $iFighter; //1 or 2
@@ -28,8 +27,7 @@ class Alert
      */
     public function __construct($a_sEmail, $a_iFightID, $a_iFighter, $a_iBookieID, $a_iLimit, $a_iID = -1, $a_iOddsType = 1)
     {
-        if (strtoupper($a_iLimit) == 'EV' || strtoupper($a_iLimit) == 'EVEN' || $a_iLimit == '-100')
-        {
+        if (strtoupper($a_iLimit) == 'EV' || strtoupper($a_iLimit) == 'EVEN' || $a_iLimit == '-100') {
             $a_iLimit = '100';
         }
 
@@ -40,18 +38,16 @@ class Alert
         $this->iID = $a_iID;
         $this->iLimit = $a_iLimit;
 
-        if (is_numeric($a_iBookieID))
-        {
+        if (is_numeric($a_iBookieID)) {
             $this->iBookieID = $a_iBookieID;
-        } else
-        {
+        } else {
             $this->iBookieID = -1;
         }
     }
 
     /**
      * Get e-mail for the alert
-     * 
+     *
      * @return string E-mail adress of the user who created the alert
      */
     public function getEmail()
@@ -81,7 +77,7 @@ class Alert
 
     /**
      * Get the bookie ID that the alert has been created for
-     * 
+     *
      * @return int Bookie ID
      */
     public function getBookieID()
@@ -107,24 +103,20 @@ class Alert
     public function getLimitAsString()
     {
         $sOdds = $this->iLimit;
-        if ($sOdds == 0)
-        {
+        if ($sOdds == 0) {
             return 'error';
-        } else if ($sOdds == 100)
-        {
+        } elseif ($sOdds == 100) {
             return 'EV';
-        } else if ($sOdds > 0)
-        {
+        } elseif ($sOdds > 0) {
             return '+' . $sOdds;
-        } else
-        {
+        } else {
             return $sOdds;
         }
     }
 
     /**
      * Get the ID for this alert
-     * 
+     *
      * @return int Alert ID
      */
     public function getID()
@@ -135,14 +127,11 @@ class Alert
     /**
      * Gets the odds type for the alert
      * 1 = Moneyline, 2 = Decimal, 3 = Fraction
-     * 
+     *
      * @return int Odds type
      */
     public function getOddsType()
     {
         return $this->iOddsType;
     }
-
 }
-
-?>

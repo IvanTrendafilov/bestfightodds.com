@@ -8,5 +8,4 @@ class PropTypeHandler
     {
         return PropTypeDB::getPropTypes($category_id);
     }
-
 }

@@ -197,7 +197,7 @@ class OddsDB
      *
      * Since these are matchup specific prop types we will go ahead and replace
      * the <T> variables with the actual team name
-     * 
+     *
      * @param int $a_iMatchupID Matchup ID
      * @return Array Collection of PropType objects
      */
@@ -431,7 +431,6 @@ class OddsDB
      */
     public static function getAllPropOddsForMatchupPropType($a_iMatchupID, $a_iBookieID, $a_iPropTypeID, $a_iTeamNum)
     {
-
         $aParams = array($a_iMatchupID, $a_iBookieID, $a_iPropTypeID, $a_iTeamNum);
 
         $sQuery = 'SELECT lp.bookie_id, lp.prop_odds, lp.negprop_odds, lp.proptype_id, lp.date, pt.prop_desc, pt.negprop_desc, lp.date, lp.team_num
@@ -474,7 +473,6 @@ class OddsDB
      */
     public static function getAllPropOddsForEventPropType($a_iEventID, $a_iBookieID, $a_iPropTypeID)
     {
-
         $aParams = array($a_iEventID, $a_iBookieID, $a_iPropTypeID);
 
         $sQuery = 'SELECT lep.bookie_id, lep.prop_odds, lep.negprop_odds, lep.proptype_id, lep.date, pt.prop_desc, pt.negprop_desc, lep.date
@@ -529,15 +527,13 @@ class OddsDB
 
     /**
      * Gets the openings odds for the specified matchup and bookie
-     * 
+     *
      * @param int $a_iMatchupID Matchup ID
      * @param int $a_iBookieID Bookie ID
      * @return \FightOdds|null The odds object. Null if not found
      */
     public static function getOpeningOddsForMatchupAndBookie($a_iMatchupID, $a_iBookieID)
     {
-
-
         $sQuery = 'SELECT fight_id, fighter1_odds, fighter2_odds, bookie_id, date
                     FROM fightodds
                     WHERE bookie_id = ? 
@@ -554,7 +550,6 @@ class OddsDB
             $aFightOddsCol[] = new FightOdds($aFightOdds['fight_id'], $aFightOdds['bookie_id'], $aFightOdds['fighter1_odds'], $aFightOdds['fighter2_odds'], $aFightOdds['date']);
         }
         if (sizeof($aFightOddsCol) > 0) {
-
             return $aFightOddsCol[0];
         }
         return null;
@@ -562,10 +557,10 @@ class OddsDB
 
     /**
      * Get openings odds for a specific prop
-     * 
+     *
      * @param int Matchup ID
      * @param int Proptype ID
-     * @return FightOdds The opening odds or null if none was found 
+     * @return FightOdds The opening odds or null if none was found
      */
     public static function getOpeningOddsForProp($a_iMatchupID, $a_iPropTypeID, $a_iTeamNum)
     {
@@ -606,10 +601,10 @@ class OddsDB
 
     /**
      * Get openings odds for a specific event prop
-     * 
+     *
      * @param int Matchup ID
      * @param int Proptype ID
-     * @return FightOdds The opening odds or null if none was found 
+     * @return FightOdds The opening odds or null if none was found
      */
     public static function getOpeningOddsForEventProp($a_iEventID, $a_iPropTypeID)
     {
@@ -647,7 +642,7 @@ class OddsDB
 
     /**
      * Get openings odds for a specific prop and bookie
-     * 
+     *
      * @param int Matchup ID
      * @param int Proptype ID
      * @param int Bookie ID
@@ -692,7 +687,7 @@ class OddsDB
 
     /**
      * Get openings odds for a specific prop and bookkie
-     * 
+     *
      * @param int Event ID
      * @param int Proptype ID
      * @param int Bookie ID
@@ -736,9 +731,9 @@ class OddsDB
 
     /**
      * Get all correlations for the specified bookie
-     * 
+     *
      * @param int $a_iBookieID Bookie ID
-     * @return array Collection of correlations 
+     * @return array Collection of correlations
      */
     public static function getCorrelationsForBookie($a_iBookieID)
     {
@@ -776,11 +771,11 @@ class OddsDB
 
     /**
      * Stores a collection of correlations
-     * 
+     *
      * Accepts an array of correlations defined as follows:
-     * 
+     *
      * array('correlation' => xxx, 'matchup_id' => xxx)
-     * 
+     *
      * @param int $a_iBookieID Bookie ID
      * @param array $a_aCorrelations Collection of correlations as defined above
      */
@@ -850,7 +845,6 @@ class OddsDB
         $sExtraQuery = '';
         $aParams = array($a_iMatchup, $a_iMatchup);
         if ($a_iOffset == 1) {
-
             $sExtraQuery = ' AND lp4.date != (SELECT
                 MAX(lp5.date)  FROM        lines_props lp5
             WHERE
@@ -918,7 +912,6 @@ class OddsDB
         $sExtraQuery = '';
         $aParams = array($a_iEventID, $a_iEventID);
         if ($a_iOffset == 1) {
-
             $sExtraQuery = ' AND lep4.date != (SELECT
                 MAX(lep5.date)  FROM lines_eventprops lep5
             WHERE
@@ -927,7 +920,6 @@ class OddsDB
             $aParams[] = $a_iEventID;
         }
         if ($a_iBookieID != null) {
-
             $sExtraQuery .= ' AND bookie_id = ? ';
             $aParams[] = $a_iBookieID;
         }
@@ -1173,7 +1165,7 @@ class OddsDB
 
         //These values can be tuned with time (TODO: Maybe move to config file?):
         $event_threshold = 24; //If the event is within this value (hours) we will not remove
-        $flagged_time = 8; //How many hours the line must be flagged before deletion 
+        $flagged_time = 8; //How many hours the line must be flagged before deletion
 
         $query = 'SELECT lf.*, TIMESTAMPDIFF(HOUR, initial_flagdate, NOW()) AS timediff, pt.prop_desc, pt.negprop_desc, 
                         f1.name AS team1_name, f2.name AS team2_name, b.name AS bookie_name, e.name AS event_name FROM lines_flagged lf 
@@ -1205,7 +1197,7 @@ class OddsDB
                     //Remove prop odds for matchup
                     $flagged_odds['prop_odds'][] = $row;
                 }
-            } else if ($row['event_id'] != -1 && $row['proptype_id'] != -1) {
+            } elseif ($row['event_id'] != -1 && $row['proptype_id'] != -1) {
                 //Remove event prop odds
                 $flagged_odds['event_prop_odds'][] = $row;
             }
@@ -1263,8 +1255,7 @@ class OddsDB
         $aParams = [];
         $aParams[] = $a_iEventID;
         $sExtraWhere = '';
-        if ($a_iEventID == null) //Required
-        {
+        if ($a_iEventID == null) { //Required
             return false;
         }
         if ($a_iBookieID != null) {
@@ -1300,8 +1291,7 @@ class OddsDB
         $aParams = [];
         $sExtraWhere = '';
 
-        if ($a_iEventID == null && $a_iMatchupID == null) //Either event ID or matchup ID needs to be specified
-        {
+        if ($a_iEventID == null && $a_iMatchupID == null) { //Either event ID or matchup ID needs to be specified
             return false;
         }
 

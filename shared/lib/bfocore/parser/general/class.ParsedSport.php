@@ -54,41 +54,30 @@ class ParsedSport
         }*/
 
         $iOrigCount = count($this->aMatchups);
-        for ($iY = 0; $iY < $iOrigCount; $iY++)
-        {
-            if (isset($this->aMatchups[$iY]) && $this->aMatchups[$iY] != null)
-            {
+        for ($iY = 0; $iY < $iOrigCount; $iY++) {
+            if (isset($this->aMatchups[$iY]) && $this->aMatchups[$iY] != null) {
                 $oMatchup = $this->aMatchups[$iY];
 
-                for ($iX = $iY + 1; $iX < $iOrigCount; $iX++)
-                {
-                    if (isset($this->aMatchups[$iX]))
-                    {
-
+                for ($iX = $iY + 1; $iX < $iOrigCount; $iX++) {
+                    if (isset($this->aMatchups[$iX])) {
                         $oTempMatchup = $this->aMatchups[$iX];
 
                         if ($oMatchup->getTeamName(1) == $oTempMatchup->getTeamName(1) &&
-                            $oMatchup->getTeamName(2) == $oTempMatchup->getTeamName(2))
-                        {
+                            $oMatchup->getTeamName(2) == $oTempMatchup->getTeamName(2)) {
                             $bChanged = false;
 
                             //Check if a moneyline exists in both. In that case just skip
                             //TODO: Maybe handle this in some way.. Maybe just check best arbitrage and then store that one?
-                            if ($oMatchup->hasMoneyline() && $oTempMatchup->hasMoneyline())
-                            {
+                            if ($oMatchup->hasMoneyline() && $oTempMatchup->hasMoneyline()) {
                                 //Do nothing for now
-                            }
-                            else if (!$oMatchup->hasMoneyline() && $oTempMatchup->hasMoneyline())
-                            {
+                            } elseif (!$oMatchup->hasMoneyline() && $oTempMatchup->hasMoneyline()) {
                                 $oMatchup->addMoneyLineObj($oTempMatchup->getMoneyLineObj());
                             }
 
                             //Remove secondary matchup
-                            if ($bChanged == true)
-                            {
+                            if ($bChanged == true) {
                                 unset($this->aMatchups[$iX]);
                             }
-
                         }
                     }
                 }
@@ -117,7 +106,4 @@ class ParsedSport
     {
         $this->aProps = $a_aProps;
     }
-
 }
-
-?>

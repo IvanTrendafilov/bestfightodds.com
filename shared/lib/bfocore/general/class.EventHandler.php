@@ -5,7 +5,6 @@ require_once('config/inc.config.php');
 
 class EventHandler
 {
-
     public static function getAllUpcomingEvents()
     {
         return EventDB::getAllUpcomingEvents();
@@ -174,7 +173,6 @@ class EventHandler
         //Validate date
         $dt = DateTime::createFromFormat("Y-m-d", $event->getDate());
         if ($dt === false || array_sum($dt::getLastErrors()) > 0) {
-
             return false;
         }
 
@@ -309,7 +307,6 @@ class EventHandler
      */
     public static function getRecentEvents($limit = 10, $offset = 0)
     {
-
         if (!is_integer($limit) || $limit <= 0) {
             return null;
         }
