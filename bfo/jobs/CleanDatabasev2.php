@@ -23,11 +23,13 @@
  *
  */
 
-require_once('lib/bfocore/utils/db/class.DBTools.php');
-require_once('lib/bfocore/utils/class.OddsTools.php');
-require_once('lib/bfocore/general/class.EventHandler.php');
-require_once('lib/bfocore/general/class.OddsHandler.php');
-require_once('lib/bfocore/general/class.BookieHandler.php');
+require_once __DIR__ . "/../bootstrap.php";
+
+use BFO\General\BookieHandler;
+use BFO\General\OddsHandler;
+use BFO\General\EventHandler;
+use BFO\Utils\DB\DBTools;
+use BFO\Utils\OddsTools;
 
 //Step 3
 
