@@ -10,8 +10,6 @@ use BFO\Utils\Twitter\Twitterer;
  * Handles all Twitter-updates for new odds
  *
  * TODO: Make generic
- *
- * @author Christian Nordvaller
  */
 class TwitterHandler
 {

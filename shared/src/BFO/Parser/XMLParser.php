@@ -13,8 +13,6 @@ use BFO\DataTypes\FightOdds;
 
 /**
  * Main XML parser
- *
- * @author Christian Nordvaller
  */
 class XMLParser
 {

@@ -4,37 +4,35 @@ namespace BFO\Parser;
 
 /**
  * Description of ParsedMoneyline
- *
- * @author Christian
  */
 class ParsedMoneyline
 {
-    private $iTeam1Moneyline;
-    private $iTeam2Moneyline;
-    private $bSwitched;
+    private $team1_moneyline;
+    private $team2_moneyline;
+    private $order_switched;
 
-    public function __construct($a_iTeam1Moneyline, $a_iTeam2Moneyline)
+    public function __construct($in_team1_moneyline, $in_team2_moneyline)
     {
-        $this->bSwitched = false;
+        $this->order_switched = false;
 
-        $this->iTeam1Moneyline = $a_iTeam1Moneyline;
-        $this->iTeam2Moneyline = $a_iTeam2Moneyline;
+        $this->team1_moneyline = $in_team1_moneyline;
+        $this->team2_moneyline = $in_team2_moneyline;
 
-        if (strtoupper($this->iTeam1Moneyline) == 'EV' || strtoupper($this->iTeam1Moneyline) == 'EVEN') {
-            $this->iTeam1Moneyline = '100';
+        if (strtoupper($this->team1_moneyline) == 'EV' || strtoupper($this->team1_moneyline) == 'EVEN') {
+            $this->team1_moneyline = '100';
         }
 
-        if (strtoupper($this->iTeam2Moneyline) == 'EV' || strtoupper($this->iTeam2Moneyline) == 'EVEN') {
-            $this->iTeam2Moneyline = '100';
+        if (strtoupper($this->team2_moneyline) == 'EV' || strtoupper($this->team2_moneyline) == 'EVEN') {
+            $this->team2_moneyline = '100';
         }
     }
 
-    public function getMoneyline($a_iTeamNo)
+    public function getMoneyline($team_no)
     {
-        switch ($a_iTeamNo) {
-            case 1: return $this->iTeam1Moneyline;
+        switch ($team_no) {
+            case 1: return $this->team1_moneyline;
                 break;
-            case 2: return $this->iTeam2Moneyline;
+            case 2: return $this->team2_moneyline;
                 break;
             default:
                 return null;
@@ -43,15 +41,14 @@ class ParsedMoneyline
 
     public function isSwitched()
     {
-        return $this->bSwitched;
+        return $this->order_switched;
     }
 
     public function switchOdds()
     {
-        $sTempOdds = $this->iTeam1Moneyline;
-        $this->iTeam1Moneyline = $this->iTeam2Moneyline;
-        $this->iTeam2Moneyline = $sTempOdds;
-
-        $this->bSwitched = true;
+        $temp_moneyline = $this->team1_moneyline;
+        $this->team1_moneyline = $this->team2_moneyline;
+        $this->team2_moneyline = $temp_moneyline;
+        $this->order_switched = true;
     }
 }

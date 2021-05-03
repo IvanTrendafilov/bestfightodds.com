@@ -6,8 +6,6 @@
  * - Fetches schedule from MMAJunkie
  * - Parses fetched schedule for missing content
  * - Checks existing content if outdated
- *
- * @author Christian Nordvaller
  */
 
 require_once('lib/bfocore/parser/schedule/class.ScheduleParser.php');

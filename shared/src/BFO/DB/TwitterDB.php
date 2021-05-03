@@ -3,6 +3,7 @@
 namespace BFO\DB;
 
 use BFO\Utils\DB\PDOTools;
+use BFO\DataTypes\Fight;
 
 /**
  * Twitter DB access

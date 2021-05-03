@@ -14,21 +14,16 @@
  * - Clear flagged odds for old matchups
  *
  */
-require_once('config/inc.config.php');
 
-require_once('lib/bfocore/general/class.Alerter.php');
-require_once('lib/bfocore/general/caching/class.CacheControl.php');
-require_once('lib/bfocore/general/class.TwitterHandler.php');
-require_once('lib/bfocore/general/class.OddsHandler.php');
-require_once('lib/bfocore/general/class.BookieHandler.php');
-require_once('lib/bfocore/general/class.ScheduleHandler.php');
-require_once('lib/bfocore/general/class.EventHandler.php');
-require_once('lib/bfocore/parser/utils/class.ParseRunLogger.php');
+namespace BFO\Jobs;
 
-$logger = new Katzgrau\KLogger\Logger(GENERAL_KLOGDIR, Psr\Log\LogLevel::INFO, ['filename' => 'cron.oddsjob.' . time() . '.log']);
-
-$oj = new OddsJob($logger);
-$oj->run();
+use BFO\General\Alerter;
+use BFO\Caching\CacheControl;
+use BFO\General\OddsHandler;
+use BFO\General\EventHandler;
+use BFO\General\TwitterHandler;
+use BFO\General\BookieHandler;
+use BFO\Parser\Utils\ParseRunLogger;
 
 class OddsJob
 {
@@ -80,7 +75,7 @@ class OddsJob
         $this->logger->info('Removed ' . $result . ' odds');
 
         //Generate new front page with latest odds
-        $plates = new League\Plates\Engine(GENERAL_BASEDIR . '/app/front/templates/');
+        $plates = new \League\Plates\Engine(GENERAL_BASEDIR . '/app/front/templates/');
         $events = EventHandler::getAllUpcomingEvents();
 
         $view_data = [];

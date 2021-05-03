@@ -4,15 +4,12 @@ namespace BFO\DB;
 
 use BFO\DataTypes\Fight;
 use BFO\DataTypes\Event;
-use BFO\Utils\DB\DBTools;
 use BFO\Utils\DB\PDOTools;
 
 /**
  * Facebook DB
  *
  * Handles all calls to the database related to Facebook posts
- *
- * @author Christian Nordvaller
  */
 class FacebookDB
 {

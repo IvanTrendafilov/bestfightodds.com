@@ -9,20 +9,21 @@
  *
  */
 
-require_once('lib/bfocore/parser/schedule/class.ScheduleParser.php');
-require_once('lib/bfocore/parser/utils/class.ParseTools.php');
+use BFO\Parser\Scheduler\ScheduleParser;
+use BFO\Parser\Utils\ParseTools;
+
 require_once('lib/simple_html_dom/simple_html_dom.php');
 
-echo 'Schedule parser start
-';
+echo "Schedule parser start
+";
 
 //Set timezone to match that of parsed schedule
 
 $rSP = new ScheduleParser();
 $rSP->parseSchedPreFetched(fetchRingTVSchedule());
 
-echo 'Done
-';
+echo "Done
+";
 
 function fetchRingTVSchedule()
 {

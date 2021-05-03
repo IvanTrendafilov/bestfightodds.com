@@ -11,35 +11,34 @@ class ScheduleParser
     private $aMatchedExistingMatchups;
     private $aMatchedExistingEvents;
 
-    /*
-     * @depcreated Use parseSchedPreFetched instead of parseSched to make it site independent
-     */
-    public function parseSched()
+    public function __construct()
     {
-        require_once('lib/bfospec/schedule/class.MMAJunkieParser.php');
-        $this->aMatchedExistingMatchups = array();
-        $this->aMatchedExistingEvents = array();
+        $this->aMatchedExistingMatchups = [];
+        $this->aMatchedExistingEvents = [];
+    }
+
+    public function run($schedule) 
+    {
         ScheduleHandler::clearAllManualActions();
-        $aSchedule = MMAJunkieParser::fetchSchedule();
-        $this->parseEvents($aSchedule);
+        $this->parseEvents($schedule);
         $this->checkRemovedContent();
     }
 
     /*
      * Use this instead of parseSched to make it site independent
      */
-    public function parseSchedPreFetched($a_aSchedule)
+    public function parseSchedPreFetched($schedule_col)
     {
         $this->aMatchedExistingMatchups = array();
         $this->aMatchedExistingEvents = array();
         ScheduleHandler::clearAllManualActions();
-        $this->parseEvents($a_aSchedule);
+        $this->parseEvents($schedule_col);
         $this->checkRemovedContent();
     }
 
-    public function parseEvents($a_aSchedule)
+    public function parseEvents($schedule_col)
     {
-        foreach ($a_aSchedule as $aEvent) {
+        foreach ($schedule_col as $aEvent) {
             //Check if event matches an existing stored event. Must be numered though
             $aStoredEvents = EventHandler::getAllUpcomingEvents();
             $bFound = false;
@@ -150,32 +149,32 @@ class ScheduleParser
         }
     }
 
-    private function checkEventDate($a_aEvent, $a_oStoredEvent)
+    private function checkEventDate($event_arr, $stored_event)
     {
-        if (date('Y-m-d', $a_aEvent['date']) != substr($a_oStoredEvent->getDate(), 0, 10)) {
-            ScheduleHandler::storeManualAction(json_encode(array('eventID' => $a_oStoredEvent->getID(), 'eventDate' => date('Y-m-d', $a_aEvent['date'])), JSON_HEX_APOS | JSON_HEX_QUOT), 3);
+        if (date('Y-m-d', $event_arr['date']) != substr($stored_event->getDate(), 0, 10)) {
+            ScheduleHandler::storeManualAction(json_encode(array('eventID' => $stored_event->getID(), 'eventDate' => date('Y-m-d', $event_arr['date'])), JSON_HEX_APOS | JSON_HEX_QUOT), 3);
             return true;
         }
         return false;
     }
 
-    public function parseMatchups($a_aEvent, $a_oMatchedEvent)
+    public function parseMatchups($event, $matched_event)
     {
-        foreach ($a_aEvent['matchups'] as $aParsedMatchup) {
-            $oMatchup = EventHandler::getMatchingFight(new Fight(-1, $aParsedMatchup[0], $aParsedMatchup[1], -1));
-            if ($oMatchup != null) {
+        foreach ($event['matchups'] as $parsed_matchup) {
+            $matchup = EventHandler::getMatchingFight(new Fight(-1, $parsed_matchup[0], $parsed_matchup[1], -1));
+            if ($matchup != null) {
                 //Found a match! But is it the right event?
-                if ($oMatchup->getEventID() == $a_oMatchedEvent->getID()) {
+                if ($matchup->getEventID() == $matched_event->getID()) {
                     //Complete match
                 } else {
                     //Matched fight but for incorrect event, switch to matched event
-                    ScheduleHandler::storeManualAction(json_encode(array('matchupID' => $oMatchup->getID(), 'eventID' => $a_oMatchedEvent->getID()), JSON_HEX_APOS | JSON_HEX_QUOT), 6);
+                    ScheduleHandler::storeManualAction(json_encode(array('matchupID' => $matchup->getID(), 'eventID' => $matched_event->getID()), JSON_HEX_APOS | JSON_HEX_QUOT), 6);
                 }
                 //Store the matched fight in the matched array to check unmatched DB entries later
-                $this->aMatchedExistingMatchups[] = $oMatchup->getID();
+                $this->aMatchedExistingMatchups[] = $matchup->getID();
             } else {
                 //No matching fight, probably should be added as new fight
-                ScheduleHandler::storeManualAction(json_encode(array('matchups' => array(array('team1' => $aParsedMatchup[0], 'team2' => $aParsedMatchup[1])), 'eventID'=> $a_oMatchedEvent->getID()), JSON_HEX_APOS | JSON_HEX_QUOT), 5);
+                ScheduleHandler::storeManualAction(json_encode(array('matchups' => array(array('team1' => $parsed_matchup[0], 'team2' => $parsed_matchup[1])), 'eventID'=> $matched_event->getID()), JSON_HEX_APOS | JSON_HEX_QUOT), 5);
             }
         }
 
@@ -184,20 +183,20 @@ class ScheduleParser
 
     public function checkRemovedContent()
     {
-        $aEvents = EventHandler::getAllUpcomingEvents();
-        foreach ($aEvents as $oEvent) {
+        $events = EventHandler::getAllUpcomingEvents();
+        foreach ($events as $event) {
             //Skip FUTURE EVENTS event
-            if ($oEvent->getID() == PARSE_FUTURESEVENT_ID) {
+            if ($event->getID() == PARSE_FUTURESEVENT_ID) {
                 break;
             }
-            $aMatchups = EventHandler::getAllFightsForEvent($oEvent->getID());
+            $aMatchups = EventHandler::getAllFightsForEvent($event->getID());
             foreach ($aMatchups as $oMatchup) {
                 if (!in_array($oMatchup->getID(), $this->aMatchedExistingMatchups)) {
                     ScheduleHandler::storeManualAction(json_encode(array('matchupID' => $oMatchup->getID()), JSON_HEX_APOS | JSON_HEX_QUOT), 7);
                 }
             }
-            if (!in_array($oEvent->getID(), $this->aMatchedExistingEvents)) {
-                ScheduleHandler::storeManualAction(json_encode(array('eventID' => $oEvent->getID()), JSON_HEX_APOS | JSON_HEX_QUOT), 4);
+            if (!in_array($event->getID(), $this->aMatchedExistingEvents)) {
+                ScheduleHandler::storeManualAction(json_encode(array('eventID' => $event->getID()), JSON_HEX_APOS | JSON_HEX_QUOT), 4);
             }
         }
     }

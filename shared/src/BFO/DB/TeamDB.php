@@ -9,8 +9,6 @@ use BFO\DataTypes\Fighter;
 
 /**
  * TeamDB
- *
- * @author Christian
  */
 class TeamDB
 {

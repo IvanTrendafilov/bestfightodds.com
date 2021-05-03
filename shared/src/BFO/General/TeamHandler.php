@@ -6,8 +6,6 @@ use BFO\DB\TeamDB;
 
 /**
  * TeamHandler
- *
- * @author Christian
  */
 class TeamHandler
 {
