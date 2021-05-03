@@ -17,6 +17,12 @@
  * https://eu-offering.kambicdn.org/offering/v2018/rbse/listView/boxing.json?lang=sv_SE&market=SE&client_id=2&channel_id=1&useCombined=true
  *
  */
+
+use BFO\Parser\ParsedSport;
+use BFO\Parser\ParsedMatchup;
+use BFO\Parser\Utils\Logger;
+use BFO\Parser\Utils\ParseTools;
+
 class XMLParserWilliamHillWeb
 {
     private $bAuthorativeRun = false;

@@ -15,7 +15,11 @@
  * Comment: Dev version
  *
  */
-require_once('lib/bfocore/general/class.BookieHandler.php');
+use BFO\Parser\ParsedSport;
+use BFO\Parser\ParsedMatchup;
+use BFO\Parser\ParsedProp;
+use BFO\Parser\Utils\Logger;
+use BFO\General\BookieHandler;
 
 class XMLParserSportBet
 {

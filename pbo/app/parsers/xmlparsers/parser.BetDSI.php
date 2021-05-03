@@ -14,6 +14,14 @@
  * Comment: Dev version
  *
  */
+
+use BFO\Parser\ParsedSport;
+use BFO\Parser\ParsedMatchup;
+use BFO\Parser\ParsedProp;
+use BFO\Parser\Utils\Logger;
+use BFO\Utils\OddsTools;
+use BFO\Parser\Utils\ParseTools;
+
 class XMLParserBetDSI
 {
     private $bAuthorativeRun = false;
@@ -114,7 +122,7 @@ class XMLParserBetDSI
      */
     private function getMatchupFromString($a_sString)
     {
-        return $sMatchup;
+        return $a_sString;
     }
 
     public function checkAuthoritiveRun($a_aMetadata)

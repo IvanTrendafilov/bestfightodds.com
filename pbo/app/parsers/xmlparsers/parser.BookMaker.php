@@ -14,6 +14,13 @@
  * Comment: Dev version
  *
  */
+
+use BFO\Parser\ParsedSport;
+use BFO\Parser\ParsedMatchup;
+use BFO\Parser\ParsedProp;
+use BFO\Parser\Utils\Logger;
+use BFO\Parser\Utils\ParseTools;
+
 class XMLParserBookMaker
 {
     private $bAuthorativeRun = false;
@@ -109,7 +116,7 @@ class XMLParserBookMaker
                 foreach ($cLeague->game as $cGame)
                 {
                     //Check if prop is a Yes/No prop, if so we add both sides as options
-                    if (count($cGame->line == 2) && strcasecmp($cGame->line[0]['tmname'], 'Yes') == 0 && strcasecmp($cGame->line[1]['tmname'], 'No') == 0)
+                    if (count($cGame->line) == 2 && strcasecmp($cGame->line[0]['tmname'], 'Yes') == 0 && strcasecmp($cGame->line[1]['tmname'], 'No') == 0)
                     {
                         //Multi line prop (Yes/No)
                         if (ParseTools::checkCorrectOdds((string) $cGame->line[0]['odds']) && ParseTools::checkCorrectOdds((string) $cGame->line[1]['odds']))
@@ -160,7 +167,7 @@ class XMLParserBookMaker
      */
     private function getMatchupFromString($a_sString)
     {
-        return $sMatchup;
+        return $a_sString;
     }
 
     public function checkAuthoritiveRun($a_aMetadata)

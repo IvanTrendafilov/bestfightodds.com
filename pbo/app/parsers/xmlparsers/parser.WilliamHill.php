@@ -17,6 +17,14 @@
  * http://whdn.williamhill.com/williamhill/oxipubserver?action=template&template=getHierarchyByMarketType&classId=10&filterBIR=N&cn=1579008672
 
  */
+use BFO\Parser\ParsedSport;
+use BFO\Parser\ParsedMatchup;
+use BFO\Parser\ParsedProp;
+use BFO\Parser\Utils\Logger;
+use BFO\Parser\Utils\ParseTools;
+use BFO\Utils\OddsTools;
+use BFO\General\BookieHandler;
+
 class XMLParserWilliamHill
 {
     private $bAuthorativeRun = false;

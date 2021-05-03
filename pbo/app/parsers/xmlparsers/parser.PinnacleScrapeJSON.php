@@ -1,7 +1,8 @@
 <?php
 
-require_once('lib/bfocore/parser/utils/class.ParseTools.php');
-require_once('lib/simple_html_dom/simple_html_dom.php');
+use BFO\Parser\ParsedSport;
+use BFO\Parser\ParsedMatchup;
+use BFO\Parser\Utils\Logger;
 
 /**
  * XML Parser

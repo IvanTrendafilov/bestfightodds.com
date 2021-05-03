@@ -18,7 +18,12 @@
  *
  */
 
-require_once 'lib/bfocore/parser/general/inc.ParserMain.php';
+use BFO\Parser\ParsedSport;
+use BFO\Parser\ParsedMatchup;
+use BFO\Parser\ParsedProp;
+use BFO\Parser\Utils\Logger;
+use BFO\Utils\OddsTools;
+use BFO\Parser\Utils\ParseTools;
 
 class XMLParserBetOnline
 {
