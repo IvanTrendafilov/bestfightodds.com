@@ -84,7 +84,7 @@ class XMLParser
         } elseif ($sXML != null && $sXML != '') {
             $oLogger->log("URL (<a href=\"" . $a_oParser->getParseURL() . "\">" . $a_oParser->getParseURL() . "</a>) fetched OK in " . round(microtime(true) - $fStartTime, 3), 0);
 
-            require_once('app/parsers/xmlparsers/parser.' . $a_oParser->getName() . '.php');
+            require_once(GENERAL_BASEDIR . '/app/parsers/xmlparsers/parser.' . $a_oParser->getName() . '.php');
             $sClassName = 'XMLParser' . $a_oParser->getName();
             $oBookieParser = new $sClassName;
 

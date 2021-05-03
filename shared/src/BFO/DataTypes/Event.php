@@ -42,16 +42,16 @@ class Event
     //Short name converts a longer name to a shorter one by omitting everything after the first : .E.g. UFC 201: Lawler vs. Woodley => UFC 201
     public function getShortName()
     {
-        $iMarkPos = strpos($this->getName(), ':');
-        if ($iMarkPos != null) {
-            return substr($this->getName(), 0, $iMarkPos);
+        $mark_pos = strpos($this->getName(), ':');
+        if ($mark_pos != null) {
+            return substr($this->getName(), 0, $mark_pos);
         }
         return $this->getName();
     }
 
-    public function setName($a_sName)
+    public function setName($new_name)
     {
-        $this->sName = $a_sName;
+        $this->sName = $new_name;
     }
 
     public function isDisplayed()
@@ -59,9 +59,9 @@ class Event
         return $this->bDisplay;
     }
 
-    public function setDisplay($a_bDisplay)
+    public function setDisplay($display)
     {
-        $this->bDisplay = $a_bDisplay;
+        $this->bDisplay = $display;
     }
 
     /**

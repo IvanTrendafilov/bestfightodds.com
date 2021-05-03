@@ -4,6 +4,7 @@ namespace BFO\General;
 
 use BFO\DB\EventDB;
 use BFO\DataTypes\FightOdds;
+use BFO\DataTypes\Event;
 
 class EventHandler
 {

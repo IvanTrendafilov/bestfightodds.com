@@ -6,6 +6,7 @@ use BFO\DB\AlertDB;
 use BFO\General\EventHandler;
 use BFO\Utils\OddsTools;
 use BFO\Utils\AWS_SES\SESMailer;
+use BFO\DataTypes\Alert;
 
 /**
  * Class Alerter - The alerter is a feature that warns (e-mails) a user whenever odds for a certain fight drops below a certain number
