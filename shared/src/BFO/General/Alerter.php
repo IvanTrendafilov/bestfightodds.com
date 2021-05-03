@@ -18,43 +18,43 @@ class Alerter
     /**
      * Adds a new alert
      *
-     * @param int $a_iFightID
-     * @param int $a_iFighter
-     * @param string $a_sEmail
-     * @param int $a_iLimit
-     * @param int $a_iBookieID
+     * @param int $matchup_id
+     * @param int $team_no
+     * @param string $email
+     * @param int $odds_limit
+     * @param int $bookie_id
      * @return boolean True if the alert was created, false if it was not
      */
-    public static function addNewAlert($a_iFightID, $a_iFighter, $a_sEmail, $a_iLimit, $a_iBookieID, $a_iOddsType = 1)
+    public static function addNewAlert($matchup_id, $team_no, $email, $odds_limit, $bookie_id, $odds_type = 1)
     {
         //If odds type == 3 (return on ..) then convert back to moneyline (1)
-        if ($a_iOddsType == 3) {
-            $a_iOddsType = 1;
+        if ($odds_type == 3) {
+            $odds_type = 1;
         }
 
         //Override cooke set odds format if the format of the submitted odds is of a specific type. Only when limit is specified though
-        if ($a_iLimit != '-9999') {
-            if ($a_iLimit[0] == '+' || $a_iLimit[0] == '-') {
+        if ($odds_limit != '-9999') {
+            if ($odds_limit[0] == '+' || $odds_limit[0] == '-') {
                 //Starts with - or +, its moneyline
                 //Note: + cannot be dected right now since the javascript removes it
-                $a_iOddsType = 1;
-            } elseif (strpos($a_iLimit, '.') !== false) {
+                $odds_type = 1;
+            } elseif (strpos($odds_limit, '.') !== false) {
                 //Contains a ., its decimal
-                $a_iOddsType = 2;
-            } elseif (strpos($a_iLimit, '/') !== false) {
+                $odds_type = 2;
+            } elseif (strpos($odds_limit, '/') !== false) {
                 //Contains a /, its fraction
-                $a_iOddsType = 4;
+                $odds_type = 4;
             }
 
             //If oddstype differs from moneyline (1) then convert from the previous format
-            if ($a_iOddsType == 2) { //Decimal
-                $a_iLimit = OddsTools::convertDecimalToMoneyline($a_iLimit);
-            } elseif ($a_iOddsType == 4) {
+            if ($odds_type == 2) { //Decimal
+                $odds_limit = OddsTools::convertDecimalToMoneyline($odds_limit);
+            } elseif ($odds_type == 4) {
                 //TODO: Create conversion from fractional odds
             }
         }
 
-        $oAlert = new Alert($a_sEmail, $a_iFightID, $a_iFighter, $a_iBookieID, $a_iLimit, -1, $a_iOddsType);
+        $oAlert = new Alert($email, $matchup_id, $team_no, $bookie_id, $odds_limit, -1, $odds_type);
         return AlertDB::addNewAlert($oAlert);
     }
 
@@ -67,75 +67,74 @@ class Alerter
      */
     public static function checkAllAlerts()
     {
-        $iAlertCount = 0;
-        $aAlerts = AlertDB::getReachedAlerts();
-        foreach ($aAlerts as $oAlert) {
-            $bSuccess = Alerter::dispatchAlert($oAlert);
-            if ($bSuccess) {
-                $iAlertCount++;
-                $bClearSuccess = AlertDB::clearAlert($oAlert->getID());
+        $count = 0;
+        $alerts = AlertDB::getReachedAlerts();
+        foreach ($alerts as $alert) {
+            $success = Alerter::dispatchAlert($alert);
+            if ($success) {
+                $count++;
+                $clear_success = AlertDB::clearAlert($alert->getID());
             }
         }
-        return $iAlertCount;
+        return $count;
     }
 
     /**
      * Dispatches an alert
      *
-     * @param Alert $a_oAlert
+     * @param Alert $alert_obj
      * @return boolean True if the alert was dispatched or false if it failed
      */
-    public static function dispatchAlert($a_oAlert)
+    public static function dispatchAlert($alert_obj)
     {
-        $oFightOdds = null;
-        if ($a_oAlert->getBookieID() == -1) {
+        $odds_obj = null;
+        if ($alert_obj->getBookieID() == -1) {
             //Alert is not bookie specific
-            $oFightOdds = EventHandler::getBestOddsForFight($a_oAlert->getFightID());
+            $odds_obj = EventHandler::getBestOddsForFight($alert_obj->getFightID());
         } else {
             //Alert is bookie specific
-            $oFightOdds = EventHandler::getLatestOddsForFightAndBookie($a_oAlert->getFightID(), $a_oAlert->getBookieID());
+            $odds_obj = EventHandler::getLatestOddsForFightAndBookie($alert_obj->getFightID(), $alert_obj->getBookieID());
         }
 
-        $oFight = EventHandler::getFightByID($a_oAlert->getFightID());
-        if ($oFightOdds == null || $oFight == null) {
+        $matchup = EventHandler::getFightByID($alert_obj->getFightID());
+        if ($odds_obj == null || $matchup == null) {
             return false;
         }
 
         //Convert odds type if necessary
-        $sTeamOdds[1] = $oFightOdds->getFighterOddsAsString(1);
-        $sTeamOdds[2] = $oFightOdds->getFighterOddsAsString(2);
-        if ($a_oAlert->getOddsType() == 2) {
+        $team_odds[1] = $odds_obj->getFighterOddsAsString(1);
+        $team_odds[2] = $odds_obj->getFighterOddsAsString(2);
+        if ($alert_obj->getOddsType() == 2) {
             //Decimal
-            $sTeamOdds[1] = OddsTools::convertMoneylineToDecimal($sTeamOdds[1]);
-            $sTeamOdds[2] = OddsTools::convertMoneylineToDecimal($sTeamOdds[2]);
-        } elseif ($a_oAlert->getOddsType() == 3) {
+            $team_odds[1] = OddsTools::convertMoneylineToDecimal($team_odds[1]);
+            $team_odds[2] = OddsTools::convertMoneylineToDecimal($team_odds[2]);
+        } elseif ($alert_obj->getOddsType() == 3) {
             //Fraction
             //TODO: Create this when fraction support is introduced
         }
 
-
         //If odds is set to -9999 then we just want to announce that the fight has got odds
-        if ($a_oAlert->getLimit() == -9999) {
-            $sText = "Odds for " . $oFight->getFighterAsString(1) . " (" . $sTeamOdds[1] . ") vs " . $oFight->getFighterAsString(2) . " (" . $sTeamOdds[2] . ") has just been posted at " . ALERTER_SITE_NAME . "\n
+        if ($alert_obj->getLimit() == -9999) {
+            $sText = "Odds for " . $matchup->getFighterAsString(1) . " (" . $team_odds[1] . ") vs " . $matchup->getFighterAsString(2) . " (" . $team_odds[2] . ") has just been posted at " . ALERTER_SITE_NAME . "\n
 Check out " . ALERTER_SITE_LINK . " to view the latest listings.\n
 You are receiving this e-mail because you have signed up to be notified when odds were added for a certain matchup. If you did not sign up for this you don't have to do anything as your e-mail will not be stored for future use.\n
 Good luck!\n
 " . ALERTER_SITE_NAME;
 
-            $sMessageHTML = "<b>Alert: New odds added</b><br><br>" . $oFight->getFighterAsString(1) . " <b>" . $sTeamOdds[1] . "</b><br>" . $oFight->getFighterAsString(2) . " <b>" . $sTeamOdds[2] . "</b><br>";
-            $sSubject = 'Odds for ' . $oFight->getFighterAsString(1) . ' vs ' . $oFight->getFighterAsString(2) . ' available';
+            $sMessageHTML = "<b>Alert: New odds added</b><br><br>" . $matchup->getFighterAsString(1) . " <b>" . $team_odds[1] . "</b><br>" . $matchup->getFighterAsString(2) . " <b>" . $team_odds[2] . "</b><br>";
+            $sSubject = 'Odds for ' . $matchup->getFighterAsString(1) . ' vs ' . $matchup->getFighterAsString(2) . ' available';
         } else {
-            $sText = "The odds for " . $oFight->getFighterAsString($a_oAlert->getFighter()) . " has reached " . $sTeamOdds[$a_oAlert->getFighter()] . " in his/her upcoming fight against " . $oFight->getFighterAsString(($a_oAlert->getFighter() == 1 ? 2 : 1)) . "\n
+            $sText = "The odds for " . $matchup->getFighterAsString($alert_obj->getFighter()) . " has reached " . $team_odds[$alert_obj->getFighter()] . " in his/her upcoming fight against " . $matchup->getFighterAsString(($alert_obj->getFighter() == 1 ? 2 : 1)) . "\n
 Check out " . ALERTER_SITE_LINK . " to view the latest listings.\n
 You are receiving this e-mail because you have signed up to be notified when the odds changed for a certain matchup. If you did not sign up for this you don't have to do anything as your e-mail will not be stored for future use.\n
 Good luck!\n
 " . ALERTER_SITE_NAME;
 
 
-            $sMessageHTML = "<b>Alert: Odds changed</b><br><br>The odds for " . $oFight->getFighterAsString($a_oAlert->getFighter()) . " has reached " . $sTeamOdds[$a_oAlert->getFighter()] . " in his/her upcoming fight against " . $oFight->getFighterAsString(($a_oAlert->getFighter() == 1 ? 2 : 1)) . "<br>";
-            $sSubject = 'Odds for ' . $oFight->getFighterAsString($a_oAlert->getFighter()) . ' has reached your limit';
+            $sMessageHTML = "<b>Alert: Odds changed</b><br><br>The odds for " . $matchup->getFighterAsString($alert_obj->getFighter()) . " has reached " . $team_odds[$alert_obj->getFighter()] . " in his/her upcoming fight against " . $matchup->getFighterAsString(($alert_obj->getFighter() == 1 ? 2 : 1)) . "<br>";
+            $sSubject = 'Odds for ' . $matchup->getFighterAsString($alert_obj->getFighter()) . ' has reached your limit';
         }
-        $sTo = $a_oAlert->getEmail();
+        $sTo = $alert_obj->getEmail();
         $sHeaders = 'From: ' . ALERTER_MAIL_FROM;
         $sTextHTML = $sText; //Fallback to plaintext if file cannot be read below
 
@@ -173,15 +172,15 @@ Good luck!\n
      */
     public static function cleanAlerts()
     {
-        $aAlerts = AlertDB::getExpiredAlerts();
+        $alerts = AlertDB::getExpiredAlerts();
 
-        $iCleared = 0;
-        foreach ($aAlerts as $oAlert) {
-            if (AlertDB::clearAlert($oAlert->getID())) {
-                $iCleared++;
+        $cleared_counter = 0;
+        foreach ($alerts as $alert) {
+            if (AlertDB::clearAlert($alert->getID())) {
+                $cleared_counter++;
             }
         }
-        return $iCleared;
+        return $cleared_counter;
     }
 
     /**
@@ -203,41 +202,39 @@ Good luck!\n
      * 	fighter2odds => At what odds you need to bet on fighter 2
      * 	profit => The profit for betting on both
      *
-     * @param int $a_iFightID Fight to get arbitrage info on
-     * @param int $a_iStake The stake used as an example on how to divide the money
+     * @param int $matchup_id Fight to get arbitrage info on
+     * @param int $stake The stake used as an example on how to divide the money
      * @return array Arbitrage information
      */
-    public static function getArbitrageInfo($a_iFightID, $a_iStake = 100)
+    public static function getArbitrageInfo($matchup_id, $stake = 100)
     {
-        $oFightOdds = EventHandler::getBestOddsForFight($a_iFightID);
+        $odds_obj = EventHandler::getBestOddsForFight($matchup_id);
 
-        if ($oFightOdds == null) {
+        if ($odds_obj == null) {
             return null;
         }
 
-        $fArbitValue = (pow($oFightOdds->getFighterOddsAsDecimal(1, true), -1)
-                + pow($oFightOdds->getFighterOddsAsDecimal(2, true), -1));
+        $arbit_value = (pow($odds_obj->getFighterOddsAsDecimal(1, true), -1)
+                + pow($odds_obj->getFighterOddsAsDecimal(2, true), -1));
 
-        $fFirstOdds = $oFightOdds->getFighterOddsAsDecimal(1);
-        $fSecondOdds = $oFightOdds->getFighterOddsAsDecimal(2);
+        $first_odds = $odds_obj->getFighterOddsAsDecimal(1);
+        $second_odds = $odds_obj->getFighterOddsAsDecimal(2);
 
-        $fFirstStake = 100;
-        $fSecondStake = $fFirstStake * $fFirstOdds / $fSecondOdds;
+        $first_stake = 100;
+        $second_stake = $first_stake * $first_odds / $second_odds;
 
-        $fTotal = $fFirstStake + $fSecondStake;
-        $fPercentFirst = $fFirstStake / $fTotal;
-        $fPercentSecond = $fSecondStake / $fTotal;
+        $total = $first_stake + $second_stake;
+        $first_percent = $first_stake / $total;
+        $second_percent = $second_stake / $total;
 
-        $iNetProfitFirst = ($fFirstOdds * ($a_iStake * $fPercentFirst)) - $a_iStake;
+        $net_profit = ($first_odds * ($stake * $first_percent)) - $stake;
 
-        $aReturnArray = array("arbitrage" => round($fArbitValue, 5),
-            "fighter1bet" => round(($a_iStake * $fPercentFirst), 2),
-            "fighter1odds" => $oFightOdds->getFighterOddsAsString(1),
-            "fighter2bet" => round(($a_iStake * $fPercentSecond), 2),
-            "fighter2odds" => $oFightOdds->getFighterOddsAsString(2),
-            "profit" => round($iNetProfitFirst, 2));
-
-        return $aReturnArray;
+        return ["arbitrage" => round($arbit_value, 5),
+            "fighter1bet" => round(($stake * $first_percent), 2),
+            "fighter1odds" => $odds_obj->getFighterOddsAsString(1),
+            "fighter2bet" => round(($stake * $second_percent), 2),
+            "fighter2odds" => $odds_obj->getFighterOddsAsString(2),
+            "profit" => round($net_profit, 2)];
     }
 
     /**
