@@ -18,8 +18,8 @@
  *
  */
 
-require_once __DIR__ . "/../../../bootstrap.php";
-require_once __DIR__ . "/../../../config/Ruleset.php";
+require_once __DIR__ . "/../../bootstrap.php";
+require_once __DIR__ . "/../../config/Ruleset.php";
 
 use BFO\Parser\Utils\ParseTools;
 use BFO\Utils\OddsTools;
