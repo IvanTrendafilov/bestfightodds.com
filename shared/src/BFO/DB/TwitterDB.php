@@ -13,7 +13,7 @@ use BFO\DataTypes\Fight;
  */
 class TwitterDB
 {
-    public static function saveFightAsTwittered($fight_id)
+    public static function saveFightAsTweeted($fight_id)
     {
         $query = 'INSERT INTO fight_twits(fight_id, twitdate)
                         VALUES (?, NOW())';
@@ -33,7 +33,7 @@ class TwitterDB
         return true;
     }
 
-    public static function getUntwitteredFights()
+    public static function getUntweetedMatchups()
     {
         $query = 'SELECT f.*, f1.name AS fighter1_name, f2.name AS fighter2_name 
                     FROM fights f, events e, fighters f1, fighters f2

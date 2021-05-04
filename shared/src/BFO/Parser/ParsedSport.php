@@ -4,35 +4,35 @@ namespace BFO\Parser;
 
 class ParsedSport
 {
-    private $sName;
-    private $aMatchups;
-    private $aProps;
+    private $name;
+    private $matchups;
+    private $props;
 
-    public function __construct($a_sName)
+    public function __construct($name)
     {
-        $this->sName = trim($a_sName);
-        $this->aMatchups = array();
-        $this->aProps = array();
+        $this->name = trim($name);
+        $this->matchups = array();
+        $this->props = array();
     }
 
     public function getName()
     {
-        return $this->sName;
+        return $this->name;
     }
 
     public function getParsedMatchups()
     {
-        return $this->aMatchups;
+        return $this->matchups;
     }
 
-    public function addParsedMatchup($a_oParsedMatchup)
+    public function addParsedMatchup($parsed_matchup_obj)
     {
-        $this->aMatchups[] = $a_oParsedMatchup;
+        $this->matchups[] = $parsed_matchup_obj;
     }
 
-    public function setMatchupList($a_aMatchups)
+    public function setMatchupList($matchups)
     {
-        $this->aMatchups = $a_aMatchups;
+        $this->matchups = $matchups;
     }
 
     /**
@@ -40,42 +40,32 @@ class ParsedSport
      */
     public function mergeMatchups()
     {
+        $original_count = count($this->matchups);
+        for ($i = 0; $i < $original_count; $i++) {
+            if (isset($this->matchups[$i]) && $this->matchups[$i] != null) {
+                $matchup_obj = $this->matchups[$i];
 
+                for ($j = $i + 1; $j < $original_count; $j++) {
+                    if (isset($this->matchups[$j])) {
+                        $other_matchup_obj = $this->matchups[$j];
 
-
-        //Just for DEBUG
-        /*echo "Pre:
-";
-        foreach ($this->aMatchups as $oMatchup)
-        {
-            echo $oMatchup->getTeamName(1) . ' - ' . $oMatchup->getTeamName(2) . "
-";
-        }*/
-
-        $iOrigCount = count($this->aMatchups);
-        for ($iY = 0; $iY < $iOrigCount; $iY++) {
-            if (isset($this->aMatchups[$iY]) && $this->aMatchups[$iY] != null) {
-                $oMatchup = $this->aMatchups[$iY];
-
-                for ($iX = $iY + 1; $iX < $iOrigCount; $iX++) {
-                    if (isset($this->aMatchups[$iX])) {
-                        $oTempMatchup = $this->aMatchups[$iX];
-
-                        if ($oMatchup->getTeamName(1) == $oTempMatchup->getTeamName(1) &&
-                            $oMatchup->getTeamName(2) == $oTempMatchup->getTeamName(2)) {
-                            $bChanged = false;
+                        if (
+                            $matchup_obj->getTeamName(1) == $other_matchup_obj->getTeamName(1) &&
+                            $matchup_obj->getTeamName(2) == $other_matchup_obj->getTeamName(2)
+                        ) {
+                            $has_changed = false;
 
                             //Check if a moneyline exists in both. In that case just skip
                             //TODO: Maybe handle this in some way.. Maybe just check best arbitrage and then store that one?
-                            if ($oMatchup->hasMoneyline() && $oTempMatchup->hasMoneyline()) {
+                            if ($matchup_obj->hasMoneyline() && $other_matchup_obj->hasMoneyline()) {
                                 //Do nothing for now
-                            } elseif (!$oMatchup->hasMoneyline() && $oTempMatchup->hasMoneyline()) {
-                                $oMatchup->addMoneyLineObj($oTempMatchup->getMoneyLineObj());
+                            } elseif (!$matchup_obj->hasMoneyline() && $other_matchup_obj->hasMoneyline()) {
+                                $matchup_obj->addMoneyLineObj($other_matchup_obj->getMoneyLineObj());
                             }
 
                             //Remove secondary matchup
-                            if ($bChanged == true) {
-                                unset($this->aMatchups[$iX]);
+                            if ($has_changed == true) {
+                                unset($this->matchups[$j]);
                             }
                         }
                     }
@@ -88,21 +78,21 @@ class ParsedSport
 
     public function getFetchedProps()
     {
-        return $this->aProps;
+        return $this->props;
     }
 
-    public function addFetchedProp($a_oParsedProp)
+    public function addFetchedProp($parsed_prop_obj)
     {
-        $this->aProps[] = $a_oParsedProp;
+        $this->props[] = $parsed_prop_obj;
     }
 
     public function getPropCount()
     {
-        return count($this->aProps);
+        return count($this->props);
     }
 
-    public function setPropList($a_aProps)
+    public function setPropList($props)
     {
-        $this->aProps = $a_aProps;
+        $this->props = $props;
     }
 }

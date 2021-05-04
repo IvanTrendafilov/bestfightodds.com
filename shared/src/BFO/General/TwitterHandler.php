@@ -4,7 +4,7 @@ namespace BFO\General;
 
 use BFO\DB\TwitterDB;
 use BFO\General\EventHandler;
-use BFO\Utils\Twitter\Twitterer;
+use BFO\Utils\Twitter\Tweeter;
 
 /**
  * Handles all Twitter-updates for new odds
@@ -13,10 +13,10 @@ use BFO\Utils\Twitter\Twitterer;
  */
 class TwitterHandler
 {
-    public static function twitterNewFights()
+    public static function tweetNewMatchups()
     {
         $iTwits = 0;
-        $aFights = TwitterDB::getUntwitteredFights();
+        $aFights = TwitterDB::getUntweetedMatchups();
 
         // Fights are mainly grouped based on event, however main events are always seperated into their own group
         $aGroups = array();
@@ -34,8 +34,8 @@ class TwitterHandler
             }
         }
 
-        $oTwitterer = new Twitterer(TWITTER_CONSUMER_KEY, TWITTER_CONSUMER_SECRET, TWITTER_OAUTH_TOKEN, TWITTER_OATUH_TOKEN_SECRET);
-        $oTwitterer->setDebugMode(TWITTER_DEV_MODE);
+        $tweeter = new Tweeter(TWITTER_CONSUMER_KEY, TWITTER_CONSUMER_SECRET, TWITTER_OAUTH_TOKEN, TWITTER_OATUH_TOKEN_SECRET);
+        $tweeter->setDebugMode(TWITTER_DEV_MODE);
 
         foreach ($aGroups as $aGroup) {
             $oEvent = EventHandler::getEvent($aGroup['event_id']);
@@ -43,14 +43,14 @@ class TwitterHandler
             $bUpdateSuccess = false;
             $sTwitText = '';
             if (count($aGroup['matchups']) > 1) {
-                //Multiple fights for the same event needs to be twittered
+                //Multiple fights for the same event needs to be tweeted
                 $sTwitText = str_replace(
                     array('<T1>','<T2>'),
                     array($aGroup['matchups'][0]->getFighterAsString(1), $aGroup['matchups'][0]->getFighterAsString(2)),
                     TWITTER_TEMPLATE_MULTI
                 );
             } elseif (count($aGroup['matchups']) == 1) {
-                //Only one fight for the event needs to be twittered
+                //Only one fight for the event needs to be tweeted
                 $oFightOdds = OddsHandler::getOpeningOddsForMatchup($aGroup['matchups'][0]->getID());
                 if ($oFightOdds != null) {
                     $sTwitText = str_replace(
@@ -95,15 +95,15 @@ class TwitterHandler
             //Trim to 280 if we made any mistakes along the way
             $sTwitText = substr($sTwitText, 0, 280);
 
-            if ($sTwitText != '' && $oTwitterer->updateStatus($sTwitText)) {
+            if ($sTwitText != '' && $tweeter->updateStatus($sTwitText)) {
                 foreach ($aGroup['matchups'] as $oEventFight) {
-                    TwitterDB::saveFightAsTwittered($oEventFight->getID());
+                    TwitterDB::saveFightAsTweeted($oEventFight->getID());
                 }
                 $iTwits++;
             }
         }
 
-        return array('pre_untwittered_fights' => count($aFights), 'pre_untwittered_events' => count($aGroups), 'post_twittered' => $iTwits);
+        return array('pre_untweeted_fights' => count($aFights), 'pre_untweeted_events' => count($aGroups), 'post_tweeted' => $iTwits);
     }
 
     public static function addTwitterHandle($team_id, $handle)

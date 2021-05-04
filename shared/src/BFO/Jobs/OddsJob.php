@@ -103,11 +103,11 @@ class OddsJob
 
         //Tweet new fight odds
         if (TWITTER_ENABLED == true) {
-            $results = TwitterHandler::twitterNewFights();
-            if ($results['pre_untwittered_events'] == $results['post_twittered']) {
-                $this->logger->info("Tweeted new matchups/events: " . $results['post_twittered'] . " of " . $results['pre_untwittered_events']);
+            $results = TwitterHandler::tweetNewMatchups();
+            if ($results['pre_untweeted_events'] == $results['post_tweeted']) {
+                $this->logger->info("Tweeted new matchups/events: " . $results['post_tweeted'] . " of " . $results['pre_untweeted_events']);
             } else {
-                $this->logger->error("Tweeted new matchups/events: " . $results['post_twittered'] . " of " . $results['pre_untwittered_events']);
+                $this->logger->error("Tweeted new matchups/events: " . $results['post_tweeted'] . " of " . $results['pre_untweeted_events']);
             }
         }
 

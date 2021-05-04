@@ -133,10 +133,10 @@ if ($rPage != null) {
 
 //Tweet new fight odds
 if (TWITTER_ENABLED == true) {
-    $aTwitResults = TwitterHandler::twitterNewFights();
+    $aTwitResults = TwitterHandler::tweetNewMatchups();
     $oLogger->log(
-        "Tweeted new matchups/events: " . $aTwitResults['post_twittered'] . " of " . $aTwitResults['pre_untwittered_events'],
-        ($aTwitResults['pre_untwittered_events'] == $aTwitResults['post_twittered'] ? 0 : -2)
+        "Tweeted new matchups/events: " . $aTwitResults['post_tweeted'] . " of " . $aTwitResults['pre_untweeted_events'],
+        ($aTwitResults['pre_untweeted_events'] == $aTwitResults['post_tweeted'] ? 0 : -2)
     );
 }
 

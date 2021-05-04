@@ -7,70 +7,70 @@ use Abraham\TwitterOAuth\TwitterOAuth;
 /**
  * Class used to integrate with Twitter API
  */
-class Twitterer
+class Tweeter
 {
-    private $m_bDebug = false;
-    private $m_sConsumerKey;
-    private $m_sConsumerSecret;
-    private $m_sOAuthToken;
-    private $m_sOAuthTokenSecret;
+    private $dev_mode = false;
+    private $consumer_key;
+    private $consumer_secret;
+    private $oauth_token;
+    private $oauth_token_secret;
 
     private $logger;
 
     /**
      * Constructor
      *
-     * @param String $a_sConsumerKey Consumer Key
-     * @param String $a_sConsumerSecret Consumer Secret
-     * @param String $a_sOAuthToken OAuth Token
-     * @param String $a_sOAuthTokenSecret OAuth Token Secret
+     * @param String $consumer_key Consumer Key
+     * @param String $consumer_secret Consumer Secret
+     * @param String $oauth_token OAuth Token
+     * @param String $oauth_token_secret OAuth Token Secret
      */
-    public function __construct($a_sConsumerKey, $a_sConsumerSecret, $a_sOAuthToken, $a_sOAuthTokenSecret)
+    public function __construct($consumer_key, $consumer_secret, $oauth_token, $oauth_token_secret)
     {
         $this->logger = new \Katzgrau\KLogger\Logger(GENERAL_KLOGDIR, \Psr\Log\LogLevel::DEBUG, ['filename' => 'twitter.log']);
 
-        $this->m_sConsumerKey = $a_sConsumerKey;
-        $this->m_sConsumerSecret = $a_sConsumerSecret;
-        $this->m_sOAuthToken = $a_sOAuthToken;
-        $this->m_sOAuthTokenSecret = $a_sOAuthTokenSecret;
+        $this->consumer_key = $consumer_key;
+        $this->consumer_secret = $consumer_secret;
+        $this->oauth_token = $oauth_token;
+        $this->oauth_token_secret = $oauth_token_secret;
     }
 
     /**
      * Updates Twitter status
      *
-     * @param string $a_sMessage Message to set status to
+     * @param string $message Message to set status to
      * @return boolean If update was successful or not
      */
-    public function updateStatus($a_sMessage)
+    public function updateStatus($message)
     {
-        if ($this->m_bDebug == true) {
-            $this->logger->debug("Simulating posting (" . strlen($a_sMessage) . "): " . $a_sMessage);
+        if ($this->dev_mode == true) {
+            $this->logger->debug("Simulating posting (" . strlen($message) . "): " . $message);
             return true;
         }
 
-        $rConnection = new TwitterOAuth(
-            $this->m_sConsumerKey,
-            $this->m_sConsumerSecret,
-            $this->m_sOAuthToken,
-            $this->m_sOAuthTokenSecret
+        $connection = new TwitterOAuth(
+            $this->consumer_key,
+            $this->consumer_secret,
+            $this->oauth_token,
+            $this->oauth_token_secret
         );
-        $rResult = $rConnection->post('statuses/update', array('status' => $a_sMessage));
+        $result = $connection->post('statuses/update', array('status' => $message));
 
-        if (isset($rResult->errors)) {
-            if ($rResult->errors[0]->code == '187') { //Duplicate, treated as success
-                $this->logger->info("Duplicate post (OK): (" . strlen($a_sMessage) . "): " . $a_sMessage);
+        if (isset($result->errors)) {
+            if ($result->errors[0]->code == '187') { //Duplicate, treated as success
+                $this->logger->info("Duplicate post (OK): (" . strlen($message) . "): " . $message);
                 return true;
             }
-            $this->logger->info("Error for tweet " . $a_sMessage . " (" . strlen($a_sMessage) . "): " . $rResult->errors[0]->code . ': ' . $rResult->errors[0]->message);
+            $this->logger->info("Error for tweet " . $message . " (" . strlen($message) . "): " . $result->errors[0]->code . ': ' . $result->errors[0]->message);
             return false;
         }
 
-        $this->logger->info("Posted (" . strlen($a_sMessage) . "): " . $a_sMessage);
+        $this->logger->info("Posted (" . strlen($message) . "): " . $message);
         return true;
     }
 
     public function setDebugMode($a_bDebug)
     {
-        $this->m_bDebug = $a_bDebug;
+        $this->dev_mode = $a_bDebug;
     }
 }

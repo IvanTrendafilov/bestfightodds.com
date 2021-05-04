@@ -4,34 +4,34 @@ namespace BFO\Parser;
 
 class ParsedProp extends ParsedMatchup
 {
-    private $iMatchedMatchupID = null;
-    private $iMatchedTeamNumber = null;
-    private $aPropValues = null;
-    private $iMainProp = null;
+    private $matched_matchup_id = null;
+    private $matched_team_no = null;
+    private $prop_values = null;
+    private $main_prop_position = null;
 
-    public function __construct($a_sTeam1, $a_sTeam2, $a_sTeam1Odds, $a_sTeam2Odds, $a_sDate = '')
+    public function __construct($team1, $team2, $team1_odds, $team2_odds, $date = '')
     {
-        parent::__construct($a_sTeam1, $a_sTeam2, $a_sTeam1Odds, $a_sTeam2Odds, $a_sDate);
+        parent::__construct($team1, $team2, $team1_odds, $team2_odds, $date);
     }
 
-    public function setMatchedMatchupID($a_iMatchedMatchupID)
+    public function setMatchedMatchupID($matched_matchup_id)
     {
-        $this->iMatchedMatchupID = $a_iMatchedMatchupID;
+        $this->matched_matchup_id = $matched_matchup_id;
     }
 
     public function getMatchedMatchupID()
     {
-        return $this->iMatchedMatchupID;
+        return $this->matched_matchup_id;
     }
 
-    public function setMatchedTeamNumber($a_iTeamNumber)
+    public function setMatchedTeamNumber($team_no)
     {
-        $this->iMatchedTeamNumber = $a_iTeamNumber;
+        $this->matched_team_no = $team_no;
     }
 
     public function getMatchedTeamNumber()
     {
-        return $this->iMatchedTeamNumber;
+        return $this->matched_team_no;
     }
 
     /**
@@ -45,7 +45,7 @@ class ParsedProp extends ParsedMatchup
      */
     public function getPropValues()
     {
-        return $this->aPropValues;
+        return $this->prop_values;
     }
 
     /**
@@ -53,17 +53,17 @@ class ParsedProp extends ParsedMatchup
      *
      * See getPropValues() for explanation
      *
-     * @param Array $aPropValues Collection of prop values
+     * @param Array $prop_values Collection of prop values
      *
      */
-    public function setPropValues($aPropValues)
+    public function setPropValues($prop_values)
     {
         //Trim values before adding
-        foreach ($aPropValues as &$sPropValue) {
-            $sPropValue = trim($sPropValue, ' -\t');
+        foreach ($prop_values as &$prop_value) {
+            $prop_value = trim($prop_value, ' -\t');
         }
 
-        $this->aPropValues = $aPropValues;
+        $this->prop_values = $prop_values;
     }
 
     /**
@@ -73,7 +73,7 @@ class ParsedProp extends ParsedMatchup
      */
     public function getMainProp()
     {
-        return $this->iMainProp;
+        return $this->main_prop_position;
     }
 
     /**
@@ -81,8 +81,8 @@ class ParsedProp extends ParsedMatchup
      *
      * @param int $a_iProp Team 1 or 2
      */
-    public function setMainProp($a_iProp)
+    public function setMainProp($team_no)
     {
-        $this->iMainProp = $a_iProp;
+        $this->main_prop_position = $team_no;
     }
 }

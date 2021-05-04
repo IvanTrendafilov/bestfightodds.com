@@ -7,40 +7,40 @@ use BFO\Parser\Utils\ParseTools;
 
 class ParsedMatchup
 {
-    private $sTeam1Name;
-    private $sTeam2Name;
-    private $oMoneyline;
-    private $sDate;
-    private $bSwitched = false; //Indicates if team order has been changed or not
-    private $bSwitchedFromOutside = false;
-    private $sCorrelationID = '';
-    private $aMetaData;
+    private $team1_name;
+    private $team2_name;
+    private $moneyline;
+    private $date;
+    private $switched = false; //Indicates if team order has been changed or not
+    private $switched_externally = false;
+    private $correlation_id = '';
+    private $metadata;
 
-    public function __construct($a_sTeam1, $a_sTeam2, $a_sTeam1Odds, $a_sTeam2Odds, $a_sDate = '')
+    public function __construct($team1, $team2, $team1_odds, $team2_odds, $date = '')
     {
         //Make sure that teams are in lexigraphical order
-        if (trim($a_sTeam1) > trim($a_sTeam2)) {
-            $this->sTeam1Name = ParseTools::formatName($a_sTeam2);
-            $this->sTeam2Name = ParseTools::formatName($a_sTeam1);
-            $this->oMoneyline = new ParsedMoneyline(trim($a_sTeam2Odds), trim($a_sTeam1Odds));
-            $this->bSwitched = true;
+        if (trim($team1) > trim($team2)) {
+            $this->team1_name = ParseTools::formatName($team2);
+            $this->team2_name = ParseTools::formatName($team1);
+            $this->moneyline = new ParsedMoneyline(trim($team2_odds), trim($team1_odds));
+            $this->switched = true;
         } else {
-            $this->sTeam1Name = ParseTools::formatName($a_sTeam1);
-            $this->sTeam2Name = ParseTools::formatName($a_sTeam2);
-            $this->oMoneyline = new ParsedMoneyline(trim($a_sTeam1Odds), trim($a_sTeam2Odds));
+            $this->team1_name = ParseTools::formatName($team1);
+            $this->team2_name = ParseTools::formatName($team2);
+            $this->moneyline = new ParsedMoneyline(trim($team1_odds), trim($team2_odds));
         }
 
-        $this->bSwitchedFromOutside = false;
-        $this->aMetaData = array();
-        $this->sDate = ($a_sDate != '' ? $this->sDate = ParseTools::standardizeDate(trim($a_sDate)) : '');
+        $this->switched_externally = false;
+        $this->metadata = array();
+        $this->date = ($date != '' ? $this->date = ParseTools::standardizeDate(trim($date)) : '');
     }
 
-    public function getTeamName($a_iTeam)
+    public function getTeamName($team_number)
     {
-        switch ($a_iTeam) {
-            case 1: return $this->sTeam1Name;
+        switch ($team_number) {
+            case 1: return $this->team1_name;
                 break;
-            case 2: return $this->sTeam2Name;
+            case 2: return $this->team2_name;
                 break;
             default:
                 return null;
@@ -50,7 +50,7 @@ class ParsedMatchup
 
     public function getDate()
     {
-        return $this->sDate;
+        return $this->date;
     }
 
     /**
@@ -61,9 +61,9 @@ class ParsedMatchup
      *
      * @deprecated Use getMoneyLine() instead
      */
-    public function getTeamOdds($a_iTeam)
+    public function getTeamOdds($team_number)
     {
-        return $this->getMoneyLine($a_iTeam);
+        return $this->getMoneyLine($team_number);
     }
 
     /**
@@ -72,48 +72,48 @@ class ParsedMatchup
      * @param int $a_iTeam Team number (1 or 2)
      * @return string Moneyline value
      */
-    public function getMoneyline($a_iTeam)
+    public function getMoneyline($team_number)
     {
-        $oML = $this->getMoneyLineObj();
+        $moneyline = $this->getMoneyLineObj();
 
-        if ($oML == null) {
+        if ($moneyline == null) {
             return false;
         }
 
-        return $oML->getMoneyline($a_iTeam);
+        return $moneyline->getMoneyline($team_number);
     }
 
     public function switchOdds()
     {
-        $this->bSwitchedFromOutside = true;
+        $this->switched_externally = true;
         //Switch moneyline
-        if ($this->oMoneyline != null && !$this->oMoneyline->isSwitched()) {
-            $this->oMoneyline->switchOdds();
+        if ($this->moneyline != null && !$this->moneyline->isSwitched()) {
+            $this->moneyline->switchOdds();
         }
         return true;
     }
 
     public function isSwitchedFromOutside()
     {
-        return $this->bSwitchedFromOutside;
+        return $this->switched_externally;
     }
 
-    public function addMoneyLineObj($a_oMoneyline)
+    public function addMoneyLineObj($moneyline)
     {
-        $this->oMoneyline = $a_oMoneyline;
-        if ($this->bSwitched == true && !$this->oMoneyline->isSwitched()) {
-            $this->oMoneyline->switchOdds();
+        $this->moneyline = $moneyline;
+        if ($this->switched == true && !$this->moneyline->isSwitched()) {
+            $this->moneyline->switchOdds();
         }
     }
 
     public function getMoneyLineObj()
     {
-        return $this->oMoneyline;
+        return $this->moneyline;
     }
 
     public function hasMoneyline()
     {
-        return ($this->oMoneyline->getMoneyline(1) != '' && $this->oMoneyline->getMoneyline(1) != '');
+        return ($this->moneyline->getMoneyline(1) != '' && $this->moneyline->getMoneyline(1) != '');
     }
 
     public function toString()
@@ -129,10 +129,10 @@ class ParsedMatchup
      *
      * @param String $a_sCorrID Correlation ID
      */
-    public function setCorrelationID($a_sCorrID)
+    public function setCorrelationID($correlation_id)
     {
         //Correlation ID is always converted to uppercase to avoid case-insensitivity problems
-        $this->sCorrelationID = strtoupper(trim($a_sCorrID));
+        $this->correlation_id = strtoupper(trim($correlation_id));
     }
 
     /**
@@ -142,16 +142,16 @@ class ParsedMatchup
      */
     public function getCorrelationID()
     {
-        return $this->sCorrelationID;
+        return $this->correlation_id;
     }
 
-    public function setMetaData($a_sAttribute, $a_sValue)
+    public function setMetaData($attribute, $value)
     {
-        $this->aMetaData[$a_sAttribute] = $a_sValue;
+        $this->metadata[$attribute] = $value;
     }
 
     public function getAllMetaData()
     {
-        return $this->aMetaData;
+        return $this->metadata;
     }
 }
