@@ -69,8 +69,8 @@ class Tweeter
         return true;
     }
 
-    public function setDebugMode($a_bDebug)
+    public function setDebugMode($debug_on)
     {
-        $this->dev_mode = $a_bDebug;
+        $this->dev_mode = $debug_on;
     }
 }
