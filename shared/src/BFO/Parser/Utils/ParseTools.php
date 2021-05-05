@@ -22,20 +22,20 @@ class ParseTools
      *
      * TODO: Secure function so that it is not possible to access folders like ../
      *
-     * @param string $a_sFile Filename
+     * @param string $filename Filename
      * @return string Contents of the file
      */
-    public static function retrievePageFromFile($a_sFile)
+    public static function retrievePageFromFile($filename)
     {
-        $sContents = '';
-        $rFile = fopen($a_sFile, 'r');
-        if ($rFile) {
-            while (!feof($rFile)) {
-                $sContents .= fread($rFile, 8192);
+        $file_contents = '';
+        $file = fopen($filename, 'r');
+        if ($file) {
+            while (!feof($file)) {
+                $file_contents .= fread($file, 8192);
             }
-            fclose($rFile);
+            fclose($file);
         }
-        return $sContents;
+        return $file_contents;
     }
 
     public static function retrievePageFromURL($a_sURL, $a_sCurlOpts = null)
