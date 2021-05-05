@@ -52,7 +52,7 @@ $customErrorHandler = function (
   ?LoggerInterface $logger = null
 ) use ($app) {
   $response = $app->getResponseFactory()->createResponse();
-  $response->getBody()->write('Error ' . $exception->getMessage() . $exception->getCode());
+  $response->getBody()->write('Error ' . $exception->getCode());
   return $response;
 };
 
