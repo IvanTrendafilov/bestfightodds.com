@@ -592,4 +592,16 @@ class AdminController
         $response->getBody()->write($this->plates->render('parser_status', $view_data));
         return $response;
     }
+
+    public function viewLegacyLog(Request $request, Response $response)
+    {
+        //Get legacy log (/logs)
+        $view_data = [];
+        $filenames = glob(PARSE_LOGDIR . '*.log');
+        $log_contents =  file_get_contents(end($filenames));
+        $view_data = ['log_contents' => $log_contents];
+
+        $response->getBody()->write($this->plates->render('parserlogs', $view_data));
+        return $response;
+    }
 }

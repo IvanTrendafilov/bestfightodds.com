@@ -86,6 +86,12 @@
 				</a>
 			</li>
 
+			<li class="sidebar-item">
+				<a class="sidebar-link" href="/cnadm/legacylog">
+					<i class="align-middle" data-feather="map"></i> <span class="align-middle">Legacy log</span>
+				</a>
+			</li>
+
 			<li class="sidebar-header">
 				Dev Components
 			</li>
