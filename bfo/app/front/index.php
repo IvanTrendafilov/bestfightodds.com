@@ -11,10 +11,11 @@ use Psr\Http\Server\RequestHandlerInterface as RequestHandler;
 use League\Plates\Engine;
 use Psr\Http\Message\ServerRequestInterface;
 use Slim\Psr7\Response;
+use Psr\Log\LoggerInterface;
 
-require 'vendor/autoload.php';
-require 'app/front/controllers/controller.php';
-require 'app/front/controllers/api_controller.php';
+require_once __DIR__ . "/../../bootstrap.php";
+require_once __DIR__ . "/../../../shared/app/front/controllers/controller.php";
+require_once __DIR__ . "/../../../shared/app/front/controllers/api_controller.php";
 
 $container = (new \DI\ContainerBuilder())
   ->useAutowiring(true)

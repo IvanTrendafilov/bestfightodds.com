@@ -1,8 +1,5 @@
 <?php
 
-require_once('lib/bfocore/parser/utils/class.ParseTools.php');
-require_once('lib/simple_html_dom/simple_html_dom.php');
-
 /**
  * XML Parser
  *
@@ -18,6 +15,13 @@ require_once('lib/simple_html_dom/simple_html_dom.php');
  * Comment: Temporary version when lines.betdsi.eu is not available. This one uses the JSON feed provided when logging in
  *
  */
+
+use BFO\Parser\ParsedSport;
+use BFO\Parser\ParsedMatchup;
+use BFO\Parser\ParsedProp;
+use BFO\Parser\Utils\Logger;
+use BFO\Utils\OddsTools;
+
 class XMLParserBetDSITemp
 {
     private $bAuthorativeRun = false;

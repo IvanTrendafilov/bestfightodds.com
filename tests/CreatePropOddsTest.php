@@ -5,12 +5,16 @@ declare(strict_types=1);
 use PHPUnit\Framework\TestCase;
 
 require_once 'bfo/bootstrap.php';
-require_once 'shared/lib/bfocore/general/class.EventHandler.php';
-require_once 'shared/lib/bfocore/general/class.BookieHandler.php';
-require_once 'shared/lib/bfocore/general/class.PropTypeHandler.php';
-require_once 'shared/lib/bfocore/parser/general/class.PropParserV2.php';
 
 use Psr\Log\NullLogger;
+use BFO\General\EventHandler;
+use BFO\General\BookieHandler;
+use BFO\DataTypes\Fight;
+use BFO\DataTypes\Event;
+use BFO\DataTypes\FightOdds;
+use BFO\DataTypes\PropTemplate;
+use BFO\Parser\ParsedProp;
+use BFO\Parser\PropParserV2;
 
 final class CreatePropOddsTest extends TestCase
 {

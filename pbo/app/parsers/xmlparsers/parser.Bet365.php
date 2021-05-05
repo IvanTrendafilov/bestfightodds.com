@@ -16,6 +16,12 @@
  *
  */
 
+use BFO\Parser\ParsedSport;
+use BFO\Parser\ParsedMatchup;
+use BFO\Parser\ParsedProp;
+use BFO\Parser\Utils\Logger;
+use BFO\Utils\OddsTools;
+
 class XMLParserBet365
 {
     private $bAuthorativeRun = false;

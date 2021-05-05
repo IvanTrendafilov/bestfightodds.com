@@ -1,7 +1,5 @@
 <?php
 
-require_once('lib/bfocore/parser/utils/class.ParseTools.php');
-
 /**
  * XML Parser
  *
@@ -13,6 +11,13 @@ require_once('lib/bfocore/parser/utils/class.ParseTools.php');
  * Comment: Prod version
  *
  */
+
+use BFO\Parser\ParsedSport;
+use BFO\Parser\ParsedMatchup;
+use BFO\Parser\ParsedProp;
+use BFO\Parser\Utils\Logger;
+use BFO\Parser\Utils\ParseTools;
+
 class XMLParserSportsInteraction
 {
     private $bAuthorativeRun = false;

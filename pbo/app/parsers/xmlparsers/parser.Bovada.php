@@ -17,6 +17,11 @@
  * 2017-08-28 - New JSON version based on latest updates from Bovada
  *
  */
+use BFO\Parser\ParsedSport;
+use BFO\Parser\ParsedMatchup;
+use BFO\Parser\ParsedProp;
+use BFO\Parser\Utils\Logger;
+
 class XMLParserBovada
 {
     private $auth_run = false;

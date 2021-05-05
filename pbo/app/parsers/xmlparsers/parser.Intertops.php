@@ -14,6 +14,14 @@
  * Comment: Prod version
  *
  */
+
+use BFO\Parser\ParsedSport;
+use BFO\Parser\ParsedMatchup;
+use BFO\Parser\ParsedProp;
+use BFO\Parser\Utils\Logger;
+use BFO\Parser\Utils\ParseTools;
+use BFO\General\BookieHandler;
+
 class XMLParserIntertops
 {
     private $bAuthorativeRun = false;

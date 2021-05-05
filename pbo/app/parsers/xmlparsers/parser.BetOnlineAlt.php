@@ -1,6 +1,6 @@
 <?php
 
-require_once('lib/bfocore/parser/utils/class.ParseTools.php');
+
 
 /**
  * XML Parser
@@ -11,6 +11,12 @@ require_once('lib/bfocore/parser/utils/class.ParseTools.php');
  * Comment: In production
  *
  */
+
+use BFO\Parser\ParsedSport;
+use BFO\Parser\ParsedMatchup;
+use BFO\Parser\Utils\Logger;
+use BFO\Parser\Utils\ParseTools;
+
 class XMLParserBetOnlineAlt
 {
     private $bAuthorativeRun = false;

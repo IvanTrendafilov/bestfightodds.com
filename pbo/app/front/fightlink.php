@@ -7,11 +7,11 @@
   regenerating them if the are missing. These are removed whenever the odds are
   updated. Therefor it would need to work with the parsing-engine. */
 
+require_once __DIR__ . "/../../bootstrap.php";
 
-require_once('lib/bfocore/general/inc.GlobalTypes.php');
-require_once('lib/bfocore/general/class.EventHandler.php');
-require_once('lib/bfocore/general/class.OddsHandler.php');
-require_once('lib/bfocore/general/caching/class.CacheControl.php');
+use BFO\General\EventHandler;
+use BFO\General\OddsHandler;
+use BFO\Caching\CacheControl;
 
 define('LINK_HEIGHT', 65);  //Only used for single fights - Events use dynamic height
 define('LINK_WIDTH', 216);

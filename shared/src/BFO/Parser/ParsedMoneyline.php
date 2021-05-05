@@ -1,0 +1,54 @@
+<?php
+
+namespace BFO\Parser;
+
+/**
+ * Description of ParsedMoneyline
+ */
+class ParsedMoneyline
+{
+    private $team1_moneyline;
+    private $team2_moneyline;
+    private $order_switched;
+
+    public function __construct($in_team1_moneyline, $in_team2_moneyline)
+    {
+        $this->order_switched = false;
+
+        $this->team1_moneyline = $in_team1_moneyline;
+        $this->team2_moneyline = $in_team2_moneyline;
+
+        if (strtoupper($this->team1_moneyline) == 'EV' || strtoupper($this->team1_moneyline) == 'EVEN') {
+            $this->team1_moneyline = '100';
+        }
+
+        if (strtoupper($this->team2_moneyline) == 'EV' || strtoupper($this->team2_moneyline) == 'EVEN') {
+            $this->team2_moneyline = '100';
+        }
+    }
+
+    public function getMoneyline($team_no)
+    {
+        switch ($team_no) {
+            case 1: return $this->team1_moneyline;
+                break;
+            case 2: return $this->team2_moneyline;
+                break;
+            default:
+                return null;
+        }
+    }
+
+    public function isSwitched()
+    {
+        return $this->order_switched;
+    }
+
+    public function switchOdds()
+    {
+        $temp_moneyline = $this->team1_moneyline;
+        $this->team1_moneyline = $this->team2_moneyline;
+        $this->team2_moneyline = $temp_moneyline;
+        $this->order_switched = true;
+    }
+}

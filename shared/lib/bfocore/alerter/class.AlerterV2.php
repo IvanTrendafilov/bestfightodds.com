@@ -1,5 +1,7 @@
 <?php
 
+namespace BFO\Alerter;
+
 require_once('config/inc.config.php');
 require_once('lib/bfocore/alerter/class.AlertsModel.php');
 require_once('lib/bfocore/general/class.EventHandler.php');
@@ -135,7 +137,7 @@ class AlerterV2
 
     private function formatAlertMail($alerts)
     {
-        if (!function_exists('sortAlerts')) {
+        if (!function_exists('BFO\Alerter\sortAlerts')) {
             function sortAlerts($a, $b)
             {
                 //Determine if prop is matchup or event, use that ID as value to compare
@@ -156,7 +158,7 @@ class AlerterV2
                 return $sortval_a < $sortval_b;
             }
         }
-        usort($alerts, 'sortAlerts');
+        usort($alerts, 'BFO\Alerter\sortAlerts');
 
         $text = "===========Alert mail:==========\n\n";
         $current_linked_id = 0;

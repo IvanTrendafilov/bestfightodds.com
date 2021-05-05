@@ -1,6 +1,5 @@
 <?php
 
-require_once('lib/bfocore/parser/utils/class.ParseTools.php');
 
 /**
  * XML Parser
@@ -12,6 +11,12 @@ require_once('lib/bfocore/parser/utils/class.ParseTools.php');
  * Note, since RSS is no longer working. Altmode has been changed to primary
  *
  */
+
+use BFO\Parser\ParsedSport;
+use BFO\Parser\ParsedMatchup;
+use BFO\Parser\Utils\Logger;
+use BFO\Parser\Utils\ParseTools;
+
 class XMLParserSportsbook
 {
     /* Used in case the primary parsing feature is not working */
