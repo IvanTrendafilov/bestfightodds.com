@@ -9,11 +9,12 @@ use Psr\Http\Message\ResponseInterface as Response;
 use Psr\Http\Message\ServerRequestInterface as Request;
 use League\Plates\Engine;
 
-require 'vendor/autoload.php';
-require 'app/admin/controllers/admin_controller.php';
-require 'app/admin/controllers/admin_api_controller.php';
-require 'app/admin/middleware/auth_middleware.php';
-require 'app/admin/middleware/session_middleware.php';
+require_once __DIR__ . "/../../../bootstrap.php";
+require __DIR__ . "/../../../../shared/app/admin/controllers/admin_controller.php";
+require __DIR__ . "/../../../../shared/app/admin/controllers/admin_api_controller.php";
+require __DIR__ . "/../../../../shared/app/admin/middleware/auth_middleware.php";
+require __DIR__ . "/../../../../shared/app/admin/middleware/session_middleware.php";
+
 
 $container = (new \DI\ContainerBuilder())
   ->useAutowiring(true)

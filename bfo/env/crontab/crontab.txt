@@ -1,14 +1,41 @@
-*/2     *       *       *       *       /usr/bin/php -d include_path=/var/www/bfo/shared:/var/www/bfo/bfo -d max_execution_time=300 /var/www/bfo/shared/lib/bfocore/cron/cron.OddsParser.php >> /var/www/bfo/bfo/log/parser.log 2>&1
-10      0       *       *       *       mv /var/www/bfo/bfo/logs/*.log /var/www/bfo/bfo/logs/archived/ && rm -rf /var/www/bfo/bfo/logs/*.log
-5       *       *       *       *       bash /var/www/bfo/bfo/db/scripts/backup/dobackup_local.sh
-6       6       *       *       *       sleep $[($RANDOM \%1740) + 11] && /usr/bin/php -d include_path=/var/www/bfo/shared:/var/www/bfo/bfo -d max_execution_time=300 /var/www/bfo/shared/lib/bfocore/cron/cron.ScheduleParser.php >> /var/www/bfo/bfo/lo\
-g/scheduleparser.log 2>&1
+# BFO BestFightOdds
+
+*/1     *       *       *       *       /usr/bin/php  /var/www/bfo/shared/lib/bfocore/cron/cron.OddsJob.php
+5       */12       *       *       *       bash /var/www/bfo/bfo/db/scripts/backup/dobackup_local.sh
+6       4       *       *       *       sleep $[($RANDOM \%1740) + 11] && /usr/bin/php -d include_path=/var/www/bfo/shared:/var/www/bfo/bfo -d max_execution_time=300 /var/www/bfo/shared/lib/bfocore/cron/cron.ScheduleParser.php >> /var/www/bfo/bfo/log/s\
+cheduleparser.log 2>&1
+6       16       *       *       *       sleep $[($RANDOM \%1740) + 11] && /usr/bin/php -d include_path=/var/www/bfo/shared:/var/www/bfo/bfo -d max_execution_time=300 /var/www/bfo/shared/lib/bfocore/cron/cron.ScheduleParser.php >> /var/www/bfo/bfo/log/\
+scheduleparser.log 2>&1
 30      12      *       *       *       /usr/bin/php -d include_path=/var/www/bfo/shared:/var/www/bfo/bfo -d max_execution_time=300 /var/www/bfo/bfo/db/scripts/cron.CleanDatabasev2.php
-30      0       *       *       *       /usr/bin/php -d include_path=/var/www/bfo/shared:/var/www/bfo/bfo -d max_execution_time=300 /var/www/bfo/bfo/db/scripts/cron.CleanDatabasev2.php
 */5     *       *       *       *       /usr/bin/php -d include_path=/var/www/bfo/shared:/var/www/bfo/bfo -d max_execution_time=300 /var/www/bfo/bfo/lib/bfospec/cron/cron.FacebookPoster.php
-*/3+1   *       *       *       *       lynx -source "https://www.betonline.ag/sportsbook/line/retrievelinedata?param.PrdNo=-1&param.Type=Cntst&param.RequestType=Normal&param.CntstParam.Lv1=MMA+Props" > /var/www/bfo/bfo/app/front/externalfeeds/beton\
-line-props.xml
-*/3     *       *       *       *       lynx -source "https://www.betonline.ag/sportsbook/Line/RetrieveLineData?param.SortOption=D&param.PrdNo=0&param.Type=H2H&param.RequestType=Normal&param.H2HParam.Lv1=Boxing&param.H2HParam.Lv2=Bouts" > /var/www/b\
-fo/bfo/app/front/externalfeeds/betonline-boxing.xml
-#*/3+2       6       *       *       *       sleep $[($RANDOM \%45) + 1] && /usr/bin/php -d include_path=/var/www/bfo/shared:/var/www/bfo/bfo -d max_execution_time=300 /var/www/bfo/bfo/app/parsers/cron/cron.DraftKings.php
-#*/3       6       *       *       *       sleep $[($RANDOM \%45) + 1] && /usr/bin/php -d include_path=/var/www/bfo/shared:/var/www/bfo/bfo -d max_execution_time=300 /var/www/bfo/bfo/app/parsers/cron/cron.Fanduel.php
+*/3     *       *       *       *       lynx -source "https://www.betonline.ag/sportsbook/Line/RetrieveLineData?param.SortOption=D&param.PrdNo=0&param.Type=H2H&param.RequestType=Normal&param.H2HParam.Lv1=Boxing&param.H2HParam.Lv2=Bouts" > /var/www/bfo/\
+bfo/app/front/externalfeeds/betonline-boxing.xml
+*/2     *       *       *       *       /usr/bin/php -d include_path=/var/www/bfo/shared:/var/www/bfo/bfo -d max_execution_time=300 /var/www/bfo/bfo/app/parsers/cron/cron.BetOnline.php
+*/2     *       *       *       *       /usr/bin/php -d include_path=/var/www/bfo/shared:/var/www/bfo/bfo -d max_execution_time=300 /var/www/bfo/bfo/app/parsers/cron/cron.BookMaker.php
+*/1     *       *       *       *       /usr/bin/php -d include_path=/var/www/bfo/shared:/var/www/bfo/bfo -d max_execution_time=300 /var/www/bfo/bfo/app/parsers/cron/cron.SportsInteraction.php
+*/2     *       *       *       *       perl -le 'sleep 30' && /usr/bin/php -d include_path=/var/www/bfo/shared:/var/www/bfo/bfo -d max_execution_time=300 /var/www/bfo/bfo/app/parsers/cron/cron.Betway.php
+0       12      *       *       *       find /var/www/bfo/bfo/log/. -name "*.log" -type f -mtime +5 -delete
+15       12      *       *       *      find /tmp/ -name ".org.chromium.Chromium*" -type d -mmin +59 -exec rm -r "{}" \;
+*/3     *       *       *       *       perl -le 'sleep rand 90' && /usr/bin/php -d include_path=/var/www/bfo/shared:/var/www/bfo/bfo -d max_execution_time=300 /var/www/bfo/bfo/app/parsers/cron/cron.DraftKings.php
+*/3     *       *       *       *       perl -le 'sleep rand 90' && /usr/bin/php -d include_path=/var/www/bfo/shared:/var/www/bfo/bfo -d max_execution_time=300 /var/www/bfo/bfo/app/parsers/cron/cron.Fanduel.php
+*/2     *       *       *       *       perl -le 'sleep 10' && /usr/bin/php -d include_path=/var/www/bfo/shared:/var/www/bfo/bfo -d max_execution_time=300 /var/www/bfo/bfo/app/parsers/cron/cron.Bovada.php
+*/2     *       *       *       *       perl -le 'sleep 20' && /usr/bin/php -d include_path=/var/www/bfo/shared:/var/www/bfo/bfo -d max_execution_time=300 /var/www/bfo/bfo/app/parsers/cron/cron.BetDSI.php
+*/1     *       *       *       *       perl -le 'sleep 15' && /usr/bin/php -d include_path=/var/www/bfo/shared:/var/www/bfo/bfo -d max_execution_time=300 /var/www/bfo/bfo/app/parsers/cron/cron.WilliamHill.php
+*/2     *       *       *       *       perl -le 'sleep 40' && /usr/bin/php -d include_path=/var/www/bfo/shared:/var/www/bfo/bfo -d max_execution_time=300 /var/www/bfo/bfo/app/parsers/cron/cron.Pinnacle.php
+*/2     *       *       *       *       perl -le 'sleep 5' && /usr/bin/php -d include_path=/var/www/bfo/shared:/var/www/bfo/bfo -d max_execution_time=300 /var/www/bfo/bfo/app/parsers/cron/cron.Sportsbook.php
+*/1     *       *       *       *       perl -le 'sleep 25' && /usr/bin/php -d include_path=/var/www/bfo/shared:/var/www/bfo/bfo -d max_execution_time=300 /var/www/bfo/bfo/app/parsers/cron/cron.5Dimes.php
+*/1     *       *       *       *       perl -le 'sleep 35' && /usr/bin/php -d include_path=/var/www/bfo/shared:/var/www/bfo/bfo -d max_execution_time=300 /var/www/bfo/bfo/app/parsers/cron/cron.SportBet.php
+*/2     *       *       *       *       perl -le 'sleep 45' && /usr/bin/php -d include_path=/var/www/bfo/shared:/var/www/bfo/bfo -d max_execution_time=300 /var/www/bfo/bfo/app/parsers/cron/cron.Bet365.php
+*/1     *       *       *       *       perl -le 'sleep 50' && /usr/bin/php -d include_path=/var/www/bfo/shared:/var/www/bfo/bfo -d max_execution_time=300 /var/www/bfo/bfo/app/parsers/cron/cron.Intertops.php
+0       6,18       *       *       *       /usr/bin/php -d include_path=/var/www/bfo/shared:/var/www/bfo/bfo -d max_execution_time=300 /var/www/bfo/shared/lib/bfocore/cron/cron.ResetAllChangenums.php
+*/5       *       *       *       *       kill $(ps -eo comm,pid,etimes | grep -v defunct | awk '/^chromedriver/ {if ($3 > 300) { print $2}}')
+
+
+# PBO ProBoxingOdds
+
+1-59/3  *       *       *       *       /usr/bin/php -d include_path=/var/www/bfo/shared:/var/www/bfo/pbo -d max_execution_time=300 /var/www/bfo/shared/lib/bfocore/cron/cron.OddsParser.php >> /var/www/bfo/pbo/log/parser.log 2>&1
+10      0       *       *       *       mv /var/www/bfo/pbo/logs/*.log /var/www/bfo/pbo/logs/archived/ && rm -rf /var/www/bfo/pbo/logs/*.log
+5       */12       *       *       *       bash /var/www/bfo/pbo/db/scripts/backup/dobackup_local.sh
+45      12    *       *       *       /usr/bin/php -d include_path=/var/www/bfo/shared:/var/www/bfo/pbo -d max_execution_time=300 /var/www/bfo/pbo/db/scripts/cron.CleanDatabasev2.php
+0       20      *       *       *       /usr/bin/php -d include_path=/var/www/bfo/shared:/var/www/bfo/pbo -d max_execution_time=300 /var/www/bfo/pbo/lib/pbospec/cron/cron.GenerateSitemap.php
+0       5       *       *       *       /usr/bin/php -d include_path=/var/www/bfo/shared:/var/www/bfo/pbo -d max_execution_time=300 /var/www/bfo/shared/lib/bfocore/cron/cron.ResetAllChangenums.php
