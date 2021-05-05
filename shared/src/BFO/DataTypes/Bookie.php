@@ -7,25 +7,25 @@ namespace BFO\DataTypes;
  */
 class Bookie
 {
-    private $iID;
-    private $sName;
-    private $sURL;
-    private $sRefURL;
+    private $id;
+    private $name;
+    private $url;
+    private $affiliate_url;
 
     /**
      * Constructor
      *
-     * @param int $a_iID ID
-     * @param string $a_sName Name
-     * @param string $a_sURL URL
-     * @param string $a_sRefURL Affiliate URL
+     * @param int $id ID
+     * @param string $name Name
+     * @param string $url URL
+     * @param string $affiliate_url Affiliate URL
      */
-    public function __construct($a_iID, $a_sName, $a_sURL, $a_sRefURL)
+    public function __construct($id, $name, $url, $affiliate_url)
     {
-        $this->iID = $a_iID;
-        $this->sName = $a_sName;
-        $this->sURL = $a_sURL;
-        $this->sRefURL = $a_sRefURL;
+        $this->id = $id;
+        $this->name = $name;
+        $this->url = $url;
+        $this->affiliate_url = $affiliate_url;
     }
 
     /**
@@ -35,7 +35,7 @@ class Bookie
      */
     public function getID()
     {
-        return $this->iID;
+        return $this->id;
     }
 
     /**
@@ -45,7 +45,7 @@ class Bookie
      */
     public function getName()
     {
-        return $this->sName;
+        return $this->name;
     }
 
     /**
@@ -55,7 +55,7 @@ class Bookie
      */
     public function getURL()
     {
-        return $this->sURL;
+        return $this->url;
     }
 
     /**
@@ -65,6 +65,6 @@ class Bookie
      */
     public function getRefURL()
     {
-        return $this->sRefURL;
+        return $this->affiliate_url;
     }
 }
