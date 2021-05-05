@@ -116,18 +116,16 @@ class Alerter
         //If odds is set to -9999 then we just want to announce that the fight has got odds
         if ($alert_obj->getLimit() == -9999) {
             $sText = "Odds for " . $matchup->getFighterAsString(1) . " (" . $team_odds[1] . ") vs " . $matchup->getFighterAsString(2) . " (" . $team_odds[2] . ") has just been posted at " . ALERTER_SITE_NAME . "\n
-Check out " . ALERTER_SITE_LINK . " to view the latest listings.\n
+Visit " . ALERTER_SITE_LINK . " to view the latest odds listings.\n
 You are receiving this e-mail because you have signed up to be notified when odds were added for a certain matchup. If you did not sign up for this you don't have to do anything as your e-mail will not be stored for future use.\n
-Good luck!\n
 " . ALERTER_SITE_NAME;
 
             $sMessageHTML = "<b>Alert: New odds added</b><br><br>" . $matchup->getFighterAsString(1) . " <b>" . $team_odds[1] . "</b><br>" . $matchup->getFighterAsString(2) . " <b>" . $team_odds[2] . "</b><br>";
             $sSubject = 'Odds for ' . $matchup->getFighterAsString(1) . ' vs ' . $matchup->getFighterAsString(2) . ' available';
         } else {
             $sText = "The odds for " . $matchup->getFighterAsString($alert_obj->getFighter()) . " has reached " . $team_odds[$alert_obj->getFighter()] . " in his/her upcoming fight against " . $matchup->getFighterAsString(($alert_obj->getFighter() == 1 ? 2 : 1)) . "\n
-Check out " . ALERTER_SITE_LINK . " to view the latest listings.\n
+Visit " . ALERTER_SITE_LINK . " to view the latest odds listings.\n
 You are receiving this e-mail because you have signed up to be notified when the odds changed for a certain matchup. If you did not sign up for this you don't have to do anything as your e-mail will not be stored for future use.\n
-Good luck!\n
 " . ALERTER_SITE_NAME;
 
 
