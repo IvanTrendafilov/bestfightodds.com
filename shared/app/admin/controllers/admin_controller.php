@@ -553,8 +553,19 @@ class AdminController
     {
         $flagged = OddsHandler::getAllFlaggedMatchups();
 
+        foreach ($flagged as &$flagged_row) {
+            $first_date = date_create($flagged_row['initial_flagdate']);
+            $last_date = date_create($flagged_row['last_flagdate']);
+
+            $cur_date = new DateTime();
+
+            $date_diff = date_diff($first_date, $cur_date);
+            $hours_diff = $date_diff->days * 24 + $date_diff->h;
+            $flagged_row['hours_diff'] = $hours_diff;
+        }
+
         //Group into matchup groups
-        $matchup_groups = [];
+        /*$matchup_groups = [];
         foreach ($flagged as $flagged_row) {
             $key = $flagged_row['fight_obj']->getTeamAsString(1) . ' / ' . $flagged_row['fight_obj']->getTeamAsString(2);
             if (!isset($matchup_groups[$key])) {
@@ -577,9 +588,9 @@ class AdminController
             } else {
                 $matchup_groups[$key]['bookies'][] = $flagged_row['bookie_name'];
             }
-        }
+        }*/
 
-        $view_data['flagged'] = $matchup_groups;
+        $view_data['flagged'] = $flagged;
         $response->getBody()->write($this->plates->render('flagged_odds', $view_data));
         return $response;
     }

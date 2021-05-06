@@ -27,10 +27,7 @@
                     <td><?= $flagged_item['event_obj']->getDate() ?></td>
                     <td><?= $flagged_item['fight_obj']->getTeamAsString(1) ?> vs. <?= $flagged_item['fight_obj']->getTeamAsString(2) ?></td>
                     <td>
-                        <?php foreach ($flagged_item['bookies'] as $bookie) : ?>
-                            <?= $bookie ?>,
-                        <?php endforeach ?>
-
+                    <td><?= $flagged_item['bookie_name'] ?></td>
                     </td>
                     <td><?= $flagged_item['initial_flagdate'] ?></td>
                     <td><?= $flagged_item['last_flagdate'] ?></td>
