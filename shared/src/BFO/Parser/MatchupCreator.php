@@ -145,7 +145,8 @@ class MatchupCreator
 
             //Fetch upcoming matchups if not already done
             if ($this->upcoming_matchups == null) {
-                $this->upcoming_matchups = EventHandler::getAllUpcomingMatchups(true);
+                //$this->upcoming_matchups = EventHandler::getAllUpcomingMatchups(true); // Look in all events
+                $this->upcoming_matchups = EventHandler::getAllFightsForEvent($matched_event->getID(), true); // Look only in the matched event
             }
             foreach ($this->upcoming_matchups as $matchup) {
                 if (
