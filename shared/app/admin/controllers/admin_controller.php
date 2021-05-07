@@ -249,18 +249,20 @@ class AdminController
                         $action['view_extra']['odds'] = OddsHandler::getOpeningOddsForMatchup($action['action_obj']->matchupID);
 
                         //Check if either fighter has another matchup scheduled and indicate that
-                        $matchups1 = EventHandler::getAllFightsForFighter($action['view_extra']['matchup']->getFighterID(1));
-                        $action['view_extra']['found1'] = false;
-                        foreach ($matchups1 as $matchup) {
-                            if ($matchup->isFuture() && ($matchup->getFighterID(1) != $action['view_extra']['matchup']->getFighterID(1) || $matchup->getFighterID(2) != $action['view_extra']['matchup']->getFighterID(2))) {
-                                $action['view_extra']['found1'] = true;
+                        if ($action['view_extra']['matchup'] != null) {
+                            $matchups1 = EventHandler::getAllFightsForFighter($action['view_extra']['matchup']->getFighterID(1));
+                            $action['view_extra']['found1'] = false;
+                            foreach ($matchups1 as $matchup) {
+                                if ($matchup->isFuture() && ($matchup->getFighterID(1) != $action['view_extra']['matchup']->getFighterID(1) || $matchup->getFighterID(2) != $action['view_extra']['matchup']->getFighterID(2))) {
+                                    $action['view_extra']['found1'] = true;
+                                }
                             }
-                        }
-                        $matchups2 = EventHandler::getAllFightsForFighter($action['view_extra']['matchup']->getFighterID(2));
-                        $action['view_extra']['found2'] = false;
-                        foreach ($matchups2 as $matchup) {
-                            if ($matchup->isFuture() && ($matchup->getFighterID(1) != $action['view_extra']['matchup']->getFighterID(1) || $matchup->getFighterID(2) != $action['view_extra']['matchup']->getFighterID(2))) {
-                                $action['view_extra']['found2'] = true;
+                            $matchups2 = EventHandler::getAllFightsForFighter($action['view_extra']['matchup']->getFighterID(2));
+                            $action['view_extra']['found2'] = false;
+                            foreach ($matchups2 as $matchup) {
+                                if ($matchup->isFuture() && ($matchup->getFighterID(1) != $action['view_extra']['matchup']->getFighterID(1) || $matchup->getFighterID(2) != $action['view_extra']['matchup']->getFighterID(2))) {
+                                    $action['view_extra']['found2'] = true;
+                                }
                             }
                         }
                         $action['view_extra']['old_event'] = EventHandler::getEvent($action['view_extra']['matchup']->getEventID());
