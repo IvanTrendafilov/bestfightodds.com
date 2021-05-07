@@ -264,8 +264,9 @@ class AdminController
                                     $action['view_extra']['found2'] = true;
                                 }
                             }
+                            $action['view_extra']['old_event'] = EventHandler::getEvent($action['view_extra']['matchup']->getEventID());
                         }
-                        $action['view_extra']['old_event'] = EventHandler::getEvent($action['view_extra']['matchup']->getEventID());
+                        
                         break;
                     case 8:
                         //Move matchup to a non-existant event
