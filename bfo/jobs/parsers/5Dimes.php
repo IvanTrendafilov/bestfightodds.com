@@ -112,7 +112,7 @@ class ParserJob
                 if (trim((string) $cEvent->SportSubType) == 'Props' || trim((string) $cEvent->SportSubType) == 'MMA Props')
                 {
                     //Temporary fix for UFC event name
-                    $cEvent->Header = str_replace('UFC VEGAS 26', 'UFC ON ESPN 24', $cEvent->Header);
+                    $cEvent->Header = str_replace('UFC Vegas 26', 'UFC ON ESPN 24', $cEvent->Header);
 
                     $oParsedProp = null;
 
