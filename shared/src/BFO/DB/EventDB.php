@@ -630,42 +630,46 @@ class EventDB
         return false;
     }
 
-    public static function removeEvent($a_iEventID)
+    public static function removeEvent($event_id)
     {
-        $sQuery = "DELETE FROM events WHERE id = ?";
-        $aParams = array($a_iEventID);
-        DBTools::doParamQuery($sQuery, $aParams);
+        $query = "DELETE FROM events WHERE id = ?";
+        $params = array($event_id);
+        DBTools::doParamQuery($query, $params);
 
         //TODO: This needs error check
         return true;
     }
 
-    public static function removeFight($a_iFightID)
+    public static function removeFight($matchup_id)
     {
         //Delete all fightodds
-        $sQuery = "DELETE FROM fightodds WHERE fight_id = ?";
-        $aParams = array($a_iFightID);
-        DBTools::doParamQuery($sQuery, $aParams);
+        $query = "DELETE FROM fightodds WHERE fight_id = ?";
+        $params = [$matchup_id];
+        DBTools::doParamQuery($query, $params);
 
         //Delete fight itself
-        $sQuery2 = "DELETE FROM fights WHERE id = ?";
-        DBTools::doParamQuery($sQuery2, $aParams);
+        $query = "DELETE FROM fights WHERE id = ?";
+        DBTools::doParamQuery($query, $params);
 
         //Delete alerts for the fight
-        $sQuery3 = "DELETE FROM alerts WHERE fight_id = ?";
-        DBTools::doParamQuery($sQuery3, $aParams);
+        $query = "DELETE FROM alerts WHERE fight_id = ?";
+        DBTools::doParamQuery($query, $params);
 
         //Delete props for the fight
-        $sQuery4 = "DELETE FROM lines_props WHERE matchup_id = ?";
-        DBTools::doParamQuery($sQuery4, $aParams);
+        $query = "DELETE FROM lines_props WHERE matchup_id = ?";
+        DBTools::doParamQuery($query, $params);
 
         //Delete tweet status
-        $sQuery5 = "DELETE FROM fight_twits WHERE fight_id = ?";
-        DBTools::doParamQuery($sQuery5, $aParams);
+        $query = "DELETE FROM fight_twits WHERE fight_id = ?";
+        DBTools::doParamQuery($query, $params);
 
         //Delete any flagged lines related to the fight
-        $sQuery6 = "DELETE FROM lines_flagged WHERE matchup_id = ?";
-        DBTools::doParamQuery($sQuery6, $aParams);
+        $query = "DELETE FROM lines_flagged WHERE matchup_id = ?";
+        DBTools::doParamQuery($query, $params);
+
+        //Delete any metadata related to the matchup
+        $query = "DELETE FROM matchups_metadata WHERE matchup_id = ?";
+        DBTools::doParamQuery($query, $params);
 
         //TODO: This needs error check
         return true;
@@ -941,38 +945,38 @@ class EventDB
     /**
      * Gets the generic event for a specific date. The generic event is a default one that is used to store matchups that cannot be linked to a more specific event
      */
-    public static function getGenericEventForDate($a_sDate)
+    public static function getGenericEventForDate($date)
     {
         //Genereic events for a date is always named after the date so a lookup is made based on that
-        $sQuery = 'SELECT id, date, name, display 
+        $query = 'SELECT id, date, name, display 
                     FROM events 
                     WHERE name = ?';
 
-        $aParams = array($a_sDate);
-        $rResult = DBTools::doParamQuery($sQuery, $aParams);
+        $params = array($date);
+        $result = DBTools::doParamQuery($query, $params);
 
-        $aEvents = array();
-        while ($aEvent = mysqli_fetch_array($rResult)) {
-            $aEvents[] = new Event($aEvent['id'], $aEvent['date'], $aEvent['name'], $aEvent['display']);
+        $events = array();
+        while ($event = mysqli_fetch_array($result)) {
+            $events[] = new Event($event['id'], $event['date'], $event['name'], $event['display']);
         }
-        if (sizeof($aEvents) > 0) {
-            return $aEvents[0];
+        if (sizeof($events) > 0) {
+            return $events[0];
         }
         return null;
     }
 
-    public static function setMetaDataForMatchup($a_iMatchup_ID, $a_sAttribute, $a_sValue, $a_iBookieID)
+    public static function setMetaDataForMatchup($matchup_id, $attribute, $value, $bookie_id)
     {
-        $sQuery = 'INSERT INTO matchups_metadata(matchup_id, mattribute, mvalue, source_bookie_id) VALUES (?,?,?,?)
+        $query = 'INSERT INTO matchups_metadata(matchup_id, mattribute, mvalue, source_bookie_id) VALUES (?,?,?,?)
                         ON DUPLICATE KEY UPDATE mvalue = ?, source_bookie_id = ?';
-        $aParams = array($a_iMatchup_ID, $a_sAttribute, $a_sValue, $a_iBookieID, $a_sValue, $a_iBookieID);
+        $params = array($matchup_id, $attribute, $value, $bookie_id, $value, $bookie_id);
 
-        return DBTools::doParamQuery($sQuery, $aParams);
+        return DBTools::doParamQuery($query, $params);
     }
 
-    public static function getLatestChangeDate($a_iEventID)
+    public static function getLatestChangeDate($event_id)
     {
-        $sQuery = 'SELECT thedate FROM (SELECT fo.date as thedate 
+        $query = 'SELECT thedate FROM (SELECT fo.date as thedate 
                     FROM fightodds fo 
                         LEFT JOIN fights f ON fo.fight_id = f.id 
                     WHERE f.event_id = ?
@@ -988,23 +992,23 @@ class EventDB
                         ORDER BY lep.date DESC LIMIT 0,1) AS lept
                     ORDER BY thedate DESC LIMIT 0,1;';
 
-        $aParams = array($a_iEventID, $a_iEventID, $a_iEventID);
+        $params = array($event_id, $event_id, $event_id);
 
-        $rResult = DBTools::doParamQuery($sQuery, $aParams);
-        return DBTools::getSingleValue($rResult);
+        $result = DBTools::doParamQuery($query, $params);
+        return DBTools::getSingleValue($result);
     }
 
     public static function getAllEventsWithMatchupsWithoutResults()
     {
-        $sQuery = 'SELECT DISTINCT e.* FROM events e INNER JOIN fights f ON e.id = f.event_id LEFT JOIN matchups_results mr ON mr.matchup_id = f.id WHERE mr.matchup_id IS NULL
+        $query = 'SELECT DISTINCT e.* FROM events e INNER JOIN fights f ON e.id = f.event_id LEFT JOIN matchups_results mr ON mr.matchup_id = f.id WHERE mr.matchup_id IS NULL
                         AND LEFT(e.date, 10) < LEFT((NOW() - INTERVAL ' . GENERAL_GRACEPERIOD_SHOW . ' HOUR), 10)';
 
-        $rResult = DBTools::doQuery($sQuery);
-        $aEvents = array();
-        while ($aEvent = mysqli_fetch_array($rResult)) {
-            $aEvents[] = new Event($aEvent['id'], $aEvent['date'], $aEvent['name'], $aEvent['display']);
+        $result = DBTools::doQuery($query);
+        $events = array();
+        while ($row = mysqli_fetch_array($result)) {
+            $events[] = new Event($row['id'], $row['date'], $row['name'], $row['display']);
         }
-        return $aEvents;
+        return $events;
     }
 
     public static function addMatchupResults($a_aParams)
@@ -1029,13 +1033,13 @@ class EventDB
         return true;
     }
 
-    public static function getResultsForMatchup($a_iMatchup_ID)
+    public static function getResultsForMatchup($matchup_id)
     {
-        $sQuery = 'SELECT matchup_id, winner, method, endround, endtime FROM matchups_results WHERE matchup_id = ?';
-        $rResult = DBTools::doParamQuery($sQuery, [$a_iMatchup_ID]);
+        $query = 'SELECT matchup_id, winner, method, endround, endtime FROM matchups_results WHERE matchup_id = ?';
+        $result = DBTools::doParamQuery($query, [$matchup_id]);
 
-        if ($aResult = mysqli_fetch_array($rResult)) {
-            return $aResult;
+        if ($return_arr = mysqli_fetch_array($result)) {
+            return $return_arr;
         }
         return null;
     }

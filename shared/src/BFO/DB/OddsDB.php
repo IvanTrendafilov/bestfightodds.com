@@ -7,6 +7,8 @@ use BFO\Utils\DB\PDOTools;
 
 use BFO\DataTypes\FightOdds;
 use BFO\DataTypes\PropBet;
+use BFO\DataTypes\PropType;
+use BFO\DataTypes\EventPropBet;
 
 
 class OddsDB
@@ -984,7 +986,13 @@ class OddsDB
                         AND fo.bookie_id = ?';
         $params = [$matchup_id, $bookie_id];
         DBTools::doParamQuery($query, $params);
-        return DBTools::getAffectedRows();
+        $deleted_odds = DBTools::getAffectedRows();
+
+        //Also remove any metadata related to the matchup for this bookie
+        $query = "DELETE FROM matchups_metadata WHERE matchup_id = ? AND source_bookie_id = ?";
+        DBTools::doParamQuery($query, $params);
+        
+        return $deleted_odds;
     }
 
     public static function removePropOddsForMatchupAndBookie($matchup_id, $bookie_id, $proptype_id = null, $team_num = null)
