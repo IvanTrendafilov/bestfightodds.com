@@ -79,7 +79,7 @@ class PropParserV2
         $matchup = null;
         if ($template->isEventProp()) {
             $event = $this->matchPropToEvent($prop, $template);
-            if (!$event) {
+            if (!$event['event_id']) {
                 //No matching event
                 return ['status' => false, 'fail_reason' => 'no_event_found', 'template' => $template];
             }
