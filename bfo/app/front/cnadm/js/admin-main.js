@@ -1,6 +1,6 @@
 function maAddEventWithMatchups(ma_id, inputdata)
 {
-    inputJSON = JSON.parse(inputdata);
+    var inputJSON = JSON.parse(inputdata);
     var opts = {
         method: 'POST',      
         headers: {
@@ -20,7 +20,7 @@ function maAddEventWithMatchups(ma_id, inputdata)
             alert(body.msg);
         }
         else {
-            console.log('added event');
+            console.log('added event' + body.event_id);
             maRecursiveAddMatchup(body.event_id, inputJSON, 0)
             console.log('all done');
             clearManulAction(ma_id);
@@ -30,7 +30,7 @@ function maAddEventWithMatchups(ma_id, inputdata)
 
 function maRecursiveAddMatchup(indata_eventid, inputJSON, currentindex)
 {
-    totalindex = inputJSON.matchups.length;
+    var totalindex = inputJSON.matchups.length;
     if (currentindex < totalindex)
     {
         var opts = {
@@ -62,7 +62,7 @@ function maRecursiveAddMatchup(indata_eventid, inputJSON, currentindex)
 
 function maRenameEvent(ma_id, inputdata)
 {
-    inputJSON = $.parseJSON(inputdata);
+    var inputJSON = $.parseJSON(inputdata);
     var opts = {
         method: 'PUT',      
         headers: {
@@ -89,7 +89,7 @@ function maRenameEvent(ma_id, inputdata)
 
 function maAddMatchup(ma_id, inputdata)
 {
-    inputJSON = $.parseJSON(inputdata);
+    var inputJSON = $.parseJSON(inputdata);
     var opts = {
         method: 'POST',      
         headers: {
@@ -118,7 +118,7 @@ function maAddMatchup(ma_id, inputdata)
 
 function maDeleteMatchup(ma_id, inputdata)
 {
-    inputJSON = $.parseJSON(inputdata);
+    var inputJSON = $.parseJSON(inputdata);
     var opts = {
         method: 'DELETE',
         headers: {
@@ -145,7 +145,7 @@ function maDeleteMatchup(ma_id, inputdata)
 
 function maMoveMatchup(ma_id, inputdata)
 {
-    inputJSON = $.parseJSON(inputdata);
+    var inputJSON = $.parseJSON(inputdata);
     var opts = {
         method: 'PUT',      
         headers: {
@@ -172,7 +172,7 @@ function maMoveMatchup(ma_id, inputdata)
 
 function maDeleteEvent(ma_id, inputdata)
 {
-    inputJSON = $.parseJSON(inputdata);
+    var inputJSON = $.parseJSON(inputdata);
     var opts = {
         method: 'DELETE',
         headers: {
@@ -199,7 +199,7 @@ function maDeleteEvent(ma_id, inputdata)
 function maRedateEvent(ma_id, inputdata)
 {
 
-    inputJSON = $.parseJSON(inputdata);
+    var inputJSON = $.parseJSON(inputdata);
     var opts = {
         method: 'PUT',      
         headers: {
