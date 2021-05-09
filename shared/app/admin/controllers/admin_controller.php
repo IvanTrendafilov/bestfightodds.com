@@ -220,7 +220,7 @@ class AdminController
         $actions = ScheduleHandler::getAllManualActions();
 
         if ($actions != null && count($actions) > 0) {
-            foreach ($actions as &$action) {
+            foreach ($actions as $key => &$action) {
                 $action['action_obj'] = json_decode($action['description']);
                 switch ((int) $action['type']) {
                     case 1:
@@ -245,6 +245,11 @@ class AdminController
                     case 7:
                         //Delete matchup
                         $action['view_extra']['matchup'] = EventHandler::getFightByID($action['action_obj']->matchupID);
+                        if ($action['view_extra']['matchup'] == null) {
+                            unset($actions[$key]);
+                            break;
+                        }
+
                         //Check if matchup has odds and the indicate that
                         $action['view_extra']['odds'] = OddsHandler::getOpeningOddsForMatchup($action['action_obj']->matchupID);
 
