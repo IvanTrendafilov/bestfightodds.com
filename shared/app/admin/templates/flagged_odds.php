@@ -26,9 +26,7 @@
                     <td><?= $flagged_item['event_obj']->getName() ?></td>
                     <td><?= $flagged_item['event_obj']->getDate() ?></td>
                     <td><?= $flagged_item['fight_obj']->getTeamAsString(1) ?> vs. <?= $flagged_item['fight_obj']->getTeamAsString(2) ?></td>
-                    <td>
                     <td><?= $flagged_item['bookie_name'] ?></td>
-                    </td>
                     <td><?= $flagged_item['initial_flagdate'] ?></td>
                     <td><?= $flagged_item['last_flagdate'] ?></td>
                     <td><?= $flagged_item['hours_diff'] ?> hours</td>
