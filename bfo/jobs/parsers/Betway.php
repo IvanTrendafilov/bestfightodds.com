@@ -11,6 +11,8 @@
  *
  * URL: https://feeds.betway.com/sbeventsen?key=1E557772&keywords=ufc---martial-arts
  *
+ * Timezone: UTC
+ * 
  */
 
 require_once __DIR__ . "/../../bootstrap.php";

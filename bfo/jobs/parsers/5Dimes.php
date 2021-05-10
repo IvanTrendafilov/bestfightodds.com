@@ -10,6 +10,8 @@
  * 
  * URL: http://lines.5dimes.com/linesfeed/getlinefeeds.aspx?uid=bestfightodds5841&Type=ReducedReplace
  *
+ * Timezone: EDT (UTC -4) but including timezone offset so properly converted
+ * 
  */
 
 require_once __DIR__ . "/../../bootstrap.php";

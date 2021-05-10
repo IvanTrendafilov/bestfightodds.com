@@ -46,13 +46,13 @@ class StatsDB
             //NOW() > METADATA = METADATA UNLESS LAST ODDS > METADATA
             //!METADATA, IS_PAST( YES = LAST ODDS, NO = NOW() )
 
-            $extra_where = " AND fo1.date <= (IF ((SELECT 1 FROM matchups_metadata mm WHERE matchup_id = ? AND mm.mattribute = 'gametime' ), 
+            $extra_where = " AND fo1.date <= (IF ((SELECT 1 FROM matchups_metadata mm WHERE matchup_id = ? AND mm.mattribute = 'gametime' LIMIT 1), 
                                                     /*Metadata exists*/
-                                                    IF ((SELECT FROM_UNIXTIME(mm.mvalue) FROM matchups_metadata mm WHERE mm.matchup_id = ? AND mm.mattribute = 'gametime' ) > NOW(), 
+                                                    IF ((SELECT FROM_UNIXTIME(MIN(mm.mvalue)) FROM matchups_metadata mm WHERE mm.matchup_id = ? AND mm.mattribute = 'gametime' LIMIT 1) > NOW(), 
                                                         /*Metadata > NOW()*/
                                                         NOW(), 
                                                         /*Metadata < NOW()*/
-                                                        (SELECT FROM_UNIXTIME(mm.mvalue) FROM matchups_metadata mm WHERE mm.matchup_id = ? AND mm.mattribute = 'gametime')),
+                                                        (SELECT FROM_UNIXTIME(MIN(mm.mvalue)) FROM matchups_metadata mm WHERE mm.matchup_id = ? AND mm.mattribute = 'gametime' LIMIT 1)),
                                                     /*Metadata does not exist*/
                                                     IF ((SELECT 1 FROM fights f INNER JOIN events e ON f.event_id = e.id WHERE f.id = ? AND LEFT(e.date, 10) < LEFT((NOW() - INTERVAL ' . GENERAL_GRACEPERIOD_SHOW . ' HOUR), 10)), 
                                                         /*Event is in past*/

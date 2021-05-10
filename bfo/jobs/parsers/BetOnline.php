@@ -14,7 +14,9 @@
  * Comment: Prod version
  * 
  * Pregames URL (this feed): https://api.linesfeed.info/v1/pregames/lines/pu?sport=Martial%20Arts&subSport=MMA
- * Props URL (handled in separate parser): https://api.linesfeed.info/v1/contest/lines/pu?sport=Martial%20Arts&subSport=MMA
+ * Props URL (handled inseparate parser): https://api.linesfeed.info/v1/contest/lines/pu?sport=Martial%20Arts&subSport=MMA
+ * 
+ * Timezone: GMT (=UTC)
  *
  */
 

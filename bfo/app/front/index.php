@@ -53,6 +53,7 @@ $customErrorHandler = function (
 ) use ($app) {
   $response = $app->getResponseFactory()->createResponse();
   $response->getBody()->write('Error ' . $exception->getCode());
+  //$response->getBody()->write('Error ' . $exception->getMessage() . $exception->getTraceAsString() . $exception->getCode());
   return $response;
 };
 

@@ -15,6 +15,8 @@
  * 
  * URL: https://sportsbook.fanduel.com/sports/navigation/7287.1
  *
+ * Timezone: GMT -4 (New York) - Not converted
+ * 
  */
 
 require_once __DIR__ . "/../../bootstrap.php";

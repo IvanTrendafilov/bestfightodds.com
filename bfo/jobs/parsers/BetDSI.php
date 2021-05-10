@@ -10,6 +10,8 @@
  *
  * URL: https://modern.betdsi.eu/api/sportmatch/get?sportID=2359
  *
+ * Timezone: UTC
+ * 
  */
 
 require_once __DIR__ . "/../../bootstrap.php";
