@@ -69,12 +69,20 @@ class OddsProcessor
 
         $this->updateMatchedMatchups($matched_matchups);
         $pp->updateMatchedProps($matched_props);
-
+        
         if ($full_run) { //If this is a full run we will flag any matchups odds not matched for deletion
             $this->flagMatchupOddsForDeletion($matched_matchups);
             $this->flagPropOddsForDeletion($matched_props);
             $this->flagEventPropOddsForDeletion($matched_props);
         }
+
+        //Store correlations in database for later use
+        $temporary_stored_correlations = [];
+        foreach ((ParseTools::getAllCorrelations()) as $correlation_key => $correlation_value) {
+            $temporary_stored_correlations[] = ['correlation' => $correlation_key, 'matchup_id' => $correlation_value];
+        }
+        OddsHandler::storeCorrelations($this->bookie_id, $temporary_stored_correlations);
+
 
         $this->logger->info('Result - Matchups: ' . (count($matched_matchups) - $matchup_unmatched_count) . '/' . count($parsed_sport->getParsedMatchups()) . ' Props: ' . (count($matched_props) - $prop_unmatched_count) . '/' . count($parsed_sport->getFetchedProps()) . ' Full run: ' . ($full_run ? 'Yes' : 'No'));
 
@@ -150,7 +158,7 @@ class OddsProcessor
             $metadata = $matched_matchup['parsed_matchup']->getAllMetaData();
             foreach ($metadata as $key => $val) {
                 /*if ($this->bookie_id != 12  && $this->bookie_id != 5 && $this->bookie_id != 17 && $this->bookie_id != 4 && $this->bookie_id != 19 && $this->bookie_id != 18 && $this->bookie_id != 13) { //TODO: Temporary disable BetOnline, Bovada, William Hill, Sportsbook, Bet365, Intertops, BetDSI from storing metadata*/
-                    EventHandler::setMetaDataForMatchup($matched_matchup['matched_matchup']->getID(), $key, $val, $this->bookie_id);
+                EventHandler::setMetaDataForMatchup($matched_matchup['matched_matchup']->getID(), $key, $val, $this->bookie_id);
                 /*}*/
             }
 
@@ -166,6 +174,7 @@ class OddsProcessor
                         $this->logger->error("-- Error adding odds");
                     }
                 }
+
                 return true;
             }
         } else {

@@ -4,27 +4,27 @@ namespace BFO\Utils;
 
 class LinkTools
 {
-    public static function slugString($a_sText)
+    public static function slugString($text)
     {
         // replace non letter or digits by -
-        $a_sText = preg_replace('~[^\\pL\d]+~u', '-', $a_sText);
+        $text = preg_replace('~[^\\pL\d]+~u', '-', $text);
 
         // trim
-        $a_sText = trim($a_sText, '-');
+        $text = trim($text, '-');
 
         // transliterate
-        $a_sText = iconv('utf-8', 'us-ascii//TRANSLIT', $a_sText);
+        $text = iconv('utf-8', 'us-ascii//TRANSLIT', $text);
 
         // lowercase
-        //$a_sText = strtolower($a_sText);
+        //$text = strtolower($text);
       
         // remove unwanted characters
-        $a_sText = preg_replace('~[^-\w]+~', '', $a_sText);
+        $text = preg_replace('~[^-\w]+~', '', $text);
 
-        if (empty($a_sText)) {
+        if (empty($text)) {
             return 'n-a';
         }
 
-        return $a_sText;
+        return $text;
     }
 }

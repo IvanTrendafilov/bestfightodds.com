@@ -111,25 +111,25 @@ class OddsTools
     /**
      * Compares two names and returns the fsim value for the check
      */
-    public static function compareNames($a_sName1, $a_sName2)
+    public static function compareNames($name1, $name2)
     {
         //Find the name with least number of parts, this will be deciding the number of parts for comparison
-        $aNameParts1 = explode(' ', $a_sName1);
-        $aNameParts2 = explode(' ', $a_sName2);
-        $iPartCount = min(count($aNameParts1), count($aNameParts2));
+        $name1_parts = explode(' ', $name1);
+        $name2_parts = explode(' ', $name2);
+        $parts_count = min(count($name1_parts), count($name2_parts));
 
-        $aNames1 = self::getNameCombinations($aNameParts1, $iPartCount);
-        $aNames2 = self::getNameCombinations($aNameParts2, $iPartCount);
+        $name1_combinations = self::getNameCombinations($name1_parts, $parts_count);
+        $name2_combinations = self::getNameCombinations($name2_parts, $parts_count);
 
-        $fTopSim = 0;
-        foreach ($aNames1 as $aName1) {
-            foreach ($aNames2 as $aName2) {
-                $fSim = 0;
-                similar_text($aName1, $aName2, $fSim);
-                $fTopSim = $fSim > $fTopSim ? $fSim : $fTopSim;
+        $top_similarity = 0;
+        foreach ($name1_combinations as $aName1) {
+            foreach ($name2_combinations as $aName2) {
+                $similarity = 0;
+                similar_text($aName1, $aName2, $similarity);
+                $top_similarity = $similarity > $top_similarity ? $similarity : $top_similarity;
             }
         }
-        return $fTopSim;
+        return $top_similarity;
     }
 
     private static function getNameCombinations($a_sNameParts, $a_iParts)
