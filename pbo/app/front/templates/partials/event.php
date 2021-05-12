@@ -39,7 +39,7 @@
 
                         <?php for ($i = 1; $i <= 2; $i++) : ?>
                             <tr <?= $i == 1 ? 'id="mu-' . $matchup->getID() . '"' : '' ?> <?= (($i == 2 && $matchup_key == array_key_last($matchups)) ? ' style="border-bottom: 0;" ' : '') ?>>
-                                <td class="date-cell" data-time="<?=date('H:i', $matchup->getMetadata('gametime'))?>"><?= ($i == 1 ? date('H:i', $matchup->getMetadata('gametime')) : (date('H:i', $matchup->getMetadata('gametime')) != '' ? 'UTC' : '')) ?></td>
+                                <td class="date-cell" data-time="<?=date('H:i', $matchup->getMetadata('max_gametime'))?>"><?= ($i == 1 ? date('H:i', $matchup->getMetadata('max_gametime')) : (date('H:i', $matchup->getMetadata('max_gametime')) != '' ? 'UTC' : '')) ?></td>
                                 <th scope="row"><a href="/fighters/<?= $matchup->getFighterAsLinkString($i) ?>"><span class="t-b-fcc"><?= $matchup->getFighterAsString($i) ?></span></a></th>
                             </tr>
                         <?php endfor ?>
@@ -103,7 +103,7 @@
                                 <?php for ($i = 1; $i <= 2; $i++) : ?>
 
                                     <tr <?= (($i == 2 && $matchup_key == array_key_last($matchups)) ? ' style="border-bottom: 0;" ' : '') ?>>
-                                        <td class="date-cell" data-time="<?=date('H:i', $matchup->getMetadata('gametime'))?>"><?= ($i == 1 ? date('H:i', $matchup->getMetadata('gametime')) : (date('H:i', $matchup->getMetadata('gametime')) != '' ? 'UTC' : '')) ?></td>
+                                        <td class="date-cell" data-time="<?=date('H:i', $matchup->getMetadata('max_gametime'))?>"><?= ($i == 1 ? date('H:i', $matchup->getMetadata('max_gametime')) : (date('H:i', $matchup->getMetadata('max_gametime')) != '' ? 'UTC' : '')) ?></td>
                                         <th scope="row"><a href="/fighters/<?= $matchup->getFighterAsLinkString($i) ?>"><span class="t-b-fcc"><?= $matchup->getFighterAsString($i) ?></span></a></th>
 
                                         <?php foreach ($bookies as $bookie) : ?>
