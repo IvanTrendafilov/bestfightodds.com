@@ -84,7 +84,7 @@ class EventDB
     {
         if ($a_bOnlyWithOdds == true) {
             $sQuery = 'SELECT f.id, f1.name AS fighter1_name, f2.name AS fighter2_name, f.event_id, f1.id AS fighter1_id, f2.id AS fighter2_id, f.is_mainevent as is_mainevent, (SELECT MIN(date) FROM fightodds fo WHERE fo.fight_id = f.id) AS latest_date, m.mvalue as gametime 
-                        FROM fights f LEFT JOIN (SELECT matchup_id, MAX(mvalue) as mvalue FROM matchups_metadata mm WHERE mm.mattribute = "gametime" GROUP BY matchup_id) m ON f.id = m.matchup_id
+                        FROM fights f LEFT JOIN (SELECT matchup_id, AVG(mvalue) as mvalue FROM matchups_metadata mm WHERE mm.mattribute = "gametime" GROUP BY matchup_id) m ON f.id = m.matchup_id
                             LEFT JOIN fighters f1 ON f1.id = f.fighter1_id
                             LEFT JOIN fighters f2 ON f2.id = f.fighter2_id
                         WHERE f.event_id = ?
