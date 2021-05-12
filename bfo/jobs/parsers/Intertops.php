@@ -121,7 +121,7 @@ class ParserJob
                                 $oTempMatchup->setMetaData('gametime', $oGameDate->getTimestamp());
 
                                 //Add correlation ID to match matchups to props
-                                $oTempMatchup->setCorrelationID((string) $cMatchup['id']);
+                                $oTempMatchup->setCorrelationID((string) $cMatchup['mid']);
 
                                 $oParsedSport->addParsedMatchup($oTempMatchup);
                             }
@@ -139,7 +139,7 @@ class ParserJob
                                     );
 
                                     //Add correlation ID to match matchups to props
-                                    $oTempProp->setCorrelationID((string) $cMatchup['id']);
+                                    $oTempProp->setCorrelationID((string) $cMatchup['mid']);
 
                                     $oParsedSport->addFetchedProp($oTempProp);
                             }
@@ -159,7 +159,7 @@ class ParserJob
                                         );
 
                                         //Add correlation ID to match matchups to props
-                                        $oTempProp->setCorrelationID((string) $cMatchup['id']);
+                                        $oTempProp->setCorrelationID((string) $cMatchup['mid']);
 
                                         $oParsedSport->addFetchedProp($oTempProp);
                                 }
