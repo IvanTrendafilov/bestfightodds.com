@@ -1,46 +1,60 @@
 <?php $this->layout('base/layout', ['title' => 'Admin']) ?>
 
 <script>
-document.addEventListener("DOMContentLoaded", function(event) { 
-    document.querySelectorAll('.reset-changenum-button').forEach(item => {
-        item.addEventListener('click', e => {
-            e.preventDefault();
-        var opts = {
-            method: 'POST',      
-            headers: {
-                'Content-type': 'application/json; charset=UTF-8'
-            },
-            body: JSON.stringify({
-                bookie_id: parseInt(e.target.dataset.bookieid)
-            })
-        };
-        fetch('/cnadm/api/resetchangenums', opts).then(function (response) {
-            return response.json();
-        })
-        .then(function (body) {
-            if (body.error == true) {
-                alert(body.msg);
-            }
-            else {
-                location.reload();
-            }
-        	
-    		});
-		});
-	});
-});
+    document.addEventListener("DOMContentLoaded", function(event) {
+        document.querySelectorAll('.reset-changenum-button').forEach(item => {
+            item.addEventListener('click', e => {
+                e.preventDefault();
+                var opts = {
+                    method: 'POST',
+                    headers: {
+                        'Content-type': 'application/json; charset=UTF-8'
+                    },
+                    body: JSON.stringify({
+                        bookie_id: parseInt(e.target.dataset.bookieid)
+                    })
+                };
+                fetch('/cnadm/api/resetchangenums', opts).then(function(response) {
+                        return response.json();
+                    })
+                    .then(function(body) {
+                        if (body.error == true) {
+                            alert(body.msg);
+                        } else {
+                            e.target.classList.add("btn-success");
+                        }
 
+                    });
+            });
+        });
+    });
 </script>
 
-<?=date('H:i:s')?>
-<br><br>
+<div class="card">
 
-All <a href="#" class="reset-changenum-button">Reset</a><br>
-<br>
+    <div class="card-header">
+        <h5 class="card-title">Reset parser changenums</h5>
+        <div>
+            <button class="reset-changenum-button btn btn-primary">Reset all</button>
+        </div>
+    </div>
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Bookie</th>
+                <th>Action</th>
 
-<?php foreach ($bookies as $bookie_id => $bookie_name): ?>
+            </tr>
+        </thead>
+        <tbody class="bg-white">
+            <?php foreach ($bookies as $bookie_id => $bookie_name) : ?>
+                <tr>
+                    <td><?= $bookie_name ?></td>
+                    <td><button class="reset-changenum-button btn btn-primary" data-bookieid="<?= $bookie_id ?>">Reset</button></td>
+                </tr>
 
-	<?=$bookie_name?> 
-	<a href="#" class="reset-changenum-button" data-bookieid="<?=$bookie_id?>">Reset</a><br>
+            <?php endforeach ?>
 
-<?php endforeach ?>
+        </tbody>
+    </table>
+</div>
