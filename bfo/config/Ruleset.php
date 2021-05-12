@@ -14,7 +14,7 @@ class Ruleset implements RulesetInterface
         $event_pieces = explode(' ', $event_name);
 
         if ($bookie_obj->getName() == 'BetOnline') {
-            $whitelisted_events = ['OKTAGON', 'LFA', 'CES', 'PFL', 'UFC', 'BELLATOR', 'FAC', 'AMC'];
+            $whitelisted_events = ['OKTAGON', 'LFA', 'CES', 'PFL', 'UFC', 'BELLATOR', 'FAC', 'AMC', 'TITAN', 'FAME'];
             if (in_array($event_pieces[0], $whitelisted_events) || $event_name == 'FUTURE EVENTS') {
                 return true;
             }
@@ -36,7 +36,7 @@ class Ruleset implements RulesetInterface
         $event_pieces = explode(' ', $event_name);
 
         if ($bookie_obj->getName() == 'BetOnline') {
-            $whitelisted_events = ['OKTAGON', 'LFA', 'CES', 'PFL', 'UFC', 'BELLATOR', 'FAC', 'AMC'];
+            $whitelisted_events = ['OKTAGON', 'LFA', 'CES', 'PFL', 'UFC', 'BELLATOR', 'FAC', 'AMC', 'TITAN', 'FAME'];
             if (in_array($event_pieces[0], $whitelisted_events)) {
                 //Check that event is numbered (= event name contains a number)
                 if (preg_match('/\\d/', $event_name) > 0) {
