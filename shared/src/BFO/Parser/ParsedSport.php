@@ -27,7 +27,12 @@ class ParsedSport
 
     public function addParsedMatchup($parsed_matchup_obj)
     {
-        $this->matchups[] = $parsed_matchup_obj;
+        if (
+            trim($parsed_matchup_obj->getTeamName(1)) != '' &&
+            trim($parsed_matchup_obj->getTeamName(2)) != ''
+        ) {
+            $this->matchups[] = $parsed_matchup_obj;
+        }
     }
 
     public function setMatchupList($matchups)
