@@ -1178,7 +1178,7 @@ class OddsDB
 
         //These values can be tuned with time (TODO: Maybe move to config file?):
         $event_threshold = 24; //If the event is within this value (hours) we will not remove
-        $flagged_time = 8; //How many hours the line must be flagged before deletion
+        $flagged_time = 4; //How many hours the line must be flagged before deletion
 
         $query = 'SELECT lf.*, TIMESTAMPDIFF(HOUR, initial_flagdate, NOW()) AS timediff, pt.prop_desc, pt.negprop_desc, 
                         f1.name AS team1_name, f2.name AS team2_name, b.name AS bookie_name, e.name AS event_name FROM lines_flagged lf 
