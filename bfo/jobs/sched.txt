@@ -1,0 +1,32 @@
+Schedule parser start
+http://localhost/rss.txt
+Warning: simplexml_load_string(): Entity: line 6: parser error : Opening and ending tag mismatch: hr line 5 and body in C:\Dev\bfo\bfo\jobs\SchedulerJob.php on line 37
+
+Warning: simplexml_load_string(): </body> in C:\Dev\bfo\bfo\jobs\SchedulerJob.php on line 37
+
+Warning: simplexml_load_string():        ^ in C:\Dev\bfo\bfo\jobs\SchedulerJob.php on line 37
+
+Warning: simplexml_load_string(): Entity: line 7: parser error : Opening and ending tag mismatch: body line 5 and html in C:\Dev\bfo\bfo\jobs\SchedulerJob.php on line 37
+
+Warning: simplexml_load_string(): </html> in C:\Dev\bfo\bfo\jobs\SchedulerJob.php on line 37
+
+Warning: simplexml_load_string():        ^ in C:\Dev\bfo\bfo\jobs\SchedulerJob.php on line 37
+
+Warning: simplexml_load_string(): Entity: line 8: parser error : EndTag: '</' not found in C:\Dev\bfo\bfo\jobs\SchedulerJob.php on line 37
+
+Warning: simplexml_load_string():  in C:\Dev\bfo\bfo\jobs\SchedulerJob.php on line 37
+
+Warning: simplexml_load_string(): ^ in C:\Dev\bfo\bfo\jobs\SchedulerJob.php on line 37
+
+Notice: Trying to get property 'channel' of non-object in C:\Dev\bfo\bfo\jobs\SchedulerJob.php on line 43
+
+Notice: Trying to get property 'item' of non-object in C:\Dev\bfo\bfo\jobs\SchedulerJob.php on line 43
+
+Warning: sizeof(): Parameter must be an array or an object that implements Countable in C:\Dev\bfo\bfo\jobs\SchedulerJob.php on line 43
+
+Notice: Trying to get property 'channel' of non-object in C:\Dev\bfo\bfo\jobs\SchedulerJob.php on line 48
+
+Notice: Trying to get property 'item' of non-object in C:\Dev\bfo\bfo\jobs\SchedulerJob.php on line 48
+
+Warning: Invalid argument supplied for foreach() in C:\Dev\bfo\bfo\jobs\SchedulerJob.php on line 48
+Done

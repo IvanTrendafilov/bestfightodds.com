@@ -80,7 +80,7 @@ class ScheduleParser
                 if (sizeof($aPrefixParts) > 1) {
                     foreach ($aStoredEvents as $oStoredEvent) {
                         $aStoredPrefixParts = explode(':', $oStoredEvent->getName());
-                        if ($aStoredPrefixParts[0] == $aPrefixParts[0]) {
+                        if ($aStoredPrefixParts[0] == $aPrefixParts[0] && !$bFound) {
                             //Found it! However event should be renamed
                             $bFound = true;
                             if ($oStoredEvent->getName() != $aEvent['title']) {
@@ -112,7 +112,6 @@ class ScheduleParser
                     }
                     reset($aFoundMatches);
                     //Probably found it! Howver event should be renamed if different
-
                     $oFoundEvent = EventHandler::getEvent(key($aFoundMatches));
                     if ($oFoundEvent->getName() != $aEvent['title']) {
                         ScheduleHandler::storeManualAction(json_encode(array('eventID' => $oFoundEvent->getID(), 'eventTitle' => $aEvent['title']), JSON_HEX_APOS | JSON_HEX_QUOT), 2);
@@ -161,6 +160,7 @@ class ScheduleParser
     public function parseMatchups($event, $matched_event)
     {
         foreach ($event['matchups'] as $parsed_matchup) {
+
             $matchup = EventHandler::getMatchingFight(new Fight(-1, $parsed_matchup[0], $parsed_matchup[1], -1));
             if ($matchup != null) {
                 //Found a match! But is it the right event?

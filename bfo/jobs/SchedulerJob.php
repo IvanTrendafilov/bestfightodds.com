@@ -32,6 +32,7 @@ class MMAJunkieParser
         //$url = 'http://localhost:8080/rss.txt';
         $curl_opts = array(CURLOPT_USERAGENT => 'MWFeedParser');
         $content = ParseTools::retrievePageFromURL($url, $curl_opts);
+        //$content = ParseTools::retrievePageFromFile('C:\dev\bfo\bfo\app\front\rss.txt');
 
         $xml = simplexml_load_string($content);
         if ($xml == false) {

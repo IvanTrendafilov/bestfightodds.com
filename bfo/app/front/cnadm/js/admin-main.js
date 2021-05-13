@@ -33,6 +33,7 @@ function maRecursiveAddMatchup(indata_eventid, inputJSON, currentindex)
     var totalindex = inputJSON.matchups.length;
     if (currentindex < totalindex)
     {
+        console.log('preparing to add recursive matchup ' + inputJSON.matchups[currentindex][0] + ' vs ' + inputJSON.matchups[currentindex][1]);
         var opts = {
             method: 'POST',      
             headers: {
