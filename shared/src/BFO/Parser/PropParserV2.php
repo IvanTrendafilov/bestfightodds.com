@@ -68,7 +68,7 @@ class PropParserV2
 
     public function matchSingleProp($prop)
     {
-        $template = $this->matchPropToTemplate($prop, $this->bookie_id);
+        $template = $this->matchPropToTemplate($prop);
         if (!$template) {
             //No matching template
             return ['status' => false, 'fail_reason' => 'no_template_found'];
@@ -103,7 +103,7 @@ class PropParserV2
      *   ParsedProp = Howard/Alves goes 3 round distance
      *
      */
-    public function matchPropToTemplate($prop, $bookie_id)
+    public function matchPropToTemplate($prop)
     {
         $is_found = false;
         $found_template = null;
@@ -450,73 +450,73 @@ class PropParserV2
         return array('event_id' => $iFoundEventID);
     }
 
-    private function addAltNameMatchupsToMatchup($oMatchupToCheck)
+    private function addAltNameMatchupsToMatchup($matchup)
     {
-        $new_matchups = array();
+        $new_matchups = [];
 
-        $aTeam1Alts = TeamHandler::getAltNamesForTeamByID($oMatchupToCheck->getFighterID(1));
-        $aTeam2Alts = TeamHandler::getAltNamesForTeamByID($oMatchupToCheck->getFighterID(2));
+        $team1_altnames = TeamHandler::getAltNamesForTeamByID($matchup->getFighterID(1));
+        $team2_altnames = TeamHandler::getAltNamesForTeamByID($matchup->getFighterID(2));
 
-        if ($aTeam1Alts != null) {
-            foreach ($aTeam1Alts as $sAltName1) {
-                $new_matchups[] = new Fight($oMatchupToCheck->getID(), $sAltName1, $oMatchupToCheck->getTeam(2), $oMatchupToCheck->getEventID(), $oMatchupToCheck->getComment());
+        if ($team1_altnames != null) {
+            foreach ($team1_altnames as $sAltName1) {
+                $new_matchups[] = new Fight($matchup->getID(), $sAltName1, $matchup->getTeam(2), $matchup->getEventID(), $matchup->getComment());
 
-                if ($aTeam2Alts != null) {
-                    foreach ($aTeam2Alts as $sAltName2) {
-                        $new_matchups[] = new Fight($oMatchupToCheck->getID(), $sAltName1, $sAltName2, $oMatchupToCheck->getEventID(), $oMatchupToCheck->getComment());
+                if ($team2_altnames != null) {
+                    foreach ($team2_altnames as $sAltName2) {
+                        $new_matchups[] = new Fight($matchup->getID(), $sAltName1, $sAltName2, $matchup->getEventID(), $matchup->getComment());
                     }
                 }
             }
         }
-        if ($aTeam2Alts != null) {
-            foreach ($aTeam2Alts as $sAltName2) {
-                $new_matchups[] = new Fight($oMatchupToCheck->getID(), $oMatchupToCheck->getTeam(1), $sAltName2, $oMatchupToCheck->getEventID(), $oMatchupToCheck->getComment());
+        if ($team2_altnames != null) {
+            foreach ($team2_altnames as $sAltName2) {
+                $new_matchups[] = new Fight($matchup->getID(), $matchup->getTeam(1), $sAltName2, $matchup->getEventID(), $matchup->getComment());
             }
         }
 
         return $new_matchups;
     }
 
-    private function determineFieldsType($aParsedMatchup)
+    private function determineFieldsType($parsed_matchup)
     {
-        $aFoundFieldsType = array();
-        for ($iZ = 0; $iZ < count($aParsedMatchup); $iZ++) {
-            if (strpos($aParsedMatchup[$iZ], " ") != true) {
+        $found_fields_type = [];
+        for ($iZ = 0; $iZ < count($parsed_matchup); $iZ++) {
+            if (strpos($parsed_matchup[$iZ], " ") != true) {
                 //Either Koscheck or J.Koscheck
-                if (preg_match('/^[^\s]\.\s?[^\s]+$/', $aParsedMatchup[$iZ])) {
+                if (preg_match('/^[^\s]\.\s?[^\s]+$/', $parsed_matchup[$iZ])) {
                     //Probably J.Koscheck
-                    $aFoundFieldsType[$iZ] = (count($aParsedMatchup) > 1 ? 6 : 5);
+                    $found_fields_type[$iZ] = (count($parsed_matchup) > 1 ? 6 : 5);
                 } else {
                     //Probably Koscheck
-                    $aFoundFieldsType[$iZ] = (count($aParsedMatchup) > 1 ? 1 : 3);
+                    $found_fields_type[$iZ] = (count($parsed_matchup) > 1 ? 1 : 3);
                 }
-            } elseif (preg_match('/^[^\s] [^\n]+/', $aParsedMatchup[$iZ])) {
+            } elseif (preg_match('/^[^\s] [^\n]+/', $parsed_matchup[$iZ])) {
                 //Probably J Koscheck
-                $aFoundFieldsType[$iZ] = (count($aParsedMatchup) > 1 ? 7 : 8);
+                $found_fields_type[$iZ] = (count($parsed_matchup) > 1 ? 7 : 8);
             } else {
                 //Could be J. Koscheck
-                if (preg_match('/^[^\s]\.\s[^\s]+$/', $aParsedMatchup[$iZ])) {
+                if (preg_match('/^[^\s]\.\s[^\s]+$/', $parsed_matchup[$iZ])) {
                     //Probably J. Koscheck (checks against J.Koscheck)
-                    $aFoundFieldsType[$iZ] = (count($aParsedMatchup) > 1 ? 6 : 5);
+                    $found_fields_type[$iZ] = (count($parsed_matchup) > 1 ? 6 : 5);
                 } else {
                     //Probably Josh Koschek
 
                     //Since we cant be sure if this is a double last name, we need to return false here for a single user..
-                    if (count($aParsedMatchup) == 1) {
+                    if (count($parsed_matchup) == 1) {
                         return false;
                     }
 
-                    $aFoundFieldsType[$iZ] = (count($aParsedMatchup) > 1 ? 2 : 4);
+                    $found_fields_type[$iZ] = (count($parsed_matchup) > 1 ? 2 : 4);
                 }
             }
         }
         //For multiple fields, compare and make sure we have only one type for both. If not return false
-        if (count($aParsedMatchup) > 1) {
-            if ($aFoundFieldsType[0] != $aFoundFieldsType[1]) {
+        if (count($parsed_matchup) > 1) {
+            if ($found_fields_type[0] != $found_fields_type[1]) {
                 return false;
             }
         }
-        return $aFoundFieldsType[0];
+        return $found_fields_type[0];
     }
 
     public function updateMatchedProps($matched_props)
