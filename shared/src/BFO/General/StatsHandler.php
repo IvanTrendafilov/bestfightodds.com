@@ -10,15 +10,15 @@ use BFO\Utils\LinkTools;
 
 class StatsHandler
 {
-    public static function getAllDiffsForEvent($a_iEventID, $a_iFrom = 0) //0 Opening, 1 = 1 day ago, 2 = 1 hour ago
+    public static function getAllDiffsForEvent($event_id, $from = 0) //0 Opening, 1 = 1 day ago, 2 = 1 hour ago
     {
-        $aMatchups = EventHandler::getAllFightsForEvent($a_iEventID, true);
-        $aSwings = [];
-        foreach ($aMatchups as $oMatchup) {
-            $aStats = StatsHandler::getDiffForMatchup($oMatchup->getID(), $a_iFrom);
+        $matchups = EventHandler::getAllFightsForEvent($event_id, true);
+        $swings_col = [];
+        foreach ($matchups as $matchup) {
+            $aStats = StatsHandler::getDiffForMatchup($matchup->getID(), $from);
 
-            $aSwings[] = array($oMatchup, 1, $aStats['f1']);
-            $aSwings[] = array($oMatchup, 2, $aStats['f2']);
+            $swings_col[] = array($matchup, 1, $aStats['f1']);
+            $swings_col[] = array($matchup, 2, $aStats['f2']);
         }
 
         if (!function_exists('BFO\General\cmpdiff')) {
@@ -27,44 +27,44 @@ class StatsHandler
                 return $a[2]['swing'] < $b[2]['swing'];
             }
         }
-        usort($aSwings, "BFO\General\cmpdiff");
+        usort($swings_col, "BFO\General\cmpdiff");
 
-        return $aSwings;
+        return $swings_col;
     }
 
-    public static function getDiffForMatchup($a_iMatchupID, $a_iFrom = 0)
+    public static function getDiffForMatchup($matchup_id, $from = 0)
     {
-        if (!is_numeric($a_iMatchupID)) {
+        if (!is_numeric($matchup_id)) {
             return null;
         }
-        return StatsDB::getDiffForMatchup($a_iMatchupID, $a_iFrom);
+        return StatsDB::getDiffForMatchup($matchup_id, $from);
     }
 
 
     public static function getExpectedOutcomesForEvent($a_iEventID)
     {
-        $aMatchups = EventHandler::getAllFightsForEvent($a_iEventID, true);
-        $aOutcomes = [];
-        foreach ($aMatchups as $oMatchup) {
-            $aMatchupOutcomes = self::getExpectedOutcomesForMatchup($oMatchup);
-            if ($aMatchupOutcomes != null) {
-                $aOutcomes[] = array($oMatchup, self::getExpectedOutcomesForMatchup($oMatchup));
+        $matchups = EventHandler::getAllFightsForEvent($a_iEventID, true);
+        $outcomes = [];
+        foreach ($matchups as $matchup) {
+            $matchup_outcomes = self::getExpectedOutcomesForMatchup($matchup);
+            if ($matchup_outcomes != null) {
+                $outcomes[] = array($matchup, self::getExpectedOutcomesForMatchup($matchup));
             }
         }
-        return $aOutcomes;
+        return $outcomes;
     }
 
-    public static function getExpectedOutcomesForMatchup($oMatchup)
+    public static function getExpectedOutcomesForMatchup($matchup)
     {
         //Hardcoded proptype IDs here.. might wanna fix this
-        $oTeam1ITD = OddsHandler::getCurrentPropIndex($oMatchup->getID(), 1, 10, ($oMatchup->hasOrderChanged() ? 2 : 1)); //Proptype 10: wins inside distance
-        $oTeam1DEC = OddsHandler::getCurrentPropIndex($oMatchup->getID(), 1, 11, ($oMatchup->hasOrderChanged() ? 2 : 1)); //Proptype 11: wins by decision
-        $oTeam2ITD = OddsHandler::getCurrentPropIndex($oMatchup->getID(), 1, 10, ($oMatchup->hasOrderChanged() ? 1 : 2)); //Proptype 10: wins inside distance
-        $oTeam2DEC = OddsHandler::getCurrentPropIndex($oMatchup->getID(), 1, 11, ($oMatchup->hasOrderChanged() ? 1 : 2)); //Proptype 11: wins by decision
-        $oDraw = OddsHandler::getCurrentPropIndex($oMatchup->getID(), 1, 6, 0); //Proptype 6: fight is a draw
+        $odds_team1_insidedistance = OddsHandler::getCurrentPropIndex($matchup->getID(), 1, 10, ($matchup->hasOrderChanged() ? 2 : 1)); //Proptype 10: wins inside distance
+        $odds_team1_decision = OddsHandler::getCurrentPropIndex($matchup->getID(), 1, 11, ($matchup->hasOrderChanged() ? 2 : 1)); //Proptype 11: wins by decision
+        $odds_team2_insidedistance = OddsHandler::getCurrentPropIndex($matchup->getID(), 1, 10, ($matchup->hasOrderChanged() ? 1 : 2)); //Proptype 10: wins inside distance
+        $odds_team2_decision = OddsHandler::getCurrentPropIndex($matchup->getID(), 1, 11, ($matchup->hasOrderChanged() ? 1 : 2)); //Proptype 11: wins by decision
+        $odds_draw = OddsHandler::getCurrentPropIndex($matchup->getID(), 1, 6, 0); //Proptype 6: fight is a draw
 
         //Odds for all prop types in category is required to be able to draw some conclusion
-        if ($oTeam1ITD == null || $oTeam1DEC == null || $oTeam2ITD == null || $oTeam2DEC == null || $oDraw == null) {
+        if ($odds_team1_insidedistance == null || $odds_team1_decision == null || $odds_team2_insidedistance == null || $odds_team2_decision == null || $odds_draw == null) {
             return ['team1_itd' => 0,
                 'team1_dec' => 0,
                 'team2_itd' => 0,
@@ -72,17 +72,17 @@ class StatsHandler
                 'draw' => 0];
         }
 
-        $sum = OddsTools::convertMoneylineToDecimal($oTeam1ITD->getPropOdds(1)) - 1
-            + OddsTools::convertMoneylineToDecimal($oTeam1DEC->getPropOdds(1)) - 1
-            + OddsTools::convertMoneylineToDecimal($oTeam2ITD->getPropOdds(1)) - 1
-            + OddsTools::convertMoneylineToDecimal($oTeam2DEC->getPropOdds(1)) - 1
-            + OddsTools::convertMoneylineToDecimal($oDraw->getPropOdds(1)) - 1;
+        $sum = OddsTools::convertMoneylineToDecimal($odds_team1_insidedistance->getPropOdds(1)) - 1
+            + OddsTools::convertMoneylineToDecimal($odds_team1_decision->getPropOdds(1)) - 1
+            + OddsTools::convertMoneylineToDecimal($odds_team2_insidedistance->getPropOdds(1)) - 1
+            + OddsTools::convertMoneylineToDecimal($odds_team2_decision->getPropOdds(1)) - 1
+            + OddsTools::convertMoneylineToDecimal($odds_draw->getPropOdds(1)) - 1;
 
-        $ret = ['team1_itd' => round($sum / (OddsTools::convertMoneylineToDecimal($oTeam1ITD->getPropOdds(1)) - 1)),
-                'team1_dec' => round($sum / (OddsTools::convertMoneylineToDecimal($oTeam1DEC->getPropOdds(1)) - 1)),
-                'team2_itd' => round($sum / (OddsTools::convertMoneylineToDecimal($oTeam2ITD->getPropOdds(1)) - 1)),
-                'team2_dec' => round($sum / (OddsTools::convertMoneylineToDecimal($oTeam2DEC->getPropOdds(1)) - 1)),
-                'draw' => round($sum / (OddsTools::convertMoneylineToDecimal($oDraw->getPropOdds(1)) - 1))];
+        $ret = ['team1_itd' => round($sum / (OddsTools::convertMoneylineToDecimal($odds_team1_insidedistance->getPropOdds(1)) - 1)),
+                'team1_dec' => round($sum / (OddsTools::convertMoneylineToDecimal($odds_team1_decision->getPropOdds(1)) - 1)),
+                'team2_itd' => round($sum / (OddsTools::convertMoneylineToDecimal($odds_team2_insidedistance->getPropOdds(1)) - 1)),
+                'team2_dec' => round($sum / (OddsTools::convertMoneylineToDecimal($odds_team2_decision->getPropOdds(1)) - 1)),
+                'draw' => round($sum / (OddsTools::convertMoneylineToDecimal($odds_draw->getPropOdds(1)) - 1))];
 
         return $ret;
     }

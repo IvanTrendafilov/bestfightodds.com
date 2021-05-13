@@ -12,25 +12,25 @@ class TeamHandler
     /**
      * @deprecated Replaced by getAltNamesForTeamByID that takes ID as input not a string name
      */
-    public static function getAllAltNamesForTeam($a_sTeamName)
+    public static function getAllAltNamesForTeam($team_name)
     {
-        return TeamDB::getAllAltNamesForTeam($a_sTeamName);
+        return TeamDB::getAllAltNamesForTeam($team_name);
     }
 
-    public static function getAltNamesForTeamByID($a_iTeamID)
+    public static function getAltNamesForTeamByID($team_id)
     {
-        if (!$a_iTeamID) {
+        if (!$team_id) {
             return null;
         }
-        return TeamDB::getAltNamesForTeamByID($a_iTeamID);
+        return TeamDB::getAltNamesForTeamByID($team_id);
     }
 
     /**
      * Gets the latest date when the fighter received an odds update
      */
-    public static function getLastChangeDate($a_iFighterID)
+    public static function getLastChangeDate($team_id)
     {
-        return TeamDB::getLastChangeDate($a_iFighterID);
+        return TeamDB::getLastChangeDate($team_id);
     }
 
     public static function getAllTeamsWithMissingResults()
