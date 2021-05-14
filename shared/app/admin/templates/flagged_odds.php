@@ -1,5 +1,38 @@
 <?php $this->layout('base/layout', ['title' => 'Admin - Events']) ?>
 
+<script>
+    document.addEventListener("DOMContentLoaded", function(event) {
+        //Delete flagged odds
+        document.querySelectorAll('.delete-odds-button').forEach(item => {
+            item.addEventListener('click', e => {
+                var input = JSON.parse(e.target.dataset.odds);
+                e.preventDefault();
+                var opts = {
+                    method: 'DELETE',
+                    headers: {
+                        'Content-type': 'application/json; charset=UTF-8'
+                    },
+                    body: JSON.stringify({
+                        bookie_id: parseInt(input.bookie_id),
+                        matchup_id: parseInt(input.matchup_id),
+                    })
+                };
+                fetch('/cnadm/api/odds', opts).then(function(response) {
+                    return response.json();
+                })
+                .then(function(body) {
+                    if (body.error == true) {
+                        alert(body.msg);
+                    } else {
+                        //Successfully deleted. Hides row from table
+                        e.target.closest('tr').style.display = 'none';
+                    }
+                });
+            })
+        })
+    });
+</script>
+
 <div class="card">
     <div class="card-header">
         <h5 class="card-title">Flagged odds</h5>
@@ -31,7 +64,7 @@
                     <td><?= $flagged_item['last_flagdate'] ?></td>
                     <td><?= $flagged_item['hours_diff'] ?> hours</td>
                     <td>
-                        <a href="#">Action</a>
+                        <button class="btn btn-primary delete-odds-button" data-odds="<?= $this->e('{"bookie_id": "' . $flagged_item['bookie_id'] . '", "matchup_id": "' . $flagged_item['fight_obj']->getID() . '"}') ?>">Delete manually</button>
                     </td>
                 </tr>
             <?php endforeach ?>

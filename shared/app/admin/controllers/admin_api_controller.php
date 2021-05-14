@@ -445,7 +445,7 @@ class AdminAPIController
         } else {
             //Delete odds
             if (isset($data->proptype_id)) {
-                //TODO: Deleting prop odds for a specific prop type ID
+                //TODO: Deleting prop odds for a specific prop type ID, also needs team_num
             } else {
                 if (OddsHandler::removeOddsForMatchupAndBookie($data->matchup_id, $data->bookie_id)) {
                     $return_data['msg'] = 'Odds removed for matchup ' . $data->matchup_id . ' and bookie_id ' . $data->bookie_id;

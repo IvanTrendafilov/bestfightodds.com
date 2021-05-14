@@ -1153,7 +1153,7 @@ class OddsDB
 
     public static function getAllFlaggedMatchups()
     {
-        $query = 'SELECT f.*, e.name as event_name, e.date as event_date, f1.name AS team1_name, f2.name AS team2_name, lf.*, b.name as bookie_name 
+        $query = 'SELECT f.*, e.name as event_name, e.date as event_date, f1.name AS team1_name, f2.name AS team2_name, lf.*, b.name as bookie_name, b.id as bookie_id 
                         FROM lines_flagged lf 
                             LEFT JOIN fights f ON lf.matchup_id = f.id 
                             LEFT JOIN fighters f1 ON f.fighter1_id = f1.id 
