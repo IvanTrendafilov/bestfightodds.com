@@ -10,6 +10,8 @@
  * 
  * URL: http://pricefeeds.williamhill.com/oxipubserver?action=template&template=getHierarchyByMarketType&classId=402&filterBIR=N
  *
+ * Timezone in feed: UTC+1 so assuming Europe/London (during DST, maybe needs to be adjusted once off DST)
+ * 
  */
 
 require_once __DIR__ . "/../../bootstrap.php";
@@ -124,11 +126,11 @@ class ParserJob
                         $oGameDate = null;
                         if ($cType['name'] == 'Potential Fights')
                         {
-                            $oGameDate = new DateTime('2019-12-31 00:00:00');
+                            $oGameDate = new DateTime('2019-12-31 18:00:00');
                         }
                         else
                         {
-                            $oGameDate = new DateTime($cMarket['date'] . ' ' . $cMarket['time']);    
+                            $oGameDate = new DateTime($cMarket['date'] . ' ' . $cMarket['time'], new DateTimeZone('Europe/London'));    
                         }
                         $oTempMatchup->setMetaData('gametime', $oGameDate->getTimestamp());
                         $oTempMatchup->setCorrelationID($this->getCorrelationID($cMarket));
