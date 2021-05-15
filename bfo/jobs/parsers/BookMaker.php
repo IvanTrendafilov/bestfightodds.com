@@ -14,6 +14,8 @@
  * Comment: Dev version
  * 
  * URL: http://lines.bookmaker.eu
+ * 
+ * Timezone in feed: PST (no daylight savings change)
  *
  */
 
@@ -136,7 +138,9 @@ class ParserJob
                             );
 
                             //Add game time metadata
-                            $date_obj = new DateTime((string) $cGame['gmdt'] . ' ' . $cGame['gmtm']);
+                            $date_obj = new DateTime((string) $cGame['gmdt'] . ' ' . $cGame['gmtm']); //Timezone is PST (no daylight savings change)
+                            $date_obj->add(new \DateInterval('PT7H')); //Offset +8 hours to UTC
+
                             $new_matchup->setMetaData('gametime', $date_obj->getTimestamp());
                             $new_matchup->setMetaData('event_name', $cBanner[0]['vtm']);
 
