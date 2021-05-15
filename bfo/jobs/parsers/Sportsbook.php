@@ -10,6 +10,8 @@
  *
  * URL: https://www.gamingsystem.ag/sbk/sportsbook4/www.sportsbook.ag/getodds.xgi?categoryId=*
  *
+ * Timezone in feed: ET
+ * 
  */
 
 require_once __DIR__ . "/../../bootstrap.php";

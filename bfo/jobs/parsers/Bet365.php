@@ -10,6 +10,8 @@
  * 
  * URL: http://oddsfeed3.bet365.com/Boxing_v2.asp
  *
+ * Timezone in feed: UTC+1 so assuming Europe/London (during DST, maybe needs to be adjusted once off DST)
+ * 
  */
 
 require_once __DIR__ . "/../../bootstrap.php";
@@ -107,7 +109,7 @@ class ParserJob
                             $oParsedMatchup->setCorrelationID((string) $cEvent['ID']);
 
                             //Add time of matchup as metadata
-                            $oGameDate = DateTime::createFromFormat('d/m/y H:i:s', (string) $cMarket['StartTime']);
+                            $oGameDate = DateTime::createFromFormat('d/m/y H:i:s', (string) $cMarket['StartTime'], new DateTimeZone('Europe/London'));
                             $oParsedMatchup->setMetaData('gametime', $oGameDate->getTimestamp());
                             
                             $oParsedSport->addParsedMatchup($oParsedMatchup);

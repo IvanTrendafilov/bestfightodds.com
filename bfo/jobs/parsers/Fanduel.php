@@ -15,7 +15,7 @@
  * 
  * URL: https://sportsbook.fanduel.com/sports/navigation/7287.1
  *
- * Timezone: GMT -4 (New York) - Not converted
+ * Timezone in feed: GMT -4 (New York)
  * 
  */
 
@@ -96,8 +96,6 @@ class ParserJob
                 '--blink-settings=imagesEnabled=false'
               ], ['port' => intval('95' . BOOKIE_ID)]);
             $crawler = $client->request('GET', 'https://sportsbook.fanduel.com/sports/navigation/7287.1/9886.3');
-            
-            
 
             $crawler = $client->waitFor('.events_futures');
 
@@ -117,7 +115,6 @@ class ParserJob
                     if ($event_node->filter('.MMA')->count())
                     {
                         $date = new DateTime($event_node->filter('div.time')->text(), new DateTimeZone('America/New_York'));
-                        
 
                         if (strpos(strtoupper($event_node->filter('div.time')->text()), 'LIVE') !== false) 
                         {
@@ -203,5 +200,3 @@ class ParserJob
         return true;
     }
 }
-
-?>
