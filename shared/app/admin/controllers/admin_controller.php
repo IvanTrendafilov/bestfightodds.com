@@ -635,7 +635,8 @@ class AdminController
         $bookies = BookieHandler::getAllBookies();
         foreach ($bookies as $bookie) {
             $has_finished_in_last_5_min = false;
-            $filenames = glob(GENERAL_KLOGDIR . 'cron.' . strtolower($bookie->getName()) . '.*');
+            
+            $filenames = glob(GENERAL_KLOGDIR . 'cron.' . str_replace(' ', '', strtolower($bookie->getName())) . '.*');
             $filenames = array_reverse($filenames);
             if (count($filenames) >= 3) {
                 for ($i = 0; $i <= 2; $i++) {
