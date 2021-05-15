@@ -24,7 +24,7 @@
     });
 </script>
 
-<?php $this->insert('parser_status', ['runstatus' => $runstatus]) ?>
+<?php $this->insert('parser_status', ['runstatus' => $runstatus, 'lastfinishes' => $lastfinishes]) ?>
 
 <?php $this->insert('partials/unmatched', ['bookies' => $bookies, 'unmatched_matchup_groups' => $unmatched_matchup_groups, 'unmatched_groups' => $unmatched_groups, 'unmatched' => $unmatched]) ?>
 

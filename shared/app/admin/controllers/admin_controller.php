@@ -59,7 +59,12 @@ class AdminController
 
     public function home(Request $request, Response $response)
     {
+        
+
         $view_data = [];
+
+        //Get status on whether or not bookie has finished parsing in the last 5 minutes
+        $view_data['lastfinishes'] = $this->getLastFinishDates();
 
         //Get alerts data
         $view_data['alertcount'] = Alerter::getAlertCount();
@@ -271,7 +276,7 @@ class AdminController
                             }
                             $action['view_extra']['old_event'] = EventHandler::getEvent($action['view_extra']['matchup']->getEventID());
                         }
-                        
+
                         break;
                     case 8:
                         //Move matchup to a non-existant event
@@ -440,7 +445,6 @@ class AdminController
     {
         $view_data = [];
         if (isset($args['bookie_name'])) {
-            $logfile = $args['bookie_name'];
             $filenames = glob(GENERAL_KLOGDIR . 'cron.' . $args['bookie_name'] . '.*');
             $log_contents =  file_get_contents(end($filenames));
             $view_data = ['log_contents' => $log_contents];
@@ -622,5 +626,42 @@ class AdminController
 
         $response->getBody()->write($this->plates->render('parserlogs', $view_data));
         return $response;
+    }
+
+    private function getLastFinishDates()
+    {
+        $bookie_status = [];
+
+        $bookies = BookieHandler::getAllBookies();
+        foreach ($bookies as $bookie) {
+            $has_finished_in_last_5_min = false;
+            $filenames = glob(GENERAL_KLOGDIR . 'cron.' . strtolower($bookie->getName()) . '.*');
+            $filenames = array_reverse($filenames);
+            if (count($filenames) >= 3) {
+                for ($i = 0; $i <= 2; $i++) {
+                    $log_contents =  file_get_contents($filenames[$i]);
+                    $str = explode("\n", $log_contents);
+                    end($str);
+                    $last_row = prev($str);
+                    if (strpos($last_row, 'Finished') !== false) {
+                        //Log contains the word Finished
+                        $date_regex = '/\[([^\]]*)]/m';
+                        $matches = [];
+                        preg_match($date_regex, $last_row, $matches);
+                        if ($matches) {
+                            //Found date, check it
+                            $now_date = new DateTime();
+                            $log_date = new DateTime($matches[1]);
+                            $log_date->add(new DateInterval('PT' . 5 . 'M'));
+                            if ($log_date > $now_date) {
+                                $has_finished_in_last_5_min = true;
+                            }
+                        }
+                    }
+                }
+            }
+            $bookie_status[$bookie->getName()] = $has_finished_in_last_5_min;
+        }
+        return $bookie_status;
     }
 }
