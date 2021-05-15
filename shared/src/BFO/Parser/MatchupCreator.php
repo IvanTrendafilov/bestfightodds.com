@@ -72,9 +72,9 @@ class MatchupCreator
             }
 
             if ($matched_event != null) {
-                if (!$this->teamHasOtherMatchup($matched_event, $team1, $team2, $in_scheduler)) {
+                //if (!$this->teamHasOtherMatchup($matched_event, $team1, $team2, $in_scheduler)) { //Check is disabled, this allows for a team to have multiple matchups at the same event
                     return $this->createMatchup($team1, $team2, $matched_event, $date_obj, $in_scheduler);
-                }
+                //}
             }
         }
 
