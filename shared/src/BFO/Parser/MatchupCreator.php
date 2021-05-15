@@ -65,6 +65,9 @@ class MatchupCreator
             $date_obj = new \DateTime();
             $date_obj = $date_obj->setTimestamp($matchup_time);
 
+            //Matchup time here is in UTC as captured by parsers. We offset time by -7 to adjust from UTC to west coast time
+            $date_obj->sub(new \DateInterval('PT7H'));
+
             $matched_event = $this->getMatchingEvent($event_name, $date_obj, $in_scheduler);
 
             if ($matched_event == null) {

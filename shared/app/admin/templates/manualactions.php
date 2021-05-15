@@ -34,7 +34,7 @@ Manual actions: <button class="btn btn-primary" onclick="$('button[onclick^=\'ma
 								<?php elseif ($action['type'] == 2) : ?>
 
 								<td>Rename event</td>
-								<td><b><?= $action['view_extra']['new_event']->getName() ?></b> to <b><?= $action['action_obj']->eventTitle ?></b></td>
+								<td>Old: <b><?= $action['view_extra']['new_event']->getName() ?></b><br>New:<b><?= $action['action_obj']->eventTitle ?></b></td>
 								<td><button class="btn btn-primary" onclick="maRenameEvent(<?= $action['id'] ?>, '<?= htmlspecialchars($action['description']) ?>')">Accept</button>
 
 								<?php elseif ($action['type'] == 3) : ?>
@@ -80,7 +80,7 @@ Manual actions: <button class="btn btn-primary" onclick="$('button[onclick^=\'ma
 									<?= $action['view_extra']['found1'] ? ' <span class="badge bg-success">' . $action['view_extra']['matchup']->getTeamAsString(1) . ' has other matchup</span> ' : '' ?>
 									<?= $action['view_extra']['found2'] ? ' <span class="badge bg-success">' . $action['view_extra']['matchup']->getTeamAsString(2) . ' has other matchup</span> ' : '' ?>
 									from <b><?= $action['view_extra']['old_event']->getName() ?></b> (<?= $action['view_extra']['old_event']->getDate() ?>)
-								<td><button class="btn btn-primary <?= ($action['view_extra']['odds'] == null && ($action['view_extra']['found1'] || $action['view_extra']['found2'])) ? 'btn-success' : 'btn-warning' ?>" onclick="maDeleteMatchup(<?= $action['id'] ?>, '<?= htmlspecialchars($action['description']) ?>')">Accept</button>
+								<td><button class="btn btn-primary <?= $action['view_extra']['odds'] == null ? 'btn-success' : 'btn-warning' ?>" onclick="maDeleteMatchup(<?= $action['id'] ?>, '<?= htmlspecialchars($action['description']) ?>')">Accept</button>
 
 								<?php elseif ($action['type'] == 8) : //Move matchup to a non-existant event
 								?>

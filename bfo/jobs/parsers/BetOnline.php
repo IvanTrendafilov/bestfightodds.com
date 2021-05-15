@@ -153,7 +153,7 @@ class ParserJob
         }
         $event_name = $matchup->scheduleText == null ? '' : trim((string) $matchup->scheduleText);
 
-        $gd = new DateTime($matchup->event_DateTimeGMT);
+        $gd = new DateTime($matchup->event_DateTimeGMT, new DateTimeZone('America/New_York'));
         $event_timestamp = $gd->getTimestamp();
 
         //Validate existance participants fields and odds
