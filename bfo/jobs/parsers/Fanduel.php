@@ -116,7 +116,7 @@ class ParserJob
                 {
                     if ($event_node->filter('.MMA')->count())
                     {
-                        $date = new DateTime($event_node->filter('div.time')->text());
+                        $date = new DateTime($event_node->filter('div.time')->text(), new DateTimeZone('America/New_York'));
                         
 
                         if (strpos(strtoupper($event_node->filter('div.time')->text()), 'LIVE') !== false) 
