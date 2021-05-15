@@ -94,7 +94,7 @@ Manual actions: <button class="btn btn-primary" onclick="$('button[onclick^=\'ma
 								<td><?= $action['view_extra']['old_event']->getName() ?> (<?= $action['view_extra']['old_event']->getDate() ?>)</td>
 								<td></td>
 								<td></td>
-								<td><button class="btn btn-primary" onclick="maDeleteMatchup(<?= $action['id'] ?>, '<?= htmlspecialchars($action['description']) ?>')">Accept</button>
+								<td><button class="btn btn-primary <?= ($action['view_extra']['odds'] == null && ($action['view_extra']['found1'] || $action['view_extra']['found2'])) ? 'btn-success' : 'btn-warning'?>" onclick="maDeleteMatchup(<?= $action['id'] ?>, '<?= htmlspecialchars($action['description']) ?>')">Accept</button>
 
 								<?php elseif ($action['type'] == 8) : //Move matchup to a non-existant event
                                 ?>
