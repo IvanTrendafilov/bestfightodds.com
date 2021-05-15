@@ -12,11 +12,7 @@ Manual actions: <button class="btn btn-primary" onclick="$('button[onclick^=\'ma
 					<tr>
 						<th>Action</th>
 						<th>Event/Matchup</th>
-						<th>From</th>
-						<th></th>
-						<th>To</th>
-						<th></th>
-						<th>Action</th>
+						<th>Accept</th>
 					</tr>
 				</thead>
 				<tbody>
@@ -26,78 +22,71 @@ Manual actions: <button class="btn btn-primary" onclick="$('button[onclick^=\'ma
 							<?php if ($action['type'] == 1) : ?>
 
 								<td>Create new event: </td>
-								<td><?= $action['action_obj']->eventTitle ?></td>
-								<td> at </td>
-								<td><?= $action['action_obj']->eventDate ?> with matchups: <br>
-									<?php foreach ($action['action_obj']->matchups as $aMatchup) : ?>
-										&nbsp;<?= $aMatchup[0] ?> vs <?= $aMatchup[1] ?><br>
-									<?php endforeach ?>
+								<td><b><?= $action['action_obj']->eventTitle ?></b> - <?= $action['action_obj']->eventDate ?>
+									<ul>
+										<?php foreach ($action['action_obj']->matchups as $aMatchup) : ?>
+											<li><?= $this->e($aMatchup[0], 'strtolower|ucwords') ?> vs <?= $this->e($aMatchup[1], 'strtolower|ucwords') ?></li>
+										<?php endforeach ?>
+									</ul>
 								</td>
 								<td><button class="btn btn-primary" onclick="maAddEventWithMatchups(<?= $action['id'] ?>, '<?= htmlspecialchars($action['description']) ?>')">Accept</button>
 
 								<?php elseif ($action['type'] == 2) : ?>
 
-								<td>Rename event </td>
-								<td><?= $action['view_extra']['new_event']->getName() ?></td>
-								<td> to </td>
-								<td><?= $action['action_obj']->eventTitle ?></td>
+								<td>Rename event</td>
+								<td><b><?= $action['view_extra']['new_event']->getName() ?></b> to <b><?= $action['action_obj']->eventTitle ?></b></td>
 								<td><button class="btn btn-primary" onclick="maRenameEvent(<?= $action['id'] ?>, '<?= htmlspecialchars($action['description']) ?>')">Accept</button>
 
 								<?php elseif ($action['type'] == 3) : ?>
 
 								<td>Change date of </td>
-								<td><?= $action['view_extra']['new_event']->getName() ?></td>
-								<td> from </td>
-								<td><?= $action['view_extra']['new_event']->getDate() ?></td>
-								<td> to </td>
-								<td><?= $action['action_obj']->eventDate ?></td>
+								<td><b><?= $action['view_extra']['new_event']->getName() ?></b>
+									from
+									<?= $action['view_extra']['new_event']->getDate() ?>
+									to
+									<?= $action['action_obj']->eventDate ?></td>
 								<td><button class="btn btn-primary" onclick="maRedateEvent(<?= $action['id'] ?>, '<?= htmlspecialchars($action['description']) ?>')">Accept</button>
 
 								<?php elseif ($action['type'] == 4) : ?>
 
 								<td>Delete event </td>
-								<td></td>
-								<td></td>
-								<td><?= $action['view_extra']['new_event']->getName() ?> - <?= $action['view_extra']['new_event']->getDate() ?></td>
-								<td></td>
-								<td></td>
+								<td><b><?= $action['view_extra']['new_event']->getName() ?></b> (<?= $action['view_extra']['new_event']->getDate() ?>)</td>
 								<td><button class="btn btn-primary" onclick="maDeleteEvent(<?= $action['id'] ?>, '<?= htmlspecialchars($action['description']) ?>')">Accept</button>
 
 								<?php elseif ($action['type'] == 5) : ?>
 
 								<td>Create matchup </td>
-								<td><?= $action['action_obj']->matchups[0]->team1 ?> vs. <?= $action['action_obj']->matchups[0]->team2 ?></td>
-								<td> at </td>
-								<td><?= $action['view_extra']['new_event']->getName() ?></td>
+								<td><?= $action['action_obj']->matchups[0]->team1 ?> vs. <?= $action['action_obj']->matchups[0]->team2 ?> at <b><?= $action['view_extra']['new_event']->getName() ?></b></td>
 								<td><button class="btn btn-primary" onclick="maAddMatchup(<?= $action['id'] ?>, '<?= htmlspecialchars($action['description']) ?>')">Accept</button>
 
 								<?php elseif ($action['type'] == 6) : ?>
 
 								<td>Move </td>
-								<td><a href="http://www.google.com/search?q=tapology <?= urlencode($action['view_extra']['matchup']->getTeamAsString(1) . ' vs. ' . $action['view_extra']['matchup']->getTeamAsString(2)) ?>"><?= $action['view_extra']['matchup']->getTeamAsString(1) ?> vs. <?= $action['view_extra']['matchup']->getTeamAsString(2) ?></a></td>
-								<td> from </td>
-								<td><?= $action['view_extra']['old_event']->getName() ?> (<?= $action['view_extra']['old_event']->getDate() ?>)</td>
-								<td> to </td>
-								<td><?= $action['view_extra']['new_event']->getName() ?> (<?= $action['view_extra']['new_event']->getDate() ?>)</td>
+								<td><a href="http://www.google.com/search?q=tapology <?= urlencode($action['view_extra']['matchup']->getTeamAsString(1) . ' vs. ' . $action['view_extra']['matchup']->getTeamAsString(2)) ?>"><?= $action['view_extra']['matchup']->getTeamAsString(1) ?> vs. <?= $action['view_extra']['matchup']->getTeamAsString(2) ?></a>
+									from
+									<b><?= $action['view_extra']['old_event']->getName() ?></b> (<?= $action['view_extra']['old_event']->getDate() ?>)
+									to
+									<b><?= $action['view_extra']['new_event']->getName() ?></b> (<?= $action['view_extra']['new_event']->getDate() ?>)</td>
 								<td><button class="btn btn-primary" onclick="maMoveMatchup(<?= $action['id'] ?>, '<?= htmlspecialchars($action['description']) ?>')">Accept</button>
 
 								<?php elseif ($action['type'] == 7) : //Delete matchup
-                                ?>
+								?>
 
-								<td>Delete </td>
-								<td><a href="http://www.google.com/search?q=tapology <?= urlencode($action['view_extra']['matchup']->getTeamAsString(1) . ' vs. ' . $action['view_extra']['matchup']->getTeamAsString(2)) ?>"><?= $action['view_extra']['matchup']->getTeamAsString(1) ?> vs. <?= $action['view_extra']['matchup']->getTeamAsString(2) ?></a>
-									<?= $action['view_extra']['odds'] == null ? ' <span class="badge bg-success">No odds</span> ' : ' <span class="badge bg-warning">Has odds</span>' ?>
-									<?= $action['view_extra']['found1'] ? ' <span class="badge bg-success">' . $action['view_extra']['matchup']->getTeamAsString(1) . ' has other matchup</span> ' : '' ?>
-									<?= $action['view_extra']['found2'] ? ' <span class="badge bg-success">' . $action['view_extra']['matchup']->getTeamAsString(2) . ' has other matchup</span> ' : '' ?>
-								</td>
-								<td> from </td>
-								<td><?= $action['view_extra']['old_event']->getName() ?> (<?= $action['view_extra']['old_event']->getDate() ?>)</td>
-								<td></td>
-								<td></td>
-								<td><button class="btn btn-primary <?= ($action['view_extra']['odds'] == null && ($action['view_extra']['found1'] || $action['view_extra']['found2'])) ? 'btn-success' : 'btn-warning'?>" onclick="maDeleteMatchup(<?= $action['id'] ?>, '<?= htmlspecialchars($action['description']) ?>')">Accept</button>
+								<td>Delete matchup</td>
+								<td>
+									<b><?= $action['view_extra']['old_event']->getName() ?></b> (<?= $action['view_extra']['old_event']->getDate() ?>)
+									<ul>
+										<li>
+											<a href="http://www.google.com/search?q=tapology <?= urlencode($action['view_extra']['matchup']->getTeamAsString(1) . ' vs. ' . $action['view_extra']['matchup']->getTeamAsString(2)) ?>"><?= $action['view_extra']['matchup']->getTeamAsString(1) ?> vs. <?= $action['view_extra']['matchup']->getTeamAsString(2) ?></a>
+											<?= $action['view_extra']['odds'] == null ? ' <span class="badge bg-success">No odds</span> ' : ' <span class="badge bg-warning">Has odds</span>' ?>
+											<?= $action['view_extra']['found1'] ? ' <span class="badge bg-success">' . $action['view_extra']['matchup']->getTeamAsString(1) . ' has other matchup</span> ' : '' ?>
+											<?= $action['view_extra']['found2'] ? ' <span class="badge bg-success">' . $action['view_extra']['matchup']->getTeamAsString(2) . ' has other matchup</span> ' : '' ?>
+										</li>
+									</ul>
+								<td><button class="btn btn-primary <?= ($action['view_extra']['odds'] == null && ($action['view_extra']['found1'] || $action['view_extra']['found2'])) ? 'btn-success' : 'btn-warning' ?>" onclick="maDeleteMatchup(<?= $action['id'] ?>, '<?= htmlspecialchars($action['description']) ?>')">Accept</button>
 
 								<?php elseif ($action['type'] == 8) : //Move matchup to a non-existant event
-                                ?>
+								?>
 
 								<td>Move the following matchups:<br>
 									<?php foreach ($action['view_extra']['matchups'] as $key => $matchup) : ?>
@@ -106,7 +95,7 @@ Manual actions: <button class="btn btn-primary" onclick="$('button[onclick^=\'ma
 								</td>
 								<td> to </td>
 								<td><?= $action['view_extra']['new_event'] != null ? $action['view_extra']['new_event']->getName() : 'TBD' ?></td>
-								<td><button class="btn btn-primary" ' .  <?= $action['view_extra']['new_event'] == null ? ' disabled=true ' : '' ?> onclick="maMoveMatchup(<?= $action['id'] ?>, ' <?= htmlspecialchars($action['view_extra']['newma'][$key]) ?>')"><br>Accept</button>
+								<td><button class="btn btn-primary" <?= $action['view_extra']['new_event'] == null ? ' disabled=true ' : '' ?> onclick="maMoveMatchup(<?= $action['id'] ?>, ' <?= htmlspecialchars($action['view_extra']['newma'][$key]) ?>')"><br>Accept</button>
 
 								<?php else : ?>
 

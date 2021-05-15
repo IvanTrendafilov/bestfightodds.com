@@ -25,7 +25,7 @@
                         alert(body.msg);
                     } else {
                         //Successfully deleted. Hides row from table
-                        e.target.closest('tr').style.textDecoration  = 'line-through';
+                        e.target.closest('tr').style.color  = '#ddd';
                         e.target.disabled = true;
                     }
                 });

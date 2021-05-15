@@ -245,8 +245,9 @@ function clearManulAction(ma_id)
         }
         else {
             console.log('deleted manual action');
-            $("#ma" + ma_id).find('td').css("text-decoration", "line-through");
-            $("#ma" + ma_id).find('input[type=submit]').attr("disabled", "disabled");
+            $("#ma" + ma_id).css("color", "#ddd");
+            $("#ma" + ma_id).find('button').attr("disabled", "disabled");
+
         }
     });
 }
