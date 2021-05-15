@@ -9,7 +9,13 @@
                 Has finished in last 5 minutes: 
                 <?php foreach ($lastfinishes as $bookie => $status) : ?>
                     <a href="/cnadm/parserlogs/<?=strtolower($bookie)?>"><span class="badge <?= ($status == false ? 'bg-danger' : 'bg-success') ?>"><?=$bookie?></span></a>
-                <?php endforeach ?>
+                <?php endforeach ?><br>
+                Odds job finished in last 5 minutes: 
+                <?php if ($oddsjob_finished): ?>
+                    <span class="badge bg-success">Yes</span>
+                <?php else: ?>
+                    <span class="badge bg-danger">No</span>
+                <?php endif ?>
             </div>
         </div>
     </div>

@@ -66,6 +66,10 @@ class AdminController
         //Get status on whether or not bookie has finished parsing in the last 5 minutes
         $view_data['lastfinishes'] = $this->getLastFinishDates();
 
+        //Get status on whether or not OddsJob has finished in the last 5 minutes
+        $view_data['oddsjob_finished'] = $this->oddsJobFinished();
+
+        var_dump($view_data['oddsjob_finished']);
         //Get alerts data
         $view_data['alertcount'] = Alerter::getAlertCount();
 
@@ -664,5 +668,35 @@ class AdminController
             $bookie_status[$bookie->getName()] = $has_finished_in_last_5_min;
         }
         return $bookie_status;
+    }
+
+    private function oddsJobFinished()
+    {
+        $filenames = glob(GENERAL_KLOGDIR . 'cron.oddsjob.*');
+        $filenames = array_reverse($filenames);
+        if (count($filenames) >= 3) {
+            for ($i = 0; $i <= 2; $i++) {
+                $log_contents =  file_get_contents($filenames[$i]);
+                $str = explode("\n", $log_contents);
+                end($str);
+                $last_row = prev($str);
+                if (strpos($last_row, 'Finished') !== false) {
+                    //Log contains the word Finished
+                    $date_regex = '/\[([^\]]*)]/m';
+                    $matches = [];
+                    preg_match($date_regex, $last_row, $matches);
+                    if ($matches) {
+                        //Found date, check it
+                        $now_date = new DateTime();
+                        $log_date = new DateTime($matches[1]);
+                        $log_date->add(new DateInterval('PT' . 5 . 'M'));
+                        if ($log_date > $now_date) {
+                            return true;
+                        }
+                    }
+                }
+            }
+        }
+        return false;
     }
 }
