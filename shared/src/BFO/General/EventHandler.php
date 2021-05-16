@@ -375,7 +375,7 @@ class EventHandler
     public static function setMetaDataForMatchup($matchup_id, $metadata_attribute, $metadata_value, $bookie_id)
     {
         if (trim($metadata_value) != '') {
-            return EventDB::setMetaDataForMatchup($matchup_id, $metadata_attribute, $metadata_value, $bookie_id);
+            return EventDB::setMetaDataForMatchup($matchup_id, $metadata_attribute, trim($metadata_value), $bookie_id);
         }
         return false;
     }
