@@ -58,7 +58,6 @@ $app->group('', function (RouteCollectorProxy $group) {
   $group->get('/flagged', \AdminController::class . ':viewFlaggedOdds');
   $group->get('/parser_status', \AdminController::class . ':viewParserStatus');
   $group->get('/changeauditlog', \AdminController::class . ':viewChangeAuditLog');
-  $group->get('/legacylog', \AdminController::class . ':viewLegacyLog');
   
 })->add(new AuthMiddleware());
 
