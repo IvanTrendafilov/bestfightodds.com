@@ -83,7 +83,6 @@ class OddsProcessor
         }
         OddsHandler::storeCorrelations($this->bookie_id, $temporary_stored_correlations);
 
-
         $this->logger->info('Result - Matchups: ' . (count($matched_matchups) - $matchup_unmatched_count) . '/' . count($parsed_sport->getParsedMatchups()) . ' Props: ' . (count($matched_props) - $prop_unmatched_count) . '/' . count($parsed_sport->getFetchedProps()) . ' Full run: ' . ($full_run ? 'Yes' : 'No'));
 
         $parse_run_logger = new ParseRunLogger();
@@ -93,7 +92,8 @@ class OddsProcessor
             'parsed_props' => count($parsed_sport->getFetchedProps()),
             'matched_matchups' => (count($matched_matchups) - $matchup_unmatched_count),
             'matched_props' => (count($matched_props) - $prop_unmatched_count),
-            'status' => 1
+            'status' => 1,
+            'authoritative_run' => $full_run
         ]);
     }
 
