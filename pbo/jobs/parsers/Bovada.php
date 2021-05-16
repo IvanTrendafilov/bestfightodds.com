@@ -142,7 +142,7 @@ class ParserJob
         }
 
         //Declare authorative run if we fill the criteria
-        if (count($parsed_sport->getParsedMatchups()) > 10)
+        if (count($parsed_sport->getParsedMatchups()) >= 5)
         {
             $this->full_run = true;
             $this->logger->info("Declared authoritive run");
