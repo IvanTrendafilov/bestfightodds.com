@@ -3,12 +3,12 @@
  * XML Parser
  *
  * Bookie: Pinnacle
- * Sport: MMA
+ * Sport: Boxing
  *
  * Moneylines: Yes
  * Props: Yes (only totals)
  *
- * URL: https://www.pinnacle.com/webapi/1.17/api/v1/GuestLines/Deadball/22/*
+ * URL: https://www.pinnacle.com/webapi/1.17/api/v1/GuestLines/Deadball/6/197047
  *
  */
 
@@ -53,18 +53,8 @@ class ParserJob
         }
         else
         {
-            //1. UFC/MMA
-            //2. Bellator
-            //3. Cage Warriors
-            //4. Invicta
-            //5. PFL
-            //6. LFA
-            $urls = ['https://www.pinnacle.com/webapi/1.17/api/v1/GuestLines/Deadball/22/1624',
-                    'https://www.pinnacle.com/webapi/1.17/api/v1/GuestLines/Deadball/22/1619',
-                    'https://www.pinnacle.com/webapi/1.17/api/v1/GuestLines/Deadball/22/208746',
-                    'https://www.pinnacle.com/webapi/1.17/api/v1/GuestLines/Deadball/22/208187',
-                    'https://www.pinnacle.com/webapi/1.17/api/v1/GuestLines/Deadball/22/207442',
-                    'https://www.pinnacle.com/webapi/1.17/api/v1/GuestLines/Deadball/22/208185'];
+            //1. Boxing
+            $urls = ['https://www.pinnacle.com/webapi/1.17/api/v1/GuestLines/Deadball/6/197047'];
             ParseTools::retrieveMultiplePagesFromURLs($urls);
             foreach ($urls as $url)
             {
@@ -90,7 +80,7 @@ class ParserJob
 
     public function parseContent($content)
     {
-        $parsed_sport = new ParsedSport('MMA');
+        $parsed_sport = new ParsedSport('Boxing');
         $failed_once = false;
         foreach ($content as $url => $part)
         {
@@ -117,7 +107,6 @@ class ParserJob
                         $event['Participants'][1]['Name'] = str_replace('(Any Location=Action)', '', $event['Participants'][1]['Name']);
                         $event['Participants'][0]['Name'] = str_replace('(AnyLocation=Action', '', $event['Participants'][0]['Name']);
                         $event['Participants'][1]['Name'] = str_replace('(AnyLocation=Action', '', $event['Participants'][1]['Name']);
-
 
                         $oParsedMatchup = new ParsedMatchup(
                             $event['Participants'][0]['Name'],

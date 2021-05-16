@@ -3,7 +3,7 @@
  * XML Parser
  *
  * Bookie: BetOnline
- * Sport: MMA
+ * Sport: Boxing
  *
  * Moneylines: Yes
  * Spreads: No
@@ -13,8 +13,8 @@
  *
  * Comment: Prod version
  * 
- * Pregames URL: https://api.linesfeed.info/v1/pregames/lines/pu?sport=Martial%20Arts&subSport=MMA
- * Props URL: https://api.linesfeed.info/v1/contest/lines/pu?sport=Martial%20Arts&subSport=MMA
+ * Pregames URL: https://api.linesfeed.info/v1/pregames/lines/pu?sport=Boxing
+ * Props URL: https://api.linesfeed.info/v1/contest/lines/pu?sport=Boxing
  * 
  * Timezone in feed: Eastern (NY) 
  *
@@ -67,8 +67,8 @@ class ParserJob
         }
         else
         {
-            $matchups_url = 'https://api.linesfeed.info/v1/pregames/lines/pu?sport=Martial%20Arts&subSport=MMA';
-            $props_url = 'https://api.linesfeed.info/v1/contest/lines/pu?sport=Martial%20Arts&subSport=MMA';
+            $matchups_url = 'https://api.linesfeed.info/v1/pregames/lines/pu?sport=Boxing';
+            $props_url = 'https://api.linesfeed.info/v1/contest/lines/pu?sport=Boxing';
 
             $this->logger->info("Fetching matchups through URL: " . $matchups_url);
             $this->logger->info("Fetching props through URL: " . $props_url);
@@ -88,7 +88,7 @@ class ParserJob
 
     private function parseContent($content)
     {
-        $this->parsed_sport = new ParsedSport('MMA');
+        $this->parsed_sport = new ParsedSport('Boxing');
 
         $this->parseMatchups($content['matchups']);
         $this->parseProps($content['props']);
@@ -125,21 +125,7 @@ class ParserJob
 
         foreach ($json->preGameEvents as $matchup)
         {
-            //Ignore certain events (e.g. non-MMA)
-            if (isset($matchup->scheduleText) 
-                && (substr(trim((string) $matchup->scheduleText),0,4) == 'BKFC'
-                || substr(trim((string) $matchup->scheduleText),0,9) == 'Fight2Win'
-                || substr(trim((string) $matchup->scheduleText),0,3) == 'WNO'
-                || substr(trim((string) $matchup->scheduleText),0,3) == 'SUG'))
-            {
-                $this->logger->info('Skipping matchup for event ' . $matchup->scheduleText);
-            }
-            else
-            {
-                $this->parseMatchup($matchup);
-            }
-
-            
+            $this->parseMatchup($matchup);
         }
     }
 
@@ -223,7 +209,7 @@ class ParserJob
 
         foreach ($json->events as $prop)
         {
-            if (trim((string) $prop->sport) == "MMA Props")
+            if (trim((string) $prop->sport) == "Boxing Props")
             {
                 $this->parseProp($prop);
             }

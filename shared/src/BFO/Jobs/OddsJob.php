@@ -74,6 +74,12 @@ class OddsJob
         $result = OddsHandler::deleteFlaggedOdds();
         $this->logger->info('Removed ' . $result . ' odds');
 
+        //Move matchups to generic dates if suggested by metadata (gametime)
+        if (PARSE_MOVEMATCHUPS) {
+            $result = EventHandler::moveMatchupsToGenericEvents();
+            $this->logger->info("Moved " . $result['moved_matchups'] . " to new dates (checked " . $result['checked_matchups'] . ")");
+        }
+
         //Generate new front page with latest odds
         $plates = new \League\Plates\Engine(GENERAL_BASEDIR . '/app/front/templates/');
         $events = EventHandler::getAllUpcomingEvents();

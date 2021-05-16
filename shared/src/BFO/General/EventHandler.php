@@ -143,22 +143,20 @@ class EventHandler
         return EventDB::addNewFightOdds($odds_obj);
     }
 
-    public static function addNewFight($a_oFight)
+    public static function addNewFight($fight_obj)
     {
-        if ($a_oFight->getFighter(1) != '' && $a_oFight->getFighter(2) != '') {
-            $iID = EventDB::addNewFight($a_oFight);
+        if ($fight_obj->getFighter(1) != '' && $fight_obj->getFighter(2) != '') {
+            return EventDB::addNewFight($fight_obj);
 
             //Check if fight is only one for this event, if so, set it as main event. Not applicable if we automatically create events - DISABLED
             /*if (PARSE_CREATEMATCHUPS == false)
             {
-                $aMatchups = self::getAllFightsForEvent($a_oFight->getEventID());
+                $aMatchups = self::getAllFightsForEvent($fight_obj->getEventID());
                 if (count($aMatchups) == 1 && $aMatchups[0]->getID() == $iID)
                 {
                     self::setFightAsMainEvent($iID);
                 }
             }*/
-
-            return $iID;
         }
         return false;
     }
@@ -256,36 +254,34 @@ class EventHandler
         return EventDB::updateFight($matchup_obj);
     }
 
-    public static function getCurrentOddsIndex($a_iFightID, $a_iFighter)
+    public static function getCurrentOddsIndex($matchup_id, $team_no)
     {
-        if ($a_iFighter > 2 || $a_iFighter < 1) {
+        if ($team_no > 2 || $team_no < 1) {
             return null;
         }
 
-        $aFightOdds = EventHandler::getAllLatestOddsForFight($a_iFightID);
+        $odds_col = EventHandler::getAllLatestOddsForFight($matchup_id);
 
-        if ($aFightOdds == null || sizeof($aFightOdds) == 0) {
+        if ($odds_col == null || sizeof($odds_col) == 0) {
             return null;
         }
-        if (sizeof($aFightOdds) == 1) {
-            return new FightOdds($a_iFightID, -1, ($a_iFighter == 1 ? $aFightOdds[0]->getFighterOdds($a_iFighter) : 0), ($a_iFighter == 2 ? $aFightOdds[0]->getFighterOdds($a_iFighter) : 0), -1);
+        if (sizeof($odds_col) == 1) {
+            return new FightOdds($matchup_id, -1, ($team_no == 1 ? $odds_col[0]->getFighterOdds($team_no) : 0), ($team_no == 2 ? $odds_col[0]->getFighterOdds($team_no) : 0), -1);
         }
-        $iCurrentOddsTotal = 0;
-        foreach ($aFightOdds as $oFightOdds) {
-            $iCurrOdds = $oFightOdds->getFighterOdds($a_iFighter);
-            $iCurrentOddsTotal += $iCurrOdds < 0 ? ($iCurrOdds + 100) : ($iCurrOdds - 100);
+        $odds_total = 0;
+        foreach ($odds_col as $odds_obj) {
+            $current_odds = $odds_obj->getFighterOdds($team_no);
+            $odds_total += $current_odds < 0 ? ($current_odds + 100) : ($current_odds - 100);
         }
-        $iCurrentOddsTotal = round($iCurrentOddsTotal / sizeof($aFightOdds) + ($iCurrentOddsTotal < 0 ? -100 : 100));
+        $odds_total = round($odds_total / sizeof($odds_col) + ($odds_total < 0 ? -100 : 100));
 
-        $oReturnOdds = new FightOdds(
-            $a_iFightID,
+        return new FightOdds(
+            $matchup_id,
             -1,
-            ($a_iFighter == 1 ? $iCurrentOddsTotal : 0),
-            ($a_iFighter == 2 ? $iCurrentOddsTotal : 0),
+            ($team_no == 1 ? $odds_total : 0),
+            ($team_no == 2 ? $odds_total : 0),
             -1
         );
-
-        return $oReturnOdds;
     }
 
     public static function getAllFightsForFighter($team_id)
@@ -398,5 +394,39 @@ class EventHandler
     public static function getResultsForMatchup($matchup_id)
     {
         return EventDB::getResultsForMatchup($matchup_id);
+    }
+
+    public static function moveMatchupsToGenericEvents()
+    {
+        $move_counter = 0;
+        $matchup_counter = 0;
+
+        //Checks the date (metadata) of the current matchup and moves the matchup to the appropriate generic event, this is typically only done for sites like PBO where matchups belong to a specific date and not a named event
+        $audit_log = new \Katzgrau\KLogger\Logger(GENERAL_KLOGDIR, \Psr\Log\LogLevel::INFO, ['filename' => 'changeaudit.log']);
+
+        $events = EventHandler::getAllUpcomingEvents();
+        foreach ($events as $event) {
+            $matchups = EventHandler::getAllFightsForEvent($event->getID());
+
+            foreach ($matchups as $matchup) {
+                $matchup_counter++;
+                $matchup_metadata_date = new \DateTime();
+                $matchup_metadata_date = $matchup_metadata_date->setTimestamp($matchup['min_gametime']);
+                if (
+                    new \DateTime() < $matchup_metadata_date //Check that new date is not in the past
+                    && $matchup_metadata_date->format('Y-m-d') != $event->getDate()
+                ) {
+                    //Metadata suggests new event, move matchup to the new event
+                    $new_event_id = EventHandler::getGenericEventForDate($matchup_metadata_date->format('Y-m-d'))->getID();
+                    if (EventHandler::changeFight($matchup->getID(), $new_event_id)) {
+                        $audit_log->info("Moved matchup " . $matchup->getTeamAsString(1) . " vs. " . $matchup->getTeamAsString(2) . " (" . $matchup->getID() . ") to " . $matchup_metadata_date->format('Y-m-d') . " based on min gametime metadata");
+                        $move_counter++;
+                    } else {
+                        $audit_log->error("Failed to move matchup " . $matchup->getTeamAsString(1) . " vs. " . $matchup->getTeamAsString(2) . " (" . $matchup->getID() . ") to " . $matchup_metadata_date->format('Y-m-d') . " based on min gametime metadata");
+                    }
+                }
+            }
+        }
+        return ['checked_matchups' => $matchup_counter, 'moved_matchups' => $move_counter];
     }
 }

@@ -13,65 +13,65 @@ class EventDB
 {
     public static function getAllUpcomingEvents()
     {
-        $sQuery = 'SELECT id, date, name, display
+        $query = 'SELECT id, date, name, display
                     FROM events
                     WHERE LEFT(date, 10) >= LEFT((NOW() - INTERVAL ' . GENERAL_GRACEPERIOD_SHOW . ' HOUR), 10)
                     ORDER BY date ASC, LEFT(name,3) = "UFC" DESC, LEFT(name,8) = "Bellator" DESC, name ASC;';
-        $rResult = DBTools::doQuery($sQuery);
-        $aEvents = array();
-        while ($aEvent = mysqli_fetch_array($rResult)) {
-            $aEvents[] = new Event($aEvent['id'], $aEvent['date'], $aEvent['name'], $aEvent['display']);
+        $result = DBTools::doQuery($query);
+        $events = array();
+        while ($row = mysqli_fetch_array($result)) {
+            $events[] = new Event($row['id'], $row['date'], $row['name'], $row['display']);
         }
 
-        return $aEvents;
+        return $events;
     }
 
     public static function getAllEvents()
     {
-        $sQuery = 'SELECT id, date, name, display
+        $query = 'SELECT id, date, name, display
                     FROM events
                     ORDER BY date ASC, LEFT(name,3) = "UFC" DESC, name ASC';
-        $rResult = DBTools::doQuery($sQuery);
-        $aEvents = array();
-        while ($aEvent = mysqli_fetch_array($rResult)) {
-            $aEvents[] = new Event($aEvent['id'], $aEvent['date'], $aEvent['name'], $aEvent['display']);
+        $result = DBTools::doQuery($query);
+        $events = array();
+        while ($row = mysqli_fetch_array($result)) {
+            $events[] = new Event($row['id'], $row['date'], $row['name'], $row['display']);
         }
 
-        return $aEvents;
+        return $events;
     }
 
-    public static function getEvent($a_iEventID, $a_bFutureEventsOnly = false)
+    public static function getEvent($event_id, $future_events_only = false)
     {
-        $sExtraWhere = '';
-        if ($a_bFutureEventsOnly) {
-            $sExtraWhere = ' AND LEFT(date, 10) >= LEFT((NOW() - INTERVAL ' . GENERAL_GRACEPERIOD_SHOW . ' HOUR), 10) ';
+        $extra_where = '';
+        if ($future_events_only) {
+            $extra_where = ' AND LEFT(date, 10) >= LEFT((NOW() - INTERVAL ' . GENERAL_GRACEPERIOD_SHOW . ' HOUR), 10) ';
         }
 
-        $sQuery = 'SELECT id, date, name, display FROM events WHERE id = ? ' . $sExtraWhere;
-        $aParams = array($a_iEventID);
+        $query = 'SELECT id, date, name, display FROM events WHERE id = ? ' . $extra_where;
+        $params = array($event_id);
 
-        $rResult = DBTools::doParamQuery($sQuery, $aParams);
-        $aEvents = array();
-        while ($aEvent = mysqli_fetch_array($rResult)) {
-            $aEvents[] = new Event($aEvent['id'], $aEvent['date'], $aEvent['name'], $aEvent['display']);
+        $result = DBTools::doParamQuery($query, $params);
+        $events = array();
+        while ($row = mysqli_fetch_array($result)) {
+            $events[] = new Event($row['id'], $row['date'], $row['name'], $row['display']);
         }
-        if (sizeof($aEvents) > 0) {
-            return $aEvents[0];
+        if (sizeof($events) > 0) {
+            return $events[0];
         }
         return null;
     }
 
 
-    public static function getEventByName($a_sName)
+    public static function getEventByName($event_name)
     {
-        $sQuery = 'SELECT id, date, name, display FROM events WHERE name = ?';
-        $rResult = DBTools::doParamQuery($sQuery, array($a_sName));
-        $aEvents = array();
-        while ($aEvent = mysqli_fetch_array($rResult)) {
-            $aEvents[] = new Event($aEvent['id'], $aEvent['date'], $aEvent['name'], $aEvent['display']);
+        $query = 'SELECT id, date, name, display FROM events WHERE name = ?';
+        $result = DBTools::doParamQuery($query, [$event_name]);
+        $events = array();
+        while ($row = mysqli_fetch_array($result)) {
+            $events[] = new Event($row['id'], $row['date'], $row['name'], $row['display']);
         }
-        if (sizeof($aEvents) > 0) {
-            return $aEvents[0];
+        if (sizeof($events) > 0) {
+            return $events[0];
         }
         return null;
     }
@@ -80,18 +80,18 @@ class EventDB
      *
      * If second parameter is set to true then only fights that have odds on them will be returned
      */
-    public static function getAllFightsForEvent($a_iEventID, $a_bOnlyWithOdds = false)
+    public static function getAllFightsForEvent($event_id, $only_with_odds = false)
     {
-        if ($a_bOnlyWithOdds == true) {
-            $sQuery = 'SELECT f.id, f1.name AS fighter1_name, f2.name AS fighter2_name, f.event_id, f1.id AS fighter1_id, f2.id AS fighter2_id, f.is_mainevent as is_mainevent, (SELECT MIN(date) FROM fightodds fo WHERE fo.fight_id = f.id) AS latest_date, m.mvalue as gametime, m.max_value as max_gametime 
-                        FROM fights f LEFT JOIN (SELECT matchup_id, AVG(mvalue) as mvalue, MAX(mvalue) as max_value FROM matchups_metadata mm WHERE mm.mattribute = "gametime" GROUP BY matchup_id) m ON f.id = m.matchup_id
+        if ($only_with_odds == true) {
+            $query = 'SELECT f.id, f1.name AS fighter1_name, f2.name AS fighter2_name, f.event_id, f1.id AS fighter1_id, f2.id AS fighter2_id, f.is_mainevent as is_mainevent, (SELECT MIN(date) FROM fightodds fo WHERE fo.fight_id = f.id) AS latest_date, m.mvalue as gametime, m.max_value as max_gametime, m.min_value as min_gametime 
+                        FROM fights f LEFT JOIN (SELECT matchup_id, AVG(mvalue) as mvalue, MAX(mvalue) as max_value, MIN(mvalue) as min_value FROM matchups_metadata mm WHERE mm.mattribute = "gametime" GROUP BY matchup_id) m ON f.id = m.matchup_id
                             LEFT JOIN fighters f1 ON f1.id = f.fighter1_id
                             LEFT JOIN fighters f2 ON f2.id = f.fighter2_id
                         WHERE f.event_id = ?
                         HAVING latest_date IS NOT NULL
                         ORDER BY f.is_mainevent DESC, gametime DESC, latest_date ASC';
         } else {
-            $sQuery = 'SELECT f.id, f1.name AS fighter1_name, f2.name AS fighter2_name, f.event_id, f1.id AS fighter1_id, f2.id AS fighter2_id, f.is_mainevent AS is_mainevent
+            $query = 'SELECT f.id, f1.name AS fighter1_name, f2.name AS fighter2_name, f.event_id, f1.id AS fighter1_id, f2.id AS fighter2_id, f.is_mainevent AS is_mainevent
                         FROM fights f, fighters f1, fighters f2
                         WHERE f.event_id = ? 
                             AND f.fighter1_id = f1.id
@@ -99,31 +99,33 @@ class EventDB
                             ORDER BY f.is_mainevent DESC, f.id ASC';
         }
 
-        $aParams = array($a_iEventID);
-        $rResult = DBTools::doParamQuery($sQuery, $aParams);
+        $params = [$event_id];
+        $result = DBTools::doParamQuery($query, $params);
 
-        $aFights = array();
-
-        while ($aFight = mysqli_fetch_array($rResult)) {
-            $oTempFight = new Fight($aFight['id'], $aFight['fighter1_name'], $aFight['fighter2_name'], $aFight['event_id']);
-            $oTempFight->setFighterID(1, $aFight['fighter1_id']);
-            $oTempFight->setFighterID(2, $aFight['fighter2_id']);
-            $oTempFight->setMainEvent($aFight['is_mainevent']);
-            if (isset($aFight['gametime'])) {
-                $oTempFight->setMetadata('gametime', $aFight['gametime']);
+        $matchups = [];
+        while ($row = mysqli_fetch_array($result)) {
+            $fight_obj = new Fight($row['id'], $row['fighter1_name'], $row['fighter2_name'], $row['event_id']);
+            $fight_obj->setFighterID(1, $row['fighter1_id']);
+            $fight_obj->setFighterID(2, $row['fighter2_id']);
+            $fight_obj->setMainEvent($row['is_mainevent']);
+            if (isset($row['gametime'])) {
+                $fight_obj->setMetadata('gametime', $row['gametime']);
             }
-            if (isset($aFight['max_gametime'])) {
-                $oTempFight->setMetadata('max_gametime', $aFight['max_gametime']);
+            if (isset($row['max_gametime'])) {
+                $fight_obj->setMetadata('max_gametime', $row['max_gametime']);
             }
-            $aFights[] = $oTempFight;
+            if (isset($row['min_gametime'])) {
+                $fight_obj->setMetadata('min_gametime', $row['min_gametime']);
+            }
+            $matchups[] = $fight_obj;
         }
 
-        return $aFights;
+        return $matchups;
     }
 
-    public static function getAllFightsForEventWithoutOdds($a_iEventID)
+    public static function getAllFightsForEventWithoutOdds($event_id)
     {
-        $sQuery = 'SELECT f.id, f1.name AS fighter1_name, f2.name AS fighter2_name, f.event_id, f1.id AS fighter1_id, f2.id AS fighter2_id
+        $query = 'SELECT f.id, f1.name AS fighter1_name, f2.name AS fighter2_name, f.event_id, f1.id AS fighter1_id, f2.id AS fighter2_id
                     FROM fights f LEFT JOIN fightodds fo ON f.id = fo.fight_id, fighters f1, fighters f2
                     WHERE fo.fight_id IS NULL
                         AND f.event_id = ?
@@ -131,32 +133,34 @@ class EventDB
                         AND f.fighter2_id = f2.id
                         ORDER BY f.is_mainevent DESC, f.id ASC';
 
-        $aParams = array($a_iEventID);
+        $params = array($event_id);
 
-        $rResult = DBTools::doParamQuery($sQuery, $aParams);
+        $result = DBTools::doParamQuery($query, $params);
 
-        $aFights = array();
+        $matchups = array();
 
-        while ($aFight = mysqli_fetch_array($rResult)) {
-            $oTempMatchup = new Fight($aFight['id'], $aFight['fighter1_name'], $aFight['fighter2_name'], $aFight['event_id']);
-            $oTempMatchup->setFighterID(1, $aFight['fighter1_id']);
-            $oTempMatchup->setFighterID(2, $aFight['fighter2_id']);
-            $aFights[] = $oTempMatchup;
+        while ($row = mysqli_fetch_array($result)) {
+            $fight_obj = new Fight($row['id'], $row['fighter1_name'], $row['fighter2_name'], $row['event_id']);
+            $fight_obj->setFighterID(1, $row['fighter1_id']);
+            $fight_obj->setFighterID(2, $row['fighter2_id']);
+            $matchups[] = $fight_obj;
         }
 
-        return $aFights;
+        return $matchups;
     }
 
     /**
      * Get all upcoming fights
      *
-     * @param boolean $a_bOnlyWithOdds Get only fights with odds
+     * @param boolean $only_with_odds Get only fights with odds
      * @return Array Collection of fights
+     * 
+     * TODO: This should be extended to also include relevant metadata like gametime
      */
-    public static function getAllUpcomingMatchups($a_bOnlyWithOdds = false)
+    public static function getAllUpcomingMatchups($only_with_odds = false)
     {
-        if ($a_bOnlyWithOdds == true) {
-            $sQuery = 'SELECT f.id, f1.name AS fighter1_name, f2.name AS fighter2_name, f.event_id, f1.id AS fighter1_id, f2.id AS fighter2_id, f.is_mainevent as is_mainevent, (SELECT date FROM fightodds fo WHERE fo.fight_id = f.id LIMIT 1) AS latest_date
+        if ($only_with_odds == true) {
+            $query = 'SELECT f.id, f1.name AS fighter1_name, f2.name AS fighter2_name, f.event_id, f1.id AS fighter1_id, f2.id AS fighter2_id, f.is_mainevent as is_mainevent, (SELECT date FROM fightodds fo WHERE fo.fight_id = f.id LIMIT 1) AS latest_date
                         FROM fights f, fighters f1, fighters f2, events e
                         WHERE f.fighter1_id = f1.id
                           AND f.fighter2_id = f2.id
@@ -165,7 +169,7 @@ class EventDB
                         HAVING latest_date IS NOT NULL
                         ORDER BY f.is_mainevent DESC, f.id ASC';
         } else {
-            $sQuery = 'SELECT f.id, f1.name AS fighter1_name, f2.name AS fighter2_name, f.event_id, f1.id AS fighter1_id, f2.id AS fighter2_id, f.is_mainevent AS is_mainevent
+            $query = 'SELECT f.id, f1.name AS fighter1_name, f2.name AS fighter2_name, f.event_id, f1.id AS fighter1_id, f2.id AS fighter2_id, f.is_mainevent AS is_mainevent
                         FROM fights f, fighters f1, fighters f2, events e
                         WHERE f.fighter1_id = f1.id
                             AND f.fighter2_id = f2.id
@@ -174,19 +178,19 @@ class EventDB
                             ORDER BY f.is_mainevent DESC, f.id ASC';
         }
 
-        $rResult = DBTools::doQuery($sQuery);
+        $result = DBTools::doQuery($query);
 
-        $aFights = array();
+        $matchups = [];
 
-        while ($aFight = mysqli_fetch_array($rResult)) {
-            $oTempFight = new Fight($aFight['id'], $aFight['fighter1_name'], $aFight['fighter2_name'], $aFight['event_id']);
-            $oTempFight->setFighterID(1, $aFight['fighter1_id']);
-            $oTempFight->setFighterID(2, $aFight['fighter2_id']);
-            $oTempFight->setMainEvent($aFight['is_mainevent']);
-            $aFights[] = $oTempFight;
+        while ($row = mysqli_fetch_array($result)) {
+            $fight_obj = new Fight($row['id'], $row['fighter1_name'], $row['fighter2_name'], $row['event_id']);
+            $fight_obj->setFighterID(1, $row['fighter1_id']);
+            $fight_obj->setFighterID(2, $row['fighter2_id']);
+            $fight_obj->setMainEvent($row['is_mainevent']);
+            $matchups[] = $fight_obj;
         }
 
-        return $aFights;
+        return $matchups;
     }
 
     public static function getAllLatestOddsForFight($a_iFightID, $a_iOffset = 0)
@@ -236,64 +240,64 @@ class EventDB
         return $aFightOddsCol;
     }
 
-    public static function getLatestOddsForFightAndBookie($a_iFightID, $a_iBookieID)
+    public static function getLatestOddsForFightAndBookie($matchup_id, $bookie_id)
     {
-        $sQuery = 'SELECT fight_id, fighter1_odds, fighter2_odds, bookie_id, date
+        $query = 'SELECT fight_id, fighter1_odds, fighter2_odds, bookie_id, date
                     FROM fightodds
                     WHERE bookie_id = ? 
                         AND fight_id = ? 
                     ORDER BY date DESC
                     LIMIT 0,1';
 
-        $aParams = array($a_iBookieID, $a_iFightID);
+        $params = array($bookie_id, $matchup_id);
 
-        $rResult = DBTools::doParamQuery($sQuery, $aParams);
+        $result = DBTools::doParamQuery($query, $params);
 
-        $aFightOddsCol = array();
-        while ($aFightOdds = mysqli_fetch_array($rResult)) {
-            $aFightOddsCol[] = new FightOdds($aFightOdds['fight_id'], $aFightOdds['bookie_id'], $aFightOdds['fighter1_odds'], $aFightOdds['fighter2_odds'], $aFightOdds['date']);
+        $odds_col = [];
+        while ($row = mysqli_fetch_array($result)) {
+            $odds_col[] = new FightOdds($row['fight_id'], $row['bookie_id'], $row['fighter1_odds'], $row['fighter2_odds'], $row['date']);
         }
-        if (sizeof($aFightOddsCol) > 0) {
-            return $aFightOddsCol[0];
+        if (sizeof($odds_col) > 0) {
+            return $odds_col[0];
         }
         return null;
     }
 
-    public static function getAllOddsForFightAndBookie($a_iFightID, $a_iBookieID)
+    public static function getAllOddsForFightAndBookie($matchup_id, $bookie_id)
     {
-        $sQuery = 'SELECT fight_id, fighter1_odds, fighter2_odds, bookie_id, date
+        $query = 'SELECT fight_id, fighter1_odds, fighter2_odds, bookie_id, date
                         FROM fightodds
                         WHERE fight_id = ? 
                             AND bookie_id = ? 
                         ORDER BY date ASC';
 
-        $rResult = DBTools::doParamQuery($sQuery, array($a_iFightID, $a_iBookieID));
+        $result = DBTools::doParamQuery($query, array($matchup_id, $bookie_id));
 
-        $aFightOddsCol = array();
-        while ($aFightOdds = mysqli_fetch_array($rResult)) {
-            $aFightOddsCol[] = new FightOdds($aFightOdds['fight_id'], $aFightOdds['bookie_id'], $aFightOdds['fighter1_odds'], $aFightOdds['fighter2_odds'], $aFightOdds['date']);
+        $odds_col = [];
+        while ($row = mysqli_fetch_array($result)) {
+            $odds_col[] = new FightOdds($row['fight_id'], $row['bookie_id'], $row['fighter1_odds'], $row['fighter2_odds'], $row['date']);
         }
-        if (sizeof($aFightOddsCol) > 0) {
-            return $aFightOddsCol;
+        if (sizeof($odds_col) > 0) {
+            return $odds_col;
         }
         return null;
     }
 
-    public static function getAllOddsForMatchup($a_iMatchupID)
+    public static function getAllOddsForMatchup($matchup_id)
     {
-        $sQuery = 'SELECT fight_id, fighter1_odds, fighter2_odds, bookie_id, date
+        $query = 'SELECT fight_id, fighter1_odds, fighter2_odds, bookie_id, date
                         FROM fightodds
                         WHERE fight_id = ? 
                         ORDER BY date ASC';
 
-        $rResult = DBTools::doParamQuery($sQuery, array($a_iMatchupID));
+        $result = DBTools::doParamQuery($query, [$matchup_id]);
 
-        $aFightOddsCol = array();
-        while ($aFightOdds = mysqli_fetch_array($rResult)) {
-            $aFightOddsCol[] = new FightOdds($aFightOdds['fight_id'], $aFightOdds['bookie_id'], $aFightOdds['fighter1_odds'], $aFightOdds['fighter2_odds'], $aFightOdds['date']);
+        $odds_col = [];
+        while ($row = mysqli_fetch_array($result)) {
+            $odds_col[] = new FightOdds($row['fight_id'], $row['bookie_id'], $row['fighter1_odds'], $row['fighter2_odds'], $row['date']);
         }
-        if (sizeof($aFightOddsCol) > 0) {
-            return $aFightOddsCol;
+        if (sizeof($odds_col) > 0) {
+            return $odds_col;
         }
         return null;
     }
@@ -456,25 +460,25 @@ class EventDB
         return null;
     }
 
-    public static function getFightByID($a_iFightID)
+    public static function getFightByID($matchup_id)
     {
-        $sQuery = 'SELECT f.id, f1.name AS fighter1_name, f2.name AS fighter2_name, f.event_id, f.fighter1_id, f.fighter2_id 
+        $query = 'SELECT f.id, f1.name AS fighter1_name, f2.name AS fighter2_name, f.event_id, f.fighter1_id, f.fighter2_id 
                     FROM fights f, fighters f1, fighters f2
                     WHERE f1.id = f.fighter1_id
                         AND f2.id = f.fighter2_id
                         AND f.id = ?
                     LIMIT 0,1';
 
-        $aParams = array($a_iFightID);
+        $params = array($matchup_id);
 
-        $rResult = DBTools::doParamQuery($sQuery, $aParams);
+        $result = DBTools::doParamQuery($query, $params);
 
-        $aFight = mysqli_fetch_array($rResult);
-        if ($aFight != false && sizeof($aFight) > 0) {
-            $oTempFight = new Fight($aFight['id'], $aFight['fighter1_name'], $aFight['fighter2_name'], $aFight['event_id']);
-            $oTempFight->setFighterID(1, $aFight['fighter1_id']);
-            $oTempFight->setFighterID(2, $aFight['fighter2_id']);
-            return $oTempFight;
+        $row = mysqli_fetch_array($result);
+        if ($row != false && sizeof($row) > 0) {
+            $fight_obj = new Fight($row['id'], $row['fighter1_name'], $row['fighter2_name'], $row['event_id']);
+            $fight_obj->setFighterID(1, $row['fighter1_id']);
+            $fight_obj->setFighterID(2, $row['fighter2_id']);
+            return $fight_obj;
         }
         return null;
     }
@@ -494,11 +498,11 @@ class EventDB
 
         $params = [$fight_id];
 
-        $rResult = DBTools::doParamQuery($query, $params);
+        $result = DBTools::doParamQuery($query, $params);
 
-        $aFight = mysqli_fetch_array($rResult);
-        if (sizeof($aFight) > 0) {
-            if ($aFight['fighter1_name'] > $aFight['fighter2_name']) {
+        $row = mysqli_fetch_array($result);
+        if (sizeof($row) > 0) {
+            if ($row['fighter1_name'] > $row['fighter2_name']) {
                 return false;
             } else {
                 return true;
@@ -910,7 +914,7 @@ class EventDB
     {
         $params = [];
         $extra_where = '';
-        if (in_array($type, [0,1,2])) {
+        if (in_array($type, [0, 1, 2])) {
             $extra_where = ' WHERE type = ? ';
             $params[] = $type;
         }
