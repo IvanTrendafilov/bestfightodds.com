@@ -3,15 +3,15 @@
  * XML Parser
  *
  * Bookie: SportsInteraction
- * Sport: MMA
+ * Sport: Boxing
  *
  * Moneylines: Yes
  * Spreads: Yes
  * Totals: Yes
  * Props: Yes
  * Authoritative run: Yes
- * 
- * URL: https://www.sportsinteraction.com/odds_feeds/30/?consumer_name=bfodds&password=bfodds3145&format_id=4
+ *
+ * URL: https://www.sportsinteraction.com/odds_feeds/5/?consumer_name=bfodds&password=bfodds3145&format_id=4
  *
  */
 
@@ -57,7 +57,7 @@ class ParserJob
         }
         else
         {
-            $matchups_url = 'https://www.sportsinteraction.com/odds_feeds/30/?consumer_name=bfodds&password=bfodds3145&format_id=4';
+            $matchups_url = 'https://www.sportsinteraction.com/odds_feeds/5/?consumer_name=bfodds&password=bfodds3145&format_id=4';
             $this->logger->info("Fetching matchups through URL: " . $matchups_url);
             $content = ParseTools::retrievePageFromURL($matchups_url);
         }
@@ -97,25 +97,17 @@ class ParserJob
             $this->logger->info("Feed reported no changes");
         }
 
-        $oParsedSport = new ParsedSport('MMA');
+        $oParsedSport = new ParsedSport('Boxing');
 
         if (isset($oXML->EventType))
         {
             foreach ($oXML->EventType as $cEventType)
             {
-                if (trim((string) $cEventType['NAME']) == 'MMA')
+                if (trim((string) $cEventType['NAME']) == 'Boxing')
                 {
                     foreach ($cEventType->Event as $cEvent)
                     {
-                        if (strpos(strtoupper($cEvent->Name), 'FIGHT OF THE NIGHT') !== false)
-                        {
-                            //Fight of the night prop
-                            foreach ($this->parseFOTN($cEvent) as $oParsedProp)
-                            {
-                                $oParsedSport->addFetchedProp($oParsedProp);
-                            }
-                        }
-                        else if ($cEvent->Bet[0]['TYPE'] == "" && !(strpos($cEvent->Name, 'Total Event') !== false))
+                        if ($cEvent->Bet[0]['TYPE'] == "" && !ParseTools::isProp($cEvent->Bet[0]->Runner))
                         {
                             //Regular matchup
                             $oParsedMatchup = null;
@@ -132,6 +124,16 @@ class ParserJob
                                                     (string) $cEvent->Bet[2]->Runner,
                                                     (string) $cEvent->Bet[0]->Price,
                                                     (string) $cEvent->Bet[2]->Price);
+
+                                    //Check if a draw is available, if so, add as prop
+                                    if (ParseTools::formatName((string) $cEvent->Bet[1]->Runner) == 'DRAW')
+                                    {
+                                        $oParsedSport->addFetchedProp(new ParsedProp(
+                                                (string) $cEvent->Bet[0]->Runner . ' VS. ' . (string) $cEvent->Bet[2]->Runner . ' DRAW',
+                                                (string) $cEvent->Bet[0]->Runner . ' VS. ' . (string) $cEvent->Bet[2]->Runner . ' IS NOT A DRAW',
+                                                (string) $cEvent->Bet[1]->Price,
+                                                -99999));
+                                    }
                                 }
                             }
                             else

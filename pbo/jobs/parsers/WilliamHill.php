@@ -3,12 +3,12 @@
  * XML Parser
  *
  * Bookie: William Hill
- * Sport: MMA
+ * Sport: Boxing
  *
  * Moneylines: Yes
  * Props: Yes
  * 
- * URL: http://pricefeeds.williamhill.com/oxipubserver?action=template&template=getHierarchyByMarketType&classId=402&filterBIR=N
+ * URL: http://pricefeeds.williamhill.com/oxipubserver?action=template&template=getHierarchyByMarketType&classId=10&filterBIR=N
  *
  * Timezone in feed: UTC+1 so assuming Europe/London (during DST, maybe needs to be adjusted once off DST)
  * 
@@ -57,7 +57,7 @@ class ParserJob
         }
         else
         {
-            $matchups_url = 'http://pricefeeds.williamhill.com/oxipubserver?action=template&template=getHierarchyByMarketType&classId=402&filterBIR=N';
+            $matchups_url = 'http://pricefeeds.williamhill.com/oxipubserver?action=template&template=getHierarchyByMarketType&classId=10&filterBIR=N';
             $change_num = BookieHandler::getChangeNum(BOOKIE_ID);
             if ($change_num != -1)
             {
@@ -93,14 +93,14 @@ class ParserJob
             $this->logger->warning("Warning: XML broke!!");
         }
 
-        $oParsedSport = new ParsedSport('MMA');
+        $oParsedSport = new ParsedSport('Boxing');
 
         foreach ($oXML->response->williamhill->class->type as $cType)
         {
             foreach ($cType->market as $cMarket)
             {
                 $sType = substr(strrchr($cMarket['name'], "-"), 2);
-                if ($sType == 'Bout Betting')
+                if ($sType == 'Bout Betting' && count($cMarket->participant) == 3) //Number of participants needs to be 3 to ensure this is a boxing bout (fighter 1, fighter2, draw)
                 {
                     //Normal matchup
                     //Find draw and ignore it
