@@ -134,7 +134,8 @@ class EventHandler
         }
 
         //Validate that odds is not positive on both sides (=surebet, most likely invalid)
-        if (intval($odds_obj->getFighterOdds(1)) >= 0 && intval($odds_obj->getFighterOdds(2) >= 0)
+        if (
+            intval($odds_obj->getFighterOdds(1)) >= 0 && intval($odds_obj->getFighterOdds(2) >= 0)
         ) {
             return false;
         }
@@ -325,10 +326,10 @@ class EventHandler
      *
      * Type: 0 = matchup, 1 = prop without matchup, 2 = prop without template
      */
-    public static function logUnmatched($a_sMatchup, $a_iBookieID, $a_iType, $a_aMetaData = null)
+    public static function logUnmatched($matchup, $bookie_id, $type, $metadata_col = null)
     {
-        $metadata = serialize($a_aMetaData);
-        return EventDB::logUnmatched($a_sMatchup, $a_iBookieID, $a_iType, $metadata);
+        $metadata = serialize($metadata_col);
+        return EventDB::logUnmatched($matchup, $bookie_id, $type, $metadata);
     }
 
     /**
@@ -373,7 +374,10 @@ class EventHandler
 
     public static function setMetaDataForMatchup($matchup_id, $metadata_attribute, $metadata_value, $bookie_id)
     {
-        return EventDB::setMetaDataForMatchup($matchup_id, $metadata_attribute, $metadata_value, $bookie_id);
+        if (trim($metadata_value) != '') {
+            return EventDB::setMetaDataForMatchup($matchup_id, $metadata_attribute, $metadata_value, $bookie_id);
+        }
+        return false;
     }
 
     public static function getLatestChangeDate($event_id)
