@@ -155,6 +155,13 @@ class ParserJob
         //Validate format of participants and odds
         $team_1 = ParseTools::formatName((string) $matchup->participants[0]->participantName);
         $team_2 = ParseTools::formatName((string) $matchup->participants[1]->participantName);
+
+        //Change order of naming from Mayweather, Floyd to Floyd Mayweather
+        $parts = explode(',', $team_1);
+        $team_1 = trim($parts[1] . ' ' . $parts[0]);
+        $parts = explode(',', $team_2);
+        $team_2 = trim($parts[1] . ' ' . $parts[0]);
+        
         if (!OddsTools::checkCorrectOdds((string) $matchup->participants[0]->odds->moneyLine) || 
             !OddsTools::checkCorrectOdds((string) $matchup->participants[1]->odds->moneyLine) ||
             $team_1 == '' ||
