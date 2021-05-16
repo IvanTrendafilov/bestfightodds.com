@@ -77,7 +77,7 @@ class ParserJob
     {
         $feed = json_decode($json, true);
         $parsed_sports = array();
-        $parsed_sport = new ParsedSport('MMA');
+        $parsed_sport = new ParsedSport('Boxing');
 
         foreach ($feed['events'] as $event)
         {
