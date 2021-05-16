@@ -1,5 +1,8 @@
 <?php
-class Ruleset
+
+use BFO\Parser\RulesetInterface;
+
+class Ruleset implements RulesetInterface
 {
     public function __construct()
     {
