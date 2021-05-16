@@ -399,6 +399,13 @@ class AdminController
         return $response;
     }
 
+    public function addNewPropType(Request $request, Response $response)
+    {
+        $view_data = [];
+        $response->getBody()->write($this->plates->render('proptype_new', $view_data));
+        return $response;
+    }
+
     public function viewPropTemplates(Request $request, Response $response)
     {
         $view_data = ['bookies' => []];

@@ -10,4 +10,12 @@ class PropTypeHandler
     {
         return PropTypeDB::getPropTypes($category_id);
     }
+
+    public static function createNewPropType($proptype_obj)
+    {
+        if ($proptype_obj->getPropDesc() != '' && $proptype_obj->getPropNegDesc() != '') {
+            return PropTypeDB::createNewPropType($proptype_obj);
+        }
+        return false;
+    }
 }

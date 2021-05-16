@@ -50,4 +50,18 @@ class PropTypeDB
         }
         return $id;
     }
+
+    public static function createNewPropType($proptype_obj)
+    {
+        $query = "INSERT INTO prop_types(prop_desc, negprop_desc, is_eventprop) VALUES (?,?,?)";
+        $params = [$proptype_obj->getPropDesc(), $proptype_obj->getPropNegDesc(), $proptype_obj->isEventProp()];
+        try {
+            $id = PDOTools::insert($query, $params);
+        } catch (\PDOException $e) {
+            if ($e->getCode() == 23000) {
+                throw new \Exception("Duplicate entry", 10);
+            }
+        }
+        return $id;
+    }
 }

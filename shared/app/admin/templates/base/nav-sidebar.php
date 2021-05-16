@@ -59,8 +59,14 @@
 			</li>
 
 			<li class="sidebar-item">
+				<a class="sidebar-link" href="/cnadm/proptype">
+					<i class="align-middle" data-feather="book"></i> <span class="align-middle">New prop type</span>
+				</a>
+			</li>
+
+			<li class="sidebar-item">
 				<a class="sidebar-link" href="/cnadm/proptemplate">
-					<i class="align-middle" data-feather="book"></i> <span class="align-middle">New prop template</span>
+					<i class="align-middle" data-feather="book"></i> <span class="align-middle">New bookie prop template</span>
 				</a>
 			</li>
 
