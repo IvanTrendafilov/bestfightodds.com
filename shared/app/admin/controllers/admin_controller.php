@@ -59,8 +59,6 @@ class AdminController
 
     public function home(Request $request, Response $response)
     {
-        
-
         $view_data = [];
 
         //Get status on whether or not bookie has finished parsing in the last 5 minutes
@@ -69,13 +67,11 @@ class AdminController
         //Get status on whether or not OddsJob has finished in the last 5 minutes
         $view_data['oddsjob_finished'] = $this->oddsJobFinished();
 
-        var_dump($view_data['oddsjob_finished']);
         //Get alerts data
         $view_data['alertcount'] = Alerter::getAlertCount();
 
         //Get unmatched data
         $unmatched_col = EventHandler::getUnmatched(1500);
-
 
         //Old approach:
         $unmatched_groups = [];

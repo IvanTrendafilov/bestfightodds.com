@@ -34,7 +34,7 @@ Manual actions: <button class="btn btn-primary" onclick="$('button[onclick^=\'ma
 								<?php elseif ($action['type'] == 2) : ?>
 
 								<td>Rename event</td>
-								<td>Old: <b><?= $action['view_extra']['new_event']->getName() ?></b><br>New:<b><?= $action['action_obj']->eventTitle ?></b></td>
+								<td>Old: <b><?= $action['view_extra']['new_event']->getName() ?></b><br>New: <b><?= $action['action_obj']->eventTitle ?></b></td>
 								<td><button class="btn btn-primary" onclick="maRenameEvent(<?= $action['id'] ?>, '<?= htmlspecialchars($action['description']) ?>')">Accept</button>
 
 								<?php elseif ($action['type'] == 3) : ?>
