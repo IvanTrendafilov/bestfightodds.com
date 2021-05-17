@@ -1,4 +1,4 @@
-<?php $this->layout('base/layout', ['title' => 'Admin - Log Viewer']) ?>
+<?php $this->layout('base/layout', ['title' => 'Admin - Log Viewer', 'current_page' => $this->name->getName()]) ?>
 
 <script>
     function switchFields(field1, field2) {

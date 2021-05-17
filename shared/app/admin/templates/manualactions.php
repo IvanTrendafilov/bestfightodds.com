@@ -1,4 +1,4 @@
-<?php $this->layout('base/layout', ['title' => 'Admin']) ?>
+<?php $this->layout('base/layout', ['title' => 'Admin', 'current_page' => $this->name->getName()]) ?>
 
 Manual actions: <button class="btn btn-primary" onclick="$('button[onclick^=\'maAdd\']').click();">Accept all <b>Create</b> actions below</button>
 <br /><br />

@@ -1,4 +1,4 @@
-<?php $this->layout('base/layout', ['title' => 'Admin - Log Viewer']) ?>
+<?php $this->layout('base/layout', ['title' => 'Admin - Log Viewer', 'current_page' => $this->name->getName()]) ?>
 
 <?php if (isset($bookies)): ?>
 

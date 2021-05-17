@@ -1,4 +1,4 @@
-<?php $this->layout('base/layout', ['title' => 'Admin - View Prop Templates']) ?>
+<?php $this->layout('base/layout', ['title' => 'Admin - View Prop Templates', 'current_page' => $this->name->getName()]) ?>
 
 <?php foreach ($bookies as $bookie) : ?>
 

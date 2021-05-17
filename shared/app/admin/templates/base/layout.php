@@ -31,7 +31,7 @@
 
 <body>
 	<div class="wrapper">
-		<?php $this->insert('base/nav-sidebar') ?>
+		<?php $this->insert('base/nav-sidebar', ['current_page' => $current_page]) ?>
 
 		<div class="main">
 

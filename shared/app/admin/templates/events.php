@@ -1,4 +1,4 @@
-<?php $this->layout('base/layout', ['title' => 'Admin - Events']) ?>
+<?php $this->layout('base/layout', ['title' => 'Admin - Events', 'current_page' => $this->name->getName()]) ?>
 
 <script>
     document.addEventListener("DOMContentLoaded", function(event) {

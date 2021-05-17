@@ -1,4 +1,4 @@
-<?php $this->layout('base/layout', ['title' => 'Admin']) ?>
+<?php $this->layout('base/layout', ['title' => 'Admin', 'current_page' => $this->name->getName()]) ?>
 <div class="card">
     <div class="card-header">
         <h5 class="card-title">Basic Table</h5>
