@@ -9,6 +9,7 @@ use BFO\General\TeamHandler;
 use BFO\General\OddsHandler;
 use BFO\General\GraphHandler;
 use BFO\General\StatsHandler;
+use BFO\Utils\LinkTools;
 
 use BFO\Caching\CacheControl;
 
