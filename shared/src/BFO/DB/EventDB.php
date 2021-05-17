@@ -535,7 +535,7 @@ class EventDB
         //Check that event is ok
         if (EventDB::getEvent($fight_obj->getEventID()) != null) {
             //Check if fight isn't already added
-            if (EventDB::getMatchingFight(['team1_name' => $fight_obj->getFighter(1), 'team2_name' => $fight_obj->getFighter(2), 'event_id' => $fight_obj->getEventID()]) == null) {
+            if (EventDB::getMatchingFight(['team1_name' => $fight_obj->getFighter(1), 'team2_name' => $fight_obj->getFighter(2), 'event_id' => $fight_obj->getEventID(), 'future_only' => true]) == null) {
                 //Check that both fighters exist, if not, add them
                 $fighter1_id = EventDB::getFighterIDByName($fight_obj->getFighter(1));
                 if ($fighter1_id == null) {
