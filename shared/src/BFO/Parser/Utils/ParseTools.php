@@ -215,31 +215,6 @@ class ParseTools
         return OddsTools::standardizeDate($a_sDate);
     }
 
-    /**
-     * Checks format on odds (ex: +180 / -220) and corrects if not ok
-     */
-    public static function formatOdds($a_sOdds)
-    {
-        if ($a_sOdds == 'EV' || $a_sOdds == 'ev' || $a_sOdds == 'Even' || $a_sOdds == 'even' || $a_sOdds == 'EVEN') {
-            $a_sOdds = '+100';
-        }
-        //Check if odds is in decimal format, if so change it to moneyline
-        elseif (preg_match('/[0-9]*\\.[0-9]*/', $a_sOdds)) {
-            $a_sOdds = ParseTools::convertOddsEUToUS($a_sOdds);
-        }
-        return $a_sOdds;
-    }
-
-    /**
-     * Formats a fighters name in a post where (hopefully) nicknames and such are stripped
-     *
-     * @deprecated Use formatName() instead
-     */
-    public static function formatFighterName($a_sFighterName)
-    {
-        return ParseTools::formatName($a_sFighterName);
-    }
-
     public static function formatName($a_sName)
     {
         $sNewName = str_replace('&quot;', '"', $a_sName);

@@ -9,14 +9,6 @@ use BFO\DB\TeamDB;
  */
 class TeamHandler
 {
-    /**
-     * @deprecated Replaced by getAltNamesForTeamByID that takes ID as input not a string name
-     */
-    public static function getAllAltNamesForTeam($team_name)
-    {
-        return TeamDB::getAllAltNamesForTeam($team_name);
-    }
-
     public static function getAltNamesForTeamByID($team_id)
     {
         if (!$team_id) {

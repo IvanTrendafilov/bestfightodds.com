@@ -302,78 +302,6 @@ class EventDB
         return null;
     }
 
-
-    /**
-     * Retrieves a future fight
-     *
-     * Matches the specified matchup using lexographical checks
-     *
-     * TODO: (Low) Parts of this should be moved to EventHandler
-     */
-    public static function getFight($a_sFighter1, $a_sFighter2, $a_iEventID = -1)
-    {
-        $sExtraWhere = '';
-        if ($a_iEventID != -1) {
-            $sExtraWhere = ' AND event_id = ' . $a_iEventID . ' ';
-        }
-
-        $sQuery = 'SELECT 1 AS original, t.id, a.name AS fighter1_name, b.name AS fighter2_name, t.event_id
-                      FROM events e, fights t
-                          JOIN fighters a ON a.id = t.fighter1_id
-                          JOIN fighters b ON b.id = t.fighter2_id WHERE e.id = event_id AND LEFT(e.date, 10) >= LEFT((NOW() - INTERVAL ' . GENERAL_GRACEPERIOD_SHOW . ' HOUR), 10)  ' . $sExtraWhere . '
-                    UNION SELECT 0 AS original, t.id, a.altname , b.altname, t.event_id
-                      FROM events e, fights t
-                          JOIN fighters_altnames a ON a.fighter_id = fighter1_id
-                          JOIN fighters_altnames b ON b.fighter_id = fighter2_id WHERE e.id = event_id AND LEFT(e.date, 10) >= LEFT((NOW() - INTERVAL ' . GENERAL_GRACEPERIOD_SHOW . ' HOUR), 10)  ' . $sExtraWhere . '
-                    UNION SELECT 0 AS original, t.id, a.name , b.altname, t.event_id
-                      FROM events e, fights t
-                          JOIN fighters a ON a.id = t.fighter1_id
-                          JOIN fighters_altnames b ON b.fighter_id = fighter2_id WHERE e.id = event_id AND LEFT(e.date, 10) >= LEFT((NOW() - INTERVAL ' . GENERAL_GRACEPERIOD_SHOW . ' HOUR), 10)  ' . $sExtraWhere . '
-                    UNION SELECT 0 AS original, t.id, a.altname , b.name, t.event_id
-                      FROM events e, fights t
-                          JOIN fighters b ON b.id = fighter2_id
-                          JOIN fighters_altnames a ON a.fighter_id = fighter1_id WHERE e.id = event_id AND LEFT(e.date, 10) >= LEFT((NOW() - INTERVAL ' . GENERAL_GRACEPERIOD_SHOW . ' HOUR), 10)  ' . $sExtraWhere . ' ';
-
-        $rResult = DBTools::getCachedQuery($sQuery);
-        if ($rResult == null) {
-            $rResult = DBTools::doQuery($sQuery);
-            DBTools::cacheQueryResults($sQuery, $rResult);
-        }
-
-        while ($aFight = mysqli_fetch_array($rResult)) {
-            $oTempFight = new Fight($aFight['id'], $aFight['fighter1_name'], $aFight['fighter2_name'], $aFight['event_id']);
-            if ($aFight['fighter1_name'] > $aFight['fighter2_name']) {
-                $oTempFight->setComment('switched');
-            }
-
-            if (OddsTools::compareNames($oTempFight->getFighter(1), $a_sFighter1) > 82) {
-                if (OddsTools::compareNames($oTempFight->getFighter(2), $a_sFighter2) > 82) {
-                    $aFoundFight = null;
-                    if ($aFight['original'] == '0') {
-                        $aFoundFight = EventDB::getFightByID($aFight['id']);
-
-                        $bCheckFight = EventDB::isFightOrderedInDatabase($aFight['id']);
-                        if ($bCheckFight == true) {
-                            if ($oTempFight->getComment() == 'switched') {
-                                $aFoundFight->setComment('switched');
-                            }
-                        } else {
-                            if ($oTempFight->getComment() != 'switched') {
-                                $aFoundFight->setComment('switched');
-                            }
-                        }
-                    } else {
-                        $aFoundFight = new Fight($aFight['id'], $aFight['fighter1_name'], $aFight['fighter2_name'], $aFight['event_id']);
-                    }
-                    return $aFoundFight;
-                }
-            }
-        }
-        //No matching fight found
-        return null;
-    }
-
-    //New version of getFight above. Improvements are the possibility of finding old matchups
     //Params:
     //team1_name = Required
     //team2_name = Required
@@ -382,7 +310,7 @@ class EventDB
     //known_fighter_id = Optional
     //event_date = Optional (format: yyyy-mm-dd) Note: day before and after is also included
     //event_id = Optional
-    public static function getMatchingFightV2($a_aParams)
+    public static function getMatchingFight($a_aParams)
     {
         $sExtraWhere = '';
         $aQueryParams = [];
@@ -602,20 +530,20 @@ class EventDB
         return null;
     }
 
-    public static function addNewFight($a_oFight)
+    public static function addNewFight($fight_obj)
     {
         //Check that event is ok
-        if (EventDB::getEvent($a_oFight->getEventID()) != null) {
+        if (EventDB::getEvent($fight_obj->getEventID()) != null) {
             //Check if fight isn't already added
-            if (EventDB::getFight($a_oFight->getFighter(1), $a_oFight->getFighter(2), $a_oFight->getEventID()) == null) {
+            if (EventDB::getMatchingFight(['team1_name' => $fight_obj->getFighter(1), 'team2_name' => $fight_obj->getFighter(2), 'event_id' => $fight_obj->getEventID()]) == null) {
                 //Check that both fighters exist, if not, add them
-                $fighter1_id = EventDB::getFighterIDByName($a_oFight->getFighter(1));
+                $fighter1_id = EventDB::getFighterIDByName($fight_obj->getFighter(1));
                 if ($fighter1_id == null) {
-                    $fighter1_id = EventDB::addNewFighter($a_oFight->getFighter(1));
+                    $fighter1_id = EventDB::addNewFighter($fight_obj->getFighter(1));
                 }
-                $fighter2_id = EventDB::getFighterIDByName($a_oFight->getFighter(2));
+                $fighter2_id = EventDB::getFighterIDByName($fight_obj->getFighter(2));
                 if ($fighter2_id == null) {
-                    $fighter2_id = EventDB::addNewFighter($a_oFight->getFighter(2));
+                    $fighter2_id = EventDB::addNewFighter($fight_obj->getFighter(2));
                 }
 
                 if ($fighter1_id == null || $fighter2_id == null) {
@@ -625,7 +553,7 @@ class EventDB
                 $query = 'INSERT INTO fights(fighter1_id, fighter2_id, event_id)
                                 VALUES(?, ?, ?)';
 
-                $params = array($fighter1_id, $fighter2_id, $a_oFight->getEventID());
+                $params = array($fighter1_id, $fighter2_id, $fight_obj->getEventID());
                 DBTools::doParamQuery($query, $params);
 
                 //Invalidate cache whenever we add a matchup in case some running function is caching matchups
@@ -760,39 +688,37 @@ class EventDB
     /**
      * Updates an event in the database. Uses all fields in the Event-object
      */
-    public static function updateEvent($a_oEvent)
+    public static function updateEvent($event_obj)
     {
-        $sQuery = 'UPDATE events
+        $query = 'UPDATE events
                     SET name = ?,
                         display = ?,
                         date = ?
                     WHERE id = ?';
 
-        $aParams = array($a_oEvent->getName(), ($a_oEvent->isDisplayed() ? '1' : '0'), $a_oEvent->getDate(), $a_oEvent->getID());
+        $params = array($event_obj->getName(), ($event_obj->isDisplayed() ? '1' : '0'), $event_obj->getDate(), $event_obj->getID());
 
-        $bResult = DBTools::doParamQuery($sQuery, $aParams);
+        $result = DBTools::doParamQuery($query, $params);
 
-        if ($bResult == false) {
+        if ($result == false) {
             return false;
         }
 
         return true;
     }
 
-    public static function updateFight($a_oFight)
+    public static function updateFight($fight_obj)
     {
-        $sQuery = 'UPDATE fights
+        $query = 'UPDATE fights
             SET event_id = ?
             WHERE id = ?';
 
-        $aParams = array($a_oFight->getEventID(), $a_oFight->getID());
+        $params = array($fight_obj->getEventID(), $fight_obj->getID());
 
-        $bResult = DBTools::doParamQuery($sQuery, $aParams);
-
-        if ($bResult == false) {
+        $result = DBTools::doParamQuery($query, $params);
+        if ($result == false) {
             return false;
         }
-
         return true;
     }
 
@@ -831,46 +757,46 @@ class EventDB
         return $aFights;
     }
 
-    public static function setFightAsMainEvent($a_iFightID, $a_bIsMainEvent)
+    public static function setFightAsMainEvent($matchup_id, $is_main_event)
     {
-        $sQuery = 'UPDATE fights f
+        $query = 'UPDATE fights f
                 SET f.is_mainevent = ?
                 WHERE f.id = ?';
 
-        $aParams = array($a_bIsMainEvent, $a_iFightID);
+        $params = array($is_main_event, $matchup_id);
 
-        return DBTools::doParamQuery($sQuery, $aParams);
+        return DBTools::doParamQuery($query, $params);
     }
 
-    public static function searchEvent($a_sEvent, $a_bFutureEventsOnly = false)
+    public static function searchEvent($event_name, $future_events_only = false)
     {
-        $sExtraWhere = '';
-        if ($a_bFutureEventsOnly == true) {
-            $sExtraWhere = ' AND LEFT(e.date, 10) >= LEFT((NOW() - INTERVAL ' . GENERAL_GRACEPERIOD_SHOW . ' HOUR), 10) ';
+        $extra_where = '';
+        if ($future_events_only == true) {
+            $extra_where = ' AND LEFT(e.date, 10) >= LEFT((NOW() - INTERVAL ' . GENERAL_GRACEPERIOD_SHOW . ' HOUR), 10) ';
         }
 
-        $sQuery = ' SELECT DISTINCT a3.* FROM
+        $query = ' SELECT DISTINCT a3.* FROM
                         ((SELECT e.id, e.date, e.name, e.display, 100 AS score
                         FROM events e
                         WHERE e.name LIKE ?
-                                 ' . $sExtraWhere . '
+                                 ' . $extra_where . '
                         ORDER BY e.date ASC) 
                     UNION
                         (SELECT e.id, e.date, e.name, e.display, MATCH(e.name) AGAINST (?) AS score  
                         FROM events e
                         WHERE MATCH(e.name) AGAINST (?) 
-                                ' . $sExtraWhere . '
+                                ' . $extra_where . '
                         ORDER BY score DESC, e.date ASC)) a3 
                     GROUP BY a3.id, a3.date, a3.name ORDER BY a3.score DESC';
 
-        $aParams = array('%' . $a_sEvent . '%', $a_sEvent, $a_sEvent);
-        $rResult = DBTools::doParamQuery($sQuery, $aParams);
-        $aEvents = array();
-        while ($aEvent = mysqli_fetch_array($rResult)) {
-            $aEvents[] = new Event($aEvent['id'], $aEvent['date'], $aEvent['name'], $aEvent['display']);
+        $params = array('%' . $event_name . '%', $event_name, $event_name);
+        $result = DBTools::doParamQuery($query, $params);
+        $events = array();
+        while ($row = mysqli_fetch_array($result)) {
+            $events[] = new Event($row['id'], $row['date'], $row['name'], $row['display']);
         }
 
-        return $aEvents;
+        return $events;
     }
 
     /**
@@ -880,30 +806,30 @@ class EventDB
      * @param int $a_iOffset Offset (default 0)
      * @return array List of events
      */
-    public static function getRecentEvents($a_iLimit, $a_iOffset = 0)
+    public static function getRecentEvents($limit, $offset = 0)
     {
-        $sQuery = 'SELECT id, date, name, display
+        $query = 'SELECT id, date, name, display
                     FROM events
                     WHERE LEFT(date, 10) < LEFT((NOW() - INTERVAL ' . GENERAL_GRACEPERIOD_SHOW . ' HOUR), 10)
-                    ORDER BY date DESC, name DESC LIMIT ' . $a_iOffset . ',' . $a_iLimit . '';
+                    ORDER BY date DESC, name DESC LIMIT ' . $offset . ',' . $limit . '';
 
-        $rResult = DBTools::doQuery($sQuery);
-        $aEvents = array();
-        while ($aEvent = mysqli_fetch_array($rResult)) {
-            $aEvents[] = new Event($aEvent['id'], $aEvent['date'], $aEvent['name'], $aEvent['display']);
+        $result = DBTools::doQuery($query);
+        $events = array();
+        while ($row = mysqli_fetch_array($result)) {
+            $events[] = new Event($row['id'], $row['date'], $row['name'], $row['display']);
         }
 
-        return $aEvents;
+        return $events;
     }
 
     /**
      * Writes an entry to the log for unmatched entries from parsing
      */
-    public static function logUnmatched($a_sMatchup, $a_iBookieID, $a_iType, $a_sMetadata = '')
+    public static function logUnmatched($matchup_string, $bookie_id, $type, $metadata = '')
     {
-        $sQuery = 'INSERT INTO matchups_unmatched(matchup, bookie_id, type, metadata, log_date) VALUES (?,?,?,?, NOW()) ON DUPLICATE KEY UPDATE log_date = NOW()';
-        $aParams = array($a_sMatchup, $a_iBookieID, $a_iType, $a_sMetadata);
-        DBTools::doParamQuery($sQuery, $aParams);
+        $query = 'INSERT INTO matchups_unmatched(matchup, bookie_id, type, metadata, log_date) VALUES (?,?,?,?, NOW()) ON DUPLICATE KEY UPDATE log_date = NOW()';
+        $params = array($matchup_string, $bookie_id, $type, $metadata);
+        DBTools::doParamQuery($query, $params);
         return DBTools::getAffectedRows();
     }
 

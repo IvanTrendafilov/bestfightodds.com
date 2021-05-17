@@ -69,28 +69,6 @@ class TeamDB
         return null;
     }
 
-    /**
-     * @deprecated Replaced by getAltNamesForTeamByID that takes ID as input not a string name
-     */
-    public static function getAllAltNamesForTeam($team_name)
-    {
-        $query = "SELECT fa.* FROM fighters_altnames fa, fighters f WHERE f.name = ? AND fa.fighter_id = f.id";
-        $params = [$team_name];
-
-        $result = DBTools::doParamQuery($query, $params);
-
-        $names = [];
-        while ($row = mysqli_fetch_array($result)) {
-            $names[] = $row['altname'];
-        }
-
-        if (count($names) > 0) {
-            return $names;
-        }
-
-        return null;
-    }
-
     public static function getAltNamesForTeamByID($team_id)
     {
         $query = "SELECT fa.altname FROM fighters_altnames fa WHERE fa.fighter_id = ?";
@@ -106,7 +84,6 @@ class TeamDB
 
         return null;
     }
-
 
     /**
      * Gets the latest date when the fighter received an odds update

@@ -46,22 +46,6 @@ class FightOdds
         return $this->iBookieID;
     }
 
-    /*
-    @deprecated Use getOdds(teamNum) instead
-    */
-    public function getFighter1Odds()
-    {
-        return $this->sFighter1Odds;
-    }
-
-    /*
-    @deprecated Use getOdds(teamNum) instead
-    */
-    public function getFighter2Odds()
-    {
-        return $this->sFighter2Odds;
-    }
-
     public function getDate()
     {
         return $this->sDate;

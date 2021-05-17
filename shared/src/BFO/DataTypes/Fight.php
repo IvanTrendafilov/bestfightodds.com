@@ -60,28 +60,6 @@ class Fight
     }
 
     /**
-     * Get fighter 1's name
-     *
-     * @deprecated Use getFighter(fighterNo) instead
-     * @return <type>
-     */
-    public function getFighter1()
-    {
-        return $this->sFighter1;
-    }
-
-    /**
-     * Get fighter 2's name
-     *
-     * @deprecated
-     * @return <type> Use getFighter(fighterNo) instead
-     */
-    public function getFighter2()
-    {
-        return $this->sFighter2;
-    }
-
-    /**
      * Get fighter name
      *
      * @deprecated Use getTeam instead

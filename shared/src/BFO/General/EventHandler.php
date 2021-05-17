@@ -58,21 +58,9 @@ class EventHandler
         return EventDB::getEvent($event_id, $future_event_only);
     }
 
-    public static function getEventByName($a_sName)
+    public static function getEventByName($name)
     {
-        return EventDB::getEventByName($a_sName);
-    }
-
-    /**
-     * Get matching fight
-     *
-     * @param Fight $matchup_obj
-     * @return Fight Matching fight
-     * @deprecated Use getMatchinFightV2() instead
-     */
-    public static function getMatchingFight($matchup_obj)
-    {
-        return EventDB::getFight($matchup_obj->getFighter(1), $matchup_obj->getFighter(2), $matchup_obj->getEventID());
+        return EventDB::getEventByName($name);
     }
 
     //New version of getFight above. Improvements are the possibility of finding old matchups
@@ -86,9 +74,9 @@ class EventHandler
      *
      * @return Fight Matching fight
      */
-    public static function getMatchingFightV2($params)
+    public static function getMatchingFight($params)
     {
-        return EventDB::getMatchingFightV2($params);
+        return EventDB::getMatchingFight($params);
     }
 
     public static function getFightByID($id)

@@ -163,7 +163,7 @@ class TeamPageParser
 
 
 		
-		$matching_fight = EventHandler::getMatchingFightV2(['team1_name' => $temp_fight->getTeam(1),
+		$matching_fight = EventHandler::getMatchingFight(['team1_name' => $temp_fight->getTeam(1),
 															'team2_name' => $temp_fight->getTeam(2),
 															'event_id' => $temp_fight->getEventID(),
 															'known_fighter_id' => $fighter->getID(),

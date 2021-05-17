@@ -286,7 +286,7 @@ class EventPageParser
 
 		$this->logger->info('Found that:  ' . $temp_fight->getTeam($temp_fight->hasOrderChanged() ? 2 : 1) . ' ' . $matchup[2] . ' ' . $temp_fight->getTeam($temp_fight->hasOrderChanged() ? 1 : 2));
 
-		$matching_fight = EventHandler::getMatchingFightV2(['team1_name' => $temp_fight->getTeam(1),
+		$matching_fight = EventHandler::getMatchingFight(['team1_name' => $temp_fight->getTeam(1),
 															'team2_name' => $temp_fight->getTeam(2),
 															'event_id' => $temp_fight->getEventID()]);
 		if ($matching_fight != null)
