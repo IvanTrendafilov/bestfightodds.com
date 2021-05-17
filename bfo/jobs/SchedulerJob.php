@@ -36,13 +36,13 @@ class MMAJunkieParser
 
         $xml = simplexml_load_string($content);
         if ($xml == false) {
-            //TODO: Error handling
+            echo "Error: XML failed";
         }
 
         $events = [];
         if (sizeof($xml->channel->item) < 5) {
             //List too small. suspicious..
-            //TODO: error handling
+            echo "Error: List too short";
         }
 
         foreach ($xml->channel->item as $item) {
