@@ -11,7 +11,7 @@ class FacebookHandler
 
     public function __construct()
     {
-        $this->logger = new \Katzgrau\KLogger\Logger(GENERAL_KLOGDIR, Psr\Log\LogLevel::DEBUG, ['filename' => 'facebook.log']);
+        $this->logger = new \Katzgrau\KLogger\Logger(GENERAL_KLOGDIR, \Psr\Log\LogLevel::DEBUG, ['filename' => 'facebook.log']);
 
         if (FACEBOOK_DEV_MODE == false) {
             $this->fb = new \Facebook\Facebook([

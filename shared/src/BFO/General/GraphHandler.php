@@ -20,9 +20,9 @@ class GraphHandler
         return OddsHandler::getAllPropOddsForMatchupPropType($matchup_id, $bookie_id, $proptype_id, $team_num);
     }
 
-    public static function getEventPropData($a_iEventID, $bookie_id, $proptype_id)
+    public static function getEventPropData($event_id, $bookie_id, $proptype_id)
     {
-        return OddsHandler::getAllPropOddsForEventPropType($a_iEventID, $bookie_id, $proptype_id);
+        return OddsHandler::getAllPropOddsForEventPropType($event_id, $bookie_id, $proptype_id);
     }
 
     public static function getMatchupIndexData($matchup_id, $team_num)
