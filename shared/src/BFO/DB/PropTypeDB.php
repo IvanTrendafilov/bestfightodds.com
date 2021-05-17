@@ -51,7 +51,7 @@ class PropTypeDB
         return $id;
     }
 
-    public static function createNewPropType($proptype_obj)
+    public static function createNewPropType(PropType $proptype_obj) : ?int
     {
         $query = "INSERT INTO prop_types(prop_desc, negprop_desc, is_eventprop) VALUES (?,?,?)";
         $params = [$proptype_obj->getPropDesc(), $proptype_obj->getPropNegDesc(), $proptype_obj->isEventProp()];

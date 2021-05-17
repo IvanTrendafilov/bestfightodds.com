@@ -4,85 +4,85 @@ namespace BFO\DataTypes;
 
 class PropType
 {
-    private $iID;
-    private $sPropDesc;
-    private $sPropNegDesc;
-    private $bTeamSpecific = false;
-    private $iTeamNum;
-    private $bIsEventProp = false;
+    private $id;
+    private $prop_desc;
+    private $negprop_desc;
+    private $is_team_specific = false;
+    private $team_num;
+    private $is_event_prop = false;
 
-    public function __construct($a_iID, $a_sPropDesc, $a_sPropNegDesc, $a_iTeamNum = 0)
+    public function __construct($id, $prop_desc, $negprop_desc, $team_num = 0)
     {
-        $this->iID = $a_iID;
-        $this->sPropDesc = $a_sPropDesc;
-        $this->sPropNegDesc = $a_sPropNegDesc;
+        $this->id = $id;
+        $this->prop_desc = $prop_desc;
+        $this->negprop_desc = $negprop_desc;
 
-        if (preg_match('/<T>/', $a_sPropDesc) > 0 || preg_match('/<T>/', $a_sPropNegDesc) > 0) {
-            $this->bTeamSpecific = true;
+        if (preg_match('/<T>/', $prop_desc) > 0 || preg_match('/<T>/', $negprop_desc) > 0) {
+            $this->is_team_specific = true;
         }
 
-        $this->iTeamNum = $a_iTeamNum;
+        $this->team_num = $team_num;
     }
 
     public function getID()
     {
-        return $this->iID;
+        return $this->id;
     }
 
-    public function setID($a_iID)
+    public function setID($id)
     {
-        $this->iID = $a_iID;
+        $this->id = $id;
     }
 
     public function getPropDesc()
     {
-        return $this->sPropDesc;
+        return $this->prop_desc;
     }
 
-    public function setPropDesc($a_sPropDesc)
+    public function setPropDesc($prop_desc)
     {
-        $this->sPropDesc = $a_sPropDesc;
+        $this->prop_desc = $prop_desc;
     }
 
     public function getPropNegDesc()
     {
-        return $this->sPropNegDesc;
+        return $this->negprop_desc;
     }
 
-    public function setPropNegDesc($a_sPropNegDesc)
+    public function setPropNegDesc($negprop_desc)
     {
-        $this->sPropNegDesc = $a_sPropNegDesc;
+        $this->negprop_desc = $negprop_desc;
     }
 
     public function isTeamSpecific()
     {
-        return $this->bTeamSpecific;
+        return $this->is_team_specific;
     }
 
     public function getTeamNum()
     {
-        return $this->iTeamNum;
+        return $this->team_num;
     }
 
     public function invertTeamNum()
     {
-        if ($this->iTeamNum == 1) {
-            $this->iTeamNum = 2;
+        if ($this->team_num == 1) {
+            $this->team_num = 2;
             return true;
-        } elseif ($this->iTeamNum == 2) {
-            $this->iTeamNum = 1;
+        } elseif ($this->team_num == 2) {
+            $this->team_num = 1;
             return true;
         }
         return false;
     }
 
-    public function setEventProp($a_bState)
+    public function setEventProp($is_event_prop)
     {
-        $this->bIsEventProp = $a_bState;
+        $this->is_event_prop = $is_event_prop;
     }
 
     public function isEventProp()
     {
-        return $this->bIsEventProp;
+        return $this->is_event_prop;
     }
 }

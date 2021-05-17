@@ -16,6 +16,8 @@ use BFO\DataTypes\Fight;
 use BFO\DataTypes\Event;
 use BFO\DataTypes\PropTemplate;
 use BFO\DataTypes\FightOdds;
+use BFO\DataTypes\PropType;
+use BFO\General\PropTypeHandler;
 
 class AdminAPIController
 {
@@ -276,6 +278,39 @@ class AdminAPIController
             } else {
                 $response->withStatus(500);
                 $return_data['msg'] = 'Error creating prop template';
+                $return_data['error'] = true;
+            }
+        }
+
+        $response->getBody()->write(json_encode($return_data));
+        return $this->returnJson($response);
+    }
+
+    public function createPropType(Request $request, Response $response)
+    {
+        $json = $request->getBody();
+        $data = json_decode($json, false);
+        $return_data = [];
+        $return_data['error'] = false;
+
+        if (!v::stringVal()->length(10, null)->validate($data->prop_desc)
+            || !v::stringVal()->length(10, null)->validate($data->negprop_desc))
+        {
+            $response->withStatus(422);
+            $return_data['msg'] = 'Missing/invalid parameters';
+            $return_data['error'] = true;
+        } else {
+            $prop_type = new PropType(-1, $data->prop_desc, $data->negprop_desc, 0);
+            if (isset($data->is_event_prop) && boolval($data->is_event_prop) == true) {
+                $prop_type->setEventProp(true);
+            }
+            $new_proptype_id = PropTypeHandler::createNewPropType($prop_type);
+            if ($new_proptype_id) {
+                $return_data['msg'] = 'Successfully added';
+                $return_data['proptype_id'] = $new_proptype_id;
+            } else {
+                $response->withStatus(500);
+                $return_data['msg'] = 'Error creating prop type';
                 $return_data['error'] = true;
             }
         }
