@@ -5,3 +5,4 @@
 cd /var/www/bfo
 git pull
 sudo service nginx reload
+composer dumpautoload -o
