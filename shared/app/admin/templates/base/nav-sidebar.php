@@ -7,7 +7,7 @@
 
 		<ul class="sidebar-nav">
 			<li class="sidebar-header">
-				Pages (Current: <?=$current_page?>)
+				Pages
 			</li>
 
 			<li class="sidebar-item <?=$current_page == 'home' ? 'active' : ''?>">

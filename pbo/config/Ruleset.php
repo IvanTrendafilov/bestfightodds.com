@@ -13,7 +13,7 @@ class Ruleset implements RulesetInterface
         $event_name = strtoupper($event_name);
         $event_pieces = explode(' ', $event_name);
 
-        return false;
+        return true; //All bookies can create matchups
     }
 
     public function evaluateEvent($bookie_obj, $event_name, $gametime)
