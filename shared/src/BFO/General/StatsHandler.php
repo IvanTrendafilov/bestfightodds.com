@@ -24,7 +24,7 @@ class StatsHandler
         if (!function_exists('BFO\General\cmpdiff')) {
             function cmpdiff($a, $b)
             {
-                return $a[2]['swing'] < $b[2]['swing'];
+                return $b[2]['swing'] <=> $a[2]['swing'];
             }
         }
         usort($swings_col, "BFO\General\cmpdiff");

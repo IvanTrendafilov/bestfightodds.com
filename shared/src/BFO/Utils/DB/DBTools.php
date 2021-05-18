@@ -10,7 +10,7 @@ class DBTools
     /**
      * Gets the current database connection or creates a new one if no one exists
      *
-     * @return Resource Database connection
+     * @return \mysqli Database connection
      */
     private static function getConnection()
     {
@@ -161,9 +161,6 @@ class DBTools
      *
      * If a query only returns one single value this function
      * can be used to fetch that value.
-     *
-     * @param resource $a_rResults MySQL resource
-     * @return string Single value
      */
     public static function getSingleValue($a_rResults)
     {
