@@ -54,14 +54,9 @@ define('FACEBOOK_ACCESS_TOKEN', 'EAAYxZA2qZC7e4BAOUww5RhqvWr9inuQZCW1koLMhTgVFAA
 define('FACEBOOK_PAGEID', '1759833807635369');
 
 /* Parser */
-define('PARSE_LOGDIR', GENERAL_BASEDIR . '/logs/'); //Directory where logs should be stored
 define('PARSE_GENERATORDIR', GENERAL_BASEDIR . '/app/generators/');  //Directory where page generators are stored
 define('PARSE_PAGEDIR', GENERAL_BASEDIR . '/app/front/pages/');  //Directory where generated pages should be stored
-define('PARSE_LOG_LEVEL', 2); //Level of detail in the logs, from -2 to 2 . At the lowest level, only errors are shown
-define('PARSE_PARSERS', 'WilliamHill');
-define('PARSE_MOCKFEEDS_ON', false); //Enable/disable mock feed mode parsing from static files instead of real feeds
 define('PARSE_MOCKFEEDS_DIR', GENERAL_BASEDIR . '/app/parsers/mockfeeds/');  //Directory where mock feeds are stored
-define('PARSE_CREATIVEMATCHING', false); //Used to specify if parser should try creative ways to match matchups (use with caution);
 define('PARSE_CREATEMATCHUPS', false); //Used to specify if parser should create matchups that was not found (use with caution);
 define('PARSE_MOVEMATCHUPS', false); //Used to specify if odds job should move matchups automatically based on metadata (gametime). Matchups will be moved to generic events (based on date) so use carefully
 define('PARSE_USE_DATE_EVENTS', false); //If we are using generic dates as events (e.g. for PBO where no named events are used)
