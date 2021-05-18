@@ -64,6 +64,8 @@ define('PARSE_MOCKFEEDS_DIR', GENERAL_BASEDIR . '/app/parsers/mockfeeds/');  //D
 define('PARSE_CREATIVEMATCHING', false); //Used to specify if parser should try creative ways to match matchups (use with caution);
 define('PARSE_CREATEMATCHUPS', false); //Used to specify if parser should create matchups that was not found (use with caution);
 define('PARSE_MOVEMATCHUPS', false); //Used to specify if odds job should move matchups automatically based on metadata (gametime). Matchups will be moved to generic events (based on date) so use carefully
+define('PARSE_USE_DATE_EVENTS', false); //If we are using generic dates as events (e.g. for PBO where no named events are used)
+define('PARSE_MATCHUP_TZ_OFFSET', 0);
 define('PARSE_FUTURESEVENT_ID', 197); //Used to identify the event that holds all future (that cant be linked to a specific event) matchups
 
 /* Twitter  */

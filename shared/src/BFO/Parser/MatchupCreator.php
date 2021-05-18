@@ -65,8 +65,12 @@ class MatchupCreator
             $date_obj = new \DateTime();
             $date_obj = $date_obj->setTimestamp($matchup_time);
 
-            //Matchup time here is in UTC as captured by parsers. We offset time by -7 to adjust from UTC to west coast time
-            $date_obj->sub(new \DateInterval('PT7H'));
+            //Matchup time here is in UTC as captured by parsers. We offset by configured value to adjust from UTC to local time. e.g. west coast -7 for BFO or UTC 0 for PBO
+            if (PARSE_MATCHUP_TZ_OFFSET < 0) {
+                $date_obj->sub(new \DateInterval('PT' . PARSE_MATCHUP_TZ_OFFSET . 'H'));
+            } elseif (PARSE_MATCHUP_TZ_OFFSET > 0) {
+                $date_obj->add(new \DateInterval('PT' . PARSE_MATCHUP_TZ_OFFSET . 'H'));
+            }
 
             $matched_event = $this->getMatchingEvent($event_name, $date_obj, $in_scheduler);
 
@@ -168,6 +172,11 @@ class MatchupCreator
 
     private function tryToCreateEvent(string $event_name, string $matchup_time, object $date_obj, array $in_scheduler)
     {
+        if (PARSE_USE_DATE_EVENTS == true) {
+            //We used generic dates for events instead of fight cards
+            $event_name = $date_obj->format('Y-m-d');
+        }
+
         //Check that ruleset allows for creation of this event
         $approved_by_ruleset = $this->creation_ruleset->evaluateEvent($this->bookie_obj, $event_name, $matchup_time);
 
@@ -179,10 +188,10 @@ class MatchupCreator
 
             $new_event = null;
             if ($in_scheduler['event_name'] != null && $in_scheduler['event_date'] != null) {
-                //Create event object based on scheduler fetched content (more accurate)
+                //Create event object based on scheduler fetched content
                 $new_event = new Event(0, $in_scheduler['event_date'], $in_scheduler['event_name'], true);
             } else {
-                //Create event object based on bookie fetched content (more accurate)
+                //Create event object based on bookie fetched content
                 $new_event = new Event(0, $date_obj->format('Y-m-d'), $event_name, true);
             }
 
