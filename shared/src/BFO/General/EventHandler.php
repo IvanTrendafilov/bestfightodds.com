@@ -417,4 +417,60 @@ class EventHandler
         }
         return ['checked_matchups' => $matchup_counter, 'moved_matchups' => $move_counter];
     }
+
+    public static function moveMatchupsToNamedEvents() : array
+    {
+        $move_counter = 0;
+        $matchup_counter = 0;
+
+        //Checks the date (metadata) of the current matchup and moves the matchup to the appropriate generic event, this is typically only done for sites like PBO where matchups belong to a specific date and not a named event
+        $audit_log = new \Katzgrau\KLogger\Logger(GENERAL_KLOGDIR, \Psr\Log\LogLevel::INFO, ['filename' => 'changeaudit.log']);
+
+        $events = EventHandler::getAllUpcomingEvents();
+        foreach ($events as $event) {
+            $matchups = EventHandler::getAllFightsForEvent($event->getID());
+
+            foreach ($matchups as $matchup) {
+                $matchup_counter++;
+                $matchup_metadata_date = new \DateTime();
+                $matchup_metadata_date = $matchup_metadata_date->setTimestamp($matchup->getMetadata('min_gametime'));
+                if (
+                    new \DateTime() < $matchup_metadata_date //Check that new date is not in the past
+                    && $matchup_metadata_date->format('Y-m-d') != $event->getDate()
+                ) {
+                    //Metadata suggests new event, move matchup to the new event
+                    $events_on_same_date = EventHandler::getAllEventsForDate(date: $matchup_metadata_date->format('Y-m-d'));
+                    foreach ($events_on_same_date as $potential_event) {
+                        //Match on name TODO:
+                        
+                        
+                        
+                        $new_event_id = null;
+                        $found = false;
+                        if ($found) {
+                            if (EventHandler::changeFight($matchup->getID(), $new_event_id)) {
+                                $audit_log->info("Moved matchup " . $matchup->getTeamAsString(1) . " vs. " . $matchup->getTeamAsString(2) . " (" . $matchup->getID() . ") to " . $matchup_metadata_date->format('Y-m-d') . " based on min gametime metadata");
+                                $move_counter++;
+                            } else {
+                                $audit_log->error("Failed to move matchup " . $matchup->getTeamAsString(1) . " vs. " . $matchup->getTeamAsString(2) . " (" . $matchup->getID() . ") to " . $matchup_metadata_date->format('Y-m-d') . " based on min gametime metadata");
+                            }
+                        }
+
+                    }
+                }
+            }
+        }
+
+        return ['checked_matchups' => $matchup_counter, 'moved_matchups' => $move_counter];
+    }
+
+    public static function getAllEventsForDate(string $date) : array
+    {
+        return EventDB::getAllEventsForDate(date: $date);
+    }
+
+    public static function deleteAllOldEventsWithoutOdds(): int
+    {
+        return EventDB::deleteAllOldEventsWithoutOdds();
+    }
 }

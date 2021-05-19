@@ -976,4 +976,36 @@ class EventDB
         }
         return null;
     }
+
+    public static function deleteAllOldEventsWithoutOdds(): int
+    {
+        $query = 'DELETE
+                    FROM events e 
+                    WHERE NOT EXISTS
+                                (SELECT null 
+                                    FROM fights f
+                                    WHERE f.event_id = e.id)
+                    AND LEFT(e.date, 10) < LEFT((NOW() - INTERVAL ' . GENERAL_GRACEPERIOD_SHOW . ' HOUR), 10);';
+
+        $rows = 0;
+        try {
+            $rows = PDOTools::delete($query, []);
+        } catch (\PDOException $e) {
+            throw new \Exception("Unable to delete old entries", 10);
+        }
+        return $rows;
+    }
+
+    public static function getAllEventsForDate(string $date) : array
+    {
+        $query = 'SELECT * FROM events e WHERE e.date = ?';
+        $params = [$date];
+        $results = PDOTools::findMany($query, $params);
+        $events = [];
+        foreach ($results as $row) {
+            $events[] = new Event($row['id'], $row['date'], $row['name'], $row['display']);
+        }
+        return $events;
+
+    }
 }

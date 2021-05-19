@@ -67,7 +67,8 @@ class MatchupCreator
 
             //Matchup time here is in UTC as captured by parsers. We offset by configured value to adjust from UTC to local time. e.g. west coast -7 for BFO or UTC 0 for PBO
             if (PARSE_MATCHUP_TZ_OFFSET < 0) {
-                $date_obj->sub(new \DateInterval('PT' . PARSE_MATCHUP_TZ_OFFSET . 'H'));
+                $date_obj->sub(new \DateInterval('PT' . abs(PARSE_MATCHUP_TZ_OFFSET) . 'H'));
+
             } elseif (PARSE_MATCHUP_TZ_OFFSET > 0) {
                 $date_obj->add(new \DateInterval('PT' . PARSE_MATCHUP_TZ_OFFSET . 'H'));
             }

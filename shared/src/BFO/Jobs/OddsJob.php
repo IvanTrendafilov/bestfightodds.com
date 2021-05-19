@@ -76,8 +76,14 @@ class OddsJob
 
         //Move matchups to generic dates if suggested by metadata (gametime)
         if (PARSE_MOVEMATCHUPS) {
-            $result = EventHandler::moveMatchupsToGenericEvents();
-            $this->logger->info("Moved " . $result['moved_matchups'] . " to new dates (checked " . $result['checked_matchups'] . ")");
+            if (PARSE_USE_DATE_EVENTS) {
+                $result = EventHandler::moveMatchupsToGenericEvents();
+                $this->logger->info("Moved " . $result['moved_matchups'] . " to new dates (checked " . $result['checked_matchups'] . ")");
+            } else {
+                /*$result = EventHandler::moveMatchupsToNamedEvents();
+                $this->logger->info("Moved " . $result['moved_matchups'] . " to new dates (checked " . $result['checked_matchups'] . ")");*/
+            }
+
         }
 
         //Generate new front page with latest odds
