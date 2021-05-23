@@ -377,6 +377,11 @@ class EventHandler
         return false;
     }
 
+    public static function getMetaDataForMatchup(int $matchup_id, string $metadata_attribute = null, int $bookie_id = null): array
+    {
+        return EventDB::getMetaDataForMatchup($matchup_id, $metadata_attribute, $bookie_id);
+    }
+
     public static function getLatestChangeDate($event_id)
     {
         return EventDB::getLatestChangeDate($event_id);
@@ -449,15 +454,39 @@ class EventHandler
                 if (
                     new \DateTime() < $matchup_metadata_date //Check that new date is not in the past
                     && $matchup_metadata_date->format('Y-m-d') != $event->getDate()
-                    && $matchup->getMetadata('event_name') != null
+
                 ) {
-                    $found_event = self::getMatchingEvent($matchup->getMetadata('event_name'), $matchup_metadata_date->format('Y-m-d'));
-                    if ($found_event) {
-                        if (EventHandler::changeFight($matchup->getID(), $found_event->getID())) {
-                            $audit_log->info("Moved matchup " . $matchup->getTeamAsString(1) . " vs. " . $matchup->getTeamAsString(2) . " (" . $matchup->getID() . ") to " . $matchup_metadata_date->format('Y-m-d') . " based on min gametime metadata");
-                            $move_counter++;
-                        } else {
-                            $audit_log->error("Failed to move matchup " . $matchup->getTeamAsString(1) . " vs. " . $matchup->getTeamAsString(2) . " (" . $matchup->getID() . ") to " . $matchup_metadata_date->format('Y-m-d') . " based on min gametime metadata. May have to create this event");
+                    //Ensure that all events have a consensus on the league (e.g. UFC). This is then stored in consens_event_name
+                    $event_names = EventHandler::getMetaDataForMatchup($matchup->getID(), 'event_name');
+                    if (count($event_names) > 0) {
+                        $consensus = true;
+                        $consensus_event_name = trim(strtoupper(explode(' ', $event_names[0]['mvalue'])[0]));
+                        for ($i = 1; $i < count($event_names); $i++) {
+                            $compare1 = trim(strtoupper(explode(' ', $event_names[$i]['mvalue'])[0]));
+                            $compare2 = trim(strtoupper(explode(' ', $event_names[$i - 1]['mvalue'])[0]));
+                            if ($compare1 != $compare2) {
+                                //Ignore the compare if one of the fields is Future, if so we will ensure that the consensus event name is the other
+                                if ($compare1 == 'FUTURE') {
+                                    $consensus_event_name = $compare2;
+                                } elseif ($compare2 == 'FUTURE') {
+                                    $consensus_event_name = $compare1;
+                                } else {
+                                    $consensus = false;
+                                }
+                            }
+                        }
+
+                        if ($consensus && $consensus_event_name) {
+
+                            $found_event = self::getMatchingEvent($consensus_event_name, $matchup_metadata_date->format('Y-m-d'));
+                            if ($found_event) {
+                                if (EventHandler::changeFight($matchup->getID(), $found_event->getID())) {
+                                    $audit_log->info("Moved matchup " . $matchup->getTeamAsString(1) . " vs. " . $matchup->getTeamAsString(2) . " (" . $matchup->getID() . ") to " . $found_event->getName() . "(" . $found_event->getDate() . ") based on min gametime metadata");
+                                    $move_counter++;
+                                } else {
+                                    $audit_log->error("Failed to move matchup " . $matchup->getTeamAsString(1) . " vs. " . $matchup->getTeamAsString(2) . " (" . $matchup->getID() . ") to " . $found_event->getName() . "(" . $found_event->getDate() . ") based on min gametime metadata. May have to create this event");
+                                }
+                            }
                         }
                     }
                 }

@@ -899,6 +899,27 @@ class EventDB
         return DBTools::doParamQuery($query, $params);
     }
 
+    public static function getMetaDataForMatchup(int $matchup_id, string $metadata_attribute = null, int $bookie_id = null) : array
+    {
+        $extra_where = '';
+        $params = [$matchup_id];
+        if ($metadata_attribute) {
+            $extra_where .= ' AND mattribute = ? ';
+            $params[] = $metadata_attribute;
+        }
+        if ($bookie_id) {
+            $extra_where .= ' AND source_bookie_id = ? ';
+            $params[] = $bookie_id;
+        }
+
+        $query = 'SELECT * 
+                    FROM matchups_metadata 
+                    WHERE matchup_id = ? ' . $extra_where . '
+                    ORDER BY source_bookie_id ASC';
+
+        return PDOTools::findMany($query, $params);
+    }
+
     public static function getLatestChangeDate($event_id)
     {
         $query = 'SELECT thedate FROM (SELECT fo.date as thedate 
