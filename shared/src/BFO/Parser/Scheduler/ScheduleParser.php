@@ -41,22 +41,22 @@ class ScheduleParser
         foreach ($schedule_col as $aEvent) {
             //Check if event matches an existing stored event. Must be numered though
             $aStoredEvents = EventHandler::getAllUpcomingEvents();
-            $bFound = false;
+            $found = false;
             foreach ($aStoredEvents as $oStoredEvent) {
                 //Check if numbered as well so we dont match generic ones like UFC Fight Night
                 $aPrefixParts = explode(':', $aEvent['title']);
                 $aPrefixParts = explode(' ', $aPrefixParts[0]);
-                if ($oStoredEvent->getName() == $aEvent['title'] && $bFound == false && is_numeric($aPrefixParts[count($aPrefixParts) - 1])) {
-                    $bFound = true;
+                if ($oStoredEvent->getName() == $aEvent['title'] && $found == false && is_numeric($aPrefixParts[count($aPrefixParts) - 1])) {
+                    $found = true;
                     $this->parseMatchups($aEvent, $oStoredEvent);
                     $this->checkEventDate($aEvent, $oStoredEvent);
                     $this->aMatchedExistingEvents[] = $oStoredEvent->getID();
                 }
-                if ($bFound == true) {
+                if ($found == true) {
                     break;
                 }
             }
-            if ($bFound == false) {
+            if ($found == false) {
                 //Match on date (but first word must match, for example for UFC*)
                 $aPrefixParts = explode(' ', $aEvent['title']);
                 if (sizeof($aPrefixParts) > 1) {
@@ -64,7 +64,7 @@ class ScheduleParser
                         $aStoredPrefixParts = explode(' ', $oStoredEvent->getName());
                         if ($aStoredPrefixParts[0] == $aPrefixParts[0] && date('Y-m-d', $aEvent['date']) == substr($oStoredEvent->getDate(), 0, 10)) {
                             //Found it! But should maybe be renamed
-                            $bFound = true;
+                            $found = true;
                             if ($oStoredEvent->getName() != $aEvent['title']) {
                                 ScheduleHandler::storeManualAction(json_encode(array('eventID' => $oStoredEvent->getID(), 'eventTitle' => $aEvent['title']), JSON_HEX_APOS | JSON_HEX_QUOT), 2);
                             }
@@ -74,15 +74,15 @@ class ScheduleParser
                     }
                 }
             }
-            if ($bFound == false) {
+            if ($found == false) {
                 //Name does not match, do alternative matching on prefix
                 $aPrefixParts = explode(':', $aEvent['title']);
                 if (sizeof($aPrefixParts) > 1) {
                     foreach ($aStoredEvents as $oStoredEvent) {
                         $aStoredPrefixParts = explode(':', $oStoredEvent->getName());
-                        if ($aStoredPrefixParts[0] == $aPrefixParts[0] && !$bFound) {
+                        if ($aStoredPrefixParts[0] == $aPrefixParts[0] && !$found) {
                             //Found it! However event should be renamed
-                            $bFound = true;
+                            $found = true;
                             if ($oStoredEvent->getName() != $aEvent['title']) {
                                 ScheduleHandler::storeManualAction(json_encode(array('eventID' => $oStoredEvent->getID(), 'eventTitle' => $aEvent['title']), JSON_HEX_APOS | JSON_HEX_QUOT), 2);
                             }
@@ -94,7 +94,7 @@ class ScheduleParser
                     }
                 }
             }
-            if ($bFound == false) {
+            if ($found == false) {
                 //Match on existing matchups
                 $aFoundMatches = array();
                 foreach ($aEvent['matchups'] as $aParsedMatchup) {
@@ -104,7 +104,7 @@ class ScheduleParser
                     }
                 }
                 if (sizeof($aFoundMatches) > 0) {
-                    $bFound = true;
+                    $found = true;
                     arsort($aFoundMatches);
                     if (sizeof($aFoundMatches) > 1) {
                         echo 'FAIL';
@@ -122,7 +122,7 @@ class ScheduleParser
                     $this->aMatchedExistingEvents[] = $oFoundEvent->getID();
                 }
             }
-            if ($bFound == false) {
+            if ($found == false) {
                 //If creative matching fails, add entire event with matchups
                 $sAction = $aEvent['title'] . ' £ ' . date('Y-m-d', $aEvent['date']) . ' => ';
                 $aFilteredMatchups = array();
