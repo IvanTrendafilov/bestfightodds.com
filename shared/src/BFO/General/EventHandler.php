@@ -412,7 +412,7 @@ class EventHandler
             foreach ($matchups as $matchup) {
                 $matchup_counter++;
                 $matchup_metadata_date = new \DateTime();
-                $matchup_metadata_date = $matchup_metadata_date->setTimestamp($matchup->getMetadata('min_gametime'));
+                $matchup_metadata_date = $matchup_metadata_date->setTimestamp(intval($matchup->getMetadata('min_gametime')));
                 if (
                     new \DateTime() < $matchup_metadata_date //Check that new date is not in the past
                     && $matchup_metadata_date->format('Y-m-d') != $event->getDate()
@@ -445,7 +445,7 @@ class EventHandler
             foreach ($matchups as $matchup) {
                 $matchup_counter++;
                 $matchup_metadata_date = new \DateTime();
-                $matchup_metadata_date = $matchup_metadata_date->setTimestamp($matchup->getMetadata('min_gametime'));
+                $matchup_metadata_date = $matchup_metadata_date->setTimestamp(intval($matchup->getMetadata('min_gametime')));
                 if (
                     new \DateTime() < $matchup_metadata_date //Check that new date is not in the past
                     && $matchup_metadata_date->format('Y-m-d') != $event->getDate()
