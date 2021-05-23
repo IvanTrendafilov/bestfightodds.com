@@ -267,13 +267,13 @@ class Fight
         }
     }
 
-    public function setMetadata($a_sAttribute, $a_sValue)
+    public function setMetadata($attribute, $value) : void
     {
-        $this->aMetadata[(string) $a_sAttribute] = (string) $a_sValue;
+        $this->aMetadata[(string) $attribute] = (string) $value;
     }
 
-    public function getMetadata($a_sAttribute)
+    public function getMetadata($attribute) : ?string
     {
-        return isset($this->aMetadata[(string) $a_sAttribute]) ? $this->aMetadata[(string) $a_sAttribute] : false;
+        return $this->aMetadata[(string) $attribute] ?? null;
     }
 }

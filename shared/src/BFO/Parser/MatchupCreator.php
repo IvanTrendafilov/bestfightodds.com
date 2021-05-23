@@ -122,8 +122,6 @@ class MatchupCreator
 
     private function getMatchingEvent(string $event_name, object $date_obj, array $in_scheduler)
     {
-        $date = $date_obj->format('Y-m-d');
-
         if (strtoupper(trim($event_name)) == 'FUTURE EVENTS') {
             return EventHandler::getEvent(PARSE_FUTURESEVENT_ID);
         }
@@ -136,15 +134,8 @@ class MatchupCreator
             return $matched_event;
         }
 
-        $event_pieces = explode(' ', strtoupper($event_name));
-        $event_search = EventHandler::searchEvent($event_pieces[0], true);
-        foreach ($event_search as $event) {
-            if ($event->getDate() == $date) {
-                return $event;
-            }
-        }
-
-        return null;
+        $date = $date_obj->format('Y-m-d');
+        return EventHandler::getMatchingEvent($event_name, $date);
     }
 
     private function teamHasOtherMatchup(object $matched_event, string $team1, string $team2, array $in_scheduler)

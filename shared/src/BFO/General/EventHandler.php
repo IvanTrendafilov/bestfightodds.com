@@ -5,6 +5,7 @@ namespace BFO\General;
 use BFO\DB\EventDB;
 use BFO\DataTypes\FightOdds;
 use BFO\DataTypes\Event;
+use BFO\DataTypes\Fight;
 
 class EventHandler
 {
@@ -77,6 +78,18 @@ class EventHandler
     public static function getMatchingFight($params)
     {
         return EventDB::getMatchingFight($params);
+    }
+
+    public static function getMatchingEvent(string $event_name, string $event_date, bool $future_only = true): ?Event
+    {
+        $event_pieces = explode(' ', strtoupper($event_name));
+        $event_search = EventHandler::searchEvent($event_pieces[0], $future_only);
+        foreach ($event_search as $event) {
+            if ($event->getDate() == $event_date) {
+                return $event;
+            }
+        }
+        return null;
     }
 
     public static function getFightByID($id)
@@ -418,7 +431,7 @@ class EventHandler
         return ['checked_matchups' => $matchup_counter, 'moved_matchups' => $move_counter];
     }
 
-    public static function moveMatchupsToNamedEvents() : array
+    public static function moveMatchupsToNamedEvents(): array
     {
         $move_counter = 0;
         $matchup_counter = 0;
@@ -429,7 +442,6 @@ class EventHandler
         $events = EventHandler::getAllUpcomingEvents();
         foreach ($events as $event) {
             $matchups = EventHandler::getAllFightsForEvent($event->getID());
-
             foreach ($matchups as $matchup) {
                 $matchup_counter++;
                 $matchup_metadata_date = new \DateTime();
@@ -437,25 +449,16 @@ class EventHandler
                 if (
                     new \DateTime() < $matchup_metadata_date //Check that new date is not in the past
                     && $matchup_metadata_date->format('Y-m-d') != $event->getDate()
+                    && $matchup->getMetadata('event_name') != null
                 ) {
-                    //Metadata suggests new event, move matchup to the new event
-                    $events_on_same_date = EventHandler::getAllEventsForDate(date: $matchup_metadata_date->format('Y-m-d'));
-                    foreach ($events_on_same_date as $potential_event) {
-                        //Match on name TODO:
-                        
-                        
-                        
-                        $new_event_id = null;
-                        $found = false;
-                        if ($found) {
-                            if (EventHandler::changeFight($matchup->getID(), $new_event_id)) {
-                                $audit_log->info("Moved matchup " . $matchup->getTeamAsString(1) . " vs. " . $matchup->getTeamAsString(2) . " (" . $matchup->getID() . ") to " . $matchup_metadata_date->format('Y-m-d') . " based on min gametime metadata");
-                                $move_counter++;
-                            } else {
-                                $audit_log->error("Failed to move matchup " . $matchup->getTeamAsString(1) . " vs. " . $matchup->getTeamAsString(2) . " (" . $matchup->getID() . ") to " . $matchup_metadata_date->format('Y-m-d') . " based on min gametime metadata");
-                            }
+                    $found_event = self::getMatchingEvent($matchup->getMetadata('event_name'), $matchup_metadata_date->format('Y-m-d'));
+                    if ($found_event) {
+                        if (EventHandler::changeFight($matchup->getID(), $found_event->getID())) {
+                            $audit_log->info("Moved matchup " . $matchup->getTeamAsString(1) . " vs. " . $matchup->getTeamAsString(2) . " (" . $matchup->getID() . ") to " . $matchup_metadata_date->format('Y-m-d') . " based on min gametime metadata");
+                            $move_counter++;
+                        } else {
+                            $audit_log->error("Failed to move matchup " . $matchup->getTeamAsString(1) . " vs. " . $matchup->getTeamAsString(2) . " (" . $matchup->getID() . ") to " . $matchup_metadata_date->format('Y-m-d') . " based on min gametime metadata. May have to create this event");
                         }
-
                     }
                 }
             }
@@ -464,7 +467,7 @@ class EventHandler
         return ['checked_matchups' => $matchup_counter, 'moved_matchups' => $move_counter];
     }
 
-    public static function getAllEventsForDate(string $date) : array
+    public static function getAllEventsForDate(string $date): array
     {
         return EventDB::getAllEventsForDate(date: $date);
     }

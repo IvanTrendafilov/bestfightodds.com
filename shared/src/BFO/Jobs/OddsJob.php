@@ -80,8 +80,8 @@ class OddsJob
                 $result = EventHandler::moveMatchupsToGenericEvents();
                 $this->logger->info("Moved " . $result['moved_matchups'] . " to new dates (checked " . $result['checked_matchups'] . ")");
             } else {
-                /*$result = EventHandler::moveMatchupsToNamedEvents();
-                $this->logger->info("Moved " . $result['moved_matchups'] . " to new dates (checked " . $result['checked_matchups'] . ")");*/
+                $result = EventHandler::moveMatchupsToNamedEvents();
+                $this->logger->info("Moved " . $result['moved_matchups'] . " to new dates (checked " . $result['checked_matchups'] . ")");
             }
 
         }
