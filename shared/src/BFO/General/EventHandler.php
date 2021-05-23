@@ -394,7 +394,7 @@ class EventHandler
 
         $events = EventHandler::getAllUpcomingEvents();
         foreach ($events as $event) {
-            $matchups = EventHandler::getAllFightsForEvent($event->getID());
+            $matchups = EventHandler::getAllFightsForEvent($event->getID(), true);
 
             foreach ($matchups as $matchup) {
                 $matchup_counter++;

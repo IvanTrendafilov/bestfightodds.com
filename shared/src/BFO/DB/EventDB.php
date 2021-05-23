@@ -82,22 +82,14 @@ class EventDB
      */
     public static function getAllFightsForEvent($event_id, $only_with_odds = false)
     {
-        if ($only_with_odds == true) {
-            $query = 'SELECT f.id, f1.name AS fighter1_name, f2.name AS fighter2_name, f.event_id, f1.id AS fighter1_id, f2.id AS fighter2_id, f.is_mainevent as is_mainevent, (SELECT MIN(date) FROM fightodds fo WHERE fo.fight_id = f.id) AS latest_date, m.mvalue as gametime, m.max_value as max_gametime, m.min_value as min_gametime 
-                        FROM fights f LEFT JOIN (SELECT matchup_id, AVG(mvalue) as mvalue, MAX(mvalue) as max_value, MIN(mvalue) as min_value FROM matchups_metadata mm WHERE mm.mattribute = "gametime" GROUP BY matchup_id) m ON f.id = m.matchup_id
-                            LEFT JOIN fighters f1 ON f1.id = f.fighter1_id
-                            LEFT JOIN fighters f2 ON f2.id = f.fighter2_id
-                        WHERE f.event_id = ?
-                        HAVING latest_date IS NOT NULL
-                        ORDER BY f.is_mainevent DESC, gametime DESC, latest_date ASC';
-        } else {
-            $query = 'SELECT f.id, f1.name AS fighter1_name, f2.name AS fighter2_name, f.event_id, f1.id AS fighter1_id, f2.id AS fighter2_id, f.is_mainevent AS is_mainevent
-                        FROM fights f, fighters f1, fighters f2
-                        WHERE f.event_id = ? 
-                            AND f.fighter1_id = f1.id
-                            AND f.fighter2_id = f2.id
-                            ORDER BY f.is_mainevent DESC, f.id ASC';
-        }
+        $query = 'SELECT f.id, f1.name AS fighter1_name, f2.name AS fighter2_name, f.event_id, f1.id AS fighter1_id, f2.id AS fighter2_id, f.is_mainevent as is_mainevent, (SELECT MIN(date) FROM fightodds fo WHERE fo.fight_id = f.id) AS latest_date, m.mvalue as gametime, m.max_value as max_gametime, m.min_value as min_gametime 
+                    FROM fights f 
+                        LEFT JOIN (SELECT matchup_id, AVG(mvalue) as mvalue, MAX(mvalue) as max_value, MIN(mvalue) as min_value FROM matchups_metadata mm WHERE mm.mattribute = "gametime" GROUP BY matchup_id) m ON f.id = m.matchup_id
+                        LEFT JOIN fighters f1 ON f1.id = f.fighter1_id
+                        LEFT JOIN fighters f2 ON f2.id = f.fighter2_id
+                    WHERE f.event_id = ?
+                    ' . ($only_with_odds ? ' HAVING latest_date IS NOT NULL ' : '') . '
+                    ORDER BY f.is_mainevent DESC, gametime DESC, latest_date ASC';
 
         $params = [$event_id];
         $result = DBTools::doParamQuery($query, $params);
