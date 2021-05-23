@@ -97,7 +97,7 @@ class ParserJob
 
         foreach ($xml->response->williamhill->class->type as $type_node)
         {
-            $event_name = $type_node['name'];
+            $event_name = (string) $type_node['name'];
             foreach ($type_node->market as $market_node)
             {
                 $market_type = substr(strrchr($market_node['name'], "-"), 2);

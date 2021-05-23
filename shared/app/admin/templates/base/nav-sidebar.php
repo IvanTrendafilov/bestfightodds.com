@@ -2,7 +2,7 @@
 	<div class="sidebar-content js-simplebar">
 		<a class="sidebar-brand" href="/cnadm/">
 			<img style="height: 30px; width: 30px; margin-right: 10px;" src="/img/iconv2.jpg">
-			<span class="align-middle">BFO Admin</span>
+			<span class="align-middle">Admin</span>
 		</a>
 
 		<ul class="sidebar-nav">
@@ -36,7 +36,7 @@
 
 			<li class="sidebar-item <?=$current_page == 'resetchangenums' ? 'active' : ''?>">
 				<a class="sidebar-link" href="/cnadm/resetchangenums">
-					<i class="align-middle" data-feather="book"></i> <span class="align-middle">Reset changenums</span>
+					<i class="align-middle" data-feather="settings"></i> <span class="align-middle">Reset changenums</span>
 				</a>
 			</li>
 
