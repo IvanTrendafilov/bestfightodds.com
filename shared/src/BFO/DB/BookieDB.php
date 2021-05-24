@@ -10,49 +10,6 @@ use BFO\DataTypes\PropTemplate;
 
 class BookieDB
 {
-    /*public static function getAllBookies()
-    {
-        $query = 'SELECT id, name, url, refurl
-					FROM bookies 
-					WHERE active = true 
-					ORDER BY position, id  ASC';
-
-        $result = DBTools::getCachedQuery($query);
-        if ($result == null) {
-            $result = DBTools::doQuery($query);
-            DBTools::cacheQueryResults($query, $result);
-        }
-
-        $bookies = array();
-
-        while ($row = mysqli_fetch_array($result)) {
-            $bookies[] = new Bookie($row['id'], $row['name'], $row['url'], $row['refurl']);
-        }
-
-        return $bookies;
-    }
-
-    public static function getBookieByID($bookie_id)
-    {
-        $query = 'SELECT id, name, url, refurl
-					FROM bookies 
-					WHERE active = true 
-					AND id = ? ';
-
-        $params = [$bookie_id];
-
-        $result = DBTools::doParamQuery($query, $params);
-        $bookies = array();
-
-        while ($row = mysqli_fetch_array($result)) {
-            $bookies[] = new Bookie($row['id'], $row['name'], $row['url'], $row['refurl']);
-        }
-        if (sizeof($bookies) > 0) {
-            return $bookies[0];
-        }
-        return null;
-    }*/
-
     public static function getBookiesGeneric(int $bookie_id = null) : array
     {
         $extra_where = '';
@@ -88,7 +45,7 @@ class BookieDB
                     SET changenum = ? 
                     WHERE bookie_id = ?';
 
-        $params = array($change_num, $bookie_id);
+        $params = [$change_num, $bookie_id];
 
         $result = DBTools::doParamQuery($query, $params);
 
@@ -104,7 +61,7 @@ class BookieDB
                     FROM bookies_changenums 
                     WHERE bookie_id = ?';
 
-        $params = array($bookie_id);
+        $params = [$bookie_id];
 
         $result = DBTools::doParamQuery($query, $params);
 
@@ -160,24 +117,24 @@ class BookieDB
     }
 
 
-    public static function getPropTemplatesForBookie($a_iBookieID)
+    public static function getPropTemplatesForBookie($bookie_id)
     {
         $query = 'SELECT bpt.id, bpt.bookie_id, bpt.template, bpt.template_neg, bpt.prop_type, bpt.fields_type, pt.is_eventprop, bpt.last_used
                     FROM bookies_proptemplates bpt, prop_types pt
                     WHERE bpt.bookie_id = ?
                         AND bpt.prop_type = pt.id';
-        $params = array($a_iBookieID);
+        $params = array($bookie_id);
 
         $result = DBTools::doParamQuery($query, $params);
 
-        $aTemplates = array();
-        while ($aTemplate = mysqli_fetch_array($result)) {
-            $oTempObj = new PropTemplate($aTemplate['id'], $aTemplate['bookie_id'], $aTemplate['template'], $aTemplate['template_neg'], $aTemplate['prop_type'], $aTemplate['fields_type'], $aTemplate['last_used']);
-            $oTempObj->setEventProp($aTemplate['is_eventprop']);
-            $aTemplates[] = $oTempObj;
+        $templates = [];
+        while ($row = mysqli_fetch_array($result)) {
+            $template = new PropTemplate($row['id'], $row['bookie_id'], $row['template'], $row['template_neg'], $row['prop_type'], $row['fields_type'], $row['last_used']);
+            $template->setEventProp($row['is_eventprop']);
+            $templates[] = $template;
         }
 
-        return $aTemplates;
+        return $templates;
     }
 
     public static function addNewPropTemplate($prop_template)
@@ -198,19 +155,19 @@ class BookieDB
         return (int) $id;
     }
 
-    public static function updateTemplateLastUsed($id)
+    public static function updateTemplateLastUsed($template_id)
     {
         $query = 'UPDATE bookies_proptemplates SET last_used = NOW() WHERE id = ?';
-        $params = array($id);
+        $params = array($template_id);
         DBTools::doParamQuery($query, $params);
 
         return (DBTools::getAffectedRows() > 0 ? true : false);
     }
 
-    public static function deleteTemplate($id)
+    public static function deleteTemplate($template_id)
     {
         $query = 'DELETE FROM bookies_proptemplates WHERE id = ?';
-        $params = array($id);
+        $params = array($template_id);
         DBTools::doParamQuery($query, $params);
         return (DBTools::getAffectedRows() > 0 ? true : false);
     }
