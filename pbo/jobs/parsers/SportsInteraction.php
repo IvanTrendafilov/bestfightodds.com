@@ -198,7 +198,7 @@ class ParserJob
         }
 
         //Declare authorative run if we fill the criteria
-        if (count($oParsedSport->getParsedMatchups()) >= 10 && $oXML->getName() != 'feed-unchanged')
+        if (count($oParsedSport->getParsedMatchups()) >= 2 && $oXML->getName() != 'feed-unchanged')
         {
             $this->full_run = true;
             $this->logger->info("Declared authoritive run");
