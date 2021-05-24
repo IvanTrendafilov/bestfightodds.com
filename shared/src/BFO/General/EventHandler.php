@@ -11,22 +11,22 @@ class EventHandler
 {
     public static function getAllUpcomingEvents()
     {
-        return EventDB::getEventsGeneric(true);
+        return EventDB::getEvents(future_events_only: true);
     }
 
     public static function getAllEvents()
     {
-        return EventDB::getEventsGeneric(false);
+        return EventDB::getEvents();
     }
 
     public static function getAllFightsForEvent($event_id, $only_with_odds = false)
     {
-        return EventDB::getMatchupsGeneric(only_with_odds: $only_with_odds, event_id: $event_id);
+        return EventDB::getMatchups(only_with_odds: $only_with_odds, event_id: $event_id);
     }
 
     public static function getAllUpcomingMatchups($only_with_odds = false)
     {
-        return EventDB::getMatchupsGeneric(future_matchups_only: true, only_with_odds: $only_with_odds);
+        return EventDB::getMatchups(future_matchups_only: true, only_with_odds: $only_with_odds);
     }
 
     /**
@@ -56,29 +56,18 @@ class EventHandler
 
     public static function getEvent($event_id, $future_event_only = false)
     {
-        $events = EventDB::getEventsGeneric($future_event_only, $event_id);
+        $events = EventDB::getEvents($future_event_only, $event_id);
         return $events[0] ?? null;
     }
 
     public static function getEventByName(string $name)
     {
-        return EventDB::getEventsGeneric(false, null, $name);
+        return EventDB::getEvents(event_name: $name);
     }
 
-    //New version of getFight above. Improvements are the possibility of finding old matchups
-    //Params:
-    //team1_name = Required
-    //team2_name = Required
-    //future_only = Optional
-    //event_id = Optional
-    /**
-     * Get matching fight (V2)
-     *
-     * @return Fight Matching fight
-     */
-    public static function getMatchingFight($params)
+    public static function getMatchingFight(string $team1_name, string $team2_name, bool $future_only = false, bool $past_only = false, int $known_fighter_id = null, string $event_date = null, int $event_id = null) : ?Fight
     {
-        return EventDB::getMatchingFight($params);
+        return EventDB::getMatchingFight($team1_name, $team2_name, $future_only, $past_only, $known_fighter_id, $event_date, $event_id);
     }
 
     public static function getMatchingEvent(string $event_name, string $event_date, bool $future_only = true): ?Event
@@ -98,7 +87,7 @@ class EventHandler
         if ($matchup_id == null) {
             return null;
         }
-        $matchups = EventDB::getMatchupsGeneric(matchup_id: $matchup_id);
+        $matchups = EventDB::getMatchups(matchup_id: $matchup_id);
         return $matchups[0] ?? null;
     }
 
@@ -205,7 +194,7 @@ class EventHandler
 
     public static function getAllFightsForEventWithoutOdds($event_id)
     {
-        return EventDB::getMatchupsGeneric(event_id: $event_id, only_without_odds: true);
+        return EventDB::getMatchups(event_id: $event_id, only_without_odds: true);
     }
 
     /**
@@ -354,7 +343,7 @@ class EventHandler
             return self::getEvent(PARSE_FUTURESEVENT_ID);
         }
 
-        $events = EventDB::getEventsGeneric(event_name: $date_str);
+        $events = EventDB::getEvents(event_name: $date_str);
         $event_obj = $events[0] ?? null;
         //$event_obj = EventDB::getGenericEventForDate($date_str);
         if ($event_obj == null) {
@@ -493,7 +482,7 @@ class EventHandler
 
     public static function getAllEventsForDate(string $date): array
     {
-        return EventDB::getEventsGeneric(event_date: $date);
+        return EventDB::getEvents(event_date: $date);
     }
 
     public static function deleteAllOldEventsWithoutOdds(): int

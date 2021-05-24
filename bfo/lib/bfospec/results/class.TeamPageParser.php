@@ -163,11 +163,11 @@ class TeamPageParser
 
 
 		
-		$matching_fight = EventHandler::getMatchingFight(['team1_name' => $temp_fight->getTeam(1),
-															'team2_name' => $temp_fight->getTeam(2),
-															'event_id' => $temp_fight->getEventID(),
-															'known_fighter_id' => $fighter->getID(),
-															'event_date' =>  $check_date->format('Y-m-d')]);
+		$matching_fight = EventHandler::getMatchingFight(team1_name: $temp_fight->getTeam(1),
+															team2_name: $temp_fight->getTeam(2),
+															event_id: $temp_fight->getEventID(),
+															known_fighter_id: $fighter->getID(),
+															event_date:  $check_date->format('Y-m-d'));
 		if ($matching_fight != null)
 		{
 			$this->logger->info('Found match: ' . $matching_fight->getTeam($temp_fight->hasOrderChanged() ? 2 : 1) . ' vs ' . $matching_fight->getTeam($temp_fight->hasOrderChanged() ? 1 : 2));

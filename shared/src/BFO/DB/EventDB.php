@@ -11,7 +11,7 @@ use BFO\DataTypes\FightOdds;
 
 class EventDB
 {
-    public static function getEventsGeneric(bool $future_events_only = null, int $event_id = null, string $event_name = null, string $event_date = null): array
+    public static function getEvents(bool $future_events_only = null, int $event_id = null, string $event_name = null, string $event_date = null): array
     {
         $extra_where = '';
         $params = [];
@@ -50,7 +50,7 @@ class EventDB
         return $found_events;
     }
 
-    public static function getMatchupsGeneric($future_matchups_only = false, $only_with_odds = false, $event_id = null, $matchup_id = null, $only_without_odds = false): array
+    public static function getMatchups($future_matchups_only = false, $only_with_odds = false, $event_id = null, $matchup_id = null, $only_without_odds = false): array
     {
         $extra_where = '';
         $extra_where_metadata = '';
@@ -225,90 +225,81 @@ class EventDB
         return null;
     }
 
-    //Params:
-    //team1_name = Required
-    //team2_name = Required
-    //future_only = Optional
-    //past_only = Optional
-    //known_fighter_id = Optional
-    //event_date = Optional (format: yyyy-mm-dd) Note: day before and after is also included
-    //event_id = Optional
-    public static function getMatchingFight($a_aParams)
+    public static function getMatchingFight(string $team1_name, string $team2_name, bool $future_only = false, bool $past_only = false, int $known_fighter_id = null, string $event_date = null, int $event_id = null) : ?Fight
     {
-        $sExtraWhere = '';
+        $extra_where = '';
         $aQueryParams = [];
-        if (isset($a_aParams['future_only']) && $a_aParams['future_only'] == true) {
-            $sExtraWhere .= ' AND LEFT(e.date, 10) >= LEFT((NOW() - INTERVAL ' . GENERAL_GRACEPERIOD_SHOW . ' HOUR), 10)';
+        if ($future_only) {
+            $extra_where .= ' AND LEFT(e.date, 10) >= LEFT((NOW() - INTERVAL ' . GENERAL_GRACEPERIOD_SHOW . ' HOUR), 10)';
         }
-        if (isset($a_aParams['past_only']) && $a_aParams['past_only'] == true) {
-            $sExtraWhere .= ' AND LEFT(e.date, 10) < LEFT((NOW() - INTERVAL ' . GENERAL_GRACEPERIOD_SHOW . ' HOUR), 10)';
+        if ($past_only) {
+            $extra_where .= ' AND LEFT(e.date, 10) < LEFT((NOW() - INTERVAL ' . GENERAL_GRACEPERIOD_SHOW . ' HOUR), 10)';
         }
-        if (isset($a_aParams['event_id']) && is_numeric($a_aParams['event_id']) && $a_aParams['event_id'] != -1) {
-            $sExtraWhere .= ' AND event_id = ' . DBTools::makeParamSafe($a_aParams['event_id']) . '';
+        if ($event_id) {
+            $extra_where .= ' AND event_id = ' . DBTools::makeParamSafe($event_id) . '';
         }
-        if (isset($a_aParams['known_fighter_id']) && is_numeric($a_aParams['known_fighter_id'])) {
-            $sExtraWhere .= ' AND (fighter1_id = ' . DBTools::makeParamSafe($a_aParams['known_fighter_id']) . ' OR fighter2_id = ' . DBTools::makeParamSafe($a_aParams['known_fighter_id']) . ')';
+        if ($known_fighter_id) {
+            $extra_where .= ' AND (fighter1_id = ' . DBTools::makeParamSafe($known_fighter_id) . ' OR fighter2_id = ' . DBTools::makeParamSafe($known_fighter_id) . ')';
         }
-        if (isset($a_aParams['event_date'])) {
-            $sExtraWhere .= ' AND LEFT(e.date, 10) <= DATE_ADD(\'' . DBTools::makeParamSafe($a_aParams['event_date']) . '\', INTERVAL +1 DAY) AND LEFT(e.date, 10) >= DATE_ADD(\'' . DBTools::makeParamSafe($a_aParams['event_date']) . '\', INTERVAL -1 DAY)';
+        if ($event_date) {
+            $extra_where .= ' AND LEFT(e.date, 10) <= DATE_ADD(\'' . DBTools::makeParamSafe($event_date) . '\', INTERVAL +1 DAY) AND LEFT(e.date, 10) >= DATE_ADD(\'' . DBTools::makeParamSafe($event_date) . '\', INTERVAL -1 DAY)';
         }
 
-        $sQuery = 'SELECT 1 AS original, t.id, a.name AS fighter1_name, a.id as fighter1_id, b.name AS fighter2_name, b.id as fighter2_id, t.event_id
+        $query = 'SELECT 1 AS original, t.id, a.name AS fighter1_name, a.id as fighter1_id, b.name AS fighter2_name, b.id as fighter2_id, t.event_id
                       FROM events e, fights t
                           JOIN fighters a ON a.id = t.fighter1_id
-                          JOIN fighters b ON b.id = t.fighter2_id WHERE e.id = event_id ' . $sExtraWhere . '
+                          JOIN fighters b ON b.id = t.fighter2_id WHERE e.id = event_id ' . $extra_where . '
                     UNION SELECT 0 AS original, t.id, a.altname, a.fighter_id, b.altname, b.fighter_id, t.event_id
                       FROM events e, fights t
                           JOIN fighters_altnames a ON a.fighter_id = fighter1_id
-                          JOIN fighters_altnames b ON b.fighter_id = fighter2_id WHERE e.id = event_id ' . $sExtraWhere . '
+                          JOIN fighters_altnames b ON b.fighter_id = fighter2_id WHERE e.id = event_id ' . $extra_where . '
                     UNION SELECT 0 AS original, t.id, a.name, a.id, b.altname, b.fighter_id, t.event_id
                       FROM events e, fights t
                           JOIN fighters a ON a.id = t.fighter1_id
-                          JOIN fighters_altnames b ON b.fighter_id = fighter2_id WHERE e.id = event_id ' . $sExtraWhere . '
+                          JOIN fighters_altnames b ON b.fighter_id = fighter2_id WHERE e.id = event_id ' . $extra_where . '
                     UNION SELECT 0 AS original, t.id, a.altname, a.fighter_id, b.name, b.id, t.event_id
                       FROM events e, fights t
                           JOIN fighters b ON b.id = fighter2_id
-                          JOIN fighters_altnames a ON a.fighter_id = fighter1_id WHERE e.id = event_id ' . $sExtraWhere . ' ';
+                          JOIN fighters_altnames a ON a.fighter_id = fighter1_id WHERE e.id = event_id ' . $extra_where . ' ';
 
-        $rResult = DBTools::getCachedQuery($sQuery);
-        if ($rResult == null) {
-            $rResult = DBTools::doQuery($sQuery);
-            DBTools::cacheQueryResults($sQuery, $rResult);
+        $result = DBTools::getCachedQuery($query);
+        if ($result == null) {
+            $result = DBTools::doQuery($query);
+            DBTools::cacheQueryResults($query, $result);
         }
 
-        while ($aFight = mysqli_fetch_array($rResult)) {
-            $oTempFight = new Fight($aFight['id'], $aFight['fighter1_name'], $aFight['fighter2_name'], $aFight['event_id']);
-            if ($aFight['fighter1_name'] > $aFight['fighter2_name']) {
-                $oTempFight->setComment('switched');
+        while ($row = mysqli_fetch_array($result)) {
+            $fight_obj = new Fight($row['id'], $row['fighter1_name'], $row['fighter2_name'], $row['event_id']);
+            if ($row['fighter1_name'] > $row['fighter2_name']) {
+                $fight_obj->setComment('switched');
             }
 
-            if (OddsTools::compareNames($oTempFight->getFighter(($a_aParams['team1_name'] >= $a_aParams['team2_name'] ? 2 : 1)), $a_aParams['team1_name']) > 82) {
-                if (OddsTools::compareNames($oTempFight->getFighter(($a_aParams['team1_name'] >= $a_aParams['team2_name'] ? 1 : 2)), $a_aParams['team2_name']) > 82) {
-                    $aFoundFight = null;
-                    if ($aFight['original'] == '0') {
-                        $matchup = EventDB::getMatchupsGeneric(matchup_id: $aFight['id']);
-                        $aFoundFight = $matchup[0] ?? null;
+            if (OddsTools::compareNames($fight_obj->getTeam(($team1_name >= $team2_name ? 2 : 1)), $team1_name) > 82) {
+                if (OddsTools::compareNames($fight_obj->getTeam(($team1_name >= $team2_name ? 1 : 2)), $team2_name) > 82) {
+                    $found_matchup = null;
+                    if ($row['original'] == '0') {
+                        $matchup = EventDB::getMatchups(matchup_id: $row['id']);
+                        $found_matchup = $matchup[0] ?? null;
 
-                        $is_ordered_in_db = EventDB::isFightOrderedInDatabase($aFight['id']);
+                        $is_ordered_in_db = EventDB::isFightOrderedInDatabase($row['id']);
                         if ($is_ordered_in_db == true) {
-                            if ($oTempFight->getComment() == 'switched') {
-                                $aFoundFight->setComment('switched');
+                            if ($fight_obj->getComment() == 'switched') {
+                                $found_matchup->setComment('switched');
                             }
                         } else {
-                            if ($oTempFight->getComment() != 'switched') {
-                                $aFoundFight->setComment('switched');
+                            if ($fight_obj->getComment() != 'switched') {
+                                $found_matchup->setComment('switched');
                             }
                         }
                     } else {
-                        $aFoundFight = new Fight($aFight['id'], $aFight['fighter1_name'], $aFight['fighter2_name'], $aFight['event_id']);
-                        $aFoundFight->setFighterID(1, $aFight['fighter1_id']);
-                        $aFoundFight->setFighterID(2, $aFight['fighter2_id']);
+                        $found_matchup = new Fight($row['id'], $row['fighter1_name'], $row['fighter2_name'], $row['event_id']);
+                        $found_matchup->setFighterID(1, $row['fighter1_id']);
+                        $found_matchup->setFighterID(2, $row['fighter2_id']);
                     }
-                    return $aFoundFight;
+                    return $found_matchup;
                 }
             }
         }
-        //No matching fight found
         return null;
     }
 
@@ -434,9 +425,9 @@ class EventDB
     public static function addNewFight($fight_obj)
     {
         //Check that event is ok
-        if (EventDB::getEventsGeneric(false, $fight_obj->getEventID()) != null) {
+        if (EventDB::getEvents(false, $fight_obj->getEventID()) != null) {
             //Check if fight isn't already added
-            if (EventDB::getMatchingFight(['team1_name' => $fight_obj->getFighter(1), 'team2_name' => $fight_obj->getFighter(2), 'event_id' => $fight_obj->getEventID(), 'future_only' => true]) == null) {
+            if (!EventDB::getMatchingFight(team1_name: $fight_obj->getFighter(1), team2_name: $fight_obj->getFighter(2), event_id: $fight_obj->getEventID(), future_only: true)) {
                 //Check that both fighters exist, if not, add them
                 $fighter1_id = EventDB::getFighterIDByName($fight_obj->getFighter(1));
                 if ($fighter1_id == null) {
@@ -735,17 +726,19 @@ class EventDB
      * @param int $a_iOffset Offset (default 0)
      * @return array List of events
      */
-    public static function getRecentEvents($limit, $offset = 0)
+    public static function getRecentEvents(int $limit, int $offset = 0) : array
     {
         $query = 'SELECT id, date, name, display
                     FROM events
                     WHERE LEFT(date, 10) < LEFT((NOW() - INTERVAL ' . GENERAL_GRACEPERIOD_SHOW . ' HOUR), 10)
                     ORDER BY date DESC, name DESC LIMIT ' . $offset . ',' . $limit . '';
 
-        $result = DBTools::doQuery($query);
-        $events = array();
-        while ($row = mysqli_fetch_array($result)) {
-            $events[] = new Event($row['id'], $row['date'], $row['name'], $row['display']);
+        try {
+            foreach (PDOTools::findMany($query) as $row) {
+                $events[] = new Event($row['id'], $row['date'], $row['name'], $row['display']);
+            }
+        } catch (\PDOException $e) {
+            throw new \Exception("Unknown error " . $e->getMessage(), 10);
         }
 
         return $events;

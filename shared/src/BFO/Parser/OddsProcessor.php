@@ -105,11 +105,11 @@ class OddsProcessor
         $matched_items = [];
         foreach ($parsed_matchups as $parsed_matchup) {
             $match = false;
-            $matching_matchup = EventHandler::getMatchingFight([
-                'team1_name' => $parsed_matchup->getTeamName(1),
-                'team2_name' => $parsed_matchup->getTeamName(2),
-                'future_only' => true
-            ]);
+            $matching_matchup = EventHandler::getMatchingFight(
+                team1_name: $parsed_matchup->getTeamName(1),
+                team2_name: $parsed_matchup->getTeamName(2),
+                future_only: true
+            );
 
             if (!$matching_matchup) {
                 $this->logger->warning('No matchup found for ' . $parsed_matchup->getTeamName(1) . ' vs ' . $parsed_matchup->getTeamName(2));

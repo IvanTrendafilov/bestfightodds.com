@@ -113,6 +113,9 @@ class OddsTools
      */
     public static function compareNames($name1, $name2)
     {
+        $name1 = strtoupper($name1);
+        $name2 = strtoupper($name2);
+
         //Find the name with least number of parts, this will be deciding the number of parts for comparison
         $name1_parts = explode(' ', $name1);
         $name2_parts = explode(' ', $name2);
