@@ -10,7 +10,7 @@ use BFO\DataTypes\PropTemplate;
 
 class BookieDB
 {
-    public static function getAllBookies()
+    /*public static function getAllBookies()
     {
         $query = 'SELECT id, name, url, refurl
 					FROM bookies 
@@ -51,6 +51,35 @@ class BookieDB
             return $bookies[0];
         }
         return null;
+    }*/
+
+    public static function getBookiesGeneric(int $bookie_id = null) : array
+    {
+        $extra_where = '';
+        $params = [];
+        if ($bookie_id) {
+            $extra_where = ' AND id = ? ';
+            $params[] = $bookie_id;
+        }
+
+        $query = 'SELECT b.id, b.name, b.url, b.refurl
+            FROM bookies b
+            WHERE active = true 
+            ' . $extra_where . '
+            ORDER BY position, id ASC';
+
+        $bookies = [];
+        try {
+            foreach (PDOTools::findMany($query, $params) as $row) {
+                $bookies[] = new Bookie($row['id'], $row['name'], $row['url'], $row['refurl']);
+            };
+        } catch (\PDOException $e) {
+            if ($e->getCode() == 23000) {
+                throw new \Exception("Unknown error " . $e->getMessage(), 10);
+            }
+        }
+
+        return $bookies;
     }
 
     public static function saveChangeNum($bookie_id, $change_num)

@@ -2,18 +2,22 @@
 
 namespace BFO\General;
 
+use BFO\DataTypes\Bookie;
 use BFO\DB\BookieDB;
 
 class BookieHandler
 {
-    public static function getAllBookies()
+    public static function getAllBookies() : array
     {
-        return BookieDB::getAllBookies();
+        //return BookieDB::getAllBookies();
+        return BookieDB::getBookiesGeneric();
     }
 
-    public static function getBookieByID($id)
+    public static function getBookieByID($bookie_id) : ?Bookie
     {
-        return BookieDB::getBookieByID($id);
+        $bookies = BookieDB::getBookiesGeneric($bookie_id);
+        return $bookies[0] ?? null;
+        //return BookieDB::getBookieByID($id);
     }
 
     public static function saveChangeNum($bookie_id, $change_num)

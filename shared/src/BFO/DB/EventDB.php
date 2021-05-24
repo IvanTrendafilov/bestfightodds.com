@@ -35,6 +35,7 @@ class EventDB
         $query = 'SELECT e.id, e.date, e.name, e.display
                     FROM events e
                         WHERE 1=1 ' . $extra_where . ' 
+                        AND e.id IS NOT NULL
                     ORDER BY e.date ASC, LEFT(e.name,3) = "UFC" DESC, LEFT(e.name,8) = "Bellator" DESC, e.name ASC;';
 
         $found_events = [];
@@ -85,6 +86,7 @@ class EventDB
                     WHERE 1=1 ' . $extra_where . '
                     ' . ($future_matchups_only ? ' AND LEFT(e.date, 10) >= LEFT((NOW() - INTERVAL ' . GENERAL_GRACEPERIOD_SHOW . ' HOUR), 10) ' : '') . '
                     ' . ($only_with_odds ? ' HAVING latest_date IS NOT NULL ' : '') . '
+                        AND f.id IS NOT NULL
                     ORDER BY f.is_mainevent DESC, gametime DESC, latest_date ASC';
 
         $matchups = [];
