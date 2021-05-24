@@ -21,12 +21,12 @@ class EventHandler
 
     public static function getAllFightsForEvent($event_id, $only_with_odds = false)
     {
-        return EventDB::getMatchupsGeneric(false, $only_with_odds, $event_id);
+        return EventDB::getMatchupsGeneric(only_with_odds: $only_with_odds, event_id: $event_id);
     }
 
     public static function getAllUpcomingMatchups($only_with_odds = false)
     {
-        return EventDB::getMatchupsGeneric(true, $only_with_odds);
+        return EventDB::getMatchupsGeneric(future_matchups_only: true, only_with_odds: $only_with_odds);
     }
 
     /**
@@ -98,7 +98,7 @@ class EventHandler
         if ($matchup_id == null) {
             return null;
         }
-        $matchups = EventDB::getMatchupsGeneric(false, false, null, $matchup_id);
+        $matchups = EventDB::getMatchupsGeneric(matchup_id: $matchup_id);
         return $matchups[0] ?? null;
     }
 
@@ -205,7 +205,7 @@ class EventHandler
 
     public static function getAllFightsForEventWithoutOdds($event_id)
     {
-        return EventDB::getMatchupsGeneric(false, false, $event_id);
+        return EventDB::getMatchupsGeneric(event_id: $event_id, only_without_odds: true);
     }
 
     /**

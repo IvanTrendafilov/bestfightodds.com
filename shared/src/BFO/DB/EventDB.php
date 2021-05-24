@@ -50,7 +50,7 @@ class EventDB
         return $found_events;
     }
 
-    public static function getMatchupsGeneric($future_matchups_only = false, $only_with_odds = false, $event_id = null, $matchup_id = null): array
+    public static function getMatchupsGeneric($future_matchups_only = false, $only_with_odds = false, $event_id = null, $matchup_id = null, $only_without_odds = false): array
     {
         $extra_where = '';
         $extra_where_metadata = '';
@@ -86,6 +86,7 @@ class EventDB
                     WHERE 1=1 ' . $extra_where . '
                     ' . ($future_matchups_only ? ' AND LEFT(e.date, 10) >= LEFT((NOW() - INTERVAL ' . GENERAL_GRACEPERIOD_SHOW . ' HOUR), 10) ' : '') . '
                     ' . ($only_with_odds ? ' HAVING latest_date IS NOT NULL ' : '') . '
+                    ' . ($only_without_odds ? ' HAVING latest_date IS NULL ' : '') . '
                         AND f.id IS NOT NULL
                     ORDER BY f.is_mainevent DESC, gametime DESC, latest_date ASC';
 
@@ -285,7 +286,7 @@ class EventDB
                 if (OddsTools::compareNames($oTempFight->getFighter(($a_aParams['team1_name'] >= $a_aParams['team2_name'] ? 1 : 2)), $a_aParams['team2_name']) > 82) {
                     $aFoundFight = null;
                     if ($aFight['original'] == '0') {
-                        $matchup = EventDB::getMatchupsGeneric(false, false, null, $aFight['id']);
+                        $matchup = EventDB::getMatchupsGeneric(matchup_id: $aFight['id']);
                         $aFoundFight = $matchup[0] ?? null;
 
                         $is_ordered_in_db = EventDB::isFightOrderedInDatabase($aFight['id']);
