@@ -45,6 +45,12 @@ final class CreateEventTest extends TestCase
             $event->getDate()
         );
 
+        $event = EventHandler::getAllEventsForDate('2032-10-23');
+        $this->assertEquals(
+            '2032-10-23',
+            $event[0]->getDate()
+        );
+
         $result = EventHandler::removeEvent($event_id);
         $this->assertEquals(
             true,

@@ -11,7 +11,7 @@ use BFO\DataTypes\FightOdds;
 
 class EventDB
 {
-    public static function getAllUpcomingEvents()
+    /*public static function getAllUpcomingEvents()
     {
         $query = 'SELECT id, date, name, display
                     FROM events
@@ -74,13 +74,51 @@ class EventDB
             return $events[0];
         }
         return null;
+    }*/
+
+    public static function getEventsGeneric(bool $future_events_only = null, int $event_id = null, string $event_name = null, string $event_date = null): array
+    {
+        $extra_where = '';
+        $params = [];
+        if ($future_events_only) {
+            $extra_where = ' AND LEFT(e.date, 10) >= LEFT((NOW() - INTERVAL ' . GENERAL_GRACEPERIOD_SHOW . ' HOUR), 10) ';
+        }
+        if ($event_id) {
+            $extra_where = ' AND e.id = ? ';
+            $params[] = $event_id;
+        }
+        if ($event_name) {
+            $extra_where = ' AND e.name = ? ';
+            $params[] = $event_name;
+        }
+
+        if ($event_date) {
+            $extra_where = ' AND e.date = ? ';
+            $params[] = $event_date;
+        }
+
+        $query = 'SELECT e.id, e.date, e.name, e.display
+                    FROM events e
+                        WHERE 1=1 ' . $extra_where . ' 
+                    ORDER BY e.date ASC, LEFT(e.name,3) = "UFC" DESC, LEFT(e.name,8) = "Bellator" DESC, e.name ASC;';
+
+        $found_events = [];
+        try {
+            foreach (PDOTools::findMany($query, $params) as $row) {
+                $found_events[] = new Event($row['id'], $row['date'], $row['name'], $row['display']);
+            }
+        } catch (\PDOException $e) {
+            throw new \Exception("Unknown error " . $e->getMessage(), 10);
+        }
+
+        return $found_events;
     }
 
     /**
      *
      * If second parameter is set to true then only fights that have odds on them will be returned
      */
-    public static function getAllFightsForEvent($event_id, $only_with_odds = false)
+    /*public static function getAllFightsForEvent($event_id, $only_with_odds = false)
     {
         $query = 'SELECT f.id, f1.name AS fighter1_name, f2.name AS fighter2_name, f.event_id, f1.id AS fighter1_id, f2.id AS fighter2_id, f.is_mainevent as is_mainevent, (SELECT MIN(date) FROM fightodds fo WHERE fo.fight_id = f.id) AS latest_date, m.mvalue as gametime, m.max_value as max_gametime, m.min_value as min_gametime 
                     FROM fights f 
@@ -120,9 +158,9 @@ class EventDB
         }
 
         return $matchups;
-    }
+    }*/
 
-    public static function getAllFightsForEventWithoutOdds($event_id)
+    /*public static function getAllFightsForEventWithoutOdds($event_id)
     {
         $query = 'SELECT f.id, f1.name AS fighter1_name, f2.name AS fighter2_name, f.event_id, f1.id AS fighter1_id, f2.id AS fighter2_id
                     FROM fights f LEFT JOIN fightodds fo ON f.id = fo.fight_id, fighters f1, fighters f2
@@ -146,7 +184,7 @@ class EventDB
         }
 
         return $matchups;
-    }
+    }*/
 
     /**
      * Get all upcoming fights
@@ -156,7 +194,7 @@ class EventDB
      * 
      * TODO: This should be extended to also include relevant metadata like gametime
      */
-    public static function getAllUpcomingMatchups($only_with_odds = false)
+    /*public static function getAllUpcomingMatchups($only_with_odds = false)
     {
         if ($only_with_odds == true) {
             $query = 'SELECT f.id, f1.name AS fighter1_name, f2.name AS fighter2_name, f.event_id, f1.id AS fighter1_id, f2.id AS fighter2_id, f.is_mainevent as is_mainevent, (SELECT date FROM fightodds fo WHERE fo.fight_id = f.id LIMIT 1) AS latest_date
@@ -190,7 +228,72 @@ class EventDB
         }
 
         return $matchups;
+    }*/
+
+
+    public static function getMatchupsGeneric($future_matchups_only = false, $only_with_odds = false, $event_id = null, $matchup_id = null): array
+    {
+        $extra_where = '';
+        $extra_where_metadata = '';
+        $params = [];
+
+        if ($matchup_id) {
+            $extra_where = ' AND f.id = :matchup_id ';
+            $extra_where_metadata = ' AND fm.id = :metadata_matchup_id ';
+            $params = [':matchup_id' => $matchup_id, ':metadata_matchup_id' => $matchup_id];
+        }
+
+        if ($event_id) {
+            $extra_where = ' AND e.id = :event_id ';
+            $extra_where_metadata = ' AND em.id = :metadata_event_id ';
+            $params = [':event_id' => $event_id, ':metadata_event_id' => $event_id];
+        }
+
+        $query = 'SELECT f.id, f1.name AS fighter1_name, f2.name AS fighter2_name, f.event_id, f1.id AS fighter1_id, f2.id AS fighter2_id, f.is_mainevent as is_mainevent, 
+                        (SELECT MIN(date) FROM fightodds fo WHERE fo.fight_id = f.id) AS latest_date, m.mvalue as gametime, m.max_value as max_gametime, m.min_value as min_gametime 
+                    FROM 
+                        events e
+                        LEFT JOIN fights f ON e.id = f.event_id 
+                        LEFT JOIN 
+                            (SELECT matchup_id, AVG(mvalue) as mvalue, MAX(mvalue) as max_value, MIN(mvalue) as min_value 
+                                FROM events em 
+                                    LEFT JOIN fights fm ON em.id = fm.event_id 
+                                    LEFT JOIN matchups_metadata mm ON fm.id = mm.matchup_id 
+                                WHERE mm.mattribute = "gametime" 
+                                    ' . $extra_where_metadata . '
+                                GROUP BY matchup_id) m ON f.id = m.matchup_id
+                        LEFT JOIN fighters f1 ON f1.id = f.fighter1_id
+                        LEFT JOIN fighters f2 ON f2.id = f.fighter2_id
+                    WHERE 1=1 ' . $extra_where . '
+                    ' . ($future_matchups_only ? ' AND LEFT(e.date, 10) >= LEFT((NOW() - INTERVAL ' . GENERAL_GRACEPERIOD_SHOW . ' HOUR), 10) ' : '') . '
+                    ' . ($only_with_odds ? ' HAVING latest_date IS NOT NULL ' : '') . '
+                    ORDER BY f.is_mainevent DESC, gametime DESC, latest_date ASC';
+
+        $matchups = [];
+        try {
+            foreach (PDOTools::findMany($query, $params) as $row) {
+                $fight_obj = new Fight($row['id'], $row['fighter1_name'], $row['fighter2_name'], $row['event_id']);
+                $fight_obj->setFighterID(1, $row['fighter1_id']);
+                $fight_obj->setFighterID(2, $row['fighter2_id']);
+                $fight_obj->setMainEvent($row['is_mainevent']);
+                if (isset($row['gametime'])) {
+                    $fight_obj->setMetadata('gametime', $row['gametime']);
+                }
+                if (isset($row['max_gametime'])) {
+                    $fight_obj->setMetadata('max_gametime', $row['max_gametime']);
+                }
+                if (isset($row['min_gametime'])) {
+                    $fight_obj->setMetadata('min_gametime', $row['min_gametime']);
+                }
+                $matchups[] = $fight_obj;
+            }
+        } catch (\PDOException $e) {
+            throw new \Exception("Unknown error " . $e->getMessage(), 10);
+        }
+
+        return $matchups;
     }
+
 
     public static function getAllLatestOddsForFight($a_iFightID, $a_iOffset = 0)
     {
@@ -362,7 +465,9 @@ class EventDB
                 if (OddsTools::compareNames($oTempFight->getFighter(($a_aParams['team1_name'] >= $a_aParams['team2_name'] ? 1 : 2)), $a_aParams['team2_name']) > 82) {
                     $aFoundFight = null;
                     if ($aFight['original'] == '0') {
-                        $aFoundFight = EventDB::getFightByID($aFight['id']);
+                        //$aFoundFight = EventDB::getFightByID($aFight['id']);
+                        $matchup = EventDB::getMatchupsGeneric(false, false, null, $aFight['id']);
+                        $aFoundFight = $matchup[0] ?? null;
 
                         $bCheckFight = EventDB::isFightOrderedInDatabase($aFight['id']);
                         if ($bCheckFight == true) {
@@ -387,7 +492,7 @@ class EventDB
         return null;
     }
 
-    public static function getFightByID($matchup_id)
+    /*public static function getFightByID($matchup_id)
     {
         $query = 'SELECT f.id, f1.name AS fighter1_name, f2.name AS fighter2_name, f.event_id, f.fighter1_id, f.fighter2_id 
                     FROM fights f, fighters f1, fighters f2
@@ -408,7 +513,7 @@ class EventDB
             return $fight_obj;
         }
         return null;
-    }
+    }*/
 
     /**
      * Ugly little function that is needed to check if a fight is stored not lexiographically order in the database.
@@ -532,7 +637,7 @@ class EventDB
     public static function addNewFight($fight_obj)
     {
         //Check that event is ok
-        if (EventDB::getEvent($fight_obj->getEventID()) != null) {
+        if (EventDB::getEventsGeneric(false, $fight_obj->getEventID()) != null) {
             //Check if fight isn't already added
             if (EventDB::getMatchingFight(['team1_name' => $fight_obj->getFighter(1), 'team2_name' => $fight_obj->getFighter(2), 'event_id' => $fight_obj->getEventID(), 'future_only' => true]) == null) {
                 //Check that both fighters exist, if not, add them
@@ -877,7 +982,7 @@ class EventDB
     /**
      * Gets the generic event for a specific date. The generic event is a default one that is used to store matchups that cannot be linked to a more specific event
      */
-    public static function getGenericEventForDate($date)
+    /*public static function getGenericEventForDate($date)
     {
         //Genereic events for a date is always named after the date so a lookup is made based on that
         $query = 'SELECT id, date, name, display 
@@ -895,7 +1000,7 @@ class EventDB
             return $events[0];
         }
         return null;
-    }
+    }*/
 
     public static function setMetaDataForMatchup($matchup_id, $attribute, $value, $bookie_id)
     {
@@ -906,7 +1011,7 @@ class EventDB
         return DBTools::doParamQuery($query, $params);
     }
 
-    public static function getMetaDataForMatchup(int $matchup_id, string $metadata_attribute = null, int $bookie_id = null) : array
+    public static function getMetaDataForMatchup(int $matchup_id, string $metadata_attribute = null, int $bookie_id = null): array
     {
         $extra_where = '';
         $params = [$matchup_id];
@@ -1016,7 +1121,7 @@ class EventDB
         return $rows;
     }
 
-    public static function getAllEventsForDate(string $date) : array
+    /*public static function getAllEventsForDate(string $date): array
     {
         $query = 'SELECT * FROM events e WHERE e.date = ?';
         $params = [$date];
@@ -1026,6 +1131,5 @@ class EventDB
             $events[] = new Event($row['id'], $row['date'], $row['name'], $row['display']);
         }
         return $events;
-
-    }
+    }*/
 }

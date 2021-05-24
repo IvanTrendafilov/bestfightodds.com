@@ -135,6 +135,11 @@ class MatchupCreator
         }
 
         $date = $date_obj->format('Y-m-d');
+
+        if (PARSE_USE_DATE_EVENTS) {
+            $event_name = $date;
+        }
+
         return EventHandler::getMatchingEvent($event_name, $date);
     }
 
