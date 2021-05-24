@@ -16,19 +16,19 @@ class EventDB
         $extra_where = '';
         $params = [];
         if ($future_events_only) {
-            $extra_where = ' AND LEFT(e.date, 10) >= LEFT((NOW() - INTERVAL ' . GENERAL_GRACEPERIOD_SHOW . ' HOUR), 10) ';
+            $extra_where .= ' AND LEFT(e.date, 10) >= LEFT((NOW() - INTERVAL ' . GENERAL_GRACEPERIOD_SHOW . ' HOUR), 10) ';
         }
         if ($event_id) {
-            $extra_where = ' AND e.id = ? ';
+            $extra_where .= ' AND e.id = ? ';
             $params[] = $event_id;
         }
         if ($event_name) {
-            $extra_where = ' AND e.name = ? ';
+            $extra_where .= ' AND e.name = ? ';
             $params[] = $event_name;
         }
 
         if ($event_date) {
-            $extra_where = ' AND e.date = ? ';
+            $extra_where .= ' AND e.date = ? ';
             $params[] = $event_date;
         }
 
@@ -57,14 +57,14 @@ class EventDB
         $params = [];
 
         if ($matchup_id) {
-            $extra_where = ' AND f.id = :matchup_id ';
-            $extra_where_metadata = ' AND fm.id = :metadata_matchup_id ';
+            $extra_where .= ' AND f.id = :matchup_id ';
+            $extra_where_metadata .= ' AND fm.id = :metadata_matchup_id ';
             $params = [':matchup_id' => $matchup_id, ':metadata_matchup_id' => $matchup_id];
         }
 
         if ($event_id) {
-            $extra_where = ' AND e.id = :event_id ';
-            $extra_where_metadata = ' AND em.id = :metadata_event_id ';
+            $extra_where .= ' AND e.id = :event_id ';
+            $extra_where_metadata .= ' AND em.id = :metadata_event_id ';
             $params = [':event_id' => $event_id, ':metadata_event_id' => $event_id];
         }
 
@@ -692,7 +692,7 @@ class EventDB
     {
         $extra_where = '';
         if ($future_events_only == true) {
-            $extra_where = ' AND LEFT(e.date, 10) >= LEFT((NOW() - INTERVAL ' . GENERAL_GRACEPERIOD_SHOW . ' HOUR), 10) ';
+            $extra_where .= ' AND LEFT(e.date, 10) >= LEFT((NOW() - INTERVAL ' . GENERAL_GRACEPERIOD_SHOW . ' HOUR), 10) ';
         }
 
         $query = ' SELECT DISTINCT a3.* FROM

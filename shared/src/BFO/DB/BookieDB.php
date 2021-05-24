@@ -15,7 +15,7 @@ class BookieDB
         $extra_where = '';
         $params = [];
         if ($bookie_id) {
-            $extra_where = ' AND id = ? ';
+            $extra_where .= ' AND id = ? ';
             $params[] = $bookie_id;
         }
 
