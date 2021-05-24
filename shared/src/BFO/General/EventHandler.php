@@ -11,26 +11,22 @@ class EventHandler
 {
     public static function getAllUpcomingEvents()
     {
-        //return EventDB::getAllUpcomingEvents();
         return EventDB::getEventsGeneric(true);
     }
 
     public static function getAllEvents()
     {
-        //return EventDB::getAllEvents();
         return EventDB::getEventsGeneric(false);
     }
 
     public static function getAllFightsForEvent($event_id, $only_with_odds = false)
     {
         return EventDB::getMatchupsGeneric(false, $only_with_odds, $event_id);
-        //return EventDB::getAllFightsForEvent($event_id, $only_with_odds);
     }
 
     public static function getAllUpcomingMatchups($only_with_odds = false)
     {
         return EventDB::getMatchupsGeneric(true, $only_with_odds);
-        //return EventDB::getAllUpcomingMatchups($only_with_odds);
     }
 
     /**
@@ -62,13 +58,11 @@ class EventHandler
     {
         $events = EventDB::getEventsGeneric($future_event_only, $event_id);
         return $events[0] ?? null;
-        //return EventDB::getEvent($event_id, $future_event_only);
     }
 
     public static function getEventByName(string $name)
     {
         return EventDB::getEventsGeneric(false, null, $name);
-        //return EventDB::getEventByName($name);
     }
 
     //New version of getFight above. Improvements are the possibility of finding old matchups
@@ -106,7 +100,6 @@ class EventHandler
         }
         $matchups = EventDB::getMatchupsGeneric(false, false, null, $matchup_id);
         return $matchups[0] ?? null;
-        //return EventDB::getFightByID($matchup_id);
     }
 
     /**
@@ -157,16 +150,6 @@ class EventHandler
     {
         if ($fight_obj->getFighter(1) != '' && $fight_obj->getFighter(2) != '') {
             return EventDB::addNewFight($fight_obj);
-
-            //Check if fight is only one for this event, if so, set it as main event. Not applicable if we automatically create events - DISABLED
-            /*if (PARSE_CREATEMATCHUPS == false)
-            {
-                $aMatchups = self::getAllFightsForEvent($fight_obj->getEventID());
-                if (count($aMatchups) == 1 && $aMatchups[0]->getID() == $iID)
-                {
-                    self::setFightAsMainEvent($iID);
-                }
-            }*/
         }
         return false;
     }
@@ -222,7 +205,6 @@ class EventHandler
 
     public static function getAllFightsForEventWithoutOdds($event_id)
     {
-        //return EventDB::getAllFightsForEventWithoutOdds($event_id);
         return EventDB::getMatchupsGeneric(false, false, $event_id);
     }
 
@@ -512,7 +494,6 @@ class EventHandler
     public static function getAllEventsForDate(string $date): array
     {
         return EventDB::getEventsGeneric(event_date: $date);
-        //return EventDB::getAllEventsForDate(date: $date);
     }
 
     public static function deleteAllOldEventsWithoutOdds(): int
