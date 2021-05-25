@@ -129,6 +129,10 @@ class ParserJob
 
                                 if (!$node1 || !$node2) {
                                     //Single orphan node, try to add as single row prop
+                                    $handicap = '';
+                                    if ((float) $cMarket['handicap'] != 0) {
+                                        $handicap = ' ' . ((float) $cMarket['handicap']);
+                                    }
 
                                     $oParsedProp = new ParsedProp(
                                         (string) $cEvent->Names->Name . ' :: ' . (string) $cMarket->Names->Name . ' : ' . (string) $node1[0]->Names->Name . $handicap,
