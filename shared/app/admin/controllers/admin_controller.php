@@ -665,9 +665,9 @@ class AdminController
     {
         $filenames = glob(GENERAL_KLOGDIR . 'cron.oddsjob.*');
         $filenames = array_reverse($filenames);
-        if (count($filenames) >= 3) {
+        if (count($filenames) >= 1) {
             for ($i = 0; $i <= 2; $i++) {
-                $log_contents =  file_get_contents($filenames[$i]);
+                $log_contents =  file_get_contents($filenames[$i]) ?? '';
                 $str = explode("\n", $log_contents);
                 end($str);
                 $last_row = prev($str);
