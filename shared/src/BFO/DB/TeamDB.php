@@ -163,7 +163,7 @@ class TeamDB
         return $fighters;
     }
 
-    public static function addTeamsAltName($team_id, $alt_name)
+    public static function addTeamAltName($team_id, $alt_name)
     {
         if ($team_id == "" || $alt_name == "") {
             return false;
