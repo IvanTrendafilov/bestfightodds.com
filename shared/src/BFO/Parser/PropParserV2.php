@@ -28,7 +28,7 @@ class PropParserV2
         $this->templates = BookieHandler::getPropTemplatesForBookie($bookie_id);
 
         //Prefetch all upcoming matchups and events
-        $this->matchups = EventHandler::getMatchups(future_matchups_only: true, only_without_odds: true);
+        $this->matchups = EventHandler::getMatchups(future_matchups_only: true, only_with_odds: true);
         $this->events = EventHandler::getEvents(future_events_only: true);
 
         //We will need to check the alt names as well so for each upcoming matchup fetched , fetch the associated altnames for each team and add a new matchup using this

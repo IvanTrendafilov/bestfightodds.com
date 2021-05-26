@@ -67,6 +67,7 @@ final class CreatePropOddsTest extends TestCase
             $this->greaterThan(0)
         ));
 
+        //$logger = new Katzgrau\KLogger\Logger(GENERAL_KLOGDIR, Psr\Log\LogLevel::INFO, ['filename' => 'cron.testlog.' . time() . '.log']);
         $pp = new PropParserV2(new NullLogger, $this->bookie_id);
         $parsed_prop = new ParsedProp('UNITTEST FIGHT GOES TO DECISION - Propone vs. Proptwo', 'UNITTEST Fight does not go to decision', '-120', '+110', '');
 
