@@ -86,6 +86,14 @@ class TwitterDB
     {
         $query = 'SELECT * FROM teams_twitterhandles WHERE team_id = ?';
         $params = [$team_id];
-        return PDOTools::findOne($query, $params);
+        
+        try {
+            return PDOTools::findOne($query, $params);
+        } catch (\PDOException $e) {
+            if ($e->getCode() == 23000) {
+                throw new \Exception("Unknown error " . $e->getMessage(), 10);
+            }
+        }
+        return false;
     }
 }

@@ -41,7 +41,7 @@ class EventDB
         $found_events = [];
         try {
             foreach (PDOTools::findMany($query, $params) as $row) {
-                $found_events[] = new Event($row['id'], $row['date'], $row['name'], $row['display']);
+                $found_events[] = new Event((int) $row['id'], $row['date'], $row['name'], $row['display']);
             }
         } catch (\PDOException $e) {
             throw new \Exception("Unknown error " . $e->getMessage(), 10);
@@ -101,9 +101,9 @@ class EventDB
         $matchups = [];
         try {
             foreach (PDOTools::findMany($query, $params) as $row) {
-                $fight_obj = new Fight($row['id'], $row['fighter1_name'], $row['fighter2_name'], $row['event_id']);
-                $fight_obj->setFighterID(1, $row['fighter1_id']);
-                $fight_obj->setFighterID(2, $row['fighter2_id']);
+                $fight_obj = new Fight((int) $row['id'], $row['fighter1_name'], $row['fighter2_name'], (int) $row['event_id']);
+                $fight_obj->setFighterID(1, (int) $row['fighter1_id']);
+                $fight_obj->setFighterID(2, (int) $row['fighter2_id']);
                 $fight_obj->setMainEvent($row['is_mainevent']);
                 $fight_obj->setIsFuture($row['is_future']);
                 if (isset($row['gametime'])) {
@@ -328,25 +328,31 @@ class EventDB
         return null;
     }
 
-    public static function addNewFightOdds($fightodds_obj)
+    public static function addNewFightOdds(FightOdds $fightodds_obj) : ?int
     {
         //TODO: This query should be updated to check for valid value from fights and bookie table
-        $query = 'INSERT INTO fightodds(fight_id, fighter1_odds, fighter2_odds, bookie_id, date)
-                        VALUES(?, ?, ?, ?, NOW())';
+        /*$query = 'INSERT INTO fightodds(fight_id, fighter1_odds, fighter2_odds, bookie_id, date)
+                        VALUES(?, ?, ?, ?, NOW())';*/
 
-        $params = [$fightodds_obj->getFightID(), $fightodds_obj->getFighterOdds(1), $fightodds_obj->getFighterOdds(2), $fightodds_obj->getBookieID()];
+        $query = 'INSERT INTO fightodds(fight_id, fighter1_odds, fighter2_odds, bookie_id, date)
+                    SELECT f.id, ?, ?, b.id, NOW()
+                        FROM fights f, bookies b
+                        WHERE f.id = ? AND b.id = ?';
+
+        $params = [$fightodds_obj->getFighterOdds(1), $fightodds_obj->getFighterOdds(2), $fightodds_obj->getFightID(), $fightodds_obj->getBookieID()];
 
         try {
-            $id = PDOTools::insert($query, $params);
+            $id = PDOTools::executeQuery($query, $params);
+            return $id->rowCount();
+
         } catch (\PDOException $e) {
             if ($e->getCode() == 23000) {
                 throw new \Exception("Duplicate entry", 10);
             } else {
                 throw new \Exception("Unknown error " . $e->getMessage(), 10);
             }
-            return false;
         }
-        return true;
+        return null;
     }
 
     public static function addNewFighter($fighter_name)
@@ -675,7 +681,7 @@ class EventDB
         $result = DBTools::doParamQuery($query, $params);
         $events = array();
         while ($row = mysqli_fetch_array($result)) {
-            $events[] = new Event($row['id'], $row['date'], $row['name'], $row['display']);
+            $events[] = new Event((int) $row['id'], $row['date'], $row['name'], $row['display']);
         }
 
         return $events;
@@ -697,7 +703,7 @@ class EventDB
 
         try {
             foreach (PDOTools::findMany($query) as $row) {
-                $events[] = new Event($row['id'], $row['date'], $row['name'], $row['display']);
+                $events[] = new Event((int) $row['id'], $row['date'], $row['name'], $row['display']);
             }
         } catch (\PDOException $e) {
             throw new \Exception("Unknown error " . $e->getMessage(), 10);
@@ -821,7 +827,7 @@ class EventDB
         $result = DBTools::doQuery($query);
         $events = array();
         while ($row = mysqli_fetch_array($result)) {
-            $events[] = new Event($row['id'], $row['date'], $row['name'], $row['display']);
+            $events[] = new Event((int) $row['id'], $row['date'], $row['name'], $row['display']);
         }
         return $events;
     }

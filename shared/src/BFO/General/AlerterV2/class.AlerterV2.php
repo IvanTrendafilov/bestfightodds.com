@@ -191,7 +191,7 @@ class AlerterV2
         if (isset($criterias['proptype_id'])) {
             //Prop
             $type = 'prop';
-            $proptype = OddsHandler::getPropTypeByID($criterias['proptype_id']);
+            $proptype = OddsHandler::getPropTypes(proptype_id: $criterias['proptype_id'])[0] ?? null;
             
             if (isset($criterias['matchup_id'])) {
                 //Proptype is linked to a specific matchup

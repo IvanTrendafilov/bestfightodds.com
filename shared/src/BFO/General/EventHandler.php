@@ -44,7 +44,7 @@ class EventHandler
         return EventDB::getLatestOddsForFightAndBookie($fight_id, $bookie_id);
     }
 
-    public static function getAllOdds(int $matchup_id, int $bookie_id = null) : ?array
+    public static function getAllOdds(int $matchup_id, int $bookie_id = null): ?array
     {
         $odds = EventDB::getAllOdds($matchup_id, $bookie_id);
         if (sizeof($odds) > 0) {
@@ -65,7 +65,7 @@ class EventHandler
         return EventDB::getEvents(event_name: $name);
     }
 
-    public static function getMatchingFight(string $team1_name, string $team2_name, bool $future_only = false, bool $past_only = false, int $known_fighter_id = null, string $event_date = null, int $event_id = null) : ?Fight
+    public static function getMatchingFight(string $team1_name, string $team2_name, bool $future_only = false, bool $past_only = false, int $known_fighter_id = null, string $event_date = null, int $event_id = null): ?Fight
     {
         return EventDB::getMatchingFight($team1_name, $team2_name, $future_only, $past_only, $known_fighter_id, $event_date, $event_id);
     }
@@ -106,7 +106,7 @@ class EventHandler
         return false;
     }
 
-    public static function addNewFightOdds($odds_obj)
+    public static function addNewFightOdds(FightOdds $odds_obj): ?int
     {
         //Validate input
         if (
@@ -162,7 +162,7 @@ class EventHandler
 
         $id = EventDB::addNewEvent($event);
         if ($id != false && $id != null) {
-            return EventHandler::getEvent($id);
+            return EventHandler::getEvents(event_id: $id)[0] ?? null;
         }
         return false;
     }
@@ -202,9 +202,8 @@ class EventHandler
      */
     public static function changeEvent($event_id, $new_event_name = '', $new_event_date = '', $new_is_visible = true)
     {
-        $event_obj = EventHandler::getEvent($event_id);
-
-        if ($event_obj == null) {
+        $event_obj = EventHandler::getEvents(event_id: $event_id)[0] ?? null;
+        if (!$event_obj) {
             return false;
         }
 

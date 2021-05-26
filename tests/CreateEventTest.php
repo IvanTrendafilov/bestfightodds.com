@@ -31,21 +31,32 @@ final class CreateEventTest extends TestCase
             $event->getDate()
         );
 
-        //Test update
-        EventHandler::changeEvent($event_id, 'Renamed ' . $event_name);
-        $event = EventHandler::getEvent($event_id);
+        //Test retrieval by name
+        $event = EventHandler::getEvents(event_name: $event_name);
         $this->assertEquals(
-            'Renamed ' . $event_name,
-            $event->getName()
+            $event_name,
+            $event[0]->getName()
         );
-        EventHandler::changeEvent($event_id, '', '2032-10-23');
-        $event = EventHandler::getEvent($event_id);
         $this->assertEquals(
-            '2032-10-23',
-            $event->getDate()
+            $event_id,
+            $event[0]->getID()
         );
 
-        $event = EventHandler::getAllEventsForDate('2032-10-23');
+
+        //Test update
+        EventHandler::changeEvent($event_id, 'Renamed ' . $event_name);
+        $event = EventHandler::getEvents(event_id: $event_id);
+        $this->assertEquals(
+            'Renamed ' . $event_name,
+            $event[0]->getName()
+        );
+        EventHandler::changeEvent($event_id, '', '2032-10-23');
+        $event = EventHandler::getEvents(event_id: $event_id);
+        $this->assertEquals(
+            '2032-10-23',
+            $event[0]->getDate()
+        );
+        $event = EventHandler::getEvents(event_date: '2032-10-23');
         $this->assertEquals(
             '2032-10-23',
             $event[0]->getDate()

@@ -4,37 +4,34 @@ namespace BFO\DataTypes;
 
 use BFO\Utils\LinkTools;
 
-/*
- * A Fighter
- */
 class Fighter
 {
-    private $sName;
-    private $iID;
+    private $name;
+    private $id;
     
-    public function __construct($a_sName, $a_iID)
+    public function __construct($name, $id)
     {
-        $this->sName = $a_sName;
-        $this->iID = $a_iID;
+        $this->name = $name;
+        $this->id = $id;
     }
     
     public function getName()
     {
-        return $this->sName;
+        return $this->name;
     }
     
     public function getID()
     {
-        return $this->iID;
+        return $this->id;
     }
 
     public function getNameAsString()
     {
-        $string = $this->sName;
+        $string = $this->name;
 
-        $word_splitters = array(' ', '.', '-', "O'", "L'", "D'", 'St.', 'Mc');
-        $lowercase_exceptions = array('the', 'van', 'den', 'von', 'und', 'der', 'de', 'da', 'of', 'and', "l'", "d'");
-        $uppercase_exceptions = array('III', 'IV', 'VI', 'VII', 'VIII', 'IX');
+        $word_splitters = [' ', '.', '-', "O'", "L'", "D'", 'St.', 'Mc'];
+        $lowercase_exceptions = ['the', 'van', 'den', 'von', 'und', 'der', 'de', 'da', 'of', 'and', "l'", "d'"];
+        $uppercase_exceptions = ['III', 'IV', 'VI', 'VII', 'VIII', 'IX'];
     
         $string = strtolower($string);
         foreach ($word_splitters as $delimiter) {
@@ -46,7 +43,6 @@ class Fighter
                 } elseif (!in_array($word, $lowercase_exceptions)) {
                     $word = ucfirst($word);
                 }
-    
                 $newwords[] = $word;
             }
     
@@ -61,7 +57,7 @@ class Fighter
     
     public function getFighterAsLinkString()
     {
-        $sName = LinkTools::slugString($this->getNameAsString());
-        return $sName . '-' . $this->iID;
+        $name = LinkTools::slugString($this->getNameAsString());
+        return $name . '-' . $this->id;
     }
 }
