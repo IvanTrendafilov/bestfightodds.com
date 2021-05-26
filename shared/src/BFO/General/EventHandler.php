@@ -135,17 +135,45 @@ class EventHandler
         return EventDB::addNewFightOdds($odds_obj);
     }
 
-    public static function addNewFight($fight_obj)
+    /*public static function addNewFight($fight_obj)
     {
         if ($fight_obj->getFighter(1) != '' && $fight_obj->getFighter(2) != '') {
             return EventDB::addNewFight($fight_obj);
         }
         return false;
-    }
+    }*/
 
-    public static function addNewFighter($a_sFighterName)
+    public static function createMatchup(Fight $fight_obj): ?int
     {
-        return EventDB::addNewFighter($a_sFighterName);
+        if ($fight_obj->getTeam(1) == '' || $fight_obj->getTeam(2) == '') {
+            return null;
+        }
+
+        //Check that event is ok
+        if (count(EventDB::getEvents(event_id: $fight_obj->getEventID())) != 1) {
+            return null;
+        }
+
+        //Check if fight isn't already added
+        if (EventDB::getMatchingFight(team1_name: $fight_obj->getTeam(1), team2_name: $fight_obj->getTeam(2), event_id: $fight_obj->getEventID(), future_only: true)) {
+            return null;
+        }
+
+        //Check that both fighters exist, if not, add them
+        $team1_id = TeamHandler::getTeamIDByName($fight_obj->getTeam(1));
+        if (!$team1_id) {
+            $team1_id = TeamHandler::createTeam($fight_obj->getTeam(1));
+        }
+        $team2_id = TeamHandler::getTeamIDByName($fight_obj->getTeam(2));
+        if (!$team2_id) {
+            $team2_id = TeamHandler::createTeam($fight_obj->getTeam(2));
+        }
+
+        if (!$team1_id || !$team2_id) {
+            return null;
+        }
+
+        return EventDB::createMatchup($team1_id, $team2_id, $fight_obj->getEventID());
     }
 
     public static function addNewEvent($event)

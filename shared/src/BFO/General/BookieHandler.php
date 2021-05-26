@@ -9,7 +9,6 @@ class BookieHandler
 {
     public static function getAllBookies() : array
     {
-        //return BookieDB::getAllBookies();
         return BookieDB::getBookiesGeneric();
     }
 
@@ -17,7 +16,6 @@ class BookieHandler
     {
         $bookies = BookieDB::getBookiesGeneric($bookie_id);
         return $bookies[0] ?? null;
-        //return BookieDB::getBookieByID($id);
     }
 
     public static function saveChangeNum($bookie_id, $change_num)

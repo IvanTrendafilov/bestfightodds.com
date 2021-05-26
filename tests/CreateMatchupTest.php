@@ -30,7 +30,7 @@ final class CreateMatchupTest extends TestCase
     public function testCanCreateAndDeleteMatchup(): void
     {
         $matchup = new Fight(0, 'Test Fighter One', 'Test Fighter Two', $this->event->getID());
-        $matchup_id = EventHandler::addNewFight($matchup);
+        $matchup_id = EventHandler::createMatchup($matchup);
         $this->assertThat($matchup_id, $this->logicalAnd(
             $this->isType('int'), 
             $this->greaterThan(0)
@@ -108,27 +108,27 @@ final class CreateMatchupTest extends TestCase
     public function testCannotCreateMatchupWithInvalidInput(): void
     {
         $matchup = new Fight(0, '', 'Test Fighter Two', $this->event->getID());
-        $matchup_id = EventHandler::addNewFight($matchup);
+        $matchup_id = EventHandler::createMatchup($matchup);
         $this->assertEquals(
-            false,
+            null,
             $matchup_id
         );
         $matchup = new Fight(0, '', '', $this->event->getID());
-        $matchup_id = EventHandler::addNewFight($matchup);
+        $matchup_id = EventHandler::createMatchup($matchup);
         $this->assertEquals(
-            false,
+            null,
             $matchup_id
         );
         $matchup = new Fight(0, 'Test Fighter One', '', $this->event->getID());
-        $matchup_id = EventHandler::addNewFight($matchup);
+        $matchup_id = EventHandler::createMatchup($matchup);
         $this->assertEquals(
-            false,
+            null,
             $matchup_id
         );
         $matchup = new Fight(0, 'Test Fighter One', 'Test Fighter Two', 48924892);
-        $matchup_id = EventHandler::addNewFight($matchup);
+        $matchup_id = EventHandler::createMatchup($matchup);
         $this->assertEquals(
-            false,
+            null,
             $matchup_id
         );
     }
@@ -136,12 +136,12 @@ final class CreateMatchupTest extends TestCase
     public function testCannotCreateDuplicateMatchup(): void
     {
         $matchup = new Fight(0, 'Test Fighter One', 'Test Fighter Two', $this->event->getID());
-        $matchup_id = EventHandler::addNewFight($matchup);
+        $matchup_id = EventHandler::createMatchup($matchup);
         $this->assertThat($matchup_id, $this->logicalAnd(
             $this->isType('int'), 
             $this->greaterThan(0)
         ));
-        $second_matchup_id = EventHandler::addNewFight($matchup);
+        $second_matchup_id = EventHandler::createMatchup($matchup);
         $this->assertEquals(
             false,
             $second_matchup_id

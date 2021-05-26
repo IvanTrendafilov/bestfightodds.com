@@ -194,7 +194,7 @@ class MainController
             return $response->withHeader('Location', '/')->withStatus(302);
         }
 
-        $team = TeamHandler::getFighterByID((int) $team_id);
+        $team = TeamHandler::getTeams(team_id: (int) $team_id)[0] ?? null;
 
         if ($team == null) {
             return $response->withHeader('Location', '/')->withStatus(302);

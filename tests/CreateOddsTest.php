@@ -26,7 +26,7 @@ final class CreateOddsTest extends TestCase
         $this->event = EventHandler::addNewEvent(new Event(0, $event_date, $event_name, true));
 
         $matchup = new Fight(0, 'Fighter One', 'Fighter Two', $this->event->getID());
-        $matchup_id = EventHandler::addNewFight($matchup);
+        $matchup_id = EventHandler::createMatchup($matchup);
         $this->matchup = EventHandler::getFightByID($matchup_id);
 
         $this->bookie_id = BookieHandler::getAllBookies()[0]->getID();

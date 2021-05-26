@@ -364,7 +364,7 @@ class AdminController
     public function viewFighter(Request $request, Response $response, array $args)
     {
         if (isset($args['id'])) {
-            $fighter = TeamHandler::getFighterByID($args['id']);
+            $fighter = TeamHandler::getTeams(team_id: $args['id'])[0] ?? null;
             $twitter_handle = TwitterHandler::getTwitterHandle($args['id']);
             $alt_names = TeamHandler::getAltNamesForTeamByID($args['id']);
             $view_data = ['fighter_obj' => $fighter, 'twitter_handle' => $twitter_handle, 'altnames' => $alt_names ?? []];

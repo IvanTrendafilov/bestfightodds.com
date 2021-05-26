@@ -355,28 +355,6 @@ class EventDB
         return null;
     }
 
-    public static function addNewFighter($fighter_name)
-    {
-        if (EventDB::getFighterIDByName($fighter_name) != null) {
-            return false;
-        }
-
-        $params = [strtoupper($fighter_name)];
-        $query = 'INSERT INTO fighters(name)
-                        VALUES(?)';
-        try {
-            $id = PDOTools::insert($query, $params);
-        } catch (\PDOException $e) {
-            if ($e->getCode() == 23000) {
-                throw new \Exception("Duplicate entry", 10);
-            } else {
-                throw new \Exception("Unknown error " . $e->getMessage(), 10);
-            }
-            return false;
-        }
-        return $id;
-    }
-
     /**
      * Adds a new event
      *
@@ -402,30 +380,9 @@ class EventDB
         return $id;
     }
 
-    public static function getFighterIDByName($fighter_name)
-    {
-        $query = 'SELECT fn.id
-                    FROM (SELECT f.id as id, f.name as name FROM fighters f
-                        UNION
-                        SELECT fa.fighter_id as id, fa.altname as name FROM fighters_altnames fa
-                        ) AS fn
-                    WHERE fn.name = ?';
 
-        $params = [strtoupper($fighter_name)];
 
-        $result = DBTools::doParamQuery($query, $params);
-
-        $fighters = array();
-        while ($row = mysqli_fetch_array($result)) {
-            $fighters[] = $row['id'];
-        }
-        if (sizeof($fighters) > 0) {
-            return $fighters[0];
-        }
-        return null;
-    }
-
-    public static function addNewFight($fight_obj)
+    /*public static function addNewFight($fight_obj)
     {
         //Check that event is ok
         if (EventDB::getEvents(false, $fight_obj->getEventID()) != null) {
@@ -458,6 +415,29 @@ class EventDB
             }
         }
         return false;
+    }*/
+
+    public static function createMatchup(int $team1_id, int $team2_id, int $event_id): ?int
+    {
+        $query = 'INSERT INTO fights(fighter1_id, fighter2_id, event_id)
+                    SELECT f1.id, f2.id, e.id
+                        FROM fighters f1, fighters f2, events e
+                        WHERE f1.id = ? AND f2.id = ? AND e.id = ?';
+
+        $params = [$team1_id, $team2_id, $event_id];
+        try {
+            $id = PDOTools::insert($query, $params);
+        } catch (\PDOException $e) {
+            if ($e->getCode() == 23000) {
+                throw new \Exception("Duplicate entry", 10);
+            } else {
+                throw new \Exception("Unknown error " . $e->getMessage(), 10);
+            }
+            return null;
+        }
+        //Invalidate cache whenever we add a matchup in case some running function is caching matchups
+        DBTools::invalidateCache();
+        return $id;
     }
 
     public static function removeEvent($event_id)

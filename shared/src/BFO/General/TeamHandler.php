@@ -30,14 +30,9 @@ class TeamHandler
         return TeamDB::getAllTeamsWithMissingResults();
     }
 
-    public static function addFighterAltName($fighter_id, $new_alt_name)
+    public static function addTeamAltName($team_id, $new_alt_name)
     {
-        return TeamDB::addFighterAltName($fighter_id, $new_alt_name);
-    }
-
-    public static function getAllFighters($only_with_odds = false)
-    {
-        return TeamDB::getAllFighters($only_with_odds);
+        return TeamDB::addTeamAltName($team_id, $new_alt_name);
     }
 
     public static function searchFighter($name)
@@ -48,8 +43,23 @@ class TeamHandler
         return TeamDB::searchFighter($name);
     }
 
-    public static function getFighterByID($id)
+    public static function getTeams(int $team_id = null): array
     {
-        return TeamDB::getFighterByID($id);
+        return TeamDB::getTeams(team_id: $team_id);
     }
+
+    public static function getTeamIDByName($team_name)
+    {
+        return TeamDB::getTeamIDByName($team_name);
+    }
+
+
+    public static function createTeam(string $team_name): ?int
+    {
+        if (TeamHandler::getTeamIDByName($team_name) != null) {
+            return null;
+        }
+        return TeamDB::createTeam($team_name);
+    }
+
 }

@@ -217,8 +217,8 @@ class MatchupCreator
                 $new_matchup = new Fight(0, $team1, $team2, $matched_event->getID());
             }
 
-            $id = EventHandler::addNewFight($new_matchup);
-            if ($id == true) {
+            $id = EventHandler::createMatchup($new_matchup);
+            if ($id) {
                 $created_matchup_obj = EventHandler::getFightByID($id);
                 $this->audit_log->info("Created new matchup " . $created_matchup_obj->getFighter(1) . ' vs ' . $created_matchup_obj->getFighter(2) . ' at ' . $matched_event->getName() . ' on ' . $matched_event->getDate() . ' as proposed by ' . $this->bookie_obj->getName() . ' . Also in scheduler: ' . ($in_scheduler['found'] ? 'Yes' : 'No'));
                 $this->logger->info("- Created new matchup " . $created_matchup_obj->getFighter(1) . ' vs ' . $created_matchup_obj->getFighter(2) . ' at ' . $matched_event->getName() . ' on ' . $matched_event->getDate() . ' as proposed by ' . $this->bookie_obj->getName() . ' . Also in scheduler: ' . ($in_scheduler['found'] ? 'Yes' : 'No'));

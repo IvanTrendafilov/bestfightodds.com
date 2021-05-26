@@ -56,7 +56,7 @@ class AdminAPIController
             $return_data['error'] = true;
         } else {
             $fight = new Fight(0, $data->team1_name, $data->team2_name, $data->event_id);
-            if ($matchup_id = EventHandler::addNewFight($fight)) {
+            if ($matchup_id = EventHandler::createMatchup($fight)) {
                 $return_data['msg'] = 'Successfully added';
                 $return_data['matchup_id'] = $matchup_id;
             } else {
@@ -240,7 +240,7 @@ class AdminAPIController
 
             //Check for alt name update (if so just add it to the bunch)
             if (v::length(5, null)->validate(@$data->alt_name)) {
-                if (TeamHandler::addFighterAltName($data->fighter_id, $data->alt_name)) {
+                if (TeamHandler::addTeamAltName($data->fighter_id, $data->alt_name)) {
                     $return_data['msg'] .= 'Successfully updated altname.';
                     $return_data['fighter_id'] = $data->fighter_id;
                 } else {

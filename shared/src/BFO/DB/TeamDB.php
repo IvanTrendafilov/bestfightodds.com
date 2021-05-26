@@ -12,31 +12,6 @@ use BFO\DataTypes\Fighter;
  */
 class TeamDB
 {
-    public static function getAllFighters($only_with_fights)
-    {
-        if ($only_with_fights == true) {
-            $query = 'SELECT DISTINCT fi.id, fi.name
-					FROM fighters fi 
-						LEFT JOIN fights f ON (fi.id = f.fighter1_id OR fi.id = f.fighter2_id), fighters f1, fighters f2
-					WHERE f.fighter1_id = f1.id
-						AND f.fighter2_id = f2.id
-					ORDER BY fi.name ASC';
-        } else {
-            $query = 'SELECT f.id, f.name 
-						FROM fighters f 
-						ORDER BY f.name ASC';
-        }
-
-        $result = DBTools::doQuery($query);
-
-        $fighters = [];
-        while ($row = mysqli_fetch_array($result)) {
-            $fighters[] = new Fighter($row['name'], $row['id']);
-        }
-
-        return $fighters;
-    }
-
     public static function searchFighter($fighter_name)
     {
         $query = "SELECT f.id, f.name, MATCH(f.name) AGAINST (?) AS score  
@@ -57,16 +32,31 @@ class TeamDB
         return $fighters;
     }
 
-    public static function getFighterByID($id)
+    public static function getTeams(int $team_id = null): array
     {
-        $query = 'SELECT f.name, f.id FROM fighters f WHERE f.id = ?';
-        $params = [$id];
-        $result = DBTools::doParamQuery($query, $params);
-
-        if ($row = mysqli_fetch_array($result)) {
-            return new Fighter($row['name'], $row['id']);
+        $extra_where = '';
+        $params = [];
+        if ($team_id) {
+            $extra_where .= ' AND f.id = :team_id';
+            $params[':team_id'] = $team_id;
         }
-        return null;
+
+        $query = 'SELECT f.id, f.name 
+						FROM fighters f 
+                            WHERE 1=1 
+                            ' . $extra_where . '
+						ORDER BY f.name ASC';
+
+        $teams = [];
+        try {
+            foreach (PDOTools::findMany($query, $params) as $row) {
+                $teams[] = new Fighter($row['name'], $row['id']);
+            }
+        } catch (\PDOException $e) {
+            throw new \Exception("Unknown error " . $e->getMessage(), 10);
+        }
+
+        return $teams;
     }
 
     public static function getAltNamesForTeamByID($team_id)
@@ -113,6 +103,50 @@ class TeamDB
         return DBTools::getSingleValue($result);
     }
 
+    public static function createTeam(string $team_name): ?int
+    {
+        $params = [strtoupper($team_name)];
+        $query = 'INSERT INTO fighters(name)
+                        VALUES(?)';
+        try {
+            $id = PDOTools::insert($query, $params);
+        } catch (\PDOException $e) {
+            if ($e->getCode() == 23000) {
+                throw new \Exception("Duplicate entry", 10);
+            } else {
+                throw new \Exception("Unknown error " . $e->getMessage(), 10);
+            }
+            return null;
+        }
+        return $id;
+    }
+
+    public static function getTeamIDByName($fighter_name)
+    {
+        $query = 'SELECT fn.id
+                    FROM (SELECT f.id as id, f.name as name FROM fighters f
+                        UNION
+                        SELECT fa.fighter_id as id, fa.altname as name FROM fighters_altnames fa
+                        ) AS fn
+                    WHERE fn.name = ?';
+
+                    //New Query (to be combined with find figher above): 
+                    //SELECT distinct(id), name FROM fighters f left join fighters_altnames fa ON fa.fighter_id = f.id WHERE name = 'CRO COP' OR altname like '%CRO COP%';
+
+        $params = [strtoupper($fighter_name)];
+
+        $result = DBTools::doParamQuery($query, $params);
+
+        $fighters = array();
+        while ($row = mysqli_fetch_array($result)) {
+            $fighters[] = $row['id'];
+        }
+        if (sizeof($fighters) > 0) {
+            return $fighters[0];
+        }
+        return null;
+    }
+
 
     public static function getAllTeamsWithMissingResults()
     {
@@ -129,16 +163,16 @@ class TeamDB
         return $fighters;
     }
 
-    public static function addFighterAltName($fighter_id, $alt_name)
+    public static function addTeamsAltName($team_id, $alt_name)
     {
-        if ($fighter_id == "" || $alt_name == "") {
+        if ($team_id == "" || $alt_name == "") {
             return false;
         }
 
         $query = 'INSERT INTO fighters_altnames(fighter_id, altname)
                     VALUES (?,?)';
 
-        $params = array($fighter_id, strtoupper($alt_name));
+        $params = [$team_id, strtoupper($alt_name)];
         $result = DBTools::doParamQuery($query, $params);
         if ($result == false) {
             return false;
