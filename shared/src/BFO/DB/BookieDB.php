@@ -28,7 +28,7 @@ class BookieDB
         $bookies = [];
         try {
             foreach (PDOTools::findMany($query, $params) as $row) {
-                $bookies[] = new Bookie($row['id'], $row['name'], $row['url'], $row['refurl']);
+                $bookies[] = new Bookie((int) $row['id'], $row['name'], $row['url'], $row['refurl']);
             };
         } catch (\PDOException $e) {
             if ($e->getCode() == 23000) {

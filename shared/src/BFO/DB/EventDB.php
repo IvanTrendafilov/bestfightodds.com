@@ -362,8 +362,8 @@ class EventDB
         }
 
         $params = [strtoupper($fighter_name)];
-        $query = 'INSERT INTO fighters(name, url)
-                        VALUES(?, \'\')';
+        $query = 'INSERT INTO fighters(name)
+                        VALUES(?)';
         try {
             $id = PDOTools::insert($query, $params);
         } catch (\PDOException $e) {
