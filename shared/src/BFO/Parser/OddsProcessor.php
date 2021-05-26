@@ -189,7 +189,7 @@ class OddsProcessor
      */
     private function flagMatchupOddsForDeletion($matched_matchups)
     {
-        $upcoming_matchups = EventHandler::getAllUpcomingMatchups();
+        $upcoming_matchups = EventHandler::getMatchups(future_matchups_only: true);
         foreach ($upcoming_matchups as $upcoming_matchup) {
             $odds = EventHandler::getLatestOddsForFightAndBookie($upcoming_matchup->getID(), $this->bookie_id);
             if ($odds != null) {
@@ -218,7 +218,7 @@ class OddsProcessor
      */
     private function flagPropOddsForDeletion($matched_props)
     {
-        $upcoming_matchups = EventHandler::getAllUpcomingMatchups();
+        $upcoming_matchups = EventHandler::getMatchups(future_matchups_only: true);;
         foreach ($upcoming_matchups as $upcoming_matchup) {
             $stored_props = OddsHandler::getAllLatestPropOddsForMatchupAndBookie($upcoming_matchup->getID(), $this->bookie_id);
             foreach ($stored_props as $stored_prop) {
@@ -252,7 +252,7 @@ class OddsProcessor
      */
     private function flagEventPropOddsForDeletion($matched_props)
     {
-        $upcoming_events = EventHandler::getAllUpcomingEvents();
+        $upcoming_events = EventHandler::getEvents(future_events_only: true);
         foreach ($upcoming_events as $upcoming_event) {
             //Todo: Possible improvement here is that we retrieve odds for all bookies. Could be limited to single bookie
             $stored_props = OddsHandler::getCompletePropsForEvent($upcoming_event->getID(), 0, $this->bookie_id);

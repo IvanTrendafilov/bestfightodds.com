@@ -9,24 +9,24 @@ use BFO\DataTypes\Fight;
 
 class EventHandler
 {
-    public static function getAllUpcomingEvents()
+    public static function getEvents(bool $future_events_only = null, int $event_id = null, string $event_name = null, string $event_date = null): array
     {
-        return EventDB::getEvents(future_events_only: true);
-    }
-
-    public static function getAllEvents()
-    {
-        return EventDB::getEvents();
+        return EventDB::getEvents($future_events_only, $event_id, $event_name, $event_date);
     }
 
     public static function getAllFightsForEvent($event_id, $only_with_odds = false)
     {
-        return EventDB::getMatchups(only_with_odds: $only_with_odds, event_id: $event_id);
+        return EventHandler::getMatchups(only_with_odds: $only_with_odds, event_id: $event_id);
     }
 
     public static function getAllUpcomingMatchups($only_with_odds = false)
     {
-        return EventDB::getMatchups(future_matchups_only: true, only_with_odds: $only_with_odds);
+        return EventHandler::getMatchups(future_matchups_only: true, only_with_odds: $only_with_odds);
+    }
+
+    public static function getMatchups(bool $future_matchups_only = false, bool $only_with_odds = false, int $event_id = null, int $matchup_id = null, bool $only_without_odds = false, int $team_id = null): array
+    {
+        return EventDB::getMatchups($future_matchups_only, $only_with_odds, $event_id, $matchup_id, $only_without_odds, $team_id);
     }
 
     /**
@@ -44,15 +44,15 @@ class EventHandler
         return EventDB::getLatestOddsForFightAndBookie($fight_id, $bookie_id);
     }
 
-    public static function getAllOddsForFightAndBookie($fight_id, $bookie_id)
+    public static function getAllOdds(int $matchup_id, int $bookie_id = null) : ?array
     {
-        return EventDB::getAllOddsForFightAndBookie($fight_id, $bookie_id);
+        $odds = EventDB::getAllOdds($matchup_id, $bookie_id);
+        if (sizeof($odds) > 0) {
+            return $odds;
+        }
+        return null;
     }
 
-    public static function getAllOddsForMatchup($matchup_id)
-    {
-        return EventDB::getAllOddsForMatchup($matchup_id);
-    }
 
     public static function getEvent($event_id, $future_event_only = false)
     {
@@ -84,10 +84,10 @@ class EventHandler
 
     public static function getFightByID($matchup_id)
     {
-        if ($matchup_id == null) {
+        if (!$matchup_id) {
             return null;
         }
-        $matchups = EventDB::getMatchups(matchup_id: $matchup_id);
+        $matchups = EventHandler::getMatchups(matchup_id: $matchup_id);
         return $matchups[0] ?? null;
     }
 
@@ -194,7 +194,7 @@ class EventHandler
 
     public static function getAllFightsForEventWithoutOdds($event_id)
     {
-        return EventDB::getMatchups(event_id: $event_id, only_without_odds: true);
+        return EventHandler::getMatchups(event_id: $event_id, only_without_odds: true);
     }
 
     /**
@@ -264,11 +264,6 @@ class EventHandler
             ($team_no == 2 ? $odds_total : 0),
             -1
         );
-    }
-
-    public static function getAllFightsForFighter($team_id)
-    {
-        return EventDB::getAllFightsForFighter($team_id);
     }
 
     public static function setFightAsMainEvent($fight_id, $set_as_main_event = true)
@@ -394,7 +389,7 @@ class EventHandler
         //Checks the date (metadata) of the current matchup and moves the matchup to the appropriate generic event, this is typically only done for sites like PBO where matchups belong to a specific date and not a named event
         $audit_log = new \Katzgrau\KLogger\Logger(GENERAL_KLOGDIR, \Psr\Log\LogLevel::INFO, ['filename' => 'changeaudit.log']);
 
-        $events = EventHandler::getAllUpcomingEvents();
+        $events = EventHandler::getEvents(future_events_only: true);
         foreach ($events as $event) {
             $matchups = EventHandler::getAllFightsForEvent($event->getID(), true);
 
@@ -428,7 +423,7 @@ class EventHandler
         //Checks the date (metadata) of the current matchup and moves the matchup to the appropriate generic event, this is typically only done for sites like PBO where matchups belong to a specific date and not a named event
         $audit_log = new \Katzgrau\KLogger\Logger(GENERAL_KLOGDIR, \Psr\Log\LogLevel::INFO, ['filename' => 'changeaudit.log']);
 
-        $events = EventHandler::getAllUpcomingEvents();
+        $events = EventHandler::getEvents(future_events_only: true);
         foreach ($events as $event) {
             $matchups = EventHandler::getAllFightsForEvent($event->getID());
             foreach ($matchups as $matchup) {

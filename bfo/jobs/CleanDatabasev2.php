@@ -34,7 +34,7 @@ use BFO\Utils\OddsTools;
 //Step 3
 
 $aBookies = BookieHandler::getAllBookies();
-$aEvents = array_merge(EventHandler::getAllUpcomingEvents(), EventHandler::getRecentEvents(5));
+$aEvents = array_merge(EventHandler::getEvents(future_events_only: true), EventHandler::getRecentEvents(5));
 $iRemovedOdds = 1;
 $iRemovedPropOdds = 1;
 $iCounter = 0;
@@ -55,7 +55,7 @@ while (($iRemovedOdds > 0 || $iRemovedPropOdds > 0)  && $iCounter < 10)
         {
             foreach ($aBookies as $oBookie)
             {
-                $aOddsToRemove = getAllDuplicates(EventHandler::getAllOddsForFightAndBookie($oFight->getID(), $oBookie->getID()));
+                $aOddsToRemove = getAllDuplicates(EventHandler::getAllOdds($oFight->getID(), $oBookie->getID()));
                 if (isset($aOddsToRemove) && count($aOddsToRemove) > 0)
                 {
                     $iRemovedOdds += count($aOddsToRemove);

@@ -12,7 +12,7 @@ class GraphHandler
 {
     public static function getMatchupData($matchup_id, $bookie_id)
     {
-        return EventHandler::getAllOddsForFightAndBookie($matchup_id, $bookie_id);
+        return EventHandler::getAllOdds($matchup_id, $bookie_id);
     }
 
     public static function getPropData($matchup_id, $bookie_id, $proptype_id, $team_num)
@@ -41,7 +41,7 @@ class GraphHandler
         foreach ($bookies as $oBookie) {
             $aOdds[$bookie_count] = [];
 
-            $aFightOdds = EventHandler::getAllOddsForFightAndBookie($matchup_id, $oBookie->getID());
+            $aFightOdds = EventHandler::getAllOdds($matchup_id, $oBookie->getID());
             if ($aFightOdds != null) {
                 foreach ($aFightOdds as $oFightOdds) {
                     $aOdds[$bookie_count][] = $oFightOdds;
@@ -258,7 +258,7 @@ class GraphHandler
     {
         $sparkline_steps = 10;
 
-        $odds = EventHandler::getAllOddsForMatchup($matchup_id);
+        $odds = EventHandler::getAllOdds($matchup_id);
         if ($odds == null || sizeof($odds) < 1) {
             return null;
         }

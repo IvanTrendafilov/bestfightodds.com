@@ -52,7 +52,7 @@ class EventRenamer
     public function evaluteRenamings() 
     {
         //Fetch all upcoming matchups and their metadata event_name
-        $matchups = EventHandler::getAllUpcomingMatchups(true);
+        $matchups = EventHandler::getMatchups(future_matchups_only: true, only_with_odds: true);
         
 
 

@@ -75,7 +75,7 @@ class TeamPageParser
         }
         
 		//Fetch all matchups to keep track which ones we have matched and not
-		$existing_db_matchups = EventHandler::getAllFightsForFighter($fighter->getID());
+		$existing_db_matchups = EventHandler::getMatchups(team_id: $fighter->getID());
 		//Filter out future matchups
 		foreach ($existing_db_matchups as $key => $val)
 		{

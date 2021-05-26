@@ -88,7 +88,7 @@ class OddsJob
 
         //Generate new front page with latest odds
         $plates = new \League\Plates\Engine(GENERAL_BASEDIR . '/app/front/templates/');
-        $events = EventHandler::getAllUpcomingEvents();
+        $events = EventHandler::getEvents(future_events_only: true);
 
         $view_data = [];
         $view_data['bookies'] = BookieHandler::getAllBookies();

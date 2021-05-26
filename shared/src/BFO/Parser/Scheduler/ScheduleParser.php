@@ -40,7 +40,7 @@ class ScheduleParser
     {
         foreach ($schedule_col as $aEvent) {
             //Check if event matches an existing stored event. Must be numered though
-            $aStoredEvents = EventHandler::getAllUpcomingEvents();
+            $aStoredEvents = EventHandler::getEvents(future_events_only: true);
             $found = false;
             foreach ($aStoredEvents as $oStoredEvent) {
                 //Check if numbered as well so we dont match generic ones like UFC Fight Night
@@ -183,7 +183,7 @@ class ScheduleParser
 
     public function checkRemovedContent()
     {
-        $events = EventHandler::getAllUpcomingEvents();
+        $events = EventHandler::getEvents(future_events_only: true);
         foreach ($events as $event) {
             //Skip FUTURE EVENTS event
             if ($event->getID() == PARSE_FUTURESEVENT_ID) {

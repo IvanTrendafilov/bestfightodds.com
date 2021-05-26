@@ -38,7 +38,7 @@ class MainController
             return $response;
         }
 
-        $events = EventHandler::getAllUpcomingEvents();
+        $events = EventHandler::getEvents(future_events_only: true);
         foreach ($events as $event) {
             //Dynamically replace last change placeholder
             $last_change = EventHandler::getLatestChangeDate($event->getID());
@@ -77,7 +77,7 @@ class MainController
     {
         $view_data = [];
         $view_data['events'] = [];
-        $events = EventHandler::getAllUpcomingEvents();
+        $events = EventHandler::getEvents(future_events_only: true);
         foreach ($events as $event) {
             $matchups = EventHandler::getAllFightsForEvent($event->getID(), true);
             if (count($matchups) > 0) {
@@ -110,7 +110,7 @@ class MainController
         $view_data = [];
         $view_events = [];
 
-        $events = EventHandler::getAllUpcomingEvents();
+        $events = EventHandler::getEvents(future_events_only: true);
         foreach ($events as $event) {
             $matchups = EventHandler::getAllFightsForEventWithoutOdds($event->getID());
             if (count($matchups) > 0) { //Only add the event if matchups were found
@@ -222,7 +222,7 @@ class MainController
         $view_data['team'] = $team;
         $view_data['matchups'] = [];
 
-        $matchups = EventHandler::getAllFightsForFighter($team->getID());
+        $matchups = EventHandler::getMatchups(team_id: $team->getID());
         foreach ($matchups as $matchup) {
             $team_odds = $this->populateTeamOdds($matchup, $team);
             if (!($team_odds['event']->getID() == PARSE_FUTURESEVENT_ID && $team_odds['odds_opening'] == null)) { //Filters out future events with no opening odds

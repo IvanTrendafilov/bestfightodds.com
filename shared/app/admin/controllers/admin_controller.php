@@ -260,14 +260,14 @@ class AdminController
 
                         //Check if either fighter has another matchup scheduled and indicate that
                         if ($action['view_extra']['matchup'] != null) {
-                            $matchups1 = EventHandler::getAllFightsForFighter($action['view_extra']['matchup']->getFighterID(1));
+                            $matchups1 = EventHandler::getMatchups(team_id: $action['view_extra']['matchup']->getFighterID(1));
                             $action['view_extra']['found1'] = false;
                             foreach ($matchups1 as $matchup) {
                                 if ($matchup->isFuture() && ($matchup->getFighterID(1) != $action['view_extra']['matchup']->getFighterID(1) || $matchup->getFighterID(2) != $action['view_extra']['matchup']->getFighterID(2))) {
                                     $action['view_extra']['found1'] = true;
                                 }
                             }
-                            $matchups2 = EventHandler::getAllFightsForFighter($action['view_extra']['matchup']->getFighterID(2));
+                            $matchups2 = EventHandler::getMatchups(team_id: $action['view_extra']['matchup']->getFighterID(2));
                             $action['view_extra']['found2'] = false;
                             foreach ($matchups2 as $matchup) {
                                 if ($matchup->isFuture() && ($matchup->getFighterID(1) != $action['view_extra']['matchup']->getFighterID(1) || $matchup->getFighterID(2) != $action['view_extra']['matchup']->getFighterID(2))) {
@@ -304,7 +304,7 @@ class AdminController
         $view_data['inteam2'] = $request->getQueryParams()['inteam2'] ?? '';
         $view_data['ineventid'] = $request->getQueryParams()['ineventid'] ?? '';
 
-        $view_data['events'] = EventHandler::getAllUpcomingEvents();
+        $view_data['events'] = EventHandler::getEvents(future_events_only: true);
 
         $response->getBody()->write($this->plates->render('matchup_new', $view_data));
         return $response;
@@ -319,11 +319,11 @@ class AdminController
 
         $events = null;
         if (isset($args['show']) && $args['show'] == 'all') {
-            $events = EventHandler::getAllEvents();
+            $events = EventHandler::getEvents();
         } elseif (isset($args['show']) && is_numeric($args['show'])) {
             return $this->showEvent($request, $response, $args);
         } else {
-            $events = EventHandler::getAllUpcomingEvents();
+            $events = EventHandler::getEvents(future_events_only: true);
         }
 
         foreach ($events as $event) {
@@ -513,7 +513,7 @@ class AdminController
 
         $view_data = [];
         $view_data['matchup'] = EventHandler::getFightByID($args['id']);
-        $view_data['events'] = EventHandler::getAllUpcomingEvents();
+        $view_data['events'] = EventHandler::getEvents(future_events_only: true);
         $response->getBody()->write($this->plates->render('matchup', $view_data));
         return $response;
     }
@@ -538,7 +538,7 @@ class AdminController
             $_GET['inCorrelation'] = $oProp->getMainProp() == 1 ? $oProp->getTeamName(1) : $oProp->getTeamName(2);
         }*/
 
-        $events = EventHandler::getAllUpcomingEvents();
+        $events = EventHandler::getEvents(future_events_only: true);
         foreach ($events as $event) {
             $matchups = EventHandler::getAllFightsForEvent($event->getID(), false);
             $event_view = [];
