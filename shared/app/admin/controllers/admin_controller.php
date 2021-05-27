@@ -495,6 +495,15 @@ class AdminController
         return $response;
     }
 
+    public function viewLog(Request $request, Response $response, array $args)
+    {
+        $view_data = [];
+        $log_contents =  file_get_contents(GENERAL_KLOGDIR . $args['log_name'] . '.log');
+        $view_data = ['log_contents' => $log_contents];
+        $response->getBody()->write($this->plates->render('logs', $view_data));
+        return $response;
+    }
+
     public function viewAlerts(Request $request, Response $response, array $args)
     {
         $view_data['alerts'] = [];

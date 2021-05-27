@@ -58,7 +58,7 @@ $app->group('', function (RouteCollectorProxy $group) {
   $group->get('/propcorrelation', \AdminController::class . ':createPropCorrelation');
   $group->get('/flagged', \AdminController::class . ':viewFlaggedOdds');
   $group->get('/parser_status', \AdminController::class . ':viewParserStatus');
-  $group->get('/changeauditlog', \AdminController::class . ':viewChangeAuditLog');
+  $group->get('/log/{log_name}', \AdminController::class . ':viewLog');
   
 })->add(new AuthMiddleware());
 

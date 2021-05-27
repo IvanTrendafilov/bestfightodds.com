@@ -87,10 +87,23 @@
 			</li>
 
 			<li class="sidebar-item <?=$current_page == 'changeauditlog' ? 'active' : ''?>">
-				<a class="sidebar-link" href="/cnadm/changeauditlog">
+				<a class="sidebar-link" href="/cnadm/log/changeaudit">
 					<i class="align-middle" data-feather="map"></i> <span class="align-middle">Change audit log</span>
 				</a>
 			</li>
+
+			<li class="sidebar-item">
+						<a data-bs-target="#ui" data-bs-toggle="collapse" class="sidebar-link collapsed">
+              <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-briefcase align-middle"><rect x="2" y="7" width="20" height="14" rx="2" ry="2"></rect><path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"></path></svg> <span class="align-middle">Other logs</span>
+            </a>
+						<ul id="ui" class="sidebar-dropdown list-unstyled collapse" data-bs-parent="#sidebar" style="">
+							<li class="sidebar-item"><a class="sidebar-link" href="/cnadm/log/twitter">Twitter</a></li>
+							<li class="sidebar-item"><a class="sidebar-link" href="/cnadm/log/facebook">Facebook</a></li>
+							<li class="sidebar-item"><a class="sidebar-link" href="/cnadm/log/scheduleparser">Scheduleparser</a></li>
+							<li class="sidebar-item"><a class="sidebar-link" href="/cnadm/log/sesmailer">SESMailer</a></li>
+
+						</ul>
+					</li>
 
 			<li class="sidebar-header">
 				Dev Components
