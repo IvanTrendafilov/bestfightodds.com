@@ -20,37 +20,68 @@ require_once __DIR__ . "/../../config/Ruleset.php";
 
 use BFO\Parser\Utils\ParseTools;
 use BFO\General\BookieHandler;
+use BFO\Parser\OddsProcessor;
 use BFO\Parser\ParsedSport;
 use BFO\Parser\ParsedMatchup;
 use BFO\Parser\ParsedProp;
 use BFO\Parser\Jobs\ParserJobBase;
+use BFO\Parser\Jobs\ParserJobInterface;
 
 define('BOOKIE_NAME', '5dimes');
-define('BOOKIE_ID', 1);
-define('BOOKIE_URLS', 
-    ['all' => 'http://lines.5dimes.com/linesfeed/getlinefeeds.aspx?uid=bestfightodds5841&Type=ReducedReplace']
-);
-define('BOOKIE_MOCKFILES', 
-    ['all' => PARSE_MOCKFEEDS_DIR . "5dimes.xml"]
-);
+define('BOOKIE_ID', '1');
 
-class ParserJob extends ParserJobBase
+$options = getopt("", ["mode::"]);
+
+$logger = new Katzgrau\KLogger\Logger(GENERAL_KLOGDIR, Psr\Log\LogLevel::INFO, ['filename' => 'cron.' . BOOKIE_NAME . '.' . time() . '.log']);
+$parser = new ParserJob($logger);
+$parser->run($options['mode'] ?? '');
+
+class ParserJob
 {
-    public function fetchContent($urls): array
+    private $full_run = false;
+    private $parsed_sport;
+    private $logger = null;
+    private $change_num = -1;
+
+    public function __construct(\Psr\Log\LoggerInterface $logger)
     {
-        //Apply changenum
-        $this->change_num = BookieHandler::getChangeNum($this->bookie_id);
-        if ($this->change_num != -1) {
-            $this->logger->info("Using changenum: &changenum=" . $this->change_num);
-            $urls['all'] .= '&changenum=' . $this->change_num;
-        }
-        $this->logger->info("Fetching matchups through URL: " . $urls['all']);
-        return ['all' => ParseTools::retrievePageFromURL($urls['all'])];
+        $this->logger = $logger;
     }
 
-    public function parseContent(array $content): ParsedSport
+    public function run($mode = 'normal')
     {
-        $xml = simplexml_load_string($content['all']);
+        $this->logger->info('Started parser');
+
+        $content = null;
+        if ($mode == 'mock') {
+            $this->logger->info("Note: Using matchup mock file at " . PARSE_MOCKFEEDS_DIR . "5dimes.xml");
+            $content = ParseTools::retrievePageFromFile(PARSE_MOCKFEEDS_DIR . '5dimes.xml');
+        } else {
+            $matchups_url = 'http://lines.5dimes.com/linesfeed/getlinefeeds.aspx?uid=bestfightodds5841&Type=ReducedReplace';
+            $this->change_num = BookieHandler::getChangeNum(BOOKIE_ID);
+            if ($this->change_num != -1) {
+                $this->logger->info("Using changenum: &changenum=" . $this->change_num);
+                $matchups_url .= '&changenum=' . $this->change_num;
+            }
+            $this->logger->info("Fetching matchups through URL: " . $matchups_url);
+            $content = ParseTools::retrievePageFromURL($matchups_url);
+        }
+
+        $parsed_sport = $this->parseContent($content);
+
+        try {
+            $op = new OddsProcessor($this->logger, BOOKIE_ID, new Ruleset());
+            $op->processParsedSport($parsed_sport, $this->full_run);
+        } catch (Exception $e) {
+            $this->logger->error('Exception: ' . $e->getMessage());
+        }
+
+        $this->logger->info('Finished');
+    }
+
+    public function parseContent(string $content): ParsedSport
+    {
+        $xml = simplexml_load_string($content);
         if (!$xml) {
             $this->logger->warning("Warning: XML broke!!");
         }
@@ -200,7 +231,7 @@ class ParserJob extends ParserJobBase
         if ($new_changenum != '-1' && $new_changenum != null && $new_changenum != '') {
             //Store the changenum
             $new_changenum = ((float) $new_changenum) - 1000;
-            if (BookieHandler::saveChangeNum($this->bookie_id, $new_changenum)) {
+            if (BookieHandler::saveChangeNum(BOOKIE_ID, $new_changenum)) {
                 $this->logger->info("ChangeNum stored OK: " . $new_changenum);
             } else {
                 $this->logger->error("ChangeNum was not stored");
@@ -212,8 +243,3 @@ class ParserJob extends ParserJobBase
         return $parsed_sport;
     }
 }
-
-$options = getopt("", ["mode::"]);
-$logger = new Katzgrau\KLogger\Logger(GENERAL_KLOGDIR, Psr\Log\LogLevel::INFO, ['filename' => 'cron.' . BOOKIE_NAME . '.' . time() . '.log']);
-$parser = new ParserJob(BOOKIE_ID, $logger, new RuleSet(), BOOKIE_URLS, BOOKIE_MOCKFILES);
-$parser->run($options['mode'] ?? '');
