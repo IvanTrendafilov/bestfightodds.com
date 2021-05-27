@@ -73,9 +73,6 @@ class ParserJob extends ParserJobBase
 
                 //Check if entry is a prop, if so add it as a parsed prop
                 if (trim((string) $event_node->SportSubType) == 'Props' || trim((string) $event_node->SportSubType) == 'MMA Props') {
-                    //Temporary fix for UFC event name
-                    $event_node->Header = str_replace('UFC Vegas 26', 'UFC ON ESPN 24', $event_node->Header);
-
                     $prop = null;
 
                     if ((trim((string) $event_node->HomeMoneyLine) != '')
