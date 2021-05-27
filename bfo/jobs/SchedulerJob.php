@@ -13,7 +13,7 @@ require_once __DIR__ . "/../bootstrap.php";
 use BFO\Parser\Scheduler\ScheduleParser;
 use BFO\Parser\Utils\ParseTools;
 
-echo "Schedule parser start
+echo date('Y-m-d H:i:s') . " - Schedule parser start
 ";
 
 $schedule = MMAJunkieParser::fetchSchedule();
@@ -21,7 +21,7 @@ $schedule = MMAJunkieParser::fetchSchedule();
 $sp = new ScheduleParser();
 $sp->run($schedule);
 
-echo "Done
+echo date('Y-m-d H:i:s') . " - Done
 ";
 
 class MMAJunkieParser
