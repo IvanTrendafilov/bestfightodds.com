@@ -36,7 +36,7 @@ final class CreateMatchupTest extends TestCase
             $this->greaterThan(0)
         ));
 
-        $matchup_obj = EventHandler::getFightByID($matchup_id);
+        $matchup_obj = EventHandler::getMatchup($matchup_id);
         $this->assertInstanceOf(
             Fight::class,
             $matchup_obj
@@ -98,7 +98,7 @@ final class CreateMatchupTest extends TestCase
             true,
             $result
         );
-        $matchup_obj = EventHandler::getFightByID($matchup_id);
+        $matchup_obj = EventHandler::getMatchup($matchup_id);
         $this->assertEquals(
             false,
             $matchup_obj
@@ -151,7 +151,7 @@ final class CreateMatchupTest extends TestCase
             true,
             $result
         );
-        $matchup_obj = EventHandler::getFightByID($matchup_id);
+        $matchup_obj = EventHandler::getMatchup($matchup_id);
         $this->assertEquals(
             false,
             $matchup_obj

@@ -12,7 +12,7 @@ class StatsHandler
 {
     public static function getAllDiffsForEvent($event_id, $from = 0) //0 Opening, 1 = 1 day ago, 2 = 1 hour ago
     {
-        $matchups = EventHandler::getAllFightsForEvent($event_id, true);
+        $matchups = EventHandler::getMatchups(event_id: $event_id, only_with_odds: true);
         $swings_col = [];
         foreach ($matchups as $matchup) {
             $aStats = StatsHandler::getDiffForMatchup($matchup->getID(), $from);
@@ -41,9 +41,9 @@ class StatsHandler
     }
 
 
-    public static function getExpectedOutcomesForEvent($a_iEventID)
+    public static function getExpectedOutcomesForEvent($event_id)
     {
-        $matchups = EventHandler::getAllFightsForEvent($a_iEventID, true);
+        $matchups = EventHandler::getMatchups(event_id: $event_id, only_with_odds: true);
         $outcomes = [];
         foreach ($matchups as $matchup) {
             $matchup_outcomes = self::getExpectedOutcomesForMatchup($matchup);
@@ -96,7 +96,7 @@ class StatsHandler
     */
     public static function getExpectedOutcome($matchup_id, $prop_category_id, $team = null)
     {
-        $matchup = EventHandler::getFightByID($matchup_id);
+        $matchup = EventHandler::getMatchup($matchup_id);
         $sum = 0;
         $posprop = 1; //See restriction on using only posprop above
         $prop_odds_store = []; //Used to temporary store prop odds for later reference when summarizing

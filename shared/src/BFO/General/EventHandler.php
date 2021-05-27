@@ -9,19 +9,32 @@ use BFO\DataTypes\Fight;
 
 class EventHandler
 {
+    public static function getEvent(int $event_id, bool $future_event_only = false): ?Event
+    {
+        if (!$event_id || $event_id == 0) {
+            return null;
+        }
+        $events = EventDB::getEvents($future_event_only, $event_id);
+        return $events[0] ?? null;
+    }
+
     public static function getEvents(bool $future_events_only = null, int $event_id = null, string $event_name = null, string $event_date = null): array
     {
         return EventDB::getEvents($future_events_only, $event_id, $event_name, $event_date);
     }
 
-    public static function getAllFightsForEvent($event_id, $only_with_odds = false)
+    /*public static function getAllFightsForEvent($event_id, $only_with_odds = false)
     {
         return EventHandler::getMatchups(only_with_odds: $only_with_odds, event_id: $event_id);
-    }
+    }*/
 
-    public static function getAllUpcomingMatchups($only_with_odds = false)
+    public static function getMatchup(int $matchup_id): ?Fight
     {
-        return EventHandler::getMatchups(future_matchups_only: true, only_with_odds: $only_with_odds);
+        if (!$matchup_id || $matchup_id == 0) {
+            return null;
+        }
+        $matchups = EventHandler::getMatchups(matchup_id: $matchup_id);
+        return $matchups[0] ?? null;
     }
 
     public static function getMatchups(bool $future_matchups_only = false, bool $only_with_odds = false, int $event_id = null, int $matchup_id = null, bool $only_without_odds = false, int $team_id = null): array
@@ -53,13 +66,6 @@ class EventHandler
         return null;
     }
 
-
-    public static function getEvent($event_id, $future_event_only = false)
-    {
-        $events = EventDB::getEvents($future_event_only, $event_id);
-        return $events[0] ?? null;
-    }
-
     public static function getEventByName(string $name)
     {
         return EventDB::getEvents(event_name: $name);
@@ -80,15 +86,6 @@ class EventHandler
             }
         }
         return null;
-    }
-
-    public static function getFightByID($matchup_id)
-    {
-        if (!$matchup_id) {
-            return null;
-        }
-        $matchups = EventHandler::getMatchups(matchup_id: $matchup_id);
-        return $matchups[0] ?? null;
     }
 
     /**
@@ -213,7 +210,7 @@ class EventHandler
     public static function removeEvent($event_id)
     {
         //First remove all matchups for this event
-        $matchups = EventHandler::getAllFightsForEvent($event_id);
+        $matchups = EventHandler::getMatchups(event_id: $event_id);
         foreach ($matchups as $matchup) {
             self::removeFight($matchup->getID());
         }
@@ -250,7 +247,7 @@ class EventHandler
 
     public static function changeFight($matchup_id, $event_id)
     {
-        $matchup_obj = EventHandler::getFightByID($matchup_id);
+        $matchup_obj = EventHandler::getMatchup($matchup_id);
 
         if ($matchup_obj == null) {
             return false;
@@ -418,7 +415,7 @@ class EventHandler
 
         $events = EventHandler::getEvents(future_events_only: true);
         foreach ($events as $event) {
-            $matchups = EventHandler::getAllFightsForEvent($event->getID(), true);
+            $matchups = EventHandler::getMatchups(event_id: $event->getID(), only_with_odds: true);
 
             foreach ($matchups as $matchup) {
                 $matchup_counter++;
@@ -452,7 +449,7 @@ class EventHandler
 
         $events = EventHandler::getEvents(future_events_only: true);
         foreach ($events as $event) {
-            $matchups = EventHandler::getAllFightsForEvent($event->getID());
+            $matchups = EventHandler::getMatchups(event_id: $event->getID());
             foreach ($matchups as $matchup) {
                 $matchup_counter++;
                 $matchup_metadata_date = new \DateTime();

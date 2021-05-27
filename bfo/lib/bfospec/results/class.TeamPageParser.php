@@ -128,7 +128,7 @@ class TeamPageParser
 		{
 			if ($found_matched == true && $found_unmatched == false && $val == false)
 			{
-				$matchup = EventHandler::getFightByID($key);
+				$matchup = EventHandler::getMatchup($key);
 				$event = EventHandler::getEvent($matchup->getEventID());
 				$this->logger->info('Matchup ' . $key . ' - ' . $matchup->getTeamAsString(1) . ' vs. ' . $matchup->getTeamAsString(2) . ' at ' . $event->getName() . ' was not found on wiki page. Should probably be cleared as Cancelled');
 			}

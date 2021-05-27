@@ -38,7 +38,7 @@ final class CreatePropOddsTest extends TestCase
         $matchup = new Fight(0, 'Propfighter Propone', 'Propfighter Proptwo', $this->event->getID());
         $matchup_id = EventHandler::createMatchup($matchup);
 
-        $this->matchup = EventHandler::getFightByID($matchup_id);
+        $this->matchup = EventHandler::getMatchup($matchup_id);
         $odds_obj = new FightOdds($this->matchup->getID(), $this->bookie_id, '-150', '+200', -1);
         EventHandler::addNewFightOdds($odds_obj);
     }

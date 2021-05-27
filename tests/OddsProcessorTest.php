@@ -35,7 +35,7 @@ final class OddsProcessorTest extends TestCase
 
         $matchup = new Fight(0, 'Fighter OpOne', 'Fighter OpTwo', $this->event->getID());
         $matchup_id = EventHandler::createMatchup($matchup);
-        $this->matchup = EventHandler::getFightByID($matchup_id);
+        $this->matchup = EventHandler::getMatchup($matchup_id);
 
         $this->bookie_id = BookieHandler::getAllBookies()[0]->getID();
         $this->op = new OddsProcessor(new NullLogger, $this->bookie_id, new RuleSet());

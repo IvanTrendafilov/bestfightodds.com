@@ -48,7 +48,8 @@ while (($iRemovedOdds > 0 || $iRemovedPropOdds > 0)  && $iCounter < 10)
 
     foreach ($aEvents as $oEvent)
     {
-        $aFights = EventHandler::getAllFightsForEvent($oEvent->getID(), true);
+        $aFights = EventHandler::getMatchups(event_id: $oEvent->getID(), only_with_odds: true);
+
         foreach ($aFights as $oFight)
         {
             foreach ($aBookies as $oBookie)

@@ -229,7 +229,7 @@ class PropParserV2
             $sFoundCorrMatchup = OddsHandler::getMatchupForCorrelation($a_oTemplate->getBookieID(), $sSearchProp);
             if ($sFoundCorrMatchup != null) {
                 $this->logger->debug('---- prop has manual correlation stored: ' . $sFoundCorrMatchup);
-                $oPreMatchedMatchup = EventHandler::getFightByID($sFoundCorrMatchup);
+                $oPreMatchedMatchup = EventHandler::getMatchup((int) $sFoundCorrMatchup);
                 if ($oPreMatchedMatchup != null) {
                     $this->logger->debug('----- found stored manual correlation for ' . $sSearchProp . ' : ' . $oPreMatchedMatchup->getID());
                     $aMatchupsToCheck = array($oPreMatchedMatchup);
@@ -243,7 +243,7 @@ class PropParserV2
                 //pre-matched already, we'll just check that
                 if ($a_oProp->getCorrelationID() != '') {
                     $this->logger->debug('--- prop has correlation id: ' . $a_oProp->getCorrelationID());
-                    $oPreMatchedMatchup = EventHandler::getFightByID(ParseTools::getCorrelation($a_oProp->getCorrelationID()));
+                    $oPreMatchedMatchup = EventHandler::getMatchup((int) ParseTools::getCorrelation($a_oProp->getCorrelationID()));
                     if ($oPreMatchedMatchup != null) {
                         $this->logger->debug('--- found stored correlation: ' . $oPreMatchedMatchup->getID());
                         $aMatchupsToCheck = array($oPreMatchedMatchup);

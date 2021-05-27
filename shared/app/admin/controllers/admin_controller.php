@@ -243,13 +243,13 @@ class AdminController
                         break;
                     case 6:
                         //Move matchup
-                        $action['view_extra']['matchup'] = EventHandler::getFightByID($action['action_obj']->matchupID);
+                        $action['view_extra']['matchup'] = EventHandler::getMatchup($action['action_obj']->matchupID);
                         $action['view_extra']['old_event'] = EventHandler::getEvent($action['view_extra']['matchup']->getEventID());
                         $action['view_extra']['new_event'] = EventHandler::getEvent($action['action_obj']->eventID);
                         break;
                     case 7:
                         //Delete matchup
-                        $action['view_extra']['matchup'] = EventHandler::getFightByID($action['action_obj']->matchupID);
+                        $action['view_extra']['matchup'] = EventHandler::getMatchup($action['action_obj']->matchupID);
                         if ($action['view_extra']['matchup'] == null) {
                             unset($actions[$key]);
                             break;
@@ -283,7 +283,7 @@ class AdminController
                         $action['view_extra']['new_event'] = EventHandler::getEventByName($action['action_obj']->eventTitle);
                         $action['view_extra']['matchups'] = [];
                         foreach ($action['action_obj']->matchupIDs as $sMatchup) {
-                            $action['view_extra']['matchups'][$sMatchup] = EventHandler::getFightByID($sMatchup);
+                            $action['view_extra']['matchups'][$sMatchup] = EventHandler::getMatchup($sMatchup);
                             $action['view_extra']['newma'][$sMatchup] = json_encode(array('matchupID' => $sMatchup, 'eventID' => ($action['view_extra']['new_event'] != null ? $action['view_extra']['new_event']->getID() : '-9999')), JSON_HEX_APOS | JSON_HEX_QUOT);
                         }
 
@@ -327,7 +327,7 @@ class AdminController
         }
 
         foreach ($events as $event) {
-            $fights = EventHandler::getAllFightsForEvent($event->getID(), false);
+            $fights = EventHandler::getMatchups(event_id: $event->getID());
             $event_view = [];
             foreach ($fights as $fight) {
                 $arbitrage_info = Alerter::getArbitrageInfo($fight->getID(), 100);
@@ -347,7 +347,7 @@ class AdminController
         $events[] = EventHandler::getEvent($args['show']);
         $view_data = ['events' => []];
         foreach ($events as $event) {
-            $fights = EventHandler::getAllFightsForEvent($event->getID(), false);
+            $fights = EventHandler::getMatchups(event_id: $event->getID());
             $event_view = [];
             foreach ($fights as $fight) {
                 $arbitrage_info = Alerter::getArbitrageInfo($fight->getID(), 100);
@@ -500,7 +500,7 @@ class AdminController
         $view_data['alerts'] = [];
         $alerts = Alerter::getAllAlerts();
         foreach ($alerts as $alert) {
-            $fight = EventHandler::getFightByID($alert->getFightID());
+            $fight = EventHandler::getMatchup($alert->getFightID());
             $view_data['alerts'][] = ['alert_obj' => $alert, 'fight_obj' => $fight];
         }
         $response->getBody()->write($this->plates->render('alerts', $view_data));
@@ -512,7 +512,7 @@ class AdminController
         $args['id'];
 
         $view_data = [];
-        $view_data['matchup'] = EventHandler::getFightByID($args['id']);
+        $view_data['matchup'] = EventHandler::getMatchup($args['id']);
         $view_data['events'] = EventHandler::getEvents(future_events_only: true);
         $response->getBody()->write($this->plates->render('matchup', $view_data));
         return $response;
@@ -540,7 +540,7 @@ class AdminController
 
         $events = EventHandler::getEvents(future_events_only: true);
         foreach ($events as $event) {
-            $matchups = EventHandler::getAllFightsForEvent($event->getID(), false);
+            $matchups = EventHandler::getMatchups(event_id: $event->getID());
             $event_view = [];
             foreach ($matchups as $matchup) {
                 $event_view[] = ['matchup_obj' => $matchup];

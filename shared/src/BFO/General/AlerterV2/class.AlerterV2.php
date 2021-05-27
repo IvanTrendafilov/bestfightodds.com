@@ -195,7 +195,7 @@ class AlerterV2
             
             if (isset($criterias['matchup_id'])) {
                 //Proptype is linked to a specific matchup
-                $matchup = EventHandler::getFightByID($criterias['matchup_id']);
+                $matchup = EventHandler::getMatchup($criterias['matchup_id']);
                 $proptype->setPropDesc(str_replace('<T>', $matchup->getTeamLastNameAsString($criterias['team_num']), $proptype->getPropDesc()));
                 $proptype->setPropNegDesc(str_replace('<T>', $matchup->getTeamLastNameAsString($criterias['team_num']), $proptype->getPropNegDesc()));
                 $proptype->getPropDesc(str_replace('<T2>', $matchup->getTeamLastNameAsString(($criterias['team_num'] % 2) + 1), $proptype->getPropDesc()));
@@ -210,7 +210,7 @@ class AlerterV2
         } else {
             //Matchup
             $type = 'matchup';
-            $matchup = EventHandler::getFightByID($criterias['matchup_id']);
+            $matchup = EventHandler::getMatchup($criterias['matchup_id']);
             $header = $matchup->getTeamAsString(1) . " vs. " . $matchup->getTeamAsString(2);
             $latest_price = null;
             $add_bookie = '';

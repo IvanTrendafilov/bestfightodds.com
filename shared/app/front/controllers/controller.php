@@ -79,7 +79,7 @@ class MainController
         $view_data['events'] = [];
         $events = EventHandler::getEvents(future_events_only: true);
         foreach ($events as $event) {
-            $matchups = EventHandler::getAllFightsForEvent($event->getID(), true);
+            $matchups = EventHandler::getMatchups(event_id: $event->getID(), only_with_odds: true);
             if (count($matchups) > 0) {
                 $view_data['events'][] = ['event_obj' => $event, 'matchups' => $matchups];
             }
@@ -97,7 +97,7 @@ class MainController
         ];
         //PBO Only - TODO: Move this to its own controller?
         foreach ($events as $event) {
-            $matchups = EventHandler::getAllFightsForEvent($event->getID(), true);
+            $matchups = EventHandler::getMatchups(event_id: $event->getID(), only_with_odds: true);
             $view_data['event_matchups'][$event->getID()] = $matchups;
         }
 

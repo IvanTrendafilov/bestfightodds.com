@@ -84,14 +84,14 @@ class FightLinkCreator
 
     public static function createEventLink($event_id, $line_type, $format)
     {
-        $aMatchups = EventHandler::getAllFightsForEvent($event_id, true);
-        return self::createLink($aMatchups, $line_type, $format);
+        $matchups = EventHandler::getMatchups(event_id: $event_id, only_with_odds: true);
+        return self::createLink($matchups, $line_type, $format);
     }
 
-    public static function createFightLink($a_iFightID, $line_type, $format)
+    public static function createFightLink($matchup_id, $line_type, $format)
     {
-        $oMatchup = EventHandler::getFightByID($a_iFightID);
-        return self::createLink(array($oMatchup), $line_type, $format);
+        $matchup = EventHandler::getMatchup($matchup_id);
+        return self::createLink([$matchup], $line_type, $format);
     }
 
     public static function createLink($aFights, $line_type, $format) //1 = Moneyline, 2 = Decimal

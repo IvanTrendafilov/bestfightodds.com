@@ -593,7 +593,7 @@ class OddsHandler
 
         $event = EventHandler::getEvent((int) $a_iEventID);
 
-        $matchups = EventHandler::getAllFightsForEvent($event->getID(), true);
+        $matchups = EventHandler::getMatchups(event_id: $event->getID(), only_with_odds: true);
 
         //Convert matchups array to associative
         $matchups_assoc = [];

@@ -96,7 +96,7 @@ class Alerter
             $odds_obj = EventHandler::getLatestOddsForFightAndBookie($alert_obj->getFightID(), $alert_obj->getBookieID());
         }
 
-        $matchup = EventHandler::getFightByID($alert_obj->getFightID());
+        $matchup = EventHandler::getMatchup($alert_obj->getFightID());
         if ($odds_obj == null || $matchup == null) {
             return false;
         }

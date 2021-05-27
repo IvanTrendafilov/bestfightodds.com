@@ -82,16 +82,16 @@ else
 class FightLinkCreator
 {
 
-    public static function createEventLink($a_iEventID, $a_iLineType, $a_iFormat)
+    public static function createEventLink($event_id, $line_type, $format)
     {
-        $aMatchups = EventHandler::getAllFightsForEvent($a_iEventID, true);
-        return self::createLink($aMatchups, $a_iLineType, $a_iFormat);
+        $matchups = EventHandler::getMatchups(event_id: $event_id, only_with_odds: true);
+        return self::createLink($matchups, $line_type, $format);
     }
 
-    public static function createFightLink($a_iFightID, $a_iLineType, $a_iFormat)
+    public static function createFightLink($matchup_id, $line_type, $format)
     {
-        $oMatchup = EventHandler::getFightByID($a_iFightID);
-        return self::createLink(array($oMatchup), $a_iLineType, $a_iFormat);
+        $oMatchup = EventHandler::getMatchup((int) $matchup_id);
+        return self::createLink(array($oMatchup), $line_type, $format);
     }
 
     public static function createLink($aFights, $a_iLineType, $a_iFormat) //1 = Moneyline, 2 = Decimal

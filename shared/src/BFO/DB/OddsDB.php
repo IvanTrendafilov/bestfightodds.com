@@ -695,7 +695,7 @@ class OddsDB
 
         $rResult = DBTools::doParamQuery($query, $params);
 
-        return DBTools::getSingleValue($rResult);
+        return (int) DBTools::getSingleValue($rResult);
     }
 
     /**

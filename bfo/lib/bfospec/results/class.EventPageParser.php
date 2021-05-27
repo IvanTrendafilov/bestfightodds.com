@@ -168,7 +168,7 @@ class EventPageParser
         }
 
 		//Fetch all matchups to keep track which ones we have matched and not
-		$existing_db_matchups = EventHandler::getAllFightsForEvent($event->getID());
+		$existing_db_matchups = EventHandler::getMatchups(event_id: $event->getID());
 		$existing_matchups = [];
 		foreach ($existing_db_matchups as $existing_db_matchup)
 		{
@@ -263,7 +263,7 @@ class EventPageParser
 		{
 			if ($found_matched == true && $found_unmatched == false && $val == false)
 			{
-				$matchup = EventHandler::getFightByID($key);
+				$matchup = EventHandler::getMatchup($key);
 				$event = EventHandler::getEvent($matchup->getEventID());
 				$this->logger->info('Matchup ' . $key . ' - ' . $matchup->getTeamAsString(1) . ' vs. ' . $matchup->getTeamAsString(2) . ' at ' . $event->getName() . ' was not found on wiki page. Should probably be cleared as Cancelled');
 			}

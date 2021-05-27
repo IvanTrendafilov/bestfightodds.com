@@ -69,7 +69,7 @@ foreach ($events as $event) {
 	) {
 		//Compile list of matchups with best odds available
 		$fightodds = '';
-		$matchups = EventHandler::getAllFightsForEvent($event->getID(), true);
+		$matchups = EventHandler::getMatchups(event_id: $event->getID(), only_with_odds: true);
 		if (sizeof($matchups) > 0) {
 			foreach ($matchups as $matchup) {
 				$odds = EventHandler::getBestOddsForFight($matchup->getID());

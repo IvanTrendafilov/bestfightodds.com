@@ -105,7 +105,7 @@ class APIController
                     if (isset($args['e'])) {
                         $event = EventHandler::getEvent($args['e'], true);
                     } else {
-                        $event = EventHandler::getEvent(EventHandler::getFightByID($args['m'])->getEventID(), true);
+                        $event = EventHandler::getEvent(EventHandler::getMatchup((int) $args['m'])->getEventID(), true);
                     }
 
                     foreach ($odds as $odds_key => $odds_obj) {

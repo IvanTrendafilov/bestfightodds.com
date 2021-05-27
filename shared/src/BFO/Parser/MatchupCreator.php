@@ -150,7 +150,7 @@ class MatchupCreator
             //Fetch upcoming matchups if not already done
             if ($this->upcoming_matchups == null) {
                 //$this->upcoming_matchups = EventHandler::getMatchups(future_matchups_only: true, only_with_odds: true); // Look in all events
-                $this->upcoming_matchups = EventHandler::getAllFightsForEvent($matched_event->getID(), true); // Look only in the matched event
+                $this->upcoming_matchups = EventHandler::getMatchups(event_id: $matched_event->getID(), only_with_odds: true); // Look only in the matched event
             }
             foreach ($this->upcoming_matchups as $matchup) {
                 if (
@@ -219,7 +219,7 @@ class MatchupCreator
 
             $id = EventHandler::createMatchup($new_matchup);
             if ($id) {
-                $created_matchup_obj = EventHandler::getFightByID($id);
+                $created_matchup_obj = EventHandler::getMatchup($id);
                 $this->audit_log->info("Created new matchup " . $created_matchup_obj->getFighter(1) . ' vs ' . $created_matchup_obj->getFighter(2) . ' at ' . $matched_event->getName() . ' on ' . $matched_event->getDate() . ' as proposed by ' . $this->bookie_obj->getName() . ' . Also in scheduler: ' . ($in_scheduler['found'] ? 'Yes' : 'No'));
                 $this->logger->info("- Created new matchup " . $created_matchup_obj->getFighter(1) . ' vs ' . $created_matchup_obj->getFighter(2) . ' at ' . $matched_event->getName() . ' on ' . $matched_event->getDate() . ' as proposed by ' . $this->bookie_obj->getName() . ' . Also in scheduler: ' . ($in_scheduler['found'] ? 'Yes' : 'No'));
                 return $created_matchup_obj;

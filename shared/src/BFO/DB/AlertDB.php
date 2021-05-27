@@ -56,7 +56,7 @@ class AlertDB
         }
 
         //Check that fight exists and is not outdated
-        $fight_obj = EventHandler::getFightByID($alert_obj->getFightID());
+        $fight_obj = EventHandler::getMatchup($alert_obj->getFightID());
         if ($fight_obj == null) {
             return -1;
         }

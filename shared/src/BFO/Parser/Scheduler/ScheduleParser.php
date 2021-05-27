@@ -189,7 +189,7 @@ class ScheduleParser
             if ($event->getID() == PARSE_FUTURESEVENT_ID) {
                 break;
             }
-            $aMatchups = EventHandler::getAllFightsForEvent($event->getID());
+            $aMatchups = EventHandler::getMatchups(event_id: $event->getID());
             foreach ($aMatchups as $oMatchup) {
                 if (!in_array($oMatchup->getID(), $this->aMatchedExistingMatchups)) {
                     ScheduleHandler::storeManualAction(json_encode(array('matchupID' => $oMatchup->getID()), JSON_HEX_APOS | JSON_HEX_QUOT), 7);
