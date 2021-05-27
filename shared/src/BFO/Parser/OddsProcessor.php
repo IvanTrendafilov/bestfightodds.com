@@ -100,7 +100,7 @@ class OddsProcessor
     /**
      * Runs through a set of parsed matchups and finds a matching matchup in the database for them
      */
-    private function matchMatchups($parsed_matchups)
+    public function matchMatchups($parsed_matchups)
     {
         $matched_items = [];
         foreach ($parsed_matchups as $parsed_matchup) {
@@ -130,7 +130,7 @@ class OddsProcessor
     /**
      * Goes through matched odds for matchups and updates them in the database if anything has changed (through updateOneMatchedMatchup() function)
      */
-    private function updateMatchedMatchups($matched_matchups)
+    public function updateMatchedMatchups($matched_matchups)
     {
         foreach ($matched_matchups as $matched_matchup) {
             if ($matched_matchup['match_result']['status'] == true) {
@@ -286,7 +286,7 @@ class OddsProcessor
     /**
      * Loops through all parsed matchups and removes any dupes
      */
-    private function removeMoneylineDupes($parsed_sport)
+    public function removeMoneylineDupes($parsed_sport)
     {
         $matchups = $parsed_sport->getParsedMatchups();
         for ($y = 0; $y < sizeof($matchups); $y++) {
@@ -295,8 +295,6 @@ class OddsProcessor
                     $x != $y
                     && $matchups[$y]->getTeamName(1) == $matchups[$x]->getTeamName(1)
                     && $matchups[$y]->getTeamName(2) == $matchups[$x]->getTeamName(2)
-                    && !($matchups[$y]->getTeamOdds(1) == $matchups[$x]->getTeamOdds(1)
-                        && $matchups[$y]->getTeamOdds(2) == $matchups[$x]->getTeamOdds(2))
                 ) {
                     //Found a match
                     $arbitrage_subject = ParseTools::getArbitrage($matchups[$y]->getTeamOdds(1), $matchups[$y]->getTeamOdds(2));
@@ -326,7 +324,7 @@ class OddsProcessor
     /**
      * Loops through all parsed props and removes any dupes (matching on name of the prop, not prop_type)
      */
-    private function removePropDupes($parsed_sport)
+    public function removePropDupes($parsed_sport)
     {
         $props = $parsed_sport->getFetchedProps();
         for ($y = 0; $y < sizeof($props); $y++) {
@@ -336,8 +334,6 @@ class OddsProcessor
                     && $props[$y]->getCorrelationID() == $props[$x]->getCorrelationID()
                     && $props[$y]->getTeamName(1) == $props[$x]->getTeamName(1)
                     && $props[$y]->getTeamName(2) == $props[$x]->getTeamName(2)
-                    && !($props[$y]->getTeamOdds(1) == $props[$x]->getTeamOdds(1)
-                        && $props[$y]->getTeamOdds(2) == $props[$x]->getTeamOdds(2))
                 ) {
                     //Found a match
                     $arbitrage_subject = ParseTools::getArbitrage($props[$y]->getTeamOdds(1), $props[$y]->getTeamOdds(2));
