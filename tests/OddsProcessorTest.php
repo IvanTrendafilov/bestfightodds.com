@@ -33,7 +33,7 @@ final class OddsProcessorTest extends TestCase
         $event_date = date('Y-m-d');
         $this->event = EventHandler::addNewEvent(new Event(0, $event_date, $event_name, true));
 
-        $matchup = new Fight(0, 'Fighter One', 'Fighter Two', $this->event->getID());
+        $matchup = new Fight(0, 'Fighter OpOne', 'Fighter OpTwo', $this->event->getID());
         $matchup_id = EventHandler::createMatchup($matchup);
         $this->matchup = EventHandler::getFightByID($matchup_id);
 
@@ -81,11 +81,11 @@ final class OddsProcessorTest extends TestCase
     {
         $parsed_sport = new ParsedSport('MMA');
        
-        $parsed_sport->addFetchedProp(new ParsedProp('Fighter One vs Fighter two - Fight goes the distance', 'Fight does not go the distance', -250, 200));
-        $parsed_sport->addFetchedProp(new ParsedProp('Fighter One vs Fighter two - Fight goes the distance', 'Fight does not go the distance', -250, 200)); //Straight dupe
-        $parsed_sport->addFetchedProp(new ParsedProp('Fighter One vs Fighter two - Fight goes the distance', 'Fight does not go the distance', -350, 150)); //Both sides worse
-        $parsed_sport->addFetchedProp(new ParsedProp('Fighter One vs Fighter two - Fight goes the distance', 'Fight does not go the distance', -350, 200)); //One side worse
-        $parsed_sport->addFetchedProp(new ParsedProp('Fighter One vs Fighter two - Fight goes the distance', 'Fight does not go the distance', -250, 100)); //Other side worse
+        $parsed_sport->addFetchedProp(new ParsedProp('Fighter OpOne vs Fighter Optwo - Fight goes the distance', 'Fight does not go the distance', -250, 200));
+        $parsed_sport->addFetchedProp(new ParsedProp('Fighter OpOne vs Fighter Optwo - Fight goes the distance', 'Fight does not go the distance', -250, 200)); //Straight dupe
+        $parsed_sport->addFetchedProp(new ParsedProp('Fighter OpOne vs Fighter Optwo - Fight goes the distance', 'Fight does not go the distance', -350, 150)); //Both sides worse
+        $parsed_sport->addFetchedProp(new ParsedProp('Fighter OpOne vs Fighter Optwo - Fight goes the distance', 'Fight does not go the distance', -350, 200)); //One side worse
+        $parsed_sport->addFetchedProp(new ParsedProp('Fighter OpOne vs Fighter Optwo - Fight goes the distance', 'Fight does not go the distance', -250, 100)); //Other side worse
 
         $parsed_sport = $this->op->removePropDupes($parsed_sport);
 
@@ -106,7 +106,7 @@ final class OddsProcessorTest extends TestCase
     public function testMatchMatchups() 
     {
         $parsed_sport = new ParsedSport('MMA');
-        $parsed_matchup = new ParsedMatchup('Fighter One', 'Fighter Two', -400, 300);
+        $parsed_matchup = new ParsedMatchup('Fighter OpOne', 'Fighter OpTwo', -400, 300);
         $parsed_sport->addParsedMatchup($parsed_matchup);
 
         $match_results = $this->op->matchMatchups($parsed_sport->getParsedMatchups());
@@ -128,7 +128,7 @@ final class OddsProcessorTest extends TestCase
     public function testUpdateMatchedMatchups()
     {
         $parsed_sport = new ParsedSport('MMA');
-        $parsed_matchup = new ParsedMatchup('Fighter One', 'Fighter Two', -400, 300);
+        $parsed_matchup = new ParsedMatchup('Fighter OpOne', 'Fighter OpTwo', -400, 300);
         $parsed_sport->addParsedMatchup($parsed_matchup);
 
         $match_results = $this->op->matchMatchups($parsed_sport->getParsedMatchups());
