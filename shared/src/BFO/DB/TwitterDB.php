@@ -13,7 +13,7 @@ use BFO\DataTypes\Fight;
  */
 class TwitterDB
 {
-    public static function saveFightAsTweeted($fight_id)
+    public static function saveFightAsTweeted(int $fight_id): bool
     {
         $query = 'INSERT INTO fight_twits(fight_id, twitdate)
                         VALUES (?, NOW())';
@@ -33,7 +33,7 @@ class TwitterDB
         return true;
     }
 
-    public static function getUntweetedMatchups()
+    public static function getUntweetedMatchups(): array
     {
         $query = 'SELECT f.*, f1.name AS fighter1_name, f2.name AS fighter2_name 
                     FROM fights f, events e, fighters f1, fighters f2
@@ -62,7 +62,7 @@ class TwitterDB
         return $fights;
     }
 
-    public static function addTwitterHandle($team_id, $handle)
+    public static function addTwitterHandle(int $team_id, string $handle): bool
     {
         $query = 'INSERT INTO teams_twitterhandles(team_id, handle)
                         VALUES (?, ?)
@@ -82,11 +82,11 @@ class TwitterDB
         return true;
     }
 
-    public static function getTwitterHandle($team_id)
+    public static function getTwitterHandle($team_id): mixed
     {
         $query = 'SELECT * FROM teams_twitterhandles WHERE team_id = ?';
         $params = [$team_id];
-        
+
         try {
             return PDOTools::findOne($query, $params);
         } catch (\PDOException $e) {
@@ -94,6 +94,6 @@ class TwitterDB
                 throw new \Exception("Unknown error " . $e->getMessage(), 10);
             }
         }
-        return false;
+        return null;
     }
 }

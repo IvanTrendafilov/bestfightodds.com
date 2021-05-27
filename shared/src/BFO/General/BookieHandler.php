@@ -18,7 +18,7 @@ class BookieHandler
         return $bookies[0] ?? null;
     }
 
-    public static function saveChangeNum($bookie_id, $change_num)
+    public static function saveChangeNum(int $bookie_id, string $change_num): bool
     {
         return BookieDB::saveChangeNum($bookie_id, $change_num);
     }

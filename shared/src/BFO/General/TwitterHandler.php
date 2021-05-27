@@ -84,7 +84,7 @@ class TwitterHandler
             //Add fighter twitter handles if we are only tweeting one matchup (and if they exist)
             if (count($group['matchups']) == 1) {
                 for ($x = 1; $x <= 2; $x++) {
-                    $handle = self::getTwitterHandle($group['matchups'][0]->getFighterID($x));
+                    $handle = self::getTwitterHandle((int) $group['matchups'][0]->getFighterID($x));
                     if ($handle && $handle != '') {
                         $text_to_tweet .= ' @' . $handle;
                     }
@@ -96,7 +96,7 @@ class TwitterHandler
 
             if ($text_to_tweet != '' && $tweeter->updateStatus($text_to_tweet)) {
                 foreach ($group['matchups'] as $matchup_tweeted) {
-                    TwitterDB::saveFightAsTweeted($matchup_tweeted->getID());
+                    TwitterDB::saveFightAsTweeted((int) $matchup_tweeted->getID());
                 }
                 $tweet_counter++;
             }
@@ -105,14 +105,14 @@ class TwitterHandler
         return array('pre_untweeted_fights' => count($matchups), 'pre_untweeted_events' => count($tweet_groups), 'post_tweeted' => $tweet_counter);
     }
 
-    public static function addTwitterHandle($team_id, $handle)
+    public static function addTwitterHandle(int $team_id, string $handle): bool
     {
         return TwitterDB::addTwitterHandle($team_id, $handle);
     }
 
-    public static function getTwitterHandle($team_id)
+    public static function getTwitterHandle(int $team_id): ?string
     {
         $result = TwitterDB::getTwitterHandle($team_id);
-        return isset($result->handle) ? $result->handle : false;
+        return isset($result->handle) ? $result->handle : null;
     }
 }

@@ -365,7 +365,7 @@ class AdminController
     {
         if (isset($args['id'])) {
             $fighter = TeamHandler::getTeams(team_id: $args['id'])[0] ?? null;
-            $twitter_handle = TwitterHandler::getTwitterHandle($args['id']);
+            $twitter_handle = TwitterHandler::getTwitterHandle((int) $args['id']);
             $alt_names = TeamHandler::getAltNamesForTeamByID($args['id']);
             $view_data = ['fighter_obj' => $fighter, 'twitter_handle' => $twitter_handle, 'altnames' => $alt_names ?? []];
             $response->getBody()->write($this->plates->render('fighters', $view_data));

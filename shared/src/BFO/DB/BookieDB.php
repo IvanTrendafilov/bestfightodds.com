@@ -10,7 +10,7 @@ use BFO\DataTypes\PropTemplate;
 
 class BookieDB
 {
-    public static function getBookiesGeneric(int $bookie_id = null) : array
+    public static function getBookiesGeneric(int $bookie_id = null): array
     {
         $extra_where = '';
         $params = [];
@@ -39,7 +39,7 @@ class BookieDB
         return $bookies;
     }
 
-    public static function saveChangeNum($bookie_id, $change_num)
+    public static function saveChangeNum(int $bookie_id, string $change_num): bool
     {
         $query = 'UPDATE bookies_changenums 
                     SET changenum = ? 
@@ -47,12 +47,12 @@ class BookieDB
 
         $params = [$change_num, $bookie_id];
 
-        $result = DBTools::doParamQuery($query, $params);
-
-        if ($result == false) {
-            return false;
+        try {
+            $result = PDOTools::executeQuery($query, $params);
+            return $result->rowCount() > 0 ? true : false;
+        } catch (\PDOException $e) {
+            throw new \Exception("Unknown error " . $e->getMessage(), 10);
         }
-        return true;
     }
 
     public static function getChangeNum($bookie_id)
