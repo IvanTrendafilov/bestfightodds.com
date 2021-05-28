@@ -40,7 +40,7 @@ class OddsDB
         return true;
     }
 
-    public static function addEventPropBet($event_propbet_obj)
+    public static function addEventPropBet(EventPropBet $event_propbet_obj)
     {
         $query = 'INSERT IGNORE INTO lines_eventprops(event_id, bookie_id, prop_odds, negprop_odds, proptype_id, date)
                     VALUES(?, ?, ?, ?, ?, NOW())';
@@ -316,43 +316,6 @@ class OddsDB
         return null;
     }
 
-    public static function getBestPropOddsForEvent($event_id, $proptype_id)
-    {
-        $query = 'SELECT MAX(co1.prop_odds) AS prop_odds, MAX(co1.negprop_odds) AS negprop_odds, co1.bookie_id, co1.date
-            FROM lines_eventprops AS co1, (SELECT co2.bookie_id, MAX(co2.date) as date
-                            FROM lines_eventprops AS co2
-                           WHERE co2.event_id = ?
-                            AND co2.proptype_id = ?
-                             GROUP BY co2.bookie_id) AS co3
-            WHERE co1.bookie_id = co3.bookie_id
-            AND co1.date = co3.date
-            AND co1.event_id = ?
-            AND co1.proptype_id = ?
-              GROUP BY co1.event_id, co1.proptype_id
-              LIMIT 0,1;';
-
-        $params = array($event_id, $proptype_id, $event_id, $proptype_id);
-
-        $rResult = DBTools::doParamQuery($query, $params);
-
-        //$aFightOddsCol = array();
-
-        if ($aRow = mysqli_fetch_array($rResult)) {
-            return new EventPropBet(
-                $event_id,
-                $aRow['bookie_id'],
-                '',
-                $aRow['prop_odds'],
-                '',
-                $aRow['negprop_odds'],
-                $proptype_id,
-                $aRow['date']
-            );
-        }
-        return null;
-    }
-
-
     /**
      * Gets all prop odds for the specific prop type and  matchup
      *
@@ -446,36 +409,6 @@ class OddsDB
                     LIMIT 0,1';
 
         $params = array($matchup_id);
-
-        $rResult = DBTools::doParamQuery($query, $params);
-
-        $aFightOddsCol = array();
-        while ($aFightOdds = mysqli_fetch_array($rResult)) {
-            $aFightOddsCol[] = new FightOdds($aFightOdds['fight_id'], $aFightOdds['bookie_id'], $aFightOdds['fighter1_odds'], $aFightOdds['fighter2_odds'], $aFightOdds['date']);
-        }
-        if (sizeof($aFightOddsCol) > 0) {
-            return $aFightOddsCol[0];
-        }
-        return null;
-    }
-
-    /**
-     * Gets the openings odds for the specified matchup and bookie
-     *
-     * @param int $matchup_id Matchup ID
-     * @param int $bookie_id Bookie ID
-     * @return \FightOdds|null The odds object. Null if not found
-     */
-    public static function getOpeningOddsForMatchupAndBookie($matchup_id, $bookie_id)
-    {
-        $query = 'SELECT fight_id, fighter1_odds, fighter2_odds, bookie_id, date
-                    FROM fightodds
-                    WHERE bookie_id = ? 
-                        AND fight_id = ? 
-                    ORDER BY date ASC
-                    LIMIT 0,1';
-
-        $params = array($bookie_id, $matchup_id);
 
         $rResult = DBTools::doParamQuery($query, $params);
 

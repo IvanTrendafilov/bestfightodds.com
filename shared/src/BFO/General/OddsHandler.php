@@ -43,28 +43,28 @@ class OddsHandler
         return OddsDB::getPropTypes($proptype_id);
     }
 
-    public static function checkMatchingPropOdds($a_oPropBet)
+    public static function checkMatchingPropOdds($propbet_obj)
     {
-        $oExistingPropOdds = OddsHandler::getLatestPropOdds($a_oPropBet->getMatchupID(), $a_oPropBet->getBookieID(), $a_oPropBet->getPropTypeID(), $a_oPropBet->getTeamNumber());
-        if ($oExistingPropOdds != null) {
-            return $oExistingPropOdds->equals($a_oPropBet);
+        $existing_prop_odds = OddsHandler::getLatestPropOdds($propbet_obj->getMatchupID(), $propbet_obj->getBookieID(), $propbet_obj->getPropTypeID(), $propbet_obj->getTeamNumber());
+        if ($existing_prop_odds != null) {
+            return $existing_prop_odds->equals($propbet_obj);
         }
         return false;
     }
 
-    public static function getLatestPropOdds($a_iMatchupID, $a_iBookieID, $a_iPropTypeID, $a_iTeamNum)
+    public static function getLatestPropOdds($matchup_id, $bookie_id, $proptype_id, $team_num)
     {
-        return OddsDB::getLatestPropOdds($a_iMatchupID, $a_iBookieID, $a_iPropTypeID, $a_iTeamNum);
+        return OddsDB::getLatestPropOdds($matchup_id, $bookie_id, $proptype_id, $team_num);
     }
 
-    public static function getAllLatestPropOddsForMatchup($a_iMatchupID, $a_iPropTypeID, $a_iTeam = 0, $a_iOffset = 0)
+    public static function getAllLatestPropOddsForMatchup($matchup_id, $proptype_id, $a_iTeam = 0, $a_iOffset = 0)
     {
         $aRetOdds = [];
 
         //Loop through each bookie and retrieve prop odds
         $bookies = BookieHandler::getAllBookies();
         foreach ($bookies as $oBookie) {
-            $oOdds = OddsDB::getLatestPropOdds($a_iMatchupID, $oBookie->getID(), $a_iPropTypeID, $a_iTeam, $a_iOffset);
+            $oOdds = OddsDB::getLatestPropOdds($matchup_id, $oBookie->getID(), $proptype_id, $a_iTeam, $a_iOffset);
             if ($oOdds != null) {
                 $aRetOdds[] = $oOdds;
             }
@@ -89,92 +89,55 @@ class OddsHandler
     }
 
     /* Gets the average value across multiple bookies for specific prop type */
-    public static function getCurrentPropIndex($a_iMatchupID, $a_iPosProp, $a_iPropTypeID, $a_iTeam)
+    public static function getCurrentPropIndex($matchup_id, $prop_side, $proptype_id, $team_num)
     {
-        $iSkippedProps = 0; //Keeps track of skipped prop bets that are not available, i.e. stored as -99999 in the database
+        $skipped_props = 0; //Keeps track of skipped prop bets that are not available, i.e. stored as -99999 in the database
 
-        if ($a_iTeam > 2 || $a_iTeam < 0) {
+        if ($team_num > 2 || $team_num < 0) {
             return null;
         }
 
-        $aOdds = OddsHandler::getAllLatestPropOddsForMatchup($a_iMatchupID, $a_iPropTypeID, $a_iTeam);
+        $odds = OddsHandler::getAllLatestPropOddsForMatchup($matchup_id, $proptype_id, $team_num);
 
-        if ($aOdds == null || sizeof($aOdds) == 0) {
+        if ($odds == null || sizeof($odds) == 0) {
             return null;
         }
-        if (sizeof($aOdds) == 1) {
-            return new PropBet($a_iMatchupID, -1, '', ($a_iPosProp == 1 ? $aOdds[0]->getPropOdds() : 0), '', ($a_iPosProp == 2 ? $aOdds[0]->getNegPropOdds() : 0), $a_iPropTypeID, -1, $a_iTeam);
+        if (sizeof($odds) == 1) {
+            return new PropBet($matchup_id, -1, '', ($prop_side == 1 ? $odds[0]->getPropOdds() : 0), '', ($prop_side == 2 ? $odds[0]->getNegPropOdds() : 0), $proptype_id, -1, $team_num);
         }
-        $iCurrentOddsTotal = 0;
-        foreach ($aOdds as $oPropBet) {
+        $odds_total = 0;
+        foreach ($odds as $oPropBet) {
             //Check if prop bet should be skipped, i.e. stored as -99999 in database
-            if (($a_iPosProp == 1 ? $oPropBet->getPropOdds() : $oPropBet->getNegPropOdds()) == -99999) {
-                $iSkippedProps++;
+            if (($prop_side == 1 ? $oPropBet->getPropOdds() : $oPropBet->getNegPropOdds()) == -99999) {
+                $skipped_props++;
             } else {
-                $iCurrOdds = $a_iPosProp == 1 ? $oPropBet->getPropOdds() : $oPropBet->getNegPropOdds();
-                $iCurrentOddsTotal += $iCurrOdds < 0 ? ($iCurrOdds + 100) : ($iCurrOdds - 100);
+                $cur_odds = $prop_side == 1 ? $oPropBet->getPropOdds() : $oPropBet->getNegPropOdds();
+                $odds_total += $cur_odds < 0 ? ($cur_odds + 100) : ($cur_odds - 100);
             }
         }
-        if (sizeof($aOdds) - $iSkippedProps != 0) {
-            $iCurrentOddsTotal = round($iCurrentOddsTotal / (sizeof($aOdds) - $iSkippedProps) + ($iCurrentOddsTotal < 0 ? -100 : 100));
+        if (sizeof($odds) - $skipped_props != 0) {
+            $odds_total = round($odds_total / (sizeof($odds) - $skipped_props) + ($odds_total < 0 ? -100 : 100));
         }
-        return new PropBet($a_iMatchupID, -1, '', ($a_iPosProp == 1 ? $iCurrentOddsTotal : 0), '', ($a_iPosProp == 2 ? $iCurrentOddsTotal : 0), $a_iPropTypeID, -1, $a_iTeam);
+        return new PropBet($matchup_id, -1, '', ($prop_side == 1 ? $odds_total : 0), '', ($prop_side == 2 ? $odds_total : 0), $proptype_id, -1, $team_num);
     }
 
-    /**
-     * Get the openings odds for a specific matchup
-     *
-     *
-     * @param int Matchup ID
-     * @return FightOdds The opening odds or null if none was found
-     */
     public static function getOpeningOddsForMatchup($matchup_id)
     {
         return OddsDB::getOpeningOddsForMatchup($matchup_id);
     }
 
-    /**
-     * Get the opening odds for a specified matchup and bookie
-     *
-     * @param int $matchup_id Matchup ID
-     * @param int $bookie_id Bookie ID
-     * @return FightOdds The opening odds or null if no line was found
-     */
-    public static function getOpeningOddsForMatchupAndBookie($matchup_id, $bookie_id)
+    public static function getOpeningOddsForProp($matchup_id, $proptype_id, $team_num)
     {
-        return OddsDB::getOpeningOddsForMatchupAndBookie($matchup_id, $bookie_id);
+        return OddsDB::getOpeningOddsForProp($matchup_id, $proptype_id, $team_num);
     }
 
-    /**
-     * Get openings odds for a specific prop
-     *
-     * @param int Matchup ID
-     * @param int Proptype ID
-     * @return FightOdds The opening odds or null if none was found
-     */
-    public static function getOpeningOddsForProp($matchup_id, $a_iPropTypeID, $team_num)
-    {
-        return OddsDB::getOpeningOddsForProp($matchup_id, $a_iPropTypeID, $team_num);
-    }
-
-    /**
-     * Get openings odds for a specific prop and bookkie
-     */
     public static function getOpeningOddsForPropAndBookie($matchup_id, $proptype_id, $bookie_id, $team_num): ?PropBet
     {
         return OddsDB::getOpeningOddsForPropAndBookie($matchup_id, $proptype_id, $bookie_id, $team_num);
     }
 
-    /**
-     * Get all correlations for the specified bookie
-     *
-     * @param int $bookie_id Bookie ID
-     * @return array Collection of correlations
-     */
     public static function getCorrelationsForBookie($bookie_id)
     {
-        //TODO: Add call to new function that removes correlations that are not valid anymore
-
         return OddsDB::getCorrelationsForBookie($bookie_id);
     }
 
@@ -188,21 +151,21 @@ class OddsHandler
      * @param int $a_iBookieID Bookie ID
      * @param array $a_aCorrelations Collection of correlations as defined above
      */
-    public static function storeCorrelations($a_iBookieID, $a_aCorrelations)
+    public static function storeCorrelations($bookie_id, $correlations_col)
     {
-        return OddsDB::storeCorrelations($a_iBookieID, $a_aCorrelations);
+        return OddsDB::storeCorrelations($bookie_id, $correlations_col);
     }
 
 
-    public static function getMatchupForCorrelation($a_iBookieID, $a_sCorrelation)
+    public static function getMatchupForCorrelation($bookie_id, $correlation)
     {
-        return OddsDB::getMatchupForCorrelation($a_iBookieID, $a_sCorrelation);
+        return OddsDB::getMatchupForCorrelation($bookie_id, $correlation);
     }
 
 
-    public static function getCompletePropsForMatchup($a_iMatchup, $a_iOffset = 0)
+    public static function getCompletePropsForMatchup($matchup_id, $offset = 0)
     {
-        return OddsDB::getCompletePropsForMatchup($a_iMatchup, $a_iOffset);
+        return OddsDB::getCompletePropsForMatchup($matchup_id, $offset);
     }
 
     /**
@@ -214,9 +177,9 @@ class OddsHandler
         return OddsDB::cleanCorrelations();
     }
 
-    public static function addEventPropBet($a_oEventPropBet)
+    public static function addEventPropBet(EventPropBet $event_prop_bet)
     {
-        return OddsDB::addEventPropBet($a_oEventPropBet);
+        return OddsDB::addEventPropBet($event_prop_bet);
     }
 
     /*public static function getPropBetsForEvent($a_iEventID)
@@ -250,23 +213,12 @@ class OddsHandler
         return $return_odds;
     }
 
-
-    public static function getBestPropOddsForEvent($event_id, $proptype_id)
-    {
-        return OddsDB::getBestPropOddsForEvent($event_id, $proptype_id);
-    }
-
     public static function getAllPropOddsForEventPropType($event_id, $bookie_id, $proptype_id)
     {
         return OddsDB::getAllPropOddsForEventPropType($event_id, $bookie_id, $proptype_id);
     }
 
-    public static function getPropCountForEvent($event_id)
-    {
-        return count(OddsDB::getAllPropTypesForEvent($event_id));
-    }
-
-    public static function getCurrentEventPropIndex($event_id, $a_iPosProp, $proptype_id)
+    public static function getCurrentEventPropIndex($event_id, $prop_side, $proptype_id)
     {
         $skipped_props = 0; //Keeps track of skipped prop bets that are not available, i.e. stored as -99999 in the database
 
@@ -276,22 +228,22 @@ class OddsHandler
             return null;
         }
         if (sizeof($odds) == 1) {
-            return new PropBet($event_id, -1, '', ($a_iPosProp == 1 ? $odds[0]->getPropOdds() : 0), '', ($a_iPosProp == 2 ? $odds[0]->getNegPropOdds() : 0), $proptype_id, -1);
+            return new PropBet($event_id, -1, '', ($prop_side == 1 ? $odds[0]->getPropOdds() : 0), '', ($prop_side == 2 ? $odds[0]->getNegPropOdds() : 0), $proptype_id, -1);
         }
         $total = 0;
         foreach ($odds as $propbet_obj) {
             //Check if prop bet should be skipped, i.e. stored as -99999 in database
-            if (($a_iPosProp == 1 ? $propbet_obj->getPropOdds() : $propbet_obj->getNegPropOdds()) == -99999) {
+            if (($prop_side == 1 ? $propbet_obj->getPropOdds() : $propbet_obj->getNegPropOdds()) == -99999) {
                 $skipped_props++;
             } else {
-                $current_odds = $a_iPosProp == 1 ? $propbet_obj->getPropOdds() : $propbet_obj->getNegPropOdds();
+                $current_odds = $prop_side == 1 ? $propbet_obj->getPropOdds() : $propbet_obj->getNegPropOdds();
                 $total += $current_odds < 0 ? ($current_odds + 100) : ($current_odds - 100);
             }
         }
         if (sizeof($odds) - $skipped_props != 0) {
             $total = round($total / (sizeof($odds) - $skipped_props) + ($total < 0 ? -100 : 100));
         }
-        return new EventPropBet($event_id, -1, '', ($a_iPosProp == 1 ? $total : 0), '', ($a_iPosProp == 2 ? $total : 0), $proptype_id, -1);
+        return new EventPropBet($event_id, -1, '', ($prop_side == 1 ? $total : 0), '', ($prop_side == 2 ? $total : 0), $proptype_id, -1);
     }
 
 
@@ -349,56 +301,56 @@ class OddsHandler
         return OddsDB::removePropOddsForEventAndBookie($event_id, $bookie_id, $proptype_id);
     }
 
-    public static function getAllLatestPropOddsForMatchupAndBookie($a_iMatchupID, $a_iBookieID, $a_iPropTypeID = -1)
+    public static function getAllLatestPropOddsForMatchupAndBookie($matchup_id, $bookie_id, $proptype_id = -1)
     {
-        if (!is_numeric($a_iMatchupID) || !is_numeric($a_iBookieID) || !is_numeric($a_iPropTypeID)) {
+        if (!is_numeric($matchup_id) || !is_numeric($bookie_id) || !is_numeric($proptype_id)) {
             return false;
         }
-        return OddsDB::getAllLatestPropOddsForMatchupAndBookie($a_iMatchupID, $a_iBookieID, $a_iPropTypeID);
+        return OddsDB::getAllLatestPropOddsForMatchupAndBookie($matchup_id, $bookie_id, $proptype_id);
     }
 
-    public static function flagMatchupOddsForDeletion($a_iBookieID, $a_iMatchupID)
+    public static function flagMatchupOddsForDeletion($bookie_id, $matchup_id)
     {
         if (
-            !is_numeric($a_iMatchupID) || !is_numeric($a_iBookieID)
-            || $a_iMatchupID <= 0 || $a_iBookieID <= 0
+            !is_numeric($matchup_id) || !is_numeric($bookie_id)
+            || $matchup_id <= 0 || $bookie_id <= 0
         ) {
             return false;
         }
-        return OddsDB::flagOddsForDeletion($a_iBookieID, $a_iMatchupID, null, null, null);
+        return OddsDB::flagOddsForDeletion($bookie_id, $matchup_id, null, null, null);
     }
 
-    public static function flagPropOddsForDeletion($a_iBookieID, $a_iMatchupID, $a_iPropTypeID, $a_iTeamNum)
+    public static function flagPropOddsForDeletion($bookie_id, $matchup_id, $proptype_id, $team_num)
     {
         if (
-            !is_numeric($a_iMatchupID) || !is_numeric($a_iBookieID) || !is_numeric($a_iPropTypeID) || !is_numeric($a_iTeamNum)
-            || $a_iMatchupID <= 0 || $a_iBookieID <= 0 || $a_iPropTypeID <= 0 || $a_iTeamNum < 0
+            !is_numeric($matchup_id) || !is_numeric($bookie_id) || !is_numeric($proptype_id) || !is_numeric($team_num)
+            || $matchup_id <= 0 || $bookie_id <= 0 || $proptype_id <= 0 || $team_num < 0
         ) {
             return false;
         }
-        return OddsDB::flagOddsForDeletion($a_iBookieID, $a_iMatchupID, null, $a_iPropTypeID, $a_iTeamNum);
+        return OddsDB::flagOddsForDeletion($bookie_id, $matchup_id, null, $proptype_id, $team_num);
     }
 
-    public static function flagEventPropOddsForDeletion($a_iBookieID, $a_iEventID, $a_iPropTypeID, $a_iTeamNum)
+    public static function flagEventPropOddsForDeletion($bookie_id, $event_id, $proptype_id, $team_num)
     {
         if (
-            !is_numeric($a_iEventID) || !is_numeric($a_iBookieID) || !is_numeric($a_iPropTypeID) || !is_numeric($a_iTeamNum)
-            || $a_iEventID <= 0 || $a_iBookieID <= 0 || $a_iPropTypeID <= 0 || $a_iTeamNum < 0
+            !is_numeric($event_id) || !is_numeric($bookie_id) || !is_numeric($proptype_id) || !is_numeric($team_num)
+            || $event_id <= 0 || $bookie_id <= 0 || $proptype_id <= 0 || $team_num < 0
         ) {
             return false;
         }
-        return OddsDB::flagOddsForDeletion($a_iBookieID, null, $a_iEventID, $a_iPropTypeID, $a_iTeamNum);
+        return OddsDB::flagOddsForDeletion($bookie_id, null, $event_id, $proptype_id, $team_num);
     }
 
-    public static function checkIfFlagged($a_iBookieID, $a_iMatchupID, $a_iEventID, $a_iPropTypeID, $a_iTeamNum)
+    public static function checkIfFlagged($bookie_id, $matchup_id, $event_id, $proptype_id, $team_num)
     {
         if (
-            !is_numeric($a_iMatchupID) || !is_numeric($a_iEventID) || !is_numeric($a_iBookieID) || !is_numeric($a_iPropTypeID) || !is_numeric($a_iTeamNum)
-            || $a_iBookieID <= 0
+            !is_numeric($matchup_id) || !is_numeric($event_id) || !is_numeric($bookie_id) || !is_numeric($proptype_id) || !is_numeric($team_num)
+            || $bookie_id <= 0
         ) {
             return false;
         }
-        return OddsDB::checkIfFlagged($a_iBookieID, $a_iMatchupID, $a_iEventID, $a_iPropTypeID, $a_iTeamNum);
+        return OddsDB::checkIfFlagged($bookie_id, $matchup_id, $event_id, $proptype_id, $team_num);
     }
 
     public static function removeFlagged($bookie_id, $matchup_id = null, $event_id = null, $proptype_id = null, $team_num = null): int

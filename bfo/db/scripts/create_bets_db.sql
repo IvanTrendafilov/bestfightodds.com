@@ -190,8 +190,6 @@ CREATE TABLE `bets`.`alerts_entries` (
 )
 ENGINE=MyISAM DEFAULT 
 CHARSET=latin1;
-AUTO_INCREMENT=301
-;
 
 CREATE TABLE `bets`.`prop_types_categories` (
   `id` INT(11) NOT NULL AUTO_INCREMENT,

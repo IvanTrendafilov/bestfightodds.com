@@ -1,14 +1,11 @@
 <?php
 
-namespace BFO\Alerter;
+namespace BFO\General\AlerterV2;
 
-require_once('config/inc.config.php');
-require_once('lib/bfocore/alerter/class.AlertsModel.php');
-require_once('lib/bfocore/general/class.EventHandler.php');
-require_once('lib/bfocore/general/class.OddsHandler.php');
-require_once('lib/bfocore/general/class.BookieHandler.php');
-
-
+use BFO\General\AlerterV2\AlertsModel;
+use BFO\General\EventHandler;
+use BFO\General\OddsHandler;
+use BFO\General\BookieHandler;
 
 /*
 
@@ -24,11 +21,10 @@ Ambition right now is to not get specific prop categories in place but wait with
 
 class AlerterV2
 {
-    private $logger;
-
-    public function __construct()
+    public function __construct(
+        private \Psr\Log\LoggerInterface $logger)
     {
-        $this->logger = new Katzgrau\KLogger\Logger(GENERAL_KLOGDIR, Psr\Log\LogLevel::DEBUG, ['prefix' => 'alerter_']);
+        
     }
 
     //Possible error codes:
@@ -48,15 +44,16 @@ class AlerterV2
         //Before adding alert, check if criterias are already met. If so we return an exception
         if ($am->isAlertReached($criterias) == true) {
             //Criteria already met
-            return -101;
+            throw new \Exception('Criteria already met', 101);
         }
         try {
             $id = $am->addAlert($email, $oddstype, $criterias);
             $this->logger->info('Added alert ' . $id . ' for ' . $email . ', oddstype ' . $oddstype . ': ' . $criterias);
-            return 1;
-        } catch (Exception $e) {
-            return (int) ('-2' . $e->getCode());
+            return true;
+        } catch (\Exception $e) {
+            throw($e);
         }
+        return null;
     }
 
     public function deleteAlert($alert_id)
@@ -65,7 +62,7 @@ class AlerterV2
         try {
             $am->deleteAlert($alert_id);
             $this->logger->info('Cleared alert ' . $alert_id);
-        } catch (Exception $e) {
+        } catch (\Exception $e) {
             $this->logger->error('Unable to clear alert ' . $alert_id);
             return false;
         }
@@ -90,7 +87,7 @@ class AlerterV2
         }
     }
 
-    private function getAlertCategory($criterias)
+    /*private function getAlertCategory($criterias)
     {
         if (isset($criterias['matchup_id'])) {
             return $this->isMatchupAlertReached($criterias);
@@ -100,7 +97,7 @@ class AlerterV2
             return $this->isEventPropAlertReached($criterias);
         }
         return false;
-    }
+    }*/
 
 
     // Take a list of alerts and creates a new array grouping them by recipient e-mail
@@ -129,7 +126,7 @@ class AlerterV2
             $text = $this->formatAlertMail($alerts);
             $this->sendAlertsByMail($text);
 
-            $this->logger->info('Dispatched ' . implode($ids_dispatched, ' ,') . ' for ' . $rcpt);
+            $this->logger->info('Dispatched ' . implode(' ,', $ids_dispatched) . ' for ' . $rcpt);
             $all_ids_dispatched = array_merge($all_ids_dispatched, $ids_dispatched);
         }
         return $all_ids_dispatched;
@@ -137,7 +134,7 @@ class AlerterV2
 
     private function formatAlertMail($alerts)
     {
-        if (!function_exists('BFO\Alerter\sortAlerts')) {
+        if (!function_exists('BFO\General\AlerterV2\sortAlerts')) {
             function sortAlerts($a, $b)
             {
                 //Determine if prop is matchup or event, use that ID as value to compare
@@ -158,7 +155,7 @@ class AlerterV2
                 return $sortval_a < $sortval_b;
             }
         }
-        usort($alerts, 'BFO\Alerter\sortAlerts');
+        usort($alerts, 'BFO\General\AlerterV2\sortAlerts');
 
         $text = "===========Alert mail:==========\n\n";
         $current_linked_id = 0;
