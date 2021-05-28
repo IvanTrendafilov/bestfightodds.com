@@ -8,7 +8,7 @@ class Ruleset implements RulesetInterface
     {
     }
 
-    public function evaluateMatchup($bookie_obj, $team1, $team2, $event_name, $gametime)
+    public function evaluateMatchup($bookie_obj, $team1, $team2, $event_name, $gametime): bool
     {
         $event_name = strtoupper($event_name);
         $event_pieces = explode(' ', $event_name);
@@ -21,7 +21,7 @@ class Ruleset implements RulesetInterface
         }
 
         if ($bookie_obj->getName() == 'BetWay') {
-            $whitelisted_events = ['EFC'];
+            $whitelisted_events = ['EFC', 'SUPERIOR', 'ACA', 'FEN'];
             if (in_array($event_pieces[0], $whitelisted_events)) {
                 return true;
             }
@@ -30,7 +30,7 @@ class Ruleset implements RulesetInterface
         return false;
     }
 
-    public function evaluateEvent($bookie_obj, $event_name, $gametime)
+    public function evaluateEvent($bookie_obj, $event_name, $gametime): bool
     {
         $event_name = strtoupper($event_name);
         $event_pieces = explode(' ', $event_name);
@@ -46,7 +46,7 @@ class Ruleset implements RulesetInterface
         }
 
         if ($bookie_obj->getName() == 'BetWay') {
-            $whitelisted_events = ['EFC'];
+            $whitelisted_events = ['EFC', 'SUPERIOR', 'ACA', 'FEN'];
             if (in_array($event_pieces[0], $whitelisted_events)) {
                 return true;
             }

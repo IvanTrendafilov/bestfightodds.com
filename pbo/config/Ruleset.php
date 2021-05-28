@@ -8,7 +8,7 @@ class Ruleset implements RulesetInterface
     {
     }
 
-    public function evaluateMatchup($bookie_obj, $team1, $team2, $event_name, $gametime)
+    public function evaluateMatchup($bookie_obj, $team1, $team2, $event_name, $gametime): bool
     {
         $event_name = strtoupper($event_name);
         $event_pieces = explode(' ', $event_name);
@@ -16,7 +16,7 @@ class Ruleset implements RulesetInterface
         return true; //All bookies can create matchups
     }
 
-    public function evaluateEvent($bookie_obj, $event_name, $gametime)
+    public function evaluateEvent($bookie_obj, $event_name, $gametime): bool
     {
         $event_name = strtoupper($event_name);
         $event_pieces = explode(' ', $event_name);
