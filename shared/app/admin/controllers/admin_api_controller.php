@@ -355,7 +355,7 @@ class AdminAPIController
 
         if (v::intType()->validate(@$data->bookie_id)) {
             //Reset specific
-            if (BookieHandler::resetChangeNum($data->bookie_id)) {
+            if (BookieHandler::resetChangeNums((int) $data->bookie_id) > 0) {
                 $return_data['msg'] = 'Successfully reset changenum for ' . $data->bookie_id;
             } else {
                 $response->withStatus(500);
@@ -364,7 +364,7 @@ class AdminAPIController
             }
         } else {
             //Reset all
-            if (BookieHandler::resetAllChangeNums()) {
+            if (BookieHandler::resetChangeNums() > 0) {
                 $return_data['msg'] = 'Successfully reset all changenums';
             } else {
                 $response->withStatus(500);

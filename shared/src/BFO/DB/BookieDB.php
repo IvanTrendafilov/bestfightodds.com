@@ -5,7 +5,6 @@ namespace BFO\DB;
 use BFO\Utils\DB\DBTools;
 use BFO\Utils\DB\PDOTools;
 use BFO\DataTypes\Bookie;
-use BFO\DataTypes\BookieParser;
 use BFO\DataTypes\PropTemplate;
 
 class BookieDB
@@ -68,52 +67,48 @@ class BookieDB
         return DBTools::getSingleValue($result);
     }
 
-    public static function resetChangenum($a_iBookieID)
-    {
-        $query = 'UPDATE bookies_changenums bcn
-                    INNER JOIN bookies_parsers bp ON bcn.bookie_id = bp.bookie_id
-                    SET bcn.changenum = bp.cn_initial WHERE bcn.bookie_id = ?';
-
-        $params = array($a_iBookieID);
-        $result = DBTools::doParamQuery($query, $params);
-
-        if ($result == false) {
-            return false;
-        }
-        return true;
-    }
-
-    public static function resetAllChangeNums()
-    {
-        $query = 'UPDATE bookies_changenums bcn
-                    INNER JOIN bookies_parsers bp ON bcn.bookie_id = bp.bookie_id
-                    SET bcn.changenum = bp.cn_initial';
-        $result = DBTools::doQuery($query);
-        if ($result == false) {
-            return false;
-        }
-        return true;
-    }
-
-    public static function getParsers($bookie_id = null)
+    public static function resetChangeNums(int $bookie_id = null): int
     {
         $params = [];
         $extra_where = '';
-        if ($bookie_id != null) {
-            $params[] = $bookie_id;
-            $extra_where = ' WHERE bookie_id = ?';
+        if ($bookie_id) {
+            $extra_where = ' WHERE bookie_id = :bookie_id ';
+            $params[':bookie_id'] = $bookie_id;
         }
 
-        $query = 'SELECT id, bookie_id, name, parse_url, cn_inuse, mockfile, cn_urlsuffix 
-                    FROM bookies_parsers b ' . $extra_where;
+        $query = 'UPDATE bookies_changenums bcn
+                    SET bcn.changenum = bcn.initial '
+                    . $extra_where . ' ';
 
-        $result = DBTools::doParamQuery($query, $params);
+        try {
+            $result = PDOTools::executeQuery($query, $params);
+            return $result->rowCount();
 
-        $parsers = [];
-        while ($row = mysqli_fetch_array($result)) {
-            $parsers[] = new BookieParser($row['id'], $row['bookie_id'], $row['name'], $row['parse_url'], $row['mockfile'], $row['cn_inuse'], $row['cn_urlsuffix']);
+        } catch (\PDOException $e) {
+            throw new \Exception("Unknown error " . $e->getMessage(), 10);
         }
-        return $parsers;
+        return 0;
+    }
+
+    public static function getChangeNums(int $bookie_id = null): ?array
+    {
+        $params = [];
+        $extra_where = '';
+        if ($bookie_id) {
+            $extra_where = ' WHERE bookie_id = :bookie_id ';
+            $params[':bookie_id'] = $bookie_id;
+        }
+
+        $query = 'SELECT bookie_id, changenum, initial 
+                    FROM bookies_changenums ' . $extra_where. ' 
+                    ORDER BY bookie_id ASC';
+        
+        try {
+            return PDOTools::findMany($query, $params);
+        } catch (\PDOException $e) {
+            throw new \Exception("Unknown error " . $e->getMessage(), 10);
+        }
+        return null;
     }
 
 

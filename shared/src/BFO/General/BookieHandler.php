@@ -28,21 +28,15 @@ class BookieHandler
         return BookieDB::getChangeNum($bookie_id);
     }
 
-    public static function resetAllChangeNums()
+    public static function resetChangeNums(int $bookie_id = null): int
     {
-        return BookieDB::resetAllChangeNums();
+        return BookieDB::resetChangeNums($bookie_id);
     }
 
-    public static function resetChangenum($bookie_id)
+    public static function getChangeNums(int $bookie_id = null): array
     {
-        return BookieDB::resetChangenum($bookie_id);
+        return BookieDB::getChangeNums($bookie_id);
     }
-
-    public static function getParsers($bookie_id = null)
-    {
-        return BookieDB::getParsers($bookie_id);
-    }
-
 
     public static function getPropTemplatesForBookie($bookie_id)
     {

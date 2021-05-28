@@ -47,10 +47,10 @@
             </tr>
         </thead>
         <tbody class="bg-white">
-            <?php foreach ($bookies as $bookie_id => $bookie_name) : ?>
+            <?php foreach ($bookies_changenums as $bookie) : ?>
                 <tr>
-                    <td><?= $bookie_name ?></td>
-                    <td><button class="reset-changenum-button btn btn-primary" data-bookieid="<?= $bookie_id ?>">Reset</button></td>
+                    <td><?= $bookie['bookie_name'] ?></td>
+                    <td><button class="reset-changenum-button btn btn-primary" data-bookieid="<?= $bookie['bookie_id'] ?>">Reset</button></td>
                 </tr>
 
             <?php endforeach ?>

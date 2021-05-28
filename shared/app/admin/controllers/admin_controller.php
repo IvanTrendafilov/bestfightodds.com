@@ -563,16 +563,19 @@ class AdminController
     public function resetChangeNums(Request $request, Response $response, array $args)
     {
         $view_data = [];
+
         $bookies = BookieHandler::getAllBookies();
+        $changenums = BookieHandler::getChangeNums();
+
+        $view_data['bookies_changenums'] = [];
         foreach ($bookies as $bookie) {
-            $parsers = BookieHandler::getParsers($bookie->getID());
-            foreach ($parsers as $parser) {
-                if ($parser->hasChangenumInUse()) {
-                    //Note: We are currently clearing changenums for all parsers at a specific bookie. Maybe extend this to be able to reset for a single parser instead?
-                    $view_data['bookies'][$bookie->getID()] = $bookie->getName();
+            foreach ($changenums as $changenum) {
+                if ($changenum['bookie_id'] == $bookie->getID()) {
+                    $view_data['bookies_changenums'][] = $changenum + ['bookie_name' => $bookie->getName()];
                 }
             }
         }
+
         $response->getBody()->write($this->plates->render('resetchangenums', $view_data));
         return $response;
     }
