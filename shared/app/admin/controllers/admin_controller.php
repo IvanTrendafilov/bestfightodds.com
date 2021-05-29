@@ -623,8 +623,10 @@ class AdminController
     public function checkRenamings(Request $request, Response $response) 
     {
         $view_data = [];
-        $er = new EventRenamer;
-        $view_data['recommendations'] = $er->evaluteRenamings();
+        if (!PARSE_USE_DATE_EVENTS) {
+            $er = new EventRenamer;
+            $view_data['recommendations'] = $er->evaluteRenamings();
+        }
         $response->getBody()->write($this->plates->render('renamings', $view_data));
         return $response;
     }

@@ -93,7 +93,7 @@ class OddsProcessor
             'matched_matchups' => (count($matched_matchups) - $matchup_unmatched_count),
             'matched_props' => (count($matched_props) - $prop_unmatched_count),
             'status' => 1,
-            'authoritative_run' => $full_run
+            'authoritative_run' => ($full_run ? 1 : 0)
         ]);
     }
 

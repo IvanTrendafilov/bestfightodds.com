@@ -6,5 +6,5 @@ require_once __DIR__ . "/../bootstrap.php";
 
 use BFO\General\BookieHandler;
 
-$result = BookieHandler::resetAllChangeNums();
+$result = BookieHandler::resetChangeNums();
 echo "Result: " . $result;

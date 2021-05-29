@@ -22,25 +22,23 @@ class ParseRunLogger
 
         $params = [
             $parser_id,
-            isset($metadata['bookie_id']) ? $metadata['bookie_id'] : '',
+            isset($metadata['bookie_id']) ? $metadata['bookie_id'] : -1,
             isset($metadata['parsed_matchups']) ? $metadata['parsed_matchups'] : -1,
             isset($metadata['parsed_props']) ? $metadata['parsed_props'] : -1,
             isset($metadata['matched_matchups']) ? $metadata['matched_matchups'] : -1,
             isset($metadata['matched_props']) ? $metadata['matched_props'] : -1,
-            isset($metadata['status']) ? $metadata['status'] : '',
+            isset($metadata['status']) ? $metadata['status'] : 0,
             isset($metadata['url']) ? $metadata['url'] : '',
-            isset($metadata['authoritative_run']) ? $metadata['authoritative_run'] : '',
-            isset($metadata['mockfeed_used']) ? $metadata['mockfeed_used'] : '',
-            isset($metadata['mockfeed_file']) ? $metadata['mockfeed_file'] : ''
+            isset($metadata['authoritative_run']) ? $metadata['authoritative_run'] : 0,
+            isset($metadata['mockfeed_used']) ? $metadata['mockfeed_used'] : 0,
+            isset($metadata['mockfeed_file']) ? $metadata['mockfeed_file'] : 0
         ];
 
         $id = null;
         try {
             $id = PDOTools::insert($query, $params);
         } catch (\PDOException $e) {
-            if ($e->getCode() == 23000) {
-                throw new \Exception("Duplicate entry", 10);
-            }
+            throw $e;
         }
         return $id;
     }

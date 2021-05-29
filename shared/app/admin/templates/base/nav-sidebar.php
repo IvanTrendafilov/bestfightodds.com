@@ -52,7 +52,7 @@
 				</a>
 			</li>
 
-			<li class="sidebar-item <?=$current_page == 'flagged_odds' ? 'active' : ''?>">
+			<li class="sidebar-item <?=$current_page == 'renamings' ? 'active' : ''?>">
 				<a class="sidebar-link" href="/cnadm/renamings">
 					<i class="align-middle" data-feather="book"></i> <span class="align-middle">Event renamings</span>
 				</a>
