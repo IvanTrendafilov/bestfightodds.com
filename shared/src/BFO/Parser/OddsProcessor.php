@@ -193,7 +193,7 @@ class OddsProcessor
         foreach ($upcoming_matchups as $upcoming_matchup) {
             $matchup_date_obj = new \DateTime();
             $matchup_date_obj->setTimestamp($upcoming_matchup->getMetadata('min_gametime'));
-            if ($matchup_date_obj > new \DateTime()) { //Only flag if this matchup is in the future as specified in metadata min_gametime
+            if ($matchup_date_obj > new \DateTime() || !$upcoming_matchup->getMetadata('min_gametime')) { //Only flag if this matchup is in the future as specified in metadata min_gametime
                 $odds = EventHandler::getLatestOddsForFightAndBookie($upcoming_matchup->getID(), $this->bookie_id);
                 if ($odds != null) {
                     $this->logger->debug('Bookie has odds for ' . $upcoming_matchup->getTeamAsString(1) . ' vs ' . $upcoming_matchup->getTeamAsString(2) . '. Checking if this should be flagged for deletion');
@@ -226,7 +226,7 @@ class OddsProcessor
         foreach ($upcoming_matchups as $upcoming_matchup) {
             $matchup_date_obj = new \DateTime();
             $matchup_date_obj->setTimestamp($upcoming_matchup->getMetadata('min_gametime'));
-            if ($matchup_date_obj > new \DateTime()) { //Only flag if this matchup is in the future as specified in metadata min_gametime
+            if ($matchup_date_obj > new \DateTime() || !$upcoming_matchup->getMetadata('min_gametime')) { //Only flag if this matchup is in the future as specified in metadata min_gametime
                 $stored_props = OddsHandler::getAllLatestPropOddsForMatchupAndBookie($upcoming_matchup->getID(), $this->bookie_id);
                 foreach ($stored_props as $stored_prop) {
                     $found = false;

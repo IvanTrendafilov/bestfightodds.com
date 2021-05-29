@@ -51,7 +51,7 @@
                 <th>First flagged</th>
                 <th>Last flagged</th>
                 <th>Flagged for</th>
-                <th>Has passed</th>
+                <th>Past matchup (No = will be deleted)</th>
                 <th>Action</th>
             </tr>
         </thead>
