@@ -11,6 +11,7 @@ use BFO\General\BookieHandler;
 use BFO\General\TeamHandler;
 use BFO\General\TwitterHandler;
 use BFO\General\Alerter;
+use BFO\Parser\EventRenamer;
 
 class AdminController
 {
@@ -619,6 +620,15 @@ class AdminController
         return $response;
     }
 
+    public function checkRenamings(Request $request, Response $response) 
+    {
+        $view_data = [];
+        $er = new EventRenamer;
+        $view_data['recommendations'] = $er->evaluteRenamings();
+        $response->getBody()->write($this->plates->render('renamings', $view_data));
+        return $response;
+    }
+
     private function getLastFinishDates()
     {
         $bookie_status = [];
@@ -686,4 +696,5 @@ class AdminController
         }
         return false;
     }
+
 }

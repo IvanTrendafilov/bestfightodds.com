@@ -193,7 +193,7 @@ class AdminAPIController
             $return_data['msg'] = 'Missing/invalid parameters';
             $return_data['error'] = true;
         } else {
-            $display = true;
+            $display = null;
             if (isset($data->event_display)) {
                 $display = boolval($data->event_display);
             }

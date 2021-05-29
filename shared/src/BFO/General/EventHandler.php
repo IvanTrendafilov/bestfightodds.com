@@ -225,7 +225,7 @@ class EventHandler
     /**
      * Changes an event. If any field is left blank it will not be updated.
      */
-    public static function changeEvent($event_id, $new_event_name = '', $new_event_date = '', $new_is_visible = true)
+    public static function changeEvent($event_id, $new_event_name = '', $new_event_date = '', $new_is_visible = null)
     {
         $event_obj = EventHandler::getEvents(event_id: $event_id)[0] ?? null;
         if (!$event_obj) {
@@ -240,7 +240,12 @@ class EventHandler
             $event_obj->setDate($new_event_date);
         }
 
-        $event_obj->setDisplay($new_is_visible);
+        if ($new_is_visible !== null) {
+            $event_obj->setDisplay($new_is_visible);
+
+        }
+
+        
 
         return EventDB::updateEvent($event_obj);
     }

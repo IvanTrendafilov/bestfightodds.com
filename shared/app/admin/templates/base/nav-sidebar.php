@@ -52,6 +52,12 @@
 				</a>
 			</li>
 
+			<li class="sidebar-item <?=$current_page == 'flagged_odds' ? 'active' : ''?>">
+				<a class="sidebar-link" href="/cnadm/renamings">
+					<i class="align-middle" data-feather="book"></i> <span class="align-middle">Event renamings</span>
+				</a>
+			</li>
+
 			<li class="sidebar-item <?=$current_page == 'proptemplates' ? 'active' : ''?>">
 				<a class="sidebar-link" href="/cnadm/proptemplates">
 					<i class="align-middle" data-feather="book"></i> <span class="align-middle">View prop templates</span>

@@ -13,7 +13,7 @@ use BFO\DataTypes\Event;
 
 class EventRenamer
 {
-    private $logger = null;
+    //private $logger = null;
     private $bookie_obj = null;
     private $ruleset = null;
     private $upcoming_matchups = null;
@@ -22,7 +22,7 @@ class EventRenamer
     private $manual_actions_create_matchups = null;
     private $creation_ruleset = null;
 
-    public function __construct(object $logger)
+    /*public function __construct(object $logger)
     {
         $this->logger = $logger;
 
@@ -41,15 +41,21 @@ class EventRenamer
         //         $action['action_obj'] = json_decode($action['description']);
         //     }
         // }
+    }*/
+
+    public function __construct()
+    {
     }
 
-    public function evaluteRenamings()
+    public function evaluteRenamings(): array
     {
         //Fetch all upcoming matchups and their metadata event_name
 
+        $recommendations = [];
 
         $events = EventHandler::getEvents(future_events_only: true);
         foreach ($events as $event) {
+            $recommendation = ['event' => $event, 'change' => false];
             $names_to_evaluate = [];
             $matchups = EventHandler::getMatchups(event_id: $event->getID(), only_with_odds: true);
             if ($event->getID() != PARSE_FUTURESEVENT_ID && count($matchups) != 0) {
@@ -122,22 +128,21 @@ class EventRenamer
 
 
                 if ($best_choice_themed != '' && $best_choice_themed != $event->getName()) {
-                    echo "Will suggest to rename " . $event->getName() . " to " . $best_choice_themed;
-                } else if ($best_choice_numbered != '' && $best_choice_numbered != $event->getName() && !preg_match('/[^\:]+\:.+vs\.?.+/', $event->getName())) {
-                    echo "Will suggest to rename " . $event->getName() . " to " . $best_choice_numbered;
-                } else {
-                    echo "No change to " . $event->getName();
-                }
-                echo "
-";
+                    $recommendation['change'] = true;
+                    $recommendation['new_name'] = $best_choice_themed;
 
+                } else if ($best_choice_numbered != '' && $best_choice_numbered != $event->getName() && !preg_match('/[^\:]+\:.+vs\.?.+/', $event->getName())) {
+                    $recommendation['change'] = true;
+                    $recommendation['new_name'] = $best_choice_numbered;
+                }
             }
+            $recommendations[] = $recommendation;
         }
 
 
 
 
-
+        return $recommendations;
         //Determine if there is a common pattern to the matchups for a specific event
         //What is the most common denominator
 
