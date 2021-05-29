@@ -1008,15 +1008,22 @@ class OddsDB
 
     public static function getAllFlaggedMatchups()
     {
-        $query = 'SELECT f.*, e.name as event_name, e.date as event_date, f1.name AS team1_name, f2.name AS team2_name, lf.*, b.name as bookie_name, b.id as bookie_id 
-                        FROM lines_flagged lf 
-                            LEFT JOIN fights f ON lf.matchup_id = f.id 
-                            LEFT JOIN fighters f1 ON f.fighter1_id = f1.id 
-                            LEFT JOIN fighters f2 ON f.fighter2_id = f2.id 
-                            LEFT JOIN events e ON f.event_id = e.id 
-                            LEFT JOIN bookies b ON lf.bookie_id = b.id
-                    WHERE proptype_id = -1
-                    ORDER BY e.date ASC';
+        $query = 'SELECT f.*, e.name as event_name, e.date as event_date, f1.name AS team1_name, f2.name AS team2_name, lf.*, b.name as bookie_name, b.id as bookie_id, m.mvalue as gametime, m.max_value as max_gametime, m.min_value as min_gametime 
+                    FROM lines_flagged lf 
+                        LEFT JOIN fights f ON lf.matchup_id = f.id 
+                        LEFT JOIN fighters f1 ON f.fighter1_id = f1.id 
+                        LEFT JOIN fighters f2 ON f.fighter2_id = f2.id 
+                        LEFT JOIN events e ON f.event_id = e.id 
+                        LEFT JOIN bookies b ON lf.bookie_id = b.id
+            LEFT JOIN 
+                        (SELECT matchup_id, AVG(mvalue) as mvalue, MAX(mvalue) as max_value, MIN(mvalue) as min_value 
+                            FROM events em 
+                                LEFT JOIN fights fm ON em.id = fm.event_id 
+                                LEFT JOIN matchups_metadata mm ON fm.id = mm.matchup_id 
+                            WHERE mm.mattribute = "gametime" 
+                            GROUP BY matchup_id)  m ON f.id = m.matchup_id
+                WHERE proptype_id = -1
+                ORDER BY e.date ASC;';
 
         $result = null;
         try {

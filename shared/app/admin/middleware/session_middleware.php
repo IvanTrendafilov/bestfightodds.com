@@ -6,8 +6,6 @@ use Psr\Http\Server\RequestHandlerInterface as RequestHandler;
 class SessionMiddleware
 {
     /**
-     * Example middleware invokable class
-     *
      * @param  ServerRequest  $request PSR-7 request
      * @param  RequestHandler $handler PSR-15 request handler
      *

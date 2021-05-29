@@ -593,33 +593,17 @@ class AdminController
             $date_diff = date_diff($first_date, $cur_date);
             $hours_diff = $date_diff->days * 24 + $date_diff->h;
             $flagged_row['hours_diff'] = $hours_diff;
-        }
 
-        //Group into matchup groups
-        /*$matchup_groups = [];
-        foreach ($flagged as $flagged_row) {
-            $key = $flagged_row['fight_obj']->getTeamAsString(1) . ' / ' . $flagged_row['fight_obj']->getTeamAsString(2);
-            if (!isset($matchup_groups[$key])) {
-                $first_date = date_create($flagged_row['initial_flagdate']);
-                $last_date = date_create($flagged_row['last_flagdate']);
+            $matchup_date = new DateTime();
+            $matchup_date->setTimestamp($flagged_row['min_gametime']);
 
-                $cur_date = new DateTime();
-
-                $date_diff = date_diff($first_date, $cur_date);
-                $hours_diff = $date_diff->days * 24 + $date_diff->h;
-
-                $matchup_groups[$key] = [
-                    'fight_obj' => $flagged_row['fight_obj'],
-                    'event_obj' => $flagged_row['event_obj'],
-                    'bookies' => [$flagged_row['bookie_name']],
-                    'initial_flagdate' => $flagged_row['initial_flagdate'],
-                    'last_flagdate' => $flagged_row['last_flagdate'],
-                    'hours_diff' => $hours_diff
-                ];
+            if ($matchup_date < $first_date) {
+                $flagged_row['has_passed'] = true;
             } else {
-                $matchup_groups[$key]['bookies'][] = $flagged_row['bookie_name'];
+                $flagged_row['has_passed'] = false;
             }
-        }*/
+
+        }
 
         $view_data['flagged'] = $flagged;
         $response->getBody()->write($this->plates->render('flagged_odds', $view_data));

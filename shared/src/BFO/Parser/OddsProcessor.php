@@ -69,7 +69,7 @@ class OddsProcessor
 
         $this->updateMatchedMatchups($matched_matchups);
         $pp->updateMatchedProps($matched_props);
-        
+
         if ($full_run) { //If this is a full run we will flag any matchups odds not matched for deletion
             $this->flagMatchupOddsForDeletion($matched_matchups);
             $this->flagPropOddsForDeletion($matched_props);
@@ -191,23 +191,27 @@ class OddsProcessor
     {
         $upcoming_matchups = EventHandler::getMatchups(future_matchups_only: true);
         foreach ($upcoming_matchups as $upcoming_matchup) {
-            $odds = EventHandler::getLatestOddsForFightAndBookie($upcoming_matchup->getID(), $this->bookie_id);
-            if ($odds != null) {
-                $this->logger->debug('Bookie has odds for ' . $upcoming_matchup->getTeamAsString(1) . ' vs ' . $upcoming_matchup->getTeamAsString(2) . '. Checking if this should be flagged for deletion');
-                $found = false;
-                foreach ($matched_matchups as $matched_matchup) {
-                    if ($matched_matchup['match_result']['status'] == true) {
-                        if ($matched_matchup['matched_matchup']->getID() == $upcoming_matchup->getID()) {
-                            $found = true;
+            $matchup_date_obj = new \DateTime();
+            $matchup_date_obj->setTimestamp($upcoming_matchup->getMetadata('min_gametime'));
+            if ($matchup_date_obj > new \DateTime()) { //Only flag if this matchup is in the future as specified in metadata min_gametime
+                $odds = EventHandler::getLatestOddsForFightAndBookie($upcoming_matchup->getID(), $this->bookie_id);
+                if ($odds != null) {
+                    $this->logger->debug('Bookie has odds for ' . $upcoming_matchup->getTeamAsString(1) . ' vs ' . $upcoming_matchup->getTeamAsString(2) . '. Checking if this should be flagged for deletion');
+                    $found = false;
+                    foreach ($matched_matchups as $matched_matchup) {
+                        if ($matched_matchup['match_result']['status'] == true) {
+                            if ($matched_matchup['matched_matchup']->getID() == $upcoming_matchup->getID()) {
+                                $found = true;
+                            }
                         }
                     }
-                }
-                if (!$found) {
-                    $this->logger->info('Odds for ' . $upcoming_matchup->getTeamAsString(1) . ' vs ' . $upcoming_matchup->getTeamAsString(2) . ' will be flagged for deletion');
-                    OddsHandler::flagMatchupOddsForDeletion($this->bookie_id, $upcoming_matchup->getID());
-                } else {
-                    OddsHandler::removeFlagged($this->bookie_id, $upcoming_matchup->getID()); //Remove any previous flags
-                    $this->logger->debug('Odds for ' . $upcoming_matchup->getTeamAsString(1) . ' vs ' . $upcoming_matchup->getTeamAsString(2) . ' still relevant. No flagging');
+                    if (!$found) {
+                        $this->logger->info('Odds for ' . $upcoming_matchup->getTeamAsString(1) . ' vs ' . $upcoming_matchup->getTeamAsString(2) . ' will be flagged for deletion');
+                        OddsHandler::flagMatchupOddsForDeletion($this->bookie_id, $upcoming_matchup->getID());
+                    } else {
+                        OddsHandler::removeFlagged($this->bookie_id, $upcoming_matchup->getID()); //Remove any previous flags
+                        $this->logger->debug('Odds for ' . $upcoming_matchup->getTeamAsString(1) . ' vs ' . $upcoming_matchup->getTeamAsString(2) . ' still relevant. No flagging');
+                    }
                 }
             }
         }
@@ -218,30 +222,34 @@ class OddsProcessor
      */
     private function flagPropOddsForDeletion($matched_props)
     {
-        $upcoming_matchups = EventHandler::getMatchups(future_matchups_only: true);;
+        $upcoming_matchups = EventHandler::getMatchups(future_matchups_only: true);
         foreach ($upcoming_matchups as $upcoming_matchup) {
-            $stored_props = OddsHandler::getAllLatestPropOddsForMatchupAndBookie($upcoming_matchup->getID(), $this->bookie_id);
-            foreach ($stored_props as $stored_prop) {
-                $found = false;
-                foreach ($matched_props as $matched_prop) {
-                    if ($matched_prop['match_result']['status'] == true && $matched_prop['match_result']['matched_type'] == 'matchup') {
-                        if (
-                            $matched_prop['match_result']['matchup']['matchup_id'] == $stored_prop->getMatchupID()
-                            && $matched_prop['match_result']['template']->getPropTypeID() == $stored_prop->getPropTypeID()
-                            && $matched_prop['match_result']['matchup']['team'] == $stored_prop->getTeamNumber()
-                            && $this->bookie_id == $stored_prop->getBookieID()
-                        ) {
-                            $found = true;
+            $matchup_date_obj = new \DateTime();
+            $matchup_date_obj->setTimestamp($upcoming_matchup->getMetadata('min_gametime'));
+            if ($matchup_date_obj > new \DateTime()) { //Only flag if this matchup is in the future as specified in metadata min_gametime
+                $stored_props = OddsHandler::getAllLatestPropOddsForMatchupAndBookie($upcoming_matchup->getID(), $this->bookie_id);
+                foreach ($stored_props as $stored_prop) {
+                    $found = false;
+                    foreach ($matched_props as $matched_prop) {
+                        if ($matched_prop['match_result']['status'] == true && $matched_prop['match_result']['matched_type'] == 'matchup') {
+                            if (
+                                $matched_prop['match_result']['matchup']['matchup_id'] == $stored_prop->getMatchupID()
+                                && $matched_prop['match_result']['template']->getPropTypeID() == $stored_prop->getPropTypeID()
+                                && $matched_prop['match_result']['matchup']['team'] == $stored_prop->getTeamNumber()
+                                && $this->bookie_id == $stored_prop->getBookieID()
+                            ) {
+                                $found = true;
+                            }
                         }
                     }
-                }
 
-                if (!$found) {
-                    $this->logger->info('Prop odds with type ' . $stored_prop->getPropTypeID() . ' for team num ' . $stored_prop->getTeamNumber() . ' in ' . $upcoming_matchup->getTeamAsString(1) . ' vs ' . $upcoming_matchup->getTeamAsString(2) . ' will be flagged for deletion');
-                    OddsHandler::flagPropOddsForDeletion($this->bookie_id, $stored_prop->getMatchupID(), $stored_prop->getPropTypeID(), $stored_prop->getTeamNumber());
-                } else {
-                    OddsHandler::removeFlagged($this->bookie_id, $stored_prop->getMatchupID(), null, $stored_prop->getPropTypeID(), $stored_prop->getTeamNumber()); //Remove any previous flags
-                    $this->logger->debug('Prop odds with type ' . $stored_prop->getPropTypeID() . ' for team num ' . $stored_prop->getTeamNumber() . ' in ' . $upcoming_matchup->getTeamAsString(1) . ' vs ' . $upcoming_matchup->getTeamAsString(2) . ' still relevant');
+                    if (!$found) {
+                        $this->logger->info('Prop odds with type ' . $stored_prop->getPropTypeID() . ' for team num ' . $stored_prop->getTeamNumber() . ' in ' . $upcoming_matchup->getTeamAsString(1) . ' vs ' . $upcoming_matchup->getTeamAsString(2) . ' will be flagged for deletion');
+                        OddsHandler::flagPropOddsForDeletion($this->bookie_id, $stored_prop->getMatchupID(), $stored_prop->getPropTypeID(), $stored_prop->getTeamNumber());
+                    } else {
+                        OddsHandler::removeFlagged($this->bookie_id, $stored_prop->getMatchupID(), null, $stored_prop->getPropTypeID(), $stored_prop->getTeamNumber()); //Remove any previous flags
+                        $this->logger->debug('Prop odds with type ' . $stored_prop->getPropTypeID() . ' for team num ' . $stored_prop->getTeamNumber() . ' in ' . $upcoming_matchup->getTeamAsString(1) . ' vs ' . $upcoming_matchup->getTeamAsString(2) . ' still relevant');
+                    }
                 }
             }
         }
@@ -254,7 +262,6 @@ class OddsProcessor
     {
         $upcoming_events = EventHandler::getEvents(future_events_only: true);
         foreach ($upcoming_events as $upcoming_event) {
-            //Todo: Possible improvement here is that we retrieve odds for all bookies. Could be limited to single bookie
             $stored_props = OddsHandler::getCompletePropsForEvent($upcoming_event->getID(), 0, $this->bookie_id);
             if ($stored_props != null) {
                 foreach ($stored_props as $stored_prop) {

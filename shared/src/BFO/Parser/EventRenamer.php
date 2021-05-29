@@ -52,60 +52,89 @@ class EventRenamer
         foreach ($events as $event) {
             $names_to_evaluate = [];
             $matchups = EventHandler::getMatchups(event_id: $event->getID(), only_with_odds: true);
-            foreach ($matchups as $matchup) {
+            if ($event->getID() != PARSE_FUTURESEVENT_ID && count($matchups) != 0) {
+                foreach ($matchups as $matchup) {
 
-                $event_names = EventHandler::getMetaDataForMatchup($matchup->getID(), 'event_name');
-                foreach ($event_names as $event_name) {
-                    //Strip anything past -
-                    $formatted_event_name = explode(' - ', $event_name['mvalue'])[0];
+                    $event_names = EventHandler::getMetaDataForMatchup($matchup->getID(), 'event_name');
+                    foreach ($event_names as $event_name) {
+                        //Strip anything past -
+                        $formatted_event_name = explode(' - ', $event_name['mvalue'])[0];
 
+                        if (
+                            !str_starts_with(strtoupper($formatted_event_name), 'FUTURE') // Ignore events starting with Future
+                            && preg_match('/\d{2,4}\-\d{2}\-\d{2}/', $formatted_event_name) == 0
+                        ) { // - Ignore events with dates in them (e.g. UFC 2012-12-31)
+                            $names_to_evaluate[] = $formatted_event_name;
+                        }
+                    }
+                }
+
+
+                /*echo $event->getName() . ": 
+    ";*/
+                foreach ($names_to_evaluate as $name) {
+                    /*echo $name . "
+    ";*/
+                }
+
+                $common_word = $this->getLongestCommonString($names_to_evaluate);
+                /*echo '- Common: ' . $common_word;
+
+
+                echo "
+    ";*/
+
+
+                //If there is consensus, check for any of the available event names that contain a numbered variant.
+                $best_choice_numbered = '';
+                $best_choice_themed = '';
+                foreach ($names_to_evaluate as $names) {
+
+                    $names_stripped = explode(':', $names)[0];
+                    $common_stripped = explode(':', $common_word)[0];
                     if (
-                        !str_starts_with(strtoupper($formatted_event_name), 'FUTURE') // Ignore events starting with Future
-                        && preg_match('/\d{2,4}\-\d{2}\-\d{2}/', $formatted_event_name) == 0) { // - Ignore events with dates in them (e.g. UFC 2012-12-31)
-                        $names_to_evaluate[] = $formatted_event_name;
+                        preg_match('/' . $common_word . '[^\d]*\s\d+/', $names_stripped) == 1
+                        || preg_match('/[^\d]+\s\d+/', $common_stripped) == 1
+                    ) {
+                        /*echo "-- Numbered candidate: " . $names . "
+    ";*/
+                        if (preg_match('/[^\:]+\:.+vs\.?.+/', $names)) {
+                            /*echo "---  Themed candidate: " . $names . "
+    ";*/
+                            $best_choice_themed = $names;
+                            //TODO How to handle multiple themed..
+                        } else {
+                            $best_choice_numbered = $names;
+                        }
+
+                        //Maybe match on both themed and number candidate and then decide which one is more relevant?
+                        //Eg. UFC Vegas 26 vs UFC Fight Night: Ike vs. Zombie .. in this case prefer maybe the named one?
+                        //I.e:
+                        //>UFC Fight Night 13: Bla vs. Bla < UFC Fight Night: Ike vs. Zombie < UFC Vegas 26 
+                        // Can also check for consus before committing to one of them.. Would not work in the UFC Vegas 26 case though...
                     }
                 }
-            }
+                //If there is also a named event afterwards (e.g. UFC 266: Bla vs. Bla we honor that)
+                $best_choice_themed = str_replace('vs ', 'vs. ', $best_choice_themed);
 
-            
-
-            foreach ($names_to_evaluate as $name) {
-                echo $name . "
-";
-            }
-
-            $common_word = $this->getLongestCommonString($names_to_evaluate);
-            echo 'Common: ' . $common_word;
+        /*        echo "= Probably best: " . $best_choice_themed . "/" . $best_choice_numbered . "
+                ";*/
 
 
-            echo "
-";
-
-
-            //If there is consensus, check for any of the available event names that contain a numbered variant.
-            foreach ($names_to_evaluate as $names) {
-                if (
-                    preg_match('/' . $common_word . '[^\d]*\s\d+/', $names) == 1
-                    || preg_match('/[^\d]+\s\d+/', $common_word) == 1) {
-                    echo " Numbered candidate: " . $names . "
-";
-                    if (preg_match('/[^\:]+\:.+/', $names)) {
-                        echo "  Themed candidate: " . $names . "
-";                      
-                    }
-
-                    //Maybe match on both themed and number candidate and then decide which one is more relevant?
-                    //Eg. UFC Vegas 26 vs UFC Fight Night: Ike vs. Zombie .. in this case prefer maybe the named one?
-                    //I.e:
-                    //>UFC Fight Night 13: Bla vs. Bla < UFC Fight Night: Ike vs. Zombie < UFC Vegas 26 
-                    // Can also check for consus before committing to one of them.. Would not work in the UFC Vegas 26 case though...
+                if ($best_choice_themed != '' && $best_choice_themed != $event->getName()) {
+                    echo "Will suggest to rename " . $event->getName() . " to " . $best_choice_themed;
+                } else if ($best_choice_numbered != '' && $best_choice_numbered != $event->getName() && !preg_match('/[^\:]+\:.+vs\.?.+/', $event->getName())) {
+                    echo "Will suggest to rename " . $event->getName() . " to " . $best_choice_numbered;
+                } else {
+                    echo "No change to " . $event->getName();
                 }
+                echo "
+";
+
             }
-            //If there is also a named event afterwards (e.g. UFC 266: Bla vs. Bla we honor that)
-
-
-
         }
+
+
 
 
 
@@ -124,7 +153,7 @@ class EventRenamer
 
     public function getLongestCommonString($words)
     {
-        $words =array_map('trim', $words);
+        $words = array_map('trim', $words);
         $sort_by_strlen = function ($a, $b) {
             if (strlen($a) == strlen($b)) {
                 return strcmp($a, $b);

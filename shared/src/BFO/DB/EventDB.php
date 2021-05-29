@@ -82,7 +82,7 @@ class EventDB
                         events e
                         LEFT JOIN fights f ON e.id = f.event_id 
                         LEFT JOIN 
-                            (SELECT matchup_id, AVG(mvalue) as mvalue, MAX(mvalue) as max_value, MIN(mvalue) as min_value 
+                            (SELECT matchup_id, ROUND(AVG(mvalue)) as mvalue, MAX(mvalue) as max_value, MIN(mvalue) as min_value 
                                 FROM events em 
                                     LEFT JOIN fights fm ON em.id = fm.event_id 
                                     LEFT JOIN matchups_metadata mm ON fm.id = mm.matchup_id 
@@ -106,13 +106,13 @@ class EventDB
                 $fight_obj->setFighterID(2, (int) $row['fighter2_id']);
                 $fight_obj->setMainEvent($row['is_mainevent']);
                 $fight_obj->setIsFuture($row['is_future']);
-                if (isset($row['gametime'])) {
+                if (isset($row['gametime']) && is_numeric($row['gametime'])) {
                     $fight_obj->setMetadata('gametime', $row['gametime']);
                 }
-                if (isset($row['max_gametime'])) {
+                if (isset($row['max_gametime']) && is_numeric($row['max_gametime'])) {
                     $fight_obj->setMetadata('max_gametime', $row['max_gametime']);
                 }
-                if (isset($row['min_gametime'])) {
+                if (isset($row['min_gametime']) && is_numeric($row['min_gametime'])) {
                     $fight_obj->setMetadata('min_gametime', $row['min_gametime']);
                 }
                 $matchups[] = $fight_obj;

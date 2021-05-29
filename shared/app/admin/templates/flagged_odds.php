@@ -45,11 +45,13 @@
             <tr>
                 <th>Event</th>
                 <th>Event Date</th>
+                <th>Matchup timestamp</th>
                 <th>Matchup</th>
                 <th>Bookie</th>
                 <th>First flagged</th>
                 <th>Last flagged</th>
                 <th>Flagged for</th>
+                <th>Has passed</th>
                 <th>Action</th>
             </tr>
         </thead>
@@ -59,11 +61,14 @@
                 <tr>
                     <td><?= $flagged_item['event_obj']->getName() ?></td>
                     <td><?= $flagged_item['event_obj']->getDate() ?></td>
+                    <td><?= date('Y-m-d H:i:s', $flagged_item['min_gametime']) ?></td>
                     <td><?= $flagged_item['fight_obj']->getTeamAsString(1) ?> vs. <?= $flagged_item['fight_obj']->getTeamAsString(2) ?></td>
                     <td><?= $flagged_item['bookie_name'] ?></td>
                     <td><?= $flagged_item['initial_flagdate'] ?></td>
                     <td><?= $flagged_item['last_flagdate'] ?></td>
                     <td><?= $flagged_item['hours_diff'] ?> hours</td>
+                    <td><span class="badge <?= $flagged_item['has_passed'] == true ? 'bg-success">Yes' : 'bg-danger">No' ?></span></td>
+                    
                     <td>
                         <button class="btn btn-primary delete-odds-button" data-odds="<?= $this->e('{"bookie_id": "' . $flagged_item['bookie_id'] . '", "matchup_id": "' . $flagged_item['fight_obj']->getID() . '"}') ?>">Delete manually</button>
                     </td>
