@@ -64,7 +64,6 @@
 
 <?php foreach ($events as $event) : ?>
 
-
     <div class="card">
 
         <?php if (!isset($hide_header) || $hide_header == false) : ?>

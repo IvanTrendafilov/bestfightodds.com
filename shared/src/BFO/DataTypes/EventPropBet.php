@@ -6,33 +6,30 @@ use BFO\DataTypes\PropBet;
 
 class EventPropBet extends PropBet
 {
-    private $iEventID; //Event the prop is linked to
+    private $event_id; //Event the prop is linked to
 
-    public function __construct($a_iEventID, $a_iBookieID, $a_sPropName, $a_sPropOdds, $a_sNegPropName, $a_sNegPropOdds, $a_iPropTypeID, $a_sDate)
+    public function __construct($event_id, $bookie_id, $prop_name, $prop_odds, $negprop_name, $neg_prop_odds, $proptype_id, $date)
     {
-        parent::__construct(-1, $a_iBookieID, $a_sPropName, $a_sPropOdds, $a_sNegPropName, $a_sNegPropOdds, $a_iPropTypeID, $a_sDate, 0);
-        $this->setEventID($a_iEventID);
+        parent::__construct(-1, $bookie_id, $prop_name, $prop_odds, $negprop_name, $neg_prop_odds, $proptype_id, $date, 0);
+        $this->setEventID($event_id);
     }
 
-    public function setEventID($a_iEventID)
+    public function setEventID($event_id)
     {
-        $this->iEventID = $a_iEventID;
+        $this->event_id = $event_id;
     }
 
     public function getEventID()
     {
-        return $this->iEventID;
+        return $this->event_id;
     }
 
-    public function equals($a_oPropBet)
+    public function equals($prop_bet)
     {
-        $bEquals = (
-            $this->iEventID == $a_oPropBet->getEventID() &&
-                $this->getBookieID() == $a_oPropBet->getBookieID() &&
-                $this->getPropOdds() == $a_oPropBet->getPropOdds() &&
-                $this->getNegPropOdds() == $a_oPropBet->getNegPropOdds() &&
-                $this->getPropTypeID() == $a_oPropBet->getPropTypeID()
-        );
-        return $bEquals;
+        return ($this->event_id == $prop_bet->getEventID() &&
+            $this->getBookieID() == $prop_bet->getBookieID() &&
+            $this->getPropOdds() == $prop_bet->getPropOdds() &&
+            $this->getNegPropOdds() == $prop_bet->getNegPropOdds() &&
+            $this->getPropTypeID() == $prop_bet->getPropTypeID());
     }
 }

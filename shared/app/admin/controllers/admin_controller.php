@@ -603,7 +603,6 @@ class AdminController
             } else {
                 $flagged_row['has_passed'] = false;
             }
-
         }
 
         $view_data['flagged'] = $flagged;
@@ -620,7 +619,7 @@ class AdminController
         return $response;
     }
 
-    public function checkRenamings(Request $request, Response $response) 
+    public function checkRenamings(Request $request, Response $response)
     {
         $view_data = [];
         if (!PARSE_USE_DATE_EVENTS) {
@@ -638,7 +637,7 @@ class AdminController
         $bookies = BookieHandler::getAllBookies();
         foreach ($bookies as $bookie) {
             $has_finished_in_last_5_min = false;
-            
+
             $filenames = glob(GENERAL_KLOGDIR . 'cron.' . str_replace(' ', '', strtolower($bookie->getName())) . '.*');
             $filenames = array_reverse($filenames);
             if (count($filenames) >= 3) {
@@ -698,5 +697,4 @@ class AdminController
         }
         return false;
     }
-
 }

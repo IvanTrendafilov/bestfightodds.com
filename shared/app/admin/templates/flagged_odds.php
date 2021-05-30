@@ -18,17 +18,17 @@
                     })
                 };
                 fetch('/cnadm/api/odds', opts).then(function(response) {
-                    return response.json();
-                })
-                .then(function(body) {
-                    if (body.error == true) {
-                        alert(body.msg);
-                    } else {
-                        //Successfully deleted. Hides row from table
-                        e.target.closest('tr').style.color  = '#ddd';
-                        e.target.disabled = true;
-                    }
-                });
+                        return response.json();
+                    })
+                    .then(function(body) {
+                        if (body.error == true) {
+                            alert(body.msg);
+                        } else {
+                            //Successfully deleted. Hides row from table
+                            e.target.closest('tr').style.color = '#ddd';
+                            e.target.disabled = true;
+                        }
+                    });
             })
         })
     });
@@ -40,40 +40,42 @@
         <h6 class="card-subtitle text-muted">These odds have been flagged for deletion as they have not been seen by the parser during a full run
         </h6>
     </div>
-    <table class="table">
-        <thead>
-            <tr>
-                <th>Event</th>
-                <th>Event Date</th>
-                <th>Matchup timestamp</th>
-                <th>Matchup</th>
-                <th>Bookie</th>
-                <th>First flagged</th>
-                <th>Last flagged</th>
-                <th>Flagged for</th>
-                <th>Past matchup (No = will be deleted)</th>
-                <th>Action</th>
-            </tr>
-        </thead>
-
-        <tbody class="bg-white">
-            <?php foreach ($flagged as $flagged_item) : ?>
+    <div class="table-responsive">
+        <table class="table">
+            <thead>
                 <tr>
-                    <td><?= $flagged_item['event_obj']->getName() ?></td>
-                    <td><?= $flagged_item['event_obj']->getDate() ?></td>
-                    <td><?= date('Y-m-d H:i:s', $flagged_item['min_gametime']) ?></td>
-                    <td><?= $flagged_item['fight_obj']->getTeamAsString(1) ?> vs. <?= $flagged_item['fight_obj']->getTeamAsString(2) ?></td>
-                    <td><?= $flagged_item['bookie_name'] ?></td>
-                    <td><?= $flagged_item['initial_flagdate'] ?></td>
-                    <td><?= $flagged_item['last_flagdate'] ?></td>
-                    <td><?= $flagged_item['hours_diff'] ?> hours</td>
-                    <td><span class="badge <?= $flagged_item['has_passed'] == true ? 'bg-success">Yes' : 'bg-danger">No' ?></span></td>
+                    <th>Event</th>
+                    <th>Event Date</th>
+                    <th>Matchup timestamp</th>
+                    <th>Matchup</th>
+                    <th>Bookie</th>
+                    <th>First flagged</th>
+                    <th>Last flagged</th>
+                    <th>Flagged for</th>
+                    <th>Past matchup (No = will be deleted)</th>
+                    <th>Action</th>
+                </tr>
+            </thead>
+
+            <tbody class="bg-white">
+                <?php foreach ($flagged as $flagged_item) : ?>
+                    <tr>
+                        <td><?= $flagged_item['event_obj']->getName() ?></td>
+                        <td><?= $flagged_item['event_obj']->getDate() ?></td>
+                        <td><?= date('Y-m-d H:i:s', $flagged_item['min_gametime']) ?></td>
+                        <td><?= $flagged_item['fight_obj']->getTeamAsString(1) ?> vs. <?= $flagged_item['fight_obj']->getTeamAsString(2) ?></td>
+                        <td><?= $flagged_item['bookie_name'] ?></td>
+                        <td><?= $flagged_item['initial_flagdate'] ?></td>
+                        <td><?= $flagged_item['last_flagdate'] ?></td>
+                        <td><?= $flagged_item['hours_diff'] ?> hours</td>
+                        <td><span class="badge <?= $flagged_item['has_passed'] == true ? 'bg-success">Yes' : 'bg-danger">No' ?></span></td>
                     
                     <td>
-                        <button class="btn btn-primary delete-odds-button" data-odds="<?= $this->e('{"bookie_id": "' . $flagged_item['bookie_id'] . '", "matchup_id": "' . $flagged_item['fight_obj']->getID() . '"}') ?>">Delete manually</button>
-                    </td>
-                </tr>
-            <?php endforeach ?>
-        </tbody>
-    </table>
+                        <button class=" btn btn-primary delete-odds-button" data-odds="<?= $this->e('{"bookie_id": "' . $flagged_item['bookie_id'] . '", "matchup_id": "' . $flagged_item['fight_obj']->getID() . '"}') ?>">Delete manually</button>
+                        </td>
+                    </tr>
+                <?php endforeach ?>
+            </tbody>
+        </table>
+    </div>
 </div>

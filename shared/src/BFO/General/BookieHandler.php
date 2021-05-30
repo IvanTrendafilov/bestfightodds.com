@@ -7,12 +7,12 @@ use BFO\DB\BookieDB;
 
 class BookieHandler
 {
-    public static function getAllBookies() : array
+    public static function getAllBookies(): array
     {
         return BookieDB::getBookiesGeneric();
     }
 
-    public static function getBookieByID($bookie_id) : ?Bookie
+    public static function getBookieByID($bookie_id): ?Bookie
     {
         $bookies = BookieDB::getBookiesGeneric($bookie_id);
         return $bookies[0] ?? null;

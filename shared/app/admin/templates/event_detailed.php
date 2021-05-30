@@ -35,20 +35,20 @@
     <div class="card-body">
         <form>
             <div class="row">
-                <div class="col-2">
+                <div class="col-sm">
                     <input type="hidden" id="event-id" value="<?= $events[0]['event_obj']->getID() ?>">
                     <input class="form-control" id="event-name" type="text" placeholder="Event name" value="<?= $events[0]['event_obj']->getName() ?>">
                 </div>
-                <div class="col-1">
+                <div class="col-sm">
                     <input class="form-control" type="text" placeholder="Date" id="event-date" value="<?= $events[0]['event_obj']->getDate() ?>">
                 </div>
-                <div class="col-1">
+                <div class="col-sm-2">
                     <div class="form-check form-switch">
                         <input class="form-check-input" type="checkbox" id="event-display" <?= ($events[0]['event_obj']->isDisplayed() ? 'checked' : '') ?>>
                         <label class="form-check-label" for="event-display">Display</label>
                     </div>
                 </div>
-                <div class="col-1">
+                <div class="col-sm-2">
                     <button class="btn btn-primary" id="update-event-button">Save changes</button>
                 </div>
 

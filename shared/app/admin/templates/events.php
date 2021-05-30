@@ -33,19 +33,19 @@
     <div class="card-body">
         <form>
             <div class="row">
-                <div class="col-2">
+                <div class="col-sm">
                     <input class="form-control" id="event_name" type="text" placeholder="New event name" value="<?= $in_event_name ?>">
                 </div>
-                <div class="col-1">
+                <div class="col-sm">
                     <input class="form-control" type="text" placeholder="Date" id="event_date" value="<?= $in_event_date != '' ?   $in_event_date : date('Y-m-d') ?>">
                 </div>
-                <div class="col-1">
+                <div class="col-sm-2">
                     <div class="form-check form-switch">
                         <input class="form-check-input" type="checkbox" id="event_hidden">
                         <label class="form-check-label" for="event_hidden">Hidden</label>
                     </div>
                 </div>
-                <div class="col-1">
+                <div class="col-sm-2">
                     <button class="btn btn-primary" id="new-event-button">Add</button>
                 </div>
             </div>

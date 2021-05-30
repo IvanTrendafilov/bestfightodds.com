@@ -135,7 +135,7 @@ class OddsDB
      * Since these are matchup specific prop types we will go ahead and replace
      * the <T> variables with the actual team name
      */
-    public static function getAllPropTypesForMatchup($matchup_id) : array
+    public static function getAllPropTypesForMatchup($matchup_id): array
     {
         $query = 'SELECT pt.id, pt.prop_desc, pt.negprop_desc, lp.team_num
                     FROM prop_types pt, lines_props lp
@@ -214,9 +214,9 @@ class OddsDB
 
         $rResult = DBTools::doParamQuery($query, $params);
 
-        $aProps = array();
+        $props = array();
         while ($aRow = mysqli_fetch_array($rResult)) {
-            $aProps[] = new PropBet(
+            $props[] = new PropBet(
                 $matchup_id,
                 $aRow['bookie_id'],
                 $aRow['prop_desc'],
@@ -228,18 +228,18 @@ class OddsDB
                 $aRow['team_num']
             );
         }
-        if (count($aProps) > 0) {
-            return $aProps[0];
+        if (count($props) > 0) {
+            return $props[0];
         }
 
         return null;
     }
 
-    public static function getLatestEventPropOdds($event_id, $bookie_id, $proptype_id, $a_iOffset = 0)
+    public static function getLatestEventPropOdds($event_id, $bookie_id, $proptype_id, $offset = 0)
     {
         $params = array($event_id, $bookie_id, $proptype_id);
 
-        if (!is_integer($a_iOffset)) {
+        if (!is_integer($offset)) {
             return null;
         }
 
@@ -250,32 +250,32 @@ class OddsDB
                         AND lep.proptype_id = ?
                         AND lep.proptype_id = pt.id
                         ORDER BY lep.date DESC
-                        LIMIT ' . $a_iOffset . ', 1';
+                        LIMIT ' . $offset . ', 1';
 
         $rResult = DBTools::doParamQuery($query, $params);
 
-        $aProps = array();
-        while ($aRow = mysqli_fetch_array($rResult)) {
-            $aProps[] = new EventPropBet(
+        $props = [];
+        while ($row = mysqli_fetch_array($rResult)) {
+            $props[] = new EventPropBet(
                 $event_id,
-                $aRow['bookie_id'],
-                $aRow['prop_desc'],
-                $aRow['prop_odds'],
-                $aRow['negprop_desc'],
-                $aRow['negprop_odds'],
-                $aRow['proptype_id'],
-                $aRow['date']
+                $row['bookie_id'],
+                $row['prop_desc'],
+                $row['prop_odds'],
+                $row['negprop_desc'],
+                $row['negprop_odds'],
+                $row['proptype_id'],
+                $row['date']
             );
         }
-        if (count($aProps) > 0) {
-            return $aProps[0];
+        if (count($props) > 0) {
+            return $props[0];
         }
 
         return null;
     }
 
 
-    public static function getBestPropOddsForMatchup($matchup_id, $proptype_id, $a_iTeam)
+    public static function getBestPropOddsForMatchup($matchup_id, $proptype_id, $team_num)
     {
         $query = 'SELECT MAX(co1.prop_odds) AS prop_odds, MAX(co1.negprop_odds) AS negprop_odds, co1.bookie_id, co1.date
             FROM lines_props AS co1, (SELECT co2.bookie_id, MAX(co2.date) as date
@@ -292,25 +292,23 @@ class OddsDB
               GROUP BY co1.matchup_id, co1.team_num, co1.proptype_id
               LIMIT 0,1;';
 
+        $params = [$matchup_id, $proptype_id, $team_num, $matchup_id, $proptype_id, $team_num];
 
-
-        $params = array($matchup_id, $proptype_id, $a_iTeam, $matchup_id, $proptype_id, $a_iTeam);
-
-        $rResult = DBTools::doParamQuery($query, $params);
+        $result = DBTools::doParamQuery($query, $params);
 
         //$aFightOddsCol = array();
 
-        if ($aRow = mysqli_fetch_array($rResult)) {
+        if ($row = mysqli_fetch_array($result)) {
             return new PropBet(
                 $matchup_id,
-                $aRow['bookie_id'],
+                $row['bookie_id'],
                 '',
-                $aRow['prop_odds'],
+                $row['prop_odds'],
                 '',
-                $aRow['negprop_odds'],
+                $row['negprop_odds'],
                 $proptype_id,
-                $aRow['date'],
-                $a_iTeam
+                $row['date'],
+                $team_num
             );
         }
         return null;
@@ -339,10 +337,10 @@ class OddsDB
                         AND lp.team_num = ?
                         ORDER BY lp.date ASC';
 
-        $rResult = DBTools::doParamQuery($query, $params);
+        $result = DBTools::doParamQuery($query, $params);
 
         $aProps = array();
-        while ($aRow = mysqli_fetch_array($rResult)) {
+        while ($aRow = mysqli_fetch_array($result)) {
             $aProps[] = new PropBet(
                 $matchup_id,
                 $aRow['bookie_id'],
@@ -380,10 +378,10 @@ class OddsDB
                         AND lep.proptype_id = pt.id
                         ORDER BY lep.date ASC';
 
-        $rResult = DBTools::doParamQuery($query, $params);
+        $result = DBTools::doParamQuery($query, $params);
 
         $aProps = array();
-        while ($aRow = mysqli_fetch_array($rResult)) {
+        while ($aRow = mysqli_fetch_array($result)) {
             $aProps[] = new EventPropBet(
                 $event_id,
                 $aRow['bookie_id'],
@@ -410,14 +408,14 @@ class OddsDB
 
         $params = array($matchup_id);
 
-        $rResult = DBTools::doParamQuery($query, $params);
+        $result = DBTools::doParamQuery($query, $params);
 
-        $aFightOddsCol = array();
-        while ($aFightOdds = mysqli_fetch_array($rResult)) {
-            $aFightOddsCol[] = new FightOdds($aFightOdds['fight_id'], $aFightOdds['bookie_id'], $aFightOdds['fighter1_odds'], $aFightOdds['fighter2_odds'], $aFightOdds['date']);
+        $odds_col = [];
+        while ($row = mysqli_fetch_array($result)) {
+            $odds_col[] = new FightOdds($row['fight_id'], $row['bookie_id'], $row['fighter1_odds'], $row['fighter2_odds'], $row['date']);
         }
-        if (sizeof($aFightOddsCol) > 0) {
-            return $aFightOddsCol[0];
+        if (sizeof($odds_col) > 0) {
+            return $odds_col[0];
         }
         return null;
     }
@@ -442,10 +440,10 @@ class OddsDB
                         ORDER BY lp.date ASC
                         LIMIT 0, 1';
 
-        $rResult = DBTools::doParamQuery($query, $params);
+        $result = DBTools::doParamQuery($query, $params);
 
         $aProps = array();
-        while ($aRow = mysqli_fetch_array($rResult)) {
+        while ($aRow = mysqli_fetch_array($result)) {
             $aProps[] = new PropBet(
                 $matchup_id,
                 $aRow['bookie_id'],
@@ -485,10 +483,10 @@ class OddsDB
                         ORDER BY lep.date ASC
                         LIMIT 0, 1';
 
-        $rResult = DBTools::doParamQuery($query, $params);
+        $result = DBTools::doParamQuery($query, $params);
 
         $aProps = array();
-        while ($aRow = mysqli_fetch_array($rResult)) {
+        while ($aRow = mysqli_fetch_array($result)) {
             $aProps[] = new EventPropBet(
                 $event_id,
                 $aRow['bookie_id'],
@@ -510,7 +508,7 @@ class OddsDB
     /**
      * Get openings odds for a specific prop and bookie
      */
-    public static function getOpeningOddsForPropAndBookie($matchup_id, $proptype_id, $bookie_id, $team_num) : ?PropBet
+    public static function getOpeningOddsForPropAndBookie($matchup_id, $proptype_id, $bookie_id, $team_num): ?PropBet
     {
         $params = [$matchup_id, $proptype_id, $bookie_id, $team_num];
 
@@ -568,10 +566,10 @@ class OddsDB
                         ORDER BY lep.date ASC
                         LIMIT 0, 1';
 
-        $rResult = DBTools::doParamQuery($query, $params);
+        $result = DBTools::doParamQuery($query, $params);
 
         $aProps = array();
-        while ($aRow = mysqli_fetch_array($rResult)) {
+        while ($aRow = mysqli_fetch_array($result)) {
             $aProps[] = new EventPropBet(
                 $event_id,
                 $aRow['bookie_id'],
@@ -605,16 +603,16 @@ class OddsDB
                         FROM lines_correlations lc 
                         WHERE lc.bookie_id = ? ';
 
-        $rResult = DBTools::doParamQuery($query, $params);
+        $result = DBTools::doParamQuery($query, $params);
 
-        $aReturn = array();
-        while ($aRow = mysqli_fetch_array($rResult)) {
-            $aReturn[] = array(
-                'correlation' => $aRow['correlation'],
-                'matchup_id' => $aRow['matchup_id']
+        $return = [];
+        while ($row = mysqli_fetch_array($result)) {
+            $return[] = array(
+                'correlation' => $row['correlation'],
+                'matchup_id' => $row['matchup_id']
             );
         }
-        return $aReturn;
+        return $return;
     }
 
 
@@ -626,9 +624,9 @@ class OddsDB
                     FROM lines_correlations 
                     WHERE bookie_id = ? AND correlation = ?';
 
-        $rResult = DBTools::doParamQuery($query, $params);
+        $result = DBTools::doParamQuery($query, $params);
 
-        return (int) DBTools::getSingleValue($rResult);
+        return (int) DBTools::getSingleValue($result);
     }
 
     /**
@@ -639,22 +637,22 @@ class OddsDB
      * array('correlation' => xxx, 'matchup_id' => xxx)
      *
      * @param int $bookie_id Bookie ID
-     * @param array $a_aCorrelations Collection of correlations as defined above
+     * @param array $correlations Collection of correlations as defined above
      */
-    public static function storeCorrelations($bookie_id, $a_aCorrelations)
+    public static function storeCorrelations($bookie_id, $correlations)
     {
         $params = array();
 
         $query = 'INSERT IGNORE INTO lines_correlations(correlation, bookie_id, matchup_id) VALUES ';
-        foreach ($a_aCorrelations as $aCorrelation) {
+        foreach ($correlations as $correlation) {
             if (count($params) > 0) {
                 $query .= ', ';
             }
 
-            if (isset($aCorrelation['correlation']) && isset($aCorrelation['matchup_id'])) {
-                $params[] = $aCorrelation['correlation'];
+            if (isset($correlation['correlation']) && isset($correlation['matchup_id'])) {
+                $params[] = $correlation['correlation'];
                 $params[] = $bookie_id;
-                $params[] = $aCorrelation['matchup_id'];
+                $params[] = $correlation['matchup_id'];
 
                 $query .= '(?,?,?)';
             }
@@ -698,22 +696,22 @@ class OddsDB
     }
 
 
-    public static function getCompletePropsForMatchup($a_iMatchup, $a_iOffset = 0)
+    public static function getCompletePropsForMatchup($matchup_id, $offset = 0)
     {
-        if ($a_iOffset != 0 && $a_iOffset != 1) {
+        if ($offset != 0 && $offset != 1) {
             return false;
         }
 
-        $sExtraQuery = '';
-        $params = array($a_iMatchup, $a_iMatchup);
-        if ($a_iOffset == 1) {
-            $sExtraQuery = ' AND lp4.date != (SELECT
+        $extra_query = '';
+        $params = array($matchup_id, $matchup_id);
+        if ($offset == 1) {
+            $extra_query = ' AND lp4.date != (SELECT
                 MAX(lp5.date)  FROM        lines_props lp5
             WHERE
                 lp5.matchup_id = ? AND lp5.bookie_id =
                 lp4.bookie_id AND lp5.proptype_id = lp4.proptype_id AND lp5.team_num =
                 lp4.team_num) ';
-            $params[] = $a_iMatchup;
+            $params[] = $matchup_id;
         }
 
 
@@ -734,7 +732,7 @@ class OddsDB
                     FROM
                         lines_props lp4
                     WHERE
-                        lp4.matchup_id = ? ' . $sExtraQuery . ' 
+                        lp4.matchup_id = ? ' . $extra_query . ' 
                     GROUP BY bookie_id , proptype_id , team_num) AS lp3
                 WHERE
                     lp2.matchup_id = ? AND lp2.bookie_id = lp3.bookie_id AND
@@ -742,24 +740,24 @@ class OddsDB
                 lp2.date = lp3.date AND lp2.proptype_id = pt.id AND lp2.bookie_id = b.id ORDER BY b.position
                 ;';
 
-        $rResult = DBTools::doParamQuery($query, $params);
+        $result = DBTools::doParamQuery($query, $params);
 
-        $aProps = array();
-        while ($aRow = mysqli_fetch_array($rResult)) {
-            $aProps[] = new PropBet(
-                $a_iMatchup,
-                $aRow['bookie_id'],
-                $aRow['prop_desc'],
-                $aRow['prop_odds'],
-                $aRow['negprop_desc'],
-                $aRow['negprop_odds'],
-                $aRow['proptype_id'],
-                $aRow['date'],
-                $aRow['team_num']
+        $props = array();
+        while ($row = mysqli_fetch_array($result)) {
+            $props[] = new PropBet(
+                $matchup_id,
+                $row['bookie_id'],
+                $row['prop_desc'],
+                $row['prop_odds'],
+                $row['negprop_desc'],
+                $row['negprop_odds'],
+                $row['proptype_id'],
+                $row['date'],
+                $row['team_num']
             );
         }
-        if (count($aProps) > 0) {
-            return $aProps;
+        if (count($props) > 0) {
+            return $props;
         }
 
         return null;
@@ -810,23 +808,23 @@ class OddsDB
                 lep2.date = lep3.date AND lep2.proptype_id = pt.id AND lep2.bookie_id = b.id ORDER BY b.position
                 ;';
 
-        $rResult = DBTools::doParamQuery($query, $params);
+        $result = DBTools::doParamQuery($query, $params);
 
-        $aProps = array();
-        while ($aRow = mysqli_fetch_array($rResult)) {
-            $aProps[] = new EventPropBet(
+        $props = array();
+        while ($row = mysqli_fetch_array($result)) {
+            $props[] = new EventPropBet(
                 $event_id,
-                $aRow['bookie_id'],
-                $aRow['prop_desc'],
-                $aRow['prop_odds'],
-                $aRow['negprop_desc'],
-                $aRow['negprop_odds'],
-                $aRow['proptype_id'],
-                $aRow['date']
+                $row['bookie_id'],
+                $row['prop_desc'],
+                $row['prop_odds'],
+                $row['negprop_desc'],
+                $row['negprop_odds'],
+                $row['proptype_id'],
+                $row['date']
             );
         }
-        if (count($aProps) > 0) {
-            return $aProps;
+        if (count($props) > 0) {
+            return $props;
         }
 
         return null;
@@ -910,23 +908,23 @@ class OddsDB
                     WHERE lp2.bookie_id IS NULL AND lp2.matchup_id IS NULL AND lp2.proptype_id IS NULL AND lp2.team_num IS NULL
                         AND lp.matchup_id = ? AND lp.bookie_id = ?;' . $extra_where;
 
-        $aResult = PDOTools::findMany($query, $params);
+        $result = PDOTools::findMany($query, $params);
 
-        $aRet = [];
-        foreach ($aResult as $aRow) {
-            $aRet[] = new PropBet(
-                $aRow['matchup_id'],
-                $aRow['bookie_id'],
-                $aRow['prop_desc'],
-                $aRow['prop_odds'],
-                $aRow['negprop_desc'],
-                $aRow['negprop_odds'],
-                $aRow['proptype_id'],
-                $aRow['date'],
-                $aRow['team_num']
+        $prop_odds = [];
+        foreach ($result as $row) {
+            $prop_odds[] = new PropBet(
+                $row['matchup_id'],
+                $row['bookie_id'],
+                $row['prop_desc'],
+                $row['prop_odds'],
+                $row['negprop_desc'],
+                $row['negprop_odds'],
+                $row['proptype_id'],
+                $row['date'],
+                $row['team_num']
             );
         }
-        return $aRet;
+        return $prop_odds;
     }
 
     public static function flagOddsForDeletion($bookie_id, $matchup_id = null, $event_id = null, $proptype_id = null, $team_num = null)
@@ -971,7 +969,7 @@ class OddsDB
         return $result;
     }
 
-    public static function removeFlagged(int $bookie_id, int $matchup_id = null, int $event_id = null, int $proptype_id = null, int $team_num = null) : int
+    public static function removeFlagged(int $bookie_id, int $matchup_id = null, int $event_id = null, int $proptype_id = null, int $team_num = null): int
     {
         $params = [$bookie_id, $matchup_id ?? -1, $event_id ?? -1, $proptype_id ?? -1, $team_num ?? -1];
 
@@ -991,7 +989,7 @@ class OddsDB
         return $result;
     }
 
-    public static function removeAllOldFlagged() : int
+    public static function removeAllOldFlagged(): int
     {
         $query = 'DELETE lf FROM lines_flagged lf 
                         LEFT JOIN fights f ON lf.matchup_id = f.id 

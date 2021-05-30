@@ -7,25 +7,25 @@ class CacheControl
     public static function cleanGraphCache()
     {
         if (is_dir(IMAGE_CACHE_DIR)) {
-            $rDir = opendir(IMAGE_CACHE_DIR);
-            if ($rDir == false) {
+            $directory = opendir(IMAGE_CACHE_DIR);
+            if ($directory == false) {
                 return false;
             }
 
-            while ($sFile = readdir($rDir)) {
-                if ($sFile != "." && $sFile != ".." && $sFile != '.gitignore') {
-                    if (!is_dir(IMAGE_CACHE_DIR . "/" . $sFile)) {
-                        unlink(IMAGE_CACHE_DIR . '/' . $sFile);
+            while ($filename = readdir($directory)) {
+                if ($filename != "." && $filename != ".." && $filename != '.gitignore') {
+                    if (!is_dir(IMAGE_CACHE_DIR . "/" . $filename)) {
+                        unlink(IMAGE_CACHE_DIR . '/' . $filename);
                     }
                 }
             }
-            closedir($rDir);
+            closedir($directory);
 
             return true;
         }
     }
 
-    public static function isCached($a_sName)
+    public static function isCached($filename)
     {
         if (!CACHE_IMAGE_CACHE_ENABLED) {
             return false;
@@ -33,54 +33,53 @@ class CacheControl
 
         //TODO: Maybe fix this one to only clear for the file in question:
         clearstatcache();
-        $bResult = file_exists(IMAGE_CACHE_DIR . '/' . $a_sName . '.png');
-        return $bResult;
+        return file_exists(IMAGE_CACHE_DIR . '/' . $filename . '.png');
     }
 
-    public static function deleteCachedImage($a_sName)
+    public static function deleteCachedImage($filename)
     {
-        return unlink(IMAGE_CACHE_DIR . '' . $a_sName . '.png');
+        return unlink(IMAGE_CACHE_DIR . '' . $filename . '.png');
     }
 
-    public static function getCachedImage($a_sName)
+    public static function getCachedImage($filename)
     {
-        return imagecreatefrompng(IMAGE_CACHE_DIR . '' . $a_sName . '.png');
+        return imagecreatefrompng(IMAGE_CACHE_DIR . '' . $filename . '.png');
     }
 
-    public static function cacheImage($rImage, $a_sName)
+    public static function cacheImage($image, $filename)
     {
-        return imagepng($rImage, IMAGE_CACHE_DIR . '' . $a_sName . '.png');
+        return imagepng($image, IMAGE_CACHE_DIR . '' . $filename . '.png');
     }
 
     public static function cleanPageCache()
     {
         if (is_dir(CACHE_PAGE_DIR)) {
-            $rDir = opendir(CACHE_PAGE_DIR);
-            if ($rDir == false) {
+            $directory = opendir(CACHE_PAGE_DIR);
+            if ($directory == false) {
                 return false;
             }
 
-            while ($sFile = readdir($rDir)) {
-                if ($sFile != "." && $sFile != "..") {
-                    if (!is_dir(CACHE_PAGE_DIR . DIRECTORY_SEPARATOR . $sFile)) {
-                        unlink(CACHE_PAGE_DIR . DIRECTORY_SEPARATOR . $sFile);
+            while ($filename = readdir($directory)) {
+                if ($filename != "." && $filename != "..") {
+                    if (!is_dir(CACHE_PAGE_DIR . DIRECTORY_SEPARATOR . $filename)) {
+                        unlink(CACHE_PAGE_DIR . DIRECTORY_SEPARATOR . $filename);
                     }
                 }
             }
-            closedir($rDir);
+            closedir($directory);
 
             return true;
         }
     }
 
-    public static function cleanPageCacheWC($a_sName)
+    public static function cleanPageCacheWC($filename_pattern)
     {
-        foreach (glob(CACHE_PAGE_DIR . DIRECTORY_SEPARATOR . $a_sName . ".php") as $sFilename) {
-            unlink($sFilename);
+        foreach (glob(CACHE_PAGE_DIR . DIRECTORY_SEPARATOR . $filename_pattern . ".php") as $filename) {
+            unlink($filename);
         }
     }
 
-    public static function isPageCached($a_sName)
+    public static function isPageCached($page_filename)
     {
         if (!CACHE_PAGE_CACHE_ENABLED) {
             return false;
@@ -88,26 +87,25 @@ class CacheControl
 
         //TODO: Maybe fix this one to only clear for the file in question:
         clearstatcache();
-        $bResult = file_exists(CACHE_PAGE_DIR . DIRECTORY_SEPARATOR . $a_sName . '.php');
-        return $bResult;
+        return file_exists(CACHE_PAGE_DIR . DIRECTORY_SEPARATOR . $page_filename . '.php');
     }
 
-    public static function getCachedPage($a_sName)
+    public static function getCachedPage($page_filename)
     {
-        return file_get_contents(CACHE_PAGE_DIR . DIRECTORY_SEPARATOR . $a_sName . '.php');
+        return file_get_contents(CACHE_PAGE_DIR . DIRECTORY_SEPARATOR . $page_filename . '.php');
     }
 
-    public static function cachePage($a_sContent, $a_sName)
+    public static function cachePage($content, $page_filename)
     {
-        return self::file_put_contents_atomic(CACHE_PAGE_DIR, $a_sName, $a_sContent);
+        return self::file_put_contents_atomic(CACHE_PAGE_DIR, $page_filename, $content);
     }
 
 
-    public static function file_put_contents_atomic($a_sCacheDir, $filename, $content)
+    public static function file_put_contents_atomic($cache_dir, $filename, $content)
     {
-        $temp = tempnam($a_sCacheDir, 'temp');
+        $temp = tempnam($cache_dir, 'temp');
         if (!($f = @fopen($temp, 'wb'))) {
-            $temp = $a_sCacheDir . DIRECTORY_SEPARATOR . uniqid('temp');
+            $temp = $cache_dir . DIRECTORY_SEPARATOR . uniqid('temp');
             if (!($f = @fopen($temp, 'wb'))) {
                 trigger_error("file_put_contents_atomic() : error writing temporary file '$temp'", E_USER_WARNING);
                 return false;
@@ -115,12 +113,12 @@ class CacheControl
         }
         fwrite($f, $content);
         fclose($f);
-       
+
         if (!@rename($temp, CACHE_PAGE_DIR . DIRECTORY_SEPARATOR . $filename)) {
             @unlink(CACHE_PAGE_DIR . DIRECTORY_SEPARATOR . $filename);
             @rename($temp, CACHE_PAGE_DIR . DIRECTORY_SEPARATOR . $filename);
         }
-       
+
         @chmod(CACHE_PAGE_DIR . DIRECTORY_SEPARATOR . $filename, 0777);
         return true;
     }
