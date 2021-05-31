@@ -257,13 +257,13 @@ class OddsDB
         $props = [];
         while ($row = mysqli_fetch_array($rResult)) {
             $props[] = new EventPropBet(
-                $event_id,
-                $row['bookie_id'],
+                (int) $event_id,
+                (int) $row['bookie_id'],
                 $row['prop_desc'],
                 $row['prop_odds'],
                 $row['negprop_desc'],
                 $row['negprop_odds'],
-                $row['proptype_id'],
+                (int) $row['proptype_id'],
                 $row['date']
             );
         }
@@ -380,21 +380,21 @@ class OddsDB
 
         $result = DBTools::doParamQuery($query, $params);
 
-        $aProps = array();
-        while ($aRow = mysqli_fetch_array($result)) {
-            $aProps[] = new EventPropBet(
-                $event_id,
-                $aRow['bookie_id'],
-                $aRow['prop_desc'],
-                $aRow['prop_odds'],
-                $aRow['negprop_desc'],
-                $aRow['negprop_odds'],
-                $aRow['proptype_id'],
-                $aRow['date']
+        $props = [];
+        while ($row = mysqli_fetch_array($result)) {
+            $props[] = new EventPropBet(
+                (int) $event_id,
+                (int) $row['bookie_id'],
+                $row['prop_desc'],
+                $row['prop_odds'],
+                $row['negprop_desc'],
+                $row['negprop_odds'],
+                (int) $row['proptype_id'],
+                $row['date']
             );
         }
 
-        return $aProps;
+        return $props;
     }
 
 
@@ -485,21 +485,21 @@ class OddsDB
 
         $result = DBTools::doParamQuery($query, $params);
 
-        $aProps = array();
-        while ($aRow = mysqli_fetch_array($result)) {
-            $aProps[] = new EventPropBet(
-                $event_id,
-                $aRow['bookie_id'],
-                $aRow['prop_desc'],
-                $aRow['prop_odds'],
-                $aRow['negprop_desc'],
-                $aRow['negprop_odds'],
-                $aRow['proptype_id'],
-                $aRow['date']
+        $props = [];
+        while ($row = mysqli_fetch_array($result)) {
+            $props[] = new EventPropBet(
+                (int) $event_id,
+                (int) $row['bookie_id'],
+                $row['prop_desc'],
+                $row['prop_odds'],
+                $row['negprop_desc'],
+                $row['negprop_odds'],
+                (int) $row['proptype_id'],
+                $row['date']
             );
         }
-        if (count($aProps) > 0) {
-            return $aProps[0];
+        if (count($props) > 0) {
+            return $props[0];
         }
 
         return null;
@@ -568,21 +568,21 @@ class OddsDB
 
         $result = DBTools::doParamQuery($query, $params);
 
-        $aProps = array();
-        while ($aRow = mysqli_fetch_array($result)) {
-            $aProps[] = new EventPropBet(
-                $event_id,
-                $aRow['bookie_id'],
-                $aRow['prop_desc'],
-                $aRow['prop_odds'],
-                $aRow['negprop_desc'],
-                $aRow['negprop_odds'],
-                $aRow['proptype_id'],
-                $aRow['date']
+        $props = [];
+        while ($row = mysqli_fetch_array($result)) {
+            $props[] = new EventPropBet(
+                (int) $event_id,
+                (int) $row['bookie_id'],
+                $row['prop_desc'],
+                $row['prop_odds'],
+                $row['negprop_desc'],
+                $row['negprop_odds'],
+                (int) $row['proptype_id'],
+                $row['date']
             );
         }
-        if (count($aProps) > 0) {
-            return $aProps[0];
+        if (count($props) > 0) {
+            return $props[0];
         }
 
         return null;
@@ -810,16 +810,16 @@ class OddsDB
 
         $result = DBTools::doParamQuery($query, $params);
 
-        $props = array();
+        $props = [];
         while ($row = mysqli_fetch_array($result)) {
             $props[] = new EventPropBet(
-                $event_id,
-                $row['bookie_id'],
+                (int) $event_id,
+                (int) $row['bookie_id'],
                 $row['prop_desc'],
                 $row['prop_odds'],
                 $row['negprop_desc'],
                 $row['negprop_odds'],
-                $row['proptype_id'],
+                (int) $row['proptype_id'],
                 $row['date']
             );
         }

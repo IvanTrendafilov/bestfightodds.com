@@ -146,13 +146,13 @@ class PropBet
         $this->team_num = $team_num;
     }
 
-    public function equals(PropBet $a_oPropBet): bool
+    public function equals(Object $prop_bet): bool
     {
-        return ($this->matchup_id == $a_oPropBet->getMatchupID() &&
-            $this->bookie_id == $a_oPropBet->getBookieID() &&
-            $this->prop_odds == $a_oPropBet->getPropOdds() &&
-            $this->negprop_odds == $a_oPropBet->getNegPropOdds() &&
-            $this->proptype_id == $a_oPropBet->getPropTypeID());
+        return ($this->matchup_id == $prop_bet->getMatchupID() &&
+            $this->bookie_id == $prop_bet->getBookieID() &&
+            $this->prop_odds == $prop_bet->getPropOdds() &&
+            $this->negprop_odds == $prop_bet->getNegPropOdds() &&
+            $this->proptype_id == $prop_bet->getPropTypeID());
     }
 
     public function getOdds(int $team_num): ?int

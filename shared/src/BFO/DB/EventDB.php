@@ -382,43 +382,6 @@ class EventDB
         return $id;
     }
 
-
-
-    /*public static function addNewFight($fight_obj)
-    {
-        //Check that event is ok
-        if (EventDB::getEvents(false, $fight_obj->getEventID()) != null) {
-            //Check if fight isn't already added
-            if (!EventDB::getMatchingFight(team1_name: $fight_obj->getFighter(1), team2_name: $fight_obj->getFighter(2), event_id: $fight_obj->getEventID(), future_only: true)) {
-                //Check that both fighters exist, if not, add them
-                $fighter1_id = EventDB::getFighterIDByName($fight_obj->getFighter(1));
-                if ($fighter1_id == null) {
-                    $fighter1_id = EventDB::addNewFighter($fight_obj->getFighter(1));
-                }
-                $fighter2_id = EventDB::getFighterIDByName($fight_obj->getFighter(2));
-                if ($fighter2_id == null) {
-                    $fighter2_id = EventDB::addNewFighter($fight_obj->getFighter(2));
-                }
-
-                if ($fighter1_id == null || $fighter2_id == null) {
-                    return false;
-                }
-
-                $query = 'INSERT INTO fights(fighter1_id, fighter2_id, event_id)
-                                VALUES(?, ?, ?)';
-
-                $params = array($fighter1_id, $fighter2_id, $fight_obj->getEventID());
-                DBTools::doParamQuery($query, $params);
-
-                //Invalidate cache whenever we add a matchup in case some running function is caching matchups
-                DBTools::invalidateCache();
-
-                return DBTools::getLatestID();
-            }
-        }
-        return false;
-    }*/
-
     public static function createMatchup(int $team1_id, int $team2_id, int $event_id): ?int
     {
         $query = 'INSERT INTO fights(fighter1_id, fighter2_id, event_id)

@@ -26,7 +26,7 @@ class TeamDB
 
         $fighters = [];
         while ($row = mysqli_fetch_array($result)) {
-            $fighters[] = new Fighter($row['name'], $row['id']);
+            $fighters[] = new Fighter((string) $row['name'], (int) $row['id']);
         }
 
         return $fighters;
@@ -50,7 +50,7 @@ class TeamDB
         $teams = [];
         try {
             foreach (PDOTools::findMany($query, $params) as $row) {
-                $teams[] = new Fighter($row['name'], $row['id']);
+                $teams[] = new Fighter((string) $row['name'], (int) $row['id']);
             }
         } catch (\PDOException $e) {
             throw new \Exception("Unknown error " . $e->getMessage(), 10);
@@ -158,7 +158,7 @@ class TeamDB
         $result = DBTools::doQuery($query);
         $fighters = [];
         while ($row = mysqli_fetch_array($result)) {
-            $fighters[] = new Fighter($row['name'], $row['id']);
+            $fighters[] = new Fighter((string) $row['name'], (int) $row['id']);
         }
         return $fighters;
     }

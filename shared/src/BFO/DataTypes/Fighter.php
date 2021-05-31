@@ -6,16 +6,16 @@ use BFO\Utils\LinkTools;
 
 class Fighter
 {
-    private $name;
-    private $id;
+    private string $name;
+    private int $id;
     
-    public function __construct($name, $id)
+    public function __construct(string $name, int $id)
     {
         $this->name = $name;
-        $this->id = (int) $id;
+        $this->id = $id;
     }
     
-    public function getName()
+    public function getName(): string
     {
         return $this->name;
     }
@@ -25,7 +25,7 @@ class Fighter
         return $this->id;
     }
 
-    public function getNameAsString()
+    public function getNameAsString(): string
     {
         $string = $this->name;
 
@@ -55,7 +55,7 @@ class Fighter
         return trim($string);
     }
     
-    public function getFighterAsLinkString()
+    public function getFighterAsLinkString(): string
     {
         $name = LinkTools::slugString($this->getNameAsString());
         return $name . '-' . $this->id;

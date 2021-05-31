@@ -8,7 +8,7 @@ class EventPropBet extends PropBet
 {
     private $event_id; //Event the prop is linked to
 
-    public function __construct($event_id, $bookie_id, $prop_name, $prop_odds, $negprop_name, $neg_prop_odds, $proptype_id, $date)
+    public function __construct(int $event_id, int $bookie_id, string $prop_name, int $prop_odds, string $negprop_name, int $neg_prop_odds, int $proptype_id, string $date)
     {
         parent::__construct(-1, $bookie_id, $prop_name, $prop_odds, $negprop_name, $neg_prop_odds, $proptype_id, $date, 0);
         $this->setEventID($event_id);
@@ -24,7 +24,7 @@ class EventPropBet extends PropBet
         return $this->event_id;
     }
 
-    public function equals($prop_bet): bool
+    public function equals(Object $prop_bet): bool
     {
         return ($this->event_id == $prop_bet->getEventID() &&
             $this->getBookieID() == $prop_bet->getBookieID() &&
