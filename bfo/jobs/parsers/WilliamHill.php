@@ -55,6 +55,7 @@ class ParserJob
         if ($mode == 'mock') {
             $this->logger->info("Note: Using matchup mock file at " . PARSE_MOCKFEEDS_DIR . "williamhill.xml");
             $content = ParseTools::retrievePageFromFile(PARSE_MOCKFEEDS_DIR . 'williamhill.xml');
+            $this->change_num = '';
         } else {
             $matchups_url = 'http://pricefeeds.williamhill.com/oxipubserver?action=template&template=getHierarchyByMarketType&classId=402&filterBIR=N';
             $this->change_num = BookieHandler::getChangeNum(BOOKIE_ID);
