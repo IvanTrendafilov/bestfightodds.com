@@ -114,11 +114,11 @@ class OddsDB
         try {
             foreach (PDOTools::findMany($query, $params) as $row) {
                 $prop_type = new PropType(
-                    $row['id'],
+                    (int) $row['id'],
                     $row['prop_desc'],
                     $row['negprop_desc']
                 );
-                $prop_type->setEventProp($row['is_eventprop']);
+                $prop_type->setEventProp((bool) $row['is_eventprop']);
                 $prop_types[] = $prop_type;
             }
         } catch (\PDOException $e) {
@@ -151,10 +151,10 @@ class OddsDB
         $prop_types = [];
         while ($row = mysqli_fetch_array($result)) {
             $prop_types[] = new PropType(
-                $row['id'],
+                (int) $row['id'],
                 $row['prop_desc'],
                 $row['negprop_desc'],
-                $row['team_num']
+                (int) $row['team_num']
             );
         }
 
@@ -183,7 +183,7 @@ class OddsDB
         $prop_types = [];
         while ($row = mysqli_fetch_array($result)) {
             $prop_types[] = new PropType(
-                $row['id'],
+                (int) $row['id'],
                 $row['prop_desc'],
                 $row['negprop_desc'],
                 0

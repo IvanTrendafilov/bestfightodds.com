@@ -76,6 +76,6 @@ Add new prop template (use &#60;T&#62; to specify team names (or event name) and
     Template: &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <input type="text" id="in_proptemplate" size="140" value="<?= isset($in_template) ? $in_template : '' ?>"> <a href="#" onclick="switchFields('templateField','templateNegField')">Switch</a><br>
     Neg Template: <input type="text" id="in_negproptemplate" size="140" value="<?= isset($in_negtemplate) ? $in_negtemplate : '' ?>" /><br><br>
 
-    <input type="submit" id="create-template-button" value="Add template" onclick="javascript:return confirm('Are you sure?')" />
+    <input type="submit" id="create-template-button" value="Add template" />
 
 </form>

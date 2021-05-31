@@ -92,7 +92,7 @@
 				</a>
 			</li>
 
-			<li class="sidebar-item <?=$current_page == 'changeauditlog' ? 'active' : ''?>">
+			<li class="sidebar-item <?=$current_page == 'changeaudit' ? 'active' : ''?>">
 				<a class="sidebar-link" href="/cnadm/log/changeaudit">
 					<i class="align-middle" data-feather="map"></i> <span class="align-middle">Change audit log</span>
 				</a>

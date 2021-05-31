@@ -11,7 +11,7 @@ class PropType
     private $team_num;
     private $is_event_prop = false;
 
-    public function __construct($id, $prop_desc, $negprop_desc, $team_num = 0)
+    public function __construct(int $id, string $prop_desc, string $negprop_desc, int $team_num = 0)
     {
         $this->id = $id;
         $this->prop_desc = $prop_desc;
@@ -24,47 +24,47 @@ class PropType
         $this->team_num = $team_num;
     }
 
-    public function getID()
+    public function getID(): int
     {
         return $this->id;
     }
 
-    public function setID($id)
+    public function setID($id): void
     {
         $this->id = $id;
     }
 
-    public function getPropDesc()
+    public function getPropDesc(): string
     {
         return $this->prop_desc;
     }
 
-    public function setPropDesc($prop_desc)
+    public function setPropDesc($prop_desc): void
     {
         $this->prop_desc = $prop_desc;
     }
 
-    public function getPropNegDesc()
+    public function getPropNegDesc(): string
     {
         return $this->negprop_desc;
     }
 
-    public function setPropNegDesc($negprop_desc)
+    public function setPropNegDesc($negprop_desc): void
     {
         $this->negprop_desc = $negprop_desc;
     }
 
-    public function isTeamSpecific()
+    public function isTeamSpecific(): bool
     {
         return $this->is_team_specific;
     }
 
-    public function getTeamNum()
+    public function getTeamNum(): int
     {
         return $this->team_num;
     }
 
-    public function invertTeamNum()
+    public function invertTeamNum(): bool
     {
         if ($this->team_num == 1) {
             $this->team_num = 2;
@@ -76,12 +76,12 @@ class PropType
         return false;
     }
 
-    public function setEventProp($is_event_prop)
+    public function setEventProp($is_event_prop): void
     {
         $this->is_event_prop = $is_event_prop;
     }
 
-    public function isEventProp()
+    public function isEventProp(): bool
     {
         return $this->is_event_prop;
     }

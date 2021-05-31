@@ -270,14 +270,20 @@ class AdminAPIController
             $return_data['msg'] = 'Missing/invalid parameters';
             $return_data['error'] = true;
         } else {
-            $template = new PropTemplate(0, $data->bookie_id, $data->proptemplate, $data->negproptemplate ?? '', $data->proptype_id, $data->fieldstype_id, '');
-            $new_template_id = BookieHandler::addNewPropTemplate($template);
-            if ($new_template_id) {
+            $template = new PropTemplate(0, (int) $data->bookie_id, $data->proptemplate, $data->negproptemplate ?? '', (int) $data->proptype_id, (int) $data->fieldstype_id, '');
+            $exception_msg = '';
+            $new_template_id = null;
+            try {
+                $new_template_id = BookieHandler::addNewPropTemplate($template);
+            } catch (Exception $e) {
+                $exception_msg = $e->getMessage();
+            }
+            if ($new_template_id && $exception_msg == '') {
                 $return_data['msg'] = 'Successfully added';
                 $return_data['proptemplate_id'] = $new_template_id;
             } else {
                 $response->withStatus(500);
-                $return_data['msg'] = 'Error creating prop template';
+                $return_data['msg'] = 'Error creating prop template: ' . $exception_msg;
                 $return_data['error'] = true;
             }
         }

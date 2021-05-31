@@ -281,7 +281,7 @@ class AdminController
                         break;
                     case 8:
                         //Move matchup to a non-existant event
-                        $action['view_extra']['new_event'] = EventHandler::getEventByName($action['action_obj']->eventTitle);
+                        $action['view_extra']['new_event'] = EventHandler::getEvents(event_name: $action['action_obj']->eventTitle)[0] ?? null;
                         $action['view_extra']['matchups'] = [];
                         foreach ($action['action_obj']->matchupIDs as $sMatchup) {
                             $action['view_extra']['matchups'][$sMatchup] = EventHandler::getMatchup($sMatchup);
@@ -432,6 +432,7 @@ class AdminController
             $logfile = $args['logfile'] == 'latest' ? end($filenames) : $args['logfile'];
             $log_contents =  file_get_contents($logfile);
             $view_data = ['log_contents' => $log_contents];
+            $view_data['log_filename'] = $logfile;
         } else {
             //List all available log files
             $logdir = opendir(GENERAL_KLOGDIR);
@@ -492,6 +493,7 @@ class AdminController
         $view_data = [];
         $log_contents =  file_get_contents(GENERAL_KLOGDIR . 'changeaudit.log');
         $view_data = ['log_contents' => $log_contents];
+        $view_data['log_filename'] = 'changeaudit.log';
         $response->getBody()->write($this->plates->render('changeauditlog', $view_data));
         return $response;
     }
@@ -501,6 +503,7 @@ class AdminController
         $view_data = [];
         $log_contents =  file_get_contents(GENERAL_KLOGDIR . $args['log_name'] . '.log');
         $view_data = ['log_contents' => $log_contents];
+        $view_data['log_filename'] = $args['log_name'];
         $response->getBody()->write($this->plates->render('logs', $view_data));
         return $response;
     }

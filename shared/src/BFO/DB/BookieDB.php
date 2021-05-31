@@ -18,7 +18,7 @@ class BookieDB
             $params[] = $bookie_id;
         }
 
-        $query = 'SELECT b.id, b.name, b.url, b.refurl
+        $query = 'SELECT b.id, b.name, b.refurl
             FROM bookies b
             WHERE active = true 
             ' . $extra_where . '
@@ -27,7 +27,7 @@ class BookieDB
         $bookies = [];
         try {
             foreach (PDOTools::findMany($query, $params) as $row) {
-                $bookies[] = new Bookie((int) $row['id'], $row['name'], $row['url'], $row['refurl']);
+                $bookies[] = new Bookie((int) $row['id'], $row['name'], $row['refurl']);
             };
         } catch (\PDOException $e) {
             if ($e->getCode() == 23000) {
@@ -124,20 +124,20 @@ class BookieDB
 
         $templates = [];
         while ($row = mysqli_fetch_array($result)) {
-            $template = new PropTemplate($row['id'], $row['bookie_id'], $row['template'], $row['template_neg'], $row['prop_type'], $row['fields_type'], $row['last_used']);
-            $template->setEventProp($row['is_eventprop']);
+            $template = new PropTemplate((int) $row['id'], (int) $row['bookie_id'], $row['template'], $row['template_neg'], (int) $row['prop_type'], (int) $row['fields_type'], $row['last_used']);
+            $template->setEventProp((bool) $row['is_eventprop']);
             $templates[] = $template;
         }
 
         return $templates;
     }
 
-    public static function addNewPropTemplate($prop_template)
+    public static function addNewPropTemplate(PropTemplate $prop_template): ?int
     {
         $query = 'INSERT INTO bookies_proptemplates(bookie_id, template, prop_type, template_neg, fields_type)
                     VALUES (?, ?, ?, ?, ?)';
 
-        $params = array($prop_template->getBookieID(), $prop_template->getTemplate(), $prop_template->getPropTypeID(), $prop_template->getTemplateNeg(), $prop_template->getFieldsTypeID());
+        $params = [$prop_template->getBookieID(), $prop_template->getTemplate(), $prop_template->getPropTypeID(), $prop_template->getTemplateNeg(), $prop_template->getFieldsTypeID()];
 
         $id = null;
         try {

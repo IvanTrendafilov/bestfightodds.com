@@ -3,7 +3,9 @@
 namespace BFO\General;
 
 use BFO\DataTypes\Bookie;
+use BFO\DataTypes\PropTemplate;
 use BFO\DB\BookieDB;
+use Exception;
 
 class BookieHandler
 {
@@ -43,18 +45,26 @@ class BookieHandler
         return BookieDB::getPropTemplatesForBookie($bookie_id);
     }
 
-    public static function addNewPropTemplate($proptemplate_obj)
+    public static function addNewPropTemplate(PropTemplate $proptemplate_obj): ?int
     {
-        //TODO: Add check to see if we are trying to add a duplicate
+        $existing_templates = BookieHandler::getPropTemplatesForBookie($proptemplate_obj->getBookieID());
+        foreach ($existing_templates as $template) {
+            if ($template->equals($proptemplate_obj)) {
+                throw new Exception("Duplicate entry", 10);
+                return null;
+            }
+        }
 
         //Check if fields type ID is within the span 1-6
         if ($proptemplate_obj->getFieldsTypeID() < 1 || $proptemplate_obj->getFieldsTypeID() > 8) {
-            return false;
+            throw new Exception("Invalid fields type", 11);
+            return null;
         }
 
         //Check if there an occurence of <T>. Add a template cannot be added without indicating at least one team/event in the template
         if (strpos($proptemplate_obj->getTemplate(), '<T>') === false) {
-            return false;
+            throw new Exception("Missing team or event (<T>) indicator", 12);
+            return null;
         }
 
         return BookieDB::addNewPropTemplate($proptemplate_obj);

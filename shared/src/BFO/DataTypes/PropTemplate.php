@@ -4,93 +4,93 @@ namespace BFO\DataTypes;
 
 class PropTemplate
 {
-    private $iID;
-    private $iBookieID;
-    private $sTemplate;
-    private $sTemplateNeg;
-    private $iPropTypeID;
-    private $aTemplatePropValues;
-    private $aTemplateNegPropValues;
-    private $iFieldsTypeID;
-    private $bIsEventProp = false;
-    private $sLastUsed;
+    private $id;
+    private $bookie_id;
+    private $template_pos;
+    private $template_neg;
+    private $proptype_id;
+    private $prop_pos_values;
+    private $prop_neg_values;
+    private $fieldstype_id;
+    private $is_event_prop = false;
+    private $last_used_date;
 
     private $bNegIsPrimary = false;
 
-    public function __construct($a_iID, $a_iBookieID, $a_sTemplate, $a_sTemplateNeg, $a_iPropTypeID, $a_iFieldsTypeID, $a_sLastUsed)
+    public function __construct(int $id, int $bookie_id, string $template_pos, string $template_neg, int $proptype_id, int $fieldstype_id, string $last_used_date)
     {
-        $this->iID = $a_iID;
-        $this->iBookieID = $a_iBookieID;
-        $this->sTemplate = strtoupper($a_sTemplate);
-        $this->iPropTypeID = $a_iPropTypeID;
-        $this->sTemplateNeg = strtoupper($a_sTemplateNeg);
-        $this->iFieldsTypeID = $a_iFieldsTypeID;
-        $this->sLastUsed = $a_sLastUsed;
+        $this->id = (int) $id;
+        $this->bookie_id = $bookie_id;
+        $this->template_pos = strtoupper($template_pos);
+        $this->proptype_id = $proptype_id;
+        $this->template_neg = strtoupper($template_neg);
+        $this->fieldstype_id = $fieldstype_id;
+        $this->last_used_date = $last_used_date;
 
         //Match all prop variables (<A-Z>) and store these as array
-        if (preg_match_all('/<[A-Z]+?>/', $this->sTemplate, $this->aTemplatePropValues)) {
-            $this->aTemplatePropValues = $this->aTemplatePropValues[0];
+        if (preg_match_all('/<[A-Z]+?>/', $this->template_pos, $this->prop_pos_values)) {
+            $this->prop_pos_values = $this->prop_pos_values[0];
         }
-        if (preg_match_all('/<[A-Z]+?>/', $this->sTemplateNeg, $this->aTemplateNegPropValues)) {
-            $this->aTemplateNegPropValues = $this->aTemplateNegPropValues[0];
+        if (preg_match_all('/<[A-Z]+?>/', $this->template_neg, $this->prop_neg_values)) {
+            $this->prop_neg_values = $this->prop_neg_values[0];
         }
 
-        if ($a_sTemplate == '') {
+        if ($template_pos == '') {
             $this->bNegIsPrimary = true;
         }
     }
 
-    public function getID()
+    public function getID(): int
     {
-        return $this->iID;
+        return $this->id;
     }
 
-    public function getBookieID()
+    public function getBookieID(): int
     {
-        return $this->iBookieID;
+        return $this->bookie_id;
     }
 
-    public function getTemplate()
+    public function getTemplate(): string
     {
-        return $this->sTemplate;
+        return $this->template_pos;
     }
 
-    public function getTemplateNeg()
+    public function getTemplateNeg(): string
     {
-        return $this->sTemplateNeg;
+        return $this->template_neg;
     }
 
-    public function getPropTypeID()
+    public function getPropTypeID(): int
     {
-        return $this->iPropTypeID;
+        return $this->proptype_id;
     }
 
-    public function getFieldsTypeID()
+    public function getFieldsTypeID(): int
     {
-        return $this->iFieldsTypeID;
+        return $this->fieldstype_id;
     }
 
-    public function setFieldsTypeID($a_iFieldsTypeID)
+    public function setFieldsTypeID(int $fieldstype_id): void
     {
-        $this->iFieldsTypeID = $a_iFieldsTypeID;
+        $this->fieldstype_id = $fieldstype_id;
     }
 
-    public function toString()
+    public function toString(): string
     {
-        $aRetStr = $this->getTemplate() . ' / ' . $this->getTemplateNeg();
-        $aRetStr = str_replace('<', '&#60;', $aRetStr);
-        $aRetStr = str_replace('>', '&#62;', $aRetStr);
-        return $aRetStr;
+        $return_string = $this->getTemplate() . ' / ' . $this->getTemplateNeg();
+        $return_string = str_replace('<', '&#60;', $return_string);
+        $return_string = str_replace('>', '&#62;', $return_string);
+        return $return_string;
     }
 
-    public function getPropVariables()
+    public function getPropVariables(): array
     {
-        return $this->aTemplatePropValues;
+        return $this->prop_pos_values;
     }
 
-    public function getNegPropVariables()
+    public function getNegPropVariables(): array
     {
-        return $this->aTemplateNegPropValues;
+        return $this->prop_neg_values;
     }
 
     public function isNegPrimary()
@@ -98,9 +98,9 @@ class PropTemplate
         return $this->bNegIsPrimary;
     }
 
-    public function getFieldsTypeAsExample()
+    public function getFieldsTypeAsExample(): string
     {
-        switch ($this->iFieldsTypeID) {
+        switch ($this->fieldstype_id) {
             case 1: return 'koscheck vs miller';
             break;
             case 2: return 'josh koscheck vs dan miller';
@@ -121,18 +121,38 @@ class PropTemplate
         }
     }
 
-    public function setEventProp($a_bState)
+    public function setEventProp(bool $is_event_prop): void
     {
-        $this->bIsEventProp = $a_bState;
+        $this->is_event_prop = $is_event_prop;
     }
 
-    public function isEventProp()
+    public function isEventProp(): bool
     {
-        return $this->bIsEventProp;
+        return $this->is_event_prop;
     }
 
-    public function getLastUsedDate()
+    public function getLastUsedDate(): string
     {
-        return $this->sLastUsed;
+        return $this->last_used_date;
+    }
+
+    public function equals(PropTemplate $other): bool
+    {
+        //Only compare ID if specified by both objects
+        if ($this->getID() > 0 && $other->getID() > 0
+            && $this->getID() != $other->getID()) {
+                return false;
+        }
+
+        if ($this->getBookieID() == $other->getBookieID()
+            && $this->getTemplate() == $other->getTemplate()
+            && $this->getTemplateNeg() == $other->getTemplateNeg()
+            && $this->getPropTypeID() == $other->getPropTypeID()
+            && $this->getFieldsTypeID() == $other->getFieldsTypeID()
+            && $this->isEventProp() == $other->isEventProp()) {
+                return true;
+        }
+
+        return false;
     }
 }

@@ -13,6 +13,9 @@ use BFO\DataTypes\PropType;
 
 class PropTypeDB
 {
+    /**
+     * Difference between this one and the one in OddsDB is that this one is prepared for prop_type_categories
+     */
     public static function getPropTypes($category_id = null)
     {
         $query = 'SELECT pt.*
@@ -29,8 +32,8 @@ class PropTypeDB
         $result = PDOTools::findMany($query, $params);
         $ret_proptypes = [];
         foreach ($result as $pt) {
-            $temp_pt = new PropType($pt['id'], $pt['prop_desc'], $pt['negprop_desc']);
-            $temp_pt->setEventProp($pt['is_eventprop']);
+            $temp_pt = new PropType((int) $pt['id'], $pt['prop_desc'], $pt['negprop_desc']);
+            $temp_pt->setEventProp((bool) $pt['is_eventprop']);
             $ret_proptypes[] = $temp_pt;
         }
         return $ret_proptypes;

@@ -27,21 +27,21 @@ class Alert
      * @param int $a_iLimit Limit
      * @param int $a_iID ID
      */
-    public function __construct($a_sEmail, $a_iFightID, $a_iFighter, $a_iBookieID, $a_iLimit, $a_iID = -1, $a_iOddsType = 1)
+    public function __construct($recipient_email, $matchup_id, $team_id, $bookie_id, $odds_limit, $alert_id = -1, $odds_format = 1)
     {
-        if (strtoupper($a_iLimit) == 'EV' || strtoupper($a_iLimit) == 'EVEN' || $a_iLimit == '-100') {
-            $a_iLimit = '100';
+        if (strtoupper($odds_limit) == 'EV' || strtoupper($odds_limit) == 'EVEN' || $odds_limit == '-100') {
+            $odds_limit = '100';
         }
 
-        $this->sEmail = trim($a_sEmail);
-        $this->iFightID = $a_iFightID;
-        $this->iFighter = $a_iFighter;
-        $this->iOddsType = $a_iOddsType;
-        $this->iID = $a_iID;
-        $this->iLimit = $a_iLimit;
+        $this->sEmail = trim($recipient_email);
+        $this->iFightID = $matchup_id;
+        $this->iFighter = $team_id;
+        $this->iOddsType = $odds_format;
+        $this->iID = $alert_id;
+        $this->iLimit = $odds_limit;
 
-        if (is_numeric($a_iBookieID)) {
-            $this->iBookieID = $a_iBookieID;
+        if (is_numeric($bookie_id)) {
+            $this->iBookieID = $bookie_id;
         } else {
             $this->iBookieID = -1;
         }

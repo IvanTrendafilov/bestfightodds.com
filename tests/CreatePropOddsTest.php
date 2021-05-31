@@ -133,4 +133,31 @@ final class CreatePropOddsTest extends TestCase
             $result
         );
     }
+
+    public function testNoDuplicatePropTemplates(): void
+    {
+        $proptype_id = 1; //Fight goes to decision
+        $fieldstype_id = 1; //Lastname vs lastname
+
+        //Create prop template
+        $template = new PropTemplate(0, $this->bookie_id, 'UNITTEST DUPE FIGHT ENDS IN ROUND 1 - <T> vs. <T>', 'UNITTEST DUPE FIGHT DOES NOT END IN ROUND 1', $proptype_id, 1, '');
+        $new_template = BookieHandler::addNewPropTemplate($template);
+        $this->temp_templates[] = $new_template;
+        $this->assertThat($new_template, $this->logicalAnd(
+            $this->isType('int'), 
+            $this->greaterThan(0)
+        ));
+
+        $this->expectException(Exception::class);
+        $this->expectExceptionMessage('Duplicate entry');
+
+        $template = new PropTemplate(0, $this->bookie_id, 'UNITTEST DUPE FIGHT ENDS IN ROUND 1 - <T> vs. <T>', 'UNITTEST DUPE FIGHT DOES NOT END IN ROUND 1', $proptype_id, 1, '');
+        $new_template = BookieHandler::addNewPropTemplate($template);
+        $this->temp_templates[] = $new_template;
+        $this->assertIsNotInt($new_template);
+        $this->assertEquals(
+            null,
+            $new_template
+        );
+    }
 }

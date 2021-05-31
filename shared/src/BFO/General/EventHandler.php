@@ -66,11 +66,6 @@ class EventHandler
         return null;
     }
 
-    public static function getEventByName(string $name)
-    {
-        return EventDB::getEvents(event_name: $name);
-    }
-
     public static function getMatchingFight(string $team1_name, string $team2_name, bool $future_only = false, bool $past_only = false, int $known_fighter_id = null, string $event_date = null, int $event_id = null): ?Fight
     {
         return EventDB::getMatchingFight($team1_name, $team2_name, $future_only, $past_only, $known_fighter_id, $event_date, $event_id);
