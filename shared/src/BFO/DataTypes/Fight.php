@@ -215,7 +215,7 @@ class Fight
         if ($team_num == 2) {
             return $this->team2;
         }
-        return null;
+        return '';
     }
 
     public function setMetadata(string $attribute, mixed $value): void
