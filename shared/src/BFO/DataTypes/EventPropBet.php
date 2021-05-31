@@ -14,17 +14,17 @@ class EventPropBet extends PropBet
         $this->setEventID($event_id);
     }
 
-    public function setEventID($event_id)
+    public function setEventID(int $event_id): void
     {
         $this->event_id = $event_id;
     }
 
-    public function getEventID()
+    public function getEventID(): int
     {
         return $this->event_id;
     }
 
-    public function equals($prop_bet)
+    public function equals($prop_bet): bool
     {
         return ($this->event_id == $prop_bet->getEventID() &&
             $this->getBookieID() == $prop_bet->getBookieID() &&

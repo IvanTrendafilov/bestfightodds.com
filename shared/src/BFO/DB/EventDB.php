@@ -41,7 +41,7 @@ class EventDB
         $found_events = [];
         try {
             foreach (PDOTools::findMany($query, $params) as $row) {
-                $found_events[] = new Event((int) $row['id'], $row['date'], $row['name'], $row['display']);
+                $found_events[] = new Event((int) $row['id'], $row['date'], $row['name'], (bool) $row['display']);
             }
         } catch (\PDOException $e) {
             throw new \Exception("Unknown error " . $e->getMessage(), 10);
@@ -657,7 +657,7 @@ class EventDB
         $result = DBTools::doParamQuery($query, $params);
         $events = array();
         while ($row = mysqli_fetch_array($result)) {
-            $events[] = new Event((int) $row['id'], $row['date'], $row['name'], $row['display']);
+            $events[] = new Event((int) $row['id'], $row['date'], $row['name'], (bool) $row['display']);
         }
 
         return $events;
@@ -679,7 +679,7 @@ class EventDB
 
         try {
             foreach (PDOTools::findMany($query) as $row) {
-                $events[] = new Event((int) $row['id'], $row['date'], $row['name'], $row['display']);
+                $events[] = new Event((int) $row['id'], $row['date'], $row['name'], (bool) $row['display']);
             }
         } catch (\PDOException $e) {
             throw new \Exception("Unknown error " . $e->getMessage(), 10);
@@ -803,7 +803,7 @@ class EventDB
         $result = DBTools::doQuery($query);
         $events = array();
         while ($row = mysqli_fetch_array($result)) {
-            $events[] = new Event((int) $row['id'], $row['date'], $row['name'], $row['display']);
+            $events[] = new Event((int) $row['id'], $row['date'], $row['name'], (bool) $row['display']);
         }
         return $events;
     }

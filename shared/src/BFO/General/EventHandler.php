@@ -220,27 +220,21 @@ class EventHandler
     /**
      * Changes an event. If any field is left blank it will not be updated.
      */
-    public static function changeEvent($event_id, $new_event_name = '', $new_event_date = '', $new_is_visible = null)
+    public static function changeEvent($event_id, $set_event_name = '', $set_event_date = '', $set_is_visible = null)
     {
         $event_obj = EventHandler::getEvents(event_id: $event_id)[0] ?? null;
         if (!$event_obj) {
             return false;
         }
-
-        if ($new_event_name != '') {
-            $event_obj->setName($new_event_name);
+        if ($set_event_name != '') {
+            $event_obj->setName($set_event_name);
         }
-
-        if ($new_event_date != '') {
-            $event_obj->setDate($new_event_date);
+        if ($set_event_date != '') {
+            $event_obj->setDate($set_event_date);
         }
-
-        if ($new_is_visible !== null) {
-            $event_obj->setDisplay($new_is_visible);
-
+        if ($set_is_visible !== null) {
+            $event_obj->setDisplay($set_is_visible);
         }
-
-        
 
         return EventDB::updateEvent($event_obj);
     }

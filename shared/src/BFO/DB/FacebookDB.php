@@ -69,7 +69,7 @@ class FacebookDB
         $results = PDOTools::findMany($query);
         $events = [];
         foreach ($results as $row) {
-            $events[] = new Event($row['id'], $row['date'], $row['name'], $row['display']);
+            $events[] = new Event((int) $row['id'], $row['date'], $row['name'], (bool) $row['display']);
         }
         return $events;
     }

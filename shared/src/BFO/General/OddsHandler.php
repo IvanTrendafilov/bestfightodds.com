@@ -484,13 +484,13 @@ class OddsHandler
             }
 
             $prop_obj = new EventPropBet(
-                $row['event_id'],
-                $row['bookie_id'],
+                (int) $row['event_id'],
+                (int) $row['bookie_id'],
                 $row['prop_desc'],
                 $row['prop_odds'],
                 $row['negprop_desc'],
                 $row['negprop_odds'],
-                $row['proptype_id'],
+                (int) $row['proptype_id'],
                 $row['date']
             );
 

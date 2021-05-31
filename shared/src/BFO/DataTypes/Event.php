@@ -6,41 +6,43 @@ use BFO\Utils\LinkTools;
 
 class Event
 {
-    private $iID;
-    private $sDate;
-    private $sName;
-    private $bDisplay;
+    private $id;
+    private $date;
+    private $name;
+    private $display;
 
-    public function __construct($a_iID, $a_sDate, $a_sName, $a_bDisplay = true)
+    public function __construct(int $id, string $date, string $name, bool $display = true)
     {
-        $this->iID = $a_iID;
-        $this->sDate = substr($a_sDate, 0, 10);
-        $this->sName = $a_sName;
-        $this->bDisplay = $a_bDisplay;
+        $this->id = $id;
+        $this->date = substr($date, 0, 10);
+        $this->name = $name;
+        $this->display = $display;
     }
 
-    public function getID()
+    public function getID(): int
     {
-        return $this->iID;
+        return $this->id;
     }
 
-    public function getDate()
+    public function getDate(): string
     {
-        return $this->sDate;
+        return $this->date;
     }
 
-    public function setDate($a_sDate)
+    public function setDate($new_date): void
     {
-        $this->sDate = $a_sDate;
+        $this->date = $new_date;
     }
 
-    public function getName()
+    public function getName(): string
     {
-        return $this->sName;
+        return $this->name;
     }
 
-    //Short name converts a longer name to a shorter one by omitting everything after the first : .E.g. UFC 201: Lawler vs. Woodley => UFC 201
-    public function getShortName()
+    /*
+     * Short name converts a longer name to a shorter one by omitting everything after the first. Example: UFC 201: Lawler vs. Woodley => UFC 201
+     */
+    public function getShortName(): string
     {
         $mark_pos = strpos($this->getName(), ':');
         if ($mark_pos != null) {
@@ -49,31 +51,28 @@ class Event
         return $this->getName();
     }
 
-    public function setName($new_name)
+    public function setName(string $new_name): void
     {
-        $this->sName = $new_name;
+        $this->name = $new_name;
     }
 
-    public function isDisplayed()
+    public function isDisplayed(): bool
     {
-        return $this->bDisplay;
+        return $this->display;
     }
 
-    public function setDisplay($display)
+    public function setDisplay($display): void
     {
-        $this->bDisplay = $display;
+        $this->display = $display;
     }
 
     /**
      * Gets the event as a link-friendly string in the format <name>-<id>
-     *
      * Example: ufc-98-evans-vs-machida-132
-     *
-     * @return string Event as link string
      */
-    public function getEventAsLinkString()
+    public function getEventAsLinkString(): string
     {
-        $sName = LinkTools::slugString($this->sName);
-        return strtolower($sName . '-' . $this->iID);
+        $name = LinkTools::slugString($this->name);
+        return strtolower($name . '-' . $this->id);
     }
 }
