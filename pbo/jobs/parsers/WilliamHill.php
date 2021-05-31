@@ -85,98 +85,100 @@ class ParserJob
         if ($xml == false) {
             $this->logger->warning("Warning: XML broke!!");
         }
+        $this->parsed_sport = new ParsedSport('Boxing');
+        foreach ($xml->response->williamhill->class->type as $type_node) {
 
-        $oParsedSport = new ParsedSport('Boxing');
-
-        foreach ($xml->response->williamhill->class->type as $cType) {
-
-            if (!str_starts_with($cType['name'], 'UFC')) {
-
-                foreach ($cType->market as $cMarket) {
-                    $sType = trim(substr(strrchr($cMarket['name'], "-"), 2));
-                    if (($sType == 'Bout Betting' && count($cMarket->participant) == 3)  //Number of participants needs to be 3 to ensure this is a boxing bout (fighter 1, fighter2, draw)
-                        || $sType == 'Bout Betting 2 Way')
-                    {
-                        //Normal matchup
-                        //Find draw and ignore it
-                        $aParticipants = [];
-                        foreach ($cMarket->participant as $cParticipant) {
-                            if ($cParticipant['name'] != 'Draw') {
-                                $aParticipants[] = $cParticipant;
-                            }
-                        }
-
-                        if (OddsTools::checkCorrectOdds(OddsTools::convertDecimalToMoneyline($aParticipants[0]['oddsDecimal'])) && OddsTools::checkCorrectOdds(OddsTools::convertDecimalToMoneyline($aParticipants[1]['oddsDecimal']))) {
-                            $oTempMatchup = new ParsedMatchup(
-                                $aParticipants[0]['name'],
-                                $aParticipants[1]['name'],
-                                OddsTools::convertDecimalToMoneyline($aParticipants[0]['oddsDecimal']),
-                                OddsTools::convertDecimalToMoneyline($aParticipants[1]['oddsDecimal'])
-                            );
-
-                            //Add time of matchup as metadata
-                            $oGameDate = null;
-                            if ($cType['name'] == 'Potential Fights') {
-                                $oGameDate = new DateTime('2030-12-31 00:00:00');
-                            } else {
-                                $oGameDate = new DateTime($cMarket['date'] . ' ' . $cMarket['time'], new DateTimeZone('Europe/London'));
-                            }
-                            $oTempMatchup->setMetaData('gametime', $oGameDate->getTimestamp());
-                            $oTempMatchup->setCorrelationID($this->getCorrelationID($cMarket));
-                            $oParsedSport->addParsedMatchup($oTempMatchup);
-                        }
-                    } else {
-                        //Prop bet
-                        if (
-                            $sType == 'Fight to go the Distance' || $sType == 'Total Rounds' || $sType == 'Fight Treble' || $sType == 'Most Successful Takedowns' || (strpos($sType, 'Total Rounds') !== false) ||
-                            (count($cMarket->participant) == 2 && in_array($cMarket->participant[0]['name'], array('Yes', 'No')) && in_array($cMarket->participant[1]['name'], array('Yes', 'No')))
-                        ) {
-                            //Two option bet OR Yes/No prop bet (second line check in if)
-                            $oParsedProp = new ParsedProp(
-                                $this->getCorrelationID($cMarket) . ' - ' . $sType . ' : ' .  $cMarket->participant[0]['name'] . ' ' . $cMarket->participant[0]['handicap'],
-                                $this->getCorrelationID($cMarket) . ' - ' . $sType . ' : ' .  $cMarket->participant[1]['name'] . ' ' . $cMarket->participant[1]['handicap'],
-                                OddsTools::convertDecimalToMoneyline($cMarket->participant[0]['oddsDecimal']),
-                                OddsTools::convertDecimalToMoneyline($cMarket->participant[1]['oddsDecimal'])
-                            );
-
-                            $oParsedProp->setCorrelationID($this->getCorrelationID($cMarket));
-                            $oParsedSport->addFetchedProp($oParsedProp);
-                        } else {   
-                            if (strpos($sType, 'SSBT') === false) { //Exclude SSBT (self service betting terminal)
-                                //One line prop bet
-                                foreach ($cMarket->participant as $cParticipant) {
-                                    $oParsedProp = new ParsedProp(
-                                        $this->getCorrelationID($cMarket) . ' - ' . $sType . ' : ' .  $cParticipant['name'] . ' ' . $cParticipant['handicap'],
-                                        '',
-                                        OddsTools::convertDecimalToMoneyline($cParticipant['oddsDecimal']),
-                                        '-99999'
-                                    );
-
-                                    $oParsedProp->setCorrelationID($this->getCorrelationID($cMarket));
-                                    $oParsedSport->addFetchedProp($oParsedProp);
-                                }
-                            }
-                        }
-                    }
+            if (!str_starts_with($type_node['name'], 'UFC')) { //Exclude UFC props that WH has added by accident to the Boxing feed
+                foreach ($type_node->market as $market_node) {
+                    $this->parseMarket($type_node, $market_node);
                 }
             }
         }
 
         //Declare full run if we fill the criteria
-        if (count($oParsedSport->getParsedMatchups()) > 10) {
+        if (count($this->parsed_sport->getParsedMatchups()) > 10) {
             $this->full_run = true;
             $this->logger->info("Declared full run");
         }
 
         //Store the changenum
-        $sCN = time();
-        if (BookieHandler::saveChangeNum(BOOKIE_ID, $sCN)) {
-            $this->logger->info("ChangeNum stored OK: " . $sCN);
+        $change_num = time();
+        if (BookieHandler::saveChangeNum(BOOKIE_ID, $change_num)) {
+            $this->logger->info("ChangeNum stored OK: " . $change_num);
         } else {
             $this->logger->warning("Error: ChangeNum was not stored");
         }
 
-        return $oParsedSport;
+        return $this->parsed_sport;
+    }
+
+    private function parseMarket($type_node, $market_node)
+    {
+        $market_name = trim(substr(strrchr($market_node['name'], "-"), 2));
+        if (($market_name == 'Bout Betting' && count($market_node->participant) == 3)  //Number of participants needs to be 3 to ensure this is a boxing bout (fighter 1, fighter2, draw)
+            || $market_name == 'Bout Betting 2 Way'
+        ) {
+            //Normal matchup
+            //Find draw and ignore it
+            $participants = [];
+            foreach ($market_node->participant as $participant_node) {
+                if ($participant_node['name'] != 'Draw') {
+                    $participants[] = $participant_node;
+                }
+            }
+
+            if (OddsTools::checkCorrectOdds(OddsTools::convertDecimalToMoneyline($participants[0]['oddsDecimal'])) && OddsTools::checkCorrectOdds(OddsTools::convertDecimalToMoneyline($participants[1]['oddsDecimal']))) {
+                $matchup_obj = new ParsedMatchup(
+                    $participants[0]['name'],
+                    $participants[1]['name'],
+                    OddsTools::convertDecimalToMoneyline($participants[0]['oddsDecimal']),
+                    OddsTools::convertDecimalToMoneyline($participants[1]['oddsDecimal'])
+                );
+
+                //Add time of matchup as metadata
+                $gamedate = null;
+                if ($type_node['name'] == 'Potential Fights') {
+                    $gamedate = new DateTime('2030-12-31 00:00:00');
+                } else {
+                    $gamedate = new DateTime($market_node['date'] . ' ' . $market_node['time'], new DateTimeZone('Europe/London'));
+                }
+                $matchup_obj->setMetaData('gametime', $gamedate->getTimestamp());
+                $matchup_obj->setCorrelationID($this->getCorrelationID($market_node));
+                $this->parsed_sport->addParsedMatchup($matchup_obj);
+            }
+        } else {
+            //Prop bet
+            if (
+                $market_name == 'Fight to go the Distance' || $market_name == 'Total Rounds' || $market_name == 'Fight Treble' || $market_name == 'Most Successful Takedowns' || (strpos($market_name, 'Total Rounds') !== false) ||
+                (count($market_node->participant) == 2 && in_array($market_node->participant[0]['name'], array('Yes', 'No')) && in_array($market_node->participant[1]['name'], array('Yes', 'No')))
+            ) {
+                //Two option bet OR Yes/No prop bet (second line check in if)
+                $prop_obj = new ParsedProp(
+                    $this->getCorrelationID($market_node) . ' - ' . $market_name . ' : ' .  $market_node->participant[0]['name'] . ' ' . $market_node->participant[0]['handicap'],
+                    $this->getCorrelationID($market_node) . ' - ' . $market_name . ' : ' .  $market_node->participant[1]['name'] . ' ' . $market_node->participant[1]['handicap'],
+                    OddsTools::convertDecimalToMoneyline($market_node->participant[0]['oddsDecimal']),
+                    OddsTools::convertDecimalToMoneyline($market_node->participant[1]['oddsDecimal'])
+                );
+
+                $prop_obj->setCorrelationID($this->getCorrelationID($market_node));
+                $this->parsed_sport->addFetchedProp($prop_obj);
+            } else {
+                if (strpos($market_name, 'SSBT') === false) { //Exclude SSBT (self service betting terminal)
+                    //One line prop bet
+                    foreach ($market_node->participant as $participant_node) {
+                        $prop_obj = new ParsedProp(
+                            $this->getCorrelationID($market_node) . ' - ' . $market_name . ' : ' .  $participant_node['name'] . ' ' . $participant_node['handicap'],
+                            '',
+                            OddsTools::convertDecimalToMoneyline($participant_node['oddsDecimal']),
+                            '-99999'
+                        );
+
+                        $prop_obj->setCorrelationID($this->getCorrelationID($market_node));
+                        $this->parsed_sport->addFetchedProp($prop_obj);
+                    }
+                }
+            }
+        }
     }
 
     private function getCorrelationID($market_node)
