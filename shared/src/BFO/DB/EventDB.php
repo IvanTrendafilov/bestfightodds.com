@@ -104,8 +104,8 @@ class EventDB
                 $fight_obj = new Fight((int) $row['id'], $row['fighter1_name'], $row['fighter2_name'], (int) $row['event_id']);
                 $fight_obj->setFighterID(1, (int) $row['fighter1_id']);
                 $fight_obj->setFighterID(2, (int) $row['fighter2_id']);
-                $fight_obj->setMainEvent($row['is_mainevent']);
-                $fight_obj->setIsFuture($row['is_future']);
+                $fight_obj->setMainEvent((bool) $row['is_mainevent']);
+                $fight_obj->setIsFuture((bool) $row['is_future']);
                 if (isset($row['gametime']) && is_numeric($row['gametime'])) {
                     $fight_obj->setMetadata('gametime', $row['gametime']);
                 }
@@ -266,9 +266,9 @@ class EventDB
         }
 
         while ($row = mysqli_fetch_array($result)) {
-            $fight_obj = new Fight($row['id'], $row['fighter1_name'], $row['fighter2_name'], $row['event_id']);
+            $fight_obj = new Fight((int) $row['id'], $row['fighter1_name'], $row['fighter2_name'], (int) $row['event_id']);
             if ($row['fighter1_name'] > $row['fighter2_name']) {
-                $fight_obj->setComment('switched');
+                $fight_obj->setExternalOrderChanged(true);
             }
 
             if (OddsTools::compareNames($fight_obj->getTeam(($team1_name >= $team2_name ? 2 : 1)), $team1_name) > 82) {
@@ -279,17 +279,13 @@ class EventDB
                         $found_matchup = $matchup[0] ?? null;
 
                         $is_ordered_in_db = EventDB::isFightOrderedInDatabase($row['id']);
-                        if ($is_ordered_in_db == true) {
-                            if ($fight_obj->getComment() == 'switched') {
-                                $found_matchup->setComment('switched');
-                            }
-                        } else {
-                            if ($fight_obj->getComment() != 'switched') {
-                                $found_matchup->setComment('switched');
-                            }
+                        if ($is_ordered_in_db && $fight_obj->hasExternalOrderChanged()) {
+                                $found_matchup->setExternalOrderChanged(true);
+                        } else if (!$is_ordered_in_db && !$fight_obj->hasExternalOrderChanged()) {
+                                $found_matchup->setExternalOrderChanged(true);
                         }
                     } else {
-                        $found_matchup = new Fight($row['id'], $row['fighter1_name'], $row['fighter2_name'], $row['event_id']);
+                        $found_matchup = new Fight((int) $row['id'], $row['fighter1_name'], $row['fighter2_name'], (int) $row['event_id']);
                         $found_matchup->setFighterID(1, $row['fighter1_id']);
                         $found_matchup->setFighterID(2, $row['fighter2_id']);
                     }

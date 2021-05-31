@@ -9,7 +9,7 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 	<link rel="preconnect" href="https://fonts.gstatic.com">
 
-	<title>BFO Admin</title>
+	<title>Admin</title>
 
 	<link rel="stylesheet" href="/cnadm/css/admin-kit.css">
 	<script src="/cnadm/js/admin-kit.js"></script>

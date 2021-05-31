@@ -295,7 +295,7 @@ class EventPageParser
 
 			//If the order has changed for the temp_fight, this means the winner is in the second field (team2). However, if the matched fight is swithed in the database due to nicknames and stuff these two cancel eachother out
 			$winner_id = null;
-			if ($matching_fight->getComment() == 'switched')
+			if ($matching_fight->hasExternalOrderChanged())
 			{
 				$winner_id = $matching_fight->getFighterID($temp_fight->hasOrderChanged() ? 1 : 2);
 				$this->logger->info('Note, switch in DB was made. Confirm results');

@@ -150,7 +150,7 @@ class OddsProcessor
 
         if ($event != null) {
             //This routine is used to switch the order of odds in a matchup if order has changed through the use of alt names or similar
-            if (($matched_matchup['matched_matchup']->getComment() == 'switched' || $temp_matchup->hasOrderChanged()) && !$matched_matchup['parsed_matchup']->isSwitchedFromOutside()) {
+            if (($matched_matchup['matched_matchup']->hasExternalOrderChanged() || $temp_matchup->hasOrderChanged()) && !$matched_matchup['parsed_matchup']->isSwitchedFromOutside()) {
                 $matched_matchup['parsed_matchup']->switchOdds();
             }
 

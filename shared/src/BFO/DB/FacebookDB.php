@@ -49,10 +49,10 @@ class FacebookDB
         $results = PDOTools::findMany($query);
         $matchups = [];
         foreach ($results as $row) {
-            $tmp_matchup = new Fight($row['id'], $row['fighter1_name'], $row['fighter2_name'], $row['event_id']);
-            $tmp_matchup->setFighterID(1, $row['fighter1_id']);
-            $tmp_matchup->setFighterID(2, $row['fighter2_id']);
-            $tmp_matchup->setMainEvent(($row['is_mainevent'] == 1 ? true : false));
+            $tmp_matchup = new Fight((int) $row['id'], $row['fighter1_name'], $row['fighter2_name'], (int) $row['event_id']);
+            $tmp_matchup->setFighterID(1, (int) $row['fighter1_id']);
+            $tmp_matchup->setFighterID(2, (int) $row['fighter2_id']);
+            $tmp_matchup->setMainEvent((bool) $row['is_mainevent']);
             $matchups[] = $tmp_matchup;
         }
         return $matchups;

@@ -6,108 +6,86 @@ use BFO\Utils\LinkTools;
 
 class Fight
 {
-    private $iID;
-    private $sFighter1;
-    private $sFighter2;
-    private $iEventID;
-    private $sComment;
-    private $iFighter1ID;
-    private $iFighter2ID;
-    private $bOrderChanged;
-    private $bIsMainEvent;
-    private $bIsFuture;
-    private $aMetadata;
+    private int $id;
+    private int $event_id;
 
-    /**
-     * Constructor
-     *
-     * @param int $a_iID ID
-     * @param string $a_sFighter1 Fighter 1's name
-     * @param string $a_sFighter2 Fighter 2's name
-     * @param int $a_iEventID Event ID
-     * @param string $a_sComment Comment
-     */
-    public function __construct($a_iID, $a_sFighter1, $a_sFighter2, $a_iEventID, $a_sComment = '')
+    private string $team1;
+    private string $team2;
+    private int $team1_id;
+    private int $team2_id;
+    
+    private bool $internal_order_changed;
+    private bool $external_order_changed = false;
+    private bool $is_main_event = false;
+    private bool $is_future = false;
+    private array $metadata;
+
+    public function __construct(int $id, string $team1_name, string $team2_name, int $event_id)
     {
-        $this->iID = $a_iID;
-        if (trim($a_sFighter1) > trim($a_sFighter2)) {
-            $this->sFighter1 = trim(strtoupper($a_sFighter2));
-            $this->sFighter2 = trim(strtoupper($a_sFighter1));
-            $this->bOrderChanged = true;
+        $this->id = $id;
+        if (trim($team1_name) > trim($team2_name)) {
+            $this->team1 = trim(strtoupper($team2_name));
+            $this->team2 = trim(strtoupper($team1_name));
+            $this->internal_order_changed = true;
         } else {
-            $this->sFighter1 = trim(strtoupper($a_sFighter1));
-            $this->sFighter2 = trim(strtoupper($a_sFighter2));
-            $this->bOrderChanged = false;
+            $this->team1 = trim(strtoupper($team1_name));
+            $this->team2 = trim(strtoupper($team2_name));
+            $this->internal_order_changed = false;
         }
 
-        if ($a_iEventID == '') {
-            $this->iEventID = -1;
+        if ($event_id == '') {
+            $this->event_id = -1;
         } else {
-            $this->iEventID = $a_iEventID;
+            $this->event_id = $event_id;
         }
-        $this->sComment = $a_sComment;
-        $this->aMetadata = [];
+        $this->metadata = [];
+    }
+
+    public function getID(): int
+    {
+        return $this->id;
     }
 
     /**
-     * Get ID
-     *
-     * @return int ID
-     */
-    public function getID()
-    {
-        return $this->iID;
-    }
-
-    /**
-     * Get fighter name
-     *
      * @deprecated Use getTeam instead
-     * @param int $a_iFighter Fighter (1 or 2)
-     * @return string Fighter name
      */
-    public function getFighter($a_iFighter)
+    public function getFighter(int $fighter_num): string
     {
-        return $this->getTeam($a_iFighter);
+        return $this->getTeam($fighter_num);
     }
 
     /**
-     * See getFighterAsStringFromString below
+     * See getTeamAsStringFromString below
      *
      * @deprecated Use getTeamAsString instead
      */
-    public function getFighterAsString($a_iFighter)
+    public function getFighterAsString(int $fighter_num): string
     {
-        return $this->getTeamAsString($a_iFighter);
+        return $this->getTeamAsString($fighter_num);
     }
 
-    public function getTeamAsString($a_iTeam)
+    public function getTeamAsString(int $team_num): string
     {
-        return $this->getFighterAsStringFromString($this->getFighter($a_iTeam));
+        return $this->getTeamAsStringFromString($this->getTeam($team_num));
     }
-    
-    public function getTeamLastNameAsString($a_iTeam)
+
+    public function getTeamLastNameAsString(int $team_num): string
     {
         //Gets everything after first name: $aParts = explode(' ', $a_sName, 2); return $aParts[1];
-        $aParts = explode(' ', $this->getFighterAsStringFromString($this->getFighter($a_iTeam)));
+        $aParts = explode(' ', $this->getTeamAsStringFromString($this->getTeam($team_num)));
         return $aParts[count($aParts) - 1];
     }
 
-    public function getFighterAsLinkString($a_iFighter)
+    public function getFighterAsLinkString(int $team_num): string
     {
-        $sName = $this->getFighterAsString($a_iFighter);
-        $sName = LinkTools::slugString($sName);
-
-        /*$sName = str_replace('.', '', $sName);
-        $sName = str_replace(' ', '-', $sName);
-        $sName = str_replace("'", "", $sName);*/
-        return $sName . '-' . ($a_iFighter == 1 ? $this->iFighter1ID : $this->iFighter2ID);
+        $slug = LinkTools::slugString($this->getTeamAsString($team_num));
+        return $slug . '-' . ($team_num == 1 ? $this->team1_id : $this->team2_id);
     }
 
-    public function getFightAsLinkString()
+    public function getFightAsLinkString(): string
     {
-        $sName = LinkTools::slugString($this->getFighterAsString(1)) . '-vs-' . LinkTools::slugString($this->getFighterAsString(2));
-        return $sName . '-' . $this->iID;
+        $slug = LinkTools::slugString($this->getTeamAsString(1)) . '-vs-' . LinkTools::slugString($this->getTeamAsString(2));
+        return $slug . '-' . $this->id;
     }
 
     /**
@@ -119,17 +97,15 @@ class Fight
      *		 'R.K.B Whatever' which would look like 'R.k.B Whatever'
      *
      */
-    public function getFighterAsStringFromString($a_sFighter)
+    public function getTeamAsStringFromString(string $fighter_name): string
     {
-        $string = $a_sFighter;
-
         $word_splitters = array(' ', '.', '-', "O'", "L'", "D'", 'St.', 'Mc');
         $lowercase_exceptions = array('the', 'van', 'den', 'von', 'und', 'der', 'de', 'da', 'of', 'and', "l'", "d'");
         $uppercase_exceptions = array('III', 'IV', 'VI', 'VII', 'VIII', 'IX');
-    
-        $string = strtolower($string);
+
+        $fighter_name = strtolower($fighter_name);
         foreach ($word_splitters as $delimiter) {
-            $words = explode($delimiter, $string);
+            $words = explode($delimiter, $fighter_name);
             $newwords = array();
             foreach ($words as $word) {
                 if (in_array(strtoupper($word), $uppercase_exceptions)) {
@@ -137,143 +113,118 @@ class Fight
                 } elseif (!in_array($word, $lowercase_exceptions)) {
                     $word = ucfirst($word);
                 }
-    
+
                 $newwords[] = $word;
             }
-    
+
             if (in_array(strtolower($delimiter), $lowercase_exceptions)) {
                 $delimiter = strtolower($delimiter);
             }
-    
-            $string = join($delimiter, $newwords);
+
+            $fighter_name = join($delimiter, $newwords);
         }
-        return trim($string);
+        return trim($fighter_name);
+    }
+
+    public function getTeamID(int $team_num): int
+    {
+        if ($team_num == 1 && isset($this->team1_id)) {
+            return $this->team1_id;
+        }
+        if ($team_num == 2 && isset($this->team2_id)) {
+            return $this->team1_id;
+        }
+        return -1;
     }
 
     /**
-     * Get fighter ID
-     *
-     * @param int $a_iFighter Fighter (1 or 2)
-     * @return int Fighter ID
+     * @depcrecated Use getTeamID() instead
      */
-    public function getFighterID($a_iFighter)
+    public function getFighterID(int $team_num): int
     {
-        if (!isset($this->iFighter1ID) || !isset($this->iFighter2ID)) {
-            return -1;
-        }
-        switch ($a_iFighter) {
-            case 1: return $this->iFighter1ID;
-                break;
-            case 2: return $this->iFighter2ID;
-                break;
-            default: return -1;
-                break;
-        }
+        return $this->getTeamID($team_num);
     }
 
-    public function getEventID()
+    public function getEventID(): int
     {
-        return $this->iEventID;
+        return $this->event_id;
     }
 
-    public function getComment()
+    public function hasOrderChanged(): bool
     {
-        return $this->sComment;
+        return $this->internal_order_changed;
     }
 
-    public function hasOrderChanged()
+    public function setExternalOrderChanged(bool $changed): void
     {
-        return $this->bOrderChanged;
+        $this->external_order_changed = $changed;
     }
 
-    public function setComment($a_sNewComment)
+    public function hasExternalOrderChanged(): bool
     {
-        $this->sComment = $a_sNewComment;
+        return $this->external_order_changed;
     }
 
-    public function setFighterID($a_iFighter, $a_iFighterID)
+    public function setFighterID(int $team_num, int $team_id): void
     {
-        if ($this->bOrderChanged == true) {
-            if ($a_iFighter == 1) {
-                $this->iFighter2ID = $a_iFighterID;
-            } elseif ($a_iFighter == 2) {
-                $this->iFighter1ID = $a_iFighterID;
+        if ($this->internal_order_changed == true) {
+            if ($team_num == 1) {
+                $this->team2_id = $team_id;
+            } elseif ($team_num == 2) {
+                $this->team1_id = $team_id;
             }
         } else {
-            if ($a_iFighter == 1) {
-                $this->iFighter1ID = $a_iFighterID;
-            } elseif ($a_iFighter == 2) {
-                $this->iFighter2ID = $a_iFighterID;
+            if ($team_num == 1) {
+                $this->team1_id = $team_id;
+            } elseif ($team_num == 2) {
+                $this->team2_id = $team_id;
             }
         }
     }
 
-    public function setMainEvent($a_bIsMainEvent)
+    public function setMainEvent(bool $is_main_event): void
     {
-        switch ($a_bIsMainEvent) {
-            case 1: $a_bIsMainEvent = true;
-                break;
-            case 0: $a_bIsMainEvent = false;
-                break;
+        $this->is_main_event = $is_main_event;
+    }
+
+    public function isMainEvent(): bool
+    {
+        return $this->is_main_event;
+    }
+
+    public function setIsFuture(bool $is_future): void
+    {
+        $this->is_future = $is_future;
+    }
+
+    public function isFuture(): bool
+    {
+        return $this->is_future;
+    }
+
+    public function setEventID(int $event_id): void
+    {
+        $this->event_id = $event_id;
+    }
+
+    public function getTeam(int $team_num): ?string
+    {
+        if ($team_num == 1) {
+            return $this->team1;
         }
-
-        $this->bIsMainEvent = $a_bIsMainEvent;
-    }
-
-    public function isMainEvent()
-    {
-        if (isset($this->bIsMainEvent)) {
-            return $this->bIsMainEvent;
+        if ($team_num == 2) {
+            return $this->team2;
         }
-        return false;
+        return null;
     }
 
-    public function setIsFuture($a_bIsFuture)
+    public function setMetadata(string $attribute, mixed $value): void
     {
-        switch ($a_bIsFuture) {
-            case 1: $a_bIsFuture = true;
-                break;
-            case 0: $a_bIsFuture = false;
-                break;
-        }
-
-        $this->bIsFuture = $a_bIsFuture;
+        $this->metadata[(string) $attribute] = (string) $value;
     }
 
-    public function isFuture()
+    public function getMetadata(mixed $attribute): ?string
     {
-        if (isset($this->bIsFuture)) {
-            return $this->bIsFuture;
-        }
-        return false;
-    }
-
-    public function setEventID($a_iEventID)
-    {
-        $this->iEventID = $a_iEventID;
-    }
-
-
-    public function getTeam($a_iTeam)
-    {
-        switch ($a_iTeam) {
-            case 1: return $this->sFighter1;
-                break;
-            case 2: return $this->sFighter2;
-                break;
-            default:
-                return 0;
-                break;
-        }
-    }
-
-    public function setMetadata($attribute, $value) : void
-    {
-        $this->aMetadata[(string) $attribute] = (string) $value;
-    }
-
-    public function getMetadata($attribute) : ?string
-    {
-        return $this->aMetadata[(string) $attribute] ?? null;
+        return $this->metadata[(string) $attribute] ?? null;
     }
 }

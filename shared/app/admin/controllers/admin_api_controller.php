@@ -55,7 +55,7 @@ class AdminAPIController
             $return_data['msg'] = 'Missing parameters';
             $return_data['error'] = true;
         } else {
-            $fight = new Fight(0, $data->team1_name, $data->team2_name, $data->event_id);
+            $fight = new Fight(0, $data->team1_name, $data->team2_name, (int) $data->event_id);
             if ($matchup_id = EventHandler::createMatchup($fight)) {
                 $return_data['msg'] = 'Successfully added';
                 $return_data['matchup_id'] = $matchup_id;

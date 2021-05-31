@@ -450,27 +450,35 @@ class PropParserV2
         return array('event_id' => $iFoundEventID);
     }
 
-    private function addAltNameMatchupsToMatchup($matchup)
+    private function addAltNameMatchupsToMatchup(Fight $matchup): array
     {
         $new_matchups = [];
 
         $team1_altnames = TeamHandler::getAltNamesForTeamByID($matchup->getFighterID(1));
         $team2_altnames = TeamHandler::getAltNamesForTeamByID($matchup->getFighterID(2));
 
-        if ($team1_altnames != null) {
-            foreach ($team1_altnames as $sAltName1) {
-                $new_matchups[] = new Fight($matchup->getID(), $sAltName1, $matchup->getTeam(2), $matchup->getEventID(), $matchup->getComment());
+        if ($team1_altnames) {
+            foreach ($team1_altnames as $team1_altname) {
 
-                if ($team2_altnames != null) {
-                    foreach ($team2_altnames as $sAltName2) {
-                        $new_matchups[] = new Fight($matchup->getID(), $sAltName1, $sAltName2, $matchup->getEventID(), $matchup->getComment());
+                $new_matchup = new Fight($matchup->getID(), $team1_altname, $matchup->getTeam(2), $matchup->getEventID());
+                $new_matchup->setExternalOrderChanged($matchup->hasExternalOrderChanged());
+                $new_matchups[] = $new_matchup;
+
+                if ($team2_altnames) {
+                    foreach ($team2_altnames as $team2_altname) {
+                        $new_matchup = new Fight($matchup->getID(), $team1_altname, $team2_altname, $matchup->getEventID());
+                        $new_matchup->setExternalOrderChanged($matchup->hasExternalOrderChanged());
+                        $new_matchups[] = $new_matchup;
                     }
                 }
             }
         }
-        if ($team2_altnames != null) {
-            foreach ($team2_altnames as $sAltName2) {
-                $new_matchups[] = new Fight($matchup->getID(), $matchup->getTeam(1), $sAltName2, $matchup->getEventID(), $matchup->getComment());
+        if ($team2_altnames) {
+            foreach ($team2_altnames as $team2_altname) {
+
+                $new_matchup = new Fight($matchup->getID(), $matchup->getTeam(1), $team2_altname, $matchup->getEventID());
+                $new_matchup->setExternalOrderChanged($matchup->hasExternalOrderChanged());
+                $new_matchups[] = $new_matchup;
             }
         }
 

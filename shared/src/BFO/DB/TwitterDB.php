@@ -53,10 +53,10 @@ class TwitterDB
         $fights = [];
         $results = PDOTools::findMany($query);
         foreach ($results as $row) {
-            $fight = new Fight($row['id'], $row['fighter1_name'], $row['fighter2_name'], $row['event_id']);
-            $fight->setFighterID(1, $row['fighter1_id']);
-            $fight->setFighterID(2, $row['fighter2_id']);
-            $fight->setMainEvent(($row['is_mainevent'] == 1 ? true : false));
+            $fight = new Fight((int) $row['id'], $row['fighter1_name'], $row['fighter2_name'], (int) $row['event_id']);
+            $fight->setFighterID(1, (int) $row['fighter1_id']);
+            $fight->setFighterID(2, (int) $row['fighter2_id']);
+            $fight->setMainEvent((bool) $row['is_mainevent']);
             $fights[] = $fight;
         }
         return $fights;
