@@ -38,7 +38,6 @@ $parser->run($options['mode'] ?? '');
 class ParserJob
 {
     private $full_run = false;
-    private $change_num;
     private $parsed_sport;
     private $logger = null;
 
@@ -55,13 +54,12 @@ class ParserJob
         if ($mode == 'mock') {
             $this->logger->info("Note: Using matchup mock file at " . PARSE_MOCKFEEDS_DIR . "williamhill.xml");
             $content = ParseTools::retrievePageFromFile(PARSE_MOCKFEEDS_DIR . 'williamhill.xml');
-            $this->change_num = '';
         } else {
             $matchups_url = 'http://pricefeeds.williamhill.com/oxipubserver?action=template&template=getHierarchyByMarketType&classId=10&filterBIR=N';
-            $this->change_num = BookieHandler::getChangeNum(BOOKIE_ID);
-            if ($this->change_num != -1) {
-                $this->logger->info("Using changenum: &cn=" . $this->change_num);
-                $matchups_url .= '&cn=' . $this->change_num;
+            $change_num = BookieHandler::getChangeNum(BOOKIE_ID);
+            if ($change_num != -1) {
+                $this->logger->info("Using changenum: &cn=" . $change_num);
+                $matchups_url .= '&cn=' . $change_num;
             }
             $this->logger->info("Fetching matchups through URL: " . $matchups_url);
             $content = ParseTools::retrievePageFromURL($matchups_url);
@@ -88,7 +86,7 @@ class ParserJob
             $this->logger->warning("Warning: XML broke!!");
         }
 
-        $parsed_sport = new ParsedSport('Boxing');
+        $oParsedSport = new ParsedSport('Boxing');
 
         foreach ($oXML->response->williamhill->class->type as $cType) {
             foreach ($cType->market as $cMarket) {
@@ -105,7 +103,7 @@ class ParserJob
                     }
 
                     if (ParseTools::checkCorrectOdds(OddsTools::convertDecimalToMoneyline($aParticipants[0]['oddsDecimal'])) && ParseTools::checkCorrectOdds(OddsTools::convertDecimalToMoneyline($aParticipants[1]['oddsDecimal']))) {
-                        $parsed_matchup = new ParsedMatchup(
+                        $oTempMatchup = new ParsedMatchup(
                             $aParticipants[0]['name'],
                             $aParticipants[1]['name'],
                             OddsTools::convertDecimalToMoneyline($aParticipants[0]['oddsDecimal']),
@@ -113,15 +111,15 @@ class ParserJob
                         );
 
                         //Add time of matchup as metadata
-                        $date_obj = null;
+                        $oGameDate = null;
                         if ($cType['name'] == 'Potential Fights') {
-                            $date_obj = new DateTime('2030-12-31 00:00:00');
+                            $oGameDate = new DateTime('2030-12-31 00:00:00');
                         } else {
-                            $date_obj = new DateTime($cMarket['date'] . ' ' . $cMarket['time'], new DateTimeZone('Europe/London'));
+                            $oGameDate = new DateTime($cMarket['date'] . ' ' . $cMarket['time'], new DateTimeZone('Europe/London'));
                         }
-                        $parsed_matchup->setMetaData('gametime', $date_obj->getTimestamp());
-                        $parsed_matchup->setCorrelationID($this->getCorrelationID($cMarket));
-                        $parsed_sport->addParsedMatchup($parsed_matchup);
+                        $oTempMatchup->setMetaData('gametime', $oGameDate->getTimestamp());
+                        $oTempMatchup->setCorrelationID($this->getCorrelationID($cMarket));
+                        $oParsedSport->addParsedMatchup($oTempMatchup);
                     }
                 } else {
                     //Prop bet
@@ -130,28 +128,28 @@ class ParserJob
                         (count($cMarket->participant) == 2 && in_array($cMarket->participant[0]['name'], array('Yes', 'No')) && in_array($cMarket->participant[1]['name'], array('Yes', 'No')))
                     ) {
                         //Two option bet OR Yes/No prop bet (second line check in if)
-                        $parsed_prop = new ParsedProp(
+                        $oParsedProp = new ParsedProp(
                             $this->getCorrelationID($cMarket) . ' - ' . $sType . ' : ' .  $cMarket->participant[0]['name'] . ' ' . $cMarket->participant[0]['handicap'],
                             $this->getCorrelationID($cMarket) . ' - ' . $sType . ' : ' .  $cMarket->participant[1]['name'] . ' ' . $cMarket->participant[1]['handicap'],
                             OddsTools::convertDecimalToMoneyline($cMarket->participant[0]['oddsDecimal']),
                             OddsTools::convertDecimalToMoneyline($cMarket->participant[1]['oddsDecimal'])
                         );
 
-                        $parsed_prop->setCorrelationID($this->getCorrelationID($cMarket));
-                        $parsed_sport->addFetchedProp($parsed_prop);
+                        $oParsedProp->setCorrelationID($this->getCorrelationID($cMarket));
+                        $oParsedSport->addFetchedProp($oParsedProp);
                     } else {   //Exclude SSBT (self service betting terminal)
                         if (strpos($sType, 'SSBT') === false) {
                             //One line prop bet
                             foreach ($cMarket->participant as $cParticipant) {
-                                $parsed_prop = new ParsedProp(
+                                $oParsedProp = new ParsedProp(
                                     $this->getCorrelationID($cMarket) . ' - ' . $sType . ' : ' .  $cParticipant['name'] . ' ' . $cParticipant['handicap'],
                                     '',
                                     OddsTools::convertDecimalToMoneyline($cParticipant['oddsDecimal']),
                                     '-99999'
                                 );
 
-                                $parsed_prop->setCorrelationID($this->getCorrelationID($cMarket));
-                                $parsed_sport->addFetchedProp($parsed_prop);
+                                $oParsedProp->setCorrelationID($this->getCorrelationID($cMarket));
+                                $oParsedSport->addFetchedProp($oParsedProp);
                             }
                         }
                     }
@@ -160,7 +158,7 @@ class ParserJob
         }
 
         //Declare full run if we fill the criteria
-        if (count($parsed_sport->getParsedMatchups()) > 10 && $this->change_num = '') {
+        if (count($oParsedSport->getParsedMatchups()) > 10) {
             $this->full_run = true;
             $this->logger->info("Declared full run");
         }
@@ -173,7 +171,7 @@ class ParserJob
             $this->logger->warning("Error: ChangeNum was not stored");
         }
 
-        return $parsed_sport;
+        return $oParsedSport;
     }
 
     private function getCorrelationID($a_cMarket)

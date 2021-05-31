@@ -38,7 +38,6 @@ $parser->run($options['mode'] ?? '');
 class ParserJob
 {
     private $full_run = false;
-    private $change_num;
     private $parsed_sport;
     private $logger = null;
 
@@ -55,15 +54,13 @@ class ParserJob
         if ($mode == 'mock') {
             $this->logger->info("Note: Using matchup mock file at " . PARSE_MOCKFEEDS_DIR . "williamhill.xml");
             $content = ParseTools::retrievePageFromFile(PARSE_MOCKFEEDS_DIR . 'williamhill.xml');
-            $this->change_num = '';
         } else {
             $matchups_url = 'http://pricefeeds.williamhill.com/oxipubserver?action=template&template=getHierarchyByMarketType&classId=402&filterBIR=N';
-            $this->change_num = BookieHandler::getChangeNum(BOOKIE_ID);
-            if ($this->change_num != -1) {
-                $this->logger->info("Using changenum: &cn=" . $this->change_num);
-                $matchups_url .= '&cn=' . $this->change_num;
+            $change_num = BookieHandler::getChangeNum(BOOKIE_ID);
+            if ($change_num != -1) {
+                $this->logger->info("Using changenum: &cn=" . $change_num);
+                $matchups_url .= '&cn=' . $change_num;
             }
-
             $this->logger->info("Fetching matchups through URL: " . $matchups_url);
             $content = ParseTools::retrievePageFromURL($matchups_url);
         }
@@ -163,7 +160,7 @@ class ParserJob
         }
 
         //Declare full run if we fill the criteria
-        if (count($parsed_sport->getParsedMatchups()) > 10 && $this->change_num == '') {
+        if (count($parsed_sport->getParsedMatchups()) > 10) {
             $this->full_run = true;
             $this->logger->info("Declared full run");
         }
