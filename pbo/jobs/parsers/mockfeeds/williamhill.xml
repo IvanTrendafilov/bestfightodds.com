@@ -2,3752 +2,482 @@
 
 <!-- OXi dbPublish-->
 <!-- Copyright (c) 2001, 2002, 2003 Orbis Technology Ltd. All rights reserved.-->
-<oxip version="7.1" created="2016-03-01 08:06:44" lastMsgId=""  requestTime="0.1561">
-<response request="getHierarchyByMarketType" code="001" message="success" debug="" provider="williamhill">
-<williamhill>
-<class id="10" name="Boxing" maxRepDate="2016-02-21" maxRepTime="01:18:55">
-<type
-id="141"
-name="Super Middleweight"
-url="http://sports.williamhill.com/bet/betting/t/141"
-lastUpdateDate="2016-02-21"
-lastUpdateTime="00:45:33">
-<market
-id="334101494"
-name="Rocky Fielding v Christopher Rebrasse - Bout Betting"
-url="http://sports.williamhill.com/bet/en-gb/betting/e/8837469/Rocky%2dFielding%2dv%2dChristopher%2dRebrasse"
-date="2016-04-02"
-time="21:00:00"
-betTillDate="2016-04-02"
-betTillTime="21:00:00"
-lastUpdateDate="2016-02-21"
-lastUpdateTime="00:52:10"
-placeAvailable="N"
-forcastAvailable="N"
-tricastAvailable="N"
-eachwayAvailable="N"
-cashoutAvailable="N"
-startingPriceAvailable="N"
-livePriceAvailable="Y"
-guarenteedPriceAvailable="N"
-firstPriceAvailable="N"
->
-<participant
-name="Rocky Fielding"
-id="1098791153"
-odds="1/5"
-oddsDecimal="1.20"
-lastUpdateDate="2016-02-21"
-lastUpdateTime="01:19:15"
-handicap=""/>
-<participant
-name="Draw"
-id="1098791154"
-odds="22/1"
-oddsDecimal="23.00"
-lastUpdateDate="2016-02-21"
-lastUpdateTime="01:19:15"
-handicap=""/>
-<participant
-name="Christopher Rebrasse"
-id="1098791155"
-odds="7/2"
-oddsDecimal="4.50"
-lastUpdateDate="2016-02-21"
-lastUpdateTime="01:19:15"
-handicap=""/>
-</market>
-<market
-id="334101493"
-name="Callum Smith v Hadillah Mohoumadi - Bout Betting"
-url="http://sports.williamhill.com/bet/en-gb/betting/e/8837468/Callum%2dSmith%2dv%2dHadillah%2dMohoumadi"
-date="2016-04-02"
-time="22:00:00"
-betTillDate="2016-04-02"
-betTillTime="22:00:00"
-lastUpdateDate="2016-02-21"
-lastUpdateTime="00:52:10"
-placeAvailable="N"
-forcastAvailable="N"
-tricastAvailable="N"
-eachwayAvailable="N"
-cashoutAvailable="N"
-startingPriceAvailable="N"
-livePriceAvailable="Y"
-guarenteedPriceAvailable="N"
-firstPriceAvailable="N"
->
-<participant
-name="Draw"
-id="1098791151"
-odds="28/1"
-oddsDecimal="29.00"
-lastUpdateDate="2016-02-21"
-lastUpdateTime="01:19:15"
-handicap=""/>
-<participant
-name="Hadillah Mohoumadi"
-id="1098791152"
-odds="9/1"
-oddsDecimal="10.00"
-lastUpdateDate="2016-02-21"
-lastUpdateTime="01:19:15"
-handicap=""/>
-<participant
-name="Callum Smith"
-id="1098791150"
-odds="1/25"
-oddsDecimal="1.04"
-lastUpdateDate="2016-02-21"
-lastUpdateTime="01:19:15"
-handicap=""/>
-</market>
-<market
-id="330123221"
-name="Arthur Abraham v Gilberto Ramirez - Bout Betting"
-url="http://sports.williamhill.com/bet/en-gb/betting/e/8773590/Arthur%2dAbraham%2dv%2dGilberto%2dRamirez"
-date="2016-04-10"
-time="03:00:00"
-betTillDate="2016-04-10"
-betTillTime="03:00:00"
-lastUpdateDate="2016-02-21"
-lastUpdateTime="00:52:04"
-placeAvailable="N"
-forcastAvailable="N"
-tricastAvailable="N"
-eachwayAvailable="N"
-cashoutAvailable="N"
-startingPriceAvailable="N"
-livePriceAvailable="Y"
-guarenteedPriceAvailable="N"
-firstPriceAvailable="N"
->
-<participant
-name="Arthur Abraham"
-id="1086757352"
-odds="13/10"
-oddsDecimal="2.30"
-lastUpdateDate="2016-02-21"
-lastUpdateTime="01:19:07"
-handicap=""/>
-<participant
-name="Gilberto Ramirez"
-id="1086757355"
-odds="8/13"
-oddsDecimal="1.62"
-lastUpdateDate="2016-02-21"
-lastUpdateTime="01:19:07"
-handicap=""/>
-<participant
-name="Draw"
-id="1086757353"
-odds="20/1"
-oddsDecimal="21.00"
-lastUpdateDate="2016-02-21"
-lastUpdateTime="01:19:07"
-handicap=""/>
-</market>
-</type>
-<type
-id="250"
-name="Heavyweight"
-url="http://sports.williamhill.com/bet/betting/t/250"
-lastUpdateDate="2016-02-21"
-lastUpdateTime="00:45:33">
-<market
-id="325524132"
-name="Ruslan Chagaev v Lucas Browne - Bout Betting"
-url="http://sports.williamhill.com/bet/en-gb/betting/e/8693386/Ruslan%2dChagaev%2dv%2dLucas%2dBrowne"
-date="2016-03-05"
-time="19:00:00"
-betTillDate="2016-03-05"
-betTillTime="19:00:00"
-lastUpdateDate="2016-02-27"
-lastUpdateTime="15:55:50"
-placeAvailable="N"
-forcastAvailable="N"
-tricastAvailable="N"
-eachwayAvailable="N"
-cashoutAvailable="Y"
-startingPriceAvailable="N"
-livePriceAvailable="Y"
-guarenteedPriceAvailable="N"
-firstPriceAvailable="N"
->
-<participant
-name="Ruslan Chagaev"
-id="1072381341"
-odds="2/7"
-oddsDecimal="1.29"
-lastUpdateDate="2016-02-27"
-lastUpdateTime="15:58:03"
-handicap=""/>
-<participant
-name="Lucas Browne"
-id="1072381343"
-odds="5/2"
-oddsDecimal="3.50"
-lastUpdateDate="2016-02-27"
-lastUpdateTime="15:58:03"
-handicap=""/>
-<participant
-name="Draw"
-id="1072381342"
-odds="28/1"
-oddsDecimal="29.00"
-lastUpdateDate="2016-02-27"
-lastUpdateTime="15:58:03"
-handicap=""/>
-</market>
-<market
-id="337614241"
-name="Anthony Joshua v Charles Martin - Bout Betting"
-url="http://sports.williamhill.com/bet/en-gb/betting/e/8885536/Anthony%2dJoshua%2dv%2dCharles%2dMartin"
-date="2016-04-09"
-time="22:30:00"
-betTillDate="2016-04-09"
-betTillTime="22:30:00"
-lastUpdateDate="2016-02-21"
-lastUpdateTime="00:58:18"
-placeAvailable="N"
-forcastAvailable="N"
-tricastAvailable="N"
-eachwayAvailable="N"
-cashoutAvailable="N"
-startingPriceAvailable="N"
-livePriceAvailable="Y"
-guarenteedPriceAvailable="N"
-firstPriceAvailable="N"
->
-<participant
-name="Charles Martin"
-id="1109505312"
-odds="9/2"
-oddsDecimal="5.50"
-lastUpdateDate="2016-02-21"
-lastUpdateTime="01:24:11"
-handicap=""/>
-<participant
-name="Draw"
-id="1109505311"
-odds="33/1"
-oddsDecimal="34.00"
-lastUpdateDate="2016-02-21"
-lastUpdateTime="01:24:11"
-handicap=""/>
-<participant
-name="Anthony Joshua"
-id="1109505310"
-odds="1/7"
-oddsDecimal="1.14"
-lastUpdateDate="2016-02-21"
-lastUpdateTime="01:24:11"
-handicap=""/>
-</market>
-<market
-id="337621741"
-name="Anthony Joshua v Charles Martin - Round Betting"
-url="http://sports.williamhill.com/bet/en-gb/betting/e/8885536/Anthony%2dJoshua%2dv%2dCharles%2dMartin"
-date="2016-04-09"
-time="22:30:00"
-betTillDate="2016-04-09"
-betTillTime="22:30:00"
-lastUpdateDate="2016-02-21"
-lastUpdateTime="00:58:18"
-placeAvailable="N"
-forcastAvailable="N"
-tricastAvailable="N"
-eachwayAvailable="N"
-cashoutAvailable="N"
-startingPriceAvailable="N"
-livePriceAvailable="Y"
-guarenteedPriceAvailable="N"
-firstPriceAvailable="N"
->
-<participant
-name="Anthony Joshua Round 5"
-id="1109522070"
-odds="8/1"
-oddsDecimal="9.00"
-lastUpdateDate="2016-02-21"
-lastUpdateTime="01:24:11"
-handicap=""/>
-<participant
-name="Draw"
-id="1109522088"
-odds="33/1"
-oddsDecimal="34.00"
-lastUpdateDate="2016-02-21"
-lastUpdateTime="01:24:11"
-handicap=""/>
-<participant
-name="Charles Martin On Points"
-id="1109522087"
-odds="14/1"
-oddsDecimal="15.00"
-lastUpdateDate="2016-02-21"
-lastUpdateTime="01:24:11"
-handicap=""/>
-<participant
-name="Anthony Joshua On Points"
-id="1109522086"
-odds="4/1"
-oddsDecimal="5.00"
-lastUpdateDate="2016-02-21"
-lastUpdateTime="01:24:11"
-handicap=""/>
-<participant
-name="Charles Martin Round 12"
-id="1109522085"
-odds="100/1"
-oddsDecimal="101.00"
-lastUpdateDate="2016-02-21"
-lastUpdateTime="01:24:11"
-handicap=""/>
-<participant
-name="Anthony Joshua Round 12"
-id="1109522084"
-odds="40/1"
-oddsDecimal="41.00"
-lastUpdateDate="2016-02-21"
-lastUpdateTime="01:24:11"
-handicap=""/>
-<participant
-name="Charles Martin Round 11"
-id="1109522083"
-odds="80/1"
-oddsDecimal="81.00"
-lastUpdateDate="2016-02-21"
-lastUpdateTime="01:24:11"
-handicap=""/>
-<participant
-name="Anthony Joshua Round 11"
-id="1109522082"
-odds="28/1"
-oddsDecimal="29.00"
-lastUpdateDate="2016-02-21"
-lastUpdateTime="01:24:11"
-handicap=""/>
-<participant
-name="Charles Martin Round 10"
-id="1109522081"
-odds="66/1"
-oddsDecimal="67.00"
-lastUpdateDate="2016-02-21"
-lastUpdateTime="01:24:11"
-handicap=""/>
-<participant
-name="Anthony Joshua Round 10"
-id="1109522080"
-odds="22/1"
-oddsDecimal="23.00"
-lastUpdateDate="2016-02-21"
-lastUpdateTime="01:24:11"
-handicap=""/>
-<participant
-name="Charles Martin Round 9"
-id="1109522079"
-odds="50/1"
-oddsDecimal="51.00"
-lastUpdateDate="2016-02-21"
-lastUpdateTime="01:24:11"
-handicap=""/>
-<participant
-name="Anthony Joshua Round 9"
-id="1109522078"
-odds="20/1"
-oddsDecimal="21.00"
-lastUpdateDate="2016-02-21"
-lastUpdateTime="01:24:11"
-handicap=""/>
-<participant
-name="Charles Martin Round 8"
-id="1109522077"
-odds="40/1"
-oddsDecimal="41.00"
-lastUpdateDate="2016-02-21"
-lastUpdateTime="01:24:11"
-handicap=""/>
-<participant
-name="Anthony Joshua Round 8"
-id="1109522076"
-odds="14/1"
-oddsDecimal="15.00"
-lastUpdateDate="2016-02-21"
-lastUpdateTime="01:24:11"
-handicap=""/>
-<participant
-name="Charles Martin Round 7"
-id="1109522075"
-odds="40/1"
-oddsDecimal="41.00"
-lastUpdateDate="2016-02-21"
-lastUpdateTime="01:24:11"
-handicap=""/>
-<participant
-name="Anthony Joshua Round 7"
-id="1109522074"
-odds="12/1"
-oddsDecimal="13.00"
-lastUpdateDate="2016-02-21"
-lastUpdateTime="01:24:11"
-handicap=""/>
-<participant
-name="Charles Martin Round 6"
-id="1109522073"
-odds="40/1"
-oddsDecimal="41.00"
-lastUpdateDate="2016-02-21"
-lastUpdateTime="01:24:11"
-handicap=""/>
-<participant
-name="Anthony Joshua Round 6"
-id="1109522072"
-odds="10/1"
-oddsDecimal="11.00"
-lastUpdateDate="2016-02-21"
-lastUpdateTime="01:24:11"
-handicap=""/>
-<participant
-name="Charles Martin Round 5"
-id="1109522071"
-odds="33/1"
-oddsDecimal="34.00"
-lastUpdateDate="2016-02-21"
-lastUpdateTime="01:24:11"
-handicap=""/>
-<participant
-name="Charles Martin Round 4"
-id="1109522069"
-odds="28/1"
-oddsDecimal="29.00"
-lastUpdateDate="2016-02-21"
-lastUpdateTime="01:24:11"
-handicap=""/>
-<participant
-name="Anthony Joshua Round 4"
-id="1109522068"
-odds="7/1"
-oddsDecimal="8.00"
-lastUpdateDate="2016-02-21"
-lastUpdateTime="01:24:11"
-handicap=""/>
-<participant
-name="Charles Martin Round 3"
-id="1109522067"
-odds="28/1"
-oddsDecimal="29.00"
-lastUpdateDate="2016-02-21"
-lastUpdateTime="01:24:11"
-handicap=""/>
-<participant
-name="Anthony Joshua Round 3"
-id="1109522066"
-odds="7/1"
-oddsDecimal="8.00"
-lastUpdateDate="2016-02-21"
-lastUpdateTime="01:24:11"
-handicap=""/>
-<participant
-name="Charles Martin Round 2"
-id="1109522065"
-odds="28/1"
-oddsDecimal="29.00"
-lastUpdateDate="2016-02-21"
-lastUpdateTime="01:24:11"
-handicap=""/>
-<participant
-name="Anthony Joshua Round 2"
-id="1109522064"
-odds="7/1"
-oddsDecimal="8.00"
-lastUpdateDate="2016-02-21"
-lastUpdateTime="01:24:11"
-handicap=""/>
-<participant
-name="Charles Martin Round 1"
-id="1109522063"
-odds="33/1"
-oddsDecimal="34.00"
-lastUpdateDate="2016-02-21"
-lastUpdateTime="01:24:11"
-handicap=""/>
-<participant
-name="Anthony Joshua Round 1"
-id="1109522062"
-odds="8/1"
-oddsDecimal="9.00"
-lastUpdateDate="2016-02-21"
-lastUpdateTime="01:24:11"
-handicap=""/>
-</market>
-<market
-id="337621742"
-name="Anthony Joshua v Charles Martin - Method Of Result"
-url="http://sports.williamhill.com/bet/en-gb/betting/e/8885536/Anthony%2dJoshua%2dv%2dCharles%2dMartin"
-date="2016-04-09"
-time="22:30:00"
-betTillDate="2016-04-09"
-betTillTime="22:30:00"
-lastUpdateDate="2016-02-21"
-lastUpdateTime="00:58:18"
-placeAvailable="N"
-forcastAvailable="N"
-tricastAvailable="N"
-eachwayAvailable="N"
-cashoutAvailable="N"
-startingPriceAvailable="N"
-livePriceAvailable="Y"
-guarenteedPriceAvailable="N"
-firstPriceAvailable="N"
->
-<participant
-name="Anthony Joshua By KO TKO or DQ"
-id="1109522089"
-odds="2/7"
-oddsDecimal="1.29"
-lastUpdateDate="2016-02-21"
-lastUpdateTime="01:24:11"
-handicap=""/>
-<participant
-name="Charles Martin By Decision or Technical Decision"
-id="1109522092"
-odds="14/1"
-oddsDecimal="15.00"
-lastUpdateDate="2016-02-21"
-lastUpdateTime="01:24:11"
-handicap=""/>
-<participant
-name="Anthony Joshua By Decision or Technical Decision"
-id="1109522091"
-odds="4/1"
-oddsDecimal="5.00"
-lastUpdateDate="2016-02-21"
-lastUpdateTime="01:24:11"
-handicap=""/>
-<participant
-name="Charles Martin By KO TKO or DQ"
-id="1109522090"
-odds="13/2"
-oddsDecimal="7.50"
-lastUpdateDate="2016-02-21"
-lastUpdateTime="01:24:11"
-handicap=""/>
-<participant
-name="Draw"
-id="1109522093"
-odds="33/1"
-oddsDecimal="34.00"
-lastUpdateDate="2016-02-21"
-lastUpdateTime="01:24:11"
-handicap=""/>
-</market>
-<market
-id="339273081"
-name="Anthony Joshua v Charles Martin - Grouped Round Betting"
-url="http://sports.williamhill.com/bet/en-gb/betting/e/8885536/Anthony%2dJoshua%2dv%2dCharles%2dMartin"
-date="2016-04-09"
-time="22:30:00"
-betTillDate="2016-04-09"
-betTillTime="22:30:00"
-lastUpdateDate="2016-02-21"
-lastUpdateTime="00:58:18"
-placeAvailable="N"
-forcastAvailable="N"
-tricastAvailable="N"
-eachwayAvailable="N"
-cashoutAvailable="N"
-startingPriceAvailable="N"
-livePriceAvailable="Y"
-guarenteedPriceAvailable="N"
-firstPriceAvailable="N"
->
-<participant
-name="Anthony Joshua Round 4-6"
-id="1114720036"
-odds="9/4"
-oddsDecimal="3.25"
-lastUpdateDate="2016-02-21"
-lastUpdateTime="01:40:05"
-handicap=""/>
-<participant
-name="Charles Martin Round 1-3"
-id="1114720041"
-odds="12/1"
-oddsDecimal="13.00"
-lastUpdateDate="2016-02-21"
-lastUpdateTime="01:40:05"
-handicap=""/>
-<participant
-name="Draw"
-id="1114720040"
-odds="33/1"
-oddsDecimal="34.00"
-lastUpdateDate="2016-02-21"
-lastUpdateTime="01:40:05"
-handicap=""/>
-<participant
-name="Anthony Joshua on Points"
-id="1114720039"
-odds="4/1"
-oddsDecimal="5.00"
-lastUpdateDate="2016-02-21"
-lastUpdateTime="01:40:05"
-handicap=""/>
-<participant
-name="Anthony Joshua Round 10-12"
-id="1114720038"
-odds="12/1"
-oddsDecimal="13.00"
-lastUpdateDate="2016-02-21"
-lastUpdateTime="01:40:05"
-handicap=""/>
-<participant
-name="Anthony Joshua Round 7-9"
-id="1114720037"
-odds="5/1"
-oddsDecimal="6.00"
-lastUpdateDate="2016-02-21"
-lastUpdateTime="01:40:05"
-handicap=""/>
-<participant
-name="Anthony Joshua Round 1-3"
-id="1114720035"
-odds="2/1"
-oddsDecimal="3.00"
-lastUpdateDate="2016-02-21"
-lastUpdateTime="01:40:05"
-handicap=""/>
-<participant
-name="Charles Martin Round 10-12"
-id="1114720044"
-odds="28/1"
-oddsDecimal="29.00"
-lastUpdateDate="2016-02-21"
-lastUpdateTime="01:40:05"
-handicap=""/>
-<participant
-name="Charles Martin Round 7-9"
-id="1114720043"
-odds="20/1"
-oddsDecimal="21.00"
-lastUpdateDate="2016-02-21"
-lastUpdateTime="01:40:05"
-handicap=""/>
-<participant
-name="Charles Martin Round 4-6"
-id="1114720042"
-odds="16/1"
-oddsDecimal="17.00"
-lastUpdateDate="2016-02-21"
-lastUpdateTime="01:40:05"
-handicap=""/>
-<participant
-name="Charles Martin on Points"
-id="1114720045"
-odds="14/1"
-oddsDecimal="15.00"
-lastUpdateDate="2016-02-21"
-lastUpdateTime="01:40:05"
-handicap=""/>
-</market>
-<market
-id="339273082"
-name="Anthony Joshua v Charles Martin - Fight to go the Distance"
-url="http://sports.williamhill.com/bet/en-gb/betting/e/8885536/Anthony%2dJoshua%2dv%2dCharles%2dMartin"
-date="2016-04-09"
-time="22:30:00"
-betTillDate="2016-04-09"
-betTillTime="22:30:00"
-lastUpdateDate="2016-02-21"
-lastUpdateTime="00:58:18"
-placeAvailable="N"
-forcastAvailable="N"
-tricastAvailable="N"
-eachwayAvailable="N"
-cashoutAvailable="N"
-startingPriceAvailable="N"
-livePriceAvailable="Y"
-guarenteedPriceAvailable="N"
-firstPriceAvailable="N"
->
-<participant
-name="No"
-id="1114720046"
-odds="1/6"
-oddsDecimal="1.17"
-lastUpdateDate="2016-02-21"
-lastUpdateTime="01:40:05"
-handicap=""/>
-<participant
-name="Yes"
-id="1114720047"
-odds="7/2"
-oddsDecimal="4.50"
-lastUpdateDate="2016-02-21"
-lastUpdateTime="01:40:05"
-handicap=""/>
-</market>
-<market
-id="329922059"
-name="Tyson Fury v Wladimir Klitschko - Bout Betting"
-url="http://sports.williamhill.com/bet/en-gb/betting/e/8769486/Tyson%2dFury%2dv%2dWladimir%2dKlitschko"
-date="2016-05-07"
-time="22:00:00"
-betTillDate="2016-05-07"
-betTillTime="22:00:00"
-lastUpdateDate="2016-02-21"
-lastUpdateTime="00:52:04"
-placeAvailable="N"
-forcastAvailable="N"
-tricastAvailable="N"
-eachwayAvailable="N"
-cashoutAvailable="N"
-startingPriceAvailable="N"
-livePriceAvailable="Y"
-guarenteedPriceAvailable="N"
-firstPriceAvailable="N"
->
-<participant
-name="Wladimir Klitschko"
-id="1086174981"
-odds="10/11"
-oddsDecimal="1.91"
-lastUpdateDate="2016-02-21"
-lastUpdateTime="01:19:07"
-handicap=""/>
-<participant
-name="Draw"
-id="1086174980"
-odds="22/1"
-oddsDecimal="23.00"
-lastUpdateDate="2016-02-21"
-lastUpdateTime="01:19:07"
-handicap=""/>
-<participant
-name="Tyson Fury"
-id="1086174979"
-odds="10/11"
-oddsDecimal="1.91"
-lastUpdateDate="2016-02-21"
-lastUpdateTime="01:19:07"
-handicap=""/>
-</market>
-<market
-id="329923018"
-name="Tyson Fury v Wladimir Klitschko - Method Of Result"
-url="http://sports.williamhill.com/bet/en-gb/betting/e/8769486/Tyson%2dFury%2dv%2dWladimir%2dKlitschko"
-date="2016-05-07"
-time="22:00:00"
-betTillDate="2016-05-07"
-betTillTime="22:00:00"
-lastUpdateDate="2016-02-21"
-lastUpdateTime="00:52:04"
-placeAvailable="N"
-forcastAvailable="N"
-tricastAvailable="N"
-eachwayAvailable="N"
-cashoutAvailable="N"
-startingPriceAvailable="N"
-livePriceAvailable="Y"
-guarenteedPriceAvailable="N"
-firstPriceAvailable="N"
->
-<participant
-name="Tyson Fury By KO TKO or DQ"
-id="1086177741"
-odds="4/1"
-oddsDecimal="5.00"
-lastUpdateDate="2016-02-21"
-lastUpdateTime="01:19:07"
-handicap=""/>
-<participant
-name="Draw"
-id="1086177745"
-odds="22/1"
-oddsDecimal="23.00"
-lastUpdateDate="2016-02-21"
-lastUpdateTime="01:19:07"
-handicap=""/>
-<participant
-name="Wladimir Klitschko By Decision or Technical Decision"
-id="1086177744"
-odds="2/1"
-oddsDecimal="3.00"
-lastUpdateDate="2016-02-21"
-lastUpdateTime="01:19:07"
-handicap=""/>
-<participant
-name="Tyson Fury By Decision or Technical Decision"
-id="1086177743"
-odds="7/4"
-oddsDecimal="2.75"
-lastUpdateDate="2016-02-21"
-lastUpdateTime="01:19:07"
-handicap=""/>
-<participant
-name="Wladimir Klitschko By KO TKO or DQ"
-id="1086177742"
-odds="11/4"
-oddsDecimal="3.75"
-lastUpdateDate="2016-02-21"
-lastUpdateTime="01:19:07"
-handicap=""/>
-</market>
-<market
-id="334142537"
-name="Tyson Fury v Wladimir Klitschko - Grouped Round Betting"
-url="http://sports.williamhill.com/bet/en-gb/betting/e/8769486/Tyson%2dFury%2dv%2dWladimir%2dKlitschko"
-date="2016-05-07"
-time="22:00:00"
-betTillDate="2016-05-07"
-betTillTime="22:00:00"
-lastUpdateDate="2016-02-21"
-lastUpdateTime="00:52:04"
-placeAvailable="N"
-forcastAvailable="N"
-tricastAvailable="N"
-eachwayAvailable="N"
-cashoutAvailable="N"
-startingPriceAvailable="N"
-livePriceAvailable="Y"
-guarenteedPriceAvailable="N"
-firstPriceAvailable="N"
->
-<participant
-name="Tyson Fury On Points"
-id="1098909917"
-odds="7/4"
-oddsDecimal="2.75"
-lastUpdateDate="2016-02-21"
-lastUpdateTime="01:19:16"
-handicap=""/>
-<participant
-name="Draw"
-id="1098909918"
-odds="22/1"
-oddsDecimal="23.00"
-lastUpdateDate="2016-02-21"
-lastUpdateTime="01:19:16"
-handicap=""/>
-<participant
-name="Wladimir Klitschko Round 1-3"
-id="1098909919"
-odds="10/1"
-oddsDecimal="11.00"
-lastUpdateDate="2016-02-21"
-lastUpdateTime="01:19:16"
-handicap=""/>
-<participant
-name="Wladimir Klitschko Round 4-6"
-id="1098909920"
-odds="9/1"
-oddsDecimal="10.00"
-lastUpdateDate="2016-02-21"
-lastUpdateTime="01:19:16"
-handicap=""/>
-<participant
-name="Wladimir Klitschko Round 7-9"
-id="1098909921"
-odds="10/1"
-oddsDecimal="11.00"
-lastUpdateDate="2016-02-21"
-lastUpdateTime="01:19:16"
-handicap=""/>
-<participant
-name="Wladimir Klitschko Round 10-12"
-id="1098909922"
-odds="16/1"
-oddsDecimal="17.00"
-lastUpdateDate="2016-02-21"
-lastUpdateTime="01:19:16"
-handicap=""/>
-<participant
-name="Wladimir Klitschko On Points"
-id="1098909923"
-odds="2/1"
-oddsDecimal="3.00"
-lastUpdateDate="2016-02-21"
-lastUpdateTime="01:19:16"
-handicap=""/>
-<participant
-name="Tyson Fury Round 4-6"
-id="1098909914"
-odds="12/1"
-oddsDecimal="13.00"
-lastUpdateDate="2016-02-21"
-lastUpdateTime="01:19:16"
-handicap=""/>
-<participant
-name="Tyson Fury Round 7-9"
-id="1098909915"
-odds="9/1"
-oddsDecimal="10.00"
-lastUpdateDate="2016-02-21"
-lastUpdateTime="01:19:16"
-handicap=""/>
-<participant
-name="Tyson Fury Round 10-12"
-id="1098909916"
-odds="10/1"
-oddsDecimal="11.00"
-lastUpdateDate="2016-02-21"
-lastUpdateTime="01:19:16"
-handicap=""/>
-<participant
-name="Tyson Fury Round 1-3"
-id="1098909913"
-odds="16/1"
-oddsDecimal="17.00"
-lastUpdateDate="2016-02-21"
-lastUpdateTime="01:19:16"
-handicap=""/>
-</market>
-<market
-id="334142552"
-name="Tyson Fury v Wladimir Klitschko - Round Betting"
-url="http://sports.williamhill.com/bet/en-gb/betting/e/8769486/Tyson%2dFury%2dv%2dWladimir%2dKlitschko"
-date="2016-05-07"
-time="22:00:00"
-betTillDate="2016-05-07"
-betTillTime="22:00:00"
-lastUpdateDate="2016-02-21"
-lastUpdateTime="00:52:04"
-placeAvailable="N"
-forcastAvailable="N"
-tricastAvailable="N"
-eachwayAvailable="N"
-cashoutAvailable="N"
-startingPriceAvailable="N"
-livePriceAvailable="Y"
-guarenteedPriceAvailable="N"
-firstPriceAvailable="N"
->
-<participant
-name="Tyson Fury Round 4"
-id="1098904229"
-odds="40/1"
-oddsDecimal="41.00"
-lastUpdateDate="2016-02-21"
-lastUpdateTime="01:19:16"
-handicap=""/>
-<participant
-name="Draw"
-id="1098904249"
-odds="22/1"
-oddsDecimal="23.00"
-lastUpdateDate="2016-02-21"
-lastUpdateTime="01:19:16"
-handicap=""/>
-<participant
-name="Wladimir Klitschko On Points"
-id="1098904248"
-odds="2/1"
-oddsDecimal="3.00"
-lastUpdateDate="2016-02-21"
-lastUpdateTime="01:19:16"
-handicap=""/>
-<participant
-name="Tyson Fury On Points"
-id="1098904247"
-odds="7/4"
-oddsDecimal="2.75"
-lastUpdateDate="2016-02-21"
-lastUpdateTime="01:19:16"
-handicap=""/>
-<participant
-name="Wladimir Klitschko Round 12"
-id="1098904246"
-odds="40/1"
-oddsDecimal="41.00"
-lastUpdateDate="2016-02-21"
-lastUpdateTime="01:19:16"
-handicap=""/>
-<participant
-name="Tyson Fury Round 12"
-id="1098904245"
-odds="33/1"
-oddsDecimal="34.00"
-lastUpdateDate="2016-02-21"
-lastUpdateTime="01:19:16"
-handicap=""/>
-<participant
-name="Wladimir Klitschko Round 11"
-id="1098904244"
-odds="33/1"
-oddsDecimal="34.00"
-lastUpdateDate="2016-02-21"
-lastUpdateTime="01:19:16"
-handicap=""/>
-<participant
-name="Tyson Fury Round 11"
-id="1098904243"
-odds="28/1"
-oddsDecimal="29.00"
-lastUpdateDate="2016-02-21"
-lastUpdateTime="01:19:16"
-handicap=""/>
-<participant
-name="Wladimir Klitschko Round 10"
-id="1098904242"
-odds="33/1"
-oddsDecimal="34.00"
-lastUpdateDate="2016-02-21"
-lastUpdateTime="01:19:16"
-handicap=""/>
-<participant
-name="Tyson Fury Round 10"
-id="1098904241"
-odds="28/1"
-oddsDecimal="29.00"
-lastUpdateDate="2016-02-21"
-lastUpdateTime="01:19:16"
-handicap=""/>
-<participant
-name="Wladimir Klitschko Round 9"
-id="1098904240"
-odds="28/1"
-oddsDecimal="29.00"
-lastUpdateDate="2016-02-21"
-lastUpdateTime="01:19:16"
-handicap=""/>
-<participant
-name="Tyson Fury Round 9"
-id="1098904239"
-odds="28/1"
-oddsDecimal="29.00"
-lastUpdateDate="2016-02-21"
-lastUpdateTime="01:19:16"
-handicap=""/>
-<participant
-name="Wladimir Klitschko Round 8"
-id="1098904238"
-odds="25/1"
-oddsDecimal="26.00"
-lastUpdateDate="2016-02-21"
-lastUpdateTime="01:19:16"
-handicap=""/>
-<participant
-name="Tyson Fury Round 8"
-id="1098904237"
-odds="33/1"
-oddsDecimal="34.00"
-lastUpdateDate="2016-02-21"
-lastUpdateTime="01:19:16"
-handicap=""/>
-<participant
-name="Wladimir Klitschko Round 7"
-id="1098904236"
-odds="25/1"
-oddsDecimal="26.00"
-lastUpdateDate="2016-02-21"
-lastUpdateTime="01:19:16"
-handicap=""/>
-<participant
-name="Tyson Fury Round 7"
-id="1098904235"
-odds="33/1"
-oddsDecimal="34.00"
-lastUpdateDate="2016-02-21"
-lastUpdateTime="01:19:16"
-handicap=""/>
-<participant
-name="Wladimir Klitschko Round 6"
-id="1098904234"
-odds="25/1"
-oddsDecimal="26.00"
-lastUpdateDate="2016-02-21"
-lastUpdateTime="01:19:16"
-handicap=""/>
-<participant
-name="Tyson Fury Round 6"
-id="1098904233"
-odds="33/1"
-oddsDecimal="34.00"
-lastUpdateDate="2016-02-21"
-lastUpdateTime="01:19:16"
-handicap=""/>
-<participant
-name="Wladimir Klitschko Round 5"
-id="1098904232"
-odds="25/1"
-oddsDecimal="26.00"
-lastUpdateDate="2016-02-21"
-lastUpdateTime="01:19:16"
-handicap=""/>
-<participant
-name="Tyson Fury Round 5"
-id="1098904231"
-odds="33/1"
-oddsDecimal="34.00"
-lastUpdateDate="2016-02-21"
-lastUpdateTime="01:19:16"
-handicap=""/>
-<participant
-name="Wladimir Klitschko Round 4"
-id="1098904230"
-odds="28/1"
-oddsDecimal="29.00"
-lastUpdateDate="2016-02-21"
-lastUpdateTime="01:19:16"
-handicap=""/>
-<participant
-name="Wladimir Klitschko Round 3"
-id="1098904228"
-odds="28/1"
-oddsDecimal="29.00"
-lastUpdateDate="2016-02-21"
-lastUpdateTime="01:19:16"
-handicap=""/>
-<participant
-name="Tyson Fury Round 3"
-id="1098904227"
-odds="40/1"
-oddsDecimal="41.00"
-lastUpdateDate="2016-02-21"
-lastUpdateTime="01:19:16"
-handicap=""/>
-<participant
-name="Wladimir Klitschko Round 2"
-id="1098904226"
-odds="28/1"
-oddsDecimal="29.00"
-lastUpdateDate="2016-02-21"
-lastUpdateTime="01:19:16"
-handicap=""/>
-<participant
-name="Tyson Fury Round 2"
-id="1098904225"
-odds="50/1"
-oddsDecimal="51.00"
-lastUpdateDate="2016-02-21"
-lastUpdateTime="01:19:16"
-handicap=""/>
-<participant
-name="Wladimir Klitschko Round 1"
-id="1098904224"
-odds="33/1"
-oddsDecimal="34.00"
-lastUpdateDate="2016-02-21"
-lastUpdateTime="01:19:16"
-handicap=""/>
-<participant
-name="Tyson Fury Round 1"
-id="1098904223"
-odds="66/1"
-oddsDecimal="67.00"
-lastUpdateDate="2016-02-21"
-lastUpdateTime="01:19:16"
-handicap=""/>
-</market>
-<market
-id="334142553"
-name="Tyson Fury v Wladimir Klitschko - Fight to go the Distance"
-url="http://sports.williamhill.com/bet/en-gb/betting/e/8769486/Tyson%2dFury%2dv%2dWladimir%2dKlitschko"
-date="2016-05-07"
-time="22:00:00"
-betTillDate="2016-05-07"
-betTillTime="22:00:00"
-lastUpdateDate="2016-02-21"
-lastUpdateTime="00:52:04"
-placeAvailable="N"
-forcastAvailable="N"
-tricastAvailable="N"
-eachwayAvailable="N"
-cashoutAvailable="N"
-startingPriceAvailable="N"
-livePriceAvailable="Y"
-guarenteedPriceAvailable="N"
-firstPriceAvailable="N"
->
-<participant
-name="Yes"
-id="1098909924"
-odds="8/15"
-oddsDecimal="1.53"
-lastUpdateDate="2016-02-21"
-lastUpdateTime="01:19:16"
-handicap=""/>
-<participant
-name="No"
-id="1098909925"
-odds="11/8"
-oddsDecimal="2.38"
-lastUpdateDate="2016-02-21"
-lastUpdateTime="01:19:16"
-handicap=""/>
-</market>
-</type>
-<type
-id="715"
-name="Middleweight"
-url="http://sports.williamhill.com/bet/betting/t/715"
-lastUpdateDate="2016-02-21"
-lastUpdateTime="00:45:33">
-<market
-id="328517722"
-name="Nick Blackwell v Chris Eubank Jr - Bout Betting"
-url="http://sports.williamhill.com/bet/en-gb/betting/e/8746529/Nick%2dBlackwell%2dv%2dChris%2dEubank%2dJr"
-date="2016-03-26"
-time="22:00:00"
-betTillDate="2016-03-26"
-betTillTime="22:00:00"
-lastUpdateDate="2016-02-21"
-lastUpdateTime="00:52:03"
-placeAvailable="N"
-forcastAvailable="N"
-tricastAvailable="N"
-eachwayAvailable="N"
-cashoutAvailable="N"
-startingPriceAvailable="N"
-livePriceAvailable="Y"
-guarenteedPriceAvailable="N"
-firstPriceAvailable="N"
->
-<participant
-name="Draw"
-id="1081817740"
-odds="22/1"
-oddsDecimal="23.00"
-lastUpdateDate="2016-02-21"
-lastUpdateTime="01:19:04"
-handicap=""/>
-<participant
-name="Nick Blackwell"
-id="1081817739"
-odds="4/1"
-oddsDecimal="5.00"
-lastUpdateDate="2016-02-21"
-lastUpdateTime="01:19:04"
-handicap=""/>
-<participant
-name="Chris Eubank Jr"
-id="1081817741"
-odds="1/6"
-oddsDecimal="1.17"
-lastUpdateDate="2016-02-21"
-lastUpdateTime="01:19:04"
-handicap=""/>
-</market>
-<market
-id="336979967"
-name="Nick Blackwell v Chris Eubank Jr - Method Of Result"
-url="http://sports.williamhill.com/bet/en-gb/betting/e/8746529/Nick%2dBlackwell%2dv%2dChris%2dEubank%2dJr"
-date="2016-03-26"
-time="22:00:00"
-betTillDate="2016-03-26"
-betTillTime="22:00:00"
-lastUpdateDate="2016-02-21"
-lastUpdateTime="00:52:03"
-placeAvailable="N"
-forcastAvailable="N"
-tricastAvailable="N"
-eachwayAvailable="N"
-cashoutAvailable="N"
-startingPriceAvailable="N"
-livePriceAvailable="Y"
-guarenteedPriceAvailable="N"
-firstPriceAvailable="N"
->
-<participant
-name="Chris Eubank Jr By Decision or Technical Decision"
-id="1107559248"
-odds="11/4"
-oddsDecimal="3.75"
-lastUpdateDate="2016-02-21"
-lastUpdateTime="01:24:00"
-handicap=""/>
-<participant
-name="Nick Blackwell By KO TKO or DQ"
-id="1107559245"
-odds="11/2"
-oddsDecimal="6.50"
-lastUpdateDate="2016-02-21"
-lastUpdateTime="01:24:00"
-handicap=""/>
-<participant
-name="Chris Eubank Jr By KO TKO or DQ"
-id="1107559246"
-odds="8/15"
-oddsDecimal="1.53"
-lastUpdateDate="2016-02-21"
-lastUpdateTime="01:24:00"
-handicap=""/>
-<participant
-name="Nick Blackwell By Decision or Technical Decision"
-id="1107559247"
-odds="12/1"
-oddsDecimal="13.00"
-lastUpdateDate="2016-02-21"
-lastUpdateTime="01:24:00"
-handicap=""/>
-<participant
-name="Draw"
-id="1107559249"
-odds="22/1"
-oddsDecimal="23.00"
-lastUpdateDate="2016-02-21"
-lastUpdateTime="01:24:00"
-handicap=""/>
-</market>
-<market
-id="336979968"
-name="Nick Blackwell v Chris Eubank Jr - Round Betting"
-url="http://sports.williamhill.com/bet/en-gb/betting/e/8746529/Nick%2dBlackwell%2dv%2dChris%2dEubank%2dJr"
-date="2016-03-26"
-time="22:00:00"
-betTillDate="2016-03-26"
-betTillTime="22:00:00"
-lastUpdateDate="2016-02-21"
-lastUpdateTime="00:52:03"
-placeAvailable="N"
-forcastAvailable="N"
-tricastAvailable="N"
-eachwayAvailable="N"
-cashoutAvailable="N"
-startingPriceAvailable="N"
-livePriceAvailable="Y"
-guarenteedPriceAvailable="N"
-firstPriceAvailable="N"
->
-<participant
-name="Nick Blackwell Round 4"
-id="1107559256"
-odds="40/1"
-oddsDecimal="41.00"
-lastUpdateDate="2016-02-21"
-lastUpdateTime="01:24:00"
-handicap=""/>
-<participant
-name="Nick Blackwell Round 9"
-id="1107559266"
-odds="40/1"
-oddsDecimal="41.00"
-lastUpdateDate="2016-02-21"
-lastUpdateTime="01:24:00"
-handicap=""/>
-<participant
-name="Chris Eubank Jr Round 8"
-id="1107559265"
-odds="11/1"
-oddsDecimal="12.00"
-lastUpdateDate="2016-02-21"
-lastUpdateTime="01:24:00"
-handicap=""/>
-<participant
-name="Nick Blackwell Round 8"
-id="1107559264"
-odds="40/1"
-oddsDecimal="41.00"
-lastUpdateDate="2016-02-21"
-lastUpdateTime="01:24:00"
-handicap=""/>
-<participant
-name="Chris Eubank Jr Round 7"
-id="1107559263"
-odds="10/1"
-oddsDecimal="11.00"
-lastUpdateDate="2016-02-21"
-lastUpdateTime="01:24:00"
-handicap=""/>
-<participant
-name="Nick Blackwell Round 7"
-id="1107559262"
-odds="40/1"
-oddsDecimal="41.00"
-lastUpdateDate="2016-02-21"
-lastUpdateTime="01:24:00"
-handicap=""/>
-<participant
-name="Chris Eubank Jr Round 6"
-id="1107559261"
-odds="10/1"
-oddsDecimal="11.00"
-lastUpdateDate="2016-02-21"
-lastUpdateTime="01:24:00"
-handicap=""/>
-<participant
-name="Nick Blackwell Round 6"
-id="1107559260"
-odds="40/1"
-oddsDecimal="41.00"
-lastUpdateDate="2016-02-21"
-lastUpdateTime="01:24:00"
-handicap=""/>
-<participant
-name="Chris Eubank Jr Round 5"
-id="1107559259"
-odds="10/1"
-oddsDecimal="11.00"
-lastUpdateDate="2016-02-21"
-lastUpdateTime="01:24:00"
-handicap=""/>
-<participant
-name="Nick Blackwell Round 5"
-id="1107559258"
-odds="40/1"
-oddsDecimal="41.00"
-lastUpdateDate="2016-02-21"
-lastUpdateTime="01:24:00"
-handicap=""/>
-<participant
-name="Chris Eubank Jr Round 4"
-id="1107559257"
-odds="12/1"
-oddsDecimal="13.00"
-lastUpdateDate="2016-02-21"
-lastUpdateTime="01:24:00"
-handicap=""/>
-<participant
-name="Chris Eubank Jr Round 3"
-id="1107559255"
-odds="14/1"
-oddsDecimal="15.00"
-lastUpdateDate="2016-02-21"
-lastUpdateTime="01:24:00"
-handicap=""/>
-<participant
-name="Nick Blackwell Round 3"
-id="1107559254"
-odds="40/1"
-oddsDecimal="41.00"
-lastUpdateDate="2016-02-21"
-lastUpdateTime="01:24:00"
-handicap=""/>
-<participant
-name="Chris Eubank Jr Round 2"
-id="1107559253"
-odds="16/1"
-oddsDecimal="17.00"
-lastUpdateDate="2016-02-21"
-lastUpdateTime="01:24:00"
-handicap=""/>
-<participant
-name="Nick Blackwell Round 2"
-id="1107559252"
-odds="50/1"
-oddsDecimal="51.00"
-lastUpdateDate="2016-02-21"
-lastUpdateTime="01:24:00"
-handicap=""/>
-<participant
-name="Chris Eubank Jr Round 1"
-id="1107559251"
-odds="20/1"
-oddsDecimal="21.00"
-lastUpdateDate="2016-02-21"
-lastUpdateTime="01:24:00"
-handicap=""/>
-<participant
-name="Nick Blackwell Round 1"
-id="1107559250"
-odds="66/1"
-oddsDecimal="67.00"
-lastUpdateDate="2016-02-21"
-lastUpdateTime="01:24:00"
-handicap=""/>
-<participant
-name="Draw"
-id="1107559276"
-odds="22/1"
-oddsDecimal="23.00"
-lastUpdateDate="2016-02-21"
-lastUpdateTime="01:24:00"
-handicap=""/>
-<participant
-name="Chris Eubank Jr On Points"
-id="1107559275"
-odds="11/4"
-oddsDecimal="3.75"
-lastUpdateDate="2016-02-21"
-lastUpdateTime="01:24:00"
-handicap=""/>
-<participant
-name="Nick Blackwell On Points"
-id="1107559274"
-odds="12/1"
-oddsDecimal="13.00"
-lastUpdateDate="2016-02-21"
-lastUpdateTime="01:24:00"
-handicap=""/>
-<participant
-name="Chris Eubank Jr Round 12"
-id="1107559273"
-odds="22/1"
-oddsDecimal="23.00"
-lastUpdateDate="2016-02-21"
-lastUpdateTime="01:24:00"
-handicap=""/>
-<participant
-name="Nick Blackwell Round 12"
-id="1107559272"
-odds="50/1"
-oddsDecimal="51.00"
-lastUpdateDate="2016-02-21"
-lastUpdateTime="01:24:00"
-handicap=""/>
-<participant
-name="Chris Eubank Jr Round 11"
-id="1107559271"
-odds="16/1"
-oddsDecimal="17.00"
-lastUpdateDate="2016-02-21"
-lastUpdateTime="01:24:00"
-handicap=""/>
-<participant
-name="Nick Blackwell Round 11"
-id="1107559270"
-odds="40/1"
-oddsDecimal="41.00"
-lastUpdateDate="2016-02-21"
-lastUpdateTime="01:24:00"
-handicap=""/>
-<participant
-name="Chris Eubank Jr Round 10"
-id="1107559269"
-odds="14/1"
-oddsDecimal="15.00"
-lastUpdateDate="2016-02-21"
-lastUpdateTime="01:24:00"
-handicap=""/>
-<participant
-name="Nick Blackwell Round 10"
-id="1107559268"
-odds="40/1"
-oddsDecimal="41.00"
-lastUpdateDate="2016-02-21"
-lastUpdateTime="01:24:00"
-handicap=""/>
-<participant
-name="Chris Eubank Jr Round 9"
-id="1107559267"
-odds="12/1"
-oddsDecimal="13.00"
-lastUpdateDate="2016-02-21"
-lastUpdateTime="01:24:00"
-handicap=""/>
-</market>
-<market
-id="336979969"
-name="Nick Blackwell v Chris Eubank Jr - Grouped Round Betting"
-url="http://sports.williamhill.com/bet/en-gb/betting/e/8746529/Nick%2dBlackwell%2dv%2dChris%2dEubank%2dJr"
-date="2016-03-26"
-time="22:00:00"
-betTillDate="2016-03-26"
-betTillTime="22:00:00"
-lastUpdateDate="2016-02-21"
-lastUpdateTime="00:52:03"
-placeAvailable="N"
-forcastAvailable="N"
-tricastAvailable="N"
-eachwayAvailable="N"
-cashoutAvailable="N"
-startingPriceAvailable="N"
-livePriceAvailable="Y"
-guarenteedPriceAvailable="N"
-firstPriceAvailable="N"
->
-<participant
-name="Chris Eubank Jr Round 4-6"
-id="1107559284"
-odds="10/3"
-oddsDecimal="4.33"
-lastUpdateDate="2016-02-21"
-lastUpdateTime="01:24:00"
-handicap=""/>
-<participant
-name="Nick Blackwell Round 1-3"
-id="1107559277"
-odds="18/1"
-oddsDecimal="19.00"
-lastUpdateDate="2016-02-21"
-lastUpdateTime="01:24:00"
-handicap=""/>
-<participant
-name="Chris Eubank Jr Round 1-3"
-id="1107559283"
-odds="11/2"
-oddsDecimal="6.50"
-lastUpdateDate="2016-02-21"
-lastUpdateTime="01:24:00"
-handicap=""/>
-<participant
-name="Chris Eubank Jr Round 7-9"
-id="1107559285"
-odds="10/3"
-oddsDecimal="4.33"
-lastUpdateDate="2016-02-21"
-lastUpdateTime="01:24:00"
-handicap=""/>
-<participant
-name="Chris Eubank Jr Round 10-12"
-id="1107559286"
-odds="5/1"
-oddsDecimal="6.00"
-lastUpdateDate="2016-02-21"
-lastUpdateTime="01:24:00"
-handicap=""/>
-<participant
-name="Chris Eubank Jr on Points"
-id="1107559287"
-odds="11/4"
-oddsDecimal="3.75"
-lastUpdateDate="2016-02-21"
-lastUpdateTime="01:24:00"
-handicap=""/>
-<participant
-name="Nick Blackwell Round 4-6"
-id="1107559278"
-odds="16/1"
-oddsDecimal="17.00"
-lastUpdateDate="2016-02-21"
-lastUpdateTime="01:24:00"
-handicap=""/>
-<participant
-name="Nick Blackwell Round 7-9"
-id="1107559279"
-odds="16/1"
-oddsDecimal="17.00"
-lastUpdateDate="2016-02-21"
-lastUpdateTime="01:24:00"
-handicap=""/>
-<participant
-name="Nick Blackwell Round 10-12"
-id="1107559280"
-odds="20/1"
-oddsDecimal="21.00"
-lastUpdateDate="2016-02-21"
-lastUpdateTime="01:24:00"
-handicap=""/>
-<participant
-name="Nick Blackwell on Points"
-id="1107559281"
-odds="12/1"
-oddsDecimal="13.00"
-lastUpdateDate="2016-02-21"
-lastUpdateTime="01:24:00"
-handicap=""/>
-<participant
-name="Draw"
-id="1107559282"
-odds="22/1"
-oddsDecimal="23.00"
-lastUpdateDate="2016-02-21"
-lastUpdateTime="01:24:00"
-handicap=""/>
-</market>
-<market
-id="336979970"
-name="Nick Blackwell v Chris Eubank Jr - Fight to go the Distance"
-url="http://sports.williamhill.com/bet/en-gb/betting/e/8746529/Nick%2dBlackwell%2dv%2dChris%2dEubank%2dJr"
-date="2016-03-26"
-time="22:00:00"
-betTillDate="2016-03-26"
-betTillTime="22:00:00"
-lastUpdateDate="2016-02-21"
-lastUpdateTime="00:52:03"
-placeAvailable="N"
-forcastAvailable="N"
-tricastAvailable="N"
-eachwayAvailable="N"
-cashoutAvailable="N"
-startingPriceAvailable="N"
-livePriceAvailable="Y"
-guarenteedPriceAvailable="N"
-firstPriceAvailable="N"
->
-<participant
-name="No"
-id="1107559289"
-odds="4/11"
-oddsDecimal="1.36"
-lastUpdateDate="2016-02-21"
-lastUpdateTime="01:24:00"
-handicap=""/>
-<participant
-name="Yes"
-id="1107559288"
-odds="2/1"
-oddsDecimal="3.00"
-lastUpdateDate="2016-02-21"
-lastUpdateTime="01:24:00"
-handicap=""/>
-</market>
-</type>
-<type
-id="716"
-name="Welterweight"
-url="http://sports.williamhill.com/bet/betting/t/716"
-lastUpdateDate="2016-02-21"
-lastUpdateTime="00:45:33">
-<market
-id="330123219"
-name="Sam Eggington v Bradley Skeete - Bout Betting"
-url="http://sports.williamhill.com/bet/en-gb/betting/e/8773588/Sam%2dEggington%2dv%2dBradley%2dSkeete"
-date="2016-03-05"
-time="21:00:00"
-betTillDate="2016-03-05"
-betTillTime="21:00:00"
-lastUpdateDate="2016-02-27"
-lastUpdateTime="15:56:20"
-placeAvailable="N"
-forcastAvailable="N"
-tricastAvailable="N"
-eachwayAvailable="N"
-cashoutAvailable="Y"
-startingPriceAvailable="N"
-livePriceAvailable="Y"
-guarenteedPriceAvailable="N"
-firstPriceAvailable="N"
->
-<participant
-name="Draw"
-id="1086757342"
-odds="20/1"
-oddsDecimal="21.00"
-lastUpdateDate="2016-02-27"
-lastUpdateTime="15:56:47"
-handicap=""/>
-<participant
-name="Sam Eggington"
-id="1086757340"
-odds="4/6"
-oddsDecimal="1.67"
-lastUpdateDate="2016-02-27"
-lastUpdateTime="15:56:39"
-handicap=""/>
-<participant
-name="Bradley Skeete"
-id="1086757344"
-odds="5/4"
-oddsDecimal="2.25"
-lastUpdateDate="2016-02-27"
-lastUpdateTime="15:56:53"
-handicap=""/>
-</market>
-<market
-id="329936966"
-name="Kell Brook v Kevin Bizier - Bout Betting"
-url="http://sports.williamhill.com/bet/en-gb/betting/e/8769519/Kell%2dBrook%2dv%2dKevin%2dBizier"
-date="2016-03-26"
-time="22:00:00"
-betTillDate="2016-03-26"
-betTillTime="22:00:00"
-lastUpdateDate="2016-02-21"
-lastUpdateTime="00:52:04"
-placeAvailable="N"
-forcastAvailable="N"
-tricastAvailable="N"
-eachwayAvailable="N"
-cashoutAvailable="N"
-startingPriceAvailable="N"
-livePriceAvailable="Y"
-guarenteedPriceAvailable="N"
-firstPriceAvailable="N"
->
-<participant
-name="Draw"
-id="1086195944"
-odds="33/1"
-oddsDecimal="34.00"
-lastUpdateDate="2016-02-21"
-lastUpdateTime="01:19:07"
-handicap=""/>
-<participant
-name="Kell Brook"
-id="1086195943"
-odds="1/25"
-oddsDecimal="1.04"
-lastUpdateDate="2016-02-21"
-lastUpdateTime="01:19:07"
-handicap=""/>
-<participant
-name="Kevin Bizier"
-id="1086195945"
-odds="10/1"
-oddsDecimal="11.00"
-lastUpdateDate="2016-02-21"
-lastUpdateTime="01:19:07"
-handicap=""/>
-</market>
-<market
-id="325524135"
-name="Manny Pacquiao v Timothy Bradley - Bout Betting"
-url="http://sports.williamhill.com/bet/en-gb/betting/e/8693389/Manny%2dPacquiao%2dv%2dTimothy%2dBradley"
-date="2016-04-10"
-time="04:00:00"
-betTillDate="2016-04-10"
-betTillTime="04:00:00"
-lastUpdateDate="2016-02-21"
-lastUpdateTime="00:52:02"
-placeAvailable="N"
-forcastAvailable="N"
-tricastAvailable="N"
-eachwayAvailable="N"
-cashoutAvailable="N"
-startingPriceAvailable="N"
-livePriceAvailable="Y"
-guarenteedPriceAvailable="N"
-firstPriceAvailable="N"
->
-<participant
-name="Draw"
-id="1072381351"
-odds="22/1"
-oddsDecimal="23.00"
-lastUpdateDate="2016-02-21"
-lastUpdateTime="01:19:03"
-handicap=""/>
-<participant
-name="Timothy Bradley"
-id="1072381352"
-odds="21/10"
-oddsDecimal="3.10"
-lastUpdateDate="2016-02-21"
-lastUpdateTime="01:19:03"
-handicap=""/>
-<participant
-name="Manny Pacquiao"
-id="1072381350"
-odds="4/11"
-oddsDecimal="1.36"
-lastUpdateDate="2016-02-21"
-lastUpdateTime="01:19:03"
-handicap=""/>
-</market>
-</type>
-<type
-id="717"
-name="Lightweight"
-url="http://sports.williamhill.com/bet/betting/t/717"
-lastUpdateDate="2016-02-21"
-lastUpdateTime="00:45:33">
-<market
-id="319429609"
-name="Terry Flanagan v Derry Mathews - Bout Betting"
-url="http://sports.williamhill.com/bet/en-gb/betting/e/8553055/Terry%2dFlanagan%2dv%2dDerry%2dMatthews"
-date="2016-03-12"
-time="22:00:00"
-betTillDate="2016-03-12"
-betTillTime="22:00:00"
-lastUpdateDate="2016-02-21"
-lastUpdateTime="00:51:10"
-placeAvailable="N"
-forcastAvailable="N"
-tricastAvailable="N"
-eachwayAvailable="N"
-cashoutAvailable="N"
-startingPriceAvailable="N"
-livePriceAvailable="Y"
-guarenteedPriceAvailable="N"
-firstPriceAvailable="N"
->
-<participant
-name="Terry Flanagan"
-id="1053219661"
-odds="1/5"
-oddsDecimal="1.20"
-lastUpdateDate="2016-02-21"
-lastUpdateTime="01:18:23"
-handicap=""/>
-<participant
-name="Draw"
-id="1053219662"
-odds="25/1"
-oddsDecimal="26.00"
-lastUpdateDate="2016-02-21"
-lastUpdateTime="01:18:23"
-handicap=""/>
-<participant
-name="Derry Mathews"
-id="1053219663"
-odds="7/2"
-oddsDecimal="4.50"
-lastUpdateDate="2016-02-21"
-lastUpdateTime="01:18:23"
-handicap=""/>
-</market>
-<market
-id="329844894"
-name="Terry Flanagan v Derry Mathews - Method Of Result"
-url="http://sports.williamhill.com/bet/en-gb/betting/e/8553055/Terry%2dFlanagan%2dv%2dDerry%2dMatthews"
-date="2016-03-12"
-time="22:00:00"
-betTillDate="2016-03-12"
-betTillTime="22:00:00"
-lastUpdateDate="2016-02-21"
-lastUpdateTime="00:51:10"
-placeAvailable="N"
-forcastAvailable="N"
-tricastAvailable="N"
-eachwayAvailable="N"
-cashoutAvailable="N"
-startingPriceAvailable="N"
-livePriceAvailable="Y"
-guarenteedPriceAvailable="N"
-firstPriceAvailable="N"
->
-<participant
-name="Terry Flanagan By KO TKO or DQ"
-id="1085922148"
-odds="4/6"
-oddsDecimal="1.67"
-lastUpdateDate="2016-02-21"
-lastUpdateTime="01:19:07"
-handicap=""/>
-<participant
-name="Derry Mathews By KO TKO or DQ"
-id="1085922149"
-odds="11/2"
-oddsDecimal="6.50"
-lastUpdateDate="2016-02-21"
-lastUpdateTime="01:19:07"
-handicap=""/>
-<participant
-name="Terry Flanagan By Decision or Technical Decision"
-id="1085922150"
-odds="9/4"
-oddsDecimal="3.25"
-lastUpdateDate="2016-02-21"
-lastUpdateTime="01:19:07"
-handicap=""/>
-<participant
-name="Derry Mathews By Decision or Technical Decision"
-id="1085922151"
-odds="10/1"
-oddsDecimal="11.00"
-lastUpdateDate="2016-02-21"
-lastUpdateTime="01:19:07"
-handicap=""/>
-<participant
-name="Draw"
-id="1085922152"
-odds="25/1"
-oddsDecimal="26.00"
-lastUpdateDate="2016-02-21"
-lastUpdateTime="01:19:07"
-handicap=""/>
-</market>
-<market
-id="329844895"
-name="Terry Flanagan v Derry Mathews - Round Betting"
-url="http://sports.williamhill.com/bet/en-gb/betting/e/8553055/Terry%2dFlanagan%2dv%2dDerry%2dMatthews"
-date="2016-03-12"
-time="22:00:00"
-betTillDate="2016-03-12"
-betTillTime="22:00:00"
-lastUpdateDate="2016-02-21"
-lastUpdateTime="00:51:10"
-placeAvailable="N"
-forcastAvailable="N"
-tricastAvailable="N"
-eachwayAvailable="N"
-cashoutAvailable="N"
-startingPriceAvailable="N"
-livePriceAvailable="Y"
-guarenteedPriceAvailable="N"
-firstPriceAvailable="N"
->
-<participant
-name="Terry Flanagan On Points"
-id="1085922177"
-odds="9/4"
-oddsDecimal="3.25"
-lastUpdateDate="2016-02-21"
-lastUpdateTime="01:19:07"
-handicap=""/>
-<participant
-name="Draw"
-id="1085922179"
-odds="25/1"
-oddsDecimal="26.00"
-lastUpdateDate="2016-02-21"
-lastUpdateTime="01:19:07"
-handicap=""/>
-<participant
-name="Derry Mathews On Points"
-id="1085922178"
-odds="10/1"
-oddsDecimal="11.00"
-lastUpdateDate="2016-02-21"
-lastUpdateTime="01:19:07"
-handicap=""/>
-<participant
-name="Derry Mathews Round 12"
-id="1085922176"
-odds="50/1"
-oddsDecimal="51.00"
-lastUpdateDate="2016-02-21"
-lastUpdateTime="01:19:07"
-handicap=""/>
-<participant
-name="Terry Flanagan Round 12"
-id="1085922175"
-odds="25/1"
-oddsDecimal="26.00"
-lastUpdateDate="2016-02-21"
-lastUpdateTime="01:19:07"
-handicap=""/>
-<participant
-name="Derry Mathews Round 11"
-id="1085922174"
-odds="40/1"
-oddsDecimal="41.00"
-lastUpdateDate="2016-02-21"
-lastUpdateTime="01:19:07"
-handicap=""/>
-<participant
-name="Terry Flanagan Round 11"
-id="1085922173"
-odds="20/1"
-oddsDecimal="21.00"
-lastUpdateDate="2016-02-21"
-lastUpdateTime="01:19:07"
-handicap=""/>
-<participant
-name="Derry Mathews Round 10"
-id="1085922172"
-odds="33/1"
-oddsDecimal="34.00"
-lastUpdateDate="2016-02-21"
-lastUpdateTime="01:19:07"
-handicap=""/>
-<participant
-name="Terry Flanagan Round 10"
-id="1085922171"
-odds="16/1"
-oddsDecimal="17.00"
-lastUpdateDate="2016-02-21"
-lastUpdateTime="01:19:07"
-handicap=""/>
-<participant
-name="Derry Mathews Round 9"
-id="1085922170"
-odds="33/1"
-oddsDecimal="34.00"
-lastUpdateDate="2016-02-21"
-lastUpdateTime="01:19:07"
-handicap=""/>
-<participant
-name="Terry Flanagan Round 9"
-id="1085922169"
-odds="14/1"
-oddsDecimal="15.00"
-lastUpdateDate="2016-02-21"
-lastUpdateTime="01:19:07"
-handicap=""/>
-<participant
-name="Derry Mathews Round 8"
-id="1085922168"
-odds="33/1"
-oddsDecimal="34.00"
-lastUpdateDate="2016-02-21"
-lastUpdateTime="01:19:07"
-handicap=""/>
-<participant
-name="Terry Flanagan Round 8"
-id="1085922167"
-odds="14/1"
-oddsDecimal="15.00"
-lastUpdateDate="2016-02-21"
-lastUpdateTime="01:19:07"
-handicap=""/>
-<participant
-name="Derry Mathews Round 7"
-id="1085922166"
-odds="33/1"
-oddsDecimal="34.00"
-lastUpdateDate="2016-02-21"
-lastUpdateTime="01:19:07"
-handicap=""/>
-<participant
-name="Terry Flanagan Round 7"
-id="1085922165"
-odds="12/1"
-oddsDecimal="13.00"
-lastUpdateDate="2016-02-21"
-lastUpdateTime="01:19:07"
-handicap=""/>
-<participant
-name="Derry Mathews Round 6"
-id="1085922164"
-odds="33/1"
-oddsDecimal="34.00"
-lastUpdateDate="2016-02-21"
-lastUpdateTime="01:19:07"
-handicap=""/>
-<participant
-name="Terry Flanagan Round 6"
-id="1085922163"
-odds="12/1"
-oddsDecimal="13.00"
-lastUpdateDate="2016-02-21"
-lastUpdateTime="01:19:07"
-handicap=""/>
-<participant
-name="Derry Mathews Round 5"
-id="1085922162"
-odds="33/1"
-oddsDecimal="34.00"
-lastUpdateDate="2016-02-21"
-lastUpdateTime="01:19:07"
-handicap=""/>
-<participant
-name="Terry Flanagan Round 5"
-id="1085922161"
-odds="12/1"
-oddsDecimal="13.00"
-lastUpdateDate="2016-02-21"
-lastUpdateTime="01:19:07"
-handicap=""/>
-<participant
-name="Derry Mathews Round 4"
-id="1085922160"
-odds="33/1"
-oddsDecimal="34.00"
-lastUpdateDate="2016-02-21"
-lastUpdateTime="01:19:07"
-handicap=""/>
-<participant
-name="Terry Flanagan Round 4"
-id="1085922159"
-odds="14/1"
-oddsDecimal="15.00"
-lastUpdateDate="2016-02-21"
-lastUpdateTime="01:19:07"
-handicap=""/>
-<participant
-name="Derry Mathews Round 3"
-id="1085922158"
-odds="33/1"
-oddsDecimal="34.00"
-lastUpdateDate="2016-02-21"
-lastUpdateTime="01:19:07"
-handicap=""/>
-<participant
-name="Terry Flanagan Round 3"
-id="1085922157"
-odds="16/1"
-oddsDecimal="17.00"
-lastUpdateDate="2016-02-21"
-lastUpdateTime="01:19:07"
-handicap=""/>
-<participant
-name="Derry Mathews Round 2"
-id="1085922156"
-odds="33/1"
-oddsDecimal="34.00"
-lastUpdateDate="2016-02-21"
-lastUpdateTime="01:19:07"
-handicap=""/>
-<participant
-name="Terry Flanagan Round 2"
-id="1085922155"
-odds="18/1"
-oddsDecimal="19.00"
-lastUpdateDate="2016-02-21"
-lastUpdateTime="01:19:07"
-handicap=""/>
-<participant
-name="Derry Mathews Round 1"
-id="1085922154"
-odds="50/1"
-oddsDecimal="51.00"
-lastUpdateDate="2016-02-21"
-lastUpdateTime="01:19:07"
-handicap=""/>
-<participant
-name="Terry Flanagan Round 1"
-id="1085922153"
-odds="22/1"
-oddsDecimal="23.00"
-lastUpdateDate="2016-02-21"
-lastUpdateTime="01:19:07"
-handicap=""/>
-</market>
-<market
-id="329844896"
-name="Terry Flanagan v Derry Mathews - Grouped Round Betting"
-url="http://sports.williamhill.com/bet/en-gb/betting/e/8553055/Terry%2dFlanagan%2dv%2dDerry%2dMatthews"
-date="2016-03-12"
-time="22:00:00"
-betTillDate="2016-03-12"
-betTillTime="22:00:00"
-lastUpdateDate="2016-02-21"
-lastUpdateTime="00:51:10"
-placeAvailable="N"
-forcastAvailable="N"
-tricastAvailable="N"
-eachwayAvailable="N"
-cashoutAvailable="N"
-startingPriceAvailable="N"
-livePriceAvailable="Y"
-guarenteedPriceAvailable="N"
-firstPriceAvailable="N"
->
-<participant
-name="Derry Mathews On Points"
-id="1085922190"
-odds="10/1"
-oddsDecimal="11.00"
-lastUpdateDate="2016-02-21"
-lastUpdateTime="01:19:07"
-handicap=""/>
-<participant
-name="Terry Flanagan Round 7-9"
-id="1085922182"
-odds="9/2"
-oddsDecimal="5.50"
-lastUpdateDate="2016-02-21"
-lastUpdateTime="01:19:07"
-handicap=""/>
-<participant
-name="Derry Mathews Round 7-9"
-id="1085922188"
-odds="12/1"
-oddsDecimal="13.00"
-lastUpdateDate="2016-02-21"
-lastUpdateTime="01:19:07"
-handicap=""/>
-<participant
-name="Derry Mathews Round 10-12"
-id="1085922189"
-odds="16/1"
-oddsDecimal="17.00"
-lastUpdateDate="2016-02-21"
-lastUpdateTime="01:19:07"
-handicap=""/>
-<participant
-name="Terry Flanagan Round 10-12"
-id="1085922183"
-odds="6/1"
-oddsDecimal="7.00"
-lastUpdateDate="2016-02-21"
-lastUpdateTime="01:19:07"
-handicap=""/>
-<participant
-name="Terry Flanagan On Points"
-id="1085922184"
-odds="9/4"
-oddsDecimal="3.25"
-lastUpdateDate="2016-02-21"
-lastUpdateTime="01:19:07"
-handicap=""/>
-<participant
-name="Draw"
-id="1085922185"
-odds="25/1"
-oddsDecimal="26.00"
-lastUpdateDate="2016-02-21"
-lastUpdateTime="01:19:07"
-handicap=""/>
-<participant
-name="Terry Flanagan Round 4-6"
-id="1085922181"
-odds="4/1"
-oddsDecimal="5.00"
-lastUpdateDate="2016-02-21"
-lastUpdateTime="01:19:07"
-handicap=""/>
-<participant
-name="Terry Flanagan Round 1-3"
-id="1085922180"
-odds="11/2"
-oddsDecimal="6.50"
-lastUpdateDate="2016-02-21"
-lastUpdateTime="01:19:07"
-handicap=""/>
-<participant
-name="Derry Mathews Round 1-3"
-id="1085922186"
-odds="16/1"
-oddsDecimal="17.00"
-lastUpdateDate="2016-02-21"
-lastUpdateTime="01:19:07"
-handicap=""/>
-<participant
-name="Derry Mathews Round 4-6"
-id="1085922187"
-odds="12/1"
-oddsDecimal="13.00"
-lastUpdateDate="2016-02-21"
-lastUpdateTime="01:19:07"
-handicap=""/>
-</market>
-<market
-id="334543952"
-name="Scott Cardle v Sean Dodd - Bout Betting"
-url="http://sports.williamhill.com/bet/en-gb/betting/e/8842409/Scott%2dCardle%2dv%2dSean%2dDodd"
-date="2016-04-02"
-time="20:00:00"
-betTillDate="2016-04-02"
-betTillTime="20:00:00"
-lastUpdateDate="2016-02-21"
-lastUpdateTime="00:52:10"
-placeAvailable="N"
-forcastAvailable="N"
-tricastAvailable="N"
-eachwayAvailable="N"
-cashoutAvailable="N"
-startingPriceAvailable="N"
-livePriceAvailable="Y"
-guarenteedPriceAvailable="N"
-firstPriceAvailable="N"
->
-<participant
-name="Scott Cardle"
-id="1100097880"
-odds="4/11"
-oddsDecimal="1.36"
-lastUpdateDate="2016-02-21"
-lastUpdateTime="01:19:16"
-handicap=""/>
-<participant
-name="Draw"
-id="1100097881"
-odds="20/1"
-oddsDecimal="21.00"
-lastUpdateDate="2016-02-21"
-lastUpdateTime="01:19:16"
-handicap=""/>
-<participant
-name="Sean Dodd"
-id="1100097882"
-odds="21/10"
-oddsDecimal="3.10"
-lastUpdateDate="2016-02-21"
-lastUpdateTime="01:19:16"
-handicap=""/>
-</market>
-</type>
-<type
-id="718"
-name="Featherweight"
-url="http://sports.williamhill.com/bet/betting/t/718"
-lastUpdateDate="2016-02-21"
-lastUpdateTime="00:45:33">
-<market
-id="330123220"
-name="Oscar Valdez v Evgeny Gradovich - Bout Betting"
-url="http://sports.williamhill.com/bet/en-gb/betting/e/8773589/Oscar%2dValdez%2dv%2dEvgeny%2dGradovich"
-date="2016-04-10"
-time="03:00:00"
-betTillDate="2016-04-10"
-betTillTime="03:00:00"
-lastUpdateDate="2016-02-21"
-lastUpdateTime="00:52:04"
-placeAvailable="N"
-forcastAvailable="N"
-tricastAvailable="N"
-eachwayAvailable="N"
-cashoutAvailable="N"
-startingPriceAvailable="N"
-livePriceAvailable="Y"
-guarenteedPriceAvailable="N"
-firstPriceAvailable="N"
->
-<participant
-name="Oscar Valdez"
-id="1086757346"
-odds="1/4"
-oddsDecimal="1.25"
-lastUpdateDate="2016-02-21"
-lastUpdateTime="01:19:07"
-handicap=""/>
-<participant
-name="Evgeny Gradovich"
-id="1086757350"
-odds="3/1"
-oddsDecimal="4.00"
-lastUpdateDate="2016-02-21"
-lastUpdateTime="01:19:07"
-handicap=""/>
-<participant
-name="Draw"
-id="1086757348"
-odds="22/1"
-oddsDecimal="23.00"
-lastUpdateDate="2016-02-21"
-lastUpdateTime="01:19:07"
-handicap=""/>
-</market>
-<market
-id="338178444"
-name="Josh Warrington v Hisashi Amagasa - Bout Betting"
-url="http://sports.williamhill.com/bet/en-gb/betting/e/8894177/Josh%2dWarrington%2dv%2dHisashi%2dAmagasa"
-date="2016-04-16"
-time="22:00:00"
-betTillDate="2016-04-16"
-betTillTime="22:00:00"
-lastUpdateDate="2016-02-21"
-lastUpdateTime="00:59:12"
-placeAvailable="N"
-forcastAvailable="N"
-tricastAvailable="N"
-eachwayAvailable="N"
-cashoutAvailable="N"
-startingPriceAvailable="N"
-livePriceAvailable="Y"
-guarenteedPriceAvailable="N"
-firstPriceAvailable="N"
->
-<participant
-name="Draw"
-id="1111349016"
-odds="20/1"
-oddsDecimal="21.00"
-lastUpdateDate="2016-02-21"
-lastUpdateTime="01:26:35"
-handicap=""/>
-<participant
-name="Josh Warrington"
-id="1111349015"
-odds="1/6"
-oddsDecimal="1.17"
-lastUpdateDate="2016-02-21"
-lastUpdateTime="01:26:35"
-handicap=""/>
-<participant
-name="Hisashi Amagasa"
-id="1111349017"
-odds="4/1"
-oddsDecimal="5.00"
-lastUpdateDate="2016-02-21"
-lastUpdateTime="01:26:35"
-handicap=""/>
-</market>
-</type>
-<type
-id="957"
-name="Super Bantamweight"
-url="http://sports.williamhill.com/bet/betting/t/957"
-lastUpdateDate="2016-02-21"
-lastUpdateTime="00:45:33">
-<market
-id="341212212"
-name="Bobby Jenkinson v Gamal Yafai - Bout Betting"
-url="http://sports.williamhill.com/bet/en-gb/betting/e/8936983/Bobby%2dJenkinson%2dv%2dGamal%2dYafai"
-date="2016-03-05"
-time="21:00:00"
-betTillDate="2016-03-05"
-betTillTime="21:00:00"
-lastUpdateDate="2016-02-27"
-lastUpdateTime="15:56:08"
-placeAvailable="N"
-forcastAvailable="N"
-tricastAvailable="N"
-eachwayAvailable="N"
-cashoutAvailable="Y"
-startingPriceAvailable="N"
-livePriceAvailable="Y"
-guarenteedPriceAvailable="N"
-firstPriceAvailable="N"
->
-<participant
-name="Bobby Jenkinson"
-id="1120717110"
-odds="5/1"
-oddsDecimal="6.00"
-lastUpdateDate="2016-02-27"
-lastUpdateTime="15:57:32"
-handicap=""/>
-<participant
-name="Gamal Yafai"
-id="1120717112"
-odds="1/9"
-oddsDecimal="1.11"
-lastUpdateDate="2016-02-27"
-lastUpdateTime="15:57:41"
-handicap=""/>
-<participant
-name="Draw"
-id="1120717111"
-odds="33/1"
-oddsDecimal="34.00"
-lastUpdateDate="2016-02-27"
-lastUpdateTime="15:57:37"
-handicap=""/>
-</market>
-<market
-id="334543951"
-name="Guillermo Rigondeaux v James Dickens - Bout Betting"
-url="http://sports.williamhill.com/bet/en-gb/betting/e/8842408/Guillermo%2dRigondeaux%2dv%2dJames%2dDickens"
-date="2016-03-12"
-time="21:00:00"
-betTillDate="2016-03-12"
-betTillTime="21:00:00"
-lastUpdateDate="2016-02-22"
-lastUpdateTime="12:05:34"
-placeAvailable="N"
-forcastAvailable="N"
-tricastAvailable="N"
-eachwayAvailable="N"
-cashoutAvailable="N"
-startingPriceAvailable="N"
-livePriceAvailable="Y"
-guarenteedPriceAvailable="N"
-firstPriceAvailable="N"
->
-<participant
-name="James Dickens"
-id="1100097879"
-odds="12/1"
-oddsDecimal="13.00"
-lastUpdateDate="2016-02-22"
-lastUpdateTime="12:05:34"
-handicap=""/>
-<participant
-name="Draw"
-id="1100097878"
-odds="33/1"
-oddsDecimal="34.00"
-lastUpdateDate="2016-02-22"
-lastUpdateTime="12:05:34"
-handicap=""/>
-<participant
-name="Guillermo Rigondeaux"
-id="1100097877"
-odds="1/50"
-oddsDecimal="1.02"
-lastUpdateDate="2016-02-22"
-lastUpdateTime="12:05:34"
-handicap=""/>
-</market>
-</type>
-<type
-id="1265"
-name="Super Featherweight"
-url="http://sports.williamhill.com/bet/betting/t/1265"
-lastUpdateDate="2016-02-21"
-lastUpdateTime="00:45:33">
-<market
-id="325524133"
-name="Jose Pedraza v Stephen Smith - Bout Betting"
-url="http://sports.williamhill.com/bet/en-gb/betting/e/8693387/Jose%2dPedraza%2dv%2dStephen%2dSmith"
-date="2016-03-27"
-time="02:00:00"
-betTillDate="2016-03-27"
-betTillTime="02:00:00"
-lastUpdateDate="2016-02-21"
-lastUpdateTime="00:52:02"
-placeAvailable="N"
-forcastAvailable="N"
-tricastAvailable="N"
-eachwayAvailable="N"
-cashoutAvailable="N"
-startingPriceAvailable="N"
-livePriceAvailable="Y"
-guarenteedPriceAvailable="N"
-firstPriceAvailable="N"
->
-<participant
-name="Jose Pedraza"
-id="1072381344"
-odds="4/9"
-oddsDecimal="1.44"
-lastUpdateDate="2016-02-21"
-lastUpdateTime="01:19:03"
-handicap=""/>
-<participant
-name="Stephen Smith"
-id="1072381346"
-odds="7/4"
-oddsDecimal="2.75"
-lastUpdateDate="2016-02-21"
-lastUpdateTime="01:19:03"
-handicap=""/>
-<participant
-name="Draw"
-id="1072381345"
-odds="20/1"
-oddsDecimal="21.00"
-lastUpdateDate="2016-02-21"
-lastUpdateTime="01:19:03"
-handicap=""/>
-</market>
-</type>
-<type
-id="5610"
-name="Catchweight"
-url="http://sports.williamhill.com/bet/betting/t/5610"
-lastUpdateDate="2016-02-21"
-lastUpdateTime="00:45:33">
-<market
-id="334101492"
-name="Saul Alvarez v Amir Khan - Bout Betting"
-url="http://sports.williamhill.com/bet/en-gb/betting/e/8837467/Saul%2dAlvarez%2dv%2dAmir%2dKhan"
-date="2016-05-08"
-time="04:00:00"
-betTillDate="2016-05-08"
-betTillTime="04:00:00"
-lastUpdateDate="2016-02-21"
-lastUpdateTime="00:52:10"
-placeAvailable="N"
-forcastAvailable="N"
-tricastAvailable="N"
-eachwayAvailable="N"
-cashoutAvailable="N"
-startingPriceAvailable="N"
-livePriceAvailable="Y"
-guarenteedPriceAvailable="N"
-firstPriceAvailable="N"
->
-<participant
-name="Saul Alvarez"
-id="1098791147"
-odds="1/3"
-oddsDecimal="1.33"
-lastUpdateDate="2016-02-21"
-lastUpdateTime="01:19:15"
-handicap=""/>
-<participant
-name="Draw"
-id="1098791148"
-odds="22/1"
-oddsDecimal="23.00"
-lastUpdateDate="2016-02-21"
-lastUpdateTime="01:19:15"
-handicap=""/>
-<participant
-name="Amir Khan"
-id="1098791149"
-odds="12/5"
-oddsDecimal="3.40"
-lastUpdateDate="2016-02-21"
-lastUpdateTime="01:19:15"
-handicap=""/>
-</market>
-<market
-id="334113396"
-name="Saul Alvarez v Amir Khan - Method Of Result"
-url="http://sports.williamhill.com/bet/en-gb/betting/e/8837467/Saul%2dAlvarez%2dv%2dAmir%2dKhan"
-date="2016-05-08"
-time="04:00:00"
-betTillDate="2016-05-08"
-betTillTime="04:00:00"
-lastUpdateDate="2016-02-21"
-lastUpdateTime="00:52:10"
-placeAvailable="N"
-forcastAvailable="N"
-tricastAvailable="N"
-eachwayAvailable="N"
-cashoutAvailable="N"
-startingPriceAvailable="N"
-livePriceAvailable="Y"
-guarenteedPriceAvailable="N"
-firstPriceAvailable="N"
->
-<participant
-name="Draw"
-id="1098827231"
-odds="22/1"
-oddsDecimal="23.00"
-lastUpdateDate="2016-02-21"
-lastUpdateTime="01:19:15"
-handicap=""/>
-<participant
-name="Amir Khan By Decision or Technical Decision"
-id="1098827230"
-odds="3/1"
-oddsDecimal="4.00"
-lastUpdateDate="2016-02-21"
-lastUpdateTime="01:19:15"
-handicap=""/>
-<participant
-name="Saul Alvarez By Decision or Technical Decision"
-id="1098827229"
-odds="5/1"
-oddsDecimal="6.00"
-lastUpdateDate="2016-02-21"
-lastUpdateTime="01:19:15"
-handicap=""/>
-<participant
-name="Amir Khan By KO TKO or DQ"
-id="1098827228"
-odds="14/1"
-oddsDecimal="15.00"
-lastUpdateDate="2016-02-21"
-lastUpdateTime="01:19:15"
-handicap=""/>
-<participant
-name="Saul Alvarez By KO TKO or DQ"
-id="1098827227"
-odds="1/2"
-oddsDecimal="1.50"
-lastUpdateDate="2016-02-21"
-lastUpdateTime="01:19:15"
-handicap=""/>
-</market>
-<market
-id="334113397"
-name="Saul Alvarez v Amir Khan - Round Betting"
-url="http://sports.williamhill.com/bet/en-gb/betting/e/8837467/Saul%2dAlvarez%2dv%2dAmir%2dKhan"
-date="2016-05-08"
-time="04:00:00"
-betTillDate="2016-05-08"
-betTillTime="04:00:00"
-lastUpdateDate="2016-02-21"
-lastUpdateTime="00:52:10"
-placeAvailable="N"
-forcastAvailable="N"
-tricastAvailable="N"
-eachwayAvailable="N"
-cashoutAvailable="N"
-startingPriceAvailable="N"
-livePriceAvailable="Y"
-guarenteedPriceAvailable="N"
-firstPriceAvailable="N"
->
-<participant
-name="Amir Khan Round 5"
-id="1098827241"
-odds="66/1"
-oddsDecimal="67.00"
-lastUpdateDate="2016-02-21"
-lastUpdateTime="01:19:15"
-handicap=""/>
-<participant
-name="Saul Alvarez Round 5"
-id="1098827240"
-odds="10/1"
-oddsDecimal="11.00"
-lastUpdateDate="2016-02-21"
-lastUpdateTime="01:19:15"
-handicap=""/>
-<participant
-name="Amir Khan Round 4"
-id="1098827239"
-odds="66/1"
-oddsDecimal="67.00"
-lastUpdateDate="2016-02-21"
-lastUpdateTime="01:19:15"
-handicap=""/>
-<participant
-name="Saul Alvarez Round 4"
-id="1098827238"
-odds="10/1"
-oddsDecimal="11.00"
-lastUpdateDate="2016-02-21"
-lastUpdateTime="01:19:15"
-handicap=""/>
-<participant
-name="Amir Khan Round 3"
-id="1098827237"
-odds="66/1"
-oddsDecimal="67.00"
-lastUpdateDate="2016-02-21"
-lastUpdateTime="01:19:15"
-handicap=""/>
-<participant
-name="Saul Alvarez Round 3"
-id="1098827236"
-odds="10/1"
-oddsDecimal="11.00"
-lastUpdateDate="2016-02-21"
-lastUpdateTime="01:19:15"
-handicap=""/>
-<participant
-name="Amir Khan Round 2"
-id="1098827235"
-odds="66/1"
-oddsDecimal="67.00"
-lastUpdateDate="2016-02-21"
-lastUpdateTime="01:19:15"
-handicap=""/>
-<participant
-name="Saul Alvarez Round 2"
-id="1098827234"
-odds="10/1"
-oddsDecimal="11.00"
-lastUpdateDate="2016-02-21"
-lastUpdateTime="01:19:15"
-handicap=""/>
-<participant
-name="Amir Khan Round 1"
-id="1098827233"
-odds="80/1"
-oddsDecimal="81.00"
-lastUpdateDate="2016-02-21"
-lastUpdateTime="01:19:15"
-handicap=""/>
-<participant
-name="Saul Alvarez Round 1"
-id="1098827232"
-odds="12/1"
-oddsDecimal="13.00"
-lastUpdateDate="2016-02-21"
-lastUpdateTime="01:19:15"
-handicap=""/>
-<participant
-name="Draw"
-id="1098827258"
-odds="22/1"
-oddsDecimal="23.00"
-lastUpdateDate="2016-02-21"
-lastUpdateTime="01:19:15"
-handicap=""/>
-<participant
-name="Amir Khan On Points"
-id="1098827257"
-odds="3/1"
-oddsDecimal="4.00"
-lastUpdateDate="2016-02-21"
-lastUpdateTime="01:19:15"
-handicap=""/>
-<participant
-name="Saul Alvarez On Points"
-id="1098827256"
-odds="5/1"
-oddsDecimal="6.00"
-lastUpdateDate="2016-02-21"
-lastUpdateTime="01:19:15"
-handicap=""/>
-<participant
-name="Amir Khan Round 12"
-id="1098827255"
-odds="100/1"
-oddsDecimal="101.00"
-lastUpdateDate="2016-02-21"
-lastUpdateTime="01:19:15"
-handicap=""/>
-<participant
-name="Saul Alvarez Round 12"
-id="1098827254"
-odds="33/1"
-oddsDecimal="34.00"
-lastUpdateDate="2016-02-21"
-lastUpdateTime="01:19:15"
-handicap=""/>
-<participant
-name="Amir Khan Round 11"
-id="1098827253"
-odds="80/1"
-oddsDecimal="81.00"
-lastUpdateDate="2016-02-21"
-lastUpdateTime="01:19:15"
-handicap=""/>
-<participant
-name="Saul Alvarez Round 11"
-id="1098827252"
-odds="28/1"
-oddsDecimal="29.00"
-lastUpdateDate="2016-02-21"
-lastUpdateTime="01:19:15"
-handicap=""/>
-<participant
-name="Amir Khan Round 10"
-id="1098827251"
-odds="80/1"
-oddsDecimal="81.00"
-lastUpdateDate="2016-02-21"
-lastUpdateTime="01:19:15"
-handicap=""/>
-<participant
-name="Saul Alvarez Round 10"
-id="1098827250"
-odds="22/1"
-oddsDecimal="23.00"
-lastUpdateDate="2016-02-21"
-lastUpdateTime="01:19:15"
-handicap=""/>
-<participant
-name="Amir Khan Round 9"
-id="1098827249"
-odds="66/1"
-oddsDecimal="67.00"
-lastUpdateDate="2016-02-21"
-lastUpdateTime="01:19:15"
-handicap=""/>
-<participant
-name="Saul Alvarez Round 9"
-id="1098827248"
-odds="18/1"
-oddsDecimal="19.00"
-lastUpdateDate="2016-02-21"
-lastUpdateTime="01:19:15"
-handicap=""/>
-<participant
-name="Amir Khan Round 8"
-id="1098827247"
-odds="66/1"
-oddsDecimal="67.00"
-lastUpdateDate="2016-02-21"
-lastUpdateTime="01:19:15"
-handicap=""/>
-<participant
-name="Saul Alvarez Round 8"
-id="1098827246"
-odds="14/1"
-oddsDecimal="15.00"
-lastUpdateDate="2016-02-21"
-lastUpdateTime="01:19:15"
-handicap=""/>
-<participant
-name="Amir Khan Round 7"
-id="1098827245"
-odds="66/1"
-oddsDecimal="67.00"
-lastUpdateDate="2016-02-21"
-lastUpdateTime="01:19:15"
-handicap=""/>
-<participant
-name="Saul Alvarez Round 7"
-id="1098827244"
-odds="12/1"
-oddsDecimal="13.00"
-lastUpdateDate="2016-02-21"
-lastUpdateTime="01:19:15"
-handicap=""/>
-<participant
-name="Amir Khan Round 6"
-id="1098827243"
-odds="66/1"
-oddsDecimal="67.00"
-lastUpdateDate="2016-02-21"
-lastUpdateTime="01:19:15"
-handicap=""/>
-<participant
-name="Saul Alvarez Round 6"
-id="1098827242"
-odds="11/1"
-oddsDecimal="12.00"
-lastUpdateDate="2016-02-21"
-lastUpdateTime="01:19:15"
-handicap=""/>
-</market>
-<market
-id="334113398"
-name="Saul Alvarez v Amir Khan - Grouped Round Betting"
-url="http://sports.williamhill.com/bet/en-gb/betting/e/8837467/Saul%2dAlvarez%2dv%2dAmir%2dKhan"
-date="2016-05-08"
-time="04:00:00"
-betTillDate="2016-05-08"
-betTillTime="04:00:00"
-lastUpdateDate="2016-02-21"
-lastUpdateTime="00:52:10"
-placeAvailable="N"
-forcastAvailable="N"
-tricastAvailable="N"
-eachwayAvailable="N"
-cashoutAvailable="N"
-startingPriceAvailable="N"
-livePriceAvailable="Y"
-guarenteedPriceAvailable="N"
-firstPriceAvailable="N"
->
-<participant
-name="Amir Khan on Points"
-id="1098827269"
-odds="3/1"
-oddsDecimal="4.00"
-lastUpdateDate="2016-02-21"
-lastUpdateTime="01:19:15"
-handicap=""/>
-<participant
-name="Saul Alvarez Round 1-3"
-id="1098827259"
-odds="10/3"
-oddsDecimal="4.33"
-lastUpdateDate="2016-02-21"
-lastUpdateTime="01:19:15"
-handicap=""/>
-<participant
-name="Saul Alvarez Round 7-9"
-id="1098827261"
-odds="5/1"
-oddsDecimal="6.00"
-lastUpdateDate="2016-02-21"
-lastUpdateTime="01:19:15"
-handicap=""/>
-<participant
-name="Amir Khan Round 4-6"
-id="1098827266"
-odds="25/1"
-oddsDecimal="26.00"
-lastUpdateDate="2016-02-21"
-lastUpdateTime="01:19:15"
-handicap=""/>
-<participant
-name="Saul Alvarez Round 10-12"
-id="1098827262"
-odds="9/1"
-oddsDecimal="10.00"
-lastUpdateDate="2016-02-21"
-lastUpdateTime="01:19:15"
-handicap=""/>
-<participant
-name="Saul Alvarez on Points"
-id="1098827263"
-odds="5/1"
-oddsDecimal="6.00"
-lastUpdateDate="2016-02-21"
-lastUpdateTime="01:19:15"
-handicap=""/>
-<participant
-name="Draw"
-id="1098827264"
-odds="22/1"
-oddsDecimal="23.00"
-lastUpdateDate="2016-02-21"
-lastUpdateTime="01:19:15"
-handicap=""/>
-<participant
-name="Amir Khan Round 1-3"
-id="1098827265"
-odds="28/1"
-oddsDecimal="29.00"
-lastUpdateDate="2016-02-21"
-lastUpdateTime="01:19:15"
-handicap=""/>
-<participant
-name="Amir Khan Round 10-12"
-id="1098827268"
-odds="28/1"
-oddsDecimal="29.00"
-lastUpdateDate="2016-02-21"
-lastUpdateTime="01:19:15"
-handicap=""/>
-<participant
-name="Saul Alvarez Round 4-6"
-id="1098827260"
-odds="10/3"
-oddsDecimal="4.33"
-lastUpdateDate="2016-02-21"
-lastUpdateTime="01:19:15"
-handicap=""/>
-<participant
-name="Amir Khan Round 7-9"
-id="1098827267"
-odds="25/1"
-oddsDecimal="26.00"
-lastUpdateDate="2016-02-21"
-lastUpdateTime="01:19:15"
-handicap=""/>
-</market>
-<market
-id="334113399"
-name="Saul Alvarez v Amir Khan - Fight to go the Distance"
-url="http://sports.williamhill.com/bet/en-gb/betting/e/8837467/Saul%2dAlvarez%2dv%2dAmir%2dKhan"
-date="2016-05-08"
-time="04:00:00"
-betTillDate="2016-05-08"
-betTillTime="04:00:00"
-lastUpdateDate="2016-02-21"
-lastUpdateTime="00:52:10"
-placeAvailable="N"
-forcastAvailable="N"
-tricastAvailable="N"
-eachwayAvailable="N"
-cashoutAvailable="N"
-startingPriceAvailable="N"
-livePriceAvailable="Y"
-guarenteedPriceAvailable="N"
-firstPriceAvailable="N"
->
-<participant
-name="No"
-id="1098827270"
-odds="4/9"
-oddsDecimal="1.44"
-lastUpdateDate="2016-02-21"
-lastUpdateTime="01:19:15"
-handicap=""/>
-<participant
-name="Yes"
-id="1098827271"
-odds="13/8"
-oddsDecimal="2.62"
-lastUpdateDate="2016-02-21"
-lastUpdateTime="01:19:15"
-handicap=""/>
-</market>
-</type>
-<type
-id="7237"
-name="Potential Fights"
-url="http://sports.williamhill.com/bet/betting/t/7237"
-lastUpdateDate="2016-02-21"
-lastUpdateTime="00:45:33">
-<market
-id="325524134"
-name="Paul Smith v Martin Murray - Bout Betting"
-url="http://sports.williamhill.com/bet/en-gb/betting/e/8693388/Paul%2dSmith%2dv%2dMartin%2dMurray"
-date="2016-12-31"
-time="22:00:00"
-betTillDate="2016-12-31"
-betTillTime="22:00:00"
-lastUpdateDate="2016-02-21"
-lastUpdateTime="00:52:02"
-placeAvailable="N"
-forcastAvailable="N"
-tricastAvailable="N"
-eachwayAvailable="N"
-cashoutAvailable="N"
-startingPriceAvailable="N"
-livePriceAvailable="Y"
-guarenteedPriceAvailable="N"
-firstPriceAvailable="N"
->
-<participant
-name="Paul Smith"
-id="1072381347"
-odds="9/4"
-oddsDecimal="3.25"
-lastUpdateDate="2016-02-21"
-lastUpdateTime="01:19:03"
-handicap=""/>
-<participant
-name="Martin Murray"
-id="1072381349"
-odds="1/3"
-oddsDecimal="1.33"
-lastUpdateDate="2016-02-21"
-lastUpdateTime="01:19:03"
-handicap=""/>
-<participant
-name="Draw"
-id="1072381348"
-odds="22/1"
-oddsDecimal="23.00"
-lastUpdateDate="2016-02-21"
-lastUpdateTime="01:19:03"
-handicap=""/>
-</market>
-<market
-id="323133448"
-name="Manny Pacquiao v Amir Khan - Bout Betting"
-url="http://sports.williamhill.com/bet/en-gb/betting/e/8620966/Manny%2dPacquiao%2dv%2dAmir%2dKhan"
-date="2016-12-31"
-time="23:59:00"
-betTillDate="2016-12-31"
-betTillTime="23:59:00"
-lastUpdateDate="2016-02-21"
-lastUpdateTime="00:51:55"
-placeAvailable="N"
-forcastAvailable="N"
-tricastAvailable="N"
-eachwayAvailable="N"
-cashoutAvailable="N"
-startingPriceAvailable="N"
-livePriceAvailable="Y"
-guarenteedPriceAvailable="N"
-firstPriceAvailable="N"
->
-<participant
-name="Draw"
-id="1064562618"
-odds="20/1"
-oddsDecimal="21.00"
-lastUpdateDate="2016-02-21"
-lastUpdateTime="01:18:55"
-handicap=""/>
-<participant
-name="Amir Khan"
-id="1064562619"
-odds="13/8"
-oddsDecimal="2.62"
-lastUpdateDate="2016-02-21"
-lastUpdateTime="01:18:55"
-handicap=""/>
-<participant
-name="Manny Pacquiao"
-id="1064562617"
-odds="1/2"
-oddsDecimal="1.50"
-lastUpdateDate="2016-02-21"
-lastUpdateTime="01:18:55"
-handicap=""/>
-</market>
-<market
-id="323133449"
-name="Manny Pacquiao v Floyd Mayweather - Bout Betting"
-url="http://sports.williamhill.com/bet/en-gb/betting/e/8620967/Manny%2dPacquiao%2dv%2dFloyd%2dMayweather"
-date="2016-12-31"
-time="23:59:00"
-betTillDate="2016-12-31"
-betTillTime="23:59:00"
-lastUpdateDate="2016-02-21"
-lastUpdateTime="00:51:55"
-placeAvailable="N"
-forcastAvailable="N"
-tricastAvailable="N"
-eachwayAvailable="N"
-cashoutAvailable="N"
-startingPriceAvailable="N"
-livePriceAvailable="Y"
-guarenteedPriceAvailable="N"
-firstPriceAvailable="N"
->
-<participant
-name="Manny Pacquiao"
-id="1064562620"
-odds="3/1"
-oddsDecimal="4.00"
-lastUpdateDate="2016-02-21"
-lastUpdateTime="01:18:55"
-handicap=""/>
-<participant
-name="Draw"
-id="1064562621"
-odds="25/1"
-oddsDecimal="26.00"
-lastUpdateDate="2016-02-21"
-lastUpdateTime="01:18:55"
-handicap=""/>
-<participant
-name="Floyd Mayweather"
-id="1064562622"
-odds="1/4"
-oddsDecimal="1.25"
-lastUpdateDate="2016-02-21"
-lastUpdateTime="01:18:55"
-handicap=""/>
-</market>
-<market
-id="323133450"
-name="Kell Brook v Amir Khan - Bout Betting"
-url="http://sports.williamhill.com/bet/en-gb/betting/e/8620968/Kell%2dBrook%2dv%2dAmir%2dKhan"
-date="2016-12-31"
-time="23:59:00"
-betTillDate="2016-12-31"
-betTillTime="23:59:00"
-lastUpdateDate="2016-02-21"
-lastUpdateTime="00:51:55"
-placeAvailable="N"
-forcastAvailable="N"
-tricastAvailable="N"
-eachwayAvailable="N"
-cashoutAvailable="N"
-startingPriceAvailable="N"
-livePriceAvailable="Y"
-guarenteedPriceAvailable="N"
-firstPriceAvailable="N"
->
-<participant
-name="Amir Khan"
-id="1064562625"
-odds="8/11"
-oddsDecimal="1.73"
-lastUpdateDate="2016-02-21"
-lastUpdateTime="01:18:55"
-handicap=""/>
-<participant
-name="Kell Brook"
-id="1064562623"
-odds="11/10"
-oddsDecimal="2.10"
-lastUpdateDate="2016-02-21"
-lastUpdateTime="01:18:55"
-handicap=""/>
-<participant
-name="Draw"
-id="1064562624"
-odds="22/1"
-oddsDecimal="23.00"
-lastUpdateDate="2016-02-21"
-lastUpdateTime="01:18:55"
-handicap=""/>
-</market>
-<market
-id="323133451"
-name="Anthony Crolla v Ismael Barroso - Bout Betting"
-url="http://sports.williamhill.com/bet/en-gb/betting/e/8620969/Anthony%2dCrolla%2dv%2dIsmael%2dBarroso"
-date="2016-12-31"
-time="23:59:00"
-betTillDate="2016-12-31"
-betTillTime="23:59:00"
-lastUpdateDate="2016-02-21"
-lastUpdateTime="00:51:55"
-placeAvailable="N"
-forcastAvailable="N"
-tricastAvailable="N"
-eachwayAvailable="N"
-cashoutAvailable="N"
-startingPriceAvailable="N"
-livePriceAvailable="Y"
-guarenteedPriceAvailable="N"
-firstPriceAvailable="N"
->
-<participant
-name="Ismael Barroso"
-id="1064562628"
-odds="8/11"
-oddsDecimal="1.73"
-lastUpdateDate="2016-02-21"
-lastUpdateTime="01:18:55"
-handicap=""/>
-<participant
-name="Draw"
-id="1064562627"
-odds="22/1"
-oddsDecimal="23.00"
-lastUpdateDate="2016-02-21"
-lastUpdateTime="01:18:55"
-handicap=""/>
-<participant
-name="Anthony Crolla"
-id="1064562626"
-odds="11/10"
-oddsDecimal="2.10"
-lastUpdateDate="2016-02-21"
-lastUpdateTime="01:18:55"
-handicap=""/>
-</market>
-<market
-id="323133452"
-name="Badou Jack v Callum Smith - Bout Betting"
-url="http://sports.williamhill.com/bet/en-gb/betting/e/8620970/Badou%2dJack%2dv%2dCallum%2dSmith"
-date="2016-12-31"
-time="23:59:00"
-betTillDate="2016-12-31"
-betTillTime="23:59:00"
-lastUpdateDate="2016-02-21"
-lastUpdateTime="00:51:55"
-placeAvailable="N"
-forcastAvailable="N"
-tricastAvailable="N"
-eachwayAvailable="N"
-cashoutAvailable="N"
-startingPriceAvailable="N"
-livePriceAvailable="Y"
-guarenteedPriceAvailable="N"
-firstPriceAvailable="N"
->
-<participant
-name="Draw"
-id="1064562630"
-odds="20/1"
-oddsDecimal="21.00"
-lastUpdateDate="2016-02-21"
-lastUpdateTime="01:18:55"
-handicap=""/>
-<participant
-name="Badou Jack"
-id="1064562629"
-odds="6/4"
-oddsDecimal="2.50"
-lastUpdateDate="2016-02-21"
-lastUpdateTime="01:18:55"
-handicap=""/>
-<participant
-name="Callum Smith"
-id="1064562631"
-odds="8/15"
-oddsDecimal="1.53"
-lastUpdateDate="2016-02-21"
-lastUpdateTime="01:18:55"
-handicap=""/>
-</market>
-<market
-id="323133453"
-name="Badou Jack v James DeGale - Bout Betting"
-url="http://sports.williamhill.com/bet/en-gb/betting/e/8620971/Badou%2dJack%2dv%2dJames%2dDeGale"
-date="2016-12-31"
-time="23:59:00"
-betTillDate="2016-12-31"
-betTillTime="23:59:00"
-lastUpdateDate="2016-02-21"
-lastUpdateTime="00:51:55"
-placeAvailable="N"
-forcastAvailable="N"
-tricastAvailable="N"
-eachwayAvailable="N"
-cashoutAvailable="N"
-startingPriceAvailable="N"
-livePriceAvailable="Y"
-guarenteedPriceAvailable="N"
-firstPriceAvailable="N"
->
-<participant
-name="Draw"
-id="1064562633"
-odds="22/1"
-oddsDecimal="23.00"
-lastUpdateDate="2016-02-21"
-lastUpdateTime="01:18:55"
-handicap=""/>
-<participant
-name="Badou Jack"
-id="1064562632"
-odds="21/10"
-oddsDecimal="3.10"
-lastUpdateDate="2016-02-21"
-lastUpdateTime="01:18:55"
-handicap=""/>
-<participant
-name="James DeGale"
-id="1064562634"
-odds="4/11"
-oddsDecimal="1.36"
-lastUpdateDate="2016-02-21"
-lastUpdateTime="01:18:55"
-handicap=""/>
-</market>
-<market
-id="323133454"
-name="Lee Selby v Josh Warrington - Bout Betting"
-url="http://sports.williamhill.com/bet/en-gb/betting/e/8620972/Lee%2dSelby%2dv%2dJosh%2dWarrington"
-date="2016-12-31"
-time="23:59:00"
-betTillDate="2016-12-31"
-betTillTime="23:59:00"
-lastUpdateDate="2016-02-21"
-lastUpdateTime="00:51:55"
-placeAvailable="N"
-forcastAvailable="N"
-tricastAvailable="N"
-eachwayAvailable="N"
-cashoutAvailable="N"
-startingPriceAvailable="N"
-livePriceAvailable="Y"
-guarenteedPriceAvailable="N"
-firstPriceAvailable="N"
->
-<participant
-name="Draw"
-id="1064562636"
-odds="25/1"
-oddsDecimal="26.00"
-lastUpdateDate="2016-02-21"
-lastUpdateTime="01:18:55"
-handicap=""/>
-<participant
-name="Lee Selby"
-id="1064562635"
-odds="2/9"
-oddsDecimal="1.22"
-lastUpdateDate="2016-02-21"
-lastUpdateTime="01:18:55"
-handicap=""/>
-<participant
-name="Josh Warrington"
-id="1064562637"
-odds="3/1"
-oddsDecimal="4.00"
-lastUpdateDate="2016-02-21"
-lastUpdateTime="01:18:55"
-handicap=""/>
-</market>
-<market
-id="323133455"
-name="Anthony Joshua v David Haye - Bout Betting"
-url="http://sports.williamhill.com/bet/en-gb/betting/e/8620973/Anthony%2dJoshua%2dv%2dDavid%2dHaye"
-date="2016-12-31"
-time="23:59:00"
-betTillDate="2016-12-31"
-betTillTime="23:59:00"
-lastUpdateDate="2016-02-21"
-lastUpdateTime="00:51:55"
-placeAvailable="N"
-forcastAvailable="N"
-tricastAvailable="N"
-eachwayAvailable="N"
-cashoutAvailable="N"
-startingPriceAvailable="N"
-livePriceAvailable="Y"
-guarenteedPriceAvailable="N"
-firstPriceAvailable="N"
->
-<participant
-name="David Haye"
-id="1064562640"
-odds="11/8"
-oddsDecimal="2.38"
-lastUpdateDate="2016-02-21"
-lastUpdateTime="01:18:55"
-handicap=""/>
-<participant
-name="Anthony Joshua"
-id="1064562638"
-odds="4/7"
-oddsDecimal="1.57"
-lastUpdateDate="2016-02-21"
-lastUpdateTime="01:18:55"
-handicap=""/>
-<participant
-name="Draw"
-id="1064562639"
-odds="25/1"
-oddsDecimal="26.00"
-lastUpdateDate="2016-02-21"
-lastUpdateTime="01:18:55"
-handicap=""/>
-</market>
-<market
-id="323133456"
-name="Anthony Joshua v Dereck Chisora - Bout Betting"
-url="http://sports.williamhill.com/bet/en-gb/betting/e/8620974/Anthony%2dJoshua%2dv%2dDereck%2dChisora"
-date="2016-12-31"
-time="23:59:00"
-betTillDate="2016-12-31"
-betTillTime="23:59:00"
-lastUpdateDate="2016-02-21"
-lastUpdateTime="00:51:55"
-placeAvailable="N"
-forcastAvailable="N"
-tricastAvailable="N"
-eachwayAvailable="N"
-cashoutAvailable="N"
-startingPriceAvailable="N"
-livePriceAvailable="Y"
-guarenteedPriceAvailable="N"
-firstPriceAvailable="N"
->
-<participant
-name="Draw"
-id="1064562642"
-odds="33/1"
-oddsDecimal="34.00"
-lastUpdateDate="2016-02-21"
-lastUpdateTime="01:18:55"
-handicap=""/>
-<participant
-name="Anthony Joshua"
-id="1064562641"
-odds="1/12"
-oddsDecimal="1.08"
-lastUpdateDate="2016-02-21"
-lastUpdateTime="01:18:55"
-handicap=""/>
-<participant
-name="Dereck Chisora"
-id="1064562643"
-odds="6/1"
-oddsDecimal="7.00"
-lastUpdateDate="2016-02-21"
-lastUpdateTime="01:18:55"
-handicap=""/>
-</market>
-<market
-id="323133457"
-name="Anthony Joshua v Tyson Fury - Bout Betting"
-url="http://sports.williamhill.com/bet/en-gb/betting/e/8620975/Anthony%2dJoshua%2dv%2dTyson%2dFury"
-date="2016-12-31"
-time="23:59:00"
-betTillDate="2016-12-31"
-betTillTime="23:59:00"
-lastUpdateDate="2016-02-21"
-lastUpdateTime="00:51:55"
-placeAvailable="N"
-forcastAvailable="N"
-tricastAvailable="N"
-eachwayAvailable="N"
-cashoutAvailable="N"
-startingPriceAvailable="N"
-livePriceAvailable="Y"
-guarenteedPriceAvailable="N"
-firstPriceAvailable="N"
->
-<participant
-name="Anthony Joshua"
-id="1064562644"
-odds="8/11"
-oddsDecimal="1.73"
-lastUpdateDate="2016-02-21"
-lastUpdateTime="01:18:55"
-handicap=""/>
-<participant
-name="Draw"
-id="1064562645"
-odds="33/1"
-oddsDecimal="34.00"
-lastUpdateDate="2016-02-21"
-lastUpdateTime="01:18:55"
-handicap=""/>
-<participant
-name="Tyson Fury"
-id="1064562646"
-odds="1/1"
-oddsDecimal="2.00"
-lastUpdateDate="2016-02-21"
-lastUpdateTime="01:18:55"
-handicap=""/>
-</market>
-<market
-id="323133458"
-name="Tyson Fury v Deontay Wilder - Bout Betting"
-url="http://sports.williamhill.com/bet/en-gb/betting/e/8620976/Tyson%2dFury%2dv%2dDeontay%2dWilder"
-date="2016-12-31"
-time="23:59:00"
-betTillDate="2016-12-31"
-betTillTime="23:59:00"
-lastUpdateDate="2016-02-21"
-lastUpdateTime="00:51:55"
-placeAvailable="N"
-forcastAvailable="N"
-tricastAvailable="N"
-eachwayAvailable="N"
-cashoutAvailable="N"
-startingPriceAvailable="N"
-livePriceAvailable="Y"
-guarenteedPriceAvailable="N"
-firstPriceAvailable="N"
->
-<participant
-name="Deontay Wilder"
-id="1064562649"
-odds="6/5"
-oddsDecimal="2.20"
-lastUpdateDate="2016-02-21"
-lastUpdateTime="01:18:55"
-handicap=""/>
-<participant
-name="Draw"
-id="1064562648"
-odds="25/1"
-oddsDecimal="26.00"
-lastUpdateDate="2016-02-21"
-lastUpdateTime="01:18:55"
-handicap=""/>
-<participant
-name="Tyson Fury"
-id="1064562647"
-odds="4/6"
-oddsDecimal="1.67"
-lastUpdateDate="2016-02-21"
-lastUpdateTime="01:18:55"
-handicap=""/>
-</market>
-<market
-id="323133459"
-name="Tyson Fury v Alexander Povetkin - Bout Betting"
-url="http://sports.williamhill.com/bet/en-gb/betting/e/8620977/Tyson%2dFury%2dv%2dAlexander%2dPovetkin"
-date="2016-12-31"
-time="23:59:00"
-betTillDate="2016-12-31"
-betTillTime="23:59:00"
-lastUpdateDate="2016-02-21"
-lastUpdateTime="00:51:55"
-placeAvailable="N"
-forcastAvailable="N"
-tricastAvailable="N"
-eachwayAvailable="N"
-cashoutAvailable="N"
-startingPriceAvailable="N"
-livePriceAvailable="Y"
-guarenteedPriceAvailable="N"
-firstPriceAvailable="N"
->
-<participant
-name="Draw"
-id="1064562651"
-odds="25/1"
-oddsDecimal="26.00"
-lastUpdateDate="2016-02-21"
-lastUpdateTime="01:18:55"
-handicap=""/>
-<participant
-name="Tyson Fury"
-id="1064562650"
-odds="8/13"
-oddsDecimal="1.62"
-lastUpdateDate="2016-02-21"
-lastUpdateTime="01:18:55"
-handicap=""/>
-<participant
-name="Alexander Povetkin"
-id="1064562652"
-odds="13/10"
-oddsDecimal="2.30"
-lastUpdateDate="2016-02-21"
-lastUpdateTime="01:18:55"
-handicap=""/>
-</market>
-<market
-id="323133460"
-name="Deontay Wilder v Alexander Povetkin - Bout Betting"
-url="http://sports.williamhill.com/bet/en-gb/betting/e/8620978/Deontay%2dWilder%2dv%2dAlexander%2dPovetkin"
-date="2016-12-31"
-time="23:59:00"
-betTillDate="2016-12-31"
-betTillTime="23:59:00"
-lastUpdateDate="2016-02-21"
-lastUpdateTime="00:51:55"
-placeAvailable="N"
-forcastAvailable="N"
-tricastAvailable="N"
-eachwayAvailable="N"
-cashoutAvailable="N"
-startingPriceAvailable="N"
-livePriceAvailable="Y"
-guarenteedPriceAvailable="N"
-firstPriceAvailable="N"
->
-<participant
-name="Alexander Povetkin"
-id="1064562655"
-odds="11/10"
-oddsDecimal="2.10"
-lastUpdateDate="2016-02-21"
-lastUpdateTime="01:18:55"
-handicap=""/>
-<participant
-name="Draw"
-id="1064562654"
-odds="25/1"
-oddsDecimal="26.00"
-lastUpdateDate="2016-02-21"
-lastUpdateTime="01:18:55"
-handicap=""/>
-<participant
-name="Deontay Wilder"
-id="1064562653"
-odds="8/11"
-oddsDecimal="1.73"
-lastUpdateDate="2016-02-21"
-lastUpdateTime="01:18:55"
-handicap=""/>
-</market>
-<market
-id="323133461"
-name="Daniel Jacobs v Chris Eubank Jr - Bout Betting"
-url="http://sports.williamhill.com/bet/en-gb/betting/e/8620979/Daniel%2dJacobs%2dv%2dChris%2dEubank%2dJr"
-date="2016-12-31"
-time="23:59:00"
-betTillDate="2016-12-31"
-betTillTime="23:59:00"
-lastUpdateDate="2016-02-21"
-lastUpdateTime="00:51:55"
-placeAvailable="N"
-forcastAvailable="N"
-tricastAvailable="N"
-eachwayAvailable="N"
-cashoutAvailable="N"
-startingPriceAvailable="N"
-livePriceAvailable="Y"
-guarenteedPriceAvailable="N"
-firstPriceAvailable="N"
->
-<participant
-name="Draw"
-id="1064562657"
-odds="25/1"
-oddsDecimal="26.00"
-lastUpdateDate="2016-02-21"
-lastUpdateTime="01:18:55"
-handicap=""/>
-<participant
-name="Chris Eubank Jr"
-id="1064562658"
-odds="13/10"
-oddsDecimal="2.30"
-lastUpdateDate="2016-02-21"
-lastUpdateTime="01:18:55"
-handicap=""/>
-<participant
-name="Daniel Jacobs"
-id="1064562656"
-odds="8/13"
-oddsDecimal="1.62"
-lastUpdateDate="2016-02-21"
-lastUpdateTime="01:18:55"
-handicap=""/>
-</market>
-</type>
-</class>
-<disclaimer>
-WHG (International) Ltd (&quot;We/Us&quot;) of 6/1 Waterport Place, Gibraltar, owns the XML Feed Website ( the &quot;Website&quot;) relating to information contained on its main trading website. By using the Website You agree to these full Terms of Use available at http://developer.williamhill.com
-</disclaimer>
-</williamhill>
-</response>
+<oxip version="7.1" created="2021-05-31 21:22:17" lastMsgId="" requestTime="0.0434">
+    <response request="getHierarchyByMarketType" code="001" message="success" debug="" provider="williamhill">
+        <williamhill>
+            <class id="10" name="Boxing" maxRepDate="2021-05-31" maxRepTime="10:59:11">
+                <type id="141" name="Super Middleweight" url="http://sports.williamhill.com/bet/betting/t/141" lastUpdateDate="2021-02-24" lastUpdateTime="13:22:52">
+                    <market id="959314590" name="Caleb Plant v Saul Alvarez - Bout Betting" url="http://sports.williamhill.com/bet/en-gb/betting/e/20689454/Caleb%2dPlant%2dv%2dSaul%2dAlvarez" date="2021-09-04" time="04:00:00" betTillDate="2021-09-04" betTillTime="04:00:00" lastUpdateDate="2021-05-28" lastUpdateTime="17:46:08" placeAvailable="N" forcastAvailable="N" tricastAvailable="N" eachwayAvailable="N" cashoutAvailable="Y" startingPriceAvailable="N" livePriceAvailable="Y" guarenteedPriceAvailable="N" firstPriceAvailable="N">
+                        <participant name="Draw" id="3198430627" odds="18/1" oddsDecimal="19.00" lastUpdateDate="2021-05-28" lastUpdateTime="17:46:08" handicap=""/>
+                        <participant name="Caleb Plant" id="3198430613" odds="9/2" oddsDecimal="5.50" lastUpdateDate="2021-05-28" lastUpdateTime="17:47:59" handicap=""/>
+                        <participant name="Saul Alvarez" id="3198430636" odds="1/7" oddsDecimal="1.14" lastUpdateDate="2021-05-28" lastUpdateTime="17:47:59" handicap=""/>
+                    </market>
+                </type>
+                <type id="250" name="Heavyweight" url="http://sports.williamhill.com/bet/betting/t/250" lastUpdateDate="2021-02-24" lastUpdateTime="13:22:52">
+                    <market id="954217837" name="Justis Huni v Paul Gallen - Bout Betting" url="http://sports.williamhill.com/bet/en-gb/betting/e/20567875/Justis%2dHuni%2dv%2dPaul%2dGallen" date="2021-06-16" time="07:00:00" betTillDate="2021-06-16" betTillTime="07:00:00" lastUpdateDate="2021-05-14" lastUpdateTime="17:02:49" placeAvailable="N" forcastAvailable="N" tricastAvailable="N" eachwayAvailable="N" cashoutAvailable="Y" startingPriceAvailable="N" livePriceAvailable="Y" guarenteedPriceAvailable="N" firstPriceAvailable="N">
+                        <participant name="Paul Gallen" id="3180495702" odds="9/2" oddsDecimal="5.50" lastUpdateDate="2021-05-25" lastUpdateTime="16:02:39" handicap=""/>
+                        <participant name="Draw" id="3180495700" odds="20/1" oddsDecimal="21.00" lastUpdateDate="2021-05-23" lastUpdateTime="17:09:30" handicap=""/>
+                        <participant name="Justis Huni" id="3180495694" odds="1/7" oddsDecimal="1.14" lastUpdateDate="2021-05-25" lastUpdateTime="16:02:39" handicap=""/>
+                    </market>
+                    <market id="956657972" name="Tyson Fury v Deontay Wilder - Bout Betting" url="http://sports.williamhill.com/bet/en-gb/betting/e/20627269/Tyson%2dFury%2dv%2dDeontay%2dWilder" date="2021-07-25" time="05:00:00" betTillDate="2021-07-25" betTillTime="05:00:00" lastUpdateDate="2021-05-21" lastUpdateTime="11:05:10" placeAvailable="N" forcastAvailable="N" tricastAvailable="N" eachwayAvailable="N" cashoutAvailable="Y" startingPriceAvailable="N" livePriceAvailable="Y" guarenteedPriceAvailable="N" firstPriceAvailable="N">
+                        <participant name="Tyson Fury" id="3189218308" odds="1/3" oddsDecimal="1.33" lastUpdateDate="2021-05-25" lastUpdateTime="06:46:18" handicap=""/>
+                        <participant name="Draw" id="3189218316" odds="20/1" oddsDecimal="21.00" lastUpdateDate="2021-05-25" lastUpdateTime="06:46:18" handicap=""/>
+                        <participant name="Deontay Wilder" id="3189218322" odds="12/5" oddsDecimal="3.40" lastUpdateDate="2021-05-25" lastUpdateTime="06:46:18" handicap=""/>
+                    </market>
+                    <market id="956657973" name="Tyson Fury v Deontay Wilder - Fight to go the Distance" url="http://sports.williamhill.com/bet/en-gb/betting/e/20627269/Tyson%2dFury%2dv%2dDeontay%2dWilder" date="2021-07-25" time="05:00:00" betTillDate="2021-07-25" betTillTime="05:00:00" lastUpdateDate="2021-05-31" lastUpdateTime="10:30:24" placeAvailable="N" forcastAvailable="N" tricastAvailable="N" eachwayAvailable="N" cashoutAvailable="N" startingPriceAvailable="N" livePriceAvailable="Y" guarenteedPriceAvailable="N" firstPriceAvailable="N">
+                        <participant name="Yes" id="3189218305" odds="2/1" oddsDecimal="3.00" lastUpdateDate="2021-05-31" lastUpdateTime="10:30:21" handicap=""/>
+                        <participant name="No" id="3189218310" odds="4/11" oddsDecimal="1.36" lastUpdateDate="2021-05-31" lastUpdateTime="10:30:21" handicap=""/>
+                    </market>
+                    <market id="956657975" name="Tyson Fury v Deontay Wilder - Method Of Result" url="http://sports.williamhill.com/bet/en-gb/betting/e/20627269/Tyson%2dFury%2dv%2dDeontay%2dWilder" date="2021-07-25" time="05:00:00" betTillDate="2021-07-25" betTillTime="05:00:00" lastUpdateDate="2021-05-31" lastUpdateTime="10:28:01" placeAvailable="N" forcastAvailable="N" tricastAvailable="N" eachwayAvailable="N" cashoutAvailable="Y" startingPriceAvailable="N" livePriceAvailable="Y" guarenteedPriceAvailable="N" firstPriceAvailable="N">
+                        <participant name="Tyson Fury By KO TKO or DQ" id="3189218317" odds="10/11" oddsDecimal="1.91" lastUpdateDate="2021-05-31" lastUpdateTime="10:28:01" handicap=""/>
+                        <participant name="Tyson Fury By Decision or Technical Decision" id="3189218333" odds="5/2" oddsDecimal="3.50" lastUpdateDate="2021-05-31" lastUpdateTime="10:28:01" handicap=""/>
+                        <participant name="Deontay Wilder By Decision or Technical Decision" id="3189218340" odds="16/1" oddsDecimal="17.00" lastUpdateDate="2021-05-31" lastUpdateTime="10:28:01" handicap=""/>
+                        <participant name="Draw" id="3189218352" odds="20/1" oddsDecimal="21.00" lastUpdateDate="2021-05-31" lastUpdateTime="10:28:01" handicap=""/>
+                        <participant name="Deontay Wilder By KO TKO or DQ" id="3189218327" odds="11/4" oddsDecimal="3.75" lastUpdateDate="2021-05-31" lastUpdateTime="10:28:01" handicap=""/>
+                    </market>
+                    <market id="956657976" name="Tyson Fury v Deontay Wilder - Alternate Grouped Round Betting 3" url="http://sports.williamhill.com/bet/en-gb/betting/e/20627269/Tyson%2dFury%2dv%2dDeontay%2dWilder" date="2021-07-25" time="05:00:00" betTillDate="2021-07-25" betTillTime="05:00:00" lastUpdateDate="2021-05-31" lastUpdateTime="10:36:51" placeAvailable="N" forcastAvailable="N" tricastAvailable="N" eachwayAvailable="N" cashoutAvailable="N" startingPriceAvailable="N" livePriceAvailable="Y" guarenteedPriceAvailable="N" firstPriceAvailable="N">
+                        <participant name="Draw" id="3189218356" odds="20/1" oddsDecimal="21.00" lastUpdateDate="2021-05-31" lastUpdateTime="10:36:50" handicap=""/>
+                        <participant name="Deontay Wilder Round 9-12" id="3189218335" odds="16/1" oddsDecimal="17.00" lastUpdateDate="2021-05-31" lastUpdateTime="10:36:50" handicap=""/>
+                        <participant name="Deontay Wilder Round 1-4" id="3189218314" odds="8/1" oddsDecimal="9.00" lastUpdateDate="2021-05-31" lastUpdateTime="10:36:50" handicap=""/>
+                        <participant name="Deontay Wilder Round 5-8" id="3189218325" odds="8/1" oddsDecimal="9.00" lastUpdateDate="2021-05-31" lastUpdateTime="10:36:50" handicap=""/>
+                        <participant name="Tyson Fury Round 9-12" id="3189218329" odds="11/2" oddsDecimal="6.50" lastUpdateDate="2021-05-31" lastUpdateTime="10:36:50" handicap=""/>
+                        <participant name="Tyson Fury Round 1-4" id="3189218307" odds="4/1" oddsDecimal="5.00" lastUpdateDate="2021-05-31" lastUpdateTime="10:36:50" handicap=""/>
+                        <participant name="Deontay Wilder on Points" id="3189218351" odds="16/1" oddsDecimal="17.00" lastUpdateDate="2021-05-31" lastUpdateTime="10:36:50" handicap=""/>
+                        <participant name="Tyson Fury on Points" id="3189218343" odds="5/2" oddsDecimal="3.50" lastUpdateDate="2021-05-31" lastUpdateTime="10:36:50" handicap=""/>
+                        <participant name="Tyson Fury Round 5-8" id="3189218321" odds="11/4" oddsDecimal="3.75" lastUpdateDate="2021-05-31" lastUpdateTime="10:36:50" handicap=""/>
+                    </market>
+                    <market id="956657977" name="Tyson Fury v Deontay Wilder - Grouped Round Betting" url="http://sports.williamhill.com/bet/en-gb/betting/e/20627269/Tyson%2dFury%2dv%2dDeontay%2dWilder" date="2021-07-25" time="05:00:00" betTillDate="2021-07-25" betTillTime="05:00:00" lastUpdateDate="2021-05-31" lastUpdateTime="10:32:40" placeAvailable="N" forcastAvailable="N" tricastAvailable="N" eachwayAvailable="N" cashoutAvailable="Y" startingPriceAvailable="N" livePriceAvailable="Y" guarenteedPriceAvailable="N" firstPriceAvailable="N">
+                        <participant name="Tyson Fury On Points" id="3189218358" odds="5/2" oddsDecimal="3.50" lastUpdateDate="2021-05-31" lastUpdateTime="10:32:39" handicap=""/>
+                        <participant name="Tyson Fury Round 1-3" id="3189218309" odds="6/1" oddsDecimal="7.00" lastUpdateDate="2021-05-31" lastUpdateTime="10:32:39" handicap=""/>
+                        <participant name="Deontay Wilder Round 1-3" id="3189218315" odds="11/1" oddsDecimal="12.00" lastUpdateDate="2021-05-31" lastUpdateTime="10:32:39" handicap=""/>
+                        <participant name="Deontay Wilder Round 10-12" id="3189218350" odds="25/1" oddsDecimal="26.00" lastUpdateDate="2021-05-31" lastUpdateTime="10:32:39" handicap=""/>
+                        <participant name="Deontay Wilder On Points" id="3189218362" odds="16/1" oddsDecimal="17.00" lastUpdateDate="2021-05-31" lastUpdateTime="10:32:39" handicap=""/>
+                        <participant name="Deontay Wilder Round 4-6" id="3189218326" odds="9/1" oddsDecimal="10.00" lastUpdateDate="2021-05-31" lastUpdateTime="10:32:39" handicap=""/>
+                        <participant name="Tyson Fury Round 10-12" id="3189218345" odds="8/1" oddsDecimal="9.00" lastUpdateDate="2021-05-31" lastUpdateTime="10:32:39" handicap=""/>
+                        <participant name="Deontay Wilder Round 7-9" id="3189218337" odds="12/1" oddsDecimal="13.00" lastUpdateDate="2021-05-31" lastUpdateTime="10:32:39" handicap=""/>
+                        <participant name="Tyson Fury Round 4-6" id="3189218320" odds="4/1" oddsDecimal="5.00" lastUpdateDate="2021-05-31" lastUpdateTime="10:32:39" handicap=""/>
+                        <participant name="Draw" id="3189218368" odds="20/1" oddsDecimal="21.00" lastUpdateDate="2021-05-31" lastUpdateTime="10:32:39" handicap=""/>
+                        <participant name="Tyson Fury Round 7-9" id="3189218330" odds="9/2" oddsDecimal="5.50" lastUpdateDate="2021-05-31" lastUpdateTime="10:32:39" handicap=""/>
+                    </market>
+                    <market id="956657978" name="Tyson Fury v Deontay Wilder - Alternate Grouped Round Betting" url="http://sports.williamhill.com/bet/en-gb/betting/e/20627269/Tyson%2dFury%2dv%2dDeontay%2dWilder" date="2021-07-25" time="05:00:00" betTillDate="2021-07-25" betTillTime="05:00:00" lastUpdateDate="2021-05-31" lastUpdateTime="10:34:30" placeAvailable="N" forcastAvailable="N" tricastAvailable="N" eachwayAvailable="N" cashoutAvailable="N" startingPriceAvailable="N" livePriceAvailable="Y" guarenteedPriceAvailable="N" firstPriceAvailable="N">
+                        <participant name="Deontay Wilder Round 7-8" id="3189218355" odds="16/1" oddsDecimal="17.00" lastUpdateDate="2021-05-31" lastUpdateTime="10:34:30" handicap=""/>
+                        <participant name="Draw" id="3189218393" odds="20/1" oddsDecimal="21.00" lastUpdateDate="2021-05-31" lastUpdateTime="10:34:30" handicap=""/>
+                        <participant name="Deontay Wilder on Points" id="3189218387" odds="16/1" oddsDecimal="17.00" lastUpdateDate="2021-05-31" lastUpdateTime="10:34:30" handicap=""/>
+                        <participant name="Deontay Wilder Round 11-12" id="3189218375" odds="40/1" oddsDecimal="41.00" lastUpdateDate="2021-05-31" lastUpdateTime="10:34:30" handicap=""/>
+                        <participant name="Deontay Wilder Round 9-10" id="3189218366" odds="22/1" oddsDecimal="23.00" lastUpdateDate="2021-05-31" lastUpdateTime="10:34:30" handicap=""/>
+                        <participant name="Deontay Wilder Round 5-6" id="3189218342" odds="14/1" oddsDecimal="15.00" lastUpdateDate="2021-05-31" lastUpdateTime="10:34:30" handicap=""/>
+                        <participant name="Deontay Wilder Round 3-4" id="3189218331" odds="12/1" oddsDecimal="13.00" lastUpdateDate="2021-05-31" lastUpdateTime="10:34:30" handicap=""/>
+                        <participant name="Deontay Wilder Round 1-2" id="3189218319" odds="15/1" oddsDecimal="16.00" lastUpdateDate="2021-05-31" lastUpdateTime="10:34:30" handicap=""/>
+                        <participant name="Tyson Fury on Points" id="3189218382" odds="5/2" oddsDecimal="3.50" lastUpdateDate="2021-05-31" lastUpdateTime="10:34:30" handicap=""/>
+                        <participant name="Tyson Fury Round 11-12" id="3189218371" odds="14/1" oddsDecimal="15.00" lastUpdateDate="2021-05-31" lastUpdateTime="10:34:30" handicap=""/>
+                        <participant name="Tyson Fury Round 9-10" id="3189218361" odds="8/1" oddsDecimal="9.00" lastUpdateDate="2021-05-31" lastUpdateTime="10:34:30" handicap=""/>
+                        <participant name="Tyson Fury Round 7-8" id="3189218348" odds="6/1" oddsDecimal="7.00" lastUpdateDate="2021-05-31" lastUpdateTime="10:34:30" handicap=""/>
+                        <participant name="Tyson Fury Round 5-6" id="3189218336" odds="6/1" oddsDecimal="7.00" lastUpdateDate="2021-05-31" lastUpdateTime="10:34:30" handicap=""/>
+                        <participant name="Tyson Fury Round 3-4" id="3189218324" odds="7/1" oddsDecimal="8.00" lastUpdateDate="2021-05-31" lastUpdateTime="10:34:30" handicap=""/>
+                        <participant name="Tyson Fury Round 1-2" id="3189218312" odds="10/1" oddsDecimal="11.00" lastUpdateDate="2021-05-31" lastUpdateTime="10:34:30" handicap=""/>
+                    </market>
+                    <market id="956657982" name="Tyson Fury v Deontay Wilder - Round Betting" url="http://sports.williamhill.com/bet/en-gb/betting/e/20627269/Tyson%2dFury%2dv%2dDeontay%2dWilder" date="2021-07-25" time="05:00:00" betTillDate="2021-07-25" betTillTime="05:00:00" lastUpdateDate="2021-05-31" lastUpdateTime="10:29:53" placeAvailable="N" forcastAvailable="N" tricastAvailable="N" eachwayAvailable="N" cashoutAvailable="N" startingPriceAvailable="N" livePriceAvailable="Y" guarenteedPriceAvailable="N" firstPriceAvailable="N">
+                        <participant name="Tyson Fury Round 1" id="3189218338" odds="22/1" oddsDecimal="23.00" lastUpdateDate="2021-05-31" lastUpdateTime="10:29:53" handicap=""/>
+                        <participant name="Tyson Fury Round 2" id="3189218357" odds="20/1" oddsDecimal="21.00" lastUpdateDate="2021-05-31" lastUpdateTime="10:29:53" handicap=""/>
+                        <participant name="Tyson Fury Round 3" id="3189218367" odds="16/1" oddsDecimal="17.00" lastUpdateDate="2021-05-31" lastUpdateTime="10:29:53" handicap=""/>
+                        <participant name="Tyson Fury Round 4" id="3189218378" odds="12/1" oddsDecimal="13.00" lastUpdateDate="2021-05-31" lastUpdateTime="10:29:53" handicap=""/>
+                        <participant name="Tyson Fury Round 5" id="3189218389" odds="12/1" oddsDecimal="13.00" lastUpdateDate="2021-05-31" lastUpdateTime="10:29:53" handicap=""/>
+                        <participant name="Tyson Fury Round 6" id="3189218398" odds="12/1" oddsDecimal="13.00" lastUpdateDate="2021-05-31" lastUpdateTime="10:29:53" handicap=""/>
+                        <participant name="Tyson Fury Round 7" id="3189218405" odds="12/1" oddsDecimal="13.00" lastUpdateDate="2021-05-31" lastUpdateTime="10:29:53" handicap=""/>
+                        <participant name="Tyson Fury Round 8" id="3189218412" odds="14/1" oddsDecimal="15.00" lastUpdateDate="2021-05-31" lastUpdateTime="10:29:53" handicap=""/>
+                        <participant name="Tyson Fury Round 9" id="3189218416" odds="16/1" oddsDecimal="17.00" lastUpdateDate="2021-05-31" lastUpdateTime="10:29:53" handicap=""/>
+                        <participant name="Tyson Fury Round 10" id="3189218420" odds="20/1" oddsDecimal="21.00" lastUpdateDate="2021-05-31" lastUpdateTime="10:29:53" handicap=""/>
+                        <participant name="Tyson Fury Round 11" id="3189218428" odds="22/1" oddsDecimal="23.00" lastUpdateDate="2021-05-31" lastUpdateTime="10:29:53" handicap=""/>
+                        <participant name="Tyson Fury Round 12" id="3189218436" odds="28/1" oddsDecimal="29.00" lastUpdateDate="2021-05-31" lastUpdateTime="10:29:53" handicap=""/>
+                        <participant name="Tyson Fury On Points" id="3189218445" odds="5/2" oddsDecimal="3.50" lastUpdateDate="2021-05-31" lastUpdateTime="10:29:53" handicap=""/>
+                        <participant name="Deontay Wilder Round 1" id="3189218349" odds="40/1" oddsDecimal="41.00" lastUpdateDate="2021-05-31" lastUpdateTime="10:29:53" handicap=""/>
+                        <participant name="Deontay Wilder Round 2" id="3189218363" odds="33/1" oddsDecimal="34.00" lastUpdateDate="2021-05-31" lastUpdateTime="10:29:53" handicap=""/>
+                        <participant name="Deontay Wilder Round 3" id="3189218373" odds="25/1" oddsDecimal="26.00" lastUpdateDate="2021-05-31" lastUpdateTime="10:29:53" handicap=""/>
+                        <participant name="Deontay Wilder Round 4" id="3189218383" odds="25/1" oddsDecimal="26.00" lastUpdateDate="2021-05-31" lastUpdateTime="10:29:53" handicap=""/>
+                        <participant name="Deontay Wilder Round 5" id="3189218395" odds="25/1" oddsDecimal="26.00" lastUpdateDate="2021-05-31" lastUpdateTime="10:29:53" handicap=""/>
+                        <participant name="Deontay Wilder Round 6" id="3189218402" odds="25/1" oddsDecimal="26.00" lastUpdateDate="2021-05-31" lastUpdateTime="10:29:53" handicap=""/>
+                        <participant name="Deontay Wilder Round 7" id="3189218409" odds="28/1" oddsDecimal="29.00" lastUpdateDate="2021-05-31" lastUpdateTime="10:29:53" handicap=""/>
+                        <participant name="Deontay Wilder Round 8" id="3189218414" odds="33/1" oddsDecimal="34.00" lastUpdateDate="2021-05-31" lastUpdateTime="10:29:53" handicap=""/>
+                        <participant name="Deontay Wilder Round 9" id="3189218417" odds="40/1" oddsDecimal="41.00" lastUpdateDate="2021-05-31" lastUpdateTime="10:29:53" handicap=""/>
+                        <participant name="Deontay Wilder Round 10" id="3189218423" odds="50/1" oddsDecimal="51.00" lastUpdateDate="2021-05-31" lastUpdateTime="10:29:53" handicap=""/>
+                        <participant name="Deontay Wilder Round 11" id="3189218433" odds="66/1" oddsDecimal="67.00" lastUpdateDate="2021-05-31" lastUpdateTime="10:29:53" handicap=""/>
+                        <participant name="Deontay Wilder Round 12" id="3189218441" odds="80/1" oddsDecimal="81.00" lastUpdateDate="2021-05-31" lastUpdateTime="10:29:53" handicap=""/>
+                        <participant name="Deontay Wilder On Points" id="3189218448" odds="16/1" oddsDecimal="17.00" lastUpdateDate="2021-05-31" lastUpdateTime="10:29:53" handicap=""/>
+                        <participant name="Draw" id="3189218450" odds="20/1" oddsDecimal="21.00" lastUpdateDate="2021-05-31" lastUpdateTime="10:29:54" handicap=""/>
+                    </market>
+                    <market id="956657983" name="Tyson Fury v Deontay Wilder - Total Rounds 5.5" url="http://sports.williamhill.com/bet/en-gb/betting/e/20627269/Tyson%2dFury%2dv%2dDeontay%2dWilder" date="2021-07-25" time="05:00:00" betTillDate="2021-07-25" betTillTime="05:00:00" lastUpdateDate="2021-05-31" lastUpdateTime="10:38:29" placeAvailable="N" forcastAvailable="N" tricastAvailable="N" eachwayAvailable="N" cashoutAvailable="N" startingPriceAvailable="N" livePriceAvailable="Y" guarenteedPriceAvailable="N" firstPriceAvailable="N">
+                        <participant name="Under" id="3189218353" odds="6/4" oddsDecimal="2.50" lastUpdateDate="2021-05-31" lastUpdateTime="10:38:27" handicap=""/>
+                        <participant name="Over" id="3189218344" odds="1/2" oddsDecimal="1.50" lastUpdateDate="2021-05-31" lastUpdateTime="10:38:27" handicap=""/>
+                    </market>
+                    <market id="956657984" name="Tyson Fury v Deontay Wilder - Total Rounds 9.5" url="http://sports.williamhill.com/bet/en-gb/betting/e/20627269/Tyson%2dFury%2dv%2dDeontay%2dWilder" date="2021-07-25" time="05:00:00" betTillDate="2021-07-25" betTillTime="05:00:00" lastUpdateDate="2021-05-31" lastUpdateTime="10:38:49" placeAvailable="N" forcastAvailable="N" tricastAvailable="N" eachwayAvailable="N" cashoutAvailable="N" startingPriceAvailable="N" livePriceAvailable="Y" guarenteedPriceAvailable="N" firstPriceAvailable="N">
+                        <participant name="Over" id="3189218364" odds="6/4" oddsDecimal="2.50" lastUpdateDate="2021-05-31" lastUpdateTime="10:38:47" handicap=""/>
+                        <participant name="Under" id="3189218370" odds="1/2" oddsDecimal="1.50" lastUpdateDate="2021-05-31" lastUpdateTime="10:38:47" handicap=""/>
+                    </market>
+                    <market id="956657985" name="Tyson Fury v Deontay Wilder - Total Rounds 6.5" url="http://sports.williamhill.com/bet/en-gb/betting/e/20627269/Tyson%2dFury%2dv%2dDeontay%2dWilder" date="2021-07-25" time="05:00:00" betTillDate="2021-07-25" betTillTime="05:00:00" lastUpdateDate="2021-05-31" lastUpdateTime="10:38:20" placeAvailable="N" forcastAvailable="N" tricastAvailable="N" eachwayAvailable="N" cashoutAvailable="N" startingPriceAvailable="N" livePriceAvailable="Y" guarenteedPriceAvailable="N" firstPriceAvailable="N">
+                        <participant name="Over" id="3189218372" odds="8/13" oddsDecimal="1.62" lastUpdateDate="2021-05-31" lastUpdateTime="10:38:18" handicap=""/>
+                        <participant name="Under" id="3189218380" odds="6/5" oddsDecimal="2.20" lastUpdateDate="2021-05-31" lastUpdateTime="10:38:18" handicap=""/>
+                    </market>
+                    <market id="956657987" name="Tyson Fury v Deontay Wilder - When Will The Fight End? 3" url="http://sports.williamhill.com/bet/en-gb/betting/e/20627269/Tyson%2dFury%2dv%2dDeontay%2dWilder" date="2021-07-25" time="05:00:00" betTillDate="2021-07-25" betTillTime="05:00:00" lastUpdateDate="2021-05-31" lastUpdateTime="10:35:14" placeAvailable="N" forcastAvailable="N" tricastAvailable="N" eachwayAvailable="N" cashoutAvailable="N" startingPriceAvailable="N" livePriceAvailable="Y" guarenteedPriceAvailable="N" firstPriceAvailable="N">
+                        <participant name="Either in Round 1-2" id="3189218377" odds="13/2" oddsDecimal="7.50" lastUpdateDate="2021-05-31" lastUpdateTime="10:35:12" handicap=""/>
+                        <participant name="Either in Round 7-8" id="3189218396" odds="9/2" oddsDecimal="5.50" lastUpdateDate="2021-05-31" lastUpdateTime="10:35:12" handicap=""/>
+                        <participant name="Fight to go the Distance" id="3189218406" odds="2/1" oddsDecimal="3.00" lastUpdateDate="2021-05-31" lastUpdateTime="10:35:12" handicap=""/>
+                        <participant name="Either in Round 3-4" id="3189218386" odds="5/1" oddsDecimal="6.00" lastUpdateDate="2021-05-31" lastUpdateTime="10:35:12" handicap=""/>
+                        <participant name="Either in Round 5-6" id="3189218390" odds="4/1" oddsDecimal="5.00" lastUpdateDate="2021-05-31" lastUpdateTime="10:35:12" handicap=""/>
+                        <participant name="Either in Round 9-10" id="3189218399" odds="13/2" oddsDecimal="7.50" lastUpdateDate="2021-05-31" lastUpdateTime="10:35:19" handicap=""/>
+                        <participant name="Either in Round 11-12" id="3189218403" odds="11/1" oddsDecimal="12.00" lastUpdateDate="2021-05-31" lastUpdateTime="10:35:19" handicap=""/>
+                    </market>
+                    <market id="956657991" name="Tyson Fury v Deontay Wilder - When Will The Fight End? 2" url="http://sports.williamhill.com/bet/en-gb/betting/e/20627269/Tyson%2dFury%2dv%2dDeontay%2dWilder" date="2021-07-25" time="05:00:00" betTillDate="2021-07-25" betTillTime="05:00:00" lastUpdateDate="2021-05-31" lastUpdateTime="10:37:14" placeAvailable="N" forcastAvailable="N" tricastAvailable="N" eachwayAvailable="N" cashoutAvailable="N" startingPriceAvailable="N" livePriceAvailable="Y" guarenteedPriceAvailable="N" firstPriceAvailable="N">
+                        <participant name="Either in Round 7-12" id="3189218407" odds="15/8" oddsDecimal="2.88" lastUpdateDate="2021-05-31" lastUpdateTime="10:37:07" handicap=""/>
+                        <participant name="Fight to go the Distance" id="3189218410" odds="2/1" oddsDecimal="3.00" lastUpdateDate="2021-05-31" lastUpdateTime="10:37:07" handicap=""/>
+                        <participant name="Either in Round 1-6" id="3189218401" odds="13/10" oddsDecimal="2.30" lastUpdateDate="2021-05-31" lastUpdateTime="10:37:13" handicap=""/>
+                    </market>
+                    <market id="956657992" name="Tyson Fury v Deontay Wilder - Total Rounds 7.5" url="http://sports.williamhill.com/bet/en-gb/betting/e/20627269/Tyson%2dFury%2dv%2dDeontay%2dWilder" date="2021-07-25" time="05:00:00" betTillDate="2021-07-25" betTillTime="05:00:00" lastUpdateDate="2021-05-31" lastUpdateTime="10:38:09" placeAvailable="N" forcastAvailable="N" tricastAvailable="N" eachwayAvailable="N" cashoutAvailable="N" startingPriceAvailable="N" livePriceAvailable="Y" guarenteedPriceAvailable="N" firstPriceAvailable="N">
+                        <participant name="Under" id="3189218413" odds="5/6" oddsDecimal="1.83" lastUpdateDate="2021-05-31" lastUpdateTime="10:38:08" handicap=""/>
+                        <participant name="Over" id="3189218411" odds="5/6" oddsDecimal="1.83" lastUpdateDate="2021-05-31" lastUpdateTime="10:38:08" handicap=""/>
+                    </market>
+                    <market id="956657993" name="Tyson Fury v Deontay Wilder - When Will The Fight End? 1" url="http://sports.williamhill.com/bet/en-gb/betting/e/20627269/Tyson%2dFury%2dv%2dDeontay%2dWilder" date="2021-07-25" time="05:00:00" betTillDate="2021-07-25" betTillTime="05:00:00" lastUpdateDate="2021-05-31" lastUpdateTime="10:33:22" placeAvailable="N" forcastAvailable="N" tricastAvailable="N" eachwayAvailable="N" cashoutAvailable="N" startingPriceAvailable="N" livePriceAvailable="Y" guarenteedPriceAvailable="N" firstPriceAvailable="N">
+                        <participant name="Fight to go the Distance" id="3189218439" odds="2/1" oddsDecimal="3.00" lastUpdateDate="2021-05-31" lastUpdateTime="10:33:15" handicap=""/>
+                        <participant name="Either in Round 1-3" id="3189218418" odds="4/1" oddsDecimal="5.00" lastUpdateDate="2021-05-31" lastUpdateTime="10:33:15" handicap=""/>
+                        <participant name="Either in Round 4-6" id="3189218426" odds="11/4" oddsDecimal="3.75" lastUpdateDate="2021-05-31" lastUpdateTime="10:33:15" handicap=""/>
+                        <participant name="Either in Round 7-9" id="3189218429" odds="3/1" oddsDecimal="4.00" lastUpdateDate="2021-05-31" lastUpdateTime="10:33:15" handicap=""/>
+                        <participant name="Either in Round 10-12" id="3189218434" odds="6/1" oddsDecimal="7.00" lastUpdateDate="2021-05-31" lastUpdateTime="10:33:18" handicap=""/>
+                    </market>
+                    <market id="956657998" name="Tyson Fury v Deontay Wilder - When Will The Fight End? 4" url="http://sports.williamhill.com/bet/en-gb/betting/e/20627269/Tyson%2dFury%2dv%2dDeontay%2dWilder" date="2021-07-25" time="05:00:00" betTillDate="2021-07-25" betTillTime="05:00:00" lastUpdateDate="2021-05-31" lastUpdateTime="10:37:32" placeAvailable="N" forcastAvailable="N" tricastAvailable="N" eachwayAvailable="N" cashoutAvailable="N" startingPriceAvailable="N" livePriceAvailable="Y" guarenteedPriceAvailable="N" firstPriceAvailable="N">
+                        <participant name="Either in Round 9-12" id="3189218460" odds="4/1" oddsDecimal="5.00" lastUpdateDate="2021-05-31" lastUpdateTime="10:37:30" handicap=""/>
+                        <participant name="Either in Round 5-8" id="3189218457" odds="2/1" oddsDecimal="3.00" lastUpdateDate="2021-05-31" lastUpdateTime="10:37:30" handicap=""/>
+                        <participant name="Either in Round 1-4" id="3189218454" odds="11/4" oddsDecimal="3.75" lastUpdateDate="2021-05-31" lastUpdateTime="10:37:30" handicap=""/>
+                        <participant name="Fight to go the Distance" id="3189218463" odds="2/1" oddsDecimal="3.00" lastUpdateDate="2021-05-31" lastUpdateTime="10:37:30" handicap=""/>
+                    </market>
+                    <market id="956657999" name="Tyson Fury v Deontay Wilder - Alternate Grouped Round Betting 2" url="http://sports.williamhill.com/bet/en-gb/betting/e/20627269/Tyson%2dFury%2dv%2dDeontay%2dWilder" date="2021-07-25" time="05:00:00" betTillDate="2021-07-25" betTillTime="05:00:00" lastUpdateDate="2021-05-31" lastUpdateTime="10:36:13" placeAvailable="N" forcastAvailable="N" tricastAvailable="N" eachwayAvailable="N" cashoutAvailable="N" startingPriceAvailable="N" livePriceAvailable="Y" guarenteedPriceAvailable="N" firstPriceAvailable="N">
+                        <participant name="Deontay Wilder Round 1-6" id="3189218471" odds="11/2" oddsDecimal="6.50" lastUpdateDate="2021-05-31" lastUpdateTime="10:36:13" handicap=""/>
+                        <participant name="Deontay Wilder on Points" id="3189218483" odds="16/1" oddsDecimal="17.00" lastUpdateDate="2021-05-31" lastUpdateTime="10:36:13" handicap=""/>
+                        <participant name="Draw" id="3189218486" odds="20/1" oddsDecimal="21.00" lastUpdateDate="2021-05-31" lastUpdateTime="10:36:13" handicap=""/>
+                        <participant name="Tyson Fury Round 1-6" id="3189218466" odds="5/2" oddsDecimal="3.50" lastUpdateDate="2021-05-31" lastUpdateTime="10:36:13" handicap=""/>
+                        <participant name="Tyson Fury Round 7-12" id="3189218474" odds="11/4" oddsDecimal="3.75" lastUpdateDate="2021-05-31" lastUpdateTime="10:36:13" handicap=""/>
+                        <participant name="Tyson Fury on Points" id="3189218479" odds="5/2" oddsDecimal="3.50" lastUpdateDate="2021-05-31" lastUpdateTime="10:36:13" handicap=""/>
+                        <participant name="Deontay Wilder Round 7-12" id="3189218476" odds="9/1" oddsDecimal="10.00" lastUpdateDate="2021-05-31" lastUpdateTime="10:36:13" handicap=""/>
+                    </market>
+                    <market id="956658000" name="Tyson Fury v Deontay Wilder - Total Rounds 8.5" url="http://sports.williamhill.com/bet/en-gb/betting/e/20627269/Tyson%2dFury%2dv%2dDeontay%2dWilder" date="2021-07-25" time="05:00:00" betTillDate="2021-07-25" betTillTime="05:00:00" lastUpdateDate="2021-05-31" lastUpdateTime="10:38:02" placeAvailable="N" forcastAvailable="N" tricastAvailable="N" eachwayAvailable="N" cashoutAvailable="N" startingPriceAvailable="N" livePriceAvailable="Y" guarenteedPriceAvailable="N" firstPriceAvailable="N">
+                        <participant name="Under" id="3189218495" odds="4/6" oddsDecimal="1.67" lastUpdateDate="2021-05-31" lastUpdateTime="10:38:01" handicap=""/>
+                        <participant name="Over" id="3189218493" odds="11/10" oddsDecimal="2.10" lastUpdateDate="2021-05-31" lastUpdateTime="10:38:01" handicap=""/>
+                    </market>
+                    <market id="956658001" name="Tyson Fury v Deontay Wilder - Gone In 60 Seconds" url="http://sports.williamhill.com/bet/en-gb/betting/e/20627269/Tyson%2dFury%2dv%2dDeontay%2dWilder" date="2021-07-25" time="05:00:00" betTillDate="2021-07-25" betTillTime="05:00:00" lastUpdateDate="2021-05-31" lastUpdateTime="10:40:15" placeAvailable="N" forcastAvailable="N" tricastAvailable="N" eachwayAvailable="N" cashoutAvailable="N" startingPriceAvailable="N" livePriceAvailable="Y" guarenteedPriceAvailable="N" firstPriceAvailable="N">
+                        <participant name="Deontay Wilder To Win In The First 60 Seconds" id="3189218514" odds="80/1" oddsDecimal="81.00" lastUpdateDate="2021-05-31" lastUpdateTime="10:40:16" handicap=""/>
+                        <participant name="Tyson Fury To Win In The First 60 Seconds" id="3189218513" odds="50/1" oddsDecimal="51.00" lastUpdateDate="2021-05-31" lastUpdateTime="10:40:16" handicap=""/>
+                    </market>
+                </type>
+                <type id="715" name="Middleweight" url="http://sports.williamhill.com/bet/betting/t/715" lastUpdateDate="2021-02-24" lastUpdateTime="13:22:52">
+                    <market id="957431825" name="Jermall Charlo v Juan Macias Montiel - Bout Betting" url="http://sports.williamhill.com/bet/en-gb/betting/e/20645177/Jermall%2dCharlo%2dv%2dJuan%2dMacias%2dMontiel" date="2021-06-20" time="01:00:00" betTillDate="2021-06-20" betTillTime="01:00:00" lastUpdateDate="2021-05-23" lastUpdateTime="16:28:06" placeAvailable="N" forcastAvailable="N" tricastAvailable="N" eachwayAvailable="N" cashoutAvailable="Y" startingPriceAvailable="N" livePriceAvailable="Y" guarenteedPriceAvailable="N" firstPriceAvailable="N">
+                        <participant name="Juan Macias Montiel" id="3191970595" odds="10/1" oddsDecimal="11.00" lastUpdateDate="2021-05-23" lastUpdateTime="16:28:06" handicap=""/>
+                        <participant name="Draw" id="3191970592" odds="28/1" oddsDecimal="29.00" lastUpdateDate="2021-05-23" lastUpdateTime="16:28:06" handicap=""/>
+                        <participant name="Jermall Charlo" id="3191970585" odds="1/33" oddsDecimal="1.03" lastUpdateDate="2021-05-23" lastUpdateTime="16:28:06" handicap=""/>
+                    </market>
+                    <market id="959887261" name="Jaime Munguia v Maciej Sulecki - Bout Betting" url="http://sports.williamhill.com/bet/en-gb/betting/e/20705795/Jaime%2dMunguia%2dv%2dMaciej%2dSulecki" date="2021-06-20" time="04:00:00" betTillDate="2021-06-20" betTillTime="04:00:00" lastUpdateDate="2021-05-30" lastUpdateTime="11:16:34" placeAvailable="N" forcastAvailable="N" tricastAvailable="N" eachwayAvailable="N" cashoutAvailable="Y" startingPriceAvailable="N" livePriceAvailable="Y" guarenteedPriceAvailable="N" firstPriceAvailable="N">
+                        <participant name="Draw" id="3200549866" odds="20/1" oddsDecimal="21.00" lastUpdateDate="2021-05-30" lastUpdateTime="11:16:34" handicap=""/>
+                        <participant name="Maciej Sulecki" id="3200549872" odds="7/2" oddsDecimal="4.50" lastUpdateDate="2021-05-30" lastUpdateTime="11:16:34" handicap=""/>
+                        <participant name="Jaime Munguia" id="3200549859" odds="1/5" oddsDecimal="1.20" lastUpdateDate="2021-05-30" lastUpdateTime="11:16:34" handicap=""/>
+                    </market>
+                </type>
+                <type id="716" name="Welterweight" url="http://sports.williamhill.com/bet/betting/t/716" lastUpdateDate="2021-02-24" lastUpdateTime="13:22:52">
+                    <market id="957442115" name="Manny Pacquiao v Errol Spence Jr - Bout Betting" url="http://sports.williamhill.com/bet/en-gb/betting/e/20645212/Manny%2dPacquiao%2dv%2dErrol%2dSpence%2dJr" date="2021-08-21" time="23:00:00" betTillDate="2021-08-21" betTillTime="23:00:00" lastUpdateDate="2021-05-23" lastUpdateTime="17:15:40" placeAvailable="N" forcastAvailable="N" tricastAvailable="N" eachwayAvailable="N" cashoutAvailable="Y" startingPriceAvailable="N" livePriceAvailable="Y" guarenteedPriceAvailable="N" firstPriceAvailable="N">
+                        <participant name="Draw" id="3191997908" odds="16/1" oddsDecimal="17.00" lastUpdateDate="2021-05-23" lastUpdateTime="17:16:18" handicap=""/>
+                        <participant name="Errol Spence Jr" id="3191997913" odds="2/7" oddsDecimal="1.29" lastUpdateDate="2021-05-30" lastUpdateTime="07:33:47" handicap=""/>
+                        <participant name="Manny Pacquiao" id="3191997900" odds="13/5" oddsDecimal="3.60" lastUpdateDate="2021-05-30" lastUpdateTime="07:33:47" handicap=""/>
+                    </market>
+                </type>
+                <type id="717" name="Lightweight" url="http://sports.williamhill.com/bet/betting/t/717" lastUpdateDate="2021-02-27" lastUpdateTime="13:58:12">
+                    <market id="945983355" name="Teofimo Lopez v George Kambosos Jnr - Bout Betting" url="http://sports.williamhill.com/bet/en-gb/betting/e/20376492/Teofimo%2dLopez%2dv%2dGeorge%2dKambosos%2dJnr" date="2021-06-19" time="12:00:00" betTillDate="2021-06-19" betTillTime="12:00:00" lastUpdateDate="2021-04-22" lastUpdateTime="21:09:08" placeAvailable="N" forcastAvailable="N" tricastAvailable="N" eachwayAvailable="N" cashoutAvailable="Y" startingPriceAvailable="N" livePriceAvailable="Y" guarenteedPriceAvailable="N" firstPriceAvailable="N">
+                        <participant name="Draw" id="3151125656" odds="22/1" oddsDecimal="23.00" lastUpdateDate="2021-04-22" lastUpdateTime="21:09:08" handicap=""/>
+                        <participant name="Teofimo Lopez" id="3151125649" odds="1/12" oddsDecimal="1.08" lastUpdateDate="2021-05-24" lastUpdateTime="20:49:04" handicap=""/>
+                        <participant name="George Kambosos Jnr" id="3151125660" odds="6/1" oddsDecimal="7.00" lastUpdateDate="2021-05-24" lastUpdateTime="20:49:04" handicap=""/>
+                    </market>
+                    <market id="956009897" name="Vasyl Lomachenko v Masayoshi Nakatani - Bout Betting" url="http://sports.williamhill.com/bet/en-gb/betting/e/20610594/Vasyl%2dLomachenko%2dv%2dMasayoshi%2dNakatani" date="2021-06-27" time="04:00:00" betTillDate="2021-06-27" betTillTime="04:00:00" lastUpdateDate="2021-05-19" lastUpdateTime="16:49:51" placeAvailable="N" forcastAvailable="N" tricastAvailable="N" eachwayAvailable="N" cashoutAvailable="Y" startingPriceAvailable="N" livePriceAvailable="Y" guarenteedPriceAvailable="N" firstPriceAvailable="N">
+                        <participant name="Masayoshi Nakatani" id="3186892348" odds="7/1" oddsDecimal="8.00" lastUpdateDate="2021-05-19" lastUpdateTime="16:49:51" handicap=""/>
+                        <participant name="Draw" id="3186892344" odds="20/1" oddsDecimal="21.00" lastUpdateDate="2021-05-19" lastUpdateTime="16:49:51" handicap=""/>
+                        <participant name="Vasyl Lomachenko" id="3186892335" odds="1/16" oddsDecimal="1.06" lastUpdateDate="2021-05-19" lastUpdateTime="16:49:51" handicap=""/>
+                    </market>
+                </type>
+                <type id="719" name="Bantamweight" url="http://sports.williamhill.com/bet/betting/t/719" lastUpdateDate="2021-02-24" lastUpdateTime="13:22:52">
+                    <market id="956009420" name="Naoya Inoue v Michael Dasmarinas - Bout Betting" url="http://sports.williamhill.com/bet/en-gb/betting/e/20610593/Naoya%2dInoue%2dv%2dMichael%2dDasmarinas" date="2021-06-20" time="04:00:00" betTillDate="2021-06-20" betTillTime="04:00:00" lastUpdateDate="2021-05-19" lastUpdateTime="16:47:30" placeAvailable="N" forcastAvailable="N" tricastAvailable="N" eachwayAvailable="N" cashoutAvailable="Y" startingPriceAvailable="N" livePriceAvailable="Y" guarenteedPriceAvailable="N" firstPriceAvailable="N">
+                        <participant name="Naoya Inoue" id="3186890795" odds="1/33" oddsDecimal="1.03" lastUpdateDate="2021-05-19" lastUpdateTime="16:47:30" handicap=""/>
+                        <participant name="Michael Dasmarinas" id="3186890802" odds="10/1" oddsDecimal="11.00" lastUpdateDate="2021-05-19" lastUpdateTime="16:47:30" handicap=""/>
+                        <participant name="Draw" id="3186890801" odds="25/1" oddsDecimal="26.00" lastUpdateDate="2021-05-19" lastUpdateTime="16:47:30" handicap=""/>
+                    </market>
+                </type>
+                <type id="1103" name="Cruiserweight" url="http://sports.williamhill.com/bet/betting/t/1103" lastUpdateDate="2021-05-18" lastUpdateTime="18:37:38">
+                    <market id="959311293" name="Julio Cesar Chavez Jr v Anderson Silva - Bout Betting" url="http://sports.williamhill.com/bet/en-gb/betting/e/20689432/Julio%2dCesar%2dChavez%2dJr%2dv%2dAnderson%2dSilva" date="2021-06-20" time="01:00:00" betTillDate="2021-06-20" betTillTime="01:00:00" lastUpdateDate="2021-05-28" lastUpdateTime="17:27:27" placeAvailable="N" forcastAvailable="N" tricastAvailable="N" eachwayAvailable="N" cashoutAvailable="Y" startingPriceAvailable="N" livePriceAvailable="Y" guarenteedPriceAvailable="N" firstPriceAvailable="N">
+                        <participant name="Anderson Silva" id="3198420726" odds="16/5" oddsDecimal="4.20" lastUpdateDate="2021-05-28" lastUpdateTime="17:27:27" handicap=""/>
+                        <participant name="Julio Cesar Chavez Jr" id="3198420715" odds="2/9" oddsDecimal="1.22" lastUpdateDate="2021-05-28" lastUpdateTime="17:27:27" handicap=""/>
+                        <participant name="Draw" id="3198420722" odds="16/1" oddsDecimal="17.00" lastUpdateDate="2021-05-28" lastUpdateTime="17:27:27" handicap=""/>
+                    </market>
+                </type>
+                <type id="1265" name="Super Featherweight" url="http://sports.williamhill.com/bet/betting/t/1265" lastUpdateDate="2021-02-24" lastUpdateTime="13:22:52">
+                    <market id="959886909" name="Shakur Stevenson v Jeremiah Nakathila - Bout Betting" url="http://sports.williamhill.com/bet/en-gb/betting/e/20705766/Shakur%2dStevenson%2dv%2dJeremiah%2dNakathila" date="2021-06-13" time="04:00:00" betTillDate="2021-06-13" betTillTime="04:00:00" lastUpdateDate="2021-05-30" lastUpdateTime="11:14:11" placeAvailable="N" forcastAvailable="N" tricastAvailable="N" eachwayAvailable="N" cashoutAvailable="Y" startingPriceAvailable="N" livePriceAvailable="Y" guarenteedPriceAvailable="N" firstPriceAvailable="N">
+                        <participant name="Jeremiah Nakathila" id="3200548976" odds="12/1" oddsDecimal="13.00" lastUpdateDate="2021-05-30" lastUpdateTime="11:14:11" handicap=""/>
+                        <participant name="Draw" id="3200548970" odds="25/1" oddsDecimal="26.00" lastUpdateDate="2021-05-30" lastUpdateTime="11:14:11" handicap=""/>
+                        <participant name="Shakur Stevenson" id="3200548963" odds="1/50" oddsDecimal="1.02" lastUpdateDate="2021-05-30" lastUpdateTime="11:14:11" handicap=""/>
+                    </market>
+                </type>
+                <type id="14387" name="Super Welterweight" url="http://sports.williamhill.com/bet/betting/t/14387" lastUpdateDate="2021-02-24" lastUpdateTime="13:22:52">
+                    <market id="956007424" name="Jarrett Hurd v Luis Arias - Bout Betting" url="http://sports.williamhill.com/bet/en-gb/betting/e/20610586/Jarrett%2dHurd%2dv%2dLuis%2dArias" date="2021-06-07" time="03:00:00" betTillDate="2021-06-07" betTillTime="03:00:00" lastUpdateDate="2021-05-19" lastUpdateTime="16:43:28" placeAvailable="N" forcastAvailable="N" tricastAvailable="N" eachwayAvailable="N" cashoutAvailable="Y" startingPriceAvailable="N" livePriceAvailable="Y" guarenteedPriceAvailable="N" firstPriceAvailable="N">
+                        <participant name="Draw" id="3186885379" odds="18/1" oddsDecimal="19.00" lastUpdateDate="2021-05-23" lastUpdateTime="17:11:10" handicap=""/>
+                        <participant name="Luis Arias" id="3186885383" odds="7/1" oddsDecimal="8.00" lastUpdateDate="2021-05-23" lastUpdateTime="17:11:10" handicap=""/>
+                        <participant name="Jarrett Hurd" id="3186885372" odds="1/14" oddsDecimal="1.07" lastUpdateDate="2021-05-23" lastUpdateTime="17:11:11" handicap=""/>
+                    </market>
+                    <market id="957435500" name="Jermell Charlo v Brian Castano - Bout Betting" url="http://sports.williamhill.com/bet/en-gb/betting/e/20645183/Jermell%2dCharlo%2dv%2dBrian%2dCastano" date="2021-07-17" time="01:00:00" betTillDate="2021-07-17" betTillTime="01:00:00" lastUpdateDate="2021-05-23" lastUpdateTime="16:47:10" placeAvailable="N" forcastAvailable="N" tricastAvailable="N" eachwayAvailable="N" cashoutAvailable="Y" startingPriceAvailable="N" livePriceAvailable="Y" guarenteedPriceAvailable="N" firstPriceAvailable="N">
+                        <participant name="Brian Castano" id="3191979688" odds="2/1" oddsDecimal="3.00" lastUpdateDate="2021-05-31" lastUpdateTime="19:07:16" handicap=""/>
+                        <participant name="Jermell Charlo" id="3191979670" odds="2/5" oddsDecimal="1.40" lastUpdateDate="2021-05-31" lastUpdateTime="19:07:16" handicap=""/>
+                        <participant name="Draw" id="3191979683" odds="18/1" oddsDecimal="19.00" lastUpdateDate="2021-05-31" lastUpdateTime="19:07:21" handicap=""/>
+                    </market>
+                    <market id="954218080" name="Michael Zerafa v Tim Tszyu - Bout Betting" url="http://sports.williamhill.com/bet/en-gb/betting/e/20567878/Michael%2dZerafa%2dv%2dTim%2dTszyu" date="2021-07-17" time="07:00:00" betTillDate="2021-07-17" betTillTime="07:00:00" lastUpdateDate="2021-05-14" lastUpdateTime="17:03:33" placeAvailable="N" forcastAvailable="N" tricastAvailable="N" eachwayAvailable="N" cashoutAvailable="Y" startingPriceAvailable="N" livePriceAvailable="Y" guarenteedPriceAvailable="N" firstPriceAvailable="N">
+                        <participant name="Tim Tszyu" id="3180496342" odds="1/8" oddsDecimal="1.12" lastUpdateDate="2021-05-14" lastUpdateTime="17:03:33" handicap=""/>
+                        <participant name="Michael Zerafa" id="3180496329" odds="5/1" oddsDecimal="6.00" lastUpdateDate="2021-05-14" lastUpdateTime="17:03:33" handicap=""/>
+                        <participant name="Draw" id="3180496337" odds="16/1" oddsDecimal="17.00" lastUpdateDate="2021-05-14" lastUpdateTime="17:03:33" handicap=""/>
+                    </market>
+                </type>
+                <type id="18996" name="Super Lightweight" url="http://sports.williamhill.com/bet/betting/t/18996" lastUpdateDate="2021-02-24" lastUpdateTime="13:22:52">
+                    <market id="959307151" name="Mario Barrios v Gervonta Davis - Bout Betting" url="http://sports.williamhill.com/bet/en-gb/betting/e/20689419/Mario%2dBarrios%2dv%2dGervonta%2dDavis" date="2021-06-27" time="02:00:00" betTillDate="2021-06-27" betTillTime="02:00:00" lastUpdateDate="2021-05-28" lastUpdateTime="17:11:03" placeAvailable="N" forcastAvailable="N" tricastAvailable="N" eachwayAvailable="N" cashoutAvailable="Y" startingPriceAvailable="N" livePriceAvailable="Y" guarenteedPriceAvailable="N" firstPriceAvailable="N">
+                        <participant name="Gervonta Davis" id="3198407727" odds="3/10" oddsDecimal="1.30" lastUpdateDate="2021-05-28" lastUpdateTime="17:11:03" handicap=""/>
+                        <participant name="Mario Barrios" id="3198407713" odds="5/2" oddsDecimal="3.50" lastUpdateDate="2021-05-28" lastUpdateTime="17:11:03" handicap=""/>
+                        <participant name="Draw" id="3198407720" odds="20/1" oddsDecimal="21.00" lastUpdateDate="2021-05-28" lastUpdateTime="17:11:03" handicap=""/>
+                    </market>
+                </type>
+                <type id="29896" name="Future #YourOdds" url="http://sports.williamhill.com/bet/betting/t/29896" lastUpdateDate="2021-02-24" lastUpdateTime="13:22:52">
+                    <market id="494913262" name="Future #YourOdds - Future Boxing Specials - Future #YourOdds" url="http://sports.williamhill.com/bet/en-gb/betting/e/11301663/Future%2d%23YourOdds%2d%2d%2dFuture%2dBoxing%2dSpecials" date="2021-06-05" time="20:00:00" betTillDate="2021-06-05" betTillTime="20:00:00" lastUpdateDate="2021-03-02" lastUpdateTime="10:44:30" placeAvailable="N" forcastAvailable="N" tricastAvailable="N" eachwayAvailable="N" cashoutAvailable="N" startingPriceAvailable="N" livePriceAvailable="Y" guarenteedPriceAvailable="N" firstPriceAvailable="N">
+                        <participant name="Jake Paul To Win A Full WBA, WBO, WBC or IBF World Title Belt Before The End Of 2023" id="3191833988" odds="66/1" oddsDecimal="67.00" lastUpdateDate="2021-05-23" lastUpdateTime="12:48:43" handicap=""/>
+                        <participant name="David Price To Win A Full WBA, WBO, WBC or IBF World Title Belt Before The End Of 2022" id="3191834139" odds="25/1" oddsDecimal="26.00" lastUpdateDate="2021-05-23" lastUpdateTime="12:49:59" handicap=""/>
+                        <participant name="Archie Sharp To Win A Full WBA, WBO, WBC or IBF World Title Belt Before The End Of 2022" id="3157462972" odds="6/1" oddsDecimal="7.00" lastUpdateDate="2021-05-23" lastUpdateTime="12:45:00" handicap=""/>
+                        <participant name="Tommy Fury To Win A Full WBA, WBO, WBC or IBF World Title Belt Before The End Of 2022" id="3100258896" odds="40/1" oddsDecimal="41.00" lastUpdateDate="2021-05-08" lastUpdateTime="18:10:57" handicap=""/>
+                        <participant name="Xander Zayas To Win A Full WBA, WBO, WBC or IBF World Title Belt Before The End Of 2023" id="3154909845" odds="2/1" oddsDecimal="3.00" lastUpdateDate="2021-04-25" lastUpdateTime="11:47:23" handicap=""/>
+                        <participant name="Willy Hutchinson To Win A Full WBA, WBO, WBC or IBF World Title Belt Before The End Of 2022" id="3083342785" odds="7/1" oddsDecimal="8.00" lastUpdateDate="2021-03-28" lastUpdateTime="16:52:55" handicap=""/>
+                        <participant name="Dennis McCann To Win A Full WBA, WBO, WBC or IBF World Title Belt Before The End Of 2023" id="3115378357" odds="5/1" oddsDecimal="6.00" lastUpdateDate="2021-03-26" lastUpdateTime="13:43:55" handicap=""/>
+                        <participant name="Viddal Riley To Win A Full WBA, WBO, WBC or IBF World Title Belt Before The End Of 2023" id="3114274443" odds="33/1" oddsDecimal="34.00" lastUpdateDate="2021-03-25" lastUpdateTime="14:26:40" handicap=""/>
+                        <participant name="Florian Marku To Win A Full WBA, WBO, WBC or IBF World Title Belt Before The End Of 2023" id="3112981245" odds="5/1" oddsDecimal="6.00" lastUpdateDate="2021-03-24" lastUpdateTime="18:11:58" handicap=""/>
+                        <participant name="Michael Hunter To Win A Full WBA, WBO, WBC or IBF World Title Belt Before The End Of 2022" id="3100261217" odds="14/1" oddsDecimal="15.00" lastUpdateDate="2021-03-14" lastUpdateTime="09:54:33" handicap=""/>
+                        <participant name="Fabio Wardley To Win A Full WBA, WBO, WBC or IBF World Title Belt Before The End Of 2023" id="3100249781" odds="10/1" oddsDecimal="11.00" lastUpdateDate="2021-03-14" lastUpdateTime="09:51:49" handicap=""/>
+                        <participant name="Joe Joyce To Be The Unified World Heavyweight Champion (WBA, WBC, WBO &amp; IBF) By The End Of 2023" id="3083355643" odds="33/1" oddsDecimal="34.00" lastUpdateDate="2021-03-14" lastUpdateTime="09:51:03" handicap=""/>
+                        <participant name="Campbell Hatton To Win A Full WBA, WBO, WBC or IBF World Title Belt Before The End Of 2022" id="3083345315" odds="33/1" oddsDecimal="34.00" lastUpdateDate="2021-03-14" lastUpdateTime="09:50:18" handicap=""/>
+                        <participant name="Johnny Fisher To Win A Full WBA, WBO, WBC or IBF World Title Belt Before The End Of 2023" id="3083352078" odds="22/1" oddsDecimal="23.00" lastUpdateDate="2021-03-02" lastUpdateTime="10:41:38" handicap=""/>
+                        <participant name="Campbell Hatton To Win A Full WBA, WBO, WBC or IBF World Title Belt Before The End Of 2023" id="3083351112" odds="10/1" oddsDecimal="11.00" lastUpdateDate="2021-03-02" lastUpdateTime="10:40:40" handicap=""/>
+                        <participant name="Conner Kelsall To Win A Full WBA, WBO, WBC or IBF World Title Belt Before The End Of 2022" id="3083344628" odds="16/1" oddsDecimal="17.00" lastUpdateDate="2021-03-02" lastUpdateTime="10:37:52" handicap=""/>
+                        <participant name="Lewis Crocker To Win A Full WBA, WBO, WBC or IBF World Title Belt Before The End Of 2022" id="3083343613" odds="12/1" oddsDecimal="13.00" lastUpdateDate="2021-03-02" lastUpdateTime="10:36:58" handicap=""/>
+                        <participant name="Daniel Dubois To Win A Full WBA, WBO, WBC or IBF Heavyweight World Title Belt Before The End Of 2022" id="2857494833" odds="2/5" oddsDecimal="1.40" lastUpdateDate="2021-03-02" lastUpdateTime="10:34:40" handicap=""/>
+                    </market>
+                </type>
+                <type id="45804" name="Potential Fights - Void if not taking place by the end of 2021" url="http://sports.williamhill.com/bet/betting/t/45804" lastUpdateDate="2021-02-24" lastUpdateTime="13:22:52">
+                    <market id="888312189" name="Manny Pacquiao v Conor McGregor - Bout Betting 2 Way" url="http://sports.williamhill.com/bet/en-gb/betting/e/18907963/Manny%2dPacquiao%2dv%2dConor%2dMcGregor" date="2021-12-31" time="12:00:00" betTillDate="2021-12-31" betTillTime="12:00:00" lastUpdateDate="2021-05-28" lastUpdateTime="17:50:30" placeAvailable="N" forcastAvailable="N" tricastAvailable="N" eachwayAvailable="N" cashoutAvailable="N" startingPriceAvailable="N" livePriceAvailable="Y" guarenteedPriceAvailable="N" firstPriceAvailable="N">
+                        <participant name="Conor McGregor" id="2945708249" odds="6/1" oddsDecimal="7.00" lastUpdateDate="2021-05-28" lastUpdateTime="17:50:20" handicap=""/>
+                        <participant name="Manny Pacquiao" id="2945708243" odds="1/10" oddsDecimal="1.10" lastUpdateDate="2021-05-28" lastUpdateTime="17:50:20" handicap=""/>
+                    </market>
+                    <market id="888316109" name="Joshua Buatsi v Callum Johnson - Bout Betting" url="http://sports.williamhill.com/bet/en-gb/betting/e/18907978/Joshua%2dBuatsi%2dv%2dCallum%2dJohnson" date="2021-12-31" time="12:00:00" betTillDate="2021-12-31" betTillTime="12:00:00" lastUpdateDate="2021-02-24" lastUpdateTime="13:24:12" placeAvailable="N" forcastAvailable="N" tricastAvailable="N" eachwayAvailable="N" cashoutAvailable="Y" startingPriceAvailable="N" livePriceAvailable="Y" guarenteedPriceAvailable="N" firstPriceAvailable="N">
+                        <participant name="Joshua Buatsi" id="2945720524" odds="1/4" oddsDecimal="1.25" lastUpdateDate="2021-02-24" lastUpdateTime="13:30:14" handicap=""/>
+                        <participant name="Callum Johnson" id="2945720541" odds="3/1" oddsDecimal="4.00" lastUpdateDate="2021-02-24" lastUpdateTime="13:30:14" handicap=""/>
+                        <participant name="Draw" id="2945720534" odds="22/1" oddsDecimal="23.00" lastUpdateDate="2021-02-24" lastUpdateTime="13:30:14" handicap=""/>
+                    </market>
+                    <market id="888316318" name="Anthony Joshua v Oleksandr Usyk - Bout Betting" url="http://sports.williamhill.com/bet/en-gb/betting/e/18907985/Anthony%2dJoshua%2dv%2dOleksandr%2dUsyk" date="2021-12-31" time="12:00:00" betTillDate="2021-12-31" betTillTime="12:00:00" lastUpdateDate="2021-02-24" lastUpdateTime="13:24:12" placeAvailable="N" forcastAvailable="N" tricastAvailable="N" eachwayAvailable="N" cashoutAvailable="Y" startingPriceAvailable="N" livePriceAvailable="Y" guarenteedPriceAvailable="N" firstPriceAvailable="N">
+                        <participant name="Draw" id="2945721680" odds="20/1" oddsDecimal="21.00" lastUpdateDate="2021-02-24" lastUpdateTime="13:30:15" handicap=""/>
+                        <participant name="Oleksandr Usyk" id="2945721683" odds="7/4" oddsDecimal="2.75" lastUpdateDate="2021-05-21" lastUpdateTime="11:05:41" handicap=""/>
+                        <participant name="Anthony Joshua" id="2945721673" odds="4/9" oddsDecimal="1.44" lastUpdateDate="2021-05-21" lastUpdateTime="11:05:41" handicap=""/>
+                    </market>
+                    <market id="888316349" name="Anthony Yarde v Joshua Buatsi - Bout Betting" url="http://sports.williamhill.com/bet/en-gb/betting/e/18907983/Anthony%2dYarde%2dv%2dJoshua%2dBuatsi" date="2021-12-31" time="12:00:00" betTillDate="2021-12-31" betTillTime="12:00:00" lastUpdateDate="2021-02-24" lastUpdateTime="13:24:12" placeAvailable="N" forcastAvailable="N" tricastAvailable="N" eachwayAvailable="N" cashoutAvailable="Y" startingPriceAvailable="N" livePriceAvailable="Y" guarenteedPriceAvailable="N" firstPriceAvailable="N">
+                        <participant name="Anthony Yarde" id="2945721857" odds="6/4" oddsDecimal="2.50" lastUpdateDate="2021-02-24" lastUpdateTime="13:30:15" handicap=""/>
+                        <participant name="Draw" id="2945721868" odds="20/1" oddsDecimal="21.00" lastUpdateDate="2021-02-24" lastUpdateTime="13:30:15" handicap=""/>
+                        <participant name="Joshua Buatsi" id="2945721873" odds="1/2" oddsDecimal="1.50" lastUpdateDate="2021-02-24" lastUpdateTime="13:30:15" handicap=""/>
+                    </market>
+                    <market id="888316428" name="Dillian Whyte v Daniel Dubois - Bout Betting" url="http://sports.williamhill.com/bet/en-gb/betting/e/18907988/Dillian%2dWhyte%2dv%2dDaniel%2dDubois" date="2021-12-31" time="12:00:00" betTillDate="2021-12-31" betTillTime="12:00:00" lastUpdateDate="2021-02-24" lastUpdateTime="13:24:12" placeAvailable="N" forcastAvailable="N" tricastAvailable="N" eachwayAvailable="N" cashoutAvailable="Y" startingPriceAvailable="N" livePriceAvailable="Y" guarenteedPriceAvailable="N" firstPriceAvailable="N">
+                        <participant name="Daniel Dubois" id="2945722306" odds="4/6" oddsDecimal="1.67" lastUpdateDate="2021-02-24" lastUpdateTime="13:30:15" handicap=""/>
+                        <participant name="Dillian Whyte" id="2945722304" odds="6/5" oddsDecimal="2.20" lastUpdateDate="2021-02-24" lastUpdateTime="13:30:15" handicap=""/>
+                        <participant name="Draw" id="2945722305" odds="22/1" oddsDecimal="23.00" lastUpdateDate="2021-02-24" lastUpdateTime="13:30:15" handicap=""/>
+                    </market>
+                    <market id="888569267" name="Eddie Hall v Hafthor Bjornsson - Bout Betting" url="http://sports.williamhill.com/bet/en-gb/betting/e/18916132/Eddie%2dHall%2dv%2dHafthor%2dBjornsson" date="2021-12-31" time="12:00:00" betTillDate="2021-12-31" betTillTime="12:00:00" lastUpdateDate="2021-02-24" lastUpdateTime="13:24:12" placeAvailable="N" forcastAvailable="N" tricastAvailable="N" eachwayAvailable="N" cashoutAvailable="Y" startingPriceAvailable="N" livePriceAvailable="Y" guarenteedPriceAvailable="N" firstPriceAvailable="N">
+                        <participant name="Hafthor Bjornsson" id="2946585579" odds="10/11" oddsDecimal="1.91" lastUpdateDate="2021-04-05" lastUpdateTime="12:13:17" handicap=""/>
+                        <participant name="Eddie Hall" id="2946585567" odds="1/1" oddsDecimal="2.00" lastUpdateDate="2021-04-05" lastUpdateTime="12:13:17" handicap=""/>
+                        <participant name="Draw" id="2946585576" odds="14/1" oddsDecimal="15.00" lastUpdateDate="2021-02-24" lastUpdateTime="13:30:15" handicap=""/>
+                    </market>
+                    <market id="923967998" name="Oleksandr Usyk v Joe Joyce - Bout Betting" url="http://sports.williamhill.com/bet/en-gb/betting/e/19859789/Oleksandr%2dUsyk%2dv%2dJoe%2dJoyce" date="2021-12-31" time="23:00:00" betTillDate="2021-12-31" betTillTime="23:00:00" lastUpdateDate="2021-02-24" lastUpdateTime="13:25:28" placeAvailable="N" forcastAvailable="N" tricastAvailable="N" eachwayAvailable="N" cashoutAvailable="Y" startingPriceAvailable="N" livePriceAvailable="Y" guarenteedPriceAvailable="N" firstPriceAvailable="N">
+                        <participant name="Draw" id="3072623179" odds="20/1" oddsDecimal="21.00" lastUpdateDate="2021-02-24" lastUpdateTime="13:32:07" handicap=""/>
+                        <participant name="Joe Joyce" id="3072623186" odds="9/4" oddsDecimal="3.25" lastUpdateDate="2021-02-24" lastUpdateTime="13:32:07" handicap=""/>
+                        <participant name="Oleksandr Usyk" id="3072623169" odds="1/3" oddsDecimal="1.33" lastUpdateDate="2021-02-24" lastUpdateTime="13:32:07" handicap=""/>
+                    </market>
+                </type>
+                <type id="47304" name="Exhibition Fights" url="http://sports.williamhill.com/bet/betting/t/47304" lastUpdateDate="2021-05-14" lastUpdateTime="14:58:35">
+                    <market id="954175743" name="Floyd Mayweather v Logan Paul - Bout Betting 2 Way" url="http://sports.williamhill.com/bet/en-gb/betting/e/20567656/Floyd%2dMayweather%2dv%2dLogan%2dPaul" date="2021-06-07" time="04:00:00" betTillDate="2021-06-07" betTillTime="04:00:00" lastUpdateDate="2021-05-17" lastUpdateTime="09:48:18" placeAvailable="N" forcastAvailable="N" tricastAvailable="N" eachwayAvailable="N" cashoutAvailable="N" startingPriceAvailable="N" livePriceAvailable="Y" guarenteedPriceAvailable="N" firstPriceAvailable="N">
+                        <participant name="Logan Paul" id="3180345972" odds="13/2" oddsDecimal="7.50" lastUpdateDate="2021-05-31" lastUpdateTime="10:10:11" handicap=""/>
+                        <participant name="Floyd Mayweather" id="3180345964" odds="1/12" oddsDecimal="1.08" lastUpdateDate="2021-05-31" lastUpdateTime="10:10:11" handicap=""/>
+                    </market>
+                </type>
+                <type id="47491" name="UFC Fight Night: June 5th" url="http://sports.williamhill.com/bet/betting/t/47491" lastUpdateDate="2021-05-31" lastUpdateTime="10:24:05">
+                    <market id="960180755" name="Antonio Arroyo v Tom Breese - Bout Betting" url="http://sports.williamhill.com/bet/en-gb/betting/e/20714008/Antonio%2dArroyo%2dv%2dTom%2dBreese" date="2021-06-06" time="00:00:00" betTillDate="2021-06-06" betTillTime="00:00:00" lastUpdateDate="2021-05-31" lastUpdateTime="11:13:07" placeAvailable="N" forcastAvailable="N" tricastAvailable="N" eachwayAvailable="N" cashoutAvailable="N" startingPriceAvailable="N" livePriceAvailable="Y" guarenteedPriceAvailable="N" firstPriceAvailable="N">
+                        <participant name="Tom Breese" id="3201584967" odds="2/5" oddsDecimal="1.40" lastUpdateDate="2021-05-31" lastUpdateTime="11:12:58" handicap=""/>
+                        <participant name="Antonio Arroyo" id="3201584966" odds="19/10" oddsDecimal="2.90" lastUpdateDate="2021-05-31" lastUpdateTime="11:12:58" handicap=""/>
+                    </market>
+                    <market id="960180756" name="Antonio Arroyo v Tom Breese - Method Of Result" url="http://sports.williamhill.com/bet/en-gb/betting/e/20714008/Antonio%2dArroyo%2dv%2dTom%2dBreese" date="2021-06-06" time="00:00:00" betTillDate="2021-06-06" betTillTime="00:00:00" lastUpdateDate="2021-05-31" lastUpdateTime="11:13:33" placeAvailable="N" forcastAvailable="N" tricastAvailable="N" eachwayAvailable="N" cashoutAvailable="N" startingPriceAvailable="N" livePriceAvailable="Y" guarenteedPriceAvailable="N" firstPriceAvailable="N">
+                        <participant name="Antonio Arroyo By KO/TKO/DQ" id="3201584968" odds="7/1" oddsDecimal="8.00" lastUpdateDate="2021-05-31" lastUpdateTime="11:13:29" handicap=""/>
+                        <participant name="Draw" id="3201584974" odds="50/1" oddsDecimal="51.00" lastUpdateDate="2021-05-31" lastUpdateTime="11:13:29" handicap=""/>
+                        <participant name="Tom Breese By Submission" id="3201584973" odds="13/2" oddsDecimal="7.50" lastUpdateDate="2021-05-31" lastUpdateTime="11:13:29" handicap=""/>
+                        <participant name="Antonio Arroyo By Submission" id="3201584972" odds="5/1" oddsDecimal="6.00" lastUpdateDate="2021-05-31" lastUpdateTime="11:13:29" handicap=""/>
+                        <participant name="Antonio Arroyo By Decision" id="3201584970" odds="11/2" oddsDecimal="6.50" lastUpdateDate="2021-05-31" lastUpdateTime="11:13:29" handicap=""/>
+                        <participant name="Tom Breese By Decision" id="3201584971" odds="12/5" oddsDecimal="3.40" lastUpdateDate="2021-05-31" lastUpdateTime="11:13:29" handicap=""/>
+                        <participant name="Tom Breese By KO/TKO/DQ" id="3201584969" odds="13/8" oddsDecimal="2.62" lastUpdateDate="2021-05-31" lastUpdateTime="11:13:29" handicap=""/>
+                    </market>
+                    <market id="960180757" name="Antonio Arroyo v Tom Breese - Round Betting" url="http://sports.williamhill.com/bet/en-gb/betting/e/20714008/Antonio%2dArroyo%2dv%2dTom%2dBreese" date="2021-06-06" time="00:00:00" betTillDate="2021-06-06" betTillTime="00:00:00" lastUpdateDate="2021-05-31" lastUpdateTime="11:14:09" placeAvailable="N" forcastAvailable="N" tricastAvailable="N" eachwayAvailable="N" cashoutAvailable="N" startingPriceAvailable="N" livePriceAvailable="Y" guarenteedPriceAvailable="N" firstPriceAvailable="N">
+                        <participant name="Tom Breese Round 3" id="3201584980" odds="9/1" oddsDecimal="10.00" lastUpdateDate="2021-05-31" lastUpdateTime="11:13:59" handicap=""/>
+                        <participant name="Tom Breese Round 2" id="3201584978" odds="4/1" oddsDecimal="5.00" lastUpdateDate="2021-05-31" lastUpdateTime="11:13:59" handicap=""/>
+                        <participant name="Antonio Arroyo Round 2" id="3201584977" odds="8/1" oddsDecimal="9.00" lastUpdateDate="2021-05-31" lastUpdateTime="11:13:59" handicap=""/>
+                        <participant name="Tom Breese Round 1" id="3201584976" odds="5/2" oddsDecimal="3.50" lastUpdateDate="2021-05-31" lastUpdateTime="11:13:59" handicap=""/>
+                        <participant name="Antonio Arroyo Round 1" id="3201584975" odds="6/1" oddsDecimal="7.00" lastUpdateDate="2021-05-31" lastUpdateTime="11:13:59" handicap=""/>
+                        <participant name="Antonio Arroyo On Points" id="3201584985" odds="11/2" oddsDecimal="6.50" lastUpdateDate="2021-05-31" lastUpdateTime="11:13:59" handicap=""/>
+                        <participant name="Tom Breese On Points" id="3201584986" odds="12/5" oddsDecimal="3.40" lastUpdateDate="2021-05-31" lastUpdateTime="11:13:59" handicap=""/>
+                        <participant name="Antonio Arroyo Round 3" id="3201584979" odds="14/1" oddsDecimal="15.00" lastUpdateDate="2021-05-31" lastUpdateTime="11:13:59" handicap=""/>
+                    </market>
+                    <market id="960180758" name="Antonio Arroyo v Tom Breese - Fight to go the Distance" url="http://sports.williamhill.com/bet/en-gb/betting/e/20714008/Antonio%2dArroyo%2dv%2dTom%2dBreese" date="2021-06-06" time="00:00:00" betTillDate="2021-06-06" betTillTime="00:00:00" lastUpdateDate="2021-05-31" lastUpdateTime="11:14:29" placeAvailable="N" forcastAvailable="N" tricastAvailable="N" eachwayAvailable="N" cashoutAvailable="N" startingPriceAvailable="N" livePriceAvailable="Y" guarenteedPriceAvailable="N" firstPriceAvailable="N">
+                        <participant name="Yes" id="3201584987" odds="13/10" oddsDecimal="2.30" lastUpdateDate="2021-05-31" lastUpdateTime="11:14:19" handicap=""/>
+                        <participant name="No" id="3201584988" odds="4/7" oddsDecimal="1.57" lastUpdateDate="2021-05-31" lastUpdateTime="11:14:19" handicap=""/>
+                    </market>
+                    <market id="960180751" name="Dusko Todorovic v Gregory Rodrigues - Bout Betting" url="http://sports.williamhill.com/bet/en-gb/betting/e/20714007/Dusko%2dTodorovic%2dv%2dGregory%2dRodrigues" date="2021-06-06" time="01:00:00" betTillDate="2021-06-06" betTillTime="01:00:00" lastUpdateDate="2021-05-31" lastUpdateTime="11:10:20" placeAvailable="N" forcastAvailable="N" tricastAvailable="N" eachwayAvailable="N" cashoutAvailable="N" startingPriceAvailable="N" livePriceAvailable="Y" guarenteedPriceAvailable="N" firstPriceAvailable="N">
+                        <participant name="Dusko Todorovic" id="3201584941" odds="4/7" oddsDecimal="1.57" lastUpdateDate="2021-05-31" lastUpdateTime="11:10:10" handicap=""/>
+                        <participant name="Gregory Rodrigues" id="3201584942" odds="11/8" oddsDecimal="2.38" lastUpdateDate="2021-05-31" lastUpdateTime="11:10:10" handicap=""/>
+                    </market>
+                    <market id="960180752" name="Dusko Todorovic v Gregory Rodrigues - Method Of Result" url="http://sports.williamhill.com/bet/en-gb/betting/e/20714007/Dusko%2dTodorovic%2dv%2dGregory%2dRodrigues" date="2021-06-06" time="01:00:00" betTillDate="2021-06-06" betTillTime="01:00:00" lastUpdateDate="2021-05-31" lastUpdateTime="11:10:50" placeAvailable="N" forcastAvailable="N" tricastAvailable="N" eachwayAvailable="N" cashoutAvailable="N" startingPriceAvailable="N" livePriceAvailable="Y" guarenteedPriceAvailable="N" firstPriceAvailable="N">
+                        <participant name="Gregory Rodrigues By Decision" id="3201584946" odds="5/1" oddsDecimal="6.00" lastUpdateDate="2021-05-31" lastUpdateTime="11:10:40" handicap=""/>
+                        <participant name="Dusko Todorovic By KO/TKO/DQ" id="3201584943" odds="6/5" oddsDecimal="2.20" lastUpdateDate="2021-05-31" lastUpdateTime="11:10:40" handicap=""/>
+                        <participant name="Draw" id="3201584949" odds="66/1" oddsDecimal="67.00" lastUpdateDate="2021-05-31" lastUpdateTime="11:10:40" handicap=""/>
+                        <participant name="Gregory Rodrigues By Submission" id="3201584948" odds="16/1" oddsDecimal="17.00" lastUpdateDate="2021-05-31" lastUpdateTime="11:10:40" handicap=""/>
+                        <participant name="Dusko Todorovic By Submission" id="3201584947" odds="12/1" oddsDecimal="13.00" lastUpdateDate="2021-05-31" lastUpdateTime="11:10:40" handicap=""/>
+                        <participant name="Dusko Todorovic By Decision" id="3201584945" odds="4/1" oddsDecimal="5.00" lastUpdateDate="2021-05-31" lastUpdateTime="11:10:40" handicap=""/>
+                        <participant name="Gregory Rodrigues By KO/TKO/DQ" id="3201584944" odds="5/2" oddsDecimal="3.50" lastUpdateDate="2021-05-31" lastUpdateTime="11:10:40" handicap=""/>
+                    </market>
+                    <market id="960180753" name="Dusko Todorovic v Gregory Rodrigues - Round Betting" url="http://sports.williamhill.com/bet/en-gb/betting/e/20714007/Dusko%2dTodorovic%2dv%2dGregory%2dRodrigues" date="2021-06-06" time="01:00:00" betTillDate="2021-06-06" betTillTime="01:00:00" lastUpdateDate="2021-05-31" lastUpdateTime="11:11:36" placeAvailable="N" forcastAvailable="N" tricastAvailable="N" eachwayAvailable="N" cashoutAvailable="N" startingPriceAvailable="N" livePriceAvailable="Y" guarenteedPriceAvailable="N" firstPriceAvailable="N">
+                        <participant name="Dusko Todorovic On Points" id="3201584962" odds="4/1" oddsDecimal="5.00" lastUpdateDate="2021-05-31" lastUpdateTime="11:11:26" handicap=""/>
+                        <participant name="Dusko Todorovic Round 1" id="3201584950" odds="9/4" oddsDecimal="3.25" lastUpdateDate="2021-05-31" lastUpdateTime="11:11:26" handicap=""/>
+                        <participant name="Gregory Rodrigues Round 1" id="3201584952" odds="4/1" oddsDecimal="5.00" lastUpdateDate="2021-05-31" lastUpdateTime="11:11:26" handicap=""/>
+                        <participant name="Dusko Todorovic Round 2" id="3201584953" odds="5/1" oddsDecimal="6.00" lastUpdateDate="2021-05-31" lastUpdateTime="11:11:26" handicap=""/>
+                        <participant name="Gregory Rodrigues Round 2" id="3201584955" odds="13/2" oddsDecimal="7.50" lastUpdateDate="2021-05-31" lastUpdateTime="11:11:26" handicap=""/>
+                        <participant name="Dusko Todorovic Round 3" id="3201584956" odds="8/1" oddsDecimal="9.00" lastUpdateDate="2021-05-31" lastUpdateTime="11:11:26" handicap=""/>
+                        <participant name="Gregory Rodrigues Round 3" id="3201584957" odds="12/1" oddsDecimal="13.00" lastUpdateDate="2021-05-31" lastUpdateTime="11:11:26" handicap=""/>
+                        <participant name="Gregory Rodrigues On Points" id="3201584963" odds="5/1" oddsDecimal="6.00" lastUpdateDate="2021-05-31" lastUpdateTime="11:11:26" handicap=""/>
+                    </market>
+                    <market id="960180754" name="Dusko Todorovic v Gregory Rodrigues - Fight to go the Distance" url="http://sports.williamhill.com/bet/en-gb/betting/e/20714007/Dusko%2dTodorovic%2dv%2dGregory%2dRodrigues" date="2021-06-06" time="01:00:00" betTillDate="2021-06-06" betTillTime="01:00:00" lastUpdateDate="2021-05-31" lastUpdateTime="11:11:57" placeAvailable="N" forcastAvailable="N" tricastAvailable="N" eachwayAvailable="N" cashoutAvailable="N" startingPriceAvailable="N" livePriceAvailable="Y" guarenteedPriceAvailable="N" firstPriceAvailable="N">
+                        <participant name="Yes" id="3201584964" odds="9/4" oddsDecimal="3.25" lastUpdateDate="2021-05-31" lastUpdateTime="11:11:47" handicap=""/>
+                        <participant name="No" id="3201584965" odds="1/3" oddsDecimal="1.33" lastUpdateDate="2021-05-31" lastUpdateTime="11:11:47" handicap=""/>
+                    </market>
+                    <market id="960180747" name="Miguel Baeza v Santiago Ponzinibbio - Bout Betting" url="http://sports.williamhill.com/bet/en-gb/betting/e/20714006/Miguel%2dBaeza%2dv%2dSantiago%2dPonzinibbio" date="2021-06-06" time="02:00:00" betTillDate="2021-06-06" betTillTime="02:00:00" lastUpdateDate="2021-05-31" lastUpdateTime="11:07:35" placeAvailable="N" forcastAvailable="N" tricastAvailable="N" eachwayAvailable="N" cashoutAvailable="N" startingPriceAvailable="N" livePriceAvailable="Y" guarenteedPriceAvailable="N" firstPriceAvailable="N">
+                        <participant name="Miguel Baeza" id="3201584918" odds="4/5" oddsDecimal="1.80" lastUpdateDate="2021-05-31" lastUpdateTime="11:07:29" handicap=""/>
+                        <participant name="Santiago Ponzinibbio" id="3201584919" odds="1/1" oddsDecimal="2.00" lastUpdateDate="2021-05-31" lastUpdateTime="11:07:29" handicap=""/>
+                    </market>
+                    <market id="960180748" name="Miguel Baeza v Santiago Ponzinibbio - Method Of Result" url="http://sports.williamhill.com/bet/en-gb/betting/e/20714006/Miguel%2dBaeza%2dv%2dSantiago%2dPonzinibbio" date="2021-06-06" time="02:00:00" betTillDate="2021-06-06" betTillTime="02:00:00" lastUpdateDate="2021-05-31" lastUpdateTime="11:08:10" placeAvailable="N" forcastAvailable="N" tricastAvailable="N" eachwayAvailable="N" cashoutAvailable="N" startingPriceAvailable="N" livePriceAvailable="Y" guarenteedPriceAvailable="N" firstPriceAvailable="N">
+                        <participant name="Santiago Ponzinibbio By Submission" id="3201584925" odds="14/1" oddsDecimal="15.00" lastUpdateDate="2021-05-31" lastUpdateTime="11:08:01" handicap=""/>
+                        <participant name="Miguel Baeza By Submission" id="3201584924" odds="10/1" oddsDecimal="11.00" lastUpdateDate="2021-05-31" lastUpdateTime="11:08:01" handicap=""/>
+                        <participant name="Santiago Ponzinibbio By Decision" id="3201584923" odds="11/4" oddsDecimal="3.75" lastUpdateDate="2021-05-31" lastUpdateTime="11:08:01" handicap=""/>
+                        <participant name="Miguel Baeza By Decision" id="3201584922" odds="4/1" oddsDecimal="5.00" lastUpdateDate="2021-05-31" lastUpdateTime="11:08:01" handicap=""/>
+                        <participant name="Santiago Ponzinibbio By KO/TKO/DQ" id="3201584921" odds="3/1" oddsDecimal="4.00" lastUpdateDate="2021-05-31" lastUpdateTime="11:08:01" handicap=""/>
+                        <participant name="Miguel Baeza By KO/TKO/DQ" id="3201584920" odds="13/8" oddsDecimal="2.62" lastUpdateDate="2021-05-31" lastUpdateTime="11:08:01" handicap=""/>
+                        <participant name="Draw" id="3201584926" odds="50/1" oddsDecimal="51.00" lastUpdateDate="2021-05-31" lastUpdateTime="11:08:01" handicap=""/>
+                    </market>
+                    <market id="960180749" name="Miguel Baeza v Santiago Ponzinibbio - Round Betting" url="http://sports.williamhill.com/bet/en-gb/betting/e/20714006/Miguel%2dBaeza%2dv%2dSantiago%2dPonzinibbio" date="2021-06-06" time="02:00:00" betTillDate="2021-06-06" betTillTime="02:00:00" lastUpdateDate="2021-05-31" lastUpdateTime="11:09:08" placeAvailable="N" forcastAvailable="N" tricastAvailable="N" eachwayAvailable="N" cashoutAvailable="N" startingPriceAvailable="N" livePriceAvailable="Y" guarenteedPriceAvailable="N" firstPriceAvailable="N">
+                        <participant name="Miguel Baeza Round 1" id="3201584927" odds="3/1" oddsDecimal="4.00" lastUpdateDate="2021-05-31" lastUpdateTime="11:08:56" handicap=""/>
+                        <participant name="Miguel Baeza Round 2" id="3201584929" odds="5/1" oddsDecimal="6.00" lastUpdateDate="2021-05-31" lastUpdateTime="11:08:56" handicap=""/>
+                        <participant name="Santiago Ponzinibbio Round 2" id="3201584930" odds="7/1" oddsDecimal="8.00" lastUpdateDate="2021-05-31" lastUpdateTime="11:08:56" handicap=""/>
+                        <participant name="Santiago Ponzinibbio On Points" id="3201584938" odds="11/4" oddsDecimal="3.75" lastUpdateDate="2021-05-31" lastUpdateTime="11:08:56" handicap=""/>
+                        <participant name="Miguel Baeza On Points" id="3201584937" odds="4/1" oddsDecimal="5.00" lastUpdateDate="2021-05-31" lastUpdateTime="11:08:56" handicap=""/>
+                        <participant name="Santiago Ponzinibbio Round 3" id="3201584932" odds="12/1" oddsDecimal="13.00" lastUpdateDate="2021-05-31" lastUpdateTime="11:08:56" handicap=""/>
+                        <participant name="Miguel Baeza Round 3" id="3201584931" odds="9/1" oddsDecimal="10.00" lastUpdateDate="2021-05-31" lastUpdateTime="11:08:56" handicap=""/>
+                        <participant name="Santiago Ponzinibbio Round 1" id="3201584928" odds="5/1" oddsDecimal="6.00" lastUpdateDate="2021-05-31" lastUpdateTime="11:08:56" handicap=""/>
+                    </market>
+                    <market id="960180750" name="Miguel Baeza v Santiago Ponzinibbio - Fight to go the Distance" url="http://sports.williamhill.com/bet/en-gb/betting/e/20714006/Miguel%2dBaeza%2dv%2dSantiago%2dPonzinibbio" date="2021-06-06" time="02:00:00" betTillDate="2021-06-06" betTillTime="02:00:00" lastUpdateDate="2021-05-31" lastUpdateTime="11:09:33" placeAvailable="N" forcastAvailable="N" tricastAvailable="N" eachwayAvailable="N" cashoutAvailable="N" startingPriceAvailable="N" livePriceAvailable="Y" guarenteedPriceAvailable="N" firstPriceAvailable="N">
+                        <participant name="No" id="3201584940" odds="1/2" oddsDecimal="1.50" lastUpdateDate="2021-05-31" lastUpdateTime="11:09:29" handicap=""/>
+                        <participant name="Yes" id="3201584939" odds="6/4" oddsDecimal="2.50" lastUpdateDate="2021-05-31" lastUpdateTime="11:09:29" handicap=""/>
+                    </market>
+                    <market id="960180743" name="Roman Dolidze v Laureano Staropoli - Bout Betting" url="http://sports.williamhill.com/bet/en-gb/betting/e/20714005/Roman%2dDolidze%2dv%2dLaureano%2dStaropoli" date="2021-06-06" time="03:00:00" betTillDate="2021-06-06" betTillTime="03:00:00" lastUpdateDate="2021-05-31" lastUpdateTime="11:04:08" placeAvailable="N" forcastAvailable="N" tricastAvailable="N" eachwayAvailable="N" cashoutAvailable="N" startingPriceAvailable="N" livePriceAvailable="Y" guarenteedPriceAvailable="N" firstPriceAvailable="N">
+                        <participant name="Laureano Staropoli" id="3201584896" odds="6/5" oddsDecimal="2.20" lastUpdateDate="2021-05-31" lastUpdateTime="12:47:36" handicap=""/>
+                        <participant name="Roman Dolidze" id="3201584895" odds="4/6" oddsDecimal="1.67" lastUpdateDate="2021-05-31" lastUpdateTime="12:47:33" handicap=""/>
+                    </market>
+                    <market id="960180744" name="Roman Dolidze v Laureano Staropoli - Method Of Result" url="http://sports.williamhill.com/bet/en-gb/betting/e/20714005/Roman%2dDolidze%2dv%2dLaureano%2dStaropoli" date="2021-06-06" time="03:00:00" betTillDate="2021-06-06" betTillTime="03:00:00" lastUpdateDate="2021-05-31" lastUpdateTime="11:04:44" placeAvailable="N" forcastAvailable="N" tricastAvailable="N" eachwayAvailable="N" cashoutAvailable="N" startingPriceAvailable="N" livePriceAvailable="Y" guarenteedPriceAvailable="N" firstPriceAvailable="N">
+                        <participant name="Laureano Staropoli By KO/TKO/DQ" id="3201584898" odds="6/1" oddsDecimal="7.00" lastUpdateDate="2021-05-31" lastUpdateTime="11:04:34" handicap=""/>
+                        <participant name="Roman Dolidze By Decision" id="3201584899" odds="13/8" oddsDecimal="2.62" lastUpdateDate="2021-05-31" lastUpdateTime="11:04:34" handicap=""/>
+                        <participant name="Laureano Staropoli By Decision" id="3201584900" odds="5/2" oddsDecimal="3.50" lastUpdateDate="2021-05-31" lastUpdateTime="11:04:34" handicap=""/>
+                        <participant name="Roman Dolidze By Submission" id="3201584901" odds="7/1" oddsDecimal="8.00" lastUpdateDate="2021-05-31" lastUpdateTime="11:04:34" handicap=""/>
+                        <participant name="Laureano Staropoli By Submission" id="3201584902" odds="8/1" oddsDecimal="9.00" lastUpdateDate="2021-05-31" lastUpdateTime="11:04:34" handicap=""/>
+                        <participant name="Draw" id="3201584903" odds="50/1" oddsDecimal="51.00" lastUpdateDate="2021-05-31" lastUpdateTime="11:04:34" handicap=""/>
+                        <participant name="Roman Dolidze By KO/TKO/DQ" id="3201584897" odds="4/1" oddsDecimal="5.00" lastUpdateDate="2021-05-31" lastUpdateTime="11:04:34" handicap=""/>
+                    </market>
+                    <market id="960180745" name="Roman Dolidze v Laureano Staropoli - Round Betting" url="http://sports.williamhill.com/bet/en-gb/betting/e/20714005/Roman%2dDolidze%2dv%2dLaureano%2dStaropoli" date="2021-06-06" time="03:00:00" betTillDate="2021-06-06" betTillTime="03:00:00" lastUpdateDate="2021-05-31" lastUpdateTime="11:06:15" placeAvailable="N" forcastAvailable="N" tricastAvailable="N" eachwayAvailable="N" cashoutAvailable="N" startingPriceAvailable="N" livePriceAvailable="Y" guarenteedPriceAvailable="N" firstPriceAvailable="N">
+                        <participant name="Laureano Staropoli Round 2" id="3201584907" odds="9/1" oddsDecimal="10.00" lastUpdateDate="2021-05-31" lastUpdateTime="11:05:20" handicap=""/>
+                        <participant name="Laureano Staropoli Round 1" id="3201584905" odds="7/1" oddsDecimal="8.00" lastUpdateDate="2021-05-31" lastUpdateTime="11:05:20" handicap=""/>
+                        <participant name="Roman Dolidze Round 1" id="3201584904" odds="5/1" oddsDecimal="6.00" lastUpdateDate="2021-05-31" lastUpdateTime="11:05:20" handicap=""/>
+                        <participant name="Laureano Staropoli On Points" id="3201584915" odds="5/2" oddsDecimal="3.50" lastUpdateDate="2021-05-31" lastUpdateTime="11:05:20" handicap=""/>
+                        <participant name="Roman Dolidze On Points" id="3201584914" odds="13/8" oddsDecimal="2.62" lastUpdateDate="2021-05-31" lastUpdateTime="11:05:20" handicap=""/>
+                        <participant name="Laureano Staropoli Round 3" id="3201584909" odds="14/1" oddsDecimal="15.00" lastUpdateDate="2021-05-31" lastUpdateTime="11:05:20" handicap=""/>
+                        <participant name="Roman Dolidze Round 3" id="3201584908" odds="12/1" oddsDecimal="13.00" lastUpdateDate="2021-05-31" lastUpdateTime="11:05:20" handicap=""/>
+                        <participant name="Roman Dolidze Round 2" id="3201584906" odds="13/2" oddsDecimal="7.50" lastUpdateDate="2021-05-31" lastUpdateTime="11:05:20" handicap=""/>
+                    </market>
+                    <market id="960180746" name="Roman Dolidze v Laureano Staropoli - Fight to go the Distance" url="http://sports.williamhill.com/bet/en-gb/betting/e/20714005/Roman%2dDolidze%2dv%2dLaureano%2dStaropoli" date="2021-06-06" time="03:00:00" betTillDate="2021-06-06" betTillTime="03:00:00" lastUpdateDate="2021-05-31" lastUpdateTime="11:06:42" placeAvailable="N" forcastAvailable="N" tricastAvailable="N" eachwayAvailable="N" cashoutAvailable="N" startingPriceAvailable="N" livePriceAvailable="Y" guarenteedPriceAvailable="N" firstPriceAvailable="N">
+                        <participant name="Yes" id="3201584916" odds="4/7" oddsDecimal="1.57" lastUpdateDate="2021-05-31" lastUpdateTime="11:06:36" handicap=""/>
+                        <participant name="No" id="3201584917" odds="13/10" oddsDecimal="2.30" lastUpdateDate="2021-05-31" lastUpdateTime="11:06:36" handicap=""/>
+                    </market>
+                    <market id="960180739" name="Marcin Tybura v Walt Harris - Bout Betting" url="http://sports.williamhill.com/bet/en-gb/betting/e/20714004/Marcin%2dTybura%2dv%2dWalt%2dHarris" date="2021-06-06" time="03:30:00" betTillDate="2021-06-06" betTillTime="03:30:00" lastUpdateDate="2021-05-31" lastUpdateTime="11:00:20" placeAvailable="N" forcastAvailable="N" tricastAvailable="N" eachwayAvailable="N" cashoutAvailable="N" startingPriceAvailable="N" livePriceAvailable="Y" guarenteedPriceAvailable="N" firstPriceAvailable="N">
+                        <participant name="Marcin Tybura" id="3201584872" odds="4/7" oddsDecimal="1.57" lastUpdateDate="2021-05-31" lastUpdateTime="11:00:07" handicap=""/>
+                        <participant name="Walt Harris" id="3201584873" odds="11/8" oddsDecimal="2.38" lastUpdateDate="2021-05-31" lastUpdateTime="11:00:07" handicap=""/>
+                    </market>
+                    <market id="960180740" name="Marcin Tybura v Walt Harris - Method Of Result" url="http://sports.williamhill.com/bet/en-gb/betting/e/20714004/Marcin%2dTybura%2dv%2dWalt%2dHarris" date="2021-06-06" time="03:30:00" betTillDate="2021-06-06" betTillTime="03:30:00" lastUpdateDate="2021-05-31" lastUpdateTime="11:00:53" placeAvailable="N" forcastAvailable="N" tricastAvailable="N" eachwayAvailable="N" cashoutAvailable="N" startingPriceAvailable="N" livePriceAvailable="Y" guarenteedPriceAvailable="N" firstPriceAvailable="N">
+                        <participant name="Walt Harris By Decision" id="3201584877" odds="5/1" oddsDecimal="6.00" lastUpdateDate="2021-05-31" lastUpdateTime="11:00:48" handicap=""/>
+                        <participant name="Marcin Tybura By Decision" id="3201584876" odds="2/1" oddsDecimal="3.00" lastUpdateDate="2021-05-31" lastUpdateTime="11:00:48" handicap=""/>
+                        <participant name="Walt Harris By KO/TKO/DQ" id="3201584875" odds="3/1" oddsDecimal="4.00" lastUpdateDate="2021-05-31" lastUpdateTime="11:00:48" handicap=""/>
+                        <participant name="Marcin Tybura By KO/TKO/DQ" id="3201584874" odds="5/2" oddsDecimal="3.50" lastUpdateDate="2021-05-31" lastUpdateTime="11:00:48" handicap=""/>
+                        <participant name="Draw" id="3201584880" odds="50/1" oddsDecimal="51.00" lastUpdateDate="2021-05-31" lastUpdateTime="11:00:48" handicap=""/>
+                        <participant name="Walt Harris By Submission" id="3201584879" odds="12/1" oddsDecimal="13.00" lastUpdateDate="2021-05-31" lastUpdateTime="11:00:48" handicap=""/>
+                        <participant name="Marcin Tybura By Submission" id="3201584878" odds="8/1" oddsDecimal="9.00" lastUpdateDate="2021-05-31" lastUpdateTime="11:00:48" handicap=""/>
+                    </market>
+                    <market id="960180741" name="Marcin Tybura v Walt Harris - Round Betting" url="http://sports.williamhill.com/bet/en-gb/betting/e/20714004/Marcin%2dTybura%2dv%2dWalt%2dHarris" date="2021-06-06" time="03:30:00" betTillDate="2021-06-06" betTillTime="03:30:00" lastUpdateDate="2021-05-31" lastUpdateTime="11:01:43" placeAvailable="N" forcastAvailable="N" tricastAvailable="N" eachwayAvailable="N" cashoutAvailable="N" startingPriceAvailable="N" livePriceAvailable="Y" guarenteedPriceAvailable="N" firstPriceAvailable="N">
+                        <participant name="Marcin Tybura Round 1" id="3201584881" odds="11/4" oddsDecimal="3.75" lastUpdateDate="2021-05-31" lastUpdateTime="11:01:30" handicap=""/>
+                        <participant name="Walt Harris Round 1" id="3201584882" odds="4/1" oddsDecimal="5.00" lastUpdateDate="2021-05-31" lastUpdateTime="11:01:30" handicap=""/>
+                        <participant name="Marcin Tybura Round 2" id="3201584883" odds="9/2" oddsDecimal="5.50" lastUpdateDate="2021-05-31" lastUpdateTime="11:01:30" handicap=""/>
+                        <participant name="Walt Harris Round 2" id="3201584884" odds="7/1" oddsDecimal="8.00" lastUpdateDate="2021-05-31" lastUpdateTime="11:01:30" handicap=""/>
+                        <participant name="Marcin Tybura Round 3" id="3201584885" odds="10/1" oddsDecimal="11.00" lastUpdateDate="2021-05-31" lastUpdateTime="11:01:30" handicap=""/>
+                        <participant name="Walt Harris Round 3" id="3201584886" odds="12/1" oddsDecimal="13.00" lastUpdateDate="2021-05-31" lastUpdateTime="11:01:30" handicap=""/>
+                        <participant name="Marcin Tybura On Points" id="3201584891" odds="2/1" oddsDecimal="3.00" lastUpdateDate="2021-05-31" lastUpdateTime="11:01:30" handicap=""/>
+                        <participant name="Walt Harris On Points" id="3201584892" odds="5/1" oddsDecimal="6.00" lastUpdateDate="2021-05-31" lastUpdateTime="11:01:30" handicap=""/>
+                    </market>
+                    <market id="960180742" name="Marcin Tybura v Walt Harris - Fight to go the Distance" url="http://sports.williamhill.com/bet/en-gb/betting/e/20714004/Marcin%2dTybura%2dv%2dWalt%2dHarris" date="2021-06-06" time="03:30:00" betTillDate="2021-06-06" betTillTime="03:30:00" lastUpdateDate="2021-05-31" lastUpdateTime="11:02:05" placeAvailable="N" forcastAvailable="N" tricastAvailable="N" eachwayAvailable="N" cashoutAvailable="N" startingPriceAvailable="N" livePriceAvailable="Y" guarenteedPriceAvailable="N" firstPriceAvailable="N">
+                        <participant name="No" id="3201584894" odds="8/13" oddsDecimal="1.62" lastUpdateDate="2021-05-31" lastUpdateTime="11:02:00" handicap=""/>
+                        <participant name="Yes" id="3201584893" odds="6/5" oddsDecimal="2.20" lastUpdateDate="2021-05-31" lastUpdateTime="11:02:00" handicap=""/>
+                    </market>
+                    <market id="960178102" name="Jairzinho Rozenstruik v Augusto Sakai - Bout Betting" url="http://sports.williamhill.com/bet/en-gb/betting/e/20713944/Jairzinho%2dRozenstruik%2dv%2dAugusto%2dSakai" date="2021-06-06" time="04:30:00" betTillDate="2021-06-06" betTillTime="04:30:00" lastUpdateDate="2021-05-31" lastUpdateTime="10:55:43" placeAvailable="N" forcastAvailable="N" tricastAvailable="N" eachwayAvailable="N" cashoutAvailable="N" startingPriceAvailable="N" livePriceAvailable="Y" guarenteedPriceAvailable="N" firstPriceAvailable="N">
+                        <participant name="Jairzinho Rozenstruik" id="3201579489" odds="4/5" oddsDecimal="1.80" lastUpdateDate="2021-05-31" lastUpdateTime="10:55:32" handicap=""/>
+                        <participant name="Augusto Sakai" id="3201579490" odds="1/1" oddsDecimal="2.00" lastUpdateDate="2021-05-31" lastUpdateTime="10:55:32" handicap=""/>
+                    </market>
+                    <market id="960178103" name="Jairzinho Rozenstruik v Augusto Sakai - Method Of Result" url="http://sports.williamhill.com/bet/en-gb/betting/e/20713944/Jairzinho%2dRozenstruik%2dv%2dAugusto%2dSakai" date="2021-06-06" time="04:30:00" betTillDate="2021-06-06" betTillTime="04:30:00" lastUpdateDate="2021-05-31" lastUpdateTime="10:57:27" placeAvailable="N" forcastAvailable="N" tricastAvailable="N" eachwayAvailable="N" cashoutAvailable="N" startingPriceAvailable="N" livePriceAvailable="Y" guarenteedPriceAvailable="N" firstPriceAvailable="N">
+                        <participant name="Jairzinho Rozenstruik By Submission" id="3201579495" odds="20/1" oddsDecimal="21.00" lastUpdateDate="2021-05-31" lastUpdateTime="10:56:10" handicap=""/>
+                        <participant name="Augusto Sakai By Decision" id="3201579494" odds="7/2" oddsDecimal="4.50" lastUpdateDate="2021-05-31" lastUpdateTime="10:56:10" handicap=""/>
+                        <participant name="Jairzinho Rozenstruik By Decision" id="3201579493" odds="11/2" oddsDecimal="6.50" lastUpdateDate="2021-05-31" lastUpdateTime="10:56:10" handicap=""/>
+                        <participant name="Augusto Sakai By KO/TKO/DQ" id="3201579492" odds="5/2" oddsDecimal="3.50" lastUpdateDate="2021-05-31" lastUpdateTime="10:56:10" handicap=""/>
+                        <participant name="Jairzinho Rozenstruik By KO/TKO/DQ" id="3201579491" odds="6/4" oddsDecimal="2.50" lastUpdateDate="2021-05-31" lastUpdateTime="10:56:10" handicap=""/>
+                        <participant name="Draw" id="3201579497" odds="66/1" oddsDecimal="67.00" lastUpdateDate="2021-05-31" lastUpdateTime="10:56:10" handicap=""/>
+                        <participant name="Augusto Sakai By Submission" id="3201579496" odds="9/1" oddsDecimal="10.00" lastUpdateDate="2021-05-31" lastUpdateTime="10:56:10" handicap=""/>
+                    </market>
+                    <market id="960178104" name="Jairzinho Rozenstruik v Augusto Sakai - Round Betting" url="http://sports.williamhill.com/bet/en-gb/betting/e/20713944/Jairzinho%2dRozenstruik%2dv%2dAugusto%2dSakai" date="2021-06-06" time="04:30:00" betTillDate="2021-06-06" betTillTime="04:30:00" lastUpdateDate="2021-05-31" lastUpdateTime="10:58:37" placeAvailable="N" forcastAvailable="N" tricastAvailable="N" eachwayAvailable="N" cashoutAvailable="N" startingPriceAvailable="N" livePriceAvailable="Y" guarenteedPriceAvailable="N" firstPriceAvailable="N">
+                        <participant name="Jairzinho Rozenstruik Round 1" id="3201579498" odds="3/1" oddsDecimal="4.00" lastUpdateDate="2021-05-31" lastUpdateTime="10:58:33" handicap=""/>
+                        <participant name="Augusto Sakai Round 1" id="3201579499" odds="5/1" oddsDecimal="6.00" lastUpdateDate="2021-05-31" lastUpdateTime="10:58:33" handicap=""/>
+                        <participant name="Augusto Sakai On Points" id="3201579509" odds="7/2" oddsDecimal="4.50" lastUpdateDate="2021-05-31" lastUpdateTime="10:58:33" handicap=""/>
+                        <participant name="Jairzinho Rozenstruik On Points" id="3201579508" odds="11/2" oddsDecimal="6.50" lastUpdateDate="2021-05-31" lastUpdateTime="10:58:33" handicap=""/>
+                        <participant name="Augusto Sakai Round 5" id="3201579507" odds="22/1" oddsDecimal="23.00" lastUpdateDate="2021-05-31" lastUpdateTime="10:58:33" handicap=""/>
+                        <participant name="Jairzinho Rozenstruik Round 5" id="3201579506" odds="22/1" oddsDecimal="23.00" lastUpdateDate="2021-05-31" lastUpdateTime="10:58:33" handicap=""/>
+                        <participant name="Augusto Sakai Round 4" id="3201579505" odds="16/1" oddsDecimal="17.00" lastUpdateDate="2021-05-31" lastUpdateTime="10:58:33" handicap=""/>
+                        <participant name="Jairzinho Rozenstruik Round 4" id="3201579504" odds="14/1" oddsDecimal="15.00" lastUpdateDate="2021-05-31" lastUpdateTime="10:58:33" handicap=""/>
+                        <participant name="Augusto Sakai Round 3" id="3201579503" odds="11/1" oddsDecimal="12.00" lastUpdateDate="2021-05-31" lastUpdateTime="10:58:33" handicap=""/>
+                        <participant name="Jairzinho Rozenstruik Round 3" id="3201579502" odds="10/1" oddsDecimal="11.00" lastUpdateDate="2021-05-31" lastUpdateTime="10:58:33" handicap=""/>
+                        <participant name="Augusto Sakai Round 2" id="3201579501" odds="15/2" oddsDecimal="8.50" lastUpdateDate="2021-05-31" lastUpdateTime="10:58:33" handicap=""/>
+                        <participant name="Jairzinho Rozenstruik Round 2" id="3201579500" odds="5/1" oddsDecimal="6.00" lastUpdateDate="2021-05-31" lastUpdateTime="10:58:33" handicap=""/>
+                    </market>
+                    <market id="960178105" name="Jairzinho Rozenstruik v Augusto Sakai - Fight to go the Distance" url="http://sports.williamhill.com/bet/en-gb/betting/e/20713944/Jairzinho%2dRozenstruik%2dv%2dAugusto%2dSakai" date="2021-06-06" time="04:30:00" betTillDate="2021-06-06" betTillTime="04:30:00" lastUpdateDate="2021-05-31" lastUpdateTime="10:59:11" placeAvailable="N" forcastAvailable="N" tricastAvailable="N" eachwayAvailable="N" cashoutAvailable="N" startingPriceAvailable="N" livePriceAvailable="Y" guarenteedPriceAvailable="N" firstPriceAvailable="N">
+                        <participant name="No" id="3201579511" odds="2/5" oddsDecimal="1.40" lastUpdateDate="2021-05-31" lastUpdateTime="10:59:06" handicap=""/>
+                        <participant name="Yes" id="3201579510" odds="7/4" oddsDecimal="2.75" lastUpdateDate="2021-05-31" lastUpdateTime="10:59:06" handicap=""/>
+                    </market>
+                </type>
+            </class>
+            <disclaimer>
+WHG (International) Ltd (We/Us) of 6/1 Waterport Place, Gibraltar, owns the XML Feed Website ( the Website) relating to information contained on its main trading website. By using the Website You agree to these full Terms of Use available at http://developer.williamhill.com
+            </disclaimer>
+        </williamhill>
+    </response>
 </oxip>
