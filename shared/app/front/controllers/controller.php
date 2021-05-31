@@ -283,6 +283,7 @@ class MainController
         }
 
         $team_pos = ((int) $matchup->getFighterID(2) == $team->getID()) + 1;
+        
         $view_matchup['team_pos'] = $team_pos;
         $view_matchup['other_pos'] = ($team_pos == 1 ? 2 : 1);
         $latest_index = EventHandler::getCurrentOddsIndex($matchup->getID(), $team_pos);

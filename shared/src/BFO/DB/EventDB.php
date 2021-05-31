@@ -75,6 +75,12 @@ class EventDB
                         ':metadata_team1_id' =>  $team_id, ':metadata_team2_id' => $team_id];
         }
 
+        $sorting = 'ORDER BY f.is_mainevent DESC, gametime DESC, latest_date ASC';
+
+        if ($team_id) { //Alternative sorting when fetching a teams matchups
+            $sorting = 'ORDER BY is_future DESC, gametime DESC, latest_date DESC, id DESC';
+        }
+
         $query = 'SELECT f.id, f1.name AS fighter1_name, f2.name AS fighter2_name, f.event_id, f1.id AS fighter1_id, f2.id AS fighter2_id, f.is_mainevent as is_mainevent, 
                         (SELECT MIN(date) FROM fightodds fo WHERE fo.fight_id = f.id) AS latest_date, m.mvalue as gametime, m.max_value as max_gametime, m.min_value as min_gametime,
                         LEFT(e.date, 10) >= LEFT((NOW() - INTERVAL ' . GENERAL_GRACEPERIOD_SHOW . ' HOUR), 10) AS is_future 
@@ -95,8 +101,8 @@ class EventDB
                     ' . ($future_matchups_only ? ' AND LEFT(e.date, 10) >= LEFT((NOW() - INTERVAL ' . GENERAL_GRACEPERIOD_SHOW . ' HOUR), 10) ' : '') . '
                     ' . ($only_with_odds ? ' HAVING latest_date IS NOT NULL ' : '') . '
                     ' . ($only_without_odds ? ' HAVING latest_date IS NULL ' : '') . '
-                        AND f.id IS NOT NULL
-                    ORDER BY f.is_mainevent DESC, gametime DESC, latest_date ASC';
+                        AND f.id IS NOT NULL ' . $sorting;
+                    
 
         $matchups = [];
         try {

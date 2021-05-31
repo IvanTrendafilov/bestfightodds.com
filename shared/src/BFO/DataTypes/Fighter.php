@@ -12,7 +12,7 @@ class Fighter
     public function __construct($name, $id)
     {
         $this->name = $name;
-        $this->id = $id;
+        $this->id = (int) $id;
     }
     
     public function getName()
@@ -20,7 +20,7 @@ class Fighter
         return $this->name;
     }
     
-    public function getID()
+    public function getID(): int
     {
         return $this->id;
     }

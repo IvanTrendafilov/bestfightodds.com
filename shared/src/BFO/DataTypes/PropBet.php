@@ -4,199 +4,197 @@ namespace BFO\DataTypes;
 
 class PropBet
 {
-    private $iMatchupID; //Matchup the prop is linked to
-    private $iTeamNumber; //Used if prop specifies a certain team in the matchup
-    private $iBookieID;
-    private $sPropName;
-    private $sPropOdds;
-    private $sNegPropName;
-    private $sNegPropOdds;
-    private $iPropTypeID;
-    private $sDate;
+    private int $matchup_id; //Matchup the prop is linked to
+    private int $team_num; //Used if prop specifies a certain team in the matchup
+    private int $bookie_id;
+    private int $proptype_id;
 
-    public function __construct($a_iMatchupID, $a_iBookieID, $a_sPropName, $a_sPropOdds, $a_sNegPropName, $a_sNegPropOdds, $a_iPropTypeID, $a_sDate, $a_iTeamNumber = 0)
+    private string $prop_name;
+    private int $prop_odds;
+    private string $negprop_name;
+    private int $negprop_odds;
+    
+    private string $date;
+
+    public function __construct(int $matchup_id, int $bookie_id, string $prop_name, int $prop_odds, string $negprop_name, int $negprop_odds, int $proptype_id, string $date, int $team_num = 0)
     {
-        $this->iMatchupID = $a_iMatchupID;
-        $this->iBookieID = $a_iBookieID;
-        $this->sPropName = $a_sPropName;
-        $this->sPropOdds = $a_sPropOdds;
-        $this->sNegPropName = $a_sNegPropName;
-        $this->sNegPropOdds = $a_sNegPropOdds;
-        $this->iPropTypeID = $a_iPropTypeID;
-        $this->iTeamNumber = $a_iTeamNumber;
-        $this->sDate = $a_sDate;
+        $this->matchup_id = $matchup_id;
+        $this->bookie_id = $bookie_id;
+        $this->prop_name = $prop_name;
+        $this->prop_odds = $prop_odds;
+        $this->negprop_name = $negprop_name;
+        $this->negprop_odds = $negprop_odds;
+        $this->proptype_id = $proptype_id;
+        $this->team_num = $team_num;
+        $this->date = $date;
     }
 
-    public function getMatchupID()
+    public function getMatchupID(): int
     {
-        return $this->iMatchupID;
+        return $this->matchup_id;
     }
 
-    public function setMatchupID($a_iMatchupID)
+    public function setMatchupID($matchup_id): void
     {
-        $this->iMatchupID = $a_iMatchupID;
+        $this->matchup_id = $matchup_id;
     }
 
-    public function getBookieID()
+    public function getBookieID(): int
     {
-        return $this->iBookieID;
+        return $this->bookie_id;
     }
 
-    public function setBookieID($a_iBookieID)
+    public function setBookieID($bookie_id): void
     {
-        $this->iBookieID = $a_iBookieID;
-    }
-
-
-    /*
-    @deprecated Use getOdds(teamNum) instead
-    */
-    public function getPropOdds()
-    {
-        return $this->sPropOdds;
-    }
-
-    public function setPropOdds($a_sPropOdds)
-    {
-        $this->sPropOdds = $a_sPropOdds;
-    }
-
-    public function getNegPropName()
-    {
-        return $this->sNegPropName;
-    }
-
-    public function setNegPropName($a_sNegPropName)
-    {
-        $this->sNegPropName = $a_sNegPropName;
+        $this->bookie_id = $bookie_id;
     }
 
     /*
     @deprecated Use getOdds(teamNum) instead
     */
-    public function getNegPropOdds()
+    public function getPropOdds(): int
     {
-        return $this->sNegPropOdds;
+        return $this->prop_odds;
     }
 
-    public function setNegPropOdds($a_sNegPropOdds)
+    public function setPropOdds(int $prop_odds): void
     {
-        $this->sNegPropOdds = $a_sNegPropOdds;
+        $this->prop_odds = $prop_odds;
     }
 
-    public function getPropTypeID()
+    public function getNegPropName(): string
     {
-        return $this->iPropTypeID;
+        return $this->negprop_name;
     }
 
-    public function setPropTypeID($a_iPropTypeID)
+    public function setNegPropName($negprop_name): void
     {
-        $this->iPropTypeID = $a_iPropTypeID;
+        $this->negprop_name = $negprop_name;
     }
 
-    public function getDate()
+    /*
+    @deprecated Use getOdds(teamNum) instead
+    */
+    public function getNegPropOdds(): int
     {
-        return $this->sDate;
+        return $this->negprop_odds;
     }
 
-    public function setDate($a_sDate)
+    public function setNegPropOdds(int $negprop_odds): void
     {
-        $this->sDate = $a_sDate;
+        $this->negprop_odds = $negprop_odds;
     }
 
-    public function getPropName()
+    public function getPropTypeID(): int
     {
-        return $this->sPropName;
+        return $this->proptype_id;
     }
 
-    public function setPropName($sPropName)
+    public function setPropTypeID(int $proptype_id): void
     {
-        $this->sPropName = $sPropName;
+        $this->proptype_id = $proptype_id;
     }
 
-    private function getOddsAsString($a_sOdds)
+    public function getDate(): string
     {
-        if ($a_sOdds == 0) {
+        return $this->date;
+    }
+
+    public function setDate($date): void
+    {
+        $this->date = $date;
+    }
+
+    public function getPropName(): string
+    {
+        return $this->prop_name;
+    }
+
+    public function setPropName(string $prop_name): void
+    {
+        $this->prop_name = $prop_name;
+    }
+
+    private function getOddsAsString(int $odds): string
+    {
+        if ($odds == 0) {
             return 'error';
-        } elseif ($a_sOdds > 0) {
-            return '+' . $a_sOdds;
-        } else {
-            return $a_sOdds;
         }
+        if ($odds > 0) {
+            return '+' . $odds;
+        }
+        return $odds;
     }
 
-    public function getPropOddsAsString()
+    public function getPropOddsAsString(): string
     {
-        return $this->getOddsAsString($this->sPropOdds);
+        return $this->getOddsAsString($this->prop_odds);
     }
 
-    public function getNegPropOddsAsString()
+    public function getNegPropOddsAsString(): string
     {
-        return $this->getOddsAsString($this->sNegPropOdds);
+        return $this->getOddsAsString($this->negprop_odds);
     }
 
-    public function getTeamNumber()
+    public function getTeamNumber(): int
     {
-        return $this->iTeamNumber;
+        return $this->team_num;
     }
 
-    public function setTeamNumber($a_iTeamNumber)
+    public function setTeamNumber(int $team_num): void
     {
-        $this->iTeamNumber = $a_iTeamNumber;
+        $this->team_num = $team_num;
     }
 
-    public function equals($a_oPropBet)
+    public function equals(PropBet $a_oPropBet): bool
     {
-        $bEquals = (
-            $this->iMatchupID == $a_oPropBet->getMatchupID() &&
-                $this->iBookieID == $a_oPropBet->getBookieID() &&
-                $this->sPropOdds == $a_oPropBet->getPropOdds() &&
-                $this->sNegPropOdds == $a_oPropBet->getNegPropOdds() &&
-                $this->iPropTypeID == $a_oPropBet->getPropTypeID()
-        );
-        return $bEquals;
+        return ($this->matchup_id == $a_oPropBet->getMatchupID() &&
+            $this->bookie_id == $a_oPropBet->getBookieID() &&
+            $this->prop_odds == $a_oPropBet->getPropOdds() &&
+            $this->negprop_odds == $a_oPropBet->getNegPropOdds() &&
+            $this->proptype_id == $a_oPropBet->getPropTypeID());
     }
 
-    public function getOdds($a_iTeamNumber)
+    public function getOdds(int $team_num): ?int
     {
-        if ($a_iTeamNumber == '1') {
-            return $this->sPropOdds;
-        } elseif ($a_iTeamNumber == '2') {
-            return $this->sNegPropOdds;
+        if ($team_num == '1') {
+            return $this->prop_odds;
+        } 
+        if ($team_num == '2') {
+            return $this->negprop_odds;
         }
         return null;
     }
 
-
-    public static function moneylineToDecimal($a_iMoneyline, $a_bNoRounding = false)
+    public static function moneylineToDecimal(int $moneyline, bool $no_rounding = false): float
     {
-        $fOdds = 0;
-        if ($a_iMoneyline == 100) {
+        if ($moneyline == 100) {
             return 2.0;
-        } elseif ($a_iMoneyline > 0) {
-            if ($a_bNoRounding == true) {
-                $fOdds = round((($a_iMoneyline / 100) + 1) * 100000) / 100000;
+        }
+        
+        if ($moneyline > 0) {
+            if ($no_rounding == true) {
+                return round((($moneyline / 100) + 1) * 100000) / 100000;
             } else {
-                $fOdds = round((($a_iMoneyline / 100) + 1) * 100) / 100;
+                return round((($moneyline / 100) + 1) * 100) / 100;
             }
         } else {
-            $a_iMoneyline = substr($a_iMoneyline, 1);
-            if ($a_bNoRounding == true) {
-                $fOdds = round(((100 / $a_iMoneyline) + 1) * 100000) / 100000;
+            $moneyline = substr($moneyline, 1);
+            if ($no_rounding == true) {
+                return round(((100 / $moneyline) + 1) * 100000) / 100000;
             } else {
-                $fOdds = round(((100 / $a_iMoneyline) + 1) * 100) / 100;
+                return round(((100 / $moneyline) + 1) * 100) / 100;
             }
         }
-        return $fOdds;
     }
 
-    public static function decimalToMoneyline($a_fDecimal)
+    public static function decimalToMoneyline($decimal_val)
     {
-        $a_fDecimal--;
-        if ($a_fDecimal < 1) {
-            return '-' . round((1 / $a_fDecimal) * 100);
-        } else { //(a_iOdds >= 1)
-            return round($a_fDecimal * 100);
+        $decimal_val--;
+        if ($decimal_val < 1) {
+            return '-' . round((1 / $decimal_val) * 100);
         }
+        //(a_iOdds >= 1)
+        return round($decimal_val * 100);
     }
 }

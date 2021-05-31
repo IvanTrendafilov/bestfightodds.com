@@ -132,7 +132,7 @@ class Fight
             return $this->team1_id;
         }
         if ($team_num == 2 && isset($this->team2_id)) {
-            return $this->team1_id;
+            return $this->team2_id;
         }
         return -1;
     }

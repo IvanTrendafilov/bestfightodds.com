@@ -9,13 +9,14 @@ class PropTemplate
     private $template_pos;
     private $template_neg;
     private $proptype_id;
+    private $fieldstype_id;
     private $prop_pos_values;
     private $prop_neg_values;
-    private $fieldstype_id;
+    
     private $is_event_prop = false;
-    private $last_used_date;
+    private $neg_is_primary = false;
 
-    private $bNegIsPrimary = false;
+    private $last_used_date;
 
     public function __construct(int $id, int $bookie_id, string $template_pos, string $template_neg, int $proptype_id, int $fieldstype_id, string $last_used_date)
     {
@@ -36,7 +37,7 @@ class PropTemplate
         }
 
         if ($template_pos == '') {
-            $this->bNegIsPrimary = true;
+            $this->neg_is_primary = true;
         }
     }
 
@@ -95,7 +96,7 @@ class PropTemplate
 
     public function isNegPrimary()
     {
-        return $this->bNegIsPrimary;
+        return $this->neg_is_primary;
     }
 
     public function getFieldsTypeAsExample(): string
