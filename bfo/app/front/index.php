@@ -53,7 +53,7 @@ $customErrorHandler = function (
 ) use ($app) {
   $response = $app->getResponseFactory()->createResponse();
   $response->getBody()->write('Error ' . $exception->getCode());
-  if ($exception->getCode() != 404) { //Don't log 404s
+  if ($exception->getCode() != 404 && $exception->getCode() != 405) { //Don't log 404s or 405s
     error_log('Error ' . $exception->getMessage() . $exception->getTraceAsString() . $exception->getCode());
   }
   return $response;
