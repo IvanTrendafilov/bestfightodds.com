@@ -95,7 +95,7 @@ class ParserJob
                 foreach ($cType->market as $cMarket) {
                     $sType = trim(substr(strrchr($cMarket['name'], "-"), 2));
                     if (($sType == 'Bout Betting' && count($cMarket->participant) == 3)  //Number of participants needs to be 3 to ensure this is a boxing bout (fighter 1, fighter2, draw)
-                        || $cType['name'] == 'Exhibition Fights' && $sType == 'Bout Betting 2 Way')
+                        || ($cType['name'] == 'Exhibition Fights' && $sType == 'Bout Betting 2 Way'))
                     {
                         //Normal matchup
                         //Find draw and ignore it
