@@ -2,6 +2,13 @@
 
 use BFO\Parser\RulesetInterface;
 
+/**
+ * This file contains the site specific ruleset that is used to determine if a matchup or event can be created automatically
+ * 
+ * When a parser is kicking off it calls OddsProcessor to process the odds. OddsProcessor will in turn call MatchupCreator 
+ * when it cannot match odds to an existing matchup to check if the matchup can be created. MatchupCreator is generic and
+ * will need to consult this site specific ruleset to check if a matchup can be created.
+ */
 class Ruleset implements RulesetInterface
 {
     public function __construct()
