@@ -31,6 +31,7 @@ abstract class ParserJobBase
             foreach ($this->mockfiles as $content_id => $mockfile) {
                 $this->logger->info("Note: Using content mock file at " . $mockfile);
                 $contents[$content_id] = ParseTools::retrievePageFromFile($mockfile);
+                $this->full_run = true;
             }
         } else {
             $this->logger->info("Fetching content through " . count($this->content_urls) . " URLs");

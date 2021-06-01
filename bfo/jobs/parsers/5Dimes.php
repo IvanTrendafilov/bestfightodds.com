@@ -27,10 +27,12 @@ use BFO\Parser\Jobs\ParserJobBase;
 
 define('BOOKIE_NAME', '5dimes');
 define('BOOKIE_ID', 1);
-define('BOOKIE_URLS', 
+define(
+    'BOOKIE_URLS',
     ['all' => 'http://lines.5dimes.com/linesfeed/getlinefeeds.aspx?uid=bestfightodds5841&Type=ReducedReplace']
 );
-define('BOOKIE_MOCKFILES', 
+define(
+    'BOOKIE_MOCKFILES',
     ['all' => PARSE_MOCKFEEDS_DIR . "5dimes.xml"]
 );
 
@@ -59,25 +61,32 @@ class ParserJob extends ParserJobBase
 
         foreach ($xml->NewDataSet->GameLines as $event_node) {
             if ((trim((string) $event_node->SportType) == 'Fighting'
-                    && (trim((string) $event_node->SportSubType) != 'Boxing')
-                    && (trim((string) $event_node->SportSubType) != 'Reduced')
-                    && (trim((string) $event_node->SportSubType) != 'Live In-Play')
-                    && (trim((string) $event_node->SportSubType) != 'Olympic Boxing')
-                    && (trim((string) $event_node->SportSubType) != 'Kickboxing')
-                    && (trim((string) $event_node->SportSubType) != 'Boxing Props')
+                    && !in_array(
+                        trim((string) $event_node->SportSubType),
+                        [
+                            'Boxing',
+                            'Reduced',
+                            'Live In-Play',
+                            'Olympic Boxing',
+                            'Kickboxing',
+                            'Boxing Props'
+                        ]
+                    )
                     && ((int) $event_node->IsCancelled) != 1
                     && ((int) $event_node->isGraded) != 1)
                 && !((trim((string) $event_node->HomeMoneyLine) == '-99999') && (trim((string) $event_node->VisitorMoneyLine) == '-99999'))
                 && !strpos(strtolower((string)$event_node->Header), 'boxing propositions')
             ) {
+                $correlation_id = '';
+                if (!empty((string) $event_node->CorrelationID)) {
+                    $correlation_id = trim((string) $event_node->CorrelationID);
+                }
 
                 //Check if entry is a prop, if so add it as a parsed prop
                 if (trim((string) $event_node->SportSubType) == 'Props' || trim((string) $event_node->SportSubType) == 'MMA Props') {
                     $prop = null;
 
-                    if ((trim((string) $event_node->HomeMoneyLine) != '')
-                        && (trim((string) $event_node->VisitorMoneyLine) != '')
-                    ) {
+                    if (!empty($event_node->HomeMoneyLine) && !empty($event_node->VisitorMoneyLine)) {
                         //Regular prop
 
                         //Workaround for props that are not sent in the correct order:
@@ -99,8 +108,8 @@ class ParserJob extends ParserJobBase
                         }
 
                         //Add correlation ID if available
-                        if (isset($event_node->CorrelationID) && trim((string) $event_node->CorrelationID) != '') {
-                            $prop->setCorrelationID((string) $event_node->CorrelationID);
+                        if ($correlation_id != '') {
+                            $prop->setCorrelationID($correlation_id);
                         }
 
                         $parsed_sport->addFetchedProp($prop);
@@ -119,8 +128,8 @@ class ParserJob extends ParserJobBase
                         );
 
                         //Add correlation ID if available
-                        if (isset($event_node->CorrelationID) && trim((string) $event_node->CorrelationID) != '') {
-                            $prop->setCorrelationID((string) $event_node->CorrelationID);
+                        if ($correlation_id != '') {
+                            $prop->setCorrelationID($correlation_id);
                         }
                         $parsed_sport->addFetchedProp($prop);
                     } else if (!empty($event_node->TotalPoints) && !empty($event_node->TotalPointsOverPrice) && !empty($event_node->TotalPointsUnderPrice)) {
@@ -131,7 +140,7 @@ class ParserJob extends ParserJobBase
                             (string) $event_node->TotalPointsOverPrice,
                             (string) $event_node->TotalPointsUnderPrice
                         );
-                        $prop->setCorrelationID((string) $event_node->CorrelationID);
+                        $prop->setCorrelationID($correlation_id);
                         $parsed_sport->addFetchedProp($prop);
                     } else {
                         //Unhandled prop
@@ -151,9 +160,7 @@ class ParserJob extends ParserJobBase
                             (string) $event_node->HomeMoneyLine,
                             (string) $event_node->VisitorMoneyLine
                         );
-
-                        //Add correlation ID to match matchups to props
-                        $oParsedMatchup->setCorrelationID((string) $event_node->CorrelationID);
+                        $oParsedMatchup->setCorrelationID($correlation_id);
 
                         //Add time of matchup as metadata
                         if (isset($event_node->GameDateTime)) {
@@ -178,7 +185,7 @@ class ParserJob extends ParserJobBase
                             (string) $event_node->TotalPointsOverPrice,
                             (string) $event_node->TotalPointsUnderPrice
                         );
-                        $prop->setCorrelationID((string) $event_node->CorrelationID);
+                        $prop->setCorrelationID($correlation_id);
 
                         $parsed_sport->addFetchedProp($prop);
                     }
