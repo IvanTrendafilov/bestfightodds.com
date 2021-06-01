@@ -36,16 +36,16 @@ define(
 
 class ParserJob extends ParserJobBase
 {
-    public function fetchContent($urls): array
+    public function fetchContent(array $content_urls): array
     {
         //Apply changenum
         $this->change_num = BookieHandler::getChangeNum($this->bookie_id);
         if ($this->change_num != -1) {
             $this->logger->info("Using changenum: &changenum=" . $this->change_num);
-            $urls['all'] .= '&changenum=' . $this->change_num;
+            $content_urls['all'] .= '&changenum=' . $this->change_num;
         }
-        $this->logger->info("Fetching matchups through URL: " . $urls['all']);
-        return ['all' => ParseTools::retrievePageFromURL($urls['all'])];
+        $this->logger->info("Fetching matchups through URL: " . $content_urls['all']);
+        return ['all' => ParseTools::retrievePageFromURL($content_urls['all'])];
     }
 
     public function parseContent(array $content): ParsedSport
