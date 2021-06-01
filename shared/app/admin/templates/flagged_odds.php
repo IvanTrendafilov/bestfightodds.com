@@ -41,7 +41,7 @@
         </h6>
     </div>
     <div class="table-responsive">
-        <table class="table">
+        <table class="table table-sm table-hover">
             <thead>
                 <tr>
                     <th>Event</th>
@@ -50,7 +50,6 @@
                     <th>Matchup</th>
                     <th>Bookie</th>
                     <th>First flagged</th>
-                    <th>Last flagged</th>
                     <th>Flagged for</th>
                     <th>Past matchup (No = will be deleted)</th>
                     <th>Action</th>
@@ -66,7 +65,6 @@
                         <td><?= $flagged_item['fight_obj']->getTeamAsString(1) ?> vs. <?= $flagged_item['fight_obj']->getTeamAsString(2) ?></td>
                         <td><?= $flagged_item['bookie_name'] ?></td>
                         <td><?= $flagged_item['initial_flagdate'] ?></td>
-                        <td><?= $flagged_item['last_flagdate'] ?></td>
                         <td><?= $flagged_item['hours_diff'] ?> hours</td>
                         <td><span class="badge <?= $flagged_item['has_passed'] == true ? 'bg-success">Yes' : 'bg-danger">No' ?></span></td>
                     

@@ -7,7 +7,7 @@ Manual actions: <button class="btn btn-primary" onclick="$('button[onclick^=\'ma
 
 	<div class="card">
 		<div class="table-responsive">
-			<table class="table">
+			<table class="table table-sm table-hover">
 				<thead>
 					<tr>
 						<th>Action</th>

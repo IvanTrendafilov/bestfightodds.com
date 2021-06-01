@@ -38,7 +38,7 @@
             <button class="reset-changenum-button btn btn-primary">Reset all</button>
         </div>
     </div>
-    <table class="table">
+    <table class="table table-sm table-hover">
         <thead>
             <tr>
                 <th>Bookie</th>

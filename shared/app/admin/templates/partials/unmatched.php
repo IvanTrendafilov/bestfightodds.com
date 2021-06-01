@@ -111,7 +111,7 @@
 
 <div class="card">
     <div class="table-responsive">
-        <table class="table">
+        <table class="table table-sm table-hover">
             <thead>
                 <tr>
                     <th>Matchup</th>
@@ -174,7 +174,7 @@
         </h6>
     </div>
     <div class="table-responsive">
-        <table class="table">
+        <table class="table table-sm table-hover">
             <thead>
                 <tr>
                     <th>Last seen</th>

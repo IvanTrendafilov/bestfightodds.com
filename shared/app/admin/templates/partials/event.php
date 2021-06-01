@@ -76,7 +76,7 @@
                 </div>
             </div>
         <?php endif ?>
-        <table class="table">
+        <table class="table table-sm table-hover">
             <thead>
                 <tr>
                     <th>ID</th>

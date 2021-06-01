@@ -5,7 +5,7 @@
         <h6 class="card-subtitle text-muted">Using the most basic table markup, here’s how .table-based tables look in Bootstrap.
         </h6>
     </div>
-    <table class="table">
+    <table class="table table-sm table-hover">
         <thead>
             <tr>
                 <th>E-mail</th>
