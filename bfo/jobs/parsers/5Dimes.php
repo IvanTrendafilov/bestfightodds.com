@@ -201,7 +201,7 @@ class ParserJob extends ParserJobBase
 
         //Before finishing up, save the changenum to be able to fetch future feeds
         $new_changenum = trim((string) $xml->NewDataSet->LastChange->ChangeNum);
-        if ($new_changenum != '-1' && $new_changenum != null && $new_changenum != '') {
+        if (!empty($new_changenum) && $new_changenum != '-1') {
             //Store the changenum
             $new_changenum = ((float) $new_changenum) - 1000;
             if (BookieHandler::saveChangeNum($this->bookie_id, $new_changenum)) {

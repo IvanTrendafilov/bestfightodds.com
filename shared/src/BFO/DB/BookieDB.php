@@ -48,7 +48,7 @@ class BookieDB
 
         try {
             $result = PDOTools::executeQuery($query, $params);
-            return $result->rowCount() > 0 ? true : false;
+            return $result !== false ? true : false;
         } catch (\PDOException $e) {
             throw new \Exception("Unknown error " . $e->getMessage(), 10);
         }
