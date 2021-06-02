@@ -1,28 +1,53 @@
 <?php
 
-// This job is used to generate XML Sitemaps and place these in the pages directory as specified in the PARSE_PAGEDIR constant
+// Used to generate XML Sitemaps and place these in the pages directory as specified in the PARSE_PAGEDIR constant
 
 require_once __DIR__ . "/../bootstrap.php";
 
-generatePage(PARSE_GENERATORDIR . 'gen.EventXMLSitemap.php',  PARSE_PAGEDIR . 'sitemap-events.xml');
-generatePage(PARSE_GENERATORDIR . 'gen.TeamXMLSitemap.php',  PARSE_PAGEDIR . 'sitemap-teams.xml');
+use BFO\General\EventHandler;
+use BFO\General\TeamHandler;
 
-function generatePage($generator_file, $target_file)
+$smg = new SiteMapGenerator();
+
+$smg->generateTeamSitemap(PARSE_PAGEDIR . 'sitemap-events.xml');
+$smg->generateEventSitemap(PARSE_PAGEDIR . 'sitemap-teams.xml');
+
+class SiteMapGenerator
 {
-    if ($generator_file == null || $target_file == null || !file_exists($generator_file))
+    private function writeToFile(string $content, string $target_file): bool
     {
-        return null;
+        if (empty($content) || empty($target_file)) {
+            return false;
+        }
+
+        if (strlen($content) > 200) {
+            $page = fopen($target_file, 'w');
+            fwrite($page, $content);
+            fclose($page);
+            return true;
+        }
+        return false;
     }
 
-    ob_start();
-    include_once($generator_file);
-    $buffer = ob_get_clean();
-    if (strlen($buffer) > 200)
+    public function generateTeamSitemap(string $filename): bool
     {
-        $page = fopen($target_file, 'w');
-        fwrite($page, $buffer);
-        fclose($page);
-        return true;
+        $teams = TeamHandler::getTeams();
+        $xml = new SimpleXMLElement('<?xml version="1.0" encoding="utf-8"?><urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"></urlset>');
+        foreach ($teams as $team) {
+            $teamlink = 'https://www.proboxingodds.com/fighters/' . $team->getFighterAsLinkString();
+            $xml->addChild('url')->addChild('loc', $teamlink);
+        }
+        return $this->writeToFile($xml->asXML(), $filename);
     }
-    return false;
+
+    public function generateEventSitemap(string $filename): bool
+    {
+        $events = EventHandler::getEvents();
+        $xml = new SimpleXMLElement('<?xml version="1.0" encoding="utf-8"?><urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"></urlset>');
+        foreach ($events as $event) {
+            $eventlink = 'https://www.proboxingodds.com/events/' . $event->getEventAsLinkString();
+            $xml->addChild('url')->addChild('loc', $eventlink);
+        }
+        return $this->writeToFile($xml->asXML(), $filename);
+    }
 }

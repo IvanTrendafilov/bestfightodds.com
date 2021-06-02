@@ -3,6 +3,8 @@
 /app/front/pages/oddspage.php
 /app/front/pages/upcoming_odds.php
 /app/front/pages/page.feed.xml
+/app/front/pages/sitemap-events.xml
+/app/front/pages/sitemap-teams.xml
 /app/front/img/cache/*.png
 /node_modules/*
 /vendor/*
