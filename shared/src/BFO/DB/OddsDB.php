@@ -595,9 +595,9 @@ class OddsDB
      * @param int $bookie_id Bookie ID
      * @return array Collection of correlations
      */
-    public static function getCorrelationsForBookie($bookie_id)
+    public static function getCorrelationsForBookie(int $bookie_id): array
     {
-        $params = array($bookie_id);
+        $params = [$bookie_id];
 
         $query = 'SELECT lc.correlation, lc.bookie_id, lc.matchup_id
                         FROM lines_correlations lc 
@@ -609,7 +609,7 @@ class OddsDB
         while ($row = mysqli_fetch_array($result)) {
             $return[] = array(
                 'correlation' => $row['correlation'],
-                'matchup_id' => $row['matchup_id']
+                'matchup_id' => (int) $row['matchup_id']
             );
         }
         return $return;

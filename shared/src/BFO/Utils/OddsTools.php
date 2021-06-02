@@ -19,94 +19,86 @@ class OddsTools
      * @param float $a_iOdds Odds in decimal format to convert
      * @return string Odds in moneyline format
      */
-    public static function convertDecimalToMoneyline($a_fOdds)
+    public static function convertDecimalToMoneyline($decimal_odds)
     {
-        $a_fOdds = (float) $a_fOdds - 1.0;
-        if ($a_fOdds == 0) {
+        $decimal_odds = (float) $decimal_odds - 1.0;
+        if ($decimal_odds == 0) {
             return '-25000';
         }
-        if ($a_fOdds < 1) {
-            return '-' . round((1 / $a_fOdds) * 100);
+        if ($decimal_odds < 1) {
+            return '-' . round((1 / $decimal_odds) * 100);
         } else {
-            return round($a_fOdds * 100);
+            return round($decimal_odds * 100);
         }
     }
 
-    public static function convertMoneylineToDecimal($a_sMoneyLine, $a_bNoRounding = false)
+    public static function convertMoneylineToDecimal($moneyline, bool $no_rounding = false): float
     {
-        $iOdds = $a_sMoneyLine;
-        $fOdds = 0;
-        if ($iOdds == 100) {
+        $moneyline_odds = $moneyline;
+        $decimal_odds = 0;
+        if ($moneyline_odds == 100) {
             return 2.0;
-        } elseif ($iOdds > 0) {
-            if ($a_bNoRounding == true) {
-                $fOdds = round((($iOdds / 100) + 1) * 100000) / 100000;
+        } elseif ($moneyline_odds > 0) {
+            if ($no_rounding == true) {
+                $decimal_odds = round((($moneyline_odds / 100) + 1) * 100000) / 100000;
             } else {
-                $fOdds = round((($iOdds / 100) + 1) * 100) / 100;
+                $decimal_odds = round((($moneyline_odds / 100) + 1) * 100) / 100;
             }
         } else {
-            $iOdds = substr($iOdds, 1);
-            if ($a_bNoRounding == true) {
-                $fOdds = round(((100 / $iOdds) + 1) * 100000) / 100000;
+            $moneyline_odds = substr($moneyline_odds, 1);
+            if ($no_rounding == true) {
+                $decimal_odds = round(((100 / $moneyline_odds) + 1) * 100000) / 100000;
             } else {
-                $fOdds = round(((100 / $iOdds) + 1) * 100) / 100;
+                $decimal_odds = round(((100 / $moneyline_odds) + 1) * 100) / 100;
             }
         }
-        return $fOdds;
+        return $decimal_odds;
     }
 
     /**
      * Takes a name in the format of Nick Diaz and changes it to N Diaz
      */
-    public static function shortenName($a_sFighterName)
+    public static function shortenName(string $name): string
     {
-        $aPieces = explode(" ", $a_sFighterName);
-
+        $pieces = explode(" ", $name);
         //If name only contains one single name, do not shorten
-        if (count($aPieces) == 1) {
-            return $a_sFighterName;
+        if (count($pieces) == 1) {
+            return $name;
         }
 
-        $a_sFighterName = '';
-        for ($iX = 0; $iX < sizeof($aPieces); $iX++) {
+        $name = '';
+        for ($iX = 0; $iX < sizeof($pieces); $iX++) {
             if ($iX == 0) {
-                $a_sFighterName .= substr($aPieces[$iX], 0, 1);
+                $name .= substr($pieces[$iX], 0, 1);
             } else {
-                $a_sFighterName .= ' ' . $aPieces[$iX];
+                $name .= ' ' . $pieces[$iX];
             }
         }
-        return $a_sFighterName;
+        return $name;
     }
 
     /**
      * Checks if moneyline odds is in the right format
      */
-    public static function checkCorrectOdds($a_sOdds)
+    public static function checkCorrectOdds($odds)
     {
-        $a_sOdds = trim($a_sOdds);
-
-        if (strtoupper($a_sOdds) == 'EV' || strtoupper($a_sOdds) == 'EVEN') {
+        $odds = trim($odds);
+        if (strtoupper($odds) == 'EV' || strtoupper($odds) == 'EVEN') {
             return true;
         }
-
-        if (preg_match('/[+-]{0,1}[0-9]{2,5}/', $a_sOdds)) {
+        if (preg_match('/[+-]{0,1}[0-9]{2,5}/', $odds)) {
             return true;
         }
-
         return false;
     }
 
     /**
      * Standardizes a date to the YYYY-MM-DD format
-     *
-     * @param string $a_sDate Date to convert
-     * @return string Date in format YYYY-MM-DD
      */
-    public static function standardizeDate($a_sDate)
+    public static function standardizeDate(string $date): string
     {
-        return date('Y-m-d', strtotime($a_sDate));
+        return date('Y-m-d', strtotime($date));
     }
-
 
     /**
      * Compares two names and returns the fsim value for the check
@@ -135,37 +127,37 @@ class OddsTools
         return $top_similarity;
     }
 
-    private static function getNameCombinations($a_sNameParts, $a_iParts)
+    private static function getNameCombinations(array $name_parts, int $parts_count): array
     {
-        $aRetNames = [];
+        $return_names = [];
         //Add the original name, untouched
-        $aRetNames[] = implode(' ', $a_sNameParts);
-        
+        $return_names[] = implode(' ', $name_parts);
+
         //Get all combinations by putting together the different parts, limited to the parts argument
 
-        self::depth_picker($a_sNameParts, "", $aRetNames, $a_iParts);
+        self::depth_picker($name_parts, "", $return_names, $parts_count);
         //Add a shortened version of the name using a letter for the first name (e.g. N Diaz for Nathan Diaz)
-        if (count($a_sNameParts) > 1) {
-            $aRetNames[] = OddsTools::shortenName(implode(' ', $a_sNameParts));
+        if (count($name_parts) > 1) {
+            $return_names[] = OddsTools::shortenName(implode(' ', $name_parts));
         }
-        return $aRetNames;
+        return $return_names;
     }
 
     private static function depth_picker($arr, $temp_string, &$collect, $part_count)
     {
         if ($temp_string != "") {
             if (substr_count(trim($temp_string), " ") == $part_count - 1) {
-                $collect []= trim($temp_string);
+                $collect[] = trim($temp_string);
             }
         }
-        for ($i=0; $i<sizeof($arr);$i++) {
+        for ($i = 0; $i < sizeof($arr); $i++) {
             $arrcopy = $arr;
             $elem = array_splice($arrcopy, $i, 1); // removes and returns the i'th element
             if (sizeof($arrcopy) > 0) {
-                self::depth_picker($arrcopy, $temp_string ." " . $elem[0], $collect, $part_count);
+                self::depth_picker($arrcopy, $temp_string . " " . $elem[0], $collect, $part_count);
             } else {
-                if (substr_count(trim($temp_string. " " . $elem[0]), " ") == $part_count - 1) {
-                    $collect[] = trim($temp_string. " " . $elem[0]);
+                if (substr_count(trim($temp_string . " " . $elem[0]), " ") == $part_count - 1) {
+                    $collect[] = trim($temp_string . " " . $elem[0]);
                 }
             }
         }

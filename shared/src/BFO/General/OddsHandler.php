@@ -136,7 +136,7 @@ class OddsHandler
         return OddsDB::getOpeningOddsForPropAndBookie($matchup_id, $proptype_id, $bookie_id, $team_num);
     }
 
-    public static function getCorrelationsForBookie($bookie_id)
+    public static function getCorrelationsForBookie(int $bookie_id): array
     {
         return OddsDB::getCorrelationsForBookie($bookie_id);
     }

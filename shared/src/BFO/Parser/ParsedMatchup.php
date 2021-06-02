@@ -4,6 +4,7 @@ namespace BFO\Parser;
 
 use BFO\Parser\ParsedMoneyline;
 use BFO\Parser\Utils\ParseTools;
+use BFO\Utils\OddsTools;
 
 class ParsedMatchup
 {
@@ -31,21 +32,18 @@ class ParsedMatchup
         }
 
         $this->switched_externally = false;
-        $this->metadata = array();
-        $this->date = ($date != '' ? $this->date = ParseTools::standardizeDate(trim($date)) : '');
+        $this->metadata = [];
+        $this->date = (!empty($date) ? OddsTools::standardizeDate(trim($date)) : '');
     }
 
-    public function getTeamName($team_number)
+    public function getTeamName($team_number): string
     {
-        switch ($team_number) {
-            case 1: return $this->team1_name;
-                break;
-            case 2: return $this->team2_name;
-                break;
-            default:
-                return null;
-                break;
+        if ($team_number == 1) {
+            return $this->team1_name;
+        } else if ($team_number == 2) {
+            return $this->team2_name;
         }
+        return null;
     }
 
     public function getDate()

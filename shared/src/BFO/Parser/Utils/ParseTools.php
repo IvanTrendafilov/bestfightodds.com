@@ -14,8 +14,8 @@ use BFO\DataTypes\FightOdds;
  */
 class ParseTools
 {
-    private static $aCorrelationTable = array();
-    private static $aFeedStorage = array();
+    private static $correlation_table = [];
+    private static $stored_content = [];
 
     /**
      * Retrieves the contents of a file and returns it as a string
@@ -25,7 +25,7 @@ class ParseTools
      * @param string $filename Filename
      * @return string Contents of the file
      */
-    public static function retrievePageFromFile($filename)
+    public static function retrievePageFromFile(string $filename): string
     {
         $file_contents = '';
         $file = fopen($filename, 'r');
@@ -38,23 +38,23 @@ class ParseTools
         return $file_contents;
     }
 
-    public static function retrievePageFromURL($a_sURL, $a_sCurlOpts = null)
+    public static function retrievePageFromURL(string $url, array $extra_curl_options = null): string
     {
         // Get cURL resource
-        $rCurl = curl_init();
+        $curl_obj = curl_init();
 
-        //Get credentials
-        $sCred = self::getCredentialsFromURL($a_sURL);
-        if ($sCred != null) {
-            curl_setopt($rCurl, CURLOPT_USERPWD, $sCred);
-            curl_setopt($rCurl, CURLOPT_HTTPAUTH, CURLAUTH_BASIC);
+        //Add credentials if applicable
+        $credentials = self::getCredentialsFromURL($url);
+        if ($credentials != null) {
+            curl_setopt($curl_obj, CURLOPT_USERPWD, $credentials);
+            curl_setopt($curl_obj, CURLOPT_HTTPAUTH, CURLAUTH_BASIC);
         }
 
         // Set some options - we are passing in a useragent too here
-        curl_setopt_array($rCurl, array(
+        curl_setopt_array($curl_obj, array(
             CURLOPT_IPRESOLVE => CURL_IPRESOLVE_V4,
             CURLOPT_RETURNTRANSFER => 1,
-            CURLOPT_URL => $a_sURL,
+            CURLOPT_URL => $url,
             CURLOPT_USERAGENT => 'Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/33.0.1750.146 Safari/537.36',
             CURLOPT_CONNECTTIMEOUT => 30,
             CURLOPT_TIMEOUT => 120,
@@ -64,57 +64,52 @@ class ParseTools
         ));
 
         //TODO: Hardcoded stuff. Ugly and should be moved out
-        if (strpos($a_sURL, 'gamingsystem.') !== false) {
-            curl_setopt($rCurl, CURLOPT_SSLVERSION, 6); //TLS 1.2
-        } elseif (substr($a_sURL, 0, strlen('https://api.pinnacle.com')) === 'https://api.pinnacle.com') {
-            curl_setopt($rCurl, CURLOPT_HTTPHEADER, ['Authorization: Basic ZmlnaHRvZGRzOmNuODI2Mg==']);
-        } elseif (substr($a_sURL, 0, strlen('https://www.pinnacle.com/webapi')) === 'https://www.pinnacle.com/webapi') {
-            curl_setopt($rCurl, CURLOPT_REFERER, "https://www.pinnacle.com/en/odds/match/mixed-martial-arts/ufc/ufc");
+        if (strpos($url, 'gamingsystem.') !== false) {
+            curl_setopt($curl_obj, CURLOPT_SSLVERSION, 6); //TLS 1.2
+        } elseif (substr($url, 0, strlen('https://api.pinnacle.com')) === 'https://api.pinnacle.com') {
+            curl_setopt($curl_obj, CURLOPT_HTTPHEADER, ['Authorization: Basic ZmlnaHRvZGRzOmNuODI2Mg==']);
+        } elseif (substr($url, 0, strlen('https://www.pinnacle.com/webapi')) === 'https://www.pinnacle.com/webapi') {
+            curl_setopt($curl_obj, CURLOPT_REFERER, "https://www.pinnacle.com/en/odds/match/mixed-martial-arts/ufc/ufc");
         }
 
         //Set custom curl options if specified
-        if (!empty($a_sCurlOpts)) {
-            curl_setopt_array($rCurl, $a_sCurlOpts);
+        if (!empty($extra_curl_options)) {
+            curl_setopt_array($curl_obj, $extra_curl_options);
         }
 
         // Send the request & save response to $resp
-        $sReturn = curl_exec($rCurl);
+        $return_content = curl_exec($curl_obj);
         // Close request to clear up some resources
-        curl_close($rCurl);
-
-        if ($sReturn == '') {
-            return 'FAILED';
-        }
-
+        curl_close($curl_obj);
 
         //Check if gzipped, if so, decode and return that
-        if (substr($sReturn, 0, 2) == "\x1F\x8B") {
-            return gzinflate(substr($sReturn, 10, -8));
+        if (substr($return_content, 0, 2) == "\x1F\x8B") {
+            return gzinflate(substr($return_content, 10, -8));
         }
 
-        return $sReturn;
+        return $return_content;
     }
 
-    public static function retrieveMultiplePagesFromURLs($a_aURLs)
+    public static function retrieveMultiplePagesFromURLs(array $urls): bool
     {
-        $aChannels = array();
+        $curl_channels = [];
         $mh = curl_multi_init();
 
         //Create individual channels for each URL
-        foreach ($a_aURLs as $sURL) {
-            $aChannels[$sURL] = curl_init();
+        foreach ($urls as $url) {
+            $curl_channels[$url] = curl_init();
 
-            //Get credentials
-            $sCred = self::getCredentialsFromURL($sURL);
-            if ($sCred != null) {
-                curl_setopt($aChannels[$sURL], CURLOPT_USERPWD, $sCred);
-                curl_setopt($aChannels[$sURL], CURLOPT_HTTPAUTH, CURLAUTH_BASIC);
+            //Add credentials if applicable
+            $credentials = self::getCredentialsFromURL($url);
+            if ($credentials != null) {
+                curl_setopt($curl_channels[$url], CURLOPT_USERPWD, $credentials);
+                curl_setopt($curl_channels[$url], CURLOPT_HTTPAUTH, CURLAUTH_BASIC);
             }
 
-            curl_setopt_array($aChannels[$sURL], array(
+            curl_setopt_array($curl_channels[$url], array(
                 CURLOPT_IPRESOLVE => CURL_IPRESOLVE_V4,
                 CURLOPT_RETURNTRANSFER => 1,
-                CURLOPT_URL => $sURL,
+                CURLOPT_URL => $url,
                 CURLOPT_USERAGENT => 'Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/33.0.1750.146 Safari/537.36',
                 CURLOPT_CONNECTTIMEOUT => 30,
                 CURLOPT_TIMEOUT => 120,
@@ -123,23 +118,16 @@ class ParseTools
                 CURLOPT_FOLLOWLOCATION => true
             ));
 
-            if (strpos($sURL, 'gamingsystem.') !== false) {
-                curl_setopt($aChannels[$sURL], CURLOPT_SSLVERSION, 6); //TLS 1.2
-            } elseif (substr($sURL, 0, strlen('https://api.pinnacle.com')) === 'https://api.pinnacle.com') {
-                curl_setopt($aChannels[$sURL], CURLOPT_HTTPHEADER, ['Authorization: Basic ZmlnaHRvZGRzOmNuODI2Mg==']);
-            } elseif (substr($sURL, 0, strlen('https://www.pinnacle.com/webapi')) === 'https://www.pinnacle.com/webapi') {
-                curl_setopt($aChannels[$sURL], CURLOPT_REFERER, "https://www.pinnacle.com/en/odds/match/mixed-martial-arts/ufc/ufc");
+            if (strpos($url, 'gamingsystem.') !== false) {
+                curl_setopt($curl_channels[$url], CURLOPT_SSLVERSION, 6); //TLS 1.2
+            } elseif (substr($url, 0, strlen('https://api.pinnacle.com')) === 'https://api.pinnacle.com') {
+                curl_setopt($curl_channels[$url], CURLOPT_HTTPHEADER, ['Authorization: Basic ZmlnaHRvZGRzOmNuODI2Mg==']);
+            } elseif (substr($url, 0, strlen('https://www.pinnacle.com/webapi')) === 'https://www.pinnacle.com/webapi') {
+                curl_setopt($curl_channels[$url], CURLOPT_REFERER, "https://www.pinnacle.com/en/odds/match/mixed-martial-arts/ufc/ufc");
             }
 
-
-            curl_multi_add_handle($mh, $aChannels[$sURL]);
+            curl_multi_add_handle($mh, $curl_channels[$url]);
         }
-
-        //Execute calls
-        /*Old: $running = null;
-        do {
-            $resp = curl_multi_exec($mh,$running);
-        } while ($running > 0);*/
 
         $running = null;
         do {
@@ -154,65 +142,31 @@ class ParseTools
         }
 
         //Fetch data into storage when all is done
-        foreach ($aChannels as $sChannelKey => $rChannelVal) {
+        foreach ($curl_channels as $sChannelKey => $rChannelVal) {
             $sContent = curl_multi_getcontent($rChannelVal);
             if (substr($sContent, 0, 2) == "\x1F\x8B") {
-                self::$aFeedStorage[$sChannelKey] = gzinflate(substr($sContent, 10, -8));
+                self::$stored_content[$sChannelKey] = gzinflate(substr($sContent, 10, -8));
             } else {
-                self::$aFeedStorage[$sChannelKey] = $sContent;
+                self::$stored_content[$sChannelKey] = $sContent;
             }
         }
 
         //Close channels
-        foreach ($aChannels as $rChannel) {
+        foreach ($curl_channels as $rChannel) {
             curl_multi_remove_handle($mh, $rChannel);
         }
         curl_multi_close($mh);
         return true;
     }
 
-    private static function getCredentialsFromURL($a_sURL)
+    private static function getCredentialsFromURL($url)
     {
-        $aMatches = array();
-        preg_match('/:\/\/([^:]+:[^@]+)@/', $a_sURL, $aMatches);
-        if (isset($aMatches[1])) {
-            return $aMatches[1];
+        $matches = array();
+        preg_match('/:\/\/([^:]+:[^@]+)@/', $url, $matches);
+        if (isset($matches[1])) {
+            return $matches[1];
         }
         return null;
-    }
-
-    /**
-     * Converts Odds in EU format (decimal) to US (moneyline)
-     *
-     * Example: 1.59 converts to -170  or  3.4 converts to +240
-     *
-     * @deprecated Use OddsTools::convertDecimalToMoneyline instead
-     * @param float $a_iOdds Odds in decimal format to convert
-     * @return string Odds in moneyline format
-     */
-    public static function convertOddsEUToUS($a_fOdds)
-    {
-        return OddsTools::convertDecimalToMoneyline($a_fOdds);
-    }
-
-    /**
-     * @deprecated Use OddsTools::convertMoneylineToDecimal instead
-     */
-    public static function convertOddsUSToEU($a_sMoneyLine, $a_bNoRounding = false)
-    {
-        return OddsTools::convertMoneylineToDecimal($a_sMoneyLine, $a_bNoRounding);
-    }
-
-    /**
-     * Standardizes a date to the YYYY-MM-DD format
-     *
-     * @param string $a_sDate Date to convert
-     * @return string Date in format YYYY-MM-DD
-     * @deprecated Use OddsTools::standardizeDate() instead
-     */
-    public static function standardizeDate($a_sDate)
-    {
-        return OddsTools::standardizeDate($a_sDate);
     }
 
     public static function formatName($a_sName)
@@ -295,7 +249,7 @@ class ParseTools
         $oTempOdds = new FightOdds(-1, -1, $a_sMoneyline1, $a_sMoneyline2, -1);
 
         $fArbitValue = (pow($oTempOdds->getFighterOddsAsDecimal(1, true), -1)
-                + pow($oTempOdds->getFighterOddsAsDecimal(2, true), -1));
+            + pow($oTempOdds->getFighterOddsAsDecimal(2, true), -1));
 
         return $fArbitValue;
     }
@@ -332,76 +286,57 @@ class ParseTools
         return false;
     }
 
-    public static function matchBlock($a_sContents, $a_sRegExp)
+    public static function matchBlock(string $contents, string $regexp)
     {
-        $aMatches = null;
-        preg_match_all($a_sRegExp, $a_sContents, $aMatches, PREG_SET_ORDER);
-        return $aMatches;
+        $matches = null;
+        preg_match_all($regexp, $contents, $matches, PREG_SET_ORDER);
+        return $matches;
     }
 
     /**
-     * Stores a correlation for the lifetime of the execution
+     * Stores a correlation for the lifetime of the execution. Key (string) => Matchup ID (int)
      *
      * Correlation can be used to link different parsed objects with eachother
      * e.g. matchups and props
-     *
-     * @param String $a_sSource Key
-     * @param String $a_sTarget Value
-     * @return boolean If correlation was stored or not
      */
-    public static function saveCorrelation($a_sSource, $a_sTarget)
+    public static function saveCorrelation(string $correlation_key, int $target_matchup_id): void
     {
-        self::$aCorrelationTable[$a_sSource] = $a_sTarget;
-        return true;
+        self::$correlation_table[$correlation_key] = $target_matchup_id;
     }
 
     /**
-     * Retrieves a stored correlation
-     *
-     * @param String $a_sSource Key
-     * @return String Value for the specified key
+     * Retrieves a stored correlation Key (string) => Matchup ID (int)
      */
-    public static function getCorrelation($a_sSource)
+    public static function getCorrelation(string $correlation_key): ?int
     {
-        if (isset(self::$aCorrelationTable[$a_sSource])) {
-            return self::$aCorrelationTable[$a_sSource];
+        if (isset(self::$correlation_table[$correlation_key])) {
+            return self::$correlation_table[$correlation_key];
         }
         return null;
     }
 
-    public static function clearCorrelations()
+    public static function getAllCorrelations(): array
     {
-        self::$aCorrelationTable = array();
-        return true;
+        return self::$correlation_table;
     }
 
-    public static function getAllCorrelations()
+    public static function getStoredContentForURL(string $url): ?string
     {
-        return self::$aCorrelationTable;
-    }
-
-    public static function getStoredContentForURL($a_sURL)
-    {
-        if (isset(self::$aFeedStorage[$a_sURL])) {
-            return self::$aFeedStorage[$a_sURL];
+        if (isset(self::$stored_content[$url])) {
+            return self::$stored_content[$url];
         }
-        return false;
+        return null;
     }
 
     /**
      * Replaces all foreign characters with their normal counterpart
      */
-    public static function stripForeignChars($a_sText)
+    public static function stripForeignChars($text)
     {
         $a = 'ÀÁÂÃÄÅÆÇÈÉÊËÌÍÎÏÐÑÒÓÔÕÖØÙÚÛÜÝÞßàáâãäåæçèéêëìíîïðñòóôõöøùúûýýþÿŔŕ ';
         $b = 'aaaaaaaceeeeiiiidnoooooouuuuybsaaaaaaaceeeeiiiidnoooooouuuyybyRr ';
-        $a_sText = utf8_decode($a_sText);
-        $a_sText = strtr($a_sText, utf8_decode($a), $b);
-        return utf8_encode($a_sText);
+        $text = utf8_decode($text);
+        $text = strtr($text, utf8_decode($a), $b);
+        return utf8_encode($text);
     }
-}
-
-function getArrayVal($a_aArray, $a_sKey)
-{
-    return $a_aArray[$a_sKey];
 }

@@ -279,12 +279,16 @@ class EventDB
 
             if (OddsTools::compareNames($fight_obj->getTeam(($team1_name >= $team2_name ? 2 : 1)), $team1_name) > 82) {
                 if (OddsTools::compareNames($fight_obj->getTeam(($team1_name >= $team2_name ? 1 : 2)), $team2_name) > 82) {
+                    //Found a match
                     $found_matchup = null;
                     if ($row['original'] == '0') {
+                        //Matched on altnames - fetch the original matchup as the matched one
                         $matchup = EventDB::getMatchups(matchup_id: $row['id']);
                         $found_matchup = $matchup[0] ?? null;
 
-                        $is_ordered_in_db = EventDB::isFightOrderedInDatabase($row['id']);
+                        //Check if fight is ordered lexographically in the database. The reason for this check is to correct
+                        //when we match on a matchup where altnames are used and the order may change when creating the Fight object
+                        $is_ordered_in_db = EventDB::isFightOrderedInDatabase((int) $row['id']);
                         if ($is_ordered_in_db && $fight_obj->hasExternalOrderChanged()) {
                                 $found_matchup->setExternalOrderChanged(true);
                         } else if (!$is_ordered_in_db && !$fight_obj->hasExternalOrderChanged()) {
@@ -306,36 +310,30 @@ class EventDB
      * Check if a fight is stored not lexiographically order in the database.
      * For example: RAMEAU SOKOUDJU, LYOTO MACHIDA gives false, BJ PENN, JOE STEVENSON gives true
      */
-    public static function isFightOrderedInDatabase($fight_id)
+    public static function isFightOrderedInDatabase(int $fight_id): ?bool
     {
-        $query = 'SELECT f.id, f1.name AS fighter1_name, f2.name AS fighter2_name, f.event_id
-                    FROM fights f, fighters f1, fighters f2
-                    WHERE f1.id = f.fighter1_id
-                        AND f2.id = f.fighter2_id
-                        AND f.id = ? 
+        $query = 'SELECT f1.name < f2.name AS ordered
+                    FROM fights f 
+                        LEFT JOIN fighters f1 ON f.fighter1_id = f1.id
+                        LEFT JOIN fighters f2 ON f.fighter2_id = f2.id 
+                    WHERE f.id = ?
                     LIMIT 0,1';
 
         $params = [$fight_id];
 
-        $result = DBTools::doParamQuery($query, $params);
-
-        $row = mysqli_fetch_array($result);
-        if (sizeof($row) > 0) {
-            if ($row['fighter1_name'] > $row['fighter2_name']) {
-                return false;
-            } else {
-                return true;
+        try {
+            $row = PDOTools::findOne($query, $params);
+            if ($row) {
+                return (bool) $row->ordered;
             }
+        } catch (\PDOException $e) {
+            throw new \Exception("Unknown error " . $e->getMessage(), 10);
         }
         return null;
     }
 
     public static function addNewFightOdds(FightOdds $fightodds_obj) : ?int
     {
-        //TODO: This query should be updated to check for valid value from fights and bookie table
-        /*$query = 'INSERT INTO fightodds(fight_id, fighter1_odds, fighter2_odds, bookie_id, date)
-                        VALUES(?, ?, ?, ?, NOW())';*/
-
         $query = 'INSERT INTO fightodds(fight_id, fighter1_odds, fighter2_odds, bookie_id, date)
                     SELECT f.id, ?, ?, b.id, NOW()
                         FROM fights f, bookies b
@@ -357,11 +355,6 @@ class EventDB
         return null;
     }
 
-    /**
-     * Adds a new event
-     *
-     * TODO: Add check to see that event doesn't already exist
-     */
     public static function addNewEvent($event_obj)
     {
         $query = 'INSERT INTO events(date, name, display)
