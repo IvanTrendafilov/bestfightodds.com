@@ -15,11 +15,33 @@ abstract class ParserJobBase
 
     public function __construct(
         public int $bookie_id,
-        public LoggerInterface $logger, 
+        public LoggerInterface $logger,
         public RulesetInterface $ruleset,
         public array $content_urls,
         public array $mockfiles
     ) {
+        /*set_error_handler(function ($errno, $errstr, $errfile, $errline) {
+            if (!(error_reporting() & $errno)) {
+                // This error code is not included in error_reporting, so let it fall
+                // through to the standard PHP error handler
+                return false;
+            }
+            // $errstr may need to be escaped:
+            $errstr = htmlspecialchars($errstr);
+            switch ($errno) {
+                case E_USER_ERROR:
+                    $this->logger->error($errno . ': ' . $errstr . ' on line ' . $errline . ' in file ' . $errfile . '. Aborting');
+                    exit(1);
+                case E_USER_WARNING:
+                    $this->logger->warning($errno . ': ' . $errstr);
+                    break;
+                case E_USER_NOTICE:
+                default:
+                    $this->logger->info($errno . ': ' . $errstr);
+                    break;
+            }
+            return true;
+        });*/
     }
 
     public function run(string $mode = 'normal'): bool
