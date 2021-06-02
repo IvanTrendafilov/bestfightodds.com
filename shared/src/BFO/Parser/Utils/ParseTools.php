@@ -44,7 +44,7 @@ class ParseTools
 
         //Add credentials if applicable
         $credentials = self::getCredentialsFromURL($url);
-        if ($credentials != null) {
+        if ($credentials) {
             curl_setopt($curl_obj, CURLOPT_USERPWD, $credentials);
             curl_setopt($curl_obj, CURLOPT_HTTPAUTH, CURLAUTH_BASIC);
         }
@@ -100,7 +100,7 @@ class ParseTools
 
             //Add credentials if applicable
             $credentials = self::getCredentialsFromURL($url);
-            if ($credentials != null) {
+            if ($credentials) {
                 curl_setopt($curl_channels[$url], CURLOPT_USERPWD, $credentials);
                 curl_setopt($curl_channels[$url], CURLOPT_HTTPAUTH, CURLAUTH_BASIC);
             }
@@ -158,7 +158,7 @@ class ParseTools
         return true;
     }
 
-    private static function getCredentialsFromURL(string $url): string
+    private static function getCredentialsFromURL(string $url): ?string
     {
         $matches = [];
         preg_match('/:\/\/([^:]+:[^@]+)@/', $url, $matches);
