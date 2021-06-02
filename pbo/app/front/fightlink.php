@@ -152,7 +152,7 @@ class FightLinkCreator
             //Fighter 2 Odds
             $aOddsSize = imagettfbbox(FONT_SIZE, 0, FONT_TYPE, $team2_odds);
             //self::textCustomSpacing($image_obj, FONT_SIZE, 0, LINK_WIDTH - (15 + ($aOddsSize[2] - $aOddsSize[0])), 0 + LINK_BFO_HEIGHT + ($team_cell_height * 2) + ($team_cell_height * ($i * 2)) + $i - 6, $color_text, FONT_TYPE, $team2_odds, 2);
-            imagettftext($image_obj, FONT_SIZE, 0, LINK_WIDTH - (15 + ($aOddsSize[2] - $aOddsSize[0])), 0 + LINK_BFO_HEIGHT + ($team_cell_height * 2) + ($team_cell_height * ($i * 2)) + $i - 6, $rTextColor, FONT_TYPE, $team2_odds);
+            imagettftext($image_obj, FONT_SIZE, 0, LINK_WIDTH - (15 + ($aOddsSize[2] - $aOddsSize[0])), 0 + LINK_BFO_HEIGHT + ($team_cell_height * 2) + ($team_cell_height * ($i * 2)) + $i - 6, $color_text, FONT_TYPE, $team2_odds);
         }
 
         //Column seperator
