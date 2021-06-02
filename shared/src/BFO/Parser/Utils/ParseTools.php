@@ -2,7 +2,6 @@
 
 namespace BFO\Parser\Utils;
 
-use BFO\Utils\OddsTools;
 use BFO\DataTypes\FightOdds;
 
 /**
@@ -159,9 +158,9 @@ class ParseTools
         return true;
     }
 
-    private static function getCredentialsFromURL($url)
+    private static function getCredentialsFromURL(string $url): string
     {
-        $matches = array();
+        $matches = [];
         preg_match('/:\/\/([^:]+:[^@]+)@/', $url, $matches);
         if (isset($matches[1])) {
             return $matches[1];
@@ -169,94 +168,69 @@ class ParseTools
         return null;
     }
 
-    public static function formatName($a_sName)
+    public static function formatName(string $team_name): string
     {
-        $sNewName = str_replace('&quot;', '"', $a_sName);
-        $sNewName = str_replace('?', '', $a_sName);
+        $new_name = str_replace('&quot;', '"', $team_name);
+        $new_name = str_replace('?', '', $team_name);
 
         //Replaces all words surrounded by [, ( or " (e.g. nicknames):
-        $sNewName = preg_replace('/[\\[("\'“Â][a-zA-Z0-9\\/\\?\'\\.\\,\\s-]*[\\])"\'”Â]/', ' ', $sNewName);
+        $new_name = preg_replace('/[\\[("\'“Â][a-zA-Z0-9\\/\\?\'\\.\\,\\s-]*[\\])"\'”Â]/', ' ', $new_name);
 
         //TODO: Minor Bookmaker/BetDSI custom fix - to be removed or revamped
-        $sNewName = str_ireplace('(3 RD', '', $sNewName);
-        $sNewName = str_ireplace('(3RND', '', $sNewName);
-        $sNewName = str_ireplace('S)', '', $sNewName);
+        $new_name = str_ireplace('(3 RD', '', $new_name);
+        $new_name = str_ireplace('(3RND', '', $new_name);
+        $new_name = str_ireplace('S)', '', $new_name);
 
         //Trims multiple spaces to single space:
-        $sNewName = preg_replace('/\h{2,}/', ' ', $sNewName);
+        $new_name = preg_replace('/\h{2,}/', ' ', $new_name);
 
         //Fixes various foreign characters:
-        $sNewName = self::stripForeignChars($sNewName);
-
+        $new_name = self::stripForeignChars($new_name);
 
         //Capitalize name and remove any trailing chars:
-        $sNewName = trim(strtoupper($sNewName), ' -\t');
+        $new_name = trim(strtoupper($new_name), ' -\t');
 
-        return $sNewName;
+        return $new_name;
     }
 
-    /**
-     * Retrieves the last name in a name
-     *
-     * @param String $a_sName Full name
-     * @param boolean $a_bOnlyLast Indicates if only last part of the full name should be retrieved. If false then all names after first is retrieved. Eg. true = Santos (Junior Dos Santos), false = Dos Santos (Junior Dos Santos)
-     * @return String Last name
-     */
-    public static function getLastnameFromName($a_sName, $a_bOnlyLast = true)
+    public static function getLastnameFromName(string $name, bool $single_last_only = true): string
     {
-        if ($a_bOnlyLast == true) {
+        if ($single_last_only == true) {
             //Gets only last part (e.g. Santos from Junior Dos Santos)
-            $aParts = explode(' ', $a_sName);
-            return $aParts[count($aParts) - 1];
+            $parts = explode(' ', $name);
+            return $parts[count($parts) - 1];
         } else {
             //Get all last names (e.g Dos Santos from Junior Dos Santos)
-            $aParts = explode(' ', $a_sName, 2);
-            if (sizeof($aParts) == 1) {
-                return $aParts[0];
+            $parts = explode(' ', $name, 2);
+            if (sizeof($parts) == 1) {
+                return $parts[0];
             }
-            return $aParts[1];
+            return $parts[1];
         }
     }
 
-    public static function getInitialsFromName($a_sName)
+    public static function getInitialsFromName(string $team_name): array
     {
-        $aInitials = array();
-        foreach (explode(" ", $a_sName) as $sName) {
-            $aInitials[] = strtoupper(substr($sName, 0, 1));
+        $initials = [];
+        foreach (explode(" ", $team_name) as $name) {
+            $initials[] = strtoupper(substr($name, 0, 1));
         }
-        return $aInitials;
+        return $initials;
     }
 
-    /**
-     * Checks if moneyline odds is in the right format
-     *
-     * @deprecated Use OddsTools::checkCorrectOdds() instead
-     */
-    public static function checkCorrectOdds($a_sOdds)
+    public static function getArbitrage(string $moneyline1, string $moneyline2): float
     {
-        return OddsTools::checkCorrectOdds($a_sOdds);
+        $odds = new FightOdds(-1, -1, $moneyline1, $moneyline2, -1);
+
+        $arbitrage_value = (pow($odds->getFighterOddsAsDecimal(1, true), -1)
+            + pow($odds->getFighterOddsAsDecimal(2, true), -1));
+
+        return $arbitrage_value;
     }
 
-    /**
-     * Get arbitrage for odds
-     *
-     * @param string First money line
-     * @param string Second money line
-     * @return float Arbitrage value in decimal
-     */
-    public static function getArbitrage($a_sMoneyline1, $a_sMoneyline2)
+    public static function checkTeamName(string $team_name): bool
     {
-        $oTempOdds = new FightOdds(-1, -1, $a_sMoneyline1, $a_sMoneyline2, -1);
-
-        $fArbitValue = (pow($oTempOdds->getFighterOddsAsDecimal(1, true), -1)
-            + pow($oTempOdds->getFighterOddsAsDecimal(2, true), -1));
-
-        return $fArbitValue;
-    }
-
-    public static function checkTeamName($a_sTeamName)
-    {
-        if (preg_match('/^[a-zA-Z0-9\'\\s-]*$/', $a_sTeamName)) {
+        if (preg_match('/^[a-zA-Z0-9\'\\s-]*$/', $team_name)) {
             return true;
         }
         return false;
@@ -272,21 +246,21 @@ class ParseTools
      * @param String $a_sName Betting string to test
      * @return boolean If string is a prop or not
      */
-    public static function isProp($a_sName)
+    public static function isProp(string $prop_name): bool
     {
         //Check if either parameter is 4 or more words, then its probably a prop bet
-        if (count(explode(" ", ParseTools::formatName($a_sName))) >= 4) {
+        if (count(explode(" ", ParseTools::formatName($prop_name))) >= 4) {
             return true;
         }
         //Check if prop is either YES or NO, if that is the case then it is probably a prop
-        if (strcasecmp($a_sName, 'yes') == 0 || strcasecmp($a_sName, 'no') == 0) {
+        if (strcasecmp($prop_name, 'yes') == 0 || strcasecmp($prop_name, 'no') == 0) {
             return true;
         }
 
         return false;
     }
 
-    public static function matchBlock(string $contents, string $regexp)
+    public static function matchBlock(string $contents, string $regexp): array
     {
         $matches = null;
         preg_match_all($regexp, $contents, $matches, PREG_SET_ORDER);
@@ -331,7 +305,7 @@ class ParseTools
     /**
      * Replaces all foreign characters with their normal counterpart
      */
-    public static function stripForeignChars($text)
+    public static function stripForeignChars(string $text): string
     {
         $a = 'ÀÁÂÃÄÅÆÇÈÉÊËÌÍÎÏÐÑÒÓÔÕÖØÙÚÛÜÝÞßàáâãäåæçèéêëìíîïðñòóôõöøùúûýýþÿŔŕ ';
         $b = 'aaaaaaaceeeeiiiidnoooooouuuuybsaaaaaaaceeeeiiiidnoooooouuuyybyRr ';

@@ -54,8 +54,8 @@ class Alerter
             }
         }
 
-        $oAlert = new Alert($email, $matchup_id, $team_no, $bookie_id, $odds_limit, -1, $odds_type);
-        return AlertDB::addNewAlert($oAlert);
+        $new_alert = new Alert((string) $email, (int) $matchup_id, (int) $team_no, (int) $bookie_id, (int) $odds_limit, -1, (int) $odds_type);
+        return AlertDB::addNewAlert($new_alert);
     }
 
     /**

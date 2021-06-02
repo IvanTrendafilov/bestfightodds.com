@@ -449,7 +449,7 @@ class AdminAPIController
             $return_data['msg'] = 'Missing parameters';
             $return_data['error'] = true;
         } else {
-            $new_odds = new FightOdds($data->matchup_id, $data->bookie_id, $data->team1_odds, $data->team2_odds, OddsTools::standardizeDate(date('Y-m-d')));
+            $new_odds = new FightOdds((int) $data->matchup_id, (int) $data->bookie_id, (string) $data->team1_odds, (string) $data->team2_odds, (string) OddsTools::standardizeDate(date('Y-m-d')));
             if (EventHandler::checkMatchingOdds($new_odds)) {
                 $return_data['msg'] = 'Odds have not changed (' . $data->team1_odds . '/' . $data->team2_odds . ')';
             } else {

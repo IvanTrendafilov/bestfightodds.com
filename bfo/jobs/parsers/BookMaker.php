@@ -23,6 +23,7 @@ require_once __DIR__ . "/../../bootstrap.php";
 require_once __DIR__ . "/../../config/Ruleset.php";
 
 use BFO\Parser\Utils\ParseTools;
+use BFO\Utils\OddsTools;
 use BFO\Parser\OddsProcessor;
 use BFO\Parser\ParsedSport;
 use BFO\Parser\ParsedMatchup;
@@ -114,7 +115,7 @@ class ParserJob
 
                     $cLine = $cGame->line;
 
-                    if ($skip != true && ParseTools::checkCorrectOdds((string) $cLine['voddst']) && ParseTools::checkCorrectOdds((string) $cLine['hoddst']))
+                    if ($skip != true && OddsTools::checkCorrectOdds((string) $cLine['voddst']) && OddsTools::checkCorrectOdds((string) $cLine['hoddst']))
                     {
                         //Check if bet is a prop or not
                         if (ParseTools::isProp((string) $cGame['vtm']) && ParseTools::isProp((string) $cGame['htm']))
@@ -174,7 +175,7 @@ class ParserJob
                     if (count($cGame->line) == 2 && strcasecmp($cGame->line[0]['tmname'], 'Yes') == 0 && strcasecmp($cGame->line[1]['tmname'], 'No') == 0)
                     {
                         //Multi line prop (Yes/No)
-                        if (ParseTools::checkCorrectOdds((string) $cGame->line[0]['odds']) && ParseTools::checkCorrectOdds((string) $cGame->line[1]['odds']))
+                        if (OddsTools::checkCorrectOdds((string) $cGame->line[0]['odds']) && OddsTools::checkCorrectOdds((string) $cGame->line[1]['odds']))
                         {
                             $this->parsed_sport->addFetchedProp(new ParsedProp(
                                             str_replace(' VS.', ' VS. ', (string) (string) trim($cGame['htm'], " -") . ' ' . $cGame->line[0]['tmname']),
@@ -189,7 +190,7 @@ class ParserJob
                         //Single line props
                         foreach ($cGame->line as $cLine)
                         {
-                            if (ParseTools::checkCorrectOdds((string) $cLine['odds']))
+                            if (OddsTools::checkCorrectOdds((string) $cLine['odds']))
                             {
                                 $this->parsed_sport->addFetchedProp(new ParsedProp(
                                                 str_replace(' VS.', ' VS. ', (string) (string) trim($cGame['htm'], " -") . ' ' . $cLine['tmname']),

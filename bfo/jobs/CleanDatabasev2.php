@@ -317,7 +317,7 @@ function removeFightOdds($a_aFightOddsCol)
                         AND fighter2_odds = ?
                         AND date = ?';
 
-        $aParams = array($oFightOdds->getFightID(), $oFightOdds->getBookieID(), $oFightOdds->getFighterOdds(1), $oFightOdds->getFighterOdds(2), $oFightOdds->getDate());
+        $aParams = array($oFightOdds->getFightID(), $oFightOdds->getBookieID(), $oFightOdds->getOdds(1), $oFightOdds->getOdds(2), $oFightOdds->getDate());
 
         DBTools::doParamQuery($sQuery, $aParams);
 

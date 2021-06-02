@@ -257,7 +257,7 @@ class AdminController
                         }
 
                         //Check if matchup has odds and the indicate that
-                        $action['view_extra']['odds'] = OddsHandler::getOpeningOddsForMatchup($action['action_obj']->matchupID);
+                        $action['view_extra']['odds'] = OddsHandler::getOpeningOddsForMatchup((int) $action['action_obj']->matchupID);
 
                         //Check if either fighter has another matchup scheduled and indicate that
                         if ($action['view_extra']['matchup'] != null) {

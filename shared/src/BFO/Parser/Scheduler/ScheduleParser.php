@@ -74,7 +74,7 @@ class ScheduleParser
                     }
                 }
             }
-            if ($found == false) {
+            if (!$found) {
                 //Name does not match, do alternative matching on prefix
                 $aPrefixParts = explode(':', $aEvent['title']);
                 if (sizeof($aPrefixParts) > 1) {
@@ -94,7 +94,7 @@ class ScheduleParser
                     }
                 }
             }
-            if ($found == false) {
+            if (!$found) {
                 //Match on existing matchups
                 $aFoundMatches = array();
                 foreach ($aEvent['matchups'] as $aParsedMatchup) {
@@ -122,7 +122,7 @@ class ScheduleParser
                     $this->aMatchedExistingEvents[] = $oFoundEvent->getID();
                 }
             }
-            if ($found == false) {
+            if (!$found) {
                 //If creative matching fails, add entire event with matchups
                 $sAction = $aEvent['title'] . ' £ ' . date('Y-m-d', $aEvent['date']) . ' => ';
                 $aFilteredMatchups = array();

@@ -16,6 +16,7 @@ require_once __DIR__ . "/../../bootstrap.php";
 require_once __DIR__ . "/../../config/Ruleset.php";
 
 use BFO\Parser\Utils\ParseTools;
+use BFO\Utils\OddsTools;
 use BFO\Parser\OddsProcessor;
 use BFO\General\BookieHandler;
 use BFO\Parser\ParsedSport;
@@ -108,7 +109,7 @@ class ParserJob
                         if ($cBet['n'] == 'Single Match')
                         {
                             //Regular matchup line
-                            if (ParseTools::checkCorrectOdds((string) $cBet->l[0]['c']) && ParseTools::checkCorrectOdds((string) $cBet->l[1]['c']))
+                            if (OddsTools::checkCorrectOdds((string) $cBet->l[0]['c']) && OddsTools::checkCorrectOdds((string) $cBet->l[1]['c']))
                             {
                                 $oTempMatchup = new ParsedMatchup(
                                     (string) $cBet->l[0],
@@ -129,7 +130,7 @@ class ParserJob
                         else if ($cBet['n'] == 'Point Score')
                         {
                             //Point score (totalt rounds)
-                            if (ParseTools::checkCorrectOdds((string) $cBet->l[0]['c']) && ParseTools::checkCorrectOdds((string) $cBet->l[1]['c']))
+                            if (OddsTools::checkCorrectOdds((string) $cBet->l[0]['c']) && OddsTools::checkCorrectOdds((string) $cBet->l[1]['c']))
                             {
                                     $oTempProp = new ParsedProp(
                                                     (string) $cMatchup['n'] . ' : ' . $cBet->l[0],
@@ -149,7 +150,7 @@ class ParserJob
                             //Any other one line prop
                             foreach ($cBet->l as $cLine)
                             {
-                                if (ParseTools::checkCorrectOdds((string) $cLine['c']))
+                                if (OddsTools::checkCorrectOdds((string) $cLine['c']))
                                 {
                                         $oTempProp = new ParsedProp(
                                                         (string) $cMatchup['n'] . ' : ' . $cLine,

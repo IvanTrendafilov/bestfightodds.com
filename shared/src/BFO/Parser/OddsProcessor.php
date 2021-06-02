@@ -165,7 +165,7 @@ class OddsProcessor
 
             if ($matched_matchup['parsed_matchup']->hasMoneyline()) {
                 $odds = new FightOdds(
-                    $matched_matchup['matched_matchup']->getID(),
+                    (int) $matched_matchup['matched_matchup']->getID(),
                     $this->bookie_id,
                     $matched_matchup['parsed_matchup']->getTeamOdds(1),
                     $matched_matchup['parsed_matchup']->getTeamOdds(2),

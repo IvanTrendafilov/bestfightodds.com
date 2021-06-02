@@ -58,7 +58,7 @@ class AlertsModel
         $result = PDOTools::findMany($query);
         $alerts = [];
         foreach ($result as $alert) {
-            $alerts[] = new AlertV2($alert['id'], $alert['email'], $alert['oddstype'], $alert['criterias']);
+            $alerts[] = new AlertV2((int) $alert['id'], (string) $alert['email'], (int) $alert['oddstype'], (string) $alert['criterias']);
         }
 
         return $alerts;

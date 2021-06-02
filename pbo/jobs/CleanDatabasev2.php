@@ -223,7 +223,7 @@ function removeFightOdds($fightodds_col)
                         AND fighter2_odds = ?
                         AND date = ?';
 
-        $params = [$fightodds->getFightID(), $fightodds->getBookieID(), $fightodds->getFighterOdds(1), $fightodds->getFighterOdds(2), $fightodds->getDate()];
+        $params = [$fightodds->getFightID(), $fightodds->getBookieID(), $fightodds->getOdds(1), $fightodds->getOdds(2), $fightodds->getDate()];
 
         DBTools::doParamQuery($query, $params);
 

@@ -145,7 +145,7 @@ class MainController
         $view_data['search_query'] = $search_query;
 
         if (strlen($search_query) >= 3) {
-            $teams = TeamHandler::searchFighter($search_query);
+            $teams = TeamHandler::searchTeam($search_query);
             $events = EventHandler::searchEvent($search_query);
             if ($teams != null || $events != null) {
                 //If we only get one result we will redirect to that page right away

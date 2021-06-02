@@ -4,7 +4,7 @@ namespace BFO\DataTypes;
 
 use BFO\Utils\LinkTools;
 
-class Fighter
+class Team
 {
     private string $name;
     private int $id;

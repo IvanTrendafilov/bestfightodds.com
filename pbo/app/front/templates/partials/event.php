@@ -116,9 +116,9 @@
                                                 <td class="but-sg" data-li="[<?= $odds['odds_obj']->getBookieID() ?>,<?= $i ?>,<?= $odds['odds_obj']->getFightID() ?>]">
                                                     <span id="oID<?= ('1' . sprintf("%06d", $odds['odds_obj']->getFightID()) . sprintf("%02d", $odds['odds_obj']->getBookieID()) . $i) ?>" <?= isset($odds['is_best_team' . $i]) ? ' class="bestbet"' : '' ?>><?= $odds['odds_obj']->getFighterOddsAsString($i) ?></span>
                                                     <?php if (isset($odds['previous_team' . $i . '_odds'])) : ?>
-                                                        <?php if ($odds['odds_obj']->getFighterOdds($i) > $odds['previous_team' . $i . '_odds']) : ?>
+                                                        <?php if ($odds['odds_obj']->getOdds($i) > $odds['previous_team' . $i . '_odds']) : ?>
                                                             <span class="aru changedate-<?= $odds['odds_obj']->getDate() ?>">▲</span>
-                                                        <?php elseif ($odds['odds_obj']->getFighterOdds($i) < $odds['previous_team' . $i . '_odds']) : ?>
+                                                        <?php elseif ($odds['odds_obj']->getOdds($i) < $odds['previous_team' . $i . '_odds']) : ?>
                                                             <span class="ard changedate-<?= $odds['odds_obj']->getDate() ?>">▼</span>
                                                         <?php endif ?>
                                                     <?php endif ?>

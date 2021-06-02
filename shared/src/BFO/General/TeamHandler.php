@@ -35,12 +35,12 @@ class TeamHandler
         return TeamDB::addTeamAltName($team_id, $new_alt_name);
     }
 
-    public static function searchFighter($name)
+    public static function searchTeam(string $name): ?array
     {
         if (strlen($name) < 2) {
-            return false;
+            return [];
         }
-        return TeamDB::searchFighter($name);
+        return TeamDB::searchTeam($name);
     }
 
     public static function getTeams(int $team_id = null): array

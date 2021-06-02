@@ -41,10 +41,12 @@ class APIController
         $args = $request->getQueryParams();
 
         //Validate input, only numeric values allowed
-        foreach ($args as $arg) {
+        foreach ($args as &$arg) {
             if (!is_numeric($arg)) {
                 $response->getBody()->write('invalid input');
                 return $response;
+            } else {
+                $arg = intval($arg);
             }
         }
 
@@ -65,28 +67,28 @@ class APIController
                         //For specific bookie
                         if (isset($args['e'])) {
                             //Event prop
-                            $odds = GraphHandler::getEventPropData($args['e'], $args['b'], $args['pt']);
+                            $odds = GraphHandler::getEventPropData((int) $args['e'], (int) $args['b'], (int) $args['pt']);
                         } else {
                             //Regular prop
-                            $odds = GraphHandler::getPropData($args['m'], $args['b'], $args['pt'], $args['tn']);
+                            $odds = GraphHandler::getPropData((int) $args['m'], (int) $args['b'], (int) $args['pt'], (int) $args['tn']);
                         }
                     } else {
                         //Mean
                         if (isset($args['e'])) {
                             //Event prop
-                            $odds = GraphHandler::getEventPropIndexData($args['e'], $args['p'], $args['pt']);
+                            $odds = GraphHandler::getEventPropIndexData((int) $args['e'], (int) $args['p'], (int) $args['pt']);
                         } else {
                             //Regular prop
-                            $odds = GraphHandler::getPropIndexData($args['m'], $args['p'], $args['pt'], $args['tn']);
+                            $odds = GraphHandler::getPropIndexData((int) $args['m'], (int) $args['p'], (int) $args['pt'], (int) $args['tn']);
                         }
                     }
                 } else {
                     //For normal matchup
                     if (isset($args['b'])) {
                         //For specific bookie
-                        $odds = GraphHandler::getMatchupData($args['m'], $args['b']);
+                        $odds = GraphHandler::getMatchupData((int) $args['m'], (int) $args['b']);
                     } else {
-                        $odds = GraphHandler::getMatchupIndexData($args['m'], $args['p']);
+                        $odds = GraphHandler::getMatchupIndexData((int) $args['m'], (int) $args['p']);
                     }
                 }
 
@@ -94,7 +96,7 @@ class APIController
                     //Convert to JSON and return
                     $bookie_name = 'Mean';
                     if (isset($args['b'])) {
-                        $bookie_name = BookieHandler::getBookieByID($args['b'])->getName();
+                        $bookie_name = BookieHandler::getBookieByID((int) $args['b'])->getName();
                     }
 
                     $return_data = [

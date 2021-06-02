@@ -23,208 +23,175 @@ define('FONT_TYPE', dirname(__FILE__) . "/micross.ttf");
 $sLineType = isset($_GET['type']) ? $_GET['type'] : 'current';
 $iFormatType = isset($_GET['format']) ? $_GET['format'] : 1;
 
-if (isset($_GET['fight']) && is_numeric($_GET['fight']) && $_GET['fight'] > 0 && $_GET['fight'] < 99999)
-{
-    $sImageName = 'link-fight_' . $_GET['fight'] . '_' . $sLineType . '_' . $iFormatType;
-    $rShowImage = null;
+if (isset($_GET['fight']) && is_numeric($_GET['fight']) && $_GET['fight'] > 0 && $_GET['fight'] < 99999) {
+    $image_name = 'link-fight_' . $_GET['fight'] . '_' . $sLineType . '_' . $iFormatType;
+    $image_obj = null;
 
-    if (CacheControl::isCached($sImageName))
-    {
-        $rShowImage = CacheControl::getCachedImage($sImageName);
-    }
-    else
-    {
-        $rShowImage = FightLinkCreator::createFightLink($_GET['fight'], $sLineType, $iFormatType);
-        if ($rShowImage != false)
-        {
-           CacheControl::cacheImage($rShowImage, $sImageName);
+    if (CacheControl::isCached($image_name)) {
+        $image_obj = CacheControl::getCachedImage($image_name);
+    } else {
+        $image_obj = FightLinkCreator::createFightLink($_GET['fight'], $sLineType, $iFormatType);
+        if ($image_obj) {
+            CacheControl::cacheImage($image_obj, $image_name);
         }
     }
 
-    if ($rShowImage != false)
-    {
+    if ($image_obj) {
         header("Content-type: image/png");
-        imagepng($rShowImage);
-        imagedestroy($rShowImage);
+        imagepng($image_obj);
+        imagedestroy($image_obj);
     }
-}
-else if (isset($_GET['event']) && is_numeric($_GET['event']) && $_GET['event'] > 0 && $_GET['event'] < 99999)
-{
-    $sImageName = 'link-event_' . $_GET['event'] . '_' . $sLineType . '_' . $iFormatType;
-    $rShowImage = null;
+} else if (isset($_GET['event']) && is_numeric($_GET['event']) && $_GET['event'] > 0 && $_GET['event'] < 99999) {
+    $image_name = 'link-event_' . $_GET['event'] . '_' . $sLineType . '_' . $iFormatType;
+    $image_obj = null;
 
-    if (CacheControl::isCached($sImageName))
-    {
-        $rShowImage = CacheControl::getCachedImage($sImageName);
-    }
-    else
-    {
-        $rShowImage = FightLinkCreator::createEventLink($_GET['event'], $sLineType, $iFormatType);
-        if ($rShowImage != false)
-        {
-            CacheControl::cacheImage($rShowImage, $sImageName);
+    if (CacheControl::isCached($image_name)) {
+        $image_obj = CacheControl::getCachedImage($image_name);
+    } else {
+        $image_obj = FightLinkCreator::createEventLink($_GET['event'], $sLineType, $iFormatType);
+        if ($image_obj) {
+            CacheControl::cacheImage($image_obj, $image_name);
         }
     }
 
-    if ($rShowImage != false)
-    {
+    if ($image_obj) {
         header("Content-type: image/png");
-        imagepng($rShowImage);
-        imagedestroy($rShowImage);    
+        imagepng($image_obj);
+        imagedestroy($image_obj);
     }
-}
-else
-{
+} else {
     header("Content-type: image/png");
-    fpassthru(fopen('img/linkout-unavail.png','r'));
+    fpassthru(fopen('img/linkout-unavail.png', 'r'));
 }
 
 class FightLinkCreator
 {
-
-    public static function createEventLink($event_id, $line_type, $format)
+    public static function createEventLink(int $event_id, string $line_type, int $format)
     {
         $matchups = EventHandler::getMatchups(event_id: $event_id, only_with_odds: true);
         return self::createLink($matchups, $line_type, $format);
     }
 
-    public static function createFightLink($matchup_id, $line_type, $format)
+    public static function createFightLink(int $matchup_id, string $line_type, int $format)
     {
-        $oMatchup = EventHandler::getMatchup((int) $matchup_id);
-        return self::createLink(array($oMatchup), $line_type, $format);
+        $matchup = EventHandler::getMatchup((int) $matchup_id);
+        return self::createLink(array($matchup), $line_type, $format);
     }
 
-    public static function createLink($aFights, $a_iLineType, $a_iFormat) //1 = Moneyline, 2 = Decimal
+    public static function createLink($matchups, $line_type, int $odds_format) //1 = Moneyline, 2 = Decimal
     {
-        if (count($aFights) < 1 || $aFights[0] == null)
-        {
+        if (count($matchups) < 1 || $matchups[0] == null) {
             header("Content-type: image/png");
-            fpassthru(fopen('img/linkout-unavail.png','r'));
+            fpassthru(fopen('img/linkout-unavail.png', 'r'));
             return false;
         }
 
-        $iFighterCellHeight = 20;
-        $iCalculatedHeight = LINK_BFO_HEIGHT + count($aFights) * ($iFighterCellHeight * 2) + count($aFights);
+        $team_cell_height = 20;
+        $total_height = LINK_BFO_HEIGHT + count($matchups) * ($team_cell_height * 2) + count($matchups);
 
-        $rImageHeader = imagecreatefrompng('img/linkout-back.png');
+        $image_header_obj = imagecreatefrompng('img/linkout-back.png');
 
-        $rImage = imagecreatetruecolor(LINK_WIDTH, $iCalculatedHeight)
-                or die("Cannot Initialize new GD image stream");
+        $image_obj = imagecreatetruecolor(LINK_WIDTH, $total_height)
+            or die("Cannot Initialize new GD image stream");
 
-        $rFrameColor = imagecolorallocate($rImage, 96, 98, 100);
-        $rMiddleFrameColor = imagecolorallocate($rImage, 194, 194, 194);
-        $rTopColor = imagecolorallocate($rImage, 245, 247, 249);
-        $rBottomColor = imagecolorallocate($rImage, 255, 255, 255);
-        $rTextColor = imagecolorallocate($rImage, 26, 26, 26);
-
-        $rSeperatorColor = imagecolorallocate($rImage, 182, 182, 182);
+        $color_frame = imagecolorallocate($image_obj, 96, 98, 100);
+        $color_inner_frame = imagecolorallocate($image_obj, 194, 194, 194);
+        $color_top = imagecolorallocate($image_obj, 245, 247, 249);
+        $color_bottom = imagecolorallocate($image_obj, 255, 255, 255);
+        $color_text = imagecolorallocate($image_obj, 26, 26, 26);
+        $color_seperator = imagecolorallocate($image_obj, 182, 182, 182);
 
         //Fighter1 Squares
-        imagefill($rImage, 0, 0, $rTopColor);
+        imagefill($image_obj, 0, 0, $color_top);
 
         //Add header
-        imagecopy($rImage, $rImageHeader, 0, 0, 0, 0, 216, 19);
+        imagecopy($image_obj, $image_header_obj, 0, 0, 0, 0, 216, 19);
 
-        for ($iFightX = 0; $iFightX < count($aFights); $iFightX++)
-        {
-            $oFight = $aFights[$iFightX];
+        for ($i = 0; $i < count($matchups); $i++) {
+            $matchup_obj = $matchups[$i];
 
-
-            $oFightOdds = null;
+            $odds_obj = null;
             //Fetch odds based on desired type, opening or current best (default)
-            if ($a_iLineType == 'opening')
-            {
-                $oFightOdds = OddsHandler::getOpeningOddsForMatchup($oFight->getID());
+            if ($line_type == 'opening') {
+                $odds_obj = OddsHandler::getOpeningOddsForMatchup($matchup_obj->getID());
+            } else {
+                $odds_obj = EventHandler::getBestOddsForFight($matchup_obj->getID());
             }
-            else
-            {
-                $oFightOdds = EventHandler::getBestOddsForFight($oFight->getID());
-            }
-            
-            $sFighter1Odds = 'n/a';
-            $sFighter2Odds = 'n/a';
 
-            if ($oFightOdds != null)
-            {
-                if ($a_iFormat == 2)
-                {
+            $team1_odds = 'n/a';
+            $team2_odds = 'n/a';
+
+            if ($odds_obj != null) {
+                if ($odds_format == 2) {
                     //Decimal
-                    $sFighter1Odds = sprintf("%1\$.2f", $oFightOdds->getFighterOddsAsDecimal(1));
-                    $sFighter2Odds = sprintf("%1\$.2f", $oFightOdds->getFighterOddsAsDecimal(2));
-                }
-                else
-                {
+                    $team1_odds = sprintf("%1\$.2f", $odds_obj->getFighterOddsAsDecimal(1));
+                    $team2_odds = sprintf("%1\$.2f", $odds_obj->getFighterOddsAsDecimal(2));
+                } else {
                     //Moneyline
-                    $sFighter1Odds = $oFightOdds->getFighterOddsAsString(1);
-                    $sFighter2Odds = $oFightOdds->getFighterOddsAsString(2);
+                    $team1_odds = $odds_obj->getFighterOddsAsString(1);
+                    $team2_odds = $odds_obj->getFighterOddsAsString(2);
                 }
             }
 
             //Fighter2 Square
-            imagefilledrectangle($rImage, 0, 1 + LINK_BFO_HEIGHT + $iFighterCellHeight + ($iFighterCellHeight * ($iFightX * 2)) + $iFightX, LINK_WIDTH, 0 + LINK_BFO_HEIGHT + ($iFighterCellHeight * 2) + ($iFighterCellHeight * ($iFightX * 2)) + $iFightX, $rBottomColor);
+            imagefilledrectangle($image_obj, 0, 1 + LINK_BFO_HEIGHT + $team_cell_height + ($team_cell_height * ($i * 2)) + $i, LINK_WIDTH, 0 + LINK_BFO_HEIGHT + ($team_cell_height * 2) + ($team_cell_height * ($i * 2)) + $i, $color_bottom);
 
             //Fighter 1 Name
-            //imagettftext($rImage, FONT_SIZE, 0, 6, 0 + LINK_BFO_HEIGHT + $iFighterCellHeight + ($iFighterCellHeight * ($iFightX * 2)) + $iFightX - 5, $rTextColor, FONT_TYPE, $oFight->getFighterAsString(1));
-            self::textCustomSpacing($rImage, FONT_SIZE, 0, 6, 0 + LINK_BFO_HEIGHT + $iFighterCellHeight + ($iFighterCellHeight * ($iFightX * 2)) + $iFightX - 5, $rTextColor, FONT_TYPE, $oFight->getFighterAsString(1), 1);
+            //imagettftext($image_obj, FONT_SIZE, 0, 6, 0 + LINK_BFO_HEIGHT + $team_cell_height + ($team_cell_height * ($i * 2)) + $i - 5, $color_text, FONT_TYPE, $matchup_obj->getFighterAsString(1));
+            self::textCustomSpacing($image_obj, FONT_SIZE, 0, 6, 0 + LINK_BFO_HEIGHT + $team_cell_height + ($team_cell_height * ($i * 2)) + $i - 5, $color_text, FONT_TYPE, $matchup_obj->getFighterAsString(1), 1);
 
             //Fighter 1 Odds
-            $aOddsSize = imagettfbbox(FONT_SIZE, 0, FONT_TYPE, $sFighter1Odds);
-            //self::textCustomSpacing($rImage, FONT_SIZE, 0, LINK_WIDTH - (15 + ($aOddsSize[2] - $aOddsSize[0])), 0 + LINK_BFO_HEIGHT + $iFighterCellHeight + ($iFighterCellHeight * ($iFightX * 2)) + $iFightX - 5, $rTextColor, FONT_TYPE, $sFighter1Odds, 2);
-    	    imagettftext($rImage, FONT_SIZE, 0, LINK_WIDTH - (15 + ($aOddsSize[2] - $aOddsSize[0])), 0 + LINK_BFO_HEIGHT + $iFighterCellHeight + ($iFighterCellHeight * ($iFightX * 2)) + $iFightX - 5, $rTextColor, FONT_TYPE, $sFighter1Odds);
+            $aOddsSize = imagettfbbox(FONT_SIZE, 0, FONT_TYPE, $team1_odds);
+            //self::textCustomSpacing($image_obj, FONT_SIZE, 0, LINK_WIDTH - (15 + ($aOddsSize[2] - $aOddsSize[0])), 0 + LINK_BFO_HEIGHT + $team_cell_height + ($team_cell_height * ($i * 2)) + $i - 5, $color_text, FONT_TYPE, $team1_odds, 2);
+            imagettftext($image_obj, FONT_SIZE, 0, LINK_WIDTH - (15 + ($aOddsSize[2] - $aOddsSize[0])), 0 + LINK_BFO_HEIGHT + $team_cell_height + ($team_cell_height * ($i * 2)) + $i - 5, $color_text, FONT_TYPE, $team1_odds);
 
 
             //Fighter 2 Name
-            self::textCustomSpacing($rImage, FONT_SIZE, 0, 6, 0 + LINK_BFO_HEIGHT + ($iFighterCellHeight * 2) + ($iFighterCellHeight * ($iFightX * 2)) + $iFightX - 6, $rTextColor, FONT_TYPE, $oFight->getFighterAsString(2), 1);
+            self::textCustomSpacing($image_obj, FONT_SIZE, 0, 6, 0 + LINK_BFO_HEIGHT + ($team_cell_height * 2) + ($team_cell_height * ($i * 2)) + $i - 6, $color_text, FONT_TYPE, $matchup_obj->getFighterAsString(2), 1);
 
             //Fighter 2 Odds
-            $aOddsSize = imagettfbbox(FONT_SIZE, 0, FONT_TYPE, $sFighter2Odds);
-            //self::textCustomSpacing($rImage, FONT_SIZE, 0, LINK_WIDTH - (15 + ($aOddsSize[2] - $aOddsSize[0])), 0 + LINK_BFO_HEIGHT + ($iFighterCellHeight * 2) + ($iFighterCellHeight * ($iFightX * 2)) + $iFightX - 6, $rTextColor, FONT_TYPE, $sFighter2Odds, 2);
-	        imagettftext($rImage, FONT_SIZE, 0, LINK_WIDTH - (15 + ($aOddsSize[2] - $aOddsSize[0])), 0 + LINK_BFO_HEIGHT + ($iFighterCellHeight * 2) + ($iFighterCellHeight * ($iFightX * 2)) + $iFightX - 6, $rTextColor, FONT_TYPE, $sFighter2Odds);
-       }
+            $aOddsSize = imagettfbbox(FONT_SIZE, 0, FONT_TYPE, $team2_odds);
+            //self::textCustomSpacing($image_obj, FONT_SIZE, 0, LINK_WIDTH - (15 + ($aOddsSize[2] - $aOddsSize[0])), 0 + LINK_BFO_HEIGHT + ($team_cell_height * 2) + ($team_cell_height * ($i * 2)) + $i - 6, $color_text, FONT_TYPE, $team2_odds, 2);
+            imagettftext($image_obj, FONT_SIZE, 0, LINK_WIDTH - (15 + ($aOddsSize[2] - $aOddsSize[0])), 0 + LINK_BFO_HEIGHT + ($team_cell_height * 2) + ($team_cell_height * ($i * 2)) + $i - 6, $rTextColor, FONT_TYPE, $team2_odds);
+        }
 
         //Column seperator
-        imageline($rImage, LINK_WIDTH - 55, 1 + LINK_BFO_HEIGHT, LINK_WIDTH - 55, $iCalculatedHeight - 2, $rMiddleFrameColor);
+        imageline($image_obj, LINK_WIDTH - 55, 1 + LINK_BFO_HEIGHT, LINK_WIDTH - 55, $total_height - 2, $color_inner_frame);
 
-        for ($iFightX = 0; $iFightX < count($aFights); $iFightX++)
-        {
+        for ($i = 0; $i < count($matchups); $i++) {
             //Fight seperator
-            imageline($rImage, 1, 0 + LINK_BFO_HEIGHT + ($iFighterCellHeight * 2) + ($iFighterCellHeight * ($iFightX * 2)) + $iFightX, LINK_WIDTH - 1, 0 + LINK_BFO_HEIGHT + ($iFighterCellHeight * 2) + ($iFighterCellHeight * ($iFightX * 2)) + $iFightX, $rSeperatorColor);
+            imageline($image_obj, 1, 0 + LINK_BFO_HEIGHT + ($team_cell_height * 2) + ($team_cell_height * ($i * 2)) + $i, LINK_WIDTH - 1, 0 + LINK_BFO_HEIGHT + ($team_cell_height * 2) + ($team_cell_height * ($i * 2)) + $i, $color_seperator);
         }
 
         //Frame
-        imagerectangle($rImage, 0, 0, LINK_WIDTH - 1, $iCalculatedHeight - 1, $rFrameColor);
+        imagerectangle($image_obj, 0, 0, LINK_WIDTH - 1, $total_height - 1, $color_frame);
 
-        return $rImage;
+        return $image_obj;
     }
 
-    private static function textCustomSpacing($a_rImage, $a_iFontSize, $a_iAngle, $a_iX, $a_iY, $a_rColor, $a_rFont, $a_sText, $a_iSpacing = 0)
+    private static function textCustomSpacing($image_obj, $font_size, $angle, $x_pos, $y_pos, $a_rColor, $a_rFont, $text, $char_spacing = 0)
     {
-        $iWritePos = 0;
-        $aLastBox = null;
-        for ($iX = 0; $iX < strlen($a_sText); $iX++)
-        {
-            $aLastBox = imagettfbbox($a_iFontSize, $a_iAngle, $a_rFont, $a_sText[$iX]);
+        $write_position = 0;
+        $last_char_box = null;
+        for ($i = 0; $i < strlen($text); $i++) {
+            $last_char_box = imagettfbbox($font_size, $angle, $a_rFont, $text[$i]);
 
-            if ($a_sText[$iX] != ' ')
-            {
-                imagettftext($a_rImage, $a_iFontSize, $a_iAngle, $a_iX + $iWritePos, $a_iY, $a_rColor, $a_rFont, $a_sText[$iX]);
+            if ($text[$i] != ' ') {
+                imagettftext($image_obj, $font_size, $angle, $x_pos + $write_position, $y_pos, $a_rColor, $a_rFont, $text[$i]);
             }
 
-            $iWritePos += $aLastBox[2] + $a_iSpacing;
-		
+            $write_position += $last_char_box[2] + $char_spacing;
+
             //Custom fixes for chars that add some spaces
-/*            switch ($a_sText[$iX])
+            /*            switch ($text[$i])
             {
                 case 'l':
                 case 'n':
-                    $iWritePos--;
-                    $iWritePos--;
+                    $write_position--;
+                    $write_position--;
                 break;
                 default:
             }*/
         }
     }
-
 }
-
-?>

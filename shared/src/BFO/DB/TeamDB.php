@@ -5,14 +5,14 @@ namespace BFO\DB;
 use BFO\Utils\DB\DBTools;
 use BFO\Utils\DB\PDOTools;
 
-use BFO\DataTypes\Fighter;
+use BFO\DataTypes\Team;
 
 /**
  * TeamDB
  */
 class TeamDB
 {
-    public static function searchFighter($fighter_name)
+    public static function searchTeam(string $team_name): array
     {
         $query = "SELECT f.id, f.name, MATCH(f.name) AGAINST (?) AS score  
 					FROM fighters f
@@ -20,16 +20,15 @@ class TeamDB
                         OR MATCH(f.name) AGAINST (?) 
 					ORDER BY score DESC, f.name ASC";
 
-        $params = [$fighter_name, '%' . $fighter_name . '%', $fighter_name];
+        $params = [$team_name, '%' . $team_name . '%', $team_name];
 
         $result = DBTools::doParamQuery($query, $params);
 
-        $fighters = [];
+        $teams = [];
         while ($row = mysqli_fetch_array($result)) {
-            $fighters[] = new Fighter((string) $row['name'], (int) $row['id']);
+            $teams[] = new Team((string) $row['name'], (int) $row['id']);
         }
-
-        return $fighters;
+        return $teams;
     }
 
     public static function getTeams(int $team_id = null): array
@@ -50,7 +49,7 @@ class TeamDB
         $teams = [];
         try {
             foreach (PDOTools::findMany($query, $params) as $row) {
-                $teams[] = new Fighter((string) $row['name'], (int) $row['id']);
+                $teams[] = new Team((string) $row['name'], (int) $row['id']);
             }
         } catch (\PDOException $e) {
             throw new \Exception("Unknown error " . $e->getMessage(), 10);
@@ -158,7 +157,7 @@ class TeamDB
         $result = DBTools::doQuery($query);
         $fighters = [];
         while ($row = mysqli_fetch_array($result)) {
-            $fighters[] = new Fighter((string) $row['name'], (int) $row['id']);
+            $fighters[] = new Team((string) $row['name'], (int) $row['id']);
         }
         return $fighters;
     }

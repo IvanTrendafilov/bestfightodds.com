@@ -190,8 +190,8 @@ class ParserJob
     
             foreach ($fight_matches as $fight)
             {
-                if (ParseTools::checkCorrectOdds(trim((string) $fight[3]))
-                    && ParseTools::checkCorrectOdds(trim((string) $fight[6])))
+                if (OddsTools::checkCorrectOdds(trim((string) $fight[3]))
+                    && OddsTools::checkCorrectOdds(trim((string) $fight[6])))
                 {
                     $date_obj = new DateTime($fight[1] . ' ' . $fight[4] . ' ' . $sTimezone);
                     $parsed_matchup = new ParsedMatchup(

@@ -131,27 +131,26 @@ class EventDB
     }
 
 
-    public static function getAllLatestOddsForFight($a_iFightID, $a_iOffset = 0)
+    public static function getAllLatestOddsForFight($matchup_id, $offset = 0)
     {
-        if ($a_iOffset != 0 && $a_iOffset != 1) {
-            //TODO: Handle this more gracefully
-            return false;
+        if ($offset != 0 && $offset != 1) {
+            return null;
         }
 
-        $aParams = array($a_iFightID, $a_iFightID);
-        $sExtraQuery = '';
+        $params = [$matchup_id, $matchup_id];
+        $extra_query = '';
 
-        if ($a_iOffset == 1) {
-            $sExtraQuery = ' AND fo4.date < (SELECT
+        if ($offset == 1) {
+            $extra_query = ' AND fo4.date < (SELECT
                 MAX(fo5.date) AS date
             FROM
                 fightodds fo5
             WHERE
                 fo5.fight_id = ? AND fo5.bookie_id = fo4.bookie_id) ';
-            $aParams[] = $a_iFightID;
+            $params[] = $matchup_id;
         }
 
-        $sQuery = 'SELECT
+        $query = 'SELECT
             fo2.fight_id, fo2.fighter1_odds, fo2.fighter2_odds, fo2.bookie_id, fo2.date
             FROM
                 fightodds AS fo2, bookies bo,
@@ -160,22 +159,20 @@ class EventDB
                 FROM
                     fightodds fo4
                 WHERE
-                    fo4.fight_id = ? ' . $sExtraQuery . ' 
+                    fo4.fight_id = ? ' . $extra_query . ' 
                 GROUP BY bookie_id) AS fo3
             WHERE
                 fo2.fight_id = ? AND fo2.bookie_id = fo3.bookie_id AND fo2.date
             = fo3.date AND fo2.bookie_id = bo.id GROUP BY fo2.bookie_id ORDER BY bo.position,
             fo2.bookie_id, fo2.fight_id ASC;';
 
-        $rResult = DBTools::doParamQuery($sQuery, $aParams);
-
-        $aFightOddsCol = array();
-
-        while ($aFightOdds = mysqli_fetch_array($rResult)) {
-            $aFightOddsCol[] = new FightOdds($aFightOdds['fight_id'], $aFightOdds['bookie_id'], $aFightOdds['fighter1_odds'], $aFightOdds['fighter2_odds'], $aFightOdds['date']);
+        $result = DBTools::doParamQuery($query, $params);
+        $odds = array();
+        while ($row = mysqli_fetch_array($result)) {
+            $odds[] = new FightOdds((int) $row['fight_id'], (int) $row['bookie_id'], (string) $row['fighter1_odds'], (string) $row['fighter2_odds'], (string) $row['date']);
         }
 
-        return $aFightOddsCol;
+        return $odds;
     }
 
     public static function getLatestOddsForFightAndBookie($matchup_id, $bookie_id)
@@ -193,7 +190,7 @@ class EventDB
 
         $odds_col = [];
         while ($row = mysqli_fetch_array($result)) {
-            $odds_col[] = new FightOdds($row['fight_id'], $row['bookie_id'], $row['fighter1_odds'], $row['fighter2_odds'], $row['date']);
+            $odds_col[] = new FightOdds((int) $row['fight_id'], (int) $row['bookie_id'], $row['fighter1_odds'], $row['fighter2_odds'], $row['date']);
         }
         if (sizeof($odds_col) > 0) {
             return $odds_col[0];
@@ -219,7 +216,7 @@ class EventDB
         $odds_col = [];
         try {
             foreach (PDOTools::findMany($query, $params) as $row) {
-                $odds_col[] = new FightOdds($row['fight_id'], $row['bookie_id'], $row['fighter1_odds'], $row['fighter2_odds'], $row['date']);
+                $odds_col[] = new FightOdds((int) $row['fight_id'], (int) $row['bookie_id'], $row['fighter1_odds'], $row['fighter2_odds'], $row['date']);
             }
         } catch (\PDOException $e) {
             throw new \Exception("Unknown error " . $e->getMessage(), 10);
@@ -339,7 +336,7 @@ class EventDB
                         FROM fights f, bookies b
                         WHERE f.id = ? AND b.id = ?';
 
-        $params = [$fightodds_obj->getFighterOdds(1), $fightodds_obj->getFighterOdds(2), $fightodds_obj->getFightID(), $fightodds_obj->getBookieID()];
+        $params = [$fightodds_obj->getOdds(1), $fightodds_obj->getOdds(2), $fightodds_obj->getFightID(), $fightodds_obj->getBookieID()];
 
         try {
             $id = PDOTools::executeQuery($query, $params);
@@ -496,7 +493,7 @@ class EventDB
         $odds_col = array();
 
         while ($row = mysqli_fetch_array($rResult)) {
-            $odds_col[] = new FightOdds($matchup_id, -1, $row['fighter1_odds'], $row['fighter2_odds'], '');
+            $odds_col[] = new FightOdds((int) $matchup_id, -1, $row['fighter1_odds'], $row['fighter2_odds'], '');
         }
         if (sizeof($odds_col) > 0) {
             return $odds_col[0];
@@ -531,14 +528,14 @@ class EventDB
                         AND co1.date = co2.date 
                     ORDER BY co1.fighter' . $team_num . '_odds DESC LIMIT 1;';
 
-        $params = array($matchup_id, $matchup_id);
+        $params = [$matchup_id, $matchup_id];
 
-        $rResult = DBTools::doParamQuery($query, $params);
+        $result = DBTools::doParamQuery($query, $params);
 
-        $odds_col = array();
+        $odds_col = [];
 
-        while ($row = mysqli_fetch_array($rResult)) {
-            $odds_col[] = new FightOdds($matchup_id, $row['bookie_id'], $row['fighter1_odds'], $row['fighter2_odds'], '');
+        while ($row = mysqli_fetch_array($result)) {
+            $odds_col[] = new FightOdds((int) $matchup_id, (int) $row['bookie_id'], $row['fighter1_odds'], $row['fighter2_odds'], '');
         }
         if (sizeof($odds_col) > 0) {
             return $odds_col[0];

@@ -23,7 +23,7 @@ class OddsTools
     {
         $decimal_odds = (float) $decimal_odds - 1.0;
         if ($decimal_odds == 0) {
-            return '-25000';
+            return '-99999';
         }
         if ($decimal_odds < 1) {
             return '-' . round((1 / $decimal_odds) * 100);

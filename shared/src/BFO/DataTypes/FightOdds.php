@@ -2,174 +2,143 @@
 
 namespace BFO\DataTypes;
 
-/**
- * FightOdds class
- *
- * The odds for the fighters are always sorted lexiographically by name
- * Example: Quinton Jackson (Fighter 2 odds) vs Chuck Liddell (Fighter 1 odds)
- */
 class FightOdds
 {
-    private $iFightID;
-    private $iBookieID;
-    private $sFighter1Odds;
-    private $sFighter2Odds;
-    private $sDate;
+    private $matchup_id;
+    private $bookie_id;
+    private $team1_odds;
+    private $team2_odds;
+    private $date;
 
-    public function __construct($a_iFightID, $a_iBookieID, $a_sFighter1Odds, $a_sFighter2Odds, $a_sDate)
+    public function __construct(?int $matchup_id, ?int $bookie_id, $team1_odds, $team2_odds, $date)
     {
-        $this->iFightID = $a_iFightID;
-        $this->iBookieID = $a_iBookieID;
+        $this->matchup_id = $matchup_id;
+        $this->bookie_id = $bookie_id;
 
-        if (strtoupper($a_sFighter1Odds) == 'EV' || strtoupper($a_sFighter1Odds) == 'EVEN') {
-            $this->sFighter1Odds = '100';
+        if (strtoupper($team1_odds) == 'EV' || strtoupper($team1_odds) == 'EVEN') {
+            $this->team1_odds = '100';
         } else {
-            $this->sFighter1Odds = str_replace('+', '', $a_sFighter1Odds);
+            $this->team1_odds = str_replace('+', '', $team1_odds);
         }
 
-        if (strtoupper($a_sFighter2Odds) == 'EV' || strtoupper($a_sFighter2Odds) == 'EVEN') {
-            $this->sFighter2Odds = '100';
+        if (strtoupper($team2_odds) == 'EV' || strtoupper($team2_odds) == 'EVEN') {
+            $this->team2_odds = '100';
         } else {
-            $this->sFighter2Odds = str_replace('+', '', $a_sFighter2Odds);
+            $this->team2_odds = str_replace('+', '', $team2_odds);
         }
 
-        $this->sDate = $a_sDate;
+        $this->date = $date;
     }
 
     public function getFightID()
     {
-        return $this->iFightID;
+        return $this->matchup_id;
     }
 
     public function getBookieID()
     {
-        return $this->iBookieID;
+        return $this->bookie_id;
     }
 
     public function getDate()
     {
-        return $this->sDate;
+        return $this->date;
     }
 
-    /*
-    @deprecated Use getOdds(teamNum) instead
-    */
-    public function getFighterOdds($a_iFighter)
+    public function getFighterOddsAsDecimal(int $team_num, bool $no_rounding = false): float // No rounding is actually not really no rounding but rather up to 5 decimals. Should be enough
     {
-        switch ($a_iFighter) {
-            case 1: return $this->sFighter1Odds;
-                break;
-            case 2: return $this->sFighter2Odds;
-                break;
-            default: return 0;
-        }
-    }
-
-    /**
-     * No rounding is actually not really no rounding but rather up to 5 decimals. Should be enough
-     */
-    public function getFighterOddsAsDecimal($a_iFighter, $a_bNoRounding = false)
-    {
-        $iOdds = $this->getFighterOdds($a_iFighter);
-        $fOdds = 0;
-        if ($iOdds == 100) {
+        $moneyline_odds = $this->getOdds($team_num);
+        $decimal_odds = 0;
+        if ($moneyline_odds == 100) {
             return 2.0;
-        } elseif ($iOdds > 0) {
-            if ($a_bNoRounding == true) {
-                $fOdds = round((($iOdds / 100) + 1) * 100000) / 100000;
+        } elseif ($moneyline_odds > 0) {
+            if ($no_rounding == true) {
+                $decimal_odds = round((($moneyline_odds / 100) + 1) * 100000) / 100000;
             } else {
-                $fOdds = round((($iOdds / 100) + 1) * 100) / 100;
+                $decimal_odds = round((($moneyline_odds / 100) + 1) * 100) / 100;
             }
         } else {
-            $iOdds = substr($iOdds, 1);
-            if ($a_bNoRounding == true) {
-                $fOdds = round(((100 / $iOdds) + 1) * 100000) / 100000;
+            $moneyline_odds = substr($moneyline_odds, 1);
+            if ($no_rounding == true) {
+                $decimal_odds = round(((100 / $moneyline_odds) + 1) * 100000) / 100000;
             } else {
-                $fOdds = round(((100 / $iOdds) + 1) * 100) / 100;
+                $decimal_odds = round(((100 / $moneyline_odds) + 1) * 100) / 100;
             }
         }
-        return $fOdds;
+        return $decimal_odds;
     }
 
-    /**
-     * Returns a string representation of the odds.
-     * Should only be used for presentation and not for calculations
-     */
-    public function getFighterOddsAsString($a_iFighter)
+    public function getFighterOddsAsString(int $team_num): string
     {
-        $sOdds = $this->getFighterOdds($a_iFighter);
-        if ($sOdds == 0) {
+        $odds = $this->getOdds($team_num);
+        if ($odds == 0) {
             return 'error';
-        } elseif ($sOdds > 0) {
-            return '+' . $sOdds;
+        } elseif ($odds > 0) {
+            return '+' . $odds;
         } else {
-            return $sOdds;
+            return $odds;
         }
     }
 
-    public function equals($a_oFightOdds)
+    public function equals($other_obj)
     {
-        $bEquals = ($this->iFightID == $a_oFightOdds->getFightID() &&
-                $this->iBookieID == $a_oFightOdds->getBookieID() &&
-                $this->sFighter1Odds == $a_oFightOdds->getFighterOdds(1) &&
-                $this->sFighter2Odds == $a_oFightOdds->getFighterOdds(2));
-        return $bEquals;
+        return ($this->matchup_id == $other_obj->getFightID() &&
+            $this->bookie_id == $other_obj->getBookieID() &&
+            $this->team1_odds == $other_obj->getOdds(1) &&
+            $this->team2_odds == $other_obj->getOdds(2));
     }
 
 
-    public function getOdds($a_iTeamNumber)
+    public function getOdds($team_num)
     {
-        switch ($a_iTeamNumber) {
-            case 1: return $this->sFighter1Odds;
-                break;
-            case 2: return $this->sFighter2Odds;
-                break;
-            default: return 0;
+        if ($team_num == 1) {
+            return $this->team1_odds;
+        }
+        if ($team_num == 2) {
+            return $this->team2_odds;
+        }
+        return 0;
+    }
+
+    public static function convertOddsEUToUS($decimal_odds)
+    {
+        $decimal_odds--;
+        if ($decimal_odds < 1) {
+            return '-' . round((1 / $decimal_odds) * 100);
+        } else { //(decimal_odds >= 1)
+            return round($decimal_odds * 100);
         }
     }
 
-    public static function convertOddsEUToUS($a_iOdds)
+    public static function moneylineToDecimal($moneyline, bool $no_rounding = false): float
     {
-        $a_iOdds--;
-        if ($a_iOdds < 1) {
-            return '-' . round((1 / $a_iOdds) * 100);
-        } else { //(a_iOdds >= 1)
-            return round($a_iOdds * 100);
-        }
-    }
-
-    /*
-    @deprecated Use decimalToMoneyline(decimal) instead
-    */
-    public static function moneylineToDecimal($a_iMoneyline, $a_bNoRounding = false)
-    {
-        $fOdds = 0;
-        if ($a_iMoneyline == 100) {
+        $decimal_odds = 0;
+        if ($moneyline == 100) {
             return 2.0;
-        } elseif ($a_iMoneyline > 0) {
-            if ($a_bNoRounding == true) {
-                $fOdds = round((($a_iMoneyline / 100) + 1) * 100000) / 100000;
+        } elseif ($moneyline > 0) {
+            if ($no_rounding == true) {
+                $decimal_odds = round((($moneyline / 100) + 1) * 100000) / 100000;
             } else {
-                $fOdds = round((($a_iMoneyline / 100) + 1) * 100) / 100;
+                $decimal_odds = round((($moneyline / 100) + 1) * 100) / 100;
             }
         } else {
-            $a_iMoneyline = substr($a_iMoneyline, 1);
-            if ($a_bNoRounding == true) {
-                $fOdds = round(((100 / $a_iMoneyline) + 1) * 100000) / 100000;
+            $moneyline = substr($moneyline, 1);
+            if ($no_rounding == true) {
+                $decimal_odds = round(((100 / $moneyline) + 1) * 100000) / 100000;
             } else {
-                $fOdds = round(((100 / $a_iMoneyline) + 1) * 100) / 100;
+                $decimal_odds = round(((100 / $moneyline) + 1) * 100) / 100;
             }
         }
-        return $fOdds;
+        return $decimal_odds;
     }
 
-    public static function decimalToMoneyline($a_fDecimal)
+    public static function decimalToMoneyline($decimal_val)
     {
-        $a_fDecimal--;
-        if ($a_fDecimal < 1) {
-            return '-' . round((1 / $a_fDecimal) * 100);
-        } else { //(a_iOdds >= 1)
-            return round($a_fDecimal * 100);
+        $decimal_val--;
+        if ($decimal_val < 1) {
+            return '-' . round((1 / $decimal_val) * 100);
+        } else { //(decimal_val >= 1)
+            return round($decimal_val * 100);
         }
     }
 }

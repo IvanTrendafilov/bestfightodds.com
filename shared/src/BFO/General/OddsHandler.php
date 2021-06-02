@@ -78,7 +78,7 @@ class OddsHandler
         return OddsDB::getBestPropOddsForMatchup($matchup_id, $proptype_id, $team_num);
     }
 
-    public static function getAllPropOddsForMatchupPropType($matchup_id, $a_iBookieID, $proptype_id, $team_num)
+    public static function getAllPropOddsForMatchupPropType($matchup_id, $a_iBookieID, $proptype_id, $team_num): array
     {
         return OddsDB::getAllPropOddsForMatchupPropType($matchup_id, $a_iBookieID, $proptype_id, $team_num);
     }
@@ -121,17 +121,17 @@ class OddsHandler
         return new PropBet($matchup_id, -1, '', ($prop_side == 1 ? $odds_total : 0), '', ($prop_side == 2 ? $odds_total : 0), $proptype_id, -1, $team_num);
     }
 
-    public static function getOpeningOddsForMatchup($matchup_id)
+    public static function getOpeningOddsForMatchup(int $matchup_id): ?FightOdds
     {
         return OddsDB::getOpeningOddsForMatchup($matchup_id);
     }
 
-    public static function getOpeningOddsForProp($matchup_id, $proptype_id, $team_num)
+    public static function getOpeningOddsForProp(int $matchup_id, int $proptype_id, int $team_num): ?PropBet
     {
         return OddsDB::getOpeningOddsForProp($matchup_id, $proptype_id, $team_num);
     }
 
-    public static function getOpeningOddsForPropAndBookie($matchup_id, $proptype_id, $bookie_id, $team_num): ?PropBet
+    public static function getOpeningOddsForPropAndBookie(int $matchup_id, int $proptype_id, int $bookie_id, int $team_num): ?PropBet
     {
         return OddsDB::getOpeningOddsForPropAndBookie($matchup_id, $proptype_id, $bookie_id, $team_num);
     }
@@ -213,7 +213,7 @@ class OddsHandler
         return $return_odds;
     }
 
-    public static function getAllPropOddsForEventPropType($event_id, $bookie_id, $proptype_id)
+    public static function getAllPropOddsForEventPropType($event_id, $bookie_id, $proptype_id): array
     {
         return OddsDB::getAllPropOddsForEventPropType($event_id, $bookie_id, $proptype_id);
     }
@@ -523,7 +523,7 @@ class OddsHandler
             }
 
 
-            $fo_obj = new FightOdds($row['fight_id'], $row['bookie_id'], $row['fighter1_odds'], $row['fighter2_odds'], $row['date']);
+            $fo_obj = new FightOdds((int) $row['fight_id'], (int) $row['bookie_id'], $row['fighter1_odds'], $row['fighter2_odds'], $row['date']);
 
             $return[$row['event_id']][$row['fight_id']][$row['bookie_id']] =
                 [

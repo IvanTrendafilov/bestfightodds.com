@@ -75,7 +75,7 @@ class AlertDB
         }
 
         if ($odds_obj != null) {
-            if ($odds_obj->getFighterOdds($alert_obj->getFighter()) >= $alert_obj->getLimit()) {
+            if ($odds_obj->getOdds($alert_obj->getFighter()) >= $alert_obj->getLimit()) {
                 return -7;
             }
         }
@@ -146,12 +146,11 @@ class AlertDB
 
     public static function getReachedAlerts()
     {
-
         //New approach:
         // This query gives all alerts where FO exist. Needs to be updated to check also if condition is met:
         // select * from alerts a left join (select fight_id, bookie_id, MAX(date) AS maxdate from fightodds group by bookie_id) fo on a.fight_id = fo.fight_id where fo.maxdate is not null;
 
-        $reached_alerts = array();
+        $reached_alerts = [];
 
         $alerts = AlertDB::getAllAlerts();
         foreach ($alerts as $alert) {
@@ -164,7 +163,7 @@ class AlertDB
                 $odds_obj = EventHandler::getLatestOddsForFightAndBookie($alert->getFightID(), $alert->getBookieID());
             }
 
-            if ($odds_obj != null && $odds_obj->getFighterOdds($alert->getFighter()) >= $alert->getLimit()) {
+            if ($odds_obj != null && $odds_obj->getOdds($alert->getFighter()) >= $alert->getLimit()) {
                 //Match
                 $reached_alerts[] = $alert;
             }
@@ -182,9 +181,9 @@ class AlertDB
 						AND LEFT(e.date,10) < LEFT((NOW() - INTERVAL 1 HOUR), 10);';
 
         $result = DBTools::doQuery($query);
-        $alerts = array();
+        $alerts = [];
         while ($row = mysqli_fetch_array($result)) {
-            $alerts[] = new Alert($row['email'], $row['fight_id'], $row['fighter'], $row['bookie_id'], $row['odds'], $row['id'], $row['odds_type']);
+            $alerts[] = new Alert((string) $row['email'], (int) $row['fight_id'], (int) $row['fighter'], (int) $row['bookie_id'], (int) $row['odds'], (int) $row['id'], (int) $row['odds_type']);
         }
 
         return $alerts;
@@ -195,10 +194,10 @@ class AlertDB
         $query = 'SELECT id, email, fight_id, fighter, bookie_id, odds, odds_type FROM alerts ORDER BY id ASC';
 
         $result = DBTools::doQuery($query);
-        $alerts = array();
+        $alerts = [];
 
         while ($row = mysqli_fetch_array($result)) {
-            $alerts[] = new Alert($row['email'], $row['fight_id'], $row['fighter'], $row['bookie_id'], $row['odds'], $row['id'], $row['odds_type']);
+            $alerts[] = new Alert((string) $row['email'], (int) $row['fight_id'], (int) $row['fighter'], (int) $row['bookie_id'], (int) $row['odds'], (int) $row['id'], (int) $row['odds_type']);
         }
 
         return $alerts;

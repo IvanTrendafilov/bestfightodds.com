@@ -167,7 +167,7 @@ class ParserJob
                             //Prop - All other
                             foreach ($cEvent->Bet as $cBet) {
                                 if (
-                                    ParseTools::checkCorrectOdds((string) $cBet->Price)
+                                    OddsTools::checkCorrectOdds((string) $cBet->Price)
                                     && !(intval($cBet->Price) < -9000)
                                 ) {
                                     $oTempProp = new ParsedProp(

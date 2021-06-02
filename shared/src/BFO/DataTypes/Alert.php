@@ -9,41 +9,32 @@ use BFO\Utils\OddsTools;
  */
 class Alert
 {
-    private $sEmail;
-    private $iFightID;
-    private $iFighter; //1 or 2
-    private $iBookieID; //-1 for all
-    private $iLimit; //In moneyline format (-100, +150, ..)
-    private $iID;
-    private $iOddsType; //1 = Moneyline, 2 = Decimal, 3 = Return on.., 4 = Fraction
+    private int $id;
+    private string $recipient_email;
+    private int $matchup_id;
+    private int $team_num; //1 or 2
+    private int $bookie_id; //-1 for all
+    private int $limit; //In moneyline format (-100, +150, ..)
+    
+    private int $odds_format; //1 = Moneyline, 2 = Decimal, 3 = Return on.., 4 = Fraction
 
-    /**
-     * Creates a new Alert object
-     *
-     * @param string $a_sEmail E-mail
-     * @param int $a_iFightID Fight ID
-     * @param int $a_iFighter Fighter number (1 or 2)
-     * @param int $a_iBookieID Bookie ID
-     * @param int $a_iLimit Limit
-     * @param int $a_iID ID
-     */
-    public function __construct($recipient_email, $matchup_id, $team_id, $bookie_id, $odds_limit, $alert_id = -1, $odds_format = 1)
+    public function __construct(string $recipient_email, int $matchup_id, int $team_id, int $bookie_id, mixed $odds_limit, int $alert_id = -1, int $odds_format = 1)
     {
         if (strtoupper($odds_limit) == 'EV' || strtoupper($odds_limit) == 'EVEN' || $odds_limit == '-100') {
             $odds_limit = '100';
         }
 
-        $this->sEmail = trim($recipient_email);
-        $this->iFightID = $matchup_id;
-        $this->iFighter = $team_id;
-        $this->iOddsType = $odds_format;
-        $this->iID = $alert_id;
-        $this->iLimit = $odds_limit;
+        $this->recipient_email = trim($recipient_email);
+        $this->matchup_id = $matchup_id;
+        $this->team_num = $team_id;
+        $this->odds_format = $odds_format;
+        $this->id = $alert_id;
+        $this->limit = intval($odds_limit);
 
         if (is_numeric($bookie_id)) {
-            $this->iBookieID = $bookie_id;
+            $this->bookie_id = $bookie_id;
         } else {
-            $this->iBookieID = -1;
+            $this->bookie_id = -1;
         }
     }
 
@@ -52,9 +43,9 @@ class Alert
      *
      * @return string E-mail adress of the user who created the alert
      */
-    public function getEmail()
+    public function getEmail(): string
     {
-        return $this->sEmail;
+        return $this->recipient_email;
     }
 
     /**
@@ -62,9 +53,9 @@ class Alert
      *
      * @return int Fight ID
      */
-    public function getFightID()
+    public function getFightID(): int
     {
-        return $this->iFightID;
+        return $this->matchup_id;
     }
 
     /**
@@ -72,29 +63,19 @@ class Alert
      *
      * @return int Fighter number
      */
-    public function getFighter()
+    public function getFighter(): int
     {
-        return $this->iFighter;
+        return $this->team_num;
     }
 
-    /**
-     * Get the bookie ID that the alert has been created for
-     *
-     * @return int Bookie ID
-     */
-    public function getBookieID()
+    public function getBookieID(): int
     {
-        return $this->iBookieID;
+        return $this->bookie_id;
     }
 
-    /**
-     * Get the limit that should be reached for the alert to be issued
-     *
-     * @return int Limit
-     */
-    public function getLimit()
+    public function getLimit(): int
     {
-        return $this->iLimit;
+        return $this->limit;
     }
 
     /**
@@ -104,15 +85,15 @@ class Alert
      */
     public function getLimitAsString()
     {
-        $sOdds = $this->iLimit;
-        if ($sOdds == 0) {
+        $odds = $this->limit;
+        if ($odds == 0) {
             return 'error';
-        } elseif ($sOdds == 100) {
+        } elseif ($odds == 100) {
             return 'EV';
-        } elseif ($sOdds > 0) {
-            return '+' . $sOdds;
+        } elseif ($odds > 0) {
+            return '+' . $odds;
         } else {
-            return $sOdds;
+            return $odds;
         }
     }
 
@@ -123,7 +104,7 @@ class Alert
      */
     public function getID()
     {
-        return $this->iID;
+        return $this->id;
     }
 
     /**
@@ -134,6 +115,6 @@ class Alert
      */
     public function getOddsType()
     {
-        return $this->iOddsType;
+        return $this->odds_format;
     }
 }

@@ -102,24 +102,24 @@ class EventHandler
     {
         //Validate input
         if (
-            $odds_obj->getFightID() == '' || !is_numeric($odds_obj->getFightID()) ||
-            $odds_obj->getBookieID() == '' || !is_numeric($odds_obj->getBookieID()) ||
-            $odds_obj->getFighterOdds(1) == '' || !is_numeric($odds_obj->getFighterOdds(1)) ||
-            $odds_obj->getFighterOdds(2) == '' || !is_numeric($odds_obj->getFighterOdds(2))
+            empty($odds_obj->getFightID()) || !is_numeric($odds_obj->getFightID()) ||
+            empty($odds_obj->getBookieID()) || !is_numeric($odds_obj->getBookieID()) ||
+            empty($odds_obj->getOdds(1)) || !is_numeric($odds_obj->getOdds(1)) ||
+            empty($odds_obj->getOdds(2)) || !is_numeric($odds_obj->getOdds(2))
         ) {
             return false;
         }
         //Validate that odds is not in range -99 => +99
         if (
-            (intval($odds_obj->getFighterOdds(1)) >= -99 && intval($odds_obj->getFighterOdds(1) <= 99)) ||
-            (intval($odds_obj->getFighterOdds(2)) >= -99 && intval($odds_obj->getFighterOdds(2) <= 99))
+            (intval($odds_obj->getOdds(1)) >= -99 && intval($odds_obj->getOdds(1) <= 99)) ||
+            (intval($odds_obj->getOdds(2)) >= -99 && intval($odds_obj->getOdds(2) <= 99))
         ) {
             return false;
         }
 
         //Validate that odds is not positive on both sides (=surebet, most likely invalid)
         if (
-            intval($odds_obj->getFighterOdds(1)) >= 0 && intval($odds_obj->getFighterOdds(2) >= 0)
+            intval($odds_obj->getOdds(1)) >= 0 && intval($odds_obj->getOdds(2) >= 0)
         ) {
             return false;
         }
@@ -266,17 +266,17 @@ class EventHandler
             return null;
         }
         if (sizeof($odds_col) == 1) {
-            return new FightOdds($matchup_id, -1, ($team_no == 1 ? $odds_col[0]->getFighterOdds($team_no) : 0), ($team_no == 2 ? $odds_col[0]->getFighterOdds($team_no) : 0), -1);
+            return new FightOdds((int) $matchup_id, -1, ($team_no == 1 ? $odds_col[0]->getOdds($team_no) : 0), ($team_no == 2 ? $odds_col[0]->getOdds($team_no) : 0), -1);
         }
         $odds_total = 0;
         foreach ($odds_col as $odds_obj) {
-            $current_odds = $odds_obj->getFighterOdds($team_no);
+            $current_odds = $odds_obj->getOdds($team_no);
             $odds_total += $current_odds < 0 ? ($current_odds + 100) : ($current_odds - 100);
         }
         $odds_total = round($odds_total / sizeof($odds_col) + ($odds_total < 0 ? -100 : 100));
 
         return new FightOdds(
-            $matchup_id,
+            (int) $matchup_id,
             -1,
             ($team_no == 1 ? $odds_total : 0),
             ($team_no == 2 ? $odds_total : 0),
