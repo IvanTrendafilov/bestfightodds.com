@@ -317,7 +317,7 @@ class EventHandler
      *
      * Type: 0 = matchup, 1 = prop without matchup, 2 = prop without template
      */
-    public static function logUnmatched(string $matchup, int $bookie_id, int $type, string $metadata_col = null): int
+    public static function logUnmatched(string $matchup, int $bookie_id, int $type, array $metadata_col = null): int
     {
         $metadata = serialize($metadata_col);
         return EventDB::logUnmatched($matchup, $bookie_id, $type, $metadata);
