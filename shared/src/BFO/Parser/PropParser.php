@@ -192,14 +192,12 @@ class PropParser
             $template_variables = $template->getPropVariables();
         }
         //Check that prop and template have the same number of variables/values
-        $prop_values = $parsed_prop->getPropValues();
+        $prop_matchup_values = $parsed_prop->getPropValues();
 
-        if (count($prop_values) != count($template_variables)) {
-            $this->logger->error('---Template variable count (' . count($template_variables) . ') does not match prop values count (' . count($prop_values) . '). Not good, check template.');
+        if (count($prop_matchup_values) != count($template_variables)) {
+            $this->logger->error('---Template variable count (' . count($template_variables) . ') does not match prop values count (' . count($prop_matchup_values) . '). Not good, check template.');
             return null;
         }
-
-        $prop_matchup_values = $parsed_prop->getPropValues();
 
         //Loop through the parsed prop values and determine fields type. Default is full name
         $new_fieldstype_id = $this->determineFieldsType($prop_matchup_values);
@@ -383,71 +381,69 @@ class PropParser
         return $matchups;
     }
 
-    private function matchPropToEvent($a_oProp, $a_oTemplate)
+    private function matchPropToEvent($parsed_prop, $template)
     {
         $template_variables = [];
-        if ($a_oTemplate->isNegPrimary()) {
-            $template_variables = $a_oTemplate->getNegPropVariables();
+        if ($template->isNegPrimary()) {
+            $template_variables = $template->getNegPropVariables();
         } else {
-            $template_variables = $a_oTemplate->getPropVariables();
+            $template_variables = $template->getPropVariables();
         }
 
         //Check that prop and template have the same number of variables/values
-        $aPropValues = $a_oProp->getPropValues();
+        $parsed_event_values = $parsed_prop->getPropValues();
 
-        if (count($aPropValues) != count($template_variables)) {
-            $this->logger->error('---Template variable count (' . count($template_variables) . ') does not match prop values count (' . count($aPropValues) . '). Not good, check template.');
+        if (count($parsed_event_values) != count($template_variables)) {
+            $this->logger->error('---Template variable count (' . count($template_variables) . ') does not match prop values count (' . count($parsed_event_values) . '). Not good, check template.');
             return null;
         }
 
-        $aParsedEvent = $a_oProp->getPropValues();
-        sort($aParsedEvent);
+        sort($parsed_event_values);
 
-        $oFoundEvent = null;
-        $iFoundEventID = null;
-        $fFoundSim = 0; //Used to compare fsims if two matchups are found for the same prop
+        $found_event = null;
+        $found_event_id = null;
+        $found_fsim = 0; //Used to compare fsims if two matchups are found for the same prop
 
-        foreach ($this->events as $oEvent) {
+        foreach ($this->events as $event) {
             //Compare the values fetched from the prop with the stored matchup
-            $bFound = false;
-            $fNewSim = 0;
-            similar_text(strtoupper($oEvent->getName()), $aParsedEvent[0], $fSim1);
-            similar_text(substr(strtoupper($oEvent->getName()), 0, strpos($oEvent->getName(), ':')), $aParsedEvent[0], $fSim2);
-            $fSim = ($fSim1 > $fSim2 ? $fSim1 : $fSim2);
+            $found = false;
+            $new_fsim = 0;
+            similar_text(strtoupper($event->getName()), $parsed_event_values[0], $fsim1);
+            similar_text(substr(strtoupper($event->getName()), 0, strpos($event->getName(), ':')), $parsed_event_values[0], $fsim2);
+            $fsim = ($fsim1 > $fsim2 ? $fsim1 : $fsim2);
 
-            //DEBUG:
-            $this->logger->debug("Checking: " . $oEvent->getName() . " _and " . substr(strtoupper($oEvent->getName()), 0, strpos($oEvent->getName(), ':')) . " vs " . $aParsedEvent[0] . " fsim:" . $fSim);
+            $this->logger->debug("Checking: " . $event->getName() . " _and " . substr(strtoupper($event->getName()), 0, strpos($event->getName(), ':')) . " vs " . $parsed_event_values[0] . " fsim:" . $fsim);
 
-            if ($fSim > 90) {
-                $fNewSim = $fSim;
-                $bFound = true;
+            if ($fsim > 90) {
+                $new_fsim = $fsim;
+                $found = true;
             } else {
-                $bFound = false;
+                $found = false;
             }
 
-            if ($bFound == true) {
-                if ($oFoundEvent != null) {
-                    $this->logger->info('---Found multiple matches for prop values. Comparing fsims, challenger: ' . $oEvent->getName() . ' ' . $oEvent->getID() . ' (' . $fNewSim . ') and current: ' . $oFoundEvent->getName() . ' ' . $oFoundEvent->getID() . ' (' . $fFoundSim . ')');
-                    if ($fNewSim > $fFoundSim) {
-                        $oFoundEvent = $oEvent;
-                        $iFoundEventID = $oFoundEvent->getID();
-                        $fFoundSim = $fNewSim;
-                        $this->logger->info('----Challenger won, changing matched to new one: ' . $iFoundEventID);
-                    } elseif ($fNewSim == $fFoundSim) {
+            if ($found) {
+                if ($found_event) {
+                    $this->logger->info('---Found multiple matches for prop values. Comparing fsims, challenger: ' . $event->getName() . ' ' . $event->getID() . ' (' . $new_fsim . ') and current: ' . $found_event->getName() . ' ' . $found_event->getID() . ' (' . $found_fsim . ')');
+                    if ($new_fsim > $found_fsim) {
+                        $found_event = $event;
+                        $found_event_id = $found_event->getID();
+                        $found_fsim = $new_fsim;
+                        $this->logger->info('----Challenger won, changing matched to new one: ' . $found_event_id);
+                    } elseif ($new_fsim == $found_fsim) {
                         $this->logger->info('----Fsims are identical, cannot determine winner. Bailing..');
                         return array('event' => null);
                     } else {
                         $this->logger->info('----Current won. Sticking with current');
                     }
                 } else {
-                    $oFoundEvent = $oEvent;
-                    $iFoundEventID = $oFoundEvent->getID();
-                    $fFoundSim = $fNewSim;
+                    $found_event = $event;
+                    $found_event_id = $found_event->getID();
+                    $found_fsim = $new_fsim;
                 }
             }
         }
 
-        return array('event_id' => $iFoundEventID);
+        return array('event_id' => $found_event_id);
     }
 
     private function addAltNameMatchupsToMatchup(Fight $matchup): array
