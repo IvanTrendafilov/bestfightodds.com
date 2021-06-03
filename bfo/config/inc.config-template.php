@@ -62,6 +62,7 @@ define('PARSE_MOVEMATCHUPS', false); //Used to specify if odds job should move m
 define('PARSE_USE_DATE_EVENTS', false); //If we are using generic dates as events (e.g. for PBO where no named events are used)
 define('PARSE_MATCHUP_TZ_OFFSET', 0);
 define('PARSE_FUTURESEVENT_ID', 197); //Used to identify the event that holds all future (that cant be linked to a specific event) matchups
+define('PARSE_REMOVE_EMPTY_MATCHUPS', false); //Used to specify if OddsJob should remove empty (no odds) upcoming matchups automatically
 
 /* Twitter  */
 define('TWITTER_ENABLED', true);

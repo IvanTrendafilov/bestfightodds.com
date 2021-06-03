@@ -216,6 +216,7 @@ class MatchupCreator
             } else {
                 $new_matchup = new Fight(0, $team1, $team2, $matched_event->getID());
             }
+            $new_matchup->setCreateSource(1);
 
             $id = EventHandler::createMatchup($new_matchup);
             if ($id) {

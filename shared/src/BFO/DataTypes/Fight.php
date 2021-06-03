@@ -20,6 +20,8 @@ class Fight
     private bool $is_future = false;
     private array $metadata;
 
+    private int $create_source = 0;
+
     public function __construct(int $id, string $team1_name, string $team2_name, int $event_id)
     {
         $this->id = $id;
@@ -226,5 +228,19 @@ class Fight
     public function getMetadata(mixed $attribute): ?string
     {
         return $this->metadata[(string) $attribute] ?? null;
+    }
+
+    //0 = Unspecified, 1 = Automatic, 2 = Manual
+    public function setCreateSource(int $source): void
+    {
+        if ($source >= 0 && $source <= 2) {
+            $this->create_source = $source;
+        }
+    }
+
+    //0 = Unspecified, 1 = Automatic, 2 = Manual
+    public function getCreateSource(): int
+    {
+        return $this->create_source;
     }
 }

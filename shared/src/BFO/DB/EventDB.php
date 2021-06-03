@@ -50,7 +50,7 @@ class EventDB
         return $found_events;
     }
 
-    public static function getMatchups($future_matchups_only = false, $only_with_odds = false, $event_id = null, $matchup_id = null, $only_without_odds = false, $team_id = null): array
+    public static function getMatchups($future_matchups_only = false, $only_with_odds = false, $event_id = null, $matchup_id = null, $only_without_odds = false, $team_id = null, $create_source = null): array
     {
         $extra_where = '';
         $extra_where_metadata = '';
@@ -75,6 +75,12 @@ class EventDB
                         ':metadata_team1_id' =>  $team_id, ':metadata_team2_id' => $team_id];
         }
 
+        //0 = Unspecified, 1 = Automatic, 2 = Manual
+        if ($create_source) {
+            $extra_where .= ' AND mca.source = :mca_source ';
+            $params = [':mca_source' => $create_source];
+        }
+
         $sorting = 'ORDER BY f.is_mainevent DESC, gametime DESC, latest_date ASC';
 
         if ($team_id) { //Alternative sorting when fetching a teams matchups
@@ -83,7 +89,7 @@ class EventDB
 
         $query = 'SELECT f.id, f1.name AS fighter1_name, f2.name AS fighter2_name, f.event_id, f1.id AS fighter1_id, f2.id AS fighter2_id, f.is_mainevent as is_mainevent, 
                         (SELECT MIN(date) FROM fightodds fo WHERE fo.fight_id = f.id) AS latest_date, m.mvalue as gametime, m.max_value as max_gametime, m.min_value as min_gametime,
-                        LEFT(e.date, 10) >= LEFT((NOW() - INTERVAL ' . GENERAL_GRACEPERIOD_SHOW . ' HOUR), 10) AS is_future 
+                        LEFT(e.date, 10) >= LEFT((NOW() - INTERVAL ' . GENERAL_GRACEPERIOD_SHOW . ' HOUR), 10) AS is_future, mca.source AS create_source
                     FROM 
                         events e
                         LEFT JOIN fights f ON e.id = f.event_id 
@@ -97,6 +103,7 @@ class EventDB
                                 GROUP BY matchup_id) m ON f.id = m.matchup_id
                         LEFT JOIN fighters f1 ON f1.id = f.fighter1_id
                         LEFT JOIN fighters f2 ON f2.id = f.fighter2_id
+                        LEFT JOIN matchups_createaudit mca ON f.id = mca.matchup_id 
                     WHERE 1=1 ' . $extra_where . '
                     ' . ($future_matchups_only ? ' AND LEFT(e.date, 10) >= LEFT((NOW() - INTERVAL ' . GENERAL_GRACEPERIOD_SHOW . ' HOUR), 10) ' : '') . '
                     ' . ($only_with_odds ? ' HAVING latest_date IS NOT NULL ' : '') . '
@@ -120,6 +127,10 @@ class EventDB
                 }
                 if (isset($row['min_gametime']) && is_numeric($row['min_gametime'])) {
                     $fight_obj->setMetadata('min_gametime', $row['min_gametime']);
+                }
+
+                if (isset($row['create_source'])) { //0 = Unspecified, 1 = Automatic, 2 = Manual
+                    $fight_obj->setCreateSource((int) $row['create_source']);
                 }
                 $matchups[] = $fight_obj;
             }
@@ -392,6 +403,25 @@ class EventDB
         }
         //Invalidate cache whenever we add a matchup in case some running function is caching matchups
         DBTools::invalidateCache();
+        return $id;
+    }
+
+    public static function addCreateAudit(int $matchup_id, int $source): ?int
+    {
+        $query = 'INSERT INTO matchups_createaudit VALUES (?,?)';
+
+        $params = [$matchup_id, $source];
+        try {
+            $id = PDOTools::insert($query, $params);
+        } catch (\PDOException $e) {
+            if ($e->getCode() == 23000) {
+                throw new \Exception("Duplicate entry", 10);
+            } else {
+                throw new \Exception("Unknown error " . $e->getMessage(), 10);
+            }
+            return null;
+        }
+        //Invalidate cache whenever we add a matchup in case some running function is caching matchups
         return $id;
     }
 

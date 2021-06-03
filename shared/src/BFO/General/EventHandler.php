@@ -37,9 +37,9 @@ class EventHandler
         return $matchups[0] ?? null;
     }
 
-    public static function getMatchups(bool $future_matchups_only = false, bool $only_with_odds = false, int $event_id = null, int $matchup_id = null, bool $only_without_odds = false, int $team_id = null): array
+    public static function getMatchups(bool $future_matchups_only = false, bool $only_with_odds = false, int $event_id = null, int $matchup_id = null, bool $only_without_odds = false, int $team_id = null, int $create_source = null): array
     {
-        return EventDB::getMatchups($future_matchups_only, $only_with_odds, $event_id, $matchup_id, $only_without_odds, $team_id);
+        return EventDB::getMatchups($future_matchups_only, $only_with_odds, $event_id, $matchup_id, $only_without_odds, $team_id, $create_source);
     }
 
     /**
@@ -165,7 +165,12 @@ class EventHandler
             return null;
         }
 
-        return EventDB::createMatchup($team1_id, $team2_id, $fight_obj->getEventID());
+        $id = EventDB::createMatchup($team1_id, $team2_id, $fight_obj->getEventID());
+        if ($id) {
+            //Add create audit trace
+            EventDB::addCreateAudit($id, $fight_obj->getCreateSource());
+        }
+        return $id;
     }
 
     public static function addNewEvent($event)
