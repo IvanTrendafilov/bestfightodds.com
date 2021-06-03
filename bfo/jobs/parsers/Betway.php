@@ -84,16 +84,25 @@ class ParserJob
         foreach ($xml_obj->Event as $cEvent) {
             if ((string) $cEvent['started'] != 'true') //Disable live odds
             {
+                //Set event name
                 $event_name = '';
                 foreach ($cEvent->Keywords->Keyword as $cKeyword) {
-                    if ((string) $cKeyword['type_cname'] == 'league') //Indicates event name
-                    {
+                    if ((string) $cKeyword['type_cname'] == 'league') {
                         $event_name = trim((string) $cKeyword);
                     }
                 }
-                if ($event_name != 'Submission Underground' && $event_name != 'BKFC') {
+
+                if (!in_array($event_name, [
+                    'Submission Underground',
+                    'BKFC',
+                    'HFO'
+                ])) {
                     foreach ($cEvent->Markets->Market as $cMarket) {
-                        if (((string) $cMarket['cname'] == 'fight-winner' || (string) $cMarket['cname'] == 'fight-winner-') && count($cMarket->Outcomes->Outcome) == 2) {
+                        if (((string) $cMarket['cname'] == 'fight-winner'
+                                || (string) $cMarket['cname'] == 'fight-winner-')
+                            && count($cMarket->Outcomes->Outcome) == 2
+                        ) {
+
                             //Regular matchup
                             $oParsedMatchup = new ParsedMatchup(
                                 (string) $cMarket->Outcomes->Outcome[0]->Names->Name,
