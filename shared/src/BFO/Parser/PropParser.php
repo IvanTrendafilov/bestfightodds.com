@@ -192,10 +192,10 @@ class PropParser
             $template_variables = $template->getPropVariables();
         }
         //Check that prop and template have the same number of variables/values
-        $aPropValues = $parsed_prop->getPropValues();
+        $prop_values = $parsed_prop->getPropValues();
 
-        if (count($aPropValues) != count($template_variables)) {
-            $this->logger->error('---Template variable count (' . count($template_variables) . ') does not match prop values count (' . count($aPropValues) . '). Not good, check template.');
+        if (count($prop_values) != count($template_variables)) {
+            $this->logger->error('---Template variable count (' . count($template_variables) . ') does not match prop values count (' . count($prop_values) . '). Not good, check template.');
             return null;
         }
 

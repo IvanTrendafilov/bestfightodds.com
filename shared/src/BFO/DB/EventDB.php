@@ -650,10 +650,10 @@ class EventDB
     /**
      * Writes an entry to the log for unmatched entries from parsing
      */
-    public static function logUnmatched($matchup_string, $bookie_id, $type, $metadata = '')
+    public static function logUnmatched(string $matchup_string, int $bookie_id, int $type, string $metadata = ''): int
     {
-        $query = 'INSERT INTO matchups_unmatched(matchup, bookie_id, type, metadata, log_date) VALUES (?,?,?,?, NOW()) ON DUPLICATE KEY UPDATE log_date = NOW()';
-        $params = array($matchup_string, $bookie_id, $type, $metadata);
+        $query = 'INSERT INTO matchups_unmatched(matchup, bookie_id, type, metadata, log_date) VALUES (?,?,?,?, NOW()) ON DUPLICATE KEY UPDATE log_date = NOW(), metadata = ?';
+        $params = [$matchup_string, $bookie_id, $type, $metadata, $metadata];
         DBTools::doParamQuery($query, $params);
         return DBTools::getAffectedRows();
     }
