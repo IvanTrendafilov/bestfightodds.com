@@ -90,7 +90,8 @@ class ParserJob
 
         foreach ($oXML->EventGroup as $cEventGroup)
         {
-            if (substr((string) $cEventGroup['name'],0,6) == 'Boxing')
+            if (str_starts_with((string) $cEventGroup['name'], 'Boxing') 
+                || str_starts_with((string) $cEventGroup['name'], 'Exhibition Bout'))
             {
                 foreach ($cEventGroup->Event as $cEvent)
                 {

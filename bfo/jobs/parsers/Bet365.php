@@ -59,6 +59,7 @@ class ParserJob extends ParserJobBase
             if (
                 !str_starts_with((string) $eventgroup_node['name'], 'Boxing')
                 && !str_starts_with((string) $eventgroup_node['name'], 'World Super Series')
+                && !str_starts_with((string) $eventgroup_node['name'], 'Exhibition Bout')
             ) {
                 foreach ($eventgroup_node->Event as $event_node) {
                     foreach ($event_node->Market as $market_node) {
