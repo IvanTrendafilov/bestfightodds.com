@@ -538,7 +538,7 @@ class AdminController
 
         /*$aSplit = explode(' vs ', $request->getQueryParams()['input_prop']);
         $oProp = new ParsedProp($aSplit[0], $aSplit[1], '123', '-123');
-        //$oPP = new PropParserV2();
+        //$oPP = new PropParser();
         $oTemplate = $oPP->matchParsedPropToTemplate($_GET['inBookieID'], $oProp);
         if ($oTemplate != null)
         {

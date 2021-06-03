@@ -10,8 +10,9 @@ use BFO\General\TeamHandler;
 use BFO\DataTypes\PropBet;
 use BFO\DataTypes\EventPropBet;
 use BFO\DataTypes\Fight;
+use BFO\DataTypes\PropTemplate;
 
-class PropParserV2
+class PropParser
 {
     private $logger;
     private $matchups;
@@ -32,11 +33,11 @@ class PropParserV2
         $this->events = EventHandler::getEvents(future_events_only: true);
 
         //We will need to check the alt names as well so for each upcoming matchup fetched , fetch the associated altnames for each team and add a new matchup using this
-        $aNewMatchupList = $this->matchups;
-        foreach ($this->matchups as $oMatchupToCheck) {
-            $aNewMatchupList = array_merge($aNewMatchupList, $this->addAltNameMatchupsToMatchup($oMatchupToCheck));
+        $new_matchup_list = $this->matchups;
+        foreach ($this->matchups as $matchup) {
+            $new_matchup_list = array_merge($new_matchup_list, $this->addAltNameMatchupsToMatchup($matchup));
         }
-        $this->matchups = $aNewMatchupList;
+        $this->matchups = $new_matchup_list;
     }
 
     public function matchProps($props)
@@ -84,7 +85,7 @@ class PropParserV2
                 return ['status' => false, 'fail_reason' => 'no_event_found', 'template' => $template];
             }
         } else {
-            $matchup = $this->matchPropToMatchup($prop, $template, true); //Check first with correlation ID enabed
+            $matchup = $this->matchPropToMatchup($prop, $template, true); //Check first with correlation ID enabled
             if (!$matchup['matchup_id']) {
                 $matchup = $this->matchPropToMatchup($prop, $template, false); //Check with correlation ID disabled
                 if (!$matchup['matchup_id']) {
@@ -103,7 +104,7 @@ class PropParserV2
      *   ParsedProp = Howard/Alves goes 3 round distance
      *
      */
-    public function matchPropToTemplate($prop)
+    public function matchPropToTemplate(ParsedProp $prop): ?PropTemplate
     {
         $is_found = false;
         $found_template = null;
@@ -125,11 +126,11 @@ class PropParserV2
             $template_str = str_replace('/', '\/', $template_str);
 
             //Check the template against the prop
-            $propvalue_matches = array();
+            $propvalue_matches = [];
             $found1 = (preg_match('/^' . $template_str . '$/', $prop->getTeamName(1), $propvalue_matches1) > 0);
             $found2 = (preg_match('/^' . $template_str . '$/', $prop->getTeamName(2), $propvalue_matches2) > 0);
             if ($found1 && $found2) {
-                $this->logger->warning('--Both team fields match template. Picking shortest one as it is probably not the negative one: ' .  $prop->getTeamName(1) . ' compared to ' .  $prop->getTeamName(2));
+                $this->logger->info('--Both team fields match template. Picking shortest one as it is probably not the negative one: ' .  $prop->getTeamName(1) . ' compared to ' .  $prop->getTeamName(2));
                 //TEMPORARY HACK FOR PROPTYPE 65. REMOVE WHEN NO ODDS ARE LIVE FOR THIS TYPE
                 if ($template->getPropTypeID() == 65) {
                     $this->logger->warning('---Proptype 65, picking main prop 1 anyway. TODO: Remove this when no odds are live!');
@@ -155,14 +156,14 @@ class PropParserV2
             }
             $is_found = ($found1 || $found2);
 
-            if ($is_found == true) {
+            if ($is_found) {
                 //Check if value is already stored, if so we have multiple templates matching the prop which is not good
-                if ($found_template != null) {
+                if ($found_template) {
                     $this->logger->warning('--Multiple templates matched. Will accept longest one');
                 }
 
                 //Replacing only template if the new one is longer (better match)
-                if ($found_template == null || strlen($template->getTemplate()) > strlen($found_template->getTemplate())) {
+                if (!$found_template || strlen($template->getTemplate()) > strlen($found_template->getTemplate())) {
                     //Remove the first element in the array since that contains the full regexp match
                     array_shift($propvalue_matches);
 
@@ -181,222 +182,221 @@ class PropParserV2
         return $found_template;
     }
 
-    public function matchPropToMatchup($a_oProp, $a_oTemplate, $use_correlation_id = true)
+    public function matchPropToMatchup(ParsedProp $parsed_prop, PropTemplate $template, bool $use_correlation_id = true): array
     {
-        $aTemplateVariables = array();
-        if ($a_oTemplate->isNegPrimary()) {
-            $aTemplateVariables = $a_oTemplate->getNegPropVariables();
+        //Get template variables (e.g. <T>) from the primary side of the prop
+        $template_variables = [];
+        if ($template->isNegPrimary()) {
+            $template_variables = $template->getNegPropVariables();
         } else {
-            $aTemplateVariables = $a_oTemplate->getPropVariables();
+            $template_variables = $template->getPropVariables();
         }
-
         //Check that prop and template have the same number of variables/values
-        $aPropValues = $a_oProp->getPropValues();
+        $aPropValues = $parsed_prop->getPropValues();
 
-        if (count($aPropValues) != count($aTemplateVariables)) {
-            $this->logger->error('---Template variable count (' . count($aTemplateVariables) . ') does not match prop values count (' . count($aPropValues) . '). Not good, check template.');
+        if (count($aPropValues) != count($template_variables)) {
+            $this->logger->error('---Template variable count (' . count($template_variables) . ') does not match prop values count (' . count($aPropValues) . '). Not good, check template.');
             return null;
         }
 
-        $aParsedMatchup = $a_oProp->getPropValues();
+        $prop_matchup_values = $parsed_prop->getPropValues();
 
         //Loop through the parsed prop values and determine fields type. Default is full name
-        $iNewFT = $this->determineFieldsType($aParsedMatchup);
-        $fields_type = $a_oTemplate->getFieldsTypeID();
-        if ($iNewFT != false) {
-            $fields_type = $iNewFT;
+        $new_fieldstype_id = $this->determineFieldsType($prop_matchup_values);
+        $fields_type = $template->getFieldsTypeID();
+        if ($new_fieldstype_id != false) {
+            $fields_type = $new_fieldstype_id;
         }
 
-        sort($aParsedMatchup);
+        sort($prop_matchup_values);
 
+        $matchups_to_check = $this->getMatchupsToCheck($parsed_prop, $use_correlation_id);
+        $matches = $this->comparePropValuesToMatchups($prop_matchup_values, $matchups_to_check, $fields_type);
+
+        $found_matchup_id = null;
+        $found_team_num = null; //Used if we need to find out which team the prop is for as well. Used when matching one single name
+        if (count($matches) >= 1) {
+
+            //If we have multiple matches, ensure that there are not two matchups with the same fsim. If that is the case we bail
+            if (count($matches) > 1) {
+                for ($i = 0; $i < count($matches) - 1; $i++) {
+                    if ($matches[$i]['fsim'] == $matches[$i + 1]['fsim'] && $matches[$i]['matchup_obj']->getID() != $matches[$i + 1]['matchup_obj']->getID()) {
+                        $this->logger->warning('----Two or more matches with identical scores (' . $matches[0]['fsim'] . '): '
+                            . $matches[0]['matchup_obj']->getTeam(1) . '/' . $matches[0]['matchup_obj']->getTeam(2) . ' and '
+                            . $matches[1]['matchup_obj']->getTeam(1) . '/' . $matches[1]['matchup_obj']->getTeam(2)
+                            . ', cannot determine winner. Bailing..');
+                        return array('matchup_id' => null, 'team' => 0);
+                    }
+                }
+            }
+
+            $found_matchup_id = $matches[0]['matchup_obj']->getID();
+            $found_team_num = $matches[0]['found_team_pos'];
+            //Switch team order if the matchup has order changed
+            if ($matches[0]['matchup_obj']->hasOrderChanged()) {
+                if ($found_team_num == 1) {
+                    $found_team_num = 2;
+                } elseif ($found_team_num == 2) {
+                    $found_team_num = 1;
+                }
+            }
+        }
+
+        return ['matchup_id' => $found_matchup_id, 'team' => $found_team_num];
+    }
+
+    private function getMatchupValuesBasedOnFieldType(Fight $matchup, int $fields_type, bool $only_single_lastname, int $specific_team_num = 0): array
+    {
+        $stored_matchup_values = null;
+        switch ($fields_type) {
+                //1 lastname vs lastname (koscheck vs miller)
+            case 1:
+                $stored_matchup_values = array(ParseTools::getLastnameFromName($matchup->getTeam(1), $only_single_lastname), ParseTools::getLastnameFromName($matchup->getTeam(2), $only_single_lastname));
+                break;
+                //2 fullname vs fullname (e.g josh koscheck vs dan miller)
+            case 2:
+                $stored_matchup_values = array($matchup->getTeam(1), $matchup->getTeam(2));
+                break;
+                //3 single lastname (koscheck)
+            case 3:
+                $stored_matchup_values = array(ParseTools::getLastnameFromName($matchup->getTeam($specific_team_num), $only_single_lastname));
+                break;
+                //4 full name (josh koscheck)
+            case 4:
+                $stored_matchup_values = array($matchup->getTeam($specific_team_num));
+                break;
+                //5 first letter.lastname (e.g. j.koscheck)
+            case 5:
+                $initials = ParseTools::getInitialsFromName($matchup->getTeam($specific_team_num));
+                $stored_matchup_values = array($initials[0] . '.' . ParseTools::getLastnameFromName($matchup->getTeam($specific_team_num), $only_single_lastname));
+                break;
+                //6 first letter.lastname vs first letter.lastname (e.g. j.koscheck vs d.miller)
+            case 6:
+                $initials1 = ParseTools::getInitialsFromName($matchup->getTeam(1));
+                $initials2 = ParseTools::getInitialsFromName($matchup->getTeam(2));
+                $stored_matchup_values = array($initials1[0] . '.' . ParseTools::getLastnameFromName($matchup->getTeam(1), $only_single_lastname), $initials2[0] . '.' . ParseTools::getLastnameFromName($matchup->getTeam(2), $only_single_lastname));
+                break;
+                //7 first letter lastname vs first letter lastname (e.g. j koscheck vs d miller)
+            case 7:
+                $initials1 = ParseTools::getInitialsFromName($matchup->getTeam(1));
+                $initials2 = ParseTools::getInitialsFromName($matchup->getTeam(2));
+                $stored_matchup_values = array($initials1[0] . ' ' . ParseTools::getLastnameFromName($matchup->getTeam(1), $only_single_lastname), $initials2[0] . ' ' . ParseTools::getLastnameFromName($matchup->getTeam(2), $only_single_lastname));
+                break;
+                //8 first letter lastname (e.g. j koscheck)
+            case 8:
+                $initials = ParseTools::getInitialsFromName($matchup->getTeam($specific_team_num));
+                $stored_matchup_values = array($initials[0] . ' ' . ParseTools::getLastnameFromName($matchup->getTeam($specific_team_num), $only_single_lastname));
+                break;
+            default:
+                $this->logger->error('---Unknown fields type ID in PropTemplate: ' . $fields_type);
+                return null;
+        }
+
+        sort($stored_matchup_values);
+        return $stored_matchup_values;
+    }
+
+    private function comparePropValuesToMatchups(array $prop_values, array $matchups_to_check, int $fields_type): array
+    {
         //Determine last name composition from parsed matchup (e.g. if last name would be Dos Santos or Santos for Junior Dos Santos)
-        $bOnlyOneLastName = true;
-        if (strpos($aParsedMatchup[0], ' ') !== false || (isset($aParsedMatchup[1]) && strpos($aParsedMatchup[1], ' ') !== false)) {
-            $bOnlyOneLastName = false;
+        $only_single_lastname = true;
+        if (strpos($prop_values[0], ' ') !== false || (isset($prop_values[1]) && strpos($prop_values[1], ' ') !== false)) {
+            $only_single_lastname = false;
         }
 
-        $oFoundMatchup = null;
-        $iFoundMatchupID = null;
-        $iFoundTeam = null; //Used if we need to find out which team the prop is for as well. Used when matching one single name
-        $fFoundSim = 0; //Used to compare fsims if two matchups are found for the same prop
+        $matches = [];
 
-        $aMatchupsToCheck = $this->matchups;
+        if (count($prop_values) == 1) { //One team prop (e.g. Santos wins by submission)
+            foreach ($matchups_to_check as $matchup) {
+                //Check twice, once for each team side
+                for ($i = 1; $i <= 2; $i++) {
+                    $matchup_values = $this->getMatchupValuesBasedOnFieldType($matchup, $fields_type, $only_single_lastname, $i);
+                    //Compare the values fetched from the prop with the stored matchup
+                    similar_text($matchup_values[0], $prop_values[0], $fSim);
+                    $this->logger->debug("Checking: " . $matchup_values[0] . " vs " . $prop_values[0] . " fsim:" . $fSim);
+                    if ($fSim > 87) {
+                        $matches[] = ['matchup_obj' => $matchup, 'fsim' => $fSim, 'found_team_pos' => $i];
+                    }
+                }
+            }
+        } else if (count($prop_values) == 2) { //Two team prop (e.g. Santos/Werdum goes the distance)
+            $fsim_sides = [];
+            //We check this two times, first time X vs Y against A vs B, the second time X vs Y against A vs B
+            foreach ($matchups_to_check as $matchup) {
+                $matchup_values = $this->getMatchupValuesBasedOnFieldType($matchup, $fields_type, $only_single_lastname);
+                $fsim_sides = [];
+                for ($i = 0; $i <= 1; $i++) { //Compare both sides of the prop
+                    //Compare the values fetched from the prop with the stored matchup
+                    similar_text($matchup_values[$i], $prop_values[$i], $fsim_sides[$i]);
+                    $this->logger->debug("Checking: " . $matchup_values[$i] . " vs " . $prop_values[$i] . " fsim:" . $fsim_sides[$i]);
+                }
+                $fSim = min($fsim_sides); //Best sim for this combination
+                if ($fSim > 87) {
+                    $matches[] = ['matchup_obj' => $matchup, 'fsim' => $fSim, 'found_team_pos' => 0];
+                }
+            }
+        }
 
-        if ($use_correlation_id == true) {
+        //Sort by fsim descending
+        usort($matches, function ($a, $b) {
+            return $b['fsim'] <=> $a['fsim'];
+        });
+
+        return $matches;
+    }
+
+
+    private function getMatchupsToCheck(ParsedProp $parsed_prop, bool $use_correlation_id): array
+    {
+        $matchups = $this->matchups;
+        if ($use_correlation_id) {
             //Check if a manual correlation has been created and stored
-            $sSearchProp = ($a_oProp->getMainProp() == 1 ? $a_oProp->getTeamName(1) : $a_oProp->getTeamName(2));
-            $this->logger->debug('--- searching for manual correlation: ' . $sSearchProp . ' for bookie ' . $a_oTemplate->getBookieID());
-            $sFoundCorrMatchup = OddsHandler::getMatchupForCorrelation($a_oTemplate->getBookieID(), $sSearchProp);
-            if ($sFoundCorrMatchup != null) {
-                $this->logger->debug('---- prop has manual correlation stored: ' . $sFoundCorrMatchup);
-                $oPreMatchedMatchup = EventHandler::getMatchup((int) $sFoundCorrMatchup);
-                if ($oPreMatchedMatchup != null) {
-                    $this->logger->debug('----- found stored manual correlation for ' . $sSearchProp . ' : ' . $oPreMatchedMatchup->getID());
-                    $aMatchupsToCheck = array($oPreMatchedMatchup);
+            $prop_name = ($parsed_prop->getMainProp() == 1 ? $parsed_prop->getTeamName(1) : $parsed_prop->getTeamName(2));
+            $this->logger->debug('--- searching for manual correlation: ' . $prop_name . ' for bookie ' . $this->bookie_id);
+            $manual_correlation = OddsHandler::getMatchupForCorrelation($this->bookie_id, $prop_name);
+            if ($manual_correlation) {
+                $this->logger->debug('---- prop has manual correlation stored: ' . $manual_correlation);
+                $matchup_from_correlation = EventHandler::getMatchup((int) $manual_correlation);
+                if ($matchup_from_correlation) {
+                    $this->logger->debug('----- found stored manual correlation for ' . $prop_name . ' : ' . $matchup_from_correlation->getID());
+                    $matchups = [$matchup_from_correlation];
                     //Even though we have prematched the matchup, we still need to add alt name matchups
-                    $aMatchupsToCheck = array_merge($aMatchupsToCheck, $this->addAltNameMatchupsToMatchup($oPreMatchedMatchup));
+                    $matchups = array_merge($matchups, $this->addAltNameMatchupsToMatchup($matchup_from_correlation));
                 }
             } else {
-                $this->logger->debug('---- no stored manual correlation found');
-
                 //Default is we search all upcoming matchups, but if there is a matchup
                 //pre-matched already, we'll just check that
-                if ($a_oProp->getCorrelationID() != '') {
-                    $this->logger->debug('--- prop has correlation id: ' . $a_oProp->getCorrelationID());
-                    $oPreMatchedMatchup = EventHandler::getMatchup((int) ParseTools::getCorrelation($a_oProp->getCorrelationID()));
-                    if ($oPreMatchedMatchup != null) {
-                        $this->logger->debug('--- found stored correlation: ' . $oPreMatchedMatchup->getID());
-                        $aMatchupsToCheck = array($oPreMatchedMatchup);
+                if ($parsed_prop->getCorrelationID() != '') {
+                    $this->logger->debug('--- prop has correlation id: ' . $parsed_prop->getCorrelationID());
+                    $matchup_from_correlation = EventHandler::getMatchup((int) ParseTools::getCorrelation($parsed_prop->getCorrelationID()));
+                    if ($matchup_from_correlation) {
+                        $this->logger->debug('--- found stored correlation: ' . $matchup_from_correlation->getID());
+                        $matchups = [$matchup_from_correlation];
                         //Even though we have prematched the matchup, we still need to add alt name matchups
-                        $aMatchupsToCheck = array_merge($aMatchupsToCheck, $this->addAltNameMatchupsToMatchup($oPreMatchedMatchup));
+                        $matchups = array_merge($matchups, $this->addAltNameMatchupsToMatchup($matchup_from_correlation));
                     } else {
-                        $this->logger->debug('--- no stored correlation found (' . $a_oProp->getCorrelationID() . ')');
+                        $this->logger->debug('--- no stored correlation found (' . $parsed_prop->getCorrelationID() . ')');
                     }
                 }
             }
         }
-
-
-
-
-        //TODO: New Flow to be implemented at some point:
-        //1. Determine if this needs to matchup one or two names (existance of <T> in multiples or only one)
-        //2. Get all name combinations
-        //3. Run through all combinations and gather a list of fsim
-        //4. Sort by fsim
-        //5. If fsim > 87 and multiple, we'll log this but pick the top one. If equal (or maybe even very close), chose the one with longest name
-
-
-        //Apply a loop if we are checking a single name (need to check both fields of getTeam in matchup
-        for ($iY = 1; $iY <= 2; $iY++) {
-            foreach ($aMatchupsToCheck as $oMatchup) {
-                $aStoredMatchup = null;
-                switch ($fields_type) {
-                        //1 lastname vs lastname (koscheck vs miller)
-                    case 1:
-                        $aStoredMatchup = array(ParseTools::getLastnameFromName($oMatchup->getTeam(1), $bOnlyOneLastName), ParseTools::getLastnameFromName($oMatchup->getTeam(2), $bOnlyOneLastName));
-                        $iY = 3; //Increment Y since we do not need to run this more than once
-                        break;
-                        //2 fullname vs fullname (e.g josh koscheck vs dan miller)
-                    case 2:
-                        $aStoredMatchup = array($oMatchup->getTeam(1), $oMatchup->getTeam(2));
-                        $iY = 3; //Increment Y since we do not need to run this more than once
-                        break;
-                        //3 single lastname (koscheck)
-                    case 3:
-                        $aStoredMatchup = array(ParseTools::getLastnameFromName($oMatchup->getTeam($iY), $bOnlyOneLastName));
-                        break;
-                        //4 full name (josh koscheck)
-                    case 4:
-                        $aStoredMatchup = array($oMatchup->getTeam($iY));
-                        break;
-                        //5 first letter.lastname (e.g. j.koscheck)
-                    case 5:
-                        $aInitials = ParseTools::getInitialsFromName($oMatchup->getTeam($iY));
-                        $aStoredMatchup = array($aInitials[0] . '.' . ParseTools::getLastnameFromName($oMatchup->getTeam($iY), $bOnlyOneLastName));
-                        break;
-                        //6 first letter.lastname vs first letter.lastname (e.g. j.koscheck vs d.miller)
-                    case 6:
-                        $aInitials1 = ParseTools::getInitialsFromName($oMatchup->getTeam(1));
-                        $aInitials2 = ParseTools::getInitialsFromName($oMatchup->getTeam(2));
-                        $aStoredMatchup = array($aInitials1[0] . '.' . ParseTools::getLastnameFromName($oMatchup->getTeam(1), $bOnlyOneLastName), $aInitials2[0] . '.' . ParseTools::getLastnameFromName($oMatchup->getTeam(2), $bOnlyOneLastName));
-                        $iY = 3; //Increment Y since we do not need to run this more than once
-                        break;
-
-                        //7 first letter lastname vs first letter lastname (e.g. j koscheck vs d miller)
-                    case 7:
-                        $aInitials1 = ParseTools::getInitialsFromName($oMatchup->getTeam(1));
-                        $aInitials2 = ParseTools::getInitialsFromName($oMatchup->getTeam(2));
-                        $aStoredMatchup = array($aInitials1[0] . ' ' . ParseTools::getLastnameFromName($oMatchup->getTeam(1), $bOnlyOneLastName), $aInitials2[0] . ' ' . ParseTools::getLastnameFromName($oMatchup->getTeam(2), $bOnlyOneLastName));
-                        $iY = 3; //Increment Y since we do not need to run this more than once
-                        break;
-                        //8 first letter lastname (e.g. j koscheck)
-                    case 8:
-                        $aInitials = ParseTools::getInitialsFromName($oMatchup->getTeam($iY));
-                        $aStoredMatchup = array($aInitials[0] . ' ' . ParseTools::getLastnameFromName($oMatchup->getTeam($iY), $bOnlyOneLastName));
-                        break;
-                    default:
-                        $this->logger->error('---Unknown fields type ID in PropTemplate: ' . $fields_type);
-                        return null;
-                }
-
-                sort($aStoredMatchup);
-
-                //Compare the values fetched from the prop with the stored matchup
-                $bFound = false;
-                $fNewSim = 0;
-                for ($iX = 0; $iX < count($aParsedMatchup); $iX++) {
-                    if (($bFound == false && $iX == 0) || ($bFound == true && $iX > 0)) {
-                        similar_text($aStoredMatchup[$iX], $aParsedMatchup[$iX], $fSim);
-                        $this->logger->debug("Checking: " . $aStoredMatchup[$iX] . " vs " . $aParsedMatchup[$iX] . " fsim:" . $fSim);
-
-                        if ($fSim > 87) {
-                            $fNewSim = $fSim;
-                            $bFound = true;
-                        } else {
-                            $bFound = false;
-                        }
-                    }
-                }
-
-                if ($bFound == true) {
-                    //First check if the match we found is just an alt name match for the same matchup
-                    if ($oFoundMatchup != null && $oFoundMatchup->getID() == $oMatchup->getID()) {
-                        //In that case, do nothing
-                    } elseif ($oFoundMatchup != null) {
-                        $this->logger->info('---Found multiple matches for prop values. Comparing fsims, challenger: ' . $oMatchup->getTeamAsString(1) . ' vs ' . $oMatchup->getTeamAsString(2) . ' ' . $oMatchup->getID() . ' (' . $fNewSim . ') and current: ' . $oFoundMatchup->getTeamAsString(1) . ' vs ' . $oFoundMatchup->getTeamAsString(2) . ' ' . $oFoundMatchup->getID() . ' (' . $fFoundSim . ')');
-                        if ($fNewSim > $fFoundSim) {
-                            $oFoundMatchup = $oMatchup;
-                            $iFoundMatchupID = $oFoundMatchup->getID();
-                            $fFoundSim = $fNewSim;
-                            $this->logger->info('----Challenger won, changing matched to new one: ' . $iFoundMatchupID);
-                            $iFoundTeam = ($iY == 3 ? '0' : $iY); //If Y = 3 then team is not relevant, set it to 0
-                        } elseif ($fNewSim == $fFoundSim) {
-                            $this->logger->warning('----Fsims are identical, cannot determine winner. Bailing..');
-                            return array('matchup_id' => null, 'team' => 0);
-                        } else {
-                            $this->logger->info('----Current won. Sticking with current');
-                        }
-                    } else {
-                        $oFoundMatchup = $oMatchup;
-                        $iFoundMatchupID = $oFoundMatchup->getID();
-                        $fFoundSim = $fNewSim;
-                        $iFoundTeam = ($iY == 3 ? '0' : $iY); //If Y = 3 then team is not relevant, set it to 0
-                        //If matchup has switched due to altnames, change the relevant team
-                        if ($oFoundMatchup->hasOrderChanged() == true) {
-                            if ($iFoundTeam == 1) {
-                                $iFoundTeam = 2;
-                            } elseif ($iFoundTeam == 2) {
-                                $iFoundTeam = 1;
-                            }
-                        }
-                    }
-                }
-            }
-
-            //Check if we found a match, then exit loop by setting Y. Kinda ugly..
-            if ($iFoundMatchupID != null) {
-                $iY = 3;
-            }
-        }
-
-        return array('matchup_id' => $iFoundMatchupID, 'team' => $iFoundTeam);
+        return $matchups;
     }
 
     private function matchPropToEvent($a_oProp, $a_oTemplate)
     {
-        $aTemplateVariables = array();
+        $template_variables = [];
         if ($a_oTemplate->isNegPrimary()) {
-            $aTemplateVariables = $a_oTemplate->getNegPropVariables();
+            $template_variables = $a_oTemplate->getNegPropVariables();
         } else {
-            $aTemplateVariables = $a_oTemplate->getPropVariables();
+            $template_variables = $a_oTemplate->getPropVariables();
         }
 
         //Check that prop and template have the same number of variables/values
         $aPropValues = $a_oProp->getPropValues();
 
-        if (count($aPropValues) != count($aTemplateVariables)) {
-            $this->logger->error('---Template variable count (' . count($aTemplateVariables) . ') does not match prop values count (' . count($aPropValues) . '). Not good, check template.');
+        if (count($aPropValues) != count($template_variables)) {
+            $this->logger->error('---Template variable count (' . count($template_variables) . ') does not match prop values count (' . count($aPropValues) . '). Not good, check template.');
             return null;
         }
 
@@ -584,7 +584,6 @@ class PropParserV2
             return false;
         }
     }
-
 
     private function updateMatchedMatchupProp($matched_prop)
     {
