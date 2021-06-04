@@ -230,8 +230,8 @@ class MatchupCreator
                 return null;
             }
         }
-        $this->audit_log->warning("Tried to create old matchup " . $team1 . ' vs ' . $team2 . ' at ' . $matched_event->getName() . ' on ' . $matched_event->getDate() . ' as proposed by ' . $this->bookie_obj->getName() . ' . Also in scheduler: ' . ($in_scheduler['found'] ? 'Yes' : 'No'));
-        $this->logger->warning("- Tried to create old matchup " . $team1 . ' vs ' . $team2 . ' at ' . $matched_event->getName() . ' on ' . $matched_event->getDate() . ' as proposed by ' . $this->bookie_obj->getName() . ' . Also in scheduler: ' . ($in_scheduler['found'] ? 'Yes' : 'No'));
+        $this->audit_log->warning("Tried to create old matchup OR matchup too close to gametime " . $team1 . ' vs ' . $team2 . ' at ' . $matched_event->getName() . ' on ' . $matched_event->getDate() . ' as proposed by ' . $this->bookie_obj->getName() . ' . Also in scheduler: ' . ($in_scheduler['found'] ? 'Yes' : 'No'));
+        $this->logger->warning("- Tried to create old matchup OR matchup too close to gametime " . $team1 . ' vs ' . $team2 . ' at ' . $matched_event->getName() . ' on ' . $matched_event->getDate() . ' as proposed by ' . $this->bookie_obj->getName() . ' . Also in scheduler: ' . ($in_scheduler['found'] ? 'Yes' : 'No'));
         return null;
     }
 }
