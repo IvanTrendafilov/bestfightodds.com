@@ -66,17 +66,18 @@ class MatchupCreator
             $date_obj = $date_obj->setTimestamp($matchup_time);
 
             //Matchup time here is in UTC as captured by parsers. We offset by configured value to adjust from UTC to local time. e.g. west coast -7 for BFO or UTC 0 for PBO
+
+            $event_adjust_date_obj = clone $date_obj;
             if (PARSE_MATCHUP_TZ_OFFSET < 0) {
-                $date_obj->sub(new \DateInterval('PT' . abs(PARSE_MATCHUP_TZ_OFFSET) . 'H'));
+                $event_adjust_date_obj->sub(new \DateInterval('PT' . abs(PARSE_MATCHUP_TZ_OFFSET) . 'H'));
 
             } elseif (PARSE_MATCHUP_TZ_OFFSET > 0) {
-                $date_obj->add(new \DateInterval('PT' . PARSE_MATCHUP_TZ_OFFSET . 'H'));
+                $event_adjust_date_obj->add(new \DateInterval('PT' . PARSE_MATCHUP_TZ_OFFSET . 'H'));
             }
 
-            $matched_event = $this->getMatchingEvent($event_name, $date_obj, $in_scheduler);
-
+            $matched_event = $this->getMatchingEvent($event_name, $event_adjust_date_obj, $in_scheduler);
             if ($matched_event == null) {
-                $matched_event = $this->tryToCreateEvent($event_name, $matchup_time, $date_obj, $in_scheduler);
+                $matched_event = $this->tryToCreateEvent($event_name, $matchup_time, $event_adjust_date_obj, $in_scheduler);
             }
 
             if ($matched_event != null) {
