@@ -37,7 +37,8 @@
                                     body: JSON.stringify({
                                         event_id: body.event_id,
                                         team1_name: structure.inteam1,
-                                        team2_name: structure.inteam2
+                                        team2_name: structure.inteam2,
+                                        create_source: 1
                                     })
                                 };
                                 fetch('/cnadm/api/matchups', opts).then(function(response) {

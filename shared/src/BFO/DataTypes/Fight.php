@@ -230,7 +230,7 @@ class Fight
         return $this->metadata[(string) $attribute] ?? null;
     }
 
-    //0 = Unspecified, 1 = Automatic, 2 = Manual
+    //0 = Unspecified, 1 = From Sportsbook, 2 = Manual
     public function setCreateSource(int $source): void
     {
         if ($source >= 0 && $source <= 2) {
@@ -238,7 +238,7 @@ class Fight
         }
     }
 
-    //0 = Unspecified, 1 = Automatic, 2 = Manual
+    //0 = Unspecified, 1 = From Sportsbook, 2 = Manual
     public function getCreateSource(): int
     {
         return $this->create_source;
