@@ -49,7 +49,7 @@ class ParserJob extends ParserJobBase
     {
         $xml = simplexml_load_string($content['all']);
 
-        if ($xml == false) {
+        if (!$xml) {
             $this->logger->warning("Warning: XML broke!!");
         }
 
@@ -78,8 +78,8 @@ class ParserJob extends ParserJobBase
                             $parsed_matchup->setCorrelationID((string) $event_node['ID']);
 
                             //Add time of matchup as metadata
-                            $oGameDate = DateTime::createFromFormat('d/m/y H:i:s', (string) $market_node['StartTime'], new DateTimeZone('Europe/London'));
-                            $parsed_matchup->setMetaData('gametime', $oGameDate->getTimestamp());
+                            $date_obj = DateTime::createFromFormat('d/m/y H:i:s', (string) $market_node['StartTime'], new DateTimeZone('Europe/London'));
+                            $parsed_matchup->setMetaData('gametime', $date_obj->getTimestamp());
 
                             $parsed_sport->addParsedMatchup($parsed_matchup);
                         } else if (strtolower((string) $market_node['Name']) == 'total rounds' && count($market_node->Participant) == 2) {

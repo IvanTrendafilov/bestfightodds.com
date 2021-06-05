@@ -6,7 +6,7 @@ use BFO\General\FacebookHandler;
 use BFO\General\OddsHandler;
 use BFO\General\EventHandler;
 
-if (FACEBOOK_ENABLED == false) {
+if (!FACEBOOK_ENABLED) {
 	echo 'Facebook posting disabled';
 	exit;
 }

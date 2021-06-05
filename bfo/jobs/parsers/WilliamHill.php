@@ -82,7 +82,7 @@ class ParserJob
         libxml_use_internal_errors(true); //Supress XML errors
         $xml = simplexml_load_string($source);
 
-        if ($xml == false) {
+        if (!$xml) {
             $this->logger->warning("Warning: XML broke!!");
         }
 

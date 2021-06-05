@@ -104,7 +104,7 @@ class ParserJob extends ParserJobBase
                         //Try future date format first
                         $this->logger->debug('Capturing date');
                         $date = DateTime::createFromFormat('D jS M g:ia', (string) $event_node->filter('.sportsbook-event-accordion__date')->text());
-                        if ($date == false) {
+                        if (!$date) {
                             $this->logger->debug('Falling back to secondary date format');
                             $date = new DateTime((string) $event_node->filter('.sportsbook-event-accordion__date')->text());
                         }

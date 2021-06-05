@@ -22,7 +22,6 @@ require_once __DIR__ . "/../../config/Ruleset.php";
 use BFO\Parser\Jobs\ParserJobBase;
 use BFO\Parser\Utils\ParseTools;
 use BFO\Utils\OddsTools;
-use BFO\Parser\OddsProcessor;
 use BFO\Parser\ParsedSport;
 use BFO\Parser\ParsedMatchup;
 use BFO\Parser\ParsedProp;

@@ -93,7 +93,7 @@ class ParserJob extends ParserJobBase
     private function parseMatchups($content)
     {
         $json = json_decode($content);
-        if ($json == false) {
+        if (!$json) {
             $this->logger->error("Unable to decode JSON: " . substr($content, 0, 50) . "...");
             return false;
         }
@@ -188,7 +188,7 @@ class ParserJob extends ParserJobBase
     private function parseProps($content)
     {
         $json = json_decode($content);
-        if ($json == false) {
+        if (!$json) {
             $this->logger->error("Unable to decode JSON: " . substr($content, 0, 50) . "...");
             return false;
         }

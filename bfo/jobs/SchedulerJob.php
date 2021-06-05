@@ -35,7 +35,7 @@ class MMAJunkieParser
         //$content = ParseTools::retrievePageFromFile('C:\dev\bfo\bfo\app\front\rss.txt');
 
         $xml = simplexml_load_string($content);
-        if ($xml == false) {
+        if (!$xml) {
             echo "Error: XML failed";
         }
 
