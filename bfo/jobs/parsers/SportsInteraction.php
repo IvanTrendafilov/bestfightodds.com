@@ -19,6 +19,7 @@
 require_once __DIR__ . "/../../bootstrap.php";
 require_once __DIR__ . "/../../config/Ruleset.php";
 
+use BFO\Parser\Jobs\ParserJobBase;
 use BFO\Parser\Utils\ParseTools;
 use BFO\Utils\OddsTools;
 use BFO\Parser\OddsProcessor;
@@ -27,157 +28,130 @@ use BFO\Parser\ParsedMatchup;
 use BFO\Parser\ParsedProp;
 
 define('BOOKIE_NAME', 'sportsinteraction');
-define('BOOKIE_ID', '8');
+define('BOOKIE_ID', 8);
+define(
+    'BOOKIE_URLS',
+    ['all' => 'https://www.sportsinteraction.com/odds_feeds/30/?consumer_name=bfodds&password=bfodds3145&format_id=4']
+);
+define(
+    'BOOKIE_MOCKFILES',
+    ['all' => PARSE_MOCKFEEDS_DIR . "sportsint.xml"]
+);
 
-$options = getopt("", ["mode::"]);
-
-$logger = new Katzgrau\KLogger\Logger(GENERAL_KLOGDIR, Psr\Log\LogLevel::INFO, ['filename' => 'cron.' . BOOKIE_NAME . '.' . time() . '.log']);
-$parser = new ParserJob($logger);
-$parser->run($options['mode'] ?? '');
-
-class ParserJob
+class ParserJob extends ParserJobBase
 {
-    private $full_run = false;
-    private $parsed_sport;
-    private $logger = null;
-
-    public function __construct(\Psr\Log\LoggerInterface $logger)
+    public function fetchContent(array $content_urls): array
     {
-        $this->logger = $logger;
+        $this->logger->info("Fetching matchups through URL: " . $content_urls['all']);
+        return ['all' => ParseTools::retrievePageFromURL($content_urls['all'])];
     }
 
-    public function run($mode = 'normal')
+    public function parseContent(array $content): ParsedSport
     {
-        $this->logger->info('Started parser');
+        $content['all'] = preg_replace("<SportsInteractionLines>", "<SportsInteractionLines>\n", $content['all']);
+        $content['all'] = preg_replace("</SportsInteractionLines>", "\n</SportsInteractionLines>", $content['all']);
 
-        $content = null;
-        if ($mode == 'mock') {
-            $this->logger->info("Note: Using matchup mock file at " . PARSE_MOCKFEEDS_DIR . "sportsint.xml");
-            $content = ParseTools::retrievePageFromFile(PARSE_MOCKFEEDS_DIR . 'sportsint.xml');
-        } else {
-            $matchups_url = 'https://www.sportsinteraction.com/odds_feeds/30/?consumer_name=bfodds&password=bfodds3145&format_id=4';
-            $this->logger->info("Fetching matchups through URL: " . $matchups_url);
-            $content = ParseTools::retrievePageFromURL($matchups_url);
-        }
+        $xml = simplexml_load_string($content['all']);
 
-        $parsed_sport = $this->parseContent($content);
-
-        try {
-            $op = new OddsProcessor($this->logger, BOOKIE_ID, new Ruleset());
-            $op->processParsedSport($parsed_sport, $this->full_run);
-        } catch (Exception $e) {
-            $this->logger->error('Exception: ' . $e->getMessage());
-        }
-
-        $this->logger->info('Finished');
-    }
-
-    public function parseContent($a_sXML)
-    {
-        $a_sXML = preg_replace("<SportsInteractionLines>", "<SportsInteractionLines>\n", $a_sXML);
-        $a_sXML = preg_replace("</SportsInteractionLines>", "\n</SportsInteractionLines>", $a_sXML);
-
-        $oXML = simplexml_load_string($a_sXML);
-
-        if ($oXML == false) {
+        if (!$xml) {
             $this->logger->warning("Warning: XML broke!!");
         }
-        if (isset($oXML['reason'])) {
-            $this->logger->error("Error: " . $oXML['reason']);
+        if (isset($xml['reason'])) {
+            $this->logger->error("Error: " . $xml['reason']);
         }
-        if ($oXML->getName() == 'feed-unchanged') {
+        if ($xml->getName() == 'feed-unchanged') {
             $this->logger->info("Feed reported no changes");
         }
 
-        $oParsedSport = new ParsedSport('MMA');
+        $parsed_sport = new ParsedSport('MMA');
 
-        if (isset($oXML->EventType)) {
-            foreach ($oXML->EventType as $cEventType) {
-                if (trim((string) $cEventType['NAME']) == 'MMA') {
-                    foreach ($cEventType->Event as $cEvent) {
-                        if (strpos(strtoupper($cEvent->Name), 'FIGHT OF THE NIGHT') !== false) {
+        if (isset($xml->EventType)) {
+            foreach ($xml->EventType as $eventtype_node) {
+                if (trim((string) $eventtype_node['NAME']) == 'MMA') {
+                    foreach ($eventtype_node->Event as $event_node) {
+                        if (strpos(strtoupper($event_node->Name), 'FIGHT OF THE NIGHT') !== false) {
                             //Fight of the night prop
-                            foreach ($this->parseFOTN($cEvent) as $oParsedProp) {
-                                $oParsedSport->addFetchedProp($oParsedProp);
+                            foreach ($this->parseFOTN($event_node) as $parsed_prop) {
+                                $parsed_sport->addFetchedProp($parsed_prop);
                             }
-                        } else if ($cEvent->Bet[0]['TYPE'] == "" && !(strpos($cEvent->Name, 'Total Event') !== false)) {
+                        } else if ($event_node->Bet[0]['TYPE'] == "" && !(strpos($event_node->Name, 'Total Event') !== false)) {
                             //Regular matchup
-                            $oParsedMatchup = null;
-                            if (isset($cEvent->Bet[2])) {
+                            $parsed_matchup = null;
+                            if (isset($event_node->Bet[2])) {
                                 //Three way
                                 if (
-                                    OddsTools::checkCorrectOdds((string) $cEvent->Bet[0]->Price)
-                                    && OddsTools::checkCorrectOdds((string) $cEvent->Bet[2]->Price)
-                                    && !isset($cEvent->Bet[3]) //Temporary fix to remove props such as FOTN
-                                    && !isset($cEvent->Bet[4]) //Temporary fix to remove props such as FOTN
-                                    && !((string) $cEvent->Bet[0]->Price == '-10000' && (string) $cEvent->Bet[2]->Price == '-10000')
+                                    OddsTools::checkCorrectOdds((string) $event_node->Bet[0]->Price)
+                                    && OddsTools::checkCorrectOdds((string) $event_node->Bet[2]->Price)
+                                    && !isset($event_node->Bet[3]) //Temporary fix to remove props such as FOTN
+                                    && !isset($event_node->Bet[4]) //Temporary fix to remove props such as FOTN
+                                    && !((string) $event_node->Bet[0]->Price == '-10000' && (string) $event_node->Bet[2]->Price == '-10000')
                                 ) {
-                                    $oParsedMatchup = new ParsedMatchup(
-                                        (string) $cEvent->Bet[0]->Runner,
-                                        (string) $cEvent->Bet[2]->Runner,
-                                        (string) $cEvent->Bet[0]->Price,
-                                        (string) $cEvent->Bet[2]->Price
+                                    $parsed_matchup = new ParsedMatchup(
+                                        (string) $event_node->Bet[0]->Runner,
+                                        (string) $event_node->Bet[2]->Runner,
+                                        (string) $event_node->Bet[0]->Price,
+                                        (string) $event_node->Bet[2]->Price
                                     );
                                 }
                             } else {
                                 if (
-                                    OddsTools::checkCorrectOdds((string) $cEvent->Bet[0]->Price)
-                                    && OddsTools::checkCorrectOdds((string) $cEvent->Bet[1]->Price)
-                                    && !isset($cEvent->Bet[3]) //Temporary fix to remove props such as FOTN
-                                    && !isset($cEvent->Bet[4]) //Temporary fix to remove props such as FOTN
-                                    && !((string) $cEvent->Bet[0]->Price == '-10000' && (string) $cEvent->Bet[1]->Price == '-10000')
+                                    OddsTools::checkCorrectOdds((string) $event_node->Bet[0]->Price)
+                                    && OddsTools::checkCorrectOdds((string) $event_node->Bet[1]->Price)
+                                    && !isset($event_node->Bet[3]) //Temporary fix to remove props such as FOTN
+                                    && !isset($event_node->Bet[4]) //Temporary fix to remove props such as FOTN
+                                    && !((string) $event_node->Bet[0]->Price == '-10000' && (string) $event_node->Bet[1]->Price == '-10000')
                                 ) {
                                     //Two way
-                                    $oParsedMatchup = new ParsedMatchup(
-                                        (string) $cEvent->Bet[0]->Runner,
-                                        (string) $cEvent->Bet[1]->Runner,
-                                        (string) $cEvent->Bet[0]->Price,
-                                        (string) $cEvent->Bet[1]->Price
+                                    $parsed_matchup = new ParsedMatchup(
+                                        (string) $event_node->Bet[0]->Runner,
+                                        (string) $event_node->Bet[1]->Runner,
+                                        (string) $event_node->Bet[0]->Price,
+                                        (string) $event_node->Bet[1]->Price
                                     );
                                 }
                             }
-                            if ($oParsedMatchup != null) {
+                            if ($parsed_matchup != null) {
                                 //Add time of matchup as metadata
-                                if (isset($cEvent->Date)) {
-                                    $oGameDate = new DateTime($cEvent->Date);
-                                    $oParsedMatchup->setMetaData('gametime', $oGameDate->getTimestamp());
+                                if (isset($event_node->Date)) {
+                                    $oGameDate = new DateTime($event_node->Date);
+                                    $parsed_matchup->setMetaData('gametime', $oGameDate->getTimestamp());
                                 }
 
                                 //Add event name as metadata
-                                if (isset($cEvent->Name)) {
-                                    $event_pieces = explode(' - ', (string) $cEvent->Name);
+                                if (isset($event_node->Name)) {
+                                    $event_pieces = explode(' - ', (string) $event_node->Name);
                                     if ($event_pieces[0] != '') {
-                                        $oParsedMatchup->setMetaData('event_name', trim($event_pieces[0]));
+                                        $parsed_matchup->setMetaData('event_name', trim($event_pieces[0]));
                                     }
                                 }
 
-                                $oParsedMatchup->setCorrelationID(trim($cEvent->Name));
-                                $oParsedSport->addParsedMatchup($oParsedMatchup);
+                                $parsed_matchup->setCorrelationID(trim($event_node->Name));
+                                $parsed_sport->addParsedMatchup($parsed_matchup);
                             }
-                        } else if ($cEvent->Bet[0]['TYPE'] != "" && (count(array_intersect(
+                        } else if ($event_node->Bet[0]['TYPE'] != "" && (count(array_intersect(
                             ['yes', 'no', 'over', 'under'],
-                            [strtolower($cEvent->Bet[0]->Runner), strtolower($cEvent->Bet[1]->Runner)]
+                            [strtolower($event_node->Bet[0]->Runner), strtolower($event_node->Bet[1]->Runner)]
                         )) > 0)) {
                             //Two side prop bet since bet 1 or 2 contains the words yes,no,over or under
-                            $oParsedProp = $this->parseTwoSideProp($cEvent);
-                            if ($oParsedProp != null) {
-                                $oParsedSport->addFetchedProp($oParsedProp);
+                            $parsed_prop = $this->parseTwoSideProp($event_node);
+                            if ($parsed_prop != null) {
+                                $parsed_sport->addFetchedProp($parsed_prop);
                             }
                         } else {
                             //Prop - All other
-                            foreach ($cEvent->Bet as $cBet) {
+                            foreach ($event_node->Bet as $bet_node) {
                                 if (
-                                    OddsTools::checkCorrectOdds((string) $cBet->Price)
-                                    && !(intval($cBet->Price) < -9000)
+                                    OddsTools::checkCorrectOdds((string) $bet_node->Price)
+                                    && !(intval($bet_node->Price) < -9000)
                                 ) {
-                                    $oTempProp = new ParsedProp(
-                                        (string) $cEvent->Name . ' ::: ' . $cBet['TYPE'] . ' :: ' . $cBet->BetTypeExtraInfo . ' : ' . $cBet->Runner,
+                                    $parsed_prop = new ParsedProp(
+                                        (string) $event_node->Name . ' ::: ' . $bet_node['TYPE'] . ' :: ' . $bet_node->BetTypeExtraInfo . ' : ' . $bet_node->Runner,
                                         '',
-                                        (string) $cBet->Price,
+                                        (string) $bet_node->Price,
                                         '-99999'
                                     );
-                                    $oTempProp->setCorrelationID(trim($cEvent->Name));
-                                    $oParsedSport->addFetchedProp($oTempProp);
+                                    $parsed_prop->setCorrelationID(trim($event_node->Name));
+                                    $parsed_sport->addFetchedProp($parsed_prop);
                                 }
                             }
                         }
@@ -187,52 +161,57 @@ class ParserJob
         }
 
         //Declare authorative run if we fill the criteria
-        if (count($oParsedSport->getParsedMatchups()) >= 10 && $oXML->getName() != 'feed-unchanged') {
+        if (count($parsed_sport->getParsedMatchups()) >= 10 && $xml->getName() != 'feed-unchanged') {
             $this->full_run = true;
             $this->logger->info("Declared authoritive run");
         }
 
-        return $oParsedSport;
+        return $parsed_sport;
     }
 
-    private function parseFOTN($a_cEvent)
+    private function parseFOTN($event_node)
     {
-        $aRet = [];
-        foreach ($a_cEvent->Bet as $cBet) {
-            $oTempProp = new ParsedProp(
-                (string) $a_cEvent->Name . ' - ' . $cBet->Runner,
+        $props = [];
+        foreach ($event_node->Bet as $bet_node) {
+            $prop = new ParsedProp(
+                (string) $event_node->Name . ' - ' . $bet_node->Runner,
                 '',
-                (string) $cBet->Price,
+                (string) $bet_node->Price,
                 '-99999'
             );
 
-            $oTempProp->setCorrelationID(trim($a_cEvent->Name));
-            $aRet[] = $oTempProp;
+            $prop->setCorrelationID(trim($event_node->Name));
+            $props[] = $prop;
         }
-        return $aRet;
+        return $props;
     }
 
-    private function parseTwoSideProp($a_cEvent)
+    private function parseTwoSideProp($event_node)
     {
         //Find tie or draw and exclude it
-        $aBets = [];
-        foreach ($a_cEvent->Bet as $key => $cBet) {
-            if ($cBet->Runner != 'Tie' && $cBet->Runner != 'Draw') {
-                $aBets[] = $cBet;
+        $bet_nodes = [];
+        foreach ($event_node->Bet as $key => $bet_node) {
+            if ($bet_node->Runner != 'Tie' && $bet_node->Runner != 'Draw') {
+                $bet_nodes[] = $bet_node;
             }
         }
 
-        if (count($aBets) == 2) {
-            $oTempProp = new ParsedProp(
-                (string) $a_cEvent->Name . ' ::: ' . $aBets[0]['TYPE'] . ' :: ' . $aBets[0]->Handicap . ' ' . $aBets[0]->BetTypeExtraInfo . ' : ' . $aBets[0]->Runner,
-                (string) $a_cEvent->Name . ' ::: ' . $aBets[1]['TYPE'] . ' :: ' . $aBets[1]->Handicap . ' ' . $aBets[1]->BetTypeExtraInfo . ' : ' . $aBets[1]->Runner,
-                (string) $aBets[0]->Price,
-                (string) $aBets[1]->Price
+        if (count($bet_nodes) == 2) {
+            $parsed_prop = new ParsedProp(
+                (string) $event_node->Name . ' ::: ' . $bet_nodes[0]['TYPE'] . ' :: ' . $bet_nodes[0]->Handicap . ' ' . $bet_nodes[0]->BetTypeExtraInfo . ' : ' . $bet_nodes[0]->Runner,
+                (string) $event_node->Name . ' ::: ' . $bet_nodes[1]['TYPE'] . ' :: ' . $bet_nodes[1]->Handicap . ' ' . $bet_nodes[1]->BetTypeExtraInfo . ' : ' . $bet_nodes[1]->Runner,
+                (string) $bet_nodes[0]->Price,
+                (string) $bet_nodes[1]->Price
             );
-            $oTempProp->setCorrelationID(trim($a_cEvent->Name));
-            return $oTempProp;
+            $parsed_prop->setCorrelationID(trim($event_node->Name));
+            return $parsed_prop;
         }
-        $this->logger->warning("Invalid special two side prop: " . $a_cEvent->Name . ' ::: ' . $aBets[0]['TYPE'] . ' :: ' .  $aBets[0]->Handicap . ' ' . $aBets[0]->BetTypeExtraInfo . ' : ' . $aBets[0]->Runner);
+        $this->logger->warning("Invalid special two side prop: " . $event_node->Name . ' ::: ' . $bet_nodes[0]['TYPE'] . ' :: ' .  $bet_nodes[0]->Handicap . ' ' . $bet_nodes[0]->BetTypeExtraInfo . ' : ' . $bet_nodes[0]->Runner);
         return null;
     }
 }
+
+$options = getopt("", ["mode::"]);
+$logger = new Katzgrau\KLogger\Logger(GENERAL_KLOGDIR, Psr\Log\LogLevel::INFO, ['filename' => 'cron.' . BOOKIE_NAME . '.' . time() . '.log']);
+$parser = new ParserJob(BOOKIE_ID, $logger, new RuleSet(), BOOKIE_URLS, BOOKIE_MOCKFILES);
+$parser->run($options['mode'] ?? '');
