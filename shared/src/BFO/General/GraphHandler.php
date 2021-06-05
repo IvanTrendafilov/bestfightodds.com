@@ -41,12 +41,12 @@ class GraphHandler
         foreach ($bookies as $oBookie) {
             $aOdds[$bookie_count] = [];
 
-            $aFightOdds = EventHandler::getAllOdds($matchup_id, $oBookie->getID());
-            if ($aFightOdds != null) {
-                foreach ($aFightOdds as $oFightOdds) {
-                    $aOdds[$bookie_count][] = $oFightOdds;
-                    if (!in_array($oFightOdds->getDate(), $dates)) {
-                        $dates[] = $oFightOdds->getDate();
+            $stored_odds_col = EventHandler::getAllOdds($matchup_id, $oBookie->getID());
+            if ($stored_odds_col != null) {
+                foreach ($stored_odds_col as $stored_odds) {
+                    $aOdds[$bookie_count][] = $stored_odds;
+                    if (!in_array($stored_odds->getDate(), $dates)) {
+                        $dates[] = $stored_odds->getDate();
                     }
                 }
             }
@@ -55,7 +55,6 @@ class GraphHandler
         }
 
         sort($dates);
-
         $aDateOdds = [];
 
         foreach ($dates as $sDate) {

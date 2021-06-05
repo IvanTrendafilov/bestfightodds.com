@@ -24,15 +24,15 @@ $sLineType = isset($_GET['type']) ? $_GET['type'] : 'current';
 $iFormatType = isset($_GET['format']) ? $_GET['format'] : 1;
 
 if (isset($_GET['fight']) && is_numeric($_GET['fight']) && $_GET['fight'] > 0 && $_GET['fight'] < 99999) {
-    $image_name = 'link-fight_' . $_GET['fight'] . '_' . $sLineType . '_' . $iFormatType;
+    $image_filename = 'link-fight_' . $_GET['fight'] . '_' . $sLineType . '_' . $iFormatType;
     $image_obj = null;
 
-    if (CacheControl::isCached($image_name)) {
-        $image_obj = CacheControl::getCachedImage($image_name);
+    if (CacheControl::isCached($image_filename)) {
+        $image_obj = CacheControl::getCachedImage($image_filename);
     } else {
         $image_obj = FightLinkCreator::createFightLink($_GET['fight'], $sLineType, $iFormatType);
         if ($image_obj) {
-            CacheControl::cacheImage($image_obj, $image_name);
+            CacheControl::cacheImage($image_obj, $image_filename);
         }
     }
 
@@ -42,15 +42,15 @@ if (isset($_GET['fight']) && is_numeric($_GET['fight']) && $_GET['fight'] > 0 &&
         imagedestroy($image_obj);
     }
 } else if (isset($_GET['event']) && is_numeric($_GET['event']) && $_GET['event'] > 0 && $_GET['event'] < 99999) {
-    $image_name = 'link-event_' . $_GET['event'] . '_' . $sLineType . '_' . $iFormatType;
+    $image_filename = 'link-event_' . $_GET['event'] . '_' . $sLineType . '_' . $iFormatType;
     $image_obj = null;
 
-    if (CacheControl::isCached($image_name)) {
-        $image_obj = CacheControl::getCachedImage($image_name);
+    if (CacheControl::isCached($image_filename)) {
+        $image_obj = CacheControl::getCachedImage($image_filename);
     } else {
         $image_obj = FightLinkCreator::createEventLink($_GET['event'], $sLineType, $iFormatType);
         if ($image_obj) {
-            CacheControl::cacheImage($image_obj, $image_name);
+            CacheControl::cacheImage($image_obj, $image_filename);
         }
     }
 
@@ -66,19 +66,19 @@ if (isset($_GET['fight']) && is_numeric($_GET['fight']) && $_GET['fight'] > 0 &&
 
 class FightLinkCreator
 {
-    public static function createEventLink(int $event_id, string $line_type, int $format)
+    public static function createEventLink(int $event_id, string $line_type, int $odds_format)
     {
         $matchups = EventHandler::getMatchups(event_id: $event_id, only_with_odds: true);
-        return self::createLink($matchups, $line_type, $format);
+        return self::createLink($matchups, $line_type, $odds_format);
     }
 
-    public static function createFightLink(int $matchup_id, string $line_type, int $format)
+    public static function createFightLink(int $matchup_id, string $line_type, int $odds_format)
     {
         $matchup = EventHandler::getMatchup((int) $matchup_id);
-        return self::createLink(array($matchup), $line_type, $format);
+        return self::createLink([$matchup], $line_type, $odds_format);
     }
 
-    public static function createLink($matchups, $line_type, int $odds_format) //1 = Moneyline, 2 = Decimal
+    public static function createLink(array $matchups, string $line_type, int $odds_format) //1 = Moneyline, 2 = Decimal
     {
         if (count($matchups) < 1 || $matchups[0] == null) {
             header("Content-type: image/png");
@@ -121,7 +121,7 @@ class FightLinkCreator
             $team1_odds = 'n/a';
             $team2_odds = 'n/a';
 
-            if ($odds_obj != null) {
+            if ($odds_obj) {
                 if ($odds_format == 2) {
                     //Decimal
                     $team1_odds = sprintf("%1\$.2f", $odds_obj->getFighterOddsAsDecimal(1));
@@ -169,15 +169,15 @@ class FightLinkCreator
         return $image_obj;
     }
 
-    private static function textCustomSpacing($image_obj, $font_size, $angle, $x_pos, $y_pos, $a_rColor, $a_rFont, $text, $char_spacing = 0)
+    private static function textCustomSpacing($image_obj, $font_size, $angle, $x_pos, $y_pos, $color, $font, $text, $char_spacing = 0)
     {
         $write_position = 0;
         $last_char_box = null;
         for ($i = 0; $i < strlen($text); $i++) {
-            $last_char_box = imagettfbbox($font_size, $angle, $a_rFont, $text[$i]);
+            $last_char_box = imagettfbbox($font_size, $angle, $font, $text[$i]);
 
             if ($text[$i] != ' ') {
-                imagettftext($image_obj, $font_size, $angle, $x_pos + $write_position, $y_pos, $a_rColor, $a_rFont, $text[$i]);
+                imagettftext($image_obj, $font_size, $angle, $x_pos + $write_position, $y_pos, $color, $font, $text[$i]);
             }
 
             $write_position += $last_char_box[2] + $char_spacing;

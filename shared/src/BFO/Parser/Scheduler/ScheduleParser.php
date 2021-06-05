@@ -5,19 +5,20 @@ namespace BFO\Parser\Scheduler;
 use BFO\General\EventHandler;
 use BFO\General\ScheduleHandler;
 use BFO\DataTypes\Fight;
+use BFO\DataTypes\Event;
 
 class ScheduleParser
 {
-    private $aMatchedExistingMatchups;
-    private $aMatchedExistingEvents;
+    private $matched_existing_matchups;
+    private $matched_existing_events;
 
     public function __construct()
     {
-        $this->aMatchedExistingMatchups = [];
-        $this->aMatchedExistingEvents = [];
+        $this->matched_existing_matchups = [];
+        $this->matched_existing_events = [];
     }
 
-    public function run($schedule) 
+    public function run($schedule): void 
     {
         ScheduleHandler::clearAllManualActions();
         $this->parseEvents($schedule);
@@ -27,107 +28,107 @@ class ScheduleParser
     /*
      * Use this instead of parseSched to make it site independent
      */
-    public function parseSchedPreFetched($schedule_col)
+    public function parseSchedPreFetched(array $parsed_events): void
     {
-        $this->aMatchedExistingMatchups = array();
-        $this->aMatchedExistingEvents = array();
+        $this->matched_existing_matchups = [];
+        $this->matched_existing_events = [];
         ScheduleHandler::clearAllManualActions();
-        $this->parseEvents($schedule_col);
+        $this->parseEvents($parsed_events);
         $this->checkRemovedContent();
     }
 
-    public function parseEvents($schedule_col)
+    public function parseEvents(array $parsed_events)
     {
-        foreach ($schedule_col as $aEvent) {
+        foreach ($parsed_events as $parsed_event) {
             //Check if event matches an existing stored event. Must be numered though
-            $aStoredEvents = EventHandler::getEvents(future_events_only: true);
+            $stored_events = EventHandler::getEvents(future_events_only: true);
             $found = false;
-            foreach ($aStoredEvents as $oStoredEvent) {
+            foreach ($stored_events as $event) {
                 //Check if numbered as well so we dont match generic ones like UFC Fight Night
-                $aPrefixParts = explode(':', $aEvent['title']);
-                $aPrefixParts = explode(' ', $aPrefixParts[0]);
-                if ($oStoredEvent->getName() == $aEvent['title'] && $found == false && is_numeric($aPrefixParts[count($aPrefixParts) - 1])) {
+                $prefix_parts = explode(':', $parsed_event['title']);
+                $prefix_parts = explode(' ', $prefix_parts[0]);
+                if ($event->getName() == $parsed_event['title'] && !$found && is_numeric($prefix_parts[count($prefix_parts) - 1])) {
                     $found = true;
-                    $this->parseMatchups($aEvent, $oStoredEvent);
-                    $this->checkEventDate($aEvent, $oStoredEvent);
-                    $this->aMatchedExistingEvents[] = $oStoredEvent->getID();
+                    $this->parseMatchups($parsed_event, $event);
+                    $this->checkEventDate($parsed_event, $event);
+                    $this->matched_existing_events[] = $event->getID();
                 }
                 if ($found == true) {
                     break;
                 }
             }
-            if ($found == false) {
+            if (!$found) {
                 //Match on date (but first word must match, for example for UFC*)
-                $aPrefixParts = explode(' ', $aEvent['title']);
-                if (sizeof($aPrefixParts) > 1) {
-                    foreach ($aStoredEvents as $oStoredEvent) {
-                        $aStoredPrefixParts = explode(' ', $oStoredEvent->getName());
-                        if ($aStoredPrefixParts[0] == $aPrefixParts[0] && date('Y-m-d', $aEvent['date']) == substr($oStoredEvent->getDate(), 0, 10)) {
+                $prefix_parts = explode(' ', $parsed_event['title']);
+                if (sizeof($prefix_parts) > 1) {
+                    foreach ($stored_events as $event) {
+                        $stored_prefix_parts = explode(' ', $event->getName());
+                        if ($stored_prefix_parts[0] == $prefix_parts[0] && date('Y-m-d', $parsed_event['date']) == substr($event->getDate(), 0, 10)) {
                             //Found it! But should maybe be renamed
                             $found = true;
-                            if ($oStoredEvent->getName() != $aEvent['title']) {
-                                ScheduleHandler::storeManualAction(json_encode(array('eventID' => $oStoredEvent->getID(), 'eventTitle' => $aEvent['title']), JSON_HEX_APOS | JSON_HEX_QUOT), 2);
+                            if ($event->getName() != $parsed_event['title']) {
+                                ScheduleHandler::storeManualAction(json_encode(array('eventID' => $event->getID(), 'eventTitle' => $parsed_event['title']), JSON_HEX_APOS | JSON_HEX_QUOT), 2);
                             }
-                            $this->parseMatchups($aEvent, $oStoredEvent);
-                            $this->aMatchedExistingEvents[] = $oStoredEvent->getID();
+                            $this->parseMatchups($parsed_event, $event);
+                            $this->matched_existing_events[] = $event->getID();
                         }
                     }
                 }
             }
             if (!$found) {
                 //Name does not match, do alternative matching on prefix
-                $aPrefixParts = explode(':', $aEvent['title']);
-                if (sizeof($aPrefixParts) > 1) {
-                    foreach ($aStoredEvents as $oStoredEvent) {
-                        $aStoredPrefixParts = explode(':', $oStoredEvent->getName());
-                        if ($aStoredPrefixParts[0] == $aPrefixParts[0] && !$found) {
+                $prefix_parts = explode(':', $parsed_event['title']);
+                if (sizeof($prefix_parts) > 1) {
+                    foreach ($stored_events as $event) {
+                        $stored_prefix_parts = explode(':', $event->getName());
+                        if ($stored_prefix_parts[0] == $prefix_parts[0] && !$found) {
                             //Found it! However event should be renamed
                             $found = true;
-                            if ($oStoredEvent->getName() != $aEvent['title']) {
-                                ScheduleHandler::storeManualAction(json_encode(array('eventID' => $oStoredEvent->getID(), 'eventTitle' => $aEvent['title']), JSON_HEX_APOS | JSON_HEX_QUOT), 2);
+                            if ($event->getName() != $parsed_event['title']) {
+                                ScheduleHandler::storeManualAction(json_encode(array('eventID' => $event->getID(), 'eventTitle' => $parsed_event['title']), JSON_HEX_APOS | JSON_HEX_QUOT), 2);
                             }
-                            $this->parseMatchups($aEvent, $oStoredEvent);
+                            $this->parseMatchups($parsed_event, $event);
                             //But maybe date is still incorrect
-                            $this->checkEventDate($aEvent, $oStoredEvent);
-                            $this->aMatchedExistingEvents[] = $oStoredEvent->getID();
+                            $this->checkEventDate($parsed_event, $event);
+                            $this->matched_existing_events[] = $event->getID();
                         }
                     }
                 }
             }
             if (!$found) {
                 //Match on existing matchups
-                $aFoundMatches = array();
-                foreach ($aEvent['matchups'] as $aParsedMatchup) {
+                $found_matches = [];
+                foreach ($parsed_event['matchups'] as $aParsedMatchup) {
                     $aMatchup = EventHandler::getMatchingFight(team1_name: $aParsedMatchup[0], team2_name: $aParsedMatchup[1], future_only: true);
-                    if ($aMatchup != null && $aMatchup->getEventID() != PARSE_FUTURESEVENT_ID) {
-                        $aFoundMatches[$aMatchup->getEventID()] = isset($aFoundMatches[$aMatchup->getEventID()]) ? $aFoundMatches[$aMatchup->getEventID()]++ : 1;
+                    if ($aMatchup && $aMatchup->getEventID() != PARSE_FUTURESEVENT_ID) {
+                        $found_matches[$aMatchup->getEventID()] = isset($found_matches[$aMatchup->getEventID()]) ? $found_matches[$aMatchup->getEventID()]++ : 1;
                     }
                 }
-                if (sizeof($aFoundMatches) > 0) {
+                if (sizeof($found_matches) > 0) {
                     $found = true;
-                    arsort($aFoundMatches);
-                    if (sizeof($aFoundMatches) > 1) {
+                    arsort($found_matches);
+                    if (sizeof($found_matches) > 1) {
                         echo 'FAIL';
                         //TODO: More than 1.. handle this somehow?
                     }
-                    reset($aFoundMatches);
+                    reset($found_matches);
                     //Probably found it! Howver event should be renamed if different
-                    $oFoundEvent = EventHandler::getEvent(key($aFoundMatches));
-                    if ($oFoundEvent->getName() != $aEvent['title']) {
-                        ScheduleHandler::storeManualAction(json_encode(array('eventID' => $oFoundEvent->getID(), 'eventTitle' => $aEvent['title']), JSON_HEX_APOS | JSON_HEX_QUOT), 2);
+                    $oFoundEvent = EventHandler::getEvent(key($found_matches));
+                    if ($oFoundEvent->getName() != $parsed_event['title']) {
+                        ScheduleHandler::storeManualAction(json_encode(array('eventID' => $oFoundEvent->getID(), 'eventTitle' => $parsed_event['title']), JSON_HEX_APOS | JSON_HEX_QUOT), 2);
                     }
-                    $this->parseMatchups($aEvent, $oFoundEvent);
+                    $this->parseMatchups($parsed_event, $oFoundEvent);
                     //But maybe date is still incorrect
-                    $this->checkEventDate($aEvent, $oFoundEvent);
-                    $this->aMatchedExistingEvents[] = $oFoundEvent->getID();
+                    $this->checkEventDate($parsed_event, $oFoundEvent);
+                    $this->matched_existing_events[] = $oFoundEvent->getID();
                 }
             }
             if (!$found) {
                 //If creative matching fails, add entire event with matchups
-                $sAction = $aEvent['title'] . ' £ ' . date('Y-m-d', $aEvent['date']) . ' => ';
-                $aFilteredMatchups = array();
-                $aOrphanMatchups = array();
-                foreach ($aEvent['matchups'] as $aPM) {
+                $sAction = $parsed_event['title'] . ' £ ' . date('Y-m-d', $parsed_event['date']) . ' => ';
+                $aFilteredMatchups = [];
+                $aOrphanMatchups = [];
+                foreach ($parsed_event['matchups'] as $aPM) {
                     $oMatchup = EventHandler::getMatchingFight(team1_name: $aPM[0], team2_name: $aPM[1], future_only: true);
                     if ($oMatchup == null) {
                         $aFilteredMatchups[] = $aPM;
@@ -135,20 +136,20 @@ class ScheduleParser
                         $aOrphanMatchups[] = $oMatchup->getID();
                     }
                 }
-                /*if (sizeof($aEvent['matchups']) > 0)
+                /*if (sizeof($parsed_event['matchups']) > 0)
                 {
                     $sAction = substr($sAction, 0, strlen($sAction) - 3);
                 }*/
-                ScheduleHandler::storeManualAction(json_encode(array('eventTitle' => (string) $aEvent['title'], 'eventDate' => date('Y-m-d', $aEvent['date']), 'matchups' => $aFilteredMatchups), JSON_HEX_APOS | JSON_HEX_QUOT), 1);
+                ScheduleHandler::storeManualAction(json_encode(array('eventTitle' => (string) $parsed_event['title'], 'eventDate' => date('Y-m-d', $parsed_event['date']), 'matchups' => $aFilteredMatchups), JSON_HEX_APOS | JSON_HEX_QUOT), 1);
 
                 if (count($aOrphanMatchups) > 0) {
-                    ScheduleHandler::storeManualAction(json_encode(array('eventTitle' => (string) $aEvent['title'], 'eventDate' => date('Y-m-d', $aEvent['date']), 'matchupIDs' => $aOrphanMatchups), JSON_HEX_APOS | JSON_HEX_QUOT), 8);
+                    ScheduleHandler::storeManualAction(json_encode(array('eventTitle' => (string) $parsed_event['title'], 'eventDate' => date('Y-m-d', $parsed_event['date']), 'matchupIDs' => $aOrphanMatchups), JSON_HEX_APOS | JSON_HEX_QUOT), 8);
                 }
             }
         }
     }
 
-    private function checkEventDate($event_arr, $stored_event)
+    private function checkEventDate(array $event_arr, Event $stored_event)
     {
         if (date('Y-m-d', $event_arr['date']) != substr($stored_event->getDate(), 0, 10)) {
             ScheduleHandler::storeManualAction(json_encode(array('eventID' => $stored_event->getID(), 'eventDate' => date('Y-m-d', $event_arr['date'])), JSON_HEX_APOS | JSON_HEX_QUOT), 3);
@@ -162,7 +163,7 @@ class ScheduleParser
         foreach ($event['matchups'] as $parsed_matchup) {
 
             $matchup = EventHandler::getMatchingFight(team1_name: $parsed_matchup[0], team2_name: $parsed_matchup[1], future_only: true);
-            if ($matchup != null) {
+            if ($matchup) {
                 //Found a match! But is it the right event?
                 if ($matchup->getEventID() == $matched_event->getID()) {
                     //Complete match
@@ -171,7 +172,7 @@ class ScheduleParser
                     ScheduleHandler::storeManualAction(json_encode(array('matchupID' => $matchup->getID(), 'eventID' => $matched_event->getID()), JSON_HEX_APOS | JSON_HEX_QUOT), 6);
                 }
                 //Store the matched fight in the matched array to check unmatched DB entries later
-                $this->aMatchedExistingMatchups[] = $matchup->getID();
+                $this->matched_existing_matchups[] = $matchup->getID();
             } else {
                 //No matching fight, probably should be added as new fight
                 ScheduleHandler::storeManualAction(json_encode(array('matchups' => array(array('team1' => $parsed_matchup[0], 'team2' => $parsed_matchup[1])), 'eventID'=> $matched_event->getID()), JSON_HEX_APOS | JSON_HEX_QUOT), 5);
@@ -191,11 +192,11 @@ class ScheduleParser
             }
             $aMatchups = EventHandler::getMatchups(event_id: $event->getID());
             foreach ($aMatchups as $oMatchup) {
-                if (!in_array($oMatchup->getID(), $this->aMatchedExistingMatchups)) {
+                if (!in_array($oMatchup->getID(), $this->matched_existing_matchups)) {
                     ScheduleHandler::storeManualAction(json_encode(array('matchupID' => $oMatchup->getID()), JSON_HEX_APOS | JSON_HEX_QUOT), 7);
                 }
             }
-            if (!in_array($event->getID(), $this->aMatchedExistingEvents)) {
+            if (!in_array($event->getID(), $this->matched_existing_events)) {
                 ScheduleHandler::storeManualAction(json_encode(array('eventID' => $event->getID()), JSON_HEX_APOS | JSON_HEX_QUOT), 4);
             }
         }

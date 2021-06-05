@@ -296,8 +296,6 @@ class OddsDB
 
         $result = DBTools::doParamQuery($query, $params);
 
-        //$aFightOddsCol = array();
-
         if ($row = mysqli_fetch_array($result)) {
             return new PropBet(
                 $matchup_id,

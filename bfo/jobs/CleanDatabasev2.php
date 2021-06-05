@@ -1,4 +1,5 @@
 <?php
+
 /**
  * This script will clean up any bad data in the database including:
  * - Duplicates on the same minute
@@ -33,79 +34,66 @@ use BFO\Utils\OddsTools;
 
 //Step 3
 
-$aBookies = BookieHandler::getAllBookies();
-$aEvents = array_merge(EventHandler::getEvents(future_events_only: true), EventHandler::getRecentEvents(5));
-$iRemovedOdds = 1;
-$iRemovedPropOdds = 1;
-$iCounter = 0;
+$bookies = BookieHandler::getAllBookies();
+$events = array_merge(EventHandler::getEvents(future_events_only: true), EventHandler::getRecentEvents(5));
+$removed_odds_counter = 1;
+$removed_propodds_counter = 1;
+$iteration_counter = 0;
 
-echo 'Preparing to clean ' . count($aEvents) . ' events.. 
+echo 'Preparing to clean ' . count($events) . ' events.. 
 ';
 
-while (($iRemovedOdds > 0 || $iRemovedPropOdds > 0)  && $iCounter < 10) 
-{
-    $iRemovedOdds = 0;
-    $iRemovedPropOdds = 0;
-    $iRemovedEventPropOdds = 0;
+while (($removed_odds_counter > 0 || $removed_propodds_counter > 0)  && $iteration_counter < 10) {
+    $removed_odds_counter = 0;
+    $removed_propodds_counter = 0;
+    $removed_eventprop_counter = 0;
 
-    foreach ($aEvents as $oEvent)
-    {
-        $aFights = EventHandler::getMatchups(event_id: $oEvent->getID(), only_with_odds: true);
+    foreach ($events as $event) {
+        $matchups = EventHandler::getMatchups(event_id: $event->getID(), only_with_odds: true);
 
-        foreach ($aFights as $oFight)
-        {
-            foreach ($aBookies as $oBookie)
-            {
-                $aOddsToRemove = getAllDuplicates(EventHandler::getAllOdds($oFight->getID(), $oBookie->getID()));
-                if (isset($aOddsToRemove) && count($aOddsToRemove) > 0)
-                {
-                    $iRemovedOdds += count($aOddsToRemove);
-                    echo ' M:' . $oFight->getID() . '/' . $oBookie->getID();
+        foreach ($matchups as $matchup) {
+            foreach ($bookies as $bookie) {
+                $odds_to_remove = getAllDuplicates(EventHandler::getAllOdds($matchup->getID(), $bookie->getID()));
+                if (isset($odds_to_remove) && count($odds_to_remove) > 0) {
+                    $removed_odds_counter += count($odds_to_remove);
+                    echo ' M:' . $matchup->getID() . '/' . $bookie->getID();
                 }
-                removeFightOdds($aOddsToRemove);
+                removeFightOdds($odds_to_remove);
 
-                $aPropTypes = OddsHandler::getAllPropTypesForMatchup($oFight->getID());
-                foreach ($aPropTypes as $oPropType)
-                {
-                    for ($i = 0; $i <= 2; $i++)
-                    {
-                        $aPropOddsToRemove = getAllPropDuplicates(OddsHandler::getAllPropOddsForMatchupPropType($oFight->getID(), $oBookie->getID(), $oPropType->getID(), $i)); 
-                        if (isset($aPropOddsToRemove) && count($aPropOddsToRemove) > 0)
-                        {
-                            $iRemovedPropOdds += count($aPropOddsToRemove);
-                            echo ' P:' . $oFight->getID() . '/' . $oBookie->getID() . '/' . $oPropType->getID() .  '/' . $i;
+                $prop_types = OddsHandler::getAllPropTypesForMatchup($matchup->getID());
+                foreach ($prop_types as $prop_type) {
+                    for ($i = 0; $i <= 2; $i++) {
+                        $propodds_to_remove = getAllPropDuplicates(OddsHandler::getAllPropOddsForMatchupPropType($matchup->getID(), $bookie->getID(), $prop_type->getID(), $i));
+                        if (isset($propodds_to_remove) && count($propodds_to_remove) > 0) {
+                            $removed_propodds_counter += count($propodds_to_remove);
+                            echo ' P:' . $matchup->getID() . '/' . $bookie->getID() . '/' . $prop_type->getID() .  '/' . $i;
                         }
-                        removePropOdds($aPropOddsToRemove);
+                        removePropOdds($propodds_to_remove);
                     }
                 }
             }
         }
 
-        $aPropTypes = OddsHandler::getAllPropTypesForEvent($oEvent->getID());
-        foreach ($aPropTypes as $oPropType)
-        {
-            for ($i = 0; $i <= 2; $i++)
-            {
-                foreach ($aBookies as $oBookie)
-                {
-                    $aPropOddsToRemove = getAllPropDuplicates(OddsHandler::getAllPropOddsForEventPropType($oEvent->getID(), $oBookie->getID(), $oPropType->getID())); 
-                    if (isset($aPropOddsToRemove) && count($aPropOddsToRemove) > 0)
-                    {
-                        $iRemovedEventPropOdds += count($aPropOddsToRemove);
-                        echo ' EP:' . $oEvent->getID() . '/' . $oBookie->getID() . '/' . $oPropType->getID() .  '/' . $i;
+        $prop_types = OddsHandler::getAllPropTypesForEvent($event->getID());
+        foreach ($prop_types as $prop_type) {
+            for ($i = 0; $i <= 2; $i++) {
+                foreach ($bookies as $bookie) {
+                    $propodds_to_remove = getAllPropDuplicates(OddsHandler::getAllPropOddsForEventPropType($event->getID(), $bookie->getID(), $prop_type->getID()));
+                    if (isset($propodds_to_remove) && count($propodds_to_remove) > 0) {
+                        $removed_eventprop_counter += count($propodds_to_remove);
+                        echo ' EP:' . $event->getID() . '/' . $bookie->getID() . '/' . $prop_type->getID() .  '/' . $i;
                     }
-                    removeEventPropOdds($aPropOddsToRemove);
+                    removeEventPropOdds($propodds_to_remove);
                 }
             }
         }
-
     }
 
-    echo "\r\nFollowing dupes removed: " . $iRemovedOdds . "\r\n";
-    echo "\r\nFollowing dupes props removed: " . $iRemovedPropOdds . "\r\n";
-    echo "\r\nFollowing dupes event props removed: " . $iRemovedEventPropOdds . "\r\n";
+    echo "\r\nFollowing dupes removed: " . $removed_odds_counter . "\r\n";
+    echo "\r\nFollowing dupes props removed: " . $removed_propodds_counter . "\r\n";
+    echo "\r\nFollowing dupes event props removed: " . $removed_eventprop_counter . "\r\n";
 
-    $iCounter++;
+    $iteration_counter++;
 }
 
 
@@ -117,87 +105,59 @@ while (($iRemovedOdds > 0 || $iRemovedPropOdds > 0)  && $iCounter < 10)
  * Returns all fight odds that are considered duplicates. A duplicate is one
  * that appear right after another odds object with the exact same values.
  *
- * @param <type> $a_aFightOdds
+ * @param <type> $odds
  */
-function getAllDuplicates($a_aFightOdds)
+function getAllDuplicates(array $odds): ?array
 {
-
-    if ($a_aFightOdds == null || count($a_aFightOdds) <= 0)
-    {
+    if (!$odds || count($odds) <= 0) {
         return null;
     }
 
-    $aRemoveOdds = array();
-    $oLastMatch = null;
+    $odds_to_remove = [];
+    $last_match = null;
 
-    foreach ($a_aFightOdds as $oFightOdds)
-    {
-        if ($oLastMatch != null)
-        {
+    foreach ($odds as $odds_obj) {
+        if ($last_match != null) {
 
-            if (abs(strtotime($oLastMatch->getDate()) - strtotime($oFightOdds->getDate())) < 15)
-            {
-                if ($oFightOdds->equals($oLastMatch))
-                {
-                    $aRemoveOdds[] = $oFightOdds;
-                }
-                else
-                {
+            if (abs(strtotime($last_match->getDate()) - strtotime($odds_obj->getDate())) < 15) {
+                if ($odds_obj->equals($last_match)) {
+                    $odds_to_remove[] = $odds_obj;
+                } else {
 
-                //Check if one fightodds is better than the other
-$fFav = (pow($oFightOdds->getFighterOddsAsDecimal(1, true), -1)
-                + pow($oFightOdds->getFighterOddsAsDecimal(2, true), -1));
-$fOav = (pow($oLastMatch->getFighterOddsAsDecimal(1, true), -1)
-                + pow($oLastMatch->getFighterOddsAsDecimal(2, true), -1));
-                
-                if ($fFav > $fOav)
-                {
-                    $aRemoveOdds[] = $oFightOdds;
-                }
-                else if ($fFav < $fOav)
-                {
-                    $aRemoveOdds[] = $oLastMatch;
-                }
-                else
-                {
-                    //If they are equal in arbitrage then delete the one that was added last
-                    if (strtotime($oLastMatch->getDate()) < strtotime($oFightOdds->getDate()))
-                    {
-                        $aRemoveOdds[] = $oFightOdds;
-                    }   
-                    else if (strtotime($oLastMatch->getDate()) < strtotime($oFightOdds->getDate()))
-                    {
-                        $aRemoveOdds[] = $oLastMatch;
-                    } 
-                    else
-                    {
+                    //Check if one fightodds is better than the other
+                    $fFav = (pow($odds_obj->getFighterOddsAsDecimal(1, true), -1)
+                        + pow($odds_obj->getFighterOddsAsDecimal(2, true), -1));
+                    $fOav = (pow($last_match->getFighterOddsAsDecimal(1, true), -1)
+                        + pow($last_match->getFighterOddsAsDecimal(2, true), -1));
 
-                    echo 'nothing ..
+                    if ($fFav > $fOav) {
+                        $odds_to_remove[] = $odds_obj;
+                    } else if ($fFav < $fOav) {
+                        $odds_to_remove[] = $last_match;
+                    } else {
+                        //If they are equal in arbitrage then delete the one that was added last
+                        if (strtotime($last_match->getDate()) < strtotime($odds_obj->getDate())) {
+                            $odds_to_remove[] = $odds_obj;
+                        } else if (strtotime($last_match->getDate()) < strtotime($odds_obj->getDate())) {
+                            $odds_to_remove[] = $last_match;
+                        } else {
+
+                            echo 'nothing ..
                     ';
+                        }
                     }
-
                 }
-
-                }
-                $oLastMatch = $oFightOdds;
-
-
+                $last_match = $odds_obj;
+            } else if ($odds_obj->equals($last_match)) {
+                $odds_to_remove[] = $odds_obj;
+            } else {
+                $last_match = $odds_obj;
             }
-            else if ($oFightOdds->equals($oLastMatch))
-            {
-                    $aRemoveOdds[] = $oFightOdds;
-            }
-            else
-            {
-                $oLastMatch = $oFightOdds;
-            }
-        }
-        else
-        {
-            $oLastMatch = $oFightOdds;
+        } else {
+            $last_match = $odds_obj;
         }
     }
-    return $aRemoveOdds;
+    return $odds_to_remove;
 }
 
 
@@ -205,128 +165,89 @@ $fOav = (pow($oLastMatch->getFighterOddsAsDecimal(1, true), -1)
  * Returns all fight odds that are considered duplicates. A duplicate is one
  * that appear right after another odds object with the exact same values.
  *
- * @param <type> $a_aFightOdds
+ * @param <type> $odds
  */
-function getAllPropDuplicates($a_aProps)
+function getAllPropDuplicates(array $prop_odds): ?array
 {
-    if ($a_aProps == null || count($a_aProps) <= 0)
-    {
+    if (!$prop_odds || count($prop_odds) <= 0) {
         return null;
     }
 
-    $aRemoveOdds = array();
-    $oLastMatch = null;
+    $odds_to_remove = [];
+    $last_match = null;
 
-    foreach ($a_aProps as $oProp)
-    {
-        if ($oLastMatch != null)
-        {
+    foreach ($prop_odds as $oProp) {
+        if ($last_match != null) {
 
-            if (abs(strtotime($oLastMatch->getDate()) - strtotime($oProp->getDate())) < 15)
-            {
-                if ($oProp->equals($oLastMatch))
-                {
-                    $aRemoveOdds[] = $oProp;
-                }
-                else
-                {
+            if (abs(strtotime($last_match->getDate()) - strtotime($oProp->getDate())) < 15) {
+                if ($oProp->equals($last_match)) {
+                    $odds_to_remove[] = $oProp;
+                } else {
 
-                //Check if one fightodds is better than the other
+                    //Check if one fightodds is better than the other
                     $fFav = 0;
                     $fOav = 0;
-                    if ($oProp->getNegPropOdds() == '-99999')
-                    {
+                    if ($oProp->getNegPropOdds() == '-99999') {
                         $fFav = (pow(OddsTools::convertMoneylineToDecimal($oProp->getPropOdds(), true), -1));
-                        $fOav = (pow(OddsTools::convertMoneylineToDecimal($oLastMatch->getPropOdds(), true), -1));
-                    }
-                    else
-                    {
+                        $fOav = (pow(OddsTools::convertMoneylineToDecimal($last_match->getPropOdds(), true), -1));
+                    } else {
                         $fFav = (pow(OddsTools::convertMoneylineToDecimal($oProp->getPropOdds(), true), -1)
-                                        + pow(OddsTools::convertMoneylineToDecimal($oProp->getNegPropOdds(), true), -1));
-                        $fOav = (pow(OddsTools::convertMoneylineToDecimal($oLastMatch->getPropOdds(), true), -1)
-                                        + pow(OddsTools::convertMoneylineToDecimal($oLastMatch->getNegPropOdds(), true), -1));
+                            + pow(OddsTools::convertMoneylineToDecimal($oProp->getNegPropOdds(), true), -1));
+                        $fOav = (pow(OddsTools::convertMoneylineToDecimal($last_match->getPropOdds(), true), -1)
+                            + pow(OddsTools::convertMoneylineToDecimal($last_match->getNegPropOdds(), true), -1));
                     }
 
-
-
-                
-                if ($fFav > $fOav)
-                {
-                    $aRemoveOdds[] = $oProp;
-                }
-                else if ($fFav < $fOav)
-                {
-                    $aRemoveOdds[] = $oLastMatch;
-                }
-                else
-                {
-                    //If they are equal in arbitrage then delete the one that was added last
-                    if (strtotime($oLastMatch->getDate()) < strtotime($oProp->getDate()))
-                    {
-                        $aRemoveOdds[] = $oProp;
-                    }   
-                    else if (strtotime($oLastMatch->getDate()) < strtotime($oProp->getDate()))
-                    {
-                        $aRemoveOdds[] = $oLastMatch;
-                    } 
-                    else
-                    {
-
-                    echo 'nothing ..
+                    if ($fFav > $fOav) {
+                        $odds_to_remove[] = $oProp;
+                    } else if ($fFav < $fOav) {
+                        $odds_to_remove[] = $last_match;
+                    } else {
+                        //If they are equal in arbitrage then delete the one that was added last
+                        if (strtotime($last_match->getDate()) < strtotime($oProp->getDate())) {
+                            $odds_to_remove[] = $oProp;
+                        } else if (strtotime($last_match->getDate()) < strtotime($oProp->getDate())) {
+                            $odds_to_remove[] = $last_match;
+                        } else {
+                            echo 'nothing ..
                     ';
+                        }
                     }
-
                 }
-
-                }
-                $oLastMatch = $oProp;
-
-
+                $last_match = $oProp;
+            } else if ($oProp->equals($last_match)) {
+                $odds_to_remove[] = $oProp;
+            } else {
+                $last_match = $oProp;
             }
-            else if ($oProp->equals($oLastMatch))
-            {
-                    $aRemoveOdds[] = $oProp;
-            }
-            else
-            {
-                $oLastMatch = $oProp;
-            }
-        }
-        else
-        {
-            $oLastMatch = $oProp;
+        } else {
+            $last_match = $oProp;
         }
     }
-    return $aRemoveOdds;
+    return $odds_to_remove;
 }
 
 
 
-function removeFightOdds($a_aFightOddsCol)
+function removeFightOdds($oddsCol): bool
 {
-    if ($a_aFightOddsCol == null || count($a_aFightOddsCol) <= 0)
-    {
+    if (!$oddsCol || count($oddsCol) <= 0) {
         return false;
     }
-    foreach ($a_aFightOddsCol as $oFightOdds)
-    {
-        $sQuery = 'DELETE FROM fightodds
+    foreach ($oddsCol as $odds_obj) {
+        $query = 'DELETE FROM fightodds
                     WHERE fight_id = ?
                         AND bookie_id = ?
                         AND fighter1_odds = ?
                         AND fighter2_odds = ?
                         AND date = ?';
 
-        $aParams = array($oFightOdds->getFightID(), $oFightOdds->getBookieID(), $oFightOdds->getOdds(1), $oFightOdds->getOdds(2), $oFightOdds->getDate());
+        $params = array($odds_obj->getFightID(), $odds_obj->getBookieID(), $odds_obj->getOdds(1), $odds_obj->getOdds(2), $odds_obj->getDate());
 
-        DBTools::doParamQuery($sQuery, $aParams);
+        DBTools::doParamQuery($query, $params);
 
-        if (DBTools::getAffectedRows() != 1)
-        {
+        if (DBTools::getAffectedRows() != 1) {
             echo "-";
-        }
-        else
-        {
+        } else {
             echo "*";
         }
     }
@@ -334,15 +255,13 @@ function removeFightOdds($a_aFightOddsCol)
 }
 
 
-function removePropOdds($a_aPropOddsCol)
+function removePropOdds(array $propodds_col): bool
 {
-    if ($a_aPropOddsCol == null || count($a_aPropOddsCol) <= 0)
-    {
+    if (!$propodds_col || count($propodds_col) <= 0) {
         return false;
     }
-    foreach ($a_aPropOddsCol as $oPropOdds)
-    {
-        $sQuery = 'DELETE FROM lines_props
+    foreach ($propodds_col as $oPropOdds) {
+        $query = 'DELETE FROM lines_props
                     WHERE matchup_id = ?
                         AND bookie_id = ?
                         AND prop_odds = ?
@@ -351,31 +270,26 @@ function removePropOdds($a_aPropOddsCol)
                         AND team_num = ?
                         AND proptype_id = ?';
 
-        $aParams = array($oPropOdds->getMatchupID(), $oPropOdds->getBookieID(), $oPropOdds->getPropOdds(), $oPropOdds->getNegPropOdds(), $oPropOdds->getDate(), $oPropOdds->getTeamNumber(), $oPropOdds->getPropTypeID());
+        $params = array($oPropOdds->getMatchupID(), $oPropOdds->getBookieID(), $oPropOdds->getPropOdds(), $oPropOdds->getNegPropOdds(), $oPropOdds->getDate(), $oPropOdds->getTeamNumber(), $oPropOdds->getPropTypeID());
 
-        DBTools::doParamQuery($sQuery, $aParams);
+        DBTools::doParamQuery($query, $params);
 
-        if (DBTools::getAffectedRows() != 1)
-        {
+        if (DBTools::getAffectedRows() != 1) {
             echo "-";
-        }
-        else
-        {
+        } else {
             echo "*";
         }
     }
     return true;
 }
 
-function removeEventPropOdds($a_aPropOddsCol)
+function removeEventPropOdds(array $propodds_col): bool
 {
-    if ($a_aPropOddsCol == null || count($a_aPropOddsCol) <= 0)
-    {
+    if ($propodds_col == null || count($propodds_col) <= 0) {
         return false;
     }
-    foreach ($a_aPropOddsCol as $oPropOdds)
-    {
-        $sQuery = 'DELETE FROM lines_eventprops
+    foreach ($propodds_col as $propodds_obj) {
+        $query = 'DELETE FROM lines_eventprops
                     WHERE event_id = ?
                         AND bookie_id = ?
                         AND prop_odds = ?
@@ -383,16 +297,13 @@ function removeEventPropOdds($a_aPropOddsCol)
                         AND date = ?
                         AND proptype_id = ?';
 
-        $aParams = array($oPropOdds->getEventID(), $oPropOdds->getBookieID(), $oPropOdds->getPropOdds(), $oPropOdds->getNegPropOdds(), $oPropOdds->getDate(), $oPropOdds->getPropTypeID());
+        $params = array($propodds_obj->getEventID(), $propodds_obj->getBookieID(), $propodds_obj->getPropOdds(), $propodds_obj->getNegPropOdds(), $propodds_obj->getDate(), $propodds_obj->getPropTypeID());
 
-        DBTools::doParamQuery($sQuery, $aParams);
+        DBTools::doParamQuery($query, $params);
 
-        if (DBTools::getAffectedRows() != 1)
-        {
+        if (DBTools::getAffectedRows() != 1) {
             echo "-";
-        }
-        else
-        {
+        } else {
             echo "*";
         }
     }
@@ -400,9 +311,9 @@ function removeEventPropOdds($a_aPropOddsCol)
 }
 
 
-function clearOverUnderIncons()
+function clearOverUnderIncons(): int
 {
-    $sQuery = 'DELETE
+    $query = 'DELETE
                 FROM lp2 USING lines_props lp1,
                                lines_props lp2
                 WHERE lp1.proptype_id IN (32,
@@ -417,15 +328,14 @@ function clearOverUnderIncons()
                   AND lp1.matchup_id = lp2.matchup_id
                   AND lp1.bookie_id = lp2.bookie_id
                   AND lp1.date > lp2.date;';
-        
-        DBTools::doQuery($sQuery);
 
-        return DBTools::getAffectedRows();
+    DBTools::doQuery($query);
+    return DBTools::getAffectedRows();
 }
 
-function clearPointsHandicapIncons()
+function clearPointsHandicapIncons(): int
 {
-    $sQuery = 'DELETE
+    $query = 'DELETE
                 FROM lp2 USING lines_props lp1,
                                lines_props lp2
                 WHERE lp1.proptype_id IN (38,
@@ -446,11 +356,7 @@ function clearPointsHandicapIncons()
                   AND lp1.team_num <> 0
                   AND lp2.team_num <> 0
                   AND lp1.date > lp2.date;';
-        
-        DBTools::doQuery($sQuery);
 
-        return DBTools::getAffectedRows();
+    DBTools::doQuery($query);
+    return DBTools::getAffectedRows();
 }
-
-
-?>

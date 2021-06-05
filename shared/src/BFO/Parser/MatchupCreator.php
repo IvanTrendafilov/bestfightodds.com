@@ -11,13 +11,6 @@ use BFO\DataTypes\Fight;
 use BFO\DataTypes\Event;
 use BFO\Parser\RulesetInterface;
 
-//Create matchup: If bookie has odds for other matchups on this event (and event name and date matches)
-//Create event and matchups: If matching whitelisting criteria (site specific). E.g. BFO, BetOnline and OKTAGON
-//Create event if: Bookie matches a specific name like BetOnline. Maybe also check if there are multiple matchups provided?
-//Create matchup: If this one is in schedule as Create?
-//Create matchup: If multiple bookies has this one provided?
-//Do not create: IF another matchup that is already matched has the same event name metadata but matched to different event
-
 class MatchupCreator
 {
     private $logger = null;
