@@ -9,8 +9,6 @@
  * Moneylines: Yes
  * Props: Yes
  * 
- * URL: http://oddsfeed3.bet365.com/Boxing_v2.asp
- *
  * Timezone in feed: UTC+1 so assuming Europe/London (during DST, maybe needs to be adjusted once off DST)
  * 
  */
