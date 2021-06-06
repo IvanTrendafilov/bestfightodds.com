@@ -63,8 +63,11 @@ class BookieDB
         $params = [$bookie_id];
 
         $result = DBTools::doParamQuery($query, $params);
-
-        return DBTools::getSingleValue($result);
+        $value = DBTools::getSingleValue($result);
+        if ($value == '') {
+            return -1;
+        }
+        return intval($value);
     }
 
     public static function resetChangeNums(int $bookie_id = null): int

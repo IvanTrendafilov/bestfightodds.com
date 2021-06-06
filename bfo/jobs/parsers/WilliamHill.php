@@ -43,7 +43,7 @@ class ParserJob extends ParserJobBase
     {
         //Apply changenum
         $this->change_num = BookieHandler::getChangeNum($this->bookie_id);
-        if ($this->change_num != -1) {
+        if ($this->change_num > 0) {
             $this->logger->info("Using changenum: &cn=" . $this->change_num);
             $content_urls['all'] .= '&cn=' . $this->change_num;
         }
