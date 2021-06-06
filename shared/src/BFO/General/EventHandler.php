@@ -173,6 +173,11 @@ class EventHandler
         return $id;
     }
 
+    public static function addCreateAudit(int $matchup_id, int $source): ?bool
+    {
+        return EventDB::addCreateAudit($matchup_id, $source);
+    }
+
     public static function addNewEvent($event)
     {
         if ($event->getName() == '' || $event->getDate() == '') {

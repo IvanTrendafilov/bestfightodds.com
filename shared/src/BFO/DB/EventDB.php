@@ -71,8 +71,10 @@ class EventDB
         if ($team_id) {
             $extra_where .= ' AND (fighter1_id = :team1_id OR fighter2_id = :team2_id) ';
             $extra_where_metadata .= ' AND (fighter1_id = :metadata_team1_id OR fighter2_id = :metadata_team2_id) ';
-            $params = [':team1_id' => $team_id, ':team2_id' => $team_id,
-                        ':metadata_team1_id' =>  $team_id, ':metadata_team2_id' => $team_id];
+            $params = [
+                ':team1_id' => $team_id, ':team2_id' => $team_id,
+                ':metadata_team1_id' =>  $team_id, ':metadata_team2_id' => $team_id
+            ];
         }
 
         //0 = Unspecified, 1 = Automatic, 2 = Manual
@@ -109,7 +111,7 @@ class EventDB
                     ' . ($only_with_odds ? ' HAVING latest_date IS NOT NULL ' : '') . '
                     ' . ($only_without_odds ? ' HAVING latest_date IS NULL ' : '') . '
                         AND f.id IS NOT NULL ' . $sorting;
-                    
+
 
         $matchups = [];
         try {
@@ -288,24 +290,18 @@ class EventDB
             if (OddsTools::compareNames($fight_obj->getTeam(($team1_name >= $team2_name ? 2 : 1)), $team1_name) > 82) {
                 if (OddsTools::compareNames($fight_obj->getTeam(($team1_name >= $team2_name ? 1 : 2)), $team2_name) > 82) {
                     //Found a match
-                    $found_matchup = null;
-                    if ($row['original'] == '0') {
-                        //Matched on altnames - fetch the original matchup as the matched one
-                        $matchup = EventDB::getMatchups(matchup_id: $row['id']);
-                        $found_matchup = $matchup[0] ?? null;
+                    $matchup = EventDB::getMatchups(matchup_id: $row['id']);
+                    $found_matchup = $matchup[0] ?? null;
 
+                    if ($row['original'] == '0') { //Matched on altname
                         //Check if fight is ordered lexographically in the database. The reason for this check is to correct
                         //when we match on a matchup where altnames are used and the order may change when creating the Fight object
                         $is_ordered_in_db = EventDB::isFightOrderedInDatabase((int) $row['id']);
                         if ($is_ordered_in_db && $fight_obj->hasExternalOrderChanged()) {
-                                $found_matchup->setExternalOrderChanged(true);
+                            $found_matchup->setExternalOrderChanged(true);
                         } else if (!$is_ordered_in_db && !$fight_obj->hasExternalOrderChanged()) {
-                                $found_matchup->setExternalOrderChanged(true);
+                            $found_matchup->setExternalOrderChanged(true);
                         }
-                    } else {
-                        $found_matchup = new Fight((int) $row['id'], $row['fighter1_name'], $row['fighter2_name'], (int) $row['event_id']);
-                        $found_matchup->setFighterID(1, $row['fighter1_id']);
-                        $found_matchup->setFighterID(2, $row['fighter2_id']);
                     }
                     return $found_matchup;
                 }
@@ -340,7 +336,7 @@ class EventDB
         return null;
     }
 
-    public static function addNewFightOdds(FightOdds $fightodds_obj) : ?int
+    public static function addNewFightOdds(FightOdds $fightodds_obj): ?int
     {
         $query = 'INSERT INTO fightodds(fight_id, fighter1_odds, fighter2_odds, bookie_id, date)
                     SELECT f.id, ?, ?, b.id, NOW()
@@ -352,7 +348,6 @@ class EventDB
         try {
             $id = PDOTools::executeQuery($query, $params);
             return $id->rowCount();
-
         } catch (\PDOException $e) {
             if ($e->getCode() == 23000) {
                 throw new \Exception("Duplicate entry", 10);
@@ -406,23 +401,18 @@ class EventDB
         return $id;
     }
 
-    public static function addCreateAudit(int $matchup_id, int $source): ?int
+    public static function addCreateAudit(int $matchup_id, int $source): ?bool
     {
-        $query = 'INSERT INTO matchups_createaudit VALUES (?,?)';
+        $query = 'INSERT INTO matchups_createaudit VALUES (?,?) ON DUPLICATE KEY UPDATE source = ?';
 
-        $params = [$matchup_id, $source];
+        $params = [$matchup_id, $source, $source];
         try {
             $id = PDOTools::insert($query, $params);
         } catch (\PDOException $e) {
-            if ($e->getCode() == 23000) {
-                throw new \Exception("Duplicate entry", 10);
-            } else {
-                throw new \Exception("Unknown error " . $e->getMessage(), 10);
-            }
-            return null;
+            throw new \Exception("Unknown error " . $e->getMessage(), 10);
+            return false;
         }
-        //Invalidate cache whenever we add a matchup in case some running function is caching matchups
-        return $id;
+        return true;
     }
 
     public static function removeEvent($event_id)

@@ -179,9 +179,18 @@ class OddsProcessor
                     $result = EventHandler::addNewFightOdds($odds);
                     if (!$result) {
                         $this->logger->error("-- Error adding odds");
+                        return false;
+                    } else {
+                        //When odds are added, if the matchup was added manually or through scheduler (!= 1) we change the createaudit for this matchup so that it can be removed automatically if all odds are removed.
+                        if ($matched_matchup['matched_matchup']->getCreateSource() != 1) {
+                            if (EventHandler::addCreateAudit($matched_matchup['matched_matchup']->getID(), 1)) {
+                                $this->logger->info("-- Updated change audit to 1 (sportsbook created) for " . $matched_matchup['matched_matchup']->getID());
+                            } else {
+                                $this->logger->error("-- Couldn't change create audit to 1 (sportsbook created) for matchup " . $matched_matchup['matched_matchup']->getID());
+                            }
+                        }
                     }
                 }
-
                 return true;
             }
         } else {
