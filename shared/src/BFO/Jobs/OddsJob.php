@@ -87,7 +87,7 @@ class OddsJob
 
         //Clean up any upcoming matchups without odds
         if (PARSE_REMOVE_EMPTY_MATCHUPS) {
-            $matchups = EventHandler::getMatchups(future_matchups_only: true, only_without_odds: true, create_source: 1);
+            $matchups = EventHandler::getMatchups(future_matchups_only: true, only_without_odds: true, create_source: 1); //create_source: 1 = Sportsbooks has provided odds for this matchup
             $counter = 0;
             $audit_log = new \Katzgrau\KLogger\Logger(GENERAL_KLOGDIR, \Psr\Log\LogLevel::INFO, ['filename' => 'changeaudit.log']);
             foreach ($matchups as $matchup) {

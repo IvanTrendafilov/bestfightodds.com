@@ -19,68 +19,42 @@ require_once __DIR__ . "/../../bootstrap.php";
 require_once __DIR__ . "/../../config/Ruleset.php";
 
 use BFO\General\BookieHandler;
+use BFO\Parser\Jobs\ParserJobBase;
 use BFO\Parser\Utils\ParseTools;
 use BFO\Utils\OddsTools;
-use BFO\Parser\OddsProcessor;
 use BFO\Parser\ParsedSport;
 use BFO\Parser\ParsedMatchup;
 use BFO\Parser\ParsedProp;
 
 define('BOOKIE_NAME', 'williamhill');
-define('BOOKIE_ID', '17');
+define('BOOKIE_ID', 17);
+define(
+    'BOOKIE_URLS',
+    ['all' => 'http://pricefeeds.williamhill.com/oxipubserver?action=template&template=getHierarchyByMarketType&classId=402&filterBIR=N']
+);
+define(
+    'BOOKIE_MOCKFILES',
+    ['all' => PARSE_MOCKFEEDS_DIR . "williamhill.xml"]
+);
 
-$options = getopt("", ["mode::"]);
-
-$logger = new Katzgrau\KLogger\Logger(GENERAL_KLOGDIR, Psr\Log\LogLevel::INFO, ['filename' => 'cron.' . BOOKIE_NAME . '.' . time() . '.log']);
-$parser = new ParserJob($logger);
-$parser->run($options['mode'] ?? '');
-
-class ParserJob
+class ParserJob extends ParserJobBase
 {
-    private $full_run = false;
-    private $parsed_sport;
-    private $logger = null;
-
-    public function __construct(\Psr\Log\LoggerInterface $logger)
+    public function fetchContent(array $content_urls): array
     {
-        $this->logger = $logger;
+        //Apply changenum
+        $this->change_num = BookieHandler::getChangeNum($this->bookie_id);
+        if ($this->change_num != -1) {
+            $this->logger->info("Using changenum: &cn=" . $this->change_num);
+            $content_urls['all'] .= '&cn=' . $this->change_num;
+        }
+        $this->logger->info("Fetching matchups through URL: " . $content_urls['all']);
+        return ['all' => ParseTools::retrievePageFromURL($content_urls['all'])];
     }
 
-    public function run($mode = 'normal')
-    {
-        $this->logger->info('Started parser');
-
-        $content = null;
-        if ($mode == 'mock') {
-            $this->logger->info("Note: Using matchup mock file at " . PARSE_MOCKFEEDS_DIR . "williamhill.xml");
-            $content = ParseTools::retrievePageFromFile(PARSE_MOCKFEEDS_DIR . 'williamhill.xml');
-        } else {
-            $matchups_url = 'http://pricefeeds.williamhill.com/oxipubserver?action=template&template=getHierarchyByMarketType&classId=402&filterBIR=N';
-            $change_num = BookieHandler::getChangeNum(BOOKIE_ID);
-            if ($change_num != -1) {
-                $this->logger->info("Using changenum: &cn=" . $change_num);
-                $matchups_url .= '&cn=' . $change_num;
-            }
-            $this->logger->info("Fetching matchups through URL: " . $matchups_url);
-            $content = ParseTools::retrievePageFromURL($matchups_url);
-        }
-
-        $parsed_sport = $this->parseContent($content);
-
-        try {
-            $op = new OddsProcessor($this->logger, BOOKIE_ID, new Ruleset());
-            $op->processParsedSport($parsed_sport, $this->full_run);
-        } catch (Exception $e) {
-            $this->logger->error('Exception: ' . $e->getMessage());
-        }
-
-        $this->logger->info('Finished');
-    }
-
-    private function parseContent($source)
+    public function parseContent(array $content): ParsedSport
     {
         libxml_use_internal_errors(true); //Supress XML errors
-        $xml = simplexml_load_string($source);
+        $xml = simplexml_load_string($content['all']);
 
         if (!$xml) {
             $this->logger->warning("Warning: XML broke!!");
@@ -167,7 +141,7 @@ class ParserJob
 
         //Store the changenum
         $change_num = time();
-        if (BookieHandler::saveChangeNum(BOOKIE_ID, $change_num)) {
+        if (BookieHandler::saveChangeNum($this->bookie_id, $change_num)) {
             $this->logger->info("ChangeNum stored OK: " . $change_num);
         } else {
             $this->logger->warning("Error: ChangeNum was not stored");
@@ -190,7 +164,7 @@ class ParserJob
 
     private function correctMarket($market_node)
     {
-        //The following piece of code ensures that the matchup correlation is always in lexigraphical order
+        //Ensures that the matchup correlation is always in lexigraphical order
         $pieces = explode(' v ', $market_node);
         if (count($pieces) == 2) {
             return $pieces[0] <= $pieces[1] ? $pieces[0] . ' v ' . $pieces[1] : $pieces[1] . ' v ' . $pieces[0];
@@ -198,3 +172,8 @@ class ParserJob
         return $market_node;
     }
 }
+
+$options = getopt("", ["mode::"]);
+$logger = new Katzgrau\KLogger\Logger(GENERAL_KLOGDIR, Psr\Log\LogLevel::INFO, ['filename' => 'cron.' . BOOKIE_NAME . '.' . time() . '.log']);
+$parser = new ParserJob(BOOKIE_ID, $logger, new RuleSet(), BOOKIE_URLS, BOOKIE_MOCKFILES);
+$parser->run($options['mode'] ?? '');
