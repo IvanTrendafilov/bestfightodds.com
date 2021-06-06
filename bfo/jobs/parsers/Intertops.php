@@ -18,72 +18,46 @@ require_once __DIR__ . "/../../config/Ruleset.php";
 
 use BFO\Parser\Utils\ParseTools;
 use BFO\Utils\OddsTools;
-use BFO\Parser\OddsProcessor;
 use BFO\General\BookieHandler;
+use BFO\Parser\Jobs\ParserJobBase;
 use BFO\Parser\ParsedSport;
 use BFO\Parser\ParsedMatchup;
 use BFO\Parser\ParsedProp;
 
 define('BOOKIE_NAME', 'intertops');
-define('BOOKIE_ID', '18');
+define('BOOKIE_ID', 18);
+define(
+    'BOOKIE_URLS',
+    ['all' => 'http://xmlfeed.intertops.com/xmloddsfeed/v2/xml/?apikey=860879d0-f4b6-e511-a090-003048dd52d5&sportId=6&includeCent=true']
+);
+define(
+    'BOOKIE_MOCKFILES',
+    ['all' => PARSE_MOCKFEEDS_DIR . "intertops.xml"]
+);
 
-$options = getopt("", ["mode::"]);
-
-$logger = new Katzgrau\KLogger\Logger(GENERAL_KLOGDIR, Psr\Log\LogLevel::INFO, ['filename' => 'cron.' . BOOKIE_NAME . '.' . time() . '.log']);
-$parser = new ParserJob($logger);
-$parser->run($options['mode'] ?? '');
-
-class ParserJob
+class ParserJob extends ParserJobBase
 {
-    private $full_run = false;
-    private $logger = null;
-    private $change_num = -1;
-
-    public function __construct(\Psr\Log\LoggerInterface $logger)
+    public function fetchContent(array $content_urls): array
     {
-        $this->logger = $logger;
+        //Apply changenum
+        $this->change_num = BookieHandler::getChangeNum($this->bookie_id);
+        if ($this->change_num != -1) {
+            $this->logger->info("Using changenum: &delta=" . $this->change_num);
+            $content_urls['all'] .= '&delta=' . $this->change_num;
+        }
+        $this->logger->info("Fetching matchups through URL: " . $content_urls['all']);
+        return ['all' => ParseTools::retrievePageFromURL($content_urls['all'])];
     }
 
-    public function run($mode = 'normal')
+    public function parseContent(array $content): ParsedSport
     {
-        $this->logger->info('Started parser');
-
-        $content = null;
-        if ($mode == 'mock') {
-            $this->logger->info("Note: Using matchup mock file at " . PARSE_MOCKFEEDS_DIR . "intertops.xml");
-            $content = ParseTools::retrievePageFromFile(PARSE_MOCKFEEDS_DIR . 'intertops.xml');
-        } else {
-            $matchups_url = 'http://xmlfeed.intertops.com/xmloddsfeed/v2/xml/?apikey=860879d0-f4b6-e511-a090-003048dd52d5&sportId=6&includeCent=true';
-            $this->change_num = BookieHandler::getChangeNum(BOOKIE_ID);
-            if ($this->change_num != -1) {
-                $this->logger->info("Using changenum: &delta=" . $this->change_num);
-                $matchups_url .= '&delta=' . $this->change_num;
-            }
-            $this->logger->info("Fetching matchups through URL: " . $matchups_url);
-            $content = ParseTools::retrievePageFromURL($matchups_url);
-        }
-
-        $parsed_sport = $this->parseContent($content);
-
-        try {
-            $op = new OddsProcessor($this->logger, BOOKIE_ID, new Ruleset());
-            $op->processParsedSport($parsed_sport, $this->full_run);
-        } catch (Exception $e) {
-            $this->logger->error('Exception: ' . $e->getMessage());
-        }
-
-        $this->logger->info('Finished');
-    }
-
-    public function parseContent($content)
-    {
-        $xml = simplexml_load_string($content);
+        $xml = simplexml_load_string($content['all']);
 
         if (!$xml) {
             $this->logger->warning("Warning: XML broke!!");
         }
 
-        $oParsedSport = new ParsedSport('MMA');
+        $parsed_sport = new ParsedSport('MMA');
 
         foreach ($xml->data->s->cat as $category_node) {
             if (
@@ -97,25 +71,25 @@ class ParserJob
                         if ($bet_node['n'] == 'Single Match') {
                             //Regular matchup line
                             if (OddsTools::checkCorrectOdds((string) $bet_node->l[0]['c']) && OddsTools::checkCorrectOdds((string) $bet_node->l[1]['c'])) {
-                                $oTempMatchup = new ParsedMatchup(
+                                $parsed_matchup = new ParsedMatchup(
                                     (string) $bet_node->l[0],
                                     (string) $bet_node->l[1],
                                     (string) $bet_node->l[0]['c'],
                                     (string) $bet_node->l[1]['c']
                                 );
 
-                                $oGameDate = new DateTime($matchup_node['dt']);
-                                $oTempMatchup->setMetaData('gametime', $oGameDate->getTimestamp());
+                                $date_obj = new DateTime($matchup_node['dt']);
+                                $parsed_matchup->setMetaData('gametime', $date_obj->getTimestamp());
 
                                 //Add correlation ID to match matchups to props
-                                $oTempMatchup->setCorrelationID((string) $matchup_node['mid']);
+                                $parsed_matchup->setCorrelationID((string) $matchup_node['mid']);
 
-                                $oParsedSport->addParsedMatchup($oTempMatchup);
+                                $parsed_sport->addParsedMatchup($parsed_matchup);
                             }
                         } else if ($bet_node['n'] == 'Point Score') {
                             //Point score (totalt rounds)
                             if (OddsTools::checkCorrectOdds((string) $bet_node->l[0]['c']) && OddsTools::checkCorrectOdds((string) $bet_node->l[1]['c'])) {
-                                $oTempProp = new ParsedProp(
+                                $parsed_prop = new ParsedProp(
                                     (string) $matchup_node['n'] . ' : ' . $bet_node->l[0],
                                     (string) $matchup_node['n'] . ' : ' . $bet_node->l[1],
                                     (string) $bet_node->l[0]['c'],
@@ -123,15 +97,15 @@ class ParserJob
                                 );
 
                                 //Add correlation ID to match matchups to props
-                                $oTempProp->setCorrelationID((string) $matchup_node['mid']);
+                                $parsed_prop->setCorrelationID((string) $matchup_node['mid']);
 
-                                $oParsedSport->addFetchedProp($oTempProp);
+                                $parsed_sport->addFetchedProp($parsed_prop);
                             }
                         } else if ($bet_node['n'] == 'FreeForm') {
                             //Any other one line prop
                             foreach ($bet_node->l as $cLine) {
                                 if (OddsTools::checkCorrectOdds((string) $cLine['c'])) {
-                                    $oTempProp = new ParsedProp(
+                                    $parsed_prop = new ParsedProp(
                                         (string) $matchup_node['n'] . ' : ' . $cLine,
                                         '',
                                         (string) $cLine['c'],
@@ -139,9 +113,9 @@ class ParserJob
                                     );
 
                                     //Add correlation ID to match matchups to props
-                                    $oTempProp->setCorrelationID((string) $matchup_node['mid']);
+                                    $parsed_prop->setCorrelationID((string) $matchup_node['mid']);
 
-                                    $oParsedSport->addFetchedProp($oTempProp);
+                                    $parsed_sport->addFetchedProp($parsed_prop);
                                 }
                             }
                         } else {
@@ -152,18 +126,23 @@ class ParserJob
             }
         }
         //Declare authorative run if we fill the criteria
-        if (count($oParsedSport->getParsedMatchups()) >= 10 && $this->change_num == '525600') {
+        if (count($parsed_sport->getParsedMatchups()) >= 2 && $this->change_num == '525600') {
             $this->full_run = true;
             $this->logger->info("Declared authoritive run");
         }
 
         //Before finishing up, save the changenum 30 to limit not fetching the entire feed
-        if (BookieHandler::saveChangeNum(BOOKIE_ID, '30')) {
+        if (BookieHandler::saveChangeNum($this->bookie_id, '30')) {
             $this->logger->info("ChangeNum stored OK: 30");
         } else {
             $this->logger->error("Error: ChangeNum was not stored");
         }
 
-        return $oParsedSport;
+        return $parsed_sport;
     }
 }
+
+$options = getopt("", ["mode::"]);
+$logger = new Katzgrau\KLogger\Logger(GENERAL_KLOGDIR, Psr\Log\LogLevel::INFO, ['filename' => 'cron.' . BOOKIE_NAME . '.' . time() . '.log']);
+$parser = new ParserJob(BOOKIE_ID, $logger, new RuleSet(), BOOKIE_URLS, BOOKIE_MOCKFILES);
+$parser->run($options['mode'] ?? '');
