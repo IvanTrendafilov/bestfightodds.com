@@ -50,7 +50,9 @@ class ParserJob extends ParserJobBase
         $json = json_decode($content['all'], true);
 
         foreach ($json as $matchup) {
-            if ($matchup['Category']['Name'] == 'Boxing Matches' && $matchup['IsLive'] == false) {
+            if ($matchup['Category']['Name'] == 'Boxing Matches' && $matchup['IsLive'] == false
+            && trim(strtoupper($matchup['HomeTeamName'])) != 'PROPS' 
+            && trim(strtoupper($matchup['AwayTeamName'])) != 'PROPS') {
                 //Fixes flipped names like Gastelum K. into K Gastelum
                 $matchup['HomeTeamName'] = preg_replace('/([a-zA-Z\-\s]+)\s([a-zA-Z])\./', '$2 $1', $matchup['HomeTeamName']);
                 $matchup['AwayTeamName'] = preg_replace('/([a-zA-Z\-\s]+)\s([a-zA-Z])\./', '$2 $1', $matchup['AwayTeamName']);
