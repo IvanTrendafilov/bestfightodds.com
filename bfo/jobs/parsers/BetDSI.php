@@ -53,8 +53,7 @@ class ParserJob extends ParserJobBase
             if (($matchup['SportType']['Name'] == 'MMA' ||
                     in_array($matchup['Category']['Name'], ['UFC', 'LFA', 'Bellator', 'Invicta']))
                 && $matchup['IsLive'] == false
-                && trim(strtoupper($matchup['HomeTeamName'])) != 'PROPS'
-                && trim(strtoupper($matchup['AwayTeamName'])) != 'PROPS'
+                && count($matchup['PreviewOddsMoneyLine']) == 2
             ) {
 
                 //Fixes flipped names like Gastelum K. into K Gastelum
