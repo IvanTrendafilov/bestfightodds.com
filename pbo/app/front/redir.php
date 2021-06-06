@@ -7,54 +7,36 @@ use BFO\General\BookieHandler;
 //This script is used to redirect to different urls depending on different variables such as locale
 
 //Bodog/Bovada
-if (isset($_GET['b']) && $_GET['b'] == '5')
-{
+if (isset($_GET['b']) && $_GET['b'] == '5') {
 	$lang = isset($_SERVER['HTTP_ACCEPT_LANGUAGE']) ? $_SERVER['HTTP_ACCEPT_LANGUAGE'] : '';
 	$strpos = stripos($lang, ',');
-	if ($strpos > 0)
-	{
+	if ($strpos > 0) {
 		$lang = substr($lang, 0, $strpos);
 	}
 
-	if (strtolower($lang) == 'en-ca')
-	{
+	if (strtolower($lang) == 'en-ca') {
 		//Bodog redir (CA)
-		$sURL = 'https://record.revenuenetwork.com/_0cjkasW-cHa_nF6nwlBnq2Nd7ZgqdRLk/0/';	
-	}
-	else
-	{
-		$oBookie = BookieHandler::getBookieByID($_GET['b']);
+		$url = 'https://record.revenuenetwork.com/_0cjkasW-cHa_nF6nwlBnq2Nd7ZgqdRLk/0/';
+	} else {
+		$bookie = BookieHandler::getBookieByID((int) $_GET['b']);
 		//Bovada redir (US)
-		$sURL = $oBookie->getRefURL();
+		$url = $bookie->getRefURL();
 	}
-	
-	header('Location: ' . $sURL);
-}
-else
-{
-	if (is_numeric($_GET['b']))
-	{
-		$oBookie = BookieHandler::getBookieByID($_GET['b']);
-		if ($oBookie != null)
-		{
-			if ($oBookie->getRefURL() != '')
-			{
-				header('Location: ' . $oBookie->getRefURL());
-			}
-			else
-			{
+
+	header('Location: ' . $url);
+} else {
+	if (is_numeric($_GET['b'])) {
+		$bookie = BookieHandler::getBookieByID((int) $_GET['b']);
+		if ($bookie != null) {
+			if ($bookie->getRefURL() != '') {
+				header('Location: ' . $bookie->getRefURL());
+			} else {
 				header('Location: https://www.proboxingodds.com');
 			}
-		}
-		else
-		{
+		} else {
 			header('Location: https://www.proboxingodds.com');
 		}
-	}
-	else
-	{
+	} else {
 		header('Location: https://www.proboxingodds.com');
-	}	
+	}
 }
-
-?>

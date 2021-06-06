@@ -14,7 +14,7 @@ class BookieHandler
         return BookieDB::getBookiesGeneric();
     }
 
-    public static function getBookieByID($bookie_id): ?Bookie
+    public static function getBookieByID(int $bookie_id): ?Bookie
     {
         $bookies = BookieDB::getBookiesGeneric($bookie_id);
         return $bookies[0] ?? null;
