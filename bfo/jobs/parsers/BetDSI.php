@@ -93,7 +93,7 @@ class ParserJob extends ParserJobBase
         }
 
         //Declare authorative run if we fill the criteria
-        if (count($parsed_sport->getParsedMatchups()) > 10) {
+        if (count($parsed_sport->getParsedMatchups()) > 3) {
             $this->full_run = true;
             $this->logger->info("Declared full run");
         }
