@@ -33,7 +33,7 @@ define(
 );
 define(
     'BOOKIE_MOCKFILES',
-    ['all' => PARSE_MOCKFEEDS_DIR . "betdsi.xml"]
+    ['all' => PARSE_MOCKFEEDS_DIR . "betdsi.json"]
 );
 
 class ParserJob extends ParserJobBase
@@ -51,8 +51,8 @@ class ParserJob extends ParserJobBase
 
         foreach ($json as $matchup) {
             if ($matchup['Category']['Name'] == 'Boxing Matches' && $matchup['IsLive'] == false
-            && trim(strtoupper($matchup['HomeTeamName'])) != 'PROPS' 
-            && trim(strtoupper($matchup['AwayTeamName'])) != 'PROPS') {
+                && count($matchup['PreviewOddsMoneyLine']) == 2) {
+
                 //Fixes flipped names like Gastelum K. into K Gastelum
                 $matchup['HomeTeamName'] = preg_replace('/([a-zA-Z\-\s]+)\s([a-zA-Z])\./', '$2 $1', $matchup['HomeTeamName']);
                 $matchup['AwayTeamName'] = preg_replace('/([a-zA-Z\-\s]+)\s([a-zA-Z])\./', '$2 $1', $matchup['AwayTeamName']);
