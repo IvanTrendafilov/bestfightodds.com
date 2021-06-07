@@ -2,9 +2,7 @@
 
 namespace BFO\General;
 
-use BFO\General\EventHandler;
 use BFO\General\OddsHandler;
-
 use BFO\DataTypes\FightOdds;
 use BFO\DataTypes\PropBet;
 
@@ -12,7 +10,7 @@ class GraphHandler
 {
     public static function getMatchupData(int $matchup_id, int $bookie_id): array
     {
-        return EventHandler::getAllOdds($matchup_id, $bookie_id);
+        return OddsHandler::getAllOdds($matchup_id, $bookie_id);
     }
 
     public static function getPropData(int $matchup_id, int $bookie_id, int $proptype_id, int $team_num): array
@@ -33,18 +31,18 @@ class GraphHandler
 
         $bookies = BookieHandler::getAllBookies();
 
-        $aOdds = [];
+        $odds_col = [];
         $dates = [];
 
         $bookie_count = 0;
 
-        foreach ($bookies as $oBookie) {
-            $aOdds[$bookie_count] = [];
+        foreach ($bookies as $bookie) {
+            $odds_col[$bookie_count] = [];
 
-            $stored_odds_col = EventHandler::getAllOdds($matchup_id, $oBookie->getID());
-            if ($stored_odds_col != null) {
+            $stored_odds_col = OddsHandler::getAllOdds($matchup_id, $bookie->getID());
+            if ($stored_odds_col) {
                 foreach ($stored_odds_col as $stored_odds) {
-                    $aOdds[$bookie_count][] = $stored_odds;
+                    $odds_col[$bookie_count][] = $stored_odds;
                     if (!in_array($stored_odds->getDate(), $dates)) {
                         $dates[] = $stored_odds->getDate();
                     }
@@ -55,82 +53,101 @@ class GraphHandler
         }
 
         sort($dates);
-        $aDateOdds = [];
+        $return_odds = [];
 
-        foreach ($dates as $sDate) {
-            $iCurrentOddsMean = 0;
-            $iCurrentOwners = 0;
+        foreach ($dates as $date_string) {
+            $odds_mean = 0;
+            $total_bookies_with_odds = 0;
 
-            for ($iX = 0; $iX < $bookie_count; $iX++) {
-                $oCurrentClosestOdds = null;
+            for ($i = 0; $i < $bookie_count; $i++) {
+                $current_closest_odds = null;
 
-                foreach ($aOdds[$iX] as $oOdds) {
-                    if ($oOdds->getDate() <= $sDate) {
-                        if ($oCurrentClosestOdds == null) {
-                            $oCurrentClosestOdds = $oOdds;
+                foreach ($odds_col[$i] as $odds_obj) {
+                    if ($odds_obj->getDate() <= $date_string) {
+                        if (!$current_closest_odds) {
+                            $current_closest_odds = $odds_obj;
                         } else {
-                            if ($oOdds->getDate() > $oCurrentClosestOdds->getDate()) {
-                                $oCurrentClosestOdds = $oOdds;
+                            if ($odds_obj->getDate() > $current_closest_odds->getDate()) {
+                                $current_closest_odds = $odds_obj;
                             }
                         }
                     }
                 }
 
-                if ($oCurrentClosestOdds != null) {
-                    if ($iCurrentOddsMean == 0) {
-                        $iCurrentOddsMean = $oCurrentClosestOdds->getFighterOddsAsDecimal($team_num, true);
-                        $iCurrentOwners = 1;
+                if ($current_closest_odds) {
+                    if ($odds_mean == 0) {
+                        $odds_mean = $current_closest_odds->getFighterOddsAsDecimal($team_num, true);
+                        $total_bookies_with_odds = 1;
                     } else {
-                        $iCurrentOddsMean = $iCurrentOddsMean + $oCurrentClosestOdds->getFighterOddsAsDecimal($team_num, true);
-                        $iCurrentOwners++;
+                        $odds_mean = $odds_mean + $current_closest_odds->getFighterOddsAsDecimal($team_num, true);
+                        $total_bookies_with_odds++;
                     }
                 }
             }
 
-            $aDateOdds[] = new FightOdds(
+            $return_odds[] = new FightOdds(
                 (int) $matchup_id,
                 -1,
-                ($team_num == 1 ? FightOdds::convertOddsEUToUS($iCurrentOddsMean / $iCurrentOwners) : 0),
-                ($team_num == 2 ? FightOdds::convertOddsEUToUS($iCurrentOddsMean / $iCurrentOwners) : 0),
-                $sDate
+                ($team_num == 1 ? FightOdds::convertOddsEUToUS($odds_mean / $total_bookies_with_odds) : 0),
+                ($team_num == 2 ? FightOdds::convertOddsEUToUS($odds_mean / $total_bookies_with_odds) : 0),
+                $date_string
             );
         }
 
-        return $aDateOdds;
+        return $return_odds;
     }
 
-
-
-    public static function getPropIndexData(int $matchup_id, int $a_iPosProp, int $proptype_id, int $team_num): array
+    public static function getPropIndexData(int $matchup_id, int $prop_side, int $proptype_id, int $team_num): array
     {
+        return self::getPropIndexDataGeneric($matchup_id, -1, $prop_side, $proptype_id, $team_num);
+    }
+
+    public static function getEventPropIndexData(int $event_id, int $prop_side, int $proptype_id): array
+    {
+        return self::getPropIndexDataGeneric(-1, $event_id, $prop_side, $proptype_id, 0);
+    }
+
+    public static function getPropIndexDataGeneric(int $matchup_id, int $event_id, int $prop_side, int $proptype_id, int $team_num = 0): array
+    {
+        if (($matchup_id != -1 && $event_id != -1)
+            || ($matchup_id == -1 && $event_id == -1)
+        ) { //Both matchup and event id specified or non at all supplied. Abort
+            return [];
+        }
+
         $bookies = BookieHandler::getAllBookies();
 
-        $aOdds = [];
+        $odds_col = [];
         $dates = [];
 
         $bookie_count = 0;
         $skip_bookie = false; //Keeps track if bookie does not give odds on the prop and if it is stored as -99999 in the database
 
-        foreach ($bookies as $oBookie) {
-            $aOdds[$bookie_count] = [];
+        foreach ($bookies as $bookie) {
+            $odds_col[$bookie_count] = [];
 
-            $aPropOdds = OddsHandler::getAllPropOddsForMatchupPropType($matchup_id, $oBookie->getID(), $proptype_id, $team_num);
+            $propodds_col = null;
+            if ($matchup_id != -1) { //Matchup is specified
+                $propodds_col = OddsHandler::getAllPropOddsForMatchupPropType($matchup_id, $bookie->getID(), $proptype_id, $team_num);
+            } else { //Event is specified
+                $propodds_col = OddsHandler::getAllPropOddsForEventPropType($event_id, $bookie->getID(), $proptype_id);
+            }
 
-            if ($aPropOdds != null) {
-                foreach ($aPropOdds as $oPropBet) {
+            if ($propodds_col) {
+                foreach ($propodds_col as $prop_odds) {
                     //Check if prop bet should be skipped, i.e. stored as -99999 in database
-                    if (($a_iPosProp == 1 ? $oPropBet->getPropOdds() : $oPropBet->getNegPropOdds()) == -99999) {
+                    if (($prop_side == 1 ? $prop_odds->getPropOdds() : $prop_odds->getNegPropOdds()) == -99999) {
                         $skip_bookie = true;
                     } else {
-                        $aOdds[$bookie_count][] = $oPropBet;
-                        if (!in_array($oPropBet->getDate(), $dates)) {
-                            $dates[] = $oPropBet->getDate();
+                        $odds_col[$bookie_count][] = $prop_odds;
+                        if (!in_array($prop_odds->getDate(), $dates)) {
+                            $dates[] = $prop_odds->getDate();
                         }
                     }
                 }
             }
 
-            if ($skip_bookie == false) {
+            if (!$skip_bookie) {
                 $bookie_count++;
             }
             $skip_bookie = false;
@@ -138,126 +155,49 @@ class GraphHandler
 
         sort($dates);
 
-        $aDateOdds = [];
+        $return_odds = [];
 
-        foreach ($dates as $sDate) {
-            $iCurrentOddsMean = 0;
-            $iCurrentOwners = 0;
+        foreach ($dates as $date_string) {
+            $odds_mean = 0;
+            $total_bookies_with_odds = 0;
 
-            for ($iX = 0; $iX < $bookie_count; $iX++) {
-                $oCurrentClosestOdds = null;
+            for ($i = 0; $i < $bookie_count; $i++) {
+                $current_closest_odds = null;
 
-                foreach ($aOdds[$iX] as $oOdds) {
-                    if ($oOdds->getDate() <= $sDate) {
-                        if ($oCurrentClosestOdds == null) {
-                            $oCurrentClosestOdds = $oOdds;
+                foreach ($odds_col[$i] as $odds_obj) {
+                    if ($odds_obj->getDate() <= $date_string) {
+                        if (!$current_closest_odds) {
+                            $current_closest_odds = $odds_obj;
                         } else {
-                            if ($oOdds->getDate() > $oCurrentClosestOdds->getDate()) {
-                                $oCurrentClosestOdds = $oOdds;
+                            if ($odds_obj->getDate() > $current_closest_odds->getDate()) {
+                                $current_closest_odds = $odds_obj;
                             }
                         }
                     }
                 }
 
-                if ($oCurrentClosestOdds != null) {
-                    if ($iCurrentOddsMean == 0) {
-                        $iCurrentOddsMean = ($a_iPosProp == 1 ? PropBet::moneylineToDecimal($oCurrentClosestOdds->getPropOdds(), true) : PropBet::moneylineToDecimal($oCurrentClosestOdds->getNegPropOdds(), true));
-                        $iCurrentOwners = 1;
+                if ($current_closest_odds) {
+                    if ($odds_mean == 0) {
+                        $odds_mean = ($prop_side == 1 ? PropBet::moneylineToDecimal($current_closest_odds->getPropOdds(), true) : PropBet::moneylineToDecimal($current_closest_odds->getNegPropOdds(), true));
+                        $total_bookies_with_odds = 1;
                     } else {
-                        $iCurrentOddsMean = $iCurrentOddsMean + ($a_iPosProp == 1 ? PropBet::moneylineToDecimal($oCurrentClosestOdds->getPropOdds(), true) : PropBet::moneylineToDecimal($oCurrentClosestOdds->getNegPropOdds(), true));
-                        $iCurrentOwners++;
+                        $odds_mean = $odds_mean + ($prop_side == 1 ? PropBet::moneylineToDecimal($current_closest_odds->getPropOdds(), true) : PropBet::moneylineToDecimal($current_closest_odds->getNegPropOdds(), true));
+                        $total_bookies_with_odds++;
                     }
                 }
             }
 
-            $aDateOdds[] = new PropBet($matchup_id, -1, '', ($a_iPosProp == 1 ? PropBet::decimalToMoneyline($iCurrentOddsMean / $iCurrentOwners) : 0), '', ($a_iPosProp == 2 ? PropBet::decimalToMoneyline($iCurrentOddsMean / $iCurrentOwners) : 0), $proptype_id, $sDate, $team_num);
+            $return_odds[] = new PropBet($matchup_id, -1, '', ($prop_side == 1 ? PropBet::decimalToMoneyline($odds_mean / $total_bookies_with_odds) : 0), '', ($prop_side == 2 ? PropBet::decimalToMoneyline($odds_mean / $total_bookies_with_odds) : 0), $proptype_id, $date_string, $team_num);
         }
 
-        return $aDateOdds;
+        return $return_odds;
     }
 
-
-    /* TODO: Merge this into the one above at some point. Some redundency here */
-    public static function getEventPropIndexData($a_iEventID, $a_iPosProp, $proptype_id)
-    {
-        $bookies = BookieHandler::getAllBookies();
-
-        $aOdds = [];
-        $dates = [];
-
-        $bookie_count = 0;
-        $skip_bookie = false; //Keeps track if bookie does not give odds on the prop and if it is stored as -99999 in the database
-
-        foreach ($bookies as $oBookie) {
-            $aOdds[$bookie_count] = [];
-
-            $aPropOdds = OddsHandler::getAllPropOddsForEventPropType($a_iEventID, $oBookie->getID(), $proptype_id);
-
-            if ($aPropOdds != null) {
-                foreach ($aPropOdds as $oPropBet) {
-                    //Check if prop bet should be skipped, i.e. stored as -99999 in database
-                    if (($a_iPosProp == 1 ? $oPropBet->getPropOdds() : $oPropBet->getNegPropOdds()) == -99999) {
-                        $skip_bookie = true;
-                    } else {
-                        $aOdds[$bookie_count][] = $oPropBet;
-                        if (!in_array($oPropBet->getDate(), $dates)) {
-                            $dates[] = $oPropBet->getDate();
-                        }
-                    }
-                }
-            }
-
-            if ($skip_bookie == false) {
-                $bookie_count++;
-            }
-            $skip_bookie = false;
-        }
-
-        sort($dates);
-
-        $aDateOdds = [];
-
-        foreach ($dates as $sDate) {
-            $iCurrentOddsMean = 0;
-            $iCurrentOwners = 0;
-
-            for ($iX = 0; $iX < $bookie_count; $iX++) {
-                $oCurrentClosestOdds = null;
-
-                foreach ($aOdds[$iX] as $oOdds) {
-                    if ($oOdds->getDate() <= $sDate) {
-                        if ($oCurrentClosestOdds == null) {
-                            $oCurrentClosestOdds = $oOdds;
-                        } else {
-                            if ($oOdds->getDate() > $oCurrentClosestOdds->getDate()) {
-                                $oCurrentClosestOdds = $oOdds;
-                            }
-                        }
-                    }
-                }
-
-                if ($oCurrentClosestOdds != null) {
-                    if ($iCurrentOddsMean == 0) {
-                        $iCurrentOddsMean = ($a_iPosProp == 1 ? PropBet::moneylineToDecimal($oCurrentClosestOdds->getPropOdds(), true) : PropBet::moneylineToDecimal($oCurrentClosestOdds->getNegPropOdds(), true));
-                        $iCurrentOwners = 1;
-                    } else {
-                        $iCurrentOddsMean = $iCurrentOddsMean + ($a_iPosProp == 1 ? PropBet::moneylineToDecimal($oCurrentClosestOdds->getPropOdds(), true) : PropBet::moneylineToDecimal($oCurrentClosestOdds->getNegPropOdds(), true));
-                        $iCurrentOwners++;
-                    }
-                }
-            }
-
-            $aDateOdds[] = new PropBet($a_iEventID, -1, '', ($a_iPosProp == 1 ? PropBet::decimalToMoneyline($iCurrentOddsMean / $iCurrentOwners) : 0), '', ($a_iPosProp == 2 ? PropBet::decimalToMoneyline($iCurrentOddsMean / $iCurrentOwners) : 0), $proptype_id, $sDate);
-        }
-
-        return $aDateOdds;
-    }
-
-    public static function getMedianSparkLine($matchup_id, $team_num)
+    public static function getMedianSparkLine(int $matchup_id, int $team_num): ?string
     {
         $sparkline_steps = 10;
 
-        $odds = EventHandler::getAllOdds($matchup_id);
+        $odds = OddsHandler::getAllOdds($matchup_id);
         if ($odds == null || sizeof($odds) < 1) {
             return null;
         }
@@ -277,8 +217,8 @@ class GraphHandler
             // Once we reach a line that passes the step date, flush the stored ones and create an index for that
             if ($odds_date >= $low_date + ($step * $step_counter)) {
                 $total = 0;
-                foreach ($latest_odds_per_bookie as $oBookieLine) {
-                    $total += $oBookieLine->getFighterOddsAsDecimal($team_num, true);
+                foreach ($latest_odds_per_bookie as $bookieLine) {
+                    $total += $bookieLine->getFighterOddsAsDecimal($team_num, true);
                 }
                 $mean = $total / sizeof($latest_odds_per_bookie);
                 //echo 'Step ' . $step_counter . ' mean is: ' . $mean . ' when steps was ' . ($low_date + ($step * $step_counter)) . '<br>';

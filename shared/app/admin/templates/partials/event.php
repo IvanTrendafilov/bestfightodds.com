@@ -68,7 +68,7 @@
 
         <?php if (!isset($hide_header) || $hide_header == false) : ?>
             <div class="card-header">
-                <h5 class="card-title"><a href="#" name="event<?= $event['event_obj']->getID() ?>"></a></h5>
+                <h5 class="card-title"><?= $event['event_obj']->getName() ?><a href="#" name="event<?= $event['event_obj']->getID() ?>"></a></h5>
                 <div style="<?= ($event['event_obj']->isDisplayed() ? '' : 'font-style: italic; color: #909090;') ?>"><?= $event['event_obj']->getName() ?>
                     <span style="color: #777777">-</span> <?= $event['event_obj']->getDate() ?> &nbsp;
                     <a href="/cnadm/events/<?= $event['event_obj']->getID() ?>">edit</a> &nbsp;

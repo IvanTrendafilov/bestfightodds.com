@@ -53,16 +53,31 @@
     </div>
 </div>
 
+<div class="row">
 
-<div>
-    <div style="float: left;">
-        <?php $this->insert('partials/event', ['events' => $events]) ?>
+    <div class="card col-xl-4 col-xxl-4">
+        <table class="table table-sm table-hover">
+            <thead>
+                <tr>
+                    <th>Quick jump to</th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody class="bg-white">
+                <?php foreach ($events as $event) : ?>
+                    <tr>
+                        <td><a href="#event<?= $event['event_obj']->getID() ?>" ><?= $event['event_obj']->getName() ?></a></td>
+                        <td><?= $event['event_obj']->getDate() ?></td>
+                    </tr>
+                <?php endforeach ?>
+            </tbody>
+        </table>
     </div>
-    <div>
-        <p style="font-size: 10px; line-height: 15px;"><b>&nbsp;&nbsp;&nbsp;&nbsp;Quick jump to</b><br />
-            <?php foreach ($events as $event) : ?>
-                &nbsp;&nbsp;&nbsp;<a href="#event<?= $event['event_obj']->getID() ?>" style="color: #000000;"><?= $event['event_obj']->getName() ?></a><br />
-            <?php endforeach ?>
-        </p>
+
+    <div class="col-xl-8 col-xxl-8">
+        <div>
+            <?php $this->insert('partials/event', ['events' => $events]) ?>
+        </div>
     </div>
+
 </div>

@@ -522,48 +522,6 @@ class EventDB
     }
 
     /**
-     * Get best odds for a fight and fighter
-     *
-     * TODO: What is the difference between this one and getBestOddsForFight? Can this one be replaced?
-     *
-     * @param int Fight ID
-     * @param int Fighter number (1 or 2)
-     * @return null|\FightOdds Odds
-     */
-    public static function getBestOddsForFightAndFighter($matchup_id, $team_num)
-    {
-        if ($team_num < 1 || $team_num > 2) {
-            return null;
-        }
-
-        $query = 'SELECT co1.fighter1_odds AS fighter1_odds, 
-                          co1.fighter2_odds AS fighter2_odds, 
-                          co1.bookie_id AS bookie_id
-                    FROM fightodds co1, (SELECT bookie_id, max(date) AS date
-                                        FROM fightodds 
-                                        WHERE fight_id = ?
-                                        GROUP BY bookie_id ) AS co2 
-                    WHERE co1.bookie_id = co2.bookie_id 
-                        AND co1.fight_id = ? 
-                        AND co1.date = co2.date 
-                    ORDER BY co1.fighter' . $team_num . '_odds DESC LIMIT 1;';
-
-        $params = [$matchup_id, $matchup_id];
-
-        $result = DBTools::doParamQuery($query, $params);
-
-        $odds_col = [];
-
-        while ($row = mysqli_fetch_array($result)) {
-            $odds_col[] = new FightOdds((int) $matchup_id, (int) $row['bookie_id'], $row['fighter1_odds'], $row['fighter2_odds'], '');
-        }
-        if (sizeof($odds_col) > 0) {
-            return $odds_col[0];
-        }
-        return null;
-    }
-
-    /**
      * Updates an event in the database. Uses all fields in the Event-object
      */
     public static function updateEvent($event_obj)
@@ -748,30 +706,6 @@ class EventDB
                     ORDER BY source_bookie_id ASC';
 
         return PDOTools::findMany($query, $params);
-    }
-
-    public static function getLatestChangeDate($event_id)
-    {
-        $query = 'SELECT thedate FROM (SELECT fo.date as thedate 
-                    FROM fightodds fo 
-                        LEFT JOIN fights f ON fo.fight_id = f.id 
-                    WHERE f.event_id = ?
-                    ORDER BY fo.date DESC LIMIT 0,1) AS fot UNION SELECT * FROM 
-                    (SELECT lp.date as thedate 
-                    FROM lines_props lp
-                        LEFT JOIN fights f ON lp.matchup_id = f.id 
-                    WHERE f.event_id = ?
-                    ORDER BY lp.date DESC LIMIT 0,1) AS lpt 
-                    UNION SELECT * FROM (SELECT lep.date as thedate 
-                        FROM lines_eventprops lep
-                        WHERE lep.event_id = ?
-                        ORDER BY lep.date DESC LIMIT 0,1) AS lept
-                    ORDER BY thedate DESC LIMIT 0,1;';
-
-        $params = array($event_id, $event_id, $event_id);
-
-        $result = DBTools::doParamQuery($query, $params);
-        return DBTools::getSingleValue($result);
     }
 
     public static function getAllEventsWithMatchupsWithoutResults()

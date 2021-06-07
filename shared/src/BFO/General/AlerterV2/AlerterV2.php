@@ -214,11 +214,11 @@ class AlerterV2
 
             if (isset($criterias['bookie_id'])) {
                 //Grab bookie specific line
-                $latest_price = EventHandler::getLatestOddsForFightAndBookie($criterias['matchup_id'], $criterias['bookie_id']);
+                $latest_price = OddsHandler::getLatestOddsForFightAndBookie($criterias['matchup_id'], $criterias['bookie_id']);
                 $bookie = BookieHandler::getBookieByID((int) $criterias['bookie_id']);
                 $add_bookie = ' at ' . $bookie->getName();
             } else {
-                $latest_price = EventHandler::getBestOddsForFight($criterias['matchup_id']);
+                $latest_price = OddsHandler::getBestOddsForFight($criterias['matchup_id']);
                 //Grab generic best line
             }
 

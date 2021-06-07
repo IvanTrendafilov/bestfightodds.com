@@ -42,30 +42,6 @@ class EventHandler
         return EventDB::getMatchups($future_matchups_only, $only_with_odds, $event_id, $matchup_id, $only_without_odds, $team_id, $create_source);
     }
 
-    /**
-     * Gets all latest odds for a fight.
-     * If the second parameter is specified it is possible to jump to historic
-     * odds, for example getting the previous odds and comparing to the current
-     */
-    public static function getAllLatestOddsForFight($fight_id, $historic_offset = 0)
-    {
-        return EventDB::getAllLatestOddsForFight($fight_id, $historic_offset);
-    }
-
-    public static function getLatestOddsForFightAndBookie($fight_id, $bookie_id)
-    {
-        return EventDB::getLatestOddsForFightAndBookie($fight_id, $bookie_id);
-    }
-
-    public static function getAllOdds(int $matchup_id, int $bookie_id = null): ?array
-    {
-        $odds = EventDB::getAllOdds($matchup_id, $bookie_id);
-        if (sizeof($odds) > 0) {
-            return $odds;
-        }
-        return null;
-    }
-
     public static function getMatchingFight(string $team1_name, string $team2_name, bool $future_only = false, bool $past_only = false, int $known_fighter_id = null, string $event_date = null, int $event_id = null): ?Fight
     {
         return EventDB::getMatchingFight($team1_name, $team2_name, $future_only, $past_only, $known_fighter_id, $event_date, $event_id);
@@ -83,49 +59,7 @@ class EventHandler
         return null;
     }
 
-    /**
-     * Checks if the exact same fight odds for the operator and fight exist.
-     *
-     * @param FightOdds object to look for (date is not checked).
-     * @return true if the exact odds exists and false if it doesn't.
-     */
-    public static function checkMatchingOdds($odds_obj)
-    {
-        $found_odds_obj = EventHandler::getLatestOddsForFightAndBookie($odds_obj->getFightID(), $odds_obj->getBookieID());
-        if ($found_odds_obj != null) {
-            return $found_odds_obj->equals($odds_obj);
-        }
-        return false;
-    }
 
-    public static function addNewFightOdds(FightOdds $odds_obj): ?int
-    {
-        //Validate input
-        if (
-            empty($odds_obj->getFightID()) || !is_numeric($odds_obj->getFightID()) ||
-            empty($odds_obj->getBookieID()) || !is_numeric($odds_obj->getBookieID()) ||
-            empty($odds_obj->getOdds(1)) || !is_numeric($odds_obj->getOdds(1)) ||
-            empty($odds_obj->getOdds(2)) || !is_numeric($odds_obj->getOdds(2))
-        ) {
-            return false;
-        }
-        //Validate that odds is not in range -99 => +99
-        if (
-            (intval($odds_obj->getOdds(1)) >= -99 && intval($odds_obj->getOdds(1) <= 99)) ||
-            (intval($odds_obj->getOdds(2)) >= -99 && intval($odds_obj->getOdds(2) <= 99))
-        ) {
-            return false;
-        }
-
-        //Validate that odds is not positive on both sides (=surebet, most likely invalid)
-        if (
-            intval($odds_obj->getOdds(1)) >= 0 && intval($odds_obj->getOdds(2) >= 0)
-        ) {
-            return false;
-        }
-
-        return EventDB::addNewFightOdds($odds_obj);
-    }
 
     /*public static function addNewFight($fight_obj)
     {
@@ -197,16 +131,6 @@ class EventHandler
         return false;
     }
 
-    public static function getBestOddsForFight($matchup_id)
-    {
-        return EventDB::getBestOddsForFight($matchup_id);
-    }
-
-    public static function getBestOddsForFightAndFighter($matchup_id, $fighter_pos)
-    {
-        return EventDB::getBestOddsForFightAndFighter($matchup_id, $fighter_pos);
-    }
-
     public static function removeFight($matchup_id)
     {
         return EventDB::removeFight($matchup_id);
@@ -262,36 +186,6 @@ class EventHandler
         }
 
         return EventDB::updateFight($matchup_obj);
-    }
-
-    public static function getCurrentOddsIndex($matchup_id, $team_no)
-    {
-        if ($team_no > 2 || $team_no < 1) {
-            return null;
-        }
-
-        $odds_col = EventHandler::getAllLatestOddsForFight($matchup_id);
-
-        if ($odds_col == null || sizeof($odds_col) == 0) {
-            return null;
-        }
-        if (sizeof($odds_col) == 1) {
-            return new FightOdds((int) $matchup_id, -1, ($team_no == 1 ? $odds_col[0]->getOdds($team_no) : 0), ($team_no == 2 ? $odds_col[0]->getOdds($team_no) : 0), -1);
-        }
-        $odds_total = 0;
-        foreach ($odds_col as $odds_obj) {
-            $current_odds = $odds_obj->getOdds($team_no);
-            $odds_total += $current_odds < 0 ? ($current_odds + 100) : ($current_odds - 100);
-        }
-        $odds_total = round($odds_total / sizeof($odds_col) + ($odds_total < 0 ? -100 : 100));
-
-        return new FightOdds(
-            (int) $matchup_id,
-            -1,
-            ($team_no == 1 ? $odds_total : 0),
-            ($team_no == 2 ? $odds_total : 0),
-            -1
-        );
     }
 
     public static function setFightAsMainEvent($fight_id, $set_as_main_event = true)
@@ -387,11 +281,6 @@ class EventHandler
     public static function getMetaDataForMatchup(int $matchup_id, string $metadata_attribute = null, int $bookie_id = null): array
     {
         return EventDB::getMetaDataForMatchup($matchup_id, $metadata_attribute, $bookie_id);
-    }
-
-    public static function getLatestChangeDate($event_id)
-    {
-        return EventDB::getLatestChangeDate($event_id);
     }
 
     public static function getAllEventsWithMatchupsWithoutResults()

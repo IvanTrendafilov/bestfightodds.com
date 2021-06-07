@@ -7,6 +7,7 @@ use PHPUnit\Framework\TestCase;
 require_once 'bfo/bootstrap.php';
 
 use BFO\General\EventHandler;
+use BFO\General\OddsHandler;
 use BFO\General\BookieHandler;
 use BFO\DataTypes\Fight;
 use BFO\DataTypes\Event;
@@ -53,7 +54,7 @@ final class CreateOddsTest extends TestCase
 
         foreach ($ok_odds_variants as $odds) {
             $odds_obj = new FightOdds($this->matchup->getID(), $this->bookie_id, $odds[0], $odds[1], -1);
-            $result = EventHandler::addNewFightOdds($odds_obj);
+            $result = OddsHandler::addNewFightOdds($odds_obj);
             $this->assertEquals(
                 true,
                 $result
@@ -74,7 +75,7 @@ final class CreateOddsTest extends TestCase
 
         foreach ($invalid_odds_variants as $odds) {
             $odds_obj = new FightOdds($this->matchup->getID(), $this->bookie_id, $odds[0], $odds[1], -1);
-            $result = EventHandler::addNewFightOdds($odds_obj);
+            $result = OddsHandler::addNewFightOdds($odds_obj);
             $this->assertEquals(
                 false,
                 $result
@@ -87,12 +88,12 @@ final class CreateOddsTest extends TestCase
         $this->expectException(Exception::class);
 
         $odds_obj = new FightOdds($this->matchup->getID(), $this->bookie_id, '-250', '+125', -1);
-        $result = EventHandler::addNewFightOdds($odds_obj);
+        $result = OddsHandler::addNewFightOdds($odds_obj);
         $this->assertEquals(
             true,
             $result
         );
-        $result = EventHandler::addNewFightOdds($odds_obj);
+        $result = OddsHandler::addNewFightOdds($odds_obj);
         $this->assertEquals(
             false,
             $result
@@ -103,7 +104,7 @@ final class CreateOddsTest extends TestCase
     {
         //No bookie specified
         $odds_obj = new FightOdds($this->matchup->getID(), null, '+300', '-250', -1);
-        $result = EventHandler::addNewFightOdds($odds_obj);
+        $result = OddsHandler::addNewFightOdds($odds_obj);
         $this->assertEquals(
             false,
             $result
@@ -111,7 +112,7 @@ final class CreateOddsTest extends TestCase
 
         //No matchup specified
         $odds_obj = new FightOdds(null, $this->bookie_id, '+300', '-250', -1);
-        $result = EventHandler::addNewFightOdds($odds_obj);
+        $result = OddsHandler::addNewFightOdds($odds_obj);
         $this->assertEquals(
             false,
             $result
@@ -119,7 +120,7 @@ final class CreateOddsTest extends TestCase
 
         //Invalid/unavailable matchup specified
         $odds_obj = new FightOdds(78913892, $this->bookie_id, '+300', '-250', -1);
-        $result = EventHandler::addNewFightOdds($odds_obj);
+        $result = OddsHandler::addNewFightOdds($odds_obj);
         $this->assertEquals(
             false,
             $result
@@ -127,7 +128,7 @@ final class CreateOddsTest extends TestCase
 
         //Invalid/unavailable bookie specified
         $odds_obj = new FightOdds($this->matchup->getID(), 238, '+300', '-250', -1);
-        $result = EventHandler::addNewFightOdds($odds_obj);
+        $result = OddsHandler::addNewFightOdds($odds_obj);
         $this->assertEquals(
             false,
             $result

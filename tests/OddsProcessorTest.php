@@ -7,6 +7,7 @@ use PHPUnit\Framework\TestCase;
 require_once 'bfo/bootstrap.php';
 require_once 'bfo/config/Ruleset.php';
 
+use BFO\General\OddsHandler;
 use BFO\General\EventHandler;
 use BFO\General\BookieHandler;
 use BFO\DataTypes\Fight;
@@ -133,13 +134,13 @@ final class OddsProcessorTest extends TestCase
 
         $match_results = $this->op->matchMatchups($parsed_sport->getParsedMatchups());
         
-        $odds = EventHandler::getAllLatestOddsForFight($this->matchup->getID());
+        $odds = OddsHandler::getAllLatestOddsForFight($this->matchup->getID());
         $this->assertEquals(
             0,
             count($odds)
         );
         $this->op->updateMatchedMatchups($match_results);
-        $odds = EventHandler::getAllLatestOddsForFight($this->matchup->getID());
+        $odds = OddsHandler::getAllLatestOddsForFight($this->matchup->getID());
         $this->assertEquals(
             1,
             count($odds)
@@ -157,7 +158,7 @@ final class OddsProcessorTest extends TestCase
             $parsed_matchup->getMoneyline(2)
         );
         $this->op->updateMatchedMatchups($match_results);
-        $odds = EventHandler::getAllLatestOddsForFight($this->matchup->getID());
+        $odds = OddsHandler::getAllLatestOddsForFight($this->matchup->getID());
         $this->assertEquals(
             1,
             count($odds)

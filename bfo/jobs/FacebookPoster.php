@@ -72,7 +72,7 @@ foreach ($events as $event) {
 		$matchups = EventHandler::getMatchups(event_id: $event->getID(), only_with_odds: true);
 		if (sizeof($matchups) > 0) {
 			foreach ($matchups as $matchup) {
-				$odds = EventHandler::getBestOddsForFight($matchup->getID());
+				$odds = OddsHandler::getBestOddsForFight($matchup->getID());
 				if ($odds != null) {
 					$fightodds .= $matchup->getTeamAsString(1) . " (" . $odds->getFighterOddsAsString(1) . ") vs. " . $matchup->getTeamAsString(2) . " (" . $odds->getFighterOddsAsString(2) . ")\r\n";
 				}

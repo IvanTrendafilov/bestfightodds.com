@@ -172,11 +172,11 @@ class OddsProcessor
                     OddsTools::standardizeDate(date('Y-m-d'))
                 );
 
-                if (EventHandler::checkMatchingOdds($odds)) {
+                if (OddsHandler::checkMatchingOdds($odds)) {
                     $this->logger->info("- " . $matched_matchup['matched_matchup']->getTeamAsString(1) . " vs " . $matched_matchup['matched_matchup']->getTeamAsString(2) . ": nothing has changed since last odds");
                 } else {
                     $this->logger->info("- " . $matched_matchup['matched_matchup']->getTeamAsString(1) . " vs " . $matched_matchup['matched_matchup']->getTeamAsString(2) . ": adding new odds");
-                    $result = EventHandler::addNewFightOdds($odds);
+                    $result = OddsHandler::addNewFightOdds($odds);
                     if (!$result) {
                         $this->logger->error("-- Error adding odds");
                         return false;
@@ -210,7 +210,7 @@ class OddsProcessor
             $matchup_date_obj = new \DateTime();
             $matchup_date_obj->setTimestamp($upcoming_matchup->getMetadata('min_gametime'));
             if ($matchup_date_obj > new \DateTime() || !$upcoming_matchup->getMetadata('min_gametime')) { //Only flag if this matchup is in the future as specified in metadata min_gametime
-                $odds = EventHandler::getLatestOddsForFightAndBookie($upcoming_matchup->getID(), $this->bookie_id);
+                $odds = OddsHandler::getLatestOddsForFightAndBookie($upcoming_matchup->getID(), $this->bookie_id);
                 if ($odds != null) {
                     $this->logger->debug('Bookie has odds for ' . $upcoming_matchup->getTeamAsString(1) . ' vs ' . $upcoming_matchup->getTeamAsString(2)
                         . '. Checking if this should be flagged for deletion');

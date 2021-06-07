@@ -809,6 +809,30 @@ class OddsDB
         return null;
     }
 
+    public static function getLatestChangeDate(int $event_id): string
+    {
+        $query = 'SELECT thedate FROM (SELECT fo.date as thedate 
+                    FROM fightodds fo 
+                        LEFT JOIN fights f ON fo.fight_id = f.id 
+                    WHERE f.event_id = ?
+                    ORDER BY fo.date DESC LIMIT 0,1) AS fot UNION SELECT * FROM 
+                    (SELECT lp.date as thedate 
+                    FROM lines_props lp
+                        LEFT JOIN fights f ON lp.matchup_id = f.id 
+                    WHERE f.event_id = ?
+                    ORDER BY lp.date DESC LIMIT 0,1) AS lpt 
+                    UNION SELECT * FROM (SELECT lep.date as thedate 
+                        FROM lines_eventprops lep
+                        WHERE lep.event_id = ?
+                        ORDER BY lep.date DESC LIMIT 0,1) AS lept
+                    ORDER BY thedate DESC LIMIT 0,1;';
+
+        $params = array($event_id, $event_id, $event_id);
+
+        $result = DBTools::doParamQuery($query, $params);
+        return (string) DBTools::getSingleValue($result);
+    }
+
     public static function removeOddsForMatchupAndBookie($matchup_id, $bookie_id)
     {
         $query = 'DELETE fo.*

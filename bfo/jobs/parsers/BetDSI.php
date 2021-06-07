@@ -9,8 +9,6 @@
  * Moneylines: Yes
  * Props: Yes
  *
- * URL: https://modern.betdsi.eu/api/sportmatch/get?sportID=2359
- *
  * Timezone: UTC
  * 
  */

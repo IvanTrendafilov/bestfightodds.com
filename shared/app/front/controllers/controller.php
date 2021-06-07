@@ -41,7 +41,7 @@ class MainController
         $events = EventHandler::getEvents(future_events_only: true);
         foreach ($events as $event) {
             //Dynamically replace last change placeholder
-            $last_change = EventHandler::getLatestChangeDate($event->getID());
+            $last_change = OddsHandler::getLatestChangeDate($event->getID());
             if ($last_change == null) {
                 $cached_contents = str_replace('%' . $event->getID() . '_last_change_date%', 'n/a', $cached_contents);
                 $cached_contents = str_replace('%' . $event->getID() . '_last_change_diff%', 'n/a', $cached_contents);
@@ -262,7 +262,7 @@ class MainController
         $view_matchup['odds_opening'] = OddsHandler::getOpeningOddsForMatchup($matchup->getID());
 
         //Determine range for this fight
-        $matchup_odds = EventHandler::getAllLatestOddsForFight($matchup->getID());
+        $matchup_odds = OddsHandler::getAllLatestOddsForFight($matchup->getID());
         $view_matchup['team1_low'] = null;
         $view_matchup['team2_low'] = null;
         $view_matchup['team1_high'] = null;
@@ -286,7 +286,7 @@ class MainController
         
         $view_matchup['team_pos'] = $team_pos;
         $view_matchup['other_pos'] = ($team_pos == 1 ? 2 : 1);
-        $latest_index = EventHandler::getCurrentOddsIndex($matchup->getID(), $team_pos);
+        $latest_index = OddsHandler::getCurrentOddsIndex($matchup->getID(), $team_pos);
 
         //Calculate % change from opening to mean
         $view_matchup['percentage_change'] = 0;
@@ -331,13 +331,13 @@ class MainController
         }
 
         //Check if page is cached or not. If so, fetch from cache and include
-        $last_change = EventHandler::getLatestChangeDate($event->getID());
+        $last_change = OddsHandler::getLatestChangeDate($event->getID());
         if (CacheControl::isPageCached('event-' . $event->getID() . '-' . strtotime($last_change))) {
             //Retrieve cached page
             $cached_contents = CacheControl::getCachedPage('event-' . $event->getID() . '-' . strtotime($last_change));
 
             //Dynamically replace last change placeholder
-            $last_change = EventHandler::getLatestChangeDate($event->getID());
+            $last_change = OddsHandler::getLatestChangeDate($event->getID());
             if ($last_change == null) {
                 $cached_contents = str_replace('%' . $event->getID() . '_last_change_date%', 'n/a', $cached_contents);
                 $cached_contents = str_replace('%' . $event->getID() . '_last_change_diff%', 'n/a', $cached_contents);
@@ -427,7 +427,7 @@ class MainController
         CacheControl::cachePage($page_content, 'event-' . $event->getID() . '-' . strtotime($last_change) . '.php');
 
         //Dynamically replace last change placeholder
-        $last_change = EventHandler::getLatestChangeDate($event->getID());
+        $last_change = OddsHandler::getLatestChangeDate($event->getID());
         if ($last_change == null) {
             $page_content = str_replace('%' . $event->getID() . '_last_change_date%', 'n/a', $page_content);
             $page_content = str_replace('%' . $event->getID() . '_last_change_diff%', 'n/a', $page_content);

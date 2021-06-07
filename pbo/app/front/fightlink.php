@@ -115,7 +115,7 @@ class FightLinkCreator
             if ($line_type == 'opening') {
                 $odds_obj = OddsHandler::getOpeningOddsForMatchup($matchup_obj->getID());
             } else {
-                $odds_obj = EventHandler::getBestOddsForFight($matchup_obj->getID());
+                $odds_obj = OddsHandler::getBestOddsForFight($matchup_obj->getID());
             }
 
             $team1_odds = 'n/a';

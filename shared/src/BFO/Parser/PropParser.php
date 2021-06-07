@@ -584,7 +584,7 @@ class PropParser
     private function updateMatchedMatchupProp($matched_prop)
     {
         //Check if the specific bookie has normal odds (non-prop) for the fight, if not, cancel the matching since no bookie generally has props but no normal odds
-        if (EventHandler::getLatestOddsForFightAndBookie($matched_prop['match_result']['matchup']['matchup_id'], $this->bookie_id) == null) {
+        if (OddsHandler::getLatestOddsForFightAndBookie($matched_prop['match_result']['matchup']['matchup_id'], $this->bookie_id) == null) {
             $this->logger->warning('----Bookie does not have normal odds for matchup ' . ($matched_prop['match_result']['matchup']['matchup_id']) . ', bailing');
             return false;
         }

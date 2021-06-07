@@ -4,6 +4,7 @@ namespace BFO\DB;
 
 use BFO\DataTypes\Alert;
 use BFO\General\EventHandler;
+use BFO\General\OddsHandler;
 
 use BFO\Utils\DB\DBTools;
 
@@ -68,10 +69,10 @@ class AlertDB
         $odds_obj = null;
         if ($alert_obj->getBookieID() == -1) {
             //Check best of all
-            $odds_obj = EventHandler::getBestOddsForFight($alert_obj->getFightID());
+            $odds_obj = OddsHandler::getBestOddsForFight($alert_obj->getFightID());
         } else {
             //Check best for bookie
-            $odds_obj = EventHandler::getLatestOddsForFightAndBookie($alert_obj->getFightID(), $alert_obj->getBookieID());
+            $odds_obj = OddsHandler::getLatestOddsForFightAndBookie($alert_obj->getFightID(), $alert_obj->getBookieID());
         }
 
         if ($odds_obj != null) {
@@ -157,10 +158,10 @@ class AlertDB
             $odds_obj = null;
             if ($alert->getBookieID() == -1) {
                 //Alert is not bookie specific
-                $odds_obj = EventHandler::getBestOddsForFight($alert->getFightID());
+                $odds_obj = OddsHandler::getBestOddsForFight($alert->getFightID());
             } else {
                 //Alert is bookie specific
-                $odds_obj = EventHandler::getLatestOddsForFightAndBookie($alert->getFightID(), $alert->getBookieID());
+                $odds_obj = OddsHandler::getLatestOddsForFightAndBookie($alert->getFightID(), $alert->getBookieID());
             }
 
             if ($odds_obj != null && $odds_obj->getOdds($alert->getFighter()) >= $alert->getLimit()) {

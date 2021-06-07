@@ -4,6 +4,7 @@ namespace BFO\General;
 
 use BFO\DB\AlertDB;
 use BFO\General\EventHandler;
+use BFO\General\OddsHandler;
 use BFO\Utils\OddsTools;
 use BFO\Utils\AWS_SES\SESMailer;
 use BFO\DataTypes\Alert;
@@ -90,10 +91,10 @@ class Alerter
         $odds_obj = null;
         if ($alert_obj->getBookieID() == -1) {
             //Alert is not bookie specific
-            $odds_obj = EventHandler::getBestOddsForFight($alert_obj->getFightID());
+            $odds_obj = OddsHandler::getBestOddsForFight($alert_obj->getFightID());
         } else {
             //Alert is bookie specific
-            $odds_obj = EventHandler::getLatestOddsForFightAndBookie($alert_obj->getFightID(), $alert_obj->getBookieID());
+            $odds_obj = OddsHandler::getLatestOddsForFightAndBookie($alert_obj->getFightID(), $alert_obj->getBookieID());
         }
 
         $matchup = EventHandler::getMatchup($alert_obj->getFightID());
@@ -206,7 +207,7 @@ You are receiving this e-mail because you have signed up to be notified when the
      */
     public static function getArbitrageInfo($matchup_id, $stake = 100)
     {
-        $odds_obj = EventHandler::getBestOddsForFight($matchup_id);
+        $odds_obj = OddsHandler::getBestOddsForFight($matchup_id);
 
         if ($odds_obj == null) {
             return null;

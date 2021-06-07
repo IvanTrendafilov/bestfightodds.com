@@ -454,10 +454,10 @@ class AdminAPIController
             $return_data['error'] = true;
         } else {
             $new_odds = new FightOdds((int) $data->matchup_id, (int) $data->bookie_id, (string) $data->team1_odds, (string) $data->team2_odds, (string) OddsTools::standardizeDate(date('Y-m-d')));
-            if (EventHandler::checkMatchingOdds($new_odds)) {
+            if (OddsHandler::checkMatchingOdds($new_odds)) {
                 $return_data['msg'] = 'Odds have not changed (' . $data->team1_odds . '/' . $data->team2_odds . ')';
             } else {
-                if (EventHandler::addNewFightOdds($new_odds)) {
+                if (OddsHandler::addNewFightOdds($new_odds)) {
                     $return_data['msg'] = 'Successfully added odds: (' . $data->team1_odds . '/' . $data->team2_odds . ')';
                 } else {
                     $response->withStatus(500);

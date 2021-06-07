@@ -8,6 +8,7 @@ require_once 'bfo/bootstrap.php';
 
 use Psr\Log\NullLogger;
 use BFO\General\EventHandler;
+use BFO\General\OddsHandler;
 use BFO\General\BookieHandler;
 use BFO\DataTypes\Fight;
 use BFO\DataTypes\Event;
@@ -40,7 +41,7 @@ final class CreatePropOddsTest extends TestCase
 
         $this->matchup = EventHandler::getMatchup($matchup_id);
         $odds_obj = new FightOdds($this->matchup->getID(), $this->bookie_id, '-150', '+200', -1);
-        EventHandler::addNewFightOdds($odds_obj);
+        OddsHandler::addNewFightOdds($odds_obj);
     }
 
     public function tearDown(): void

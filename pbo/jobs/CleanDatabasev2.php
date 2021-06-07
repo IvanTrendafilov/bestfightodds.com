@@ -51,7 +51,7 @@ while (($removed_odds_counter > 0 || $removed_props_counter > 0)  && $iterations
 
         foreach ($matchups as $matchup) {
             foreach ($bookies as $oBookie) {
-                $odds_to_remove = getAllDuplicates(EventHandler::getAllOdds($matchup->getID(), $oBookie->getID()));
+                $odds_to_remove = getAllDuplicates(OddsHandler::getAllOdds($matchup->getID(), $oBookie->getID()));
                 if (count($odds_to_remove) > 0) {
                     $removed_odds_counter += count($odds_to_remove);
                     echo ' M:' . $matchup->getID() . '/' . $oBookie->getID();
