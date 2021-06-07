@@ -343,7 +343,7 @@ class AdminAPIController
             $return_data['msg'] = 'Missing/invalid parameters';
             $return_data['error'] = true;
         } else {
-            if (OddsHandler::storeCorrelations($data->bookie_id, [['correlation' => $data->correlation, 'matchup_id' => $data->matchup_id]])) {
+            if (OddsHandler::storeCorrelations((int) $data->bookie_id, [['correlation' => $data->correlation, 'matchup_id' => $data->matchup_id]])) {
                 $return_data['msg'] = 'Successfully added correlation';
             } else {
                 $response->withStatus(500);

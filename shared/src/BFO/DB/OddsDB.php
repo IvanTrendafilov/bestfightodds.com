@@ -67,7 +67,7 @@ class OddsDB
     }
 
 
-    public static function getPropBetsForMatchup($matchup_id)
+    public static function getPropBetsForMatchup(int $matchup_id): array
     {
         $query = 'SELECT lp.bookie_id, lp.prop_odds, lp.negprop_odds, lp.proptype_id, lp.date, pt.prop_desc, pt.negprop_desc, lp.date, lp.team_num
                     FROM lines_props lp, prop_types pt
@@ -135,7 +135,7 @@ class OddsDB
      * Since these are matchup specific prop types we will go ahead and replace
      * the <T> variables with the actual team name
      */
-    public static function getAllPropTypesForMatchup($matchup_id): array
+    public static function getAllPropTypesForMatchup(int $matchup_id): array
     {
         $query = 'SELECT pt.id, pt.prop_desc, pt.negprop_desc, lp.team_num
                     FROM prop_types pt, lines_props lp
@@ -167,7 +167,7 @@ class OddsDB
      * @param int $event_id Matchup ID
      * @return Array Collection of PropType objects
      */
-    public static function getAllPropTypesForEvent($event_id): array
+    public static function getAllPropTypesForEvent(int $event_id): array
     {
         $query = 'SELECT pt.id, pt.prop_desc, pt.negprop_desc
                     FROM prop_types pt, lines_eventprops lep
@@ -614,13 +614,10 @@ class OddsDB
      * Accepts an array of correlations defined as follows:
      *
      * array('correlation' => xxx, 'matchup_id' => xxx)
-     *
-     * @param int $bookie_id Bookie ID
-     * @param array $correlations Collection of correlations as defined above
      */
-    public static function storeCorrelations($bookie_id, $correlations)
+    public static function storeCorrelations(int $bookie_id, array $correlations): bool
     {
-        $params = array();
+        $params = [];
 
         $query = 'INSERT IGNORE INTO lines_correlations(correlation, bookie_id, matchup_id) VALUES ';
         foreach ($correlations as $correlation) {
@@ -742,24 +739,24 @@ class OddsDB
         return null;
     }
 
-    public static function getCompletePropsForEvent($event_id, $a_iOffset = 0, $bookie_id = null)
+    public static function getCompletePropsForEvent(int $event_id, int $offset = 0, int $bookie_id = null): ?array
     {
-        if ($a_iOffset != 0 && $a_iOffset != 1) {
+        if ($offset != 0 && $offset != 1) {
             return false;
         }
 
-        $sExtraQuery = '';
-        $params = array($event_id, $event_id);
-        if ($a_iOffset == 1) {
-            $sExtraQuery = ' AND lep4.date != (SELECT
+        $extra_query = '';
+        $params = [$event_id, $event_id];
+        if ($offset == 1) {
+            $extra_query = ' AND lep4.date != (SELECT
                 MAX(lep5.date)  FROM lines_eventprops lep5
             WHERE
                 lep5.event_id = ? AND lep5.bookie_id =
                 lep4.bookie_id AND lep5.proptype_id = lep4.proptype_id) ';
             $params[] = $event_id;
         }
-        if ($bookie_id != null) {
-            $sExtraQuery .= ' AND bookie_id = ? ';
+        if ($bookie_id) {
+            $extra_query .= ' AND bookie_id = ? ';
             $params[] = $bookie_id;
         }
 
@@ -779,7 +776,7 @@ class OddsDB
                     FROM
                         lines_eventprops lep4
                     WHERE
-                        lep4.event_id = ? ' . $sExtraQuery . ' 
+                        lep4.event_id = ? ' . $extra_query . ' 
                     GROUP BY bookie_id , proptype_id) AS lep3
                 WHERE
                     lep2.event_id = ? AND lep2.bookie_id = lep3.bookie_id AND
@@ -833,9 +830,8 @@ class OddsDB
         return (string) DBTools::getSingleValue($result);
     }
 
-    public static function getBestOddsForFight($matchup_id)
+    public static function getBestOddsForFight(int $matchup_id): ?FightOdds
     {
-        //TODO: Possibly improve this one by splitting into two main subqueries fetchin the best odds?
         $query = 'SELECT
                         MAX(co1.fighter1_odds) AS fighter1_odds,
                         MAX(co1.fighter2_odds) AS fighter2_odds

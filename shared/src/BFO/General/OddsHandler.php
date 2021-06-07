@@ -127,17 +127,17 @@ class OddsHandler
         );
     }
 
-    public static function getBestOddsForFight($matchup_id)
+    public static function getBestOddsForFight(int $matchup_id): ?FightOdds
     {
         return OddsDB::getBestOddsForFight($matchup_id);
     }
 
-    public static function getPropBetsForMatchup($matchup_id)
+    public static function getPropBetsForMatchup(int $matchup_id): array
     {
         return OddsDB::getPropBetsForMatchup($matchup_id);
     }
 
-    public static function getAllPropTypesForMatchup($matchup_id): array
+    public static function getAllPropTypesForMatchup(int $matchup_id): array
     {
         return OddsDB::getAllPropTypesForMatchup($matchup_id);
     }
@@ -260,7 +260,7 @@ class OddsHandler
      * @param int $a_iBookieID Bookie ID
      * @param array $a_aCorrelations Collection of correlations as defined above
      */
-    public static function storeCorrelations($bookie_id, $correlations_col)
+    public static function storeCorrelations(int $bookie_id, array $correlations_col): bool
     {
         return OddsDB::storeCorrelations($bookie_id, $correlations_col);
     }
@@ -270,7 +270,6 @@ class OddsHandler
     {
         return OddsDB::getMatchupForCorrelation($bookie_id, $correlation);
     }
-
 
     public static function getCompletePropsForMatchup($matchup_id, $offset = 0)
     {
@@ -290,11 +289,6 @@ class OddsHandler
     {
         return OddsDB::addEventPropBet($event_prop_bet);
     }
-
-    /*public static function getPropBetsForEvent($a_iEventID)
-    {
-        return OddsDB::getPropBetsForEvent($a_iEventID);
-    }*/
 
     public static function getAllPropTypesForEvent($event_id)
     {
@@ -366,7 +360,7 @@ class OddsHandler
         return OddsDB::getOpeningOddsForEventPropAndBookie($event_id, $proptype_id, $bookie_id);
     }
 
-    public static function getCompletePropsForEvent($event_id, $offset = 0, $bookie_id = null)
+    public static function getCompletePropsForEvent(int $event_id, int $offset = 0, int $bookie_id = null)
     {
         return OddsDB::getCompletePropsForEvent($event_id, $offset, $bookie_id);
     }
@@ -528,9 +522,9 @@ class OddsHandler
         return count($flagged_col['matchup_odds']) + count($flagged_col['prop_odds']) + count($flagged_col['event_prop_odds']);
     }
 
-    public static function getLatestPropOddsV2($a_iEventID = null, $a_iMatchupID = null, $a_iBookieID = null, $a_iPropTypeID = null, $a_iTeamNum = null)
+    public static function getLatestPropOddsV2($event_id = null, $a_iMatchupID = null, $a_iBookieID = null, $a_iPropTypeID = null, $a_iTeamNum = null)
     {
-        $result = OddsDB::getLatestPropOddsV2($a_iEventID, $a_iMatchupID, $a_iBookieID, $a_iPropTypeID, $a_iTeamNum);
+        $result = OddsDB::getLatestPropOddsV2($event_id, $a_iMatchupID, $a_iBookieID, $a_iPropTypeID, $a_iTeamNum);
 
         $return = [];
         //Move result into multidimensional array
@@ -574,9 +568,9 @@ class OddsHandler
         return $return;
     }
 
-    public static function getLatestEventPropOddsV2($a_iEventID = null, $a_iMatchupID = null, $a_iBookieID = null, $a_iPropTypeID = null, $a_iTeamNum = null)
+    public static function getLatestEventPropOddsV2($event_id = null, $a_iMatchupID = null, $a_iBookieID = null, $a_iPropTypeID = null, $a_iTeamNum = null)
     {
-        $result = OddsDB::getLatestEventPropOddsV2($a_iEventID, $a_iMatchupID, $a_iBookieID, $a_iPropTypeID, $a_iTeamNum);
+        $result = OddsDB::getLatestEventPropOddsV2($event_id, $a_iMatchupID, $a_iBookieID, $a_iPropTypeID, $a_iTeamNum);
 
         $return = [];
         //Move result into multidimensional array
@@ -613,9 +607,9 @@ class OddsHandler
         return $return;
     }
 
-    public static function getLatestMatchupOddsV2($a_iEventID = null, $a_iMatchupID = null)
+    public static function getLatestMatchupOddsV2($event_id = null, $a_iMatchupID = null)
     {
-        $result = OddsDB::getLatestMatchupOddsV2($a_iEventID, $a_iMatchupID);
+        $result = OddsDB::getLatestMatchupOddsV2($event_id, $a_iMatchupID);
 
         $return = [];
         //Move result into multidimensional array
@@ -644,15 +638,15 @@ class OddsHandler
         return $return;
     }
 
-    public static function getEventViewData($a_iEventID)
+    public static function getEventViewData($event_id)
     {
-        if ($a_iEventID == null || !is_numeric($a_iEventID)) {
+        if ($event_id == null || !is_numeric($event_id)) {
             return false;
         }
 
         $view_data = [];
 
-        $event = EventHandler::getEvent((int) $a_iEventID);
+        $event = EventHandler::getEvent((int) $event_id);
 
         $matchups = EventHandler::getMatchups(event_id: $event->getID(), only_with_odds: true);
 

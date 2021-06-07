@@ -9,17 +9,19 @@ use BFO\General\EventHandler;
 use BFO\DataTypes\Fight;
 use BFO\DataTypes\FightOdds;
 use BFO\Utils\OddsTools;
+use Psr\Log\LoggerInterface;
+use BFO\Parser\RulesetInterface;
 
 /**
  * OddsProcessor - Goes through parsed matchups and props, matches and stores them in the database. Also keeps track of changes to matchups and more..
  */
 class OddsProcessor
 {
-    private $logger = null;
-    private $bookie_id = null;
-    private $creation_ruleset = null;
+    private LoggerInterface $logger;
+    private int $bookie_id;
+    private RulesetInterface $creation_ruleset;
 
-    public function __construct($logger, $bookie_id, $creation_ruleset)
+    public function __construct(LoggerInterface $logger, $bookie_id, RulesetInterface $creation_ruleset)
     {
         $this->logger = $logger;
         $this->bookie_id = $bookie_id;
@@ -28,22 +30,9 @@ class OddsProcessor
 
     /**
      * Processes parsed sport from a bookie parser
-     *
-     * Steps:
-     * 1. Removes any duplicate moneylines
-     * 2. Removes any duplicate props (including event props)
-     * 3. Looks up and matches all matchups
-     * 4. Looks up and matches all prop bets
-     * 4.5 PENDING: Remove prop dupes after matching
-     * 5. Updates odds in database based on matches <--- NOT DONE
-     * 6. Updates prop odds and event prop odds in database based on matches
-     * 7. (IF full run) Flags matchups for deletion that was not found in parsed feed
-     * 8. (IF full run) Flags prop odds for deletion that was not found in parsed feed
-     * 9. (IF full run) Flags event prop odds for deletion that was not found in parsed feed
      */
-    public function processParsedSport($parsed_sport, $full_run)
+    public function processParsedSport(ParsedSport $parsed_sport, bool $full_run): void
     {
-
         //Pre-populate correlation table with entries from database. These can be overwritten later in the matching matchups method
         $correlations = OddsHandler::getCorrelationsForBookie($this->bookie_id);
         foreach ($correlations as $correlation) {
@@ -55,7 +44,6 @@ class OddsProcessor
 
         $matched_matchups = $this->matchMatchups($parsed_sport->getParsedMatchups());
 
-        //Pending: For Create mode, create new matchups if no match was found
         if (PARSE_CREATEMATCHUPS == true) {
             $matched_matchups = $this->createUnmatchedMatchups($matched_matchups);
         }
@@ -88,6 +76,7 @@ class OddsProcessor
             . ' Props: ' . (count($matched_props) - $prop_unmatched_count) . '/' . count($parsed_sport->getFetchedProps())
             . ' Full run: ' . ($full_run ? 'Yes' : 'No'));
 
+        //Log this run to the database
         $parse_run_logger = new ParseRunLogger();
         $parse_run_logger->logRun(-1, [
             'bookie_id' => $this->bookie_id,
@@ -103,7 +92,7 @@ class OddsProcessor
     /**
      * Runs through a set of parsed matchups and finds a matching matchup in the database for them
      */
-    public function matchMatchups($parsed_matchups)
+    public function matchMatchups(array $parsed_matchups): array
     {
         $matched_items = [];
         foreach ($parsed_matchups as $parsed_matchup) {
@@ -133,7 +122,7 @@ class OddsProcessor
     /**
      * Goes through matched odds for matchups and updates them in the database if anything has changed (through updateOneMatchedMatchup() function)
      */
-    public function updateMatchedMatchups($matched_matchups)
+    public function updateMatchedMatchups(array $matched_matchups): void
     {
         foreach ($matched_matchups as $matched_matchup) {
             if ($matched_matchup['match_result']['status'] == true) {
@@ -146,7 +135,7 @@ class OddsProcessor
      * Takes one matched odds for matchups and updates them in the database if anything has changed
      * In addition to this, it will also store correlation ID for this matchup (if any other odds will require it) as well as store any meta data for the matchup
      */
-    private function updateOneMatchedMatchup($matched_matchup)
+    private function updateOneMatchedMatchup(array $matched_matchup): bool
     {
         $event = EventHandler::getEvent($matched_matchup['matched_matchup']->getEventID(), true);
         $temp_matchup = new Fight(0, $matched_matchup['parsed_matchup']->getTeamName(1), $matched_matchup['parsed_matchup']->getTeamName(2), -1);
@@ -203,7 +192,7 @@ class OddsProcessor
     /**
      * Fetches all upcoming matchups where the bookie has previously had odds and checks if the odds are now removed. If so the odds will be flagged for deletion
      */
-    private function flagMatchupOddsForDeletion($matched_matchups)
+    private function flagMatchupOddsForDeletion(array $matched_matchups): void
     {
         $upcoming_matchups = EventHandler::getMatchups(future_matchups_only: true);
         foreach ($upcoming_matchups as $upcoming_matchup) {
@@ -237,7 +226,7 @@ class OddsProcessor
     /**
      * Fetches all upcoming matchups where the bookie has previously had prop odds and checks if the prop odds are now removed. If so the prop odds will be flagged for deletion
      */
-    private function flagPropOddsForDeletion($matched_props)
+    private function flagPropOddsForDeletion(array $matched_props): void
     {
         $upcoming_matchups = EventHandler::getMatchups(future_matchups_only: true);
         foreach ($upcoming_matchups as $upcoming_matchup) {
@@ -277,12 +266,12 @@ class OddsProcessor
     /**
      * Fetches all events where the bookie has previously had event prop odds and checks if the event prop odds are now removed. If so the event prop odds will be flagged for deletion
      */
-    private function flagEventPropOddsForDeletion($matched_props)
+    private function flagEventPropOddsForDeletion(array $matched_props): void
     {
         $upcoming_events = EventHandler::getEvents(future_events_only: true);
         foreach ($upcoming_events as $upcoming_event) {
             $stored_props = OddsHandler::getCompletePropsForEvent($upcoming_event->getID(), 0, $this->bookie_id);
-            if ($stored_props != null) {
+            if ($stored_props) {
                 foreach ($stored_props as $stored_prop) {
                     $found = false;
                     foreach ($matched_props as $matched_prop) {
@@ -312,7 +301,7 @@ class OddsProcessor
     /**
      * Loops through all parsed matchups and removes any dupes
      */
-    public function removeMoneylineDupes($parsed_sport)
+    public function removeMoneylineDupes(ParsedSport $parsed_sport): ParsedSport
     {
         $matchups = $parsed_sport->getParsedMatchups();
         for ($y = 0; $y < sizeof($matchups); $y++) {
@@ -350,7 +339,7 @@ class OddsProcessor
     /**
      * Loops through all parsed props and removes any dupes (matching on name of the prop, not prop_type)
      */
-    public function removePropDupes($parsed_sport)
+    public function removePropDupes(ParsedSport $parsed_sport): ParsedSport
     {
         $props = $parsed_sport->getFetchedProps();
         for ($y = 0; $y < sizeof($props); $y++) {
@@ -389,11 +378,10 @@ class OddsProcessor
     /**
      * Loops through all _matched_ props and removes any dupes based on prop_type and matchup
      */
-    private function removeMatchedPropDupes($props)
+    private function removeMatchedPropDupes(array $props): array
     {
         for ($y = 0; $y < sizeof($props); $y++) {
             if ($props[$y]['match_result']['status'] == true) {
-                $matches = [];
                 for ($x = 0; $x < sizeof($props); $x++) {
                     if ($x != $y) { //Ignore self
                         if (
@@ -430,7 +418,7 @@ class OddsProcessor
         return $props;
     }
 
-    private function logUnmatchedMatchups($matched_matchups)
+    private function logUnmatchedMatchups(array $matched_matchups): int
     {
         $counter = 0;
         foreach ($matched_matchups as $matchup) {
@@ -442,7 +430,7 @@ class OddsProcessor
         return $counter;
     }
 
-    private function createUnmatchedMatchups($matched_matchups)
+    private function createUnmatchedMatchups(array $matched_matchups): array
     {
         $mc = new MatchupCreator($this->logger, $this->bookie_id, $this->creation_ruleset);
         foreach ($matched_matchups as &$matchup) {
