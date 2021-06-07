@@ -167,8 +167,8 @@ class OddsProcessor
                 $odds = new FightOdds(
                     (int) $matched_matchup['matched_matchup']->getID(),
                     $this->bookie_id,
-                    $matched_matchup['parsed_matchup']->getTeamOdds(1),
-                    $matched_matchup['parsed_matchup']->getTeamOdds(2),
+                    $matched_matchup['parsed_matchup']->getMoneyLine(1),
+                    $matched_matchup['parsed_matchup']->getMoneyLine(2),
                     OddsTools::standardizeDate(date('Y-m-d'))
                 );
 
@@ -323,8 +323,8 @@ class OddsProcessor
                     && $matchups[$y]->getTeamName(2) == $matchups[$x]->getTeamName(2)
                 ) {
                     //Found a match
-                    $arbitrage_subject = ParseTools::getArbitrage($matchups[$y]->getTeamOdds(1), $matchups[$y]->getTeamOdds(2));
-                    $arbitrage_challenger = ParseTools::getArbitrage($matchups[$x]->getTeamOdds(1), $matchups[$x]->getTeamOdds(2));
+                    $arbitrage_subject = ParseTools::getArbitrage($matchups[$y]->getMoneyLine(1), $matchups[$y]->getMoneyLine(2));
+                    $arbitrage_challenger = ParseTools::getArbitrage($matchups[$x]->getMoneyLine(1), $matchups[$x]->getMoneyLine(2));
 
                     $this->logger->info('Removing dupe: ' . $matchups[$y]->getTeamName(1) . ' vs ' . $matchups[$y]->getTeamName(2));
 
@@ -362,8 +362,8 @@ class OddsProcessor
                     && $props[$y]->getTeamName(2) == $props[$x]->getTeamName(2)
                 ) {
                     //Found a match
-                    $arbitrage_subject = ParseTools::getArbitrage($props[$y]->getTeamOdds(1), $props[$y]->getTeamOdds(2));
-                    $arbitrage_challenger = ParseTools::getArbitrage($props[$x]->getTeamOdds(1), $props[$x]->getTeamOdds(2));
+                    $arbitrage_subject = ParseTools::getArbitrage($props[$y]->getMoneyLine(1), $props[$y]->getMoneyLine(2));
+                    $arbitrage_challenger = ParseTools::getArbitrage($props[$x]->getMoneyLine(1), $props[$x]->getMoneyLine(2));
 
                     $this->logger->info('Removing dupe: ' . $props[$y]->getTeamName(1) . ' vs ' . $props[$y]->getTeamName(2));
 
@@ -403,19 +403,19 @@ class OddsProcessor
                             && $props[$x]['match_result']['matchup']['team'] == $props[$y]['match_result']['matchup']['team']
                         ) {
                             $this->logger->info('Matching dupe for proptype_id: ' . $props[$x]['match_result']['template']->getPropTypeID() . ', matchup_id: ' . $props[$x]['match_result']['matchup']['matchup_id'] .
-                                ' ' . $props[$y]['prop']->getTeamOdds(1) . '/' . $props[$y]['prop']->getTeamOdds(2) . ' and ' . $props[$x]['prop']->getTeamOdds(1) . '/' . $props[$x]['prop']->getTeamOdds(2));
+                                ' ' . $props[$y]['prop']->getMoneyLine(1) . '/' . $props[$y]['prop']->getMoneyLine(2) . ' and ' . $props[$x]['prop']->getMoneyLine(1) . '/' . $props[$x]['prop']->getMoneyLine(2));
 
-                            $arbitrage_subject = ParseTools::getArbitrage($props[$y]['prop']->getTeamOdds(1), $props[$y]['prop']->getTeamOdds(2));
-                            $arbitrage_challenger = ParseTools::getArbitrage($props[$x]['prop']->getTeamOdds(1), $props[$x]['prop']->getTeamOdds(2));
+                            $arbitrage_subject = ParseTools::getArbitrage($props[$y]['prop']->getMoneyLine(1), $props[$y]['prop']->getMoneyLine(2));
+                            $arbitrage_challenger = ParseTools::getArbitrage($props[$x]['prop']->getMoneyLine(1), $props[$x]['prop']->getMoneyLine(2));
 
                             if ($arbitrage_subject > $arbitrage_challenger) { //Challenger won
-                                $this->logger->info('Removing subject dupe: ' . $props[$y]['prop']->getTeamOdds(1) . '/' . $props[$y]['prop']->getTeamOdds(2) . ' for matchup_id: ' . $props[$x]['match_result']['matchup']['matchup_id'] . ' proptype_id: ' . $props[$x]['match_result']['template']->getPropTypeID() . ' team_num: ' . $props[$y]['match_result']['matchup']['team']);
+                                $this->logger->info('Removing subject dupe: ' . $props[$y]['prop']->getMoneyLine(1) . '/' . $props[$y]['prop']->getMoneyLine(2) . ' for matchup_id: ' . $props[$x]['match_result']['matchup']['matchup_id'] . ' proptype_id: ' . $props[$x]['match_result']['template']->getPropTypeID() . ' team_num: ' . $props[$y]['match_result']['matchup']['team']);
                                 unset($props[$y]);
                             } elseif ($arbitrage_subject < $arbitrage_challenger) { //Subject won
-                                $this->logger->info('Removing challenger dupe: ' . $props[$x]['prop']->getTeamOdds(1) . '/' . $props[$x]['prop']->getTeamOdds(2) . ' for matchup_id: ' . $props[$x]['match_result']['matchup']['matchup_id'] . ' proptype_id: ' . $props[$x]['match_result']['template']->getPropTypeID() . ' team_num: ' . $props[$y]['match_result']['matchup']['team']);
+                                $this->logger->info('Removing challenger dupe: ' . $props[$x]['prop']->getMoneyLine(1) . '/' . $props[$x]['prop']->getMoneyLine(2) . ' for matchup_id: ' . $props[$x]['match_result']['matchup']['matchup_id'] . ' proptype_id: ' . $props[$x]['match_result']['template']->getPropTypeID() . ' team_num: ' . $props[$y]['match_result']['matchup']['team']);
                                 unset($props[$x]);
                             } else { //Draw, remove one
-                                $this->logger->info('Removing identical dupe: ' . $props[$x]['prop']->getTeamOdds(1) . '/' . $props[$x]['prop']->getTeamOdds(2) . ' for matchup_id: ' . $props[$x]['match_result']['matchup']['matchup_id'] . ' proptype_id: ' . $props[$x]['match_result']['template']->getPropTypeID() . ' team_num: ' . $props[$y]['match_result']['matchup']['team']);
+                                $this->logger->info('Removing identical dupe: ' . $props[$x]['prop']->getMoneyLine(1) . '/' . $props[$x]['prop']->getMoneyLine(2) . ' for matchup_id: ' . $props[$x]['match_result']['matchup']['matchup_id'] . ' proptype_id: ' . $props[$x]['match_result']['template']->getPropTypeID() . ' team_num: ' . $props[$y]['match_result']['matchup']['team']);
                                 unset($props[$x]);
                             }
                             $props = array_values($props);

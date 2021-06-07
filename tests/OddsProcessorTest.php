@@ -70,11 +70,11 @@ final class OddsProcessorTest extends TestCase
         ;
         $this->assertEquals(
             -250,
-            $parsed_sport->getParsedMatchups()[0]->getTeamOdds(1)
+            $parsed_sport->getParsedMatchups()[0]->getMoneyLine(1)
         );       
         $this->assertEquals(
             125,
-            $parsed_sport->getParsedMatchups()[0]->getTeamOdds(2)
+            $parsed_sport->getParsedMatchups()[0]->getMoneyLine(2)
         );      
     }
 
@@ -96,11 +96,11 @@ final class OddsProcessorTest extends TestCase
         );
         $this->assertEquals(
             200,
-            $parsed_sport->getFetchedProps()[0]->getTeamOdds(1)
+            $parsed_sport->getFetchedProps()[0]->getMoneyLine(1)
         );       
         $this->assertEquals(
             -250,
-            $parsed_sport->getFetchedProps()[0]->getTeamOdds(2)
+            $parsed_sport->getFetchedProps()[0]->getMoneyLine(2)
         );      
     }
 

@@ -105,7 +105,7 @@
 						<path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"></path>
 					</svg> <span class="align-middle">Other logs</span>
 				</a>
-				<ul id="ui" class="sidebar-dropdown list-unstyled collapse" data-bs-parent="#sidebar" style="">
+				<ul id="ui" class="sidebar-dropdown list-unstyled collapse" data-bs-parent="#sidebar">
 					<li class="sidebar-item"><a class="sidebar-link" href="/cnadm/log/twitter">Twitter</a></li>
 					<li class="sidebar-item"><a class="sidebar-link" href="/cnadm/log/facebook">Facebook</a></li>
 					<li class="sidebar-item"><a class="sidebar-link" href="/cnadm/log/scheduleparser">Scheduleparser</a></li>

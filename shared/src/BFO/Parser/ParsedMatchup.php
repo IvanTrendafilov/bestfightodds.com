@@ -46,22 +46,9 @@ class ParsedMatchup
         return null;
     }
 
-    public function getDate()
+    public function getDate(): string
     {
         return $this->date;
-    }
-
-    /**
-     * Get moneyline value for a team
-     *
-     * @param <type> $a_iTeam
-     * @return <type>
-     *
-     * @deprecated Use getMoneyLine() instead
-     */
-    public function getTeamOdds($team_number)
-    {
-        return $this->getMoneyLine($team_number);
     }
 
     /**
@@ -70,7 +57,7 @@ class ParsedMatchup
      * @param int $a_iTeam Team number (1 or 2)
      * @return string Moneyline value
      */
-    public function getMoneyline($team_number)
+    public function getMoneyline(int $team_number)
     {
         $moneyline = $this->getMoneyLineObj();
 
@@ -91,12 +78,12 @@ class ParsedMatchup
         return true;
     }
 
-    public function isSwitchedFromOutside()
+    public function isSwitchedFromOutside(): bool
     {
         return $this->switched_externally;
     }
 
-    public function addMoneyLineObj($moneyline)
+    public function addMoneyLineObj($moneyline): void
     {
         $this->moneyline = $moneyline;
         if ($this->switched == true && !$this->moneyline->isSwitched()) {
@@ -109,12 +96,12 @@ class ParsedMatchup
         return $this->moneyline;
     }
 
-    public function hasMoneyline()
+    public function hasMoneyline(): bool
     {
         return ($this->moneyline->getMoneyline(1) != '' && $this->moneyline->getMoneyline(1) != '');
     }
 
-    public function toString()
+    public function toString(): string
     {
         return $this->getTeamName(1) . ' vs ' . $this->getTeamName(2);
     }

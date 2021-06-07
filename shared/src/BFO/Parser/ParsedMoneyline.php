@@ -2,16 +2,13 @@
 
 namespace BFO\Parser;
 
-/**
- * Description of ParsedMoneyline
- */
 class ParsedMoneyline
 {
     private $team1_moneyline;
     private $team2_moneyline;
     private $order_switched;
 
-    public function __construct($in_team1_moneyline, $in_team2_moneyline)
+    public function __construct(string $in_team1_moneyline, string $in_team2_moneyline)
     {
         $this->order_switched = false;
 
@@ -27,24 +24,23 @@ class ParsedMoneyline
         }
     }
 
-    public function getMoneyline($team_no)
+    public function getMoneyline(int $team_no): string
     {
-        switch ($team_no) {
-            case 1: return $this->team1_moneyline;
-                break;
-            case 2: return $this->team2_moneyline;
-                break;
-            default:
-                return null;
+        if ($team_no == 1) {
+            return $this->team1_moneyline;
         }
+        if ($team_no == 2) {
+            return $this->team2_moneyline;
+        }
+        return null;
     }
 
-    public function isSwitched()
+    public function isSwitched(): bool
     {
         return $this->order_switched;
     }
 
-    public function switchOdds()
+    public function switchOdds(): void
     {
         $temp_moneyline = $this->team1_moneyline;
         $this->team1_moneyline = $this->team2_moneyline;
