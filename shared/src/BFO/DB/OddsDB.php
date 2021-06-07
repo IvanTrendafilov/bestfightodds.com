@@ -833,7 +833,155 @@ class OddsDB
         return (string) DBTools::getSingleValue($result);
     }
 
-    public static function removeOddsForMatchupAndBookie($matchup_id, $bookie_id)
+    public static function getBestOddsForFight($matchup_id)
+    {
+        //TODO: Possibly improve this one by splitting into two main subqueries fetchin the best odds?
+        $query = 'SELECT
+                        MAX(co1.fighter1_odds) AS fighter1_odds,
+                        MAX(co1.fighter2_odds) AS fighter2_odds
+                    FROM
+                        fightodds AS co1
+                    WHERE
+                        co1.date = (SELECT
+                                MAX(co2.date) as maxdate
+                            FROM
+                                fightodds AS co2
+                            WHERE
+                                co2.bookie_id = co1.bookie_id AND co2.fight_id = ?)
+                    AND co1.fight_id = ?
+                    HAVING fighter1_odds IS NOT NULL AND fighter2_odds IS NOT NULL;';
+
+        $params = array($matchup_id, $matchup_id);
+
+        $rResult = DBTools::doParamQuery($query, $params);
+
+        $odds_col = array();
+
+        while ($row = mysqli_fetch_array($rResult)) {
+            $odds_col[] = new FightOdds((int) $matchup_id, -1, $row['fighter1_odds'], $row['fighter2_odds'], '');
+        }
+        if (sizeof($odds_col) > 0) {
+            return $odds_col[0];
+        }
+        return null;
+    }
+
+    public static function getAllLatestOddsForFight(int $matchup_id, int $offset = 0): array
+    {
+        if ($offset != 0 && $offset != 1) {
+            return null;
+        }
+
+        $params = [$matchup_id, $matchup_id];
+        $extra_query = '';
+
+        if ($offset == 1) {
+            $extra_query = ' AND fo4.date < (SELECT
+                MAX(fo5.date) AS date
+            FROM
+                fightodds fo5
+            WHERE
+                fo5.fight_id = ? AND fo5.bookie_id = fo4.bookie_id) ';
+            $params[] = $matchup_id;
+        }
+
+        $query = 'SELECT
+            fo2.fight_id, fo2.fighter1_odds, fo2.fighter2_odds, fo2.bookie_id, fo2.date
+            FROM
+                fightodds AS fo2, bookies bo,
+                (SELECT
+                    MAX(fo4.date) as date, bookie_id
+                FROM
+                    fightodds fo4
+                WHERE
+                    fo4.fight_id = ? ' . $extra_query . ' 
+                GROUP BY bookie_id) AS fo3
+            WHERE
+                fo2.fight_id = ? AND fo2.bookie_id = fo3.bookie_id AND fo2.date
+            = fo3.date AND fo2.bookie_id = bo.id GROUP BY fo2.bookie_id ORDER BY bo.position,
+            fo2.bookie_id, fo2.fight_id ASC;';
+
+        $result = DBTools::doParamQuery($query, $params);
+        $odds = array();
+        while ($row = mysqli_fetch_array($result)) {
+            $odds[] = new FightOdds((int) $row['fight_id'], (int) $row['bookie_id'], (string) $row['fighter1_odds'], (string) $row['fighter2_odds'], (string) $row['date']);
+        }
+
+        return $odds;
+    }
+
+    public static function getAllOdds(int $matchup_id, int $bookie_id = null): ?array
+    {
+        $extra_where = '';
+        $params = [':matchup_id' => $matchup_id];
+        if ($bookie_id) {
+            $params[':bookie_id'] = $bookie_id;
+            $extra_where = ' AND bookie_id = :bookie_id ';
+        }
+
+        $query = 'SELECT fight_id, fighter1_odds, fighter2_odds, bookie_id, date
+                    FROM fightodds
+                    WHERE fight_id = :matchup_id 
+                    ' . $extra_where . '
+                    ORDER BY date ASC';
+
+        $odds_col = [];
+        try {
+            foreach (PDOTools::findMany($query, $params) as $row) {
+                $odds_col[] = new FightOdds((int) $row['fight_id'], (int) $row['bookie_id'], $row['fighter1_odds'], $row['fighter2_odds'], $row['date']);
+            }
+        } catch (\PDOException $e) {
+            throw new \Exception("Unknown error " . $e->getMessage(), 10);
+        }
+        return $odds_col;
+    }
+
+    public static function getLatestOddsForFightAndBookie(int $matchup_id, int $bookie_id): ?FightOdds
+    {
+        $query = 'SELECT fight_id, fighter1_odds, fighter2_odds, bookie_id, date
+                    FROM fightodds
+                    WHERE bookie_id = ? 
+                        AND fight_id = ? 
+                    ORDER BY date DESC
+                    LIMIT 0,1';
+
+        $params = array($bookie_id, $matchup_id);
+
+        $result = DBTools::doParamQuery($query, $params);
+
+        $odds_col = [];
+        while ($row = mysqli_fetch_array($result)) {
+            $odds_col[] = new FightOdds((int) $row['fight_id'], (int) $row['bookie_id'], $row['fighter1_odds'], $row['fighter2_odds'], $row['date']);
+        }
+        if (sizeof($odds_col) > 0) {
+            return $odds_col[0];
+        }
+        return null;
+    }
+
+    public static function addNewFightOdds(FightOdds $fightodds_obj): ?int
+    {
+        $query = 'INSERT INTO fightodds(fight_id, fighter1_odds, fighter2_odds, bookie_id, date)
+                    SELECT f.id, ?, ?, b.id, NOW()
+                        FROM fights f, bookies b
+                        WHERE f.id = ? AND b.id = ?';
+
+        $params = [$fightodds_obj->getOdds(1), $fightodds_obj->getOdds(2), $fightodds_obj->getFightID(), $fightodds_obj->getBookieID()];
+
+        try {
+            $id = PDOTools::executeQuery($query, $params);
+            return $id->rowCount();
+        } catch (\PDOException $e) {
+            if ($e->getCode() == 23000) {
+                throw new \Exception("Duplicate entry", 10);
+            } else {
+                throw new \Exception("Unknown error " . $e->getMessage(), 10);
+            }
+        }
+        return null;
+    }
+
+    public static function removeOddsForMatchupAndBookie(int $matchup_id, int $bookie_id)
     {
         $query = 'DELETE fo.*
                     FROM fightodds fo

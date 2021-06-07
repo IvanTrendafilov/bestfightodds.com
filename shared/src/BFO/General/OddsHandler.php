@@ -3,7 +3,6 @@
 namespace BFO\General;
 
 use BFO\DB\OddsDB;
-use BFO\DB\EventDB;
 use BFO\General\BookieHandler;
 use BFO\General\EventHandler;
 use BFO\DataTypes\FightOdds;
@@ -66,7 +65,7 @@ class OddsHandler
             return false;
         }
 
-        return EventDB::addNewFightOdds($odds_obj);
+        return OddsDB::addNewFightOdds($odds_obj);
     }
 
     /**
@@ -74,19 +73,19 @@ class OddsHandler
      * If the second parameter is specified it is possible to jump to historic
      * odds, for example getting the previous odds and comparing to the current
      */
-    public static function getAllLatestOddsForFight($fight_id, $historic_offset = 0)
+    public static function getAllLatestOddsForFight(int $fight_id, int $historic_offset = 0): array
     {
-        return EventDB::getAllLatestOddsForFight($fight_id, $historic_offset);
+        return OddsDB::getAllLatestOddsForFight($fight_id, $historic_offset);
     }
 
-    public static function getLatestOddsForFightAndBookie($fight_id, $bookie_id)
+    public static function getLatestOddsForFightAndBookie(int $fight_id, int $bookie_id): ?FightOdds
     {
-        return EventDB::getLatestOddsForFightAndBookie($fight_id, $bookie_id);
+        return OddsDB::getLatestOddsForFightAndBookie($fight_id, $bookie_id);
     }
 
     public static function getAllOdds(int $matchup_id, int $bookie_id = null): ?array
     {
-        $odds = EventDB::getAllOdds($matchup_id, $bookie_id);
+        $odds = OddsDB::getAllOdds($matchup_id, $bookie_id);
         if (sizeof($odds) > 0) {
             return $odds;
         }
@@ -130,7 +129,7 @@ class OddsHandler
 
     public static function getBestOddsForFight($matchup_id)
     {
-        return EventDB::getBestOddsForFight($matchup_id);
+        return OddsDB::getBestOddsForFight($matchup_id);
     }
 
     public static function getPropBetsForMatchup($matchup_id)
@@ -381,7 +380,7 @@ class OddsHandler
         return false;
     }
 
-    public static function removeOddsForMatchupAndBookie($matchup_id, $bookie_id)
+    public static function removeOddsForMatchupAndBookie(int $matchup_id, int $bookie_id)
     {
         if (!is_int($matchup_id) || !is_int($bookie_id)) {
             return false;
