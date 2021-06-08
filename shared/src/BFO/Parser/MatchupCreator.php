@@ -210,7 +210,7 @@ class MatchupCreator
             } else {
                 $new_matchup = new Fight(0, $team1, $team2, $matched_event->getID());
             }
-            $new_matchup->setCreateSource(1);
+            $new_matchup->setCreateSource(0); //Setting create source to 0 to avoid automatic deletion by OddsJob before odds has been added. Once odds are added it is changed to 1
 
             $id = EventHandler::createMatchup($new_matchup);
             if ($id) {
