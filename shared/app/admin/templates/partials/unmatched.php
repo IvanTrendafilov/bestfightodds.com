@@ -95,20 +95,9 @@
         });
     });
 
-    /*
-    myNameSpace = function(){
-      var current = null;
-      function init(){...}
-      function change(){...}
-      function verify(){...}
-      return{
-        init:init,
-        set:change
-      }
-    }();*/
 </script>
 
-<button id="clear-unmatched-button" class="btn btn-primary">Clear unmatched table</button><br /><br />
+<button id="clear-unmatched-button" class="btn btn-primary">Clear all unmatched matchups and props</button><br /><br />
 
 <div class="card">
     <div class="card-header">
