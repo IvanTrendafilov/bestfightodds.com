@@ -401,4 +401,20 @@ class EventHandler
     {
         return EventDB::deleteAllOldEventsWithoutOdds();
     }
+
+    public static function deleteMatchupsWithoutOdds(): int
+    {
+        //Note, this excludes matchups that are either created manually or through scheduler
+        $matchups = EventHandler::getMatchups(future_matchups_only: true, only_without_odds: true, create_source: 1); //create_source: 1 = Sportsbooks has provided odds for this matchup
+        $counter = 0;
+        $audit_log = new \Katzgrau\KLogger\Logger(GENERAL_KLOGDIR, \Psr\Log\LogLevel::INFO, ['filename' => 'changeaudit.log']);
+        foreach ($matchups as $matchup) {
+            if ($matchup->getCreateSource() == 1) {
+                EventHandler::removeFight($matchup->getID());
+                $audit_log->info('Removed matchup ' . $matchup->getTeam(1) . ' vs. ' . $matchup->getTeam(2) . ' as it was once automatically created and it now has no odds');
+                $counter++;
+            }
+        }
+        return $counter;
+    }
 }
