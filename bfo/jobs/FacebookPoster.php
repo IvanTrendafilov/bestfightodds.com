@@ -16,7 +16,7 @@ $fh = new FacebookHandler();
 //Post any new opening odds for matchups that have not yet been posted
 $matchups = $fh->getUnpostedMatchups();
 foreach ($matchups as $matchup) {
-	if ($matchup->isMainEvent() == true) {
+	if ($matchup->isMainEvent()) {
 		$event = EventHandler::getEvent($matchup->getEventID());
 		$odds = OddsHandler::getOpeningOddsForMatchup($matchup->getID());
 		$message = '';
@@ -29,7 +29,6 @@ foreach ($matchups as $matchup) {
 		} else if ($odds->getFighterOddsAsDecimal(1) == $odds->getFighterOddsAsDecimal(2)) {
 			$favourite_num = 0; //Even odds
 		}
-
 
 		//If matchup date is not decided (future event) adjust wording accordingly
 		$event_message = '';

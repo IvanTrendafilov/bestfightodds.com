@@ -46,12 +46,12 @@ class FacebookHandler
         return true;
     }
 
-    public function saveMatchupAsPosted($matchup_id, $skipped = false)
+    public function saveMatchupAsPosted(int $matchup_id, bool $skipped = false)
     {
         return FacebookDB::saveMatchupAsPosted($matchup_id, $skipped);
     }
 
-    public function saveEventAsPosted($event_id, $skipped = false)
+    public function saveEventAsPosted(int $event_id, bool $skipped = false)
     {
         return FacebookDB::saveEventAsPosted($event_id, $skipped);
     }

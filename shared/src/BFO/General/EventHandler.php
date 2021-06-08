@@ -23,11 +23,6 @@ class EventHandler
         return EventDB::getEvents($future_events_only, $event_id, $event_name, $event_date);
     }
 
-    /*public static function getAllFightsForEvent($event_id, $only_with_odds = false)
-    {
-        return EventHandler::getMatchups(only_with_odds: $only_with_odds, event_id: $event_id);
-    }*/
-
     public static function getMatchup(int $matchup_id): ?Fight
     {
         if (!$matchup_id || $matchup_id == 0) {
@@ -112,7 +107,7 @@ class EventHandler
         return EventDB::addCreateAudit($matchup_id, $source);
     }
 
-    public static function addNewEvent($event)
+    public static function addNewEvent(Event $event)
     {
         if ($event->getName() == '' || $event->getDate() == '') {
             return false;
@@ -131,7 +126,7 @@ class EventHandler
         return false;
     }
 
-    public static function removeFight($matchup_id)
+    public static function removeFight(int $matchup_id): bool
     {
         return EventDB::removeFight($matchup_id);
     }
@@ -198,13 +193,7 @@ class EventHandler
         return EventDB::searchEvent($event_name, $only_future_events);
     }
 
-    /**
-     * Retrieve recent events
-     *
-     * @param int $limit Event limit (default 10)
-     * @return array List of events
-     */
-    public static function getRecentEvents($limit = 10, $offset = 0)
+    public static function getRecentEvents(int $limit = 10, int $offset = 0)
     {
         if (!is_integer($limit) || $limit <= 0) {
             return null;
@@ -281,21 +270,6 @@ class EventHandler
     public static function getMetaDataForMatchup(int $matchup_id, string $metadata_attribute = null, int $bookie_id = null): array
     {
         return EventDB::getMetaDataForMatchup($matchup_id, $metadata_attribute, $bookie_id);
-    }
-
-    public static function getAllEventsWithMatchupsWithoutResults()
-    {
-        return EventDB::getAllEventsWithMatchupsWithoutResults();
-    }
-
-    public static function addMatchupResults($params)
-    {
-        return EventDB::addMatchupResults($params);
-    }
-
-    public static function getResultsForMatchup($matchup_id)
-    {
-        return EventDB::getResultsForMatchup($matchup_id);
     }
 
     public static function moveMatchupsToGenericEvents()

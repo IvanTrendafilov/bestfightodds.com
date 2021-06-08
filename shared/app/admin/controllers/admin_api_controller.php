@@ -127,7 +127,7 @@ class AdminAPIController
             $return_data['msg'] = 'Missing parameters';
             $return_data['error'] = true;
         } else {
-            $result = EventHandler::removeFight($data->matchup_id);
+            $result = EventHandler::removeFight((int) $data->matchup_id);
             $return_data['msg'] = 'Successfully deleted matchup ' . $data->matchup_id;
         }
 

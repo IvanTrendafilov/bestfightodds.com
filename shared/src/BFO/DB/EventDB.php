@@ -302,12 +302,10 @@ class EventDB
         $query = "DELETE FROM events WHERE id = ?";
         $params = array($event_id);
         DBTools::doParamQuery($query, $params);
-
-        //TODO: This needs error check
         return true;
     }
 
-    public static function removeFight($matchup_id)
+    public static function removeFight(int $matchup_id): bool
     {
         //Delete all fightodds
         $query = "DELETE FROM fightodds WHERE fight_id = ?";
@@ -449,13 +447,6 @@ class EventDB
         return $events;
     }
 
-    /**
-     * Retrieve recent events
-     *
-     * @param int $a_iLimit Event limit (default 10)
-     * @param int $a_iOffset Offset (default 0)
-     * @return array List of events
-     */
     public static function getRecentEvents(int $limit, int $offset = 0): array
     {
         $query = 'SELECT id, date, name, display
@@ -555,52 +546,6 @@ class EventDB
                     ORDER BY source_bookie_id ASC';
 
         return PDOTools::findMany($query, $params);
-    }
-
-    public static function getAllEventsWithMatchupsWithoutResults()
-    {
-        $query = 'SELECT DISTINCT e.* FROM events e INNER JOIN fights f ON e.id = f.event_id LEFT JOIN matchups_results mr ON mr.matchup_id = f.id WHERE mr.matchup_id IS NULL
-                        AND LEFT(e.date, 10) < LEFT((NOW() - INTERVAL ' . GENERAL_GRACEPERIOD_SHOW . ' HOUR), 10)';
-
-        $result = DBTools::doQuery($query);
-        $events = array();
-        while ($row = mysqli_fetch_array($result)) {
-            $events[] = new Event((int) $row['id'], $row['date'], $row['name'], (bool) $row['display']);
-        }
-        return $events;
-    }
-
-    public static function addMatchupResults($a_aParams)
-    {
-        if (!isset($a_aParams['matchup_id'], $a_aParams['winner'], $a_aParams['source'])) {
-            return false;
-        }
-        $aQueryParams[] = $a_aParams['matchup_id'];
-        $aQueryParams[] = $a_aParams['winner'];
-        $aQueryParams[] = isset($a_aParams['method']) ? $a_aParams['method'] : '';
-        $aQueryParams[] = isset($a_aParams['endround']) ? $a_aParams['endround'] : -1;
-        $aQueryParams[] = isset($a_aParams['endtime']) ? $a_aParams['endtime'] : '';
-        $aQueryParams[] = $a_aParams['source'];
-
-        $sQuery = 'REPLACE INTO matchups_results(matchup_id, winner, method, endround, endtime, source) 
-                    VALUES (?,?,?,?,?, ?)';
-
-        $bResult = DBTools::doParamQuery($sQuery, $aQueryParams);
-        if ($bResult == false) {
-            return false;
-        }
-        return true;
-    }
-
-    public static function getResultsForMatchup($matchup_id)
-    {
-        $query = 'SELECT matchup_id, winner, method, endround, endtime FROM matchups_results WHERE matchup_id = ?';
-        $result = DBTools::doParamQuery($query, [$matchup_id]);
-
-        if ($return_arr = mysqli_fetch_array($result)) {
-            return $return_arr;
-        }
-        return null;
     }
 
     public static function deleteAllOldEventsWithoutOdds(): int

@@ -13,7 +13,7 @@ use BFO\Utils\DB\PDOTools;
  */
 class FacebookDB
 {
-    public static function saveMatchupAsPosted($matchup_id, $skipped)
+    public static function saveMatchupAsPosted(int $matchup_id, bool $skipped)
     {
         $query = 'INSERT INTO matchups_fbposts(matchup_id, post_date, skipped)
                         VALUES (?, NOW(), ?)';
@@ -21,7 +21,7 @@ class FacebookDB
         return PDOTools::insert($query, $params);
     }
 
-    public static function saveEventAsPosted($event_id, $skipped)
+    public static function saveEventAsPosted(int $event_id, bool $skipped)
     {
         $query = 'INSERT INTO matchups_fbposts(event_id, post_date, skipped)
                         VALUES (?, NOW(), ?)';
