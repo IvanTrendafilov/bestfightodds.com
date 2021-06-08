@@ -8,22 +8,22 @@ use BFO\DataTypes\PropBet;
 
 class GraphHandler
 {
-    public static function getMatchupData(int $matchup_id, int $bookie_id): array
+    public static function getMatchupData(int $matchup_id, int $bookie_id): ?array
     {
         return OddsHandler::getAllOdds($matchup_id, $bookie_id);
     }
 
-    public static function getPropData(int $matchup_id, int $bookie_id, int $proptype_id, int $team_num): array
+    public static function getPropData(int $matchup_id, int $bookie_id, int $proptype_id, int $team_num): ?array
     {
         return OddsHandler::getAllPropOddsForMatchupPropType($matchup_id, $bookie_id, $proptype_id, $team_num);
     }
 
-    public static function getEventPropData(int $event_id, int $bookie_id, int $proptype_id): array
+    public static function getEventPropData(int $event_id, int $bookie_id, int $proptype_id): ?array
     {
         return OddsHandler::getAllPropOddsForEventPropType($event_id, $bookie_id, $proptype_id);
     }
 
-    public static function getMatchupIndexData(int $matchup_id, int $team_num): array
+    public static function getMatchupIndexData(int $matchup_id, int $team_num): ?array
     {
         if ($team_num != 1 && $team_num != 2) {
             return null;

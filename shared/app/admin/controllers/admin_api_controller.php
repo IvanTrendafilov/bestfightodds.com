@@ -244,7 +244,7 @@ class AdminAPIController
 
             //Check for alt name update (if so just add it to the bunch)
             if (v::length(5, null)->validate(@$data->alt_name)) {
-                if (TeamHandler::addTeamAltName($data->fighter_id, $data->alt_name)) {
+                if (TeamHandler::addTeamAltName((int) $data->fighter_id, (string) $data->alt_name)) {
                     $return_data['msg'] .= 'Successfully updated altname.';
                     $return_data['fighter_id'] = $data->fighter_id;
                 } else {

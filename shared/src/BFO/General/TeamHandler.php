@@ -9,7 +9,7 @@ use BFO\DB\TeamDB;
  */
 class TeamHandler
 {
-    public static function getAltNamesForTeamByID($team_id)
+    public static function getAltNamesForTeamByID(int $team_id): ?array
     {
         if (!$team_id) {
             return null;
@@ -20,7 +20,7 @@ class TeamHandler
     /**
      * Gets the latest date when the fighter received an odds update
      */
-    public static function getLastChangeDate($team_id)
+    public static function getLastChangeDate(int $team_id): ?string
     {
         return TeamDB::getLastChangeDate($team_id);
     }
@@ -30,7 +30,7 @@ class TeamHandler
         return TeamDB::getAllTeamsWithMissingResults();
     }
 
-    public static function addTeamAltName($team_id, $new_alt_name)
+    public static function addTeamAltName(int $team_id, string $new_alt_name): bool
     {
         return TeamDB::addTeamAltName($team_id, $new_alt_name);
     }
@@ -48,7 +48,7 @@ class TeamHandler
         return TeamDB::getTeams(team_id: $team_id);
     }
 
-    public static function getTeamIDByName($team_name)
+    public static function getTeamIDByName(string $team_name): ?int
     {
         return TeamDB::getTeamIDByName($team_name);
     }

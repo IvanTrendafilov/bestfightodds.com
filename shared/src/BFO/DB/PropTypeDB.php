@@ -9,51 +9,11 @@ Each prop type can in turn be assigned to a specific category.
 The purpose of prop categories is to be able to use these when generating pre fight report and eventually also for alerts */
 
 use BFO\Utils\DB\PDOTools;
+use BFO\Utils\DB\DBTools;
 use BFO\DataTypes\PropType;
 
 class PropTypeDB
 {
-    /**
-     * Difference between this one and the one in OddsDB is that this one is prepared for prop_type_categories
-     */
-    public static function getPropTypes($category_id = null)
-    {
-        $query = 'SELECT pt.*
-                    FROM prop_types pt';
-        $params = [];
-
-        if ($category_id != null && is_numeric($category_id)) {
-            $query .= ' INNER JOIN prop_type_category ptc ON pt.id = ptc.proptype_id
-                        INNER JOIN prop_categories pc ON ptc.category_id = pc.id
-                        WHERE pc.id = ?';
-            $params[] = $category_id;
-        }
-
-        $result = PDOTools::findMany($query, $params);
-        $ret_proptypes = [];
-        foreach ($result as $pt) {
-            $temp_pt = new PropType((int) $pt['id'], $pt['prop_desc'], $pt['negprop_desc']);
-            $temp_pt->setEventProp((bool) $pt['is_eventprop']);
-            $ret_proptypes[] = $temp_pt;
-        }
-        return $ret_proptypes;
-    }
-
-    //TODO: Currently not used. Remove or implement function in admin pages?
-    public static function assignPropTypeToCategory($proptype_id, $category_id)
-    {
-        $query = "INSERT INTO prop_type_category(proptype_id, category_id) VALUES (?,?)";
-        $params = [$proptype_id, $category_id];
-        try {
-            $id = PDOTools::insert($query, $params);
-        } catch (\PDOException $e) {
-            if ($e->getCode() == 23000) {
-                throw new \Exception("Duplicate entry", 10);
-            }
-        }
-        return $id;
-    }
-
     public static function createNewPropType(PropType $proptype_obj) : ?int
     {
         $query = "INSERT INTO prop_types(prop_desc, negprop_desc, is_eventprop) VALUES (?,?,?)";
@@ -66,5 +26,103 @@ class PropTypeDB
             }
         }
         return $id;
+    }
+
+    public static function getPropTypes(int $proptype_id = null): array
+    {
+        $extra_where = '';
+        $params = [];
+        if ($proptype_id) {
+            $extra_where .= ' AND pt.id = :proptype_id';
+            $params[':proptype_id'] = $proptype_id;
+        }
+
+        $query = 'SELECT pt.id, pt.prop_desc, pt.negprop_desc, pt.is_eventprop
+                    FROM prop_types pt
+                        WHERE 1=1 
+                        ' . $extra_where . ' 
+                    ORDER BY LEFT(pt.prop_desc,4) = "Over" DESC, id ASC';
+
+        $prop_types = [];
+        try {
+            foreach (PDOTools::findMany($query, $params) as $row) {
+                $prop_type = new PropType(
+                    (int) $row['id'],
+                    $row['prop_desc'],
+                    $row['negprop_desc']
+                );
+                $prop_type->setEventProp((bool) $row['is_eventprop']);
+                $prop_types[] = $prop_type;
+            }
+        } catch (\PDOException $e) {
+            if ($e->getCode() == 23000) {
+                throw new \Exception("Unknown error " . $e->getMessage(), 10);
+            }
+        }
+        return $prop_types;
+    }
+
+    /**
+     * Retrieves the prop types that a certain matchup has props and odds for
+     *
+     * Since these are matchup specific prop types we will go ahead and replace
+     * the <T> variables with the actual team name
+     */
+    public static function getAllPropTypesForMatchup(int $matchup_id): array
+    {
+        $query = 'SELECT pt.id, pt.prop_desc, pt.negprop_desc, lp.team_num
+                    FROM prop_types pt, lines_props lp
+                    WHERE lp.proptype_id = pt.id
+                        AND  lp.matchup_id = ?
+                        GROUP BY lp.matchup_id, lp.team_num, pt.id
+                    ORDER BY LEFT(pt.prop_desc,4) = "Over" DESC, id ASC, lp.team_num ASC';
+
+        $params = [$matchup_id];
+
+        $result = DBTools::doParamQuery($query, $params);
+
+        $prop_types = [];
+        while ($row = mysqli_fetch_array($result)) {
+            $prop_types[] = new PropType(
+                (int) $row['id'],
+                $row['prop_desc'],
+                $row['negprop_desc'],
+                (int) $row['team_num']
+            );
+        }
+
+        return $prop_types;
+    }
+
+    /**
+     * Retrieves the prop types that a certain event has props and odds for
+     *
+     * @param int $event_id Matchup ID
+     * @return Array Collection of PropType objects
+     */
+    public static function getAllPropTypesForEvent(int $event_id): array
+    {
+        $query = 'SELECT pt.id, pt.prop_desc, pt.negprop_desc
+                    FROM prop_types pt, lines_eventprops lep
+                    WHERE lep.proptype_id = pt.id
+                        AND  lep.event_id = ?
+                        GROUP BY lep.event_id, pt.id
+                    ORDER BY id ASC';
+
+        $params = array($event_id);
+
+        $result = DBTools::doParamQuery($query, $params);
+
+        $prop_types = [];
+        while ($row = mysqli_fetch_array($result)) {
+            $prop_types[] = new PropType(
+                (int) $row['id'],
+                $row['prop_desc'],
+                $row['negprop_desc'],
+                0
+            );
+        }
+
+        return $prop_types;
     }
 }

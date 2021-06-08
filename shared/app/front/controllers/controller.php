@@ -10,6 +10,7 @@ use BFO\General\OddsHandler;
 use BFO\General\GraphHandler;
 use BFO\General\StatsHandler;
 use BFO\Utils\LinkTools;
+use BFO\DataTypes\Fight;
 
 use BFO\Caching\CacheControl;
 
@@ -127,7 +128,7 @@ class MainController
             }
         }
         $view_data['events'] = $view_events;
-        $view_data['bookies'] = BookieHandler::getAllBookies();
+        $view_data['bookies'] = BookieHandler::getAllBookies(exclude_inactive: true);
 
         //Add view data that contains the users email (populated when previously creating an alert and stored in cookie)
         $cookies = $request->getCookieParams();
@@ -226,7 +227,7 @@ class MainController
         foreach ($matchups as $matchup) {
             $team_odds = $this->populateTeamOdds($matchup, $team);
             if (!($team_odds['event']->getID() == PARSE_FUTURESEVENT_ID && $team_odds['odds_opening'] == null)) { //Filters out future events with no opening odds
-                $view_data['matchups'][] = $this->populateTeamOdds($matchup, $team);
+                $view_data['matchups'][] = $team_odds;
             }
         }
 
@@ -295,6 +296,52 @@ class MainController
         }
 
         $view_matchup['graph_data'] = GraphHandler::getMedianSparkLine($matchup->getID(), ($matchup->getFighterID(1) == $team->getID() ? 1 : 2));
+        $view_matchup['matchup_obj'] = $matchup;
+        return $view_matchup;
+    }
+
+    private function populateEventAggregatedOdds(Fight $matchup): array
+    {
+        $view_matchup = [];
+
+        $view_matchup['odds_opening'] = OddsHandler::getOpeningOddsForMatchup($matchup->getID());
+
+        //Determine range for this fight
+        $matchup_odds = OddsHandler::getAllLatestOddsForFight($matchup->getID());
+        $view_matchup['team1_low'] = null;
+        $view_matchup['team2_low'] = null;
+        $view_matchup['team1_high'] = null;
+        $view_matchup['team2_high'] = null;
+        foreach ($matchup_odds as $odds) {
+            if (!$view_matchup['team1_low'] || $odds->getFighterOddsAsDecimal(1, true) < $view_matchup['team1_low']->getFighterOddsAsDecimal(1, true)) {
+                $view_matchup['team1_low'] = $odds;
+            }
+            if (!$view_matchup['team2_low'] || $odds->getFighterOddsAsDecimal(2, true) < $view_matchup['team2_low']->getFighterOddsAsDecimal(2, true)) {
+                $view_matchup['team2_low'] = $odds;
+            }
+            if (!$view_matchup['team1_high'] || $odds->getFighterOddsAsDecimal(1, true) > $view_matchup['team1_high']->getFighterOddsAsDecimal(1, true)) {
+                $view_matchup['team1_high'] = $odds;
+            }
+            if (!$view_matchup['team2_high'] || $odds->getFighterOddsAsDecimal(2, true) > $view_matchup['team2_high']->getFighterOddsAsDecimal(2, true)) {
+                $view_matchup['team2_high'] = $odds;
+            }
+        }
+
+        $latest_index_team1 = OddsHandler::getCurrentOddsIndex($matchup->getID(), 1);
+        $latest_index_team2 = OddsHandler::getCurrentOddsIndex($matchup->getID(), 2);
+
+        //Calculate % change from opening to mean
+        $view_matchup['percentage_change_team1'] = 0;
+        if ($latest_index_team1 != null && $view_matchup['odds_opening'] != null) {
+            $view_matchup['percentage_change_team1'] = round((($latest_index_team1->getFighterOddsAsDecimal(1, true) - $view_matchup['odds_opening']->getFighterOddsAsDecimal(1, true)) / $latest_index_team1->getFighterOddsAsDecimal(1, true)) * 100, 1);
+        }
+        $view_matchup['percentage_change_team2'] = 0;
+        if ($latest_index_team2 != null && $view_matchup['odds_opening'] != null) {
+            $view_matchup['percentage_change_team2'] = round((($latest_index_team2->getFighterOddsAsDecimal(2, true) - $view_matchup['odds_opening']->getFighterOddsAsDecimal(2, true)) / $latest_index_team2->getFighterOddsAsDecimal(2, true)) * 100, 1);
+        }
+
+        $view_matchup['graph_data_team1'] = GraphHandler::getMedianSparkLine($matchup->getID(), 1);
+        $view_matchup['graph_data_team2'] = GraphHandler::getMedianSparkLine($matchup->getID(), 2);
         $view_matchup['matchup_obj'] = $matchup;
         return $view_matchup;
     }
@@ -369,7 +416,7 @@ class MainController
         }
 
         $view_data = OddsHandler::getEventViewData($event->getID());
-        $view_data['bookies'] = BookieHandler::getAllBookies();
+        $view_data['bookies'] = BookieHandler::getAllBookies(exclude_inactive: true);
 
         //Add swing chart data (= change since opening, last 24h, last h)
         $data = [];
@@ -447,6 +494,128 @@ class MainController
                 return 'arage-1';
             }
         }, $page_content);
+
+        //Add page title and metadata
+        $view_data = [];
+        $view_data['contents'] = $page_content;
+        $view_data['team_title'] = $event->getName() . ' Odds & Betting Lines';
+        $view_data['meta_desc'] = $event->getName() . ' odds & betting lines.';
+        $view_data['meta_keywords'] = $event->getName();
+
+        $response->getBody()->write($this->plates->render('single_event', $view_data));
+        return $response;
+    }
+
+    public function viewEventAggregated(Request $request, Response $response, array $args)
+    {
+        if (!isset($args['id'])) {
+            return $response->withHeader('Location', '/')->withStatus(302);
+        }
+
+        //Get ID from id attribute
+        $event_id = substr($args['id'], strrpos($args['id'], '-') + 1);
+        if (!intval($event_id)) {
+            return $response->withHeader('Location', '/')->withStatus(302);
+        }
+        $event = EventHandler::getEvent((int) $event_id);
+
+        if ($event == null) {
+            return $response->withHeader('Location', '/')->withStatus(302);
+        }
+
+        //Verify that requested event slug matches the expected one. This is to reduce scrapers trying to autogenerate URLs
+        if (strtolower($event->getEventAsLinkString()) != strtolower($args['id'])) {
+            //URL does not match, check partial match to ensure we dont break links if an event is renamed from e.g UFC Fight Night 185: Jonas vs. Silva to UFC Fight Night 185: Griffin vs. Jones
+            $mark_pos = strpos($event->getName(), ':') != null ? strpos($event->getName(), ':') : strlen($event->getName()); //Find position of ':'
+            $shortened_event = strtolower(LinkTools::slugString(substr($event->getName(), 0, $mark_pos)));
+            if ($shortened_event == strtolower(substr($args['id'], 0, strlen($shortened_event)))) {
+                //Slug matches partially, redirect with 301 to real URL
+                return $response->withHeader('Location', '/events/' . $event->getEventAsLinkString())->withStatus(301);
+            } else {
+                //Slug does not match partially, redirect to main page with a 302
+                return $response->withHeader('Location', '/')->withStatus(302);
+            }
+        }
+
+        //Check if page is cached or not. If so, fetch from cache and include
+        $last_change = OddsHandler::getLatestChangeDate($event->getID());
+        if (CacheControl::isPageCached('event-aggregated-' . $event->getID() . '-' . strtotime($last_change))) {
+            //Retrieve cached page
+            $cached_contents = CacheControl::getCachedPage('event-aggregated-' . $event->getID() . '-' . strtotime($last_change));
+
+            $view_data = [];
+            $view_data['contents'] = $cached_contents;
+            $view_data['team_title'] = $event->getName() . ' Odds & Betting Lines';
+            $view_data['meta_desc'] = $event->getName() . ' odds & betting lines.';
+            $view_data['meta_keywords'] = $event->getName();
+
+            $response->getBody()->write($this->plates->render('single_event', $view_data));
+            return $response;
+        }
+
+        //$view_data = OddsHandler::getEventViewData($event->getID());
+        $view_data['bookies'] = BookieHandler::getAllBookies();
+
+        $matchups = EventHandler::getMatchups(event_id: $event->getID());
+        foreach ($matchups as $matchup) {
+            $matchup_details = $this->populateEventAggregatedOdds($matchup);
+            if ($matchup_details['odds_opening']) { //Filters out matchups with no opening odds
+                $view_data['matchups'][] = $matchup_details;
+            }
+        }
+
+        //Add swing chart data (= change since opening, last 24h, last h)
+        $data = [];
+        $series_names = ['Change since opening', 'Change in the last 24 hours', 'Change in the last hour'];
+        for ($x = 0; $x <= 2; $x++) {
+            $swings = StatsHandler::getAllDiffsForEvent($event->getID(), $x);
+            $row_data = [];
+
+            foreach ($swings as $swing) {
+                if ($swing[2]['swing'] < 0.01 && $swing[2]['swing'] > 0.00) {
+                    $swing[2]['swing'] = 0.01;
+                }
+                if (round($swing[2]['swing'] * 100) != 0) {
+                    $row_data[]  = [$swing[0]->getTeamAsString($swing[1]), -round($swing[2]['swing'] * 100)];
+                }
+            }
+            if (count($row_data) == 0) {
+                $row_data[] = ['No ' . strtolower($series_names[$x]), null];
+            }
+            $data[]  = ["name" => $series_names[$x], "data" => $row_data, "visible" => ($x == 0 ? true : false)];
+        }
+        $view_data['swing_chart_data'] = $data;
+
+        //Add expected outcome data
+        $outcomes = StatsHandler::getExpectedOutcomesForEvent($event->getID());
+        $row_data = [];
+        foreach ($outcomes as $outcome) {
+            $labels = [$outcome[0]->getTeamAsString(1), $outcome[0]->getTeamAsString(2)];
+
+            $points = [
+                $outcome[1]['team1_dec'],
+                $outcome[1]['team1_itd'],
+                $outcome[1]['draw'],
+                $outcome[1]['team2_itd'],
+                $outcome[1]['team2_dec']
+            ];
+            $row_data[] = [$labels, $points];
+        }
+        if (count($row_data) == 0) {
+            $points = [0, 0, 0, 0, 0];
+            $row_data[] = [['N/A', 'N/A'], $points];
+        }
+        $view_data['expected_outcome_data']  = ["name" => 'Outcomes', "data" => $row_data];
+        $view_data['event'] = $event;
+
+        $page_content = $this->plates->render('gen_eventpage_aggregated', $view_data);
+
+        //Minify
+        $page_content = preg_replace('/\>\s+\</m', '><', $page_content);
+
+        //Cache page
+        CacheControl::cleanPageCacheWC('event-aggregated-' . $event->getID() . '-*');
+        CacheControl::cachePage($page_content, 'event-aggregated-' . $event->getID() . '-' . strtotime($last_change) . '.php');
 
         //Add page title and metadata
         $view_data = [];

@@ -9,9 +9,9 @@ use Exception;
 
 class BookieHandler
 {
-    public static function getAllBookies(): array
+    public static function getAllBookies(bool $exclude_inactive = false): array
     {
-        return BookieDB::getBookiesGeneric();
+        return BookieDB::getBookiesGeneric(exclude_inactive: $exclude_inactive);
     }
 
     public static function getBookieByID(int $bookie_id): ?Bookie

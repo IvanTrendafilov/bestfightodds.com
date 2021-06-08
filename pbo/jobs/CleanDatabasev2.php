@@ -27,6 +27,7 @@ require_once __DIR__ . "/../bootstrap.php";
 
 use BFO\General\BookieHandler;
 use BFO\General\OddsHandler;
+use BFO\General\PropTypeHandler;
 use BFO\General\EventHandler;
 use BFO\Utils\DB\DBTools;
 use BFO\Utils\OddsTools;
@@ -58,7 +59,7 @@ while (($removed_odds_counter > 0 || $removed_props_counter > 0)  && $iterations
                 }
                 removeFightOdds($odds_to_remove);
 
-                $proptypes = OddsHandler::getAllPropTypesForMatchup($matchup->getID());
+                $proptypes = PropTypeHandler::getAllPropTypesForMatchup($matchup->getID());
                 foreach ($proptypes as $proptype) {
                     for ($i = 0; $i <= 2; $i++) {
                         $props_to_remove = getAllPropDuplicates(OddsHandler::getAllPropOddsForMatchupPropType($matchup->getID(), $oBookie->getID(), $proptype->getID(), $i));

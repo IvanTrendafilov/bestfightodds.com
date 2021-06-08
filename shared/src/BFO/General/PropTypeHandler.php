@@ -7,9 +7,25 @@ use BFO\DB\PropTypeDB;
 
 class PropTypeHandler
 {
-    public static function getPropTypes($category_id = null)
+
+    public static function getAllPropTypes()
     {
-        return PropTypeDB::getPropTypes($category_id);
+        return self::getPropTypes();
+    }
+
+    public static function getPropTypes(int $proptype_id = null): array
+    {
+        return PropTypeDB::getPropTypes($proptype_id);
+    }
+
+    public static function getAllPropTypesForMatchup(int $matchup_id): array
+    {
+        return PropTypeDB::getAllPropTypesForMatchup($matchup_id);
+    }
+
+    public static function getAllPropTypesForEvent($event_id)
+    {
+        return PropTypeDB::getAllPropTypesForEvent($event_id);
     }
 
     public static function createNewPropType(PropType $proptype_obj): ?int

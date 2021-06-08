@@ -105,7 +105,8 @@ class OddsJob
         $events = EventHandler::getEvents(future_events_only: true);
 
         $view_data = [];
-        $view_data['bookies'] = BookieHandler::getAllBookies();
+        $view_data['bookies'] = BookieHandler::getAllBookies(exclude_inactive: true);
+
         $view_data['events'] = [];
         foreach ($events as $event) {
             if ($event->isDisplayed()) {

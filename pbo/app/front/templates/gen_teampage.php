@@ -83,7 +83,7 @@
                                         <td class="moneyline"></td>
                                         <td></td>
                                         <td></td>
-                                        <td class="item-non-mobile" scope="row" style="padding-left: 20px"><a href="/events/<?= $matchup['event']->getEventAsLinkString() ?>"><?= $matchup['event']->getName() ?></a></th>
+                                        <td class="item-non-mobile" scope="row" style="padding-left: 20px"><a href="/events/<?= $matchup['event']->getEventAsLinkString() ?>"><?= $matchup['event']->getName() ?></a></td>
                                     </tr>
                                     <tr>
                                         <?php /*    <td class="resultcell"><div class="method"><?=$aResults['winner'] != '-1' ? '' . $sMethod . '' : ''?></div></td> */ ?>

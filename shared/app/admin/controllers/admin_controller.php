@@ -7,6 +7,7 @@ use DI\Container;
 use BFO\General\ScheduleHandler;
 use BFO\General\EventHandler;
 use BFO\General\OddsHandler;
+use BFO\General\PropTypeHandler;
 use BFO\General\BookieHandler;
 use BFO\General\TeamHandler;
 use BFO\General\TwitterHandler;
@@ -395,7 +396,7 @@ class AdminController
         $view_data['in_bookie_id'] = $request->getQueryParams()['in_bookie_id'] ?? '';
 
         $view_data['bookies'] = BookieHandler::getAllBookies();
-        $view_data['prop_types'] = OddsHandler::getAllPropTypes();
+        $view_data['prop_types'] = PropTypeHandler::getAllPropTypes();
         $response->getBody()->write($this->plates->render('proptemplate_new', $view_data));
         return $response;
     }

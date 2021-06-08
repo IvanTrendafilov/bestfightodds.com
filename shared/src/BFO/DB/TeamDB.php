@@ -58,7 +58,7 @@ class TeamDB
         return $teams;
     }
 
-    public static function getAltNamesForTeamByID($team_id)
+    public static function getAltNamesForTeamByID(int $team_id): ?array
     {
         $query = "SELECT fa.altname FROM fighters_altnames fa WHERE fa.fighter_id = ?";
         $rows = PDOTools::findMany($query, [$team_id]);
@@ -77,7 +77,7 @@ class TeamDB
     /**
      * Gets the latest date when the fighter received an odds update
      */
-    public static function getLastChangeDate($team_id)
+    public static function getLastChangeDate(int $team_id): ?string
     {
         $query = 'SELECT Max(fo3.date) 
                     FROM   (SELECT fo1.date 
@@ -120,7 +120,7 @@ class TeamDB
         return $id;
     }
 
-    public static function getTeamIDByName($fighter_name)
+    public static function getTeamIDByName(string $team_name): ?int
     {
         $query = 'SELECT fn.id
                     FROM (SELECT f.id as id, f.name as name FROM fighters f
@@ -132,16 +132,16 @@ class TeamDB
                     //New Query (to be combined with find figher above): 
                     //SELECT distinct(id), name FROM fighters f left join fighters_altnames fa ON fa.fighter_id = f.id WHERE name = 'CRO COP' OR altname like '%CRO COP%';
 
-        $params = [strtoupper($fighter_name)];
+        $params = [strtoupper($team_name)];
 
         $result = DBTools::doParamQuery($query, $params);
 
-        $fighters = array();
+        $teams = [];
         while ($row = mysqli_fetch_array($result)) {
-            $fighters[] = $row['id'];
+            $teams[] = (int) $row['id'];
         }
-        if (sizeof($fighters) > 0) {
-            return $fighters[0];
+        if (sizeof($teams) > 0) {
+            return $teams[0];
         }
         return null;
     }
@@ -162,9 +162,9 @@ class TeamDB
         return $fighters;
     }
 
-    public static function addTeamAltName($team_id, $alt_name)
+    public static function addTeamAltName(int $team_id, string $alt_name): bool
     {
-        if ($team_id == "" || $alt_name == "") {
+        if (empty($team_id) || empty($alt_name)) {
             return false;
         }
 
@@ -173,7 +173,7 @@ class TeamDB
 
         $params = [$team_id, strtoupper($alt_name)];
         $result = DBTools::doParamQuery($query, $params);
-        if ($result == false) {
+        if (!$result) {
             return false;
         }
 

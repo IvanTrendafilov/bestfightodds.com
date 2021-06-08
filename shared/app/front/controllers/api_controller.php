@@ -92,7 +92,7 @@ class APIController
                     }
                 }
 
-                if ($odds != null) {
+                if ($odds) {
                     //Convert to JSON and return
                     $bookie_name = 'Mean';
                     if (isset($args['b'])) {

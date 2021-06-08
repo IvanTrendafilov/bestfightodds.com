@@ -73,6 +73,7 @@ $app->group('', function (RouteCollectorProxy $group) {
   $group->get('/links', \MainController::class . ':widget');
   $group->get('/fighters/{id}', \MainController::class . ':viewTeam');
   $group->get('/events/{id}', \MainController::class . ':viewEvent');
+  $group->get('/events2/{id}', \MainController::class . ':viewEventAggregated');
 });
 
 //API Routes

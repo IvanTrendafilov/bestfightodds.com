@@ -9,7 +9,7 @@ use BFO\DataTypes\PropTemplate;
 
 class BookieDB
 {
-    public static function getBookiesGeneric(int $bookie_id = null): array
+    public static function getBookiesGeneric(int $bookie_id = null, bool $exclude_inactive = false): array
     {
         $extra_where = '';
         $params = [];
@@ -18,16 +18,20 @@ class BookieDB
             $params[] = $bookie_id;
         }
 
-        $query = 'SELECT b.id, b.name, b.refurl
+        if ($exclude_inactive) {
+            $extra_where .= ' AND b.active = true ';
+        }
+
+        $query = 'SELECT b.id, b.name, b.refurl, b.active
             FROM bookies b
-            WHERE active = true 
+                WHERE 1=1 
             ' . $extra_where . '
             ORDER BY position, id ASC';
 
         $bookies = [];
         try {
             foreach (PDOTools::findMany($query, $params) as $row) {
-                $bookies[] = new Bookie((int) $row['id'], $row['name'], $row['refurl']);
+                $bookies[] = new Bookie((int) $row['id'], $row['name'], $row['refurl'], boolval($row['active']));
             };
         } catch (\PDOException $e) {
             if ($e->getCode() == 23000) {
@@ -178,4 +182,5 @@ class BookieDB
                     GROUP BY lp.bookie_id;';
         return PDOTools::findMany($query);
     }
+
 }

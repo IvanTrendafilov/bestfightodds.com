@@ -51,7 +51,7 @@
                                             <td rowspan="2" class="change-cell"></td>
                                 <?php endif ?>
                                             
-                                            <td class="item-non-mobile" scope="row" style="padding-left: 20px"><a href="/events/<?=$matchup['event']->getEventAsLinkString()?>" ><?=$matchup['event']->getName()?></a></th>
+                                            <td class="item-non-mobile" scope="row" style="padding-left: 20px"><a href="/events/<?=$matchup['event']->getEventAsLinkString()?>" ><?=$matchup['event']->getName()?></a></td>
                                         </tr>
                                         <tr>
                                             <?php /* <td class="resultcell"><div class="method"><?=(isset($aResults['winner']) && $aResults['winner'] != '-1') ? '' . $sMethod . '' : ''?></div></td> */?>

@@ -8,6 +8,7 @@ require_once 'bfo/bootstrap.php';
 
 use BFO\General\EventHandler;
 use BFO\General\BookieHandler;
+use BFO\General\PropTypeHandler;
 use BFO\DataTypes\Fight;
 use BFO\DataTypes\Event;
 use BFO\DataTypes\PropTemplate;
@@ -61,7 +62,7 @@ final class AlerterTest extends TestCase
 
     public function testMatchupAlertDupe(): void
     {
-        /*$aPropTypes = OddsHandler::getAllPropTypes();
+        /*$aPropTypes = PropTypeHandler::getAllPropTypes();
         foreach ($aPropTypes as $oPropType) {
             if (!$oPropType->isEventProp()) {
                 //If prop contains <T> then this is a team prop so we need to add both 1 and 2
