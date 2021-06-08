@@ -227,9 +227,9 @@ class OddsHandler
     }
 
 
-    public static function getMatchupForCorrelation(int $bookie_id, string $correlation): ?int
+    public static function getMatchupIDForCorrelation(int $bookie_id, string $correlation): ?int
     {
-        return OddsDB::getMatchupForCorrelation($bookie_id, $correlation);
+        return OddsDB::getMatchupIDForCorrelation($bookie_id, $correlation);
     }
 
     /**

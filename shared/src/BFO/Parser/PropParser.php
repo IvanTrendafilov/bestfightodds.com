@@ -11,16 +11,17 @@ use BFO\DataTypes\PropBet;
 use BFO\DataTypes\EventPropBet;
 use BFO\DataTypes\Fight;
 use BFO\DataTypes\PropTemplate;
+use Psr\Log\LoggerInterface;
 
 class PropParser
 {
-    private $logger;
+    private LoggerInterface $logger;
     private $matchups;
     private $events;
     private $bookie_id;
     private $templates;
 
-    public function __construct($logger, $bookie_id)
+    public function __construct(LoggerInterface $logger, int $bookie_id)
     {
         $this->logger = $logger;
         $this->bookie_id = $bookie_id;
@@ -40,7 +41,7 @@ class PropParser
         $this->matchups = $new_matchup_list;
     }
 
-    public function matchProps($props)
+    public function matchProps(array $props): array
     {
         $result = [];
         foreach ($props as $prop) {
@@ -67,7 +68,7 @@ class PropParser
         return $result;
     }
 
-    public function matchSingleProp($prop)
+    public function matchSingleProp(ParsedProp $prop): array
     {
         $template = $this->matchPropToTemplate($prop);
         if (!$template) {
@@ -351,7 +352,7 @@ class PropParser
             //Check if a manual correlation has been created and stored
             $prop_name = ($parsed_prop->getMainProp() == 1 ? $parsed_prop->getTeamName(1) : $parsed_prop->getTeamName(2));
             $this->logger->debug('--- searching for manual correlation: ' . $prop_name . ' for bookie ' . $this->bookie_id);
-            $manual_correlation = OddsHandler::getMatchupForCorrelation($this->bookie_id, $prop_name);
+            $manual_correlation = OddsHandler::getMatchupIDForCorrelation($this->bookie_id, $prop_name);
             if ($manual_correlation) {
                 $this->logger->debug('---- prop has manual correlation stored: ' . $manual_correlation);
                 $matchup_from_correlation = EventHandler::getMatchup((int) $manual_correlation);
@@ -381,7 +382,7 @@ class PropParser
         return $matchups;
     }
 
-    private function matchPropToEvent($parsed_prop, $template)
+    private function matchPropToEvent(ParsedProp $parsed_prop, PropTemplate $template): ?array
     {
         $template_variables = [];
         if ($template->isNegPrimary()) {
@@ -443,7 +444,7 @@ class PropParser
             }
         }
 
-        return array('event_id' => $found_event_id);
+        return ['event_id' => $found_event_id];
     }
 
     private function addAltNameMatchupsToMatchup(Fight $matchup): array

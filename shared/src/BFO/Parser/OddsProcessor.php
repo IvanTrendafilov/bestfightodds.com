@@ -97,7 +97,7 @@ class OddsProcessor
         $matched_items = [];
         foreach ($parsed_matchups as $parsed_matchup) {
             $match = false;
-            $matching_matchup = EventHandler::getMatchingFight(
+            $matching_matchup = EventHandler::getMatchingMatchup(
                 team1_name: $parsed_matchup->getTeamName(1),
                 team2_name: $parsed_matchup->getTeamName(2),
                 future_only: true

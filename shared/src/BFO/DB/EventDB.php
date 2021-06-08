@@ -142,7 +142,7 @@ class EventDB
         return $matchups;
     }
 
-    public static function getMatchingFight(string $team1_name, string $team2_name, bool $future_only = false, bool $past_only = false, int $known_fighter_id = null, string $event_date = null, int $event_id = null): ?Fight
+    public static function getMatchingMatchup(string $team1_name, string $team2_name, bool $future_only = false, bool $past_only = false, int $known_fighter_id = null, string $event_date = null, int $event_id = null): ?Fight
     {
         $extra_where = '';
         $aQueryParams = [];
@@ -305,7 +305,7 @@ class EventDB
         return true;
     }
 
-    public static function removeFight(int $matchup_id): bool
+    public static function removeMatchup(int $matchup_id): bool
     {
         //Delete all fightodds
         $query = "DELETE FROM fightodds WHERE fight_id = ?";
@@ -405,7 +405,7 @@ class EventDB
         return true;
     }
 
-    public static function setFightAsMainEvent($matchup_id, $is_main_event)
+    public static function setFightAsMainEvent(int $matchup_id, bool $is_main_event)
     {
         $query = 'UPDATE fights f
                 SET f.is_mainevent = ?
@@ -439,7 +439,7 @@ class EventDB
 
         $params = array('%' . $event_name . '%', $event_name, $event_name);
         $result = DBTools::doParamQuery($query, $params);
-        $events = array();
+        $events = [];
         while ($row = mysqli_fetch_array($result)) {
             $events[] = new Event((int) $row['id'], $row['date'], $row['name'], (bool) $row['display']);
         }
@@ -479,7 +479,7 @@ class EventDB
     /**
      * Retrieves all stored unmatched entries
      */
-    public static function getUnmatched($limit = 10, $type = -1)
+    public static function getUnmatched(int $limit = 10, int $type = -1): array
     {
         $params = [];
         $extra_where = '';
@@ -494,7 +494,7 @@ class EventDB
                     LIMIT 0, ' . $limit;
 
         $result = DBTools::doParamQuery($query, $params);
-        $unmatched = array();
+        $unmatched = [];
         while ($row = mysqli_fetch_array($result)) {
             $unmatched[] = $row;
         }

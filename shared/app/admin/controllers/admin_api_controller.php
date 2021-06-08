@@ -88,7 +88,7 @@ class AdminAPIController
         } else {
             if (isset($data->is_main_event) && is_bool(boolval($data->is_main_event))) {
                 //Flip main even status
-                if (EventHandler::setFightAsMainEvent($data->matchup_id, $data->is_main_event)) {
+                if (EventHandler::setFightAsMainEvent((int) $data->matchup_id, (bool) $data->is_main_event)) {
                     $return_data['msg'] = 'Successfully switched matchup to main event';
                     $return_data['matchup_id'] = $data->matchup_id;
                     $return_data['is_main_event'] = $data->is_main_event;
@@ -127,7 +127,7 @@ class AdminAPIController
             $return_data['msg'] = 'Missing parameters';
             $return_data['error'] = true;
         } else {
-            $result = EventHandler::removeFight((int) $data->matchup_id);
+            $result = EventHandler::removeMatchup((int) $data->matchup_id);
             $return_data['msg'] = 'Successfully deleted matchup ' . $data->matchup_id;
         }
 

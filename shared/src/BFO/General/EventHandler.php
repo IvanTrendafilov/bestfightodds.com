@@ -37,9 +37,9 @@ class EventHandler
         return EventDB::getMatchups($future_matchups_only, $only_with_odds, $event_id, $matchup_id, $only_without_odds, $team_id, $create_source);
     }
 
-    public static function getMatchingFight(string $team1_name, string $team2_name, bool $future_only = false, bool $past_only = false, int $known_fighter_id = null, string $event_date = null, int $event_id = null): ?Fight
+    public static function getMatchingMatchup(string $team1_name, string $team2_name, bool $future_only = false, bool $past_only = false, int $known_fighter_id = null, string $event_date = null, int $event_id = null): ?Fight
     {
-        return EventDB::getMatchingFight($team1_name, $team2_name, $future_only, $past_only, $known_fighter_id, $event_date, $event_id);
+        return EventDB::getMatchingMatchup($team1_name, $team2_name, $future_only, $past_only, $known_fighter_id, $event_date, $event_id);
     }
 
     public static function getMatchingEvent(string $event_name, string $event_date, bool $future_only = true): ?Event
@@ -54,50 +54,40 @@ class EventHandler
         return null;
     }
 
-
-
-    /*public static function addNewFight($fight_obj)
+    public static function createMatchup(Fight $matchup_obj): ?int
     {
-        if ($fight_obj->getFighter(1) != '' && $fight_obj->getFighter(2) != '') {
-            return EventDB::addNewFight($fight_obj);
-        }
-        return false;
-    }*/
-
-    public static function createMatchup(Fight $fight_obj): ?int
-    {
-        if ($fight_obj->getTeam(1) == '' || $fight_obj->getTeam(2) == '') {
+        if ($matchup_obj->getTeam(1) == '' || $matchup_obj->getTeam(2) == '') {
             return null;
         }
 
         //Check that event is ok
-        if (count(EventDB::getEvents(event_id: $fight_obj->getEventID())) != 1) {
+        if (count(EventDB::getEvents(event_id: $matchup_obj->getEventID())) != 1) {
             return null;
         }
 
-        //Check if fight isn't already added
-        if (EventDB::getMatchingFight(team1_name: $fight_obj->getTeam(1), team2_name: $fight_obj->getTeam(2), event_id: $fight_obj->getEventID(), future_only: true)) {
+        //Check if matchup isn't already added
+        if (EventDB::getMatchingMatchup(team1_name: $matchup_obj->getTeam(1), team2_name: $matchup_obj->getTeam(2), event_id: $matchup_obj->getEventID(), future_only: true)) {
             return null;
         }
 
-        //Check that both fighters exist, if not, add them
-        $team1_id = TeamHandler::getTeamIDByName($fight_obj->getTeam(1));
+        //Check that both teams exist, if not, add them
+        $team1_id = TeamHandler::getTeamIDByName($matchup_obj->getTeam(1));
         if (!$team1_id) {
-            $team1_id = TeamHandler::createTeam($fight_obj->getTeam(1));
+            $team1_id = TeamHandler::createTeam($matchup_obj->getTeam(1));
         }
-        $team2_id = TeamHandler::getTeamIDByName($fight_obj->getTeam(2));
+        $team2_id = TeamHandler::getTeamIDByName($matchup_obj->getTeam(2));
         if (!$team2_id) {
-            $team2_id = TeamHandler::createTeam($fight_obj->getTeam(2));
+            $team2_id = TeamHandler::createTeam($matchup_obj->getTeam(2));
         }
 
         if (!$team1_id || !$team2_id) {
             return null;
         }
 
-        $id = EventDB::createMatchup($team1_id, $team2_id, $fight_obj->getEventID());
+        $id = EventDB::createMatchup($team1_id, $team2_id, $matchup_obj->getEventID());
         if ($id) {
             //Add create audit trace
-            EventDB::addCreateAudit($id, $fight_obj->getCreateSource());
+            EventDB::addCreateAudit($id, $matchup_obj->getCreateSource());
         }
         return $id;
     }
@@ -126,9 +116,9 @@ class EventHandler
         return false;
     }
 
-    public static function removeFight(int $matchup_id): bool
+    public static function removeMatchup(int $matchup_id): bool
     {
-        return EventDB::removeFight($matchup_id);
+        return EventDB::removeMatchup($matchup_id);
     }
 
     public static function removeEvent($event_id)
@@ -136,14 +126,9 @@ class EventHandler
         //First remove all matchups for this event
         $matchups = EventHandler::getMatchups(event_id: $event_id);
         foreach ($matchups as $matchup) {
-            self::removeFight($matchup->getID());
+            self::removeMatchup($matchup->getID());
         }
         return EventDB::removeEvent($event_id);
-    }
-
-    public static function getAllFightsForEventWithoutOdds($event_id)
-    {
-        return EventHandler::getMatchups(event_id: $event_id, only_without_odds: true);
     }
 
     /**
@@ -183,12 +168,12 @@ class EventHandler
         return EventDB::updateFight($matchup_obj);
     }
 
-    public static function setFightAsMainEvent($fight_id, $set_as_main_event = true)
+    public static function setFightAsMainEvent(int $fight_id, bool $set_as_main_event = true)
     {
         return EventDB::setFightAsMainEvent($fight_id, $set_as_main_event);
     }
 
-    public static function searchEvent($event_name, $only_future_events = false)
+    public static function searchEvent(string $event_name, bool $only_future_events = false)
     {
         return EventDB::searchEvent($event_name, $only_future_events);
     }
@@ -384,7 +369,7 @@ class EventHandler
         $audit_log = new \Katzgrau\KLogger\Logger(GENERAL_KLOGDIR, \Psr\Log\LogLevel::INFO, ['filename' => 'changeaudit.log']);
         foreach ($matchups as $matchup) {
             if ($matchup->getCreateSource() == 1) {
-                EventHandler::removeFight($matchup->getID());
+                EventHandler::removeMatchup($matchup->getID());
                 $audit_log->info('Removed matchup ' . $matchup->getTeam(1) . ' vs. ' . $matchup->getTeam(2) . ' as it was once automatically created and it now has no odds');
                 $counter++;
             }

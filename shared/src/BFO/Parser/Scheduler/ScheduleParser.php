@@ -99,7 +99,7 @@ class ScheduleParser
                 //Match on existing matchups
                 $found_matches = [];
                 foreach ($parsed_event['matchups'] as $aParsedMatchup) {
-                    $aMatchup = EventHandler::getMatchingFight(team1_name: $aParsedMatchup[0], team2_name: $aParsedMatchup[1], future_only: true);
+                    $aMatchup = EventHandler::getMatchingMatchup(team1_name: $aParsedMatchup[0], team2_name: $aParsedMatchup[1], future_only: true);
                     if ($aMatchup && $aMatchup->getEventID() != PARSE_FUTURESEVENT_ID) {
                         $found_matches[$aMatchup->getEventID()] = isset($found_matches[$aMatchup->getEventID()]) ? $found_matches[$aMatchup->getEventID()]++ : 1;
                     }
@@ -129,7 +129,7 @@ class ScheduleParser
                 $aFilteredMatchups = [];
                 $aOrphanMatchups = [];
                 foreach ($parsed_event['matchups'] as $aPM) {
-                    $oMatchup = EventHandler::getMatchingFight(team1_name: $aPM[0], team2_name: $aPM[1], future_only: true);
+                    $oMatchup = EventHandler::getMatchingMatchup(team1_name: $aPM[0], team2_name: $aPM[1], future_only: true);
                     if ($oMatchup == null) {
                         $aFilteredMatchups[] = $aPM;
                     } else {
@@ -162,7 +162,7 @@ class ScheduleParser
     {
         foreach ($event['matchups'] as $parsed_matchup) {
 
-            $matchup = EventHandler::getMatchingFight(team1_name: $parsed_matchup[0], team2_name: $parsed_matchup[1], future_only: true);
+            $matchup = EventHandler::getMatchingMatchup(team1_name: $parsed_matchup[0], team2_name: $parsed_matchup[1], future_only: true);
             if ($matchup) {
                 //Found a match! But is it the right event?
                 if ($matchup->getEventID() == $matched_event->getID()) {

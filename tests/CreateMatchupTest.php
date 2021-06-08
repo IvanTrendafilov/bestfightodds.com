@@ -55,7 +55,7 @@ final class CreateMatchupTest extends TestCase
         );
 
         //Exact match:
-        $matchup_obj = EventHandler::getMatchingFight(team1_name: 'TEST FIGHTER ONE', team2_name: 'TEST FIGHTER TWO');
+        $matchup_obj = EventHandler::getMatchingMatchup(team1_name: 'TEST FIGHTER ONE', team2_name: 'TEST FIGHTER TWO');
         $this->assertInstanceOf(
             Fight::class,
             $matchup_obj
@@ -74,7 +74,7 @@ final class CreateMatchupTest extends TestCase
         );
 
         //Not exact match but close:
-        $matchup_obj = EventHandler::getMatchingFight(team1_name: 'TEST FIGHTER ON', team2_name: 'TEST FIGHTER TW');
+        $matchup_obj = EventHandler::getMatchingMatchup(team1_name: 'TEST FIGHTER ON', team2_name: 'TEST FIGHTER TW');
         $this->assertInstanceOf(
             Fight::class,
             $matchup_obj
@@ -93,7 +93,7 @@ final class CreateMatchupTest extends TestCase
         );
 
 
-        $result = EventHandler::removeFight($matchup_obj->getID());
+        $result = EventHandler::removeMatchup($matchup_obj->getID());
         $this->assertEquals(
             true,
             $result
@@ -146,7 +146,7 @@ final class CreateMatchupTest extends TestCase
             false,
             $second_matchup_id
         );
-        $result = EventHandler::removeFight($matchup_id);
+        $result = EventHandler::removeMatchup($matchup_id);
         $this->assertEquals(
             true,
             $result

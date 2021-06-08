@@ -232,12 +232,6 @@ class OddsDB
         return null;
     }
 
-    /**
-     * Get all correlations for the specified bookie
-     *
-     * @param int $bookie_id Bookie ID
-     * @return array Collection of correlations
-     */
     public static function getCorrelationsForBookie(int $bookie_id): array
     {
         $params = [$bookie_id];
@@ -258,7 +252,7 @@ class OddsDB
         return $return;
     }
 
-    public static function getMatchupForCorrelation(int $bookie_id, string $correlation): ?int
+    public static function getMatchupIDForCorrelation(int $bookie_id, string $correlation): ?int
     {
         $params = [$bookie_id, $correlation];
 

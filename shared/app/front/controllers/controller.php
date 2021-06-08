@@ -113,7 +113,7 @@ class MainController
 
         $events = EventHandler::getEvents(future_events_only: true);
         foreach ($events as $event) {
-            $matchups = EventHandler::getAllFightsForEventWithoutOdds($event->getID());
+            $matchups = EventHandler::getMatchups(event_id: $event->getID(), only_without_odds: true);
             if (count($matchups) > 0) { //Only add the event if matchups were found
                 //If non bellator, ufc or future events we limit to just the main event (first fight)
                 if (
