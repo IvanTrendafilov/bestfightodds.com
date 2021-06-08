@@ -436,6 +436,33 @@ class AdminAPIController
         return $this->returnJson($response);
     }
 
+    public function deletePropTemplate(Request $request, Response $response)
+    {
+        $json = $request->getBody();
+        $data = json_decode($json, false);
+        $return_data = [];
+        $return_data['error'] = false;
+
+        if (!isset($data->template_id)
+            || (int) $data->template_id <= 0) {
+            $response->withStatus(422);
+            $return_data['msg'] = 'Missing parameters';
+            $return_data['error'] = true;
+        } else {
+            $result = BookieHandler::deletePropTemplate((int) $data->template_id);
+            if ($result && $result > 0) {
+                $return_data['msg'] = 'Successfully deleted prop template ' . $data->template_id;
+            } else {
+                $response->withStatus(500);
+                $return_data['msg'] = 'Failed to delete prop template with ID ' . $data->template_id;
+                $return_data['error'] = true;
+            }
+        }
+
+        $response->getBody()->write(json_encode($return_data));
+        return $this->returnJson($response);
+    }
+
     public function createOdds(Request $request, Response $response)
     {
         $json = $request->getBody();

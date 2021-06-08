@@ -12,7 +12,7 @@ use Exception;
 
 class OddsDB
 {
-    public static function addPropBet($propbet_obj)
+    public static function addPropBet(PropBet $propbet_obj): bool
     {
         $query = 'INSERT IGNORE INTO lines_props(matchup_id, bookie_id, prop_odds, negprop_odds, proptype_id, date, team_num)
                     VALUES(?, ?, ?, ?, ?, NOW(), ?)';
@@ -65,7 +65,7 @@ class OddsDB
         return true;
     }
 
-    public static function getLatestPropOdds($matchup_id, $bookie_id, $proptype_id, $team_num, $offset = 0)
+    public static function getLatestPropOdds(int $matchup_id, int $bookie_id, int $proptype_id, int $team_num, int $offset = 0): ?PropBet
     {
         $params = [$matchup_id, $bookie_id, $proptype_id, $team_num];
 
@@ -83,10 +83,10 @@ class OddsDB
                         ORDER BY lp.date DESC
                         LIMIT ' . $offset . ', 1';
 
-        $rResult = DBTools::doParamQuery($query, $params);
+        $result = DBTools::doParamQuery($query, $params);
 
         $props = array();
-        while ($aRow = mysqli_fetch_array($rResult)) {
+        while ($aRow = mysqli_fetch_array($result)) {
             $props[] = new PropBet(
                 $matchup_id,
                 $aRow['bookie_id'],
@@ -123,10 +123,10 @@ class OddsDB
                         ORDER BY lep.date DESC
                         LIMIT ' . $offset . ', 1';
 
-        $rResult = DBTools::doParamQuery($query, $params);
+        $result = DBTools::doParamQuery($query, $params);
 
         $props = [];
-        while ($row = mysqli_fetch_array($rResult)) {
+        while ($row = mysqli_fetch_array($result)) {
             $props[] = new EventPropBet(
                 (int) $event_id,
                 (int) $row['bookie_id'],
@@ -438,11 +438,11 @@ class OddsDB
 
         $params = array($matchup_id, $matchup_id);
 
-        $rResult = DBTools::doParamQuery($query, $params);
+        $result = DBTools::doParamQuery($query, $params);
 
         $odds_col = array();
 
-        while ($row = mysqli_fetch_array($rResult)) {
+        while ($row = mysqli_fetch_array($result)) {
             $odds_col[] = new FightOdds((int) $matchup_id, -1, $row['fighter1_odds'], $row['fighter2_odds'], '');
         }
         if (sizeof($odds_col) > 0) {
@@ -627,7 +627,7 @@ class OddsDB
         return DBTools::getAffectedRows();
     }
 
-    public static function getAllLatestPropOddsForMatchupAndBookie(int $matchup_id, int $bookie_id, int $proptype_id = -1)
+    public static function getAllLatestPropOddsForMatchupAndBookie(int $matchup_id, int $bookie_id, int $proptype_id = -1): array
     {
         $extra_where = '';
         $params = [$matchup_id, $bookie_id];

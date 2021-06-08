@@ -73,7 +73,9 @@ class AdminController
         $view_data['alertcount'] = Alerter::getAlertCount();
 
         //Get unmatched data
-        $unmatched_col = EventHandler::getUnmatched(1500);
+        $unmatched_col = EventHandler::getUnmatched(1500, 0);
+        $view_data['unmatched_props_matchups_count'] = count(EventHandler::getUnmatched(1500, 1));
+        $view_data['unmatched_props_templates_count'] = count(EventHandler::getUnmatched(1500, 2));
 
         //Old approach:
         $unmatched_groups = [];
@@ -219,6 +221,25 @@ class AdminController
         }
 
         $response->getBody()->write($this->plates->render('home', $view_data));
+        return $response;
+    }
+
+    public function viewUnmatchedProps(Request $request, Response $response)
+    {
+        $view_data = [];
+
+        //Get unmatched data for props
+        $view_data['unmatched_matchups_col'] = EventHandler::getUnmatched(1500, 1); //Props not matched to matchups
+        $view_data['unmatched_templates_col'] = EventHandler::getUnmatched(1500, 2); //Unknown props (missing prop templates)
+
+
+        $bookies = BookieHandler::getAllBookies();
+        $view_data['bookies'] = [];
+        foreach ($bookies as $bookie) {
+            $view_data['bookies'][$bookie->getID()] = $bookie->getName();
+        }
+
+        $response->getBody()->write($this->plates->render('unmatched_props', $view_data));
         return $response;
     }
 

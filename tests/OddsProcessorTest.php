@@ -49,7 +49,7 @@ final class OddsProcessorTest extends TestCase
     public function tearDown(): void
     {
         EventHandler::removeEvent($this->event->getID());
-        BookieHandler::deleteTemplate($this->template_id);
+        BookieHandler::deletePropTemplate($this->template_id);
     }
 
     public function testRemoveMoneylineDupes(): void

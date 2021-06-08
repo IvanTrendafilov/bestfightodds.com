@@ -48,7 +48,7 @@ final class CreatePropOddsTest extends TestCase
     {
         EventHandler::removeEvent($this->event->getID());
         foreach ($this->temp_templates as $template) {
-            BookieHandler::deleteTemplate($template);
+            BookieHandler::deletePropTemplate($template);
         }
         
     }
@@ -93,7 +93,7 @@ final class CreatePropOddsTest extends TestCase
             $result['matched_type']
         );
 
-        $result = BookieHandler::deleteTemplate($new_template);
+        $result = BookieHandler::deletePropTemplate($new_template);
         $this->assertEquals(
             true,
             $result
@@ -128,7 +128,7 @@ final class CreatePropOddsTest extends TestCase
             $result['fail_reason']
         );
 
-        $result = BookieHandler::deleteTemplate($new_template);
+        $result = BookieHandler::deletePropTemplate($new_template);
         $this->assertEquals(
             true,
             $result

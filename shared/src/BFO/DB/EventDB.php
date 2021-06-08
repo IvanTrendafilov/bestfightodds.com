@@ -478,6 +478,8 @@ class EventDB
 
     /**
      * Retrieves all stored unmatched entries
+     * 
+     * Type: 0 = Matchup , 1 = Prop not matched to matchup, 2 = Prop not matched to template
      */
     public static function getUnmatched(int $limit = 10, int $type = -1): array
     {

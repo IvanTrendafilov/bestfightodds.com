@@ -60,6 +60,7 @@ $app->group('', function (RouteCollectorProxy $group) {
   $group->get('/parser_status', \AdminController::class . ':viewParserStatus');
   $group->get('/log/{log_name}', \AdminController::class . ':viewLog');
   $group->get('/renamings', \AdminController::class . ':checkRenamings');
+  $group->get('/unmatched_props', \AdminController::class . ':viewUnmatchedProps');
   
 })->add(new AuthMiddleware());
 
@@ -83,6 +84,7 @@ $app->group('/api', function (RouteCollectorProxy $group) {
   $group->post('/proptemplates', \AdminAPIController::class . ':createPropTemplate');
   $group->post('/propcorrelation', \AdminAPIController::class . ':createPropCorrelation');
   $group->delete('/manualactions/{id}', \AdminAPIController::class . ':deleteManualAction');
+  $group->delete('/proptemplates/{id}', \AdminAPIController::class . ':deletePropTemplate');
 
   $group->delete('/odds', \AdminAPIController::class . ':deleteOdds');
 });

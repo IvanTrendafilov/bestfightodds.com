@@ -53,7 +53,7 @@ final class AlerterTest extends TestCase
     public function tearDown(): void
     {
         EventHandler::removeEvent($this->event->getID());
-        BookieHandler::deleteTemplate($this->template_id);
+        BookieHandler::deletePropTemplate($this->template_id);
         $alerts = $this->alerter->getAllAlerts();
         foreach ($alerts as $alert) {
             $this->alerter->deleteAlert($alert->getID());

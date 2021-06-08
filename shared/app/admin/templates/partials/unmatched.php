@@ -111,6 +111,10 @@
 <button id="clear-unmatched-button" class="btn btn-primary">Clear unmatched table</button><br /><br />
 
 <div class="card">
+    <div class="card-header">
+        <h5 class="card-title">Unmatched matchups</h5>
+        </h6>
+    </div>
     <div class="table-responsive">
         <table class="table table-sm table-hover">
             <thead>
@@ -160,7 +164,7 @@
                         </td>
 
                         <td>
-                            <a href="/cnadm/newmatchup?inteam1=<?= $this->e($unmatched_matchup_group['teams'][0], 'urlencode') ?>&inteam2=<?= $this->e($unmatched_matchup_group['teams'][1], 'urlencode') ?>&ineventid=<?=isset(array_values($unmatched_matchup_group['dates'])[0]['matched_events'][0]) ? array_values(@$unmatched_matchup_group['dates'])[0]['matched_events'][0]->getID() : '' ?>"><button class="btn btn-primary">Add</button></a>
+                            <a href="/cnadm/newmatchup?inteam1=<?= $this->e($unmatched_matchup_group['teams'][0], 'urlencode') ?>&inteam2=<?= $this->e($unmatched_matchup_group['teams'][1], 'urlencode') ?>&ineventid=<?= isset(array_values($unmatched_matchup_group['dates'])[0]['matched_events'][0]) ? array_values(@$unmatched_matchup_group['dates'])[0]['matched_events'][0]->getID() : '' ?>"><button class="btn btn-primary">Add</button></a>
                         </td>
                     </tr>
                 <?php endforeach ?>
@@ -242,36 +246,12 @@
     </div>
 </div>
 
-<table class="genericTable">
-
-
-</table><br />
-
-<b>Props without matchups</b>: <br />
-<table class="genericTable">
-
-    <?php foreach ($unmatched as $unmatched_item) : ?>
-        <?php if ($unmatched_item['type'] == 1) : ?>
-            <tr>
-                <td><?= date("Y-m-d H:i:s", strtotime($unmatched_item['log_date'])) ?></td>
-                <td><b><?= $bookies[$unmatched_item['bookie_id']] ?></b></td>
-                <td><?= $unmatched_item['matchup'] ?></td>
-                <td>[<a href="/cnadm/propcorrelation?bookie_id=<?= $unmatched_item['bookie_id'] ?>&input_prop=<?= urlencode($unmatched_item['matchup']) ?>">link manually</a>]</td>
-            </tr>
-        <?php endif ?>
-    <?php endforeach ?>
-</table><br />
-
-<b>Props without templates:</b> <br />
-<table class="genericTable">
-    <?php foreach ($unmatched as $unmatched_item) : ?>
-        <?php if ($unmatched_item['type'] == 2) : ?>
-            <tr>
-                <td><?= date("Y-m-d H:i:s", strtotime($unmatched_item['log_date'])) ?></td>
-                <td><b><?= $bookies[$unmatched_item['bookie_id']] ?></b></td>
-                <td><?= $unmatched_item['matchup'] ?></td>
-                <td>[<a href="/cnadm/proptemplate?in_bookie_id=<?= $unmatched_item['bookie_id'] ?>&in_template=<?= urlencode($unmatched_item['view_indata1']) ?>&in_negtemplate=<?= urlencode($unmatched_item['view_indata2']) ?>">add</a>]</td>
-            </tr>
-        <?php endif ?>
-    <?php endforeach ?>
-</table><br />
+<div class="card">
+    <div class="card-header">
+        <h5 class="card-title">Props without matchups</h5>
+        </h6>
+    </div>
+    <div>Props with no matching matchups: <?=$unmatched_props_matchups_count?></div>
+    <div>Props with no matching template: <?=$unmatched_props_templates_count?></div>
+    <a href="/cnadm/unmatched_props"><button id="clear-unmatched-button" class="btn btn-primary">Handle unmatched props</button></a><br /><br />
+</div>

@@ -13,15 +13,15 @@ use BFO\DataTypes\Event;
 
 class OddsHandler
 {
-    public static function addPropBet($a_oPropBet)
+    public static function addPropBet(PropBet $propbet_obj): bool
     {
         if (
-            $a_oPropBet->getPropOdds() == '' || $a_oPropBet->getNegPropOdds() == ''
-            || (intval($a_oPropBet->getPropOdds()) > 0 && intval($a_oPropBet->getNegPropOdds()) > 0)
+            $propbet_obj->getPropOdds() == '' || $propbet_obj->getNegPropOdds() == ''
+            || (intval($propbet_obj->getPropOdds()) > 0 && intval($propbet_obj->getNegPropOdds()) > 0)
         ) { //Ignore odds that are positive on both ends (should indicate an incorrect line)
             return false;
         }
-        return OddsDB::addPropBet($a_oPropBet);
+        return OddsDB::addPropBet($propbet_obj);
     }
 
     /**
@@ -30,7 +30,7 @@ class OddsHandler
      * @param FightOdds object to look for (date is not checked).
      * @return true if the exact odds exists and false if it doesn't.
      */
-    public static function checkMatchingOdds($odds_obj)
+    public static function checkMatchingOdds(FightOdds $odds_obj): bool
     {
         $found_odds_obj = OddsHandler::getLatestOddsForFightAndBookie($odds_obj->getFightID(), $odds_obj->getBookieID());
         if ($found_odds_obj != null) {
@@ -132,7 +132,7 @@ class OddsHandler
         return OddsDB::getBestOddsForFight($matchup_id);
     }
 
-    public static function checkMatchingPropOdds($propbet_obj)
+    public static function checkMatchingPropOdds(PropBet $propbet_obj): bool
     {
         $existing_prop_odds = OddsHandler::getLatestPropOdds($propbet_obj->getMatchupID(), $propbet_obj->getBookieID(), $propbet_obj->getPropTypeID(), $propbet_obj->getTeamNumber());
         if ($existing_prop_odds != null) {
@@ -141,12 +141,12 @@ class OddsHandler
         return false;
     }
 
-    public static function getLatestPropOdds($matchup_id, $bookie_id, $proptype_id, $team_num)
+    public static function getLatestPropOdds(int $matchup_id, int $bookie_id, int $proptype_id, int $team_num): ?PropBet
     {
         return OddsDB::getLatestPropOdds($matchup_id, $bookie_id, $proptype_id, $team_num);
     }
 
-    public static function getAllLatestPropOddsForMatchup($matchup_id, $proptype_id, $team_num = 0, $offset = 0)
+    public static function getAllLatestPropOddsForMatchup(int $matchup_id, int $proptype_id, int $team_num = 0, int $offset = 0)
     {
         $odds_col = [];
 
@@ -212,14 +212,9 @@ class OddsHandler
     }
 
     /**
-     * Stores a collection of correlations
-     *
      * Accepts an array of correlations defined as follows:
      *
      * array('correlation' => xxx, 'matchup_id' => xxx)
-     *
-     * @param int $a_iBookieID Bookie ID
-     * @param array $a_aCorrelations Collection of correlations as defined above
      */
     public static function storeCorrelations(int $bookie_id, array $correlations_col): bool
     {
@@ -291,7 +286,7 @@ class OddsHandler
         return OddsDB::removePropOddsForMatchupAndBookie($matchup_id, $bookie_id, $proptype_id, $team_num);
     }
 
-    public static function removePropOddsForEventAndBookie($event_id, $bookie_id, $proptype_id = null)
+    public static function removePropOddsForEventAndBookie(int $event_id, int $bookie_id, int $proptype_id = null)
     {
         if (!is_numeric($event_id) || !is_numeric($bookie_id)) {
             return false;
@@ -300,43 +295,43 @@ class OddsHandler
         return OddsDB::removePropOddsForEventAndBookie($event_id, $bookie_id, $proptype_id);
     }
 
-    public static function getAllLatestPropOddsForMatchupAndBookie($matchup_id, $bookie_id, $proptype_id = -1)
+    public static function getAllLatestPropOddsForMatchupAndBookie(int $matchup_id, int $bookie_id, int $proptype_id = -1): ?array
     {
         if (!is_numeric($matchup_id) || !is_numeric($bookie_id) || !is_numeric($proptype_id)) {
-            return false;
+            return null;
         }
         return OddsDB::getAllLatestPropOddsForMatchupAndBookie($matchup_id, $bookie_id, $proptype_id);
     }
 
-    public static function flagMatchupOddsForDeletion($bookie_id, $matchup_id)
+    public static function flagMatchupOddsForDeletion(int $bookie_id, int $matchup_id): ?int
     {
         if (
             !is_numeric($matchup_id) || !is_numeric($bookie_id)
             || $matchup_id <= 0 || $bookie_id <= 0
         ) {
-            return false;
+            return null;
         }
         return OddsDB::flagOddsForDeletion($bookie_id, $matchup_id, null, null, null);
     }
 
-    public static function flagPropOddsForDeletion($bookie_id, $matchup_id, $proptype_id, $team_num)
+    public static function flagPropOddsForDeletion(int $bookie_id, int $matchup_id, int $proptype_id, int $team_num): ?int
     {
         if (
             !is_numeric($matchup_id) || !is_numeric($bookie_id) || !is_numeric($proptype_id) || !is_numeric($team_num)
             || $matchup_id <= 0 || $bookie_id <= 0 || $proptype_id <= 0 || $team_num < 0
         ) {
-            return false;
+            return null;
         }
         return OddsDB::flagOddsForDeletion($bookie_id, $matchup_id, null, $proptype_id, $team_num);
     }
 
-    public static function flagEventPropOddsForDeletion($bookie_id, $event_id, $proptype_id, $team_num)
+    public static function flagEventPropOddsForDeletion(int $bookie_id, int $event_id, int $proptype_id, int $team_num): ?int
     {
         if (
             !is_numeric($event_id) || !is_numeric($bookie_id) || !is_numeric($proptype_id) || !is_numeric($team_num)
             || $event_id <= 0 || $bookie_id <= 0 || $proptype_id <= 0 || $team_num < 0
         ) {
-            return false;
+            return null;
         }
         return OddsDB::flagOddsForDeletion($bookie_id, null, $event_id, $proptype_id, $team_num);
     }
@@ -453,9 +448,9 @@ class OddsHandler
         return $return;
     }
 
-    public static function getLatestEventPropOddsV2($event_id = null, $a_iMatchupID = null, $a_iBookieID = null, $a_iPropTypeID = null, $a_iTeamNum = null)
+    public static function getLatestEventPropOddsV2(int $event_id = null, int $matchup_id = null, int $bookie_id = null, int $proptype_id = null, int $team_num = null): array
     {
-        $result = OddsDB::getLatestEventPropOddsV2($event_id, $a_iMatchupID, $a_iBookieID, $a_iPropTypeID, $a_iTeamNum);
+        $result = OddsDB::getLatestEventPropOddsV2($event_id, $matchup_id, $bookie_id, $proptype_id, $team_num);
 
         $return = [];
         //Move result into multidimensional array
@@ -492,9 +487,9 @@ class OddsHandler
         return $return;
     }
 
-    public static function getLatestMatchupOddsV2($event_id = null, $a_iMatchupID = null)
+    public static function getLatestMatchupOddsV2(int $event_id = null, int $matchup_id = null): array
     {
-        $result = OddsDB::getLatestMatchupOddsV2($event_id, $a_iMatchupID);
+        $result = OddsDB::getLatestMatchupOddsV2($event_id, $matchup_id);
 
         $return = [];
         //Move result into multidimensional array
@@ -523,7 +518,7 @@ class OddsHandler
         return $return;
     }
 
-    public static function getEventViewData(int $event_id)
+    public static function getEventViewData(int $event_id): array
     {
         if ($event_id == null || !is_numeric($event_id)) {
             return false;

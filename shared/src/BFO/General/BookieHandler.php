@@ -70,17 +70,17 @@ class BookieHandler
         return BookieDB::addNewPropTemplate($proptemplate_obj);
     }
 
-    public static function updateTemplateLastUsed($template_id)
+    public static function updateTemplateLastUsed(int $template_id): bool
     {
         return BookieDB::updateTemplateLastUsed($template_id);
     }
 
-    public static function deleteTemplate($template_id)
+    public static function deletePropTemplate(int $template_id): bool
     {
         if (!is_int($template_id)) {
             return false;
         }
-        return BookieDB::deleteTemplate($template_id);
+        return BookieDB::deletePropTemplate($template_id);
     }
 
     public static function getAllRunStatuses()

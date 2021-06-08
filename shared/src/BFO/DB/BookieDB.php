@@ -166,7 +166,7 @@ class BookieDB
         return (DBTools::getAffectedRows() > 0 ? true : false);
     }
 
-    public static function deleteTemplate(int $template_id): bool
+    public static function deletePropTemplate(int $template_id): bool
     {
         $query = 'DELETE FROM bookies_proptemplates WHERE id = ?';
         $params = array($template_id);
