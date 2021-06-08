@@ -86,7 +86,7 @@ class Alerter
      * @param Alert $alert_obj
      * @return boolean True if the alert was dispatched or false if it failed
      */
-    public static function dispatchAlert($alert_obj)
+    public static function dispatchAlert(Alert $alert_obj): bool
     {
         $odds_obj = null;
         if ($alert_obj->getBookieID() == -1) {
@@ -98,7 +98,7 @@ class Alerter
         }
 
         $matchup = EventHandler::getMatchup($alert_obj->getFightID());
-        if ($odds_obj == null || $matchup == null) {
+        if (!$odds_obj || !$matchup) {
             return false;
         }
 
@@ -147,21 +147,21 @@ You are receiving this e-mail because you have signed up to be notified when the
         $sTextHTML = str_replace('{{SUBJECT}}', $sSubject, $sTextHTML);
         $sTextHTML = str_replace('{{SITEURL}}', ALERTER_SITE_LINK, $sTextHTML);
 
-        $bSuccess = false;
+        $success = false;
         if (ALERTER_DEV_MODE == true) {
             //If dev mode, do not send any e-mail alert
-            $bSuccess = true;
+            $success = true;
             echo 'Sent one: ' . $sSubject .'
             ';
             echo 'Message:' . $sText;
         } else {
             //Send e-mail alert
             $mailer = new SESMailer(MAIL_SMTP_HOST, MAIL_SMTP_PORT, MAIL_SMTP_USERNAME, MAIL_SMTP_PASSWORD);
-            $bSuccess = $mailer->sendMail(ALERTER_MAIL_SENDER_MAIL, ALERTER_MAIL_FROM, $sTo, $sSubject, $sTextHTML, $sText);
-            //$bSuccess = mail($sTo, $sSubject, $sText, $sHeaders);
+            $success = $mailer->sendMail(ALERTER_MAIL_SENDER_MAIL, ALERTER_MAIL_FROM, $sTo, $sSubject, $sTextHTML, $sText);
+            //$success = mail($sTo, $sSubject, $sText, $sHeaders);
         }
 
-        return $bSuccess;
+        return $success;
     }
 
     /**
@@ -169,7 +169,7 @@ You are receiving this e-mail because you have signed up to be notified when the
      *
      * @return int The number of alerts cleared
      */
-    public static function cleanAlerts()
+    public static function cleanAlerts(): int
     {
         $alerts = AlertDB::getExpiredAlerts();
 
@@ -182,12 +182,7 @@ You are receiving this e-mail because you have signed up to be notified when the
         return $cleared_counter;
     }
 
-    /**
-     * Get the number of alerts stored
-     *
-     * @return int Number of alerts stored
-     */
-    public static function getAlertCount()
+    public static function getAlertCount(): int
     {
         return AlertDB::getAlertCount();
     }

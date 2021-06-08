@@ -204,14 +204,14 @@ class AlertDB
         return $alerts;
     }
 
-    public static function getAlertCount()
+    public static function getAlertCount(): int
     {
         $query = 'SELECT COUNT(*) AS alertcount FROM alerts a;';
 
         $result = DBTools::doQuery($query);
 
         if ($result = mysqli_fetch_array($result)) {
-            return $result['alertcount'];
+            return (int) $result['alertcount'];
         }
 
         return -1;

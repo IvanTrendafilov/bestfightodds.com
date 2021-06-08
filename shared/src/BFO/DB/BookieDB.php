@@ -119,7 +119,7 @@ class BookieDB
     }
 
 
-    public static function getPropTemplatesForBookie($bookie_id)
+    public static function getPropTemplatesForBookie(int $bookie_id): array
     {
         $query = 'SELECT bpt.id, bpt.bookie_id, bpt.template, bpt.template_neg, bpt.prop_type, bpt.fields_type, pt.is_eventprop, bpt.last_used
                     FROM bookies_proptemplates bpt, prop_types pt
@@ -157,7 +157,7 @@ class BookieDB
         return (int) $id;
     }
 
-    public static function updateTemplateLastUsed($template_id)
+    public static function updateTemplateLastUsed(int $template_id): bool
     {
         $query = 'UPDATE bookies_proptemplates SET last_used = NOW() WHERE id = ?';
         $params = array($template_id);
@@ -166,7 +166,7 @@ class BookieDB
         return (DBTools::getAffectedRows() > 0 ? true : false);
     }
 
-    public static function deleteTemplate($template_id)
+    public static function deleteTemplate(int $template_id): bool
     {
         $query = 'DELETE FROM bookies_proptemplates WHERE id = ?';
         $params = array($template_id);
@@ -174,7 +174,7 @@ class BookieDB
         return (DBTools::getAffectedRows() > 0 ? true : false);
     }
 
-    public static function getAllRunStatuses()
+    public static function getAllRunStatuses(): ?array 
     {
         $query = 'SELECT b.name, lp.bookie_id, MAX(lp.date), AVG(lp.matched_matchups) as average_matched 
                     FROM logs_parseruns lp INNER JOIN bookies b  on lp.bookie_id = b.id 

@@ -40,7 +40,7 @@ class BookieHandler
         return BookieDB::getChangeNums($bookie_id);
     }
 
-    public static function getPropTemplatesForBookie($bookie_id)
+    public static function getPropTemplatesForBookie(int $bookie_id): array
     {
         return BookieDB::getPropTemplatesForBookie($bookie_id);
     }
