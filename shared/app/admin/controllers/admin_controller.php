@@ -437,6 +437,14 @@ class AdminController
             $templates = BookieHandler::getPropTemplatesForBookie($bookie->getID());
             $view_data['bookies'][] = ['bookie' => $bookie, 'templates' => $templates];
         }
+
+        $view_data['in_template'] = $request->getQueryParams()['in_template'] ?? '';
+        $view_data['in_negtemplate'] = $request->getQueryParams()['in_negtemplate'] ?? '';
+        $view_data['in_bookie_id'] = $request->getQueryParams()['in_bookie_id'] ?? '';
+
+        $view_data['bookies_select'] = BookieHandler::getAllBookies();
+        $view_data['prop_types'] = PropTypeHandler::getAllPropTypes();
+
         $response->getBody()->write($this->plates->render('proptemplates', $view_data));
         return $response;
     }

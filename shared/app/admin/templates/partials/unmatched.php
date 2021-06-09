@@ -95,79 +95,114 @@
         });
     });
 
+    document.addEventListener("DOMContentLoaded", function(event) {
+        document.getElementById('clear-unmatched-button').addEventListener('click', function(e) {
+            e.preventDefault();
+            var opts = {
+                method: 'POST',
+                headers: {
+                    'Content-type': 'application/json; charset=UTF-8'
+                }
+            };
+            fetch('/cnadm/api/clearunmatched', opts).then(function(response) {
+                    return response.json();
+                })
+                .then(function(body) {
+                    if (body.error == true) {
+                        alert(body.msg);
+                    } else {
+                        location.reload();
+                    }
+                });
+        });
+    });
 </script>
 
 <button id="clear-unmatched-button" class="btn btn-primary">Clear all unmatched matchups and props</button><br /><br />
 
 <div class="card" id="unmatched-normal-card">
     <div class="card-header d-flex justify-content-between">
-        <h5 class="card-title">Unmatched matchups</h5>
-
-            <button class="btn btn-primary" onclick="document.getElementById('unmatched-normal-card').style.display = 'none'; document.getElementById('unmatched-group-card').style.display = 'block';">Switch to group view</button>
+        <h5 class="card-title align-self-center">Unmatched matchups</h5>
+        <div class="btn-group" role="group" aria-label="Basic example">
+  <button type="button" class="btn btn-secondary" onclick="document.getElementById('unmatched-group-card').style.display = 'none'; document.getElementById('unmatched-normal-card').style.display = 'block';"  disabled=true>Single view</button>
+  <button type="button" class="btn btn-secondary" onclick="document.getElementById('unmatched-normal-card').style.display = 'none'; document.getElementById('unmatched-group-card').style.display = 'block';">Grouped view</button>
+</div>
     </div>
-    <div class="table-responsive p-2">
-        <table class="table table-sm table-hover">
-            <thead>
-                <tr>
-                    <th>Matchup</th>
-                    <th>Dates</th>
-                    <th>Parsed events</th>
-                    <th>Matched events</th>
-                    <th>Actions</th>
-                </tr>
-            </thead>
 
-            <tbody>
+    <?php if (count($unmatched_matchup_groups) > 0) : ?>
 
-                <?php foreach ($unmatched_matchup_groups as $key_matchup => $unmatched_matchup_group) : ?>
+        <div class="table-responsive p-2">
+            <table class="table table-sm table-hover">
+                <thead>
                     <tr>
-                        <td><a href="http://www.google.se/search?q=tapology <?= $this->e($key_matchup, 'strtolower|ucwords') ?>"><?= $this->e($key_matchup, 'strtolower|ucwords') ?></a></td>
-                        <td>
-                            <?php foreach ($unmatched_matchup_group['dates'] as $key_date => $date) : ?>
-
-                                <?= $key_date ?>
-                                <?php foreach ($date['unmatched'] as $unmatched_item) : ?>
-                                    <?= $bookies[$unmatched_item['bookie_id']] ?>
-                                <?php endforeach ?><br>
-                            <?php endforeach ?>
-                        </td>
-                        <td>
-
-                            <?php foreach ($unmatched_matchup_group['dates'] as $key_date => $date) : ?>
-                                <?php if (isset($date['parsed_events'])) : ?>
-                                    <?php foreach ($date['parsed_events'] as $event) : ?>
-                                        <?= $event ?><br>
-                                    <?php endforeach ?>
-                                <?php endif ?>
-                            <?php endforeach ?>
-                        </td>
-
-                        <td>
-
-                            <?php foreach ($unmatched_matchup_group['dates'] as $key_date => $date) : ?>
-                                <?php if (isset($date['matched_events'])) : ?>
-                                    <?php foreach ($date['matched_events'] as $event) : ?>
-                                        <?= $event->getName() ?><br>
-                                    <?php endforeach ?>
-                                <?php endif ?>
-                            <?php endforeach ?>
-                        </td>
-
-                        <td>
-                            <a href="/cnadm/newmatchup?inteam1=<?= $this->e($unmatched_matchup_group['teams'][0], 'urlencode') ?>&inteam2=<?= $this->e($unmatched_matchup_group['teams'][1], 'urlencode') ?>&ineventid=<?= isset(array_values($unmatched_matchup_group['dates'])[0]['matched_events'][0]) ? array_values(@$unmatched_matchup_group['dates'])[0]['matched_events'][0]->getID() : '' ?>"><button class="btn btn-primary">Add</button></a>
-                        </td>
+                        <th>Matchup</th>
+                        <th>Dates</th>
+                        <th>Parsed events</th>
+                        <th>Matched events</th>
+                        <th>Actions</th>
                     </tr>
-                <?php endforeach ?>
-            </tbody>
-        </table>
-    </div>
+                </thead>
+
+                <tbody>
+
+                    <?php foreach ($unmatched_matchup_groups as $key_matchup => $unmatched_matchup_group) : ?>
+                        <tr>
+                            <td><a href="http://www.google.se/search?q=tapology <?= $this->e($key_matchup, 'strtolower|ucwords') ?>"><?= $this->e($key_matchup, 'strtolower|ucwords') ?></a></td>
+                            <td>
+                                <?php foreach ($unmatched_matchup_group['dates'] as $key_date => $date) : ?>
+
+                                    <?= $key_date ?>
+                                    <?php foreach ($date['unmatched'] as $unmatched_item) : ?>
+                                        <?= $bookies[$unmatched_item['bookie_id']] ?>
+                                    <?php endforeach ?><br>
+                                <?php endforeach ?>
+                            </td>
+                            <td>
+
+                                <?php foreach ($unmatched_matchup_group['dates'] as $key_date => $date) : ?>
+                                    <?php if (isset($date['parsed_events'])) : ?>
+                                        <?php foreach ($date['parsed_events'] as $event) : ?>
+                                            <?= $event ?><br>
+                                        <?php endforeach ?>
+                                    <?php endif ?>
+                                <?php endforeach ?>
+                            </td>
+
+                            <td>
+
+                                <?php foreach ($unmatched_matchup_group['dates'] as $key_date => $date) : ?>
+                                    <?php if (isset($date['matched_events'])) : ?>
+                                        <?php foreach ($date['matched_events'] as $event) : ?>
+                                            <?= $event->getName() ?><br>
+                                        <?php endforeach ?>
+                                    <?php endif ?>
+                                <?php endforeach ?>
+                            </td>
+
+                            <td>
+                                <a href="/cnadm/newmatchup?inteam1=<?= $this->e($unmatched_matchup_group['teams'][0], 'urlencode') ?>&inteam2=<?= $this->e($unmatched_matchup_group['teams'][1], 'urlencode') ?>&ineventid=<?= isset(array_values($unmatched_matchup_group['dates'])[0]['matched_events'][0]) ? array_values(@$unmatched_matchup_group['dates'])[0]['matched_events'][0]->getID() : '' ?>"><button class="btn btn-primary">Add</button></a>
+                            </td>
+                        </tr>
+                    <?php endforeach ?>
+                </tbody>
+            </table>
+        </div>
+    <?php else : ?>
+        <div class="card-body pt-0">All done!
+        </div>
+    <?php endif ?>
 </div>
 
 <div class="card" id="unmatched-group-card" style="display: none">
-<div class="card-header d-flex justify-content-between">
-        <h5 class="card-title">Unmatched matchups</h5>
-        <button class="btn btn-primary" onclick="document.getElementById('unmatched-group-card').style.display = 'none'; document.getElementById('unmatched-normal-card').style.display = 'block';">Switch to individual view</button>
+    <div class="card-header d-flex justify-content-between">
+        <h5 class="card-title align-self-center">Unmatched matchups</h5>
+        <div class="btn-group" role="group" aria-label="Basic example">
+  <button type="button" class="btn btn-secondary" onclick="document.getElementById('unmatched-group-card').style.display = 'none'; document.getElementById('unmatched-normal-card').style.display = 'block';"  >Single view</button>
+  <button type="button" class="btn btn-secondary" onclick="document.getElementById('unmatched-normal-card').style.display = 'none'; document.getElementById('unmatched-group-card').style.display = 'block';" disabled=true>Grouped view</button>
+</div>
+
     </div>
+    <?php if (count($unmatched_groups) > 0) : ?>
     <div class="table-responsive p-2">
         <table class="table table-sm table-hover">
             <thead>
@@ -234,6 +269,10 @@
             </tbody>
         </table>
     </div>
+    <?php else : ?>
+        <div class="card-body pt-0">All done!
+        </div>
+    <?php endif ?>
 </div>
 
 <div class="card">
@@ -241,7 +280,9 @@
         <h5 class="card-title">Props without matchups</h5>
         </h6>
     </div>
-    <div>Props with no matching matchups: <?=$unmatched_props_matchups_count?></div>
-    <div>Props with no matching template: <?=$unmatched_props_templates_count?></div>
-    <a href="/cnadm/unmatched_props"><button id="clear-unmatched-button" class="btn btn-primary">Handle unmatched props</button></a><br /><br />
+    <div class="card-body pt-0">
+        <div>Props with no matching matchups: <?= $unmatched_props_matchups_count ?></div>
+        <div>Props with no matching template: <?= $unmatched_props_templates_count ?></div>
+        <a href="/cnadm/unmatched_props"><button class="btn btn-primary">Handle unmatched props</button></a><br /><br />
+    </div>
 </div>

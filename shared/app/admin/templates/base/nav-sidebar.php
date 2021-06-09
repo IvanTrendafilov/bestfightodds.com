@@ -54,7 +54,7 @@
 
 			<li class="sidebar-item <?= $current_page == 'proptemplates' ? 'active' : '' ?>">
 				<a class="sidebar-link" href="/cnadm/proptemplates">
-					<i class="align-middle" data-feather="book"></i> <span class="align-middle">View prop templates</span>
+					<i class="align-middle" data-feather="book"></i> <span class="align-middle">Manage prop templates</span>
 				</a>
 			</li>
 
