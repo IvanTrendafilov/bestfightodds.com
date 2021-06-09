@@ -92,7 +92,7 @@ class OddsJob
         }
         
         //Clean up any historic events without matchups
-        if (false) {
+        if (PARSE_REMOVE_EMPTY_EVENTS) {
             $counter = EventHandler::deleteAllOldEventsWithoutOdds();
             $this->logger->info("Remove empty historic events without matchups: " . $counter);
         }

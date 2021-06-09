@@ -121,8 +121,12 @@ class EventHandler
         return EventDB::removeMatchup($matchup_id);
     }
 
-    public static function removeEvent($event_id)
+    public static function removeEvent(int $event_id): bool
     {
+        if (!$event_id || $event_id < 1) {
+            return false;
+        }
+
         //First remove all matchups for this event
         $matchups = EventHandler::getMatchups(event_id: $event_id);
         foreach ($matchups as $matchup) {
@@ -358,7 +362,15 @@ class EventHandler
 
     public static function deleteAllOldEventsWithoutOdds(): int
     {
-        return EventDB::deleteAllOldEventsWithoutOdds();
+        $events = EventDB::getOldEventsWithoutOdds();
+        $counter = 0;
+        $audit_log = new \Katzgrau\KLogger\Logger(GENERAL_KLOGDIR, \Psr\Log\LogLevel::INFO, ['filename' => 'changeaudit.log']);
+        foreach ($events as $event) {
+            $counter++;
+            EventHandler::removeEvent($event->getID());
+            $audit_log->info('Removed event ' . $event->getName() . '(' . $event->getID() . ') since it is old and does not have any matchups');
+        }
+        return $counter;
     }
 
     public static function deleteMatchupsWithoutOdds(): int

@@ -297,11 +297,15 @@ class EventDB
         return true;
     }
 
-    public static function removeEvent($event_id)
+    public static function removeEvent(int $event_id): bool
     {
         $query = "DELETE FROM events WHERE id = ?";
-        $params = array($event_id);
-        DBTools::doParamQuery($query, $params);
+        $params = [$event_id];
+        try {
+            $result = PDOTools::delete($query, $params);
+        } catch (\PDOException $e) {
+            throw new \Exception("Unknown error " . $e->getMessage(), 10);
+        }
         return true;
     }
 
@@ -550,9 +554,9 @@ class EventDB
         return PDOTools::findMany($query, $params);
     }
 
-    public static function deleteAllOldEventsWithoutOdds(): int
+    public static function getOldEventsWithoutOdds(): array
     {
-        $query = 'DELETE
+        $query = 'SELECT * 
                     FROM events e 
                     WHERE NOT EXISTS
                                 (SELECT null 
@@ -560,12 +564,15 @@ class EventDB
                                     WHERE f.event_id = e.id)
                     AND LEFT(e.date, 10) < LEFT((NOW() - INTERVAL ' . GENERAL_GRACEPERIOD_SHOW . ' HOUR), 10);';
 
-        $rows = 0;
+        $found_events = [];
         try {
-            $rows = PDOTools::delete($query, []);
+            foreach (PDOTools::findMany($query, []) as $row) {
+                $found_events[] = new Event((int) $row['id'], $row['date'], $row['name'], (bool) $row['display']);
+            }
         } catch (\PDOException $e) {
-            throw new \Exception("Unable to delete old entries", 10);
+            throw new \Exception("Unknown error " . $e->getMessage(), 10);
         }
-        return $rows;
+
+        return $found_events;
     }
 }
