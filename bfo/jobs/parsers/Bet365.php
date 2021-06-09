@@ -93,7 +93,7 @@ class ParserJob extends ParserJobBase
 
                             $parsed_sport->addFetchedProp($parsed_prop);
                         } else if (strtolower((string) $market_node['Name']) == 'total rounds' && count($market_node->Participant) > 2) {
-                            //TODO: Currently no way to handle multiple over/unders on total rounds. Needs a fix
+                            //Note: Currently no way to handle multiple over/unders on total rounds. Needs a fix
                         } else if (count($market_node->Participant) == 2 && in_array($market_node->Participant[0]['Name'], array('Yes', 'No')) && in_array($market_node->Participant[1]['Name'], array('Yes', 'No'))) {
                             //Two side prop (Yes/No)
                             $parsed_prop = new ParsedProp(

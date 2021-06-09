@@ -94,7 +94,7 @@ class Fight
      * Returns a more nicer looking representation of the fighter
      * Warning: Use only when displaying fighter name directly to user and NOT when working with the name.
      *
-     * TODO: Currently fixes if a fighter has a name like B.J. Penn.
+     * Note: Currently fixes if a fighter has a name like B.J. Penn.
      *		 However does not fix if a name has 3 or more letter like
      *		 'R.K.B Whatever' which would look like 'R.k.B Whatever'
      *

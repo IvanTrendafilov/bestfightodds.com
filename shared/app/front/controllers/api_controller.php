@@ -31,7 +31,7 @@ class APIController
             return $response;
         }
 
-        $result = Alerter::addNewAlert($args['alertFight'], $args['alertFighter'], $args['alertMail'], $args['alertOdds'], $args['alertBookie'], $args['alertOddsType']);
+        $result = Alerter::addNewAlert((int) $args['alertFight'], (int) $args['alertFighter'], (string) $args['alertMail'], (string) $args['alertOdds'], (int) $args['alertBookie'], (int) $args['alertOddsType']);
         $response->getBody()->write((string) $result);
         return $response;
     }
@@ -112,7 +112,7 @@ class APIController
 
                     foreach ($odds as $odds_key => $odds_obj) {
                         //TODO: Temporary measure to prevent bot data scraping
-                        if ($_SERVER['HTTP_USER_AGENT'] == 'python-requests/2.24.0' || $_SERVER['REMOTE_ADDR'] == '77.4.141.237' || $_SERVER['REMOTE_ADDR'] == '77.2.84.76' || $_SERVER['REMOTE_ADDR'] == '77.4.124.22' || $_SERVER['REMOTE_ADDR'] == '77.9.20.120') {
+                        if ($_SERVER['HTTP_USER_AGENT'] == 'python-requests/2.24.0') {
                             $scale = pow(10, 3);
                             $dummy = mt_rand(1 * $scale, 3 * $scale) / $scale;
 

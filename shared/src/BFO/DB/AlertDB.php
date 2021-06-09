@@ -23,7 +23,7 @@ class AlertDB
      * 		-7 = Odds already reached
      * 		2 = Alert already exists
      */
-    public static function addNewAlert($alert_obj)
+    public static function addNewAlert(Alert $alert_obj): int
     {
         //Check that alert doesn't already exist
         if (AlertDB::matchAlert($alert_obj)) {
@@ -31,7 +31,7 @@ class AlertDB
         }
 
         //Check that the email hasn't reached the current limit. Only applicable if the email is not extempt. Which is checked first
-        if (!AlertDB::hasLimitExemption($alert_obj->getEmail()) && AlertDB::reachedLimit($alert_obj->getEmail())) {
+        if (!AlertDB::hasLimitExemption($alert_obj->getEmail()) && AlertDB::hasReachedLimit($alert_obj->getEmail())) {
             return -6;
         }
 
@@ -100,11 +100,11 @@ class AlertDB
      *
      * If none exists then null is returned.
      */
-    public static function matchAlert($alert_obj)
+    public static function matchAlert(Alert $alert_obj): bool
     {
         $query = 'SELECT a.* FROM alerts a WHERE email = ? AND fight_id = ? AND fighter = ? AND bookie_id = ? AND odds = ?;';
 
-        $params = array($alert_obj->getEmail(), $alert_obj->getFightID(), $alert_obj->getFighter(), $alert_obj->getBookieID(), $alert_obj->getLimit());
+        $params = [$alert_obj->getEmail(), $alert_obj->getFightID(), $alert_obj->getFighter(), $alert_obj->getBookieID(), $alert_obj->getLimit()];
 
         $result = DBTools::doParamQuery($query, $params);
         if ($data = mysqli_fetch_array($result)) {
@@ -116,10 +116,10 @@ class AlertDB
     /**
      * Check if an e-mail has reached the max 50 alerts limit
      */
-    public static function reachedLimit($a_sEmail)
+    public static function hasReachedLimit(string $recipient_email)
     {
         $query = "SELECT COUNT(*) AS limitcount FROM alerts WHERE email = ? GROUP BY email;";
-        $params = array($a_sEmail);
+        $params = array($recipient_email);
 
         $result = DBTools::doParamQuery($query, $params);
         if ($data = mysqli_fetch_array($result)) {
@@ -130,10 +130,10 @@ class AlertDB
         return false;
     }
 
-    public static function clearAlert($a_iAlert)
+    public static function clearAlert(int $alert_id): bool
     {
         $query = "DELETE FROM alerts WHERE id = ?";
-        $params = array($a_iAlert);
+        $params = [$alert_id];
 
         DBTools::doParamQuery($query, $params);
 
@@ -145,7 +145,7 @@ class AlertDB
 
     /* Could be optimized to not have to retrieve all alerts but do a smart select that checks the alert in mysql */
 
-    public static function getReachedAlerts()
+    public static function getReachedAlerts(): array 
     {
         //New approach:
         // This query gives all alerts where FO exist. Needs to be updated to check also if condition is met:
@@ -173,7 +173,7 @@ class AlertDB
         return $reached_alerts;
     }
 
-    public static function getExpiredAlerts()
+    public static function getExpiredAlerts(): array
     {
         $query = 'SELECT a.*
 					FROM alerts a, fights f, events e 
@@ -190,7 +190,7 @@ class AlertDB
         return $alerts;
     }
 
-    public static function getAllAlerts()
+    public static function getAllAlerts(): array
     {
         $query = 'SELECT id, email, fight_id, fighter, bookie_id, odds, odds_type FROM alerts ORDER BY id ASC';
 
@@ -218,17 +218,12 @@ class AlertDB
     }
 
     /**
-     * Checks if an e-mail is exempted from the alert limit (max 50 alerts). These e-mail addresses are stored in a special table
-     *
-     * Tables: alerts_exemptions
-     *
-     * @param String $a_sEmail E-mail address to check
-     * @return boolean If e-mail addresss has exemption
+     * Checks if an e-mail is exempted from the alert limit (max 50 alerts). These e-mail addresses are stored in a special table (alerts_exemptions)
      */
-    public static function hasLimitExemption($a_sEmail)
+    public static function hasLimitExemption($recipient_email)
     {
         $query = "SELECT email FROM alerts_exemptions WHERE email = ?;";
-        $params = array(strtolower($a_sEmail));
+        $params = array(strtolower($recipient_email));
 
         $result = DBTools::doParamQuery($query, $params);
 

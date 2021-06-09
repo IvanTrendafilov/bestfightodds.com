@@ -31,7 +31,6 @@ class CacheControl
             return false;
         }
 
-        //TODO: Maybe fix this one to only clear for the file in question:
         clearstatcache();
         return file_exists(IMAGE_CACHE_DIR . '/' . $filename . '.png');
     }
@@ -85,7 +84,6 @@ class CacheControl
             return false;
         }
 
-        //TODO: Maybe fix this one to only clear for the file in question:
         clearstatcache();
         return file_exists(CACHE_PAGE_DIR . DIRECTORY_SEPARATOR . $page_filename . '.php');
     }
@@ -99,7 +97,6 @@ class CacheControl
     {
         return self::file_put_contents_atomic(CACHE_PAGE_DIR, $page_filename, $content);
     }
-
 
     public static function file_put_contents_atomic($cache_dir, $filename, $content)
     {

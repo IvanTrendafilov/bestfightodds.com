@@ -108,7 +108,7 @@
 
                                         <?php foreach ($bookies as $bookie) : ?>
 
-                                            <?php $odds = @$matchup_odds[$event->getID()][$matchup->getID()][$bookie->getID()]; //TODO: Not recommended by plates but simplifies access to this object. Any alternative way to handle this? 
+                                            <?php $odds = @$matchup_odds[$event->getID()][$matchup->getID()][$bookie->getID()]; 
                                             ?>
 
                                             <?php if (isset($odds['odds_obj'])) : ?>
@@ -189,13 +189,13 @@
 
                                                     <?php foreach ($bookies as $bookie) : ?>
 
-                                                        <?php $odds = @$prop[$bookie->getID()]; //TODO: Not recommended by plates but simplifies access to this object. Any alternative way to handle this? 
+                                                        <?php $odds = @$prop[$bookie->getID()]; 
                                                         ?>
                                                         <?php if (isset($odds['odds_obj'])) {
                                                             $odds_val = ($i == 1 ? $odds['odds_obj']->getPropOdds() : $odds['odds_obj']->getNegPropOdds());
-                                                        } //TODO: Not recommended by plates but simplifies access to this object. Any alternative way to handle this? 
+                                                        } 
                                                         ?>
-                                                        <?php $previous_odds_val = $i == 1 ?  @$prop[$bookie->getID()]['previous_prop_odds'] : @$prop[$bookie->getID()]['previous_negprop_odds']; //TODO: Not recommended by plates but simplifies access to this object. Any alternative way to handle this? 
+                                                        <?php $previous_odds_val = $i == 1 ?  @$prop[$bookie->getID()]['previous_prop_odds'] : @$prop[$bookie->getID()]['previous_negprop_odds']; 
                                                         ?>
 
                                                         <?php if (isset($odds['odds_obj'])) : ?>
@@ -295,13 +295,13 @@
 
                                             <?php foreach ($bookies as $bookie) : ?>
 
-                                                <?php $odds = @$prop[$bookie->getID()]; //TODO: Not recommended by plates but simplifies access to this object. Any alternative way to handle this? 
+                                                <?php $odds = @$prop[$bookie->getID()]; 
                                                 ?>
                                                 <?php if (isset($odds['odds_obj'])) {
                                                     $odds_val = ($i == 1 ? $odds['odds_obj']->getPropOdds() : $odds['odds_obj']->getNegPropOdds());
-                                                } //TODO: Not recommended by plates but simplifies access to this object. Any alternative way to handle this? 
+                                                } 
                                                 ?>
-                                                <?php $previous_odds_val = $i == 1 ?  @$prop[$bookie->getID()]['previous_prop_odds'] : @$prop[$bookie->getID()]['previous_negprop_odds']; //TODO: Not recommended by plates but simplifies access to this object. Any alternative way to handle this? 
+                                                <?php $previous_odds_val = $i == 1 ?  @$prop[$bookie->getID()]['previous_prop_odds'] : @$prop[$bookie->getID()]['previous_negprop_odds']; 
                                                 ?>
 
                                                 <?php if (isset($odds['odds_obj'])) : ?>

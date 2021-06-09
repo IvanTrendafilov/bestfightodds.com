@@ -16,14 +16,6 @@ class ParseTools
     private static $correlation_table = [];
     private static $stored_content = [];
 
-    /**
-     * Retrieves the contents of a file and returns it as a string
-     *
-     * TODO: Secure function so that it is not possible to access folders like ../
-     *
-     * @param string $filename Filename
-     * @return string Contents of the file
-     */
     public static function retrievePageFromFile(string $filename): string
     {
         $file_contents = '';

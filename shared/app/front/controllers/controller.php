@@ -96,7 +96,7 @@ class MainController
             'recent_events' => $events,
             'event_matchups' => []
         ];
-        //PBO Only - TODO: Move this to its own controller?
+
         foreach ($events as $event) {
             $matchups = EventHandler::getMatchups(event_id: $event->getID(), only_with_odds: true);
             $view_data['event_matchups'][$event->getID()] = $matchups;

@@ -8,8 +8,6 @@ use BFO\Utils\Twitter\Tweeter;
 
 /**
  * Handles all Twitter-updates for new odds
- *
- * TODO: Make generic
  */
 class TwitterHandler
 {

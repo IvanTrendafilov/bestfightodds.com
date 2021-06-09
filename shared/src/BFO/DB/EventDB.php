@@ -368,7 +368,6 @@ class EventDB
             throw new \Exception("Unknown error " . $e->getMessage(), 10);
         }
 
-        //TODO: This needs error check
         return true;
     }
 

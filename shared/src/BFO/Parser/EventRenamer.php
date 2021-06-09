@@ -2,47 +2,10 @@
 
 namespace BFO\Parser;
 
-use BFO\General\BookieHandler;
-use BFO\General\ScheduleHandler;
 use BFO\General\EventHandler;
-use BFO\Utils\OddsTools;
-
-use BFO\DataTypes\Fight;
-use BFO\DataTypes\Event;
-
 
 class EventRenamer
 {
-    //private $logger = null;
-    private $bookie_obj = null;
-    private $ruleset = null;
-    private $upcoming_matchups = null;
-    private $audit_log = null;
-    private $manual_actions_create_events = null;
-    private $manual_actions_create_matchups = null;
-    private $creation_ruleset = null;
-
-    /*public function __construct(object $logger)
-    {
-        $this->logger = $logger;
-
-        $this->audit_log = new \Katzgrau\KLogger\Logger(GENERAL_KLOGDIR, \Psr\Log\LogLevel::INFO, ['filename' => 'changeaudit.log']);
-
-        // //Prefetch manual actions that we will check against later on
-        // $this->manual_actions_create_events = ScheduleHandler::getAllManualActions(1);
-        // $this->manual_actions_create_matchups = ScheduleHandler::getAllManualActions(5);
-        // if ($this->manual_actions_create_events != null) {
-        //     foreach ($this->manual_actions_create_events as &$action) {
-        //         $action['action_obj'] = json_decode($action['description']);
-        //     }
-        // }
-        // if ($this->manual_actions_create_matchups != null) {
-        //     foreach ($this->manual_actions_create_matchups as &$action) {
-        //         $action['action_obj'] = json_decode($action['description']);
-        //     }
-        // }
-    }*/
-
     public function __construct()
     {
     }
