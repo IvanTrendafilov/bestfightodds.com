@@ -90,6 +90,12 @@ class OddsJob
             $counter = EventHandler::deleteMatchupsWithoutOdds();
             $this->logger->info("Remove empty future matchups previously automatically created: " . $counter);
         }
+        
+        //Clean up any historic events without matchups
+        if (PARSE_REMOVE_EMPTY_EVENTS) {
+            $counter = EventHandler::deleteAllOldEventsWithoutOdds();
+            $this->logger->info("Remove empty historic events without matchups: " . $counter);
+        }
 
         //Generate new front page with latest odds
         $plates = new \League\Plates\Engine(GENERAL_BASEDIR . '/app/front/templates/');

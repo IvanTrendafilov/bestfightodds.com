@@ -22,12 +22,6 @@
 				</a>
 			</li>
 
-			<li class="sidebar-item <?= $current_page == 'matchup_new' ? 'active' : '' ?>">
-				<a class="sidebar-link" href="/cnadm/newmatchup">
-				<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-check-circle align-middle"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path><polyline points="22 4 12 14.01 9 11.01"></polyline></svg> <span class="align-middle">New matchup</span>
-				</a>
-			</li>
-
 			<li class="sidebar-item <?= in_array($current_page, ['events', 'event_detailed', 'fighters']) ? 'active' : '' ?>">
 				<a class="sidebar-link" href="/cnadm/events">
 				<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-map align-middle"><polygon points="1 6 1 22 8 18 16 22 23 18 23 2 16 6 8 2 1 6"></polygon><line x1="8" y1="2" x2="8" y2="18"></line><line x1="16" y1="6" x2="16" y2="22"></line></svg> <span class="align-middle">Events overview</span>

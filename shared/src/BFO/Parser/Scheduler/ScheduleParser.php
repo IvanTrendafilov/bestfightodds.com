@@ -190,10 +190,11 @@ class ScheduleParser
             if ($event->getID() == PARSE_FUTURESEVENT_ID) {
                 break;
             }
-            $aMatchups = EventHandler::getMatchups(event_id: $event->getID());
-            foreach ($aMatchups as $oMatchup) {
-                if (!in_array($oMatchup->getID(), $this->matched_existing_matchups)) {
-                    ScheduleHandler::storeManualAction(json_encode(array('matchupID' => $oMatchup->getID()), JSON_HEX_APOS | JSON_HEX_QUOT), 7);
+            $matchups = EventHandler::getMatchups(event_id: $event->getID());
+            foreach ($matchups as $matchup) {
+                if (!in_array($matchup->getID(), $this->matched_existing_matchups)
+                    && $matchup->getCreateSource() != 1) { //Don't remove matchups that are now owned by sportsbooks (has odds)
+                    ScheduleHandler::storeManualAction(json_encode(array('matchupID' => $matchup->getID()), JSON_HEX_APOS | JSON_HEX_QUOT), 7);
                 }
             }
             if (!in_array($event->getID(), $this->matched_existing_events)) {

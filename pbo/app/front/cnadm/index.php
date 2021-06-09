@@ -41,15 +41,12 @@ $app->get('/logout', \AdminController::class . ':logout');
 $app->group('', function (RouteCollectorProxy $group) {
   $group->get('[/]', \AdminController::class . ':home');
   $group->get('/manualactions', \AdminController::class . ':viewManualActions');
-  $group->get('/newmatchup', \AdminController::class . ':createMatchup');
   $group->get('/events[/{show}]', \AdminController::class . ':eventsOverview');
   $group->get('/fighters/{id}', \AdminController::class . ':viewFighter');
   $group->get('/addOddsManually', \AdminController::class . ':addOddsManually');
-  $group->get('/clearOddsForMatchupAndBookie', \AdminController::class . ':clearOddsForMatchupAndBookie');
   $group->get('/proptype', \AdminController::class . ':addNewPropType');
   $group->get('/proptemplates', \AdminController::class . ':viewPropTemplates');
   $group->get('/resetchangenums', \AdminController::class . ':resetChangeNums');
-  $group->get('/testMail', \AdminController::class . ':testMail');
   $group->get('/logs[/{logfile}]', \AdminController::class . ':viewLatestLog');
   $group->get('/parserlogs[/{bookie_name}]', \AdminController::class . ':viewParserLogs');
   $group->get('/alerts', \AdminController::class . ':viewAlerts');
