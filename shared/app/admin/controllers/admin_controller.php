@@ -510,6 +510,12 @@ class AdminController
         return $response;
     }
 
+    public function viewOtherLogs(Request $request, Response $response)
+    {
+        $response->getBody()->write($this->plates->render('other_logs', []));
+        return $response;
+    }
+
     public function viewChangeAuditLog(Request $request, Response $response)
     {
         $view_data = [];

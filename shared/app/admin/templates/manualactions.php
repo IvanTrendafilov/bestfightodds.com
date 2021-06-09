@@ -6,7 +6,7 @@ Manual actions: <button class="btn btn-primary" onclick="$('button[onclick^=\'ma
 <?php if ($actions != null && count($actions) > 0) : ?>
 
 	<div class="card">
-		<div class="table-responsive">
+		<div class="table-responsive p-2">
 			<table class="table table-sm table-hover">
 				<thead>
 					<tr>

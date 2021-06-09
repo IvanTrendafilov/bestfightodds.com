@@ -38,7 +38,7 @@
         <h6 class="card-subtitle text-muted">Sportsbooks metadata has suggested the following renamings
         </h6>
     </div>
-    <div class="table-responsive">
+    <div class="table-responsive p-2">
         <table class="table table-sm table-hover">
             <thead>
                 <tr>

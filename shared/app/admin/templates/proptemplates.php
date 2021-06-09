@@ -43,7 +43,7 @@
         <div class="card-header">
             <h5 class="card-title"><?= $this->e($bookie['bookie']->getName()) ?></h5>
         </div>
-        <div class="table-responsive">
+        <div class="table-responsive p-2">
             <table class="table table-sm table-hover">
                 <thead>
                     <tr>

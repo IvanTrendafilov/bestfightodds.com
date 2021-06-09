@@ -99,12 +99,13 @@
 
 <button id="clear-unmatched-button" class="btn btn-primary">Clear all unmatched matchups and props</button><br /><br />
 
-<div class="card">
-    <div class="card-header">
+<div class="card" id="unmatched-normal-card">
+    <div class="card-header d-flex justify-content-between">
         <h5 class="card-title">Unmatched matchups</h5>
-        </h6>
+
+            <button class="btn btn-primary" onclick="document.getElementById('unmatched-normal-card').style.display = 'none'; document.getElementById('unmatched-group-card').style.display = 'block';">Switch to group view</button>
     </div>
-    <div class="table-responsive">
+    <div class="table-responsive p-2">
         <table class="table table-sm table-hover">
             <thead>
                 <tr>
@@ -162,12 +163,12 @@
     </div>
 </div>
 
-<div class="card">
-    <div class="card-header">
-        <h5 class="card-title">Matchups</h5>
-        </h6>
+<div class="card" id="unmatched-group-card" style="display: none">
+<div class="card-header d-flex justify-content-between">
+        <h5 class="card-title">Unmatched matchups</h5>
+        <button class="btn btn-primary" onclick="document.getElementById('unmatched-group-card').style.display = 'none'; document.getElementById('unmatched-normal-card').style.display = 'block';">Switch to individual view</button>
     </div>
-    <div class="table-responsive">
+    <div class="table-responsive p-2">
         <table class="table table-sm table-hover">
             <thead>
                 <tr>
