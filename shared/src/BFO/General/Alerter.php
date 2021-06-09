@@ -184,7 +184,7 @@ You are receiving this e-mail because you have signed up to be notified when the
      * 	fighter2odds => At what odds you need to bet on fighter 2
      * 	profit => The profit for betting on both
      */
-    public static function getArbitrageInfo(int $matchup_id, int $stake = 100): array
+    public static function getArbitrageInfo(int $matchup_id, int $stake = 100): ?array
     {
         $odds_obj = OddsHandler::getBestOddsForFight($matchup_id);
 
