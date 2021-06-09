@@ -67,12 +67,10 @@
     <div class="card">
 
         <?php if (!isset($hide_header) || $hide_header == false) : ?>
-            <div class="card-header">
-                <h5 class="card-title"><?= $event['event_obj']->getName() ?><a href="#" name="event<?= $event['event_obj']->getID() ?>"></a></h5>
-                <div style="<?= ($event['event_obj']->isDisplayed() ? '' : 'font-style: italic; color: #909090;') ?>"><?= $event['event_obj']->getName() ?>
-                    <span style="color: #777777">-</span> <?= $event['event_obj']->getDate() ?> &nbsp;
-                    <a href="/cnadm/events/<?= $event['event_obj']->getID() ?>">edit</a> &nbsp;
-                    <span style="color: #ffffff"><?= sizeof($event['fights']) ?></span> <b><a href="/cnadm/events/<?= $event['event_obj']->getID() ?>">add</a></b>
+            <div class="card-header d-flex justify-content-between">
+                <h5 class="card-title" style="<?= ($event['event_obj']->isDisplayed() ? '' : 'font-style: italic; color: #909090;') ?>"><?= $event['event_obj']->getName() ?> - <?= $event['event_obj']->getDate() ?><a href="#" name="event<?= $event['event_obj']->getID() ?>"></a></h5>
+                <div>
+                    <a href="/cnadm/events/<?= $event['event_obj']->getID() ?>"><button class="btn btn-primary">Edit or Add matchups</button></a> &nbsp;
                 </div>
             </div>
         <?php endif ?>

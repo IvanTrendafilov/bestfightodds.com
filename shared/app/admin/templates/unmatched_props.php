@@ -57,7 +57,7 @@
                             <td><?= date("Y-m-d H:i:s", strtotime($unmatched_item['log_date'])) ?></td>
                             <td><b><?= $bookies[$unmatched_item['bookie_id']] ?></b></td>
                             <td><?= $unmatched_item['matchup'] ?></td>
-                            <td><a href="/cnadm/proptemplate?in_bookie_id=<?= $unmatched_item['bookie_id'] ?>&in_template=<?= urlencode($unmatched_item['view_indata1']) ?>&in_negtemplate=<?= urlencode($unmatched_item['view_indata2']) ?>"><button class="btn btn-primary">Add</button></a></td>
+                            <td><a href="/cnadm/proptemplates?in_bookie_id=<?= $unmatched_item['bookie_id'] ?>&in_template=<?= urlencode($unmatched_item['view_indata1']) ?>&in_negtemplate=<?= urlencode($unmatched_item['view_indata2']) ?>"><button class="btn btn-primary">Add</button></a></td>
                         </tr>
                     <?php endif ?>
                 <?php endforeach ?>

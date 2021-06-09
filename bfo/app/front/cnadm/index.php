@@ -47,7 +47,6 @@ $app->group('', function (RouteCollectorProxy $group) {
   $group->get('/addOddsManually', \AdminController::class . ':addOddsManually');
   $group->get('/clearOddsForMatchupAndBookie', \AdminController::class . ':clearOddsForMatchupAndBookie');
   $group->get('/proptype', \AdminController::class . ':addNewPropType');
-  $group->get('/proptemplate', \AdminController::class . ':addNewPropTemplate');
   $group->get('/proptemplates', \AdminController::class . ':viewPropTemplates');
   $group->get('/resetchangenums', \AdminController::class . ':resetChangeNums');
   $group->get('/testMail', \AdminController::class . ':testMail');

@@ -64,12 +64,6 @@
 				</a>
 			</li>
 
-			<li class="sidebar-item <?= $current_page == 'proptemplate' || $current_page == 'proptemplate_new' ? 'active' : '' ?>">
-				<a class="sidebar-link" href="/cnadm/proptemplate">
-					<i class="align-middle" data-feather="book"></i> <span class="align-middle">New bookie prop template</span>
-				</a>
-			</li>
-
 			<li class="sidebar-header">
 				Logs
 			</li>
