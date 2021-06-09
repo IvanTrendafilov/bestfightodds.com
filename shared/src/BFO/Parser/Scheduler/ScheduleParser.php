@@ -193,13 +193,15 @@ class ScheduleParser
             $matchups = EventHandler::getMatchups(event_id: $event->getID());
             foreach ($matchups as $matchup) {
                 if (!in_array($matchup->getID(), $this->matched_existing_matchups)
-                    && $matchup->getCreateSource() != 1) { //Don't remove matchups that are now owned by sportsbooks (has odds)
+                    && $matchup->getCreateSource() == 1) { //Only suggest to remove matchups created by scheduler
                     ScheduleHandler::storeManualAction(json_encode(array('matchupID' => $matchup->getID()), JSON_HEX_APOS | JSON_HEX_QUOT), 7);
                 }
             }
-            if (!in_array($event->getID(), $this->matched_existing_events)) {
+
+            //Remove events disabled since historic events are automatically cleaned up if they have no matchups
+            /*if (!in_array($event->getID(), $this->matched_existing_events)) {
                 ScheduleHandler::storeManualAction(json_encode(array('eventID' => $event->getID()), JSON_HEX_APOS | JSON_HEX_QUOT), 4);
-            }
+            }*/ 
         }
     }
 }
