@@ -193,7 +193,7 @@ class ScheduleParser
             $matchups = EventHandler::getMatchups(event_id: $event->getID());
             foreach ($matchups as $matchup) {
                 if (!in_array($matchup->getID(), $this->matched_existing_matchups)
-                    && $matchup->getCreateSource() == 1) { //Only suggest to remove matchups created by scheduler
+                    && $matchup->getCreateSource() == 2) { //Only suggest to remove matchups created by scheduler
                     ScheduleHandler::storeManualAction(json_encode(array('matchupID' => $matchup->getID()), JSON_HEX_APOS | JSON_HEX_QUOT), 7);
                 }
             }
