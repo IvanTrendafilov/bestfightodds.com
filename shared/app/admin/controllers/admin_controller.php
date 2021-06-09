@@ -232,6 +232,17 @@ class AdminController
         $view_data['unmatched_matchups_col'] = EventHandler::getUnmatched(1500, 1); //Props not matched to matchups
         $view_data['unmatched_templates_col'] = EventHandler::getUnmatched(1500, 2); //Unknown props (missing prop templates)
 
+        foreach ($view_data['unmatched_templates_col'] as $key => &$unmatched) {
+            $split = explode(' vs ', $unmatched['matchup']);
+            $view_data['unmatched_templates_col'][$key]['view_indata1'] = $split[0] == '' ? $split[1] : $split[0]; //Swap places if first part is blank
+            $view_data['unmatched_templates_col'][$key]['view_indata2'] = $split[0] == '' ? $split[0] : $split[1];
+        }
+
+        foreach ($view_data['unmatched_matchups_col'] as $key => &$unmatched) {
+            $split = explode(' vs ', $unmatched['matchup']);
+            $view_data['unmatched_matchups_col'][$key]['view_indata1'] = $split[0] == '' ? $split[1] : $split[0]; //Swap places if first part is blank
+            $view_data['unmatched_matchups_col'][$key]['view_indata2'] = $split[0] == '' ? $split[0] : $split[1];
+        }
 
         $bookies = BookieHandler::getAllBookies();
         $view_data['bookies'] = [];
