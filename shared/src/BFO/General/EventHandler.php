@@ -248,11 +248,21 @@ class EventHandler
         return $event_obj;
     }
 
-    public static function setMetaDataForMatchup($matchup_id, $metadata_attribute, $metadata_value, $bookie_id)
+    public static function setMetaDataForMatchup(int $matchup_id, string $metadata_attribute, string $metadata_value, int $bookie_id)
     {
         if (trim($metadata_value) != '') {
+            if ($metadata_attribute == 'event_name') {
+                $a = 'ÀÁÂÃÄÅÆÇÈÉÊËÌÍÎÏÐÑÒÓÔÕÖØÙÚÛÜÝÞßàáâãäåæçèéêëìíîïðñòóôõöøùúûýýþÿŔŕ ';
+                $b = 'aaaaaaaceeeeiiiidnoooooouuuuybsaaaaaaaceeeeiiiidnoooooouuuyybyRr ';
+                $metadata_value = utf8_decode($metadata_value);
+                $metadata_value = strtr($metadata_value, utf8_decode($a), $b);
+                
+                //Trims multiple spaces to single space:
+                $metadata_value = preg_replace('/\h{2,}/', ' ', $metadata_value);
+            }
             return EventDB::setMetaDataForMatchup($matchup_id, $metadata_attribute, trim($metadata_value), $bookie_id);
         }
+
         return false;
     }
 

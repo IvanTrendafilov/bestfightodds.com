@@ -30,17 +30,17 @@ class FightOdds
         $this->date = $date;
     }
 
-    public function getFightID(): int
+    public function getFightID(): ?int
     {
         return $this->matchup_id;
     }
 
-    public function getBookieID(): int
+    public function getBookieID(): ?int
     {
         return $this->bookie_id;
     }
 
-    public function getDate(): string
+    public function getDate(): ?string
     {
         return $this->date;
     }

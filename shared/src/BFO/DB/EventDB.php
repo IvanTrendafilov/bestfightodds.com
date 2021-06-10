@@ -523,7 +523,7 @@ class EventDB
         return DBTools::getAffectedRows();
     }
 
-    public static function setMetaDataForMatchup($matchup_id, $attribute, $value, $bookie_id)
+    public static function setMetaDataForMatchup(int $matchup_id, string $attribute, string $value, int $bookie_id)
     {
         $query = 'INSERT INTO matchups_metadata(matchup_id, mattribute, mvalue, source_bookie_id) VALUES (?,?,?,?)
                         ON DUPLICATE KEY UPDATE mvalue = ?';

@@ -68,7 +68,7 @@ class ParsedMatchup
         return $moneyline->getMoneyline($team_number);
     }
 
-    public function switchOdds()
+    public function switchOdds(): bool
     {
         $this->switched_externally = true;
         //Switch moneyline
@@ -83,7 +83,7 @@ class ParsedMatchup
         return $this->switched_externally;
     }
 
-    public function addMoneyLineObj($moneyline): void
+    public function addMoneyLineObj(ParsedMoneyline $moneyline): void
     {
         $this->moneyline = $moneyline;
         if ($this->switched == true && !$this->moneyline->isSwitched()) {
@@ -91,7 +91,7 @@ class ParsedMatchup
         }
     }
 
-    public function getMoneyLineObj()
+    public function getMoneyLineObj(): ParsedMoneyline
     {
         return $this->moneyline;
     }
@@ -111,10 +111,8 @@ class ParsedMatchup
      *
      * The correlation ID can be used to store an identifier that is used to
      * match the matchup with other parsed content such as props
-     *
-     * @param String $a_sCorrID Correlation ID
      */
-    public function setCorrelationID($correlation_id)
+    public function setCorrelationID(string $correlation_id): void
     {
         //Correlation ID is always converted to uppercase to avoid case-insensitivity problems
         $this->correlation_id = strtoupper(trim($correlation_id));
@@ -125,7 +123,7 @@ class ParsedMatchup
      *
      * @return String Correlation ID
      */
-    public function getCorrelationID()
+    public function getCorrelationID(): ?string
     {
         return $this->correlation_id;
     }
