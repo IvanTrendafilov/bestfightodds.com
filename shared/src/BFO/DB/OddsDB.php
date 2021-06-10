@@ -722,7 +722,7 @@ class OddsDB
 
     public static function getAllFlaggedMatchups(): ?array
     {
-        $query = 'SELECT f.*, e.name as event_name, e.date as event_date, f1.name AS team1_name, f2.name AS team2_name, lf.*, b.name as bookie_name, b.id as bookie_id, m.mvalue as gametime, m.max_value as max_gametime, m.min_value as min_gametime 
+        $query = 'SELECT f.*, e.name as event_name, e.date as event_date, f1.name AS team1_name, f2.name AS team2_name, lf.*, b.name as bookie_name, b.id as bookie_id, m.mvalue as gametime
                     FROM lines_flagged lf 
                         LEFT JOIN fights f ON lf.matchup_id = f.id 
                         LEFT JOIN fighters f1 ON f.fighter1_id = f1.id 
@@ -730,12 +730,9 @@ class OddsDB
                         LEFT JOIN events e ON f.event_id = e.id 
                         LEFT JOIN bookies b ON lf.bookie_id = b.id
             LEFT JOIN 
-                        (SELECT matchup_id, AVG(mvalue) as mvalue, MAX(mvalue) as max_value, MIN(mvalue) as min_value 
-                            FROM events em 
-                                LEFT JOIN fights fm ON em.id = fm.event_id 
-                                LEFT JOIN matchups_metadata mm ON fm.id = mm.matchup_id 
-                            WHERE mm.mattribute = "gametime" 
-                            GROUP BY matchup_id)  m ON f.id = m.matchup_id
+                        (SELECT matchup_id, source_bookie_id, mvalue 
+                                FROM  matchups_metadata mm
+                                WHERE mm.mattribute = "gametime" ) m ON f.id = m.matchup_id AND b.id = m.source_bookie_id
                 WHERE proptype_id = -1
                 ORDER BY e.date ASC;';
 

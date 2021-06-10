@@ -61,7 +61,7 @@
                     <tr>
                         <td><?= $flagged_item['event_obj']->getName() ?></td>
                         <td><?= $flagged_item['event_obj']->getDate() ?></td>
-                        <td><?= date('Y-m-d H:i:s', $flagged_item['min_gametime']) ?></td>
+                        <td><?= date('Y-m-d H:i:s', $flagged_item['gametime']) ?></td>
                         <td><?= $flagged_item['fight_obj']->getTeamAsString(1) ?> vs. <?= $flagged_item['fight_obj']->getTeamAsString(2) ?></td>
                         <td><?= $flagged_item['bookie_name'] ?></td>
                         <td><?= $flagged_item['initial_flagdate'] ?></td>
