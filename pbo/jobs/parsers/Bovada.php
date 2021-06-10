@@ -58,7 +58,8 @@ class ParserJob extends ParserJobBase
 
             foreach ($event['markets'] as $market) {
                 if ($market['status'] == 'OPEN') {
-                    if ($market['description'] == 'To Win the Bout') {
+                    if ($market['description'] == 'To Win the Bout'
+                        && isset($market['outcomes'][0]['price'], $market['outcomes'][1]['price'])) {
                         //Regular matchup
                         $parsed_matchup = new ParsedMatchup(
                             $market['outcomes'][0]['description'],
