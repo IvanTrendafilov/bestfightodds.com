@@ -15,7 +15,7 @@ use BFO\DataTypes\Event;
 use BFO\DataTypes\FightOdds;
 use BFO\DataTypes\PropTemplate;
 use BFO\Parser\ParsedProp;
-use BFO\Parser\PropParser;
+use BFO\Parser\PropProcessor;
 
 final class CreatePropOddsTest extends TestCase
 {
@@ -69,7 +69,7 @@ final class CreatePropOddsTest extends TestCase
         ));
 
         //$logger = new Katzgrau\KLogger\Logger(GENERAL_KLOGDIR, Psr\Log\LogLevel::INFO, ['filename' => 'cron.testlog.' . time() . '.log']);
-        $pp = new PropParser(new NullLogger, $this->bookie_id);
+        $pp = new PropProcessor(new NullLogger, $this->bookie_id);
         $parsed_prop = new ParsedProp('UNITTEST FIGHT GOES TO DECISION - Propone vs. Proptwo', 'UNITTEST Fight does not go to decision', '-120', '+110', '');
 
         $result = $pp->matchSingleProp($parsed_prop);
@@ -114,7 +114,7 @@ final class CreatePropOddsTest extends TestCase
             $this->greaterThan(0)
         ));
 
-        $pp = new PropParser(new NullLogger, $this->bookie_id);
+        $pp = new PropProcessor(new NullLogger, $this->bookie_id);
         $parsed_prop = new ParsedProp('UNITTEST Fight is a draw - Propone vs. Proptwo', 'UNITTEST Fight does not go to decision', '-120', '+110', '');
 
         $result = $pp->matchSingleProp($parsed_prop);

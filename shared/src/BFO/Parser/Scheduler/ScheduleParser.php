@@ -110,14 +110,14 @@ class ScheduleParser
                     }
                     reset($found_matches);
                     //Probably found it! Howver event should be renamed if different
-                    $oFoundEvent = EventHandler::getEvent(key($found_matches));
-                    if ($oFoundEvent->getName() != $parsed_event['title']) {
-                        ScheduleHandler::storeManualAction(json_encode(array('eventID' => $oFoundEvent->getID(), 'eventTitle' => $parsed_event['title']), JSON_HEX_APOS | JSON_HEX_QUOT), 2);
+                    $found_event = EventHandler::getEvent(key($found_matches));
+                    if ($found_event->getName() != $parsed_event['title']) {
+                        ScheduleHandler::storeManualAction(json_encode(array('eventID' => $found_event->getID(), 'eventTitle' => $parsed_event['title']), JSON_HEX_APOS | JSON_HEX_QUOT), 2);
                     }
-                    $this->parseMatchups($parsed_event, $oFoundEvent);
+                    $this->parseMatchups($parsed_event, $found_event);
                     //But maybe date is still incorrect
-                    $this->checkEventDate($parsed_event, $oFoundEvent);
-                    $this->matched_existing_events[] = $oFoundEvent->getID();
+                    $this->checkEventDate($parsed_event, $found_event);
+                    $this->matched_existing_events[] = $found_event->getID();
                 }
             }
             if (!$found) {

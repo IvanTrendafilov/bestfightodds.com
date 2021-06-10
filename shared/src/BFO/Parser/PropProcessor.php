@@ -13,7 +13,7 @@ use BFO\DataTypes\Fight;
 use BFO\DataTypes\PropTemplate;
 use Psr\Log\LoggerInterface;
 
-class PropParser
+class PropProcessor
 {
     private LoggerInterface $logger;
     private $matchups;

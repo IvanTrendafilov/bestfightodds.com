@@ -48,7 +48,7 @@ class OddsProcessor
             $matched_matchups = $this->createUnmatchedMatchups($matched_matchups);
         }
 
-        $pp = new PropParser($this->logger, $this->bookie_id);
+        $pp = new PropProcessor($this->logger, $this->bookie_id);
         $matched_props = $pp->matchProps($parsed_sport->getFetchedProps());
 
         $matched_props = $this->removeMatchedPropDupes($matched_props);

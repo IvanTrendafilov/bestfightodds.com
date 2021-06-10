@@ -3,7 +3,7 @@
 /**
  * Main schedule parser cron job that does the following
  *
- * - Fetches schedule from MMAJunkie
+ * - Fetches schedule from external source
  * - Parses fetched schedule for missing content
  * - Checks existing content if outdated
  */
@@ -16,24 +16,19 @@ use BFO\Parser\Utils\ParseTools;
 echo date('Y-m-d H:i:s') . " - Schedule parser start
 ";
 
-$schedule = MMAJunkieParser::fetchSchedule();
-
+$schedule = RSSParser::fetchSchedule();
 $sp = new ScheduleParser();
 $sp->run($schedule);
 
 echo date('Y-m-d H:i:s') . " - Done
 ";
 
-class MMAJunkieParser
+class RSSParser
 {
     public static function fetchSchedule()
     {
         $url = 'http://api.mmajunkie.com/rumors/rss';
-        //$url = 'http://localhost:8080/rss.txt';
-        $curl_opts = array(CURLOPT_USERAGENT => 'MWFeedParser');
-        $content = ParseTools::retrievePageFromURL($url, $curl_opts);
-        //$content = ParseTools::retrievePageFromFile('C:\dev\bfo\bfo\app\front\rss.txt');
-
+        $content = ParseTools::retrievePageFromURL($url, [CURLOPT_USERAGENT => 'MWFeedParser']);
         $xml = simplexml_load_string($content);
         if (!$xml) {
             echo "Error: XML failed";

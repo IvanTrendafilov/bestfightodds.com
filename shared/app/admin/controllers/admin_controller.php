@@ -541,21 +541,6 @@ class AdminController
         $view_data['input_prop'] = $request->getQueryParams()['input_prop'] ?? '';
         $view_data['bookie_id'] = $request->getQueryParams()['bookie_id'] ?? '';
 
-        /*$aSplit = explode(' vs ', $request->getQueryParams()['input_prop']);
-        $oProp = new ParsedProp($aSplit[0], $aSplit[1], '123', '-123');
-        //$oPP = new PropParser();
-        $oTemplate = $oPP->matchParsedPropToTemplate($_GET['inBookieID'], $oProp);
-        if ($oTemplate != null)
-        {
-            $aMatchup = $oPP->matchParsedPropToMatchup($oProp, $oTemplate);
-            if ($aMatchup['matchup'] != null)
-            {
-                $iMatchedMatchup = $aMatchup['matchup'];
-                echo 'Prematched: '  . $iMatchedMatchup .  ' <br/>';
-            }
-            $_GET['inCorrelation'] = $oProp->getMainProp() == 1 ? $oProp->getTeamName(1) : $oProp->getTeamName(2);
-        }*/
-
         $events = EventHandler::getEvents(future_events_only: true);
         foreach ($events as $event) {
             $matchups = EventHandler::getMatchups(event_id: $event->getID());
