@@ -2,6 +2,9 @@
 
 namespace BFO\DataTypes;
 
+/**
+ * Represents a sportsbook (bookie) in the system
+ */
 class Bookie
 {
     private $id;

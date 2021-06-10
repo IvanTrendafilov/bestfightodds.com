@@ -2,6 +2,9 @@
 
 namespace BFO\DataTypes;
 
+/**
+ * Fight Odds Class - Represents a betting line for a matchup
+ */
 class FightOdds
 {
     private $matchup_id;

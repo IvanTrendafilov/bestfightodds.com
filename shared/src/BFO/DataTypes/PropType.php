@@ -2,6 +2,9 @@
 
 namespace BFO\DataTypes;
 
+/**
+ * Prop Type Class - Represents a generic type/categorization of a prop bet
+ */
 class PropType
 {
     private $id;

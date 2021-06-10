@@ -4,6 +4,9 @@ namespace BFO\DataTypes;
 
 use BFO\DataTypes\PropBet;
 
+/**
+ * Event Prop Bet Class - Represents a betting line linked to an event (e.g. Over 8½ matchups go the distance)
+ */
 class EventPropBet extends PropBet
 {
     private $event_id; //Event the prop is linked to

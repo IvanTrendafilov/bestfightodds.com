@@ -2,6 +2,9 @@
 
 namespace BFO\DataTypes;
 
+/**
+ * Prop Template Class - Represents a template for a specific type of prop bet at a sportsbook
+ */
 class PropTemplate
 {
     private $id;

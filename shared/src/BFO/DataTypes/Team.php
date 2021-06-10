@@ -4,6 +4,9 @@ namespace BFO\DataTypes;
 
 use BFO\Utils\LinkTools;
 
+/**
+ * Team Class - Represents a single team
+ */
 class Team
 {
     private string $name;

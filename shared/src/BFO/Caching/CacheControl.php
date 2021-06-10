@@ -2,6 +2,13 @@
 
 namespace BFO\Caching;
 
+/**
+ * CacheControl is used to store cached copies of images, pages and graph data (json) on disk
+ * 
+ * When pages are generated in the controller/views the controller may use this class to store and retrieve 
+ * cached copies of content as well as invalidate (delete) cache when new content is generated
+ * 
+ */
 class CacheControl
 {
     public static function cleanGraphCache()

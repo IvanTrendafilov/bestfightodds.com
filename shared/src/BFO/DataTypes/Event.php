@@ -4,6 +4,9 @@ namespace BFO\DataTypes;
 
 use BFO\Utils\LinkTools;
 
+/**
+ * Event Class - Represents an event (fightcard/date)
+ */
 class Event
 {
     private $id;

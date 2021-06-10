@@ -4,6 +4,9 @@ namespace BFO\DataTypes;
 
 use BFO\Utils\LinkTools;
 
+/**
+ * Fight Class - Represents a matchup between two teams
+ */
 class Fight
 {
     private int $id;

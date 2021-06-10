@@ -2,6 +2,9 @@
 
 namespace BFO\DataTypes;
 
+/**
+ * Prop Bet Class - Represents a betting line for a prop bet
+ */
 class PropBet
 {
     private int $matchup_id; //Matchup the prop is linked to
