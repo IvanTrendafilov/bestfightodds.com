@@ -25,9 +25,6 @@ class ScheduleParser
         $this->checkRemovedContent();
     }
 
-    /*
-     * Use this instead of parseSched to make it site independent
-     */
     public function parseSchedPreFetched(array $parsed_events): void
     {
         $this->matched_existing_matchups = [];
@@ -37,7 +34,7 @@ class ScheduleParser
         $this->checkRemovedContent();
     }
 
-    public function parseEvents(array $parsed_events)
+    public function parseEvents(array $parsed_events): void
     {
         foreach ($parsed_events as $parsed_event) {
             //Check if event matches an existing stored event. Must be numered though
@@ -98,8 +95,8 @@ class ScheduleParser
             if (!$found) {
                 //Match on existing matchups
                 $found_matches = [];
-                foreach ($parsed_event['matchups'] as $aParsedMatchup) {
-                    $aMatchup = EventHandler::getMatchingMatchup(team1_name: $aParsedMatchup[0], team2_name: $aParsedMatchup[1], future_only: true);
+                foreach ($parsed_event['matchups'] as $parsed_matchup) {
+                    $aMatchup = EventHandler::getMatchingMatchup(team1_name: $parsed_matchup[0], team2_name: $parsed_matchup[1], future_only: true);
                     if ($aMatchup && $aMatchup->getEventID() != PARSE_FUTURESEVENT_ID) {
                         $found_matches[$aMatchup->getEventID()] = isset($found_matches[$aMatchup->getEventID()]) ? $found_matches[$aMatchup->getEventID()]++ : 1;
                     }

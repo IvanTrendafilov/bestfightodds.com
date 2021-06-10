@@ -756,20 +756,9 @@ class OddsDB
         $gametime_threshold = 4; //If the matchup is within this value (hours) we will not remove
         $flagged_time = 3; //How many hours the line must be flagged before deletion
 
-        /*$query = 'SELECT lf.*, TIMESTAMPDIFF(HOUR, initial_flagdate, NOW()) AS timediff, pt.prop_desc, pt.negprop_desc, 
-                        f1.name AS team1_name, f2.name AS team2_name, b.name AS bookie_name, e.name AS event_name FROM lines_flagged lf 
-                    LEFT JOIN fights f ON lf.matchup_id = f.id 
-                    LEFT JOIN events e ON (f.event_id = e.id  OR lf.event_id = e.id)
-                    LEFT JOIN prop_types pt ON lf.proptype_id = pt.id
-                    LEFT JOIN fighters f1 ON f.fighter1_id = f1.id
-                    LEFT JOIN fighters f2 ON f.fighter2_id = f2.id 
-                    LEFT JOIN bookies b ON lf.bookie_id = b.id 
-                WHERE LEFT(e.date, 10) >= LEFT((NOW() - INTERVAL -' . $gametime_threshold . ' HOUR), 10) HAVING timediff >= ' . $flagged_time . ';';*/
-
-
         $query = 'SELECT lf.*, TIMESTAMPDIFF(HOUR, initial_flagdate, NOW()) AS timediff, pt.prop_desc, pt.negprop_desc, 
                         f1.name AS team1_name, f2.name AS team2_name, b.name AS bookie_name, e.name AS event_name,  
-                        m.mvalue as gametime, m.max_value as max_gametime, m.min_value as min_gametime
+                        m.mvalue as gametime
                         FROM lines_flagged lf
                     LEFT JOIN fights f ON lf.matchup_id = f.id 
                     LEFT JOIN events e ON (f.event_id = e.id  OR lf.event_id = e.id)
@@ -778,13 +767,10 @@ class OddsDB
                     LEFT JOIN fighters f2 ON f.fighter2_id = f2.id 
                     LEFT JOIN bookies b ON lf.bookie_id = b.id 
                     LEFT JOIN 
-                            (SELECT matchup_id, ROUND(AVG(mvalue)) as mvalue, MAX(mvalue) as max_value, MIN(mvalue) as min_value 
-                                FROM events em 
-                                    LEFT JOIN fights fm ON em.id = fm.event_id 
-                                    LEFT JOIN matchups_metadata mm ON fm.id = mm.matchup_id 
-                                WHERE mm.mattribute = "gametime" 
-                                GROUP BY matchup_id) m ON f.id = m.matchup_id 
-                WHERE FROM_UNIXTIME(m.min_value) > (NOW() + INTERVAL ' . $gametime_threshold . ' HOUR) HAVING timediff >= ' . $flagged_time . '';
+                            (SELECT matchup_id, source_bookie_id, mvalue 
+                                FROM  matchups_metadata mm
+                                WHERE mm.mattribute = "gametime" ) m ON f.id = m.matchup_id AND b.id = m.source_bookie_id 
+                WHERE FROM_UNIXTIME(m.mvalue) > (NOW() + INTERVAL ' . $gametime_threshold . ' HOUR) HAVING timediff >= ' . $flagged_time . '';
 
         $result = null;
         try {
