@@ -185,8 +185,8 @@ class OddsProcessor
         } else {
             //Trying to add odds for a matchup with no upcoming event
             $this->logger->error("--- match wrongfully matched to event OR odds are old");
-            return false;
         }
+        return false;
     }
 
     /**
