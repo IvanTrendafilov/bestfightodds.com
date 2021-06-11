@@ -390,7 +390,7 @@ class OddsProcessor
                             && $props[$x]['match_result']['matchup']['matchup_id'] == $props[$y]['match_result']['matchup']['matchup_id']
                             && $props[$x]['match_result']['matchup']['team'] == $props[$y]['match_result']['matchup']['team']
                         ) {
-                            $this->logger->info('Matching dupe for proptype_id: ' . $props[$x]['match_result']['template']->getPropTypeID() . ', matchup_id: ' . $props[$x]['match_result']['matchup']['matchup_id'] .
+                            $this->logger->debug('Matching dupe for proptype_id: ' . $props[$x]['match_result']['template']->getPropTypeID() . ', matchup_id: ' . $props[$x]['match_result']['matchup']['matchup_id'] .
                                 ' ' . $props[$y]['prop']->getMoneyLine(1) . '/' . $props[$y]['prop']->getMoneyLine(2) . ' and ' . $props[$x]['prop']->getMoneyLine(1) . '/' . $props[$x]['prop']->getMoneyLine(2));
 
                             $arbitrage_subject = ParseTools::getArbitrage($props[$y]['prop']->getMoneyLine(1), $props[$y]['prop']->getMoneyLine(2));
