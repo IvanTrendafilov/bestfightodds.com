@@ -72,6 +72,7 @@ class BookieHandler
 
     public static function updateTemplateLastUsed(int $template_id): bool
     {
+        return false; //TODO: Currently disabled to avoid table locks 
         return BookieDB::updateTemplateLastUsed($template_id);
     }
 
