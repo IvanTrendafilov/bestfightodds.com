@@ -336,7 +336,22 @@ class OddsHandler
         return OddsDB::flagOddsForDeletion($bookie_id, null, $event_id, $proptype_id, $team_num);
     }
 
-    public static function removeFlagged($bookie_id, $matchup_id = null, $event_id = null, $proptype_id = null, $team_num = null): int
+    public static function isFlagged($bookie_id, $matchup_id, $event_id, $proptype_id, $team_num)
+    {
+        if (
+            !is_numeric($matchup_id) || !is_numeric($event_id) || !is_numeric($bookie_id) || !is_numeric($proptype_id) || !is_numeric($team_num)
+            || $bookie_id <= 0
+        ) {
+            return false;
+        }
+        $flagged = OddsDB::isFlagged($bookie_id, $matchup_id, $event_id, $proptype_id, $team_num);
+        if (!$flagged || count($flagged) == 0) {
+            return false;
+        }
+        return true;
+    }
+
+    public static function removeFlagged($bookie_id, $matchup_id = null, $event_id = null, $proptype_id = null, $team_num = null): ?bool
     {
         if (
             !is_numeric($bookie_id) || $bookie_id <= 0
@@ -344,7 +359,11 @@ class OddsHandler
         ) { //If no value is specified we abort
             return false;
         }
-        return OddsDB::removeFlagged($bookie_id, $matchup_id, $event_id, $proptype_id, $team_num);
+        if (OddsHandler::isFlagged($bookie_id, $matchup_id, $event_id, $proptype_id, $team_num))
+        {
+            OddsDB::removeFlagged($bookie_id, $matchup_id, $event_id, $proptype_id, $team_num);
+        }
+        return true; 
     }
 
     public static function removeAllOldFlagged(): int

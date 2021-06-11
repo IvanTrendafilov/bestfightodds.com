@@ -685,6 +685,26 @@ class OddsDB
         return $id;
     }
 
+    public static function isFlagged($bookie_id, $matchup_id = null, $event_id = null, $proptype_id = null, $team_num = null)
+    {
+        $params = [$bookie_id, $matchup_id ?? -1, $event_id ?? -1, $proptype_id ?? -1, $team_num ?? -1];
+
+        $query = 'SELECT * FROM lines_flagged 
+                WHERE bookie_id = ? 
+                AND matchup_id = ?
+                AND event_id = ?
+                AND proptype_id = ?
+                AND team_num = ?';
+
+        $result = null;
+        try {
+            $result = PDOTools::findMany($query, $params);
+        } catch (\PDOException $e) {
+            throw new \Exception("Unknown error " . $e->getMessage(), 10);
+        }
+        return $result;
+    }
+
     public static function removeFlagged(int $bookie_id, int $matchup_id = null, int $event_id = null, int $proptype_id = null, int $team_num = null): ?int
     {
         $params = [$bookie_id, $matchup_id ?? -1, $event_id ?? -1, $proptype_id ?? -1, $team_num ?? -1];
