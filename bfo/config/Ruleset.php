@@ -28,7 +28,7 @@ class Ruleset implements RulesetInterface
         }
 
         if ($bookie_obj->getName() == 'BetWay') {
-            $whitelisted_events = ['EFC', 'SUPERIOR', 'ACA', 'FEN', 'OKTAGON', 'BRAVE'];
+            $whitelisted_events = ['EFC', 'SUPERIOR', 'ACA', 'FEN', 'OKTAGON', 'BRAVE', 'OPEN'];
             if (in_array($event_pieces[0], $whitelisted_events)) {
                 return true;
             }
@@ -53,7 +53,7 @@ class Ruleset implements RulesetInterface
         }
 
         if ($bookie_obj->getName() == 'BetWay') {
-            $whitelisted_events = ['EFC', 'SUPERIOR', 'ACA', 'FEN', 'OKTAGON', 'BRAVE'];
+            $whitelisted_events = ['EFC', 'SUPERIOR', 'ACA', 'FEN', 'OKTAGON', 'BRAVE', 'OPEN'];
             if (in_array($event_pieces[0], $whitelisted_events)) {
                 return true;
             }
