@@ -589,7 +589,7 @@ class AdminController
             $flagged_row['hours_diff'] = $hours_diff;
 
             $matchup_date = new DateTime();
-            $matchup_date->setTimestamp($flagged_row['min_gametime']);
+            $matchup_date->setTimestamp($flagged_row['gametime']);
 
             if ($matchup_date < $first_date) {
                 $flagged_row['has_passed'] = true;
