@@ -255,7 +255,7 @@ class OddsProcessor
                         OddsHandler::flagPropOddsForDeletion($this->bookie_id, $stored_prop->getMatchupID(), $stored_prop->getPropTypeID(), $stored_prop->getTeamNumber());
                     } else {
                         OddsHandler::removeFlagged($this->bookie_id, $stored_prop->getMatchupID(), null, $stored_prop->getPropTypeID(), $stored_prop->getTeamNumber()); //Remove any previous flags
-                        $this->logger->debug('Prop odds with type ' . $stored_prop->getPropTypeID() . ' for team num ' . $stored_prop->getTeamNumber()
+                        $this->logger->info('Prop odds with type ' . $stored_prop->getPropTypeID() . ' for team num ' . $stored_prop->getTeamNumber()
                             . ' in ' . $upcoming_matchup->getTeamAsString(1) . ' vs ' . $upcoming_matchup->getTeamAsString(2) . ' still relevant');
                     }
                 }
