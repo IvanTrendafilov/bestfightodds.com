@@ -29,7 +29,11 @@ class ParsedSport
     {
         if (
             trim($parsed_matchup_obj->getTeamName(1)) != '' &&
-            trim($parsed_matchup_obj->getTeamName(2)) != ''
+            trim($parsed_matchup_obj->getTeamName(2)) != '' &&
+            trim(strtoupper($parsed_matchup_obj->getTeamName(1))) != 'OVER' &&
+            trim(strtoupper($parsed_matchup_obj->getTeamName(1))) != 'UNDER' && 
+            trim(strtoupper($parsed_matchup_obj->getTeamName(2))) != 'OVER' &&
+            trim(strtoupper($parsed_matchup_obj->getTeamName(2))) != 'UNDER'
         ) {
             $this->matchups[] = $parsed_matchup_obj;
         }
