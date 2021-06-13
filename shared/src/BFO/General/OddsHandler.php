@@ -338,10 +338,7 @@ class OddsHandler
 
     public static function isFlagged($bookie_id, $matchup_id, $event_id, $proptype_id, $team_num)
     {
-        if (
-            !is_numeric($matchup_id) || !is_numeric($event_id) || !is_numeric($bookie_id) || !is_numeric($proptype_id) || !is_numeric($team_num)
-            || $bookie_id <= 0
-        ) {
+        if ($bookie_id <= 0) {
             return false;
         }
         $flagged = OddsDB::isFlagged($bookie_id, $matchup_id, $event_id, $proptype_id, $team_num);
