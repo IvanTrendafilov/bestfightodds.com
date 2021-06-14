@@ -7,6 +7,12 @@ use BFO\General\ScheduleHandler;
 use BFO\DataTypes\Fight;
 use BFO\DataTypes\Event;
 
+/**
+ * Takes a parsed schedule (collection of events with matchups) and checks against the existing
+ * events and matchups stored in the database. Manual actions are then created and stored in the
+ * database for any suggested actions (delete, move, create, etc). Note that no action is taken
+ * automatically by the schedule parser
+ */
 class ScheduleParser
 {
     private $matched_existing_matchups;
@@ -21,8 +27,8 @@ class ScheduleParser
     public function run($schedule): void 
     {
         ScheduleHandler::clearAllManualActions();
-        $this->parseEvents($schedule);
-        $this->checkRemovedContent();
+        $this->processEvents($schedule);
+        $this->suggestToRemoveUnmatchedMatchups();
     }
 
     public function parseSchedPreFetched(array $parsed_events): void
@@ -30,11 +36,11 @@ class ScheduleParser
         $this->matched_existing_matchups = [];
         $this->matched_existing_events = [];
         ScheduleHandler::clearAllManualActions();
-        $this->parseEvents($parsed_events);
-        $this->checkRemovedContent();
+        $this->processEvents($parsed_events);
+        $this->suggestToRemoveUnmatchedMatchups();
     }
 
-    public function parseEvents(array $parsed_events): void
+    public function processEvents(array $parsed_events): void
     {
         foreach ($parsed_events as $parsed_event) {
             //Check if event matches an existing stored event. Must be numered though
@@ -46,7 +52,7 @@ class ScheduleParser
                 $prefix_parts = explode(' ', $prefix_parts[0]);
                 if ($event->getName() == $parsed_event['title'] && !$found && is_numeric($prefix_parts[count($prefix_parts) - 1])) {
                     $found = true;
-                    $this->parseMatchups($parsed_event, $event);
+                    $this->processMatchups($parsed_event, $event);
                     $this->checkEventDate($parsed_event, $event);
                     $this->matched_existing_events[] = $event->getID();
                 }
@@ -66,7 +72,7 @@ class ScheduleParser
                             if ($event->getName() != $parsed_event['title']) {
                                 ScheduleHandler::storeManualAction(json_encode(array('eventID' => $event->getID(), 'eventTitle' => $parsed_event['title']), JSON_HEX_APOS | JSON_HEX_QUOT), 2);
                             }
-                            $this->parseMatchups($parsed_event, $event);
+                            $this->processMatchups($parsed_event, $event);
                             $this->matched_existing_events[] = $event->getID();
                         }
                     }
@@ -84,7 +90,7 @@ class ScheduleParser
                             if ($event->getName() != $parsed_event['title']) {
                                 ScheduleHandler::storeManualAction(json_encode(array('eventID' => $event->getID(), 'eventTitle' => $parsed_event['title']), JSON_HEX_APOS | JSON_HEX_QUOT), 2);
                             }
-                            $this->parseMatchups($parsed_event, $event);
+                            $this->processMatchups($parsed_event, $event);
                             //But maybe date is still incorrect
                             $this->checkEventDate($parsed_event, $event);
                             $this->matched_existing_events[] = $event->getID();
@@ -114,7 +120,7 @@ class ScheduleParser
                     if ($found_event->getName() != $parsed_event['title']) {
                         ScheduleHandler::storeManualAction(json_encode(array('eventID' => $found_event->getID(), 'eventTitle' => $parsed_event['title']), JSON_HEX_APOS | JSON_HEX_QUOT), 2);
                     }
-                    $this->parseMatchups($parsed_event, $found_event);
+                    $this->processMatchups($parsed_event, $found_event);
                     //But maybe date is still incorrect
                     $this->checkEventDate($parsed_event, $found_event);
                     $this->matched_existing_events[] = $found_event->getID();
@@ -146,7 +152,7 @@ class ScheduleParser
         }
     }
 
-    private function checkEventDate(array $event_arr, Event $stored_event)
+    private function checkEventDate(array $event_arr, Event $stored_event): bool
     {
         if (date('Y-m-d', $event_arr['date']) != substr($stored_event->getDate(), 0, 10)) {
             ScheduleHandler::storeManualAction(json_encode(array('eventID' => $stored_event->getID(), 'eventDate' => date('Y-m-d', $event_arr['date'])), JSON_HEX_APOS | JSON_HEX_QUOT), 3);
@@ -155,7 +161,7 @@ class ScheduleParser
         return false;
     }
 
-    public function parseMatchups($event, $matched_event)
+    public function processMatchups(array $event, Event $matched_event)
     {
         foreach ($event['matchups'] as $parsed_matchup) {
 
@@ -179,7 +185,7 @@ class ScheduleParser
         return true;
     }
 
-    public function checkRemovedContent()
+    public function suggestToRemoveUnmatchedMatchups()
     {
         $events = EventHandler::getEvents(future_events_only: true);
         foreach ($events as $event) {
@@ -187,7 +193,7 @@ class ScheduleParser
             if ($event->getID() == PARSE_FUTURESEVENT_ID) {
                 break;
             }
-            $matchups = EventHandler::getMatchups(event_id: $event->getID());
+            $matchups = EventHandler::getMatchups(event_id: $event->getID(), only_without_odds: true);
             foreach ($matchups as $matchup) {
                 if (!in_array($matchup->getID(), $this->matched_existing_matchups)
                     && $matchup->getCreateSource() == 2) { //Only suggest to remove matchups created by scheduler
