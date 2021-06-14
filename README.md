@@ -9,7 +9,7 @@
 * Ensure that **gulp watch** is running to ensure that Javascript minification and SASS compile is active
 
 3. Deployment
-* Important: **Do not deploy the /config/inc.config.php file** (is excluded in .gitignore)
+* Important: **Do not commit the /config/inc.config.php file** (is excluded in .gitignore)
 
 4. Additionals to notice:
 * MySQL stored procedures will not be included in the dump that is imported. Create these manually using the scripts in /db

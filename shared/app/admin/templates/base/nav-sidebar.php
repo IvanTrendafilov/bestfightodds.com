@@ -36,19 +36,13 @@
 
 			<li class="sidebar-item <?= $current_page == 'flagged_odds' ? 'active' : '' ?>">
 				<a class="sidebar-link" href="/cnadm/flagged">
-				<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-check-circle align-middle"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path><polyline points="22 4 12 14.01 9 11.01"></polyline></svg> <span class="align-middle">View flagged</span>
+				<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-check-circle align-middle"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path><polyline points="22 4 12 14.01 9 11.01"></polyline></svg> <span class="align-middle">Flagged odds</span>
 				</a>
 			</li>
 
 			<li class="sidebar-item <?= $current_page == 'proptemplates' ? 'active' : '' ?>">
 				<a class="sidebar-link" href="/cnadm/proptemplates">
-					<i class="align-middle" data-feather="book"></i> <span class="align-middle">Manage prop templates</span>
-				</a>
-			</li>
-
-			<li class="sidebar-item <?= $current_page == 'proptype_new' ? 'active' : '' ?>">
-				<a class="sidebar-link" href="/cnadm/proptype">
-					<i class="align-middle" data-feather="book"></i> <span class="align-middle">New prop type</span>
+					<i class="align-middle" data-feather="book"></i> <span class="align-middle">Prop templates</span>
 				</a>
 			</li>
 
@@ -80,16 +74,6 @@
 						<rect x="2" y="7" width="20" height="14" rx="2" ry="2"></rect>
 						<path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"></path>
 					</svg> <span class="align-middle">Other logs</span>
-				</a>
-			</li>
-
-			<li class="sidebar-header">
-				Dev Components
-			</li>
-
-			<li class="sidebar-item">
-				<a class="sidebar-link" href="/cnadm/index.html">
-					<i class="align-middle" data-feather="map"></i> <span class="align-middle">Admin Kit</span>
 				</a>
 			</li>
 

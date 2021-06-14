@@ -23,9 +23,10 @@
                     })
                     .then(function(body) {
                         if (body.error == true) {
-                            event_row.classList.add("failed")
+                            alert(body.msg);
                         } else {
-                            event_row.classList.add("success")
+                            e.target.closest('tr').style.color = '#ddd';
+                            e.target.disabled = true;
                             //Run through matchups and add them to the event that was created
                             document.querySelectorAll(".matchup-row[data-eventlink='" + e.target.parentNode.dataset.eventlink + "']").forEach(function(item) {
                                 structure = JSON.parse(item.dataset.create);
@@ -46,9 +47,10 @@
                                     })
                                     .then(function(body) {
                                         if (body.error == true) {
-                                            item.classList.add("failed")
+                                            alert(body.msg);
                                         } else {
-                                            item.classList.add("success")
+                                            e.target.closest('tr').style.color = '#ddd';
+							                e.target.disabled = true;
                                         }
                                     });
                             });
@@ -85,9 +87,10 @@
                         })
                         .then(function(body) {
                             if (body.error == true) {
-                                item.classList.add("failed")
+                                item.closest('tr').style.color = '#ff0000';
                             } else {
-                                item.classList.add("success")
+                                item.closest('tr').style.color = '#ddd';
+							    e.target.disabled = true;
                             }
                         });
                 });
@@ -225,11 +228,11 @@
                                     <?php if (isset($unmatched_group[0]['view_extras']['event_match']['id'])) : ?>
                                         Match: <?= $unmatched_group[0]['view_extras']['event_match']['name'] ?> (<?= $unmatched_group[0]['view_extras']['event_match']['date'] ?>)
                                 </td>
-                                <td><a href="#" class="create-matchups-for-event" data-eventid="<?= $unmatched_group[0]['view_extras']['event_match']['id'] ?>" data-eventlink="event<?= $i ?>"><button class="btn btn-primary">Create all below at matched event</button></a></td>
+                                <td><a href="#" class="create-matchups-for-event" data-eventid="<?= $unmatched_group[0]['view_extras']['event_match']['id'] ?>" data-eventlink="event<?= $i ?>"><button class="btn btn-primary">Auto create all below at matched event</button></a></td>
                             <?php else : ?>
                                 No match..
                                 </td>
-                                <td><a href="/cnadm/events?in_event_name=<?= $unmatched_group[0]['view_extras']['event_name_reduced'] ?? '' ?>&in_event_date=<?= $unmatched_group[0]['view_extras']['event_date_formatted'] ?>"><button class="btn btn-primary">Create</button></a> <a href="http://www.google.se/search?q=tapology <?= $unmatched_group[0]['view_extras']['event_name_reduced'] ?? '' ?>"><button class="btn btn-primary">Google</button></a></td>
+                                <td><a href="/cnadm/events?in_event_name=<?= $unmatched_group[0]['view_extras']['event_name_reduced'] ?? '' ?>&in_event_date=<?= $unmatched_group[0]['view_extras']['event_date_formatted'] ?>"><button class="btn btn-primary">Manually create</button></a> <a href="http://www.google.se/search?q=tapology <?= $unmatched_group[0]['view_extras']['event_name_reduced'] ?? '' ?>"><button class="btn btn-success">Google</button></a></td>
                             <?php endif ?>
 
                         <?php else : ?>
@@ -248,7 +251,7 @@
                                         <td><b><?= $bookies[$unmatched_item['bookie_id']] ?></b></td>
                                         <td>
                                             <?= $this->e($unmatched_item['matchup'], 'strtolower|ucwords') ?></td>
-                                        <td><a href="/cnadm/newmatchup?inteam1=<?= $unmatched_item['view_indata1'] ?>&inteam2=<?= $unmatched_item['view_indata2'] ?>&ineventid=<?= $unmatched_group[0]['view_extras']['event_match']['id'] ?? '' ?>"><button class="btn btn-primary">Add</button></a> <a href="http://www.google.se/search?q=tapology <?= $unmatched_item['matchup'] ?>"><button class="btn btn-primary">google</button></a>
+                                        <td><a href="/cnadm/newmatchup?inteam1=<?= $unmatched_item['view_indata1'] ?>&inteam2=<?= $unmatched_item['view_indata2'] ?>&ineventid=<?= $unmatched_group[0]['view_extras']['event_match']['id'] ?? '' ?>"><button class="btn btn-primary">Add</button></a> <a href="http://www.google.se/search?q=tapology <?= $unmatched_item['matchup'] ?>"><button class="btn btn-success">Google</button></a>
                                         </td>
                                     </tr>
                                 <?php endif ?>
@@ -259,11 +262,17 @@
                                 <td></td>
                                 <td>
                                     <?php if (isset($unmatched_group[0]['view_extras']['event_name_reduced'])) : ?>
-                                        <a href="#" class="create-event-with-matchups" data-eventlink="event<?= $i ?>"><button class="btn btn-primary">Create event and matchups</button></a>
+                                        <a href="#" class="create-event-with-matchups" data-eventlink="event<?= $i ?>"><button class="btn btn-primary">Auto create new event and matchups</button></a>
                                     <?php else : ?>
                                         &nbsp;
                                     <?php endif ?>
                                 </td>
+                            </tr>
+                            <tr>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
                             </tr>
                         <?php endforeach ?>
                 </tbody>

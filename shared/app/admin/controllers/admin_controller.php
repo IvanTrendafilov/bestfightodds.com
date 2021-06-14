@@ -338,6 +338,19 @@ class AdminController
         return $response;
     }
 
+    public function createMatchup(Request $request, Response $response)
+    {
+        $view_data = [];
+        $view_data['inteam1'] = $request->getQueryParams()['inteam1'] ?? '';
+        $view_data['inteam2'] = $request->getQueryParams()['inteam2'] ?? '';
+        $view_data['ineventid'] = $request->getQueryParams()['ineventid'] ?? '';
+
+        $view_data['events'] = EventHandler::getEvents(future_events_only: true);
+
+        $response->getBody()->write($this->plates->render('matchup_new', $view_data));
+        return $response;
+    }
+
     public function eventsOverview(Request $request, Response $response, array $args)
     {
         $view_data = ['events' => []];

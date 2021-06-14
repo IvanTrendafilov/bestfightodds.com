@@ -57,6 +57,7 @@ $app->group('', function (RouteCollectorProxy $group) {
   $group->get('/log/{log_name}', \AdminController::class . ':viewLog');
   $group->get('/unmatched_props', \AdminController::class . ':viewUnmatchedProps');
   $group->get('/other_logs', \AdminController::class . ':viewOtherLogs');
+  $group->get('/newmatchup', \AdminController::class . ':createMatchup');
   
 })->add(new AuthMiddleware());
 

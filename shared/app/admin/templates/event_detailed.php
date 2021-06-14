@@ -64,28 +64,24 @@
     <div class="card-body">
         <form name="addFightForm">
             <input type="hidden" id="event-id" value="<?= $events[0]['event_obj']->getID() ?>" />
+            <div class="row">
+                <div class="col-sm">
+                    <input class="form-control" id="team1" type="text">
+                </div>
+                <div class="col-sm-1">
+                    vs.
+                </div>
 
+                <div class="col-sm">
+                    <input class="form-control" id="team2" type="text">
+                </div>
 
+                <div class="col-sm-3">
+                    <button class="btn btn-primary" id="create-matchup-button">Add matchup</button>
+                </div>
+            </div>
 
         </form>
-
-
-        <div class="row">
-            <div class="col-2">
-                <input class="form-control" id="team1" type="text">
-            </div>
-            <div class="col-1">
-                vs.
-            </div>
-
-            <div class="col-2">
-                <input class="form-control" id="team2" type="text">
-            </div>
-
-            <div class="col-1">
-                <button class="btn btn-primary" id="create-matchup-button">Add matchup</button>
-            </div>
-        </div>
 
     </div>
 </div>
