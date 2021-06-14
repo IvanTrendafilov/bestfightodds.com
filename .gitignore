@@ -1,3 +1,4 @@
 /vendor/*
 /tools/*
 .php_cs.cache
+pbo/app/front/pages/oddspage.php
