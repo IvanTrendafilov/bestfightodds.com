@@ -767,9 +767,8 @@ class OddsDB
 
     public static function getFlaggedOddsForDeletion()
     {
-        //Get all flagged odds first. We select all flagged odds that have been flagged for more than 3 hours AND belongs to an event that is not starting in the next 4 hours.
-
-        //These values can be tuned with time (TODO: Maybe move to config file?):
+        /* Get all flagged odds first. We select all flagged odds that have been flagged for more than 3 hours AND belongs to an event that is not starting in the next 4 hours.
+         * These values can be tuned. Potentially to be moved to config file if needed */
         $gametime_threshold = 4; //If the matchup is within this value (hours) we will not remove
         $flagged_time = 3; //How many hours the line must be flagged before deletion
 

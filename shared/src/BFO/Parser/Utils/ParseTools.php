@@ -54,7 +54,7 @@ class ParseTools
             CURLOPT_FOLLOWLOCATION => true
         ));
 
-        //TODO: Hardcoded stuff. Ugly and should be moved out
+        //TODO: Hardcoded URL specific
         if (strpos($url, 'gamingsystem.') !== false) {
             curl_setopt($curl_obj, CURLOPT_SSLVERSION, 6); //TLS 1.2
         } elseif (substr($url, 0, strlen('https://api.pinnacle.com')) === 'https://api.pinnacle.com') {
@@ -168,7 +168,6 @@ class ParseTools
         //Replaces all words surrounded by [, ( or " (e.g. nicknames):
         $new_name = preg_replace('/[\\[("\'“Â][a-zA-Z0-9\\/\\?\'\\.\\,\\s-]*[\\])"\'”Â]/', ' ', $new_name);
 
-        //TODO: Minor Bookmaker/BetDSI custom fix - to be removed or revamped
         $new_name = str_ireplace('(3 RD', '', $new_name);
         $new_name = str_ireplace('(3RND', '', $new_name);
         $new_name = str_ireplace('S)', '', $new_name);

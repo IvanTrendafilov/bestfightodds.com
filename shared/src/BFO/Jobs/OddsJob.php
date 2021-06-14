@@ -23,6 +23,7 @@ use BFO\General\OddsHandler;
 use BFO\General\EventHandler;
 use BFO\General\TwitterHandler;
 use BFO\General\BookieHandler;
+use BFO\General\ScheduleHandler;
 use BFO\Parser\Utils\ParseRunLogger;
 
 class OddsJob
@@ -36,10 +37,11 @@ class OddsJob
 
     public function run()
     {
-        /*if (PARSE_CREATEMATCHUPS == true) {
-            //Check if there are changes proposed by scheduler AND logged as unmatched. These should be automatically created
-            $matches = ScheduleHandler::getAllUnmatchedAndScheduled();
-        }*/
+        if (PARSE_CREATEMATCHUPS == true) {
+            //Check if there are create changes proposed by scheduler. These should be automatically created
+            $created = ScheduleHandler::acceptAllCreateActions();
+            $this->logger->info("Auto creating matchups found by scheduler: " . $created);
+        }
 
         //Clean and check alerts
         if (ALERTER_ENABLED == true) {
@@ -65,14 +67,12 @@ class OddsJob
         $this->logger->info("Old correlations cleaned: " . $success);
 
         //Clear old flagged odds that belong to historic matchups
-        $this->logger->info("Clearing old flags for historic matchups");
         $result = OddsHandler::removeAllOldFlagged();
-        $this->logger->info($result . ' cleared');
+        $this->logger->info("Clearing old flags for historic matchups: " . $result);
 
         //Delete odds that have been flagged for over 24 hours
-        $this->logger->info("Deleting odds that have been flagged for over 3 hours");
         $result = OddsHandler::deleteFlaggedOdds();
-        $this->logger->info('Removed ' . $result . ' odds');
+        $this->logger->info("Deleting odds that have been flagged for over 3 hours: " . $result . " removed");
 
         //Move matchups to generic dates if suggested by metadata (gametime)
         if (PARSE_MOVEMATCHUPS) {

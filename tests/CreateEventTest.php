@@ -88,6 +88,8 @@ final class CreateEventTest extends TestCase
             $obj
         );
 
+        $this->expectException(Exception::class);
+
         $obj = EventHandler::addNewEvent(new Event(0, '2041-99-38', $event_name, true));
         $this->assertEquals(
             false,

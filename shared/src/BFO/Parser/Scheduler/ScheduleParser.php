@@ -11,7 +11,8 @@ use BFO\DataTypes\Event;
  * Takes a parsed schedule (collection of events with matchups) and checks against the existing
  * events and matchups stored in the database. Manual actions are then created and stored in the
  * database for any suggested actions (delete, move, create, etc). Note that no action is taken
- * automatically by the schedule parser
+ * automatically by the schedule parser. OddsJob can be configured with the PARSE_CREATEMATCHUPS
+ * parameter to automatically process Create actions created here
  */
 class ScheduleParser
 {

@@ -19,11 +19,9 @@ define('MAIL_SMTP_HOST', 'email-smtp.us-east-1.amazonaws.com'); //SMTP Hostname 
 define('MAIL_SMTP_PORT', '587'); //SMTP Port for external e-mail service
 define('MAIL_SMTP_USERNAME', ''); //Username for external e-mail service
 define('MAIL_SMTP_PASSWORD', ''); //Password for external e-mail service
-define('MAIL_SENDGRID_KEY', ''); //Sendgrid API key
 
 /* Alerts */
 define('ALERTER_ENABLED', false);
-define('ALERTER_ADMIN_ALERT','cnordvaller@gmail.com');  //E-mail to alert in case of internal alerts (arbitrage etc.)
 define('ALERTER_DEV_MODE', true); //Dev mode on or off, if true no e-mails will be sent
 define('ALERTER_MAIL_FROM', 'Best Fight Odds <no-reply@bestfightodds.com>');
 define('ALERTER_MAIL_SENDER_MAIL', 'no-reply@bestfightodds.com');

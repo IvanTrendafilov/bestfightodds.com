@@ -97,23 +97,28 @@ class EventHandler
         return EventDB::addCreateAudit($matchup_id, $source);
     }
 
-    public static function addNewEvent(Event $event)
+    public static function addNewEvent(Event $event): ?Event
     {
         if ($event->getName() == '' || $event->getDate() == '') {
-            return false;
+            return null;
+        }
+
+        //Check that event doesn't already exists
+        if (EventHandler::getEvents(event_name: $event->getName(), event_date: $event->getDate())) {
+            return null;
         }
 
         //Validate date
         $dt = \DateTime::createFromFormat("Y-m-d", $event->getDate());
         if ($dt === false || array_sum($dt::getLastErrors()) > 0) {
-            return false;
+            return null;
         }
 
         $id = EventDB::addNewEvent($event);
         if ($id != false && $id != null) {
             return EventHandler::getEvents(event_id: $id)[0] ?? null;
         }
-        return false;
+        return null;
     }
 
     public static function removeMatchup(int $matchup_id): bool

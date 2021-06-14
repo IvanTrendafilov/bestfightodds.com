@@ -130,7 +130,7 @@ class EventDB
                     $fight_obj->setMetadata('min_gametime', $row['min_gametime']);
                 }
 
-                if (isset($row['create_source'])) { //0 = Unspecified, 1 = From Sportsbook, 2 = Manual
+                if (isset($row['create_source'])) { //0 = Unspecified, 1 = From Sportsbook, 2 = Manual/Scheduler
                     $fight_obj->setCreateSource((int) $row['create_source']);
                 }
                 $matchups[] = $fight_obj;

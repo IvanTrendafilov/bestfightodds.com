@@ -418,6 +418,9 @@ class OddsProcessor
         return $props;
     }
 
+    /**
+     * If a matchup cannot be matched and parsed properly this function will call EventHandler to log a record of it to the database
+     */
     private function logUnmatchedMatchups(array $matched_matchups): int
     {
         $counter = 0;

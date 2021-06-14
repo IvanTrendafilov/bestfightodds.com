@@ -1,8 +1,8 @@
 <?php $this->layout('base/layout', ['title' => 'Admin', 'current_page' => $this->name->getName()]) ?>
 <div class="card">
     <div class="card-header">
-        <h5 class="card-title">Basic Table</h5>
-        <h6 class="card-subtitle text-muted">Using the most basic table markup, here’s how .table-based tables look in Bootstrap.
+        <h5 class="card-title">Created alerts</h5>
+        <h6 class="card-subtitle text-muted">This table shows all alerts created by end users
         </h6>
     </div>
     <table class="table table-sm table-hover">

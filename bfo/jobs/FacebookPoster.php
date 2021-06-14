@@ -1,5 +1,14 @@
 <?php
 
+/**
+ * This job is used to automatically post upcoming odds to the Facebook page
+ * specified in the configuration file for a site. There are two types of posts
+ * that are automatically created through this script
+ * 
+ * - Heads up post when new odds is posted
+ * - 24 hours prior to the event, a summary of the odds is posted
+ */
+
 require_once __DIR__ . "/../bootstrap.php";
 
 use BFO\General\FacebookHandler;

@@ -22,15 +22,15 @@ function index(el) {
     if (!el) return -1;
     var i = 0;
     do {
-      i++;
+        i++;
     } while (el = el.previousElementSibling);
     return i;
-  }
+}
 
 //ClearChart - JQUERY REMOVED
 chartCC = function () {
     el = document.getElementById('chart-area');
-    while(el.firstChild)
+    while (el.firstChild)
         el.removeChild(el.firstChild);
     document.getElementById('chart-link').style.display = 'none';
     setHeight(document.getElementById('chart-window'), 228);
@@ -49,7 +49,7 @@ chartSC = function (content, xcord, ycord) {
         chartlink.style.display = '';
         chartlink.parentNode.setAttribute('href', 'https://www.bestfightodds.com' + url[1]);
         setHeight(chartwindow, 260);
-        
+
         //Fix for Bet365 to discourage US players:
         if (bookie[1] == 'Bet365') {
             setHeight(chartwindow, 300);
@@ -81,10 +81,10 @@ chartSC = function (content, xcord, ycord) {
             yorigin = 'bottom';
         }
 
-        chartwindow.style.left = setxcord  + 'px';
-        chartwindow.style.top = setycord  + 'px';
+        chartwindow.style.left = setxcord + 'px';
+        chartwindow.style.top = setycord + 'px';
         chartwindow.style.transformOrigin = yorigin + ' ' + xorigin;
-       
+
     }
     //Flush CSS cache. Not sure if this actually has any effect..
     getComputedStyle(chartwindow).display;
@@ -185,7 +185,7 @@ addToParlay = function (obj) {
     if (parlay.length === 0) {
         document.getElementById('parlay-area').innerHTML = 'Click on a line to add it to your parlay';
         document.getElementById('parlay-header').innerHTML = 'Parlay';
-        return false; 
+        return false;
     }
 
     tmpText = '';
@@ -838,90 +838,20 @@ initPage = function () {
         });
     });
 
-    //Add prop row togglers - Moved to event delegation for table
-
-    /*document.querySelectorAll('.prop-cell-exp').forEach(function (item) {
-        item.addEventListener("click", function (event) {
-        matchup_id = $(this).attr('data-mu');
-        if (typeof $(this).data('toggled') == 'undefined') {
-            $(this).data('toggled', false);
-        }
-        $(this).data('toggled', !$(this).data('toggled'));
-        $("[data-mu=" + matchup_id + "]").data('toggled', $(this).data('toggled'));
-        if ($(this).data('toggled')) {
-            if (navigator.appName.indexOf("Microsoft") > -1 && navigator.appVersion.indexOf("MSIE 10.0") == -1) {
-                $(this).closest('tr:not(.pr)').next('tr:not(.pr)').addBack('tr').nextUntil('tr:not(.pr)').css('display', 'block');
-                $('#mu-' + matchup_id).next('tr:not(.pr)').nextUntil('tr:not(.pr)').css('display', 'block');
-            } else {
-                $(this).closest('tr:not(.pr)').next('tr:not(.pr)').addBack('tr').nextUntil('tr:not(.pr)').css('display', 'table-row');
-                $('#mu-' + matchup_id).next('tr:not(.pr)').nextUntil('tr:not(.pr)').css('display', 'table-row');
-            }
-            $("[data-mu='" + matchup_id + "']").find(".exp-ard").addClass("exp-aru").removeClass("exp-ard");
-            refreshOpenProps[matchup_id] = true;
-        } else {
-            $(this).closest('tr:not(.pr)').next('tr').addBack('tr').nextUntil('tr:not(.pr)').css('display', 'none');
-            $('#mu-' + matchup_id).next('tr:not(.pr)').nextUntil(':not(tr.pr)').css('display', 'none');
-            $("[data-mu='" + matchup_id + "']").find(".exp-aru").addClass("exp-ard").removeClass("exp-aru");
-            refreshOpenProps[matchup_id] = false;
-        }
-        return false;
-
-    })
-
-    // document.querySelectorAll('.prop-cell-exp').forEach(function (item) {
-    //     item.addEventListener("click", function (event) {
-    //     matchup_id = $(this).attr('data-mu');
-    //     if (typeof $(this).data('toggled') == 'undefined') {
-    //         $(this).data('toggled', false);
-    //     }
-    //     $(this).data('toggled', !$(this).data('toggled'));
-    //     $("[data-mu=" + matchup_id + "]").data('toggled', $(this).data('toggled'));
-    //     if ($(this).data('toggled')) {
-    //         if (navigator.appName.indexOf("Microsoft") > -1 && navigator.appVersion.indexOf("MSIE 10.0") == -1) {
-    //             $(this).closest('tr').next('tr.odd').addBack('tr.odd').nextUntil('tr.even').css('display', 'block');
-    //             $('#mu-' + matchup_id).nextUntil('tr.even').css('display', 'block');
-    //         } else {
-    //             $(this).closest('tr').next('tr.odd').addBack('tr.odd').nextUntil('tr.even').css('display', 'table-row');
-    //             $('#mu-' + matchup_id).nextUntil('tr.even').css('display', 'table-row');
-    //         }
-    //         $("[data-mu='" + matchup_id + "']").find(".exp-ard").addClass("exp-aru").removeClass("exp-ard");
-    //         refreshOpenProps[matchup_id] = true;
-    //     } else {
-    //         $(this).closest('tr').next('tr.odd').addBack('tr.odd').nextUntil('tr.even').css('display', 'none');
-    //         $('#mu-' + matchup_id).nextUntil('tr.even').css('display', 'none');
-    //         $("[data-mu='" + matchup_id + "']").find(".exp-aru").addClass("exp-ard").removeClass("exp-aru");
-    //         refreshOpenProps[matchup_id] = false;
-    //     }
-    //     return false;
-    // })
-
-});*/
-
-    /*document.querySelectorAll('tr.eventprop th').forEach(function (item) {
-        console.log('here' + item + ' and ');
-        //event.preventDefault();
-        var event_id = item.getAttribute('data-mu');
-        $('.prop-cell').find("[data-mu=" + event_id + "]").trigger('click'); //Jquery, needs conversion
-    });*/
-
-    $('tr.eventprop th').find('a').on('click', function(event) {
+    $('tr.eventprop th').find('a').on('click', function (event) {
         event.preventDefault();
         event_id = $(this).attr('data-mu');
         $('.prop-cell-exp[data-mu=\"e' + event_id + '\"]').trigger('click');
-    }); 
-
+    });
 
     //Sync scrollbars
-    /*$('div.table-scroller').bind('mousedown touchstart', function () {
-        scrollCaptain = $(this);
-    });*/
     document.querySelectorAll('.table-scroller').forEach(function (item) {
         item.addEventListener("mousedown", function (event) {
             scrollCaptain = this;
-        }, {passive: true});
+        }, { passive: true });
         item.addEventListener("touchstart", function (event) {
             scrollCaptain = this;
-        }, {passive: true});
+        }, { passive: true });
     });
 
     $('div.table-scroller').on('scroll', function () {
@@ -1062,8 +992,6 @@ initPage = function () {
         }
     });
 
-
-
     //Bind graph clicks on table
     //Event delegation changes:
     document.querySelectorAll('.odds-table').forEach(function (item) {
@@ -1074,22 +1002,22 @@ initPage = function () {
             while (td !== this && !td.matches("td") && !td.matches("th")) {
                 td = td.parentNode;
             }
-            
+
             if (td.matches('td.but-sg')) //Show graph for regular odds
             {
                 if (parlayMode) {
                     return addToParlay(td);
                 } else {
                     var opts = JSON.parse(td.getAttribute('data-li'));
-                    var title = td.parentNode.querySelector("th").querySelector("a").textContent + " <span style=\"font-weight: normal;\"> &#150; <a href=\"" + 
-                    td.closest('table').querySelectorAll('th')[index(td) - 1].querySelector("a").getAttribute("href") + "\" target=\"_blank\">" + 
-                    td.closest('table').querySelectorAll('th')[index(td) - 1].querySelector("a").textContent 
-                    + "</a></span>";
-    
+                    var title = td.parentNode.querySelector("th").querySelector("a").textContent + " <span style=\"font-weight: normal;\"> &#150; <a href=\"" +
+                        td.closest('table').querySelectorAll('th')[index(td) - 1].querySelector("a").getAttribute("href") + "\" target=\"_blank\">" +
+                        td.closest('table').querySelectorAll('th')[index(td) - 1].querySelector("a").textContent
+                        + "</a></span>";
+
                     chartCC();
                     createMChart(opts[0], opts[1], opts[2]);
                     chartSC(title, e.clientX, e.clientY);
-    
+
                     return false;
                 }
             }
@@ -1099,9 +1027,9 @@ initPage = function () {
                     return addToParlay(td);
                 } else {
                     var opts = JSON.parse(td.getAttribute('data-li'));
-                    var title = td.parentNode.querySelector("th").textContent + " <span style=\"font-weight: normal;\"> &#150; <a href=\"" + 
-                        td.closest('table').querySelectorAll('th')[index(td) - 1].querySelector("a").getAttribute("href") + "\" target=\"_blank\">" + 
-                        td.closest('table').querySelectorAll('th')[index(td) - 1].querySelector("a").textContent 
+                    var title = td.parentNode.querySelector("th").textContent + " <span style=\"font-weight: normal;\"> &#150; <a href=\"" +
+                        td.closest('table').querySelectorAll('th')[index(td) - 1].querySelector("a").getAttribute("href") + "\" target=\"_blank\">" +
+                        td.closest('table').querySelectorAll('th')[index(td) - 1].querySelector("a").textContent
                         + "</a></span>";
                     chartCC();
                     createPChart(opts[0], opts[2], opts[1], opts[3], opts[4]);
@@ -1116,9 +1044,9 @@ initPage = function () {
                 } else {
                     var opts = JSON.parse(td.getAttribute('data-li'));
                     //var title = $(td).parent().parent().find("th").text() + " <span style=\"font-weight: normal;\"> &#150; <a href=\"" + $(td).closest('table').find('th').eq($(td).parent().index()).find("a").attr("href") + "\" target=\"_blank\">" + $(td).closest('table').find('th').eq($(td).parent().index()).find("a").text() + "</a></span>";
-                    var title = td.parentNode.querySelector("th").textContent + " <span style=\"font-weight: normal;\"> &#150; <a href=\"" + 
-                        td.closest('table').querySelectorAll('th')[index(td) - 1].querySelector("a").getAttribute("href") + "\" target=\"_blank\">" + 
-                        td.closest('table').querySelectorAll('th')[index(td) - 1].querySelector("a").textContent 
+                    var title = td.parentNode.querySelector("th").textContent + " <span style=\"font-weight: normal;\"> &#150; <a href=\"" +
+                        td.closest('table').querySelectorAll('th')[index(td) - 1].querySelector("a").getAttribute("href") + "\" target=\"_blank\">" +
+                        td.closest('table').querySelectorAll('th')[index(td) - 1].querySelector("a").textContent
                         + "</a></span>";
                     chartCC();
                     createEPChart(opts[0], opts[1], opts[2], opts[3]);
@@ -1126,8 +1054,7 @@ initPage = function () {
                     return false;
                 }
             }
-            else if (td.matches('td.but-si'))
-            {
+            else if (td.matches('td.but-si')) {
                 if (parlayMode) {
                     return false;
                 } else {
@@ -1139,8 +1066,7 @@ initPage = function () {
                     return false;
                 }
             }
-            else if (td.matches('td.but-sip'))
-            {
+            else if (td.matches('td.but-sip')) {
                 if (parlayMode) {
                     return false;
                 } else {
@@ -1152,8 +1078,7 @@ initPage = function () {
                     return false;
                 }
             }
-            else if (td.matches('td.but-siep'))
-            {
+            else if (td.matches('td.but-siep')) {
                 if (parlayMode) {
                     return false;
                 } else {
@@ -1165,8 +1090,7 @@ initPage = function () {
                     return false;
                 }
             }
-            else if (td.matches('td.but-al'))
-            {
+            else if (td.matches('td.but-al')) {
                 var context = {};
                 context.opts = $.parseJSON($(td).attr('data-li'));
                 context.bestodds = $(td).closest("tr").find(".bestbet").first().text();
@@ -1178,8 +1102,7 @@ initPage = function () {
                     return false;
                 }
             }
-            else if (td.matches('td.prop-cell-exp'))
-            {
+            else if (td.matches('td.prop-cell-exp')) {
                 matchup_id = $(td).attr('data-mu');
                 if (typeof $(td).data('toggled') == 'undefined') {
                     $(td).data('toggled', false);
@@ -1205,143 +1128,8 @@ initPage = function () {
                 return false;
             }
         });
-        
+
     });
-
-    //Add regular matchup listeners
-    /*document.querySelectorAll('.but-sg').forEach(function (item) {
-        item.addEventListener("click", function (event) {
-            event.stopPropagation();
-            if (parlayMode) {
-                return addToParlay(this);
-            } else {
-                var opts = JSON.parse(this.getAttribute('data-li'));
-                var title = this.parentNode.querySelector("th").querySelector("a").textContent + " <span style=\"font-weight: normal;\"> &#150; <a href=\"" + 
-                this.closest('table').querySelectorAll('th')[index(this) - 1].querySelector("a").getAttribute("href") + "\" target=\"_blank\">" + 
-                this.closest('table').querySelectorAll('th')[index(this) - 1].querySelector("a").textContent 
-                + "</a></span>";
-
-                chartCC();
-                createMChart(opts[0], opts[1], opts[2]);
-                chartSC(title, event.clientX, event.clientY);
-
-                return false;
-            }
-        })
-    });
-
-    //Add prop listeners
-    document.querySelectorAll('.but-sgp').forEach(function (item) {
-        item.addEventListener("click", function () {
-            event.stopPropagation();
-            if (parlayMode) {
-                return addToParlay(this);
-            } else {
-                var opts = JSON.parse(this.getAttribute('data-li'));
-                var title = this.parentNode.querySelector("th").textContent + " <span style=\"font-weight: normal;\"> &#150; <a href=\"" + 
-                    this.closest('table').querySelectorAll('th')[index(this) - 1].querySelector("a").getAttribute("href") + "\" target=\"_blank\">" + 
-                    this.closest('table').querySelectorAll('th')[index(this) - 1].querySelector("a").textContent 
-                    + "</a></span>";
-                chartCC();
-                createPChart(opts[0], opts[2], opts[1], opts[3], opts[4]);
-                chartSC(title, event.clientX, event.clientY);
-                return false;
-            }
-        })
-    });
-    //Add event prop listeners
-    document.querySelectorAll('.but-sgep').forEach(function (item) {
-        item.addEventListener("click", function () {
-            event.stopPropagation();
-            if (parlayMode) {
-                return addToParlay(this);
-            } else {
-                var opts = JSON.parse(this.getAttribute('data-li'));
-                //var title = $(this).parent().parent().find("th").text() + " <span style=\"font-weight: normal;\"> &#150; <a href=\"" + $(this).closest('table').find('th').eq($(this).parent().index()).find("a").attr("href") + "\" target=\"_blank\">" + $(this).closest('table').find('th').eq($(this).parent().index()).find("a").text() + "</a></span>";
-                var title = this.parentNode.querySelector("th").textContent + " <span style=\"font-weight: normal;\"> &#150; <a href=\"" + 
-                    this.closest('table').querySelectorAll('th')[index(this) - 1].querySelector("a").getAttribute("href") + "\" target=\"_blank\">" + 
-                    this.closest('table').querySelectorAll('th')[index(this) - 1].querySelector("a").textContent 
-                    + "</a></span>";
-                chartCC();
-                createEPChart(opts[0], opts[1], opts[2], opts[3]);
-                chartSC(title, event.clientX, event.clientY);
-                return false;
-            }
-        })
-    });
-
-
-    //Add index graph button listeners
-    document.querySelectorAll('.but-si').forEach(function (item) {
-        item.addEventListener("click", function () {
-            event.stopPropagation();
-            if (parlayMode) {
-                return false;
-            } else {
-                var opts = JSON.parse(this.dataset.li);
-                var title = this.parentNode.querySelector('th').innerText + " <span style=\"font-weight: normal;\"> &#150; Mean odds";
-                chartCC();
-                createMIChart(opts[1], opts[0]);
-                chartSC(title, event.clientX, event.clientY);
-                return false;
-            }
-        })
-    });
-    //Add prop index graph button listeners
-    document.querySelectorAll('.but-sip').forEach(function (item) {
-        item.addEventListener("click", function () {
-            event.stopPropagation();
-            if (parlayMode) {
-                return false;
-            } else {
-                var opts = JSON.parse(this.dataset.li);
-                var title = this.parentNode.querySelector('th').innerText + " <span style=\"font-weight: normal;\"> &#150; Mean odds";
-                chartCC();
-                createPIChart(opts[1], opts[0], opts[2], opts[3]);
-                chartSC(title, event.clientX, event.clientY);
-                return false;
-            }
-        })
-    });
-
-    //Add event prop index graph button listeners
-    document.querySelectorAll('.but-siep').forEach(function (item) {
-        item.addEventListener("click", function () {
-            event.stopPropagation();
-            if (parlayMode) {
-                return false;
-            } else {
-                var opts = JSON.parse(this.getAttribute('data-li'));
-                var title = this.parentNode.querySelector('th').innerText + " <span style=\"font-weight: normal;\"> &#150; Mean odds";
-                chartCC();
-                createEPIChart(opts[0], opts[1], opts[2]);
-                chartSC(title, event.clientX, event.clientY);
-                return false;
-            }
-        })
-    });
-
-    //Add alert button form show listeners
-    document.querySelectorAll('.but-al').forEach(function (item) {
-        item.addEventListener("click", function () {
-            event.stopPropagation();
-            var context = {};
-            context.opts = $.parseJSON($(this).attr('data-li'));
-            context.bestodds = $(this).closest("tr").find(".bestbet").first().text();
-            context.teamtitle = $(this).closest("tr").find("th").text();
-            if (parlayMode) {
-                return addToParlay(this);
-            } else {
-                alertSW(context, event.clientX, event.clientY);
-                return false;
-            }
-        })
-    });*/
-};
-
-
-//TODO: Why is this empty??
-addAlert = function (m, tn, b, mail, alert_odds, alert_oddstype) {
 };
 
 refreshPage = function () {
@@ -1355,7 +1143,7 @@ refreshPage = function () {
     });
 };
 
-toggleRefresh = function (autoRefresh) { 
+toggleRefresh = function (autoRefresh) {
     if (autoRefresh === true) {
         refreshId = setInterval(function () {
             refreshPage();

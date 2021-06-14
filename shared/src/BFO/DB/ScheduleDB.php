@@ -15,7 +15,7 @@ class ScheduleDB
         return DBTools::doParamQuery($query, $params);
     }
 
-    public static function getAllManualActions($type = -1)
+    public static function getAllManualActions(int $type = -1): ?array
     {
         $params = [];
         $extra_where = '';
@@ -29,12 +29,12 @@ class ScheduleDB
 					' . $extra_where . ' ';
         $result = DBTools::doParamQuery($query, $params);
 
-        $return = array();
+        $return = [];
         while ($row = mysqli_fetch_array($result)) {
             $return[] = $row;
         }
         if (sizeof($return) == 0) {
-            return false;
+            return null;
         }
         return $return;
     }

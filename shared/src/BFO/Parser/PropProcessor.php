@@ -134,7 +134,7 @@ class PropProcessor
                 $this->logger->debug('--Both team fields match template. Picking shortest one as it is probably not the negative one: ' .  $prop->getTeamName(1) . ' compared to ' .  $prop->getTeamName(2));
                 //TEMPORARY HACK FOR PROPTYPE 65. REMOVE WHEN NO ODDS ARE LIVE FOR THIS TYPE
                 if ($template->getPropTypeID() == 65) {
-                    $this->logger->warning('---Proptype 65, picking main prop 1 anyway. TODO: Remove this when no odds are live!');
+                    $this->logger->debug('---Proptype 65, picking main prop 1 anyway');
                     $prop->setMainProp(1);
                     $propvalue_matches = $propvalue_matches1;
                 } elseif (strlen($prop->getTeamName(1)) <= strlen($prop->getTeamName(2))) {

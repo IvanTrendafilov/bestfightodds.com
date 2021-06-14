@@ -111,22 +111,10 @@ class APIController
                     }
 
                     foreach ($odds as $odds_key => $odds_obj) {
-                        //TODO: Temporary measure to prevent bot data scraping
-                        if ($_SERVER['HTTP_USER_AGENT'] == 'python-requests/2.24.0') {
-                            $scale = pow(10, 3);
-                            $dummy = mt_rand(1 * $scale, 3 * $scale) / $scale;
-
-                            $return_data['data'][] = [
-                                'x' => (new DateTime($odds_obj->getDate()))->getTimestamp() * 1000,
-                                'y' => $dummy
-                            ];
-                        //error_log('Giving bogus data');
-                        } else {
-                            $return_data['data'][] = [
-                                'x' => (new DateTime($odds_obj->getDate()))->getTimestamp() * 1000,
-                                'y' => $odds_obj->moneylineToDecimal($odds_obj->getOdds($args['p']), true)
-                            ];
-                        }
+                        $return_data['data'][] = [
+                            'x' => (new DateTime($odds_obj->getDate()))->getTimestamp() * 1000,
+                            'y' => $odds_obj->moneylineToDecimal($odds_obj->getOdds($args['p']), true)
+                        ];
 
                         if ($odds_key == 0) {
                             $return_data['data'][0]['dataLabels'] = ['x' => 9];
