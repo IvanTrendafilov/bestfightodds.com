@@ -40,12 +40,6 @@
 				</a>
 			</li>
 
-			<li class="sidebar-item <?= $current_page == 'renamings' ? 'active' : '' ?>">
-				<a class="sidebar-link" href="/cnadm/renamings">
-				<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-check-circle align-middle"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path><polyline points="22 4 12 14.01 9 11.01"></polyline></svg> <span class="align-middle">Event renamings</span>
-				</a>
-			</li>
-
 			<li class="sidebar-item <?= $current_page == 'proptemplates' ? 'active' : '' ?>">
 				<a class="sidebar-link" href="/cnadm/proptemplates">
 					<i class="align-middle" data-feather="book"></i> <span class="align-middle">Manage prop templates</span>

@@ -55,7 +55,6 @@ $app->group('', function (RouteCollectorProxy $group) {
   $group->get('/flagged', \AdminController::class . ':viewFlaggedOdds');
   $group->get('/parser_status', \AdminController::class . ':viewParserStatus');
   $group->get('/log/{log_name}', \AdminController::class . ':viewLog');
-  $group->get('/renamings', \AdminController::class . ':checkRenamings');
   $group->get('/unmatched_props', \AdminController::class . ':viewUnmatchedProps');
   $group->get('/other_logs', \AdminController::class . ':viewOtherLogs');
   
