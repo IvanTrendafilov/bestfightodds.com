@@ -91,7 +91,8 @@ class WikiScheduleParser
                     }
                 } else {
                     $error_once = true;
-                    echo 'Failed to retrieve announced matchup page for ' . $upcoming_event['event_name'];
+                    echo 'Failed to retrieve announced matchup page for ' . $upcoming_event['event_name'] ."
+";
                 }
             }
 

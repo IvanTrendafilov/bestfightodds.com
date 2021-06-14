@@ -124,9 +124,9 @@
     <div class="card-header d-flex justify-content-between">
         <h5 class="card-title align-self-center">Unmatched matchups</h5>
         <div class="btn-group" role="group" aria-label="Basic example">
-  <button type="button" class="btn btn-secondary" onclick="document.getElementById('unmatched-group-card').style.display = 'none'; document.getElementById('unmatched-normal-card').style.display = 'block';"  disabled=true>Single view</button>
-  <button type="button" class="btn btn-secondary" onclick="document.getElementById('unmatched-normal-card').style.display = 'none'; document.getElementById('unmatched-group-card').style.display = 'block';">Grouped view</button>
-</div>
+            <button type="button" class="btn btn-secondary" onclick="document.getElementById('unmatched-group-card').style.display = 'none'; document.getElementById('unmatched-normal-card').style.display = 'block';" disabled=true>Single view</button>
+            <button type="button" class="btn btn-secondary" onclick="document.getElementById('unmatched-normal-card').style.display = 'none'; document.getElementById('unmatched-group-card').style.display = 'block';">Grouped view</button>
+        </div>
     </div>
 
     <?php if (count($unmatched_matchup_groups) > 0) : ?>
@@ -197,78 +197,78 @@
     <div class="card-header d-flex justify-content-between">
         <h5 class="card-title align-self-center">Unmatched matchups</h5>
         <div class="btn-group" role="group" aria-label="Basic example">
-  <button type="button" class="btn btn-secondary" onclick="document.getElementById('unmatched-group-card').style.display = 'none'; document.getElementById('unmatched-normal-card').style.display = 'block';"  >Single view</button>
-  <button type="button" class="btn btn-secondary" onclick="document.getElementById('unmatched-normal-card').style.display = 'none'; document.getElementById('unmatched-group-card').style.display = 'block';" disabled=true>Grouped view</button>
-</div>
+            <button type="button" class="btn btn-secondary" onclick="document.getElementById('unmatched-group-card').style.display = 'none'; document.getElementById('unmatched-normal-card').style.display = 'block';">Single view</button>
+            <button type="button" class="btn btn-secondary" onclick="document.getElementById('unmatched-normal-card').style.display = 'none'; document.getElementById('unmatched-group-card').style.display = 'block';" disabled=true>Grouped view</button>
+        </div>
 
     </div>
     <?php if (count($unmatched_groups) > 0) : ?>
-    <div class="table-responsive p-2">
-        <table class="table table-sm table-hover">
-            <thead>
-                <tr>
-                    <th>Last seen</th>
-                    <th>Bookie</th>
-                    <th>Matchup</th>
-                    <th>Actions</th>
-                </tr>
-            </thead>
+        <div class="table-responsive p-2">
+            <table class="table table-sm table-hover">
+                <thead>
+                    <tr>
+                        <th>Last seen</th>
+                        <th>Bookie</th>
+                        <th>Matchup</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
 
-            <tbody>
+                <tbody>
 
-                <?php foreach ($unmatched_groups as $unmatched_group) : ?>
-                    <?php if (isset($unmatched_group[0]['view_extras'])) : ?>
-                        <tr class="event event-group" id="event<?= isset($i) ? ++$i : $i = 1 ?>" data-create="<?= $this->e('{"name": "' . ($unmatched_group[0]['view_extras']['event_name_reduced'] ?? '') . '", "date": "' . $unmatched_group[0]['view_extras']['event_date_formatted'] . '"}') ?>">
-                            <td></td>
-                            <td></td>
-                            <td data-date=""><b><?= $unmatched_group[0]['metadata']['event_name'] ?? '' ?> / <?= $unmatched_group[0]['view_extras']['event_name_reduced'] ?? '' ?></b> (<?= $unmatched_group[0]['view_extras']['event_date_formatted'] ?>)
-                                <?php if (isset($unmatched_group[0]['view_extras']['event_match']['id'])) : ?>
-                                    Match: <?= $unmatched_group[0]['view_extras']['event_match']['name'] ?> (<?= $unmatched_group[0]['view_extras']['event_match']['date'] ?>)
-                            </td>
-                            <td><a href="#" class="create-matchups-for-event" data-eventid="<?= $unmatched_group[0]['view_extras']['event_match']['id'] ?>" data-eventlink="event<?= $i ?>"><button class="btn btn-primary">Create all below at matched event</button></a></td>
-                        <?php else : ?>
-                            No match..
-                            </td>
-                            <td><a href="/cnadm/events?in_event_name=<?= $unmatched_group[0]['view_extras']['event_name_reduced'] ?? '' ?>&in_event_date=<?= $unmatched_group[0]['view_extras']['event_date_formatted'] ?>"><button class="btn btn-primary">Create</button></a> <a href="http://www.google.se/search?q=tapology <?= $unmatched_group[0]['view_extras']['event_name_reduced'] ?? '' ?>"><button class="btn btn-primary">Google</button></a></td>
-                        <?php endif ?>
-
-                    <?php else : ?>
-                        <tr class="event event-group" id="event<?= isset($i) ? ++$i : $i = 1 ?>">
-                            <td></td>
-                            <td></td>
-                            <td data-date=""></td>
-                            <td></td>
-                        <?php endif ?>
-                        </tr>
-
-                        <?php foreach ($unmatched_group as $unmatched_item) : ?>
-                            <?php if ($unmatched_item['type'] == 0) : ?>
-                                <tr class="matchup-row" data-create="<?= $this->e('{"inteam1": "' . $unmatched_item['view_indata1'] . '", "inteam2": "' . $unmatched_item['view_indata2'] . '"}') ?>" data-eventlink="event<?= $i ?>">
-                                    <td><?= date("Y-m-d H:i:s", strtotime($unmatched_item['log_date'])) ?></td>
-                                    <td><b><?= $bookies[$unmatched_item['bookie_id']] ?></b></td>
-                                    <td>
-                                        <?= $this->e($unmatched_item['matchup'], 'strtolower|ucwords') ?></td>
-                                    <td><a href="/cnadm/newmatchup?inteam1=<?= $unmatched_item['view_indata1'] ?>&inteam2=<?= $unmatched_item['view_indata2'] ?>&ineventid=<?= $unmatched_group[0]['view_extras']['event_match']['id'] ?? '' ?>"><button class="btn btn-primary">Add</button></a> <a href="http://www.google.se/search?q=tapology <?= $unmatched_item['matchup'] ?>"><button class="btn btn-primary">google</button></a>
-                                    </td>
-                                </tr>
+                    <?php foreach ($unmatched_groups as $unmatched_group) : ?>
+                        <?php if (isset($unmatched_group[0]['view_extras'])) : ?>
+                            <tr class="event event-group" id="event<?= isset($i) ? ++$i : $i = 1 ?>" data-create="<?= $this->e('{"name": "' . ($unmatched_group[0]['view_extras']['event_name_reduced'] ?? '') . '", "date": "' . $unmatched_group[0]['view_extras']['event_date_formatted'] . '"}') ?>">
+                                <td></td>
+                                <td></td>
+                                <td data-date=""><b><?= $unmatched_group[0]['metadata']['event_name'] ?? '' ?> / <?= $unmatched_group[0]['view_extras']['event_name_reduced'] ?? '' ?></b> (<?= $unmatched_group[0]['view_extras']['event_date_formatted'] ?>)
+                                    <?php if (isset($unmatched_group[0]['view_extras']['event_match']['id'])) : ?>
+                                        Match: <?= $unmatched_group[0]['view_extras']['event_match']['name'] ?> (<?= $unmatched_group[0]['view_extras']['event_match']['date'] ?>)
+                                </td>
+                                <td><a href="#" class="create-matchups-for-event" data-eventid="<?= $unmatched_group[0]['view_extras']['event_match']['id'] ?>" data-eventlink="event<?= $i ?>"><button class="btn btn-primary">Create all below at matched event</button></a></td>
+                            <?php else : ?>
+                                No match..
+                                </td>
+                                <td><a href="/cnadm/events?in_event_name=<?= $unmatched_group[0]['view_extras']['event_name_reduced'] ?? '' ?>&in_event_date=<?= $unmatched_group[0]['view_extras']['event_date_formatted'] ?>"><button class="btn btn-primary">Create</button></a> <a href="http://www.google.se/search?q=tapology <?= $unmatched_group[0]['view_extras']['event_name_reduced'] ?? '' ?>"><button class="btn btn-primary">Google</button></a></td>
                             <?php endif ?>
-                        <?php endforeach ?>
-                        <tr>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td>
-                                <?php if (isset($unmatched_group[0]['view_extras']['event_name_reduced'])) : ?>
-                                    <a href="#" class="create-event-with-matchups" data-eventlink="event<?= $i ?>"><button class="btn btn-primary">Create event and matchups</button></a>
-                                <?php else : ?>
-                                    &nbsp;
+
+                        <?php else : ?>
+                            <tr class="event event-group" id="event<?= isset($i) ? ++$i : $i = 1 ?>">
+                                <td></td>
+                                <td></td>
+                                <td data-date=""></td>
+                                <td></td>
+                            <?php endif ?>
+                            </tr>
+
+                            <?php foreach ($unmatched_group as $unmatched_item) : ?>
+                                <?php if ($unmatched_item['type'] == 0) : ?>
+                                    <tr class="matchup-row" data-create="<?= $this->e('{"inteam1": "' . $unmatched_item['view_indata1'] . '", "inteam2": "' . $unmatched_item['view_indata2'] . '"}') ?>" data-eventlink="event<?= $i ?>">
+                                        <td><?= date("Y-m-d H:i:s", strtotime($unmatched_item['log_date'])) ?></td>
+                                        <td><b><?= $bookies[$unmatched_item['bookie_id']] ?></b></td>
+                                        <td>
+                                            <?= $this->e($unmatched_item['matchup'], 'strtolower|ucwords') ?></td>
+                                        <td><a href="/cnadm/newmatchup?inteam1=<?= $unmatched_item['view_indata1'] ?>&inteam2=<?= $unmatched_item['view_indata2'] ?>&ineventid=<?= $unmatched_group[0]['view_extras']['event_match']['id'] ?? '' ?>"><button class="btn btn-primary">Add</button></a> <a href="http://www.google.se/search?q=tapology <?= $unmatched_item['matchup'] ?>"><button class="btn btn-primary">google</button></a>
+                                        </td>
+                                    </tr>
                                 <?php endif ?>
-                            </td>
-                        </tr>
-                    <?php endforeach ?>
-            </tbody>
-        </table>
-    </div>
+                            <?php endforeach ?>
+                            <tr>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td>
+                                    <?php if (isset($unmatched_group[0]['view_extras']['event_name_reduced'])) : ?>
+                                        <a href="#" class="create-event-with-matchups" data-eventlink="event<?= $i ?>"><button class="btn btn-primary">Create event and matchups</button></a>
+                                    <?php else : ?>
+                                        &nbsp;
+                                    <?php endif ?>
+                                </td>
+                            </tr>
+                        <?php endforeach ?>
+                </tbody>
+            </table>
+        </div>
     <?php else : ?>
         <div class="card-body pt-0">All done!
         </div>

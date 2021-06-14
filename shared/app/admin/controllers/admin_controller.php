@@ -327,7 +327,14 @@ class AdminController
             }
         }
 
-        $response->getBody()->write($this->plates->render('manualactions', ['actions' => $actions]));
+        //Get suggested event renamings from bookies
+        $er_recommendations = null;
+        if (!PARSE_USE_DATE_EVENTS) {
+            $er = new EventRenamer;
+            $er_recommendations = $er->evaluteRenamings();
+        }
+
+        $response->getBody()->write($this->plates->render('manualactions', ['actions' => $actions, 'recommendations' => $er_recommendations]));
         return $response;
     }
 
@@ -609,17 +616,6 @@ class AdminController
         $view_data['runstatus'] = BookieHandler::getAllRunStatuses();
 
         $response->getBody()->write($this->plates->render('parser_status', $view_data));
-        return $response;
-    }
-
-    public function checkRenamings(Request $request, Response $response)
-    {
-        $view_data = [];
-        if (!PARSE_USE_DATE_EVENTS) {
-            $er = new EventRenamer;
-            $view_data['recommendations'] = $er->evaluteRenamings();
-        }
-        $response->getBody()->write($this->plates->render('renamings', $view_data));
         return $response;
     }
 
