@@ -4,4 +4,12 @@
 
 <?php $this->insert('partials/unmatched', ['bookies' => $bookies, 'unmatched_matchup_groups' => $unmatched_matchup_groups, 'unmatched_groups' => $unmatched_groups, 'unmatched' => $unmatched, 'unmatched_props_matchups_count' => $unmatched_props_matchups_count, 'unmatched_props_templates_count' => $unmatched_props_templates_count]) ?>
 
-<a href="/cnadm/alerts">Alerts stored: <?= $alertcount ?></a>
+<div class="card col-3">
+    <div class="card-header">
+        <h5 class="card-title">Alerts</h5>
+        </h6>
+    </div>
+    <div class="card-body pt-0">
+        <div>Alerts stored: <a href="/cnadm/alerts"><?= $alertcount ?></a></div>
+    </div>
+</div>

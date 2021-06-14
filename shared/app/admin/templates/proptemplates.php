@@ -119,7 +119,7 @@
                     <input class="form-control" type="text" id="in_negproptemplate" size="140" value="<?= isset($in_negtemplate) ? $in_negtemplate : '' ?>" />
                 </div>
                 <div class="col-sm-2">
-                    <button class="btn btn-primary" id="create-template-button">Add</button>
+                    <button class="btn btn-primary mt-3" id="create-template-button">Add</button>
                 </div>
             </div>
         </form>

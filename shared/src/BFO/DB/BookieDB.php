@@ -157,15 +157,6 @@ class BookieDB
         return (int) $id;
     }
 
-    public static function updateTemplateLastUsed(int $template_id): bool
-    {
-        $query = 'UPDATE bookies_proptemplates SET last_used = NOW() WHERE id = ?';
-        $params = array($template_id);
-        DBTools::doParamQuery($query, $params);
-
-        return (DBTools::getAffectedRows() > 0 ? true : false);
-    }
-
     public static function deletePropTemplate(int $template_id): bool
     {
         $query = 'DELETE FROM bookies_proptemplates WHERE id = ?';

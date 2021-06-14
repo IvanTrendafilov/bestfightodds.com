@@ -75,7 +75,6 @@ class PropProcessor
             //No matching template
             return ['status' => false, 'fail_reason' => 'no_template_found'];
         }
-        BookieHandler::updateTemplateLastUsed($template->getID());
 
         $event = null;
         $matchup = null;

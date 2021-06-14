@@ -70,12 +70,6 @@ class BookieHandler
         return BookieDB::addNewPropTemplate($proptemplate_obj);
     }
 
-    public static function updateTemplateLastUsed(int $template_id): bool
-    {
-        return false; //TODO: Currently disabled to avoid table locks 
-        return BookieDB::updateTemplateLastUsed($template_id);
-    }
-
     public static function deletePropTemplate(int $template_id): bool
     {
         if (!is_int($template_id)) {
