@@ -20,7 +20,7 @@ $schedule = WikiScheduleParser::fetchSchedule();
 $sp = new ScheduleParser();
 $sp->run($schedule);
 
-echo date('Y-m-d H:i:s') . " - Done
+echo date('Y-m-d H:i:s') . " - Done. Found: " . count($schedule) . " upcoming events
 ";
 
 /**
@@ -80,7 +80,7 @@ class WikiScheduleParser
             $section_num = self::findWikipediaSection($upcoming_event['event_name'], 'Announced_bouts');
             if ($section_num) {
                 $announced_parsed_str = self::normalizePageContent(self::fetchWikipediaPage($upcoming_event['event_name'], $section_num));
-                if ($announced_parsed_str) {
+                if ($announced_parsed_str && !empty($announced_parsed_str)) {
                     //Parse the announce content
                     $team_matches = null;
                     preg_match_all("/[bB]out:\s(?<team1_name>[a-zA-Z0-9\s'-\.]+) vs. (?<team2_name>[a-zA-Z0-9\s'-\.]+)/", $announced_parsed_str, $team_matches, PREG_SET_ORDER);
@@ -89,6 +89,9 @@ class WikiScheduleParser
                             $new_event['matchups'][] = [ParseTools::formatName($team_match['team1_name']), ParseTools::formatName($team_match['team2_name'])];
                         }
                     }
+                } else {
+                    $error_once = true;
+                    echo 'Failed to retrieve announced matchup page for ' . $upcoming_event['event_name'];
                 }
             }
 
