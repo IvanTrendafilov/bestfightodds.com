@@ -98,4 +98,30 @@ class ScheduleHandler
         }
         return $counter;
     }
+
+    public static function acceptAllDeleteActions(): int
+    {
+        $audit_log = new \Katzgrau\KLogger\Logger(GENERAL_KLOGDIR, \Psr\Log\LogLevel::INFO, ['filename' => 'changeaudit.log']);
+        $counter = 0;
+        $ma_create_matchups = ScheduleHandler::getAllManualActions(7) ?? []; //7 = Delete matchup
+        foreach ($ma_create_matchups as $action) {
+            $action['action_obj'] = json_decode($action['description'], true);
+            /*$new_matchup = new Fight(
+                -1,
+                $action['action_obj']['matchups'][0]['team1'],
+                $action['action_obj']['matchups'][0]['team2'],
+                $action['action_obj']['eventID']
+            );
+            $new_matchup->setCreateSource(2);
+            if (EventHandler::createMatchup($new_matchup)) {
+                $audit_log->info("Created new matchup " . $new_matchup->getTeamAsString(1) . ' vs. ' . $new_matchup->getTeamAsString(2) . ' at ' . $new_matchup->getEventID() . ' as proposed by scheduler');
+            } else {
+                $audit_log->error("Failed to create new matchup " . $new_matchup->getTeamAsString(1) . ' vs. ' . $new_matchup->getTeamAsString(2) . ' at ' . $new_matchup->getEventID() . ' as proposed by scheduler');
+            }*/
+            $result = ScheduleHandler::clearManualAction($action['id']);
+            $counter++;
+        }
+
+        return $counter;
+    }
 }

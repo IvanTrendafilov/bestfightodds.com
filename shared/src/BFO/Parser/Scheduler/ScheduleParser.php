@@ -152,8 +152,9 @@ class ScheduleParser
     {
         $events = EventHandler::getEvents(future_events_only: true);
         foreach ($events as $event) {
-            //Skip FUTURE EVENTS event
-            if ($event->getID() == PARSE_FUTURESEVENT_ID) {
+            //Skip FUTURE EVENTS event and events that are on the same day or closer
+            if ($event->getID() == PARSE_FUTURESEVENT_ID || 
+                $event->getDate() <= date('Y-m-d')) {
                 break;
             }
             $matchups = EventHandler::getMatchups(event_id: $event->getID(), only_without_odds: true);
