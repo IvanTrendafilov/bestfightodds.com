@@ -6,6 +6,8 @@
  *
  * Timezone: TBD
  * 
+ * Notes: Can be run in dev/test towards actual URLs (not using mock)
+ * 
  */
 
 require_once __DIR__ . "/../../bootstrap.php";
@@ -21,11 +23,11 @@ define('BOOKIE_NAME', 'williamhillus');
 define('BOOKIE_ID', 23);
 define(
     'BOOKIE_URLS',
-    ['all' => 'https://sportsbook.draftkings.com']
+    ['all' => 'https://odds.us.williamhill.com/api/v1/competitions?sportId=ufcmma']
 );
 define(
     'BOOKIE_MOCKFILES',
-    ['all' => PARSE_MOCKFEEDS_DIR . "draftkings.json"]
+    ['all' => PARSE_MOCKFEEDS_DIR . "williamhillus.json"]
 );
 
 class ParserJob extends ParserJobBase
@@ -34,25 +36,27 @@ class ParserJob extends ParserJobBase
 
     public function fetchContent(array $content_urls): array
     {
-        //Grab league IDs for MMA 
-        $leagues = ParseTools::retrievePageFromURL($content_urls['all'] . '/api/odds/v1/leagues.json');
-        $json = json_decode($leagues, true);
-        $league_urls = [];
-        foreach ($json['leagues'] as $league) {
-            if ($league['sportName'] == 'MMA') {
-                $league_urls[$league['name']] = $content_urls['all'] . '/api/odds/v1/leagues/' . $league['leagueId'] . '/offers/gamelines';
-                $league_urls['FUTURES ' . $league['name']] = $content_urls['all'] . '/api/odds/v1/leagues/' . $league['leagueId'] . '/offers/futures';
-                $league_urls['PROPS ' . $league['name']] = $content_urls['all'] . '/api/odds/v1/leagues/' . $league['leagueId'] . '/offers/props';
-            }
+        $api_key = 'hgpAaGGYqpSNljzBG2iHfm03Er4ZlFkxSTcfPQEtF';
+
+        $competitions = ParseTools::retrievePageFromURL($content_urls['all'], [CURLOPT_HTTPHEADER => ['X-Api-Key: ' . $api_key]]);
+        $competitions_json = json_decode($competitions);
+
+        if (isset($competitions_json->message) && $competitions_json->message == 'Forbidden') {
+            $this->logger->error("Feed responded with forbidden. Check API key");
+            return [];
         }
 
+        $comp_urls = [];
+        foreach ($competitions_json as $competition) {
+            $comp_urls[$competition->name] = 'https://odds.us.williamhill.com/api/v1/events?competitionId=' . $competition->id . '&includeMarkets=true';;
+        }
         $content = [];
-        foreach ($league_urls as $key => $url) {
+        foreach ($comp_urls as $key => $url) {
             $this->logger->info("Fetching " . $key . " matchups through URL: " . $url);
         }
-        ParseTools::retrieveMultiplePagesFromURLs($league_urls);
-        foreach ($league_urls as $key => $url) {
-            $content[$key] = ParseTools::getStoredContentForURL($league_urls[$key]);
+        foreach ($comp_urls as $key => $url) {
+            sleep(1); //Avoid throttling
+            $content[$key] = ParseTools::retrievePageFromURL($url, [CURLOPT_HTTPHEADER => ['X-Api-Key: ' . $api_key]]);
         }
         return $content;
     }
@@ -64,7 +68,7 @@ class ParserJob extends ParserJobBase
 
         //Process each league
         foreach ($content as $league_name => $json_content) {
-            if (!$this->parseLeague($league_name, $json_content)) {
+            if (!$this->parseEvent($league_name, $json_content)) {
                 $error_once = true;
             }
         }
@@ -78,7 +82,7 @@ class ParserJob extends ParserJobBase
         return $this->parsed_sport;
     }
 
-    private function parseLeague(string $league_name, string $json_content): bool
+    private function parseEvent(string $league_name, string $json_content): bool
     {
         $json = json_decode($json_content);
 
@@ -87,16 +91,14 @@ class ParserJob extends ParserJobBase
             $this->logger->error("Unable to parse proper json for " . $league_name . '. Contents: ' . substr($json_content, 0, 20) . '...');
             return false;
         }
-        if (isset($json->errorStatus)) {
-            if (in_array($json->errorStatus->code, ['BET419', 'BET420', 'BET421'])) {
-                //No matchups found. Not an error
-                $this->logger->info("League " . $league_name . " has no matchups");
-                return true;
+        if (isset($json->message)) {
+            if ($json->message == 'Forbidden') {
+                $this->logger->error("Feed responded with forbidden. Check API key");
             } else {
-                //Error occurred
-                $this->logger->error("Unknown error: " . $json->errorStatus->code . " " . $json->errorStatus->developerMessage);
-                return false;
+                //Other error occurred
+                $this->logger->error("Unknown error: " . $json->message);
             }
+            return false;
         }
         $this->logger->info("Processing league " . $league_name);
 

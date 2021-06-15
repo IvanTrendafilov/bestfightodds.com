@@ -77,7 +77,7 @@ class ParseTools
         return $return_content;
     }
 
-    public static function retrieveMultiplePagesFromURLs(array $urls): bool
+    public static function retrieveMultiplePagesFromURLs(array $urls, array $extra_curl_opts = null): bool
     {
         $curl_channels = [];
         $mh = curl_multi_init();
@@ -91,6 +91,13 @@ class ParseTools
             if ($credentials) {
                 curl_setopt($curl_channels[$url], CURLOPT_USERPWD, $credentials);
                 curl_setopt($curl_channels[$url], CURLOPT_HTTPAUTH, CURLAUTH_BASIC);
+            }
+
+            //Add extra curl opts if specified
+            if ($extra_curl_opts) {
+                if (!empty($extra_curl_options)) {
+                    curl_setopt_array($curl_channels[$url], $extra_curl_options);
+                }
             }
 
             curl_setopt_array($curl_channels[$url], array(

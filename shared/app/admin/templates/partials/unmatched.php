@@ -85,6 +85,7 @@
                                 item.closest('tr').style.color = '#ff0000';
                             } else {
                                 item.closest('tr').style.color = '#ddd';
+                                item.getElementsByTagName('button')[0].disabled = true;
                                 e.target.disabled = true;
                             }
                         });

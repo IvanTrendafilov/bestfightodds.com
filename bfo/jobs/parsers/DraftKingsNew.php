@@ -5,7 +5,9 @@
  * Sport: MMA
  *
  * Timezone: UTC
- * 
+ *
+ * Notes: Can be run in dev/test towards actual URLs (not using mock)
+ *  
  */
 
 require_once __DIR__ . "/../../bootstrap.php";
