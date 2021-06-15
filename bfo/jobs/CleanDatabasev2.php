@@ -6,15 +6,14 @@
  * - Differencing lines posted at the same minute for a fight and bookie
  * - Lines that for some reason have been added after eachother in time but
  *   represent the exact same line
- * - Prop inconsistencies (+3.5 points, multiple over/unders for a single book/fight)
  *
  * Prefereably this should be scheduled as a cron job running at least once a day
  *
- * Step 2: Remove all duplicates occuring in the same minute for the same fight
+ * Step: Remove all duplicates occuring in the same minute for the same fight
  * and bookie but remove the line that has the worst vig. This should be done using
  * the Alerter class that has vig calculation has a method.
  * 
- * Step 3: Removes any odds that appear right after each other in time with the
+ * Step: Removes any odds that appear right after each other in time with the
  * same odds for the same bookie and fight. If records where cleaned as part of
  * step 1, it is highly likely that there will be records like this left in the
  * database.
@@ -93,9 +92,6 @@ while (($removed_odds_counter > 0 || $removed_propodds_counter > 0)  && $iterati
 }
 
 
-
-//echo "\r\nCleaned over/under inconsistensies: " . clearOverUnderIncons();
-//echo "\r\nCleaned handicap (e.g. +3 points) inconsistensies: " . clearPointsHandicapIncons();
 
 /**
  * Returns all fight odds that are considered duplicates. A duplicate is one
@@ -304,55 +300,4 @@ function removeEventPropOdds(array $propodds_col): bool
         }
     }
     return true;
-}
-
-
-function clearOverUnderIncons(): int
-{
-    $query = 'DELETE
-                FROM lp2 USING lines_props lp1,
-                               lines_props lp2
-                WHERE lp1.proptype_id IN (32,
-                                          33,
-                                          34,
-                                          35)
-                  AND lp2.proptype_id IN (32,
-                                          33,
-                                          34,
-                                          35)
-                  AND lp1.proptype_id != lp2.proptype_id
-                  AND lp1.matchup_id = lp2.matchup_id
-                  AND lp1.bookie_id = lp2.bookie_id
-                  AND lp1.date > lp2.date;';
-
-    DBTools::doQuery($query);
-    return DBTools::getAffectedRows();
-}
-
-function clearPointsHandicapIncons(): int
-{
-    $query = 'DELETE
-                FROM lp2 USING lines_props lp1,
-                               lines_props lp2
-                WHERE lp1.proptype_id IN (38,
-                                          39,
-                                          40,
-                                          41,
-                                          42,
-                                          43,
-                                          47,
-                                          48,
-                                          49,
-                                          50,
-                                          64)
-                  AND lp1.matchup_id = lp2.matchup_id
-                  AND lp1.bookie_id = lp2.bookie_id
-                  AND lp1.proptype_id = lp2.proptype_id
-                  AND lp1.team_num <> lp2.team_num
-                  AND lp1.team_num <> 0
-                  AND lp2.team_num <> 0
-                  AND lp1.date > lp2.date;';
-
-    DBTools::doQuery($query);
-    return DBTools::getAffectedRows();
 }

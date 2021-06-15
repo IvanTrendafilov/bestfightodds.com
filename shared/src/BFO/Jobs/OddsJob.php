@@ -1,18 +1,20 @@
 <?php
 
 /**
- * Odds Job
+ *  Handles automatic generation of content as well as housekeeping activities:
+ * 
+ * - Generate a new front page
+ * - Tweet new odds
+ * - Send out any alerts that have should be triggered
  *
- *  This is v2 of cron.OddsParser.php and does not handle feed parsing but the following activities:
- *
- * - Checks if any alerts needs to be dispatched or cleaned out
- * - Clears the image cache for graphs
- * - Generates a new front page with latest odds
- * - Generates a new fighter list for browsing purposes
- * - Tweet new fight odds
- * - NEW: In progress: Automatically create matchups that are unmatched AND found in scheduler
- * - Clear flagged odds for old matchups
- *
+ * - Creates and deletes matchups proposed by scheduler
+ * - Clears the image cache for widgets
+ * - Clears the cache for graph date
+ * - Cleans up old parsing correlations
+ * - Removes unused removal flags on odds
+ * - Deletes odds that have been flagged for deletion
+ * - Moves matchups to events based on sportsbook metadata
+ * - Cleanup of un-used odds
  */
 
 namespace BFO\Jobs;

@@ -9,17 +9,14 @@
  *
  * Prefereably this should be scheduled as a cron job running at least once a day
  *
- *
- * Step 2: Remove all duplicates occuring in the same minute for the same fight
+ * Step: Remove all duplicates occuring in the same minute for the same fight
  * and bookie but remove the line that has the worst vig. This should be done using
  * the Alerter class that has vig calculation has a method.
  * 
- * Step 3: Removes any odds that appear right after each other in time with the
+ * Step: Removes any odds that appear right after each other in time with the
  * same odds for the same bookie and fight. If records where cleaned as part of
  * step 1, it is highly likely that there will be records like this left in the
  * database.
- *
- * The above description might be out of date..
  *
  */
 

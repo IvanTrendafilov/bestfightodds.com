@@ -1,6 +1,9 @@
 <?php
 
-// Used to generate XML Sitemaps and place these in the pages directory as specified in the PARSE_PAGEDIR constant
+/**
+ * Used to generate XML Sitemaps and place these in the pages directory as specified in the PARSE_PAGEDIR constant
+ */
+
 
 require_once __DIR__ . "/../bootstrap.php";
 
