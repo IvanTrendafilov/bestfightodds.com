@@ -32,17 +32,16 @@
 	});
 </script>
 
-
-
 <?php if ($actions != null && count($actions) > 0) : ?>
 
 	<div class="card">
 		<div class="card-header d-flex justify-content-between">
-				<div><h5 class="card-title">Scheduler manual actions</h5>
+			<div>
+				<h5 class="card-title">Scheduler manual actions</h5>
 				<h6 class="card-subtitle text-muted">The scheduler has suggested the following changes to be made</h6>
-</div>
-				<button class="btn btn-primary" onclick="$('button[onclick^=\'maAdd\']').click();">Accept all <b>Create</b></button>
 			</div>
+			<button class="btn btn-primary" onclick="$('button[onclick^=\'maAdd\']').click();">Accept all <b>Create</b></button>
+		</div>
 		<div class="table-responsive p-2">
 			<table class="table table-sm table-hover">
 				<thead>
@@ -140,6 +139,18 @@
 					<?php endforeach ?>
 				</tbody>
 			</table>
+		</div>
+	</div>
+<?php else : ?>
+	<div class="card">
+		<div class="card-header d-flex justify-content-between">
+			<div>
+				<h5 class="card-title">Scheduler manual actions</h5>
+			</div>
+		</div>
+		<div class="card-body pt-0  text-success  align-self-center">All done <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-check" viewBox="0 0 16 16">
+				<path d="M10.97 4.97a.75.75 0 0 1 1.07 1.05l-3.99 4.99a.75.75 0 0 1-1.08.02L4.324 8.384a.75.75 0 1 1 1.06-1.06l2.094 2.093 3.473-4.425a.267.267 0 0 1 .02-.022z" />
+			</svg>
 		</div>
 	</div>
 
