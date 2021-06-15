@@ -4,7 +4,7 @@
  * Bookie: William Hill
  * Sport: MMA
  *
- * Timezone: TBD
+ * Timezone: UTC
  * 
  * Notes: Can be run in dev/test towards actual URLs (not using mock)
  * 
@@ -20,7 +20,7 @@ use BFO\Parser\ParsedProp;
 use BFO\Parser\Jobs\ParserJobBase;
 
 define('BOOKIE_NAME', 'williamhillus');
-define('BOOKIE_ID', 23);
+define('BOOKIE_ID', 24);
 define(
     'BOOKIE_URLS',
     ['all' => 'https://odds.us.williamhill.com/api/v1/competitions?sportId=ufcmma']
@@ -67,8 +67,8 @@ class ParserJob extends ParserJobBase
         $error_once = false;
 
         //Process each league
-        foreach ($content as $league_name => $json_content) {
-            if (!$this->parseEvent($league_name, $json_content)) {
+        foreach ($content as $event_name => $json_content) {
+            if (!$this->parseEvent($event_name, $json_content)) {
                 $error_once = true;
             }
         }
@@ -82,13 +82,13 @@ class ParserJob extends ParserJobBase
         return $this->parsed_sport;
     }
 
-    private function parseEvent(string $league_name, string $json_content): bool
+    private function parseEvent(string $event_name, string $json_content): bool
     {
         $json = json_decode($json_content);
 
         //Error checking
         if (!$json) {
-            $this->logger->error("Unable to parse proper json for " . $league_name . '. Contents: ' . substr($json_content, 0, 20) . '...');
+            $this->logger->error("Unable to parse proper json for " . $event_name . '. Contents: ' . substr($json_content, 0, 20) . '...');
             return false;
         }
         if (isset($json->message)) {
@@ -100,25 +100,25 @@ class ParserJob extends ParserJobBase
             }
             return false;
         }
-        $this->logger->info("Processing league " . $league_name);
+        $this->logger->info("Processing event " . $event_name);
 
         //Loop through events and grab matchups
-        foreach ($json->events as $matchup) {
-            foreach ($matchup->offers as $offer) {
+        foreach ($json as $matchup) {
+            foreach ($matchup->markets as $market) {
                 if (
-                    $offer->label == 'Moneyline' &&
+                    $market->name == 'Bout Betting' &&
                     isset(
                         $matchup->id,
-                        $matchup->startDate,
-                        $offer?->outcomes[0]->oddsAmerican,
-                        $offer?->outcomes[0]->participant,
-                        $offer?->outcomes[1]->oddsAmerican,
-                        $offer?->outcomes[1]->participant
+                        $matchup->startTime,
+                        $market?->selections[0]->name,
+                        $market?->selections[0]->price->a,
+                        $market?->selections[1]->name,
+                        $market?->selections[1]->price->a
                     )
                 ) {
-                    $this->parseMatchup($league_name, $matchup, $offer);
-                } else if (str_starts_with($league_name, 'PROPS ')) {
-                    $this->parseProp($matchup, $offer);
+                    $this->parseMatchup($matchup, $market);
+                } else {
+                    //$this->parseProp($matchup, $market); //TODO
                 }
             }
         }
@@ -126,23 +126,18 @@ class ParserJob extends ParserJobBase
         return true;
     }
 
-    private function parseMatchup($league_name, $matchup, $offer): void
+    private function parseMatchup($matchup, $market): void
     {
         $parsed_matchup = new ParsedMatchup(
-            $offer->outcomes[0]->participant,
-            $offer->outcomes[1]->participant,
-            $offer->outcomes[0]->oddsAmerican,
-            $offer->outcomes[1]->oddsAmerican
+            $market?->selections[0]->name,
+            $market?->selections[1]->name,
+            $market?->selections[0]->price->a,
+            $market?->selections[1]->price->a
         );
 
-        $date_obj = new DateTime((string) $matchup->startDate);
+        $date_obj = new DateTime((string) $matchup->startTime);
         $parsed_matchup->setMetaData('gametime', $date_obj->getTimestamp());
-        if (str_starts_with($league_name, 'FUTURES ')) {
-            $parsed_matchup->setMetaData('event_name', substr($league_name, 8)); //Remove FUTURE part
-        } else {
-            $parsed_matchup->setMetaData('event_name', $league_name);
-        }
-
+        $parsed_matchup->setMetaData('event_name', $matchup->competitionName);
         $parsed_matchup->setCorrelationID($matchup->id);
 
         $this->parsed_sport->addParsedMatchup($parsed_matchup);
