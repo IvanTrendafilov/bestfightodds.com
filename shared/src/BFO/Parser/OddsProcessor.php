@@ -5,6 +5,7 @@ namespace BFO\Parser;
 use BFO\Parser\Utils\ParseTools;
 use BFO\Parser\Utils\ParseRunLogger;
 use BFO\General\OddsHandler;
+use BFO\General\BookieHandler;
 use BFO\General\EventHandler;
 use BFO\DataTypes\Fight;
 use BFO\DataTypes\FightOdds;
@@ -33,6 +34,12 @@ class OddsProcessor
      */
     public function processParsedSport(ParsedSport $parsed_sport, bool $full_run): void
     {
+        //Check that bookie is valid
+        if (!BookieHandler::getBookieByID($this->bookie_id)) {
+            $this->logger->error('Bookie does not exist in database: ' . $this->bookie_id . ' Aborting');
+            return;
+        }
+        
         //Pre-populate correlation table with entries from database. These can be overwritten later in the matching matchups method
         $correlations = OddsHandler::getCorrelationsForBookie($this->bookie_id);
         foreach ($correlations as $correlation) {
@@ -173,7 +180,7 @@ class OddsProcessor
                         //When odds are added, if the matchup was added manually or through scheduler (!= 1) we change the createaudit for this matchup so that it can be removed automatically if all odds are removed.
                         if ($matched_matchup['matched_matchup']->getCreateSource() != 1) {
                             if (EventHandler::addCreateAudit($matched_matchup['matched_matchup']->getID(), 1)) {
-                                $this->logger->info("-- Updated change audit to 1 (sportsbook created) for " . $matched_matchup['matched_matchup']->getID());
+                                $this->logger->debug("-- Updated change audit to 1 (sportsbook created) for " . $matched_matchup['matched_matchup']->getID());
                             } else {
                                 $this->logger->error("-- Couldn't change create audit to 1 (sportsbook created) for matchup " . $matched_matchup['matched_matchup']->getID());
                             }

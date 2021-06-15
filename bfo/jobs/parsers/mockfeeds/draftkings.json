@@ -1,0 +1,836 @@
+{
+    "events": [
+        {
+            "id": 179872279,
+            "name": "Marlon Vera - Davey Grant",
+            "homeTeamName": "Marlon Vera",
+            "awayTeamName": "Davey Grant",
+            "startDate": "2021-06-19T23:00:00.0000000Z",
+            "offers": [
+                {
+                    "id": "1-2267752493",
+                    "label": "Moneyline",
+                    "outcomes": [
+                        {
+                            "id": "1-2929892978",
+                            "label": "Marlon Vera",
+                            "oddsAmerican": "-250",
+                            "oddsDecimal": 1.4000,
+                            "oddsFractional": "2/5",
+                            "participant": "Marlon Vera"
+                        },
+                        {
+                            "id": "1-2929892980",
+                            "label": "Davey Grant",
+                            "oddsAmerican": "+195",
+                            "oddsDecimal": 2.9500,
+                            "oddsFractional": "39/20",
+                            "participant": "Davey Grant"
+                        }
+                    ],
+                    "main": true
+                }
+            ]
+        },
+        {
+            "id": 179868190,
+            "name": "Charles Rosa - Justin Jaynes",
+            "homeTeamName": "Charles Rosa",
+            "awayTeamName": "Justin Jaynes",
+            "startDate": "2021-06-26T20:00:00.0000000Z",
+            "offers": [
+                {
+                    "id": "1-2267753217",
+                    "label": "Moneyline",
+                    "outcomes": [
+                        {
+                            "id": "1-2929895201",
+                            "label": "Charles Rosa",
+                            "oddsAmerican": "-167",
+                            "oddsDecimal": 1.6000,
+                            "oddsFractional": "3/5",
+                            "participant": "Charles Rosa"
+                        },
+                        {
+                            "id": "1-2929895203",
+                            "label": "Justin Jaynes",
+                            "oddsAmerican": "+135",
+                            "oddsDecimal": 2.3500,
+                            "oddsFractional": "27/20",
+                            "participant": "Justin Jaynes"
+                        }
+                    ],
+                    "main": true
+                }
+            ]
+        },
+        {
+            "id": 179872269,
+            "name": "Aleksei Oleinik - Serghei Spivac",
+            "homeTeamName": "Aleksei Oleinik",
+            "awayTeamName": "Serghei Spivac",
+            "startDate": "2021-06-19T23:00:00.0000000Z",
+            "offers": [
+                {
+                    "id": "1-2267752665",
+                    "label": "Moneyline",
+                    "outcomes": [
+                        {
+                            "id": "1-2929893566",
+                            "label": "Aleksei Oleinik",
+                            "oddsAmerican": "+175",
+                            "oddsDecimal": 2.7500,
+                            "oddsFractional": "7/4",
+                            "participant": "Aleksei Oleinik"
+                        },
+                        {
+                            "id": "1-2929893568",
+                            "label": "Serghei Spivac",
+                            "oddsAmerican": "-225",
+                            "oddsDecimal": 1.4500,
+                            "oddsFractional": "4/9",
+                            "participant": "Serghei Spivac"
+                        }
+                    ],
+                    "main": true
+                }
+            ]
+        },
+        {
+            "id": 179872283,
+            "name": "Raoni Barcelos - Timur Valiev",
+            "homeTeamName": "Raoni Barcelos",
+            "awayTeamName": "Timur Valiev",
+            "startDate": "2021-06-26T20:00:00.0000000Z",
+            "offers": [
+                {
+                    "id": "1-2267753219",
+                    "label": "Moneyline",
+                    "outcomes": [
+                        {
+                            "id": "1-2929895207",
+                            "label": "Raoni Barcelos",
+                            "oddsAmerican": "-225",
+                            "oddsDecimal": 1.4500,
+                            "oddsFractional": "4/9",
+                            "participant": "Raoni Barcelos"
+                        },
+                        {
+                            "id": "1-2929895209",
+                            "label": "Timur Valiev",
+                            "oddsAmerican": "+175",
+                            "oddsDecimal": 2.7500,
+                            "oddsFractional": "7/4",
+                            "participant": "Timur Valiev"
+                        }
+                    ],
+                    "main": true
+                }
+            ]
+        },
+        {
+            "id": 179845577,
+            "name": "Chan Sung Jung - Dan Ige",
+            "homeTeamName": "Chan Sung Jung",
+            "awayTeamName": "Dan Ige",
+            "startDate": "2021-06-19T23:00:00.0000000Z",
+            "offers": [
+                {
+                    "id": "1-2265445334",
+                    "label": "Moneyline",
+                    "outcomes": [
+                        {
+                            "id": "1-2922283077",
+                            "label": "Chan Sung Jung",
+                            "oddsAmerican": "-110",
+                            "oddsDecimal": 1.9100,
+                            "oddsFractional": "10/11",
+                            "participant": "Chan Sung Jung"
+                        },
+                        {
+                            "id": "1-2922283079",
+                            "label": "Dan Ige",
+                            "oddsAmerican": "-110",
+                            "oddsDecimal": 1.9100,
+                            "oddsFractional": "10/11",
+                            "participant": "Dan Ige"
+                        }
+                    ],
+                    "main": true
+                }
+            ]
+        },
+        {
+            "id": 179872284,
+            "name": "Tim Elliott - Mudaerji Su",
+            "homeTeamName": "Tim Elliott",
+            "awayTeamName": "Mudaerji Su",
+            "startDate": "2021-06-26T20:00:00.0000000Z",
+            "offers": [
+                {
+                    "id": "1-2267753220",
+                    "label": "Moneyline",
+                    "outcomes": [
+                        {
+                            "id": "1-2929895210",
+                            "label": "Tim Elliott",
+                            "oddsAmerican": "+125",
+                            "oddsDecimal": 2.2500,
+                            "oddsFractional": "5/4",
+                            "participant": "Tim Elliott"
+                        },
+                        {
+                            "id": "1-2929895212",
+                            "label": "Mudaerji Su",
+                            "oddsAmerican": "-155",
+                            "oddsDecimal": 1.6500,
+                            "oddsFractional": "13/20",
+                            "participant": "Mudaerji Su"
+                        }
+                    ],
+                    "main": true
+                }
+            ]
+        },
+        {
+            "id": 179872280,
+            "name": "Wellington Turman - Bruno Silva",
+            "homeTeamName": "Wellington Turman",
+            "awayTeamName": "Bruno Silva",
+            "startDate": "2021-06-19T23:00:00.0000000Z",
+            "offers": [
+                {
+                    "id": "1-2267752664",
+                    "label": "Moneyline",
+                    "outcomes": [
+                        {
+                            "id": "1-2929893563",
+                            "label": "Wellington Turman",
+                            "oddsAmerican": "+125",
+                            "oddsDecimal": 2.2500,
+                            "oddsFractional": "5/4",
+                            "participant": "Wellington Turman"
+                        },
+                        {
+                            "id": "1-2929893565",
+                            "label": "Bruno Silva",
+                            "oddsAmerican": "-155",
+                            "oddsDecimal": 1.6500,
+                            "oddsFractional": "13/20",
+                            "participant": "Bruno Silva"
+                        }
+                    ],
+                    "main": true
+                }
+            ]
+        },
+        {
+            "id": 179801914,
+            "name": "Ciryl Gane - Alexander Volkov",
+            "homeTeamName": "Ciryl Gane",
+            "awayTeamName": "Alexander Volkov",
+            "startDate": "2021-06-27T02:00:00.0000000Z",
+            "offers": [
+                {
+                    "id": "1-2261373296",
+                    "label": "Moneyline",
+                    "outcomes": [
+                        {
+                            "id": "1-2908511499",
+                            "label": "Ciryl Gane",
+                            "oddsAmerican": "-155",
+                            "oddsDecimal": 1.6500,
+                            "oddsFractional": "13/20",
+                            "participant": "Ciryl Gane"
+                        },
+                        {
+                            "id": "1-2908511501",
+                            "label": "Alexander Volkov",
+                            "oddsAmerican": "+124",
+                            "oddsDecimal": 2.2400,
+                            "oddsFractional": "6/5",
+                            "participant": "Alexander Volkov"
+                        }
+                    ],
+                    "main": true
+                }
+            ]
+        },
+        {
+            "id": 179872267,
+            "name": "Nicolae Negumereanu - Aleksa Camur",
+            "homeTeamName": "Nicolae Negumereanu",
+            "awayTeamName": "Aleksa Camur",
+            "startDate": "2021-06-19T23:00:00.0000000Z",
+            "offers": [
+                {
+                    "id": "1-2267752494",
+                    "label": "Moneyline",
+                    "outcomes": [
+                        {
+                            "id": "1-2929892981",
+                            "label": "Nicolae Negumereanu",
+                            "oddsAmerican": "+200",
+                            "oddsDecimal": 3.0000,
+                            "oddsFractional": "2/1",
+                            "participant": "Nicolae Negumereanu"
+                        },
+                        {
+                            "id": "1-2929892983",
+                            "label": "Aleksa Camur",
+                            "oddsAmerican": "-265",
+                            "oddsDecimal": 1.3800,
+                            "oddsFractional": "4/11",
+                            "participant": "Aleksa Camur"
+                        }
+                    ],
+                    "main": true
+                }
+            ]
+        },
+        {
+            "id": 179872263,
+            "name": "Dhiego Lima - Matt Brown",
+            "homeTeamName": "Dhiego Lima",
+            "awayTeamName": "Matt Brown",
+            "startDate": "2021-06-19T23:00:00.0000000Z",
+            "offers": [
+                {
+                    "id": "1-2267752492",
+                    "label": "Moneyline",
+                    "outcomes": [
+                        {
+                            "id": "1-2929892975",
+                            "label": "Dhiego Lima",
+                            "oddsAmerican": "-177",
+                            "oddsDecimal": 1.5700,
+                            "oddsFractional": "11/20",
+                            "participant": "Dhiego Lima"
+                        },
+                        {
+                            "id": "1-2929892977",
+                            "label": "Matt Brown",
+                            "oddsAmerican": "+140",
+                            "oddsDecimal": 2.4000,
+                            "oddsFractional": "7/5",
+                            "participant": "Matt Brown"
+                        }
+                    ],
+                    "main": true
+                }
+            ]
+        },
+        {
+            "id": 179872285,
+            "name": "Ramazan Emeev - Warlley Alves",
+            "homeTeamName": "Ramazan Emeev",
+            "awayTeamName": "Warlley Alves",
+            "startDate": "2021-06-26T20:00:00.0000000Z",
+            "offers": [
+                {
+                    "id": "1-2267753221",
+                    "label": "Moneyline",
+                    "outcomes": [
+                        {
+                            "id": "1-2929895213",
+                            "label": "Ramazan Emeev",
+                            "oddsAmerican": "-155",
+                            "oddsDecimal": 1.6500,
+                            "oddsFractional": "13/20",
+                            "participant": "Ramazan Emeev"
+                        },
+                        {
+                            "id": "1-2929895215",
+                            "label": "Warlley Alves",
+                            "oddsAmerican": "+125",
+                            "oddsDecimal": 2.2500,
+                            "oddsFractional": "5/4",
+                            "participant": "Warlley Alves"
+                        }
+                    ],
+                    "main": true
+                }
+            ]
+        },
+        {
+            "id": 179872290,
+            "name": "Marcin Prachnio - Ike Villanueva",
+            "homeTeamName": "Marcin Prachnio",
+            "awayTeamName": "Ike Villanueva",
+            "startDate": "2021-06-26T20:00:00.0000000Z",
+            "offers": [
+                {
+                    "id": "1-2267753037",
+                    "label": "Moneyline",
+                    "outcomes": [
+                        {
+                            "id": "1-2929894696",
+                            "label": "Marcin Prachnio",
+                            "oddsAmerican": "-215",
+                            "oddsDecimal": 1.4700,
+                            "oddsFractional": "4/9",
+                            "participant": "Marcin Prachnio"
+                        },
+                        {
+                            "id": "1-2929894698",
+                            "label": "Ike Villanueva",
+                            "oddsAmerican": "+170",
+                            "oddsDecimal": 2.7000,
+                            "oddsFractional": "17/10",
+                            "participant": "Ike Villanueva"
+                        }
+                    ],
+                    "main": true
+                }
+            ]
+        },
+        {
+            "id": 179872278,
+            "name": "Joaquim Silva - Rick Glenn",
+            "homeTeamName": "Joaquim Silva",
+            "awayTeamName": "Rick Glenn",
+            "startDate": "2021-06-19T23:00:00.0000000Z",
+            "offers": [
+                {
+                    "id": "1-2267752666",
+                    "label": "Moneyline",
+                    "outcomes": [
+                        {
+                            "id": "1-2929893569",
+                            "label": "Joaquim Silva",
+                            "oddsAmerican": "-118",
+                            "oddsDecimal": 1.8500,
+                            "oddsFractional": "17/20",
+                            "participant": "Joaquim Silva"
+                        },
+                        {
+                            "id": "1-2929893571",
+                            "label": "Rick Glenn",
+                            "oddsAmerican": "-106",
+                            "oddsDecimal": 1.9500,
+                            "oddsFractional": "19/20",
+                            "participant": "Rick Glenn"
+                        }
+                    ],
+                    "main": true
+                }
+            ]
+        },
+        {
+            "id": 179804380,
+            "name": "Amanda Nunes - Julianna Peña",
+            "homeTeamName": "Amanda Nunes",
+            "awayTeamName": "Julianna Peña",
+            "startDate": "2021-08-08T03:00:00.0000000Z",
+            "offers": [
+                {
+                    "id": "1-2261373297",
+                    "label": "Moneyline",
+                    "outcomes": [
+                        {
+                            "id": "1-2908511502",
+                            "label": "Amanda Nunes",
+                            "oddsAmerican": "-770",
+                            "oddsDecimal": 1.1300,
+                            "oddsFractional": "1/8",
+                            "participant": "Amanda Nunes"
+                        },
+                        {
+                            "id": "1-2908511504",
+                            "label": "Julianna Peña",
+                            "oddsAmerican": "+515",
+                            "oddsDecimal": 6.1500,
+                            "oddsFractional": "5/1",
+                            "participant": "Julianna Peña"
+                        }
+                    ],
+                    "main": true
+                }
+            ]
+        },
+        {
+            "id": 179872262,
+            "name": "Virna Jandiroba - Kanako Murata",
+            "homeTeamName": "Virna Jandiroba",
+            "awayTeamName": "Kanako Murata",
+            "startDate": "2021-06-19T23:00:00.0000000Z",
+            "offers": [
+                {
+                    "id": "1-2267752186",
+                    "label": "Moneyline",
+                    "outcomes": [
+                        {
+                            "id": "1-2929891955",
+                            "label": "Virna Jandiroba",
+                            "oddsAmerican": "-155",
+                            "oddsDecimal": 1.6500,
+                            "oddsFractional": "13/20",
+                            "participant": "Virna Jandiroba"
+                        },
+                        {
+                            "id": "1-2929891957",
+                            "label": "Kanako Murata",
+                            "oddsAmerican": "+125",
+                            "oddsDecimal": 2.2500,
+                            "oddsFractional": "5/4",
+                            "participant": "Kanako Murata"
+                        }
+                    ],
+                    "main": true
+                }
+            ]
+        },
+        {
+            "id": 179872270,
+            "name": "Casey O'Neill - Lara Fritzen Procopio",
+            "homeTeamName": "Casey O'Neill",
+            "awayTeamName": "Lara Fritzen Procopio",
+            "startDate": "2021-06-19T23:00:00.0000000Z",
+            "offers": [
+                {
+                    "id": "1-2267752667",
+                    "label": "Moneyline",
+                    "outcomes": [
+                        {
+                            "id": "1-2929893572",
+                            "label": "Casey O'Neill",
+                            "oddsAmerican": "+110",
+                            "oddsDecimal": 2.1,
+                            "oddsFractional": "11/10",
+                            "participant": "Casey O'Neill"
+                        },
+                        {
+                            "id": "1-2929893574",
+                            "label": "Lara Fritzen Procopio",
+                            "oddsAmerican": "-139",
+                            "oddsDecimal": 1.72,
+                            "oddsFractional": "7/10",
+                            "participant": "Lara Fritzen Procopio"
+                        }
+                    ],
+                    "main": true
+                }
+            ]
+        },
+        {
+            "id": 179872289,
+            "name": "Michel Prazeres - Shavkat Rakhmonov",
+            "homeTeamName": "Michel Prazeres",
+            "awayTeamName": "Shavkat Rakhmonov",
+            "startDate": "2021-06-26T20:00:00.0000000Z",
+            "offers": [
+                {
+                    "id": "1-2267753218",
+                    "label": "Moneyline",
+                    "outcomes": [
+                        {
+                            "id": "1-2929895204",
+                            "label": "Michel Prazeres",
+                            "oddsAmerican": "+190",
+                            "oddsDecimal": 2.9,
+                            "oddsFractional": "19/10",
+                            "participant": "Michel Prazeres"
+                        },
+                        {
+                            "id": "1-2929895206",
+                            "label": "Shavkat Rakhmonov",
+                            "oddsAmerican": "-240",
+                            "oddsDecimal": 1.42,
+                            "oddsFractional": "21/50",
+                            "participant": "Shavkat Rakhmonov"
+                        }
+                    ],
+                    "main": true
+                }
+            ]
+        },
+        {
+            "id": 179872288,
+            "name": "Renato Moicano - Jai Herbert",
+            "homeTeamName": "Renato Moicano",
+            "awayTeamName": "Jai Herbert",
+            "startDate": "2021-06-26T20:00:00.0000000Z",
+            "offers": [
+                {
+                    "id": "1-2267753036",
+                    "label": "Moneyline",
+                    "outcomes": [
+                        {
+                            "id": "1-2929894693",
+                            "label": "Renato Moicano",
+                            "oddsAmerican": "-250",
+                            "oddsDecimal": 1.4000,
+                            "oddsFractional": "2/5",
+                            "participant": "Renato Moicano"
+                        },
+                        {
+                            "id": "1-2929894695",
+                            "label": "Jai Herbert",
+                            "oddsAmerican": "+195",
+                            "oddsDecimal": 2.9500,
+                            "oddsFractional": "39/20",
+                            "participant": "Jai Herbert"
+                        }
+                    ],
+                    "main": true
+                }
+            ]
+        },
+        {
+            "id": 179872277,
+            "name": "Seung Woo Choi - Julian Erosa",
+            "homeTeamName": "Seung Woo Choi",
+            "awayTeamName": "Julian Erosa",
+            "startDate": "2021-06-19T23:00:00.0000000Z",
+            "offers": [
+                {
+                    "id": "1-2267752185",
+                    "label": "Moneyline",
+                    "outcomes": [
+                        {
+                            "id": "1-2929891952",
+                            "label": "Seung Woo Choi",
+                            "oddsAmerican": "-125",
+                            "oddsDecimal": 1.8000,
+                            "oddsFractional": "4/5",
+                            "participant": "Seung Woo Choi"
+                        },
+                        {
+                            "id": "1-2929891954",
+                            "label": "Julian Erosa",
+                            "oddsAmerican": "+101",
+                            "oddsDecimal": 2.0100,
+                            "oddsFractional": "Evens",
+                            "participant": "Julian Erosa"
+                        }
+                    ],
+                    "main": true
+                }
+            ]
+        },
+        {
+            "id": 179783234,
+            "name": "Dustin Poirier - Conor McGregor",
+            "homeTeamName": "Dustin Poirier",
+            "awayTeamName": "Conor McGregor",
+            "startDate": "2021-07-10T22:00:00.0000000Z",
+            "offers": [
+                {
+                    "id": "1-2259126509",
+                    "label": "Moneyline",
+                    "outcomes": [
+                        {
+                            "id": "1-2900873912",
+                            "label": "Dustin Poirier",
+                            "oddsAmerican": "-108",
+                            "oddsDecimal": 1.9300,
+                            "oddsFractional": "10/11",
+                            "participant": "Dustin Poirier"
+                        },
+                        {
+                            "id": "1-2900873914",
+                            "label": "Conor McGregor",
+                            "oddsAmerican": "-113",
+                            "oddsDecimal": 1.8900,
+                            "oddsFractional": "22/25",
+                            "participant": "Conor McGregor"
+                        }
+                    ],
+                    "main": true
+                }
+            ]
+        },
+        {
+            "id": 179872287,
+            "name": "Ed Herman - Danilo Marques",
+            "homeTeamName": "Ed Herman",
+            "awayTeamName": "Danilo Marques",
+            "startDate": "2021-06-26T20:00:00.0000000Z",
+            "offers": [
+                {
+                    "id": "1-2267753035",
+                    "label": "Moneyline",
+                    "outcomes": [
+                        {
+                            "id": "1-2929894690",
+                            "label": "Ed Herman",
+                            "oddsAmerican": "+140",
+                            "oddsDecimal": 2.4000,
+                            "oddsFractional": "7/5",
+                            "participant": "Ed Herman"
+                        },
+                        {
+                            "id": "1-2929894692",
+                            "label": "Danilo Marques",
+                            "oddsAmerican": "-177",
+                            "oddsDecimal": 1.5700,
+                            "oddsFractional": "11/20",
+                            "participant": "Danilo Marques"
+                        }
+                    ],
+                    "main": true
+                }
+            ]
+        },
+        {
+            "id": 179872266,
+            "name": "Tim Means - Danny Roberts",
+            "homeTeamName": "Tim Means",
+            "awayTeamName": "Danny Roberts",
+            "startDate": "2021-06-19T23:00:00.0000000Z",
+            "offers": [
+                {
+                    "id": "1-2267752184",
+                    "label": "Moneyline",
+                    "outcomes": [
+                        {
+                            "id": "1-2929891949",
+                            "label": "Tim Means",
+                            "oddsAmerican": "-200",
+                            "oddsDecimal": 1.5000,
+                            "oddsFractional": "1/2",
+                            "participant": "Tim Means"
+                        },
+                        {
+                            "id": "1-2929891951",
+                            "label": "Danny Roberts",
+                            "oddsAmerican": "+160",
+                            "oddsDecimal": 2.6000,
+                            "oddsFractional": "8/5",
+                            "participant": "Danny Roberts"
+                        }
+                    ],
+                    "main": true
+                }
+            ]
+        },
+        {
+            "id": 179868178,
+            "name": "Ovince St. Preux - Maxim Grishin",
+            "homeTeamName": "Ovince St. Preux",
+            "awayTeamName": "Maxim Grishin",
+            "startDate": "2021-06-26T20:00:00.0000000Z",
+            "offers": [
+                {
+                    "id": "1-2267753038",
+                    "label": "Moneyline",
+                    "outcomes": [
+                        {
+                            "id": "1-2929894699",
+                            "label": "Ovince St. Preux",
+                            "oddsAmerican": "-112",
+                            "oddsDecimal": 1.9000,
+                            "oddsFractional": "9/10",
+                            "participant": "Ovince St. Preux"
+                        },
+                        {
+                            "id": "1-2929894701",
+                            "label": "Maxim Grishin",
+                            "oddsAmerican": "-112",
+                            "oddsDecimal": 1.9000,
+                            "oddsFractional": "9/10",
+                            "participant": "Maxim Grishin"
+                        }
+                    ],
+                    "main": true
+                }
+            ]
+        },
+        {
+            "id": 179872275,
+            "name": "Josh Parisian - Roque Martinez",
+            "homeTeamName": "Josh Parisian",
+            "awayTeamName": "Roque Martinez",
+            "startDate": "2021-06-19T23:00:00.0000000Z",
+            "offers": [
+                {
+                    "id": "1-2267752668",
+                    "label": "Moneyline",
+                    "outcomes": [
+                        {
+                            "id": "1-2929893575",
+                            "label": "Josh Parisian",
+                            "oddsAmerican": "-132",
+                            "oddsDecimal": 1.7600,
+                            "oddsFractional": "3/4",
+                            "participant": "Josh Parisian"
+                        },
+                        {
+                            "id": "1-2929893577",
+                            "label": "Roque Martinez",
+                            "oddsAmerican": "+107",
+                            "oddsDecimal": 2.0700,
+                            "oddsFractional": "21/20",
+                            "participant": "Roque Martinez"
+                        }
+                    ],
+                    "main": true
+                }
+            ]
+        },
+        {
+            "id": 179804381,
+            "name": "Gilbert Burns - Stephen Thompson",
+            "homeTeamName": "Gilbert Burns",
+            "awayTeamName": "Stephen Thompson",
+            "startDate": "2021-07-11T02:00:00.0000000Z",
+            "offers": [
+                {
+                    "id": "1-2261373295",
+                    "label": "Moneyline",
+                    "outcomes": [
+                        {
+                            "id": "1-2908511496",
+                            "label": "Gilbert Burns",
+                            "oddsAmerican": "+112",
+                            "oddsDecimal": 2.1200,
+                            "oddsFractional": "11/10",
+                            "participant": "Gilbert Burns"
+                        },
+                        {
+                            "id": "1-2908511498",
+                            "label": "Stephen Thompson",
+                            "oddsAmerican": "-139",
+                            "oddsDecimal": 1.7200,
+                            "oddsFractional": "7/10",
+                            "participant": "Stephen Thompson"
+                        }
+                    ],
+                    "main": true
+                }
+            ]
+        },
+        {
+            "id": 179872282,
+            "name": "Khaos Williams - Matthew Semelsberger",
+            "homeTeamName": "Khaos Williams",
+            "awayTeamName": "Matthew Semelsberger",
+            "startDate": "2021-06-19T23:00:00.0000000Z",
+            "offers": [
+                {
+                    "id": "1-2267754216",
+                    "label": "Moneyline",
+                    "outcomes": [
+                        {
+                            "id": "1-2929898348",
+                            "label": "Khaos Williams",
+                            "oddsAmerican": "-177",
+                            "oddsDecimal": 1.5700,
+                            "oddsFractional": "11/20",
+                            "participant": "Khaos Williams"
+                        },
+                        {
+                            "id": "1-2929898350",
+                            "label": "Matthew Semelsberger",
+                            "oddsAmerican": "+140",
+                            "oddsDecimal": 2.4000,
+                            "oddsFractional": "7/5",
+                            "participant": "Matthew Semelsberger"
+                        }
+                    ],
+                    "main": true
+                }
+            ]
+        }
+    ]
+}
