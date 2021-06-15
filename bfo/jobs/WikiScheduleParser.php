@@ -65,7 +65,8 @@ class WikiScheduleParser
             $new_event = [
                 'title' => self::renameEvents($event_details_name['event_name']),
                 'date' => $date_obj->getTimestamp(),
-                'matchups' => []
+                'matchups' => [],
+                'failed' => false
             ];
 
             $fightcard_matches = null;
@@ -90,13 +91,13 @@ class WikiScheduleParser
                         }
                     }
                 } else {
-                    $error_once = true;
-                    echo 'Failed to retrieve announced matchup page for ' . $upcoming_event['event_name'] ."
+                    $new_event['failed'] = true;
+                    echo "Failed to retrieve announced matchup page for " . $upcoming_event['event_name'] ."
 ";
                 }
             }
 
-            if (count($new_event['matchups']) > 0 && $date_obj > new DateTime()) {
+            if (count($new_event['matchups']) > 0 && $date_obj >= new DateTime()) {
                 $parsed_events[] = $new_event;
             }
         }

@@ -58,28 +58,30 @@ class EventDB
         if ($matchup_id) {
             $extra_where .= ' AND f.id = :matchup_id ';
             $extra_where_metadata .= ' AND fm.id = :metadata_matchup_id ';
-            $params = [':matchup_id' => $matchup_id, ':metadata_matchup_id' => $matchup_id];
+            $params[':matchup_id'] = $matchup_id;
+            $params[':metadata_matchup_id'] = $matchup_id;
         }
 
         if ($event_id) {
             $extra_where .= ' AND e.id = :event_id ';
             $extra_where_metadata .= ' AND em.id = :metadata_event_id ';
-            $params = [':event_id' => $event_id, ':metadata_event_id' => $event_id];
+            $params[':event_id'] = $event_id;
+            $params[':metadata_event_id'] = $event_id;
         }
 
         if ($team_id) {
             $extra_where .= ' AND (fighter1_id = :team1_id OR fighter2_id = :team2_id) ';
             $extra_where_metadata .= ' AND (fighter1_id = :metadata_team1_id OR fighter2_id = :metadata_team2_id) ';
-            $params = [
-                ':team1_id' => $team_id, ':team2_id' => $team_id,
-                ':metadata_team1_id' =>  $team_id, ':metadata_team2_id' => $team_id
-            ];
+            $params[':team1_id'] = $team_id;
+            $params[':team2_id'] = $team_id;
+            $params[':metadata_team1_id'] = $team_id;
+            $params[':metadata_team2_id'] = $team_id;
         }
 
         //0 = Unspecified, 1 = Automatic, 2 = Manual
         if ($create_source) {
             $extra_where .= ' AND mca.source = :mca_source ';
-            $params = [':mca_source' => $create_source];
+            $params[':mca_source'] = $create_source;
         }
 
         $sorting = 'ORDER BY f.is_mainevent DESC, gametime DESC, latest_date ASC';

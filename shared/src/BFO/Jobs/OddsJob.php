@@ -42,8 +42,8 @@ class OddsJob
             $created = ScheduleHandler::acceptAllCreateActions();
             $this->logger->info("Auto creating matchups found by scheduler: " . $created);
 
-            /*$removed = ScheduleHandler::acceptAllDeleteActions();
-            $this->logger->info("Auto removing matchups no longer relevant in scheduler: " . $removed);*/
+            $removed = ScheduleHandler::acceptAllDeleteActions();
+            $this->logger->info("Auto removing matchups no longer relevant in scheduler: " . $removed);
         }
 
         //Clean and check alerts

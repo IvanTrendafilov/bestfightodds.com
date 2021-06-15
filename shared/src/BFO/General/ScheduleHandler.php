@@ -74,7 +74,7 @@ class ScheduleHandler
             $new_event = new Event(-1, $action['action_obj']['eventDate'], $action['action_obj']['eventTitle'], true);
             $event = EventHandler::addNewEvent($new_event);
             if ($event) {
-                $audit_log->info("Created new event " . $event->getName() . ' on ' . $event->getDate() . ' as proposed by scheduler');
+                $audit_log->info('Created new event ' . $event->getName() . ' on ' . $event->getDate() . ' as proposed by scheduler');
                 //Event added succesfully. Add matchups
                 foreach ($action['action_obj']['matchups'] as $matchup) {
                     $new_matchup = new Fight(
@@ -85,15 +85,15 @@ class ScheduleHandler
                     );
                     $new_matchup->setCreateSource(2);
                     if (EventHandler::createMatchup($new_matchup)) {
-                        $audit_log->info("Created new matchup " . $new_matchup->getTeamAsString(1) . ' vs. ' . $new_matchup->getTeamAsString(2) . ' as child to ' . $event->getName() . ' (' . $new_matchup->getEventID() . ') as proposed by scheduler');
+                        $audit_log->info('Created new matchup ' . $new_matchup->getTeamAsString(1) . ' vs. ' . $new_matchup->getTeamAsString(2) . ' as child to ' . $event->getName() . ' (' . $new_matchup->getEventID() . ') as proposed by scheduler');
                     } else {
-                        $audit_log->error("Failed to create new matchup " . $new_matchup->getTeamAsString(1) . ' vs. ' . $new_matchup->getTeamAsString(2) . ' as child to ' . $event->getName() . ' (' . $new_matchup->getEventID() . ') as proposed by scheduler');
+                        $audit_log->error('Failed to create new matchup ' . $new_matchup->getTeamAsString(1) . ' vs. ' . $new_matchup->getTeamAsString(2) . ' as child to ' . $event->getName() . ' (' . $new_matchup->getEventID() . ') as proposed by scheduler');
                     }
                     $counter++;
                 }
                 $result = ScheduleHandler::clearManualAction($action['id']);
             } else {
-                $audit_log->error("Failed to create new event " . $new_event->getName() . ' on ' . $new_event->getDate() . ' as proposed by scheduler');
+                $audit_log->error('Failed to create new event ' . $new_event->getName() . ' on ' . $new_event->getDate() . ' as proposed by scheduler');
             }
         }
         return $counter;
@@ -106,18 +106,15 @@ class ScheduleHandler
         $ma_create_matchups = ScheduleHandler::getAllManualActions(7) ?? []; //7 = Delete matchup
         foreach ($ma_create_matchups as $action) {
             $action['action_obj'] = json_decode($action['description'], true);
-            /*$new_matchup = new Fight(
-                -1,
-                $action['action_obj']['matchups'][0]['team1'],
-                $action['action_obj']['matchups'][0]['team2'],
-                $action['action_obj']['eventID']
-            );
-            $new_matchup->setCreateSource(2);
-            if (EventHandler::createMatchup($new_matchup)) {
-                $audit_log->info("Created new matchup " . $new_matchup->getTeamAsString(1) . ' vs. ' . $new_matchup->getTeamAsString(2) . ' at ' . $new_matchup->getEventID() . ' as proposed by scheduler');
-            } else {
-                $audit_log->error("Failed to create new matchup " . $new_matchup->getTeamAsString(1) . ' vs. ' . $new_matchup->getTeamAsString(2) . ' at ' . $new_matchup->getEventID() . ' as proposed by scheduler');
-            }*/
+            $matchups = EventHandler::getMatchups(matchup_id: $action['action_obj']['matchupID'], only_without_odds: true, create_source: 2, future_matchups_only: true);
+
+            if ($matchups[0] && $matchups[0]->getCreateSource() == 2 && $matchups[0]->getID() == $action['action_obj']['matchupID']) {
+                if (EventHandler::removeMatchup($matchups[0]->getID())) {
+                    $audit_log->info('Removed matchup ' . $matchups[0]->getTeamAsString(1) . ' vs. ' . $matchups[0]->getTeamAsString(2) . ' at ' . $matchups[0]->getEventID() . ' as proposed by scheduler');
+                } else {
+                    $audit_log->error('Failed to remove matchup ' . $matchups[0]->getTeamAsString(1) . ' vs. ' . $matchups[0]->getTeamAsString(2) . ' at ' . $matchups[0]->getEventID() . ' as proposed by scheduler');
+                }
+            }
             $result = ScheduleHandler::clearManualAction($action['id']);
             $counter++;
         }

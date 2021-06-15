@@ -25,11 +25,28 @@ class ScheduleParser
         $this->matched_existing_events = [];
     }
 
+    /**
+     * Accepts an array of parsed events with each event having the an array:
+     *           'title' => (string)
+     *           'date' => (string, YYYY-MM-DD)
+     *           'matchups' => (array with collection of matchups consisting of two teams (array))
+     *           'failed' => (bool)
+     */
     public function run(array $schedule): void
     {
         ScheduleHandler::clearAllManualActions();
         $this->processEvents($schedule);
-        $this->suggestToRemoveUnmatchedMatchups();
+
+        //Don't run cleanup if we failed in any of the events
+        $failed_once = false;
+        foreach ($schedule as $event) {
+            if ($event['failed']) {
+                $failed_once = true;
+            }
+        }
+        if (!$failed_once) {
+            $this->suggestToRemoveUnmatchedMatchups();
+        }
     }
 
     public function processEvents(array $parsed_events): void
@@ -152,18 +169,20 @@ class ScheduleParser
     {
         $events = EventHandler::getEvents(future_events_only: true);
         foreach ($events as $event) {
-            //Skip FUTURE EVENTS event and events that are on the same day or closer
-            if ($event->getID() == PARSE_FUTURESEVENT_ID || 
-                $event->getDate() <= date('Y-m-d')) {
-                break;
-            }
-            $matchups = EventHandler::getMatchups(event_id: $event->getID(), only_without_odds: true);
-            foreach ($matchups as $matchup) {
-                if (
-                    !in_array($matchup->getID(), $this->matched_existing_matchups)
-                    && $matchup->getCreateSource() == 2
-                ) { //Only suggest to remove matchups created by scheduler
-                    ScheduleHandler::storeManualAction(json_encode(array('matchupID' => $matchup->getID()), JSON_HEX_APOS | JSON_HEX_QUOT), 7);
+            //Skip FUTURE EVENTS event and events that are on the next day or closer
+            $tomorrow = new \DateTime('tomorrow');
+            if (
+                $event->getID() != PARSE_FUTURESEVENT_ID &&
+                $event->getDate() > $tomorrow->format('Y-m-d')
+            ) {
+                $matchups = EventHandler::getMatchups(event_id: $event->getID(), only_without_odds: true);
+                foreach ($matchups as $matchup) {
+                    if (
+                        !in_array($matchup->getID(), $this->matched_existing_matchups)
+                        && $matchup->getCreateSource() == 2
+                    ) { //Only suggest to remove matchups created by scheduler
+                        ScheduleHandler::storeManualAction(json_encode(array('matchupID' => $matchup->getID()), JSON_HEX_APOS | JSON_HEX_QUOT), 7);
+                    }
                 }
             }
         }
