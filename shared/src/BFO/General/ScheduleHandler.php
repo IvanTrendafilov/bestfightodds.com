@@ -108,7 +108,7 @@ class ScheduleHandler
             $action['action_obj'] = json_decode($action['description'], true);
             $matchups = EventHandler::getMatchups(matchup_id: $action['action_obj']['matchupID'], only_without_odds: true, create_source: 2, future_matchups_only: true);
 
-            if ($matchups[0] && $matchups[0]->getCreateSource() == 2 && $matchups[0]->getID() == $action['action_obj']['matchupID']) {
+            if ($action['type'] == 7 && $matchups[0] && $matchups[0]->getCreateSource() == 2 && $matchups[0]->getID() == $action['action_obj']['matchupID']) {
                 if (EventHandler::removeMatchup($matchups[0]->getID())) {
                     $audit_log->info('Removed matchup ' . $matchups[0]->getTeamAsString(1) . ' vs. ' . $matchups[0]->getTeamAsString(2) . ' at ' . $matchups[0]->getEventID() . ' as proposed by scheduler');
                 } else {
