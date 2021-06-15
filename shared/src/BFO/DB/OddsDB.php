@@ -10,6 +10,9 @@ use BFO\DataTypes\PropBet;
 use BFO\DataTypes\EventPropBet;
 use Exception;
 
+/**
+ * Database logic to handle storage and retrieval of odds, including prop bets
+ */
 class OddsDB
 {
     public static function addPropBet(PropBet $propbet_obj): bool

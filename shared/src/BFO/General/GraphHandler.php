@@ -6,6 +6,9 @@ use BFO\General\OddsHandler;
 use BFO\DataTypes\FightOdds;
 use BFO\DataTypes\PropBet;
 
+/**
+ * Logic to handle retrieval of data for generation of graphs. Include methods for fetching aggregated data
+ */
 class GraphHandler
 {
     public static function getMatchupData(int $matchup_id, int $bookie_id): ?array

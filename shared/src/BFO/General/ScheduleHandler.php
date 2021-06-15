@@ -8,6 +8,9 @@ use BFO\Utils\OddsTools;
 use BFO\DataTypes\Fight;
 use BFO\DataTypes\Event;
 
+/**
+ * Logic to handle storage, retrieval and processing of scheduler related manual actions
+ */
 class ScheduleHandler
 {
     /**

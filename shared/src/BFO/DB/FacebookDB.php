@@ -7,9 +7,7 @@ use BFO\DataTypes\Event;
 use BFO\Utils\DB\PDOTools;
 
 /**
- * Facebook DB
- *
- * Handles all calls to the database related to Facebook posts
+ * Database logic to handle storage related to Facebook posts
  */
 class FacebookDB
 {

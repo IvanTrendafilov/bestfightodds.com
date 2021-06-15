@@ -7,6 +7,9 @@ use BFO\Utils\DB\PDOTools;
 use BFO\DataTypes\Bookie;
 use BFO\DataTypes\PropTemplate;
 
+/**
+ * Database logic to handle sportsbooks (bookies)
+ */
 class BookieDB
 {
     public static function getBookiesGeneric(int $bookie_id = null, bool $exclude_inactive = false): array

@@ -2,6 +2,9 @@
 
 namespace BFO\Utils\DB;
 
+/**
+ * DB (PDO) connection wrapper class
+ */
 class PDOTools
 {
     private static $cached_queries = [];

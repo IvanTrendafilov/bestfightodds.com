@@ -4,6 +4,9 @@ namespace BFO\General;
 
 use BFO\DB\FacebookDB;
 
+/**
+ * Logic to handle posting to Facebook and storage related to Facebook posts
+ */
 class FacebookHandler
 {
     private $logger;

@@ -5,6 +5,9 @@ namespace BFO\DB;
 use BFO\Utils\DB\DBTools;
 use BFO\Utils\DB\PDOTools;
 
+/**
+ * Database logic to handle storage of scheduler related manual actions
+ */
 class ScheduleDB
 {
     public static function storeManualAction($message, $type)

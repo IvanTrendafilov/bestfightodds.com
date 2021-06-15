@@ -5,7 +5,7 @@ namespace BFO\DB;
 use BFO\Utils\DB\PDOTools;
 
 /**
- * Statistics DB
+ * Database logic to handle retrieval of special statistics related to odds. Used for graphs and more
  */
 class StatsDB
 {
@@ -40,12 +40,10 @@ class StatsDB
             $params[] = $matchup_id;
         } else {
             //Last day or hour
-
             //This query is used when a time slice is used, for example last 24 hours or last hour. We need to check if the event is in the past so that past events dont utilize NOW() - 1 HOUR as last hour. The check is as follows:
             //NOW() < METADATA = NOW()
             //NOW() > METADATA = METADATA UNLESS LAST ODDS > METADATA
             //!METADATA, IS_PAST( YES = LAST ODDS, NO = NOW() )
-
             $extra_where = " AND fo1.date <= (IF ((SELECT 1 FROM matchups_metadata mm WHERE matchup_id = ? AND mm.mattribute = 'gametime' LIMIT 1), 
                                                     /*Metadata exists*/
                                                     IF ((SELECT FROM_UNIXTIME(MIN(mm.mvalue)) FROM matchups_metadata mm WHERE mm.matchup_id = ? AND mm.mattribute = 'gametime' LIMIT 1) > NOW(), 

@@ -6,10 +6,7 @@ use BFO\Utils\DB\PDOTools;
 use BFO\DataTypes\Fight;
 
 /**
- * Twitter DB access
- *
- * Handles all calls to the database related to tweets
- *
+ * Database logic to track tweeted matchups as well as add/remove twitter handles for teams
  */
 class TwitterDB
 {

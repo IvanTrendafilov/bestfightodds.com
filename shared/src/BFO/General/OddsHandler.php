@@ -11,6 +11,9 @@ use BFO\DataTypes\EventPropBet;
 use BFO\DataTypes\Fight;
 use BFO\DataTypes\Event;
 
+/**
+ * Logic to handle storage, retrieval and matching of odds, including prop bets
+ */
 class OddsHandler
 {
     public static function addPropBet(PropBet $propbet_obj): bool

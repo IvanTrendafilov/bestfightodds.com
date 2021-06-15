@@ -7,7 +7,7 @@ use BFO\General\EventHandler;
 use BFO\Utils\Twitter\Tweeter;
 
 /**
- * Handles all Twitter-updates for new odds
+ * Logic to tweet new matchups, track tweeted matchups as well as add/remove twitter handles for teams
  */
 class TwitterHandler
 {

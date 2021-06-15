@@ -5,7 +5,7 @@ namespace BFO\General;
 use BFO\DB\TeamDB;
 
 /**
- * TeamHandler
+ * Logic to handle retrieval and storage of teams (aka fighters)
  */
 class TeamHandler
 {
@@ -23,11 +23,6 @@ class TeamHandler
     public static function getLastChangeDate(int $team_id): ?string
     {
         return TeamDB::getLastChangeDate($team_id);
-    }
-
-    public static function getAllTeamsWithMissingResults()
-    {
-        return TeamDB::getAllTeamsWithMissingResults();
     }
 
     public static function addTeamAltName(int $team_id, string $new_alt_name): bool

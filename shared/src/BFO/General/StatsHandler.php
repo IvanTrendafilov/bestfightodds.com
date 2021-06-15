@@ -8,6 +8,9 @@ use BFO\Utils\OddsTools;
 use BFO\General\PropTypeHandler;
 use BFO\Utils\LinkTools;
 
+/**
+ * Logic to handle retrieval of special statistics related to odds. Used for graphs and more
+ */
 class StatsHandler
 {
     public static function getAllDiffsForEvent($event_id, $from = 0) //0 Opening, 1 = 1 day ago, 2 = 1 hour ago

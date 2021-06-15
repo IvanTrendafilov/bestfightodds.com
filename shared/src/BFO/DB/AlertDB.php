@@ -8,6 +8,9 @@ use BFO\General\OddsHandler;
 
 use BFO\Utils\DB\DBTools;
 
+/**
+ * Database logic to handle alerts
+ */
 class AlertDB
 {
     /**

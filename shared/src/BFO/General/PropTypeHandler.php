@@ -5,6 +5,9 @@ namespace BFO\General;
 use BFO\DataTypes\PropType;
 use BFO\DB\PropTypeDB;
 
+/**
+ * Logic to handle storage and retrieval of prop types, generic definitions of prop bets
+ */
 class PropTypeHandler
 {
 

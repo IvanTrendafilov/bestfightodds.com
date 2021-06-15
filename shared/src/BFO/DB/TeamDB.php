@@ -8,7 +8,7 @@ use BFO\Utils\DB\PDOTools;
 use BFO\DataTypes\Team;
 
 /**
- * TeamDB
+ * Database logic to handle retrieval and storage of teams (aka fighters)
  */
 class TeamDB
 {
@@ -144,22 +144,6 @@ class TeamDB
             return $teams[0];
         }
         return null;
-    }
-
-
-    public static function getAllTeamsWithMissingResults()
-    {
-        $query = 'SELECT DISTINCT f.* FROM fighters f 
-                        INNER JOIN fights fi ON (fi.fighter1_id = f.id OR fi.fighter2_id = f.id) 
-                        INNER JOIN events e ON fi.event_id = e.id 
-                    WHERE fi.id NOT IN (SELECT mr.matchup_id FROM matchups_results mr)
-                        AND LEFT(e.date, 10) < LEFT((NOW() - INTERVAL ' . GENERAL_GRACEPERIOD_SHOW . ' HOUR), 10)';
-        $result = DBTools::doQuery($query);
-        $fighters = [];
-        while ($row = mysqli_fetch_array($result)) {
-            $fighters[] = new Team((string) $row['name'], (int) $row['id']);
-        }
-        return $fighters;
     }
 
     public static function addTeamAltName(int $team_id, string $alt_name): bool

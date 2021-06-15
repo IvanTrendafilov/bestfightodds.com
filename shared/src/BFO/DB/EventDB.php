@@ -8,6 +8,9 @@ use BFO\Utils\OddsTools;
 use BFO\DataTypes\Event;
 use BFO\DataTypes\Fight;
 
+/**
+ * Database logic to handle the storage and retrieval of events (e.g. fightcards) and matchups
+ */
 class EventDB
 {
     public static function getEvents(bool $future_events_only = null, int $event_id = null, string $event_name = null, string $event_date = null): array

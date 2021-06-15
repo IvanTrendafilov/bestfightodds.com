@@ -2,16 +2,13 @@
 
 namespace BFO\DB;
 
-/* Holds logic to modify prop types
-
-Prop types are categories that bookie prop templates are mapped to.
-Each prop type can in turn be assigned to a specific category.
-The purpose of prop categories is to be able to use these when generating pre fight report and eventually also for alerts */
-
 use BFO\Utils\DB\PDOTools;
 use BFO\Utils\DB\DBTools;
 use BFO\DataTypes\PropType;
 
+/**
+ * Database logic to handle storage and retrieval of prop types, generic definitions of prop bets
+ */
 class PropTypeDB
 {
     public static function createNewPropType(PropType $proptype_obj) : ?int

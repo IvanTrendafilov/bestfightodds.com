@@ -7,6 +7,9 @@ use BFO\DataTypes\PropTemplate;
 use BFO\DB\BookieDB;
 use Exception;
 
+/**
+ * Logic to handle sportsbooks (bookies)
+ */
 class BookieHandler
 {
     public static function getAllBookies(bool $exclude_inactive = false): array

@@ -2,6 +2,9 @@
 
 namespace BFO\Utils\DB;
 
+/**
+ * Legacy DB connection class. Use PDOTools instead
+ */
 class DBTools
 {
     public static $aCachedResults = array();
@@ -29,19 +32,7 @@ class DBTools
      */
     public static function doQuery($a_sQuery)
     {
-        //$sStart = microtime();
         $rResult = mysqli_query(self::getConnection(), $a_sQuery) or die('MySQL error: ' . mysqli_error(self::getConnection()));
-
-        /*if (microtime() - $sStart > 0.05)
-        {
-                 echo "
-
-                  ";
-                  echo 'query: ' . (microtime() - $sStart) . ' ' . $a_sQuery . '<br /><br />';
-                  echo "
-
-                  ";
-        }*/
         return $rResult;
     }
 

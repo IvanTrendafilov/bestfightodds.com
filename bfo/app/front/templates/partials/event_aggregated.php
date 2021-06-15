@@ -10,7 +10,6 @@
                     <table class="team-stats-table" cellspacing="0" summary="Odds for <?=$event->getName()?>">
                         <thead>
                             <tr>
-                                <?php //<th>Result</th>?>
                                 <th>Matchup</th>
                                 <th style="text-align: right; padding-right: 4px;">Opening line</th>
                                 <th style="text-align: center;" colspan="3">Closing range</th>
@@ -74,9 +73,6 @@
                             <?php else: ?>
 
                                 <tr class="main-row">
-                                    <?php /* <td class="resultcell <?=$sResultClass?>">
-                                        <div class="result"><?=$sResult?></div>
-                                    </td> */?>
                                     <th class="oppcell"><?='<a href="/fighters/' . $matchup['matchup_obj']->getFighterAsLinkString(1) . '">' . $matchup['matchup_obj']->getFighterAsString(1) . '</a>'?></td>
                                     <td class="moneyline"></td>
                                     <td class="moneyline">n/a</td>
@@ -86,7 +82,6 @@
                                     <td></td>
                                 </tr>
                                 <tr>
-                                    <?php /*    <td class="resultcell"><div class="method"><?=$aResults['winner'] != '-1' ? '' . $sMethod . '' : ''?></div></td> */?>
                                     <th class="oppcell"><?='<a href="/fighters/' . $matchup['matchup_obj']->getFighterAsLinkString($matchup['other_pos']) . '">' . $matchup['matchup_obj']->getFighterAsString($matchup['other_pos']) . '</a>'?></td>
                                     <td class="moneyline"></td>
                                     <td class="moneyline">n/a</td>

@@ -7,6 +7,9 @@ use BFO\DataTypes\FightOdds;
 use BFO\DataTypes\Event;
 use BFO\DataTypes\Fight;
 
+/**
+ * Logic to handle the storage, retrieval and matching of events (e.g. fightcards) and matchups
+ */
 class EventHandler
 {
     public static function getEvent(int $event_id, bool $future_event_only = false): ?Event
