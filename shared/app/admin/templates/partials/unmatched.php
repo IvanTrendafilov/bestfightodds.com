@@ -49,17 +49,12 @@
                                         if (body.error == true) {
                                             alert(body.msg);
                                         } else {
-                                            e.target.closest('tr').style.color = '#ddd';
-                                            e.target.disabled = true;
+                                            item.style.color = '#ddd';
+                                            item.getElementsByTagName('button')[0].disabled = true;
                                         }
                                     });
                             });
-
-
-
-
                         }
-
                     });
             });
         });
