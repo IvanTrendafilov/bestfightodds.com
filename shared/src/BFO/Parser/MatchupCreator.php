@@ -193,12 +193,12 @@ class MatchupCreator
 
             $created_event_obj = EventHandler::addNewEvent($new_event);
             if ($created_event_obj != null) {
-                $this->audit_log->info("Created new event " . $created_event_obj->getName() . ' on ' . $date_obj->format('Y-m-d') . ' as proposed by ' . $this->bookie_obj->getName() . ' . Also in scheduler: ' . ($in_scheduler['found'] ? 'Yes' : 'No'));
-                $this->logger->info("Created new event " . $created_event_obj->getName() . ' on ' . $date_obj->format('Y-m-d') . ' as proposed by ' . $this->bookie_obj->getName() . ' . Also in scheduler: ' . ($in_scheduler['found'] ? 'Yes' : 'No'));
+                $this->audit_log->info("Created new event " . $created_event_obj->getName() . ' on ' . $date_obj->format('Y-m-d') . ' as proposed by ' . $this->bookie_obj->getName());
+                $this->logger->info("Created new event " . $created_event_obj->getName() . ' on ' . $date_obj->format('Y-m-d') . ' as proposed by ' . $this->bookie_obj->getName());
                 return $created_event_obj;
             } else {
-                $this->audit_log->error("Failed to create new event " . $event_name . ' on ' . $date_obj->format('Y-m-d') . ' as proposed by ' . $this->bookie_obj->getName() . ' . Also in scheduler: ' . ($in_scheduler['found'] ? 'Yes' : 'No'));
-                $this->logger->error("Failed to create new event " . $event_name . ' on ' . $date_obj->format('Y-m-d') . ' as proposed by ' . $this->bookie_obj->getName() . ' . Also in scheduler: ' . ($in_scheduler['found'] ? 'Yes' : 'No'));
+                $this->audit_log->error("Failed to create new event " . $event_name . ' on ' . $date_obj->format('Y-m-d') . ' as proposed by ' . $this->bookie_obj->getName());
+                $this->logger->error("Failed to create new event " . $event_name . ' on ' . $date_obj->format('Y-m-d') . ' as proposed by ' . $this->bookie_obj->getName());
                 return null;
             }
         }
@@ -220,17 +220,17 @@ class MatchupCreator
             $id = EventHandler::createMatchup($new_matchup);
             if ($id) {
                 $created_matchup_obj = EventHandler::getMatchup($id);
-                $this->audit_log->info("Created new matchup " . $created_matchup_obj->getTeam(1) . ' vs ' . $created_matchup_obj->getTeam(2) . ' at ' . $matched_event->getName() . ' on ' . $matched_event->getDate() . ' as proposed by ' . $this->bookie_obj->getName() . ' . Also in scheduler: ' . ($in_scheduler['found'] ? 'Yes' : 'No'));
-                $this->logger->info("- Created new matchup " . $created_matchup_obj->getTeam(1) . ' vs ' . $created_matchup_obj->getTeam(2) . ' at ' . $matched_event->getName() . ' on ' . $matched_event->getDate() . ' as proposed by ' . $this->bookie_obj->getName() . ' . Also in scheduler: ' . ($in_scheduler['found'] ? 'Yes' : 'No'));
+                $this->audit_log->info("Created new matchup " . $created_matchup_obj->getTeam(1) . ' vs ' . $created_matchup_obj->getTeam(2) . ' at ' . $matched_event->getName() . ' on ' . $matched_event->getDate() . ' as proposed by ' . $this->bookie_obj->getName());
+                $this->logger->info("- Created new matchup " . $created_matchup_obj->getTeam(1) . ' vs ' . $created_matchup_obj->getTeam(2) . ' at ' . $matched_event->getName() . ' on ' . $matched_event->getDate() . ' as proposed by ' . $this->bookie_obj->getName());
                 return $created_matchup_obj;
             } else {
-                $this->audit_log->error("Failed to create new matchup " . $team1 . ' vs ' . $team2 . ' at ' . $matched_event->getName() . ' on ' . $matched_event->getDate() . ' as proposed by ' . $this->bookie_obj->getName() . ' . Also in scheduler: ' . ($in_scheduler['found'] ? 'Yes' : 'No'));
-                $this->logger->error("- Failed to create new matchup " . $team1 . ' vs ' . $team2 . ' at ' . $matched_event->getName() . ' on ' . $matched_event->getDate() . ' as proposed by ' . $this->bookie_obj->getName() . ' . Also in scheduler: ' . ($in_scheduler['found'] ? 'Yes' : 'No'));
+                $this->audit_log->error("Failed to create new matchup " . $team1 . ' vs ' . $team2 . ' at ' . $matched_event->getName() . ' on ' . $matched_event->getDate() . ' as proposed by ' . $this->bookie_obj->getName());
+                $this->logger->error("- Failed to create new matchup " . $team1 . ' vs ' . $team2 . ' at ' . $matched_event->getName() . ' on ' . $matched_event->getDate() . ' as proposed by ' . $this->bookie_obj->getName());
                 return null;
             }
         }
-        $this->audit_log->warning("Tried to create old matchup OR matchup too close to gametime " . $team1 . ' vs ' . $team2 . ' at ' . $matched_event->getName() . ' on ' . $matched_event->getDate() . ' as proposed by ' . $this->bookie_obj->getName() . ' . Also in scheduler: ' . ($in_scheduler['found'] ? 'Yes' : 'No'));
-        $this->logger->warning("- Tried to create old matchup OR matchup too close to gametime " . $team1 . ' vs ' . $team2 . ' at ' . $matched_event->getName() . ' on ' . $matched_event->getDate() . ' as proposed by ' . $this->bookie_obj->getName() . ' . Also in scheduler: ' . ($in_scheduler['found'] ? 'Yes' : 'No'));
+        $this->audit_log->warning("Tried to create old matchup OR matchup too close to gametime " . $team1 . ' vs ' . $team2 . ' at ' . $matched_event->getName() . ' on ' . $matched_event->getDate() . ' as proposed by ' . $this->bookie_obj->getName());
+        $this->logger->warning("- Tried to create old matchup OR matchup too close to gametime " . $team1 . ' vs ' . $team2 . ' at ' . $matched_event->getName() . ' on ' . $matched_event->getDate() . ' as proposed by ' . $this->bookie_obj->getName());
         return null;
     }
 }
