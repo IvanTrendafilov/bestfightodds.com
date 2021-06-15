@@ -2,6 +2,9 @@
 
 namespace BFO\Parser;
 
+/**
+ * This interface is used as a base for site specific rulesets that MatchupCreator uses to determine if an event or matchup can be created
+ */
 interface RulesetInterface
 {
     public function __construct();

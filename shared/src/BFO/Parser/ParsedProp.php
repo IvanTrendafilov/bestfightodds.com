@@ -2,6 +2,9 @@
 
 namespace BFO\Parser;
 
+/**
+ * ParsedProp Class - Represents a parsed prop bet from a sportsbook
+ */
 class ParsedProp extends ParsedMatchup
 {
     private $matched_matchup_id = null;

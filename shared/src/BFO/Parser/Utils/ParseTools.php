@@ -5,11 +5,7 @@ namespace BFO\Parser\Utils;
 use BFO\DataTypes\FightOdds;
 
 /**
- * ParseTools
- *
- * Contains tools used when parsing matchups and betting lines
- *
- * Status: Prod version
+ * Contains useful tools used when parsing matchups and betting lines
  */
 class ParseTools
 {

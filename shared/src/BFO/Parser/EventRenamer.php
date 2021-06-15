@@ -4,6 +4,9 @@ namespace BFO\Parser;
 
 use BFO\General\EventHandler;
 
+/**
+ * Used to check the current stored sportsbook metadata for a matchup and determine the most suitable event name based on input from sportsbooks
+ */
 class EventRenamer
 {
     public function __construct()
@@ -12,8 +15,6 @@ class EventRenamer
 
     public function evaluteRenamings(): array
     {
-        //Fetch all upcoming matchups and their metadata event_name
-
         $recommendations = [];
 
         $events = EventHandler::getEvents(future_events_only: true);
@@ -28,7 +29,6 @@ class EventRenamer
                     foreach ($event_names as $event_name) {
                         //Strip anything past -
                         $formatted_event_name = explode(' - ', $event_name['mvalue'])[0];
-
                         if (
                             !str_starts_with(strtoupper($formatted_event_name), 'FUTURE') // Ignore events starting with Future
                             && preg_match('/\d{2,4}\-\d{2}\-\d{2}/', $formatted_event_name) == 0
@@ -38,21 +38,7 @@ class EventRenamer
                     }
                 }
 
-
-                /*echo $event->getName() . ": 
-    ";*/
-                foreach ($names_to_evaluate as $name) {
-                    /*echo $name . "
-    ";*/
-                }
-
                 $common_word = $this->getLongestCommonString($names_to_evaluate);
-                /*echo '- Common: ' . $common_word;
-
-
-                echo "
-    ";*/
-
 
                 //If there is consensus, check for any of the available event names that contain a numbered variant.
                 $best_choice_numbered = '';
@@ -65,35 +51,19 @@ class EventRenamer
                         preg_match('/' . $common_word . '[^\d]*\s\d+/', $names_stripped) == 1
                         || preg_match('/[^\d]+\s\d+/', $common_stripped) == 1
                     ) {
-                        /*echo "-- Numbered candidate: " . $names . "
-    ";*/
                         if (preg_match('/[^\:]+\:.+vs\.?.+/', $names)) {
-                            /*echo "---  Themed candidate: " . $names . "
-    ";*/
                             $best_choice_themed = $names;
-                            //TODO How to handle multiple themed..
                         } else {
                             $best_choice_numbered = $names;
                         }
-
-                        //Maybe match on both themed and number candidate and then decide which one is more relevant?
-                        //Eg. UFC Vegas 26 vs UFC Fight Night: Ike vs. Zombie .. in this case prefer maybe the named one?
-                        //I.e:
-                        //>UFC Fight Night 13: Bla vs. Bla < UFC Fight Night: Ike vs. Zombie < UFC Vegas 26 
-                        // Can also check for consus before committing to one of them.. Would not work in the UFC Vegas 26 case though...
                     }
                 }
-                //If there is also a named event afterwards (e.g. UFC 266: Bla vs. Bla we honor that)
+                //If there is also a named event afterwards (e.g. UFC 266: Jones vs. Silva we honor that)
                 $best_choice_themed = str_replace('vs ', 'vs. ', $best_choice_themed);
-
-        /*        echo "= Probably best: " . $best_choice_themed . "/" . $best_choice_numbered . "
-                ";*/
-
 
                 if ($best_choice_themed != '' && $best_choice_themed != $event->getName()) {
                     $recommendation['change'] = true;
                     $recommendation['new_name'] = $best_choice_themed;
-
                 } else if ($best_choice_numbered != '' && $best_choice_numbered != $event->getName() && !preg_match('/[^\:]+\:.+vs\.?.+/', $event->getName())) {
                     $recommendation['change'] = true;
                     $recommendation['new_name'] = $best_choice_numbered;

@@ -2,12 +2,11 @@
 
 namespace BFO\Parser\Utils;
 
+use BFO\Utils\DB\PDOTools;
+
 /*
  * The purpose of this class is to provide logging of any parsing runs that have been made. Logged runs are simply stored in the database for later analysis and monitoring
  */
-
-use BFO\Utils\DB\PDOTools;
-
 class ParseRunLogger
 {
     /*

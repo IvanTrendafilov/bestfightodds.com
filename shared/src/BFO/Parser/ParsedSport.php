@@ -2,6 +2,9 @@
 
 namespace BFO\Parser;
 
+/**
+ * ParsedSport Class - Represents a parsed sport from a sportsbook containing multiple ParsedMatchups and ParsedProps
+ */
 class ParsedSport
 {
     private string $name;

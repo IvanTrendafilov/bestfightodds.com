@@ -2,6 +2,9 @@
 
 namespace BFO\Parser;
 
+/**
+ * ParsdeMoneyLine Class - Represents a parsed moneyline from a sportsbook. Typically associated with a ParsedMatchup or ParsedProp
+ */
 class ParsedMoneyline
 {
     private $team1_moneyline;

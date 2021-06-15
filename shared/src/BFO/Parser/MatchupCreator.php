@@ -11,6 +11,11 @@ use BFO\DataTypes\Fight;
 use BFO\DataTypes\Event;
 use BFO\Parser\RulesetInterface;
 
+/**
+ * Automatically creates events and matchups based on site specific criteria (defined in ruleset and config).
+ * 
+ * Used by OddsProcessor when unable to match odds to an existing matchup
+ */
 class MatchupCreator
 {
     private $logger = null;

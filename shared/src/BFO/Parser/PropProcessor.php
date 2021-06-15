@@ -13,6 +13,9 @@ use BFO\DataTypes\Fight;
 use BFO\DataTypes\PropTemplate;
 use Psr\Log\LoggerInterface;
 
+/**
+ * PropProcessor - Goes through parsed props, matches and stores them in the database. Also keeps track of changes to matchups and more..
+ */
 class PropProcessor
 {
     private LoggerInterface $logger;

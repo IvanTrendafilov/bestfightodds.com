@@ -2,6 +2,9 @@
 
 namespace BFO\Utils;
 
+/**
+ * Contains useful methods to generate links based on content
+ */
 class LinkTools
 {
     public static function slugString($text)
@@ -17,7 +20,7 @@ class LinkTools
 
         // lowercase
         //$text = strtolower($text);
-      
+
         // remove unwanted characters
         $text = preg_replace('~[^-\w]+~', '', $text);
 

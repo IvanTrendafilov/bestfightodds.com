@@ -3,11 +3,7 @@
 namespace BFO\Utils;
 
 /**
- * OddsTools
- *
- * Contains tools used to manipulate, verify and format odds in various different scenarios. Replaces ParseTools
- * which was initially ment only for Parsing scenarios
- *
+ * Contains tools used to manipulate, verify and format odds in various different scenarios
  */
 class OddsTools
 {

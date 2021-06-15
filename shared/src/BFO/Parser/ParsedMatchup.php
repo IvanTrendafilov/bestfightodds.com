@@ -6,6 +6,9 @@ use BFO\Parser\ParsedMoneyline;
 use BFO\Parser\Utils\ParseTools;
 use BFO\Utils\OddsTools;
 
+/**
+ * ParsedMatchup Class - Represents a parsed matchup from a sportsbook
+ */
 class ParsedMatchup
 {
     private $team1_name;
