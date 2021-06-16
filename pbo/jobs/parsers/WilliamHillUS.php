@@ -2,7 +2,7 @@
 
 /**
  * Bookie: William Hill
- * Sport: MMA
+ * Sport: Boxing
  *
  * Timezone: UTC
  * 
@@ -23,7 +23,7 @@ define('BOOKIE_NAME', 'williamhillus');
 define('BOOKIE_ID', 24);
 define(
     'BOOKIE_URLS',
-    ['all' => 'https://odds.us.williamhill.com/api/v1/competitions?sportId=ufcmma']
+    ['all' => 'https://odds.us.williamhill.com/api/v1/competitions?sportId=boxing']
 );
 define(
     'BOOKIE_MOCKFILES',
@@ -106,7 +106,7 @@ class ParserJob extends ParserJobBase
         foreach ($json as $matchup) {
             foreach ($matchup->markets as $market) {
                 if (
-                    $market->name == 'Bout Betting' &&
+                    $market->name == 'Bout Betting 2 Way' &&
                     isset(
                         $matchup->id,
                         $matchup->startTime,

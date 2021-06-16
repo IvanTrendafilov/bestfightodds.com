@@ -11,9 +11,9 @@ class ParsedSport
     private array $matchups;
     private array $props;
 
-    public function __construct(string $name)
+    public function __construct(string $name = null)
     {
-        $this->name = trim($name);
+        $this->name = $name ? trim($name) : 'Default';
         $this->matchups = [];
         $this->props = [];
     }
