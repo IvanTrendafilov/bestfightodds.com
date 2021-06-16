@@ -2,7 +2,7 @@
 
 /**
  * Bookie: Fanduel
- * Sport: MMA
+ * Sport: Boxing
  *
  * Timezone: ES, converted to UTC
  * 
@@ -29,7 +29,7 @@ define(
 );
 define(
     'BOOKIE_MOCKFILES',
-    ['UFC' => PARSE_MOCKFEEDS_DIR . "fanduel.json"]
+    ['All fights' => PARSE_MOCKFEEDS_DIR . "fanduel.json"]
 );
 
 class ParserJob extends ParserJobBase
@@ -48,7 +48,7 @@ class ParserJob extends ParserJobBase
         $urls = [];
         //Fanduel structure forces us to create this foreach pyramid
         foreach ($json->bonavigationnodes as $nav_node) {
-            if ($nav_node->name == 'MMA') {
+            if ($nav_node->name == 'Boxing') {
                 foreach ($nav_node->bonavigationnodes as $sport_nodes) {
                     foreach ($sport_nodes->bonavigationnodes as $sub_node) {
                         foreach ($sub_node->bonavigationnodes as $third_node) {
@@ -62,6 +62,7 @@ class ParserJob extends ParserJobBase
                 }
             }
         }
+
         //With the subtypes gathered, fetch the content for each
         foreach ($urls as $key => $url) {
             $this->logger->info("Fetching " . $key . " matchups through URL: " . $url);
@@ -131,7 +132,7 @@ class ParserJob extends ParserJobBase
             }
         }
     }
-   
+
     private function parseMatchup(string $competition_name, $event, $market): void
     {
         if (
