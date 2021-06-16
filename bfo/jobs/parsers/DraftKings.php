@@ -1,132 +1,78 @@
 <?php
 
 /**
- * XML Parser
- *
  * Bookie: DraftKings
  * Sport: MMA
  *
- * Moneylines: Yes
- * Spreads: No
- * Totals: No
- * Props: No
- * Authoritative run: Yes
+ * Timezone: UTC
  *
- * Comment: Dev version
- * 
- * URL: https://sportsbook.draftkings.com/sports/mma
- *
+ * Notes: Can be run in dev/test towards actual URLs (not using mock)
+ *  
  */
 
 require_once __DIR__ . "/../../bootstrap.php";
 require_once __DIR__ . "/../../config/Ruleset.php";
 
-use BFO\Parser\Jobs\ParserJobBase;
 use BFO\Parser\Utils\ParseTools;
-use BFO\Utils\OddsTools;
 use BFO\Parser\ParsedSport;
 use BFO\Parser\ParsedMatchup;
-use Symfony\Component\Panther\Client;
-use Respect\Validation\Validator as v;
+use BFO\Parser\ParsedProp;
+use BFO\Parser\Jobs\ParserJobBase;
 
 define('BOOKIE_NAME', 'draftkings');
 define('BOOKIE_ID', 22);
 define(
     'BOOKIE_URLS',
-    ['all' => 'https://sportsbook.draftkings.com/sports/mma']
+    ['all' => 'https://sportsbook.draftkings.com']
 );
 define(
     'BOOKIE_MOCKFILES',
-    ['all' => PARSE_MOCKFEEDS_DIR . "draftkings.xml"]
+    ['all' => PARSE_MOCKFEEDS_DIR . "draftkings.json"]
 );
 
 class ParserJob extends ParserJobBase
 {
-    private $parsed_sport;
+    private ParsedSport $parsed_sport;
 
     public function fetchContent(array $content_urls): array
     {
-        $this->logger->info("Fetching matchups through URL: " . BOOKIE_URLS['all']);
-        //Actualy fetching is performed in parseContent due to Panther complexity
-        return ['all' => ''];
+        //Grab league IDs for MMA 
+        $leagues = ParseTools::retrievePageFromURL($content_urls['all'] . '/api/odds/v1/leagues.json');
+        $json = json_decode($leagues, true);
+        $league_urls = [];
+        foreach ($json['leagues'] as $league) {
+            if ($league['sportName'] == 'MMA') {
+                $league_urls[$league['name']] = $content_urls['all'] . '/api/odds/v1/leagues/' . $league['leagueId'] . '/offers/gamelines';
+                $league_urls['FUTURES ' . $league['name']] = $content_urls['all'] . '/api/odds/v1/leagues/' . $league['leagueId'] . '/offers/futures';
+                $league_urls['PROPS ' . $league['name']] = $content_urls['all'] . '/api/odds/v1/leagues/' . $league['leagueId'] . '/offers/props';
+            }
+        }
+
+        $content = [];
+        foreach ($league_urls as $key => $url) {
+            $this->logger->info("Fetching " . $key . " matchups through URL: " . $url);
+        }
+        ParseTools::retrieveMultiplePagesFromURLs($league_urls);
+        foreach ($league_urls as $key => $url) {
+            $content[$key] = ParseTools::getStoredContentForURL($league_urls[$key]);
+        }
+        return $content;
     }
 
-    public function parseContent(array $source): ParsedSport
+    public function parseContent(array $content): ParsedSport
     {
-        //$source is essentially ignored here since we will be using panther to simulate the browsing
-
         $this->parsed_sport = new ParsedSport('MMA');
+        $error_once = false;
 
-        try {
-            $client = Client::createChromeClient(null, [
-                '--no-sandbox',
-                '--user-agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/79.0.3945.88 Safari/537.36',
-                '--window-size=1200,1100',
-                '--disable-setuid-sandbox',
-                '--disable-dev-shm-usage',
-                '--disable-accelerated-2d-canvas',
-                '--no-first-run',
-                '--headless',
-                '--no-zygote',
-                '--single-process',
-                '--disable-gpu',
-                '--blink-settings=imagesEnabled=false,scriptEnabled=false'
-            ], ['port' => intval('95' . BOOKIE_ID)]);
-            $client->request('GET', BOOKIE_URLS['all']);
-
-            $matchups = [];
-
-            $crawler = $client->waitFor('.league-link__link');
-
-            $tab_count = $crawler->filter('a.league-link__link')->count();
-            if ($tab_count > 10) {
-                $this->logger->error('Unusual amount of tabs, bailing' . $tab_count);
-                return $this->parsed_sport;
+        //Process each league
+        foreach ($content as $league_name => $json_content) {
+            if (!$this->parseLeague($league_name, $json_content)) {
+                $error_once = true;
             }
-            for ($x = 0; $x < $tab_count; $x++) {
-                $this->logger->debug('Clicking on tab on page');
-                $client->executeScript("document.querySelectorAll('a.league-link__link')[" . $x . "].click()");
-                $crawler = $client->waitFor('.sportsbook-offer-category-card');
-                $crawler->filter('.sportsbook-event-accordion__wrapper')->each(function (\Symfony\Component\DomCrawler\Crawler $event_node) use (&$client, &$matchups) {
-                    //Check for live indicator, if so we skip this entry
-                    $live_crawler = $event_node->filter('.sportsbook__icon--live');
-                    if ($live_crawler->count() > 0) {
-                        $this->logger->info('Live event, will skip');
-                    } else if ($event_node->filter('.sportsbook-outcome-body-wrapper')->count() == 2) {
-                        $matchup = [];
-                        $i = 1;
-                        $event_node->filter('.sportsbook-outcome-body-wrapper')->each(function (\Symfony\Component\DomCrawler\Crawler $team_node) use (&$matchup, &$i) {
-                            $matchup['team' . $i . '_name'] = $team_node->filter('.sportsbook-outcome-cell__label-line-container')->text();
-                            $matchup['team' . $i . '_odds'] = $team_node->filter('.sportsbook-odds')->text();
-                            $i++;
-                        });
-
-                        //Try future date format first
-                        $this->logger->debug('Capturing date');
-                        $date = DateTime::createFromFormat('D jS M g:ia', (string) $event_node->filter('.sportsbook-event-accordion__date')->text());
-                        if (!$date) {
-                            $this->logger->debug('Falling back to secondary date format');
-                            $date = new DateTime((string) $event_node->filter('.sportsbook-event-accordion__date')->text());
-                        }
-                        $matchup['date'] = $date->getTimestamp();
-                        $matchups[] = $matchup;
-                    }
-                });
-                $client->back();
-            }
-        } catch (Exception $e) {
-            $this->logger->error('Exception when retrieving page contents: ' . $e->getMessage());
-        } finally {
-            $client->quit();
         }
 
-        $client->quit();
-
-        foreach ($matchups as $matchup) {
-            $this->parseMatchup($matchup);
-        }
-
-        if (count($this->parsed_sport->getParsedMatchups()) >= 10) {
+        //Declare full run if we fill the criteria
+        if (!$error_once && count($this->parsed_sport->getParsedMatchups()) > 3) {
             $this->full_run = true;
             $this->logger->info("Declared full run");
         }
@@ -134,38 +80,99 @@ class ParserJob extends ParserJobBase
         return $this->parsed_sport;
     }
 
-    private function parseMatchup($matchup)
+    private function parseLeague(string $league_name, string $json_content): bool
     {
-        //Check for metadata
-        if (!isset($matchup['date'])) {
-            $this->logger->warning('Missing metadata (date) for matchup');
+        $json = json_decode($json_content);
+
+        //Error checking
+        if (!$json) {
+            $this->logger->error("Unable to parse proper json for " . $league_name . '. Contents: ' . substr($json_content, 0, 20) . '...');
             return false;
         }
-
-        //Validate matchup before adding
-        if (
-            !v::stringVal()->length(5, null)->validate($matchup['team1_name'])
-            || !v::stringVal()->length(5, null)->validate($matchup['team2_name'])
-            || !v::stringVal()->length(2, null)->validate($matchup['team1_odds'])
-            || !v::stringVal()->length(2, null)->validate($matchup['team2_odds'])
-            || !OddsTools::checkCorrectOdds((string) $matchup['team1_odds'])
-            || !OddsTools::checkCorrectOdds((string) $matchup['team2_odds'])
-        ) {
-            $this->logger->warning('Invalid matchup fetched: ' . $matchup['team1_name'] . ' ' . $matchup['team1_odds'] . ' / ' . $matchup['team2_name'] . ' ' . $matchup['team2_odds']);
-            return false;
+        if (isset($json->errorStatus)) {
+            if (in_array($json->errorStatus->code, ['BET419', 'BET420', 'BET421'])) {
+                //No matchups found. Not an error
+                $this->logger->info("League " . $league_name . " has no matchups");
+                return true;
+            } else {
+                //Error occurred
+                $this->logger->error("Unknown error: " . $json->errorStatus->code . " " . $json->errorStatus->developerMessage);
+                return false;
+            }
         }
+        $this->logger->info("Processing league " . $league_name);
 
-        //All ok, add matchup
-        $parsed_matchup = new ParsedMatchup(
-            ParseTools::formatName($matchup['team1_name']),
-            ParseTools::formatName($matchup['team2_name']),
-            $matchup['team1_odds'],
-            $matchup['team2_odds']
-        );
-        $parsed_matchup->setMetaData('gametime', $matchup['date']);
-        $this->parsed_sport->addParsedMatchup($parsed_matchup);
+        //Loop through events and grab matchups
+        foreach ($json->events as $matchup) {
+            foreach ($matchup->offers as $offer) {
+                if (
+                    $offer->label == 'Moneyline' &&
+                    isset(
+                        $matchup->id,
+                        $matchup->startDate,
+                        $offer?->outcomes[0]->oddsAmerican,
+                        $offer?->outcomes[0]->participant,
+                        $offer?->outcomes[1]->oddsAmerican,
+                        $offer?->outcomes[1]->participant
+                    )
+                ) {
+                    $this->parseMatchup($league_name, $matchup, $offer);
+                } else if (str_starts_with($league_name, 'PROPS ')) {
+                    $this->parseProp($matchup, $offer);
+                }
+            }
+        }
 
         return true;
+    }
+
+    private function parseMatchup($league_name, $matchup, $offer): void
+    {
+        $parsed_matchup = new ParsedMatchup(
+            $offer->outcomes[0]->participant,
+            $offer->outcomes[1]->participant,
+            $offer->outcomes[0]->oddsAmerican,
+            $offer->outcomes[1]->oddsAmerican
+        );
+
+        $date_obj = new DateTime((string) $matchup->startDate);
+        $parsed_matchup->setMetaData('gametime', $date_obj->getTimestamp());
+        if (str_starts_with($league_name, 'FUTURES ')) {
+            $parsed_matchup->setMetaData('event_name', substr($league_name, 8)); //Remove FUTURE part
+        } else {
+            $parsed_matchup->setMetaData('event_name', $league_name);
+        }
+
+        $parsed_matchup->setCorrelationID($matchup->id);
+
+        $this->parsed_sport->addParsedMatchup($parsed_matchup);
+    }
+
+    private function parseProp($matchup, $offer): void
+    {
+        if (count($offer->outcomes) == 2) {
+            //Two way prop
+            $parsed_prop = new ParsedProp(
+                $matchup->homeTeamName . ' vs. ' . $matchup->awayTeamName . ' :: ' . $offer->label . ' : ' . $offer->outcomes[0]->label,
+                $matchup->homeTeamName . ' vs. ' . $matchup->awayTeamName . ' :: ' . $offer->label . ' : ' . $offer->outcomes[1]->label,
+                $offer->outcomes[0]->oddsAmerican,
+                $offer->outcomes[1]->oddsAmerican
+            );
+            $parsed_prop->setCorrelationID($matchup->id);
+            $this->parsed_sport->addFetchedProp($parsed_prop);
+        } else {
+            //Single line prop
+            foreach ($offer->outcomes as $outcome) {
+                $parsed_prop = new ParsedProp(
+                    $matchup->homeTeamName . ' vs. ' . $matchup->awayTeamName . ' :: ' . $offer->label . ' : ' . $outcome->label,
+                    '',
+                    $outcome->oddsAmerican,
+                    '-99999'
+                );
+                $parsed_prop->setCorrelationID($matchup->id);
+                $this->parsed_sport->addFetchedProp($parsed_prop);
+            }
+        }
     }
 }
 
