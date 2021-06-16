@@ -136,19 +136,19 @@
     <div id="alert-window" class="popup-window"><div class="popup-header" id="alert-header"><div></div><a href="#" class="cd-popup-close">&#10005;</a></div><div id="alert-area">
         <form id="alert-form">Alert me at e-mail <input type="text" name="alert-mail" id="alert-mail"><br>when the odds reaches <input type="text" name="alert-odds" id="alert-odds"> or better<br>at <select name="alert-bookie">
             <option value="-1">any bookie</option>
-            <option value="1">5Dimes</option>
+            <option value="1">5D</option>
             <option value="17">William Hill</option>
             <option value="20">BetWay</option>
-            <option value="3">BookMaker</option>
-            <option value="5">Bovada</option>
-            <option value="2">SportBet</option>
-            <option value="8">SportsInteraction</option>
-            <option value="9">Pinnacle</option>
-            <option value="12">BetOnline</option>
-            <option value="13">BetDSI</option>
-            <option value="16">Intertops</option>
+            <option value="3">BM</option>
+            <option value="5">BV</option>
+            <option value="2">SP</option>
+            <option value="8">SI</option>
+            <option value="9">PN</option>
+            <option value="12">BO</option>
+            <option value="13">BD</option>
+            <option value="16">IT</option>
             <option value="19">Bet365</option>
-            <option value="4">Sportsbook</option>
+            <option value="4">SB</option>
         </select><br><div id="alert-button-container"><input type="hidden" name="tn"><input type="hidden" name="m">
             <div class="alert-loader"></div>
             <div class="alert-result">&nbsp;</div>

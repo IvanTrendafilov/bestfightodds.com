@@ -71,7 +71,11 @@
                         <tr>
                             <th scope="col"></th>
                             <?php foreach ($bookies as $bookie): ?>
-                                <th scope="col" data-b="<?=$bookie->getID()?>"><a href="/out/<?=$bookie->getID()?>" onclick="lO(<?=$bookie->getID()?>,<?=$event->getID()?>);"><?=str_replace(' ', '&nbsp;', (strlen($bookie->getName()) > 10 ? (substr($bookie->getName(), 0, 9) . '.') : $bookie->getName()))?></a></th>
+                                <?php if ($bookie->getRefURL() == ''): ?>
+                                    <th scope="col" data-b="<?=$bookie->getID()?>"><span style="    color: #606060; padding-top: 6px; padding-bottom: 6px; height: 20px;"><?=str_replace(' ', '&nbsp;', (strlen($bookie->getName()) > 10 ? (substr($bookie->getName(), 0, 9) . '.') : $bookie->getName()))?></span></th>
+                                <?php else: ?>
+                                    <th scope="col" data-b="<?=$bookie->getID()?>"><a href="/out/<?=$bookie->getID()?>" onclick="lO(<?=$bookie->getID()?>,<?=$event->getID()?>);"><?=str_replace(' ', '&nbsp;', (strlen($bookie->getName()) > 10 ? (substr($bookie->getName(), 0, 9) . '.') : $bookie->getName()))?></a></th>
+                                <?php endif ?>
                             <?php endforeach ?>
                             <th scope="col" colspan="3" class="table-prop-header">Props</th>
                         </tr>

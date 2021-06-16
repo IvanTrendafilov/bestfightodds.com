@@ -362,10 +362,10 @@ class EventHandler
                             $found_event = self::getMatchingEvent($consensus_event_name, $matchup_metadata_date->format('Y-m-d'));
                             if ($found_event) {
                                 if (EventHandler::changeFight($matchup->getID(), $found_event->getID())) {
-                                    $audit_log->info("Moved matchup " . $matchup->getTeamAsString(1) . " vs. " . $matchup->getTeamAsString(2) . " (" . $matchup->getID() . ") to " . $found_event->getName() . "(" . $found_event->getDate() . ") based on median gametime metadata");
+                                    $audit_log->info("Moved matchup " . $matchup->getTeamAsString(1) . " vs. " . $matchup->getTeamAsString(2) . " (" . $matchup->getID() . ") to " . $found_event->getName() . " (" . $found_event->getDate() . ") based on median gametime metadata");
                                     $move_counter++;
                                 } else {
-                                    $audit_log->error("Failed to move matchup " . $matchup->getTeamAsString(1) . " vs. " . $matchup->getTeamAsString(2) . " (" . $matchup->getID() . ") to " . $found_event->getName() . "(" . $found_event->getDate() . ") based on median gametime metadata. May have to create this event");
+                                    $audit_log->error("Failed to move matchup " . $matchup->getTeamAsString(1) . " vs. " . $matchup->getTeamAsString(2) . " (" . $matchup->getID() . ") to " . $found_event->getName() . " (" . $found_event->getDate() . ") based on median gametime metadata. May have to create this event");
                                 }
                             }
                         }

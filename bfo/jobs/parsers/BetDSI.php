@@ -31,7 +31,7 @@ define(
 );
 define(
     'BOOKIE_MOCKFILES',
-    ['all' => PARSE_MOCKFEEDS_DIR . "5dimes.xml"]
+    ['all' => PARSE_MOCKFEEDS_DIR . "betdsi.xml"]
 );
 
 class ParserJob extends ParserJobBase

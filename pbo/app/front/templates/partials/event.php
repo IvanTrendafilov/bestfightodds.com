@@ -1,10 +1,11 @@
 <div class="table-outer-wrapper">
     <div class="table-header"><a href="/events/<?= $event->getEventAsLinkString() ?>">
-            <?php if (strtoupper($event->getName()) != 'FUTURE EVENTS') : //Add date for all events except for FUTURE EVENTS ?> 
-            
+            <?php if (strtoupper($event->getName()) != 'FUTURE EVENTS') : //Add date for all events except for FUTURE EVENTS 
+            ?>
+
                 <?= date('F jS', strtotime($event->getDate())) ?>
             <?php else : ?>
-                <?=$event->getName()?>
+                <?= $event->getName() ?>
             <?php endif ?>
         </a>
 
@@ -35,11 +36,11 @@
                     <?php //============== Add matchups ====================== 
                     ?>
                     <?php foreach (array_reverse($matchups) as $matchup_key => $matchup) : ?>
-                        
+
 
                         <?php for ($i = 1; $i <= 2; $i++) : ?>
                             <tr <?= $i == 1 ? 'id="mu-' . $matchup->getID() . '"' : '' ?> <?= (($i == 2 && $matchup_key == array_key_last($matchups)) ? ' style="border-bottom: 0;" ' : '') ?>>
-                                <td class="date-cell" data-time="<?=date('H:i', intval($matchup->getMetadata('max_gametime')))?>"><?= ($i == 1 ? date('H:i', intval($matchup->getMetadata('max_gametime'))) : (date('H:i', intval($matchup->getMetadata('max_gametime'))) != '' ? 'UTC' : '')) ?></td>
+                                <td class="date-cell" data-time="<?= date('H:i', intval($matchup->getMetadata('max_gametime'))) ?>"><?= ($i == 1 ? date('H:i', intval($matchup->getMetadata('max_gametime'))) : (date('H:i', intval($matchup->getMetadata('max_gametime'))) != '' ? 'UTC' : '')) ?></td>
                                 <th scope="row"><a href="/fighters/<?= $matchup->getFighterAsLinkString($i) ?>"><span class="t-b-fcc"><?= $matchup->getFighterAsString($i) ?></span></a></th>
                             </tr>
                         <?php endfor ?>
@@ -50,7 +51,7 @@
                                 <?php foreach ($team_num_row as $team_num => $prop) : ?>
                                     <?php for ($i = 1; $i <= 2; $i++) : ?>
                                         <tr class="pr">
-                                            <th scope="row"  colspan="2"><?= $i == 1 ? $prop[array_key_first($prop)]['odds_obj']->getPropName() : $prop[array_key_first($prop)]['odds_obj']->getNegPropName() ?></th>
+                                            <th scope="row" colspan="2"><?= $i == 1 ? $prop[array_key_first($prop)]['odds_obj']->getPropName() : $prop[array_key_first($prop)]['odds_obj']->getNegPropName() ?></th>
                                         </tr>
                                     <?php endfor ?>
                                 <?php endforeach ?>
@@ -69,7 +70,7 @@
                         <?php foreach ($event_prop_odds[$event->getID()] as $proptype_id => $prop) : ?>
                             <?php for ($i = 1; $i <= 2; $i++) : ?>
                                 <tr class="pr">
-                                    <th scope="row"  colspan="2"><?= $i == 1 ? $prop[array_key_first($prop)]['odds_obj']->getPropName() : $prop[array_key_first($prop)]['odds_obj']->getNegPropName() ?></th>
+                                    <th scope="row" colspan="2"><?= $i == 1 ? $prop[array_key_first($prop)]['odds_obj']->getPropName() : $prop[array_key_first($prop)]['odds_obj']->getNegPropName() ?></th>
                                 </tr>
                             <?php endfor ?>
                         <?php endforeach ?>
@@ -88,7 +89,11 @@
                                 <th scope="col" class="date-head"></th>
                                 <th scope="col"></th>
                                 <?php foreach ($bookies as $bookie) : ?>
-                                    <th scope="col" data-b="<?= $bookie->getID() ?>"><a href="/out/<?= $bookie->getID() ?>" onclick="lO(<?= $bookie->getID() ?>,<?= $event->getID() ?>);"><?= str_replace(' ', '&nbsp;', (strlen($bookie->getName()) > 10 ? (substr($bookie->getName(), 0, 9) . '.') : $bookie->getName())) ?></a></th>
+                                    <?php if ($bookie->getRefURL() == '') : ?>
+                                        <th scope="col" data-b="<?= $bookie->getID() ?>"><span style="color: #606060; padding-top: 6px; padding-bottom: 6px; height: 20px;"><?= str_replace(' ', '&nbsp;', (strlen($bookie->getName()) > 10 ? (substr($bookie->getName(), 0, 9) . '.') : $bookie->getName())) ?></span></th>
+                                    <?php else : ?>
+                                        <th scope="col" data-b="<?= $bookie->getID() ?>"><a href="/out/<?= $bookie->getID() ?>" onclick="lO(<?= $bookie->getID() ?>,<?= $event->getID() ?>);"><?= str_replace(' ', '&nbsp;', (strlen($bookie->getName()) > 10 ? (substr($bookie->getName(), 0, 9) . '.') : $bookie->getName())) ?></a></th>
+                                    <?php endif ?>
                                 <?php endforeach ?>
                                 <th scope="col" colspan="3" class="table-prop-header">Props</th>
                             </tr>
@@ -103,12 +108,12 @@
                                 <?php for ($i = 1; $i <= 2; $i++) : ?>
 
                                     <tr <?= (($i == 2 && $matchup_key == array_key_last($matchups)) ? ' style="border-bottom: 0;" ' : '') ?>>
-                                        <td class="date-cell" data-time="<?=date('H:i', intval($matchup->getMetadata('max_gametime')))?>"><?= ($i == 1 ? date('H:i', intval($matchup->getMetadata('max_gametime'))) : (date('H:i', intval($matchup->getMetadata('max_gametime'))) != '' ? 'UTC' : '')) ?></td>
+                                        <td class="date-cell" data-time="<?= date('H:i', intval($matchup->getMetadata('max_gametime'))) ?>"><?= ($i == 1 ? date('H:i', intval($matchup->getMetadata('max_gametime'))) : (date('H:i', intval($matchup->getMetadata('max_gametime'))) != '' ? 'UTC' : '')) ?></td>
                                         <th scope="row"><a href="/fighters/<?= $matchup->getFighterAsLinkString($i) ?>"><span class="t-b-fcc"><?= $matchup->getFighterAsString($i) ?></span></a></th>
 
                                         <?php foreach ($bookies as $bookie) : ?>
 
-                                            <?php $odds = @$matchup_odds[$event->getID()][$matchup->getID()][$bookie->getID()]; 
+                                            <?php $odds = @$matchup_odds[$event->getID()][$matchup->getID()][$bookie->getID()];
                                             ?>
 
                                             <?php if (isset($odds['odds_obj'])) : ?>
@@ -189,13 +194,13 @@
 
                                                     <?php foreach ($bookies as $bookie) : ?>
 
-                                                        <?php $odds = @$prop[$bookie->getID()]; 
+                                                        <?php $odds = @$prop[$bookie->getID()];
                                                         ?>
                                                         <?php if (isset($odds['odds_obj'])) {
                                                             $odds_val = ($i == 1 ? $odds['odds_obj']->getPropOdds() : $odds['odds_obj']->getNegPropOdds());
-                                                        } 
+                                                        }
                                                         ?>
-                                                        <?php $previous_odds_val = $i == 1 ?  @$prop[$bookie->getID()]['previous_prop_odds'] : @$prop[$bookie->getID()]['previous_negprop_odds']; 
+                                                        <?php $previous_odds_val = $i == 1 ?  @$prop[$bookie->getID()]['previous_prop_odds'] : @$prop[$bookie->getID()]['previous_negprop_odds'];
                                                         ?>
 
                                                         <?php if (isset($odds['odds_obj'])) : ?>
@@ -295,13 +300,13 @@
 
                                             <?php foreach ($bookies as $bookie) : ?>
 
-                                                <?php $odds = @$prop[$bookie->getID()]; 
+                                                <?php $odds = @$prop[$bookie->getID()];
                                                 ?>
                                                 <?php if (isset($odds['odds_obj'])) {
                                                     $odds_val = ($i == 1 ? $odds['odds_obj']->getPropOdds() : $odds['odds_obj']->getNegPropOdds());
-                                                } 
+                                                }
                                                 ?>
-                                                <?php $previous_odds_val = $i == 1 ?  @$prop[$bookie->getID()]['previous_prop_odds'] : @$prop[$bookie->getID()]['previous_negprop_odds']; 
+                                                <?php $previous_odds_val = $i == 1 ?  @$prop[$bookie->getID()]['previous_prop_odds'] : @$prop[$bookie->getID()]['previous_negprop_odds'];
                                                 ?>
 
                                                 <?php if (isset($odds['odds_obj'])) : ?>
