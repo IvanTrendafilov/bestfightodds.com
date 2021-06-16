@@ -553,7 +553,7 @@ class EventDB
         $query = 'SELECT * 
                     FROM matchups_metadata 
                     WHERE matchup_id = ? ' . $extra_where . '
-                    ORDER BY source_bookie_id ASC';
+                    ORDER BY mvalue ASC';
 
         return PDOTools::findMany($query, $params);
     }

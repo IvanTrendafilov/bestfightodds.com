@@ -318,20 +318,24 @@ class EventHandler
         $move_counter = 0;
         $matchup_counter = 0;
 
-        //Checks the date (metadata) of the current matchup and moves the matchup to the appropriate generic event, this is typically only done for sites like PBO where matchups belong to a specific date and not a named event
+        //Checks the date (metadata) of the current matchup and moves the matchup to the appropriate named event
         $audit_log = new \Katzgrau\KLogger\Logger(GENERAL_KLOGDIR, \Psr\Log\LogLevel::INFO, ['filename' => 'changeaudit.log']);
 
         $events = EventHandler::getEvents(future_events_only: true);
         foreach ($events as $event) {
-            $matchups = EventHandler::getMatchups(event_id: $event->getID());
+            $matchups = EventHandler::getMatchups(event_id: $event->getID(), only_with_odds: true);
             foreach ($matchups as $matchup) {
                 $matchup_counter++;
                 $matchup_metadata_date = new \DateTime();
-                $matchup_metadata_date = $matchup_metadata_date->setTimestamp(intval($matchup->getMetadata('min_gametime')));
+
+                //Get all dates for event 
+                $matchup_metadata_dates = EventHandler::getMetaDataForMatchup($matchup->getID(), 'gametime');
+                $median_timestamp = $matchup_metadata_dates[floor((count($matchup_metadata_dates) - 1) / 2)];
+
+                $matchup_metadata_date = $matchup_metadata_date->setTimestamp(intval($median_timestamp['mvalue']));
                 if (
                     new \DateTime() < $matchup_metadata_date //Check that new date is not in the past
                     && $matchup_metadata_date->format('Y-m-d') != $event->getDate()
-
                 ) {
                     //Ensure that all events have a consensus on the league (e.g. UFC). This is then stored in consens_event_name
                     $event_names = EventHandler::getMetaDataForMatchup($matchup->getID(), 'event_name');
@@ -358,10 +362,10 @@ class EventHandler
                             $found_event = self::getMatchingEvent($consensus_event_name, $matchup_metadata_date->format('Y-m-d'));
                             if ($found_event) {
                                 if (EventHandler::changeFight($matchup->getID(), $found_event->getID())) {
-                                    $audit_log->info("Moved matchup " . $matchup->getTeamAsString(1) . " vs. " . $matchup->getTeamAsString(2) . " (" . $matchup->getID() . ") to " . $found_event->getName() . "(" . $found_event->getDate() . ") based on min gametime metadata");
+                                    $audit_log->info("Moved matchup " . $matchup->getTeamAsString(1) . " vs. " . $matchup->getTeamAsString(2) . " (" . $matchup->getID() . ") to " . $found_event->getName() . "(" . $found_event->getDate() . ") based on median gametime metadata");
                                     $move_counter++;
                                 } else {
-                                    $audit_log->error("Failed to move matchup " . $matchup->getTeamAsString(1) . " vs. " . $matchup->getTeamAsString(2) . " (" . $matchup->getID() . ") to " . $found_event->getName() . "(" . $found_event->getDate() . ") based on min gametime metadata. May have to create this event");
+                                    $audit_log->error("Failed to move matchup " . $matchup->getTeamAsString(1) . " vs. " . $matchup->getTeamAsString(2) . " (" . $matchup->getID() . ") to " . $found_event->getName() . "(" . $found_event->getDate() . ") based on median gametime metadata. May have to create this event");
                                 }
                             }
                         }
