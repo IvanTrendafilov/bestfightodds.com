@@ -88,7 +88,7 @@ class ParserJob extends ParserJobBase
 
         //Error checking
         if (!$json) {
-            $this->logger->error("Unable to parse proper json for " . $event_name . '. Contents: ' . substr($json_content, 0, 20) . '...');
+            $this->logger->error('Unable to parse proper json for ' . $event_name . '. Contents: ' . substr($json_content, 0, 20) . '...');
             return false;
         }
         if (isset($json->message)) {

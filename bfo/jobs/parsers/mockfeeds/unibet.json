@@ -1,0 +1,3903 @@
+{
+    "betOffers": [
+        {
+            "eventId": 1007501860,
+            "criterion": {
+                "englishLabel": "Bout Odds",
+                "id": 1001160027,
+                "label": "Bout Odds",
+                "order": [
+                    0
+                ]
+            },
+            "tags": [
+                "OFFERED_PREMATCH",
+                "MAIN"
+            ],
+            "outcomes": [
+                {
+                    "oddsFractional": "10/11",
+                    "englishLabel": "1",
+                    "label": "1",
+                    "betOfferId": 2259126509,
+                    "oddsAmerican": "-108",
+                    "type": "OT_ONE",
+                    "changedDate": "2021-05-10T07:21:49Z",
+                    "odds": 1930,
+                    "cashOutStatus": "ENABLED",
+                    "id": 2900873912,
+                    "status": "OPEN"
+                },
+                {
+                    "oddsFractional": "22/25",
+                    "englishLabel": "2",
+                    "label": "2",
+                    "betOfferId": 2259126509,
+                    "oddsAmerican": "-113",
+                    "type": "OT_TWO",
+                    "changedDate": "2021-05-10T07:21:49Z",
+                    "odds": 1890,
+                    "cashOutStatus": "ENABLED",
+                    "id": 2900873914,
+                    "status": "OPEN"
+                }
+            ],
+            "cashOutStatus": "ENABLED",
+            "closed": "2021-07-10T22:00:00Z",
+            "betOfferType": {
+                "englishName": "Match",
+                "name": "Match",
+                "id": 2
+            },
+            "id": 2259126509
+        },
+        {
+            "eventId": 1007573160,
+            "criterion": {
+                "englishLabel": "Bout Odds",
+                "id": 1001160027,
+                "label": "Bout Odds",
+                "order": [
+                    0
+                ]
+            },
+            "tags": [
+                "OFFERED_PREMATCH",
+                "MAIN"
+            ],
+            "outcomes": [
+                {
+                    "oddsFractional": "11/10",
+                    "englishLabel": "1",
+                    "label": "1",
+                    "betOfferId": 2261373295,
+                    "oddsAmerican": "112",
+                    "type": "OT_ONE",
+                    "changedDate": "2021-06-07T16:09:19Z",
+                    "odds": 2120,
+                    "cashOutStatus": "ENABLED",
+                    "id": 2908511496,
+                    "status": "OPEN"
+                },
+                {
+                    "oddsFractional": "7/10",
+                    "englishLabel": "2",
+                    "label": "2",
+                    "betOfferId": 2261373295,
+                    "oddsAmerican": "-139",
+                    "type": "OT_TWO",
+                    "changedDate": "2021-06-07T16:09:19Z",
+                    "odds": 1720,
+                    "cashOutStatus": "ENABLED",
+                    "id": 2908511498,
+                    "status": "OPEN"
+                }
+            ],
+            "cashOutStatus": "ENABLED",
+            "closed": "2021-07-11T02:00:00Z",
+            "betOfferType": {
+                "englishName": "Match",
+                "name": "Match",
+                "id": 2
+            },
+            "id": 2261373295
+        },
+        {
+            "eventId": 1007573170,
+            "criterion": {
+                "englishLabel": "Bout Odds",
+                "id": 1001160027,
+                "label": "Bout Odds",
+                "order": [
+                    0
+                ]
+            },
+            "tags": [
+                "OFFERED_PREMATCH",
+                "MAIN"
+            ],
+            "outcomes": [
+                {
+                    "oddsFractional": "13/20",
+                    "englishLabel": "1",
+                    "label": "1",
+                    "betOfferId": 2261373296,
+                    "oddsAmerican": "-155",
+                    "type": "OT_ONE",
+                    "changedDate": "2021-06-07T16:10:00Z",
+                    "odds": 1650,
+                    "cashOutStatus": "ENABLED",
+                    "id": 2908511499,
+                    "status": "OPEN"
+                },
+                {
+                    "oddsFractional": "6/5",
+                    "englishLabel": "2",
+                    "label": "2",
+                    "betOfferId": 2261373296,
+                    "oddsAmerican": "124",
+                    "type": "OT_TWO",
+                    "changedDate": "2021-06-07T16:10:00Z",
+                    "odds": 2240,
+                    "cashOutStatus": "ENABLED",
+                    "id": 2908511501,
+                    "status": "OPEN"
+                }
+            ],
+            "cashOutStatus": "ENABLED",
+            "closed": "2021-06-27T02:00:00Z",
+            "betOfferType": {
+                "englishName": "Match",
+                "name": "Match",
+                "id": 2
+            },
+            "id": 2261373296
+        },
+        {
+            "eventId": 1007573389,
+            "criterion": {
+                "englishLabel": "Bout Odds",
+                "id": 1001160027,
+                "label": "Bout Odds",
+                "order": [
+                    0
+                ]
+            },
+            "tags": [
+                "OFFERED_PREMATCH",
+                "MAIN"
+            ],
+            "outcomes": [
+                {
+                    "oddsFractional": "1/8",
+                    "englishLabel": "1",
+                    "label": "1",
+                    "betOfferId": 2261373297,
+                    "oddsAmerican": "-770",
+                    "type": "OT_ONE",
+                    "changedDate": "2021-04-28T16:06:34Z",
+                    "odds": 1130,
+                    "cashOutStatus": "ENABLED",
+                    "id": 2908511502,
+                    "status": "OPEN"
+                },
+                {
+                    "oddsFractional": "5/1",
+                    "englishLabel": "2",
+                    "label": "2",
+                    "betOfferId": 2261373297,
+                    "oddsAmerican": "515",
+                    "type": "OT_TWO",
+                    "changedDate": "2021-04-28T16:06:34Z",
+                    "odds": 6150,
+                    "cashOutStatus": "ENABLED",
+                    "id": 2908511504,
+                    "status": "OPEN"
+                }
+            ],
+            "cashOutStatus": "ENABLED",
+            "closed": "2021-08-08T03:00:00Z",
+            "betOfferType": {
+                "englishName": "Match",
+                "name": "Match",
+                "id": 2
+            },
+            "id": 2261373297
+        },
+        {
+            "eventId": 1007658567,
+            "criterion": {
+                "englishLabel": "Bout Odds",
+                "id": 1001160027,
+                "label": "Bout Odds",
+                "order": [
+                    0
+                ]
+            },
+            "tags": [
+                "OFFERED_PREMATCH",
+                "MAIN"
+            ],
+            "outcomes": [
+                {
+                    "oddsFractional": "10/11",
+                    "englishLabel": "1",
+                    "label": "1",
+                    "betOfferId": 2265445334,
+                    "oddsAmerican": "-110",
+                    "type": "OT_ONE",
+                    "changedDate": "2021-06-11T10:05:06Z",
+                    "odds": 1910,
+                    "cashOutStatus": "ENABLED",
+                    "id": 2922283077,
+                    "status": "OPEN"
+                },
+                {
+                    "oddsFractional": "10/11",
+                    "englishLabel": "2",
+                    "label": "2",
+                    "betOfferId": 2265445334,
+                    "oddsAmerican": "-110",
+                    "type": "OT_TWO",
+                    "changedDate": "2021-06-11T10:05:06Z",
+                    "odds": 1910,
+                    "cashOutStatus": "ENABLED",
+                    "id": 2922283079,
+                    "status": "OPEN"
+                }
+            ],
+            "cashOutStatus": "ENABLED",
+            "closed": "2021-06-20T02:00:00Z",
+            "betOfferType": {
+                "englishName": "Match",
+                "name": "Match",
+                "id": 2
+            },
+            "id": 2265445334
+        },
+        {
+            "eventId": 1007662949,
+            "criterion": {
+                "englishLabel": "Winner",
+                "id": 1001159642,
+                "label": "Winner",
+                "order": [
+                    0
+                ]
+            },
+            "tags": [
+                "OFFERED_PREMATCH",
+                "NOT_COMBINABLE"
+            ],
+            "outcomes": [
+                {
+                    "oddsFractional": "20/1",
+                    "englishLabel": "Camozzi, Chris",
+                    "label": "Camozzi, Chris",
+                    "betOfferId": 2265589781,
+                    "oddsAmerican": "2000",
+                    "type": "OT_UNTYPED",
+                    "participant": "Camozzi, Chris",
+                    "prevOdds": [],
+                    "participantId": 1000278450,
+                    "changedDate": "2021-05-26T15:42:15Z",
+                    "odds": 21000,
+                    "cashOutStatus": "ENABLED",
+                    "id": 2922768835,
+                    "status": "OPEN"
+                },
+                {
+                    "oddsFractional": "11/4",
+                    "englishLabel": "Carlos, Antonio Jr",
+                    "label": "Carlos, Antonio Jr",
+                    "betOfferId": 2265589781,
+                    "oddsAmerican": "275",
+                    "type": "OT_UNTYPED",
+                    "participant": "Carlos, Antonio Jr",
+                    "prevOdds": [],
+                    "participantId": 1002102207,
+                    "changedDate": "2021-05-26T15:42:15Z",
+                    "odds": 3750,
+                    "cashOutStatus": "ENABLED",
+                    "id": 2922768836,
+                    "status": "OPEN"
+                },
+                {
+                    "oddsFractional": "3/1",
+                    "englishLabel": "Ferreira, Cezar",
+                    "label": "Ferreira, Cezar",
+                    "betOfferId": 2265589781,
+                    "oddsAmerican": "300",
+                    "type": "OT_UNTYPED",
+                    "participant": "Ferreira, Cezar",
+                    "prevOdds": [],
+                    "participantId": 1001290665,
+                    "changedDate": "2021-05-26T15:42:15Z",
+                    "odds": 4000,
+                    "cashOutStatus": "ENABLED",
+                    "id": 2922768837,
+                    "status": "OPEN"
+                },
+                {
+                    "oddsFractional": "5/1",
+                    "englishLabel": "Hamlet, Marthin",
+                    "label": "Hamlet, Marthin",
+                    "betOfferId": 2265589781,
+                    "oddsAmerican": "500",
+                    "type": "OT_UNTYPED",
+                    "participant": "Hamlet, Marthin",
+                    "prevOdds": [],
+                    "participantId": 1005587510,
+                    "changedDate": "2021-05-26T15:42:15Z",
+                    "odds": 6000,
+                    "cashOutStatus": "ENABLED",
+                    "id": 2922768838,
+                    "status": "OPEN"
+                },
+                {
+                    "oddsFractional": "22/1",
+                    "englishLabel": "Hendricks, Cory",
+                    "label": "Hendricks, Cory",
+                    "betOfferId": 2265589781,
+                    "oddsAmerican": "2200",
+                    "type": "OT_UNTYPED",
+                    "participant": "Hendricks, Cory",
+                    "prevOdds": [],
+                    "participantId": 1003327895,
+                    "changedDate": "2021-05-26T15:42:15Z",
+                    "odds": 23000,
+                    "cashOutStatus": "ENABLED",
+                    "id": 2922768839,
+                    "status": "OPEN"
+                },
+                {
+                    "oddsFractional": "33/1",
+                    "englishLabel": "Lawlor, Tom",
+                    "label": "Lawlor, Tom",
+                    "betOfferId": 2265589781,
+                    "oddsAmerican": "3300",
+                    "type": "OT_UNTYPED",
+                    "participant": "Lawlor, Tom",
+                    "prevOdds": [],
+                    "participantId": 1000504147,
+                    "changedDate": "2021-05-26T15:42:15Z",
+                    "odds": 34000,
+                    "cashOutStatus": "ENABLED",
+                    "id": 2922768840,
+                    "status": "OPEN"
+                },
+                {
+                    "oddsFractional": "25/1",
+                    "englishLabel": "Magalhaes, Vinny",
+                    "label": "Magalhaes, Vinny",
+                    "betOfferId": 2265589781,
+                    "oddsAmerican": "2500",
+                    "type": "OT_UNTYPED",
+                    "participant": "Magalhaes, Vinny",
+                    "prevOdds": [],
+                    "participantId": 1000504140,
+                    "changedDate": "2021-05-26T15:42:15Z",
+                    "odds": 26000,
+                    "cashOutStatus": "ENABLED",
+                    "id": 2922768841,
+                    "status": "OPEN"
+                },
+                {
+                    "oddsFractional": "11/4",
+                    "englishLabel": "Sordi, Emiliano",
+                    "label": "Sordi, Emiliano",
+                    "betOfferId": 2265589781,
+                    "oddsAmerican": "275",
+                    "type": "OT_UNTYPED",
+                    "participant": "Sordi, Emiliano",
+                    "prevOdds": [],
+                    "participantId": 1002332208,
+                    "changedDate": "2021-05-26T15:42:15Z",
+                    "odds": 3750,
+                    "cashOutStatus": "ENABLED",
+                    "id": 2922768843,
+                    "status": "OPEN"
+                },
+                {
+                    "oddsFractional": "25/1",
+                    "englishLabel": "Spohn, Daniel",
+                    "label": "Spohn, Daniel",
+                    "betOfferId": 2265589781,
+                    "oddsAmerican": "2500",
+                    "type": "OT_UNTYPED",
+                    "participant": "Spohn, Daniel",
+                    "prevOdds": [],
+                    "participantId": 1002159409,
+                    "changedDate": "2021-05-26T15:42:15Z",
+                    "odds": 26000,
+                    "cashOutStatus": "ENABLED",
+                    "id": 2922768844,
+                    "status": "OPEN"
+                },
+                {
+                    "oddsFractional": "11/2",
+                    "englishLabel": "Young, Jordan",
+                    "label": "Young, Jordan",
+                    "betOfferId": 2265589781,
+                    "oddsAmerican": "550",
+                    "type": "OT_UNTYPED",
+                    "participant": "Young, Jordan",
+                    "prevOdds": [],
+                    "participantId": 1007570856,
+                    "changedDate": "2021-05-26T15:42:15Z",
+                    "odds": 6500,
+                    "cashOutStatus": "ENABLED",
+                    "id": 2922768845,
+                    "status": "OPEN"
+                }
+            ],
+            "cashOutStatus": "DISABLED",
+            "closed": "2021-12-31T22:00:00Z",
+            "betOfferType": {
+                "englishName": "Winner",
+                "name": "Winner",
+                "id": 4
+            },
+            "id": 2265589781
+        },
+        {
+            "eventId": 1007662964,
+            "criterion": {
+                "englishLabel": "Winner",
+                "id": 1001159642,
+                "label": "Winner",
+                "order": [
+                    0
+                ]
+            },
+            "tags": [
+                "OFFERED_PREMATCH",
+                "NOT_COMBINABLE"
+            ],
+            "outcomes": [
+                {
+                    "oddsFractional": "8/1",
+                    "englishLabel": "Aleksakhin, Nikolai",
+                    "label": "Aleksakhin, Nikolai",
+                    "betOfferId": 2265593282,
+                    "oddsAmerican": "800",
+                    "type": "OT_UNTYPED",
+                    "participant": "Aleksakhin, Nikolai",
+                    "prevOdds": [
+                        8500,
+                        8000
+                    ],
+                    "participantId": 1003147784,
+                    "changedDate": "2021-06-01T08:51:00Z",
+                    "odds": 9000,
+                    "cashOutStatus": "ENABLED",
+                    "id": 2922773407,
+                    "status": "OPEN"
+                },
+                {
+                    "oddsFractional": "15/4",
+                    "englishLabel": "Cooper III, Ray",
+                    "label": "Cooper III, Ray",
+                    "betOfferId": 2265593282,
+                    "oddsAmerican": "375",
+                    "type": "OT_UNTYPED",
+                    "participant": "Cooper III, Ray",
+                    "prevOdds": [
+                        4250,
+                        3750
+                    ],
+                    "participantId": 1004799433,
+                    "changedDate": "2021-06-01T08:51:00Z",
+                    "odds": 4750,
+                    "cashOutStatus": "ENABLED",
+                    "id": 2922773408,
+                    "status": "OPEN"
+                },
+                {
+                    "oddsFractional": "18/1",
+                    "englishLabel": "Kunchenko, Aleksei",
+                    "label": "Kunchenko, Aleksei",
+                    "betOfferId": 2265593282,
+                    "oddsAmerican": "1800",
+                    "type": "OT_UNTYPED",
+                    "participant": "Kunchenko, Aleksei",
+                    "prevOdds": [
+                        17000
+                    ],
+                    "participantId": 1004305191,
+                    "changedDate": "2021-06-01T08:51:00Z",
+                    "odds": 19000,
+                    "cashOutStatus": "ENABLED",
+                    "id": 2922773409,
+                    "status": "OPEN"
+                },
+                {
+                    "oddsFractional": "Evens",
+                    "englishLabel": "MacDonald, Rory",
+                    "label": "MacDonald, Rory",
+                    "betOfferId": 2265593282,
+                    "oddsAmerican": "100",
+                    "type": "OT_UNTYPED",
+                    "participant": "MacDonald, Rory",
+                    "prevOdds": [
+                        2380,
+                        2750
+                    ],
+                    "participantId": 1000710272,
+                    "changedDate": "2021-06-01T08:51:00Z",
+                    "odds": 2000,
+                    "cashOutStatus": "ENABLED",
+                    "id": 2922773410,
+                    "status": "OPEN"
+                },
+                {
+                    "oddsFractional": "6/1",
+                    "englishLabel": "Magomedkerimov, Magomed",
+                    "label": "Magomedkerimov, Magomed",
+                    "betOfferId": 2265593282,
+                    "oddsAmerican": "600",
+                    "type": "OT_UNTYPED",
+                    "participant": "Magomedkerimov, Magomed",
+                    "prevOdds": [
+                        6000,
+                        5500,
+                        6500
+                    ],
+                    "participantId": 1004908397,
+                    "changedDate": "2021-06-01T08:51:00Z",
+                    "odds": 7000,
+                    "cashOutStatus": "ENABLED",
+                    "id": 2922773411,
+                    "status": "OPEN"
+                },
+                {
+                    "oddsFractional": "28/1",
+                    "englishLabel": "Millender, Curtis",
+                    "label": "Millender, Curtis",
+                    "betOfferId": 2265593282,
+                    "oddsAmerican": "2800",
+                    "type": "OT_UNTYPED",
+                    "participant": "Millender, Curtis",
+                    "prevOdds": [
+                        26000
+                    ],
+                    "participantId": 1002516937,
+                    "changedDate": "2021-06-01T08:51:00Z",
+                    "odds": 29000,
+                    "cashOutStatus": "ENABLED",
+                    "id": 2922773412,
+                    "status": "OPEN"
+                },
+                {
+                    "oddsFractional": "50/1",
+                    "englishLabel": "Ponet, Jason",
+                    "label": "Ponet, Jason",
+                    "betOfferId": 2265593282,
+                    "oddsAmerican": "5000",
+                    "type": "OT_UNTYPED",
+                    "participant": "Ponet, Jason",
+                    "prevOdds": [],
+                    "participantId": 1003453912,
+                    "changedDate": "2021-06-01T08:51:00Z",
+                    "odds": 51000,
+                    "cashOutStatus": "ENABLED",
+                    "id": 2922773413,
+                    "status": "OPEN"
+                },
+                {
+                    "oddsFractional": "25/1",
+                    "englishLabel": "Sy, Sadibou",
+                    "label": "Sy, Sadibou",
+                    "betOfferId": 2265593282,
+                    "oddsAmerican": "2500",
+                    "type": "OT_UNTYPED",
+                    "participant": "Sy, Sadibou",
+                    "prevOdds": [
+                        23000,
+                        21000
+                    ],
+                    "participantId": 1003268357,
+                    "changedDate": "2021-06-01T08:51:00Z",
+                    "odds": 26000,
+                    "cashOutStatus": "ENABLED",
+                    "id": 2922773415,
+                    "status": "OPEN"
+                },
+                {
+                    "oddsFractional": "33/1",
+                    "englishLabel": "Tibau, Gleison",
+                    "label": "Tibau, Gleison",
+                    "betOfferId": 2265593282,
+                    "oddsAmerican": "3300",
+                    "type": "OT_UNTYPED",
+                    "participant": "Tibau, Gleison",
+                    "prevOdds": [
+                        29000,
+                        23000
+                    ],
+                    "participantId": 1000086158,
+                    "changedDate": "2021-06-01T08:51:00Z",
+                    "odds": 34000,
+                    "cashOutStatus": "ENABLED",
+                    "id": 2922773416,
+                    "status": "OPEN"
+                },
+                {
+                    "oddsFractional": "6/1",
+                    "englishLabel": "Zeferino, Joao",
+                    "label": "Zeferino, Joao",
+                    "betOfferId": 2265593282,
+                    "oddsAmerican": "600",
+                    "type": "OT_UNTYPED",
+                    "participant": "Zeferino, Joao",
+                    "prevOdds": [
+                        6000,
+                        5500
+                    ],
+                    "participantId": 1001573537,
+                    "changedDate": "2021-06-01T08:51:00Z",
+                    "odds": 7000,
+                    "cashOutStatus": "ENABLED",
+                    "id": 2922773417,
+                    "status": "OPEN"
+                }
+            ],
+            "cashOutStatus": "DISABLED",
+            "closed": "2021-12-31T22:00:00Z",
+            "betOfferType": {
+                "englishName": "Winner",
+                "name": "Winner",
+                "id": 4
+            },
+            "id": 2265593282
+        },
+        {
+            "eventId": 1007707282,
+            "criterion": {
+                "englishLabel": "Bout Odds",
+                "id": 1001160027,
+                "label": "Bout Odds",
+                "order": [
+                    0
+                ]
+            },
+            "tags": [
+                "OFFERED_PREMATCH",
+                "MAIN"
+            ],
+            "outcomes": [
+                {
+                    "oddsFractional": "7/10",
+                    "englishLabel": "1",
+                    "label": "1",
+                    "betOfferId": 2267752185,
+                    "oddsAmerican": "-143",
+                    "type": "OT_ONE",
+                    "changedDate": "2021-06-15T14:48:33Z",
+                    "odds": 1700,
+                    "cashOutStatus": "ENABLED",
+                    "id": 2929891952,
+                    "status": "OPEN"
+                },
+                {
+                    "oddsFractional": "23/20",
+                    "englishLabel": "2",
+                    "label": "2",
+                    "betOfferId": 2267752185,
+                    "oddsAmerican": "115",
+                    "type": "OT_TWO",
+                    "changedDate": "2021-06-15T14:48:33Z",
+                    "odds": 2150,
+                    "cashOutStatus": "ENABLED",
+                    "id": 2929891954,
+                    "status": "OPEN"
+                }
+            ],
+            "cashOutStatus": "ENABLED",
+            "closed": "2021-06-20T00:15:00Z",
+            "betOfferType": {
+                "englishName": "Match",
+                "name": "Match",
+                "id": 2
+            },
+            "id": 2267752185
+        },
+        {
+            "eventId": 1007707284,
+            "criterion": {
+                "englishLabel": "Bout Odds",
+                "id": 1001160027,
+                "label": "Bout Odds",
+                "order": [
+                    0
+                ]
+            },
+            "tags": [
+                "OFFERED_PREMATCH",
+                "MAIN"
+            ],
+            "outcomes": [
+                {
+                    "oddsFractional": "13/20",
+                    "englishLabel": "1",
+                    "label": "1",
+                    "betOfferId": 2267752186,
+                    "oddsAmerican": "-155",
+                    "type": "OT_ONE",
+                    "changedDate": "2021-06-11T10:12:47Z",
+                    "odds": 1650,
+                    "cashOutStatus": "ENABLED",
+                    "id": 2929891955,
+                    "status": "OPEN"
+                },
+                {
+                    "oddsFractional": "5/4",
+                    "englishLabel": "2",
+                    "label": "2",
+                    "betOfferId": 2267752186,
+                    "oddsAmerican": "125",
+                    "type": "OT_TWO",
+                    "changedDate": "2021-06-11T10:12:47Z",
+                    "odds": 2250,
+                    "cashOutStatus": "ENABLED",
+                    "id": 2929891957,
+                    "status": "OPEN"
+                }
+            ],
+            "cashOutStatus": "ENABLED",
+            "closed": "2021-06-19T22:15:00Z",
+            "betOfferType": {
+                "englishName": "Match",
+                "name": "Match",
+                "id": 2
+            },
+            "id": 2267752186
+        },
+        {
+            "eventId": 1007707285,
+            "criterion": {
+                "englishLabel": "Bout Odds",
+                "id": 1001160027,
+                "label": "Bout Odds",
+                "order": [
+                    0
+                ]
+            },
+            "tags": [
+                "OFFERED_PREMATCH",
+                "MAIN"
+            ],
+            "outcomes": [
+                {
+                    "oddsFractional": "11/20",
+                    "englishLabel": "1",
+                    "label": "1",
+                    "betOfferId": 2267752492,
+                    "oddsAmerican": "-177",
+                    "type": "OT_ONE",
+                    "changedDate": "2021-06-11T10:11:02Z",
+                    "odds": 1570,
+                    "cashOutStatus": "ENABLED",
+                    "id": 2929892975,
+                    "status": "OPEN"
+                },
+                {
+                    "oddsFractional": "7/5",
+                    "englishLabel": "2",
+                    "label": "2",
+                    "betOfferId": 2267752492,
+                    "oddsAmerican": "140",
+                    "type": "OT_TWO",
+                    "changedDate": "2021-06-11T10:11:02Z",
+                    "odds": 2400,
+                    "cashOutStatus": "ENABLED",
+                    "id": 2929892977,
+                    "status": "OPEN"
+                }
+            ],
+            "cashOutStatus": "ENABLED",
+            "closed": "2021-06-19T23:15:00Z",
+            "betOfferType": {
+                "englishName": "Match",
+                "name": "Match",
+                "id": 2
+            },
+            "id": 2267752492
+        },
+        {
+            "eventId": 1007707272,
+            "criterion": {
+                "englishLabel": "Bout Odds",
+                "id": 1001160027,
+                "label": "Bout Odds",
+                "order": [
+                    0
+                ]
+            },
+            "tags": [
+                "OFFERED_PREMATCH",
+                "MAIN"
+            ],
+            "outcomes": [
+                {
+                    "oddsFractional": "11/25",
+                    "englishLabel": "1",
+                    "label": "1",
+                    "betOfferId": 2267752493,
+                    "oddsAmerican": "-230",
+                    "type": "OT_ONE",
+                    "changedDate": "2021-06-15T16:14:56Z",
+                    "odds": 1440,
+                    "cashOutStatus": "ENABLED",
+                    "id": 2929892978,
+                    "status": "OPEN"
+                },
+                {
+                    "oddsFractional": "9/5",
+                    "englishLabel": "2",
+                    "label": "2",
+                    "betOfferId": 2267752493,
+                    "oddsAmerican": "180",
+                    "type": "OT_TWO",
+                    "changedDate": "2021-06-15T16:14:56Z",
+                    "odds": 2800,
+                    "cashOutStatus": "ENABLED",
+                    "id": 2929892980,
+                    "status": "OPEN"
+                }
+            ],
+            "cashOutStatus": "ENABLED",
+            "closed": "2021-06-20T00:45:00Z",
+            "betOfferType": {
+                "englishName": "Match",
+                "name": "Match",
+                "id": 2
+            },
+            "id": 2267752493
+        },
+        {
+            "eventId": 1007707273,
+            "criterion": {
+                "englishLabel": "Bout Odds",
+                "id": 1001160027,
+                "label": "Bout Odds",
+                "order": [
+                    0
+                ]
+            },
+            "tags": [
+                "OFFERED_PREMATCH",
+                "MAIN"
+            ],
+            "outcomes": [
+                {
+                    "oddsFractional": "2/1",
+                    "englishLabel": "1",
+                    "label": "1",
+                    "betOfferId": 2267752494,
+                    "oddsAmerican": "200",
+                    "type": "OT_ONE",
+                    "changedDate": "2021-06-11T10:11:02Z",
+                    "odds": 3000,
+                    "cashOutStatus": "ENABLED",
+                    "id": 2929892981,
+                    "status": "OPEN"
+                },
+                {
+                    "oddsFractional": "4/11",
+                    "englishLabel": "2",
+                    "label": "2",
+                    "betOfferId": 2267752494,
+                    "oddsAmerican": "-265",
+                    "type": "OT_TWO",
+                    "changedDate": "2021-06-11T10:11:02Z",
+                    "odds": 1380,
+                    "cashOutStatus": "ENABLED",
+                    "id": 2929892983,
+                    "status": "OPEN"
+                }
+            ],
+            "cashOutStatus": "ENABLED",
+            "closed": "2021-06-19T22:45:00Z",
+            "betOfferType": {
+                "englishName": "Match",
+                "name": "Match",
+                "id": 2
+            },
+            "id": 2267752494
+        },
+        {
+            "eventId": 1007707275,
+            "criterion": {
+                "englishLabel": "Bout Odds",
+                "id": 1001160027,
+                "label": "Bout Odds",
+                "order": [
+                    0
+                ]
+            },
+            "tags": [
+                "OFFERED_PREMATCH",
+                "MAIN"
+            ],
+            "outcomes": [
+                {
+                    "oddsFractional": "5/4",
+                    "englishLabel": "1",
+                    "label": "1",
+                    "betOfferId": 2267752664,
+                    "oddsAmerican": "125",
+                    "type": "OT_ONE",
+                    "changedDate": "2021-06-11T10:12:43Z",
+                    "odds": 2250,
+                    "cashOutStatus": "ENABLED",
+                    "id": 2929893563,
+                    "status": "OPEN"
+                },
+                {
+                    "oddsFractional": "13/20",
+                    "englishLabel": "2",
+                    "label": "2",
+                    "betOfferId": 2267752664,
+                    "oddsAmerican": "-155",
+                    "type": "OT_TWO",
+                    "changedDate": "2021-06-11T10:12:43Z",
+                    "odds": 1650,
+                    "cashOutStatus": "ENABLED",
+                    "id": 2929893565,
+                    "status": "OPEN"
+                }
+            ],
+            "cashOutStatus": "ENABLED",
+            "closed": "2021-06-19T23:45:00Z",
+            "betOfferType": {
+                "englishName": "Match",
+                "name": "Match",
+                "id": 2
+            },
+            "id": 2267752664
+        },
+        {
+            "eventId": 1007707276,
+            "criterion": {
+                "englishLabel": "Bout Odds",
+                "id": 1001160027,
+                "label": "Bout Odds",
+                "order": [
+                    0
+                ]
+            },
+            "tags": [
+                "OFFERED_PREMATCH",
+                "MAIN"
+            ],
+            "outcomes": [
+                {
+                    "oddsFractional": "7/4",
+                    "englishLabel": "1",
+                    "label": "1",
+                    "betOfferId": 2267752665,
+                    "oddsAmerican": "175",
+                    "type": "OT_ONE",
+                    "changedDate": "2021-06-11T10:12:43Z",
+                    "odds": 2750,
+                    "cashOutStatus": "ENABLED",
+                    "id": 2929893566,
+                    "status": "OPEN"
+                },
+                {
+                    "oddsFractional": "4/9",
+                    "englishLabel": "2",
+                    "label": "2",
+                    "betOfferId": 2267752665,
+                    "oddsAmerican": "-225",
+                    "type": "OT_TWO",
+                    "changedDate": "2021-06-11T10:12:43Z",
+                    "odds": 1450,
+                    "cashOutStatus": "ENABLED",
+                    "id": 2929893568,
+                    "status": "OPEN"
+                }
+            ],
+            "cashOutStatus": "ENABLED",
+            "closed": "2021-06-20T01:15:00Z",
+            "betOfferType": {
+                "englishName": "Match",
+                "name": "Match",
+                "id": 2
+            },
+            "id": 2267752665
+        },
+        {
+            "eventId": 1007707277,
+            "criterion": {
+                "englishLabel": "Bout Odds",
+                "id": 1001160027,
+                "label": "Bout Odds",
+                "order": [
+                    0
+                ]
+            },
+            "tags": [
+                "OFFERED_PREMATCH",
+                "MAIN"
+            ],
+            "outcomes": [
+                {
+                    "oddsFractional": "17/20",
+                    "englishLabel": "1",
+                    "label": "1",
+                    "betOfferId": 2267752666,
+                    "oddsAmerican": "-118",
+                    "type": "OT_ONE",
+                    "changedDate": "2021-06-11T14:21:45Z",
+                    "odds": 1850,
+                    "cashOutStatus": "ENABLED",
+                    "id": 2929893569,
+                    "status": "OPEN"
+                },
+                {
+                    "oddsFractional": "19/20",
+                    "englishLabel": "2",
+                    "label": "2",
+                    "betOfferId": 2267752666,
+                    "oddsAmerican": "-106",
+                    "type": "OT_TWO",
+                    "changedDate": "2021-06-11T14:21:45Z",
+                    "odds": 1950,
+                    "cashOutStatus": "ENABLED",
+                    "id": 2929893571,
+                    "status": "OPEN"
+                }
+            ],
+            "cashOutStatus": "ENABLED",
+            "closed": "2021-06-19T20:45:00Z",
+            "betOfferType": {
+                "englishName": "Match",
+                "name": "Match",
+                "id": 2
+            },
+            "id": 2267752666
+        },
+        {
+            "eventId": 1007707278,
+            "criterion": {
+                "englishLabel": "Bout Odds",
+                "id": 1001160027,
+                "label": "Bout Odds",
+                "order": [
+                    0
+                ]
+            },
+            "tags": [
+                "OFFERED_PREMATCH",
+                "MAIN"
+            ],
+            "outcomes": [
+                {
+                    "oddsFractional": "5/4",
+                    "englishLabel": "1",
+                    "label": "1",
+                    "betOfferId": 2267752667,
+                    "oddsAmerican": "125",
+                    "type": "OT_ONE",
+                    "changedDate": "2021-06-15T16:13:37Z",
+                    "odds": 2250,
+                    "cashOutStatus": "ENABLED",
+                    "id": 2929893572,
+                    "status": "OPEN"
+                },
+                {
+                    "oddsFractional": "13/20",
+                    "englishLabel": "2",
+                    "label": "2",
+                    "betOfferId": 2267752667,
+                    "oddsAmerican": "-155",
+                    "type": "OT_TWO",
+                    "changedDate": "2021-06-15T16:13:37Z",
+                    "odds": 1650,
+                    "cashOutStatus": "ENABLED",
+                    "id": 2929893574,
+                    "status": "OPEN"
+                }
+            ],
+            "cashOutStatus": "ENABLED",
+            "closed": "2021-06-19T20:15:00Z",
+            "betOfferType": {
+                "englishName": "Match",
+                "name": "Match",
+                "id": 2
+            },
+            "id": 2267752667
+        },
+        {
+            "eventId": 1007707279,
+            "criterion": {
+                "englishLabel": "Bout Odds",
+                "id": 1001160027,
+                "label": "Bout Odds",
+                "order": [
+                    0
+                ]
+            },
+            "tags": [
+                "OFFERED_PREMATCH",
+                "MAIN"
+            ],
+            "outcomes": [
+                {
+                    "oddsFractional": "3/4",
+                    "englishLabel": "1",
+                    "label": "1",
+                    "betOfferId": 2267752668,
+                    "oddsAmerican": "-132",
+                    "type": "OT_ONE",
+                    "changedDate": "2021-06-11T14:20:57Z",
+                    "odds": 1760,
+                    "cashOutStatus": "ENABLED",
+                    "id": 2929893575,
+                    "status": "OPEN"
+                },
+                {
+                    "oddsFractional": "21/20",
+                    "englishLabel": "2",
+                    "label": "2",
+                    "betOfferId": 2267752668,
+                    "oddsAmerican": "107",
+                    "type": "OT_TWO",
+                    "changedDate": "2021-06-11T14:20:57Z",
+                    "odds": 2070,
+                    "cashOutStatus": "ENABLED",
+                    "id": 2929893577,
+                    "status": "OPEN"
+                }
+            ],
+            "cashOutStatus": "ENABLED",
+            "closed": "2021-06-19T21:15:00Z",
+            "betOfferType": {
+                "englishName": "Match",
+                "name": "Match",
+                "id": 2
+            },
+            "id": 2267752668
+        },
+        {
+            "eventId": 1007708913,
+            "criterion": {
+                "englishLabel": "Bout Odds",
+                "id": 1001160027,
+                "label": "Bout Odds",
+                "order": [
+                    0
+                ]
+            },
+            "tags": [
+                "OFFERED_PREMATCH",
+                "MAIN"
+            ],
+            "outcomes": [
+                {
+                    "oddsFractional": "2/5",
+                    "englishLabel": "1",
+                    "label": "1",
+                    "betOfferId": 2267753036,
+                    "oddsAmerican": "-250",
+                    "type": "OT_ONE",
+                    "changedDate": "2021-06-11T10:17:26Z",
+                    "odds": 1400,
+                    "cashOutStatus": "ENABLED",
+                    "id": 2929894693,
+                    "status": "OPEN"
+                },
+                {
+                    "oddsFractional": "39/20",
+                    "englishLabel": "2",
+                    "label": "2",
+                    "betOfferId": 2267753036,
+                    "oddsAmerican": "195",
+                    "type": "OT_TWO",
+                    "changedDate": "2021-06-11T10:17:26Z",
+                    "odds": 2950,
+                    "cashOutStatus": "ENABLED",
+                    "id": 2929894695,
+                    "status": "OPEN"
+                }
+            ],
+            "cashOutStatus": "ENABLED",
+            "closed": "2021-06-26T20:00:00Z",
+            "betOfferType": {
+                "englishName": "Match",
+                "name": "Match",
+                "id": 2
+            },
+            "id": 2267753036
+        },
+        {
+            "eventId": 1007708948,
+            "criterion": {
+                "englishLabel": "Bout Odds",
+                "id": 1001160027,
+                "label": "Bout Odds",
+                "order": [
+                    0
+                ]
+            },
+            "tags": [
+                "OFFERED_PREMATCH",
+                "MAIN"
+            ],
+            "outcomes": [
+                {
+                    "oddsFractional": "4/9",
+                    "englishLabel": "1",
+                    "label": "1",
+                    "betOfferId": 2267753037,
+                    "oddsAmerican": "-215",
+                    "type": "OT_ONE",
+                    "changedDate": "2021-06-11T10:17:26Z",
+                    "odds": 1470,
+                    "cashOutStatus": "ENABLED",
+                    "id": 2929894696,
+                    "status": "OPEN"
+                },
+                {
+                    "oddsFractional": "17/10",
+                    "englishLabel": "2",
+                    "label": "2",
+                    "betOfferId": 2267753037,
+                    "oddsAmerican": "170",
+                    "type": "OT_TWO",
+                    "changedDate": "2021-06-11T10:17:26Z",
+                    "odds": 2700,
+                    "cashOutStatus": "ENABLED",
+                    "id": 2929894698,
+                    "status": "OPEN"
+                }
+            ],
+            "cashOutStatus": "ENABLED",
+            "closed": "2021-06-26T20:00:00Z",
+            "betOfferType": {
+                "englishName": "Match",
+                "name": "Match",
+                "id": 2
+            },
+            "id": 2267753037
+        },
+        {
+            "eventId": 1007708809,
+            "criterion": {
+                "englishLabel": "Bout Odds",
+                "id": 1001160027,
+                "label": "Bout Odds",
+                "order": [
+                    0
+                ]
+            },
+            "tags": [
+                "OFFERED_PREMATCH",
+                "MAIN"
+            ],
+            "outcomes": [
+                {
+                    "oddsFractional": "9/10",
+                    "englishLabel": "1",
+                    "label": "1",
+                    "betOfferId": 2267753038,
+                    "oddsAmerican": "-112",
+                    "type": "OT_ONE",
+                    "changedDate": "2021-06-11T10:17:26Z",
+                    "odds": 1900,
+                    "cashOutStatus": "ENABLED",
+                    "id": 2929894699,
+                    "status": "OPEN"
+                },
+                {
+                    "oddsFractional": "9/10",
+                    "englishLabel": "2",
+                    "label": "2",
+                    "betOfferId": 2267753038,
+                    "oddsAmerican": "-112",
+                    "type": "OT_TWO",
+                    "changedDate": "2021-06-11T10:17:26Z",
+                    "odds": 1900,
+                    "cashOutStatus": "ENABLED",
+                    "id": 2929894701,
+                    "status": "OPEN"
+                }
+            ],
+            "cashOutStatus": "ENABLED",
+            "closed": "2021-06-26T20:00:00Z",
+            "betOfferType": {
+                "englishName": "Match",
+                "name": "Match",
+                "id": 2
+            },
+            "id": 2267753038
+        },
+        {
+            "eventId": 1007708810,
+            "criterion": {
+                "englishLabel": "Bout Odds",
+                "id": 1001160027,
+                "label": "Bout Odds",
+                "order": [
+                    0
+                ]
+            },
+            "tags": [
+                "OFFERED_PREMATCH",
+                "MAIN"
+            ],
+            "outcomes": [
+                {
+                    "oddsFractional": "3/5",
+                    "englishLabel": "1",
+                    "label": "1",
+                    "betOfferId": 2267753217,
+                    "oddsAmerican": "-167",
+                    "type": "OT_ONE",
+                    "changedDate": "2021-06-11T10:19:03Z",
+                    "odds": 1600,
+                    "cashOutStatus": "ENABLED",
+                    "id": 2929895201,
+                    "status": "OPEN"
+                },
+                {
+                    "oddsFractional": "27/20",
+                    "englishLabel": "2",
+                    "label": "2",
+                    "betOfferId": 2267753217,
+                    "oddsAmerican": "135",
+                    "type": "OT_TWO",
+                    "changedDate": "2021-06-11T10:19:03Z",
+                    "odds": 2350,
+                    "cashOutStatus": "ENABLED",
+                    "id": 2929895203,
+                    "status": "OPEN"
+                }
+            ],
+            "cashOutStatus": "ENABLED",
+            "closed": "2021-06-26T20:00:00Z",
+            "betOfferType": {
+                "englishName": "Match",
+                "name": "Match",
+                "id": 2
+            },
+            "id": 2267753217
+        },
+        {
+            "eventId": 1007708811,
+            "criterion": {
+                "englishLabel": "Bout Odds",
+                "id": 1001160027,
+                "label": "Bout Odds",
+                "order": [
+                    0
+                ]
+            },
+            "tags": [
+                "OFFERED_PREMATCH",
+                "MAIN"
+            ],
+            "outcomes": [
+                {
+                    "oddsFractional": "19/10",
+                    "englishLabel": "1",
+                    "label": "1",
+                    "betOfferId": 2267753218,
+                    "oddsAmerican": "190",
+                    "type": "OT_ONE",
+                    "changedDate": "2021-06-15T07:05:36Z",
+                    "odds": 2900,
+                    "cashOutStatus": "ENABLED",
+                    "id": 2929895204,
+                    "status": "OPEN"
+                },
+                {
+                    "oddsFractional": "21/50",
+                    "englishLabel": "2",
+                    "label": "2",
+                    "betOfferId": 2267753218,
+                    "oddsAmerican": "-240",
+                    "type": "OT_TWO",
+                    "changedDate": "2021-06-15T07:05:36Z",
+                    "odds": 1420,
+                    "cashOutStatus": "ENABLED",
+                    "id": 2929895206,
+                    "status": "OPEN"
+                }
+            ],
+            "cashOutStatus": "ENABLED",
+            "closed": "2021-06-26T20:00:00Z",
+            "betOfferType": {
+                "englishName": "Match",
+                "name": "Match",
+                "id": 2
+            },
+            "id": 2267753218
+        },
+        {
+            "eventId": 1007708813,
+            "criterion": {
+                "englishLabel": "Bout Odds",
+                "id": 1001160027,
+                "label": "Bout Odds",
+                "order": [
+                    0
+                ]
+            },
+            "tags": [
+                "OFFERED_PREMATCH",
+                "MAIN"
+            ],
+            "outcomes": [
+                {
+                    "oddsFractional": "4/9",
+                    "englishLabel": "1",
+                    "label": "1",
+                    "betOfferId": 2267753219,
+                    "oddsAmerican": "-225",
+                    "type": "OT_ONE",
+                    "changedDate": "2021-06-11T10:19:03Z",
+                    "odds": 1450,
+                    "cashOutStatus": "ENABLED",
+                    "id": 2929895207,
+                    "status": "OPEN"
+                },
+                {
+                    "oddsFractional": "7/4",
+                    "englishLabel": "2",
+                    "label": "2",
+                    "betOfferId": 2267753219,
+                    "oddsAmerican": "175",
+                    "type": "OT_TWO",
+                    "changedDate": "2021-06-11T10:19:03Z",
+                    "odds": 2750,
+                    "cashOutStatus": "ENABLED",
+                    "id": 2929895209,
+                    "status": "OPEN"
+                }
+            ],
+            "cashOutStatus": "ENABLED",
+            "closed": "2021-06-26T20:00:00Z",
+            "betOfferType": {
+                "englishName": "Match",
+                "name": "Match",
+                "id": 2
+            },
+            "id": 2267753219
+        },
+        {
+            "eventId": 1007708815,
+            "criterion": {
+                "englishLabel": "Bout Odds",
+                "id": 1001160027,
+                "label": "Bout Odds",
+                "order": [
+                    0
+                ]
+            },
+            "tags": [
+                "OFFERED_PREMATCH",
+                "MAIN"
+            ],
+            "outcomes": [
+                {
+                    "oddsFractional": "13/20",
+                    "englishLabel": "1",
+                    "label": "1",
+                    "betOfferId": 2267753221,
+                    "oddsAmerican": "-155",
+                    "type": "OT_ONE",
+                    "changedDate": "2021-06-11T10:19:03Z",
+                    "odds": 1650,
+                    "cashOutStatus": "ENABLED",
+                    "id": 2929895213,
+                    "status": "OPEN"
+                },
+                {
+                    "oddsFractional": "5/4",
+                    "englishLabel": "2",
+                    "label": "2",
+                    "betOfferId": 2267753221,
+                    "oddsAmerican": "125",
+                    "type": "OT_TWO",
+                    "changedDate": "2021-06-11T10:19:03Z",
+                    "odds": 2250,
+                    "cashOutStatus": "ENABLED",
+                    "id": 2929895215,
+                    "status": "OPEN"
+                }
+            ],
+            "cashOutStatus": "ENABLED",
+            "closed": "2021-06-26T20:00:00Z",
+            "betOfferType": {
+                "englishName": "Match",
+                "name": "Match",
+                "id": 2
+            },
+            "id": 2267753221
+        },
+        {
+            "eventId": 1007707283,
+            "criterion": {
+                "englishLabel": "Bout Odds",
+                "id": 1001160027,
+                "label": "Bout Odds",
+                "order": [
+                    0
+                ]
+            },
+            "tags": [
+                "OFFERED_PREMATCH",
+                "MAIN"
+            ],
+            "outcomes": [
+                {
+                    "oddsFractional": "11/20",
+                    "englishLabel": "1",
+                    "label": "1",
+                    "betOfferId": 2267754216,
+                    "oddsAmerican": "-177",
+                    "type": "OT_ONE",
+                    "changedDate": "2021-06-11T10:30:50Z",
+                    "odds": 1570,
+                    "cashOutStatus": "ENABLED",
+                    "id": 2929898348,
+                    "status": "OPEN"
+                },
+                {
+                    "oddsFractional": "7/5",
+                    "englishLabel": "2",
+                    "label": "2",
+                    "betOfferId": 2267754216,
+                    "oddsAmerican": "140",
+                    "type": "OT_TWO",
+                    "changedDate": "2021-06-11T10:30:50Z",
+                    "odds": 2400,
+                    "cashOutStatus": "ENABLED",
+                    "id": 2929898350,
+                    "status": "OPEN"
+                }
+            ],
+            "cashOutStatus": "ENABLED",
+            "closed": "2021-06-19T21:45:00Z",
+            "betOfferType": {
+                "englishName": "Match",
+                "name": "Match",
+                "id": 2
+            },
+            "id": 2267754216
+        },
+        {
+            "eventId": 1007730220,
+            "criterion": {
+                "englishLabel": "Bout Odds",
+                "id": 1001160027,
+                "label": "Bout Odds",
+                "order": [
+                    0
+                ]
+            },
+            "tags": [
+                "OFFERED_PREMATCH",
+                "MAIN"
+            ],
+            "outcomes": [
+                {
+                    "oddsFractional": "23/20",
+                    "englishLabel": "1",
+                    "label": "1",
+                    "betOfferId": 2268326255,
+                    "oddsAmerican": "115",
+                    "type": "OT_ONE",
+                    "changedDate": "2021-06-15T21:39:25Z",
+                    "odds": 2150,
+                    "cashOutStatus": "ENABLED",
+                    "id": 2931799027,
+                    "status": "OPEN"
+                },
+                {
+                    "oddsFractional": "4/6",
+                    "englishLabel": "2",
+                    "label": "2",
+                    "betOfferId": 2268326255,
+                    "oddsAmerican": "-148",
+                    "type": "OT_TWO",
+                    "changedDate": "2021-06-15T21:39:25Z",
+                    "odds": 1680,
+                    "cashOutStatus": "ENABLED",
+                    "id": 2931799029,
+                    "status": "OPEN"
+                }
+            ],
+            "cashOutStatus": "ENABLED",
+            "closed": "2021-06-17T22:00:00Z",
+            "betOfferType": {
+                "englishName": "Match",
+                "name": "Match",
+                "id": 2
+            },
+            "id": 2268326255
+        },
+        {
+            "eventId": 1007730217,
+            "criterion": {
+                "englishLabel": "Bout Odds",
+                "id": 1001160027,
+                "label": "Bout Odds",
+                "order": [
+                    0
+                ]
+            },
+            "tags": [
+                "OFFERED_PREMATCH",
+                "MAIN"
+            ],
+            "outcomes": [
+                {
+                    "oddsFractional": "11/4",
+                    "englishLabel": "1",
+                    "label": "1",
+                    "betOfferId": 2268326256,
+                    "oddsAmerican": "275",
+                    "type": "OT_ONE",
+                    "changedDate": "2021-06-15T15:04:21Z",
+                    "odds": 3750,
+                    "cashOutStatus": "ENABLED",
+                    "id": 2931799030,
+                    "status": "OPEN"
+                },
+                {
+                    "oddsFractional": "1/4",
+                    "englishLabel": "2",
+                    "label": "2",
+                    "betOfferId": 2268326256,
+                    "oddsAmerican": "-400",
+                    "type": "OT_TWO",
+                    "changedDate": "2021-06-15T15:04:21Z",
+                    "odds": 1250,
+                    "cashOutStatus": "ENABLED",
+                    "id": 2931799032,
+                    "status": "OPEN"
+                }
+            ],
+            "cashOutStatus": "ENABLED",
+            "closed": "2021-06-17T22:30:00Z",
+            "betOfferType": {
+                "englishName": "Match",
+                "name": "Match",
+                "id": 2
+            },
+            "id": 2268326256
+        },
+        {
+            "eventId": 1007730219,
+            "criterion": {
+                "englishLabel": "Bout Odds",
+                "id": 1001160027,
+                "label": "Bout Odds",
+                "order": [
+                    0
+                ]
+            },
+            "tags": [
+                "OFFERED_PREMATCH",
+                "MAIN"
+            ],
+            "outcomes": [
+                {
+                    "oddsFractional": "1/10",
+                    "englishLabel": "1",
+                    "label": "1",
+                    "betOfferId": 2268326257,
+                    "oddsAmerican": "-910",
+                    "type": "OT_ONE",
+                    "changedDate": "2021-06-15T15:04:21Z",
+                    "odds": 1110,
+                    "cashOutStatus": "ENABLED",
+                    "id": 2931799033,
+                    "status": "OPEN"
+                },
+                {
+                    "oddsFractional": "5/1",
+                    "englishLabel": "2",
+                    "label": "2",
+                    "betOfferId": 2268326257,
+                    "oddsAmerican": "500",
+                    "type": "OT_TWO",
+                    "changedDate": "2021-06-15T15:04:21Z",
+                    "odds": 6000,
+                    "cashOutStatus": "ENABLED",
+                    "id": 2931799035,
+                    "status": "OPEN"
+                }
+            ],
+            "cashOutStatus": "ENABLED",
+            "closed": "2021-06-17T23:00:00Z",
+            "betOfferType": {
+                "englishName": "Match",
+                "name": "Match",
+                "id": 2
+            },
+            "id": 2268326257
+        },
+        {
+            "eventId": 1007730218,
+            "criterion": {
+                "englishLabel": "Bout Odds",
+                "id": 1001160027,
+                "label": "Bout Odds",
+                "order": [
+                    0
+                ]
+            },
+            "tags": [
+                "OFFERED_PREMATCH",
+                "MAIN"
+            ],
+            "outcomes": [
+                {
+                    "oddsFractional": "1/4",
+                    "englishLabel": "1",
+                    "label": "1",
+                    "betOfferId": 2268326258,
+                    "oddsAmerican": "-400",
+                    "type": "OT_ONE",
+                    "changedDate": "2021-06-15T15:04:21Z",
+                    "odds": 1250,
+                    "cashOutStatus": "ENABLED",
+                    "id": 2931799036,
+                    "status": "OPEN"
+                },
+                {
+                    "oddsFractional": "11/4",
+                    "englishLabel": "2",
+                    "label": "2",
+                    "betOfferId": 2268326258,
+                    "oddsAmerican": "275",
+                    "type": "OT_TWO",
+                    "changedDate": "2021-06-15T15:04:21Z",
+                    "odds": 3750,
+                    "cashOutStatus": "ENABLED",
+                    "id": 2931799038,
+                    "status": "OPEN"
+                }
+            ],
+            "cashOutStatus": "ENABLED",
+            "closed": "2021-06-17T23:30:00Z",
+            "betOfferType": {
+                "englishName": "Match",
+                "name": "Match",
+                "id": 2
+            },
+            "id": 2268326258
+        },
+        {
+            "eventId": 1007730215,
+            "criterion": {
+                "englishLabel": "Bout Odds",
+                "id": 1001160027,
+                "label": "Bout Odds",
+                "order": [
+                    0
+                ]
+            },
+            "tags": [
+                "OFFERED_PREMATCH",
+                "MAIN"
+            ],
+            "outcomes": [
+                {
+                    "oddsFractional": "21/50",
+                    "englishLabel": "1",
+                    "label": "1",
+                    "betOfferId": 2268326259,
+                    "oddsAmerican": "-240",
+                    "type": "OT_ONE",
+                    "changedDate": "2021-06-15T21:39:54Z",
+                    "odds": 1420,
+                    "cashOutStatus": "ENABLED",
+                    "id": 2931799039,
+                    "status": "OPEN"
+                },
+                {
+                    "oddsFractional": "37/20",
+                    "englishLabel": "2",
+                    "label": "2",
+                    "betOfferId": 2268326259,
+                    "oddsAmerican": "185",
+                    "type": "OT_TWO",
+                    "changedDate": "2021-06-15T21:39:54Z",
+                    "odds": 2850,
+                    "cashOutStatus": "ENABLED",
+                    "id": 2931799041,
+                    "status": "OPEN"
+                }
+            ],
+            "cashOutStatus": "ENABLED",
+            "closed": "2021-06-18T00:00:00Z",
+            "betOfferType": {
+                "englishName": "Match",
+                "name": "Match",
+                "id": 2
+            },
+            "id": 2268326259
+        },
+        {
+            "eventId": 1007730214,
+            "criterion": {
+                "englishLabel": "Bout Odds",
+                "id": 1001160027,
+                "label": "Bout Odds",
+                "order": [
+                    0
+                ]
+            },
+            "tags": [
+                "OFFERED_PREMATCH",
+                "MAIN"
+            ],
+            "outcomes": [
+                {
+                    "oddsFractional": "4/11",
+                    "englishLabel": "1",
+                    "label": "1",
+                    "betOfferId": 2268326260,
+                    "oddsAmerican": "-265",
+                    "type": "OT_ONE",
+                    "changedDate": "2021-06-16T05:19:59Z",
+                    "odds": 1390,
+                    "cashOutStatus": "ENABLED",
+                    "id": 2931799042,
+                    "status": "OPEN"
+                },
+                {
+                    "oddsFractional": "39/20",
+                    "englishLabel": "2",
+                    "label": "2",
+                    "betOfferId": 2268326260,
+                    "oddsAmerican": "195",
+                    "type": "OT_TWO",
+                    "changedDate": "2021-06-16T05:19:59Z",
+                    "odds": 2950,
+                    "cashOutStatus": "ENABLED",
+                    "id": 2931799044,
+                    "status": "OPEN"
+                }
+            ],
+            "cashOutStatus": "ENABLED",
+            "closed": "2021-06-18T00:30:00Z",
+            "betOfferType": {
+                "englishName": "Match",
+                "name": "Match",
+                "id": 2
+            },
+            "id": 2268326260
+        },
+        {
+            "eventId": 1007730213,
+            "criterion": {
+                "englishLabel": "Bout Odds",
+                "id": 1001160027,
+                "label": "Bout Odds",
+                "order": [
+                    0
+                ]
+            },
+            "tags": [
+                "OFFERED_PREMATCH",
+                "MAIN"
+            ],
+            "outcomes": [
+                {
+                    "oddsFractional": "2/7",
+                    "englishLabel": "1",
+                    "label": "1",
+                    "betOfferId": 2268326261,
+                    "oddsAmerican": "-345",
+                    "type": "OT_ONE",
+                    "changedDate": "2021-06-15T15:04:21Z",
+                    "odds": 1290,
+                    "cashOutStatus": "ENABLED",
+                    "id": 2931799045,
+                    "status": "OPEN"
+                },
+                {
+                    "oddsFractional": "49/20",
+                    "englishLabel": "2",
+                    "label": "2",
+                    "betOfferId": 2268326261,
+                    "oddsAmerican": "245",
+                    "type": "OT_TWO",
+                    "changedDate": "2021-06-15T15:04:21Z",
+                    "odds": 3450,
+                    "cashOutStatus": "ENABLED",
+                    "id": 2931799047,
+                    "status": "OPEN"
+                }
+            ],
+            "cashOutStatus": "ENABLED",
+            "closed": "2021-06-18T01:15:00Z",
+            "betOfferType": {
+                "englishName": "Match",
+                "name": "Match",
+                "id": 2
+            },
+            "id": 2268326261
+        },
+        {
+            "eventId": 1007730212,
+            "criterion": {
+                "englishLabel": "Bout Odds",
+                "id": 1001160027,
+                "label": "Bout Odds",
+                "order": [
+                    0
+                ]
+            },
+            "tags": [
+                "OFFERED_PREMATCH",
+                "MAIN"
+            ],
+            "outcomes": [
+                {
+                    "oddsFractional": "1/4",
+                    "englishLabel": "1",
+                    "label": "1",
+                    "betOfferId": 2268326262,
+                    "oddsAmerican": "-400",
+                    "type": "OT_ONE",
+                    "changedDate": "2021-06-15T15:04:21Z",
+                    "odds": 1250,
+                    "cashOutStatus": "ENABLED",
+                    "id": 2931799048,
+                    "status": "OPEN"
+                },
+                {
+                    "oddsFractional": "11/4",
+                    "englishLabel": "2",
+                    "label": "2",
+                    "betOfferId": 2268326262,
+                    "oddsAmerican": "275",
+                    "type": "OT_TWO",
+                    "changedDate": "2021-06-15T15:04:21Z",
+                    "odds": 3750,
+                    "cashOutStatus": "ENABLED",
+                    "id": 2931799050,
+                    "status": "OPEN"
+                }
+            ],
+            "cashOutStatus": "ENABLED",
+            "closed": "2021-06-18T01:45:00Z",
+            "betOfferType": {
+                "englishName": "Match",
+                "name": "Match",
+                "id": 2
+            },
+            "id": 2268326262
+        },
+        {
+            "eventId": 1007730216,
+            "criterion": {
+                "englishLabel": "Bout Odds",
+                "id": 1001160027,
+                "label": "Bout Odds",
+                "order": [
+                    0
+                ]
+            },
+            "tags": [
+                "OFFERED_PREMATCH",
+                "MAIN"
+            ],
+            "outcomes": [
+                {
+                    "oddsFractional": "6/5",
+                    "englishLabel": "1",
+                    "label": "1",
+                    "betOfferId": 2268326263,
+                    "oddsAmerican": "120",
+                    "type": "OT_ONE",
+                    "changedDate": "2021-06-15T21:39:01Z",
+                    "odds": 2200,
+                    "cashOutStatus": "ENABLED",
+                    "id": 2931799051,
+                    "status": "OPEN"
+                },
+                {
+                    "oddsFractional": "13/20",
+                    "englishLabel": "2",
+                    "label": "2",
+                    "betOfferId": 2268326263,
+                    "oddsAmerican": "-152",
+                    "type": "OT_TWO",
+                    "changedDate": "2021-06-15T21:39:01Z",
+                    "odds": 1660,
+                    "cashOutStatus": "ENABLED",
+                    "id": 2931799053,
+                    "status": "OPEN"
+                }
+            ],
+            "cashOutStatus": "ENABLED",
+            "closed": "2021-06-18T02:15:00Z",
+            "betOfferType": {
+                "englishName": "Match",
+                "name": "Match",
+                "id": 2
+            },
+            "id": 2268326263
+        },
+        {
+            "eventId": 1007730211,
+            "criterion": {
+                "englishLabel": "Bout Odds",
+                "id": 1001160027,
+                "label": "Bout Odds",
+                "order": [
+                    0
+                ]
+            },
+            "tags": [
+                "OFFERED_PREMATCH",
+                "MAIN"
+            ],
+            "outcomes": [
+                {
+                    "oddsFractional": "1/8",
+                    "englishLabel": "1",
+                    "label": "1",
+                    "betOfferId": 2268326264,
+                    "oddsAmerican": "-770",
+                    "type": "OT_ONE",
+                    "changedDate": "2021-06-15T21:40:23Z",
+                    "odds": 1130,
+                    "cashOutStatus": "ENABLED",
+                    "id": 2931799054,
+                    "status": "OPEN"
+                },
+                {
+                    "oddsFractional": "9/2",
+                    "englishLabel": "2",
+                    "label": "2",
+                    "betOfferId": 2268326264,
+                    "oddsAmerican": "450",
+                    "type": "OT_TWO",
+                    "changedDate": "2021-06-15T21:40:23Z",
+                    "odds": 5500,
+                    "cashOutStatus": "ENABLED",
+                    "id": 2931799056,
+                    "status": "OPEN"
+                }
+            ],
+            "cashOutStatus": "ENABLED",
+            "closed": "2021-06-18T02:45:00Z",
+            "betOfferType": {
+                "englishName": "Match",
+                "name": "Match",
+                "id": 2
+            },
+            "id": 2268326264
+        },
+        {
+            "eventId": 1007695099,
+            "criterion": {
+                "englishLabel": "Bout Odds",
+                "id": 1001160027,
+                "label": "Bout Odds",
+                "order": [
+                    0
+                ]
+            },
+            "tags": [
+                "OFFERED_PREMATCH",
+                "MAIN"
+            ],
+            "outcomes": [
+                {
+                    "oddsFractional": "11/50",
+                    "englishLabel": "1",
+                    "label": "1",
+                    "betOfferId": 2268367356,
+                    "oddsAmerican": "-455",
+                    "type": "OT_ONE",
+                    "changedDate": "2021-06-15T21:05:21Z",
+                    "odds": 1220,
+                    "cashOutStatus": "ENABLED",
+                    "id": 2931919713,
+                    "status": "OPEN"
+                },
+                {
+                    "oddsFractional": "13/4",
+                    "englishLabel": "2",
+                    "label": "2",
+                    "betOfferId": 2268367356,
+                    "oddsAmerican": "325",
+                    "type": "OT_TWO",
+                    "changedDate": "2021-06-15T21:05:21Z",
+                    "odds": 4250,
+                    "cashOutStatus": "ENABLED",
+                    "id": 2931919715,
+                    "status": "OPEN"
+                }
+            ],
+            "cashOutStatus": "ENABLED",
+            "closed": "2021-07-17T22:00:00Z",
+            "betOfferType": {
+                "englishName": "Match",
+                "name": "Match",
+                "id": 2
+            },
+            "id": 2268367356
+        }
+    ],
+    "range": {
+        "total": 36,
+        "size": 36,
+        "start": 0
+    },
+    "events": [
+        {
+            "englishName": "Sy, Sadibou - Kunchenko, Aleksei",
+            "groupId": 2000107675,
+            "homeName": "Sy, Sadibou",
+            "groupSortOrder": 3874820019684212736,
+            "path": [
+                {
+                    "englishName": "UFC/MMA",
+                    "termKey": "ufc_mma",
+                    "name": "UFC/MMA",
+                    "id": 1000093238
+                },
+                {
+                    "englishName": "Professional Fighters League",
+                    "termKey": "professional_fighters_league",
+                    "name": "Professional Fighters League",
+                    "id": 2000107675
+                }
+            ],
+            "id": 1007730220,
+            "state": "NOT_STARTED",
+            "group": "Professional Fighters League",
+            "participants": [
+                {
+                    "participantId": 1003268357,
+                    "nonRunner": false,
+                    "scratched": false,
+                    "name": "Sy, Sadibou"
+                },
+                {
+                    "participantId": 1004305191,
+                    "nonRunner": false,
+                    "scratched": false,
+                    "name": "Kunchenko, Aleksei"
+                }
+            ],
+            "start": "2021-06-17T22:00:00Z",
+            "nonLiveBoCount": 1,
+            "tags": [
+                "OFFERED_LIVE",
+                "MATCH"
+            ],
+            "awayName": "Kunchenko, Aleksei",
+            "name": "Sy, Sadibou - Kunchenko, Aleksei",
+            "sport": "MARTIAL_ARTS"
+        },
+        {
+            "englishName": "Lawlor, Tom - Young, Jordan",
+            "groupId": 2000107675,
+            "homeName": "Lawlor, Tom",
+            "groupSortOrder": 3874820019684212736,
+            "path": [
+                {
+                    "englishName": "UFC/MMA",
+                    "termKey": "ufc_mma",
+                    "name": "UFC/MMA",
+                    "id": 1000093238
+                },
+                {
+                    "englishName": "Professional Fighters League",
+                    "termKey": "professional_fighters_league",
+                    "name": "Professional Fighters League",
+                    "id": 2000107675
+                }
+            ],
+            "id": 1007730217,
+            "state": "NOT_STARTED",
+            "group": "Professional Fighters League",
+            "participants": [
+                {
+                    "participantId": 1000504147,
+                    "nonRunner": false,
+                    "scratched": false,
+                    "name": "Lawlor, Tom"
+                },
+                {
+                    "participantId": 1007570856,
+                    "nonRunner": false,
+                    "scratched": false,
+                    "name": "Young, Jordan"
+                }
+            ],
+            "start": "2021-06-17T22:30:00Z",
+            "nonLiveBoCount": 1,
+            "tags": [
+                "OFFERED_LIVE",
+                "MATCH"
+            ],
+            "awayName": "Young, Jordan",
+            "name": "Lawlor, Tom - Young, Jordan",
+            "sport": "MARTIAL_ARTS"
+        },
+        {
+            "englishName": "Magomedkerimov, Magomed - Millender, Curtis",
+            "groupId": 2000107675,
+            "homeName": "Magomedkerimov, Magomed",
+            "groupSortOrder": 3874820019684212736,
+            "path": [
+                {
+                    "englishName": "UFC/MMA",
+                    "termKey": "ufc_mma",
+                    "name": "UFC/MMA",
+                    "id": 1000093238
+                },
+                {
+                    "englishName": "Professional Fighters League",
+                    "termKey": "professional_fighters_league",
+                    "name": "Professional Fighters League",
+                    "id": 2000107675
+                }
+            ],
+            "id": 1007730219,
+            "state": "NOT_STARTED",
+            "group": "Professional Fighters League",
+            "participants": [
+                {
+                    "participantId": 1002516937,
+                    "nonRunner": false,
+                    "scratched": false,
+                    "name": "Millender, Curtis"
+                },
+                {
+                    "participantId": 1004908397,
+                    "nonRunner": false,
+                    "scratched": false,
+                    "name": "Magomedkerimov, Magomed"
+                }
+            ],
+            "start": "2021-06-17T23:00:00Z",
+            "nonLiveBoCount": 1,
+            "tags": [
+                "OFFERED_LIVE",
+                "MATCH"
+            ],
+            "awayName": "Millender, Curtis",
+            "name": "Magomedkerimov, Magomed - Millender, Curtis",
+            "sport": "MARTIAL_ARTS"
+        },
+        {
+            "englishName": "Zeferino, Joao - Ponet, Jason",
+            "groupId": 2000107675,
+            "homeName": "Zeferino, Joao",
+            "groupSortOrder": 3874820019684212736,
+            "path": [
+                {
+                    "englishName": "UFC/MMA",
+                    "termKey": "ufc_mma",
+                    "name": "UFC/MMA",
+                    "id": 1000093238
+                },
+                {
+                    "englishName": "Professional Fighters League",
+                    "termKey": "professional_fighters_league",
+                    "name": "Professional Fighters League",
+                    "id": 2000107675
+                }
+            ],
+            "id": 1007730218,
+            "state": "NOT_STARTED",
+            "group": "Professional Fighters League",
+            "participants": [
+                {
+                    "participantId": 1001573537,
+                    "nonRunner": false,
+                    "scratched": false,
+                    "name": "Zeferino, Joao"
+                },
+                {
+                    "participantId": 1003453912,
+                    "nonRunner": false,
+                    "scratched": false,
+                    "name": "Ponet, Jason"
+                }
+            ],
+            "start": "2021-06-17T23:30:00Z",
+            "nonLiveBoCount": 1,
+            "tags": [
+                "OFFERED_LIVE",
+                "MATCH"
+            ],
+            "awayName": "Ponet, Jason",
+            "name": "Zeferino, Joao - Ponet, Jason",
+            "sport": "MARTIAL_ARTS"
+        },
+        {
+            "englishName": "Hamlet Nielsen, Marthin - Hendricks, Cory",
+            "groupId": 2000107675,
+            "homeName": "Hamlet Nielsen, Marthin",
+            "groupSortOrder": 3874820019684212736,
+            "path": [
+                {
+                    "englishName": "UFC/MMA",
+                    "termKey": "ufc_mma",
+                    "name": "UFC/MMA",
+                    "id": 1000093238
+                },
+                {
+                    "englishName": "Professional Fighters League",
+                    "termKey": "professional_fighters_league",
+                    "name": "Professional Fighters League",
+                    "id": 2000107675
+                }
+            ],
+            "id": 1007730215,
+            "state": "NOT_STARTED",
+            "group": "Professional Fighters League",
+            "participants": [
+                {
+                    "participantId": 1003327895,
+                    "nonRunner": false,
+                    "scratched": false,
+                    "name": "Hendricks, Cory"
+                },
+                {
+                    "participantId": 1004370849,
+                    "nonRunner": false,
+                    "scratched": false,
+                    "name": "Hamlet Nielsen, Marthin"
+                }
+            ],
+            "start": "2021-06-18T00:00:00Z",
+            "nonLiveBoCount": 1,
+            "tags": [
+                "OFFERED_LIVE",
+                "MATCH"
+            ],
+            "awayName": "Hendricks, Cory",
+            "name": "Hamlet Nielsen, Marthin - Hendricks, Cory",
+            "sport": "MARTIAL_ARTS"
+        },
+        {
+            "englishName": "Júnior, Carlos Antônio - Magalhaes, Vinny",
+            "groupId": 2000107675,
+            "homeName": "Júnior, Carlos Antônio",
+            "groupSortOrder": 3874820019684212736,
+            "path": [
+                {
+                    "englishName": "UFC/MMA",
+                    "termKey": "ufc_mma",
+                    "name": "UFC/MMA",
+                    "id": 1000093238
+                },
+                {
+                    "englishName": "Professional Fighters League",
+                    "termKey": "professional_fighters_league",
+                    "name": "Professional Fighters League",
+                    "id": 2000107675
+                }
+            ],
+            "id": 1007730214,
+            "state": "NOT_STARTED",
+            "group": "Professional Fighters League",
+            "participants": [
+                {
+                    "participantId": 1000504140,
+                    "nonRunner": false,
+                    "scratched": false,
+                    "name": "Magalhaes, Vinny"
+                },
+                {
+                    "participantId": 1007197717,
+                    "nonRunner": false,
+                    "scratched": false,
+                    "name": "Júnior, Carlos Antônio"
+                }
+            ],
+            "start": "2021-06-18T00:30:00Z",
+            "nonLiveBoCount": 1,
+            "tags": [
+                "OFFERED_LIVE",
+                "MATCH"
+            ],
+            "awayName": "Magalhaes, Vinny",
+            "name": "Júnior, Carlos Antônio - Magalhaes, Vinny",
+            "sport": "MARTIAL_ARTS"
+        },
+        {
+            "englishName": "Ferreira, Cezar - Camozzi, Chris",
+            "groupId": 2000107675,
+            "homeName": "Ferreira, Cezar",
+            "groupSortOrder": 3874820019684212736,
+            "path": [
+                {
+                    "englishName": "UFC/MMA",
+                    "termKey": "ufc_mma",
+                    "name": "UFC/MMA",
+                    "id": 1000093238
+                },
+                {
+                    "englishName": "Professional Fighters League",
+                    "termKey": "professional_fighters_league",
+                    "name": "Professional Fighters League",
+                    "id": 2000107675
+                }
+            ],
+            "id": 1007730213,
+            "state": "NOT_STARTED",
+            "group": "Professional Fighters League",
+            "participants": [
+                {
+                    "participantId": 1000278450,
+                    "nonRunner": false,
+                    "scratched": false,
+                    "name": "Camozzi, Chris"
+                },
+                {
+                    "participantId": 1001290665,
+                    "nonRunner": false,
+                    "scratched": false,
+                    "name": "Ferreira, Cezar"
+                }
+            ],
+            "start": "2021-06-18T01:15:00Z",
+            "nonLiveBoCount": 1,
+            "tags": [
+                "OFFERED_LIVE",
+                "MATCH"
+            ],
+            "awayName": "Camozzi, Chris",
+            "name": "Ferreira, Cezar - Camozzi, Chris",
+            "sport": "MARTIAL_ARTS"
+        },
+        {
+            "englishName": "Sordi, Emiliano - Spohn, Daniel",
+            "groupId": 2000107675,
+            "homeName": "Sordi, Emiliano",
+            "groupSortOrder": 3874820019684212736,
+            "path": [
+                {
+                    "englishName": "UFC/MMA",
+                    "termKey": "ufc_mma",
+                    "name": "UFC/MMA",
+                    "id": 1000093238
+                },
+                {
+                    "englishName": "Professional Fighters League",
+                    "termKey": "professional_fighters_league",
+                    "name": "Professional Fighters League",
+                    "id": 2000107675
+                }
+            ],
+            "id": 1007730212,
+            "state": "NOT_STARTED",
+            "group": "Professional Fighters League",
+            "participants": [
+                {
+                    "participantId": 1002159409,
+                    "nonRunner": false,
+                    "scratched": false,
+                    "name": "Spohn, Daniel"
+                },
+                {
+                    "participantId": 1002332208,
+                    "nonRunner": false,
+                    "scratched": false,
+                    "name": "Sordi, Emiliano"
+                }
+            ],
+            "start": "2021-06-18T01:45:00Z",
+            "nonLiveBoCount": 1,
+            "tags": [
+                "OFFERED_LIVE",
+                "MATCH"
+            ],
+            "awayName": "Spohn, Daniel",
+            "name": "Sordi, Emiliano - Spohn, Daniel",
+            "sport": "MARTIAL_ARTS"
+        },
+        {
+            "englishName": "Cooper III, Ray - Aleksakhin, Nikolai",
+            "groupId": 2000107675,
+            "homeName": "Cooper III, Ray",
+            "groupSortOrder": 3874820019684212736,
+            "path": [
+                {
+                    "englishName": "UFC/MMA",
+                    "termKey": "ufc_mma",
+                    "name": "UFC/MMA",
+                    "id": 1000093238
+                },
+                {
+                    "englishName": "Professional Fighters League",
+                    "termKey": "professional_fighters_league",
+                    "name": "Professional Fighters League",
+                    "id": 2000107675
+                }
+            ],
+            "id": 1007730216,
+            "state": "NOT_STARTED",
+            "group": "Professional Fighters League",
+            "participants": [
+                {
+                    "participantId": 1003147784,
+                    "nonRunner": false,
+                    "scratched": false,
+                    "name": "Aleksakhin, Nikolai"
+                },
+                {
+                    "participantId": 1004799433,
+                    "nonRunner": false,
+                    "scratched": false,
+                    "name": "Cooper III, Ray"
+                }
+            ],
+            "start": "2021-06-18T02:15:00Z",
+            "nonLiveBoCount": 1,
+            "tags": [
+                "OFFERED_LIVE",
+                "MATCH"
+            ],
+            "awayName": "Aleksakhin, Nikolai",
+            "name": "Cooper III, Ray - Aleksakhin, Nikolai",
+            "sport": "MARTIAL_ARTS"
+        },
+        {
+            "englishName": "MacDonald, Rory - Tibau, Gleison",
+            "groupId": 2000107675,
+            "homeName": "MacDonald, Rory",
+            "groupSortOrder": 3874820019684212736,
+            "path": [
+                {
+                    "englishName": "UFC/MMA",
+                    "termKey": "ufc_mma",
+                    "name": "UFC/MMA",
+                    "id": 1000093238
+                },
+                {
+                    "englishName": "Professional Fighters League",
+                    "termKey": "professional_fighters_league",
+                    "name": "Professional Fighters League",
+                    "id": 2000107675
+                }
+            ],
+            "id": 1007730211,
+            "state": "NOT_STARTED",
+            "group": "Professional Fighters League",
+            "participants": [
+                {
+                    "participantId": 1000086158,
+                    "nonRunner": false,
+                    "scratched": false,
+                    "name": "Tibau, Gleison"
+                },
+                {
+                    "participantId": 1000710272,
+                    "nonRunner": false,
+                    "scratched": false,
+                    "name": "MacDonald, Rory"
+                }
+            ],
+            "start": "2021-06-18T02:45:00Z",
+            "nonLiveBoCount": 1,
+            "tags": [
+                "OFFERED_LIVE",
+                "MATCH"
+            ],
+            "awayName": "Tibau, Gleison",
+            "name": "MacDonald, Rory - Tibau, Gleison",
+            "sport": "MARTIAL_ARTS"
+        },
+        {
+            "englishName": "O'Neill, Casey - Procopio, Lara Fritzen",
+            "groupId": 1000093883,
+            "homeName": "O'Neill, Casey",
+            "groupSortOrder": 2876820019684212736,
+            "path": [
+                {
+                    "englishName": "UFC/MMA",
+                    "termKey": "ufc_mma",
+                    "name": "UFC/MMA",
+                    "id": 1000093238
+                },
+                {
+                    "englishName": "UFC",
+                    "termKey": "ufc",
+                    "name": "UFC",
+                    "id": 1000093883
+                }
+            ],
+            "id": 1007707278,
+            "state": "NOT_STARTED",
+            "group": "UFC",
+            "participants": [
+                {
+                    "participantId": 1007313526,
+                    "nonRunner": false,
+                    "scratched": false,
+                    "name": "O'Neill, Casey"
+                },
+                {
+                    "participantId": 1005732944,
+                    "nonRunner": false,
+                    "scratched": false,
+                    "name": "Procopio, Lara Fritzen"
+                }
+            ],
+            "start": "2021-06-19T20:15:00Z",
+            "nonLiveBoCount": 1,
+            "tags": [
+                "OFFERED_LIVE",
+                "MATCH"
+            ],
+            "awayName": "Procopio, Lara Fritzen",
+            "name": "O'Neill, Casey - Procopio, Lara Fritzen",
+            "sport": "MARTIAL_ARTS"
+        },
+        {
+            "englishName": "Silva, Joaquim - Glenn, Rick",
+            "groupId": 1000093883,
+            "homeName": "Silva, Joaquim",
+            "groupSortOrder": 2876820019684212736,
+            "path": [
+                {
+                    "englishName": "UFC/MMA",
+                    "termKey": "ufc_mma",
+                    "name": "UFC/MMA",
+                    "id": 1000093238
+                },
+                {
+                    "englishName": "UFC",
+                    "termKey": "ufc",
+                    "name": "UFC",
+                    "id": 1000093883
+                }
+            ],
+            "id": 1007707277,
+            "state": "NOT_STARTED",
+            "group": "UFC",
+            "participants": [
+                {
+                    "participantId": 1002827388,
+                    "nonRunner": false,
+                    "scratched": false,
+                    "name": "Silva, Joaquim"
+                },
+                {
+                    "participantId": 1002131596,
+                    "nonRunner": false,
+                    "scratched": false,
+                    "name": "Glenn, Rick"
+                }
+            ],
+            "start": "2021-06-19T20:45:00Z",
+            "nonLiveBoCount": 1,
+            "tags": [
+                "OFFERED_LIVE",
+                "MATCH"
+            ],
+            "awayName": "Glenn, Rick",
+            "name": "Silva, Joaquim - Glenn, Rick",
+            "sport": "MARTIAL_ARTS"
+        },
+        {
+            "englishName": "Parisian, Josh - Martinez, Roque",
+            "groupId": 1000093883,
+            "homeName": "Parisian, Josh",
+            "groupSortOrder": 2876820019684212736,
+            "path": [
+                {
+                    "englishName": "UFC/MMA",
+                    "termKey": "ufc_mma",
+                    "name": "UFC/MMA",
+                    "id": 1000093238
+                },
+                {
+                    "englishName": "UFC",
+                    "termKey": "ufc",
+                    "name": "UFC",
+                    "id": 1000093883
+                }
+            ],
+            "id": 1007707279,
+            "state": "NOT_STARTED",
+            "group": "UFC",
+            "participants": [
+                {
+                    "participantId": 1004776785,
+                    "nonRunner": false,
+                    "scratched": false,
+                    "name": "Parisian, Josh"
+                },
+                {
+                    "participantId": 1006811533,
+                    "nonRunner": false,
+                    "scratched": false,
+                    "name": "Martinez, Roque"
+                }
+            ],
+            "start": "2021-06-19T21:15:00Z",
+            "nonLiveBoCount": 1,
+            "tags": [
+                "OFFERED_LIVE",
+                "MATCH"
+            ],
+            "awayName": "Martinez, Roque",
+            "name": "Parisian, Josh - Martinez, Roque",
+            "sport": "MARTIAL_ARTS"
+        },
+        {
+            "englishName": "Williams, Khaos - Semelsberger, Matthew",
+            "groupId": 1000093883,
+            "homeName": "Williams, Khaos",
+            "groupSortOrder": 2876820019684212736,
+            "path": [
+                {
+                    "englishName": "UFC/MMA",
+                    "termKey": "ufc_mma",
+                    "name": "UFC/MMA",
+                    "id": 1000093238
+                },
+                {
+                    "englishName": "UFC",
+                    "termKey": "ufc",
+                    "name": "UFC",
+                    "id": 1000093883
+                }
+            ],
+            "id": 1007707283,
+            "state": "NOT_STARTED",
+            "group": "UFC",
+            "participants": [
+                {
+                    "participantId": 1006109637,
+                    "nonRunner": false,
+                    "scratched": false,
+                    "name": "Williams, Khaos"
+                },
+                {
+                    "participantId": 1006675947,
+                    "nonRunner": false,
+                    "scratched": false,
+                    "name": "Semelsberger, Matthew"
+                }
+            ],
+            "start": "2021-06-19T21:45:00Z",
+            "nonLiveBoCount": 1,
+            "tags": [
+                "OFFERED_LIVE",
+                "MATCH"
+            ],
+            "awayName": "Semelsberger, Matthew",
+            "name": "Williams, Khaos - Semelsberger, Matthew",
+            "sport": "MARTIAL_ARTS"
+        },
+        {
+            "englishName": "Jandiroba, Virna - Murata, Kanako",
+            "groupId": 1000093883,
+            "homeName": "Jandiroba, Virna",
+            "groupSortOrder": 2876820019684212736,
+            "path": [
+                {
+                    "englishName": "UFC/MMA",
+                    "termKey": "ufc_mma",
+                    "name": "UFC/MMA",
+                    "id": 1000093238
+                },
+                {
+                    "englishName": "UFC",
+                    "termKey": "ufc",
+                    "name": "UFC",
+                    "id": 1000093883
+                }
+            ],
+            "id": 1007707284,
+            "state": "NOT_STARTED",
+            "group": "UFC",
+            "participants": [
+                {
+                    "participantId": 1004387094,
+                    "nonRunner": false,
+                    "scratched": false,
+                    "name": "Jandiroba, Virna"
+                },
+                {
+                    "participantId": 1003186177,
+                    "nonRunner": false,
+                    "scratched": false,
+                    "name": "Murata, Kanako"
+                }
+            ],
+            "start": "2021-06-19T22:15:00Z",
+            "nonLiveBoCount": 1,
+            "tags": [
+                "OFFERED_LIVE",
+                "MATCH"
+            ],
+            "awayName": "Murata, Kanako",
+            "name": "Jandiroba, Virna - Murata, Kanako",
+            "sport": "MARTIAL_ARTS"
+        },
+        {
+            "englishName": "Negumereanu, Nicolae - Camur, Aleksa",
+            "groupId": 1000093883,
+            "homeName": "Negumereanu, Nicolae",
+            "groupSortOrder": 2876820019684212736,
+            "path": [
+                {
+                    "englishName": "UFC/MMA",
+                    "termKey": "ufc_mma",
+                    "name": "UFC/MMA",
+                    "id": 1000093238
+                },
+                {
+                    "englishName": "UFC",
+                    "termKey": "ufc",
+                    "name": "UFC",
+                    "id": 1000093883
+                }
+            ],
+            "id": 1007707273,
+            "state": "NOT_STARTED",
+            "group": "UFC",
+            "participants": [
+                {
+                    "participantId": 1005345345,
+                    "nonRunner": false,
+                    "scratched": false,
+                    "name": "Negumereanu, Nicolae"
+                },
+                {
+                    "participantId": 1005675664,
+                    "nonRunner": false,
+                    "scratched": false,
+                    "name": "Camur, Aleksa"
+                }
+            ],
+            "start": "2021-06-19T22:45:00Z",
+            "nonLiveBoCount": 1,
+            "tags": [
+                "OFFERED_LIVE",
+                "MATCH"
+            ],
+            "awayName": "Camur, Aleksa",
+            "name": "Negumereanu, Nicolae - Camur, Aleksa",
+            "sport": "MARTIAL_ARTS"
+        },
+        {
+            "englishName": "Lima, Dhiego - Brown, Matt",
+            "groupId": 1000093883,
+            "homeName": "Lima, Dhiego",
+            "groupSortOrder": 2876820019684212736,
+            "path": [
+                {
+                    "englishName": "UFC/MMA",
+                    "termKey": "ufc_mma",
+                    "name": "UFC/MMA",
+                    "id": 1000093238
+                },
+                {
+                    "englishName": "UFC",
+                    "termKey": "ufc",
+                    "name": "UFC",
+                    "id": 1000093883
+                }
+            ],
+            "id": 1007707285,
+            "state": "NOT_STARTED",
+            "group": "UFC",
+            "participants": [
+                {
+                    "participantId": 1002159414,
+                    "nonRunner": false,
+                    "scratched": false,
+                    "name": "Lima, Dhiego"
+                },
+                {
+                    "participantId": 1000745446,
+                    "nonRunner": false,
+                    "scratched": false,
+                    "name": "Brown, Matt"
+                }
+            ],
+            "start": "2021-06-19T23:15:00Z",
+            "nonLiveBoCount": 1,
+            "tags": [
+                "OFFERED_LIVE",
+                "MATCH"
+            ],
+            "awayName": "Brown, Matt",
+            "name": "Lima, Dhiego - Brown, Matt",
+            "sport": "MARTIAL_ARTS"
+        },
+        {
+            "englishName": "Turman, Wellington - Silva, Bruno",
+            "groupId": 1000093883,
+            "homeName": "Turman, Wellington",
+            "groupSortOrder": 2876820019684212736,
+            "path": [
+                {
+                    "englishName": "UFC/MMA",
+                    "termKey": "ufc_mma",
+                    "name": "UFC/MMA",
+                    "id": 1000093238
+                },
+                {
+                    "englishName": "UFC",
+                    "termKey": "ufc",
+                    "name": "UFC",
+                    "id": 1000093883
+                }
+            ],
+            "id": 1007707275,
+            "state": "NOT_STARTED",
+            "group": "UFC",
+            "participants": [
+                {
+                    "participantId": 1005587562,
+                    "nonRunner": false,
+                    "scratched": false,
+                    "name": "Turman, Wellington"
+                },
+                {
+                    "participantId": 1005540243,
+                    "nonRunner": false,
+                    "scratched": false,
+                    "name": "Silva, Bruno"
+                }
+            ],
+            "start": "2021-06-19T23:45:00Z",
+            "nonLiveBoCount": 1,
+            "tags": [
+                "OFFERED_LIVE",
+                "MATCH"
+            ],
+            "awayName": "Silva, Bruno",
+            "name": "Turman, Wellington - Silva, Bruno",
+            "sport": "MARTIAL_ARTS"
+        },
+        {
+            "englishName": "Seung Woo Choi - Erosa, Julian",
+            "groupId": 1000093883,
+            "homeName": "Seung Woo Choi",
+            "groupSortOrder": 2876820019684212736,
+            "path": [
+                {
+                    "englishName": "UFC/MMA",
+                    "termKey": "ufc_mma",
+                    "name": "UFC/MMA",
+                    "id": 1000093238
+                },
+                {
+                    "englishName": "UFC",
+                    "termKey": "ufc",
+                    "name": "UFC",
+                    "id": 1000093883
+                }
+            ],
+            "id": 1007707282,
+            "state": "NOT_STARTED",
+            "group": "UFC",
+            "participants": [
+                {
+                    "participantId": 1005403154,
+                    "nonRunner": false,
+                    "scratched": false,
+                    "name": "Seung Woo Choi"
+                },
+                {
+                    "participantId": 1003019551,
+                    "nonRunner": false,
+                    "scratched": false,
+                    "name": "Erosa, Julian"
+                }
+            ],
+            "start": "2021-06-20T00:15:00Z",
+            "nonLiveBoCount": 1,
+            "tags": [
+                "OFFERED_LIVE",
+                "MATCH"
+            ],
+            "awayName": "Erosa, Julian",
+            "name": "Seung Woo Choi - Erosa, Julian",
+            "sport": "MARTIAL_ARTS"
+        },
+        {
+            "englishName": "Vera, Marlon - Grant, Davey",
+            "groupId": 1000093883,
+            "homeName": "Vera, Marlon",
+            "groupSortOrder": 2876820019684212736,
+            "path": [
+                {
+                    "englishName": "UFC/MMA",
+                    "termKey": "ufc_mma",
+                    "name": "UFC/MMA",
+                    "id": 1000093238
+                },
+                {
+                    "englishName": "UFC",
+                    "termKey": "ufc",
+                    "name": "UFC",
+                    "id": 1000093883
+                }
+            ],
+            "id": 1007707272,
+            "state": "NOT_STARTED",
+            "group": "UFC",
+            "participants": [
+                {
+                    "participantId": 1002382945,
+                    "nonRunner": false,
+                    "scratched": false,
+                    "name": "Vera, Marlon"
+                },
+                {
+                    "participantId": 1001856322,
+                    "nonRunner": false,
+                    "scratched": false,
+                    "name": "Grant, Davey"
+                }
+            ],
+            "start": "2021-06-20T00:45:00Z",
+            "nonLiveBoCount": 1,
+            "tags": [
+                "OFFERED_LIVE",
+                "MATCH"
+            ],
+            "awayName": "Grant, Davey",
+            "name": "Vera, Marlon - Grant, Davey",
+            "sport": "MARTIAL_ARTS"
+        },
+        {
+            "englishName": "Oleinik, Aleksei - Spivac, Serghei",
+            "groupId": 1000093883,
+            "homeName": "Oleinik, Aleksei",
+            "groupSortOrder": 2876820019684212736,
+            "path": [
+                {
+                    "englishName": "UFC/MMA",
+                    "termKey": "ufc_mma",
+                    "name": "UFC/MMA",
+                    "id": 1000093238
+                },
+                {
+                    "englishName": "UFC",
+                    "termKey": "ufc",
+                    "name": "UFC",
+                    "id": 1000093883
+                }
+            ],
+            "id": 1007707276,
+            "state": "NOT_STARTED",
+            "group": "UFC",
+            "participants": [
+                {
+                    "participantId": 1000847828,
+                    "nonRunner": false,
+                    "scratched": false,
+                    "name": "Oleinik, Aleksei"
+                },
+                {
+                    "participantId": 1006138444,
+                    "nonRunner": false,
+                    "scratched": false,
+                    "name": "Spivac, Serghei"
+                }
+            ],
+            "start": "2021-06-20T01:15:00Z",
+            "nonLiveBoCount": 1,
+            "tags": [
+                "OFFERED_LIVE",
+                "MATCH"
+            ],
+            "awayName": "Spivac, Serghei",
+            "name": "Oleinik, Aleksei - Spivac, Serghei",
+            "sport": "MARTIAL_ARTS"
+        },
+        {
+            "englishName": "Chan Sung Jung - Ige, Dan",
+            "groupId": 1000093883,
+            "homeName": "Chan Sung Jung",
+            "groupSortOrder": 2876820019684212736,
+            "path": [
+                {
+                    "englishName": "UFC/MMA",
+                    "termKey": "ufc_mma",
+                    "name": "UFC/MMA",
+                    "id": 1000093238
+                },
+                {
+                    "englishName": "UFC",
+                    "termKey": "ufc",
+                    "name": "UFC",
+                    "id": 1000093883
+                }
+            ],
+            "id": 1007658567,
+            "state": "NOT_STARTED",
+            "group": "UFC",
+            "participants": [
+                {
+                    "participantId": 1000545269,
+                    "nonRunner": false,
+                    "scratched": false,
+                    "name": "Chan Sung Jung"
+                },
+                {
+                    "participantId": 1004111894,
+                    "nonRunner": false,
+                    "scratched": false,
+                    "name": "Ige, Dan"
+                }
+            ],
+            "start": "2021-06-20T02:00:00Z",
+            "nonLiveBoCount": 1,
+            "tags": [
+                "OFFERED_LIVE",
+                "MATCH"
+            ],
+            "awayName": "Ige, Dan",
+            "name": "Chan Sung Jung - Ige, Dan",
+            "sport": "MARTIAL_ARTS"
+        },
+        {
+            "englishName": "Barcelos, Raoni - Valiev, Timur",
+            "groupId": 1000093883,
+            "homeName": "Barcelos, Raoni",
+            "groupSortOrder": 2876820019684212736,
+            "path": [
+                {
+                    "englishName": "UFC/MMA",
+                    "termKey": "ufc_mma",
+                    "name": "UFC/MMA",
+                    "id": 1000093238
+                },
+                {
+                    "englishName": "UFC",
+                    "termKey": "ufc",
+                    "name": "UFC",
+                    "id": 1000093883
+                }
+            ],
+            "id": 1007708813,
+            "state": "NOT_STARTED",
+            "group": "UFC",
+            "participants": [
+                {
+                    "participantId": 1004292963,
+                    "nonRunner": false,
+                    "scratched": false,
+                    "name": "Barcelos, Raoni"
+                },
+                {
+                    "participantId": 1002287913,
+                    "nonRunner": false,
+                    "scratched": false,
+                    "name": "Valiev, Timur"
+                }
+            ],
+            "start": "2021-06-26T20:00:00Z",
+            "nonLiveBoCount": 1,
+            "tags": [
+                "OFFERED_LIVE",
+                "MATCH"
+            ],
+            "awayName": "Valiev, Timur",
+            "name": "Barcelos, Raoni - Valiev, Timur",
+            "sport": "MARTIAL_ARTS"
+        },
+        {
+            "englishName": "Emeev, Ramazan - Alves, Warlley",
+            "groupId": 1000093883,
+            "homeName": "Emeev, Ramazan",
+            "groupSortOrder": 2876820019684212736,
+            "path": [
+                {
+                    "englishName": "UFC/MMA",
+                    "termKey": "ufc_mma",
+                    "name": "UFC/MMA",
+                    "id": 1000093238
+                },
+                {
+                    "englishName": "UFC",
+                    "termKey": "ufc",
+                    "name": "UFC",
+                    "id": 1000093883
+                }
+            ],
+            "id": 1007708815,
+            "state": "NOT_STARTED",
+            "group": "UFC",
+            "participants": [
+                {
+                    "participantId": 1004275719,
+                    "nonRunner": false,
+                    "scratched": false,
+                    "name": "Emeev, Ramazan"
+                },
+                {
+                    "participantId": 1002102205,
+                    "nonRunner": false,
+                    "scratched": false,
+                    "name": "Alves, Warlley"
+                }
+            ],
+            "start": "2021-06-26T20:00:00Z",
+            "nonLiveBoCount": 1,
+            "tags": [
+                "OFFERED_LIVE",
+                "MATCH"
+            ],
+            "awayName": "Alves, Warlley",
+            "name": "Emeev, Ramazan - Alves, Warlley",
+            "sport": "MARTIAL_ARTS"
+        },
+        {
+            "englishName": "Moicano, Renato - Herbert, Jai",
+            "groupId": 1000093883,
+            "homeName": "Moicano, Renato",
+            "groupSortOrder": 2876820019684212736,
+            "path": [
+                {
+                    "englishName": "UFC/MMA",
+                    "termKey": "ufc_mma",
+                    "name": "UFC/MMA",
+                    "id": 1000093238
+                },
+                {
+                    "englishName": "UFC",
+                    "termKey": "ufc",
+                    "name": "UFC",
+                    "id": 1000093883
+                }
+            ],
+            "id": 1007708913,
+            "state": "NOT_STARTED",
+            "group": "UFC",
+            "participants": [
+                {
+                    "participantId": 1002427637,
+                    "nonRunner": false,
+                    "scratched": false,
+                    "name": "Moicano, Renato"
+                },
+                {
+                    "participantId": 1004751161,
+                    "nonRunner": false,
+                    "scratched": false,
+                    "name": "Herbert, Jai"
+                }
+            ],
+            "start": "2021-06-26T20:00:00Z",
+            "nonLiveBoCount": 1,
+            "tags": [
+                "OFFERED_LIVE",
+                "MATCH"
+            ],
+            "awayName": "Herbert, Jai",
+            "name": "Moicano, Renato - Herbert, Jai",
+            "sport": "MARTIAL_ARTS"
+        },
+        {
+            "englishName": "Prachnio, Marcin - Villanueva, Ike",
+            "groupId": 1000093883,
+            "homeName": "Prachnio, Marcin",
+            "groupSortOrder": 2876820019684212736,
+            "path": [
+                {
+                    "englishName": "UFC/MMA",
+                    "termKey": "ufc_mma",
+                    "name": "UFC/MMA",
+                    "id": 1000093238
+                },
+                {
+                    "englishName": "UFC",
+                    "termKey": "ufc",
+                    "name": "UFC",
+                    "id": 1000093883
+                }
+            ],
+            "id": 1007708948,
+            "state": "NOT_STARTED",
+            "group": "UFC",
+            "participants": [
+                {
+                    "participantId": 1004513666,
+                    "nonRunner": false,
+                    "scratched": false,
+                    "name": "Prachnio, Marcin"
+                },
+                {
+                    "participantId": 1006350714,
+                    "nonRunner": false,
+                    "scratched": false,
+                    "name": "Villanueva, Ike"
+                }
+            ],
+            "start": "2021-06-26T20:00:00Z",
+            "nonLiveBoCount": 1,
+            "tags": [
+                "OFFERED_LIVE",
+                "MATCH"
+            ],
+            "awayName": "Villanueva, Ike",
+            "name": "Prachnio, Marcin - Villanueva, Ike",
+            "sport": "MARTIAL_ARTS"
+        },
+        {
+            "englishName": "Prazeres, Michel - Rakhmonov, Shavkat",
+            "groupId": 1000093883,
+            "homeName": "Prazeres, Michel",
+            "groupSortOrder": 2876820019684212736,
+            "path": [
+                {
+                    "englishName": "UFC/MMA",
+                    "termKey": "ufc_mma",
+                    "name": "UFC/MMA",
+                    "id": 1000093238
+                },
+                {
+                    "englishName": "UFC",
+                    "termKey": "ufc",
+                    "name": "UFC",
+                    "id": 1000093883
+                }
+            ],
+            "id": 1007708811,
+            "state": "NOT_STARTED",
+            "group": "UFC",
+            "participants": [
+                {
+                    "participantId": 1001573541,
+                    "nonRunner": false,
+                    "scratched": false,
+                    "name": "Prazeres, Michel"
+                },
+                {
+                    "participantId": 1006197122,
+                    "nonRunner": false,
+                    "scratched": false,
+                    "name": "Rakhmonov, Shavkat"
+                }
+            ],
+            "start": "2021-06-26T20:00:00Z",
+            "nonLiveBoCount": 1,
+            "tags": [
+                "OFFERED_LIVE",
+                "MATCH"
+            ],
+            "awayName": "Rakhmonov, Shavkat",
+            "name": "Prazeres, Michel - Rakhmonov, Shavkat",
+            "sport": "MARTIAL_ARTS"
+        },
+        {
+            "englishName": "Rosa, Charles - Jaynes, Justin",
+            "groupId": 1000093883,
+            "homeName": "Rosa, Charles",
+            "groupSortOrder": 2876820019684212736,
+            "path": [
+                {
+                    "englishName": "UFC/MMA",
+                    "termKey": "ufc_mma",
+                    "name": "UFC/MMA",
+                    "id": 1000093238
+                },
+                {
+                    "englishName": "UFC",
+                    "termKey": "ufc",
+                    "name": "UFC",
+                    "id": 1000093883
+                }
+            ],
+            "id": 1007708810,
+            "state": "NOT_STARTED",
+            "group": "UFC",
+            "participants": [
+                {
+                    "participantId": 1002320720,
+                    "nonRunner": false,
+                    "scratched": false,
+                    "name": "Rosa, Charles"
+                },
+                {
+                    "participantId": 1006486003,
+                    "nonRunner": false,
+                    "scratched": false,
+                    "name": "Jaynes, Justin"
+                }
+            ],
+            "start": "2021-06-26T20:00:00Z",
+            "nonLiveBoCount": 1,
+            "tags": [
+                "OFFERED_LIVE",
+                "MATCH"
+            ],
+            "awayName": "Jaynes, Justin",
+            "name": "Rosa, Charles - Jaynes, Justin",
+            "sport": "MARTIAL_ARTS"
+        },
+        {
+            "englishName": "St. Preux, Ovince - Grishin, Maxim",
+            "groupId": 1000093883,
+            "homeName": "St. Preux, Ovince",
+            "groupSortOrder": 2876820019684212736,
+            "path": [
+                {
+                    "englishName": "UFC/MMA",
+                    "termKey": "ufc_mma",
+                    "name": "UFC/MMA",
+                    "id": 1000093238
+                },
+                {
+                    "englishName": "UFC",
+                    "termKey": "ufc",
+                    "name": "UFC",
+                    "id": 1000093883
+                }
+            ],
+            "id": 1007708809,
+            "state": "NOT_STARTED",
+            "group": "UFC",
+            "participants": [
+                {
+                    "participantId": 1000903088,
+                    "nonRunner": false,
+                    "scratched": false,
+                    "name": "St. Preux, Ovince"
+                },
+                {
+                    "participantId": 1004856967,
+                    "nonRunner": false,
+                    "scratched": false,
+                    "name": "Grishin, Maxim"
+                }
+            ],
+            "start": "2021-06-26T20:00:00Z",
+            "nonLiveBoCount": 1,
+            "tags": [
+                "OFFERED_LIVE",
+                "MATCH"
+            ],
+            "awayName": "Grishin, Maxim",
+            "name": "St. Preux, Ovince - Grishin, Maxim",
+            "sport": "MARTIAL_ARTS"
+        },
+        {
+            "englishName": "Gane, Ciryl - Volkov, Alexander",
+            "groupId": 1000093883,
+            "homeName": "Gane, Ciryl",
+            "groupSortOrder": 2876820019684212736,
+            "path": [
+                {
+                    "englishName": "UFC/MMA",
+                    "termKey": "ufc_mma",
+                    "name": "UFC/MMA",
+                    "id": 1000093238
+                },
+                {
+                    "englishName": "UFC",
+                    "termKey": "ufc",
+                    "name": "UFC",
+                    "id": 1000093883
+                }
+            ],
+            "id": 1007573170,
+            "state": "NOT_STARTED",
+            "group": "UFC",
+            "participants": [
+                {
+                    "participantId": 1005606361,
+                    "nonRunner": false,
+                    "scratched": false,
+                    "name": "Gane, Ciryl"
+                },
+                {
+                    "participantId": 1001395636,
+                    "nonRunner": false,
+                    "scratched": false,
+                    "name": "Volkov, Alexander"
+                }
+            ],
+            "start": "2021-06-27T02:00:00Z",
+            "nonLiveBoCount": 1,
+            "tags": [
+                "OFFERED_LIVE",
+                "MATCH"
+            ],
+            "awayName": "Volkov, Alexander",
+            "name": "Gane, Ciryl - Volkov, Alexander",
+            "sport": "MARTIAL_ARTS"
+        },
+        {
+            "englishName": "Poirier, Dustin - McGregor, Conor",
+            "groupId": 1000093883,
+            "homeName": "Poirier, Dustin",
+            "groupSortOrder": 2876820019684212736,
+            "path": [
+                {
+                    "englishName": "UFC/MMA",
+                    "termKey": "ufc_mma",
+                    "name": "UFC/MMA",
+                    "id": 1000093238
+                },
+                {
+                    "englishName": "UFC",
+                    "termKey": "ufc",
+                    "name": "UFC",
+                    "id": 1000093883
+                }
+            ],
+            "id": 1007501860,
+            "state": "NOT_STARTED",
+            "group": "UFC",
+            "participants": [
+                {
+                    "participantId": 1000837740,
+                    "nonRunner": false,
+                    "scratched": false,
+                    "name": "Poirier, Dustin"
+                },
+                {
+                    "participantId": 1001525290,
+                    "nonRunner": false,
+                    "scratched": false,
+                    "name": "McGregor, Conor"
+                }
+            ],
+            "start": "2021-07-10T22:00:00Z",
+            "nonLiveBoCount": 1,
+            "tags": [
+                "OFFERED_LIVE",
+                "MATCH"
+            ],
+            "awayName": "McGregor, Conor",
+            "name": "Poirier, Dustin - McGregor, Conor",
+            "sport": "MARTIAL_ARTS"
+        },
+        {
+            "englishName": "Burns, Gilbert - Thompson, Stephen",
+            "groupId": 1000093883,
+            "homeName": "Burns, Gilbert",
+            "groupSortOrder": 2876820019684212736,
+            "path": [
+                {
+                    "englishName": "UFC/MMA",
+                    "termKey": "ufc_mma",
+                    "name": "UFC/MMA",
+                    "id": 1000093238
+                },
+                {
+                    "englishName": "UFC",
+                    "termKey": "ufc",
+                    "name": "UFC",
+                    "id": 1000093883
+                }
+            ],
+            "id": 1007573160,
+            "state": "NOT_STARTED",
+            "group": "UFC",
+            "participants": [
+                {
+                    "participantId": 1002190920,
+                    "nonRunner": false,
+                    "scratched": false,
+                    "name": "Burns, Gilbert"
+                },
+                {
+                    "participantId": 1002307547,
+                    "nonRunner": false,
+                    "scratched": false,
+                    "name": "Thompson, Stephen"
+                }
+            ],
+            "start": "2021-07-11T02:00:00Z",
+            "nonLiveBoCount": 1,
+            "tags": [
+                "OFFERED_LIVE",
+                "MATCH"
+            ],
+            "awayName": "Thompson, Stephen",
+            "name": "Burns, Gilbert - Thompson, Stephen",
+            "sport": "MARTIAL_ARTS"
+        },
+        {
+            "englishName": "Holloway, Max - Rodriguez, Yair",
+            "groupId": 1000093883,
+            "homeName": "Holloway, Max",
+            "groupSortOrder": 2876820019684212736,
+            "path": [
+                {
+                    "englishName": "UFC/MMA",
+                    "termKey": "ufc_mma",
+                    "name": "UFC/MMA",
+                    "id": 1000093238
+                },
+                {
+                    "englishName": "UFC",
+                    "termKey": "ufc",
+                    "name": "UFC",
+                    "id": 1000093883
+                }
+            ],
+            "id": 1007695099,
+            "state": "NOT_STARTED",
+            "group": "UFC",
+            "participants": [
+                {
+                    "participantId": 1001460896,
+                    "nonRunner": false,
+                    "scratched": false,
+                    "name": "Holloway, Max"
+                },
+                {
+                    "participantId": 1002383770,
+                    "nonRunner": false,
+                    "scratched": false,
+                    "name": "Rodriguez, Yair"
+                }
+            ],
+            "start": "2021-07-17T22:00:00Z",
+            "nonLiveBoCount": 1,
+            "tags": [
+                "OFFERED_LIVE",
+                "MATCH"
+            ],
+            "awayName": "Rodriguez, Yair",
+            "name": "Holloway, Max - Rodriguez, Yair",
+            "sport": "MARTIAL_ARTS"
+        },
+        {
+            "englishName": "Nunes, Amanda - Peña, Julianna",
+            "groupId": 1000093883,
+            "homeName": "Nunes, Amanda",
+            "groupSortOrder": 2876820019684212736,
+            "path": [
+                {
+                    "englishName": "UFC/MMA",
+                    "termKey": "ufc_mma",
+                    "name": "UFC/MMA",
+                    "id": 1000093238
+                },
+                {
+                    "englishName": "UFC",
+                    "termKey": "ufc",
+                    "name": "UFC",
+                    "id": 1000093883
+                }
+            ],
+            "id": 1007573389,
+            "state": "NOT_STARTED",
+            "group": "UFC",
+            "participants": [
+                {
+                    "participantId": 1001092483,
+                    "nonRunner": false,
+                    "scratched": false,
+                    "name": "Nunes, Amanda"
+                },
+                {
+                    "participantId": 1001863887,
+                    "nonRunner": false,
+                    "scratched": false,
+                    "name": "Peña, Julianna"
+                }
+            ],
+            "start": "2021-08-08T03:00:00Z",
+            "nonLiveBoCount": 1,
+            "tags": [
+                "OFFERED_LIVE",
+                "MATCH"
+            ],
+            "awayName": "Peña, Julianna",
+            "name": "Nunes, Amanda - Peña, Julianna",
+            "sport": "MARTIAL_ARTS"
+        },
+        {
+            "englishName": "Professional Fighters League Light Heavyweight Champion 2021",
+            "groupId": 2000107675,
+            "homeName": "Professional Fighters League Light Heavyweight Champion 2021",
+            "groupSortOrder": 3874820019684212736,
+            "path": [
+                {
+                    "englishName": "UFC/MMA",
+                    "termKey": "ufc_mma",
+                    "name": "UFC/MMA",
+                    "id": 1000093238
+                },
+                {
+                    "englishName": "Professional Fighters League",
+                    "termKey": "professional_fighters_league",
+                    "name": "Professional Fighters League",
+                    "id": 2000107675
+                }
+            ],
+            "id": 1007662949,
+            "state": "NOT_STARTED",
+            "group": "Professional Fighters League",
+            "participants": [
+                {
+                    "participantId": 1000278450,
+                    "nonRunner": false,
+                    "scratched": false,
+                    "name": "Camozzi, Chris"
+                },
+                {
+                    "participantId": 1000504140,
+                    "nonRunner": false,
+                    "scratched": false,
+                    "name": "Magalhaes, Vinny"
+                },
+                {
+                    "participantId": 1000504147,
+                    "nonRunner": false,
+                    "scratched": false,
+                    "name": "Lawlor, Tom"
+                },
+                {
+                    "participantId": 1001290665,
+                    "nonRunner": false,
+                    "scratched": false,
+                    "name": "Ferreira, Cezar"
+                },
+                {
+                    "participantId": 1002102207,
+                    "nonRunner": false,
+                    "scratched": false,
+                    "name": "Carlos, Antonio Jr"
+                },
+                {
+                    "participantId": 1002159409,
+                    "nonRunner": false,
+                    "scratched": false,
+                    "name": "Spohn, Daniel"
+                },
+                {
+                    "participantId": 1002332208,
+                    "nonRunner": false,
+                    "scratched": false,
+                    "name": "Sordi, Emiliano"
+                },
+                {
+                    "participantId": 1003327895,
+                    "nonRunner": false,
+                    "scratched": false,
+                    "name": "Hendricks, Cory"
+                },
+                {
+                    "participantId": 1005587510,
+                    "nonRunner": false,
+                    "scratched": false,
+                    "name": "Hamlet, Marthin"
+                },
+                {
+                    "participantId": 1007562661,
+                    "nonRunner": false,
+                    "scratched": false,
+                    "name": "Professional Fighters League 2021"
+                },
+                {
+                    "participantId": 1007570856,
+                    "nonRunner": false,
+                    "scratched": false,
+                    "name": "Young, Jordan"
+                }
+            ],
+            "start": "2021-12-31T22:00:00Z",
+            "nonLiveBoCount": 1,
+            "tags": [
+                "COMPETITION",
+                "SHOW_START_NUMBER"
+            ],
+            "name": "Professional Fighters League Light Heavyweight Champion 2021",
+            "sport": "MARTIAL_ARTS"
+        },
+        {
+            "englishName": "Professional Fighters League Welterweight Champion 2021",
+            "groupId": 2000107675,
+            "homeName": "Professional Fighters League Welterweight Champion 2021",
+            "groupSortOrder": 3874820019684212736,
+            "path": [
+                {
+                    "englishName": "UFC/MMA",
+                    "termKey": "ufc_mma",
+                    "name": "UFC/MMA",
+                    "id": 1000093238
+                },
+                {
+                    "englishName": "Professional Fighters League",
+                    "termKey": "professional_fighters_league",
+                    "name": "Professional Fighters League",
+                    "id": 2000107675
+                }
+            ],
+            "id": 1007662964,
+            "state": "NOT_STARTED",
+            "group": "Professional Fighters League",
+            "participants": [
+                {
+                    "participantId": 1000086158,
+                    "nonRunner": false,
+                    "scratched": false,
+                    "name": "Tibau, Gleison"
+                },
+                {
+                    "participantId": 1000710272,
+                    "nonRunner": false,
+                    "scratched": false,
+                    "name": "MacDonald, Rory"
+                },
+                {
+                    "participantId": 1001573537,
+                    "nonRunner": false,
+                    "scratched": false,
+                    "name": "Zeferino, Joao"
+                },
+                {
+                    "participantId": 1002516937,
+                    "nonRunner": false,
+                    "scratched": false,
+                    "name": "Millender, Curtis"
+                },
+                {
+                    "participantId": 1003147784,
+                    "nonRunner": false,
+                    "scratched": false,
+                    "name": "Aleksakhin, Nikolai"
+                },
+                {
+                    "participantId": 1003268357,
+                    "nonRunner": false,
+                    "scratched": false,
+                    "name": "Sy, Sadibou"
+                },
+                {
+                    "participantId": 1003453912,
+                    "nonRunner": false,
+                    "scratched": false,
+                    "name": "Ponet, Jason"
+                },
+                {
+                    "participantId": 1004305191,
+                    "nonRunner": false,
+                    "scratched": false,
+                    "name": "Kunchenko, Aleksei"
+                },
+                {
+                    "participantId": 1004799433,
+                    "nonRunner": false,
+                    "scratched": false,
+                    "name": "Cooper III, Ray"
+                },
+                {
+                    "participantId": 1004908397,
+                    "nonRunner": false,
+                    "scratched": false,
+                    "name": "Magomedkerimov, Magomed"
+                },
+                {
+                    "participantId": 1007562661,
+                    "nonRunner": false,
+                    "scratched": false,
+                    "name": "Professional Fighters League 2021"
+                }
+            ],
+            "start": "2021-12-31T22:00:00Z",
+            "nonLiveBoCount": 1,
+            "tags": [
+                "COMPETITION",
+                "SHOW_START_NUMBER"
+            ],
+            "name": "Professional Fighters League Welterweight Champion 2021",
+            "sport": "MARTIAL_ARTS"
+        }
+    ]
+}

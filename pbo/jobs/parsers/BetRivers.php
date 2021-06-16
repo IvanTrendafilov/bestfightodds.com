@@ -82,18 +82,8 @@ class ParserJob extends ParserJobBase
         }
 
         //Convert names from lastname, firstname to firstname lastname
-        $team1_name = $event->participants[0]->name;
-        $comma_pos = strpos($event->participants[0]->name, ',');
-        if ($comma_pos) {
-            $team1_name = trim(substr($event->participants[0]->name, $comma_pos + 1))
-                . ' ' . substr($event->participants[0]->name, 0, $comma_pos);
-        }
-        $team2_name = $event->participants[1]->name;
-        $comma_pos = strpos($event->participants[1]->name, ',');
-        if ($comma_pos) {
-            $team2_name = trim(substr($event->participants[1]->name, $comma_pos + 1))
-                . ' ' . substr($event->participants[1]->name, 0, $comma_pos);
-        }
+        $team1_name = ParseTools::convertCommaNameToFullName($event->participants[0]->name);
+        $team2_name = ParseTools::convertCommaNameToFullName($event->participants[1]->name);
 
         foreach ($event->betOffers as $betoffer) {
             if ($betoffer->betOfferType == 'Match' && $betoffer->betDescription == 'Tie No Bet - Bout Odds') {

@@ -203,6 +203,19 @@ class ParseTools
         }
     }
 
+    /**
+     * Convert name from Lastname, Firstname to Firstname Lastname
+     */
+    public static function convertCommaNameToFullName(string $name): string
+    {
+        $comma_pos = strpos($name, ',');
+        if ($comma_pos) {
+            return trim(substr($name, $comma_pos + 1))
+                . ' ' . substr($name, 0, $comma_pos);
+        }
+        return $name;
+    }
+
     public static function getInitialsFromName(string $team_name): array
     {
         $initials = [];
