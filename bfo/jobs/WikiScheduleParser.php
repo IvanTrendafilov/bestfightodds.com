@@ -52,11 +52,11 @@ class WikiScheduleParser
 
             $event_details_name = null;
             $event_details_date = null;
-            preg_match('/\{\{Infobox MMA event\s*\|name=\s*(?<event_name>[^\|]+)\|/i', $announced_parsed_str, $event_details_name);
-            preg_match('/date=\s*\{\{start date\|(?<event_date>[0-9\|]+)\}\}/i', $announced_parsed_str, $event_details_date);
+            preg_match('/\{\{Infobox MMA event.*?\|name=\s*(?<event_name>[^\|]+)\|/i', $announced_parsed_str, $event_details_name);
+            preg_match('/\{\{start date.*?\|(?<event_date>\d{4}\|\d{2}\|\d{2})/i', $announced_parsed_str, $event_details_date);
             if (!$event_details_name || !$event_details_date || empty($event_details_name['event_name']) || empty($event_details_date['event_date'])) {
                 echo 'Failed to retrieve event details for ' . $upcoming_event['event_name'];
-                echo "event_details_name: " . var_export($event_details_name ?? 'null') . "\n";
+                echo "\nevent_details_name: " . var_export($event_details_name ?? 'null') . "\n";
                 echo "event_details_date: " . var_export($event_details_date ?? 'null') . "\n";
                 exit;
             }
