@@ -77,7 +77,7 @@ class ScheduleParser
                     foreach ($stored_events as $event) {
                         $stored_prefix_parts = explode(' ', $event->getName());
                         if ($stored_prefix_parts[0] == $prefix_parts[0] && date('Y-m-d', $parsed_event['date']) == substr($event->getDate(), 0, 10)) {
-                            //Found it! But should maybe be renamed
+                            //Found it. But should maybe be renamed
                             $found = true;
                             if ($event->getName() != $parsed_event['title']) {
                                 ScheduleHandler::storeManualAction(json_encode(array('eventID' => $event->getID(), 'eventTitle' => $parsed_event['title']), JSON_HEX_APOS | JSON_HEX_QUOT), 2);
@@ -100,14 +100,14 @@ class ScheduleParser
                 if (count($found_matches) > 0) {
                     $found = true;
                     asort($found_matches, SORT_NUMERIC);
-                    //Probably found it! However event should be renamed if different
+                    //Probably found it. However event should maybe be renamed if different
                     $found_event = EventHandler::getEvent(array_key_first($found_matches));
                     if ($found_event->getName() != $parsed_event['title']) {
                         ScheduleHandler::storeManualAction(json_encode(array('eventID' => $found_event->getID(), 'eventTitle' => $parsed_event['title']), JSON_HEX_APOS | JSON_HEX_QUOT), 2);
                     }
                     $this->processMatchups($parsed_event, $found_event);
                     //But maybe date is still incorrect
-                    $this->checkEventDate($parsed_event, $found_event);
+                    //$this->checkEventDate($parsed_event, $found_event);
                     $this->matched_existing_events[] = $found_event->getID();
                 }
             }
@@ -147,7 +147,7 @@ class ScheduleParser
 
             $matchup = EventHandler::getMatchingMatchup(team1_name: $parsed_matchup[0], team2_name: $parsed_matchup[1], future_only: true);
             if ($matchup) {
-                //Found a match! But is it the right event?
+                //Found a match. Check if it is the right event
                 if ($matchup->getEventID() == $matched_event->getID()) {
                     //Complete match
                 } else {
