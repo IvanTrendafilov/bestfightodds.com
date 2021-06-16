@@ -1,0 +1,716 @@
+{
+    "events": [
+        {
+            "id": 1007730642,
+            "name": "Munguia, Jaime - Szeremeta, Kamil",
+            "participants": [
+                {
+                    "name": "Munguia, Jaime",
+                    "id": 1004675848,
+                    "home": true
+                },
+                {
+                    "name": "Szeremeta, Kamil",
+                    "id": 1005345807,
+                    "home": false
+                }
+            ],
+            "start": "2021-06-19T21:00:00.000Z",
+            "eventInfo": [
+                {
+                    "name": "Boxing",
+                    "id": 1000093201
+                },
+                {
+                    "name": "Upcoming Fights",
+                    "id": 2000050854
+                }
+            ],
+            "state": "NOT_STARTED",
+            "betOffers": [
+                {
+                    "id": 2268338127,
+                    "betOfferType": "Match",
+                    "betDescription": "Tie No Bet - Bout Odds",
+                    "outcomes": [
+                        {
+                            "id": 2931842436,
+                            "odds": 1.03,
+                            "oddsAmerican": "-3335",
+                            "oddsFractional": "1/40",
+                            "label": "1",
+                            "status": "OPEN",
+                            "cashOutStatus": "ENABLED"
+                        },
+                        {
+                            "id": 2931842438,
+                            "odds": 10.00,
+                            "oddsAmerican": "900",
+                            "oddsFractional": "9/1",
+                            "label": "2",
+                            "status": "OPEN",
+                            "cashOutStatus": "ENABLED"
+                        }
+                    ]
+                },
+                {
+                    "id": 2268338186,
+                    "betOfferType": "Match",
+                    "betDescription": "Moneyline (3-way)",
+                    "outcomes": [
+                        {
+                            "id": 2931842609,
+                            "odds": 1.04,
+                            "oddsAmerican": "-2500",
+                            "oddsFractional": "1/25",
+                            "label": "1",
+                            "status": "OPEN",
+                            "cashOutStatus": "ENABLED"
+                        },
+                        {
+                            "id": 2931842610,
+                            "odds": 26.00,
+                            "oddsAmerican": "2500",
+                            "oddsFractional": "25/1",
+                            "label": "X",
+                            "status": "OPEN",
+                            "cashOutStatus": "ENABLED"
+                        },
+                        {
+                            "id": 2931842611,
+                            "odds": 11.00,
+                            "oddsAmerican": "1000",
+                            "oddsFractional": "10/1",
+                            "label": "2",
+                            "status": "OPEN",
+                            "cashOutStatus": "ENABLED"
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "id": 1007660296,
+            "name": "Leo, Angelo - Alameda, Aaron",
+            "participants": [
+                {
+                    "name": "Leo, Angelo",
+                    "id": 1005284505,
+                    "home": true
+                },
+                {
+                    "name": "Alameda, Aaron",
+                    "id": 1006869670,
+                    "home": false
+                }
+            ],
+            "start": "2021-06-20T01:00:00.000Z",
+            "eventInfo": [
+                {
+                    "name": "Boxing",
+                    "id": 1000093201
+                },
+                {
+                    "name": "Upcoming Fights",
+                    "id": 2000050854
+                }
+            ],
+            "state": "NOT_STARTED",
+            "betOffers": [
+                {
+                    "id": 2268335985,
+                    "betOfferType": "Match",
+                    "betDescription": "Tie No Bet - Bout Odds",
+                    "outcomes": [
+                        {
+                            "id": 2931832759,
+                            "odds": 1.38,
+                            "oddsAmerican": "-265",
+                            "oddsFractional": "4/11",
+                            "label": "1",
+                            "status": "OPEN",
+                            "cashOutStatus": "ENABLED"
+                        },
+                        {
+                            "id": 2931832761,
+                            "odds": 2.88,
+                            "oddsAmerican": "188",
+                            "oddsFractional": "15/8",
+                            "label": "2",
+                            "status": "OPEN",
+                            "cashOutStatus": "ENABLED"
+                        }
+                    ]
+                },
+                {
+                    "id": 2268336080,
+                    "betOfferType": "Match",
+                    "betDescription": "Moneyline (3-way)",
+                    "outcomes": [
+                        {
+                            "id": 2931833063,
+                            "odds": 1.40,
+                            "oddsAmerican": "-250",
+                            "oddsFractional": "2/5",
+                            "label": "1",
+                            "status": "OPEN",
+                            "cashOutStatus": "ENABLED"
+                        },
+                        {
+                            "id": 2931833064,
+                            "odds": 21.00,
+                            "oddsAmerican": "2000",
+                            "oddsFractional": "20/1",
+                            "label": "X",
+                            "status": "OPEN",
+                            "cashOutStatus": "ENABLED"
+                        },
+                        {
+                            "id": 2931833065,
+                            "odds": 3.00,
+                            "oddsAmerican": "200",
+                            "oddsFractional": "2/1",
+                            "label": "2",
+                            "status": "OPEN",
+                            "cashOutStatus": "ENABLED"
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "id": 1007660295,
+            "name": "Charlo, Jermall - Montiel, Juan Macias",
+            "participants": [
+                {
+                    "name": "Charlo, Jermall",
+                    "id": 1001291331,
+                    "home": true
+                },
+                {
+                    "name": "Montiel, Juan Macias",
+                    "id": 1007660288,
+                    "home": false
+                }
+            ],
+            "start": "2021-06-20T02:00:00.000Z",
+            "eventInfo": [
+                {
+                    "name": "Boxing",
+                    "id": 1000093201
+                },
+                {
+                    "name": "Upcoming Fights",
+                    "id": 2000050854
+                }
+            ],
+            "state": "NOT_STARTED",
+            "betOffers": [
+                {
+                    "id": 2266557164,
+                    "betOfferType": "Match",
+                    "betDescription": "Tie No Bet - Bout Odds",
+                    "outcomes": [
+                        {
+                            "id": 2925964250,
+                            "odds": 1.02,
+                            "oddsAmerican": "-5000",
+                            "oddsFractional": "1/50",
+                            "label": "1",
+                            "status": "OPEN",
+                            "cashOutStatus": "ENABLED"
+                        },
+                        {
+                            "id": 2925964252,
+                            "odds": 11.00,
+                            "oddsAmerican": "1000",
+                            "oddsFractional": "10/1",
+                            "label": "2",
+                            "status": "OPEN",
+                            "cashOutStatus": "ENABLED"
+                        }
+                    ]
+                },
+                {
+                    "id": 2266557199,
+                    "betOfferType": "Match",
+                    "betDescription": "Moneyline (3-way)",
+                    "outcomes": [
+                        {
+                            "id": 2925964362,
+                            "odds": 1.03,
+                            "oddsAmerican": "-3335",
+                            "oddsFractional": "1/40",
+                            "label": "1",
+                            "status": "OPEN",
+                            "cashOutStatus": "ENABLED"
+                        },
+                        {
+                            "id": 2925964363,
+                            "odds": 26.00,
+                            "oddsAmerican": "2500",
+                            "oddsFractional": "25/1",
+                            "label": "X",
+                            "status": "OPEN",
+                            "cashOutStatus": "ENABLED"
+                        },
+                        {
+                            "id": 2925964364,
+                            "odds": 12.00,
+                            "oddsAmerican": "1100",
+                            "oddsFractional": "11/1",
+                            "label": "2",
+                            "status": "OPEN",
+                            "cashOutStatus": "ENABLED"
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "id": 1007660203,
+            "name": "Mayer, Mikaela - Farias, Erica Anabella",
+            "participants": [
+                {
+                    "name": "Mayer, Mikaela",
+                    "id": 1005299398,
+                    "home": true
+                },
+                {
+                    "name": "Farias, Erica Anabella",
+                    "id": 1002633693,
+                    "home": false
+                }
+            ],
+            "start": "2021-06-20T02:30:00.000Z",
+            "eventInfo": [
+                {
+                    "name": "Boxing",
+                    "id": 1000093201
+                },
+                {
+                    "name": "Upcoming Fights",
+                    "id": 2000050854
+                }
+            ],
+            "state": "NOT_STARTED",
+            "betOffers": [
+                {
+                    "id": 2268335553,
+                    "betOfferType": "Match",
+                    "betDescription": "Tie No Bet - Bout Odds",
+                    "outcomes": [
+                        {
+                            "id": 2931831393,
+                            "odds": 1.02,
+                            "oddsAmerican": "-5000",
+                            "oddsFractional": "1/50",
+                            "label": "1",
+                            "status": "OPEN",
+                            "cashOutStatus": "ENABLED"
+                        },
+                        {
+                            "id": 2931831395,
+                            "odds": 11.00,
+                            "oddsAmerican": "1000",
+                            "oddsFractional": "10/1",
+                            "label": "2",
+                            "status": "OPEN",
+                            "cashOutStatus": "ENABLED"
+                        }
+                    ]
+                },
+                {
+                    "id": 2268335621,
+                    "betOfferType": "Match",
+                    "betDescription": "Moneyline (3-way)",
+                    "outcomes": [
+                        {
+                            "id": 2931831621,
+                            "odds": 1.03,
+                            "oddsAmerican": "-3335",
+                            "oddsFractional": "1/40",
+                            "label": "1",
+                            "status": "OPEN",
+                            "cashOutStatus": "ENABLED"
+                        },
+                        {
+                            "id": 2931831622,
+                            "odds": 15.00,
+                            "oddsAmerican": "1400",
+                            "oddsFractional": "14/1",
+                            "label": "X",
+                            "status": "OPEN",
+                            "cashOutStatus": "ENABLED"
+                        },
+                        {
+                            "id": 2931831623,
+                            "odds": 13.00,
+                            "oddsAmerican": "1200",
+                            "oddsFractional": "12/1",
+                            "label": "2",
+                            "status": "OPEN",
+                            "cashOutStatus": "ENABLED"
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "id": 1007660202,
+            "name": "Inoue, Naoya - Dasmarinas, Michael",
+            "participants": [
+                {
+                    "name": "Inoue, Naoya",
+                    "id": 1003045080,
+                    "home": true
+                },
+                {
+                    "name": "Dasmarinas, Michael",
+                    "id": 1007660194,
+                    "home": false
+                }
+            ],
+            "start": "2021-06-20T03:00:00.000Z",
+            "eventInfo": [
+                {
+                    "name": "Boxing",
+                    "id": 1000093201
+                },
+                {
+                    "name": "Upcoming Fights",
+                    "id": 2000050854
+                }
+            ],
+            "state": "NOT_STARTED",
+            "betOffers": [
+                {
+                    "id": 2266557264,
+                    "betOfferType": "Match",
+                    "betDescription": "Tie No Bet - Bout Odds",
+                    "outcomes": [
+                        {
+                            "id": 2925964557,
+                            "odds": 1.02,
+                            "oddsAmerican": "-5000",
+                            "oddsFractional": "1/50",
+                            "label": "1",
+                            "status": "OPEN",
+                            "cashOutStatus": "ENABLED"
+                        },
+                        {
+                            "id": 2925964559,
+                            "odds": 11.00,
+                            "oddsAmerican": "1000",
+                            "oddsFractional": "10/1",
+                            "label": "2",
+                            "status": "OPEN",
+                            "cashOutStatus": "ENABLED"
+                        }
+                    ]
+                },
+                {
+                    "id": 2266557275,
+                    "betOfferType": "Match",
+                    "betDescription": "Moneyline (3-way)",
+                    "outcomes": [
+                        {
+                            "id": 2925964586,
+                            "odds": 1.03,
+                            "oddsAmerican": "-3335",
+                            "oddsFractional": "1/40",
+                            "label": "1",
+                            "status": "OPEN",
+                            "cashOutStatus": "ENABLED"
+                        },
+                        {
+                            "id": 2925964587,
+                            "odds": 26.00,
+                            "oddsAmerican": "2500",
+                            "oddsFractional": "25/1",
+                            "label": "X",
+                            "status": "OPEN",
+                            "cashOutStatus": "ENABLED"
+                        },
+                        {
+                            "id": 2925964588,
+                            "odds": 12.00,
+                            "oddsAmerican": "1100",
+                            "oddsFractional": "11/1",
+                            "label": "2",
+                            "status": "OPEN",
+                            "cashOutStatus": "ENABLED"
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "id": 1007660305,
+            "name": "Davis, Gervonta - Barrios, Mario",
+            "participants": [
+                {
+                    "name": "Davis, Gervonta",
+                    "id": 1003170514,
+                    "home": true
+                },
+                {
+                    "name": "Barrios, Mario",
+                    "id": 1005284502,
+                    "home": false
+                }
+            ],
+            "start": "2021-06-27T01:00:00.000Z",
+            "eventInfo": [
+                {
+                    "name": "Boxing",
+                    "id": 1000093201
+                },
+                {
+                    "name": "Upcoming Fights",
+                    "id": 2000050854
+                }
+            ],
+            "state": "NOT_STARTED",
+            "betOffers": [
+                {
+                    "id": 2266560854,
+                    "betOfferType": "Match",
+                    "betDescription": "Tie No Bet - Bout Odds",
+                    "outcomes": [
+                        {
+                            "id": 2925966611,
+                            "odds": 1.26,
+                            "oddsAmerican": "-385",
+                            "oddsFractional": "1/4",
+                            "label": "1",
+                            "status": "OPEN",
+                            "cashOutStatus": "ENABLED"
+                        },
+                        {
+                            "id": 2925966613,
+                            "odds": 3.65,
+                            "oddsAmerican": "265",
+                            "oddsFractional": "13/5",
+                            "label": "2",
+                            "status": "OPEN",
+                            "cashOutStatus": "ENABLED"
+                        }
+                    ]
+                },
+                {
+                    "id": 2266560874,
+                    "betOfferType": "Match",
+                    "betDescription": "Moneyline (3-way)",
+                    "outcomes": [
+                        {
+                            "id": 2925966670,
+                            "odds": 1.25,
+                            "oddsAmerican": "-400",
+                            "oddsFractional": "1/4",
+                            "label": "1",
+                            "status": "OPEN",
+                            "cashOutStatus": "ENABLED"
+                        },
+                        {
+                            "id": 2925966671,
+                            "odds": 23.00,
+                            "oddsAmerican": "2200",
+                            "oddsFractional": "22/1",
+                            "label": "X",
+                            "status": "OPEN",
+                            "cashOutStatus": "ENABLED"
+                        },
+                        {
+                            "id": 2925966672,
+                            "odds": 4.00,
+                            "oddsAmerican": "300",
+                            "oddsFractional": "3/1",
+                            "label": "2",
+                            "status": "OPEN",
+                            "cashOutStatus": "ENABLED"
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "id": 1007663329,
+            "name": "Charlo, Jermell - Castano, Brian",
+            "participants": [
+                {
+                    "name": "Charlo, Jermell",
+                    "id": 1003215504,
+                    "home": true
+                },
+                {
+                    "name": "Castano, Brian",
+                    "id": 1004551451,
+                    "home": false
+                }
+            ],
+            "start": "2021-07-18T01:00:00.000Z",
+            "eventInfo": [
+                {
+                    "name": "Boxing",
+                    "id": 1000093201
+                },
+                {
+                    "name": "Upcoming Fights",
+                    "id": 2000050854
+                }
+            ],
+            "state": "NOT_STARTED",
+            "betOffers": [
+                {
+                    "id": 2266561000,
+                    "betOfferType": "Match",
+                    "betDescription": "Tie No Bet - Bout Odds",
+                    "outcomes": [
+                        {
+                            "id": 2925967041,
+                            "odds": 1.40,
+                            "oddsAmerican": "-250",
+                            "oddsFractional": "2/5",
+                            "label": "1",
+                            "status": "OPEN",
+                            "cashOutStatus": "ENABLED"
+                        },
+                        {
+                            "id": 2925967043,
+                            "odds": 2.80,
+                            "oddsAmerican": "180",
+                            "oddsFractional": "9/5",
+                            "label": "2",
+                            "status": "OPEN",
+                            "cashOutStatus": "ENABLED"
+                        }
+                    ]
+                },
+                {
+                    "id": 2266561048,
+                    "betOfferType": "Match",
+                    "betDescription": "Moneyline (3-way)",
+                    "outcomes": [
+                        {
+                            "id": 2925967201,
+                            "odds": 1.42,
+                            "oddsAmerican": "-240",
+                            "oddsFractional": "21/50",
+                            "label": "1",
+                            "status": "OPEN",
+                            "cashOutStatus": "ENABLED"
+                        },
+                        {
+                            "id": 2925967202,
+                            "odds": 19.00,
+                            "oddsAmerican": "1800",
+                            "oddsFractional": "18/1",
+                            "label": "X",
+                            "status": "OPEN",
+                            "cashOutStatus": "ENABLED"
+                        },
+                        {
+                            "id": 2925967203,
+                            "odds": 2.88,
+                            "oddsAmerican": "188",
+                            "oddsFractional": "15/8",
+                            "label": "2",
+                            "status": "OPEN",
+                            "cashOutStatus": "ENABLED"
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "id": 1007660309,
+            "name": "Pacquiao, Manny - Spence Jr, Errol",
+            "participants": [
+                {
+                    "name": "Pacquiao, Manny",
+                    "id": 1000085776,
+                    "home": true
+                },
+                {
+                    "name": "Spence Jr, Errol",
+                    "id": 1002580537,
+                    "home": false
+                }
+            ],
+            "start": "2021-08-22T02:00:00.000Z",
+            "eventInfo": [
+                {
+                    "name": "Boxing",
+                    "id": 1000093201
+                },
+                {
+                    "name": "Upcoming Fights",
+                    "id": 2000050854
+                }
+            ],
+            "state": "NOT_STARTED",
+            "betOffers": [
+                {
+                    "id": 2266561273,
+                    "betOfferType": "Match",
+                    "betDescription": "Tie No Bet - Bout Odds",
+                    "outcomes": [
+                        {
+                            "id": 2925967933,
+                            "odds": 3.40,
+                            "oddsAmerican": "240",
+                            "oddsFractional": "12/5",
+                            "label": "1",
+                            "status": "OPEN",
+                            "cashOutStatus": "ENABLED"
+                        },
+                        {
+                            "id": 2925967935,
+                            "odds": 1.29,
+                            "oddsAmerican": "-345",
+                            "oddsFractional": "2/7",
+                            "label": "2",
+                            "status": "OPEN",
+                            "cashOutStatus": "ENABLED"
+                        }
+                    ]
+                },
+                {
+                    "id": 2266561294,
+                    "betOfferType": "Match",
+                    "betDescription": "Moneyline (3-way)",
+                    "outcomes": [
+                        {
+                            "id": 2925968001,
+                            "odds": 3.35,
+                            "oddsAmerican": "235",
+                            "oddsFractional": "47/20",
+                            "label": "1",
+                            "status": "OPEN",
+                            "cashOutStatus": "ENABLED"
+                        },
+                        {
+                            "id": 2925968002,
+                            "odds": 19.00,
+                            "oddsAmerican": "1800",
+                            "oddsFractional": "18/1",
+                            "label": "X",
+                            "status": "OPEN",
+                            "cashOutStatus": "ENABLED"
+                        },
+                        {
+                            "id": 2925968003,
+                            "odds": 1.33,
+                            "oddsAmerican": "-305",
+                            "oddsFractional": "33/100",
+                            "label": "2",
+                            "status": "OPEN",
+                            "cashOutStatus": "ENABLED"
+                        }
+                    ]
+                }
+            ]
+        }
+    ]
+}

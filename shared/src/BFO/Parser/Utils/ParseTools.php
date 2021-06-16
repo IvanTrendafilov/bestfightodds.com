@@ -93,13 +93,6 @@ class ParseTools
                 curl_setopt($curl_channels[$url], CURLOPT_HTTPAUTH, CURLAUTH_BASIC);
             }
 
-            //Add extra curl opts if specified
-            if ($extra_curl_opts) {
-                if (!empty($extra_curl_options)) {
-                    curl_setopt_array($curl_channels[$url], $extra_curl_options);
-                }
-            }
-
             curl_setopt_array($curl_channels[$url], array(
                 CURLOPT_IPRESOLVE => CURL_IPRESOLVE_V4,
                 CURLOPT_RETURNTRANSFER => 1,
@@ -111,6 +104,13 @@ class ParseTools
                 CURLOPT_SSL_VERIFYHOST => 0,
                 CURLOPT_FOLLOWLOCATION => true
             ));
+
+            //Add extra curl opts if specified
+            if ($extra_curl_opts) {
+                if (!empty($extra_curl_options)) {
+                    curl_setopt_array($curl_channels[$url], $extra_curl_options);
+                }
+            }
 
             if (strpos($url, 'gamingsystem.') !== false) {
                 curl_setopt($curl_channels[$url], CURLOPT_SSLVERSION, 6); //TLS 1.2

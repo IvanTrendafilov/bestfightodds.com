@@ -1,0 +1,1324 @@
+{
+    "events": [
+        {
+            "id": 1007707278,
+            "name": "O'Neill, Casey - Procopio, Lara Fritzen",
+            "participants": [
+                {
+                    "name": "O'Neill, Casey",
+                    "id": 1007313526,
+                    "home": true
+                },
+                {
+                    "name": "Procopio, Lara Fritzen",
+                    "id": 1005732944,
+                    "home": false
+                }
+            ],
+            "start": "2021-06-19T20:15:00.000Z",
+            "eventInfo": [
+                {
+                    "name": "UFC/MMA",
+                    "id": 1000093238
+                },
+                {
+                    "name": "UFC",
+                    "id": 1000093883
+                }
+            ],
+            "state": "NOT_STARTED",
+            "betOffers": [
+                {
+                    "id": 2267752667,
+                    "betOfferType": "Match",
+                    "betDescription": "Moneyline",
+                    "outcomes": [
+                        {
+                            "id": 2929893572,
+                            "odds": 2.25,
+                            "oddsAmerican": "125",
+                            "oddsFractional": "5/4",
+                            "label": "1",
+                            "status": "OPEN",
+                            "cashOutStatus": "ENABLED"
+                        },
+                        {
+                            "id": 2929893574,
+                            "odds": 1.65,
+                            "oddsAmerican": "-155",
+                            "oddsFractional": "13/20",
+                            "label": "2",
+                            "status": "OPEN",
+                            "cashOutStatus": "ENABLED"
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "id": 1007707277,
+            "name": "Silva, Joaquim - Glenn, Rick",
+            "participants": [
+                {
+                    "name": "Silva, Joaquim",
+                    "id": 1002827388,
+                    "home": true
+                },
+                {
+                    "name": "Glenn, Rick",
+                    "id": 1002131596,
+                    "home": false
+                }
+            ],
+            "start": "2021-06-19T20:45:00.000Z",
+            "eventInfo": [
+                {
+                    "name": "UFC/MMA",
+                    "id": 1000093238
+                },
+                {
+                    "name": "UFC",
+                    "id": 1000093883
+                }
+            ],
+            "state": "NOT_STARTED",
+            "betOffers": [
+                {
+                    "id": 2267752666,
+                    "betOfferType": "Match",
+                    "betDescription": "Moneyline",
+                    "outcomes": [
+                        {
+                            "id": 2929893569,
+                            "odds": 1.85,
+                            "oddsAmerican": "-118",
+                            "oddsFractional": "17/20",
+                            "label": "1",
+                            "status": "OPEN",
+                            "cashOutStatus": "ENABLED"
+                        },
+                        {
+                            "id": 2929893571,
+                            "odds": 1.95,
+                            "oddsAmerican": "-106",
+                            "oddsFractional": "19/20",
+                            "label": "2",
+                            "status": "OPEN",
+                            "cashOutStatus": "ENABLED"
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "id": 1007707279,
+            "name": "Parisian, Josh - Martinez, Roque",
+            "participants": [
+                {
+                    "name": "Parisian, Josh",
+                    "id": 1004776785,
+                    "home": true
+                },
+                {
+                    "name": "Martinez, Roque",
+                    "id": 1006811533,
+                    "home": false
+                }
+            ],
+            "start": "2021-06-19T21:15:00.000Z",
+            "eventInfo": [
+                {
+                    "name": "UFC/MMA",
+                    "id": 1000093238
+                },
+                {
+                    "name": "UFC",
+                    "id": 1000093883
+                }
+            ],
+            "state": "NOT_STARTED",
+            "betOffers": [
+                {
+                    "id": 2267752668,
+                    "betOfferType": "Match",
+                    "betDescription": "Moneyline",
+                    "outcomes": [
+                        {
+                            "id": 2929893575,
+                            "odds": 1.76,
+                            "oddsAmerican": "-132",
+                            "oddsFractional": "3/4",
+                            "label": "1",
+                            "status": "OPEN",
+                            "cashOutStatus": "ENABLED"
+                        },
+                        {
+                            "id": 2929893577,
+                            "odds": 2.07,
+                            "oddsAmerican": "107",
+                            "oddsFractional": "21/20",
+                            "label": "2",
+                            "status": "OPEN",
+                            "cashOutStatus": "ENABLED"
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "id": 1007707283,
+            "name": "Williams, Khaos - Semelsberger, Matthew",
+            "participants": [
+                {
+                    "name": "Williams, Khaos",
+                    "id": 1006109637,
+                    "home": true
+                },
+                {
+                    "name": "Semelsberger, Matthew",
+                    "id": 1006675947,
+                    "home": false
+                }
+            ],
+            "start": "2021-06-19T21:45:00.000Z",
+            "eventInfo": [
+                {
+                    "name": "UFC/MMA",
+                    "id": 1000093238
+                },
+                {
+                    "name": "UFC",
+                    "id": 1000093883
+                }
+            ],
+            "state": "NOT_STARTED",
+            "betOffers": [
+                {
+                    "id": 2267754216,
+                    "betOfferType": "Match",
+                    "betDescription": "Moneyline",
+                    "outcomes": [
+                        {
+                            "id": 2929898348,
+                            "odds": 1.57,
+                            "oddsAmerican": "-177",
+                            "oddsFractional": "11/20",
+                            "label": "1",
+                            "status": "OPEN",
+                            "cashOutStatus": "ENABLED"
+                        },
+                        {
+                            "id": 2929898350,
+                            "odds": 2.40,
+                            "oddsAmerican": "140",
+                            "oddsFractional": "7/5",
+                            "label": "2",
+                            "status": "OPEN",
+                            "cashOutStatus": "ENABLED"
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "id": 1007707284,
+            "name": "Jandiroba, Virna - Murata, Kanako",
+            "participants": [
+                {
+                    "name": "Jandiroba, Virna",
+                    "id": 1004387094,
+                    "home": true
+                },
+                {
+                    "name": "Murata, Kanako",
+                    "id": 1003186177,
+                    "home": false
+                }
+            ],
+            "start": "2021-06-19T22:15:00.000Z",
+            "eventInfo": [
+                {
+                    "name": "UFC/MMA",
+                    "id": 1000093238
+                },
+                {
+                    "name": "UFC",
+                    "id": 1000093883
+                }
+            ],
+            "state": "NOT_STARTED",
+            "betOffers": [
+                {
+                    "id": 2267752186,
+                    "betOfferType": "Match",
+                    "betDescription": "Moneyline",
+                    "outcomes": [
+                        {
+                            "id": 2929891955,
+                            "odds": 1.65,
+                            "oddsAmerican": "-155",
+                            "oddsFractional": "13/20",
+                            "label": "1",
+                            "status": "OPEN",
+                            "cashOutStatus": "ENABLED"
+                        },
+                        {
+                            "id": 2929891957,
+                            "odds": 2.25,
+                            "oddsAmerican": "125",
+                            "oddsFractional": "5/4",
+                            "label": "2",
+                            "status": "OPEN",
+                            "cashOutStatus": "ENABLED"
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "id": 1007707273,
+            "name": "Negumereanu, Nicolae - Camur, Aleksa",
+            "participants": [
+                {
+                    "name": "Negumereanu, Nicolae",
+                    "id": 1005345345,
+                    "home": true
+                },
+                {
+                    "name": "Camur, Aleksa",
+                    "id": 1005675664,
+                    "home": false
+                }
+            ],
+            "start": "2021-06-19T22:45:00.000Z",
+            "eventInfo": [
+                {
+                    "name": "UFC/MMA",
+                    "id": 1000093238
+                },
+                {
+                    "name": "UFC",
+                    "id": 1000093883
+                }
+            ],
+            "state": "NOT_STARTED",
+            "betOffers": [
+                {
+                    "id": 2267752494,
+                    "betOfferType": "Match",
+                    "betDescription": "Moneyline",
+                    "outcomes": [
+                        {
+                            "id": 2929892981,
+                            "odds": 3.00,
+                            "oddsAmerican": "200",
+                            "oddsFractional": "2/1",
+                            "label": "1",
+                            "status": "OPEN",
+                            "cashOutStatus": "ENABLED"
+                        },
+                        {
+                            "id": 2929892983,
+                            "odds": 1.38,
+                            "oddsAmerican": "-265",
+                            "oddsFractional": "4/11",
+                            "label": "2",
+                            "status": "OPEN",
+                            "cashOutStatus": "ENABLED"
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "id": 1007707285,
+            "name": "Lima, Dhiego - Brown, Matt",
+            "participants": [
+                {
+                    "name": "Lima, Dhiego",
+                    "id": 1002159414,
+                    "home": true
+                },
+                {
+                    "name": "Brown, Matt",
+                    "id": 1000745446,
+                    "home": false
+                }
+            ],
+            "start": "2021-06-19T23:15:00.000Z",
+            "eventInfo": [
+                {
+                    "name": "UFC/MMA",
+                    "id": 1000093238
+                },
+                {
+                    "name": "UFC",
+                    "id": 1000093883
+                }
+            ],
+            "state": "NOT_STARTED",
+            "betOffers": [
+                {
+                    "id": 2267752492,
+                    "betOfferType": "Match",
+                    "betDescription": "Moneyline",
+                    "outcomes": [
+                        {
+                            "id": 2929892975,
+                            "odds": 1.57,
+                            "oddsAmerican": "-177",
+                            "oddsFractional": "11/20",
+                            "label": "1",
+                            "status": "OPEN",
+                            "cashOutStatus": "ENABLED"
+                        },
+                        {
+                            "id": 2929892977,
+                            "odds": 2.40,
+                            "oddsAmerican": "140",
+                            "oddsFractional": "7/5",
+                            "label": "2",
+                            "status": "OPEN",
+                            "cashOutStatus": "ENABLED"
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "id": 1007707275,
+            "name": "Turman, Wellington - Silva, Bruno",
+            "participants": [
+                {
+                    "name": "Turman, Wellington",
+                    "id": 1005587562,
+                    "home": true
+                },
+                {
+                    "name": "Silva, Bruno",
+                    "id": 1005540243,
+                    "home": false
+                }
+            ],
+            "start": "2021-06-19T23:45:00.000Z",
+            "eventInfo": [
+                {
+                    "name": "UFC/MMA",
+                    "id": 1000093238
+                },
+                {
+                    "name": "UFC",
+                    "id": 1000093883
+                }
+            ],
+            "state": "NOT_STARTED",
+            "betOffers": [
+                {
+                    "id": 2267752664,
+                    "betOfferType": "Match",
+                    "betDescription": "Moneyline",
+                    "outcomes": [
+                        {
+                            "id": 2929893563,
+                            "odds": 2.25,
+                            "oddsAmerican": "125",
+                            "oddsFractional": "5/4",
+                            "label": "1",
+                            "status": "OPEN",
+                            "cashOutStatus": "ENABLED"
+                        },
+                        {
+                            "id": 2929893565,
+                            "odds": 1.65,
+                            "oddsAmerican": "-155",
+                            "oddsFractional": "13/20",
+                            "label": "2",
+                            "status": "OPEN",
+                            "cashOutStatus": "ENABLED"
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "id": 1007707282,
+            "name": "Seung Woo Choi - Erosa, Julian",
+            "participants": [
+                {
+                    "name": "Seung Woo Choi",
+                    "id": 1005403154,
+                    "home": true
+                },
+                {
+                    "name": "Erosa, Julian",
+                    "id": 1003019551,
+                    "home": false
+                }
+            ],
+            "start": "2021-06-20T00:15:00.000Z",
+            "eventInfo": [
+                {
+                    "name": "UFC/MMA",
+                    "id": 1000093238
+                },
+                {
+                    "name": "UFC",
+                    "id": 1000093883
+                }
+            ],
+            "state": "NOT_STARTED",
+            "betOffers": [
+                {
+                    "id": 2267752185,
+                    "betOfferType": "Match",
+                    "betDescription": "Moneyline",
+                    "outcomes": [
+                        {
+                            "id": 2929891952,
+                            "odds": 1.70,
+                            "oddsAmerican": "-143",
+                            "oddsFractional": "7/10",
+                            "label": "1",
+                            "status": "OPEN",
+                            "cashOutStatus": "ENABLED"
+                        },
+                        {
+                            "id": 2929891954,
+                            "odds": 2.15,
+                            "oddsAmerican": "115",
+                            "oddsFractional": "23/20",
+                            "label": "2",
+                            "status": "OPEN",
+                            "cashOutStatus": "ENABLED"
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "id": 1007707272,
+            "name": "Vera, Marlon - Grant, Davey",
+            "participants": [
+                {
+                    "name": "Vera, Marlon",
+                    "id": 1002382945,
+                    "home": true
+                },
+                {
+                    "name": "Grant, Davey",
+                    "id": 1001856322,
+                    "home": false
+                }
+            ],
+            "start": "2021-06-20T00:45:00.000Z",
+            "eventInfo": [
+                {
+                    "name": "UFC/MMA",
+                    "id": 1000093238
+                },
+                {
+                    "name": "UFC",
+                    "id": 1000093883
+                }
+            ],
+            "state": "NOT_STARTED",
+            "betOffers": [
+                {
+                    "id": 2267752493,
+                    "betOfferType": "Match",
+                    "betDescription": "Moneyline",
+                    "outcomes": [
+                        {
+                            "id": 2929892978,
+                            "odds": 1.44,
+                            "oddsAmerican": "-230",
+                            "oddsFractional": "11/25",
+                            "label": "1",
+                            "status": "OPEN",
+                            "cashOutStatus": "ENABLED"
+                        },
+                        {
+                            "id": 2929892980,
+                            "odds": 2.80,
+                            "oddsAmerican": "180",
+                            "oddsFractional": "9/5",
+                            "label": "2",
+                            "status": "OPEN",
+                            "cashOutStatus": "ENABLED"
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "id": 1007707276,
+            "name": "Oleinik, Aleksei - Spivac, Serghei",
+            "participants": [
+                {
+                    "name": "Oleinik, Aleksei",
+                    "id": 1000847828,
+                    "home": true
+                },
+                {
+                    "name": "Spivac, Serghei",
+                    "id": 1006138444,
+                    "home": false
+                }
+            ],
+            "start": "2021-06-20T01:15:00.000Z",
+            "eventInfo": [
+                {
+                    "name": "UFC/MMA",
+                    "id": 1000093238
+                },
+                {
+                    "name": "UFC",
+                    "id": 1000093883
+                }
+            ],
+            "state": "NOT_STARTED",
+            "betOffers": [
+                {
+                    "id": 2267752665,
+                    "betOfferType": "Match",
+                    "betDescription": "Moneyline",
+                    "outcomes": [
+                        {
+                            "id": 2929893566,
+                            "odds": 2.75,
+                            "oddsAmerican": "175",
+                            "oddsFractional": "7/4",
+                            "label": "1",
+                            "status": "OPEN",
+                            "cashOutStatus": "ENABLED"
+                        },
+                        {
+                            "id": 2929893568,
+                            "odds": 1.45,
+                            "oddsAmerican": "-225",
+                            "oddsFractional": "4/9",
+                            "label": "2",
+                            "status": "OPEN",
+                            "cashOutStatus": "ENABLED"
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "id": 1007658567,
+            "name": "Chan Sung Jung - Ige, Dan",
+            "participants": [
+                {
+                    "name": "Chan Sung Jung",
+                    "id": 1000545269,
+                    "home": true
+                },
+                {
+                    "name": "Ige, Dan",
+                    "id": 1004111894,
+                    "home": false
+                }
+            ],
+            "start": "2021-06-20T02:00:00.000Z",
+            "eventInfo": [
+                {
+                    "name": "UFC/MMA",
+                    "id": 1000093238
+                },
+                {
+                    "name": "UFC",
+                    "id": 1000093883
+                }
+            ],
+            "state": "NOT_STARTED",
+            "betOffers": [
+                {
+                    "id": 2265445334,
+                    "betOfferType": "Match",
+                    "betDescription": "Moneyline",
+                    "outcomes": [
+                        {
+                            "id": 2922283077,
+                            "odds": 1.91,
+                            "oddsAmerican": "-110",
+                            "oddsFractional": "10/11",
+                            "label": "1",
+                            "status": "OPEN",
+                            "cashOutStatus": "ENABLED"
+                        },
+                        {
+                            "id": 2922283079,
+                            "odds": 1.91,
+                            "oddsAmerican": "-110",
+                            "oddsFractional": "10/11",
+                            "label": "2",
+                            "status": "OPEN",
+                            "cashOutStatus": "ENABLED"
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "id": 1007708809,
+            "name": "St. Preux, Ovince - Grishin, Maxim",
+            "participants": [
+                {
+                    "name": "St. Preux, Ovince",
+                    "id": 1000903088,
+                    "home": true
+                },
+                {
+                    "name": "Grishin, Maxim",
+                    "id": 1004856967,
+                    "home": false
+                }
+            ],
+            "start": "2021-06-26T20:00:00.000Z",
+            "eventInfo": [
+                {
+                    "name": "UFC/MMA",
+                    "id": 1000093238
+                },
+                {
+                    "name": "UFC",
+                    "id": 1000093883
+                }
+            ],
+            "state": "NOT_STARTED",
+            "betOffers": [
+                {
+                    "id": 2267753038,
+                    "betOfferType": "Match",
+                    "betDescription": "Moneyline",
+                    "outcomes": [
+                        {
+                            "id": 2929894699,
+                            "odds": 1.90,
+                            "oddsAmerican": "-112",
+                            "oddsFractional": "9/10",
+                            "label": "1",
+                            "status": "OPEN",
+                            "cashOutStatus": "ENABLED"
+                        },
+                        {
+                            "id": 2929894701,
+                            "odds": 1.90,
+                            "oddsAmerican": "-112",
+                            "oddsFractional": "9/10",
+                            "label": "2",
+                            "status": "OPEN",
+                            "cashOutStatus": "ENABLED"
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "id": 1007708810,
+            "name": "Rosa, Charles - Jaynes, Justin",
+            "participants": [
+                {
+                    "name": "Rosa, Charles",
+                    "id": 1002320720,
+                    "home": true
+                },
+                {
+                    "name": "Jaynes, Justin",
+                    "id": 1006486003,
+                    "home": false
+                }
+            ],
+            "start": "2021-06-26T20:00:00.000Z",
+            "eventInfo": [
+                {
+                    "name": "UFC/MMA",
+                    "id": 1000093238
+                },
+                {
+                    "name": "UFC",
+                    "id": 1000093883
+                }
+            ],
+            "state": "NOT_STARTED",
+            "betOffers": [
+                {
+                    "id": 2267753217,
+                    "betOfferType": "Match",
+                    "betDescription": "Moneyline",
+                    "outcomes": [
+                        {
+                            "id": 2929895201,
+                            "odds": 1.60,
+                            "oddsAmerican": "-167",
+                            "oddsFractional": "3/5",
+                            "label": "1",
+                            "status": "OPEN",
+                            "cashOutStatus": "ENABLED"
+                        },
+                        {
+                            "id": 2929895203,
+                            "odds": 2.35,
+                            "oddsAmerican": "135",
+                            "oddsFractional": "27/20",
+                            "label": "2",
+                            "status": "OPEN",
+                            "cashOutStatus": "ENABLED"
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "id": 1007708811,
+            "name": "Prazeres, Michel - Rakhmonov, Shavkat",
+            "participants": [
+                {
+                    "name": "Prazeres, Michel",
+                    "id": 1001573541,
+                    "home": true
+                },
+                {
+                    "name": "Rakhmonov, Shavkat",
+                    "id": 1006197122,
+                    "home": false
+                }
+            ],
+            "start": "2021-06-26T20:00:00.000Z",
+            "eventInfo": [
+                {
+                    "name": "UFC/MMA",
+                    "id": 1000093238
+                },
+                {
+                    "name": "UFC",
+                    "id": 1000093883
+                }
+            ],
+            "state": "NOT_STARTED",
+            "betOffers": [
+                {
+                    "id": 2267753218,
+                    "betOfferType": "Match",
+                    "betDescription": "Moneyline",
+                    "outcomes": [
+                        {
+                            "id": 2929895204,
+                            "odds": 2.90,
+                            "oddsAmerican": "190",
+                            "oddsFractional": "19/10",
+                            "label": "1",
+                            "status": "OPEN",
+                            "cashOutStatus": "ENABLED"
+                        },
+                        {
+                            "id": 2929895206,
+                            "odds": 1.42,
+                            "oddsAmerican": "-240",
+                            "oddsFractional": "21/50",
+                            "label": "2",
+                            "status": "OPEN",
+                            "cashOutStatus": "ENABLED"
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "id": 1007708813,
+            "name": "Barcelos, Raoni - Valiev, Timur",
+            "participants": [
+                {
+                    "name": "Barcelos, Raoni",
+                    "id": 1004292963,
+                    "home": true
+                },
+                {
+                    "name": "Valiev, Timur",
+                    "id": 1002287913,
+                    "home": false
+                }
+            ],
+            "start": "2021-06-26T20:00:00.000Z",
+            "eventInfo": [
+                {
+                    "name": "UFC/MMA",
+                    "id": 1000093238
+                },
+                {
+                    "name": "UFC",
+                    "id": 1000093883
+                }
+            ],
+            "state": "NOT_STARTED",
+            "betOffers": [
+                {
+                    "id": 2267753219,
+                    "betOfferType": "Match",
+                    "betDescription": "Moneyline",
+                    "outcomes": [
+                        {
+                            "id": 2929895207,
+                            "odds": 1.45,
+                            "oddsAmerican": "-225",
+                            "oddsFractional": "4/9",
+                            "label": "1",
+                            "status": "OPEN",
+                            "cashOutStatus": "ENABLED"
+                        },
+                        {
+                            "id": 2929895209,
+                            "odds": 2.75,
+                            "oddsAmerican": "175",
+                            "oddsFractional": "7/4",
+                            "label": "2",
+                            "status": "OPEN",
+                            "cashOutStatus": "ENABLED"
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "id": 1007708815,
+            "name": "Emeev, Ramazan - Alves, Warlley",
+            "participants": [
+                {
+                    "name": "Emeev, Ramazan",
+                    "id": 1004275719,
+                    "home": true
+                },
+                {
+                    "name": "Alves, Warlley",
+                    "id": 1002102205,
+                    "home": false
+                }
+            ],
+            "start": "2021-06-26T20:00:00.000Z",
+            "eventInfo": [
+                {
+                    "name": "UFC/MMA",
+                    "id": 1000093238
+                },
+                {
+                    "name": "UFC",
+                    "id": 1000093883
+                }
+            ],
+            "state": "NOT_STARTED",
+            "betOffers": [
+                {
+                    "id": 2267753221,
+                    "betOfferType": "Match",
+                    "betDescription": "Moneyline",
+                    "outcomes": [
+                        {
+                            "id": 2929895213,
+                            "odds": 1.65,
+                            "oddsAmerican": "-155",
+                            "oddsFractional": "13/20",
+                            "label": "1",
+                            "status": "OPEN",
+                            "cashOutStatus": "ENABLED"
+                        },
+                        {
+                            "id": 2929895215,
+                            "odds": 2.25,
+                            "oddsAmerican": "125",
+                            "oddsFractional": "5/4",
+                            "label": "2",
+                            "status": "OPEN",
+                            "cashOutStatus": "ENABLED"
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "id": 1007708913,
+            "name": "Moicano, Renato - Herbert, Jai",
+            "participants": [
+                {
+                    "name": "Moicano, Renato",
+                    "id": 1002427637,
+                    "home": true
+                },
+                {
+                    "name": "Herbert, Jai",
+                    "id": 1004751161,
+                    "home": false
+                }
+            ],
+            "start": "2021-06-26T20:00:00.000Z",
+            "eventInfo": [
+                {
+                    "name": "UFC/MMA",
+                    "id": 1000093238
+                },
+                {
+                    "name": "UFC",
+                    "id": 1000093883
+                }
+            ],
+            "state": "NOT_STARTED",
+            "betOffers": [
+                {
+                    "id": 2267753036,
+                    "betOfferType": "Match",
+                    "betDescription": "Moneyline",
+                    "outcomes": [
+                        {
+                            "id": 2929894693,
+                            "odds": 1.40,
+                            "oddsAmerican": "-250",
+                            "oddsFractional": "2/5",
+                            "label": "1",
+                            "status": "OPEN",
+                            "cashOutStatus": "ENABLED"
+                        },
+                        {
+                            "id": 2929894695,
+                            "odds": 2.95,
+                            "oddsAmerican": "195",
+                            "oddsFractional": "39/20",
+                            "label": "2",
+                            "status": "OPEN",
+                            "cashOutStatus": "ENABLED"
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "id": 1007708948,
+            "name": "Prachnio, Marcin - Villanueva, Ike",
+            "participants": [
+                {
+                    "name": "Prachnio, Marcin",
+                    "id": 1004513666,
+                    "home": true
+                },
+                {
+                    "name": "Villanueva, Ike",
+                    "id": 1006350714,
+                    "home": false
+                }
+            ],
+            "start": "2021-06-26T20:00:00.000Z",
+            "eventInfo": [
+                {
+                    "name": "UFC/MMA",
+                    "id": 1000093238
+                },
+                {
+                    "name": "UFC",
+                    "id": 1000093883
+                }
+            ],
+            "state": "NOT_STARTED",
+            "betOffers": [
+                {
+                    "id": 2267753037,
+                    "betOfferType": "Match",
+                    "betDescription": "Moneyline",
+                    "outcomes": [
+                        {
+                            "id": 2929894696,
+                            "odds": 1.47,
+                            "oddsAmerican": "-215",
+                            "oddsFractional": "4/9",
+                            "label": "1",
+                            "status": "OPEN",
+                            "cashOutStatus": "ENABLED"
+                        },
+                        {
+                            "id": 2929894698,
+                            "odds": 2.70,
+                            "oddsAmerican": "170",
+                            "oddsFractional": "17/10",
+                            "label": "2",
+                            "status": "OPEN",
+                            "cashOutStatus": "ENABLED"
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "id": 1007573170,
+            "name": "Gane, Ciryl - Volkov, Alexander",
+            "participants": [
+                {
+                    "name": "Gane, Ciryl",
+                    "id": 1005606361,
+                    "home": true
+                },
+                {
+                    "name": "Volkov, Alexander",
+                    "id": 1001395636,
+                    "home": false
+                }
+            ],
+            "start": "2021-06-27T02:00:00.000Z",
+            "eventInfo": [
+                {
+                    "name": "UFC/MMA",
+                    "id": 1000093238
+                },
+                {
+                    "name": "UFC",
+                    "id": 1000093883
+                }
+            ],
+            "state": "NOT_STARTED",
+            "betOffers": [
+                {
+                    "id": 2261373296,
+                    "betOfferType": "Match",
+                    "betDescription": "Moneyline",
+                    "outcomes": [
+                        {
+                            "id": 2908511499,
+                            "odds": 1.65,
+                            "oddsAmerican": "-155",
+                            "oddsFractional": "13/20",
+                            "label": "1",
+                            "status": "OPEN",
+                            "cashOutStatus": "ENABLED"
+                        },
+                        {
+                            "id": 2908511501,
+                            "odds": 2.24,
+                            "oddsAmerican": "124",
+                            "oddsFractional": "6/5",
+                            "label": "2",
+                            "status": "OPEN",
+                            "cashOutStatus": "ENABLED"
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "id": 1007501860,
+            "name": "Poirier, Dustin - McGregor, Conor",
+            "participants": [
+                {
+                    "name": "Poirier, Dustin",
+                    "id": 1000837740,
+                    "home": true
+                },
+                {
+                    "name": "McGregor, Conor",
+                    "id": 1001525290,
+                    "home": false
+                }
+            ],
+            "start": "2021-07-10T22:00:00.000Z",
+            "eventInfo": [
+                {
+                    "name": "UFC/MMA",
+                    "id": 1000093238
+                },
+                {
+                    "name": "UFC",
+                    "id": 1000093883
+                }
+            ],
+            "state": "NOT_STARTED",
+            "betOffers": [
+                {
+                    "id": 2259126509,
+                    "betOfferType": "Match",
+                    "betDescription": "Moneyline",
+                    "outcomes": [
+                        {
+                            "id": 2900873912,
+                            "odds": 1.93,
+                            "oddsAmerican": "-108",
+                            "oddsFractional": "10/11",
+                            "label": "1",
+                            "status": "OPEN",
+                            "cashOutStatus": "ENABLED"
+                        },
+                        {
+                            "id": 2900873914,
+                            "odds": 1.89,
+                            "oddsAmerican": "-113",
+                            "oddsFractional": "22/25",
+                            "label": "2",
+                            "status": "OPEN",
+                            "cashOutStatus": "ENABLED"
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "id": 1007573160,
+            "name": "Burns, Gilbert - Thompson, Stephen",
+            "participants": [
+                {
+                    "name": "Burns, Gilbert",
+                    "id": 1002190920,
+                    "home": true
+                },
+                {
+                    "name": "Thompson, Stephen",
+                    "id": 1002307547,
+                    "home": false
+                }
+            ],
+            "start": "2021-07-11T02:00:00.000Z",
+            "eventInfo": [
+                {
+                    "name": "UFC/MMA",
+                    "id": 1000093238
+                },
+                {
+                    "name": "UFC",
+                    "id": 1000093883
+                }
+            ],
+            "state": "NOT_STARTED",
+            "betOffers": [
+                {
+                    "id": 2261373295,
+                    "betOfferType": "Match",
+                    "betDescription": "Moneyline",
+                    "outcomes": [
+                        {
+                            "id": 2908511496,
+                            "odds": 2.12,
+                            "oddsAmerican": "112",
+                            "oddsFractional": "11/10",
+                            "label": "1",
+                            "status": "OPEN",
+                            "cashOutStatus": "ENABLED"
+                        },
+                        {
+                            "id": 2908511498,
+                            "odds": 1.72,
+                            "oddsAmerican": "-139",
+                            "oddsFractional": "7/10",
+                            "label": "2",
+                            "status": "OPEN",
+                            "cashOutStatus": "ENABLED"
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "id": 1007695099,
+            "name": "Holloway, Max - Rodriguez, Yair",
+            "participants": [
+                {
+                    "name": "Holloway, Max",
+                    "id": 1001460896,
+                    "home": true
+                },
+                {
+                    "name": "Rodriguez, Yair",
+                    "id": 1002383770,
+                    "home": false
+                }
+            ],
+            "start": "2021-07-17T22:00:00.000Z",
+            "eventInfo": [
+                {
+                    "name": "UFC/MMA",
+                    "id": 1000093238
+                },
+                {
+                    "name": "UFC",
+                    "id": 1000093883
+                }
+            ],
+            "state": "NOT_STARTED",
+            "betOffers": [
+                {
+                    "id": 2268367356,
+                    "betOfferType": "Match",
+                    "betDescription": "Moneyline",
+                    "outcomes": [
+                        {
+                            "id": 2931919713,
+                            "odds": 1.22,
+                            "oddsAmerican": "-455",
+                            "oddsFractional": "11/50",
+                            "label": "1",
+                            "status": "OPEN",
+                            "cashOutStatus": "ENABLED"
+                        },
+                        {
+                            "id": 2931919715,
+                            "odds": 4.25,
+                            "oddsAmerican": "325",
+                            "oddsFractional": "13/4",
+                            "label": "2",
+                            "status": "OPEN",
+                            "cashOutStatus": "ENABLED"
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "id": 1007573389,
+            "name": "Nunes, Amanda - Peña, Julianna",
+            "participants": [
+                {
+                    "name": "Nunes, Amanda",
+                    "id": 1001092483,
+                    "home": true
+                },
+                {
+                    "name": "Peña, Julianna",
+                    "id": 1001863887,
+                    "home": false
+                }
+            ],
+            "start": "2021-08-08T03:00:00.000Z",
+            "eventInfo": [
+                {
+                    "name": "UFC/MMA",
+                    "id": 1000093238
+                },
+                {
+                    "name": "UFC",
+                    "id": 1000093883
+                }
+            ],
+            "state": "NOT_STARTED",
+            "betOffers": [
+                {
+                    "id": 2261373297,
+                    "betOfferType": "Match",
+                    "betDescription": "Moneyline",
+                    "outcomes": [
+                        {
+                            "id": 2908511502,
+                            "odds": 1.13,
+                            "oddsAmerican": "-770",
+                            "oddsFractional": "1/8",
+                            "label": "1",
+                            "status": "OPEN",
+                            "cashOutStatus": "ENABLED"
+                        },
+                        {
+                            "id": 2908511504,
+                            "odds": 6.15,
+                            "oddsAmerican": "515",
+                            "oddsFractional": "5/1",
+                            "label": "2",
+                            "status": "OPEN",
+                            "cashOutStatus": "ENABLED"
+                        }
+                    ]
+                }
+            ]
+        }
+    ]
+}
