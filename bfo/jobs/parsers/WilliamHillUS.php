@@ -105,20 +105,22 @@ class ParserJob extends ParserJobBase
         //Loop through events and grab matchups
         foreach ($json as $matchup) {
             foreach ($matchup->markets as $market) {
-                if (
-                    $market->name == 'Bout Betting' &&
-                    isset(
-                        $matchup->id,
-                        $matchup->startTime,
-                        $market?->selections[0]->name,
-                        $market?->selections[0]->price->a,
-                        $market?->selections[1]->name,
-                        $market?->selections[1]->price->a
-                    )
-                ) {
-                    $this->parseMatchup($matchup, $market);
-                } else {
-                    $this->parseProp($matchup, $market);
+                if (!$market->tradedInPlay) {
+                    if (
+                        $market->name == 'Bout Betting' &&
+                        isset(
+                            $matchup->id,
+                            $matchup->startTime,
+                            $market?->selections[0]->name,
+                            $market?->selections[0]->price->a,
+                            $market?->selections[1]->name,
+                            $market?->selections[1]->price->a
+                        )
+                    ) {
+                        $this->parseMatchup($matchup, $market);
+                    } else {
+                        $this->parseProp($matchup, $market);
+                    }
                 }
             }
         }
@@ -130,9 +132,9 @@ class ParserJob extends ParserJobBase
     {
         if (
             !empty($market->selections[0]->name) &&
-            !empty($market->selections[0]->name) &&
+            !empty($market->selections[1]->name) &&
             !empty($market->selections[0]->price?->a) &&
-            !empty($market->selections[0]->price?->a)
+            !empty($market->selections[1]->price?->a)
         ) {
             $parsed_matchup = new ParsedMatchup(
                 $market->selections[0]->name,

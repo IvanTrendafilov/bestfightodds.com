@@ -1,0 +1,773 @@
+{
+    "items": [
+        {
+            "id": {
+                "full": "11653752",
+                "entityId": 11653752
+            },
+            "name": {
+                "text": "Naoya Inoue (JPN) - Michael Dasmarinas (PHI)",
+                "sign": "AX8Lrw%3D%3D",
+                "shortText": "N. Inoue - M. Dasmarinas",
+                "shortTextSign": "X7viCw%3D%3D"
+            },
+            "version": 1,
+            "startDateUtc": "2021-06-20T01:00:00Z",
+            "cutOffDateUtc": "2021-06-20T01:00:00Z",
+            "isInPlay": false,
+            "isDisplayed": true,
+            "isOpenForBetting": true,
+            "isPlannedInPlay": false,
+            "type": "PairGame",
+            "competition": {
+                "id": 2414,
+                "name": {
+                    "text": "Bantamweight",
+                    "shortText": "Bantamweight"
+                }
+            },
+            "region": {
+                "id": 6,
+                "name": {
+                    "text": "World",
+                    "shortText": "World"
+                }
+            },
+            "participants": [
+                {
+                    "id": 2713469,
+                    "name": {
+                        "text": "Naoya Inoue (JPN)",
+                        "shortText": "N. Inoue"
+                    },
+                    "participantTag": "Home"
+                },
+                {
+                    "id": 2872420,
+                    "name": {
+                        "text": "Michael Dasmarinas (PHI)",
+                        "shortText": "M. Dasmarinas"
+                    },
+                    "participantTag": "Away"
+                }
+            ],
+            "markets": [
+                {
+                    "id": 628127164,
+                    "name": {
+                        "text": "Fight Result (3-way)",
+                        "sign": "zsM%2FNg%3D%3D",
+                        "shortText": "Fight Result (3-way)",
+                        "shortTextSign": "zsM%2FNg%3D%3D"
+                    },
+                    "marketType": "3way period Y",
+                    "period": "Fulltime",
+                    "isDisplayed": true,
+                    "isOpenForBetting": true,
+                    "isBalancedLine": false,
+                    "options": [
+                        {
+                            "id": 1809195919,
+                            "name": {
+                                "text": "1",
+                                "sign": "qwq8pQ%3D%3D",
+                                "shortText": "1",
+                                "shortTextSign": "qwq8pQ%3D%3D"
+                            },
+                            "price": {
+                                "fraction": {
+                                    "numerator": 1,
+                                    "denominator": 25
+                                },
+                                "odds": 1.04,
+                                "usOdds": -2500
+                            },
+                            "isDisplayed": true,
+                            "isOpenForBetting": true
+                        },
+                        {
+                            "id": 1809195920,
+                            "name": {
+                                "text": "X",
+                                "sign": "%2F3kBQA%3D%3D",
+                                "shortText": "X",
+                                "shortTextSign": "%2F3kBQA%3D%3D"
+                            },
+                            "price": {
+                                "fraction": {
+                                    "numerator": 25,
+                                    "denominator": 1
+                                },
+                                "odds": 26.0,
+                                "usOdds": 2500
+                            },
+                            "isDisplayed": true,
+                            "isOpenForBetting": true
+                        },
+                        {
+                            "id": 1809195921,
+                            "name": {
+                                "text": "2",
+                                "sign": "%2BjrAag%3D%3D",
+                                "shortText": "2",
+                                "shortTextSign": "%2BjrAag%3D%3D"
+                            },
+                            "price": {
+                                "fraction": {
+                                    "numerator": 9,
+                                    "denominator": 1
+                                },
+                                "odds": 10.0,
+                                "usOdds": 900
+                            },
+                            "isDisplayed": true,
+                            "isOpenForBetting": true
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "id": {
+                "full": "9821772",
+                "entityId": 9821772
+            },
+            "name": {
+                "text": "Tyson Fury (ENG) - Deontay Wilder (USA)",
+                "sign": "xaKUqA%3D%3D",
+                "shortText": "T. Fury - D. Wilder",
+                "shortTextSign": "DT4slw%3D%3D"
+            },
+            "version": 1,
+            "startDateUtc": "2021-07-23T22:00:00Z",
+            "cutOffDateUtc": "2021-07-23T22:00:00Z",
+            "isInPlay": false,
+            "isDisplayed": true,
+            "isOpenForBetting": true,
+            "isPlannedInPlay": false,
+            "type": "PairGame",
+            "fixtureGroupId": 2512877,
+            "competition": {
+                "id": 2405,
+                "name": {
+                    "text": "Heavyweight",
+                    "shortText": "Heavyweight"
+                }
+            },
+            "region": {
+                "id": 6,
+                "name": {
+                    "text": "World",
+                    "shortText": "World"
+                }
+            },
+            "participants": [
+                {
+                    "id": 2585494,
+                    "name": {
+                        "text": "Tyson Fury (ENG)",
+                        "shortText": "T. Fury"
+                    },
+                    "participantTag": "Home"
+                },
+                {
+                    "id": 2585131,
+                    "name": {
+                        "text": "Deontay Wilder (USA)",
+                        "shortText": "D. Wilder"
+                    },
+                    "participantTag": "Away"
+                }
+            ],
+            "markets": [
+                {
+                    "id": 461187395,
+                    "name": {
+                        "text": "Fight Result (3-way)",
+                        "sign": "wKUGfQ%3D%3D",
+                        "shortText": "Fight Result (3-way)",
+                        "shortTextSign": "wKUGfQ%3D%3D"
+                    },
+                    "marketType": "3way period Y",
+                    "period": "Fulltime",
+                    "isDisplayed": true,
+                    "isOpenForBetting": true,
+                    "isBalancedLine": false,
+                    "options": [
+                        {
+                            "id": 1359051819,
+                            "name": {
+                                "text": "1",
+                                "sign": "lP7WJg%3D%3D",
+                                "shortText": "1",
+                                "shortTextSign": "lP7WJg%3D%3D"
+                            },
+                            "price": {
+                                "fraction": {
+                                    "numerator": 7,
+                                    "denominator": 20
+                                },
+                                "odds": 1.35,
+                                "usOdds": -275
+                            },
+                            "isDisplayed": true,
+                            "isOpenForBetting": true
+                        },
+                        {
+                            "id": 1359051820,
+                            "name": {
+                                "text": "X",
+                                "sign": "I1sqMg%3D%3D",
+                                "shortText": "X",
+                                "shortTextSign": "I1sqMg%3D%3D"
+                            },
+                            "price": {
+                                "fraction": {
+                                    "numerator": 25,
+                                    "denominator": 1
+                                },
+                                "odds": 26.00,
+                                "usOdds": 2500
+                            },
+                            "isDisplayed": true,
+                            "isOpenForBetting": true
+                        },
+                        {
+                            "id": 1359051821,
+                            "name": {
+                                "text": "2",
+                                "sign": "JhjrGA%3D%3D",
+                                "shortText": "2",
+                                "shortTextSign": "JhjrGA%3D%3D"
+                            },
+                            "price": {
+                                "fraction": {
+                                    "numerator": 9,
+                                    "denominator": 4
+                                },
+                                "odds": 3.25,
+                                "usOdds": 225
+                            },
+                            "isDisplayed": true,
+                            "isOpenForBetting": true
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "id": {
+                "full": "11542717",
+                "entityId": 11542717
+            },
+            "name": {
+                "text": "Teofimo Lopez (USA) - George Kambosos Jr (AUS)",
+                "sign": "6xkq1g%3D%3D",
+                "shortText": "T. Lopez - G. Kambosos Jr",
+                "shortTextSign": "jG72kw%3D%3D"
+            },
+            "version": 1,
+            "startDateUtc": "2021-06-20T03:00:00Z",
+            "cutOffDateUtc": "2021-06-20T03:00:00Z",
+            "isInPlay": false,
+            "isDisplayed": true,
+            "isOpenForBetting": true,
+            "isPlannedInPlay": false,
+            "type": "PairGame",
+            "fixtureGroupId": 2494986,
+            "competition": {
+                "id": 2410,
+                "name": {
+                    "text": "Lightweight",
+                    "shortText": "Lightweight"
+                }
+            },
+            "region": {
+                "id": 6,
+                "name": {
+                    "text": "World",
+                    "shortText": "World"
+                }
+            },
+            "participants": [
+                {
+                    "id": 2789534,
+                    "name": {
+                        "text": "Teofimo Lopez (USA)",
+                        "shortText": "T. Lopez"
+                    },
+                    "participantTag": "Home"
+                },
+                {
+                    "id": 2859078,
+                    "name": {
+                        "text": "George Kambosos Jr (AUS)",
+                        "shortText": "G. Kambosos Jr"
+                    },
+                    "participantTag": "Away"
+                }
+            ],
+            "markets": [
+                {
+                    "id": 617207744,
+                    "name": {
+                        "text": "Fight Result (3-way)",
+                        "sign": "dClqCQ%3D%3D",
+                        "shortText": "Fight Result (3-way)",
+                        "shortTextSign": "dClqCQ%3D%3D"
+                    },
+                    "marketType": "3way period Y",
+                    "period": "Fulltime",
+                    "isDisplayed": true,
+                    "isOpenForBetting": true,
+                    "isBalancedLine": false,
+                    "options": [
+                        {
+                            "id": 1780066785,
+                            "name": {
+                                "text": "1",
+                                "sign": "xlvIcg%3D%3D",
+                                "shortText": "1",
+                                "shortTextSign": "xlvIcg%3D%3D"
+                            },
+                            "price": {
+                                "fraction": {
+                                    "numerator": 2,
+                                    "denominator": 17
+                                },
+                                "odds": 1.12,
+                                "usOdds": -800
+                            },
+                            "isDisplayed": true,
+                            "isOpenForBetting": true
+                        },
+                        {
+                            "id": 1780066786,
+                            "name": {
+                                "text": "X",
+                                "sign": "vtk8FQ%3D%3D",
+                                "shortText": "X",
+                                "shortTextSign": "vtk8FQ%3D%3D"
+                            },
+                            "price": {
+                                "fraction": {
+                                    "numerator": 25,
+                                    "denominator": 1
+                                },
+                                "odds": 26.0,
+                                "usOdds": 2500
+                            },
+                            "isDisplayed": true,
+                            "isOpenForBetting": true
+                        },
+                        {
+                            "id": 1780066787,
+                            "name": {
+                                "text": "2",
+                                "sign": "u5r9Pw%3D%3D",
+                                "shortText": "2",
+                                "shortTextSign": "u5r9Pw%3D%3D"
+                            },
+                            "price": {
+                                "fraction": {
+                                    "numerator": 11,
+                                    "denominator": 2
+                                },
+                                "odds": 6.5,
+                                "usOdds": 550
+                            },
+                            "isDisplayed": true,
+                            "isOpenForBetting": true
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "id": {
+                "full": "11653758",
+                "entityId": 11653758
+            },
+            "name": {
+                "text": "Mario Barrios (USA) - Gervonta Davis (USA)",
+                "sign": "jnFvAw%3D%3D",
+                "shortText": "M. Barrios - G. Davis",
+                "shortTextSign": "duRhlQ%3D%3D"
+            },
+            "version": 1,
+            "startDateUtc": "2021-06-27T01:00:00Z",
+            "cutOffDateUtc": "2021-06-27T01:00:00Z",
+            "isInPlay": false,
+            "isDisplayed": true,
+            "isOpenForBetting": true,
+            "isPlannedInPlay": false,
+            "type": "PairGame",
+            "competition": {
+                "id": 2410,
+                "name": {
+                    "text": "Lightweight",
+                    "shortText": "Lightweight"
+                }
+            },
+            "region": {
+                "id": 6,
+                "name": {
+                    "text": "World",
+                    "shortText": "World"
+                }
+            },
+            "participants": [
+                {
+                    "id": 2736932,
+                    "name": {
+                        "text": "Mario Barrios (USA)",
+                        "shortText": "M. Barrios"
+                    },
+                    "participantTag": "Home"
+                },
+                {
+                    "id": 2748618,
+                    "name": {
+                        "text": "Gervonta Davis (USA)",
+                        "shortText": "G. Davis"
+                    },
+                    "participantTag": "Away"
+                }
+            ],
+            "markets": [
+                {
+                    "id": 628127929,
+                    "name": {
+                        "text": "Fight Result (3-way)",
+                        "sign": "o6peFg%3D%3D",
+                        "shortText": "Fight Result (3-way)",
+                        "shortTextSign": "o6peFg%3D%3D"
+                    },
+                    "marketType": "3way period Y",
+                    "period": "Fulltime",
+                    "isDisplayed": true,
+                    "isOpenForBetting": true,
+                    "isBalancedLine": false,
+                    "options": [
+                        {
+                            "id": 1809197777,
+                            "name": {
+                                "text": "1",
+                                "sign": "agD0cw%3D%3D",
+                                "shortText": "1",
+                                "shortTextSign": "agD0cw%3D%3D"
+                            },
+                            "price": {
+                                "fraction": {
+                                    "numerator": 11,
+                                    "denominator": 4
+                                },
+                                "odds": 3.75,
+                                "usOdds": 275
+                            },
+                            "isDisplayed": true,
+                            "isOpenForBetting": true
+                        },
+                        {
+                            "id": 1809197778,
+                            "name": {
+                                "text": "X",
+                                "sign": "EoIAFA%3D%3D",
+                                "shortText": "X",
+                                "shortTextSign": "EoIAFA%3D%3D"
+                            },
+                            "price": {
+                                "fraction": {
+                                    "numerator": 25,
+                                    "denominator": 1
+                                },
+                                "odds": 26.0,
+                                "usOdds": 2500
+                            },
+                            "isDisplayed": true,
+                            "isOpenForBetting": true
+                        },
+                        {
+                            "id": 1809197779,
+                            "name": {
+                                "text": "2",
+                                "sign": "F8HBPg%3D%3D",
+                                "shortText": "2",
+                                "shortTextSign": "F8HBPg%3D%3D"
+                            },
+                            "price": {
+                                "fraction": {
+                                    "numerator": 1,
+                                    "denominator": 4
+                                },
+                                "odds": 1.25,
+                                "usOdds": -400
+                            },
+                            "isDisplayed": true,
+                            "isOpenForBetting": true
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "id": {
+                "full": "11675765",
+                "entityId": 11675765
+            },
+            "name": {
+                "text": "Vasyl Lomachenko (UKR) - Masayoshi Nakatani (JPN)",
+                "sign": "qWcG4A%3D%3D",
+                "shortText": "V. Lomachenko - M. Nakatani",
+                "shortTextSign": "m1puBw%3D%3D"
+            },
+            "version": 1,
+            "startDateUtc": "2021-06-27T02:00:00Z",
+            "cutOffDateUtc": "2021-06-27T02:00:00Z",
+            "isInPlay": false,
+            "isDisplayed": true,
+            "isOpenForBetting": true,
+            "isPlannedInPlay": false,
+            "type": "PairGame",
+            "competition": {
+                "id": 2410,
+                "name": {
+                    "text": "Lightweight",
+                    "shortText": "Lightweight"
+                }
+            },
+            "region": {
+                "id": 6,
+                "name": {
+                    "text": "World",
+                    "shortText": "World"
+                }
+            },
+            "participants": [
+                {
+                    "id": 2585096,
+                    "name": {
+                        "text": "Vasyl Lomachenko (UKR)",
+                        "shortText": "V. Lomachenko"
+                    },
+                    "participantTag": "Home"
+                },
+                {
+                    "id": 2862665,
+                    "name": {
+                        "text": "Masayoshi Nakatani (JPN)",
+                        "shortText": "M. Nakatani"
+                    },
+                    "participantTag": "Away"
+                }
+            ],
+            "markets": [
+                {
+                    "id": 630334225,
+                    "name": {
+                        "text": "Fight Result (3-way)",
+                        "sign": "VSJHkA%3D%3D",
+                        "shortText": "Fight Result (3-way)",
+                        "shortTextSign": "VSJHkA%3D%3D"
+                    },
+                    "marketType": "3way period Y",
+                    "period": "Fulltime",
+                    "isDisplayed": true,
+                    "isOpenForBetting": true,
+                    "isBalancedLine": false,
+                    "options": [
+                        {
+                            "id": 1815095616,
+                            "name": {
+                                "text": "1",
+                                "sign": "JObJOw%3D%3D",
+                                "shortText": "1",
+                                "shortTextSign": "JObJOw%3D%3D"
+                            },
+                            "price": {
+                                "fraction": {
+                                    "numerator": 1,
+                                    "denominator": 12
+                                },
+                                "odds": 1.08,
+                                "usOdds": -1200
+                            },
+                            "isDisplayed": true,
+                            "isOpenForBetting": true
+                        },
+                        {
+                            "id": 1815095617,
+                            "name": {
+                                "text": "X",
+                                "sign": "m%2FQBiA%3D%3D",
+                                "shortText": "X",
+                                "shortTextSign": "m%2FQBiA%3D%3D"
+                            },
+                            "price": {
+                                "fraction": {
+                                    "numerator": 25,
+                                    "denominator": 1
+                                },
+                                "odds": 26.0,
+                                "usOdds": 2500
+                            },
+                            "isDisplayed": true,
+                            "isOpenForBetting": true
+                        },
+                        {
+                            "id": 1815095618,
+                            "name": {
+                                "text": "2",
+                                "sign": "WSf8dg%3D%3D",
+                                "shortText": "2",
+                                "shortTextSign": "WSf8dg%3D%3D"
+                            },
+                            "price": {
+                                "fraction": {
+                                    "numerator": 7,
+                                    "denominator": 1
+                                },
+                                "odds": 8.0,
+                                "usOdds": 700
+                            },
+                            "isDisplayed": true,
+                            "isOpenForBetting": true
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "id": {
+                "full": "11617153",
+                "entityId": 11617153
+            },
+            "name": {
+                "text": "Errol Spence (USA) - Manny Pacquiao (PHI)",
+                "sign": "Efaidg%3D%3D",
+                "shortText": "E. Spence - M. Pacquiao",
+                "shortTextSign": "CxMA%2Bg%3D%3D"
+            },
+            "version": 1,
+            "startDateUtc": "2021-08-22T02:00:00Z",
+            "cutOffDateUtc": "2021-08-22T02:00:00Z",
+            "isInPlay": false,
+            "isDisplayed": true,
+            "isOpenForBetting": true,
+            "isPlannedInPlay": false,
+            "type": "PairGame",
+            "competition": {
+                "id": 896,
+                "name": {
+                    "text": "Welterweight",
+                    "shortText": "Welterweight"
+                }
+            },
+            "region": {
+                "id": 6,
+                "name": {
+                    "text": "World",
+                    "shortText": "World"
+                }
+            },
+            "participants": [
+                {
+                    "id": 2670208,
+                    "name": {
+                        "text": "Errol Spence (USA)",
+                        "shortText": "E. Spence"
+                    },
+                    "participantTag": "Home"
+                },
+                {
+                    "id": 2583663,
+                    "name": {
+                        "text": "Manny Pacquiao (PHI)",
+                        "shortText": "M. Pacquiao"
+                    },
+                    "participantTag": "Away"
+                }
+            ],
+            "markets": [
+                {
+                    "id": 624454188,
+                    "name": {
+                        "text": "Fight Result (3-way)",
+                        "sign": "%2Fsv8Xw%3D%3D",
+                        "shortText": "Fight Result (3-way)",
+                        "shortTextSign": "%2Fsv8Xw%3D%3D"
+                    },
+                    "marketType": "3way period Y",
+                    "period": "Fulltime",
+                    "isDisplayed": true,
+                    "isOpenForBetting": true,
+                    "isBalancedLine": false,
+                    "options": [
+                        {
+                            "id": 1799452280,
+                            "name": {
+                                "text": "1",
+                                "sign": "5wbyeA%3D%3D",
+                                "shortText": "1",
+                                "shortTextSign": "5wbyeA%3D%3D"
+                            },
+                            "price": {
+                                "fraction": {
+                                    "numerator": 3,
+                                    "denominator": 10
+                                },
+                                "odds": 1.3,
+                                "usOdds": -350
+                            },
+                            "isDisplayed": true,
+                            "isOpenForBetting": true
+                        },
+                        {
+                            "id": 1799452281,
+                            "name": {
+                                "text": "X",
+                                "sign": "WBQ6yw%3D%3D",
+                                "shortText": "X",
+                                "shortTextSign": "WBQ6yw%3D%3D"
+                            },
+                            "price": {
+                                "fraction": {
+                                    "numerator": 25,
+                                    "denominator": 1
+                                },
+                                "odds": 26.0,
+                                "usOdds": 2500
+                            },
+                            "isDisplayed": true,
+                            "isOpenForBetting": true
+                        },
+                        {
+                            "id": 1799452282,
+                            "name": {
+                                "text": "2",
+                                "sign": "msfHNQ%3D%3D",
+                                "shortText": "2",
+                                "shortTextSign": "msfHNQ%3D%3D"
+                            },
+                            "price": {
+                                "fraction": {
+                                    "numerator": 5,
+                                    "denominator": 2
+                                },
+                                "odds": 3.5,
+                                "usOdds": 250
+                            },
+                            "isDisplayed": true,
+                            "isOpenForBetting": true
+                        }
+                    ]
+                }
+            ]
+        }
+    ],
+    "count": 6,
+    "links": {
+        "next": "/offer/api/24/us/fixtures?since=20210616082143&isInPlay=False"
+    },
+    "type": "Full"
+}

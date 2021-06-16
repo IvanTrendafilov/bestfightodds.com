@@ -2,7 +2,7 @@
 
 /**
  * Bookie: BetMGM
- * Sport: MMA
+ * Sport: Boxing
  *
  * Timezone: UTC
  * 
@@ -22,7 +22,7 @@ define('BOOKIE_NAME', 'betmgm');
 define('BOOKIE_ID', 23);
 define(
     'BOOKIE_URLS',
-    ['all' => 'https://sportsapi.nj.betmgm.com/offer/api/45/us/fixtures?language=en&isInPlay=false&onlyMainMarkets=true']
+    ['all' => 'https://sportsapi.nj.betmgm.com/offer/api/24/us/fixtures?language=en&isInPlay=false&onlyMainMarkets=true']
 );
 define(
     'BOOKIE_MOCKFILES',
@@ -88,7 +88,7 @@ class ParserJob extends ParserJobBase
 
         foreach ($matchup->markets as $market) {
 
-            if ($market->name->text == 'Fight Result (2-way)') {
+            if ($market->name->text == 'Fight Result (3-way)') {
                 //Regular matchup
                 $this->parseMatchup($matchup, $market);
             } else {
@@ -104,7 +104,7 @@ class ParserJob extends ParserJobBase
             empty($matchup->participants[0]->name->text) ||
             empty($matchup->participants[1]->name->text) ||
             empty($market->options[0]->price?->usOdds) ||
-            empty($market->options[1]->price?->usOdds)
+            empty($market->options[2]->price?->usOdds)
         ) {
             return false;
         }
@@ -113,7 +113,7 @@ class ParserJob extends ParserJobBase
             $matchup->participants[0]->name->text,
             $matchup->participants[1]->name->text,
             $market->options[0]->price?->usOdds,
-            $market->options[1]->price?->usOdds
+            $market->options[2]->price?->usOdds
         );
 
         $date_obj = new DateTime((string) $matchup->startDateUtc);
@@ -122,6 +122,18 @@ class ParserJob extends ParserJobBase
         $parsed_matchup->setCorrelationID($matchup->id->full);
 
         $this->parsed_sport->addParsedMatchup($parsed_matchup);
+
+        //Add draw
+        $matchup_text = ParseTools::formatName($matchup->participants[0]->name->text) . ' vs. ' . ParseTools::formatName($matchup->participants[1]->name->text);
+        $parsed_prop = new ParsedProp(
+            $matchup_text . ' :: FIGHT IS A DRAW',
+            '',
+            $market->options[1]->price?->usOdds,
+            '-99999'
+        );
+        $parsed_prop->setCorrelationID($matchup->id->full);
+        $this->parsed_sport->addFetchedProp($parsed_prop);
+
         return true;
     }
 
@@ -145,7 +157,7 @@ class ParserJob extends ParserJobBase
                 $market->options[0]->price?->usOdds,
                 $market->options[1]->price?->usOdds
             );
-            $parsed_prop->setCorrelationID($matchup->id?->full);
+            $parsed_prop->setCorrelationID($matchup->id->full);
             $this->parsed_sport->addFetchedProp($parsed_prop);
         } else {
             //Single line prop
@@ -161,7 +173,7 @@ class ParserJob extends ParserJobBase
                         $option->price->usOdds,
                         '-99999'
                     );
-                    $parsed_prop->setCorrelationID($matchup->id?->full);
+                    $parsed_prop->setCorrelationID($matchup->id->full);
                     $this->parsed_sport->addFetchedProp($parsed_prop);
                 }
             }
