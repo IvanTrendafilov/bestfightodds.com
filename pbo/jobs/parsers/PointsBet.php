@@ -2,7 +2,7 @@
 
 /**
  * Bookie: PointsBet
- * Sport: MMA
+ * Sport: Boxing
  *
  * Timezone: ES, converted to UTC
  * 
@@ -25,7 +25,7 @@ define('BOOKIE_NAME', 'pointsbet');
 define('BOOKIE_ID', 27);
 define(
     'BOOKIE_URLS',
-    ['all' => 'https://api-usa.pointsbet.com/api/v2/sports/mma/competitions']
+    ['all' => 'https://api-usa.pointsbet.com/api/v2/sports/boxing/competitions']
 );
 define(
     'BOOKIE_MOCKFILES',
@@ -82,7 +82,7 @@ class ParserJob extends ParserJobBase
         return $this->parsed_sport;
     }
 
-    private function parseCompetition(string $league_name, ?string $json_content): bool
+    private function parseCompetition(string $league_name, string $json_content): bool
     {
         $json = json_decode($json_content);
 
