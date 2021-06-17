@@ -27,6 +27,33 @@
                     }
                 });
         });
+        document.getElementById('delete-event-button').addEventListener('click', function(e) {
+            if (confirm("Are you sure you want to delete this event?")) {
+                e.preventDefault();
+                var opts = {
+                    method: 'DELETE',
+                    headers: {
+                        'Content-type': 'application/json; charset=UTF-8'
+                    },
+                    body: JSON.stringify({
+                        event_id: parseInt(e.target.dataset.eventid),
+                    })
+                };
+                fetch('/cnadm/api/events/' + e.target.dataset.eventid, opts).then(function(response) {
+                        return response.json();
+                    })
+                    .then(function(body) {
+                        if (body.error == true) {
+                            alert(body.msg);
+                        } else {
+                            //Successfully deleted. Hides row from table
+                            window.location = '/cnadm/events';
+                        }
+                    });
+            } else {
+                return false;
+            }
+        });
     });
 </script>
 
@@ -59,7 +86,6 @@
 
 <?php $this->insert('partials/event', ['events' => $events, 'hide_header' => true]) ?>
 
-
 <div class="card">
     <div class="card-body">
         <form name="addFightForm">
@@ -83,5 +109,13 @@
 
         </form>
 
+    </div>
+</div>
+
+<div class="card">
+    <div class="card-body">
+        <form name="deleteEventForm">
+            <button class="btn btn-danger" id="delete-event-button" data-eventid="<?= $events[0]['event_obj']->getID() ?>">Delete event</button>
+        </form>
     </div>
 </div>

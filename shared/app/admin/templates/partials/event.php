@@ -30,9 +30,7 @@
         //Delete matchup
         document.querySelectorAll('.delete-matchup-button').forEach(item => {
             item.addEventListener('click', e => {
-
                 if (confirm("Really remove " + e.target.closest('tr').getElementsByTagName('td')[1].innerText + "?")) {
-                    console.log(e.target);
                     e.preventDefault();
                     var opts = {
                         method: 'DELETE',
