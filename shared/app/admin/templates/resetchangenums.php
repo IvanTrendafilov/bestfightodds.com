@@ -33,7 +33,7 @@
 <div class="card p-2">
 
     <div class="card-header">
-        <h5 class="card-title">Reset parser changenums</h5>
+        <h5 class="card-title">Reset bookie changenums</h5>
         <div>
             <button class="reset-changenum-button btn btn-primary">Reset all</button>
         </div>
@@ -50,7 +50,7 @@
             <?php foreach ($bookies_changenums as $bookie) : ?>
                 <tr>
                     <td><?= $bookie['bookie_name'] ?></td>
-                    <td><button class="reset-changenum-button btn btn-primary" data-bookieid="<?= $bookie['bookie_id'] ?>">Reset</button></td>
+                    <td><button class="reset-changenum-button btn btn-primary" data-bookieid="<?= $bookie['bookie_id'] ?>">Reset changenum</button></td>
                 </tr>
 
             <?php endforeach ?>

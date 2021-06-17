@@ -34,6 +34,13 @@ class Ruleset implements RulesetInterface
             }
         }
 
+        if ($bookie_obj->getName() == 'FanDuel') {
+            $whitelisted_events = ['BELLATOR'];
+            if (in_array($event_pieces[0], $whitelisted_events)) {
+                return true;
+            }
+        }
+
         return false;
     }
 
@@ -54,6 +61,13 @@ class Ruleset implements RulesetInterface
 
         if ($bookie_obj->getName() == 'BetWay') {
             $whitelisted_events = ['EFC', 'SUPERIOR', 'ACA', 'FEN', 'OKTAGON', 'BRAVE', 'OPEN', 'RCC'];
+            if (in_array($event_pieces[0], $whitelisted_events)) {
+                return true;
+            }
+        }
+
+        if ($bookie_obj->getName() == 'FanDuel') {
+            $whitelisted_events = ['BELLATOR'];
             if (in_array($event_pieces[0], $whitelisted_events)) {
                 return true;
             }
