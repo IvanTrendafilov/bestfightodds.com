@@ -88,12 +88,11 @@ class BookieDB
 
         $query = 'UPDATE bookies_changenums bcn
                     SET bcn.changenum = bcn.initial '
-                    . $extra_where . ' ';
+            . $extra_where . ' ';
 
         try {
             $result = PDOTools::executeQuery($query, $params);
-            return $result->rowCount();
-
+            return $result !== false ? true : false;
         } catch (\PDOException $e) {
             throw new \Exception("Unknown error " . $e->getMessage(), 10);
         }
@@ -110,9 +109,9 @@ class BookieDB
         }
 
         $query = 'SELECT bookie_id, changenum, initial 
-                    FROM bookies_changenums ' . $extra_where. ' 
+                    FROM bookies_changenums ' . $extra_where . ' 
                     ORDER BY bookie_id ASC';
-        
+
         try {
             return PDOTools::findMany($query, $params);
         } catch (\PDOException $e) {
@@ -168,7 +167,7 @@ class BookieDB
         return (DBTools::getAffectedRows() > 0 ? true : false);
     }
 
-    public static function getAllRunStatuses(): ?array 
+    public static function getAllRunStatuses(): ?array
     {
         $query = 'SELECT b.name, lp.bookie_id, MAX(lp.date), AVG(lp.matched_matchups) as average_matched 
                     FROM logs_parseruns lp INNER JOIN bookies b  on lp.bookie_id = b.id 
@@ -177,4 +176,19 @@ class BookieDB
         return PDOTools::findMany($query);
     }
 
+    public static function updateBookieURL(int $bookie_id, string $url): bool
+    {
+        $query = 'UPDATE bookies  
+                SET refurl = ? 
+                WHERE id = ?';
+
+        $params = [$url, $bookie_id];
+
+        try {
+            $result = PDOTools::executeQuery($query, $params);
+            return $result !== false ? true : false;
+        } catch (\PDOException $e) {
+            throw new \Exception("Unknown error " . $e->getMessage(), 10);
+        }
+    }
 }

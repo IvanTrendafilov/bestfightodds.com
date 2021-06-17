@@ -49,15 +49,17 @@ class AdminAPIController
         $return_data = [];
         $return_data['error'] = false;
 
-        if (!isset($data->event_id, $data->team1_name, $data->team2_name)
-            || (int) $data->event_id <= 0 || (string) $data->team1_name == '' || (string) $data->team2_name == '') {
+        if (
+            !isset($data->event_id, $data->team1_name, $data->team2_name)
+            || (int) $data->event_id <= 0 || (string) $data->team1_name == '' || (string) $data->team2_name == ''
+        ) {
             $response->withStatus(422);
             $return_data['msg'] = 'Missing parameters';
             $return_data['error'] = true;
         } else {
             $matchup = new Fight(0, $data->team1_name, $data->team2_name, (int) $data->event_id);
             $matchup->setCreateSource(2);
-            if (isset($data->create_source) && is_numeric($data->create_source) && $data->create_source >= 0 && $data->create_source <= 2){
+            if (isset($data->create_source) && is_numeric($data->create_source) && $data->create_source >= 0 && $data->create_source <= 2) {
                 $matchup->setCreateSource(intval($data->create_source));
             }
             if ($matchup_id = EventHandler::createMatchup($matchup)) {
@@ -121,8 +123,10 @@ class AdminAPIController
         $return_data = [];
         $return_data['error'] = false;
 
-        if (!isset($data->matchup_id)
-            || (int) $data->matchup_id <= 0) {
+        if (
+            !isset($data->matchup_id)
+            || (int) $data->matchup_id <= 0
+        ) {
             $response->withStatus(422);
             $return_data['msg'] = 'Missing parameters';
             $return_data['error'] = true;
@@ -142,8 +146,10 @@ class AdminAPIController
         $return_data = [];
         $return_data['error'] = false;
 
-        if (!isset($data->event_id)
-            || (int) $data->event_id <= 0) {
+        if (
+            !isset($data->event_id)
+            || (int) $data->event_id <= 0
+        ) {
             $response->withStatus(422);
             $return_data['msg'] = 'Missing parameters';
             $return_data['error'] = true;
@@ -163,9 +169,11 @@ class AdminAPIController
         $return_data = [];
         $return_data['error'] = false;
 
-        if (!v::stringVal()->length(3, null)->validate($data->event_name)
+        if (
+            !v::stringVal()->length(3, null)->validate($data->event_name)
             || !v::date('Y-m-d')->validate($data->event_date)
-            || !v::boolVal()->validate($data->event_hidden)) {
+            || !v::boolVal()->validate($data->event_hidden)
+        ) {
             $response->withStatus(422);
             $return_data['msg'] = 'Missing/invalid parameters';
             $return_data['error'] = true;
@@ -201,7 +209,7 @@ class AdminAPIController
             if (isset($data->event_display)) {
                 $display = boolval($data->event_display);
             }
-            
+
             //Update matchup event
             if (EventHandler::changeEvent($data->event_id, $data->event_name ?? '', $data->event_date ?? '', $display)) {
                 $return_data['msg'] = 'Successfully updated';
@@ -266,10 +274,12 @@ class AdminAPIController
         $return_data = [];
         $return_data['error'] = false;
 
-        if (!v::stringVal()->length(10, null)->validate($data->proptemplate)
+        if (
+            !v::stringVal()->length(10, null)->validate($data->proptemplate)
             || !v::intType()->validate($data->bookie_id)
             || !v::intType()->validate($data->proptype_id)
-            || !v::intType()->validate($data->fieldstype_id)) {
+            || !v::intType()->validate($data->fieldstype_id)
+        ) {
             $response->withStatus(422);
             $return_data['msg'] = 'Missing/invalid parameters';
             $return_data['error'] = true;
@@ -303,9 +313,10 @@ class AdminAPIController
         $return_data = [];
         $return_data['error'] = false;
 
-        if (!v::stringVal()->length(10, null)->validate($data->prop_desc)
-            || !v::stringVal()->length(10, null)->validate($data->negprop_desc))
-        {
+        if (
+            !v::stringVal()->length(10, null)->validate($data->prop_desc)
+            || !v::stringVal()->length(10, null)->validate($data->negprop_desc)
+        ) {
             $response->withStatus(422);
             $return_data['msg'] = 'Missing/invalid parameters';
             $return_data['error'] = true;
@@ -336,9 +347,11 @@ class AdminAPIController
         $return_data = [];
         $return_data['error'] = false;
 
-        if (!v::stringVal()->length(10, null)->validate($data->correlation)
+        if (
+            !v::stringVal()->length(10, null)->validate($data->correlation)
             || !v::intType()->validate($data->bookie_id)
-            || !v::intType()->validate($data->matchup_id)) {
+            || !v::intType()->validate($data->matchup_id)
+        ) {
             $response->withStatus(422);
             $return_data['msg'] = 'Missing/invalid parameters';
             $return_data['error'] = true;
@@ -416,8 +429,10 @@ class AdminAPIController
         $return_data = [];
         $return_data['error'] = false;
 
-        if (!isset($data->action_id)
-            || (int) $data->action_id <= 0) {
+        if (
+            !isset($data->action_id)
+            || (int) $data->action_id <= 0
+        ) {
             $response->withStatus(422);
             $return_data['msg'] = 'Missing parameters';
             $return_data['error'] = true;
@@ -443,8 +458,10 @@ class AdminAPIController
         $return_data = [];
         $return_data['error'] = false;
 
-        if (!isset($data->template_id)
-            || (int) $data->template_id <= 0) {
+        if (
+            !isset($data->template_id)
+            || (int) $data->template_id <= 0
+        ) {
             $response->withStatus(422);
             $return_data['msg'] = 'Missing parameters';
             $return_data['error'] = true;
@@ -470,12 +487,14 @@ class AdminAPIController
         $return_data = [];
         $return_data['error'] = false;
 
-        if (!v::intType()->validate($data->bookie_id)
+        if (
+            !v::intType()->validate($data->bookie_id)
             || !v::intType()->validate($data->matchup_id)
             || !v::stringVal()->length(2, null)->validate($data->team1_odds)
             || !v::stringVal()->length(2, null)->validate($data->team2_odds)
             || !OddsTools::checkCorrectOdds($data->team1_odds)
-            || !OddsTools::checkCorrectOdds($data->team2_odds)) {
+            || !OddsTools::checkCorrectOdds($data->team2_odds)
+        ) {
             $response->withStatus(422);
             $return_data['msg'] = 'Missing parameters';
             $return_data['error'] = true;
@@ -509,8 +528,10 @@ class AdminAPIController
         $return_data = [];
         $return_data['error'] = false;
 
-        if (!v::intType()->validate($data->bookie_id)
-            || !v::intType()->validate($data->matchup_id)) {
+        if (
+            !v::intType()->validate($data->bookie_id)
+            || !v::intType()->validate($data->matchup_id)
+        ) {
             $response->withStatus(422);
             $return_data['msg'] = 'Missing parameters';
             $return_data['error'] = true;
@@ -529,6 +550,34 @@ class AdminAPIController
 
                 $return_data['matchup_id'] = $data->matchup_id;
                 $return_data['bookie_id'] = $data->bookie_id;
+            }
+        }
+
+        $response->getBody()->write(json_encode($return_data));
+        return $this->returnJson($response);
+    }
+
+    public function updateBookie(Request $request, Response $response)
+    {
+        $json = $request->getBody();
+        $data = json_decode($json, false);
+        $return_data = [];
+        $return_data['error'] = false;
+
+        if (
+            !v::intType()->validate($data->bookie_id)
+            || !v::stringVal()->validate($data->url)
+        ) {
+            $response->withStatus(422);
+            $return_data['msg'] = 'Missing parameters';
+            $return_data['error'] = true;
+        } else {
+            if (BookieHandler::updateBookieURL((int) $data->bookie_id, (string) $data->url)) {
+                $return_data['msg'] = 'Successfully updated bookie URL';
+            } else {
+                $response->withStatus(500);
+                $return_data['msg'] = 'Error updating bookie';
+                $return_data['error'] = true;
             }
         }
 

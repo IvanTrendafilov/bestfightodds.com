@@ -85,4 +85,9 @@ class BookieHandler
     {
         return BookieDB::getAllRunStatuses();
     }
+
+    public static function updateBookieURL(int $bookie_id, string $url): bool
+    {
+        return BookieDB::updateBookieURL($bookie_id, $url);
+    }
 }

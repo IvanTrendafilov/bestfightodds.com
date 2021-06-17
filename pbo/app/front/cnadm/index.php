@@ -83,6 +83,8 @@ $app->group('/api', function (RouteCollectorProxy $group) {
   $group->delete('/manualactions/{id}', \AdminAPIController::class . ':deleteManualAction');
   $group->delete('/proptemplates/{id}', \AdminAPIController::class . ':deletePropTemplate');
 
+  $group->post('/updatebookie', \AdminAPIController::class . ':updateBookie');
+
   $group->delete('/odds', \AdminAPIController::class . ':deleteOdds');
 });
 $app->run();

@@ -581,11 +581,12 @@ class AdminController
         $bookies = BookieHandler::getAllBookies();
         $changenums = BookieHandler::getChangeNums();
 
-        $view_data['bookies_changenums'] = [];
+        $view_data['bookies'] = [];
         foreach ($bookies as $bookie) {
+            $view_data['bookies'][$bookie->getID()] = ['bookie_obj' => $bookie];
             foreach ($changenums as $changenum) {
                 if ($changenum['bookie_id'] == $bookie->getID()) {
-                    $view_data['bookies_changenums'][] = $changenum + ['bookie_name' => $bookie->getName()];
+                    $view_data['bookies'][$bookie->getID()]['changenum'] = $changenum;
                 }
             }
         }
