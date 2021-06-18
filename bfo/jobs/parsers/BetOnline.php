@@ -31,7 +31,7 @@ use BFO\Parser\ParsedSport;
 use BFO\Parser\ParsedMatchup;
 use BFO\Parser\ParsedProp;
 
-define('BOOKIE_NAME', 'betonline');
+define('BOOKIE_NAME', 'ref');
 define('BOOKIE_ID', 12);
 define(
     'BOOKIE_URLS',
