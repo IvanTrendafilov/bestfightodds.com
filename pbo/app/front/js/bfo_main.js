@@ -1009,9 +1009,9 @@ initPage = function () {
                     return addToParlay(td);
                 } else {
                     var opts = JSON.parse(td.getAttribute('data-li'));
-                    var title = td.parentNode.querySelector("th").querySelector("a").textContent + " <span style=\"font-weight: normal;\"> &#150; <a href=\"" +
-                        td.closest('table').querySelectorAll('th')[index(td) - 1].querySelector("a").getAttribute("href") + "\" target=\"_blank\">" +
-                        td.closest('table').querySelectorAll('th')[index(td) - 1].querySelector("a").textContent
+                    var title = td.parentNode.querySelector("th").textContent + " <span style=\"font-weight: normal;\"> &#150; <a href=\"" +
+                        td.closest('table').querySelectorAll('th')[index(td) - 1].getAttribute("href") + "\" target=\"_blank\">" +
+                        td.closest('table').querySelectorAll('th')[index(td) - 1].textContent
                         + "</a></span>";
 
                     chartCC();
@@ -1028,8 +1028,8 @@ initPage = function () {
                 } else {
                     var opts = JSON.parse(td.getAttribute('data-li'));
                     var title = td.parentNode.querySelector("th").textContent + " <span style=\"font-weight: normal;\"> &#150; <a href=\"" +
-                        td.closest('table').querySelectorAll('th')[index(td) - 1].querySelector("a").getAttribute("href") + "\" target=\"_blank\">" +
-                        td.closest('table').querySelectorAll('th')[index(td) - 1].querySelector("a").textContent
+                        td.closest('table').querySelectorAll('th')[index(td) - 1].getAttribute("href") + "\" target=\"_blank\">" +
+                        td.closest('table').querySelectorAll('th')[index(td) - 1].textContent
                         + "</a></span>";
                     chartCC();
                     createPChart(opts[0], opts[2], opts[1], opts[3], opts[4]);
@@ -1045,8 +1045,8 @@ initPage = function () {
                     var opts = JSON.parse(td.getAttribute('data-li'));
                     //var title = $(td).parent().parent().find("th").text() + " <span style=\"font-weight: normal;\"> &#150; <a href=\"" + $(td).closest('table').find('th').eq($(td).parent().index()).find("a").attr("href") + "\" target=\"_blank\">" + $(td).closest('table').find('th').eq($(td).parent().index()).find("a").text() + "</a></span>";
                     var title = td.parentNode.querySelector("th").textContent + " <span style=\"font-weight: normal;\"> &#150; <a href=\"" +
-                        td.closest('table').querySelectorAll('th')[index(td) - 1].querySelector("a").getAttribute("href") + "\" target=\"_blank\">" +
-                        td.closest('table').querySelectorAll('th')[index(td) - 1].querySelector("a").textContent
+                        td.closest('table').querySelectorAll('th')[index(td) - 1].getAttribute("href") + "\" target=\"_blank\">" +
+                        td.closest('table').querySelectorAll('th')[index(td) - 1].textContent
                         + "</a></span>";
                     chartCC();
                     createEPChart(opts[0], opts[1], opts[2], opts[3]);

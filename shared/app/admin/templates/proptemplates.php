@@ -75,6 +75,13 @@
 </script>
 
 <div class="card">
+    <div class="card-header">
+            <h5 class="card-title">Add new prop template</h5>
+            <div>A prop template is used to match a prop bet from a bookie with a generic prop type (e.g. Fight goes the distance). <br><br>The prop template must contain <b>&lt;T&gt;</b> identifiers for one or more teams (e.g. <span style="font-style: italic">&lt;T&gt; vs &lt;T&gt; goes the distance</span>). Use the following to indicate wildcard/optional characters:<br>
+            <b>&lt;*&gt;</b> = Match any number of characters<br>
+            <b>&lt;.&gt;</b> = Match a single character<br>
+            <b>&lt;?&gt;</b> = Match an optional character</div>
+        </div>
     <div class="card-body">
         <form>
             <div class="row">
@@ -115,7 +122,7 @@
                     <input class="form-control" type="text" id="in_proptemplate" size="140" value="<?= isset($in_template) ? $in_template : '' ?>"> <a href="#" onclick="switchFields('in_proptemplate','in_negproptemplate')">Switch</a>
                 </div>
                 <div>
-                    <label class="form-label">Neg Template</label>
+                    <label class="form-label">Neg Template (optional)</label>
                     <input class="form-control" type="text" id="in_negproptemplate" size="140" value="<?= isset($in_negtemplate) ? $in_negtemplate : '' ?>" />
                 </div>
                 <div class="col-sm-2">

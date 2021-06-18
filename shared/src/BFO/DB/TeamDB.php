@@ -129,9 +129,6 @@ class TeamDB
                         ) AS fn
                     WHERE fn.name = ?';
 
-                    //New Query (to be combined with find figher above): 
-                    //SELECT distinct(id), name FROM fighters f left join fighters_altnames fa ON fa.fighter_id = f.id WHERE name = 'CRO COP' OR altname like '%CRO COP%';
-
         $params = [strtoupper($team_name)];
 
         $result = DBTools::doParamQuery($query, $params);

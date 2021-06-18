@@ -134,7 +134,6 @@ class PropProcessor
             $found2 = (preg_match('/^' . $template_str . '$/', $prop->getTeamName(2), $propvalue_matches2) > 0);
             if ($found1 && $found2) {
                 $this->logger->debug('--Both team fields match template. Picking shortest one as it is probably not the negative one: ' .  $prop->getTeamName(1) . ' compared to ' .  $prop->getTeamName(2));
-                //TEMPORARY HACK FOR PROPTYPE 65. REMOVE WHEN NO ODDS ARE LIVE FOR THIS TYPE
                 if ($template->getPropTypeID() == 65) {
                     $this->logger->debug('---Proptype 65, picking main prop 1 anyway');
                     $prop->setMainProp(1);
