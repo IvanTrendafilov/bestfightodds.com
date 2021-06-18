@@ -42,7 +42,7 @@ class ParserJob extends ParserJobBase
         $groups_content = ParseTools::retrievePageFromURL($content_urls['all']);
         $json = json_decode($groups_content);
         if (!$json || !isset($json->locales?->competitions)) {
-            $this->logger->error('Unable to parse json' . substr($groups_content, 0, 20) . '..');
+            $this->logger->error('Unable to parse json' . substr($groups_content, 0, 50) . '..');
             return ['all' => null];
         }
         $urls = [];
@@ -88,7 +88,7 @@ class ParserJob extends ParserJobBase
 
         //Error checking
         if (!$json) {
-            $this->logger->error("Unable to parse proper json for " . $league_name . '. Contents: ' . substr($json_content, 0, 20) . '...');
+            $this->logger->error("Unable to parse proper json for " . $league_name . '. Contents: ' . substr($json_content, 0, 50) . '...');
             return false;
         }
         if (!$json->name) {
