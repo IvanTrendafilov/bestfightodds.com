@@ -1114,6 +1114,21 @@ table.team-stats-table {
   margin: 1px 0;
 }
 
+.hightlighted-button {
+  border-radius: 2px;
+  padding: 3px 10px;
+  background-color: #346896;
+  color: #fff;
+  cursor: pointer;
+  font-size: 12px;
+  display: inline-block;
+  border: 1px solid #285073;
+  &:hover {
+   background-color: #385073;
+  }
+  margin: 1px 0;
+}
+
 #event-swing-area {
   -webkit-box-shadow: 0 1px 1px 1px rgb(170, 170, 170);
   -moz-box-shadow: 0 1px 1px 1px rgb(170, 170, 170);
