@@ -154,7 +154,7 @@
         <?php else : ?>
             <a href="#" onclick="setDesktop(true);">Desktop site</a><span class="menu-seperator">|</span>
         <?php endif ?>
-        <a href="https://www.bestfightodds.com" target="_blank" rel="noopener">MMA Odds</a><span class="menu-seperator">|</span><a href="/terms">Terms of service</a><span class="menu-seperator">|</span><a href="#">18+</a><span class="menu-seperator">|</span><a href="https://www.begambleaware.org/">BeGambleAware</a><span class="menu-seperator">|</span><a href="mailto:info@proboxingodds.com">Contact</a><span class="menu-seperator">|</span><a href="mailto:info@proboxingodds.com">&copy; <?= date('Y') ?></a>
+        <a href="https://www.bestfightodds.com" target="_blank" rel="noopener">MMA Odds</a><span class="menu-seperator">|</span><a href="/terms">Terms of service</a><span class="menu-seperator">|</span><a href="#">18+</a><span class="menu-seperator">|</span><a href="https://www.begambleaware.org/">BeGambleAware</a><span class="menu-seperator">|</span><!--<a href="mailto:info@proboxingodds.com">Contact</a><span class="menu-seperator">|</span><a href="mailto:info@proboxingodds.com">-->&copy; <?= date('Y') ?></a>
     </div>
 
     <div id="chart-window" class="popup-window">
