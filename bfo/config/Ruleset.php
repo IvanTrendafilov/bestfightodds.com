@@ -36,11 +36,6 @@ class Ruleset implements RulesetInterface
             return false;
         }
 
-        //Ignore names containing TBD
-        if (strpos(strtoupper($event_name['team2_name']), 'TBD') === false) {
-            return false;
-        }
-
         return true;
     }
 }
