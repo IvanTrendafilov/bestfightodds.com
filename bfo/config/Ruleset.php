@@ -11,37 +11,18 @@ use BFO\Parser\RulesetInterface;
  */
 class Ruleset implements RulesetInterface
 {
-    public function __construct()
-    {
-    }
-
     public function evaluateMatchup($bookie_obj, $team1, $team2, $event_name, $gametime): bool
     {
         $event_name = strtoupper($event_name);
         $event_pieces = explode(' ', $event_name);
 
-        if ($bookie_obj->getName() == 'BetOnline') {
-            $whitelisted_events = ['OKTAGON', 'LFA', 'CES', 'PFL', 'UFC', 'BELLATOR', 'FAC', 'AMC', 'TITAN', 'FAME', 'INVICTA', 'EFC', 'ACA', 'UWC'];
-            if (in_array($event_pieces[0], $whitelisted_events) || $event_name == 'FUTURE EVENTS') {
-                return true;
-            }
+        //Ignore Grappling/K1 events
+        $blacklisted_events = ['GLORY', 'BKFC', 'WNO'];
+        if (in_array($event_pieces[0], $blacklisted_events)) {
+            return false;
         }
 
-        if ($bookie_obj->getName() == 'BetWay') {
-            $whitelisted_events = ['EFC', 'SUPERIOR', 'ACA', 'FEN', 'OKTAGON', 'BRAVE', 'OPEN'];
-            if (in_array($event_pieces[0], $whitelisted_events)) {
-                return true;
-            }
-        }
-
-        if ($bookie_obj->getName() == 'FanDuel') {
-            $whitelisted_events = ['BELLATOR'];
-            if (in_array($event_pieces[0], $whitelisted_events)) {
-                return true;
-            }
-        }
-
-        return false;
+        return true; //Default to create any reported matchup
     }
 
     public function evaluateEvent($bookie_obj, $event_name, $gametime): bool
@@ -49,30 +30,17 @@ class Ruleset implements RulesetInterface
         $event_name = strtoupper($event_name);
         $event_pieces = explode(' ', $event_name);
 
-        if ($bookie_obj->getName() == 'BetOnline') {
-            $whitelisted_events = ['OKTAGON', 'LFA', 'CES', 'PFL', 'UFC', 'BELLATOR', 'FAC', 'AMC', 'TITAN', 'FAME', 'INVICTA', 'EFC', 'ACA', 'UWC', 'RCC'];
-            if (in_array($event_pieces[0], $whitelisted_events)) {
-                //Check that event is numbered (= event name contains a number)
-                if (preg_match('/\\d/', $event_name) > 0) {
-                    return true;
-                }
-            }
+        //Ignore Grappling/K1 events
+        $blacklisted_events = ['GLORY', 'BKFC', 'WNO'];
+        if (in_array($event_pieces[0], $blacklisted_events)) {
+            return false;
         }
 
-        if ($bookie_obj->getName() == 'BetWay') {
-            $whitelisted_events = ['EFC', 'SUPERIOR', 'ACA', 'FEN', 'OKTAGON', 'BRAVE', 'OPEN', 'RCC'];
-            if (in_array($event_pieces[0], $whitelisted_events)) {
-                return true;
-            }
+        //Ignore names containing TBD
+        if (strpos(strtoupper($event_name['team2_name']), 'TBD') === false) {
+            return false;
         }
 
-        if ($bookie_obj->getName() == 'FanDuel') {
-            $whitelisted_events = ['BELLATOR'];
-            if (in_array($event_pieces[0], $whitelisted_events)) {
-                return true;
-            }
-        }
-
-        return false;
+        return true;
     }
 }

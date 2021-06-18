@@ -11,10 +11,6 @@ use BFO\Parser\RulesetInterface;
  */
 class Ruleset implements RulesetInterface
 {
-    public function __construct()
-    {
-    }
-
     public function evaluateMatchup($bookie_obj, $team1, $team2, $event_name, $gametime): bool
     {
         $event_name = strtoupper($event_name);
