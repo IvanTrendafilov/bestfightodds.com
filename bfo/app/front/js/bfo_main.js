@@ -491,24 +491,6 @@ $(document).ready(function () {
 
     initPage();
 
-    //TODO: Auto refresh disabled
-    /*if ($('#auto-refresh-container').css('display') != 'none') {
-        if (Cookies.get('bfo_autorefresh') !== null && !isNaN(Cookies.get('bfo_autorefresh')) && Cookies.get('bfo_autorefresh') == '0') {
-            //Disable auto refresh
-            $('#afSelectorOn').removeClass("list-checked");
-            $('span', $('#afSelectorOn')).css('display', 'none');
-            toggleRefresh(false);
-            $('#afSelectorOff').addClass("list-checked");
-            $('span', $('#afSelectorOff')).css('display', 'inline-block');
-        } else {
-            $('#afSelectorOff').removeClass("list-checked");
-            $('span', $('#afSelectorOff')).css('display', 'none');
-            toggleRefresh(true);
-            $('#afSelectorOn').addClass("list-checked");
-            $('span', $('#afSelectorOn')).css('display', 'inline-block');
-        }
-    }*/
-
     //Bind dropdowns
     $('#formatSelector1').click(function () {
         $('[id^="formatSelector"]').each(function () {
@@ -578,22 +560,6 @@ $(document).ready(function () {
         $('#darkModeSelector').addClass("list-checked");
         $('span', $('#darkModeSelector')).css('display', 'inline-block');
     });
-
-    //Autorefresh selectors - Disabled
-    /*$('#afSelectorOn').click(function() {
-        $('#afSelectorOff').removeClass("list-checked");
-        $('span', $('#afSelectorOff')).css('display', 'none');
-        toggleRefresh(true);
-        $('#afSelectorOn').addClass("list-checked");
-        $('span', $('#afSelectorOn')).css('display', 'inline-block');
-    });
-    $('#afSelectorOff').click(function() {
-        $('#afSelectorOn').removeClass("list-checked");
-        $('span', $('#afSelectorOn')).css('display', 'none');
-        toggleRefresh(false);
-        $('#afSelectorOff').addClass("list-checked");
-        $('span', $('#afSelectorOff')).css('display', 'inline-block');
-    });*/
 
     $('#parlay-mode-box').click(function () {
         parlay = [];
@@ -1009,8 +975,12 @@ initPage = function () {
                     return addToParlay(td);
                 } else {
                     var opts = JSON.parse(td.getAttribute('data-li'));
+                    var link = null;
+                    if (td.closest('table').querySelectorAll('th')[index(td) - 1].querySelector('a') !== null) {
+                        link = td.closest('table').querySelectorAll('th')[index(td) - 1].querySelector('a').getAttribute("href") + "\" target=\"_blank\">";
+                    }
                     var title = td.parentNode.querySelector("th").textContent + " <span style=\"font-weight: normal;\"> &#150; <a href=\"" +
-                        td.closest('table').querySelectorAll('th')[index(td) - 1].getAttribute("href") + "\" target=\"_blank\">" +
+                        link +
                         td.closest('table').querySelectorAll('th')[index(td) - 1].textContent
                         + "</a></span>";
 
@@ -1027,8 +997,12 @@ initPage = function () {
                     return addToParlay(td);
                 } else {
                     var opts = JSON.parse(td.getAttribute('data-li'));
+                    var link = null;
+                    if (td.closest('table').querySelectorAll('th')[index(td) - 1].querySelector('a') !== null) {
+                        link = td.closest('table').querySelectorAll('th')[index(td) - 1].getAttribute("href") + "\" target=\"_blank\">";
+                    }
                     var title = td.parentNode.querySelector("th").textContent + " <span style=\"font-weight: normal;\"> &#150; <a href=\"" +
-                        td.closest('table').querySelectorAll('th')[index(td) - 1].getAttribute("href") + "\" target=\"_blank\">" +
+                        link +
                         td.closest('table').querySelectorAll('th')[index(td) - 1].textContent
                         + "</a></span>";
                     chartCC();
@@ -1043,9 +1017,12 @@ initPage = function () {
                     return addToParlay(td);
                 } else {
                     var opts = JSON.parse(td.getAttribute('data-li'));
-                    //var title = $(td).parent().parent().find("th").text() + " <span style=\"font-weight: normal;\"> &#150; <a href=\"" + $(td).closest('table').find('th').eq($(td).parent().index()).find("a").attr("href") + "\" target=\"_blank\">" + $(td).closest('table').find('th').eq($(td).parent().index()).find("a").text() + "</a></span>";
+                    var link = null;
+                    if (td.closest('table').querySelectorAll('th')[index(td) - 1].querySelector('a') !== null) {
+                        link = td.closest('table').querySelectorAll('th')[index(td) - 1].getAttribute("href") + "\" target=\"_blank\">";
+                    }
                     var title = td.parentNode.querySelector("th").textContent + " <span style=\"font-weight: normal;\"> &#150; <a href=\"" +
-                        td.closest('table').querySelectorAll('th')[index(td) - 1].getAttribute("href") + "\" target=\"_blank\">" +
+                        link +
                         td.closest('table').querySelectorAll('th')[index(td) - 1].textContent
                         + "</a></span>";
                     chartCC();
