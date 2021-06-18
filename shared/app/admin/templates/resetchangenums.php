@@ -80,7 +80,11 @@
             <?php foreach ($bookies as $bookie) : ?>
                 <tr>
                     <td style="width: 5%"><?= $bookie['bookie_obj']->getID() ?></td>
-                    <td style="width: 10%"><?= $bookie['bookie_obj']->getName() ?></td>
+                    <td style="width: 10%"><?= $bookie['bookie_obj']->getName() ?> 
+                        <?php if (!$bookie['bookie_obj']->isActive()): ?>
+                             (inactive)
+                            <?php endif ?>
+                    </td>
                     <td>
                         <input class="form-control" id="bookieurl-<?= $bookie['bookie_obj']->getID() ?>" type="text" value="<?= $bookie['bookie_obj']->getRefURL() ?>">
                     </td>

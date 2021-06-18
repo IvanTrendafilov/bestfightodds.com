@@ -637,7 +637,7 @@ class AdminController
     {
         $bookie_status = [];
 
-        $bookies = BookieHandler::getAllBookies();
+        $bookies = BookieHandler::getAllBookies(exclude_inactive: true);
         foreach ($bookies as $bookie) {
             $has_finished_in_last_5_min = false;
 
