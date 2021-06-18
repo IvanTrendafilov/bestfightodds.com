@@ -95,24 +95,26 @@
     });
 
     document.addEventListener("DOMContentLoaded", function(event) {
-        document.getElementById('clear-unmatched-button').addEventListener('click', function(e) {
-            e.preventDefault();
-            var opts = {
-                method: 'POST',
-                headers: {
-                    'Content-type': 'application/json; charset=UTF-8'
-                }
-            };
-            fetch('/cnadm/api/clearunmatched', opts).then(function(response) {
-                    return response.json();
-                })
-                .then(function(body) {
-                    if (body.error == true) {
-                        alert(body.msg);
-                    } else {
-                        location.reload();
+        document.querySelectorAll('.clear-unmatched-button').forEach(item => {
+            item.addEventListener('click', function(e) {
+                e.preventDefault();
+                var opts = {
+                    method: 'POST',
+                    headers: {
+                        'Content-type': 'application/json; charset=UTF-8'
                     }
-                });
+                };
+                fetch('/cnadm/api/clearunmatched', opts).then(function(response) {
+                        return response.json();
+                    })
+                    .then(function(body) {
+                        if (body.error == true) {
+                            alert(body.msg);
+                        } else {
+                            location.reload();
+                        }
+                    });
+            });
         });
     });
 </script>
@@ -129,7 +131,7 @@
                     <button type="button" class="btn btn-secondary" onclick="document.getElementById('unmatched-group-card').style.display = 'none'; document.getElementById('unmatched-normal-card').style.display = 'flex';" disabled=true>Single view</button>
                     <button type="button" class="btn btn-secondary" onclick="document.getElementById('unmatched-normal-card').style.display = 'none'; document.getElementById('unmatched-group-card').style.display = 'flex';">Grouped view</button>
                 </div>
-                <button id="clear-unmatched-button" class="btn btn-primary pl-5">Clear all unmatched</button>
+                <button class="clear-unmatched-button btn btn-primary pl-5">Clear all unmatched</button>
             <?php endif ?>
         </div>
 
@@ -208,7 +210,7 @@
                     <button type="button" class="btn btn-secondary" onclick="document.getElementById('unmatched-normal-card').style.display = 'none'; document.getElementById('unmatched-group-card').style.display = 'flex';" disabled=true>Grouped view</button>
                 </div>
 
-                <button id="clear-unmatched-button" class="btn btn-primary pl-5">Clear all unmatched</button>
+                <button class="clear-unmatched-button btn btn-primary pl-5">Clear all unmatched</button>
             <?php endif ?>
         </div>
         <?php if (count($unmatched_groups) > 0) : ?>
