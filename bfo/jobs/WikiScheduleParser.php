@@ -72,7 +72,8 @@ class WikiScheduleParser
             $fightcard_matches = null;
             preg_match_all("/\{\{MMAevent bout[\s]*\|[^|]*\|(?<team1_name>[a-zA-Z0-9\s'-\.]+)\|\s?vs\.?\s?\|(?<team2_name>[a-zA-Z0-9\s'-\.]+)\|/", $announced_parsed_str, $fightcard_matches, PREG_SET_ORDER);
             foreach ($fightcard_matches as $fightcard_match) {
-                if (strpos($fightcard_match['team1_name'], 'TBA') === false && strpos($fightcard_match['team2_name'], 'TBA') === false) {
+                if (strpos(strtoupper($fightcard_match['team1_name']), 'TBA') === false && strpos(strtoupper($fightcard_match['team2_name']), 'TBA') === false &&
+                    strpos(strtoupper($fightcard_match['team1_name']), 'TBD') === false && strpos(strtoupper($fightcard_match['team2_name']), 'TBD') === false) {
                     $new_event['matchups'][] = [ParseTools::formatName($fightcard_match['team1_name']), ParseTools::formatName($fightcard_match['team2_name'])];
                 }
             }
