@@ -46,8 +46,10 @@ class ParserJob extends ParserJobBase
             return ['all' => null];
         }
         $urls = [];
-        foreach ($json->locales->competitions as $competition) {
-            $urls[$competition->name] = 'https://api-usa.pointsbet.com/api/v2/competitions/' . $competition->key . '/events/featured?includeLive=false';
+        foreach ($json->locales as $locale) {
+            foreach ($locale->competitions as $competition) {
+                $urls[$competition->name] = 'https://api-usa.pointsbet.com/api/v2/competitions/' . $competition->key . '/events/featured?includeLive=false';
+            }
         }
 
         //With the subtypes gathered, fetch the content for each

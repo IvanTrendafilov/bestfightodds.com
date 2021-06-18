@@ -41,13 +41,15 @@ class ParserJob extends ParserJobBase
         //First we parse the competitions feed that provides the available subtypes for the sport
         $groups_content = ParseTools::retrievePageFromURL($content_urls['all']);
         $json = json_decode($groups_content);
-        if (!$json || !isset($json->locales?->competitions)) {
+        if (!$json || !isset($json->locales)) {
             $this->logger->error('Unable to parse json' . substr($groups_content, 0, 100) . '..');
             return [];
         }
         $urls = [];
-        foreach ($json->locales->competitions as $competition) {
-            $urls[$competition->name] = 'https://api-usa.pointsbet.com/api/v2/competitions/' . $competition->key . '/events/featured?includeLive=false';
+        foreach ($json->locales as $locale) {
+            foreach ($locale->competitions as $competition) {
+                $urls[$competition->name] = 'https://api-usa.pointsbet.com/api/v2/competitions/' . $competition->key . '/events/featured?includeLive=false';
+            }
         }
 
         //With the subtypes gathered, fetch the content for each
