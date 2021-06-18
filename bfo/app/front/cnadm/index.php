@@ -43,7 +43,6 @@ $app->group('', function (RouteCollectorProxy $group) {
   $group->get('/manualactions', \AdminController::class . ':viewManualActions');
   $group->get('/events[/{show}]', \AdminController::class . ':eventsOverview');
   $group->get('/fighters/{id}', \AdminController::class . ':viewFighter');
-  $group->get('/addOddsManually', \AdminController::class . ':addOddsManually');
   $group->get('/proptype', \AdminController::class . ':addNewPropType');
   $group->get('/proptemplates', \AdminController::class . ':viewPropTemplates');
   $group->get('/resetchangenums', \AdminController::class . ':resetChangeNums');
@@ -53,7 +52,6 @@ $app->group('', function (RouteCollectorProxy $group) {
   $group->get('/matchups/{id}', \AdminController::class . ':viewMatchup');
   $group->get('/propcorrelation', \AdminController::class . ':createPropCorrelation');
   $group->get('/flagged', \AdminController::class . ':viewFlaggedOdds');
-  $group->get('/parser_status', \AdminController::class . ':viewParserStatus');
   $group->get('/log/{log_name}', \AdminController::class . ':viewLog');
   $group->get('/unmatched_props', \AdminController::class . ':viewUnmatchedProps');
   $group->get('/other_logs', \AdminController::class . ':viewOtherLogs');

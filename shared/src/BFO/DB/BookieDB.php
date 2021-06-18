@@ -172,6 +172,7 @@ class BookieDB
         $query = 'SELECT b.name, lp.bookie_id, MAX(lp.date), AVG(lp.matched_matchups) as average_matched 
                     FROM logs_parseruns lp INNER JOIN bookies b  on lp.bookie_id = b.id 
                     WHERE lp.date >= NOW() - INTERVAL 1 DAY 
+                        AND b.active = true 
                     GROUP BY lp.bookie_id;';
         return PDOTools::findMany($query);
     }

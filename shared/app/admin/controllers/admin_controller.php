@@ -22,9 +22,6 @@ class AdminController
     public function __construct(\League\Plates\Engine $plates)
     {
         $this->plates = $plates;
-
-        //Get run status data
-        $plates->addData(['runstatus' => BookieHandler::getAllRunStatuses()]);
     }
 
     public function __invoke(Request $request, Response $response)
@@ -62,6 +59,9 @@ class AdminController
     public function home(Request $request, Response $response)
     {
         $view_data = [];
+
+        //Get run status data
+        $view_data['runstatus'] = BookieHandler::getAllRunStatuses();
 
         //Get status on whether or not bookie has finished parsing in the last 5 minutes
         $view_data['lastfinishes'] = $this->getLastFinishDates();
@@ -621,15 +621,6 @@ class AdminController
 
         $view_data['flagged'] = $flagged;
         $response->getBody()->write($this->plates->render('flagged_odds', $view_data));
-        return $response;
-    }
-
-    public function viewParserStatus(Request $request, Response $response, array $args)
-    {
-        //Get run status data
-        $view_data['runstatus'] = BookieHandler::getAllRunStatuses();
-
-        $response->getBody()->write($this->plates->render('parser_status', $view_data));
         return $response;
     }
 
