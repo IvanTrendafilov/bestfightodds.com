@@ -41,9 +41,9 @@ class ParserJob extends ParserJobBase
         //First we parse the competitions feed that provides the available subtypes for the sport
         $groups_content = ParseTools::retrievePageFromURL($content_urls['all']);
         $json = json_decode($groups_content);
-        if (!$json || !isset($json->locales?->competitions)) {
+        if (!$json || !isset($json->locales)) {
             $this->logger->error('Unable to parse json' . substr($groups_content, 0, 100) . '..');
-            return ['all' => null];
+            return [];
         }
         $urls = [];
         foreach ($json->locales as $locale) {
@@ -84,7 +84,7 @@ class ParserJob extends ParserJobBase
         return $this->parsed_sport;
     }
 
-    private function parseCompetition(string $league_name, string $json_content): bool
+    private function parseCompetition(string $league_name, ?string $json_content): bool
     {
         $json = json_decode($json_content);
 
