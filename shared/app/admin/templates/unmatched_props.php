@@ -1,9 +1,37 @@
 <?php $this->layout('base/layout', ['title' => 'Admin - Unmatched Props', 'current_page' => $this->name->getName()]) ?>
 
+<script>
+    document.addEventListener("DOMContentLoaded", function(event) {
+        document.querySelectorAll('.clear-unmatched-button').forEach(item => {
+            item.addEventListener('click', function(e) {
+                e.preventDefault();
+                var opts = {
+                    method: 'POST',
+                    headers: {
+                        'Content-type': 'application/json; charset=UTF-8'
+                    }
+                };
+                fetch('/cnadm/api/clearunmatched', opts).then(function(response) {
+                        return response.json();
+                    })
+                    .then(function(body) {
+                        if (body.error == true) {
+                            alert(body.msg);
+                        } else {
+                            location.reload();
+                        }
+                    });
+            });
+        });
+    });
+</script>
+
 <div class="card">
-    <div class="card-header">
+    <div class="card-header d-flex justify-content-between">
+    <div class="d-flex">
         <h5 class="card-title">Props without matchups</h5>
-        </h6>
+    </div>
+    <button class="clear-unmatched-button btn btn-primary pl-5">Clear all unmatched</button>
     </div>
     <div class="table-responsive p-2">
         <table class="table table-sm table-hover">
