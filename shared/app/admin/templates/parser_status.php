@@ -1,9 +1,9 @@
 <div class="row">
     <div class="col-12">
         <div class="card">
-        <div class="card-header">
-            <h5 class="card-title">Platform Status</h5>
-        </div>
+            <div class="card-header">
+                <h5 class="card-title">Platform Status</h5>
+            </div>
             <div class="card-body pt-0">
                 Parsed new matchups/props in last 24 hours:
                 <?php foreach ($runstatus as $runstatus_entry) : ?>
@@ -16,11 +16,11 @@
                 Odds job finished in last 5 minutes:
                 <a href="/cnadm/logs/latest">
                     <?php if ($oddsjob_finished) : ?>
-                </a><span class="badge bg-success">Yes</span>
-            <?php else : ?>
-                <span class="badge bg-danger">No</span>
-            <?php endif ?>
-            </a>
+                        <span class="badge bg-success">Yes</span>
+                    <?php else : ?>
+                        <span class="badge bg-danger">No</span>
+                    <?php endif ?>
+                </a>
             </div>
         </div>
     </div>
