@@ -46,7 +46,12 @@ chartSC = function (content, xcord, ycord) {
     if ((url = content.match('href="([^"]*)"')) != null && (bookie = content.match('>([^<]*)</a>')) != null) {
         chartdisc.style.display = 'none';
         chartlink.innerHTML = 'Bet this line at ' + bookie[1];
-        chartlink.style.display = '';
+
+        //Hide button if url is blank (#)
+        if (url[1] != '#') {
+            chartlink.style.display = '';
+        } 
+        
         chartlink.parentNode.setAttribute('href', 'https://www.bestfightodds.com' + url[1]);
         setHeight(chartwindow, 260);
 
@@ -975,7 +980,7 @@ initPage = function () {
                     return addToParlay(td);
                 } else {
                     var opts = JSON.parse(td.getAttribute('data-li'));
-                    var link = null;
+                    var link = "#\">";
                     if (td.closest('table').querySelectorAll('th')[index(td) - 1].querySelector('a') !== null) {
                         link = td.closest('table').querySelectorAll('th')[index(td) - 1].querySelector('a').getAttribute("href") + "\" target=\"_blank\">";
                     }
@@ -997,7 +1002,7 @@ initPage = function () {
                     return addToParlay(td);
                 } else {
                     var opts = JSON.parse(td.getAttribute('data-li'));
-                    var link = null;
+                    var link = "#\">";
                     if (td.closest('table').querySelectorAll('th')[index(td) - 1].querySelector('a') !== null) {
                         link = td.closest('table').querySelectorAll('th')[index(td) - 1].getAttribute("href") + "\" target=\"_blank\">";
                     }
@@ -1017,7 +1022,7 @@ initPage = function () {
                     return addToParlay(td);
                 } else {
                     var opts = JSON.parse(td.getAttribute('data-li'));
-                    var link = null;
+                    var link = "#\">";
                     if (td.closest('table').querySelectorAll('th')[index(td) - 1].querySelector('a') !== null) {
                         link = td.closest('table').querySelectorAll('th')[index(td) - 1].getAttribute("href") + "\" target=\"_blank\">";
                     }

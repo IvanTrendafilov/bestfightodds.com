@@ -51,7 +51,7 @@
 </head>
 
 <body>
-    <script async src="/js/bfo.min.js?v=0.4.8"></script>
+    <script async src="/js/bfo.min.js?v=0.4.9"></script>
     <div class="flex-header">
         <div class="flex-header-wrap">
             <a href="/"><img src="/img/logo_3.png" class="logo" width="290" height="54" alt="Best Fight Odds logo"></a>
