@@ -109,7 +109,7 @@ class ParserJob extends ParserJobBase
     private function parseEvent($event)
     {
         foreach ($event->fixedOddsMarkets as $market) {
-            if ($market->eventName == "Fight Result") {
+            if ($market->eventName == "Fight Result (Draw No Bet)") {
                 //Regular matchup
                 $this->parseMatchup($event, $market);
             } else {
