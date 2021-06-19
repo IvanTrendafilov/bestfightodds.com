@@ -147,7 +147,6 @@
                         <th>Template</th>
                         <th>Proptype ID</th>
                         <th>Field Type</th>
-                        <th>Last used</th>
                         <th>Action</th>
                     </tr>
                 </thead>
@@ -161,7 +160,6 @@
                             </td>
                             <td><?= $template->getPropTypeID() ?></td>
                             <td>e.g: <?= $template->getFieldsTypeAsExample() ?></td>
-                            <td><?= $template->getLastUsedDate() ?></td>
                             <td><button class="btn btn-danger delete-pt-button" data-li="<?= $template->getID() ?>">Delete</button></td>
                         </tr>
                     <?php endforeach ?>
