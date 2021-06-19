@@ -200,6 +200,13 @@ class ParserJob extends ParserJobBase
     {
         $correlation_id = trim(strtolower((string) $prop->league));
 
+        //Convert names from lastname, firstname to firstname lastname in league name
+        $event_name_adjusted = $prop->league;
+        $parts = explode(' VS ', $prop->league);
+        if (count($parts) > 1) {
+            $event_name_adjusted = ParseTools::convertCommaNameToFullName($parts[0]) . ' VS ' . ParseTools::convertCommaNameToFullName($parts[1]);
+        }
+
         if (
             count($prop->participants) == 2
             && (trim(strtolower((string) $prop->participants[0]->name)) == 'yes' && trim(strtolower((string) $prop->participants[1]->name)) == 'no')
@@ -222,8 +229,8 @@ class ParserJob extends ParserJobBase
 
             //Two way prop
             $prop_obj = new ParsedProp(
-                trim((string) $prop->league) . ' : ' . trim((string) $prop->description) . ' - ' . trim((string) $prop->participants[0]->name),
-                trim((string) $prop->league) . ' : ' . trim((string) $prop->description) . ' - ' . trim((string) $prop->participants[1]->name),
+                trim($event_name_adjusted) . ' : ' . trim((string) $prop->description) . ' - ' . trim((string) $prop->participants[0]->name),
+                trim($event_name_adjusted) . ' : ' . trim((string) $prop->description) . ' - ' . trim((string) $prop->participants[1]->name),
                 trim((string) $prop->participants[0]->odds->moneyLine),
                 trim((string) $prop->participants[1]->odds->moneyLine)
             );
@@ -243,7 +250,7 @@ class ParserJob extends ParserJobBase
                     $this->logger->warning('Missing/invalid options and odds fields for prop ' . trim((string) $prop->description) . ' at ' . $prop->league);
                 } else {
                     $prop_obj = new ParsedProp(
-                        trim((string) $prop->league) . ' : ' . trim((string) $prop->description) . ' - ' . trim((string) $prop_line->name),
+                        trim($event_name_adjusted) . ' : ' . trim((string) $prop->description) . ' - ' . trim((string) $prop_line->name),
                         '',
                         trim((string) $prop_line->odds->moneyLine),
                         '-99999'
