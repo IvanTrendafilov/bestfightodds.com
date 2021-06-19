@@ -202,7 +202,7 @@ class ParserJob extends ParserJobBase
 
         //Convert names from lastname, firstname to firstname lastname in league name
         $event_name_adjusted = $prop->league;
-        $parts = explode(' VS ', $prop->league);
+        $parts = explode(' vs ', $prop->league);
         if (count($parts) > 1) {
             $event_name_adjusted = ParseTools::convertCommaNameToFullName($parts[0]) . ' VS ' . ParseTools::convertCommaNameToFullName($parts[1]);
         }
