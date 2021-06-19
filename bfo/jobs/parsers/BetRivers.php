@@ -154,8 +154,22 @@ class ParserJob extends ParserJobBase
                     !empty($outcome->label) &&
                     !empty($outcome->oddsAmerican)
                 ) {
+                    //Find lastname, firstname occurences in props and convert o firstname lastname
+                    $new_label = $outcome->label;
+                    $parts = explode(' - ', $outcome->label);
+                    if (count($parts) > 1) {
+                        //Convert names from lastname, firstname to firstname lastname
+                        $new_label = ParseTools::convertCommaNameToFullName($parts[0]) . ' - ' . $parts[1];
+                    } else {
+                        $parts = explode(' by ', $outcome->label);
+                        if (count($parts) > 1) {
+                            //Convert names from lastname, firstname to firstname lastname
+                            $new_label = ParseTools::convertCommaNameToFullName($parts[0]) . ' by ' . $parts[1];
+                        }
+                    }
+
                     $parsed_prop = new ParsedProp(
-                        $team1_name . ' vs. ' . $team2_name . ' :: ' . $betoffer->betOfferType . ' ' . $betoffer->betDescription . ' : ' . $outcome->label,
+                        $team1_name . ' vs. ' . $team2_name . ' :: ' . $betoffer->betOfferType . ' ' . $betoffer->betDescription . ' : ' . $new_label,
                         '',
                         $outcome->oddsAmerican,
                         '-99999'
