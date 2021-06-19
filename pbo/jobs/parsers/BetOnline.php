@@ -249,8 +249,18 @@ class ParserJob extends ParserJobBase
                 ) {
                     $this->logger->warning('Missing/invalid options and odds fields for prop ' . trim((string) $prop->description) . ' at ' . $prop->league);
                 } else {
+
+                    //Find lastname, firstname occurences in props and convert o firstname lastname
+                    $new_label = $prop_line->name;
+                    $parts = explode(' by ', $prop_line->name);
+                    if (count($parts) > 1) {
+                        //Convert names from lastname, firstname to firstname lastname
+                        $new_label = ParseTools::convertCommaNameToFullName($parts[0]) . ' by ' . $parts[1];
+                    }
+
+
                     $prop_obj = new ParsedProp(
-                        trim($event_name_adjusted) . ' : ' . trim((string) $prop->description) . ' - ' . trim((string) $prop_line->name),
+                        trim($event_name_adjusted) . ' : ' . trim((string) $prop->description) . ' - ' . trim($new_label),
                         '',
                         trim((string) $prop_line->odds->moneyLine),
                         '-99999'
