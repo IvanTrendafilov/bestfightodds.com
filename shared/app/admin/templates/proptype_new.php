@@ -29,7 +29,7 @@
                     if (body.error == true) {
                         alert(body.msg);
                     } else {
-                        window.location.href = '/cnadm/proptypes';
+                        window.location.href = '/cnadm/proptype';
                     }
                 });
         });
