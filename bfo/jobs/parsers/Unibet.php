@@ -141,6 +141,13 @@ class ParserJob extends ParserJobBase
 
     private function parseProp($betoffer, $event): void
     {
+        //Convert names from lastname, firstname to firstname lastname in event name
+        $event_name_adjusted = $event->name;
+        $parts = explode(' - ', $event->name);
+        if (count($parts) > 1) {
+            $event_name_adjusted = ParseTools::convertCommaNameToFullName($parts[0]) . ' - ' . ParseTools::convertCommaNameToFullName($parts[1]);
+        }
+
         if (count($betoffer->outcomes) == 2) {
             //Two way prop
             if (
@@ -155,8 +162,8 @@ class ParserJob extends ParserJobBase
                 $label2 = ParseTools::convertCommaNameToFullName($betoffer->outcomes[1]->label);
 
                 $parsed_prop = new ParsedProp(
-                    $event->name . ' :: ' . $betoffer->criterion->label . ' : ' . $label1,
-                    $event->name . ' :: ' . $betoffer->criterion->label . ' : ' . $label2,
+                    $event_name_adjusted . ' :: ' . $betoffer->criterion->label . ' : ' . $label1,
+                    $event_name_adjusted . ' :: ' . $betoffer->criterion->label . ' : ' . $label2,
                     $betoffer->outcomes[0]->oddsAmerican,
                     $betoffer->outcomes[1]->oddsAmerican
                 );
@@ -185,7 +192,7 @@ class ParserJob extends ParserJobBase
                     }
 
                     $parsed_prop = new ParsedProp(
-                        $event->name . ' :: ' . $betoffer->criterion->label . ' : ' . $new_label,
+                        $event_name_adjusted . ' :: ' . $betoffer->criterion->label . ' : ' . $new_label,
                         '',
                         $outcome->oddsAmerican,
                         '-99999'
