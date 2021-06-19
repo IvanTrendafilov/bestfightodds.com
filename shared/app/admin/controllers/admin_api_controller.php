@@ -314,8 +314,8 @@ class AdminAPIController
         $return_data['error'] = false;
 
         if (
-            !v::stringVal()->length(10, null)->validate($data->prop_desc)
-            || !v::stringVal()->length(10, null)->validate($data->negprop_desc)
+            !v::stringVal()->length(5, null)->validate($data->prop_desc)
+            || !v::stringVal()->length(5, null)->validate($data->negprop_desc)
         ) {
             $response->withStatus(422);
             $return_data['msg'] = 'Missing/invalid parameters';

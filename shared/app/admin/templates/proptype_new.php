@@ -17,21 +17,19 @@
                     'Content-type': 'application/json; charset=UTF-8'
                 },
                 body: JSON.stringify({
-                    bookie_id: parseInt(document.querySelector('#in_bookie_id').value),
-                    proptemplate: document.querySelector('#in_proptemplate').value,
-                    negproptemplate: document.querySelector('#in_negproptemplate').value,
-                    proptype_id: parseInt(document.querySelector('#in_proptype_id').value),
-                    fieldstype_id: parseInt(document.querySelector('#in_fieldstype_id').value),
+                    prop_desc: document.querySelector('#propdesc').value,
+                    negprop_desc: document.querySelector('#negpropdesc').value,
+                    is_event_prop: document.querySelector('#event_prop_type').checked
                 })
             };
-            fetch('/cnadm/api/proptemplates', opts).then(function(response) {
+            fetch('/cnadm/api/proptypes', opts).then(function(response) {
                     return response.json();
                 })
                 .then(function(body) {
                     if (body.error == true) {
                         alert(body.msg);
                     } else {
-                        window.location.href = '/cnadm/proptemplates';
+                        window.location.href = '/cnadm/proptypes';
                     }
                 });
         });
@@ -52,14 +50,14 @@
             </div>
             <div class="row">
             <div class="col-6">
-                <input class="form-control" id="propdesc" type="text" placeholder="" value="">
+                <input class="form-control" id="negpropdesc" type="text" placeholder="" value="">
                 </div>
             </div>
             <div class="row">
             <div class="col-2">
                 <div class="form-check form-switch">
-                    <input class="form-check-input" type="checkbox" id="event_hidden">
-                    <label class="form-check-label" for="event_hidden">Event prop type</label>
+                    <input class="form-check-input" type="checkbox" id="event_prop_type">
+                    <label class="form-check-label" for="event_prop_type">Event prop type</label>
                 </div>
             </div>
             <div class="col-2">

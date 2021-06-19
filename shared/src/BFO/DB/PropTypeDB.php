@@ -14,12 +14,15 @@ class PropTypeDB
     public static function createNewPropType(PropType $proptype_obj) : ?int
     {
         $query = "INSERT INTO prop_types(prop_desc, negprop_desc, is_eventprop) VALUES (?,?,?)";
-        $params = [$proptype_obj->getPropDesc(), $proptype_obj->getPropNegDesc(), $proptype_obj->isEventProp()];
+        $params = [$proptype_obj->getPropDesc(), $proptype_obj->getPropNegDesc(), $proptype_obj->isEventProp() ? 1 : 0];
+        $id = null;
         try {
             $id = PDOTools::insert($query, $params);
         } catch (\PDOException $e) {
             if ($e->getCode() == 23000) {
                 throw new \Exception("Duplicate entry", 10);
+            } else {
+                throw new \Exception("SQL Error" . $e->getMessage(), 10);
             }
         }
         return $id;
