@@ -125,6 +125,13 @@ class ParserJob extends ParserJobBase
 
     private function parseMatchup($league_name, $matchup, $offer): void
     {
+        //Skip live events
+        $date_obj = new DateTime((string) $matchup->startDate);
+        if ($date_obj <= new DateTime()) {
+            $this->logger->info("Skipping live odds for " . $offer->outcomes[0]->participant . " vs " . $offer->outcomes[1]->participant);
+            return;
+        }
+
         $parsed_matchup = new ParsedMatchup(
             $offer->outcomes[0]->participant,
             $offer->outcomes[1]->participant,
@@ -132,7 +139,6 @@ class ParserJob extends ParserJobBase
             $offer->outcomes[1]->oddsAmerican
         );
 
-        $date_obj = new DateTime((string) $matchup->startDate);
         $parsed_matchup->setMetaData('gametime', $date_obj->getTimestamp());
         if (str_starts_with($league_name, 'FUTURES ')) {
             $parsed_matchup->setMetaData('event_name', substr($league_name, 8)); //Remove FUTURE part
@@ -147,6 +153,13 @@ class ParserJob extends ParserJobBase
 
     private function parseProp($matchup, $offer): void
     {
+        //Skip live events
+        $date_obj = new DateTime((string) $matchup->startDate);
+        if ($date_obj <= new DateTime()) {
+            $this->logger->info('Skipping live odds for prop ' . $matchup->homeTeamName . ' vs. ' . $matchup->awayTeamName . ' :: ' . $offer->label);
+            return;
+        }
+
         if (count($offer->outcomes) == 2) {
             //Two way prop
             $parsed_prop = new ParsedProp(

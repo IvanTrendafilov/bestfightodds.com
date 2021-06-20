@@ -144,6 +144,13 @@ class ParserJob extends ParserJobBase
             && !empty($market->selections[1]->price)
             && !empty($event->tsstart)
         ) {
+            //Skip live events
+            $date_obj = new DateTime((string) $event->tsstart, new DateTimeZone('America/New_York'));
+            if ($date_obj <= new DateTime()) {
+                $this->logger->info("Skipping live odds for " . $market->selections[0]->name . " vs " . $market->selections[1]->name);
+                return;
+            }
+
             $parsed_matchup = new ParsedMatchup(
                 $market->selections[0]->name,
                 $market->selections[1]->name,
@@ -151,7 +158,6 @@ class ParserJob extends ParserJobBase
                 OddsTools::convertDecimalToMoneyline($market->selections[1]->price)
             );
 
-            $date_obj = new DateTime((string) $event->tsstart, new DateTimeZone('America/New_York'));
             $parsed_matchup->setMetaData('gametime', $date_obj->getTimestamp());
             $parsed_matchup->setMetaData('event_name', $competition_name);
 
