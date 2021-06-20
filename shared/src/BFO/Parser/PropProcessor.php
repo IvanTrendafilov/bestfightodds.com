@@ -55,13 +55,13 @@ class PropProcessor
                 //Unmatched to either template, matchup or event. Log this both in log file and in database
                 switch ($match['fail_reason']) {
                     case 'no_template_found':
-                        $this->logger->warning('--No template found for ' . $prop->toString());
+                        $this->logger->info('--No template found for ' . $prop->toString());
                         break;
                     case 'no_matchup_found':
-                        $this->logger->warning('---No matchup found for prop values ' . $prop->toString() . ' (Template ' . $match['template']->getID() . ' expecting ft: ' . $match['template']->getFieldsTypeAsExample() . ')');
+                        $this->logger->info('---No matchup found for prop values ' . $prop->toString() . ' (Template ' . $match['template']->getID() . ' expecting ft: ' . $match['template']->getFieldsTypeAsExample() . ')');
                         break;
                     case 'no_event_found':
-                        $this->logger->warning('---No event found for prop values ' . $prop->toString() . ' (Template ' . $match['template']->getID() . ' expecting ft: ' . $match['template']->getFieldsTypeAsExample() . ')');
+                        $this->logger->info('---No event found for prop values ' . $prop->toString() . ' (Template ' . $match['template']->getID() . ' expecting ft: ' . $match['template']->getFieldsTypeAsExample() . ')');
                         break;
                     default:
                 }
