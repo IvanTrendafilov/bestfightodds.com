@@ -136,6 +136,11 @@ class ParserJob extends ParserJobBase
             !empty($market->selections[0]->price?->a) &&
             !empty($market->selections[1]->price?->a)
         ) {
+            $date_obj = new DateTime((string) $matchup->startTime);
+            if ($date_obj < new DateTime()) {
+                return;
+            }
+
             $parsed_matchup = new ParsedMatchup(
                 $market->selections[0]->name,
                 $market->selections[1]->name,
@@ -143,7 +148,6 @@ class ParserJob extends ParserJobBase
                 $market->selections[1]->price->a
             );
 
-            $date_obj = new DateTime((string) $matchup->startTime);
             $parsed_matchup->setMetaData('gametime', $date_obj->getTimestamp());
             $parsed_matchup->setMetaData('event_name', $matchup->competitionName);
             $parsed_matchup->setCorrelationID($matchup->id);
