@@ -54,6 +54,22 @@ http {
 }
 ```
 
+### Database setup
+
+Install MySQL community edition. Download [here](https://downloads.mysql.com/archives/community/)
+
+Configure MySQL as needed (default settings should be sufficient)
+
+Quickest way to get started is to take a copy of the production database and use this as a base for development. Local server backups are available in zip files in the `/var/www/bfo/<site>/db/scripts/backup` directory. Access the server using SCP and find a database copy in the mentioned directory. E.g. `/var/www/bfo/bfo/db/scripts/backup` for BestFightOdds.com.
+
+Decompress the database backup and import it into your local running MySQL (replace credentials below with the ones you created during installation)
+
+```
+mysql -uroot -proot bets < bfo_backup.sql
+```
+
+Note that you may have to create the `bets` (for BestFightOdds.com) or `bets_boxing` (for ProBoxingOdds.com) before importing. If you are planning to develop changes for both sites it is wise to make sure you have a database copy of each
+
 ### Create a new site configuration file
 
 Located in the `/bfo/<site>/config` directory is a config template `inc.config-template.php` that you can be use as a base configuration file. Make a copy of this file in the same directory and rename the new config file `inc.config.php`
