@@ -1,234 +1,6 @@
 {
     "betOffers": [
         {
-            "eventId": 1007660295,
-            "criterion": {
-                "englishLabel": "Draw No Bet - Bout Odds",
-                "id": 1005190459,
-                "label": "Draw No Bet - Bout Odds",
-                "order": [
-                    0
-                ]
-            },
-            "tags": [
-                "OFFERED_PREMATCH"
-            ],
-            "outcomes": [
-                {
-                    "oddsFractional": "1/50",
-                    "englishLabel": "1",
-                    "label": "1",
-                    "betOfferId": 2266557164,
-                    "oddsAmerican": "-5000",
-                    "type": "OT_ONE",
-                    "changedDate": "2021-06-02T16:50:05Z",
-                    "odds": 1020,
-                    "cashOutStatus": "ENABLED",
-                    "id": 2925964250,
-                    "status": "OPEN"
-                },
-                {
-                    "oddsFractional": "10/1",
-                    "englishLabel": "2",
-                    "label": "2",
-                    "betOfferId": 2266557164,
-                    "oddsAmerican": "1000",
-                    "type": "OT_TWO",
-                    "changedDate": "2021-06-02T16:50:05Z",
-                    "odds": 11000,
-                    "cashOutStatus": "ENABLED",
-                    "id": 2925964252,
-                    "status": "OPEN"
-                }
-            ],
-            "cashOutStatus": "ENABLED",
-            "closed": "2021-06-20T03:00:00Z",
-            "betOfferType": {
-                "englishName": "Match",
-                "name": "Match",
-                "id": 2
-            },
-            "id": 2266557164
-        },
-        {
-            "eventId": 1007660295,
-            "criterion": {
-                "englishLabel": "Bout Odds",
-                "id": 1001159900,
-                "label": "Bout Odds",
-                "order": [
-                    0
-                ]
-            },
-            "tags": [
-                "OFFERED_PREMATCH",
-                "MAIN"
-            ],
-            "outcomes": [
-                {
-                    "oddsFractional": "1/40",
-                    "englishLabel": "1",
-                    "label": "1",
-                    "betOfferId": 2266557199,
-                    "oddsAmerican": "-3335",
-                    "type": "OT_ONE",
-                    "changedDate": "2021-06-02T16:50:20Z",
-                    "odds": 1030,
-                    "cashOutStatus": "ENABLED",
-                    "id": 2925964362,
-                    "status": "OPEN"
-                },
-                {
-                    "oddsFractional": "25/1",
-                    "englishLabel": "X",
-                    "label": "X",
-                    "betOfferId": 2266557199,
-                    "oddsAmerican": "2500",
-                    "type": "OT_CROSS",
-                    "changedDate": "2021-06-02T16:50:20Z",
-                    "odds": 26000,
-                    "cashOutStatus": "ENABLED",
-                    "id": 2925964363,
-                    "status": "OPEN"
-                },
-                {
-                    "oddsFractional": "11/1",
-                    "englishLabel": "2",
-                    "label": "2",
-                    "betOfferId": 2266557199,
-                    "oddsAmerican": "1100",
-                    "type": "OT_TWO",
-                    "changedDate": "2021-06-02T16:50:20Z",
-                    "odds": 12000,
-                    "cashOutStatus": "ENABLED",
-                    "id": 2925964364,
-                    "status": "OPEN"
-                }
-            ],
-            "cashOutStatus": "ENABLED",
-            "closed": "2021-06-20T03:00:00Z",
-            "betOfferType": {
-                "englishName": "Match",
-                "name": "Match",
-                "id": 2
-            },
-            "id": 2266557199
-        },
-        {
-            "eventId": 1007660202,
-            "criterion": {
-                "englishLabel": "Draw No Bet - Bout Odds",
-                "id": 1005190459,
-                "label": "Draw No Bet - Bout Odds",
-                "order": [
-                    0
-                ]
-            },
-            "tags": [
-                "OFFERED_PREMATCH"
-            ],
-            "outcomes": [
-                {
-                    "oddsFractional": "1/50",
-                    "englishLabel": "1",
-                    "label": "1",
-                    "betOfferId": 2266557264,
-                    "oddsAmerican": "-5000",
-                    "type": "OT_ONE",
-                    "changedDate": "2021-06-02T16:51:22Z",
-                    "odds": 1020,
-                    "cashOutStatus": "ENABLED",
-                    "id": 2925964557,
-                    "status": "OPEN"
-                },
-                {
-                    "oddsFractional": "10/1",
-                    "englishLabel": "2",
-                    "label": "2",
-                    "betOfferId": 2266557264,
-                    "oddsAmerican": "1000",
-                    "type": "OT_TWO",
-                    "changedDate": "2021-06-02T16:51:22Z",
-                    "odds": 11000,
-                    "cashOutStatus": "ENABLED",
-                    "id": 2925964559,
-                    "status": "OPEN"
-                }
-            ],
-            "cashOutStatus": "ENABLED",
-            "closed": "2021-06-20T03:00:00Z",
-            "betOfferType": {
-                "englishName": "Match",
-                "name": "Match",
-                "id": 2
-            },
-            "id": 2266557264
-        },
-        {
-            "eventId": 1007660202,
-            "criterion": {
-                "englishLabel": "Bout Odds",
-                "id": 1001159900,
-                "label": "Bout Odds",
-                "order": [
-                    0
-                ]
-            },
-            "tags": [
-                "OFFERED_PREMATCH",
-                "MAIN"
-            ],
-            "outcomes": [
-                {
-                    "oddsFractional": "1/40",
-                    "englishLabel": "1",
-                    "label": "1",
-                    "betOfferId": 2266557275,
-                    "oddsAmerican": "-3335",
-                    "type": "OT_ONE",
-                    "changedDate": "2021-06-02T16:51:33Z",
-                    "odds": 1030,
-                    "cashOutStatus": "ENABLED",
-                    "id": 2925964586,
-                    "status": "OPEN"
-                },
-                {
-                    "oddsFractional": "25/1",
-                    "englishLabel": "X",
-                    "label": "X",
-                    "betOfferId": 2266557275,
-                    "oddsAmerican": "2500",
-                    "type": "OT_CROSS",
-                    "changedDate": "2021-06-02T16:51:33Z",
-                    "odds": 26000,
-                    "cashOutStatus": "ENABLED",
-                    "id": 2925964587,
-                    "status": "OPEN"
-                },
-                {
-                    "oddsFractional": "11/1",
-                    "englishLabel": "2",
-                    "label": "2",
-                    "betOfferId": 2266557275,
-                    "oddsAmerican": "1100",
-                    "type": "OT_TWO",
-                    "changedDate": "2021-06-02T16:51:33Z",
-                    "odds": 12000,
-                    "cashOutStatus": "ENABLED",
-                    "id": 2925964588,
-                    "status": "OPEN"
-                }
-            ],
-            "cashOutStatus": "ENABLED",
-            "closed": "2021-06-20T03:00:00Z",
-            "betOfferType": {
-                "englishName": "Match",
-                "name": "Match",
-                "id": 2
-            },
-            "id": 2266557275
-        },
-        {
             "eventId": 1007660303,
             "criterion": {
                 "englishLabel": "Draw No Bet - Bout Odds",
@@ -357,27 +129,27 @@
             ],
             "outcomes": [
                 {
-                    "oddsFractional": "1/4",
+                    "oddsFractional": "1/5",
                     "englishLabel": "1",
                     "label": "1",
                     "betOfferId": 2266560854,
-                    "oddsAmerican": "-385",
+                    "oddsAmerican": "-500",
                     "type": "OT_ONE",
-                    "changedDate": "2021-06-02T16:59:20Z",
-                    "odds": 1260,
+                    "changedDate": "2021-06-17T16:15:08Z",
+                    "odds": 1200,
                     "cashOutStatus": "ENABLED",
                     "id": 2925966611,
                     "status": "OPEN"
                 },
                 {
-                    "oddsFractional": "13/5",
+                    "oddsFractional": "16/5",
                     "englishLabel": "2",
                     "label": "2",
                     "betOfferId": 2266560854,
-                    "oddsAmerican": "265",
+                    "oddsAmerican": "320",
                     "type": "OT_TWO",
-                    "changedDate": "2021-06-02T16:59:20Z",
-                    "odds": 3650,
+                    "changedDate": "2021-06-17T16:15:08Z",
+                    "odds": 4200,
                     "cashOutStatus": "ENABLED",
                     "id": 2925966613,
                     "status": "OPEN"
@@ -408,14 +180,14 @@
             ],
             "outcomes": [
                 {
-                    "oddsFractional": "1/4",
+                    "oddsFractional": "11/50",
                     "englishLabel": "1",
                     "label": "1",
                     "betOfferId": 2266560874,
-                    "oddsAmerican": "-400",
+                    "oddsAmerican": "-455",
                     "type": "OT_ONE",
-                    "changedDate": "2021-06-15T22:01:10Z",
-                    "odds": 1250,
+                    "changedDate": "2021-06-17T16:15:12Z",
+                    "odds": 1220,
                     "cashOutStatus": "ENABLED",
                     "id": 2925966670,
                     "status": "OPEN"
@@ -427,21 +199,21 @@
                     "betOfferId": 2266560874,
                     "oddsAmerican": "2200",
                     "type": "OT_CROSS",
-                    "changedDate": "2021-06-15T22:01:10Z",
+                    "changedDate": "2021-06-17T16:15:12Z",
                     "odds": 23000,
                     "cashOutStatus": "ENABLED",
                     "id": 2925966671,
                     "status": "OPEN"
                 },
                 {
-                    "oddsFractional": "3/1",
+                    "oddsFractional": "33/10",
                     "englishLabel": "2",
                     "label": "2",
                     "betOfferId": 2266560874,
-                    "oddsAmerican": "300",
+                    "oddsAmerican": "333",
                     "type": "OT_TWO",
-                    "changedDate": "2021-06-15T22:01:10Z",
-                    "odds": 4000,
+                    "changedDate": "2021-06-17T16:15:12Z",
+                    "odds": 4330,
                     "cashOutStatus": "ENABLED",
                     "id": 2925966672,
                     "status": "OPEN"
@@ -799,11 +571,11 @@
             "id": 2266561294
         },
         {
-            "eventId": 1007660204,
+            "eventId": 1007730905,
             "criterion": {
-                "englishLabel": "Draw No Bet - Bout Odds",
-                "id": 1005190459,
-                "label": "Draw No Bet - Bout Odds",
+                "englishLabel": "Winning group of rounds",
+                "id": 1001300511,
+                "label": "Winning group of rounds",
                 "order": [
                     0
                 ]
@@ -813,549 +585,1031 @@
             ],
             "outcomes": [
                 {
-                    "oddsFractional": "7/4",
-                    "englishLabel": "1",
-                    "label": "1",
-                    "betOfferId": 2268335552,
-                    "oddsAmerican": "178",
-                    "type": "OT_ONE",
-                    "changedDate": "2021-06-15T22:50:12Z",
-                    "odds": 2780,
+                    "oddsFractional": "9/1",
+                    "englishLabel": "Fury, Tyson - Rounds 1-3",
+                    "label": "Fury, Tyson - Rounds 1-3",
+                    "betOfferId": 2268355144,
+                    "oddsAmerican": "900",
+                    "type": "OT_UNTYPED",
+                    "startNr": 1,
+                    "participant": "Fury, Tyson - Rounds 1-3",
+                    "prevOdds": [
+                        1010
+                    ],
+                    "participantId": 1001300352,
+                    "changedDate": "2021-06-19T15:01:00Z",
+                    "odds": 10000,
                     "cashOutStatus": "ENABLED",
-                    "id": 2931831390,
-                    "status": "OPEN"
-                },
-                {
-                    "oddsFractional": "2/5",
-                    "englishLabel": "2",
-                    "label": "2",
-                    "betOfferId": 2268335552,
-                    "oddsAmerican": "-250",
-                    "type": "OT_TWO",
-                    "changedDate": "2021-06-15T22:50:12Z",
-                    "odds": 1400,
-                    "cashOutStatus": "ENABLED",
-                    "id": 2931831392,
-                    "status": "OPEN"
-                }
-            ],
-            "cashOutStatus": "ENABLED",
-            "closed": "2021-06-20T02:00:00Z",
-            "betOfferType": {
-                "englishName": "Match",
-                "name": "Match",
-                "id": 2
-            },
-            "id": 2268335552
-        },
-        {
-            "eventId": 1007660203,
-            "criterion": {
-                "englishLabel": "Draw No Bet - Bout Odds",
-                "id": 1005190459,
-                "label": "Draw No Bet - Bout Odds",
-                "order": [
-                    0
-                ]
-            },
-            "tags": [
-                "OFFERED_PREMATCH"
-            ],
-            "outcomes": [
-                {
-                    "oddsFractional": "1/50",
-                    "englishLabel": "1",
-                    "label": "1",
-                    "betOfferId": 2268335553,
-                    "oddsAmerican": "-5000",
-                    "type": "OT_ONE",
-                    "changedDate": "2021-06-15T16:16:05Z",
-                    "odds": 1020,
-                    "cashOutStatus": "ENABLED",
-                    "id": 2931831393,
-                    "status": "OPEN"
-                },
-                {
-                    "oddsFractional": "10/1",
-                    "englishLabel": "2",
-                    "label": "2",
-                    "betOfferId": 2268335553,
-                    "oddsAmerican": "1000",
-                    "type": "OT_TWO",
-                    "changedDate": "2021-06-15T16:16:05Z",
-                    "odds": 11000,
-                    "cashOutStatus": "ENABLED",
-                    "id": 2931831395,
-                    "status": "OPEN"
-                }
-            ],
-            "cashOutStatus": "ENABLED",
-            "closed": "2021-06-20T02:30:00Z",
-            "betOfferType": {
-                "englishName": "Match",
-                "name": "Match",
-                "id": 2
-            },
-            "id": 2268335553
-        },
-        {
-            "eventId": 1007660204,
-            "criterion": {
-                "englishLabel": "Bout Odds",
-                "id": 1001159900,
-                "label": "Bout Odds",
-                "order": [
-                    0
-                ]
-            },
-            "tags": [
-                "OFFERED_PREMATCH",
-                "MAIN"
-            ],
-            "outcomes": [
-                {
-                    "oddsFractional": "17/10",
-                    "englishLabel": "1",
-                    "label": "1",
-                    "betOfferId": 2268335620,
-                    "oddsAmerican": "170",
-                    "type": "OT_ONE",
-                    "changedDate": "2021-06-15T22:58:43Z",
-                    "odds": 2700,
-                    "cashOutStatus": "ENABLED",
-                    "id": 2931831618,
-                    "status": "OPEN"
-                },
-                {
-                    "oddsFractional": "18/1",
-                    "englishLabel": "X",
-                    "label": "X",
-                    "betOfferId": 2268335620,
-                    "oddsAmerican": "1800",
-                    "type": "OT_CROSS",
-                    "changedDate": "2021-06-15T22:58:43Z",
-                    "odds": 19000,
-                    "cashOutStatus": "ENABLED",
-                    "id": 2931831619,
-                    "status": "OPEN"
-                },
-                {
-                    "oddsFractional": "4/9",
-                    "englishLabel": "2",
-                    "label": "2",
-                    "betOfferId": 2268335620,
-                    "oddsAmerican": "-220",
-                    "type": "OT_TWO",
-                    "changedDate": "2021-06-15T22:58:43Z",
-                    "odds": 1460,
-                    "cashOutStatus": "ENABLED",
-                    "id": 2931831620,
-                    "status": "OPEN"
-                }
-            ],
-            "cashOutStatus": "ENABLED",
-            "closed": "2021-06-20T02:00:00Z",
-            "betOfferType": {
-                "englishName": "Match",
-                "name": "Match",
-                "id": 2
-            },
-            "id": 2268335620
-        },
-        {
-            "eventId": 1007660203,
-            "criterion": {
-                "englishLabel": "Bout Odds",
-                "id": 1001159900,
-                "label": "Bout Odds",
-                "order": [
-                    0
-                ]
-            },
-            "tags": [
-                "OFFERED_PREMATCH",
-                "MAIN"
-            ],
-            "outcomes": [
-                {
-                    "oddsFractional": "1/40",
-                    "englishLabel": "1",
-                    "label": "1",
-                    "betOfferId": 2268335621,
-                    "oddsAmerican": "-3335",
-                    "type": "OT_ONE",
-                    "changedDate": "2021-06-15T16:16:41Z",
-                    "odds": 1030,
-                    "cashOutStatus": "ENABLED",
-                    "id": 2931831621,
-                    "status": "OPEN"
-                },
-                {
-                    "oddsFractional": "14/1",
-                    "englishLabel": "X",
-                    "label": "X",
-                    "betOfferId": 2268335621,
-                    "oddsAmerican": "1400",
-                    "type": "OT_CROSS",
-                    "changedDate": "2021-06-15T16:16:41Z",
-                    "odds": 15000,
-                    "cashOutStatus": "ENABLED",
-                    "id": 2931831622,
-                    "status": "OPEN"
-                },
-                {
-                    "oddsFractional": "12/1",
-                    "englishLabel": "2",
-                    "label": "2",
-                    "betOfferId": 2268335621,
-                    "oddsAmerican": "1200",
-                    "type": "OT_TWO",
-                    "changedDate": "2021-06-15T16:16:41Z",
-                    "odds": 13000,
-                    "cashOutStatus": "ENABLED",
-                    "id": 2931831623,
-                    "status": "OPEN"
-                }
-            ],
-            "cashOutStatus": "ENABLED",
-            "closed": "2021-06-20T02:30:00Z",
-            "betOfferType": {
-                "englishName": "Match",
-                "name": "Match",
-                "id": 2
-            },
-            "id": 2268335621
-        },
-        {
-            "eventId": 1007660296,
-            "criterion": {
-                "englishLabel": "Draw No Bet - Bout Odds",
-                "id": 1005190459,
-                "label": "Draw No Bet - Bout Odds",
-                "order": [
-                    0
-                ]
-            },
-            "tags": [
-                "OFFERED_PREMATCH"
-            ],
-            "outcomes": [
-                {
-                    "oddsFractional": "4/11",
-                    "englishLabel": "1",
-                    "label": "1",
-                    "betOfferId": 2268335985,
-                    "oddsAmerican": "-265",
-                    "type": "OT_ONE",
-                    "changedDate": "2021-06-15T16:20:41Z",
-                    "odds": 1380,
-                    "cashOutStatus": "ENABLED",
-                    "id": 2931832759,
-                    "status": "OPEN"
-                },
-                {
-                    "oddsFractional": "15/8",
-                    "englishLabel": "2",
-                    "label": "2",
-                    "betOfferId": 2268335985,
-                    "oddsAmerican": "188",
-                    "type": "OT_TWO",
-                    "changedDate": "2021-06-15T16:20:41Z",
-                    "odds": 2880,
-                    "cashOutStatus": "ENABLED",
-                    "id": 2931832761,
-                    "status": "OPEN"
-                }
-            ],
-            "cashOutStatus": "ENABLED",
-            "closed": "2021-06-20T01:30:00Z",
-            "betOfferType": {
-                "englishName": "Match",
-                "name": "Match",
-                "id": 2
-            },
-            "id": 2268335985
-        },
-        {
-            "eventId": 1007660294,
-            "criterion": {
-                "englishLabel": "Draw No Bet - Bout Odds",
-                "id": 1005190459,
-                "label": "Draw No Bet - Bout Odds",
-                "order": [
-                    0
-                ]
-            },
-            "tags": [
-                "OFFERED_PREMATCH"
-            ],
-            "outcomes": [
-                {
-                    "oddsFractional": "1/7",
-                    "englishLabel": "1",
-                    "label": "1",
-                    "betOfferId": 2268335986,
-                    "oddsAmerican": "-670",
-                    "type": "OT_ONE",
-                    "changedDate": "2021-06-15T16:20:41Z",
-                    "odds": 1150,
-                    "cashOutStatus": "ENABLED",
-                    "id": 2931832762,
-                    "status": "OPEN"
-                },
-                {
-                    "oddsFractional": "4/1",
-                    "englishLabel": "2",
-                    "label": "2",
-                    "betOfferId": 2268335986,
-                    "oddsAmerican": "400",
-                    "type": "OT_TWO",
-                    "changedDate": "2021-06-15T16:20:41Z",
-                    "odds": 5000,
-                    "cashOutStatus": "ENABLED",
-                    "id": 2931832764,
-                    "status": "OPEN"
-                }
-            ],
-            "cashOutStatus": "ENABLED",
-            "closed": "2021-06-20T02:15:00Z",
-            "betOfferType": {
-                "englishName": "Match",
-                "name": "Match",
-                "id": 2
-            },
-            "id": 2268335986
-        },
-        {
-            "eventId": 1007660296,
-            "criterion": {
-                "englishLabel": "Bout Odds",
-                "id": 1001159900,
-                "label": "Bout Odds",
-                "order": [
-                    0
-                ]
-            },
-            "tags": [
-                "OFFERED_PREMATCH",
-                "MAIN"
-            ],
-            "outcomes": [
-                {
-                    "oddsFractional": "2/5",
-                    "englishLabel": "1",
-                    "label": "1",
-                    "betOfferId": 2268336080,
-                    "oddsAmerican": "-250",
-                    "type": "OT_ONE",
-                    "changedDate": "2021-06-15T16:22:06Z",
-                    "odds": 1400,
-                    "cashOutStatus": "ENABLED",
-                    "id": 2931833063,
-                    "status": "OPEN"
-                },
-                {
-                    "oddsFractional": "20/1",
-                    "englishLabel": "X",
-                    "label": "X",
-                    "betOfferId": 2268336080,
-                    "oddsAmerican": "2000",
-                    "type": "OT_CROSS",
-                    "changedDate": "2021-06-15T16:22:06Z",
-                    "odds": 21000,
-                    "cashOutStatus": "ENABLED",
-                    "id": 2931833064,
-                    "status": "OPEN"
-                },
-                {
-                    "oddsFractional": "2/1",
-                    "englishLabel": "2",
-                    "label": "2",
-                    "betOfferId": 2268336080,
-                    "oddsAmerican": "200",
-                    "type": "OT_TWO",
-                    "changedDate": "2021-06-15T16:22:06Z",
-                    "odds": 3000,
-                    "cashOutStatus": "ENABLED",
-                    "id": 2931833065,
-                    "status": "OPEN"
-                }
-            ],
-            "cashOutStatus": "ENABLED",
-            "closed": "2021-06-20T01:30:00Z",
-            "betOfferType": {
-                "englishName": "Match",
-                "name": "Match",
-                "id": 2
-            },
-            "id": 2268336080
-        },
-        {
-            "eventId": 1007660294,
-            "criterion": {
-                "englishLabel": "Bout Odds",
-                "id": 1001159900,
-                "label": "Bout Odds",
-                "order": [
-                    0
-                ]
-            },
-            "tags": [
-                "OFFERED_PREMATCH",
-                "MAIN"
-            ],
-            "outcomes": [
-                {
-                    "oddsFractional": "1/6",
-                    "englishLabel": "1",
-                    "label": "1",
-                    "betOfferId": 2268336081,
-                    "oddsAmerican": "-590",
-                    "type": "OT_ONE",
-                    "changedDate": "2021-06-15T16:22:06Z",
-                    "odds": 1170,
-                    "cashOutStatus": "ENABLED",
-                    "id": 2931833066,
-                    "status": "OPEN"
-                },
-                {
-                    "oddsFractional": "20/1",
-                    "englishLabel": "X",
-                    "label": "X",
-                    "betOfferId": 2268336081,
-                    "oddsAmerican": "2000",
-                    "type": "OT_CROSS",
-                    "changedDate": "2021-06-15T16:22:06Z",
-                    "odds": 21000,
-                    "cashOutStatus": "ENABLED",
-                    "id": 2931833067,
-                    "status": "OPEN"
-                },
-                {
-                    "oddsFractional": "17/4",
-                    "englishLabel": "2",
-                    "label": "2",
-                    "betOfferId": 2268336081,
-                    "oddsAmerican": "425",
-                    "type": "OT_TWO",
-                    "changedDate": "2021-06-15T16:22:06Z",
-                    "odds": 5250,
-                    "cashOutStatus": "ENABLED",
-                    "id": 2931833068,
-                    "status": "OPEN"
-                }
-            ],
-            "cashOutStatus": "ENABLED",
-            "closed": "2021-06-20T02:15:00Z",
-            "betOfferType": {
-                "englishName": "Match",
-                "name": "Match",
-                "id": 2
-            },
-            "id": 2268336081
-        },
-        {
-            "eventId": 1007730653,
-            "criterion": {
-                "englishLabel": "Draw No Bet - Bout Odds",
-                "id": 1005190459,
-                "label": "Draw No Bet - Bout Odds",
-                "order": [
-                    0
-                ]
-            },
-            "tags": [
-                "OFFERED_PREMATCH"
-            ],
-            "outcomes": [
-                {
-                    "oddsFractional": "2/13",
-                    "englishLabel": "1",
-                    "label": "1",
-                    "betOfferId": 2268338125,
-                    "oddsAmerican": "-625",
-                    "type": "OT_ONE",
-                    "changedDate": "2021-06-15T16:46:23Z",
-                    "odds": 1160,
-                    "cashOutStatus": "ENABLED",
-                    "id": 2931842430,
-                    "status": "OPEN"
-                },
-                {
-                    "oddsFractional": "15/4",
-                    "englishLabel": "2",
-                    "label": "2",
-                    "betOfferId": 2268338125,
-                    "oddsAmerican": "375",
-                    "type": "OT_TWO",
-                    "changedDate": "2021-06-15T16:46:23Z",
-                    "odds": 4750,
-                    "cashOutStatus": "ENABLED",
-                    "id": 2931842432,
-                    "status": "OPEN"
-                }
-            ],
-            "cashOutStatus": "ENABLED",
-            "closed": "2021-06-19T19:30:00Z",
-            "betOfferType": {
-                "englishName": "Match",
-                "name": "Match",
-                "id": 2
-            },
-            "id": 2268338125
-        },
-        {
-            "eventId": 1007730643,
-            "criterion": {
-                "englishLabel": "Draw No Bet - Bout Odds",
-                "id": 1005190459,
-                "label": "Draw No Bet - Bout Odds",
-                "order": [
-                    0
-                ]
-            },
-            "tags": [
-                "OFFERED_PREMATCH"
-            ],
-            "outcomes": [
-                {
-                    "oddsFractional": "1/20",
-                    "englishLabel": "1",
-                    "label": "1",
-                    "betOfferId": 2268338126,
-                    "oddsAmerican": "-2000",
-                    "type": "OT_ONE",
-                    "changedDate": "2021-06-15T16:46:23Z",
-                    "odds": 1050,
-                    "cashOutStatus": "ENABLED",
-                    "id": 2931842433,
+                    "id": 2931885241,
                     "status": "OPEN"
                 },
                 {
                     "oddsFractional": "15/2",
-                    "englishLabel": "2",
-                    "label": "2",
-                    "betOfferId": 2268338126,
+                    "englishLabel": "Fury, Tyson - Rounds 10-12",
+                    "label": "Fury, Tyson - Rounds 10-12",
+                    "betOfferId": 2268355144,
                     "oddsAmerican": "750",
-                    "type": "OT_TWO",
-                    "changedDate": "2021-06-15T16:46:23Z",
+                    "type": "OT_UNTYPED",
+                    "startNr": 4,
+                    "participant": "Fury, Tyson - Rounds 10-12",
+                    "prevOdds": [
+                        1010
+                    ],
+                    "participantId": 1001134414,
+                    "changedDate": "2021-06-19T15:01:00Z",
                     "odds": 8500,
                     "cashOutStatus": "ENABLED",
-                    "id": 2931842435,
+                    "id": 2931885245,
+                    "status": "OPEN"
+                },
+                {
+                    "oddsFractional": "9/2",
+                    "englishLabel": "Fury, Tyson - Rounds 4-6",
+                    "label": "Fury, Tyson - Rounds 4-6",
+                    "betOfferId": 2268355144,
+                    "oddsAmerican": "450",
+                    "type": "OT_UNTYPED",
+                    "startNr": 2,
+                    "participant": "Fury, Tyson - Rounds 4-6",
+                    "prevOdds": [
+                        1010
+                    ],
+                    "participantId": 1001134412,
+                    "changedDate": "2021-06-19T15:01:00Z",
+                    "odds": 5500,
+                    "cashOutStatus": "ENABLED",
+                    "id": 2931885248,
+                    "status": "OPEN"
+                },
+                {
+                    "oddsFractional": "4/1",
+                    "englishLabel": "Fury, Tyson - Rounds 7-9",
+                    "label": "Fury, Tyson - Rounds 7-9",
+                    "betOfferId": 2268355144,
+                    "oddsAmerican": "400",
+                    "type": "OT_UNTYPED",
+                    "startNr": 3,
+                    "participant": "Fury, Tyson - Rounds 7-9",
+                    "prevOdds": [
+                        1010
+                    ],
+                    "participantId": 1001300358,
+                    "changedDate": "2021-06-19T15:01:00Z",
+                    "odds": 5000,
+                    "cashOutStatus": "ENABLED",
+                    "id": 2931885253,
+                    "status": "OPEN"
+                },
+                {
+                    "oddsFractional": "13/5",
+                    "englishLabel": "Fury, Tyson by Points (After 12 Rounds)",
+                    "label": "Fury, Tyson by Points (After 12 Rounds)",
+                    "betOfferId": 2268355144,
+                    "oddsAmerican": "260",
+                    "type": "OT_UNTYPED",
+                    "startNr": 5,
+                    "participant": "Fury, Tyson by Points (After 12 Rounds)",
+                    "prevOdds": [
+                        1010
+                    ],
+                    "participantId": 1001134410,
+                    "changedDate": "2021-06-19T15:01:00Z",
+                    "odds": 3600,
+                    "cashOutStatus": "ENABLED",
+                    "id": 2931885260,
+                    "status": "OPEN"
+                },
+                {
+                    "oddsFractional": "12/1",
+                    "englishLabel": "Wilder, Deontay  - Rounds 1-3",
+                    "label": "Wilder, Deontay  - Rounds 1-3",
+                    "betOfferId": 2268355144,
+                    "oddsAmerican": "1200",
+                    "type": "OT_UNTYPED",
+                    "startNr": 7,
+                    "participant": "Wilder, Deontay  - Rounds 1-3",
+                    "prevOdds": [
+                        1010
+                    ],
+                    "participantId": 1002457182,
+                    "changedDate": "2021-06-19T15:01:00Z",
+                    "odds": 13000,
+                    "cashOutStatus": "ENABLED",
+                    "id": 2931885278,
+                    "status": "OPEN"
+                },
+                {
+                    "oddsFractional": "25/1",
+                    "englishLabel": "Wilder, Deontay  - Rounds 10-12",
+                    "label": "Wilder, Deontay  - Rounds 10-12",
+                    "betOfferId": 2268355144,
+                    "oddsAmerican": "2500",
+                    "type": "OT_UNTYPED",
+                    "startNr": 10,
+                    "participant": "Wilder, Deontay  - Rounds 10-12",
+                    "prevOdds": [
+                        1010
+                    ],
+                    "participantId": 1002457185,
+                    "changedDate": "2021-06-19T15:01:00Z",
+                    "odds": 26000,
+                    "cashOutStatus": "ENABLED",
+                    "id": 2931885281,
+                    "status": "OPEN"
+                },
+                {
+                    "oddsFractional": "9/1",
+                    "englishLabel": "Wilder, Deontay  - Rounds 4-6",
+                    "label": "Wilder, Deontay  - Rounds 4-6",
+                    "betOfferId": 2268355144,
+                    "oddsAmerican": "900",
+                    "type": "OT_UNTYPED",
+                    "startNr": 8,
+                    "participant": "Wilder, Deontay  - Rounds 4-6",
+                    "prevOdds": [
+                        1010
+                    ],
+                    "participantId": 1002457183,
+                    "changedDate": "2021-06-19T15:01:00Z",
+                    "odds": 10000,
+                    "cashOutStatus": "ENABLED",
+                    "id": 2931885282,
+                    "status": "OPEN"
+                },
+                {
+                    "oddsFractional": "12/1",
+                    "englishLabel": "Wilder, Deontay  - Rounds 7-9",
+                    "label": "Wilder, Deontay  - Rounds 7-9",
+                    "betOfferId": 2268355144,
+                    "oddsAmerican": "1200",
+                    "type": "OT_UNTYPED",
+                    "startNr": 9,
+                    "participant": "Wilder, Deontay  - Rounds 7-9",
+                    "prevOdds": [
+                        1010
+                    ],
+                    "participantId": 1002457184,
+                    "changedDate": "2021-06-19T15:01:00Z",
+                    "odds": 13000,
+                    "cashOutStatus": "ENABLED",
+                    "id": 2931885285,
+                    "status": "OPEN"
+                },
+                {
+                    "oddsFractional": "16/1",
+                    "englishLabel": "Wilder, Deontay by Points (after 12 rounds)",
+                    "label": "Wilder, Deontay by Points (after 12 rounds)",
+                    "betOfferId": 2268355144,
+                    "oddsAmerican": "1600",
+                    "type": "OT_UNTYPED",
+                    "startNr": 11,
+                    "participant": "Wilder, Deontay by Points (after 12 rounds)",
+                    "prevOdds": [
+                        1010
+                    ],
+                    "participantId": 1002457181,
+                    "changedDate": "2021-06-19T15:01:00Z",
+                    "odds": 17000,
+                    "cashOutStatus": "ENABLED",
+                    "id": 2931885294,
+                    "status": "OPEN"
+                },
+                {
+                    "oddsFractional": "20/1",
+                    "englishLabel": "Draw",
+                    "label": "Draw",
+                    "betOfferId": 2268355144,
+                    "oddsAmerican": "2000",
+                    "type": "OT_UNTYPED",
+                    "startNr": 6,
+                    "prevOdds": [
+                        1010
+                    ],
+                    "changedDate": "2021-06-19T15:01:00Z",
+                    "odds": 21000,
+                    "cashOutStatus": "ENABLED",
+                    "id": 2931885295,
                     "status": "OPEN"
                 }
             ],
-            "cashOutStatus": "ENABLED",
-            "closed": "2021-06-19T20:30:00Z",
+            "cashOutStatus": "DISABLED",
+            "closed": "2021-07-25T02:00:00Z",
             "betOfferType": {
-                "englishName": "Match",
-                "name": "Match",
-                "id": 2
+                "englishName": "Winner",
+                "name": "Winner",
+                "id": 4
             },
-            "id": 2268338126
+            "id": 2268355144
         },
         {
-            "eventId": 1007730642,
+            "eventId": 1007730905,
+            "criterion": {
+                "englishLabel": "Winning group of rounds #2",
+                "id": 1001300512,
+                "label": "Winning group of rounds #2",
+                "order": [
+                    0
+                ]
+            },
+            "tags": [
+                "OFFERED_PREMATCH"
+            ],
+            "outcomes": [
+                {
+                    "oddsFractional": "13/5",
+                    "englishLabel": "Fury, Tyson - Rounds 1-6",
+                    "label": "Fury, Tyson - Rounds 1-6",
+                    "betOfferId": 2268355324,
+                    "oddsAmerican": "260",
+                    "type": "OT_UNTYPED",
+                    "startNr": 1,
+                    "participant": "Fury, Tyson - Rounds 1-6",
+                    "prevOdds": [
+                        1010
+                    ],
+                    "participantId": 1001557868,
+                    "changedDate": "2021-06-19T15:01:55Z",
+                    "odds": 3600,
+                    "cashOutStatus": "ENABLED",
+                    "id": 2931885820,
+                    "status": "OPEN"
+                },
+                {
+                    "oddsFractional": "9/4",
+                    "englishLabel": "Fury, Tyson - Rounds 7-12",
+                    "label": "Fury, Tyson - Rounds 7-12",
+                    "betOfferId": 2268355324,
+                    "oddsAmerican": "225",
+                    "type": "OT_UNTYPED",
+                    "startNr": 2,
+                    "participant": "Fury, Tyson - Rounds 7-12",
+                    "prevOdds": [
+                        1010
+                    ],
+                    "participantId": 1001557869,
+                    "changedDate": "2021-06-19T15:01:55Z",
+                    "odds": 3250,
+                    "cashOutStatus": "ENABLED",
+                    "id": 2931885828,
+                    "status": "OPEN"
+                },
+                {
+                    "oddsFractional": "13/5",
+                    "englishLabel": "Fury, Tyson by Points (After 12 Rounds)",
+                    "label": "Fury, Tyson by Points (After 12 Rounds)",
+                    "betOfferId": 2268355324,
+                    "oddsAmerican": "260",
+                    "type": "OT_UNTYPED",
+                    "startNr": 3,
+                    "participant": "Fury, Tyson by Points (After 12 Rounds)",
+                    "prevOdds": [
+                        1010
+                    ],
+                    "participantId": 1001134410,
+                    "changedDate": "2021-06-19T15:01:55Z",
+                    "odds": 3600,
+                    "cashOutStatus": "ENABLED",
+                    "id": 2931885837,
+                    "status": "OPEN"
+                },
+                {
+                    "oddsFractional": "5/1",
+                    "englishLabel": "Wilder, Deontay  - Rounds 1-6",
+                    "label": "Wilder, Deontay  - Rounds 1-6",
+                    "betOfferId": 2268355324,
+                    "oddsAmerican": "500",
+                    "type": "OT_UNTYPED",
+                    "startNr": 5,
+                    "participant": "Wilder, Deontay  - Rounds 1-6",
+                    "prevOdds": [
+                        1010
+                    ],
+                    "participantId": 1002457257,
+                    "changedDate": "2021-06-19T15:01:55Z",
+                    "odds": 6000,
+                    "cashOutStatus": "ENABLED",
+                    "id": 2931885857,
+                    "status": "OPEN"
+                },
+                {
+                    "oddsFractional": "8/1",
+                    "englishLabel": "Wilder, Deontay  - Rounds 7-12",
+                    "label": "Wilder, Deontay  - Rounds 7-12",
+                    "betOfferId": 2268355324,
+                    "oddsAmerican": "800",
+                    "type": "OT_UNTYPED",
+                    "startNr": 6,
+                    "participant": "Wilder, Deontay  - Rounds 7-12",
+                    "prevOdds": [
+                        1010
+                    ],
+                    "participantId": 1002457258,
+                    "changedDate": "2021-06-19T15:01:55Z",
+                    "odds": 9000,
+                    "cashOutStatus": "ENABLED",
+                    "id": 2931885861,
+                    "status": "OPEN"
+                },
+                {
+                    "oddsFractional": "16/1",
+                    "englishLabel": "Wilder, Deontay by Points (after 12 rounds)",
+                    "label": "Wilder, Deontay by Points (after 12 rounds)",
+                    "betOfferId": 2268355324,
+                    "oddsAmerican": "1600",
+                    "type": "OT_UNTYPED",
+                    "startNr": 7,
+                    "participant": "Wilder, Deontay by Points (after 12 rounds)",
+                    "prevOdds": [
+                        1010
+                    ],
+                    "participantId": 1002457181,
+                    "changedDate": "2021-06-19T15:01:55Z",
+                    "odds": 17000,
+                    "cashOutStatus": "ENABLED",
+                    "id": 2931885871,
+                    "status": "OPEN"
+                },
+                {
+                    "oddsFractional": "20/1",
+                    "englishLabel": "Draw",
+                    "label": "Draw",
+                    "betOfferId": 2268355324,
+                    "oddsAmerican": "2000",
+                    "type": "OT_UNTYPED",
+                    "startNr": 4,
+                    "prevOdds": [
+                        1010
+                    ],
+                    "changedDate": "2021-06-19T15:01:55Z",
+                    "odds": 21000,
+                    "cashOutStatus": "ENABLED",
+                    "id": 2931885872,
+                    "status": "OPEN"
+                }
+            ],
+            "cashOutStatus": "DISABLED",
+            "closed": "2021-07-25T02:00:00Z",
+            "betOfferType": {
+                "englishName": "Winner",
+                "name": "Winner",
+                "id": 4
+            },
+            "id": 2268355324
+        },
+        {
+            "eventId": 1007730905,
+            "criterion": {
+                "englishLabel": "Round betting",
+                "id": 1001300510,
+                "label": "Round betting",
+                "order": [
+                    0
+                ]
+            },
+            "tags": [
+                "OFFERED_PREMATCH"
+            ],
+            "outcomes": [
+                {
+                    "oddsFractional": "33/1",
+                    "englishLabel": "Fury, Tyson - Round 1",
+                    "label": "Fury, Tyson - Round 1",
+                    "betOfferId": 2268355841,
+                    "oddsAmerican": "3300",
+                    "type": "OT_UNTYPED",
+                    "startNr": 1,
+                    "participant": "Fury, Tyson - Round 1",
+                    "prevOdds": [
+                        1010
+                    ],
+                    "participantId": 1001134411,
+                    "changedDate": "2021-06-19T15:00:04Z",
+                    "odds": 34000,
+                    "cashOutStatus": "ENABLED",
+                    "id": 2931887309,
+                    "status": "OPEN"
+                },
+                {
+                    "oddsFractional": "16/1",
+                    "englishLabel": "Fury, Tyson - Round 10",
+                    "label": "Fury, Tyson - Round 10",
+                    "betOfferId": 2268355841,
+                    "oddsAmerican": "1600",
+                    "type": "OT_UNTYPED",
+                    "startNr": 10,
+                    "participant": "Fury, Tyson - Round 10",
+                    "prevOdds": [
+                        1010
+                    ],
+                    "participantId": 1001300361,
+                    "changedDate": "2021-06-19T15:00:04Z",
+                    "odds": 17000,
+                    "cashOutStatus": "ENABLED",
+                    "id": 2931887310,
+                    "status": "OPEN"
+                },
+                {
+                    "oddsFractional": "20/1",
+                    "englishLabel": "Fury, Tyson - Round 11",
+                    "label": "Fury, Tyson - Round 11",
+                    "betOfferId": 2268355841,
+                    "oddsAmerican": "2000",
+                    "type": "OT_UNTYPED",
+                    "startNr": 11,
+                    "participant": "Fury, Tyson - Round 11",
+                    "prevOdds": [
+                        1010
+                    ],
+                    "participantId": 1001300362,
+                    "changedDate": "2021-06-19T15:00:04Z",
+                    "odds": 21000,
+                    "cashOutStatus": "ENABLED",
+                    "id": 2931887311,
+                    "status": "OPEN"
+                },
+                {
+                    "oddsFractional": "25/1",
+                    "englishLabel": "Fury, Tyson - Round 12",
+                    "label": "Fury, Tyson - Round 12",
+                    "betOfferId": 2268355841,
+                    "oddsAmerican": "2500",
+                    "type": "OT_UNTYPED",
+                    "startNr": 12,
+                    "participant": "Fury, Tyson - Round 12",
+                    "prevOdds": [
+                        1010
+                    ],
+                    "participantId": 1001300363,
+                    "changedDate": "2021-06-19T15:00:04Z",
+                    "odds": 26000,
+                    "cashOutStatus": "ENABLED",
+                    "id": 2931887312,
+                    "status": "OPEN"
+                },
+                {
+                    "oddsFractional": "25/1",
+                    "englishLabel": "Fury, Tyson - Round 2",
+                    "label": "Fury, Tyson - Round 2",
+                    "betOfferId": 2268355841,
+                    "oddsAmerican": "2500",
+                    "type": "OT_UNTYPED",
+                    "startNr": 2,
+                    "participant": "Fury, Tyson - Round 2",
+                    "prevOdds": [
+                        1010
+                    ],
+                    "participantId": 1001300353,
+                    "changedDate": "2021-06-19T15:00:04Z",
+                    "odds": 26000,
+                    "cashOutStatus": "ENABLED",
+                    "id": 2931887313,
+                    "status": "OPEN"
+                },
+                {
+                    "oddsFractional": "18/1",
+                    "englishLabel": "Fury, Tyson - Round 3",
+                    "label": "Fury, Tyson - Round 3",
+                    "betOfferId": 2268355841,
+                    "oddsAmerican": "1800",
+                    "type": "OT_UNTYPED",
+                    "startNr": 3,
+                    "participant": "Fury, Tyson - Round 3",
+                    "prevOdds": [
+                        1010
+                    ],
+                    "participantId": 1001300354,
+                    "changedDate": "2021-06-19T15:00:04Z",
+                    "odds": 19000,
+                    "cashOutStatus": "ENABLED",
+                    "id": 2931887314,
+                    "status": "OPEN"
+                },
+                {
+                    "oddsFractional": "16/1",
+                    "englishLabel": "Fury, Tyson - Round 4",
+                    "label": "Fury, Tyson - Round 4",
+                    "betOfferId": 2268355841,
+                    "oddsAmerican": "1600",
+                    "type": "OT_UNTYPED",
+                    "startNr": 4,
+                    "participant": "Fury, Tyson - Round 4",
+                    "prevOdds": [
+                        1010
+                    ],
+                    "participantId": 1001300355,
+                    "changedDate": "2021-06-19T15:00:04Z",
+                    "odds": 17000,
+                    "cashOutStatus": "ENABLED",
+                    "id": 2931887315,
+                    "status": "OPEN"
+                },
+                {
+                    "oddsFractional": "14/1",
+                    "englishLabel": "Fury, Tyson - Round 5",
+                    "label": "Fury, Tyson - Round 5",
+                    "betOfferId": 2268355841,
+                    "oddsAmerican": "1400",
+                    "type": "OT_UNTYPED",
+                    "startNr": 5,
+                    "participant": "Fury, Tyson - Round 5",
+                    "prevOdds": [
+                        1010
+                    ],
+                    "participantId": 1001300356,
+                    "changedDate": "2021-06-19T15:00:04Z",
+                    "odds": 15000,
+                    "cashOutStatus": "ENABLED",
+                    "id": 2931887316,
+                    "status": "OPEN"
+                },
+                {
+                    "oddsFractional": "12/1",
+                    "englishLabel": "Fury, Tyson - Round 6",
+                    "label": "Fury, Tyson - Round 6",
+                    "betOfferId": 2268355841,
+                    "oddsAmerican": "1200",
+                    "type": "OT_UNTYPED",
+                    "startNr": 6,
+                    "participant": "Fury, Tyson - Round 6",
+                    "prevOdds": [
+                        1010
+                    ],
+                    "participantId": 1001300357,
+                    "changedDate": "2021-06-19T15:00:04Z",
+                    "odds": 13000,
+                    "cashOutStatus": "ENABLED",
+                    "id": 2931887317,
+                    "status": "OPEN"
+                },
+                {
+                    "oddsFractional": "11/1",
+                    "englishLabel": "Fury, Tyson - Round 7",
+                    "label": "Fury, Tyson - Round 7",
+                    "betOfferId": 2268355841,
+                    "oddsAmerican": "1100",
+                    "type": "OT_UNTYPED",
+                    "startNr": 7,
+                    "participant": "Fury, Tyson - Round 7",
+                    "prevOdds": [
+                        1010
+                    ],
+                    "participantId": 1001134413,
+                    "changedDate": "2021-06-19T15:00:04Z",
+                    "odds": 12000,
+                    "cashOutStatus": "ENABLED",
+                    "id": 2931887318,
+                    "status": "OPEN"
+                },
+                {
+                    "oddsFractional": "12/1",
+                    "englishLabel": "Fury, Tyson - Round 8",
+                    "label": "Fury, Tyson - Round 8",
+                    "betOfferId": 2268355841,
+                    "oddsAmerican": "1200",
+                    "type": "OT_UNTYPED",
+                    "startNr": 8,
+                    "participant": "Fury, Tyson - Round 8",
+                    "prevOdds": [
+                        1010
+                    ],
+                    "participantId": 1001300359,
+                    "changedDate": "2021-06-19T15:00:04Z",
+                    "odds": 13000,
+                    "cashOutStatus": "ENABLED",
+                    "id": 2931887319,
+                    "status": "OPEN"
+                },
+                {
+                    "oddsFractional": "14/1",
+                    "englishLabel": "Fury, Tyson - Round 9",
+                    "label": "Fury, Tyson - Round 9",
+                    "betOfferId": 2268355841,
+                    "oddsAmerican": "1400",
+                    "type": "OT_UNTYPED",
+                    "startNr": 9,
+                    "participant": "Fury, Tyson - Round 9",
+                    "prevOdds": [
+                        1010
+                    ],
+                    "participantId": 1001300360,
+                    "changedDate": "2021-06-19T15:00:04Z",
+                    "odds": 15000,
+                    "cashOutStatus": "ENABLED",
+                    "id": 2931887320,
+                    "status": "OPEN"
+                },
+                {
+                    "oddsFractional": "13/5",
+                    "englishLabel": "Fury, Tyson by Points (After 12 Rounds)",
+                    "label": "Fury, Tyson by Points (After 12 Rounds)",
+                    "betOfferId": 2268355841,
+                    "oddsAmerican": "260",
+                    "type": "OT_UNTYPED",
+                    "startNr": 13,
+                    "participant": "Fury, Tyson by Points (After 12 Rounds)",
+                    "prevOdds": [
+                        1010
+                    ],
+                    "participantId": 1001134410,
+                    "changedDate": "2021-06-19T15:00:04Z",
+                    "odds": 3600,
+                    "cashOutStatus": "ENABLED",
+                    "id": 2931887341,
+                    "status": "OPEN"
+                },
+                {
+                    "oddsFractional": "40/1",
+                    "englishLabel": "Wilder, Deontay  - Round 1",
+                    "label": "Wilder, Deontay  - Round 1",
+                    "betOfferId": 2268355841,
+                    "oddsAmerican": "4000",
+                    "type": "OT_UNTYPED",
+                    "startNr": 15,
+                    "participant": "Wilder, Deontay  - Round 1",
+                    "prevOdds": [
+                        1010
+                    ],
+                    "participantId": 1001782750,
+                    "changedDate": "2021-06-19T15:00:04Z",
+                    "odds": 41000,
+                    "cashOutStatus": "ENABLED",
+                    "id": 2931887347,
+                    "status": "OPEN"
+                },
+                {
+                    "oddsFractional": "50/1",
+                    "englishLabel": "Wilder, Deontay  - Round 10",
+                    "label": "Wilder, Deontay  - Round 10",
+                    "betOfferId": 2268355841,
+                    "oddsAmerican": "5000",
+                    "type": "OT_UNTYPED",
+                    "startNr": 24,
+                    "participant": "Wilder, Deontay  - Round 10",
+                    "prevOdds": [
+                        1010
+                    ],
+                    "participantId": 1001782759,
+                    "changedDate": "2021-06-19T15:00:04Z",
+                    "odds": 51000,
+                    "cashOutStatus": "ENABLED",
+                    "id": 2931887348,
+                    "status": "OPEN"
+                },
+                {
+                    "oddsFractional": "66/1",
+                    "englishLabel": "Wilder, Deontay  - Round 11",
+                    "label": "Wilder, Deontay  - Round 11",
+                    "betOfferId": 2268355841,
+                    "oddsAmerican": "6600",
+                    "type": "OT_UNTYPED",
+                    "startNr": 25,
+                    "participant": "Wilder, Deontay  - Round 11",
+                    "prevOdds": [
+                        1010
+                    ],
+                    "participantId": 1002457179,
+                    "changedDate": "2021-06-19T15:00:04Z",
+                    "odds": 67000,
+                    "cashOutStatus": "ENABLED",
+                    "id": 2931887349,
+                    "status": "OPEN"
+                },
+                {
+                    "oddsFractional": "80/1",
+                    "englishLabel": "Wilder, Deontay  - Round 12",
+                    "label": "Wilder, Deontay  - Round 12",
+                    "betOfferId": 2268355841,
+                    "oddsAmerican": "8000",
+                    "type": "OT_UNTYPED",
+                    "startNr": 26,
+                    "participant": "Wilder, Deontay  - Round 12",
+                    "prevOdds": [
+                        1010
+                    ],
+                    "participantId": 1002457180,
+                    "changedDate": "2021-06-19T15:00:04Z",
+                    "odds": 81000,
+                    "cashOutStatus": "ENABLED",
+                    "id": 2931887350,
+                    "status": "OPEN"
+                },
+                {
+                    "oddsFractional": "33/1",
+                    "englishLabel": "Wilder, Deontay  - Round 2",
+                    "label": "Wilder, Deontay  - Round 2",
+                    "betOfferId": 2268355841,
+                    "oddsAmerican": "3300",
+                    "type": "OT_UNTYPED",
+                    "startNr": 16,
+                    "participant": "Wilder, Deontay  - Round 2",
+                    "prevOdds": [
+                        1010
+                    ],
+                    "participantId": 1001782751,
+                    "changedDate": "2021-06-19T15:00:04Z",
+                    "odds": 34000,
+                    "cashOutStatus": "ENABLED",
+                    "id": 2931887351,
+                    "status": "OPEN"
+                },
+                {
+                    "oddsFractional": "28/1",
+                    "englishLabel": "Wilder, Deontay  - Round 3",
+                    "label": "Wilder, Deontay  - Round 3",
+                    "betOfferId": 2268355841,
+                    "oddsAmerican": "2800",
+                    "type": "OT_UNTYPED",
+                    "startNr": 17,
+                    "participant": "Wilder, Deontay  - Round 3",
+                    "prevOdds": [
+                        1010
+                    ],
+                    "participantId": 1001782752,
+                    "changedDate": "2021-06-19T15:00:04Z",
+                    "odds": 29000,
+                    "cashOutStatus": "ENABLED",
+                    "id": 2931887352,
+                    "status": "OPEN"
+                },
+                {
+                    "oddsFractional": "25/1",
+                    "englishLabel": "Wilder, Deontay  - Round 4",
+                    "label": "Wilder, Deontay  - Round 4",
+                    "betOfferId": 2268355841,
+                    "oddsAmerican": "2500",
+                    "type": "OT_UNTYPED",
+                    "startNr": 18,
+                    "participant": "Wilder, Deontay  - Round 4",
+                    "prevOdds": [
+                        1010
+                    ],
+                    "participantId": 1001782753,
+                    "changedDate": "2021-06-19T15:00:04Z",
+                    "odds": 26000,
+                    "cashOutStatus": "ENABLED",
+                    "id": 2931887353,
+                    "status": "OPEN"
+                },
+                {
+                    "oddsFractional": "25/1",
+                    "englishLabel": "Wilder, Deontay  - Round 5",
+                    "label": "Wilder, Deontay  - Round 5",
+                    "betOfferId": 2268355841,
+                    "oddsAmerican": "2500",
+                    "type": "OT_UNTYPED",
+                    "startNr": 19,
+                    "participant": "Wilder, Deontay  - Round 5",
+                    "prevOdds": [
+                        1010
+                    ],
+                    "participantId": 1001782754,
+                    "changedDate": "2021-06-19T15:00:04Z",
+                    "odds": 26000,
+                    "cashOutStatus": "ENABLED",
+                    "id": 2931887354,
+                    "status": "OPEN"
+                },
+                {
+                    "oddsFractional": "25/1",
+                    "englishLabel": "Wilder, Deontay  - Round 6",
+                    "label": "Wilder, Deontay  - Round 6",
+                    "betOfferId": 2268355841,
+                    "oddsAmerican": "2500",
+                    "type": "OT_UNTYPED",
+                    "startNr": 20,
+                    "participant": "Wilder, Deontay  - Round 6",
+                    "prevOdds": [
+                        1010
+                    ],
+                    "participantId": 1001782755,
+                    "changedDate": "2021-06-19T15:00:04Z",
+                    "odds": 26000,
+                    "cashOutStatus": "ENABLED",
+                    "id": 2931887355,
+                    "status": "OPEN"
+                },
+                {
+                    "oddsFractional": "28/1",
+                    "englishLabel": "Wilder, Deontay  - Round 7",
+                    "label": "Wilder, Deontay  - Round 7",
+                    "betOfferId": 2268355841,
+                    "oddsAmerican": "2800",
+                    "type": "OT_UNTYPED",
+                    "startNr": 21,
+                    "participant": "Wilder, Deontay  - Round 7",
+                    "prevOdds": [
+                        1010
+                    ],
+                    "participantId": 1001782756,
+                    "changedDate": "2021-06-19T15:00:04Z",
+                    "odds": 29000,
+                    "cashOutStatus": "ENABLED",
+                    "id": 2931887356,
+                    "status": "OPEN"
+                },
+                {
+                    "oddsFractional": "33/1",
+                    "englishLabel": "Wilder, Deontay  - Round 8",
+                    "label": "Wilder, Deontay  - Round 8",
+                    "betOfferId": 2268355841,
+                    "oddsAmerican": "3300",
+                    "type": "OT_UNTYPED",
+                    "startNr": 22,
+                    "participant": "Wilder, Deontay  - Round 8",
+                    "prevOdds": [
+                        1010
+                    ],
+                    "participantId": 1001782757,
+                    "changedDate": "2021-06-19T15:00:04Z",
+                    "odds": 34000,
+                    "cashOutStatus": "ENABLED",
+                    "id": 2931887357,
+                    "status": "OPEN"
+                },
+                {
+                    "oddsFractional": "40/1",
+                    "englishLabel": "Wilder, Deontay  - Round 9",
+                    "label": "Wilder, Deontay  - Round 9",
+                    "betOfferId": 2268355841,
+                    "oddsAmerican": "4000",
+                    "type": "OT_UNTYPED",
+                    "startNr": 23,
+                    "participant": "Wilder, Deontay  - Round 9",
+                    "prevOdds": [
+                        1010
+                    ],
+                    "participantId": 1001782758,
+                    "changedDate": "2021-06-19T15:00:04Z",
+                    "odds": 41000,
+                    "cashOutStatus": "ENABLED",
+                    "id": 2931887358,
+                    "status": "OPEN"
+                },
+                {
+                    "oddsFractional": "16/1",
+                    "englishLabel": "Wilder, Deontay by Points (after 12 rounds)",
+                    "label": "Wilder, Deontay by Points (after 12 rounds)",
+                    "betOfferId": 2268355841,
+                    "oddsAmerican": "1600",
+                    "type": "OT_UNTYPED",
+                    "startNr": 27,
+                    "participant": "Wilder, Deontay by Points (after 12 rounds)",
+                    "prevOdds": [
+                        1010
+                    ],
+                    "participantId": 1002457181,
+                    "changedDate": "2021-06-19T15:00:04Z",
+                    "odds": 17000,
+                    "cashOutStatus": "ENABLED",
+                    "id": 2931887375,
+                    "status": "OPEN"
+                },
+                {
+                    "oddsFractional": "20/1",
+                    "englishLabel": "Draw",
+                    "label": "Draw",
+                    "betOfferId": 2268355841,
+                    "oddsAmerican": "2000",
+                    "type": "OT_UNTYPED",
+                    "startNr": 14,
+                    "prevOdds": [
+                        1010
+                    ],
+                    "changedDate": "2021-06-19T15:00:04Z",
+                    "odds": 21000,
+                    "cashOutStatus": "ENABLED",
+                    "id": 2931887376,
+                    "status": "OPEN"
+                }
+            ],
+            "cashOutStatus": "DISABLED",
+            "closed": "2021-07-25T02:00:00Z",
+            "betOfferType": {
+                "englishName": "Winner",
+                "name": "Winner",
+                "id": 4
+            },
+            "id": 2268355841
+        },
+        {
+            "eventId": 1007730905,
+            "criterion": {
+                "englishLabel": "Winning method",
+                "id": 1001159772,
+                "label": "Winning method",
+                "order": [
+                    0
+                ]
+            },
+            "tags": [
+                "OFFERED_PREMATCH"
+            ],
+            "outcomes": [
+                {
+                    "oddsFractional": "10/11",
+                    "englishLabel": "Fury, Tyson by KO, TKO or DQ",
+                    "label": "Fury, Tyson by KO, TKO or DQ",
+                    "betOfferId": 2268356000,
+                    "oddsAmerican": "-110",
+                    "type": "OT_UNTYPED",
+                    "startNr": 1,
+                    "participant": "Fury, Tyson by KO, TKO or DQ",
+                    "prevOdds": [
+                        1010
+                    ],
+                    "participantId": 1000794881,
+                    "changedDate": "2021-06-19T14:58:49Z",
+                    "odds": 1910,
+                    "cashOutStatus": "ENABLED",
+                    "id": 2931887924,
+                    "status": "OPEN"
+                },
+                {
+                    "oddsFractional": "13/5",
+                    "englishLabel": "Fury, Tyson by Points (After 12 Rounds)",
+                    "label": "Fury, Tyson by Points (After 12 Rounds)",
+                    "betOfferId": 2268356000,
+                    "oddsAmerican": "260",
+                    "type": "OT_UNTYPED",
+                    "startNr": 2,
+                    "participant": "Fury, Tyson by Points (After 12 Rounds)",
+                    "prevOdds": [
+                        1010
+                    ],
+                    "participantId": 1001134410,
+                    "changedDate": "2021-06-19T14:58:49Z",
+                    "odds": 3600,
+                    "cashOutStatus": "ENABLED",
+                    "id": 2931887926,
+                    "status": "OPEN"
+                },
+                {
+                    "oddsFractional": "3/1",
+                    "englishLabel": "Wilder, Deontay by KO, TKO or DQ",
+                    "label": "Wilder, Deontay by KO, TKO or DQ",
+                    "betOfferId": 2268356000,
+                    "oddsAmerican": "300",
+                    "type": "OT_UNTYPED",
+                    "startNr": 4,
+                    "participant": "Wilder, Deontay by KO, TKO or DQ",
+                    "prevOdds": [
+                        1010
+                    ],
+                    "participantId": 1001782806,
+                    "changedDate": "2021-06-19T14:58:49Z",
+                    "odds": 4000,
+                    "cashOutStatus": "ENABLED",
+                    "id": 2931887977,
+                    "status": "OPEN"
+                },
+                {
+                    "oddsFractional": "16/1",
+                    "englishLabel": "Wilder, Deontay by Points (after 12 rounds)",
+                    "label": "Wilder, Deontay by Points (after 12 rounds)",
+                    "betOfferId": 2268356000,
+                    "oddsAmerican": "1600",
+                    "type": "OT_UNTYPED",
+                    "startNr": 5,
+                    "participant": "Wilder, Deontay by Points (after 12 rounds)",
+                    "prevOdds": [
+                        1010
+                    ],
+                    "participantId": 1002457181,
+                    "changedDate": "2021-06-19T14:58:49Z",
+                    "odds": 17000,
+                    "cashOutStatus": "ENABLED",
+                    "id": 2931887978,
+                    "status": "OPEN"
+                },
+                {
+                    "oddsFractional": "20/1",
+                    "englishLabel": "Draw",
+                    "label": "Draw",
+                    "betOfferId": 2268356000,
+                    "oddsAmerican": "2000",
+                    "type": "OT_UNTYPED",
+                    "startNr": 3,
+                    "prevOdds": [
+                        1010
+                    ],
+                    "changedDate": "2021-06-19T14:58:49Z",
+                    "odds": 21000,
+                    "cashOutStatus": "ENABLED",
+                    "id": 2931887979,
+                    "status": "OPEN"
+                }
+            ],
+            "cashOutStatus": "DISABLED",
+            "closed": "2021-07-25T02:00:00Z",
+            "betOfferType": {
+                "englishName": "Winner",
+                "name": "Winner",
+                "id": 4
+            },
+            "id": 2268356000
+        },
+        {
+            "eventId": 1007730905,
             "criterion": {
                 "englishLabel": "Draw No Bet - Bout Odds",
                 "id": 1005190459,
@@ -1369,43 +1623,43 @@
             ],
             "outcomes": [
                 {
-                    "oddsFractional": "1/40",
+                    "oddsFractional": "3/10",
                     "englishLabel": "1",
                     "label": "1",
-                    "betOfferId": 2268338127,
-                    "oddsAmerican": "-3335",
+                    "betOfferId": 2268365999,
+                    "oddsAmerican": "-335",
                     "type": "OT_ONE",
-                    "changedDate": "2021-06-15T16:46:23Z",
-                    "odds": 1030,
+                    "changedDate": "2021-06-15T20:32:33Z",
+                    "odds": 1310,
                     "cashOutStatus": "ENABLED",
-                    "id": 2931842436,
+                    "id": 2931912354,
                     "status": "OPEN"
                 },
                 {
-                    "oddsFractional": "9/1",
+                    "oddsFractional": "9/4",
                     "englishLabel": "2",
                     "label": "2",
-                    "betOfferId": 2268338127,
-                    "oddsAmerican": "900",
+                    "betOfferId": 2268365999,
+                    "oddsAmerican": "225",
                     "type": "OT_TWO",
-                    "changedDate": "2021-06-15T16:46:23Z",
-                    "odds": 10000,
+                    "changedDate": "2021-06-15T20:32:33Z",
+                    "odds": 3250,
                     "cashOutStatus": "ENABLED",
-                    "id": 2931842438,
+                    "id": 2931912356,
                     "status": "OPEN"
                 }
             ],
             "cashOutStatus": "ENABLED",
-            "closed": "2021-06-19T21:00:00Z",
+            "closed": "2021-07-25T02:00:00Z",
             "betOfferType": {
                 "englishName": "Match",
                 "name": "Match",
                 "id": 2
             },
-            "id": 2268338127
+            "id": 2268365999
         },
         {
-            "eventId": 1007730653,
+            "eventId": 1007730905,
             "criterion": {
                 "englishLabel": "Bout Odds",
                 "id": 1001159900,
@@ -1420,468 +1674,164 @@
             ],
             "outcomes": [
                 {
-                    "oddsFractional": "1/6",
+                    "oddsFractional": "33/100",
                     "englishLabel": "1",
                     "label": "1",
-                    "betOfferId": 2268338184,
-                    "oddsAmerican": "-560",
+                    "betOfferId": 2268366009,
+                    "oddsAmerican": "-305",
                     "type": "OT_ONE",
-                    "changedDate": "2021-06-15T16:47:29Z",
-                    "odds": 1180,
+                    "changedDate": "2021-06-15T20:32:47Z",
+                    "odds": 1330,
                     "cashOutStatus": "ENABLED",
-                    "id": 2931842603,
+                    "id": 2931912378,
                     "status": "OPEN"
                 },
                 {
                     "oddsFractional": "20/1",
                     "englishLabel": "X",
                     "label": "X",
-                    "betOfferId": 2268338184,
+                    "betOfferId": 2268366009,
                     "oddsAmerican": "2000",
                     "type": "OT_CROSS",
-                    "changedDate": "2021-06-15T16:47:29Z",
+                    "changedDate": "2021-06-15T20:32:47Z",
                     "odds": 21000,
                     "cashOutStatus": "ENABLED",
-                    "id": 2931842604,
+                    "id": 2931912379,
                     "status": "OPEN"
                 },
                 {
-                    "oddsFractional": "4/1",
+                    "oddsFractional": "12/5",
                     "englishLabel": "2",
                     "label": "2",
-                    "betOfferId": 2268338184,
-                    "oddsAmerican": "400",
+                    "betOfferId": 2268366009,
+                    "oddsAmerican": "240",
                     "type": "OT_TWO",
-                    "changedDate": "2021-06-15T16:47:29Z",
-                    "odds": 5000,
+                    "changedDate": "2021-06-15T20:32:47Z",
+                    "odds": 3400,
                     "cashOutStatus": "ENABLED",
-                    "id": 2931842605,
+                    "id": 2931912380,
                     "status": "OPEN"
                 }
             ],
             "cashOutStatus": "ENABLED",
-            "closed": "2021-06-19T19:30:00Z",
+            "closed": "2021-07-25T02:00:00Z",
             "betOfferType": {
                 "englishName": "Match",
                 "name": "Match",
                 "id": 2
             },
-            "id": 2268338184
+            "id": 2268366009
         },
         {
-            "eventId": 1007730643,
+            "eventId": 1007730905,
             "criterion": {
-                "englishLabel": "Bout Odds",
-                "id": 1001159900,
-                "label": "Bout Odds",
+                "englishLabel": "To go the distance",
+                "id": 1001159788,
+                "label": "To go the distance",
+                "order": [
+                    0
+                ]
+            },
+            "tags": [
+                "OFFERED_PREMATCH"
+            ],
+            "outcomes": [
+                {
+                    "oddsFractional": "43/20",
+                    "englishLabel": "Yes",
+                    "label": "Yes",
+                    "betOfferId": 2268877073,
+                    "oddsAmerican": "215",
+                    "type": "OT_YES",
+                    "changedDate": "2021-06-19T15:02:52Z",
+                    "odds": 3150,
+                    "cashOutStatus": "ENABLED",
+                    "id": 2933620216,
+                    "status": "OPEN"
+                },
+                {
+                    "oddsFractional": "33/100",
+                    "englishLabel": "No",
+                    "label": "No",
+                    "betOfferId": 2268877073,
+                    "oddsAmerican": "-305",
+                    "type": "OT_NO",
+                    "changedDate": "2021-06-19T15:02:52Z",
+                    "odds": 1330,
+                    "cashOutStatus": "ENABLED",
+                    "id": 2933620217,
+                    "status": "OPEN"
+                }
+            ],
+            "cashOutStatus": "DISABLED",
+            "closed": "2021-07-25T02:00:00Z",
+            "betOfferType": {
+                "englishName": "Yes/No",
+                "name": "Yes/No",
+                "id": 18
+            },
+            "id": 2268877073
+        },
+        {
+            "eventId": 1007730905,
+            "criterion": {
+                "englishLabel": "Total Rounds",
+                "id": 1001159526,
+                "label": "Total Rounds",
                 "order": [
                     0
                 ]
             },
             "tags": [
                 "OFFERED_PREMATCH",
-                "MAIN"
+                "MAIN_LINE"
             ],
             "outcomes": [
                 {
-                    "oddsFractional": "1/18",
-                    "englishLabel": "1",
-                    "label": "1",
-                    "betOfferId": 2268338185,
-                    "oddsAmerican": "-1667",
-                    "type": "OT_ONE",
-                    "changedDate": "2021-06-15T16:47:29Z",
-                    "odds": 1060,
+                    "oddsFractional": "4/5",
+                    "englishLabel": "Over",
+                    "line": 7500,
+                    "label": "Over",
+                    "betOfferId": 2268877134,
+                    "oddsAmerican": "-125",
+                    "type": "OT_OVER",
+                    "changedDate": "2021-06-19T15:03:46Z",
+                    "odds": 1800,
                     "cashOutStatus": "ENABLED",
-                    "id": 2931842606,
+                    "id": 2933620394,
                     "status": "OPEN"
                 },
                 {
-                    "oddsFractional": "25/1",
-                    "englishLabel": "X",
-                    "label": "X",
-                    "betOfferId": 2268338185,
-                    "oddsAmerican": "2500",
-                    "type": "OT_CROSS",
-                    "changedDate": "2021-06-15T16:47:29Z",
-                    "odds": 26000,
+                    "oddsFractional": "19/20",
+                    "englishLabel": "Under",
+                    "line": 7500,
+                    "label": "Under",
+                    "betOfferId": 2268877134,
+                    "oddsAmerican": "-106",
+                    "type": "OT_UNDER",
+                    "changedDate": "2021-06-19T15:03:46Z",
+                    "odds": 1950,
                     "cashOutStatus": "ENABLED",
-                    "id": 2931842607,
-                    "status": "OPEN"
-                },
-                {
-                    "oddsFractional": "8/1",
-                    "englishLabel": "2",
-                    "label": "2",
-                    "betOfferId": 2268338185,
-                    "oddsAmerican": "800",
-                    "type": "OT_TWO",
-                    "changedDate": "2021-06-15T16:47:29Z",
-                    "odds": 9000,
-                    "cashOutStatus": "ENABLED",
-                    "id": 2931842608,
+                    "id": 2933620395,
                     "status": "OPEN"
                 }
             ],
-            "cashOutStatus": "ENABLED",
-            "closed": "2021-06-19T20:30:00Z",
+            "cashOutStatus": "DISABLED",
+            "closed": "2021-07-25T02:00:00Z",
             "betOfferType": {
-                "englishName": "Match",
-                "name": "Match",
-                "id": 2
+                "englishName": "Over/Under",
+                "name": "Over/Under",
+                "id": 6
             },
-            "id": 2268338185
-        },
-        {
-            "eventId": 1007730642,
-            "criterion": {
-                "englishLabel": "Bout Odds",
-                "id": 1001159900,
-                "label": "Bout Odds",
-                "order": [
-                    0
-                ]
-            },
-            "tags": [
-                "OFFERED_PREMATCH",
-                "MAIN"
-            ],
-            "outcomes": [
-                {
-                    "oddsFractional": "1/25",
-                    "englishLabel": "1",
-                    "label": "1",
-                    "betOfferId": 2268338186,
-                    "oddsAmerican": "-2500",
-                    "type": "OT_ONE",
-                    "changedDate": "2021-06-15T16:47:29Z",
-                    "odds": 1040,
-                    "cashOutStatus": "ENABLED",
-                    "id": 2931842609,
-                    "status": "OPEN"
-                },
-                {
-                    "oddsFractional": "25/1",
-                    "englishLabel": "X",
-                    "label": "X",
-                    "betOfferId": 2268338186,
-                    "oddsAmerican": "2500",
-                    "type": "OT_CROSS",
-                    "changedDate": "2021-06-15T16:47:29Z",
-                    "odds": 26000,
-                    "cashOutStatus": "ENABLED",
-                    "id": 2931842610,
-                    "status": "OPEN"
-                },
-                {
-                    "oddsFractional": "10/1",
-                    "englishLabel": "2",
-                    "label": "2",
-                    "betOfferId": 2268338186,
-                    "oddsAmerican": "1000",
-                    "type": "OT_TWO",
-                    "changedDate": "2021-06-15T16:47:29Z",
-                    "odds": 11000,
-                    "cashOutStatus": "ENABLED",
-                    "id": 2931842611,
-                    "status": "OPEN"
-                }
-            ],
-            "cashOutStatus": "ENABLED",
-            "closed": "2021-06-19T21:00:00Z",
-            "betOfferType": {
-                "englishName": "Match",
-                "name": "Match",
-                "id": 2
-            },
-            "id": 2268338186
+            "id": 2268877134
         }
     ],
     "range": {
-        "total": 28,
-        "size": 28,
+        "total": 18,
+        "size": 18,
         "start": 0
     },
     "events": [
-        {
-            "englishName": "Cobbs, Blair - Solomon, Brad",
-            "groupId": 2000050854,
-            "homeName": "Cobbs, Blair",
-            "groupSortOrder": 2877820019684212736,
-            "path": [
-                {
-                    "englishName": "Boxing",
-                    "termKey": "boxing",
-                    "name": "Boxing",
-                    "id": 1000093201
-                },
-                {
-                    "englishName": "Upcoming Fights",
-                    "termKey": "upcoming_fights",
-                    "name": "Upcoming Fights",
-                    "id": 2000050854
-                }
-            ],
-            "id": 1007730653,
-            "state": "NOT_STARTED",
-            "group": "Upcoming Fights",
-            "start": "2021-06-19T19:30:00Z",
-            "nonLiveBoCount": 2,
-            "tags": [
-                "MATCH"
-            ],
-            "awayName": "Solomon, Brad",
-            "name": "Cobbs, Blair - Solomon, Brad",
-            "sport": "BOXING"
-        },
-        {
-            "englishName": "Melikuziev, Bektemir - Rosado, Gabriel",
-            "groupId": 2000050854,
-            "homeName": "Melikuziev, Bektemir",
-            "groupSortOrder": 2877820019684212736,
-            "path": [
-                {
-                    "englishName": "Boxing",
-                    "termKey": "boxing",
-                    "name": "Boxing",
-                    "id": 1000093201
-                },
-                {
-                    "englishName": "Upcoming Fights",
-                    "termKey": "upcoming_fights",
-                    "name": "Upcoming Fights",
-                    "id": 2000050854
-                }
-            ],
-            "id": 1007730643,
-            "state": "NOT_STARTED",
-            "group": "Upcoming Fights",
-            "start": "2021-06-19T20:30:00Z",
-            "nonLiveBoCount": 2,
-            "tags": [
-                "MATCH"
-            ],
-            "awayName": "Rosado, Gabriel",
-            "name": "Melikuziev, Bektemir - Rosado, Gabriel",
-            "sport": "BOXING"
-        },
-        {
-            "englishName": "Munguia, Jaime - Szeremeta, Kamil",
-            "groupId": 2000050854,
-            "homeName": "Munguia, Jaime",
-            "groupSortOrder": 2877820019684212736,
-            "path": [
-                {
-                    "englishName": "Boxing",
-                    "termKey": "boxing",
-                    "name": "Boxing",
-                    "id": 1000093201
-                },
-                {
-                    "englishName": "Upcoming Fights",
-                    "termKey": "upcoming_fights",
-                    "name": "Upcoming Fights",
-                    "id": 2000050854
-                }
-            ],
-            "id": 1007730642,
-            "state": "NOT_STARTED",
-            "group": "Upcoming Fights",
-            "start": "2021-06-19T21:00:00Z",
-            "nonLiveBoCount": 2,
-            "tags": [
-                "MATCH"
-            ],
-            "awayName": "Szeremeta, Kamil",
-            "name": "Munguia, Jaime - Szeremeta, Kamil",
-            "sport": "BOXING"
-        },
-        {
-            "englishName": "Leo, Angelo - Alameda, Aaron",
-            "groupId": 2000050854,
-            "homeName": "Leo, Angelo",
-            "groupSortOrder": 2877820019684212736,
-            "path": [
-                {
-                    "englishName": "Boxing",
-                    "termKey": "boxing",
-                    "name": "Boxing",
-                    "id": 1000093201
-                },
-                {
-                    "englishName": "Upcoming Fights",
-                    "termKey": "upcoming_fights",
-                    "name": "Upcoming Fights",
-                    "id": 2000050854
-                }
-            ],
-            "id": 1007660296,
-            "state": "NOT_STARTED",
-            "group": "Upcoming Fights",
-            "start": "2021-06-20T01:30:00Z",
-            "nonLiveBoCount": 2,
-            "tags": [
-                "MATCH"
-            ],
-            "awayName": "Alameda, Aaron",
-            "name": "Leo, Angelo - Alameda, Aaron",
-            "sport": "BOXING"
-        },
-        {
-            "englishName": "Lopez, Adam - Dogboe, Isaac",
-            "groupId": 2000050854,
-            "homeName": "Lopez, Adam",
-            "groupSortOrder": 2877820019684212736,
-            "path": [
-                {
-                    "englishName": "Boxing",
-                    "termKey": "boxing",
-                    "name": "Boxing",
-                    "id": 1000093201
-                },
-                {
-                    "englishName": "Upcoming Fights",
-                    "termKey": "upcoming_fights",
-                    "name": "Upcoming Fights",
-                    "id": 2000050854
-                }
-            ],
-            "id": 1007660204,
-            "state": "NOT_STARTED",
-            "group": "Upcoming Fights",
-            "start": "2021-06-20T02:00:00Z",
-            "nonLiveBoCount": 2,
-            "tags": [
-                "MATCH"
-            ],
-            "awayName": "Dogboe, Isaac",
-            "name": "Lopez, Adam - Dogboe, Isaac",
-            "sport": "BOXING"
-        },
-        {
-            "englishName": "Cruz Gonzalez, Isaac - Vargas, Francisco",
-            "groupId": 2000050854,
-            "homeName": "Cruz Gonzalez, Isaac",
-            "groupSortOrder": 2877820019684212736,
-            "path": [
-                {
-                    "englishName": "Boxing",
-                    "termKey": "boxing",
-                    "name": "Boxing",
-                    "id": 1000093201
-                },
-                {
-                    "englishName": "Upcoming Fights",
-                    "termKey": "upcoming_fights",
-                    "name": "Upcoming Fights",
-                    "id": 2000050854
-                }
-            ],
-            "id": 1007660294,
-            "state": "NOT_STARTED",
-            "group": "Upcoming Fights",
-            "start": "2021-06-20T02:15:00Z",
-            "nonLiveBoCount": 2,
-            "tags": [
-                "MATCH"
-            ],
-            "awayName": "Vargas, Francisco",
-            "name": "Cruz Gonzalez, Isaac - Vargas, Francisco",
-            "sport": "BOXING"
-        },
-        {
-            "englishName": "Mayer, Mikaela - Farias, Erica Anabella",
-            "groupId": 2000050854,
-            "homeName": "Mayer, Mikaela",
-            "groupSortOrder": 2877820019684212736,
-            "path": [
-                {
-                    "englishName": "Boxing",
-                    "termKey": "boxing",
-                    "name": "Boxing",
-                    "id": 1000093201
-                },
-                {
-                    "englishName": "Upcoming Fights",
-                    "termKey": "upcoming_fights",
-                    "name": "Upcoming Fights",
-                    "id": 2000050854
-                }
-            ],
-            "id": 1007660203,
-            "state": "NOT_STARTED",
-            "group": "Upcoming Fights",
-            "start": "2021-06-20T02:30:00Z",
-            "nonLiveBoCount": 2,
-            "tags": [
-                "MATCH"
-            ],
-            "awayName": "Farias, Erica Anabella",
-            "name": "Mayer, Mikaela - Farias, Erica Anabella",
-            "sport": "BOXING"
-        },
-        {
-            "englishName": "Charlo, Jermall - Montiel, Juan Macias",
-            "groupId": 2000050854,
-            "homeName": "Charlo, Jermall",
-            "groupSortOrder": 2877820019684212736,
-            "path": [
-                {
-                    "englishName": "Boxing",
-                    "termKey": "boxing",
-                    "name": "Boxing",
-                    "id": 1000093201
-                },
-                {
-                    "englishName": "Upcoming Fights",
-                    "termKey": "upcoming_fights",
-                    "name": "Upcoming Fights",
-                    "id": 2000050854
-                }
-            ],
-            "id": 1007660295,
-            "state": "NOT_STARTED",
-            "group": "Upcoming Fights",
-            "start": "2021-06-20T03:00:00Z",
-            "nonLiveBoCount": 2,
-            "tags": [
-                "MATCH"
-            ],
-            "awayName": "Montiel, Juan Macias",
-            "name": "Charlo, Jermall - Montiel, Juan Macias",
-            "sport": "BOXING"
-        },
-        {
-            "englishName": "Inoue, Naoya - Dasmarinas, Michael",
-            "groupId": 2000050854,
-            "homeName": "Inoue, Naoya",
-            "groupSortOrder": 2877820019684212736,
-            "path": [
-                {
-                    "englishName": "Boxing",
-                    "termKey": "boxing",
-                    "name": "Boxing",
-                    "id": 1000093201
-                },
-                {
-                    "englishName": "Upcoming Fights",
-                    "termKey": "upcoming_fights",
-                    "name": "Upcoming Fights",
-                    "id": 2000050854
-                }
-            ],
-            "id": 1007660202,
-            "state": "NOT_STARTED",
-            "group": "Upcoming Fights",
-            "start": "2021-06-20T03:00:00Z",
-            "nonLiveBoCount": 2,
-            "tags": [
-                "MATCH"
-            ],
-            "awayName": "Dasmarinas, Michael",
-            "name": "Inoue, Naoya - Dasmarinas, Michael",
-            "sport": "BOXING"
-        },
         {
             "englishName": "Lomachenko, Vasyl - Nakatani, Masayoshi",
             "groupId": 2000050854,
@@ -2004,6 +1954,37 @@
             ],
             "awayName": "Castano, Brian",
             "name": "Charlo, Jermell - Castano, Brian",
+            "sport": "BOXING"
+        },
+        {
+            "englishName": "Fury, Tyson - Wilder, Deontay",
+            "groupId": 2000050854,
+            "homeName": "Fury, Tyson",
+            "groupSortOrder": 2877820019684212736,
+            "path": [
+                {
+                    "englishName": "Boxing",
+                    "termKey": "boxing",
+                    "name": "Boxing",
+                    "id": 1000093201
+                },
+                {
+                    "englishName": "Upcoming Fights",
+                    "termKey": "upcoming_fights",
+                    "name": "Upcoming Fights",
+                    "id": 2000050854
+                }
+            ],
+            "id": 1007730905,
+            "state": "NOT_STARTED",
+            "group": "Upcoming Fights",
+            "start": "2021-07-25T02:00:00Z",
+            "nonLiveBoCount": 8,
+            "tags": [
+                "MATCH"
+            ],
+            "awayName": "Wilder, Deontay",
+            "name": "Fury, Tyson - Wilder, Deontay",
             "sport": "BOXING"
         },
         {
