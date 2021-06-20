@@ -52,13 +52,13 @@ define('FACEBOOK_PAGEID', '1759833807635369');
 /* Parser */
 define('PARSE_PAGEDIR', GENERAL_BASEDIR . '/app/front/pages/');  //Directory where generated pages should be stored
 define('PARSE_MOCKFEEDS_DIR', GENERAL_BASEDIR . '/app/parsers/mockfeeds/');  //Directory where mock feeds are stored
-define('PARSE_CREATEMATCHUPS', false); //Used to specify if parser should create matchups that was not found (use with caution);
-define('PARSE_MOVEMATCHUPS', false); //Used to specify if odds job should move matchups automatically based on metadata (gametime). Matchups will be moved to generic events (based on date) so use carefully
-define('PARSE_USE_DATE_EVENTS', false); //If we are using generic dates as events (e.g. for PBO where no named events are used)
+define('PARSE_CREATEMATCHUPS', true); //Used to specify if parser should create matchups that was not found (use with caution);
+define('PARSE_MOVEMATCHUPS', true); //Used to specify if odds job should move matchups automatically based on metadata (gametime). Matchups will be moved to generic events (based on date) so use carefully
+define('PARSE_USE_DATE_EVENTS', true); //If we are using generic dates as events (e.g. for PBO where no named events are used)
 define('PARSE_MATCHUP_TZ_OFFSET', 0);
 define('PARSE_FUTURESEVENT_ID', 197); //Used to identify the event that holds all future (that cant be linked to a specific event) matchups
-define('PARSE_REMOVE_EMPTY_MATCHUPS', false); //Used to specify if OddsJob should remove empty (no odds) upcoming matchups automatically
-define('PARSE_REMOVE_EMPTY_EVENTS', false); //Used to specify if OddsJob should remove empty (no odds) historic events automatically
+define('PARSE_REMOVE_EMPTY_MATCHUPS', true); //Used to specify if OddsJob should remove empty (no odds) upcoming matchups automatically
+define('PARSE_REMOVE_EMPTY_EVENTS', true); //Used to specify if OddsJob should remove empty (no odds) historic events automatically
 
 /* Twitter  */
 define('TWITTER_ENABLED', true);
