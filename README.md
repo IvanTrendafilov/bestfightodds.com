@@ -81,6 +81,8 @@ Within the site specific directory (e.g. `/bfo` or `/pbo`) run the following com
 gulp watch
 ```
 
+With PHP, Nginx and Gulp running you should be all set. Commit and push changes as with any Git repository. Note that pushing changes to the main branch will not trigger any automatic deployment to production. Code pulls in production are done manually on demand
+
 ## Testing 
 
 The platform uses PHPUnit for general testing of shared components. The PHPUnit scripts are available in the `/tests` directory of the repository and can be run using the following command while in the repository root:
