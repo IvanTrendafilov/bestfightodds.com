@@ -82,7 +82,7 @@ class ParserJob extends ParserJobBase
             $missing_content = true;
         }
 
-        if (!$missing_content && count($this->parsed_sport->getParsedMatchups()) >= 5 && count($this->parsed_sport->getFetchedProps()) >= 5) {
+        if (!$missing_content && count($this->parsed_sport->getParsedMatchups()) >= 3) {
             $this->full_run = true;
             $this->logger->info("Declared full run");
         }

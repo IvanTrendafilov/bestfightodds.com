@@ -194,7 +194,7 @@ class ParserJob extends ParserJobBase
         }
 
         //Declare full run if we fill the criteria
-        if (count($parsed_sport->getParsedMatchups()) > 10 && $parsed_sport->getPropCount() > 10 && $this->change_num == -1) {
+        if (count($parsed_sport->getParsedMatchups()) > 10 && $this->change_num == -1) {
             $this->full_run = true;
             $this->logger->info("Declared full run");
         }
