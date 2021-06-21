@@ -438,6 +438,16 @@ class AdminController
 
         $view_data['bookies_select'] = BookieHandler::getAllBookies();
         $view_data['prop_types'] = PropTypeHandler::getAllPropTypes();
+        foreach ($view_data['prop_types'] as &$prop_type_obj) {
+            $proptype_desc = $prop_type_obj->getPropDesc();
+            $proptype_desc = str_replace('<', '&lt;', $proptype_desc);
+            $proptype_desc = str_replace('>', '&gt', $proptype_desc);
+            $proptype_negdesc = $prop_type_obj->getPropNegDesc();
+            $proptype_negdesc = str_replace('<', '&lt;', $proptype_negdesc);
+            $proptype_negdesc = str_replace('>', '&gt', $proptype_negdesc);
+            $prop_type_obj->setPropDesc($proptype_desc);
+            $prop_type_obj->setPropNegDesc($proptype_negdesc);
+        }
 
         $response->getBody()->write($this->plates->render('proptemplates', $view_data));
         return $response;
