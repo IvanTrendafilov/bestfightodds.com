@@ -37,11 +37,10 @@ class Ruleset implements RulesetInterface
         }
 
         //Ignore names containing TBD
-        if (strpos(strtoupper($event_name), 'TBD') === false ||
-            strpos(strtoupper($event_name), 'TBA') === false) {
+        if (strpos(strtoupper($event_name), 'TBD') === true ||
+            strpos(strtoupper($event_name), 'TBA') === true) {
             return false;
         }
-
         return true;
     }
 }
