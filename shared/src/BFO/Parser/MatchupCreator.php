@@ -74,7 +74,7 @@ class MatchupCreator
             }
 
             $matched_event = $this->getMatchingEvent($event_name, $event_adjust_date_obj, $in_scheduler);
-            if ($matched_event == null) {
+            if ($matched_event == null && trim($event_name) != '') {
                 $matched_event = $this->tryToCreateEvent($event_name, $matchup_time, $event_adjust_date_obj, $in_scheduler);
             }
 
@@ -121,6 +121,9 @@ class MatchupCreator
 
     private function getMatchingEvent(string $event_name, object $date_obj, array $in_scheduler)
     {
+        if (trim($event_name) == '') {
+            return null;
+        }
         if (strtoupper(trim($event_name)) == 'FUTURE EVENTS') {
             return EventHandler::getEvent(PARSE_FUTURESEVENT_ID);
         }
@@ -168,6 +171,9 @@ class MatchupCreator
 
     private function tryToCreateEvent(string $event_name, string $matchup_time, object $date_obj, array $in_scheduler)
     {
+        if (trim($event_name) == '') {
+            return null;
+        }
         if (PARSE_USE_DATE_EVENTS == true) {
             //We used generic dates for events instead of fight cards
             $event_name = $date_obj->format('Y-m-d');
@@ -175,8 +181,6 @@ class MatchupCreator
 
         //Check that ruleset allows for creation of this event
         $approved_by_ruleset = $this->creation_ruleset->evaluateEvent($this->bookie_obj, $event_name, $matchup_time);
-
-        //Note: Blessing can also come from the scheduler (if event is scheduled)
 
         //Check that date is not in the past
         $current_date = new \DateTime();

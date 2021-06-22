@@ -75,6 +75,7 @@ class ParserJob extends ParserJobBase
                             //Add time of matchup as metadata
                             $date_obj = DateTime::createFromFormat('d/m/y H:i:s', (string) $market_node['StartTime'], new DateTimeZone('Europe/London'));
                             $parsed_matchup->setMetaData('gametime', $date_obj->getTimestamp());
+                            $parsed_matchup->setMetaData('event_name', $eventgroup_node['name']);
 
                             $parsed_sport->addParsedMatchup($parsed_matchup);
                         } else if (strtolower((string) $market_node['Name']) == 'total rounds' && count($market_node->Participant) == 2) {

@@ -22,14 +22,6 @@ class Ruleset implements RulesetInterface
             return false;
         }
 
-        //Limit Bet365 to UFC events
-        if ($bookie_obj->getName = 'Bet365') {
-            $whitelisted_events = ['UFC'];
-            if (!in_array($event_pieces[0], $whitelisted_events)) {
-                return false;
-            }
-        }
-
         return true; //Default to create any reported matchup
     }
 
@@ -37,14 +29,6 @@ class Ruleset implements RulesetInterface
     {
         $event_name = strtoupper($event_name);
         $event_pieces = explode(' ', $event_name);
-
-        //Limit Bet365 to UFC events
-        if ($bookie_obj->getName = 'Bet365') {
-            $whitelisted_events = ['UFC'];
-            if (!in_array($event_pieces[0], $whitelisted_events)) {
-                return false;
-            }
-        }
 
         //Ignore Grappling/K1 events
         $blacklisted_events = ['GLORY', 'BKFC', 'WNO'];
