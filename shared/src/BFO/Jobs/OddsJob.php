@@ -9,7 +9,7 @@
  *
  * - Creates and deletes matchups proposed by scheduler
  * - Clears the image cache for widgets
- * - Clears the cache for graph date
+ * - Clears the cache for graph data
  * - Cleans up old parsing correlations
  * - Removes unused removal flags on odds
  * - Deletes odds that have been flagged for deletion
