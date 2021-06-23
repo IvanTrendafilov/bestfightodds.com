@@ -140,8 +140,8 @@ class ParserJob extends ParserJobBase
             }
 
             $parsed_prop = new ParsedProp(
-                $team1_name . ' vs. ' . $team2_name . ' :: ' . $betoffer->betOfferType . ' ' . $betoffer->betDescription . ' : ' . $betoffer->outcomes[0]->label,
-                $team1_name . ' vs. ' . $team2_name . ' :: ' . $betoffer->betOfferType . ' ' . $betoffer->betDescription . ' : ' . $betoffer->outcomes[1]->label,
+                $team1_name . ' vs. ' . $team2_name . ' :: ' . $betoffer->betOfferType . ' ' . (isset($betoffer->participant) ? $betoffer->participant . ' ' : '') . $betoffer->betDescription . ' : ' . $betoffer->outcomes[0]->label,
+                $team1_name . ' vs. ' . $team2_name . ' :: ' . $betoffer->betOfferType . ' ' . (isset($betoffer->participant) ? $betoffer->participant . ' ' : '') . $betoffer->betDescription . ' : ' . $betoffer->outcomes[1]->label,
                 $betoffer->outcomes[0]->oddsAmerican,
                 $betoffer->outcomes[1]->oddsAmerican
             );
@@ -185,7 +185,7 @@ class ParserJob extends ParserJobBase
                     }
 
                     $parsed_prop = new ParsedProp(
-                        $team1_name . ' vs. ' . $team2_name . ' :: ' . $betoffer->betOfferType . ' ' . $betoffer->betDescription . ' : ' . $new_label,
+                        $team1_name . ' vs. ' . $team2_name . ' :: ' . $betoffer->betOfferType . ' ' . (isset($betoffer->participant) ? $betoffer->participant . ' ' : '') . $betoffer->betDescription . ' : ' . $new_label,
                         '',
                         $outcome->oddsAmerican,
                         '-99999'

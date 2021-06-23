@@ -237,7 +237,7 @@
                                         <?php if (isset($unmatched_group[0]['view_extras']['event_match']['id'])) : ?>
                                             Match: <?= $unmatched_group[0]['view_extras']['event_match']['name'] ?> (<?= $unmatched_group[0]['view_extras']['event_match']['date'] ?>)
                                     </td>
-                                    <td><a href="#" class="create-matchups-for-event" data-eventid="<?= $unmatched_group[0]['view_extras']['event_match']['id'] ?>" data-eventlink="event<?= $i ?>"><button class="btn btn-primary">Auto create all below at matched event</button></a></td>
+                                    <td><a href="#" class="create-matchups-for-event" data-eventid="<?= $unmatched_group[0]['view_extras']['event_match']['id'] ?>" data-eventlink="event<?= $i ?>"><button class="btn btn-primary">Create all matchups below at matched event</button></a></td>
                                 <?php else : ?>
                                     No match..
                                     </td>
@@ -271,7 +271,7 @@
                                     <td></td>
                                     <td>
                                         <?php if (isset($unmatched_group[0]['view_extras']['event_name_reduced'])) : ?>
-                                            <a href="#" class="create-event-with-matchups" data-eventlink="event<?= $i ?>"><button class="btn btn-primary">Auto create new event and matchups</button></a>
+                                            <a href="#" class="create-event-with-matchups" data-eventlink="event<?= $i ?>"><button class="btn btn-primary">Create above event and matchups</button></a>
                                         <?php else : ?>
                                             &nbsp;
                                         <?php endif ?>
