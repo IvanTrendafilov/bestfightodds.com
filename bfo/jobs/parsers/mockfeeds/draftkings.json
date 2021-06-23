@@ -1,546 +1,170 @@
 {
     "events": [
         {
-            "id": 179872279,
-            "name": "Marlon Vera - Davey Grant",
-            "homeTeamName": "Marlon Vera",
-            "awayTeamName": "Davey Grant",
-            "startDate": "2021-06-19T23:00:00.0000000Z",
-            "offers": [
-                {
-                    "id": "1-2267752493",
-                    "label": "Moneyline",
-                    "outcomes": [
-                        {
-                            "id": "1-2929892978",
-                            "label": "Marlon Vera",
-                            "oddsAmerican": "-250",
-                            "oddsDecimal": 1.4000,
-                            "oddsFractional": "2/5",
-                            "participant": "Marlon Vera"
-                        },
-                        {
-                            "id": "1-2929892980",
-                            "label": "Davey Grant",
-                            "oddsAmerican": "+195",
-                            "oddsDecimal": 2.9500,
-                            "oddsFractional": "39/20",
-                            "participant": "Davey Grant"
-                        }
-                    ],
-                    "main": true
-                }
-            ]
-        },
-        {
-            "id": 179868190,
-            "name": "Charles Rosa - Justin Jaynes",
-            "homeTeamName": "Charles Rosa",
-            "awayTeamName": "Justin Jaynes",
-            "startDate": "2021-06-26T20:00:00.0000000Z",
-            "offers": [
-                {
-                    "id": "1-2267753217",
-                    "label": "Moneyline",
-                    "outcomes": [
-                        {
-                            "id": "1-2929895201",
-                            "label": "Charles Rosa",
-                            "oddsAmerican": "-167",
-                            "oddsDecimal": 1.6000,
-                            "oddsFractional": "3/5",
-                            "participant": "Charles Rosa"
-                        },
-                        {
-                            "id": "1-2929895203",
-                            "label": "Justin Jaynes",
-                            "oddsAmerican": "+135",
-                            "oddsDecimal": 2.3500,
-                            "oddsFractional": "27/20",
-                            "participant": "Justin Jaynes"
-                        }
-                    ],
-                    "main": true
-                }
-            ]
-        },
-        {
-            "id": 179872269,
-            "name": "Aleksei Oleinik - Serghei Spivac",
-            "homeTeamName": "Aleksei Oleinik",
-            "awayTeamName": "Serghei Spivac",
-            "startDate": "2021-06-19T23:00:00.0000000Z",
-            "offers": [
-                {
-                    "id": "1-2267752665",
-                    "label": "Moneyline",
-                    "outcomes": [
-                        {
-                            "id": "1-2929893566",
-                            "label": "Aleksei Oleinik",
-                            "oddsAmerican": "+175",
-                            "oddsDecimal": 2.7500,
-                            "oddsFractional": "7/4",
-                            "participant": "Aleksei Oleinik"
-                        },
-                        {
-                            "id": "1-2929893568",
-                            "label": "Serghei Spivac",
-                            "oddsAmerican": "-225",
-                            "oddsDecimal": 1.4500,
-                            "oddsFractional": "4/9",
-                            "participant": "Serghei Spivac"
-                        }
-                    ],
-                    "main": true
-                }
-            ]
-        },
-        {
             "id": 179872283,
             "name": "Raoni Barcelos - Timur Valiev",
             "homeTeamName": "Raoni Barcelos",
             "awayTeamName": "Timur Valiev",
-            "startDate": "2021-06-26T20:00:00.0000000Z",
+            "startDate": "2021-06-26T21:45:00.0000000Z",
             "offers": [
                 {
-                    "id": "1-2267753219",
-                    "label": "Moneyline",
+                    "id": "1-2267493857",
+                    "label": "Winning round",
                     "outcomes": [
                         {
-                            "id": "1-2929895207",
-                            "label": "Raoni Barcelos",
-                            "oddsAmerican": "-225",
-                            "oddsDecimal": 1.4500,
-                            "oddsFractional": "4/9",
-                            "participant": "Raoni Barcelos"
-                        },
-                        {
-                            "id": "1-2929895209",
-                            "label": "Timur Valiev",
-                            "oddsAmerican": "+175",
-                            "oddsDecimal": 2.7500,
-                            "oddsFractional": "7/4",
-                            "participant": "Timur Valiev"
-                        }
-                    ],
-                    "main": true
-                }
-            ]
-        },
-        {
-            "id": 179845577,
-            "name": "Chan Sung Jung - Dan Ige",
-            "homeTeamName": "Chan Sung Jung",
-            "awayTeamName": "Dan Ige",
-            "startDate": "2021-06-19T23:00:00.0000000Z",
-            "offers": [
-                {
-                    "id": "1-2265445334",
-                    "label": "Moneyline",
-                    "outcomes": [
-                        {
-                            "id": "1-2922283077",
-                            "label": "Chan Sung Jung",
-                            "oddsAmerican": "-110",
-                            "oddsDecimal": 1.9100,
-                            "oddsFractional": "10/11",
-                            "participant": "Chan Sung Jung"
-                        },
-                        {
-                            "id": "1-2922283079",
-                            "label": "Dan Ige",
-                            "oddsAmerican": "-110",
-                            "oddsDecimal": 1.9100,
-                            "oddsFractional": "10/11",
-                            "participant": "Dan Ige"
-                        }
-                    ],
-                    "main": true
-                }
-            ]
-        },
-        {
-            "id": 179872284,
-            "name": "Tim Elliott - Mudaerji Su",
-            "homeTeamName": "Tim Elliott",
-            "awayTeamName": "Mudaerji Su",
-            "startDate": "2021-06-26T20:00:00.0000000Z",
-            "offers": [
-                {
-                    "id": "1-2267753220",
-                    "label": "Moneyline",
-                    "outcomes": [
-                        {
-                            "id": "1-2929895210",
-                            "label": "Tim Elliott",
+                            "id": "1-2929079422",
+                            "label": "Raoni Barcelos By Decision",
                             "oddsAmerican": "+125",
-                            "oddsDecimal": 2.2500,
+                            "oddsDecimal": 2.25,
                             "oddsFractional": "5/4",
-                            "participant": "Tim Elliott"
+                            "participant": "Raoni Barcelos By Decision"
                         },
                         {
-                            "id": "1-2929895212",
-                            "label": "Mudaerji Su",
-                            "oddsAmerican": "-155",
-                            "oddsDecimal": 1.6500,
-                            "oddsFractional": "13/20",
-                            "participant": "Mudaerji Su"
+                            "id": "1-2929079445",
+                            "label": "Timur Valiev By Decision",
+                            "oddsAmerican": "+325",
+                            "oddsDecimal": 4.25,
+                            "oddsFractional": "13/4",
+                            "participant": "Timur Valiev By Decision"
+                        },
+                        {
+                            "id": "1-2929079415",
+                            "label": "Raoni Barcelos - Round 1",
+                            "oddsAmerican": "+600",
+                            "oddsDecimal": 7,
+                            "oddsFractional": "6/1",
+                            "participant": "Raoni Barcelos - Round 1"
+                        },
+                        {
+                            "id": "1-2929079416",
+                            "label": "Raoni Barcelos - Round 2",
+                            "oddsAmerican": "+750",
+                            "oddsDecimal": 8.5,
+                            "oddsFractional": "15/2",
+                            "participant": "Raoni Barcelos - Round 2"
+                        },
+                        {
+                            "id": "1-2929079436",
+                            "label": "Timur Valiev - Round 1",
+                            "oddsAmerican": "+900",
+                            "oddsDecimal": 10,
+                            "oddsFractional": "9/1",
+                            "participant": "Timur Valiev - Round 1"
+                        },
+                        {
+                            "id": "1-2929079417",
+                            "label": "Raoni Barcelos - Round 3",
+                            "oddsAmerican": "+1000",
+                            "oddsDecimal": 11,
+                            "oddsFractional": "10/1",
+                            "participant": "Raoni Barcelos - Round 3"
+                        },
+                        {
+                            "id": "1-2929079437",
+                            "label": "Timur Valiev - Round 2",
+                            "oddsAmerican": "+1400",
+                            "oddsDecimal": 15,
+                            "oddsFractional": "14/1",
+                            "participant": "Timur Valiev - Round 2"
+                        },
+                        {
+                            "id": "1-2929079438",
+                            "label": "Timur Valiev - Round 3",
+                            "oddsAmerican": "+2000",
+                            "oddsDecimal": 21,
+                            "oddsFractional": "20/1",
+                            "participant": "Timur Valiev - Round 3"
+                        },
+                        {
+                            "id": "1-2929079454",
+                            "label": "Tie",
+                            "oddsAmerican": "+6600",
+                            "oddsDecimal": 67,
+                            "oddsFractional": "66/1",
+                            "participant": "Tie"
                         }
-                    ],
-                    "main": true
-                }
-            ]
-        },
-        {
-            "id": 179872280,
-            "name": "Wellington Turman - Bruno Silva",
-            "homeTeamName": "Wellington Turman",
-            "awayTeamName": "Bruno Silva",
-            "startDate": "2021-06-19T23:00:00.0000000Z",
-            "offers": [
+                    ]
+                },
                 {
-                    "id": "1-2267752664",
-                    "label": "Moneyline",
+                    "id": "1-2267492373",
+                    "label": "Winning group of rounds",
                     "outcomes": [
                         {
-                            "id": "1-2929893563",
-                            "label": "Wellington Turman",
-                            "oddsAmerican": "+125",
-                            "oddsDecimal": 2.2500,
-                            "oddsFractional": "5/4",
-                            "participant": "Wellington Turman"
+                            "id": "1-2929071209",
+                            "label": "Raoni Barcelos - Round 3-Decision",
+                            "oddsAmerican": "+100",
+                            "oddsDecimal": 2,
+                            "oddsFractional": "Evens",
+                            "participant": "Raoni Barcelos - Round 3-Decision"
                         },
                         {
-                            "id": "1-2929893565",
-                            "label": "Bruno Silva",
-                            "oddsAmerican": "-155",
-                            "oddsDecimal": 1.6500,
-                            "oddsFractional": "13/20",
-                            "participant": "Bruno Silva"
-                        }
-                    ],
-                    "main": true
-                }
-            ]
-        },
-        {
-            "id": 179801914,
-            "name": "Ciryl Gane - Alexander Volkov",
-            "homeTeamName": "Ciryl Gane",
-            "awayTeamName": "Alexander Volkov",
-            "startDate": "2021-06-27T02:00:00.0000000Z",
-            "offers": [
-                {
-                    "id": "1-2261373296",
-                    "label": "Moneyline",
-                    "outcomes": [
-                        {
-                            "id": "1-2908511499",
-                            "label": "Ciryl Gane",
-                            "oddsAmerican": "-155",
-                            "oddsDecimal": 1.6500,
-                            "oddsFractional": "13/20",
-                            "participant": "Ciryl Gane"
+                            "id": "1-2929071212",
+                            "label": "Raoni Barcelos - Rounds 1-2",
+                            "oddsAmerican": "+280",
+                            "oddsDecimal": 3.8,
+                            "oddsFractional": "14/5",
+                            "participant": "Raoni Barcelos - Rounds 1-2"
                         },
                         {
-                            "id": "1-2908511501",
-                            "label": "Alexander Volkov",
-                            "oddsAmerican": "+124",
-                            "oddsDecimal": 2.2400,
-                            "oddsFractional": "6/5",
-                            "participant": "Alexander Volkov"
-                        }
-                    ],
-                    "main": true
-                }
-            ]
-        },
-        {
-            "id": 179872267,
-            "name": "Nicolae Negumereanu - Aleksa Camur",
-            "homeTeamName": "Nicolae Negumereanu",
-            "awayTeamName": "Aleksa Camur",
-            "startDate": "2021-06-19T23:00:00.0000000Z",
-            "offers": [
-                {
-                    "id": "1-2267752494",
-                    "label": "Moneyline",
-                    "outcomes": [
-                        {
-                            "id": "1-2929892981",
-                            "label": "Nicolae Negumereanu",
-                            "oddsAmerican": "+200",
-                            "oddsDecimal": 3.0000,
-                            "oddsFractional": "2/1",
-                            "participant": "Nicolae Negumereanu"
+                            "id": "1-2929071230",
+                            "label": "Timur Valiev - Round 3-Decision",
+                            "oddsAmerican": "+280",
+                            "oddsDecimal": 3.8,
+                            "oddsFractional": "14/5",
+                            "participant": "Timur Valiev - Round 3-Decision"
                         },
                         {
-                            "id": "1-2929892983",
-                            "label": "Aleksa Camur",
-                            "oddsAmerican": "-265",
-                            "oddsDecimal": 1.3800,
-                            "oddsFractional": "4/11",
-                            "participant": "Aleksa Camur"
-                        }
-                    ],
-                    "main": true
-                }
-            ]
-        },
-        {
-            "id": 179872263,
-            "name": "Dhiego Lima - Matt Brown",
-            "homeTeamName": "Dhiego Lima",
-            "awayTeamName": "Matt Brown",
-            "startDate": "2021-06-19T23:00:00.0000000Z",
-            "offers": [
-                {
-                    "id": "1-2267752492",
-                    "label": "Moneyline",
-                    "outcomes": [
-                        {
-                            "id": "1-2929892975",
-                            "label": "Dhiego Lima",
-                            "oddsAmerican": "-177",
-                            "oddsDecimal": 1.5700,
-                            "oddsFractional": "11/20",
-                            "participant": "Dhiego Lima"
-                        },
-                        {
-                            "id": "1-2929892977",
-                            "label": "Matt Brown",
-                            "oddsAmerican": "+140",
-                            "oddsDecimal": 2.4000,
-                            "oddsFractional": "7/5",
-                            "participant": "Matt Brown"
-                        }
-                    ],
-                    "main": true
-                }
-            ]
-        },
-        {
-            "id": 179872285,
-            "name": "Ramazan Emeev - Warlley Alves",
-            "homeTeamName": "Ramazan Emeev",
-            "awayTeamName": "Warlley Alves",
-            "startDate": "2021-06-26T20:00:00.0000000Z",
-            "offers": [
-                {
-                    "id": "1-2267753221",
-                    "label": "Moneyline",
-                    "outcomes": [
-                        {
-                            "id": "1-2929895213",
-                            "label": "Ramazan Emeev",
-                            "oddsAmerican": "-155",
-                            "oddsDecimal": 1.6500,
-                            "oddsFractional": "13/20",
-                            "participant": "Ramazan Emeev"
-                        },
-                        {
-                            "id": "1-2929895215",
-                            "label": "Warlley Alves",
-                            "oddsAmerican": "+125",
-                            "oddsDecimal": 2.2500,
-                            "oddsFractional": "5/4",
-                            "participant": "Warlley Alves"
-                        }
-                    ],
-                    "main": true
-                }
-            ]
-        },
-        {
-            "id": 179872290,
-            "name": "Marcin Prachnio - Ike Villanueva",
-            "homeTeamName": "Marcin Prachnio",
-            "awayTeamName": "Ike Villanueva",
-            "startDate": "2021-06-26T20:00:00.0000000Z",
-            "offers": [
-                {
-                    "id": "1-2267753037",
-                    "label": "Moneyline",
-                    "outcomes": [
-                        {
-                            "id": "1-2929894696",
-                            "label": "Marcin Prachnio",
-                            "oddsAmerican": "-215",
-                            "oddsDecimal": 1.4700,
-                            "oddsFractional": "4/9",
-                            "participant": "Marcin Prachnio"
-                        },
-                        {
-                            "id": "1-2929894698",
-                            "label": "Ike Villanueva",
-                            "oddsAmerican": "+170",
-                            "oddsDecimal": 2.7000,
-                            "oddsFractional": "17/10",
-                            "participant": "Ike Villanueva"
-                        }
-                    ],
-                    "main": true
-                }
-            ]
-        },
-        {
-            "id": 179872278,
-            "name": "Joaquim Silva - Rick Glenn",
-            "homeTeamName": "Joaquim Silva",
-            "awayTeamName": "Rick Glenn",
-            "startDate": "2021-06-19T23:00:00.0000000Z",
-            "offers": [
-                {
-                    "id": "1-2267752666",
-                    "label": "Moneyline",
-                    "outcomes": [
-                        {
-                            "id": "1-2929893569",
-                            "label": "Joaquim Silva",
-                            "oddsAmerican": "-118",
-                            "oddsDecimal": 1.8500,
-                            "oddsFractional": "17/20",
-                            "participant": "Joaquim Silva"
-                        },
-                        {
-                            "id": "1-2929893571",
-                            "label": "Rick Glenn",
-                            "oddsAmerican": "-106",
-                            "oddsDecimal": 1.9500,
-                            "oddsFractional": "19/20",
-                            "participant": "Rick Glenn"
-                        }
-                    ],
-                    "main": true
-                }
-            ]
-        },
-        {
-            "id": 179804380,
-            "name": "Amanda Nunes - Julianna Peña",
-            "homeTeamName": "Amanda Nunes",
-            "awayTeamName": "Julianna Peña",
-            "startDate": "2021-08-08T03:00:00.0000000Z",
-            "offers": [
-                {
-                    "id": "1-2261373297",
-                    "label": "Moneyline",
-                    "outcomes": [
-                        {
-                            "id": "1-2908511502",
-                            "label": "Amanda Nunes",
-                            "oddsAmerican": "-770",
-                            "oddsDecimal": 1.1300,
-                            "oddsFractional": "1/8",
-                            "participant": "Amanda Nunes"
-                        },
-                        {
-                            "id": "1-2908511504",
-                            "label": "Julianna Peña",
-                            "oddsAmerican": "+515",
-                            "oddsDecimal": 6.1500,
+                            "id": "1-2929071234",
+                            "label": "Timur Valiev - Rounds 1-2",
+                            "oddsAmerican": "+500",
+                            "oddsDecimal": 6,
                             "oddsFractional": "5/1",
-                            "participant": "Julianna Peña"
-                        }
-                    ],
-                    "main": true
-                }
-            ]
-        },
-        {
-            "id": 179872262,
-            "name": "Virna Jandiroba - Kanako Murata",
-            "homeTeamName": "Virna Jandiroba",
-            "awayTeamName": "Kanako Murata",
-            "startDate": "2021-06-19T23:00:00.0000000Z",
-            "offers": [
-                {
-                    "id": "1-2267752186",
-                    "label": "Moneyline",
-                    "outcomes": [
-                        {
-                            "id": "1-2929891955",
-                            "label": "Virna Jandiroba",
-                            "oddsAmerican": "-155",
-                            "oddsDecimal": 1.6500,
-                            "oddsFractional": "13/20",
-                            "participant": "Virna Jandiroba"
+                            "participant": "Timur Valiev - Rounds 1-2"
                         },
                         {
-                            "id": "1-2929891957",
-                            "label": "Kanako Murata",
-                            "oddsAmerican": "+125",
-                            "oddsDecimal": 2.2500,
-                            "oddsFractional": "5/4",
-                            "participant": "Kanako Murata"
+                            "id": "1-2929071245",
+                            "label": "Tie",
+                            "oddsAmerican": "+6600",
+                            "oddsDecimal": 67,
+                            "oddsFractional": "66/1",
+                            "participant": "Tie"
                         }
-                    ],
-                    "main": true
-                }
-            ]
-        },
-        {
-            "id": 179872270,
-            "name": "Casey O'Neill - Lara Fritzen Procopio",
-            "homeTeamName": "Casey O'Neill",
-            "awayTeamName": "Lara Fritzen Procopio",
-            "startDate": "2021-06-19T23:00:00.0000000Z",
-            "offers": [
+                    ]
+                },
                 {
-                    "id": "1-2267752667",
-                    "label": "Moneyline",
+                    "id": "1-2269367095",
+                    "label": "Fight to End in the First 60 Seconds of Round 1",
                     "outcomes": [
                         {
-                            "id": "1-2929893572",
-                            "label": "Casey O'Neill",
-                            "oddsAmerican": "+110",
-                            "oddsDecimal": 2.1,
-                            "oddsFractional": "11/10",
-                            "participant": "Casey O'Neill"
-                        },
-                        {
-                            "id": "1-2929893574",
-                            "label": "Lara Fritzen Procopio",
-                            "oddsAmerican": "-139",
-                            "oddsDecimal": 1.72,
-                            "oddsFractional": "7/10",
-                            "participant": "Lara Fritzen Procopio"
+                            "id": "1-2935241459",
+                            "label": "Yes",
+                            "oddsAmerican": "+1600",
+                            "oddsDecimal": 17,
+                            "oddsFractional": "16/1"
                         }
-                    ],
-                    "main": true
-                }
-            ]
-        },
-        {
-            "id": 179872289,
-            "name": "Michel Prazeres - Shavkat Rakhmonov",
-            "homeTeamName": "Michel Prazeres",
-            "awayTeamName": "Shavkat Rakhmonov",
-            "startDate": "2021-06-26T20:00:00.0000000Z",
-            "offers": [
+                    ]
+                },
                 {
-                    "id": "1-2267753218",
-                    "label": "Moneyline",
+                    "id": "1-2267491417",
+                    "label": "Alternate winning group of rounds",
                     "outcomes": [
                         {
-                            "id": "1-2929895204",
-                            "label": "Michel Prazeres",
-                            "oddsAmerican": "+190",
-                            "oddsDecimal": 2.9,
-                            "oddsFractional": "19/10",
-                            "participant": "Michel Prazeres"
+                            "id": "1-2929067959",
+                            "label": "Round 3-Decision",
+                            "oddsAmerican": "-250",
+                            "oddsDecimal": 1.4,
+                            "oddsFractional": "2/5",
+                            "participant": "Round 3-Decision"
                         },
                         {
-                            "id": "1-2929895206",
-                            "label": "Shavkat Rakhmonov",
-                            "oddsAmerican": "-240",
-                            "oddsDecimal": 1.42,
-                            "oddsFractional": "21/50",
-                            "participant": "Shavkat Rakhmonov"
+                            "id": "1-2929067960",
+                            "label": "Rounds 1-2",
+                            "oddsAmerican": "+175",
+                            "oddsDecimal": 2.75,
+                            "oddsFractional": "7/4",
+                            "participant": "Rounds 1-2"
                         }
-                    ],
-                    "main": true
+                    ]
                 }
             ]
         },
@@ -549,286 +173,948 @@
             "name": "Renato Moicano - Jai Herbert",
             "homeTeamName": "Renato Moicano",
             "awayTeamName": "Jai Herbert",
-            "startDate": "2021-06-26T20:00:00.0000000Z",
+            "startDate": "2021-06-26T20:15:00.0000000Z",
             "offers": [
                 {
-                    "id": "1-2267753036",
-                    "label": "Moneyline",
+                    "id": "1-2267495380",
+                    "label": "Winning round",
                     "outcomes": [
                         {
-                            "id": "1-2929894693",
-                            "label": "Renato Moicano",
-                            "oddsAmerican": "-250",
-                            "oddsDecimal": 1.4000,
-                            "oddsFractional": "2/5",
-                            "participant": "Renato Moicano"
+                            "id": "1-2929084346",
+                            "label": "Renato Moicano By Decision",
+                            "oddsAmerican": "+240",
+                            "oddsDecimal": 3.4,
+                            "oddsFractional": "12/5",
+                            "participant": "Renato Moicano By Decision"
                         },
                         {
-                            "id": "1-2929894695",
-                            "label": "Jai Herbert",
-                            "oddsAmerican": "+195",
-                            "oddsDecimal": 2.9500,
-                            "oddsFractional": "39/20",
-                            "participant": "Jai Herbert"
+                            "id": "1-2929084337",
+                            "label": "Renato Moicano - Round 1",
+                            "oddsAmerican": "+300",
+                            "oddsDecimal": 4,
+                            "oddsFractional": "3/1",
+                            "participant": "Renato Moicano - Round 1"
+                        },
+                        {
+                            "id": "1-2929084338",
+                            "label": "Renato Moicano - Round 2",
+                            "oddsAmerican": "+500",
+                            "oddsDecimal": 6,
+                            "oddsFractional": "5/1",
+                            "participant": "Renato Moicano - Round 2"
+                        },
+                        {
+                            "id": "1-2929084371",
+                            "label": "Jai Herbert By Decision",
+                            "oddsAmerican": "+550",
+                            "oddsDecimal": 6.5,
+                            "oddsFractional": "11/2",
+                            "participant": "Jai Herbert By Decision"
+                        },
+                        {
+                            "id": "1-2929084366",
+                            "label": "Jai Herbert - Round 1",
+                            "oddsAmerican": "+700",
+                            "oddsDecimal": 8,
+                            "oddsFractional": "7/1",
+                            "participant": "Jai Herbert - Round 1"
+                        },
+                        {
+                            "id": "1-2929084339",
+                            "label": "Renato Moicano - Round 3",
+                            "oddsAmerican": "+850",
+                            "oddsDecimal": 9.5,
+                            "oddsFractional": "17/2",
+                            "participant": "Renato Moicano - Round 3"
+                        },
+                        {
+                            "id": "1-2929084367",
+                            "label": "Jai Herbert - Round 2",
+                            "oddsAmerican": "+1100",
+                            "oddsDecimal": 12,
+                            "oddsFractional": "11/1",
+                            "participant": "Jai Herbert - Round 2"
+                        },
+                        {
+                            "id": "1-2929084368",
+                            "label": "Jai Herbert - Round 3",
+                            "oddsAmerican": "+1600",
+                            "oddsDecimal": 17,
+                            "oddsFractional": "16/1",
+                            "participant": "Jai Herbert - Round 3"
+                        },
+                        {
+                            "id": "1-2929084380",
+                            "label": "Tie",
+                            "oddsAmerican": "+6600",
+                            "oddsDecimal": 67,
+                            "oddsFractional": "66/1",
+                            "participant": "Tie"
                         }
-                    ],
-                    "main": true
-                }
-            ]
-        },
-        {
-            "id": 179872277,
-            "name": "Seung Woo Choi - Julian Erosa",
-            "homeTeamName": "Seung Woo Choi",
-            "awayTeamName": "Julian Erosa",
-            "startDate": "2021-06-19T23:00:00.0000000Z",
-            "offers": [
+                    ]
+                },
                 {
-                    "id": "1-2267752185",
-                    "label": "Moneyline",
+                    "id": "1-2267492692",
+                    "label": "Winning group of rounds",
                     "outcomes": [
                         {
-                            "id": "1-2929891952",
-                            "label": "Seung Woo Choi",
+                            "id": "1-2929072403",
+                            "label": "Renato Moicano - Rounds 1-2",
+                            "oddsAmerican": "+140",
+                            "oddsDecimal": 2.4,
+                            "oddsFractional": "7/5",
+                            "participant": "Renato Moicano - Rounds 1-2"
+                        },
+                        {
+                            "id": "1-2929072400",
+                            "label": "Renato Moicano - Round 3-Decision",
+                            "oddsAmerican": "+175",
+                            "oddsDecimal": 2.75,
+                            "oddsFractional": "7/4",
+                            "participant": "Renato Moicano - Round 3-Decision"
+                        },
+                        {
+                            "id": "1-2929072430",
+                            "label": "Jai Herbert - Rounds 1-2",
+                            "oddsAmerican": "+375",
+                            "oddsDecimal": 4.75,
+                            "oddsFractional": "15/4",
+                            "participant": "Jai Herbert - Rounds 1-2"
+                        },
+                        {
+                            "id": "1-2929072429",
+                            "label": "Jai Herbert - Round 3-Decision",
+                            "oddsAmerican": "+425",
+                            "oddsDecimal": 5.25,
+                            "oddsFractional": "17/4",
+                            "participant": "Jai Herbert - Round 3-Decision"
+                        },
+                        {
+                            "id": "1-2929072440",
+                            "label": "Tie",
+                            "oddsAmerican": "+6600",
+                            "oddsDecimal": 67,
+                            "oddsFractional": "66/1",
+                            "participant": "Tie"
+                        }
+                    ]
+                },
+                {
+                    "id": "1-2267491932",
+                    "label": "Alternate winning group of rounds",
+                    "outcomes": [
+                        {
+                            "id": "1-2929069800",
+                            "label": "Round 3-Decision",
                             "oddsAmerican": "-125",
-                            "oddsDecimal": 1.8000,
+                            "oddsDecimal": 1.8,
                             "oddsFractional": "4/5",
-                            "participant": "Seung Woo Choi"
+                            "participant": "Round 3-Decision"
                         },
                         {
-                            "id": "1-2929891954",
-                            "label": "Julian Erosa",
-                            "oddsAmerican": "+101",
-                            "oddsDecimal": 2.0100,
-                            "oddsFractional": "Evens",
-                            "participant": "Julian Erosa"
-                        }
-                    ],
-                    "main": true
-                }
-            ]
-        },
-        {
-            "id": 179783234,
-            "name": "Dustin Poirier - Conor McGregor",
-            "homeTeamName": "Dustin Poirier",
-            "awayTeamName": "Conor McGregor",
-            "startDate": "2021-07-10T22:00:00.0000000Z",
-            "offers": [
-                {
-                    "id": "1-2259126509",
-                    "label": "Moneyline",
-                    "outcomes": [
-                        {
-                            "id": "1-2900873912",
-                            "label": "Dustin Poirier",
-                            "oddsAmerican": "-108",
-                            "oddsDecimal": 1.9300,
+                            "id": "1-2929069801",
+                            "label": "Rounds 1-2",
+                            "oddsAmerican": "-110",
+                            "oddsDecimal": 1.91,
                             "oddsFractional": "10/11",
-                            "participant": "Dustin Poirier"
-                        },
-                        {
-                            "id": "1-2900873914",
-                            "label": "Conor McGregor",
-                            "oddsAmerican": "-113",
-                            "oddsDecimal": 1.8900,
-                            "oddsFractional": "22/25",
-                            "participant": "Conor McGregor"
+                            "participant": "Rounds 1-2"
                         }
-                    ],
-                    "main": true
-                }
-            ]
-        },
-        {
-            "id": 179872287,
-            "name": "Ed Herman - Danilo Marques",
-            "homeTeamName": "Ed Herman",
-            "awayTeamName": "Danilo Marques",
-            "startDate": "2021-06-26T20:00:00.0000000Z",
-            "offers": [
+                    ]
+                },
                 {
-                    "id": "1-2267753035",
-                    "label": "Moneyline",
+                    "id": "1-2269371807",
+                    "label": "Fight to End in the First 60 Seconds of Round 1",
                     "outcomes": [
                         {
-                            "id": "1-2929894690",
-                            "label": "Ed Herman",
-                            "oddsAmerican": "+140",
-                            "oddsDecimal": 2.4000,
-                            "oddsFractional": "7/5",
-                            "participant": "Ed Herman"
-                        },
-                        {
-                            "id": "1-2929894692",
-                            "label": "Danilo Marques",
-                            "oddsAmerican": "-177",
-                            "oddsDecimal": 1.5700,
-                            "oddsFractional": "11/20",
-                            "participant": "Danilo Marques"
+                            "id": "1-2935262943",
+                            "label": "Yes",
+                            "oddsAmerican": "+1000",
+                            "oddsDecimal": 11,
+                            "oddsFractional": "10/1"
                         }
-                    ],
-                    "main": true
+                    ]
                 }
             ]
         },
         {
-            "id": 179872266,
-            "name": "Tim Means - Danny Roberts",
-            "homeTeamName": "Tim Means",
-            "awayTeamName": "Danny Roberts",
-            "startDate": "2021-06-19T23:00:00.0000000Z",
-            "offers": [
-                {
-                    "id": "1-2267752184",
-                    "label": "Moneyline",
-                    "outcomes": [
-                        {
-                            "id": "1-2929891949",
-                            "label": "Tim Means",
-                            "oddsAmerican": "-200",
-                            "oddsDecimal": 1.5000,
-                            "oddsFractional": "1/2",
-                            "participant": "Tim Means"
-                        },
-                        {
-                            "id": "1-2929891951",
-                            "label": "Danny Roberts",
-                            "oddsAmerican": "+160",
-                            "oddsDecimal": 2.6000,
-                            "oddsFractional": "8/5",
-                            "participant": "Danny Roberts"
-                        }
-                    ],
-                    "main": true
-                }
-            ]
-        },
-        {
-            "id": 179868178,
-            "name": "Ovince St. Preux - Maxim Grishin",
+            "id": 179885771,
+            "name": "Ovince St. Preux - Tanner Boser",
             "homeTeamName": "Ovince St. Preux",
-            "awayTeamName": "Maxim Grishin",
-            "startDate": "2021-06-26T20:00:00.0000000Z",
+            "awayTeamName": "Tanner Boser",
+            "startDate": "2021-06-26T22:15:00.0000000Z",
             "offers": [
                 {
-                    "id": "1-2267753038",
-                    "label": "Moneyline",
+                    "id": "1-2268594753",
+                    "label": "Alternate winning group of rounds",
                     "outcomes": [
                         {
-                            "id": "1-2929894699",
-                            "label": "Ovince St. Preux",
-                            "oddsAmerican": "-112",
-                            "oddsDecimal": 1.9000,
-                            "oddsFractional": "9/10",
-                            "participant": "Ovince St. Preux"
+                            "id": "1-2932676732",
+                            "label": "Round 3-Decision",
+                            "oddsAmerican": "-167",
+                            "oddsDecimal": 1.6,
+                            "oddsFractional": "3/5",
+                            "participant": "Round 3-Decision"
                         },
                         {
-                            "id": "1-2929894701",
-                            "label": "Maxim Grishin",
-                            "oddsAmerican": "-112",
-                            "oddsDecimal": 1.9000,
-                            "oddsFractional": "9/10",
-                            "participant": "Maxim Grishin"
+                            "id": "1-2932676733",
+                            "label": "Rounds 1-2",
+                            "oddsAmerican": "+125",
+                            "oddsDecimal": 2.25,
+                            "oddsFractional": "5/4",
+                            "participant": "Rounds 1-2"
                         }
-                    ],
-                    "main": true
+                    ]
+                },
+                {
+                    "id": "1-2268594589",
+                    "label": "Winning round",
+                    "outcomes": [
+                        {
+                            "id": "1-2932676127",
+                            "label": "Tanner Boser By Decision",
+                            "oddsAmerican": "+175",
+                            "oddsDecimal": 2.75,
+                            "oddsFractional": "7/4",
+                            "participant": "Tanner Boser By Decision"
+                        },
+                        {
+                            "id": "1-2932676106",
+                            "label": "Ovince St. Preux By Decision",
+                            "oddsAmerican": "+350",
+                            "oddsDecimal": 4.5,
+                            "oddsFractional": "7/2",
+                            "participant": "Ovince St. Preux By Decision"
+                        },
+                        {
+                            "id": "1-2932676120",
+                            "label": "Tanner Boser - Round 1",
+                            "oddsAmerican": "+500",
+                            "oddsDecimal": 6,
+                            "oddsFractional": "5/1",
+                            "participant": "Tanner Boser - Round 1"
+                        },
+                        {
+                            "id": "1-2932676097",
+                            "label": "Ovince St. Preux - Round 1",
+                            "oddsAmerican": "+650",
+                            "oddsDecimal": 7.5,
+                            "oddsFractional": "13/2",
+                            "participant": "Ovince St. Preux - Round 1"
+                        },
+                        {
+                            "id": "1-2932676121",
+                            "label": "Tanner Boser - Round 2",
+                            "oddsAmerican": "+800",
+                            "oddsDecimal": 9,
+                            "oddsFractional": "8/1",
+                            "participant": "Tanner Boser - Round 2"
+                        },
+                        {
+                            "id": "1-2932676098",
+                            "label": "Ovince St. Preux - Round 2",
+                            "oddsAmerican": "+900",
+                            "oddsDecimal": 10,
+                            "oddsFractional": "9/1",
+                            "participant": "Ovince St. Preux - Round 2"
+                        },
+                        {
+                            "id": "1-2932676122",
+                            "label": "Tanner Boser - Round 3",
+                            "oddsAmerican": "+1200",
+                            "oddsDecimal": 13,
+                            "oddsFractional": "12/1",
+                            "participant": "Tanner Boser - Round 3"
+                        },
+                        {
+                            "id": "1-2932676099",
+                            "label": "Ovince St. Preux - Round 3",
+                            "oddsAmerican": "+1400",
+                            "oddsDecimal": 15,
+                            "oddsFractional": "14/1",
+                            "participant": "Ovince St. Preux - Round 3"
+                        },
+                        {
+                            "id": "1-2932676130",
+                            "label": "Tie",
+                            "oddsAmerican": "+6600",
+                            "oddsDecimal": 67,
+                            "oddsFractional": "66/1",
+                            "participant": "Tie"
+                        }
+                    ]
+                },
+                {
+                    "id": "1-2268594666",
+                    "label": "Winning group of rounds",
+                    "outcomes": [
+                        {
+                            "id": "1-2932676405",
+                            "label": "Tanner Boser - Round 3-Decision",
+                            "oddsAmerican": "+145",
+                            "oddsDecimal": 2.45,
+                            "oddsFractional": "29/20",
+                            "participant": "Tanner Boser - Round 3-Decision"
+                        },
+                        {
+                            "id": "1-2932676408",
+                            "label": "Tanner Boser - Rounds 1-2",
+                            "oddsAmerican": "+260",
+                            "oddsDecimal": 3.6,
+                            "oddsFractional": "13/5",
+                            "participant": "Tanner Boser - Rounds 1-2"
+                        },
+                        {
+                            "id": "1-2932676382",
+                            "label": "Ovince St. Preux - Round 3-Decision",
+                            "oddsAmerican": "+280",
+                            "oddsDecimal": 3.8,
+                            "oddsFractional": "14/5",
+                            "participant": "Ovince St. Preux - Round 3-Decision"
+                        },
+                        {
+                            "id": "1-2932676386",
+                            "label": "Ovince St. Preux - Rounds 1-2",
+                            "oddsAmerican": "+333",
+                            "oddsDecimal": 4.33,
+                            "oddsFractional": "33/10",
+                            "participant": "Ovince St. Preux - Rounds 1-2"
+                        },
+                        {
+                            "id": "1-2932676414",
+                            "label": "Tie",
+                            "oddsAmerican": "+6600",
+                            "oddsDecimal": 67,
+                            "oddsFractional": "66/1",
+                            "participant": "Tie"
+                        }
+                    ]
+                },
+                {
+                    "id": "1-2269363811",
+                    "label": "Fight to End in the First 60 Seconds of Round 1",
+                    "outcomes": [
+                        {
+                            "id": "1-2935227560",
+                            "label": "Yes",
+                            "oddsAmerican": "+1200",
+                            "oddsDecimal": 13,
+                            "oddsFractional": "12/1"
+                        }
+                    ]
                 }
             ]
         },
         {
-            "id": 179872275,
-            "name": "Josh Parisian - Roque Martinez",
-            "homeTeamName": "Josh Parisian",
-            "awayTeamName": "Roque Martinez",
-            "startDate": "2021-06-19T23:00:00.0000000Z",
+            "id": 179885772,
+            "name": "Daniel Pineda - Andre Fili",
+            "homeTeamName": "Daniel Pineda",
+            "awayTeamName": "Andre Fili",
+            "startDate": "2021-06-26T21:15:00.0000000Z",
             "offers": [
                 {
-                    "id": "1-2267752668",
-                    "label": "Moneyline",
+                    "id": "1-2269368446",
+                    "label": "Fight to End in the First 60 Seconds of Round 1",
                     "outcomes": [
                         {
-                            "id": "1-2929893575",
-                            "label": "Josh Parisian",
-                            "oddsAmerican": "-132",
-                            "oddsDecimal": 1.7600,
+                            "id": "1-2935249190",
+                            "label": "Yes",
+                            "oddsAmerican": "+1200",
+                            "oddsDecimal": 13,
+                            "oddsFractional": "12/1"
+                        }
+                    ]
+                },
+                {
+                    "id": "1-2268592535",
+                    "label": "Alternate winning group of rounds",
+                    "outcomes": [
+                        {
+                            "id": "1-2932665215",
+                            "label": "Round 3-Decision",
+                            "oddsAmerican": "-190",
+                            "oddsDecimal": 1.53,
+                            "oddsFractional": "13/25",
+                            "participant": "Round 3-Decision"
+                        },
+                        {
+                            "id": "1-2932665216",
+                            "label": "Rounds 1-2",
+                            "oddsAmerican": "+135",
+                            "oddsDecimal": 2.35,
+                            "oddsFractional": "27/20",
+                            "participant": "Rounds 1-2"
+                        }
+                    ]
+                },
+                {
+                    "id": "1-2268592408",
+                    "label": "Winning group of rounds",
+                    "outcomes": [
+                        {
+                            "id": "1-2932664673",
+                            "label": "Andre Fili - Round 3-Decision",
+                            "oddsAmerican": "+125",
+                            "oddsDecimal": 2.25,
+                            "oddsFractional": "5/4",
+                            "participant": "Andre Fili - Round 3-Decision"
+                        },
+                        {
+                            "id": "1-2932664677",
+                            "label": "Andre Fili - Rounds 1-2",
+                            "oddsAmerican": "+215",
+                            "oddsDecimal": 3.15,
+                            "oddsFractional": "43/20",
+                            "participant": "Andre Fili - Rounds 1-2"
+                        },
+                        {
+                            "id": "1-2932664658",
+                            "label": "Daniel Pineda - Round 3-Decision",
+                            "oddsAmerican": "+333",
+                            "oddsDecimal": 4.33,
+                            "oddsFractional": "33/10",
+                            "participant": "Daniel Pineda - Round 3-Decision"
+                        },
+                        {
+                            "id": "1-2932664659",
+                            "label": "Daniel Pineda - Rounds 1-2",
+                            "oddsAmerican": "+425",
+                            "oddsDecimal": 5.25,
+                            "oddsFractional": "17/4",
+                            "participant": "Daniel Pineda - Rounds 1-2"
+                        },
+                        {
+                            "id": "1-2932664692",
+                            "label": "Tie",
+                            "oddsAmerican": "+5000",
+                            "oddsDecimal": 51,
+                            "oddsFractional": "50/1",
+                            "participant": "Tie"
+                        }
+                    ]
+                },
+                {
+                    "id": "1-2268592253",
+                    "label": "Winning round",
+                    "outcomes": [
+                        {
+                            "id": "1-2932664148",
+                            "label": "Andre Fili By Decision",
+                            "oddsAmerican": "+162",
+                            "oddsDecimal": 2.62,
+                            "oddsFractional": "8/5",
+                            "participant": "Andre Fili By Decision"
+                        },
+                        {
+                            "id": "1-2932664129",
+                            "label": "Daniel Pineda By Decision",
+                            "oddsAmerican": "+400",
+                            "oddsDecimal": 5,
+                            "oddsFractional": "4/1",
+                            "participant": "Daniel Pineda By Decision"
+                        },
+                        {
+                            "id": "1-2932664139",
+                            "label": "Andre Fili - Round 1",
+                            "oddsAmerican": "+450",
+                            "oddsDecimal": 5.5,
+                            "oddsFractional": "9/2",
+                            "participant": "Andre Fili - Round 1"
+                        },
+                        {
+                            "id": "1-2932664140",
+                            "label": "Andre Fili - Round 2",
+                            "oddsAmerican": "+650",
+                            "oddsDecimal": 7.5,
+                            "oddsFractional": "13/2",
+                            "participant": "Andre Fili - Round 2"
+                        },
+                        {
+                            "id": "1-2932664124",
+                            "label": "Daniel Pineda - Round 1",
+                            "oddsAmerican": "+800",
+                            "oddsDecimal": 9,
+                            "oddsFractional": "8/1",
+                            "participant": "Daniel Pineda - Round 1"
+                        },
+                        {
+                            "id": "1-2932664141",
+                            "label": "Andre Fili - Round 3",
+                            "oddsAmerican": "+900",
+                            "oddsDecimal": 10,
+                            "oddsFractional": "9/1",
+                            "participant": "Andre Fili - Round 3"
+                        },
+                        {
+                            "id": "1-2932664125",
+                            "label": "Daniel Pineda - Round 2",
+                            "oddsAmerican": "+1200",
+                            "oddsDecimal": 13,
+                            "oddsFractional": "12/1",
+                            "participant": "Daniel Pineda - Round 2"
+                        },
+                        {
+                            "id": "1-2932664126",
+                            "label": "Daniel Pineda - Round 3",
+                            "oddsAmerican": "+2000",
+                            "oddsDecimal": 21,
+                            "oddsFractional": "20/1",
+                            "participant": "Daniel Pineda - Round 3"
+                        },
+                        {
+                            "id": "1-2932664161",
+                            "label": "Tie",
+                            "oddsAmerican": "+5000",
+                            "oddsDecimal": 51,
+                            "oddsFractional": "50/1",
+                            "participant": "Tie"
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "id": 179801914,
+            "name": "Ciryl Gane - Alexander Volkov",
+            "homeTeamName": "Ciryl Gane",
+            "awayTeamName": "Alexander Volkov",
+            "startDate": "2021-06-26T23:00:00.0000000Z",
+            "offers": [
+                {
+                    "id": "1-2261116899",
+                    "label": "Alternate winning round",
+                    "outcomes": [
+                        {
+                            "id": "1-2907627005",
+                            "label": "Decision",
+                            "oddsAmerican": "-106",
+                            "oddsDecimal": 1.95,
+                            "oddsFractional": "19/20",
+                            "participant": "Decision"
+                        },
+                        {
+                            "id": "1-2907627006",
+                            "label": "Round 1",
+                            "oddsAmerican": "+333",
+                            "oddsDecimal": 4.33,
+                            "oddsFractional": "33/10",
+                            "participant": "Round 1"
+                        },
+                        {
+                            "id": "1-2907627007",
+                            "label": "Round 2",
+                            "oddsAmerican": "+550",
+                            "oddsDecimal": 6.5,
+                            "oddsFractional": "11/2",
+                            "participant": "Round 2"
+                        },
+                        {
+                            "id": "1-2907627008",
+                            "label": "Round 3",
+                            "oddsAmerican": "+750",
+                            "oddsDecimal": 8.5,
+                            "oddsFractional": "15/2",
+                            "participant": "Round 3"
+                        },
+                        {
+                            "id": "1-2907627009",
+                            "label": "Round 4",
+                            "oddsAmerican": "+900",
+                            "oddsDecimal": 10,
+                            "oddsFractional": "9/1",
+                            "participant": "Round 4"
+                        },
+                        {
+                            "id": "1-2907627010",
+                            "label": "Round 5",
+                            "oddsAmerican": "+1400",
+                            "oddsDecimal": 15,
+                            "oddsFractional": "14/1",
+                            "participant": "Round 5"
+                        }
+                    ]
+                },
+                {
+                    "id": "1-2261113602",
+                    "label": "Winning group of rounds",
+                    "outcomes": [
+                        {
+                            "id": "1-2907622838",
+                            "label": "Ciryl Gane - Round 5-Decision",
+                            "oddsAmerican": "+175",
+                            "oddsDecimal": 2.75,
+                            "oddsFractional": "7/4",
+                            "participant": "Ciryl Gane - Round 5-Decision"
+                        },
+                        {
+                            "id": "1-2907622866",
+                            "label": "Alexander Volkov - Rounds 5-Decision",
+                            "oddsAmerican": "+350",
+                            "oddsDecimal": 4.5,
+                            "oddsFractional": "7/2",
+                            "participant": "Alexander Volkov - Rounds 5-Decision"
+                        },
+                        {
+                            "id": "1-2907622839",
+                            "label": "Ciryl Gane - Rounds 1-2",
+                            "oddsAmerican": "+400",
+                            "oddsDecimal": 5,
+                            "oddsFractional": "4/1",
+                            "participant": "Ciryl Gane - Rounds 1-2"
+                        },
+                        {
+                            "id": "1-2907622864",
+                            "label": "Alexander Volkov - Rounds 1-2",
+                            "oddsAmerican": "+450",
+                            "oddsDecimal": 5.5,
+                            "oddsFractional": "9/2",
+                            "participant": "Alexander Volkov - Rounds 1-2"
+                        },
+                        {
+                            "id": "1-2907622840",
+                            "label": "Ciryl Gane - Rounds 3-4",
+                            "oddsAmerican": "+700",
+                            "oddsDecimal": 8,
+                            "oddsFractional": "7/1",
+                            "participant": "Ciryl Gane - Rounds 3-4"
+                        },
+                        {
+                            "id": "1-2907622865",
+                            "label": "Alexander Volkov - Rounds 3-4",
+                            "oddsAmerican": "+1000",
+                            "oddsDecimal": 11,
+                            "oddsFractional": "10/1",
+                            "participant": "Alexander Volkov - Rounds 3-4"
+                        },
+                        {
+                            "id": "1-2907622880",
+                            "label": "Tie",
+                            "oddsAmerican": "+6600",
+                            "oddsDecimal": 67,
+                            "oddsFractional": "66/1",
+                            "participant": "Tie"
+                        }
+                    ]
+                },
+                {
+                    "id": "1-2261116828",
+                    "label": "Alternate winning group of rounds",
+                    "outcomes": [
+                        {
+                            "id": "1-2907626743",
+                            "label": "Round 5-Decision",
+                            "oddsAmerican": "-134",
+                            "oddsDecimal": 1.75,
                             "oddsFractional": "3/4",
-                            "participant": "Josh Parisian"
+                            "participant": "Round 5-Decision"
                         },
                         {
-                            "id": "1-2929893577",
-                            "label": "Roque Martinez",
-                            "oddsAmerican": "+107",
-                            "oddsDecimal": 2.0700,
-                            "oddsFractional": "21/20",
-                            "participant": "Roque Martinez"
+                            "id": "1-2907626742",
+                            "label": "Rounds 1-2",
+                            "oddsAmerican": "+195",
+                            "oddsDecimal": 2.95,
+                            "oddsFractional": "39/20",
+                            "participant": "Rounds 1-2"
+                        },
+                        {
+                            "id": "1-2907626744",
+                            "label": "Rounds 3-4",
+                            "oddsAmerican": "+425",
+                            "oddsDecimal": 5.25,
+                            "oddsFractional": "17/4",
+                            "participant": "Rounds 3-4"
                         }
-                    ],
-                    "main": true
+                    ]
+                },
+                {
+                    "id": "1-2269362656",
+                    "label": "Fight to End in the First 60 Seconds of Round 1",
+                    "outcomes": [
+                        {
+                            "id": "1-2935223961",
+                            "label": "Yes",
+                            "oddsAmerican": "+1600",
+                            "oddsDecimal": 17,
+                            "oddsFractional": "16/1"
+                        }
+                    ]
+                },
+                {
+                    "id": "1-2261113578",
+                    "label": "Winning round",
+                    "outcomes": [
+                        {
+                            "id": "1-2907622724",
+                            "label": "Ciryl Gane By Decision",
+                            "oddsAmerican": "+188",
+                            "oddsDecimal": 2.88,
+                            "oddsFractional": "15/8",
+                            "participant": "Ciryl Gane By Decision"
+                        },
+                        {
+                            "id": "1-2907622750",
+                            "label": "Alexander Volkov By Decision",
+                            "oddsAmerican": "+375",
+                            "oddsDecimal": 4.75,
+                            "oddsFractional": "15/4",
+                            "participant": "Alexander Volkov By Decision"
+                        },
+                        {
+                            "id": "1-2907622715",
+                            "label": "Ciryl Gane - Round 1",
+                            "oddsAmerican": "+700",
+                            "oddsDecimal": 8,
+                            "oddsFractional": "7/1",
+                            "participant": "Ciryl Gane - Round 1"
+                        },
+                        {
+                            "id": "1-2907622741",
+                            "label": "Alexander Volkov - Round 1",
+                            "oddsAmerican": "+750",
+                            "oddsDecimal": 8.5,
+                            "oddsFractional": "15/2",
+                            "participant": "Alexander Volkov - Round 1"
+                        },
+                        {
+                            "id": "1-2907622716",
+                            "label": "Ciryl Gane - Round 2",
+                            "oddsAmerican": "+1000",
+                            "oddsDecimal": 11,
+                            "oddsFractional": "10/1",
+                            "participant": "Ciryl Gane - Round 2"
+                        },
+                        {
+                            "id": "1-2907622717",
+                            "label": "Ciryl Gane - Round 3",
+                            "oddsAmerican": "+1200",
+                            "oddsDecimal": 13,
+                            "oddsFractional": "12/1",
+                            "participant": "Ciryl Gane - Round 3"
+                        },
+                        {
+                            "id": "1-2907622742",
+                            "label": "Alexander Volkov - Round 2",
+                            "oddsAmerican": "+1200",
+                            "oddsDecimal": 13,
+                            "oddsFractional": "12/1",
+                            "participant": "Alexander Volkov - Round 2"
+                        },
+                        {
+                            "id": "1-2907622719",
+                            "label": "Ciryl Gane - Round 4",
+                            "oddsAmerican": "+1600",
+                            "oddsDecimal": 17,
+                            "oddsFractional": "16/1",
+                            "participant": "Ciryl Gane - Round 4"
+                        },
+                        {
+                            "id": "1-2907622743",
+                            "label": "Alexander Volkov - Round 3",
+                            "oddsAmerican": "+1800",
+                            "oddsDecimal": 19,
+                            "oddsFractional": "18/1",
+                            "participant": "Alexander Volkov - Round 3"
+                        },
+                        {
+                            "id": "1-2907622720",
+                            "label": "Ciryl Gane - Round 5",
+                            "oddsAmerican": "+2200",
+                            "oddsDecimal": 23,
+                            "oddsFractional": "22/1",
+                            "participant": "Ciryl Gane - Round 5"
+                        },
+                        {
+                            "id": "1-2907622745",
+                            "label": "Alexander Volkov - Round 4",
+                            "oddsAmerican": "+2200",
+                            "oddsDecimal": 23,
+                            "oddsFractional": "22/1",
+                            "participant": "Alexander Volkov - Round 4"
+                        },
+                        {
+                            "id": "1-2907622746",
+                            "label": "Alexander Volkov - Round 5",
+                            "oddsAmerican": "+3300",
+                            "oddsDecimal": 34,
+                            "oddsFractional": "33/1",
+                            "participant": "Alexander Volkov - Round 5"
+                        },
+                        {
+                            "id": "1-2907622763",
+                            "label": "Tie",
+                            "oddsAmerican": "+6600",
+                            "oddsDecimal": 67,
+                            "oddsFractional": "66/1",
+                            "participant": "Tie"
+                        }
+                    ]
                 }
             ]
         },
         {
-            "id": 179804381,
-            "name": "Gilbert Burns - Stephen Thompson",
-            "homeTeamName": "Gilbert Burns",
-            "awayTeamName": "Stephen Thompson",
-            "startDate": "2021-07-11T02:00:00.0000000Z",
+            "id": 179885773,
+            "name": "Nicolas Dalby - Tim Means",
+            "homeTeamName": "Nicolas Dalby",
+            "awayTeamName": "Tim Means",
+            "startDate": "2021-06-26T20:45:00.0000000Z",
             "offers": [
                 {
-                    "id": "1-2261373295",
-                    "label": "Moneyline",
+                    "id": "1-2268594272",
+                    "label": "Alternate winning group of rounds",
                     "outcomes": [
                         {
-                            "id": "1-2908511496",
-                            "label": "Gilbert Burns",
-                            "oddsAmerican": "+112",
-                            "oddsDecimal": 2.1200,
-                            "oddsFractional": "11/10",
-                            "participant": "Gilbert Burns"
+                            "id": "1-2932675030",
+                            "label": "Round 3-Decision",
+                            "oddsAmerican": "-250",
+                            "oddsDecimal": 1.4,
+                            "oddsFractional": "2/5",
+                            "participant": "Round 3-Decision"
                         },
                         {
-                            "id": "1-2908511498",
-                            "label": "Stephen Thompson",
-                            "oddsAmerican": "-139",
-                            "oddsDecimal": 1.7200,
-                            "oddsFractional": "7/10",
-                            "participant": "Stephen Thompson"
+                            "id": "1-2932675031",
+                            "label": "Rounds 1-2",
+                            "oddsAmerican": "+175",
+                            "oddsDecimal": 2.75,
+                            "oddsFractional": "7/4",
+                            "participant": "Rounds 1-2"
                         }
-                    ],
-                    "main": true
-                }
-            ]
-        },
-        {
-            "id": 179872282,
-            "name": "Khaos Williams - Matthew Semelsberger",
-            "homeTeamName": "Khaos Williams",
-            "awayTeamName": "Matthew Semelsberger",
-            "startDate": "2021-06-19T23:00:00.0000000Z",
-            "offers": [
+                    ]
+                },
                 {
-                    "id": "1-2267754216",
-                    "label": "Moneyline",
+                    "id": "1-2268594214",
+                    "label": "Winning group of rounds",
                     "outcomes": [
                         {
-                            "id": "1-2929898348",
-                            "label": "Khaos Williams",
-                            "oddsAmerican": "-177",
-                            "oddsDecimal": 1.5700,
-                            "oddsFractional": "11/20",
-                            "participant": "Khaos Williams"
+                            "id": "1-2932674791",
+                            "label": "Tim Means - Round 3-Decision",
+                            "oddsAmerican": "+138",
+                            "oddsDecimal": 2.38,
+                            "oddsFractional": "11/8",
+                            "participant": "Tim Means - Round 3-Decision"
                         },
                         {
-                            "id": "1-2929898350",
-                            "label": "Matthew Semelsberger",
-                            "oddsAmerican": "+140",
-                            "oddsDecimal": 2.4000,
-                            "oddsFractional": "7/5",
-                            "participant": "Matthew Semelsberger"
+                            "id": "1-2932674770",
+                            "label": "Nicolas Dalby - Round 3-Decision",
+                            "oddsAmerican": "+200",
+                            "oddsDecimal": 3,
+                            "oddsFractional": "2/1",
+                            "participant": "Nicolas Dalby - Round 3-Decision"
+                        },
+                        {
+                            "id": "1-2932674795",
+                            "label": "Tim Means - Rounds 1-2",
+                            "oddsAmerican": "+325",
+                            "oddsDecimal": 4.25,
+                            "oddsFractional": "13/4",
+                            "participant": "Tim Means - Rounds 1-2"
+                        },
+                        {
+                            "id": "1-2932674772",
+                            "label": "Nicolas Dalby - Rounds 1-2",
+                            "oddsAmerican": "+450",
+                            "oddsDecimal": 5.5,
+                            "oddsFractional": "9/2",
+                            "participant": "Nicolas Dalby - Rounds 1-2"
+                        },
+                        {
+                            "id": "1-2932674810",
+                            "label": "Tie",
+                            "oddsAmerican": "+5000",
+                            "oddsDecimal": 51,
+                            "oddsFractional": "50/1",
+                            "participant": "Tie"
                         }
-                    ],
-                    "main": true
+                    ]
+                },
+                {
+                    "id": "1-2269370269",
+                    "label": "Fight to End in the First 60 Seconds of Round 1",
+                    "outcomes": [
+                        {
+                            "id": "1-2935254980",
+                            "label": "Yes",
+                            "oddsAmerican": "+1400",
+                            "oddsDecimal": 15,
+                            "oddsFractional": "14/1"
+                        }
+                    ]
+                },
+                {
+                    "id": "1-2268594161",
+                    "label": "Winning round",
+                    "outcomes": [
+                        {
+                            "id": "1-2932674608",
+                            "label": "Tim Means By Decision",
+                            "oddsAmerican": "+165",
+                            "oddsDecimal": 2.65,
+                            "oddsFractional": "33/20",
+                            "participant": "Tim Means By Decision"
+                        },
+                        {
+                            "id": "1-2932674585",
+                            "label": "Nicolas Dalby By Decision",
+                            "oddsAmerican": "+225",
+                            "oddsDecimal": 3.25,
+                            "oddsFractional": "9/4",
+                            "participant": "Nicolas Dalby By Decision"
+                        },
+                        {
+                            "id": "1-2932674599",
+                            "label": "Tim Means - Round 1",
+                            "oddsAmerican": "+600",
+                            "oddsDecimal": 7,
+                            "oddsFractional": "6/1",
+                            "participant": "Tim Means - Round 1"
+                        },
+                        {
+                            "id": "1-2932674578",
+                            "label": "Nicolas Dalby - Round 1",
+                            "oddsAmerican": "+850",
+                            "oddsDecimal": 9.5,
+                            "oddsFractional": "17/2",
+                            "participant": "Nicolas Dalby - Round 1"
+                        },
+                        {
+                            "id": "1-2932674600",
+                            "label": "Tim Means - Round 2",
+                            "oddsAmerican": "+900",
+                            "oddsDecimal": 10,
+                            "oddsFractional": "9/1",
+                            "participant": "Tim Means - Round 2"
+                        },
+                        {
+                            "id": "1-2932674579",
+                            "label": "Nicolas Dalby - Round 2",
+                            "oddsAmerican": "+1200",
+                            "oddsDecimal": 13,
+                            "oddsFractional": "12/1",
+                            "participant": "Nicolas Dalby - Round 2"
+                        },
+                        {
+                            "id": "1-2932674601",
+                            "label": "Tim Means - Round 3",
+                            "oddsAmerican": "+1200",
+                            "oddsDecimal": 13,
+                            "oddsFractional": "12/1",
+                            "participant": "Tim Means - Round 3"
+                        },
+                        {
+                            "id": "1-2932674580",
+                            "label": "Nicolas Dalby - Round 3",
+                            "oddsAmerican": "+1800",
+                            "oddsDecimal": 19,
+                            "oddsFractional": "18/1",
+                            "participant": "Nicolas Dalby - Round 3"
+                        },
+                        {
+                            "id": "1-2932674621",
+                            "label": "Tie",
+                            "oddsAmerican": "+5000",
+                            "oddsDecimal": 51,
+                            "oddsFractional": "50/1",
+                            "participant": "Tie"
+                        }
+                    ]
                 }
             ]
         }

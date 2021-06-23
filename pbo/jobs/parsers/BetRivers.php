@@ -128,7 +128,8 @@ class ParserJob extends ParserJobBase
 
     private function parseProp($event, string $team1_name, string $team2_name, $betoffer): bool
     {
-        if (count($betoffer->outcomes) == 2) {
+        if (count($betoffer->outcomes) == 2 &&
+            in_array($betoffer->betOfferType, ["Yes/No", "Over/Under", "Head to Head"])) {
             //Two way prop
             if (
                 empty($betoffer->outcomes[0]->label) ||
