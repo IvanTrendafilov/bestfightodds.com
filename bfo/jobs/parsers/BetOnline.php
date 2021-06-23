@@ -204,6 +204,13 @@ class ParserJob extends ParserJobBase
     {
         $correlation_id = trim(strtolower((string) $prop->league));
 
+        if (str_starts_with((string) $prop->league, 'BKFC')
+        || str_starts_with((string) $prop->league, 'Fight2Win')
+        || str_starts_with((string) $prop->league, 'WNO')
+        || str_starts_with((string) $prop->league, 'SUG')) {
+            return false;
+        }
+
         if (
             count($prop->participants) == 2
             && (trim(strtolower((string) $prop->participants[0]->name)) == 'yes' && trim(strtolower((string) $prop->participants[1]->name)) == 'no')
