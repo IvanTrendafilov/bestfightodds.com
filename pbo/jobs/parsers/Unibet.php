@@ -163,8 +163,8 @@ class ParserJob extends ParserJobBase
                 $label2 = ParseTools::convertCommaNameToFullName($betoffer->outcomes[1]->label);
 
                 $parsed_prop = new ParsedProp(
-                    $event_name_adjusted . ' :: ' . (isset($betoffer->outcomes[0]->participant) ? ParseTools::convertCommaNameToFullName($betoffer->outcomes[0]->participant) . ' ' : '') . $betoffer->criterion->label . ' : ' . $label1,
-                    $event_name_adjusted . ' :: ' . (isset($betoffer->outcomes[1]->participant) ? ParseTools::convertCommaNameToFullName($betoffer->outcomes[1]->participant) . ' ' : '') . $betoffer->criterion->label . ' : ' . $label2,
+                    $event_name_adjusted . ' :: ' . (isset($betoffer->outcomes[0]->participant) ? ParseTools::convertCommaNameToFullName($betoffer->outcomes[0]->participant) . ' ' : '') . $betoffer->criterion->label . (isset($betoffer->outcomes[0]->line) ? ' ' . $betoffer->outcomes[0]->line : '') . ' : ' . $label1,
+                    $event_name_adjusted . ' :: ' . (isset($betoffer->outcomes[1]->participant) ? ParseTools::convertCommaNameToFullName($betoffer->outcomes[1]->participant) . ' ' : '') . $betoffer->criterion->label . (isset($betoffer->outcomes[1]->line) ? ' ' . $betoffer->outcomes[1]->line : '') . ' : ' . $label2,
                     $betoffer->outcomes[0]->oddsAmerican,
                     $betoffer->outcomes[1]->oddsAmerican
                 );
@@ -213,7 +213,7 @@ class ParserJob extends ParserJobBase
                     }
 
                     $parsed_prop = new ParsedProp(
-                        $event_name_adjusted . ' :: ' . (isset($outcome->participant) ? ParseTools::convertCommaNameToFullName($outcome->participant) . ' ' : '') . $betoffer->criterion->label . ' : ' . $new_label,
+                        $event_name_adjusted . ' :: ' . (isset($outcome->participant) ? ParseTools::convertCommaNameToFullName($outcome->participant) . ' ' : '') . $betoffer->criterion->label . (isset($outcome->line) ? ' ' . $outcome->line : '') . ' : ' . $new_label,
                         '',
                         $outcome->oddsAmerican,
                         '-99999'
