@@ -6,11 +6,6 @@
  * Bookie: 5Dimes
  * Sport: MMA
  *
- * Moneylines: Yes
- * Props: Yes
- * 
- * URL: http://lines.5dimes.com/linesfeed/getlinefeeds.aspx?uid=bestfightodds5841&Type=ReducedReplace
- *
  * Timezone: EDT (UTC -4) but including timezone offset so properly converted
  * 
  */
@@ -29,7 +24,7 @@ define('BOOKIE_NAME', '5dimes');
 define('BOOKIE_ID', 1);
 define(
     'BOOKIE_URLS',
-    ['all' => 'http://lines.5dimes.com/linesfeed/getlinefeeds.aspx?uid=bestfightodds5841&Type=ReducedReplace']
+    ['all' => 'http://lines.5dimes.com/linesfeed/getlinefeeds.aspx?uid=5dimesnews&Type=ReducedReplace']
 );
 define(
     'BOOKIE_MOCKFILES',
