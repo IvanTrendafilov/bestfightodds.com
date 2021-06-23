@@ -148,7 +148,8 @@ class ParserJob extends ParserJobBase
             $event_name_adjusted = ParseTools::convertCommaNameToFullName($parts[0]) . ' - ' . ParseTools::convertCommaNameToFullName($parts[1]);
         }
 
-        if (count($betoffer->outcomes) == 2) {
+        if (count($betoffer->outcomes) == 2 &&
+            in_array($betoffer->betOfferType->name, ["Yes/No", "Over/Under", "Head to Head"])) {
             //Two way prop
             if (
                 !empty($betoffer->outcomes[0]->label) &&
