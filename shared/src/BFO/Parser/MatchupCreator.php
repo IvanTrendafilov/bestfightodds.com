@@ -210,6 +210,11 @@ class MatchupCreator
 
     private function createMatchup(string $team1, string $team2, object $matched_event, object $date_obj, array $in_scheduler)
     {
+        //Skip if names are the same
+        if (strtolower(trim($team1)) == strtolower(trim($team2))) {
+            return null;
+        }
+
         //Check that date is not in the past
         if ($date_obj > new \DateTime()) {
             $new_matchup = null;
