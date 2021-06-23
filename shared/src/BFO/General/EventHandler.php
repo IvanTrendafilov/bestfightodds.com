@@ -83,7 +83,8 @@ class EventHandler
             $team2_id = TeamHandler::createTeam($matchup_obj->getTeam(2));
         }
 
-        if (!$team1_id || !$team2_id) {
+        if (!$team1_id || !$team2_id ||
+            $team1_id == $team2_id) {
             return null;
         }
 
