@@ -208,6 +208,14 @@ class ParseTools
      */
     public static function convertCommaNameToFullName(string $name): string
     {
+        //Workaround for comma separate prop after actual name
+        $pos = strpos($name, 'KO,');
+        if ($pos) {
+            $first_part = substr($name, 0, $pos);
+            $last_part = substr($name, $pos);
+            return self::convertCommaNameToFullName($first_part) . $last_part;
+        }
+
         $comma_pos = strpos($name, ',');
         if ($comma_pos) {
             return trim(substr($name, $comma_pos + 1))
