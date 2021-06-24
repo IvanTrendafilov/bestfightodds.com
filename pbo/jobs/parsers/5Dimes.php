@@ -20,7 +20,7 @@ use BFO\Parser\ParsedMatchup;
 use BFO\Parser\ParsedProp;
 use BFO\Parser\Jobs\ParserJobBase;
 
-define('BOOKIE_NAME', '5dimes');
+define('BOOKIE_NAME', '5d');
 define('BOOKIE_ID', 1);
 define(
     'BOOKIE_URLS',
