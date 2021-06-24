@@ -40,7 +40,7 @@
 				<h5 class="card-title">Scheduler manual actions</h5>
 				<h6 class="card-subtitle text-muted">The scheduler has suggested the following changes to be made</h6>
 			</div>
-			<button class="btn btn-primary" onclick="$('button[onclick^=\'maAdd\']').click();">Accept all <b>Create</b></button>
+			<button class="btn btn-primary" onclick="$('button[onclick^=\'maRedateEvent\'],[onclick^=\'maMoveMatchup\']').click();">Accept all <b>Move</b> and <b>Change date</b></button>
 		</div>
 		<div class="table-responsive p-2">
 			<table class="table table-sm table-hover">
