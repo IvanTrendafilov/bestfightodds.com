@@ -50,7 +50,16 @@ class EventHandler
         //Get a matching event based on the first page of the event name (e.g. UFC)
         $event_pieces = explode(' ', strtoupper($event_name));
         $event_search = EventHandler::searchEvent($event_pieces[0], $future_only);
-        if (empty($event_search)) {
+        if ($event_search != null) {
+            foreach ($event_search as $event) {
+                if ($event->getDate() == $event_date) {
+                    return $event;
+                }
+            }
+        }
+        $event_search = null;
+
+        if (!PARSE_USE_DATE_EVENTS) { 
             //No match found on main event name. Do alternative search on condensed event name (e.g. Cage Warriors = CW)
             $arr = explode(":", $event_name);
             $arr = explode(' ', $arr[0]);
@@ -63,12 +72,44 @@ class EventHandler
             if (strlen($shortened) >= 2) {
                 $event_search = EventHandler::searchEvent($shortened, $future_only);
             }
-        }
-        foreach ($event_search as $event) {
-            if ($event->getDate() == $event_date) {
-                return $event;
+
+            if ($event_search != null) {
+                foreach ($event_search as $event) {
+                    if ($event->getDate() == $event_date) {
+                        return $event;
+                    }
+                }
+            }
+
+            //No match on shortened. Check all upcoming and shorten the stored event names for comparisson
+            $stored_events = EventHandler::getEvents(future_events_only: true);
+            $event_search = [];
+            foreach ($stored_events as $stored_event) {
+                //Shorten the stored name
+                $arr = explode(":", $stored_event->getName());
+                $arr = explode(' ', $arr[0]);
+                $shortened = '';
+                foreach ($arr as $piece) {
+                    if (strlen($piece) > 0 && !is_numeric($piece) && ctype_alpha($piece[0])) {
+                        $shortened .= $piece[0];
+                    }
+                }
+                if (
+                    strlen($shortened) >= 2 && $stored_event->getID() != PARSE_FUTURESEVENT_ID
+                    && $shortened == $event_pieces[0]
+                ) {
+                    //Found a match on shortened for stored event in database
+                    $event_search[] = $stored_event;
+                }
+            }
+
+            foreach ($event_search as $event) {
+                if ($event->getDate() == $event_date) {
+                    return $event;
+                }
             }
         }
+
         return null;
     }
 
@@ -98,8 +139,10 @@ class EventHandler
             $team2_id = TeamHandler::createTeam($matchup_obj->getTeam(2));
         }
 
-        if (!$team1_id || !$team2_id ||
-            $team1_id == $team2_id) {
+        if (
+            !$team1_id || !$team2_id ||
+            $team1_id == $team2_id
+        ) {
             return null;
         }
 

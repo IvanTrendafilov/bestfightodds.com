@@ -165,7 +165,8 @@ class ParserJob extends ParserJobBase
 
                         //Add header of matchup as metadata
                         if (isset($event_node->Header)) {
-                            $parsed_matchup->setMetaData('event_name', (string) $event_node->Header);
+                            $event_name_pieces = explode(' - ', (string) $event_node->Header);
+                            $parsed_matchup->setMetaData('event_name', $event_name_pieces[0]);
                         }
 
                         $parsed_sport->addParsedMatchup($parsed_matchup);
