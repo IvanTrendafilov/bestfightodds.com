@@ -76,7 +76,9 @@ class ParserJob extends ParserJobBase
         //Loop through and store event references
         $stored_events = [];
         foreach ($json->events as $event) {
-            $stored_events[$event->id] = $event;
+            if ($event->sport == 'BOXING') {
+                $stored_events[$event->id] = $event;
+            }
         }
 
         //Loop through betoffers and parse these
@@ -96,9 +98,10 @@ class ParserJob extends ParserJobBase
 
     private function parseBetOffer($betoffer, array &$stored_events)
     {
-        $event = $stored_events[$betoffer->eventId];
+        $event = $stored_events[$betoffer->eventId] ?? null;
 
         if (isset(
+            $event,
             $event->homeName,
             $event->start
         )) {
