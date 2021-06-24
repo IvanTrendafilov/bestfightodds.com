@@ -56,7 +56,7 @@ class EventHandler
             $arr = explode(' ', $arr[0]);
             $shortened = '';
             foreach ($arr as $piece) {
-                if (!is_numeric($piece)) {
+                if (strlen($piece) > 0 && !is_numeric($piece) && ctype_alpha($piece[0])) {
                     $shortened .= $piece[0];
                 }
             }
