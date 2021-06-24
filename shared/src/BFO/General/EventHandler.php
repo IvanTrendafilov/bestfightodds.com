@@ -47,8 +47,23 @@ class EventHandler
 
     public static function getMatchingEvent(string $event_name, string $event_date, bool $future_only = true): ?Event
     {
+        //Get a matching event based on the first page of the event name (e.g. UFC)
         $event_pieces = explode(' ', strtoupper($event_name));
         $event_search = EventHandler::searchEvent($event_pieces[0], $future_only);
+        if (empty($event_search)) {
+            //No match found on main event name. Do alternative search on condensed event name (e.g. Cage Warriors = CW)
+            $arr = explode(":", $event_name);
+            $arr = explode(' ', $arr[0]);
+            $shortened = '';
+            foreach ($arr as $piece) {
+                if (!is_numeric($piece)) {
+                    $shortened .= $piece[0];
+                }
+            }
+            if (strlen($shortened) >= 2) {
+                $event_search = EventHandler::searchEvent($shortened, $future_only);
+            }
+        }
         foreach ($event_search as $event) {
             if ($event->getDate() == $event_date) {
                 return $event;
