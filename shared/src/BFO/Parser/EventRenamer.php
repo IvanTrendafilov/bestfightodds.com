@@ -39,7 +39,7 @@ class EventRenamer
                 }
 
                 $common_word = $this->getLongestCommonString($names_to_evaluate);
-
+                
                 //If there is consensus, check for any of the available event names that contain a numbered variant.
                 $best_choice_numbered = '';
                 $best_choice_themed = '';
@@ -72,21 +72,7 @@ class EventRenamer
             $recommendations[] = $recommendation;
         }
 
-
-
-
         return $recommendations;
-        //Determine if there is a common pattern to the matchups for a specific event
-        //What is the most common denominator
-
-        //Ruleset: (should this be external or not, ie specific to the site?)
-        //Event is named
-        //Event is numbered
-        //Event is :<x></x> vs  y
-
-
-
-
     }
 
     public function getLongestCommonString($words)
