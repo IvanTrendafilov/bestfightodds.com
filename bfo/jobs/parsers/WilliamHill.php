@@ -149,7 +149,8 @@ class ParserJob extends ParserJobBase
             );
 
             $parsed_matchup->setMetaData('gametime', $date_obj->getTimestamp());
-            $parsed_matchup->setMetaData('event_name', $matchup->competitionName);
+            $event_name_pieces = explode(':' , $matchup->competitionName);
+            $parsed_matchup->setMetaData('event_name', $event_name_pieces[0]);
             $parsed_matchup->setCorrelationID($matchup->id);
 
             $this->parsed_sport->addParsedMatchup($parsed_matchup);
