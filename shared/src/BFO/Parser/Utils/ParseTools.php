@@ -208,8 +208,11 @@ class ParseTools
      */
     public static function convertCommaNameToFullName(string $name): string
     {
-        //Workaround for potential comma separate prop or additional text after actual name (indicated with ' by ' OR ' - ')
+        //Workaround for potential comma separate prop or additional text after actual name
         $pos = strpos($name, ' by ');
+        if (!$pos) {
+            $pos = strpos($name, ' - '); //Different dash than below
+        }
         if (!$pos) {
             $pos = strpos($name, ' - ');
         }
@@ -225,7 +228,7 @@ class ParseTools
             return trim(substr($name, $comma_pos + 1))
                 . ' ' . substr($name, 0, $comma_pos);
         }
-        return $name;
+        return trim($name);
     }
 
     public static function getInitialsFromName(string $team_name): array

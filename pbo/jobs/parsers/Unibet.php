@@ -202,20 +202,7 @@ class ParserJob extends ParserJobBase
                     !empty($outcome->label) &&
                     !empty($outcome->oddsAmerican)
                 ) {
-
-                    //Find lastname, firstname occurences in props and convert o firstname lastname
-                    $new_label = $outcome->label;
-                    $parts = explode(' - ', $outcome->label);
-                    if (count($parts) > 1) {
-                        //Convert names from lastname, firstname to firstname lastname
-                        $new_label = ParseTools::convertCommaNameToFullName($parts[0]) . ' - ' . $parts[1];
-                    } else {
-                        $parts = explode(' by ', $outcome->label);
-                        if (count($parts) > 1) {
-                            //Convert names from lastname, firstname to firstname lastname
-                            $new_label = ParseTools::convertCommaNameToFullName($parts[0]) . ' by ' . $parts[1];
-                        }
-                    }
+                    $new_label = ParseTools::convertCommaNameToFullName($outcome->label);
 
                     $parsed_prop = new ParsedProp(
                         $event_name_adjusted . ' :: ' . (isset($outcome->participant) ? ParseTools::convertCommaNameToFullName($outcome->participant) . ' ' : '') 
