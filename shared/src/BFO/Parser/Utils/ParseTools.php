@@ -208,8 +208,12 @@ class ParseTools
      */
     public static function convertCommaNameToFullName(string $name): string
     {
-        //Workaround for comma separate prop after actual name
-        $pos = strpos($name, 'by KO,');
+        //Workaround for potential comma separate prop or additional text after actual name (indicated with ' by ' OR ' - ')
+        $pos = strpos($name, ' by ');
+        if (!$pos) {
+            $pos = strpos($name, ' - ');
+        }
+
         if ($pos) {
             $first_part = substr($name, 0, $pos);
             $last_part = substr($name, $pos);
