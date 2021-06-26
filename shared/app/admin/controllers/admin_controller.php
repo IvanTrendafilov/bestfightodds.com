@@ -611,7 +611,6 @@ class AdminController
 
         foreach ($flagged as &$flagged_row) {
             $first_date = date_create($flagged_row['initial_flagdate']);
-            $last_date = date_create($flagged_row['last_flagdate']);
 
             $cur_date = new DateTime();
 
@@ -622,7 +621,7 @@ class AdminController
             $matchup_date = new DateTime();
             $matchup_date->setTimestamp($flagged_row['gametime']);
 
-            if ($matchup_date < $first_date) {
+            if ($matchup_date < new DateTime()) {
                 $flagged_row['has_passed'] = true;
             } else {
                 $flagged_row['has_passed'] = false;
