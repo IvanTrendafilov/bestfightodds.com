@@ -60,6 +60,11 @@ class OddsProcessor
 
         $matched_props = $this->removeMatchedPropDupes($matched_props);
 
+        //If this is a full run, clear the unmatched table for this bookie first
+        if ($full_run) {
+            EventHandler::clearUnmatched(null, $this->bookie_id);
+        }
+
         $matchup_unmatched_count = $this->logUnmatchedMatchups($matched_matchups);
         $prop_unmatched_count = $pp->logUnmatchedProps($matched_props);
 

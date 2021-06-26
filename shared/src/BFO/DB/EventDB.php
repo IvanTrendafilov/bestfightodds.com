@@ -521,9 +521,13 @@ class EventDB
         if ($unmatched_item != null && $bookie_id != null) {
             $extra_where = ' WHERE matchup = ? AND bookie_id = ? ';
             $params = [$unmatched_item, $bookie_id];
+        } else if ($bookie_id != null) {
+            $extra_where = ' WHERE bookie_id = ? ';
+            $params = [$bookie_id];
         }
 
         $query = 'DELETE FROM matchups_unmatched ' . $extra_where;
+
         DBTools::doParamQuery($query, $params);
         return DBTools::getAffectedRows();
     }
