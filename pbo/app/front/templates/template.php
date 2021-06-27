@@ -18,7 +18,7 @@
     <noscript>
         <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap">
     </noscript>
-    <link rel="stylesheet" type="text/css" href="/css/pbo.min.css?v=0.3.8">
+    <link rel="stylesheet" type="text/css" href="/css/pbo.min.css?v=0.3.9">
     <link rel="shortcut icon" href="https://www.proboxingodds.com/favicon.ico">
     <link rel="apple-touch-icon" sizes="144x144" href="/apple-touch-icon-144x144.png">
     <link rel="apple-touch-icon" sizes="114x114" href="/apple-touch-icon-114x114.png">
