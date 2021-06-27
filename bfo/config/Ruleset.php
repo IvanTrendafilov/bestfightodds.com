@@ -17,7 +17,7 @@ class Ruleset implements RulesetInterface
         $event_pieces = explode(' ', $event_name);
 
         //Ignore Grappling/K1 events
-        $blacklisted_events = ['GLORY', 'BKFC', 'WNO'];
+        $blacklisted_events = ['GLORY', 'BKFC', 'WNO', 'SUBMISSION'];
         if (in_array($event_pieces[0], $blacklisted_events)) {
             return false;
         }
@@ -31,7 +31,7 @@ class Ruleset implements RulesetInterface
         $event_pieces = explode(' ', $event_name);
 
         //Ignore Grappling/K1 events
-        $blacklisted_events = ['GLORY', 'BKFC', 'WNO'];
+        $blacklisted_events = ['GLORY', 'BKFC', 'WNO', 'SUBMISSION'];
         if (in_array($event_pieces[0], $blacklisted_events)) {
             return false;
         }
