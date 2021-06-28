@@ -10,6 +10,10 @@
     ?>
         <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
     <?php endif ?>
+    <?php if (isset($no_indexing) && $no_indexing) : //Disable robots if actively specified 
+    ?>
+        <meta name="robots" content="noindex">
+    <?php endif ?>
     <link rel="preconnect" href="https://www.googletagmanager.com">
     <link rel="preconnect" href="https://www.google-analytics.com">
     <link rel="preconnect" href="https://fonts.googleapis.com" crossorigin>
@@ -18,7 +22,7 @@
     <noscript>
         <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap">
     </noscript>
-    <link rel="stylesheet" type="text/css" href="/css/pbo.min.css?v=0.3.9">
+    <link rel="stylesheet" type="text/css" href="/css/pbo.min.css?v=0.3.10">
     <link rel="shortcut icon" href="https://www.proboxingodds.com/favicon.ico">
     <link rel="apple-touch-icon" sizes="144x144" href="/apple-touch-icon-144x144.png">
     <link rel="apple-touch-icon" sizes="114x114" href="/apple-touch-icon-114x114.png">
@@ -154,7 +158,7 @@
         <?php else : ?>
             <a href="#" onclick="setDesktop(true);">Desktop site</a><span class="menu-seperator">|</span>
         <?php endif ?>
-        <a href="https://www.bestfightodds.com" target="_blank" rel="noopener">MMA Odds</a><span class="menu-seperator">|</span><a href="/terms">Terms of service</a><span class="menu-seperator">|</span><a href="#">18+</a><span class="menu-seperator">|</span><a href="https://www.begambleaware.org/">BeGambleAware</a><span class="menu-seperator">|</span><a href="mailto:contact@proboxingodds.com">Contact</a><span class="menu-seperator">|</span><a href="mailto:contact@proboxingodds.com">&copy; <?= date('Y') ?></a>
+        <a href="https://www.bestfightodds.com" target="_blank" rel="noopener">MMA Odds</a><span class="menu-seperator">|</span><a href="/terms">Terms of service</a><span class="menu-seperator">|</span><a href="#">18+</a><span class="menu-seperator">|</span><a href="/responsiblegaming">Responsible Gaming</a><span class="menu-seperator">|</span><a href="https://www.begambleaware.org/">BeGambleAware</a><span class="menu-seperator">|</span><a href="mailto:contact@proboxingodds.com">Contact</a><span class="menu-seperator">|</span><a href="mailto:contact@proboxingodds.com">&copy; <?= date('Y') ?></a>
     </div>
 
     <div id="chart-window" class="popup-window">

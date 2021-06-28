@@ -68,6 +68,7 @@ $app->group('', function (RouteCollectorProxy $group) {
   $group->get('[/]', \MainController::class . ':home');
   $group->get('/alerts', \MainController::class . ':alerts');
   $group->get('/terms', \MainController::class . ':terms');
+  $group->get('/responsiblegaming', \MainController::class . ':responsibleGaming');
   $group->get('/archive', \MainController::class . ':archive');
   $group->get('/search', \MainController::class . ':search');
   $group->get('/links', \MainController::class . ':widget');

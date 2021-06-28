@@ -74,6 +74,12 @@ class MainController
         return $response;
     }
 
+    public function responsibleGaming(Request $request, Response $response)
+    {
+        $response->getBody()->write($this->plates->render('responsiblegaming', []));
+        return $response;
+    }
+
     public function widget(Request $request, Response $response)
     {
         $view_data = [];

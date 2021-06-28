@@ -6,9 +6,13 @@
     <meta name="description" content="<?= isset($meta_desc) ? $meta_desc . ' ' : '' ?>UFC/MMA odds comparison service. Compare the latest UFC/MMA fight odds and betting lines from the top online sportsbooks">
     <meta name="keywords" content="<?= isset($meta_keywords) ? $meta_keywords . ' ' : '' ?>mma odds, mma betting, mma lines, ufc odds, ufc, mma, odds, betting">
     <meta property="og:image" content="https://www.bestfightodds.com/img/iconv2.jpg">
-    <?php if (!(isset($_COOKIE['bfo_reqdesktop']) && $_COOKIE['bfo_reqdesktop'] == 'true')) : //Enable viewport if desktop has not explicitly been requested
+    <?php if (!(isset($_COOKIE['bfo_reqdesktop']) && $_COOKIE['bfo_reqdesktop'] == 'true')) : //Enable viewport if desktop has not explicitly been requested 
     ?>
         <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+    <?php endif ?>
+    <?php if (isset($no_indexing) && $no_indexing) : //Disable robots if actively specified 
+    ?>
+        <meta name="robots" content="noindex">
     <?php endif ?>
     <link rel="preconnect" href="https://www.googletagmanager.com">
     <link rel="preconnect" href="https://www.google-analytics.com">
@@ -18,7 +22,7 @@
     <noscript>
         <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap">
     </noscript>
-    <link rel="stylesheet" type="text/css" href="/css/bfo.min.css?v=0.3.9">
+    <link rel="stylesheet" type="text/css" href="/css/bfo.min.css?v=0.3.10">
     <link rel="shortcut icon" href="https://www.bestfightodds.com/favicon.ico">
     <link rel="apple-touch-icon" sizes="144x144" href="/apple-touch-icon-144x144.png">
     <link rel="apple-touch-icon" sizes="114x114" href="/apple-touch-icon-114x114.png">
@@ -154,7 +158,7 @@
         <?php else : ?>
             <a href="#" onclick="setDesktop(true);">Desktop site</a><span class="menu-seperator">|</span>
         <?php endif ?>
-        <a href="https://www.proboxingodds.com" target="_blank" rel="noopener">Boxing Odds</a><span class="menu-seperator">|</span><a href="/terms">Terms of service</a><span class="menu-seperator">|</span><a href="#">18+</a><span class="menu-seperator">|</span><a href="https://www.begambleaware.org/">BeGambleAware</a><span class="menu-seperator">|</span><a href="mailto:contact@bestfightodds.com">Contact</a><span class="menu-seperator">|</span><a href="mailto:contact@bestfightodds.com"> &copy; <?= date('Y') ?></a>
+        <a href="https://www.proboxingodds.com" target="_blank" rel="noopener">Boxing Odds</a><span class="menu-seperator">|</span><a href="/terms">Terms of service</a><span class="menu-seperator">|</span><a href="#">18+</a><span class="menu-seperator">|</span><a href="/responsiblegaming">Responsible Gaming</a><span class="menu-seperator">|</span><a href="https://www.begambleaware.org/">BeGambleAware</a><span class="menu-seperator">|</span><a href="mailto:contact@bestfightodds.com">Contact</a><span class="menu-seperator">|</span><a href="mailto:contact@bestfightodds.com"> &copy; <?= date('Y') ?></a>
     </div>
 
     <div id="chart-window" class="popup-window">
