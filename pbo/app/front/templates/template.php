@@ -156,7 +156,7 @@
         ?>
             <a href="#" onclick="setDesktop(false);">Mobile</a><span class="menu-seperator">|</span>
         <?php else : ?>
-            <a href="#" onclick="setDesktop(true);">Desktop site</a><span class="menu-seperator">|</span>
+            <a href="#" onclick="setDesktop(true);">Desktop&nbsp;site</a><span class="menu-seperator">|</span>
         <?php endif ?>
         <a href="https://www.bestfightodds.com" target="_blank" rel="noopener">MMA&nbsp;Odds</a><span class="menu-seperator">|</span><a href="/terms">Terms&nbsp;of&nbsp;service</a><span class="menu-seperator">|</span><a href="#">18+</a><span class="menu-seperator">|</span><a href="/responsiblegaming">Responsible&nbsp;Gaming</a><span class="menu-seperator">|</span><a href="https://www.begambleaware.org/">BeGambleAware</a><span class="menu-seperator">|</span><a href="mailto:contact@proboxingodds.com">Contact</a><span class="menu-seperator">|</span><a href="mailto:contact@proboxingodds.com">&copy; <?= date('Y') ?></a>
     </div>
