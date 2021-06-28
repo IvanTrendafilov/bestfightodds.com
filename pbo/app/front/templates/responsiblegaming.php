@@ -1,4 +1,4 @@
-<?php $this->layout('template', ['title' => 'Terms of service', 'no_indexing' => true]) ?>
+<?php $this->layout('template', ['title' => 'Responsible Gaming', 'no_indexing' => true]) ?>
 
 <div id="page-wrapper" style="max-width: 750px;">
     <div id="page-container">
