@@ -47,8 +47,13 @@ class EventHandler
 
     public static function getMatchingEvent(string $event_name, string $event_date, bool $future_only = true): ?Event
     {
-        //Get a matching event based on the first page of the event name (e.g. UFC)
         $event_pieces = explode(' ', strtoupper($event_name));
+
+        if ($event_pieces[0] == 'FUTURE') {
+            return EventHandler::getEvent(PARSE_FUTURESEVENT_ID, true);
+        }
+
+        //Get a matching event based on the first page of the event name (e.g. UFC)
         $event_search = EventHandler::searchEvent($event_pieces[0], $future_only);
         if ($event_search != null) {
             foreach ($event_search as $event) {
@@ -419,7 +424,7 @@ class EventHandler
                         if ($consensus && $consensus_event_name) {
 
                             $found_event = self::getMatchingEvent($consensus_event_name, $matchup_metadata_date->format('Y-m-d'));
-                            if ($found_event) {
+                            if ($found_event && $found_event->getID() != $event->getID()) {
                                 if (EventHandler::changeFight($matchup->getID(), $found_event->getID())) {
                                     $audit_log->info("Moved matchup " . $matchup->getTeamAsString(1) . " vs. " . $matchup->getTeamAsString(2) . " (" . $matchup->getID() . ") to " . $found_event->getName() . " (" . $found_event->getDate() . ") based on median gametime metadata");
                                     $move_counter++;
