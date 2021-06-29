@@ -97,7 +97,7 @@ class ScheduleParser
                         $found_matches[$stored_matchup->getEventID()] = isset($found_matches[$stored_matchup->getEventID()]) ? $found_matches[$stored_matchup->getEventID()] + 1 : 1;
                     }
                 }
-                if (count($found_matches) > 0) {
+                if (count($found_matches) > 2) {
                     $found = true;
                     asort($found_matches, SORT_NUMERIC);
                     //Probably found it. However event should maybe be renamed if different
