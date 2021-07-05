@@ -87,7 +87,8 @@ class WikiScheduleParser
                     $team_matches = null;
                     preg_match_all("/[bB]out:\s(?<team1_name>[a-zA-Z0-9\s'-\.]+) vs. (?<team2_name>[a-zA-Z0-9\s'-\.]+)/", $announced_parsed_str, $team_matches, PREG_SET_ORDER);
                     foreach ($team_matches as $team_match) {
-                        if (strpos($team_match['team1_name'], 'TBA') === false && strpos($team_match['team2_name'], 'TBA') === false) {
+                        if (strpos($team_match['team1_name'], 'TBA') === false && strpos($team_match['team2_name'], 'TBA') === false &&
+                            strpos($team_match['team1_name'], 'TBD') === false && strpos($team_match['team2_name'], 'TBD') === false) {
                             $new_event['matchups'][] = [ParseTools::formatName($team_match['team1_name']), ParseTools::formatName($team_match['team2_name'])];
                         }
                     }
