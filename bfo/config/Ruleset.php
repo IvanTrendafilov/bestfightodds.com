@@ -13,12 +13,15 @@ class Ruleset implements RulesetInterface
 {
     public function evaluateMatchup($bookie_obj, $team1, $team2, $event_name, $gametime): bool
     {
-        $event_name = strtoupper($event_name);
+        $event_name = strtoupper(trim($event_name));
         $event_pieces = explode(' ', $event_name);
 
         //Ignore Grappling/K1 events
         $blacklisted_events = ['GLORY', 'BKFC', 'WNO', 'SUBMISSION'];
         if (in_array($event_pieces[0], $blacklisted_events)) {
+            return false;
+        }
+        if (str_starts_with($event_name, 'ROAD TO ADCC')) {
             return false;
         }
 
@@ -27,7 +30,7 @@ class Ruleset implements RulesetInterface
 
     public function evaluateEvent($bookie_obj, $event_name, $gametime): bool
     {
-        $event_name = strtoupper($event_name);
+        $event_name = strtoupper(trim($event_name));
         $event_pieces = explode(' ', $event_name);
 
         //Ignore Grappling/K1 events
@@ -35,13 +38,18 @@ class Ruleset implements RulesetInterface
         if (in_array($event_pieces[0], $blacklisted_events)) {
             return false;
         }
-
-        //Ignore names containing TBD
-        if (strpos(strtoupper($event_name), 'TBD') === true ||
-            strpos(strtoupper($event_name), 'TBA') === true) {
+        if (str_starts_with($event_name, 'ROAD TO ADCC')) {
             return false;
         }
 
-        return true;
+        //Ignore names containing TBD
+        if (
+            strpos(strtoupper($event_name), 'TBD') === true ||
+            strpos(strtoupper($event_name), 'TBA') === true
+        ) {
+            return false;
+        }
+
+        return true; //Default to create any reported event
     }
 }
