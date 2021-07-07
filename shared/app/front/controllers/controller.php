@@ -290,7 +290,7 @@ class MainController
         }
 
         $team_pos = ((int) $matchup->getFighterID(2) == $team->getID()) + 1;
-        
+
         $view_matchup['team_pos'] = $team_pos;
         $view_matchup['other_pos'] = ($team_pos == 1 ? 2 : 1);
         $latest_index = OddsHandler::getCurrentOddsIndex($matchup->getID(), $team_pos);
@@ -414,6 +414,13 @@ class MainController
             $view_data = [];
             $view_data['contents'] = $cached_contents;
             $view_data['team_title'] = $event->getName() . ' Odds & Betting Lines';
+
+            //Add alt title if present
+            preg_match('/alt-title: \[([^\]]+)\]/', $cached_contents, $matches);
+            if (!empty($matches[1])) {
+                $view_data['alt_title'] = $matches[1];
+            }
+            
             $view_data['meta_desc'] = $event->getName() . ' odds & betting lines.';
             $view_data['meta_keywords'] = $event->getName();
 
@@ -507,6 +514,12 @@ class MainController
         $view_data['team_title'] = $event->getName() . ' Odds & Betting Lines';
         $view_data['meta_desc'] = $event->getName() . ' odds & betting lines.';
         $view_data['meta_keywords'] = $event->getName();
+
+        //Add alt title if present
+        preg_match('/alt-title: \[([^\]]+)\]/', $page_content, $matches);
+        if (!empty($matches[1])) {
+            $view_data['alt_title'] = $matches[1];
+        }
 
         $response->getBody()->write($this->plates->render('single_event', $view_data));
         return $response;

@@ -35,6 +35,8 @@
 
                     <?php //============== Add matchups ====================== 
                     ?>
+                    <!-- alt-title: [<?=$matchups[array_key_first($matchups)]->getTeamAsString(1)?> vs. <?=$matchups[array_key_first($matchups)]->getTeamAsString(2)?> Betting Odds & Lines - <?=date('n/j', strtotime($event->getDate()))?>] -->
+
                     <?php foreach (array_reverse($matchups) as $matchup_key => $matchup) : ?>
 
 
