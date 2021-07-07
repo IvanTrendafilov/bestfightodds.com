@@ -51,7 +51,7 @@
         })(window, document, 'script', 'dataLayer', 'GTM-TWMXX6K');
     </script>
     <!-- End Google Tag Manager -->
-    <title><?= isset($title) ? $title . ' | Pro Boxing Odds' : 'Boxing Odds &amp; Betting Lines | Pro Boxing Odds' ?></title>
+    <title><?= isset($title) ? $title : 'Boxing Odds &amp; Betting Lines | Pro Boxing Odds' ?></title>
 </head>
 
 <body>
