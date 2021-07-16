@@ -221,7 +221,7 @@ class ParserJob extends ParserJobBase
 
                     if (
                         !str_contains(strtoupper($market->marketName), 'TIME OF FIGHT FINISH') && !str_contains(strtoupper($market->marketName), 'WHEN WILL THE FIGHT BE WON')
-                        && !str_contains(strtoupper($market->marketName), 'DOUBLE CHANCE')
+                        && !str_contains(strtoupper($market->marketName), 'DOUBLE CHANCE') && !str_contains(strtoupper($market->marketName), 'WHAT MINUTE WILL THE FIGHT END IN')
                     ) {
 
                         $handicap_1 = $runner->handicap != 0.0 ? (string) $runner->handicap : '';
