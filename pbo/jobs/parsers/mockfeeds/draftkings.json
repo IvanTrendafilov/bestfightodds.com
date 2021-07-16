@@ -1,61 +1,29 @@
 {
     "events": [
         {
-            "id": 179847930,
-            "name": "Naoya Inoue - Michael Dasmarinas",
-            "homeTeamName": "Naoya Inoue",
-            "awayTeamName": "Michael Dasmarinas",
-            "startDate": "2021-06-20T00:00:00.0000000Z",
+            "id": 179926715,
+            "name": "Ryad Merhy vs Zhaoxin Zhang",
+            "homeTeamName": "Ryad Merhy",
+            "awayTeamName": "Zhaoxin Zhang",
+            "startDate": "2021-07-17T19:00:00.0000000Z",
             "offers": [
                 {
-                    "id": "1-2266557275",
-                    "label": "Moneyline (3-way)",
+                    "id": "2-1_57618256",
+                    "label": "Moneyline",
                     "outcomes": [
                         {
-                            "id": "1-2925964586",
-                            "label": "Naoya Inoue",
-                            "oddsAmerican": "-3335",
-                            "oddsDecimal": 1.0300,
-                            "oddsFractional": "1/40",
-                            "participant": "Naoya Inoue"
+                            "id": "2-0ML57618256_1",
+                            "label": "Ryad Merhy",
+                            "oddsAmerican": "-800",
+                            "oddsDecimal": 1.12500000,
+                            "oddsFractional": "1/8"
                         },
                         {
-                            "id": "1-2925964587",
-                            "label": "Tie",
-                            "oddsAmerican": "+2500",
-                            "oddsDecimal": 26.0000,
-                            "oddsFractional": "25/1",
-                            "participant": "Tie"
-                        },
-                        {
-                            "id": "1-2925964588",
-                            "label": "Michael Dasmarinas",
-                            "oddsAmerican": "+1100",
-                            "oddsDecimal": 12.0000,
-                            "oddsFractional": "11/1",
-                            "participant": "Michael Dasmarinas"
-                        }
-                    ]
-                },
-                {
-                    "id": "1-2266557264",
-                    "label": "Tie No Bet - Bout Odds",
-                    "outcomes": [
-                        {
-                            "id": "1-2925964557",
-                            "label": "Naoya Inoue",
-                            "oddsAmerican": "-5000",
-                            "oddsDecimal": 1.0200,
-                            "oddsFractional": "1/50",
-                            "participant": "Naoya Inoue"
-                        },
-                        {
-                            "id": "1-2925964559",
-                            "label": "Michael Dasmarinas",
-                            "oddsAmerican": "+1000",
-                            "oddsDecimal": 11.0000,
-                            "oddsFractional": "10/1",
-                            "participant": "Michael Dasmarinas"
+                            "id": "2-0ML57618256_3",
+                            "label": "Zhaoxin Zhang",
+                            "oddsAmerican": "+550",
+                            "oddsDecimal": 6.50000000,
+                            "oddsFractional": "11/2"
                         }
                     ],
                     "main": true
@@ -63,61 +31,29 @@
             ]
         },
         {
-            "id": 179857982,
-            "name": "Vasyl Lomachenko - Masayoshi Nakatani",
-            "homeTeamName": "Vasyl Lomachenko",
-            "awayTeamName": "Masayoshi Nakatani",
-            "startDate": "2021-06-27T00:00:00.0000000Z",
+            "id": 179929496,
+            "name": "Conor Benn vs Adrian Granados",
+            "homeTeamName": "Conor Benn",
+            "awayTeamName": "Adrian Granados",
+            "startDate": "2021-07-31T20:00:00.0000000Z",
             "offers": [
                 {
-                    "id": "1-2266560673",
-                    "label": "Moneyline (3-way)",
+                    "id": "2-1_57664643",
+                    "label": "Moneyline",
                     "outcomes": [
                         {
-                            "id": "1-2925966037",
-                            "label": "Vasyl Lomachenko",
-                            "oddsAmerican": "-1667",
-                            "oddsDecimal": 1.0600,
-                            "oddsFractional": "1/18",
-                            "participant": "Vasyl Lomachenko"
+                            "id": "2-0ML57664643_1",
+                            "label": "Conor Benn",
+                            "oddsAmerican": "-1600",
+                            "oddsDecimal": 1.06250000,
+                            "oddsFractional": "1/16"
                         },
                         {
-                            "id": "1-2925966038",
-                            "label": "Tie",
-                            "oddsAmerican": "+2200",
-                            "oddsDecimal": 23.0000,
-                            "oddsFractional": "22/1",
-                            "participant": "Tie"
-                        },
-                        {
-                            "id": "1-2925966039",
-                            "label": "Masayoshi Nakatani",
+                            "id": "2-0ML57664643_3",
+                            "label": "Adrian Granados",
                             "oddsAmerican": "+800",
-                            "oddsDecimal": 9.0000,
-                            "oddsFractional": "8/1",
-                            "participant": "Masayoshi Nakatani"
-                        }
-                    ]
-                },
-                {
-                    "id": "1-2266560664",
-                    "label": "Tie No Bet - Bout Odds",
-                    "outcomes": [
-                        {
-                            "id": "1-2925966012",
-                            "label": "Vasyl Lomachenko",
-                            "oddsAmerican": "-2000",
-                            "oddsDecimal": 1.0500,
-                            "oddsFractional": "1/20",
-                            "participant": "Vasyl Lomachenko"
-                        },
-                        {
-                            "id": "1-2925966014",
-                            "label": "Masayoshi Nakatani",
-                            "oddsAmerican": "+750",
-                            "oddsDecimal": 8.5000,
-                            "oddsFractional": "15/2",
-                            "participant": "Masayoshi Nakatani"
+                            "oddsDecimal": 9.00000000,
+                            "oddsFractional": "8/1"
                         }
                     ],
                     "main": true
@@ -125,185 +61,112 @@
             ]
         },
         {
-            "id": 179826472,
-            "name": "Teofimo Lopéz - George Kambosos Jr",
-            "homeTeamName": "Teofimo Lopéz",
-            "awayTeamName": "George Kambosos Jr",
-            "startDate": "2021-06-20T00:00:00.0000000Z",
+            "id": 179926494,
+            "name": "Rolando Romero vs Anthony Yigit",
+            "homeTeamName": "Rolando Romero",
+            "awayTeamName": "Anthony Yigit",
+            "startDate": "2021-07-17T22:00:00.0000000Z",
             "offers": [
                 {
-                    "id": "1-2263665959",
-                    "label": "Tie No Bet - Bout Odds",
+                    "id": "2-3_57613858",
+                    "label": "OU Rounds",
                     "outcomes": [
                         {
-                            "id": "1-2916276998",
-                            "label": "Teofimo Lopéz",
-                            "oddsAmerican": "-1667",
-                            "oddsDecimal": 1.0600,
-                            "oddsFractional": "1/18",
-                            "participant": "Teofimo Lopéz"
+                            "id": "2-0OU57613858O750_1",
+                            "label": "Over",
+                            "line": "7.5",
+                            "oddsAmerican": "+100",
+                            "oddsDecimal": 2.00000000,
+                            "oddsFractional": "1/1"
                         },
                         {
-                            "id": "1-2916277000",
-                            "label": "George Kambosos Jr",
-                            "oddsAmerican": "+700",
-                            "oddsDecimal": 8.0000,
-                            "oddsFractional": "7/1",
-                            "participant": "George Kambosos Jr"
+                            "id": "2-0OU57613858U750_3",
+                            "label": "Under",
+                            "line": "7.5",
+                            "oddsAmerican": "-120",
+                            "oddsDecimal": 1.83330000,
+                            "oddsFractional": "5/6"
                         }
                     ],
                     "main": true
                 },
                 {
-                    "id": "1-2263665998",
-                    "label": "Moneyline (3-way)",
+                    "id": "2-1_57613858",
+                    "label": "Moneyline",
                     "outcomes": [
                         {
-                            "id": "1-2916277119",
-                            "label": "Teofimo Lopéz",
-                            "oddsAmerican": "-1430",
-                            "oddsDecimal": 1.0700,
-                            "oddsFractional": "1/16",
-                            "participant": "Teofimo Lopéz"
+                            "id": "2-0ML57613858_1",
+                            "label": "Rolando Romero",
+                            "oddsAmerican": "-425",
+                            "oddsDecimal": 1.23530000,
+                            "oddsFractional": "4/17"
                         },
                         {
-                            "id": "1-2916277120",
-                            "label": "Tie",
-                            "oddsAmerican": "+2200",
-                            "oddsDecimal": 23.0000,
-                            "oddsFractional": "22/1",
-                            "participant": "Tie"
-                        },
-                        {
-                            "id": "1-2916277121",
-                            "label": "George Kambosos Jr",
-                            "oddsAmerican": "+750",
-                            "oddsDecimal": 8.5000,
-                            "oddsFractional": "15/2",
-                            "participant": "George Kambosos Jr"
+                            "id": "2-0ML57613858_3",
+                            "label": "Anthony Yigit",
+                            "oddsAmerican": "+320",
+                            "oddsDecimal": 4.20000000,
+                            "oddsFractional": "16/5"
                         }
-                    ]
+                    ],
+                    "main": true
                 }
             ]
         },
         {
-            "id": 179857988,
-            "name": "Tim Tszyu - Michael Zerafa",
-            "homeTeamName": "Tim Tszyu",
-            "awayTeamName": "Michael Zerafa",
-            "startDate": "2021-07-07T09:00:00.0000000Z",
+            "id": 179929516,
+            "name": "Antony Fowler vs Roberto Garcia",
+            "homeTeamName": "Antony Fowler",
+            "awayTeamName": "Roberto Garcia",
+            "startDate": "2021-07-31T18:00:00.0000000Z",
             "offers": [
                 {
-                    "id": "1-2266560949",
-                    "label": "Tie No Bet - Bout Odds",
+                    "id": "2-1_57665169",
+                    "label": "Moneyline",
                     "outcomes": [
                         {
-                            "id": "1-2925966883",
-                            "label": "Tim Tszyu",
-                            "oddsAmerican": "-1250",
-                            "oddsDecimal": 1.0800,
-                            "oddsFractional": "1/14",
-                            "participant": "Tim Tszyu"
+                            "id": "2-0ML57665169_1",
+                            "label": "Antony Fowler",
+                            "oddsAmerican": "-1800",
+                            "oddsDecimal": 1.05560000,
+                            "oddsFractional": "1/18"
                         },
                         {
-                            "id": "1-2925966885",
-                            "label": "Michael Zerafa",
-                            "oddsAmerican": "+600",
-                            "oddsDecimal": 7.0000,
-                            "oddsFractional": "6/1",
-                            "participant": "Michael Zerafa"
+                            "id": "2-0ML57665169_3",
+                            "label": "Roberto Garcia",
+                            "oddsAmerican": "+900",
+                            "oddsDecimal": 10.00000000,
+                            "oddsFractional": "9/1"
                         }
                     ],
                     "main": true
-                },
-                {
-                    "id": "1-2266560953",
-                    "label": "Moneyline (3-way)",
-                    "outcomes": [
-                        {
-                            "id": "1-2925966895",
-                            "label": "Tim Tszyu",
-                            "oddsAmerican": "-1115",
-                            "oddsDecimal": 1.0900,
-                            "oddsFractional": "1/12",
-                            "participant": "Tim Tszyu"
-                        },
-                        {
-                            "id": "1-2925966896",
-                            "label": "Tie",
-                            "oddsAmerican": "+2000",
-                            "oddsDecimal": 21.0000,
-                            "oddsFractional": "20/1",
-                            "participant": "Tie"
-                        },
-                        {
-                            "id": "1-2925966897",
-                            "label": "Michael Zerafa",
-                            "oddsAmerican": "+650",
-                            "oddsDecimal": 7.5000,
-                            "oddsFractional": "13/2",
-                            "participant": "Michael Zerafa"
-                        }
-                    ]
                 }
             ]
         },
         {
-            "id": 179857987,
-            "name": "Gervonta Davis - Mario Barrios",
-            "homeTeamName": "Gervonta Davis",
-            "awayTeamName": "Mario Barrios",
-            "startDate": "2021-06-27T01:00:00.0000000Z",
+            "id": 179928738,
+            "name": "Tyson Fury vs Deontay Wilder",
+            "homeTeamName": "Tyson Fury",
+            "awayTeamName": "Deontay Wilder",
+            "startDate": "2021-10-10T01:00:00.0000000Z",
             "offers": [
                 {
-                    "id": "1-2266560874",
-                    "label": "Moneyline (3-way)",
+                    "id": "2-1_57649586",
+                    "label": "Moneyline",
                     "outcomes": [
                         {
-                            "id": "1-2925966670",
-                            "label": "Gervonta Davis",
-                            "oddsAmerican": "-360",
-                            "oddsDecimal": 1.2800,
-                            "oddsFractional": "7/25",
-                            "participant": "Gervonta Davis"
+                            "id": "2-0ML57649586_1",
+                            "label": "Tyson Fury",
+                            "oddsAmerican": "-310",
+                            "oddsDecimal": 1.32260000,
+                            "oddsFractional": "10/31"
                         },
                         {
-                            "id": "1-2925966671",
-                            "label": "Tie",
-                            "oddsAmerican": "+2200",
-                            "oddsDecimal": 23.0000,
-                            "oddsFractional": "22/1",
-                            "participant": "Tie"
-                        },
-                        {
-                            "id": "1-2925966672",
-                            "label": "Mario Barrios",
-                            "oddsAmerican": "+275",
-                            "oddsDecimal": 3.7500,
-                            "oddsFractional": "11/4",
-                            "participant": "Mario Barrios"
-                        }
-                    ]
-                },
-                {
-                    "id": "1-2266560854",
-                    "label": "Tie No Bet - Bout Odds",
-                    "outcomes": [
-                        {
-                            "id": "1-2925966611",
-                            "label": "Gervonta Davis",
-                            "oddsAmerican": "-385",
-                            "oddsDecimal": 1.2600,
-                            "oddsFractional": "1/4",
-                            "participant": "Gervonta Davis"
-                        },
-                        {
-                            "id": "1-2925966613",
-                            "label": "Mario Barrios",
-                            "oddsAmerican": "+265",
-                            "oddsDecimal": 3.6500,
-                            "oddsFractional": "13/5",
-                            "participant": "Mario Barrios"
+                            "id": "2-0ML57649586_3",
+                            "label": "Deontay Wilder",
+                            "oddsAmerican": "+240",
+                            "oddsDecimal": 3.40000000,
+                            "oddsFractional": "12/5"
                         }
                     ],
                     "main": true
@@ -311,185 +174,285 @@
             ]
         },
         {
-            "id": 179857995,
-            "name": "Manny Pacquiao - Errol Spence Jr",
-            "homeTeamName": "Manny Pacquiao",
-            "awayTeamName": "Errol Spence Jr",
+            "id": 179906789,
+            "name": "Anthony Joshua vs Oleksandr Usyk",
+            "homeTeamName": "Anthony Joshua",
+            "awayTeamName": "Oleksandr Usyk",
+            "startDate": "2021-09-25T21:00:00.0000000Z",
+            "offers": [
+                {
+                    "id": "2-1_57338559",
+                    "label": "Moneyline",
+                    "outcomes": [
+                        {
+                            "id": "2-0ML57338559_1",
+                            "label": "Anthony Joshua",
+                            "oddsAmerican": "-265",
+                            "oddsDecimal": 1.37740000,
+                            "oddsFractional": "10/27"
+                        },
+                        {
+                            "id": "2-0ML57338559_3",
+                            "label": "Oleksandr Usyk",
+                            "oddsAmerican": "+215",
+                            "oddsDecimal": 3.15000000,
+                            "oddsFractional": "43/20"
+                        }
+                    ],
+                    "main": true
+                }
+            ]
+        },
+        {
+            "id": 179881745,
+            "name": "Joe Joyce vs Carlos Takam",
+            "homeTeamName": "Joe Joyce",
+            "awayTeamName": "Carlos Takam",
+            "startDate": "2021-07-24T21:00:00.0000000Z",
+            "offers": [
+                {
+                    "id": "2-3_56980314",
+                    "label": "OU Rounds",
+                    "outcomes": [
+                        {
+                            "id": "2-0OU56980314O750_1",
+                            "label": "Over",
+                            "line": "7.5",
+                            "oddsAmerican": "-115",
+                            "oddsDecimal": 1.86960000,
+                            "oddsFractional": "20/23"
+                        },
+                        {
+                            "id": "2-0OU56980314U750_3",
+                            "label": "Under",
+                            "line": "7.5",
+                            "oddsAmerican": "-105",
+                            "oddsDecimal": 1.95240000,
+                            "oddsFractional": "20/21"
+                        }
+                    ],
+                    "main": true
+                },
+                {
+                    "id": "2-1_56980314",
+                    "label": "Moneyline",
+                    "outcomes": [
+                        {
+                            "id": "2-0ML56980314_1",
+                            "label": "Joe Joyce",
+                            "oddsAmerican": "-1000",
+                            "oddsDecimal": 1.10000000,
+                            "oddsFractional": "1/10"
+                        },
+                        {
+                            "id": "2-0ML56980314_3",
+                            "label": "Carlos Takam",
+                            "oddsAmerican": "+625",
+                            "oddsDecimal": 7.25000000,
+                            "oddsFractional": "25/4"
+                        }
+                    ],
+                    "main": true
+                }
+            ]
+        },
+        {
+            "id": 179845255,
+            "name": "Jermell Charlo vs Brian Carlos Castano",
+            "homeTeamName": "Jermell Charlo",
+            "awayTeamName": "Brian Carlos Castano",
+            "startDate": "2021-07-18T02:00:00.0000000Z",
+            "offers": [
+                {
+                    "id": "2-3_56398066",
+                    "label": "OU Rounds",
+                    "outcomes": [
+                        {
+                            "id": "2-0OU56398066O1050_1",
+                            "label": "Over",
+                            "line": "10.5",
+                            "oddsAmerican": "-195",
+                            "oddsDecimal": 1.51280000,
+                            "oddsFractional": "20/39"
+                        },
+                        {
+                            "id": "2-0OU56398066U1050_3",
+                            "label": "Under",
+                            "line": "10.5",
+                            "oddsAmerican": "+160",
+                            "oddsDecimal": 2.60000000,
+                            "oddsFractional": "8/5"
+                        }
+                    ],
+                    "main": true
+                },
+                {
+                    "id": "2-1_56398066",
+                    "label": "Moneyline",
+                    "outcomes": [
+                        {
+                            "id": "2-0ML56398066_1",
+                            "label": "Jermell Charlo",
+                            "oddsAmerican": "-265",
+                            "oddsDecimal": 1.37740000,
+                            "oddsFractional": "20/53"
+                        },
+                        {
+                            "id": "2-0ML56398066_3",
+                            "label": "Brian Carlos Castano",
+                            "oddsAmerican": "+210",
+                            "oddsDecimal": 3.10000000,
+                            "oddsFractional": "21/10"
+                        }
+                    ],
+                    "main": true
+                }
+            ]
+        },
+        {
+            "id": 179929498,
+            "name": "John Riel Casimero vs Guillermo Rigondeaux",
+            "homeTeamName": "John Riel Casimero",
+            "awayTeamName": "Guillermo Rigondeaux",
+            "startDate": "2021-08-15T00:00:00.0000000Z",
+            "offers": [
+                {
+                    "id": "2-1_57638423",
+                    "label": "Moneyline",
+                    "outcomes": [
+                        {
+                            "id": "2-0ML57638423_1",
+                            "label": "John Riel Casimero",
+                            "oddsAmerican": "+140",
+                            "oddsDecimal": 2.40000000,
+                            "oddsFractional": "7/5"
+                        },
+                        {
+                            "id": "2-0ML57638423_3",
+                            "label": "Guillermo Rigondeaux",
+                            "oddsAmerican": "-175",
+                            "oddsDecimal": 1.57140000,
+                            "oddsFractional": "4/7"
+                        }
+                    ],
+                    "main": true
+                }
+            ]
+        },
+        {
+            "id": 179842267,
+            "name": "Errol Spence Jr vs Manny Pacquiao",
+            "homeTeamName": "Errol Spence Jr",
+            "awayTeamName": "Manny Pacquiao",
             "startDate": "2021-08-22T02:00:00.0000000Z",
             "offers": [
                 {
-                    "id": "1-2266561273",
-                    "label": "Tie No Bet - Bout Odds",
+                    "id": "2-1_56350495",
+                    "label": "Moneyline",
                     "outcomes": [
                         {
-                            "id": "1-2925967933",
-                            "label": "Manny Pacquiao",
-                            "oddsAmerican": "+240",
-                            "oddsDecimal": 3.4000,
-                            "oddsFractional": "12/5",
-                            "participant": "Manny Pacquiao"
+                            "id": "2-0ML56350495_1",
+                            "label": "Errol Spence Jr",
+                            "oddsAmerican": "-220",
+                            "oddsDecimal": 1.45450000,
+                            "oddsFractional": "5/11"
                         },
                         {
-                            "id": "1-2925967935",
-                            "label": "Errol Spence Jr",
-                            "oddsAmerican": "-345",
-                            "oddsDecimal": 1.2900,
-                            "oddsFractional": "2/7",
-                            "participant": "Errol Spence Jr"
+                            "id": "2-0ML56350495_3",
+                            "label": "Manny Pacquiao",
+                            "oddsAmerican": "+170",
+                            "oddsDecimal": 2.70000000,
+                            "oddsFractional": "17/10"
                         }
                     ],
                     "main": true
-                },
-                {
-                    "id": "1-2266561294",
-                    "label": "Moneyline (3-way)",
-                    "outcomes": [
-                        {
-                            "id": "1-2925968001",
-                            "label": "Manny Pacquiao",
-                            "oddsAmerican": "+235",
-                            "oddsDecimal": 3.35,
-                            "oddsFractional": "47/20",
-                            "participant": "Manny Pacquiao"
-                        },
-                        {
-                            "id": "1-2925968002",
-                            "label": "Tie",
-                            "oddsAmerican": "+1800",
-                            "oddsDecimal": 19,
-                            "oddsFractional": "18/1",
-                            "participant": "Tie"
-                        },
-                        {
-                            "id": "1-2925968003",
-                            "label": "Errol Spence Jr",
-                            "oddsAmerican": "-305",
-                            "oddsDecimal": 1.33,
-                            "oddsFractional": "33/100",
-                            "participant": "Errol Spence Jr"
-                        }
-                    ]
                 }
             ]
         },
         {
-            "id": 179857969,
-            "name": "Jermall Charlo - Juan Macias Montiel",
-            "homeTeamName": "Jermall Charlo",
-            "awayTeamName": "Juan Macias Montiel",
-            "startDate": "2021-06-20T01:00:00.0000000Z",
+            "id": 179927927,
+            "name": "Kid Galahad vs James Dickens",
+            "homeTeamName": "Kid Galahad",
+            "awayTeamName": "James Dickens",
+            "startDate": "2021-08-07T18:00:00.0000000Z",
             "offers": [
                 {
-                    "id": "1-2266557164",
-                    "label": "Tie No Bet - Bout Odds",
+                    "id": "2-1_57638900",
+                    "label": "Moneyline",
                     "outcomes": [
                         {
-                            "id": "1-2925964250",
-                            "label": "Jermall Charlo",
-                            "oddsAmerican": "-5000",
-                            "oddsDecimal": 1.0200,
-                            "oddsFractional": "1/50",
-                            "participant": "Jermall Charlo"
+                            "id": "2-0ML57638900_1",
+                            "label": "Kid Galahad",
+                            "oddsAmerican": "-320",
+                            "oddsDecimal": 1.31250000,
+                            "oddsFractional": "5/16"
                         },
                         {
-                            "id": "1-2925964252",
-                            "label": "Juan Macias Montiel",
-                            "oddsAmerican": "+1000",
-                            "oddsDecimal": 11.0000,
-                            "oddsFractional": "10/1",
-                            "participant": "Juan Macias Montiel"
+                            "id": "2-0ML57638900_3",
+                            "label": "James Dickens",
+                            "oddsAmerican": "+245",
+                            "oddsDecimal": 3.45000000,
+                            "oddsFractional": "49/20"
                         }
                     ],
                     "main": true
-                },
-                {
-                    "id": "1-2266557199",
-                    "label": "Moneyline (3-way)",
-                    "outcomes": [
-                        {
-                            "id": "1-2925964362",
-                            "label": "Jermall Charlo",
-                            "oddsAmerican": "-3335",
-                            "oddsDecimal": 1.0300,
-                            "oddsFractional": "1/40",
-                            "participant": "Jermall Charlo"
-                        },
-                        {
-                            "id": "1-2925964363",
-                            "label": "Tie",
-                            "oddsAmerican": "+2500",
-                            "oddsDecimal": 26.0000,
-                            "oddsFractional": "25/1",
-                            "participant": "Tie"
-                        },
-                        {
-                            "id": "1-2925964364",
-                            "label": "Juan Macias Montiel",
-                            "oddsAmerican": "+1100",
-                            "oddsDecimal": 12.0000,
-                            "oddsFractional": "11/1",
-                            "participant": "Juan Macias Montiel"
-                        }
-                    ]
                 }
             ]
         },
         {
-            "id": 179847705,
-            "name": "Jermell Charlo - Brian Castano",
-            "homeTeamName": "Jermell Charlo",
-            "awayTeamName": "Brian Castano",
-            "startDate": "2021-07-18T01:00:00.0000000Z",
+            "id": 179927961,
+            "name": "Katie Taylor vs Jennifer Han",
+            "homeTeamName": "Katie Taylor",
+            "awayTeamName": "Jennifer Han",
+            "startDate": "2021-09-04T19:00:00.0000000Z",
             "offers": [
                 {
-                    "id": "1-2266561048",
-                    "label": "Moneyline (3-way)",
+                    "id": "2-1_57638437",
+                    "label": "Moneyline",
                     "outcomes": [
                         {
-                            "id": "1-2925967201",
-                            "label": "Jermell Charlo",
-                            "oddsAmerican": "-240",
-                            "oddsDecimal": 1.4200,
-                            "oddsFractional": "21/50",
-                            "participant": "Jermell Charlo"
+                            "id": "2-0ML57638437_1",
+                            "label": "Katie Taylor",
+                            "oddsAmerican": "-4000",
+                            "oddsDecimal": 1.02500000,
+                            "oddsFractional": "1/40"
                         },
                         {
-                            "id": "1-2925967202",
-                            "label": "Tie",
-                            "oddsAmerican": "+1800",
-                            "oddsDecimal": 19.0000,
-                            "oddsFractional": "18/1",
-                            "participant": "Tie"
-                        },
-                        {
-                            "id": "1-2925967203",
-                            "label": "Brian Castano",
-                            "oddsAmerican": "+188",
-                            "oddsDecimal": 2.8800,
-                            "oddsFractional": "15/8",
-                            "participant": "Brian Castano"
+                            "id": "2-0ML57638437_3",
+                            "label": "Jennifer Han",
+                            "oddsAmerican": "+1300",
+                            "oddsDecimal": 14.00000000,
+                            "oddsFractional": "13/1"
                         }
-                    ]
-                },
+                    ],
+                    "main": true
+                }
+            ]
+        },
+        {
+            "id": 179929526,
+            "name": "Joshua Buatsi vs Ricards Bolotniks",
+            "homeTeamName": "Joshua Buatsi",
+            "awayTeamName": "Ricards Bolotniks",
+            "startDate": "2021-08-14T18:00:00.0000000Z",
+            "offers": [
                 {
-                    "id": "1-2266561000",
-                    "label": "Tie No Bet - Bout Odds",
+                    "id": "2-1_57665170",
+                    "label": "Moneyline",
                     "outcomes": [
                         {
-                            "id": "1-2925967041",
-                            "label": "Jermell Charlo",
-                            "oddsAmerican": "-250",
-                            "oddsDecimal": 1.4000,
-                            "oddsFractional": "2/5",
-                            "participant": "Jermell Charlo"
+                            "id": "2-0ML57665170_1",
+                            "label": "Joshua Buatsi",
+                            "oddsAmerican": "-750",
+                            "oddsDecimal": 1.13330000,
+                            "oddsFractional": "2/15"
                         },
                         {
-                            "id": "1-2925967043",
-                            "label": "Brian Castano",
-                            "oddsAmerican": "+180",
-                            "oddsDecimal": 2.8000,
-                            "oddsFractional": "9/5",
-                            "participant": "Brian Castano"
+                            "id": "2-0ML57665170_3",
+                            "label": "Ricards Bolotniks",
+                            "oddsAmerican": "+525",
+                            "oddsDecimal": 6.25000000,
+                            "oddsFractional": "21/4"
                         }
                     ],
                     "main": true

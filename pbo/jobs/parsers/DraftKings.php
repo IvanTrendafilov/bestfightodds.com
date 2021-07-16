@@ -103,14 +103,12 @@ class ParserJob extends ParserJobBase
         foreach ($json->events as $matchup) {
             foreach ($matchup->offers as $offer) {
                 if (
-                    $offer->label == 'Tie No Bet - Bout Odds' &&
+                    ($offer->label == 'Tie No Bet - Bout Odds' || $offer->label == 'Moneyline') &&
                     isset(
                         $matchup->id,
                         $matchup->startDate,
                         $offer?->outcomes[0]->oddsAmerican,
-                        $offer?->outcomes[0]->participant,
                         $offer?->outcomes[1]->oddsAmerican,
-                        $offer?->outcomes[1]->participant
                     )
                 ) {
                     $this->parseMatchup($league_name, $matchup, $offer);
