@@ -173,14 +173,16 @@ class ParserJob extends ParserJobBase
         } else {
             //Single line prop
             foreach ($offer->outcomes as $outcome) {
-                $parsed_prop = new ParsedProp(
-                    $matchup->homeTeamName . ' vs. ' . $matchup->awayTeamName . ' :: ' . $offer->label . ' : ' . $outcome->label,
-                    '',
-                    $outcome->oddsAmerican,
-                    '-99999'
-                );
-                $parsed_prop->setCorrelationID($matchup->id);
-                $this->parsed_sport->addFetchedProp($parsed_prop);
+                if (!str_contains($offer->label, 'TIME OF FIGHT FINISH') && !str_contains($offer->label, 'WHEN WILL THE FIGHT BE WON')) {
+                    $parsed_prop = new ParsedProp(
+                        $matchup->homeTeamName . ' vs. ' . $matchup->awayTeamName . ' :: ' . $offer->label . ' : ' . $outcome->label,
+                        '',
+                        $outcome->oddsAmerican,
+                        '-99999'
+                    );
+                    $parsed_prop->setCorrelationID($matchup->id);
+                    $this->parsed_sport->addFetchedProp($parsed_prop);
+                }
             }
         }
     }
