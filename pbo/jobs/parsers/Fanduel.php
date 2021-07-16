@@ -210,8 +210,8 @@ class ParserJob extends ParserJobBase
                         . $market->runnerDetails[0]->selectionName . ' ' . $handicap_1,
                     $this->matchup_references[$market->eventId] . ' :: ' . $market->marketName . ' : '
                         . $market->runnerDetails[1]->selectionName . ' ' . $handicap_2,
-                    $market->runnerDetails[0]->winRunnerOdds->decimal,
-                    $market->runnerDetails[1]->winRunnerOdds->decimal
+                    OddsTools::convertDecimalToMoneyline($market->runnerDetails[0]->winRunnerOdds->decimal),
+                    OddsTools::convertDecimalToMoneyline($market->runnerDetails[1]->winRunnerOdds->decimal)
                 );
                 $parsed_prop->setCorrelationID((string) $market->eventId);
                 $this->parsed_sport->addFetchedProp($parsed_prop);
@@ -229,7 +229,7 @@ class ParserJob extends ParserJobBase
                             $this->matchup_references[$market->eventId] . ' :: ' . $market->marketName . ' : '
                                 . $runner->selectionName . ' ' . $handicap_1,
                             '',
-                            $runner->winRunnerOdds->decimal,
+                            OddsTools::convertDecimalToMoneyline($runner->winRunnerOdds->decimal),
                             '-99999'
                         );
                         $parsed_prop->setCorrelationID((string) $market->eventId);
