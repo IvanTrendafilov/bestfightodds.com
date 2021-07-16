@@ -50,15 +50,6 @@ class ParseTools
             CURLOPT_FOLLOWLOCATION => true
         ));
 
-        //TODO: Hardcoded URL specific
-        if (strpos($url, 'gamingsystem.') !== false) {
-            curl_setopt($curl_obj, CURLOPT_SSLVERSION, 6); //TLS 1.2
-        } elseif (substr($url, 0, strlen('https://api.pinnacle.com')) === 'https://api.pinnacle.com') {
-            curl_setopt($curl_obj, CURLOPT_HTTPHEADER, ['Authorization: Basic ZmlnaHRvZGRzOmNuODI2Mg==']);
-        } elseif (substr($url, 0, strlen('https://www.pinnacle.com/webapi')) === 'https://www.pinnacle.com/webapi') {
-            curl_setopt($curl_obj, CURLOPT_REFERER, "https://www.pinnacle.com/en/odds/match/mixed-martial-arts/ufc/ufc");
-        }
-
         //Set custom curl options if specified
         if (!empty($extra_curl_options)) {
             curl_setopt_array($curl_obj, $extra_curl_options);
@@ -110,14 +101,6 @@ class ParseTools
                 if (!empty($extra_curl_options)) {
                     curl_setopt_array($curl_channels[$url], $extra_curl_options);
                 }
-            }
-
-            if (strpos($url, 'gamingsystem.') !== false) {
-                curl_setopt($curl_channels[$url], CURLOPT_SSLVERSION, 6); //TLS 1.2
-            } elseif (substr($url, 0, strlen('https://api.pinnacle.com')) === 'https://api.pinnacle.com') {
-                curl_setopt($curl_channels[$url], CURLOPT_HTTPHEADER, ['Authorization: Basic ZmlnaHRvZGRzOmNuODI2Mg==']);
-            } elseif (substr($url, 0, strlen('https://www.pinnacle.com/webapi')) === 'https://www.pinnacle.com/webapi') {
-                curl_setopt($curl_channels[$url], CURLOPT_REFERER, "https://www.pinnacle.com/en/odds/match/mixed-martial-arts/ufc/ufc");
             }
 
             curl_multi_add_handle($mh, $curl_channels[$url]);
