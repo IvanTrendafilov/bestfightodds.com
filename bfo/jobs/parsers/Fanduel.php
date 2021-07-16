@@ -219,16 +219,23 @@ class ParserJob extends ParserJobBase
             } else {
                 //Multi-way prop
                 foreach ($market->runnerDetails as $runner) {
-                    $handicap_1 = $runner->handicap != 0.0 ? (string) $runner->handicap : '';
-                    $parsed_prop = new ParsedProp(
-                        $this->matchup_references[$market->eventId] . ' :: ' . $market->marketName . ' : '
-                            . $runner->selectionName . ' ' . $handicap_1,
-                        '',
-                        $runner->winRunnerOdds->decimal,
-                        '-99999'
-                    );
-                    $parsed_prop->setCorrelationID((string) $market->eventId);
-                    $this->parsed_sport->addFetchedProp($parsed_prop);
+
+                    if (
+                        !str_contains(strtoupper($market->marketName), 'TIME OF FIGHT FINISH') && !str_contains(strtoupper($market->marketName), 'WHEN WILL THE FIGHT BE WON')
+                        && !str_contains(strtoupper($market->marketName), 'DOUBLE CHANCE')
+                    ) {
+
+                        $handicap_1 = $runner->handicap != 0.0 ? (string) $runner->handicap : '';
+                        $parsed_prop = new ParsedProp(
+                            $this->matchup_references[$market->eventId] . ' :: ' . $market->marketName . ' : '
+                                . $runner->selectionName . ' ' . $handicap_1,
+                            '',
+                            $runner->winRunnerOdds->decimal,
+                            '-99999'
+                        );
+                        $parsed_prop->setCorrelationID((string) $market->eventId);
+                        $this->parsed_sport->addFetchedProp($parsed_prop);
+                    }
                 }
             }
         }

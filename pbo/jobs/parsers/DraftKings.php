@@ -173,7 +173,8 @@ class ParserJob extends ParserJobBase
         } else {
             //Single line prop
             foreach ($offer->outcomes as $outcome) {
-                if (!str_contains(strtoupper($offer->label), 'TIME OF FIGHT FINISH') && !str_contains(strtoupper($offer->label), 'WHEN WILL THE FIGHT BE WON')) {
+                if (!str_contains(strtoupper($offer->label), 'TIME OF FIGHT FINISH') && !str_contains(strtoupper($offer->label), 'WHEN WILL THE FIGHT BE WON')
+                    && !str_contains(strtoupper($offer->label), 'DOUBLE CHANCE')) {
                     $parsed_prop = new ParsedProp(
                         $matchup->homeTeamName . ' vs. ' . $matchup->awayTeamName . ' :: ' . $offer->label . ' : ' . $outcome->label,
                         '',
