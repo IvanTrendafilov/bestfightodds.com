@@ -111,9 +111,7 @@ class ParserJob extends ParserJobBase
                         $matchup->id,
                         $matchup->startDate,
                         $offer?->outcomes[0]->oddsAmerican,
-                        $offer?->outcomes[0]->participant,
                         $offer?->outcomes[1]->oddsAmerican,
-                        $offer?->outcomes[1]->participant
                     )
                 ) {
                     $this->parseMatchup($league_name, $matchup, $offer);
@@ -135,9 +133,29 @@ class ParserJob extends ParserJobBase
             return;
         }
 
+        //The feed can provide the team name either as the participant value or label value so we need to check both
+        $team_1 = '';
+        if (isset($offer->outcomes[0]->participant)) {
+            $team_1 = $offer->outcomes[0]->participant;
+        } else if (isset($offer->outcomes[0]->label)) {
+            $team_1 = $offer->outcomes[0]->label;
+        } else {
+            //Not specified, abort
+            return;
+        }
+        $team_2 = '';
+        if (isset($offer->outcomes[1]->participant)) {
+            $team_2 = $offer->outcomes[1]->participant;
+        } else if (isset($offer->outcomes[1]->label)) {
+            $team_2 = $offer->outcomes[1]->label;
+        } else {
+            //Not specified, abort
+            return;
+        }
+
         $parsed_matchup = new ParsedMatchup(
-            $offer->outcomes[0]->participant,
-            $offer->outcomes[1]->participant,
+            $team_1,
+            $team_2,
             $offer->outcomes[0]->oddsAmerican,
             $offer->outcomes[1]->oddsAmerican
         );
