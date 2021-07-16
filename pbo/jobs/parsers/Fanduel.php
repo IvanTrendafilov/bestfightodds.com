@@ -1,13 +1,12 @@
 <?php
 
 /**
- * Bookie: Fanduel
+ * Bookie: Fanduel 
  * Sport: Boxing
  *
- * Timezone: ES, converted to UTC
+ * Timezone: UTC
  * 
  * Notes: Can be run in dev/test towards actual URLs (not using mock).
- *        Props not available from sportsbook at time of creation
  * 
  */
 
@@ -25,51 +24,63 @@ define('BOOKIE_NAME', 'fanduel');
 define('BOOKIE_ID', 21);
 define(
     'BOOKIE_URLS',
-    ['all' => 'https://sportsbook.fanduel.com/cache/psbonav/1/UK/top.json']
+    ['all' => 'https://affiliates.sportsbook.fanduel.com/betting/rest/v1/listCompetitions/']
 );
 define(
     'BOOKIE_MOCKFILES',
-    ['All fights' => PARSE_MOCKFEEDS_DIR . "fanduel.json"]
+    ['UFC' => PARSE_MOCKFEEDS_DIR . "fanduel.json"]
 );
 
 class ParserJob extends ParserJobBase
 {
     private ParsedSport $parsed_sport;
+    private array $matchup_references = [];
 
     public function fetchContent(array $content_urls): array
     {
+        $sport_id = '6';
+
+        $headers = [
+            "X-Application: WPulikw4grbXS2wf",
+            "Content-Type: application/json",
+            "Accept: application/json"
+        ];
+
+        $payload = '{
+            "listCompetitionsRequestParams": {
+              "marketFilter": {
+                  "eventTypeIds": [' . $sport_id . ']
+              }
+            }
+          }';
+
+
         //First we parse the competitions feed that provides the available subtypes for the sport
-        $groups_content = ParseTools::retrievePageFromURL($content_urls['all']);
-        $json = json_decode($groups_content);
-        if (!$json || !isset($json->bonavigationnodes)) {
-            $this->logger->error('Unable to parse json' . substr($groups_content, 0, 20) . '..');
+        $competitions = ParseTools::retrievePageFromURL($content_urls['all'], [CURLOPT_HTTPHEADER => $headers, CURLOPT_POSTFIELDS => $payload]);
+        $json = json_decode($competitions);
+        if (!$json) {
+            $this->logger->error('Unable to parse json' . substr($competitions, 0, 50) . '..');
+            return ['all' => null];
+        } else if (isset($json->faultcode)) {
+            $this->logger->error('Error reported when fetching competitions: ' . $json->faultcode . ": " . $json->faultstring . " details: " . var_export($json->detail));
             return ['all' => null];
         }
+
         $urls = [];
         //Fanduel structure forces us to create this foreach pyramid
-        foreach ($json->bonavigationnodes as $nav_node) {
-            if ($nav_node->name == 'Boxing') {
-                foreach ($nav_node->bonavigationnodes as $sport_nodes) {
-                    foreach ($sport_nodes->bonavigationnodes as $sub_node) {
-                        foreach ($sub_node->bonavigationnodes as $third_node) {
-                            if (isset($third_node->marketgroups) && count($third_node->marketgroups) > 0) {
-                                foreach ($third_node->marketgroups as $market_group) {
-                                    $urls[$third_node->name] = 'https://sportsbook.fanduel.com/cache/psmg/UK/' . $market_group->idfwmarketgroup . '.json';
-                                }
-                            }
-                        }
-                    }
+        foreach ($json as $competition_node) {
+            sleep(1); //Avoid throttling
+            $payload = '{
+                "bulkListMarketPricesRequestParams": {
+                  "eventTypeId": ' . $sport_id . ',
+                  "competitionId": ' . $competition_node->competition->id . '
                 }
-            }
-        }
-
-        //With the subtypes gathered, fetch the content for each
-        foreach ($urls as $key => $url) {
-            $this->logger->info("Fetching " . $key . " matchups through URL: " . $url);
-        }
-        ParseTools::retrieveMultiplePagesFromURLs($urls);
-        foreach ($urls as $key => $url) {
-            $content[$key] = ParseTools::getStoredContentForURL($urls[$key]);
+              }';
+            $this->logger->info("Fetching matchups for competition: " . $competition_node->competition->name . " (" . $competition_node->competition->id . ")");
+            $content[$competition_node->competition->name] = ParseTools::retrievePageFromURL(
+                'https://affiliates.sportsbook.fanduel.com/betting/rest/v1/bulkListMarketPrices/',
+                [CURLOPT_HTTPHEADER => $headers, CURLOPT_POSTFIELDS => $payload]
+            );
         }
         return $content;
     }
@@ -100,11 +111,11 @@ class ParserJob extends ParserJobBase
         $json = json_decode($json_content);
         //Error checking
         if (!$json) {
-            $this->logger->error("Unable to parse proper json for " . $competition_name . '. Contents: ' . substr($json_content, 0, 20) . '...');
+            $this->logger->error("Unable to parse proper json for " . $competition_name . '. Contents: ' . substr($json_content, 0, 50) . '...');
             return false;
         }
-        if (!$json->events) {
-            $this->logger->error("No specified sport name in market. Probably failure in fetching page");
+        if (isset($json->faultcode)) {
+            $this->logger->error('Error reported when fetching competitions: ' . $json->faultcode . ": " . $json->faultstring . " details: " . var_export($json->detail));
             return false;
         }
         $this->logger->info("Processing competition " . $competition_name);
@@ -114,56 +125,118 @@ class ParserJob extends ParserJobBase
             $competition_name = $parts[0];
         }
 
-        foreach ($json->events as $event) {
-            $this->parseEvent($competition_name, $event);
+        //Process matchups first
+        foreach ($json->marketDetails as $market) {
+            if ($market->marketType == "HEAD_TO_HEAD") {
+                $this->parseMatchup($competition_name, $market);
+            }
+        }
+
+        //Process props
+        foreach ($json->marketDetails as $market) {
+            if ($market->marketType != "HEAD_TO_HEAD" && $market->marketType != "BOXING_MATCH_BETTING") {
+                $this->parseProp($competition_name, $market);
+            }
         }
 
         return true;
     }
 
-    private function parseEvent(string $competition_name, $event): void
-    {
-        foreach ($event->markets as $market) {
-            if ($market->name == "Moneyline") {
-                //Regular matchup
-                $this->parseMatchup($competition_name, $event, $market);
-            } else {
-                //Prop - When supported by sportsbook
-            }
-        }
-    }
-
-    private function parseMatchup(string $competition_name, $event, $market): void
+    private function parseMatchup(string $competition_name, $market): void
     {
         if (
-            isset($market->selections)
-            && count($market->selections) == 2
-            && !empty($market->selections[0]->name)
-            && !empty($market->selections[1]->name)
-            && !empty($market->selections[0]->price)
-            && !empty($market->selections[1]->price)
-            && !empty($event->tsstart)
+            isset($market->runnerDetails)
+            && count($market->runnerDetails) == 2
+            && !empty($market->runnerDetails[0]->selectionName)
+            && !empty($market->runnerDetails[1]->selectionName)
+            && !empty($market->runnerDetails[0]->winRunnerOdds->decimal)
+            && !empty($market->runnerDetails[1]->winRunnerOdds->decimal)
+            && !empty($market->marketStartTime
+                && !$market->inplay)
         ) {
             //Skip live events
-            $date_obj = new DateTime((string) $event->tsstart, new DateTimeZone('America/New_York'));
+            $date_obj = new DateTime((string) $market->marketStartTime);
             if ($date_obj <= new DateTime()) {
-                $this->logger->info("Skipping live odds for " . $market->selections[0]->name . " vs " . $market->selections[1]->name);
+                $this->logger->info("Skipping live odds for " . $market->runnerDetails[0]->selectionName . " vs " . $market->runnerDetails[1]->selectionName);
                 return;
             }
 
             $parsed_matchup = new ParsedMatchup(
-                $market->selections[0]->name,
-                $market->selections[1]->name,
-                OddsTools::convertDecimalToMoneyline($market->selections[0]->price),
-                OddsTools::convertDecimalToMoneyline($market->selections[1]->price)
+                $market->runnerDetails[0]->selectionName,
+                $market->runnerDetails[1]->selectionName,
+                OddsTools::convertDecimalToMoneyline($market->runnerDetails[0]->winRunnerOdds->decimal),
+                OddsTools::convertDecimalToMoneyline($market->runnerDetails[1]->winRunnerOdds->decimal)
             );
 
             $parsed_matchup->setMetaData('gametime', $date_obj->getTimestamp());
-            $parsed_matchup->setMetaData('event_name', $competition_name);
+            if ($competition_name != 'FanDuel') {
+                $parsed_matchup->setMetaData('event_name', $competition_name);
+            }
 
-            $parsed_matchup->setCorrelationID((string) $event->idfoevent);
+            $parsed_matchup->setCorrelationID((string) $market->eventId);
+
+            $this->matchup_references[$market->eventId] = $market->runnerDetails[0]->selectionName . " vs. " . $market->runnerDetails[1]->selectionName;
 
             $this->parsed_sport->addParsedMatchup($parsed_matchup);
+        }
+    }
+
+    private function parseProp(string $competition_name, $market): void
+    {
+        if (
+            isset($market->runnerDetails)
+            && count($market->runnerDetails) > 0
+            && !$market->inplay
+            && isset($this->matchup_references[$market->eventId])
+        ) {
+
+            //Skip live events
+            $date_obj = new DateTime((string) $market->marketStartTime);
+            if ($date_obj <= new DateTime()) {
+                return;
+            }
+
+            if (
+                count($market->runnerDetails) == 2
+                && in_array(strtoupper($market->runnerDetails[0]->selectionName), ['YES', 'NO', 'OVER', 'UNDER'])
+                && in_array(strtoupper($market->runnerDetails[1]->selectionName), ['YES', 'NO', 'OVER', 'UNDER'])
+            ) {
+                //Two-sided prop
+                $handicap_1 = $market->runnerDetails[0]->handicap != 0.0 ? (string) $market->runnerDetails[0]->handicap : '';
+                $handicap_2 = $market->runnerDetails[1]->handicap != 0.0 ? (string) $market->runnerDetails[1]->handicap : '';
+
+                $parsed_prop = new ParsedProp(
+                    $this->matchup_references[$market->eventId] . ' :: ' . $market->marketName . ' : '
+                        . $market->runnerDetails[0]->selectionName . ' ' . $handicap_1,
+                    $this->matchup_references[$market->eventId] . ' :: ' . $market->marketName . ' : '
+                        . $market->runnerDetails[1]->selectionName . ' ' . $handicap_2,
+                    $market->runnerDetails[0]->winRunnerOdds->decimal,
+                    $market->runnerDetails[1]->winRunnerOdds->decimal
+                );
+                $parsed_prop->setCorrelationID((string) $market->eventId);
+                $this->parsed_sport->addFetchedProp($parsed_prop);
+            } else {
+                //Multi-way prop
+                foreach ($market->runnerDetails as $runner) {
+
+                    if (
+                        !str_contains(strtoupper($market->marketName), 'TIME OF FIGHT FINISH') && !str_contains(strtoupper($market->marketName), 'WHEN WILL THE FIGHT BE WON')
+                        && !str_contains(strtoupper($market->marketName), 'DOUBLE CHANCE')
+                    ) {
+
+                        $handicap_1 = $runner->handicap != 0.0 ? (string) $runner->handicap : '';
+                        $parsed_prop = new ParsedProp(
+                            $this->matchup_references[$market->eventId] . ' :: ' . $market->marketName . ' : '
+                                . $runner->selectionName . ' ' . $handicap_1,
+                            '',
+                            $runner->winRunnerOdds->decimal,
+                            '-99999'
+                        );
+                        $parsed_prop->setCorrelationID((string) $market->eventId);
+                        $this->parsed_sport->addFetchedProp($parsed_prop);
+                    }
+                }
+            }
         }
     }
 }

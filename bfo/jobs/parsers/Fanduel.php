@@ -7,7 +7,6 @@
  * Timezone: UTC
  * 
  * Notes: Can be run in dev/test towards actual URLs (not using mock).
- *        Props not available from sportsbook at time of creation
  * 
  */
 
