@@ -91,24 +91,32 @@ class ScheduleParser
             if (!$found) {
                 //Match on existing matchups
                 $found_matches = [];
+                $total = 0;
                 foreach ($parsed_event['matchups'] as $parsed_matchup) {
                     $stored_matchup = EventHandler::getMatchingMatchup(team1_name: $parsed_matchup[0], team2_name: $parsed_matchup[1], future_only: true);
+                    $total++;
                     if ($stored_matchup && $stored_matchup->getEventID() != PARSE_FUTURESEVENT_ID) {
                         $found_matches[$stored_matchup->getEventID()] = isset($found_matches[$stored_matchup->getEventID()]) ? $found_matches[$stored_matchup->getEventID()] + 1 : 1;
                     }
                 }
+
                 if (count($found_matches) > 0) {
-                    $found = true;
                     asort($found_matches, SORT_NUMERIC);
                     //Probably found it. However event should maybe be renamed if different
                     $found_event = EventHandler::getEvent(array_key_first($found_matches));
-                    if ($found_event->getName() != $parsed_event['title']) {
-                        ScheduleHandler::storeManualAction(json_encode(array('eventID' => $found_event->getID(), 'eventTitle' => $parsed_event['title']), JSON_HEX_APOS | JSON_HEX_QUOT), 2);
+                    $current_matchups = EventHAndler::getMatchups(event_id: $found_event->getID(), future_matchups_only: true);
+
+                    //Check to make sure that we are matching a majority of the matchups (> 0.8). If not, this is probably a separate event that should be created
+                    if ($found_matches[array_key_first($found_matches)] / count($current_matchups) > 0.8) {
+                        $found = true;
+                        if ($found_event->getName() != $parsed_event['title']) {
+                            ScheduleHandler::storeManualAction(json_encode(array('eventID' => $found_event->getID(), 'eventTitle' => $parsed_event['title']), JSON_HEX_APOS | JSON_HEX_QUOT), 2);
+                        }
+                        $this->processMatchups($parsed_event, $found_event);
+                        //But maybe date is still incorrect
+                        //$this->checkEventDate($parsed_event, $found_event);
+                        $this->matched_existing_events[] = $found_event->getID();
                     }
-                    $this->processMatchups($parsed_event, $found_event);
-                    //But maybe date is still incorrect
-                    //$this->checkEventDate($parsed_event, $found_event);
-                    $this->matched_existing_events[] = $found_event->getID();
                 }
             }
             if (!$found) {
@@ -120,6 +128,7 @@ class ScheduleParser
                     if ($stored_matchup == null) {
                         $filtered_matchups[] = $parsed_matchup;
                     } else {
+                        $this->matched_existing_matchups[] = $stored_matchup->getID();
                         $orphan_matchups[] = $stored_matchup->getID();
                     }
                 }
@@ -144,7 +153,6 @@ class ScheduleParser
     public function processMatchups(array $event, Event $matched_event)
     {
         foreach ($event['matchups'] as $parsed_matchup) {
-
             $matchup = EventHandler::getMatchingMatchup(team1_name: $parsed_matchup[0], team2_name: $parsed_matchup[1], future_only: true);
             if ($matchup) {
                 //Found a match. Check if it is the right event
