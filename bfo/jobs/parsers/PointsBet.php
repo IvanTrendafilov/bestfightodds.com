@@ -39,6 +39,7 @@ class ParserJob extends ParserJobBase
     public function fetchContent(array $content_urls): array
     {
         //First we parse the competitions feed that provides the available subtypes for the sport
+        $this->logger->info("Fetching subtypes through URL: " . $content_urls['all']);
         $groups_content = ParseTools::retrievePageFromURL($content_urls['all']);
         $json = json_decode($groups_content);
         if (!$json || !isset($json->locales)) {
