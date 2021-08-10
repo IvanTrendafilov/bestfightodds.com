@@ -57,6 +57,7 @@ class ParserJob extends ParserJobBase
             $this->logger->info("Fetching " . $key . " matchups through URL: " . $url);
         }
         ParseTools::retrieveMultiplePagesFromURLs($urls);
+        $content = [];
         foreach ($urls as $key => $url) {
             $content[$key] = ParseTools::getStoredContentForURL($urls[$key]);
         }
