@@ -548,9 +548,9 @@ class PropProcessor
                 $matched_prop['match_result']['event']['event_id'],
                 $this->bookie_id,
                 '',
-                $matched_prop['prop']->getMoneyline(($matched_prop['prop']->getMainProp() % 2) + 1),
+                intval($matched_prop['prop']->getMoneyline(($matched_prop['prop']->getMainProp() % 2) + 1)),
                 '',
-                $matched_prop['prop']->getMoneyline($matched_prop['prop']->getMainProp()),
+                intval($matched_prop['prop']->getMoneyline($matched_prop['prop']->getMainProp())),
                 $matched_prop['match_result']['template']->getPropTypeID(),
                 ''
             );
@@ -560,9 +560,9 @@ class PropProcessor
                 $matched_prop['match_result']['event']['event_id'],
                 $this->bookie_id,
                 '',
-                $matched_prop['prop']->getMoneyline($matched_prop['prop']->getMainProp()),
+                intval($matched_prop['prop']->getMoneyline($matched_prop['prop']->getMainProp())),
                 '',
-                $matched_prop['prop']->getMoneyline(($matched_prop['prop']->getMainProp() % 2) + 1),
+                intval($matched_prop['prop']->getMoneyline(($matched_prop['prop']->getMainProp() % 2) + 1)),
                 $matched_prop['match_result']['template']->getPropTypeID(),
                 ''
             );
@@ -598,9 +598,9 @@ class PropProcessor
                 $matched_prop['match_result']['matchup']['matchup_id'],
                 $this->bookie_id,
                 '',
-                $matched_prop['prop']->getMoneyline(($matched_prop['prop']->getMainProp() % 2) + 1),
+                intval($matched_prop['prop']->getMoneyline(($matched_prop['prop']->getMainProp() % 2) + 1)),
                 '',
-                $matched_prop['prop']->getMoneyline($matched_prop['prop']->getMainProp()),
+                intval($matched_prop['prop']->getMoneyline($matched_prop['prop']->getMainProp())),
                 $matched_prop['match_result']['template']->getPropTypeID(),
                 '',
                 $matched_prop['match_result']['matchup']['team']
@@ -611,9 +611,9 @@ class PropProcessor
                 $matched_prop['match_result']['matchup']['matchup_id'],
                 $this->bookie_id,
                 '',
-                $matched_prop['prop']->getMoneyline($matched_prop['prop']->getMainProp()),
+                intval($matched_prop['prop']->getMoneyline($matched_prop['prop']->getMainProp())),
                 '',
-                $matched_prop['prop']->getMoneyline(($matched_prop['prop']->getMainProp() % 2) + 1),
+                intval($matched_prop['prop']->getMoneyline(($matched_prop['prop']->getMainProp() % 2) + 1)),
                 $matched_prop['match_result']['template']->getPropTypeID(),
                 '',
                 $matched_prop['match_result']['matchup']['team']
