@@ -429,7 +429,7 @@ class MainController
         }
 
         $view_data = OddsHandler::getEventViewData($event->getID());
-        $view_data['bookies'] = BookieHandler::getAllBookies(exclude_inactive: false);
+        $view_data['bookies'] = BookieHandler::getAllBookies(exclude_inactive: true);
 
         //Add swing chart data (= change since opening, last 24h, last h)
         $data = [];

@@ -36,7 +36,7 @@ class ParserJob extends ParserJobBase
         $api_key_header = [CURLOPT_HTTPHEADER =>
         [
             'Bwin-AccessId: NDM0MjhhNmQtYzE2Yi00NjNmLWJlNWQtZmJlZGUxYTIxOTAw',
-            'Bwin-AccessIdToken: 4L78QyBjWyKPeSHHIJ0KIg=='
+            'Bwin-AccessIdToken: GNHKqEuO9kuDT9Y0Ais/cQ=='
         ]];
 
         $this->logger->info("Fetching matchups through URL: " . $content_urls['all']);
