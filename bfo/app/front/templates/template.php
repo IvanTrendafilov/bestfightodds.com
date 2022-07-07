@@ -51,7 +51,12 @@
         })(window, document, 'script', 'dataLayer', 'GTM-5X6Z3Z9');
     </script>
     <!-- End Google Tag Manager -->
+    <?php $title = isset($title) && strpos($title, 'MMA Odds History') === false ? implode(' Odds:', explode(':', $title, 2)) : $title; ?>
+    <?php if (str_starts_with($title, 'UFC 268 Odds')) { ?>
+    <title>UFC 268 Odds: Usman vs. Covington 2 Odds & Betting Lines</title>
+    <?php } else { ?>
     <title><?= isset($title) ? $title . ' | Best Fight Odds' : 'UFC &amp; MMA Odds &amp; Betting Lines | Best Fight Odds' ?></title>
+    <?php } ?>
 </head>
 
 <body>

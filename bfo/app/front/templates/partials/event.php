@@ -1,4 +1,5 @@
-<div class="table-outer-wrapper"><div class="table-div" id="event<?=$event->getID()?>"><div class="table-header"><a href="/events/<?=$event->getEventAsLinkString()?>"><h1><?=$event->getName()?></h1></a>
+<div class="table-outer-wrapper">
+<div class="table-div" id="event<?=$event->getID()?>"><div class="table-header"><a href="/events/<?=$event->getEventAsLinkString()?>"><h1><?=$event->getName()?></h1></a>
 
     <?php if (strtoupper($event->getName()) != 'FUTURE EVENTS'): //Add date for all events except for FUTURE EVENTS?>
                 <span class="table-header-date"><?=date('F jS', strtotime($event->getDate()))?></span>
